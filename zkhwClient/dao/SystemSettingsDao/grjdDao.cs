@@ -38,13 +38,12 @@ namespace zkhwClient.dao
         }
 
         //保存体检统计信息
-        public bool addBgdcInfo(bean.jkBean jkbar)
+        public bool addBgdcInfo(bean.grjdxxBean grjbxx,string barcode,string archive_no)
         {
             int rt = 0;
             string id = Result.GetNewId();
             string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            string status = "0";
-            String sql = "insert into zkhw_tj_bgdc (ID,aichive_no,id_number,bar_code,Caozuoyuan,SjName,Carcode,createtime,upload_status,duns) values ('" + id + "','" + jkbar.aichive_no + "','" + jkbar.id_number + "', '" + jkbar.bar_code + "', '" + jkbar.batch_no + "', '" + jkbar.Pic1 + "', '" + jkbar.Pic2 + "', '" + jkbar.Xzdm + "', '" + jkbar.Xianzhudi + "', '" + jkbar.XzjdName + "', '" + jkbar.CjwhName + "', '" + jkbar.JddwName + "', '" + jkbar.JdrName + "', '" + jkbar.ZrysName + "', '" + jkbar.Caozuoyuan + "', '" + jkbar.SjName + "', '" + jkbar.Carcode + "', '" + time + "', '" + status + "', '" + jkbar.duns + "')";
+            String sql = "insert into zkhw_tj_bgdc (ID,aichive_no,id_number,bar_code,name,sex,birthday,healthchecktime,createtime) value('" + id + "','" + archive_no + "','" + grjbxx.Cardcode + "', '" + barcode + "', '" + grjbxx.name + "', '" + grjbxx.Sex + "', '" + grjbxx.Birthday + "', '" + time + "', '" + time + "')";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }

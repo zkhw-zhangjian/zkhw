@@ -384,16 +384,23 @@ namespace zkhwClient.view.PublicHealthView
                     bool istrue = grjddao.addgrjdInfo(grjdxx);
                 }
                 jkBean jk = new jkBean();
-                jk.aichive_no = grjdxx.archive_no;
+                string archive_no= grjdxx.archive_no;
+                if (archive_no==null|| archive_no=="") {
+                    archive_no = textBox5.Text;
+                }
+                jk.aichive_no = archive_no;
                 jk.id_number = grjdxx.Cardcode;
                 jk.bar_code = barcode; 
                 jk.Pic1 = grjdxx.CardPic;
                 jk.Pic2 = grjdxx.Cardcode + ".jpg";
                 addjkbool = grjddao.addJkInfo(jk);
-
                 textBox5.Text = jk.aichive_no;
                 textBox6.Text = barcode;
-            }
+                if (addjkbool)
+                {
+                    grjddao.addBgdcInfo(grjdxx, barcode, archive_no);
+                }
+                }
                 try
                 {
                     if (addjkbool)
