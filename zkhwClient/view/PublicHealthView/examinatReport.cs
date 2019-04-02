@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Aspose.Words;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -461,16 +463,121 @@ GROUP BY sex";
 
         private void button2_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            try
             {
-                if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
+                List<string> list = new List<string>();
+                List<string> ide = new List<string>();
+                DataSet dataSet = new DataSet();
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
-                    string data = dataGridView1.Rows[i].Cells[4].EditedFormattedValue.ToString();
+                    if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
+                    {
+                        ide.Add(dataGridView1.Rows[i].Cells[7].EditedFormattedValue.ToString());
+                    }
                 }
+                foreach (Control ctrl in groupBox4.Controls)
+                {
+                    if (ctrl is CheckBox)
+                    {
+                        if (((CheckBox)ctrl).Checked)
+                        {
+                            list.Add(ctrl.Text);
+                            switch (ctrl.Text)
+                            {
+                                case "封面":
+                                    string sql1 = $@"select * from zkhw_tj_bgdc bgdc
+join zkhw_tj_jk jk on bgdc.id_number = jk.id_number
+where bgdc.id_number in('{string.Join(",", ide)}')";
+                                    DataSet datas = DbHelperMySQL.Query(sql1);
+                                    if (datas != null && datas.Tables.Count > 0)
+                                    {
+                                        DataTable data = datas.Tables[0].Copy();
+                                        data.TableName = "封面";
+                                        dataSet.Tables.Add(data);
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                }
+                if (list.Count > 1 && list.Exists(m => m == "综合报告单"))
+                {
+                    MessageBox.Show("综合报告单不能和其它报告一起！");
+                }
+                PDF(list, dataSet);
+                MessageBox.Show("成功！");
+            }
+            catch (Exception ex)
+            {
 
+                throw;
             }
         }
 
+        private void PDF(List<string> list, DataSet dataSet)
+        {
+            string str = Application.StartupPath;//项目路径
+            Document doc = null;
+            DocumentBuilder builder = null;
+            if (list.Count > 1)
+            {
+                foreach (string item in list)
+                {
+
+
+                }
+            }
+            else
+            {
+                switch (list[0])
+                {
+                    case "封面":
+                        DataTable data = dataSet.Tables["封面"];
+                        doc = new Document(@str + $"/up/template/封面.doc");
+                        DateTime date = DateTime.Now;
+                        for (int i = 0; i < data.Rows.Count; i++)
+                        {
+                            builder = new DocumentBuilder(doc);
+                            var dic = new Dictionary<string, string>();
+                            dic.Add("编号", "09876543321");
+                            dic.Add("姓名", data.Rows[i]["name"].ToString());
+                            dic.Add("现住址", data.Rows[i]["Xzhuzhi"].ToString());
+                            dic.Add("户籍地址", data.Rows[i]["address"].ToString());
+                            dic.Add("联系电话", "无");
+                            dic.Add("乡镇名称", data.Rows[i]["XzjdName"].ToString());
+                            dic.Add("村委会名称", data.Rows[i]["CjwhName"].ToString());
+                            dic.Add("建档单位", data.Rows[i]["JddwName"].ToString());
+                            dic.Add("建档人", data.Rows[i]["JdrName"].ToString());
+                            dic.Add("责任医生", data.Rows[i]["ZrysName"].ToString());
+                            dic.Add("年", date.Year.ToString());
+                            dic.Add("月", date.Month.ToString());
+                            dic.Add("日", date.Day.ToString());
+                            //书签替换
+                            foreach (var key in dic.Keys)
+                            {
+                                builder.MoveToBookmark(key);
+                                builder.Write(dic[key]);
+                            }
+                            //保存为PDF文件，此处的SaveFormat支持很多种格式，如图片，epub,rtf 等等
+                            string url = @str + $"/up/result/{data.Rows[i]["id_number"].ToString()}.pdf";
+                            DeteleFile(url);
+                            doc.Save(url, SaveFormat.Pdf);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            //this.button1.BackgroundImage = Image.FromFile(@str + "/images/check.png");
+        }
+
+        /// <summary>
+        /// CheckBox勾选
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             //checkbox 勾上
@@ -481,6 +588,14 @@ GROUP BY sex";
             else
             {
                 this.dataGridView1.Rows[e.RowIndex].Cells[0].Value = true;
+            }
+        }
+
+        private void DeteleFile(string url)
+        {
+            if (File.Exists(url))
+            {
+                File.Delete(url);
             }
         }
     }

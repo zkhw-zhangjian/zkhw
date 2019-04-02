@@ -38,6 +38,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -112,6 +113,9 @@
     <Reference Include="AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>dll\AForge.Video.DirectShow.dll</HintPath>
+    </Reference>
+    <Reference Include="Aspose.Words">
+      <HintPath>dll\Aspose.Words.dll</HintPath>
     </Reference>
     <Reference Include="BarcodeLib, Version=1.0.0.11, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -614,6 +618,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="up\template\个人信息.doc" />
+    <None Include="up\template\公卫表单模板.docx" />
+    <None Include="up\template\封面.doc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -694,6 +701,9 @@
     <Content Include="dll\AForge.Video.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="dll\Aspose.Words.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="dll\BarcodeLib.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -722,6 +732,7 @@
     <Folder Include="service\DataAnalysisService\" />
     <Folder Include="service\HomeDoctorSigningService\" />
     <Folder Include="service\UseHelpService\" />
+    <Folder Include="up\result\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
