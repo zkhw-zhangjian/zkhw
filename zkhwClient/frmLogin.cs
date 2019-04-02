@@ -17,6 +17,7 @@ namespace zkhwClient
         public static string passw = null;
         public static string dataPassw = "";
         public static List<string> listpower = null;
+        public static string organCode = null;
         service.loginLogService lls = new service.loginLogService();
         service.UserService us = new service.UserService();
 
@@ -43,7 +44,9 @@ namespace zkhwClient
             //用户登录 获取用户的账号和密码并判断          
             DataTable ret = service.UserService.UserExists(comboBox1.Text, txtPassword.Text);
             if (ret.Rows.Count == 1)
-            {
+            {  //获取当前登录用户的机构
+                organCode=ret.Rows[0]["organ_code"].ToString();
+
                 name = this.comboBox1.Text;
                 passw = this.txtPassword.Text;
  

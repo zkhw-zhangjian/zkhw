@@ -11,10 +11,11 @@ namespace zkhwClient.PublicHealth
 {
     public partial class olderHelthService : Form
     {
+        service.olderHelthServices olderHelthS = new service.olderHelthServices();
 
+        public string pCa = "";
         public string time1 = null;
         public string time2 = null;
-        DataTable dt;
 
         public olderHelthService()
         {
@@ -26,59 +27,74 @@ namespace zkhwClient.PublicHealth
             //让默认的日期时间减一天
             this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1);
             string str = Application.StartupPath;//项目路径
-            this.button1.BackgroundImage = Image.FromFile(@str + "/images/check.png");
-            queryExaminatProgress();
+            queryOlderHelthService();
         }
-        private void queryExaminatProgress()
+        private void queryOlderHelthService()
         {
+            this.dataGridView1.DataSource = null;
+            DataTable dt = olderHelthS.queryOlderHelthService(pCa, time1, time2);
+            this.dataGridView1.DataSource = dt;
+            this.dataGridView1.Columns[0].Visible = false;
+            this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";
+            this.dataGridView1.Columns[2].HeaderCell.Value = "年龄";
+            this.dataGridView1.Columns[3].HeaderCell.Value = "总分";
+            this.dataGridView1.Columns[4].HeaderCell.Value = "评判结果";
+            this.dataGridView1.Columns[5].HeaderCell.Value = "测试日期";
+            this.dataGridView1.Columns[6].HeaderCell.Value = "测试医生";
 
-            time1 = this.dateTimePicker1.Text.ToString();//开始时间
-            time2 = this.dateTimePicker2.Text.ToString();//结束时间
-
-
-            dt = null;//traderecord.queryTradeRecord(time1, time2, userinfoName, tradeRecordCode, tradeMeans);
-            if (dt != null)
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            for (int i = 0; i < this.dataGridView1.Columns.Count; i++)
             {
-                this.dataGridView1.DataSource = dt;
-                this.dataGridView1.Columns[0].Visible = false;
-                this.dataGridView1.Columns[1].HeaderCell.Value = "操作员";
-                this.dataGridView1.Columns[2].HeaderCell.Value = "流水号";
-                this.dataGridView1.Columns[3].HeaderCell.Value = "类别";
-                this.dataGridView1.Columns[4].HeaderCell.Value = "名称";
-                this.dataGridView1.Columns[5].HeaderCell.Value = "条码";
-                this.dataGridView1.Columns[6].HeaderCell.Value = "进价";
-                this.dataGridView1.Columns[7].HeaderCell.Value = "售价";
-                this.dataGridView1.Columns[8].HeaderCell.Value = "数量";
-                this.dataGridView1.Columns[9].HeaderCell.Value = "计量单位";
-                this.dataGridView1.Columns[10].HeaderCell.Value = "交易金额";
-                this.dataGridView1.Columns[11].HeaderCell.Value = "利润";
-                this.dataGridView1.Columns[12].HeaderCell.Value = "交易时间";
-                this.dataGridView1.Columns[13].HeaderCell.Value = "交易方式";
-
-
-                this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
-                this.dataGridView1.AllowUserToAddRows = false;
-                this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-                this.dataGridView1.Columns[0].Visible = false;
-
-                this.dataGridView1.ReadOnly = true;
-                for (int i = 0; i < this.dataGridView1.Columns.Count; i++)
-                {
-                    this.dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-                }
+                this.dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            queryExaminatProgress();
+            pCa = this.textBox1.Text;
+            if (pCa != "")
+            {
+                this.label2.Text = "";
+            }
+            else { this.label2.Text = "---姓名/身份证号/档案号---"; }
+            time1 = this.dateTimePicker1.Text.ToString();//开始时间
+            time2 = this.dateTimePicker2.Text.ToString();//结束时间
+            queryOlderHelthService();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             this.label5.Visible = this.textBox1.Text.Length < 1;
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            string id = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+
+            DialogResult rr = MessageBox.Show("确认删除？", "确认删除提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+            int tt = (int)rr;
+            if (tt == 1)
+            {//删除用户       
+                bool istrue = olderHelthS.deleteOlderHelthService(id);
+                if (istrue)
+                {
+                    //刷新页面
+                    queryOlderHelthService();
+                    MessageBox.Show("删除成功！");
+                }
+            }
         }
     }
 }

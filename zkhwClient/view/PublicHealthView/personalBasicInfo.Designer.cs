@@ -207,11 +207,11 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Enabled = false;
-            this.label5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label5.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label5.Location = new System.Drawing.Point(126, 81);
+            this.label5.Location = new System.Drawing.Point(127, 80);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(286, 20);
+            this.label5.Size = new System.Drawing.Size(216, 16);
             this.label5.TabIndex = 11;
             this.label5.Text = "---姓名/身份证号/档案号---";
             // 

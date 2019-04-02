@@ -15,7 +15,6 @@ namespace zkhwClient
         [STAThread]
         static void Main()
         {
-
             bool ret;
             System.Threading.Mutex mutex = new System.Threading.Mutex(true, Application.ProductName, out ret);
             if (ret)

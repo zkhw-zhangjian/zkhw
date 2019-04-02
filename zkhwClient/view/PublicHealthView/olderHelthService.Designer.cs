@@ -233,7 +233,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 20);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1153, 442);
+            this.dataGridView1.Size = new System.Drawing.Size(1153, 461);
             this.dataGridView1.TabIndex = 1;
             // 
             // groupBox2
@@ -435,7 +435,7 @@
             this.groupBox3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox3.Location = new System.Drawing.Point(1, 165);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1153, 468);
+            this.groupBox3.Size = new System.Drawing.Size(1153, 481);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "新建自理能力评估";
@@ -444,16 +444,17 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Enabled = false;
-            this.label5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label5.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label5.Location = new System.Drawing.Point(136, 55);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(286, 20);
+            this.label5.Size = new System.Drawing.Size(216, 16);
             this.label5.TabIndex = 13;
             this.label5.Text = "---姓名/身份证号/档案号---";
             // 
             // button2
             // 
+            this.button2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.button2.BackColor = System.Drawing.Color.SkyBlue;
             this.button2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
@@ -466,6 +467,7 @@
             // 
             // button3
             // 
+            this.button3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.button3.BackColor = System.Drawing.Color.SkyBlue;
             this.button3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
@@ -478,23 +480,31 @@
             // 
             // button4
             // 
+            this.button4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.button4.BackColor = System.Drawing.Color.SkyBlue;
             this.button4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button4.Location = new System.Drawing.Point(662, 661);
+            this.button4.Location = new System.Drawing.Point(643, 652);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(96, 32);
             this.button4.TabIndex = 6;
             this.button4.Text = "删除";
-            this.button4.UseVisualStyleBackColor = true;
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(899, 661);
+            this.button5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.button5.BackColor = System.Drawing.Color.Red;
+            this.button5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button5.Location = new System.Drawing.Point(899, 652);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.Size = new System.Drawing.Size(93, 32);
             this.button5.TabIndex = 7;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Text = "关闭";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // olderHelthService
             // 

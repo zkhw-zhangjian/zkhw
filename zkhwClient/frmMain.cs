@@ -1,26 +1,20 @@
-﻿using zkhwClient.dao;
-using zkhwClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using zkhwClient.view.PublicHealthView;
 using zkhwClient.PublicHealth;
 using zkhwClient.view.HomeDoctorSigningView;
 using zkhwClient.view.UseHelpView;
 using zkhwClient.view.setting;
+using System.Diagnostics;
 
 namespace zkhwClient
 {
     public partial class frmMain : Form
     {
+        personRegist pR = null;
+        Process proHttp = new Process();
         public frmMain()
         {
             InitializeComponent();
@@ -28,8 +22,10 @@ namespace zkhwClient
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
-            //注册窗体关闭事件。
-            this.FormClosing += new FormClosingEventHandler(MainForm_Closing);
+            //proHttp.StartInfo.FileName = "C:\\Users\\5050\\Desktop\\healthCheck\\httpCeshi\\bin\\Debug\\httpCeshi.exe";
+            //proHttp.StartInfo.UseShellExecute = false;
+            //proHttp.Start();
+
             this.timer1.Start();//时间控件定时器
 
             this.label1.Text = "一体化查体车  中科弘卫";
@@ -52,7 +48,7 @@ namespace zkhwClient
                         if (i == 0)//默认首项选中
                         {
                             picb[i].BackColor = Color.Blue;
-                            personRegist pR = new personRegist();
+                            pR = new personRegist();
                             pR.TopLevel = false;
                             pR.Dock = DockStyle.Fill;
                             pR.FormBorderStyle = FormBorderStyle.None;
@@ -93,16 +89,11 @@ namespace zkhwClient
             }
 
         }
-        //点击关闭按钮时触发此函数。
-        private void MainForm_Closing(object sender, CancelEventArgs e)
-        {
-            Application.Exit();//退出程序
-        }
+
         private void 用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             userManage um = new userManage();
             um.ShowDialog();
-
         }
 
         private void 密码修改ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -117,6 +108,7 @@ namespace zkhwClient
             DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
+                proHttp.Close();
                 service.loginLogService llse = new service.loginLogService();
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = frmLogin.name;
@@ -127,9 +119,7 @@ namespace zkhwClient
                     llse.addCheckLog(lb);
                 }
                 System.Environment.Exit(0);
-
             }
-
         }
         //挂机
         [DllImport("user32 ")]
@@ -157,8 +147,11 @@ namespace zkhwClient
                         picb[i].BorderStyle = BorderStyle.None;
                         if (i == 0)//默认首项选中
                         {
+                            pR.btnClose_Click();
+                            pR = null;
+                            
                             picb[i].BackColor = Color.Blue;
-                            personRegist pR = new personRegist();
+                            pR = new personRegist();
                             pR.TopLevel = false;
                             pR.Dock = DockStyle.Fill;
                             pR.FormBorderStyle = FormBorderStyle.None;
@@ -243,7 +236,12 @@ namespace zkhwClient
             PictureBox pic = (PictureBox)sender;
             pic.BackColor = Color.Blue;
             string tag = pic.Tag.ToString();
-            ////选中打标
+            if (!"人员登记".Equals(tag) && pR != null)
+            {
+                pR.btnClose_Click();
+                pR = null;
+            }
+            //选中打标
             for (int i = 0; i < this.flowLayoutPanel1.Controls.Count; i++)
             {
                 if (this.flowLayoutPanel1.Controls[i].Tag.ToString() == tag)
@@ -257,7 +255,7 @@ namespace zkhwClient
             }
 
             if (tag == "人员登记")
-            {               //公共卫生模块
+            {    //公共卫生模块
                 personRegist pR = new personRegist();
                 pR.TopLevel = false;
                 pR.Dock = DockStyle.Fill;
@@ -478,7 +476,7 @@ namespace zkhwClient
                 pR.Show();
             }
             else if (tag == "软件系统")
-            {          //使用帮助模块 
+            {   //使用帮助模块 
                 softwareSystems pR = new softwareSystems();
                 pR.TopLevel = false;
                 pR.Dock = DockStyle.Fill;
@@ -517,7 +515,7 @@ namespace zkhwClient
                 this.panel1.Controls.Add(pR);
                 pR.Show();
             }
-            else if (tag == "血液分析")
+            else if (tag == "血常规")
             {
                 bloodAnalysis pR = new bloodAnalysis();
                 pR.TopLevel = false;
@@ -547,16 +545,6 @@ namespace zkhwClient
                 this.panel1.Controls.Add(pR);
                 pR.Show();
             }
-            else if (tag == "血液计")
-            {
-                bloodMeter pR = new bloodMeter();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
             else if (tag == "血压")
             {
                 bloodPressure pR = new bloodPressure();
@@ -568,31 +556,10 @@ namespace zkhwClient
                 pR.Show();
 
             }
-            else if (tag == "血糖")
-            {
-                bloodSugar pR = new bloodSugar();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if (tag == "体温枪")
-            {
-                bodyTemperatureGun pR = new bodyTemperatureGun();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
             else
             {
                 this.panel1.Controls.Clear();
             }
-
         }
 
         private void 数据分析ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -748,6 +715,16 @@ namespace zkhwClient
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.label5.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //proHttp.Kill();
+            Process p = Process.GetCurrentProcess();
+            if (p != null)
+            {
+                p.Kill();
+            }
         }
     }
 }

@@ -247,11 +247,11 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Enabled = false;
-            this.label2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label2.Location = new System.Drawing.Point(155, 86);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(277, 19);
+            this.label2.Size = new System.Drawing.Size(216, 16);
             this.label2.TabIndex = 7;
             this.label2.Text = "---姓名/身份证号/档案号---";
             // 

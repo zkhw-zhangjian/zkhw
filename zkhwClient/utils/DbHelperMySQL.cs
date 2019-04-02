@@ -7,6 +7,8 @@ using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Data.Common;
 using System.Collections.Generic;
+using System.Windows.Forms;
+
 namespace zkhwClient.dao
 {
     /// <summary>
@@ -113,6 +115,10 @@ namespace zkhwClient.dao
                     catch (MySql.Data.MySqlClient.MySqlException e)
                     {
                         connection.Close();
+                        using (System.IO.StreamWriter sw = new System.IO.StreamWriter("F:/log.txt", true))
+                        {
+                            sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + e.Message + "\r\n"+ SQLString);
+                        }
                         throw e;
                     }
                 }
