@@ -541,7 +541,7 @@ where bgdc.id_number in('{string.Join(",", ide)}')";
                         {
                             builder = new DocumentBuilder(doc);
                             var dic = new Dictionary<string, string>();
-                            dic.Add("编号", "09876543321");
+                            dic.Add("编号", "①");
                             dic.Add("姓名", data.Rows[i]["name"].ToString());
                             dic.Add("现住址", data.Rows[i]["Xzhuzhi"].ToString());
                             dic.Add("户籍地址", data.Rows[i]["address"].ToString());
@@ -597,6 +597,78 @@ where bgdc.id_number in('{string.Join(",", ide)}')";
             {
                 File.Delete(url);
             }
+        }
+
+        private string ZF(string st)
+        {
+            string rule = string.Empty;
+            switch (st)
+            {
+                case "1":
+                    rule = "⑴";
+                    break;
+                case "2":
+                    rule = "⑵";
+                    break;
+                case "3":
+                    rule = "⑶";
+                    break;
+                case "4":
+                    rule = "⑷";
+                    break;
+                case "5":
+                    rule = "⑸";
+                    break;
+                case "6":
+                    rule = "⑹";
+                    break;
+                case "7":
+                    rule = "⑺";
+                    break;
+                case "8":
+                    rule = "⑻";
+                    break;
+                case "9":
+                    rule = "⑼";
+                    break;
+                case "10":
+                    rule = "⑽";
+                    break;
+                case "11":
+                    rule = "⑾";
+                    break;
+                case "12":
+                    rule = "⑿";
+                    break;
+                case "13":
+                    rule = "⒀";
+                    break;
+                case "14":
+                    rule = "⒁";
+                    break;
+                case "15":
+                    rule = "⒂";
+                    break;
+                case "16":
+                    rule = "⒃";
+                    break;
+                case "17":
+                    rule = "⒄";
+                    break;
+                case "18":
+                    rule = "⒅";
+                    break;
+                case "19":
+                    rule = "⒆";
+                    break;
+                case "20":
+                    rule = "⒇";
+                    break;
+                default:
+                    break;
+
+            }
+            return rule;
         }
     }
 }
