@@ -95,32 +95,32 @@
   <ItemGroup>
     <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x86\Debug\AForge.dll</HintPath>
+      <HintPath>dll\AForge.dll</HintPath>
     </Reference>
     <Reference Include="AForge.Controls, Version=2.2.5.0, Culture=neutral, PublicKeyToken=a8ac264d1dc6b9d9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x86\Debug\AForge.Controls.dll</HintPath>
+      <HintPath>dll\AForge.Controls.dll</HintPath>
     </Reference>
     <Reference Include="AForge.Imaging, Version=2.2.5.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x86\Debug\AForge.Imaging.dll</HintPath>
+      <HintPath>dll\AForge.Imaging.dll</HintPath>
     </Reference>
     <Reference Include="AForge.Video, Version=2.2.5.0, Culture=neutral, PublicKeyToken=cbfb6e07d173c401, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x86\Debug\AForge.Video.dll</HintPath>
+      <HintPath>dll\AForge.Video.dll</HintPath>
     </Reference>
     <Reference Include="AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x86\Debug\AForge.Video.DirectShow.dll</HintPath>
+      <HintPath>dll\AForge.Video.DirectShow.dll</HintPath>
     </Reference>
     <Reference Include="BarcodeLib, Version=1.0.0.11, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x86\Debug\BarcodeLib.dll</HintPath>
+      <HintPath>dll\BarcodeLib.dll</HintPath>
     </Reference>
     <Reference Include="Interop.BarTender, Version=10.1.3.1, Culture=neutral, PublicKeyToken=109ff779a1b4cbc7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>bin\x86\Debug\Interop.BarTender.dll</HintPath>
+      <HintPath>dll\Interop.BarTender.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp, Version=5.5.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -679,6 +679,13 @@
     <Content Include="bin\x86\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll" />
     <Content Include="bin\x86\Debug\zh-Hans\Microsoft.SqlServer.Types.resources.dll" />
     <Content Include="bin\x86\Debug\zh-Hant\Microsoft.SqlServer.Types.resources.dll" />
+    <Content Include="dll\AForge.Controls.dll" />
+    <Content Include="dll\AForge.dll" />
+    <Content Include="dll\AForge.Imaging.dll" />
+    <Content Include="dll\AForge.Video.DirectShow.dll" />
+    <Content Include="dll\AForge.Video.dll" />
+    <Content Include="dll\BarcodeLib.dll" />
+    <Content Include="dll\Interop.BarTender.dll" />
     <Content Include="dll\itextsharp.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
