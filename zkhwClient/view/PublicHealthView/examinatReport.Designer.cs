@@ -122,7 +122,6 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.版式 = new System.Windows.Forms.Label();
-            this.pagerControl1 = new zkhwClient.control.PagerControl();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
@@ -135,6 +134,7 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.pagerControl1 = new zkhwClient.control.PagerControl();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -307,6 +307,7 @@
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(1544, 564);
             this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
             // 
             // groupBox2
@@ -1172,6 +1173,7 @@
             this.button2.TabIndex = 13;
             this.button2.Text = "报告导出";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // radioButton2
             // 
@@ -1206,20 +1208,6 @@
             this.版式.Size = new System.Drawing.Size(52, 15);
             this.版式.TabIndex = 0;
             this.版式.Text = "版式：";
-            // 
-            // pagerControl1
-            // 
-            this.pagerControl1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.pagerControl1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(78)))), ((int)(((byte)(151)))));
-            this.pagerControl1.JumpText = "Go";
-            this.pagerControl1.Location = new System.Drawing.Point(1, 962);
-            this.pagerControl1.Margin = new System.Windows.Forms.Padding(5);
-            this.pagerControl1.Name = "pagerControl1";
-            this.pagerControl1.PageIndex = 1;
-            this.pagerControl1.PageSize = 100;
-            this.pagerControl1.RecordCount = 0;
-            this.pagerControl1.Size = new System.Drawing.Size(1544, 36);
-            this.pagerControl1.TabIndex = 4;
             // 
             // groupBox4
             // 
@@ -1359,6 +1347,20 @@
             this.label5.Size = new System.Drawing.Size(52, 15);
             this.label5.TabIndex = 13;
             this.label5.Text = "格式：";
+            // 
+            // pagerControl1
+            // 
+            this.pagerControl1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.pagerControl1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(78)))), ((int)(((byte)(151)))));
+            this.pagerControl1.JumpText = "Go";
+            this.pagerControl1.Location = new System.Drawing.Point(1, 962);
+            this.pagerControl1.Margin = new System.Windows.Forms.Padding(5);
+            this.pagerControl1.Name = "pagerControl1";
+            this.pagerControl1.PageIndex = 1;
+            this.pagerControl1.PageSize = 100;
+            this.pagerControl1.RecordCount = 0;
+            this.pagerControl1.Size = new System.Drawing.Size(1544, 36);
+            this.pagerControl1.TabIndex = 4;
             // 
             // examinatReport
             // 

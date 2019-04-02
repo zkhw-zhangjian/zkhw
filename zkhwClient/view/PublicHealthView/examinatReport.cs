@@ -96,20 +96,20 @@ GROUP BY sex
             pairs.Add("juming", juming);
             string sql = $@"select SQL_CALC_FOUND_ROWS 
 id,
-DATE_FORMAT(DengJiShiJian,'%Y%m%d') DengJiShiJian,
-area_duns,
-bar_code,
-name,
-sex,
-id_number,
-ShiFouTongBu,
-BaoGaoShengChan
+DATE_FORMAT(healthchecktime,'%Y%m%d') 登记时间,
+area_duns 区域,
+bar_code 编号,
+name 姓名,
+sex 性别,
+id_number 身份证号,
+ShiFouTongBu 是否同步,
+BaoGaoShengChan 报告生产时间
 from zkhw_tj_bgdc where 1=1 ";
             if (pairs != null && pairs.Count > 0)
             {
                 if (!string.IsNullOrWhiteSpace(pairs["timesta"]) && !string.IsNullOrWhiteSpace(pairs["timeend"]))
                 {
-                    sql += $" and date_format(DengJiShiJian,'%Y-%m-%d') between '{pairs["timesta"]}' and '{pairs["timeend"]}'";
+                    sql += $" and date_format(healthchecktime,'%Y-%m-%d') between '{pairs["timesta"]}' and '{pairs["timeend"]}'";
                 }
 
                 if (!string.IsNullOrWhiteSpace(pairs["juming"]))
@@ -127,6 +127,9 @@ select id From zkhw_tj_bgdc Order By id limit {pageindex},1
             return dt;
         }
 
+        //声明静态类变量
+        private static DataGridViewCheckBoxColumn checkColumn = null;
+        private static DataGridViewButtonColumn buttonColumn = null;
         /// <summary>
         /// 数据绑定
         /// </summary>
@@ -148,32 +151,33 @@ select id From zkhw_tj_bgdc Order By id limit {pageindex},1
             {
                 this.dataGridView1.DataSource = data;
                 this.dataGridView1.Columns[0].Visible = false;
-                this.dataGridView1.Columns[1].HeaderCell.Value = "登记时间";
-                this.dataGridView1.Columns[2].HeaderCell.Value = "区域";
-                this.dataGridView1.Columns[3].HeaderCell.Value = "编号";
-                this.dataGridView1.Columns[4].HeaderCell.Value = "姓名";
-                this.dataGridView1.Columns[5].HeaderCell.Value = "性别";
-                this.dataGridView1.Columns[6].HeaderCell.Value = "身份证号";
-                this.dataGridView1.Columns[7].HeaderCell.Value = "是否同步";
-                this.dataGridView1.Columns[8].HeaderCell.Value = "报告生产时间";
-
-                //DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
-                //btn.Name = "btnModify";
-                //btn.HeaderText = "修改";
-                //btn.DefaultCellStyle.NullValue = "修改";
-                //dataGridView1.Columns.Add(btn);
-
-
+                //this.dataGridView1.Columns[1].HeaderCell.Value = "登记时间";
+                //this.dataGridView1.Columns[2].HeaderCell.Value = "区域";
+                //this.dataGridView1.Columns[3].HeaderCell.Value = "编号";
+                //this.dataGridView1.Columns[4].HeaderCell.Value = "姓名";
+                //this.dataGridView1.Columns[5].HeaderCell.Value = "性别";
+                //this.dataGridView1.Columns[6].HeaderCell.Value = "身份证号";
+                //this.dataGridView1.Columns[7].HeaderCell.Value = "是否同步";
+                //this.dataGridView1.Columns[8].HeaderCell.Value = "报告生产时间";
+                if (buttonColumn == null)
+                {
+                    buttonColumn = new DataGridViewButtonColumn();
+                    buttonColumn.Name = "btnModify";
+                    buttonColumn.HeaderText = "修改";
+                    buttonColumn.DefaultCellStyle.NullValue = "修改";
+                    dataGridView1.Columns.Add(buttonColumn);
+                }
+                checkColumn = new DataGridViewCheckBoxColumn(); //插入第0列 
+                checkColumn.HeaderText = "选择";
+                checkColumn.Name = "cb_check";
+                checkColumn.TrueValue = true;
+                checkColumn.FalseValue = false;
+                checkColumn.DataPropertyName = "IsChecked";
+                dataGridView1.Columns.Insert(0, checkColumn);    //添加的checkbox在第一列
                 this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
                 this.dataGridView1.AllowUserToAddRows = false;
                 this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-                this.dataGridView1.Columns[0].Visible = false;
-
                 this.dataGridView1.ReadOnly = true;
-                //for (int i = 0; i < this.dataGridView1.Columns.Count; i++)
-                //{
-                //    this.dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-                //}
             }
 
         }
@@ -219,7 +223,7 @@ COUNT(CASE
         '0'
 END
 ) as 生化异常
-from zkhw_tj_bgdc where birthday >= '0' and birthday<= '64' and date_format(DengJiShiJian,'%Y-%m-%d') between '{stan}' and '{end}'
+from zkhw_tj_bgdc where birthday >= '0' and birthday<= '64' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
 GROUP BY sex;
 
 SELECT sex,'70',COUNT(sex) 人数,
@@ -248,7 +252,7 @@ COUNT(CASE
         '0'
 END
 ) as 生化异常
-from zkhw_tj_bgdc where birthday >= '65' and birthday<= '70' and date_format(DengJiShiJian,'%Y-%m-%d') between '{stan}' and '{end}'
+from zkhw_tj_bgdc where birthday >= '65' and birthday<= '70' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
 GROUP BY sex;
 
 SELECT sex,'75',COUNT(sex) 人数,
@@ -277,7 +281,7 @@ COUNT(CASE
         '0'
 END
 ) as 生化异常
-from zkhw_tj_bgdc where birthday >= '70' and birthday<= '75' and date_format(DengJiShiJian,'%Y-%m-%d') between '{stan}' and '{end}'
+from zkhw_tj_bgdc where birthday >= '70' and birthday<= '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
 GROUP BY sex;
 
 SELECT sex,'76',COUNT(sex) 人数,
@@ -306,7 +310,7 @@ COUNT(CASE
         '0'
 END
 ) as 生化异常
-from zkhw_tj_bgdc where birthday >= '75' and date_format(DengJiShiJian,'%Y-%m-%d') between '{stan}' and '{end}'
+from zkhw_tj_bgdc where birthday >= '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
 GROUP BY sex";
             DataSet dataSet = DbHelperMySQL.Query(sql);
             if (dataSet != null && dataSet.Tables.Count > 0)
@@ -453,6 +457,31 @@ GROUP BY sex";
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBoxBin(comboBox4, comboBox5);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
+                {
+                    string data = dataGridView1.Rows[i].Cells[4].EditedFormattedValue.ToString();
+                }
+
+            }
+        }
+
+        private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            //checkbox 勾上
+            if ((bool)dataGridView1.Rows[e.RowIndex].Cells[0].EditedFormattedValue == true)
+            {
+                this.dataGridView1.Rows[e.RowIndex].Cells[0].Value = false;
+            }
+            else
+            {
+                this.dataGridView1.Rows[e.RowIndex].Cells[0].Value = true;
+            }
         }
     }
 }
