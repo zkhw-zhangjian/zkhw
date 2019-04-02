@@ -397,7 +397,7 @@ namespace zkhwClient.view.PublicHealthView
                 textBox5.Text = jk.aichive_no;
                 textBox6.Text = barcode;
                 if (addjkbool)
-                {
+                {   //体检信息统计表
                     grjddao.addBgdcInfo(grjdxx, barcode, archive_no);
                 }
                 }
@@ -437,14 +437,15 @@ namespace zkhwClient.view.PublicHealthView
             if (name != null && !"".Equals(name))
             {
                 DataTable dtRegistration = grjddao.registrationRecordInfo(name);
-                DataView dv = dtRegistration.DefaultView;//虚拟视图
-                dv.Sort = "measureCode,meterNo,devtime asc";
-                DataTable dts = dv.ToTable(true);
+                //DataView dv = dtRegistration.DefaultView;//虚拟视图
+                //dv.Sort = "measureCode,meterNo,devtime asc";
+                //DataTable dts = dv.ToTable(true);
                 this.dataGridView1.DataSource = dtRegistration;
-                this.dataGridView1.Columns[0].HeaderCell.Value = "名字";
+                this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
                 this.dataGridView1.Columns[1].HeaderCell.Value = "性别";
                 this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
                 this.dataGridView1.Columns[3].HeaderCell.Value = "电子档案号";
+                this.dataGridView1.Columns[4].HeaderCell.Value = "条码号";
                 //this.dataGridView1.Columns[7].Visible = false;
                 this.dataGridView1.Columns[0].Width = 70;
                 this.dataGridView1.Columns[1].Width = 55;
@@ -467,7 +468,6 @@ namespace zkhwClient.view.PublicHealthView
         {
             label16.Text = "";//计划体检人数
             label19.Text = "";//登记人数
-
 
 
             label22.Text = ""; //40 - 64岁 男

@@ -21,7 +21,7 @@ namespace zkhwClient.dao
             string id = Result.GetNewId();
             string time=DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string status = "0";
-            String sql = "insert into resident_base_info (id,name,sex,birthday,id_number,card_pic,register_address,photo_code,create_time,create_name,aichive_org,is_synchro) values ('" + id + "','" + grjd.name + "','" + grjd.Sex + "', '" + grjd.Birthday + "', '" + grjd.Cardcode + "', '" + grjd.CardPic + "', '" + grjd.Zhuzhi + "', '" + grjd.photo_code + "', '" + time + "', '" + grjd.create_name + "', '" + grjd.aichive_org + "', '" + status + "')";
+            String sql = "insert into resident_base_info (id,archive_no,name,sex,birthday,id_number,card_pic,register_address,photo_code,create_time,create_name,aichive_org,is_synchro) values ('" + id + "','" + grjd.archive_no + "','" + grjd.name + "','" + grjd.Sex + "', '" + grjd.Birthday + "', '" + grjd.Cardcode + "', '" + grjd.CardPic + "', '" + grjd.Zhuzhi + "', '" + grjd.photo_code + "', '" + time + "', '" + grjd.create_name + "', '" + grjd.aichive_org + "', '" + status + "')";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
@@ -51,7 +51,7 @@ namespace zkhwClient.dao
         public DataTable registrationRecordInfo(string name)
         {
             DataSet ds = new DataSet();
-            string sql = "select name,sex,id_number,archive_no from resident_base_info a where a.id_number like '%" + name + "%' or a.name like '%" + name + "%' or a.archive_no like '%" + name + "%'";
+            string sql = "select a.name,a.sex,a.id_number,a.archive_no,k.bar_code from resident_base_info a left join zkhw_tj_jk k on a.id_number=k.id_number and a.id_number like '%" + name + "%' or a.name like '%" + name + "%' or a.archive_no like '%" + name + "%' GROUP BY a.id_number";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
