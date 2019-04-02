@@ -679,13 +679,27 @@
     <Content Include="bin\x86\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll" />
     <Content Include="bin\x86\Debug\zh-Hans\Microsoft.SqlServer.Types.resources.dll" />
     <Content Include="bin\x86\Debug\zh-Hant\Microsoft.SqlServer.Types.resources.dll" />
-    <Content Include="dll\AForge.Controls.dll" />
-    <Content Include="dll\AForge.dll" />
-    <Content Include="dll\AForge.Imaging.dll" />
-    <Content Include="dll\AForge.Video.DirectShow.dll" />
-    <Content Include="dll\AForge.Video.dll" />
-    <Content Include="dll\BarcodeLib.dll" />
-    <Content Include="dll\Interop.BarTender.dll" />
+    <Content Include="dll\AForge.Controls.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dll\AForge.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dll\AForge.Imaging.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dll\AForge.Video.DirectShow.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dll\AForge.Video.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dll\BarcodeLib.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dll\Interop.BarTender.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="dll\itextsharp.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
