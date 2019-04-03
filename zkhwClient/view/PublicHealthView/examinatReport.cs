@@ -59,8 +59,8 @@ GROUP BY sex
             //让默认的日期时间减一天
             this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1);
             string str = Application.StartupPath;//项目路径
-            //this.button1.BackgroundImage = Image.FromFile(@str + "/images/check.png");
-            //this.统计查询.BackgroundImage = Image.FromFile(@str + "/images/check.png");
+            this.button1.BackgroundImage = Image.FromFile(@str + "/images/check.png");
+            this.统计查询.BackgroundImage = Image.FromFile(@str + "/images/check.png");
 
             pagerControl1.OnPageChanged += new EventHandler(pagerControl1_OnPageChanged);
             int count = 0;
@@ -97,16 +97,16 @@ GROUP BY sex
             pairs.Add("timeend", timeend);
             pairs.Add("juming", juming);
             string sql = $@"select SQL_CALC_FOUND_ROWS 
-id,
-DATE_FORMAT(healthchecktime,'%Y%m%d') 登记时间,
-area_duns 区域,
-bar_code 编号,
-name 姓名,
-sex 性别,
-id_number 身份证号,
-ShiFouTongBu 是否同步,
-BaoGaoShengChan 报告生产时间
-from zkhw_tj_bgdc where 1=1 ";
+                            id,
+                            DATE_FORMAT(healthchecktime,'%Y%m%d') 登记时间,
+                            area_duns 区域,
+                            bar_code 编号,
+                            name 姓名,
+                            sex 性别,
+                            id_number 身份证号,
+                            ShiFouTongBu 是否同步,
+                            BaoGaoShengChan 报告生产时间
+                            from zkhw_tj_bgdc where 1=1 ";
             if (pairs != null && pairs.Count > 0)
             {
                 if (!string.IsNullOrWhiteSpace(pairs["timesta"]) && !string.IsNullOrWhiteSpace(pairs["timeend"]))
@@ -121,8 +121,8 @@ from zkhw_tj_bgdc where 1=1 ";
             }
             //sql += $" and id > ({pageindex}-1)*{pagesize} limit {pagesize}; select found_rows()";
             sql += $@" and id >=(
-select id From zkhw_tj_bgdc Order By id limit {pageindex},1
-) limit {pagesize}; select found_rows()";
+            select id From zkhw_tj_bgdc Order By id limit {pageindex},1
+            ) limit {pagesize}; select found_rows()";
             DataSet dataSet = DbHelperMySQL.Query(sql);
             DataTable dt = dataSet.Tables[0];
             count = Convert.ToInt32(dataSet.Tables[1].Rows[0][0]);
@@ -181,7 +181,6 @@ select id From zkhw_tj_bgdc Order By id limit {pageindex},1
                 this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
                 this.dataGridView1.ReadOnly = true;
             }
-
         }
 
         /// <summary>
@@ -201,119 +200,119 @@ select id From zkhw_tj_bgdc Order By id limit {pageindex},1
             string stan = dateTimePicker3.Value.ToString("yyyy-MM-dd");
             string end = dateTimePicker4.Value.ToString("yyyy-MM-dd");
             string sql = $@"SELECT sex,'64',COUNT(sex) 人数,
-COUNT(CASE
-    WHEN(bchao = '2') THEN '0'
-END
-) as B超异常,
-COUNT(CASE
-    WHEN(XinDian = '2') THEN
-        '0'
-END
-) as 心电异常,
-COUNT(CASE
-    WHEN(NiaoChangGui = '2') THEN
-        '0'
-END
-) as 尿常规异常,
-COUNT(CASE
-    WHEN(XueYa = '2') THEN
-        '0'
-END
-) as 血压异常,
-COUNT(CASE
-    WHEN(ShengHua = '2') THEN
-        '0'
-END
-) as 生化异常
-from zkhw_tj_bgdc where birthday >= '0' and birthday<= '64' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
-GROUP BY sex;
+            COUNT(CASE
+                WHEN(bchao = '2') THEN '0'
+            END
+            ) as B超异常,
+            COUNT(CASE
+                WHEN(XinDian = '2') THEN
+                    '0'
+            END
+            ) as 心电异常,
+            COUNT(CASE
+                WHEN(NiaoChangGui = '2') THEN
+                    '0'
+            END
+            ) as 尿常规异常,
+            COUNT(CASE
+                WHEN(XueYa = '2') THEN
+                    '0'
+            END
+            ) as 血压异常,
+            COUNT(CASE
+                WHEN(ShengHua = '2') THEN
+                    '0'
+            END
+            ) as 生化异常
+            from zkhw_tj_bgdc where birthday >= '0' and birthday<= '64' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+            GROUP BY sex;
 
-SELECT sex,'70',COUNT(sex) 人数,
-COUNT(CASE
-    WHEN(bchao = '2') THEN
-        '0'
-END
-) as B超异常,
-COUNT(CASE
-    WHEN(XinDian = '2') THEN
-        '0'
-END
-) as 心电异常,
-COUNT(CASE
-    WHEN(NiaoChangGui = '2') THEN
-        '0'
-END
-) as 尿常规异常,
-COUNT(CASE
-    WHEN(XueYa = '2') THEN
-        '0'
-END
-) as 血压异常,
-COUNT(CASE
-    WHEN(ShengHua = '2') THEN
-        '0'
-END
-) as 生化异常
-from zkhw_tj_bgdc where birthday >= '65' and birthday<= '70' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
-GROUP BY sex;
+            SELECT sex,'70',COUNT(sex) 人数,
+            COUNT(CASE
+                WHEN(bchao = '2') THEN
+                    '0'
+            END
+            ) as B超异常,
+            COUNT(CASE
+                WHEN(XinDian = '2') THEN
+                    '0'
+            END
+            ) as 心电异常,
+            COUNT(CASE
+                WHEN(NiaoChangGui = '2') THEN
+                    '0'
+            END
+            ) as 尿常规异常,
+            COUNT(CASE
+                WHEN(XueYa = '2') THEN
+                    '0'
+            END
+            ) as 血压异常,
+            COUNT(CASE
+                WHEN(ShengHua = '2') THEN
+                    '0'
+            END
+            ) as 生化异常
+            from zkhw_tj_bgdc where birthday >= '65' and birthday<= '70' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+            GROUP BY sex;
 
-SELECT sex,'75',COUNT(sex) 人数,
-COUNT(CASE
-    WHEN(bchao = '2') THEN
-        '0'
-END
-) as B超异常,
-COUNT(CASE
-    WHEN(XinDian = '2') THEN
-        '0'
-END
-) as 心电异常,
-COUNT(CASE
-    WHEN(NiaoChangGui = '2') THEN
-        '0'
-END
-) as 尿常规异常,
-COUNT(CASE
-    WHEN(XueYa = '2') THEN
-        '0'
-END
-) as 血压异常,
-COUNT(CASE
-    WHEN(ShengHua = '2') THEN
-        '0'
-END
-) as 生化异常
-from zkhw_tj_bgdc where birthday >= '70' and birthday<= '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
-GROUP BY sex;
+            SELECT sex,'75',COUNT(sex) 人数,
+            COUNT(CASE
+                WHEN(bchao = '2') THEN
+                    '0'
+            END
+            ) as B超异常,
+            COUNT(CASE
+                WHEN(XinDian = '2') THEN
+                    '0'
+            END
+            ) as 心电异常,
+            COUNT(CASE
+                WHEN(NiaoChangGui = '2') THEN
+                    '0'
+            END
+            ) as 尿常规异常,
+            COUNT(CASE
+                WHEN(XueYa = '2') THEN
+                    '0'
+            END
+            ) as 血压异常,
+            COUNT(CASE
+                WHEN(ShengHua = '2') THEN
+                    '0'
+            END
+            ) as 生化异常
+            from zkhw_tj_bgdc where birthday >= '70' and birthday<= '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+            GROUP BY sex;
 
-SELECT sex,'76',COUNT(sex) 人数,
-COUNT(CASE
-    WHEN(bchao = '2') THEN
-        '0'
-END
-) as B超异常,
-COUNT(CASE
-    WHEN(XinDian = '2') THEN
-        '0'
-END
-) as 心电异常,
-COUNT(CASE
-    WHEN(NiaoChangGui = '2') THEN
-        '0'
-END
-) as 尿常规异常,
-COUNT(CASE
-    WHEN(XueYa = '2') THEN
-        '0'
-END
-) as 血压异常,
-COUNT(CASE
-    WHEN(ShengHua = '2') THEN
-        '0'
-END
-) as 生化异常
-from zkhw_tj_bgdc where birthday >= '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
-GROUP BY sex";
+            SELECT sex,'76',COUNT(sex) 人数,
+            COUNT(CASE
+                WHEN(bchao = '2') THEN
+                    '0'
+            END
+            ) as B超异常,
+            COUNT(CASE
+                WHEN(XinDian = '2') THEN
+                    '0'
+            END
+            ) as 心电异常,
+            COUNT(CASE
+                WHEN(NiaoChangGui = '2') THEN
+                    '0'
+            END
+            ) as 尿常规异常,
+            COUNT(CASE
+                WHEN(XueYa = '2') THEN
+                    '0'
+            END
+            ) as 血压异常,
+            COUNT(CASE
+                WHEN(ShengHua = '2') THEN
+                    '0'
+            END
+            ) as 生化异常
+            from zkhw_tj_bgdc where birthday >= '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+            GROUP BY sex";
             DataSet dataSet = DbHelperMySQL.Query(sql);
             if (dataSet != null && dataSet.Tables.Count > 0)
             {

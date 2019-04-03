@@ -14,6 +14,7 @@ namespace zkhwClient.bean
         public string name { get; set; }
         public string Sex { get; set; }
         public string Birthday { get; set; }
+        public int age { get; set; }
         public string Cardcode { get; set; }
         public string Zhuzhi { get; set; }
         public string CardPic { get; set; }

@@ -8,6 +8,8 @@ using zkhwClient.view.HomeDoctorSigningView;
 using zkhwClient.view.UseHelpView;
 using zkhwClient.view.setting;
 using System.Diagnostics;
+using zkhwClient.dao;
+using System.Data;
 
 namespace zkhwClient
 {
@@ -15,6 +17,7 @@ namespace zkhwClient
     {
         personRegist pR = null;
         Process proHttp = new Process();
+        basicSettingDao bsdao = new basicSettingDao();
         public frmMain()
         {
             InitializeComponent();
@@ -31,6 +34,13 @@ namespace zkhwClient
             this.label1.Text = "一体化查体车  中科弘卫";
             this.label1.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
 
+            //获取首页右上角信息
+            DataTable dts= bsdao.checkBasicsettingInfo();
+            if (dts.Rows.Count>0) {
+                label3.Text= dts.Rows[0]["organ_name"].ToString();
+                label7.Text = dts.Rows[0]["input_name"].ToString();
+                label9.Text = dts.Rows[0]["zeren_doctor"].ToString();
+            }
             //默认主页面显示
             foreach (ToolStripMenuItem item in this.menuStrip1.Items)
             {

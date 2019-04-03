@@ -15,16 +15,24 @@ namespace zkhwClient.bean
         public string bar_code { get; set; }
         //社保卡号
         public string SocialSecuritycode { get; set; }
+        //名字
+        public string name { get; set; }
+        //年龄
+        public int age { get; set; }
+        //性别
+        public string sex { get; set; }
         //体检批次号
         public string batch_no { get; set; }
         //身份证照片地址
         public string Pic1 { get; set; }
         //摄像头拍摄照片地址
         public string Pic2 { get; set; }
-        //行政代码
-        public string Xzdm { get; set; }
+        // 村区域编号
+        public string village_code { get; set; }
+        //户籍地址
+        public string address { get; set; }
         //现住地
-        public string Xianzhudi { get; set; }
+        public string Xzhudi { get; set; }
         //乡镇街道名称
         public string XzjdName { get; set; }
         //村（局）委会名称

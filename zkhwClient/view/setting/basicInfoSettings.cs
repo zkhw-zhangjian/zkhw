@@ -15,21 +15,37 @@ namespace zkhwClient.view.setting
         areaConfigDao areadao = new areaConfigDao();
         basicSettingDao bsdao = new basicSettingDao();
         UserDao userdao = new UserDao();
-        public static string xcuncode = null;
+        public static string xcuncode = "123";
+        public static string xzName = null;
+        public static string xcName = null;
         string xzcode = null;
         string qxcode = null;
         string shicode = null;
         string shengcode = null;
+        public static string zeren_doctor = null;
+        public static string organ_name = null;
+        public static string input_name = null;
+        public static string createtime = null;
         public basicInfoSettings()
         {
             InitializeComponent();
         }
         private void basicInfoSettings_Load(object sender, EventArgs e)
         {
+            DataTable dtbasic= bsdao.checkBasicsettingInfo();
+            if (dtbasic.Rows.Count>0) {
+                zeren_doctor= dtbasic.Rows[0]["zeren_doctor"].ToString();
+                organ_name = dtbasic.Rows[0]["organ_name"].ToString();
+                input_name = dtbasic.Rows[0]["input_name"].ToString();
+                createtime = dtbasic.Rows[0]["createtime"].ToString();
+                xcuncode = dtbasic.Rows[0]["cun_code"].ToString();
+                xzcode = dtbasic.Rows[0]["xz_code"].ToString();
+                xzName= bsdao.selectAreaBycode(xzcode).Rows[0][0].ToString();
+                xcName = bsdao.selectAreaBycode(xcuncode).Rows[0][0].ToString();
+            }
             this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源
             this.comboBox1.DisplayMember = "name";//显示给用户的数据集表项
             this.comboBox1.ValueMember = "code";//操作时获取的值 
-
             showCombobox();
         }
 
@@ -72,15 +88,17 @@ namespace zkhwClient.view.setting
         }
 
         private void comboBox5_SelectionChangeCommitted(object sender, EventArgs e)
-        {
+        {       
             xcuncode = this.comboBox5.SelectedValue.ToString();
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            xzName = this.comboBox4.Text;
+            xcName = this.comboBox5.Text;
             string organ_code = null;
-            string organ_name = textBox1.Text;
-            string input_name = this.comboBox6.SelectedValue.ToString();
-            string zeren_doctor = this.comboBox7.SelectedValue.ToString();
+            organ_name = textBox1.Text;
+            input_name = this.comboBox6.SelectedValue.ToString();
+            zeren_doctor = this.comboBox7.SelectedValue.ToString();
             string bc = this.comboBox8.SelectedValue.ToString();
             string xcg = this.comboBox9.SelectedValue.ToString();
             string sh = this.comboBox10.SelectedValue.ToString();
@@ -101,6 +119,7 @@ namespace zkhwClient.view.setting
             {
                bool bl= bsdao.addBasicSetting(shengcode, shicode, qxcode, xzcode, xcuncode, organ_code, organ_name, input_name, zeren_doctor, bc, xcg, sh, sgtz, ncg, xdt, xy, wx, other, captain, members, operation, car_name, create_user, create_name);
                 if (bl) {
+                    createtime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                     MessageBox.Show("数据保存成功！");
                 }
             }
