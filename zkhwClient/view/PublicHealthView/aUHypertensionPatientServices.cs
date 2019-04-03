@@ -154,8 +154,8 @@ namespace zkhwClient.view.PublicHealthView
 
             //以下页面未用 数据库字段格式要求
             //Cardcode,Codebar,SocialSecuritycode,patientAge,dataSate,hypertension_code,referral_code,create_name,create_time,update_name,update_time
-            fuv_hypertensionBean.create_time = DateTime.Now.ToString();
-            fuv_hypertensionBean.update_time = DateTime.Now.ToString();
+            fuv_hypertensionBean.create_time = DateTime.Now.ToString("yyyy-MM-dd");
+            fuv_hypertensionBean.update_time = DateTime.Now.ToString("yyyy-MM-dd");
 
 
             bool isfalse = hypertensionPatient.aUfuv_hypertension(fuv_hypertensionBean, id, goodsList);
