@@ -250,9 +250,9 @@ namespace zkhwClient.view.PublicHealthView
 
 
             //////以下页面未用 数据库字段格式要求
-            //resident_base_infoBean.synchro_time = DateTime.Now.ToString();
-            //resident_base_infoBean.create_time = DateTime.Now.ToString();
-            //resident_base_infoBean.update_time = DateTime.Now.ToString();
+            //resident_base_infoBean.synchro_time = DateTime.Now.ToString("yyyy-MM-dd");
+            //resident_base_infoBean.create_time = DateTime.Now.ToString("yyyy-MM-dd");
+            //resident_base_infoBean.update_time = DateTime.Now.ToString("yyyy-MM-dd");
 
             //resident_base_infoBean.is_hypertension = "0";
             //resident_base_infoBean.is_diabetes = "0";

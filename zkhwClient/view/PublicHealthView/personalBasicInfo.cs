@@ -35,16 +35,16 @@ namespace zkhwClient.view.PublicHealthView
             label4.Left = (this.panel1.Width - this.label4.Width) / 2;
             label4.BringToFront();
 
-            querypBasicInfo();
+            button5_Click(null,null);
         }
         private void button5_Click(object sender, EventArgs e)
         {
             pCa = this.textBox1.Text;
             if (pCa != "")
             {
-                this.label2.Text = "";
+                this.label5.Text = "";
             }
-            else { this.label2.Text = "---姓名/身份证号/档案号---"; }
+            else { this.label5.Text = "---姓名/身份证号/档案号---"; }
             time1 = this.dateTimePicker1.Text.ToString();//开始时间
             time2 = this.dateTimePicker2.Text.ToString();//结束时间
             querypBasicInfo();
@@ -88,7 +88,7 @@ namespace zkhwClient.view.PublicHealthView
             if (hm.ShowDialog() == DialogResult.OK)
             {
                 //刷新页面
-                querypBasicInfo();
+                button5_Click(null, null);
                 MessageBox.Show("添加成功！");
 
             }
@@ -234,7 +234,8 @@ namespace zkhwClient.view.PublicHealthView
             if (hm.ShowDialog() == DialogResult.OK)
             {
                 //刷新页面
-                querypBasicInfo();
+
+                button5_Click(null, null);
                 MessageBox.Show("修改成功！");
 
             }
@@ -253,7 +254,7 @@ namespace zkhwClient.view.PublicHealthView
                 if (istrue)
                 {
                     //刷新页面
-                    querypBasicInfo();
+                    button5_Click(null, null);
                     MessageBox.Show("删除成功！");
                 }
             }

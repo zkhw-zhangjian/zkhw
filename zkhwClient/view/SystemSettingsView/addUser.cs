@@ -44,7 +44,7 @@ namespace zkhwClient
             string pwd = this.textBox2.Text;
             string pwd1 = this.textBox3.Text;
 
-            string lasttime = DateTime.Now.ToString();
+            string lasttime = DateTime.Now.ToString("yyyy-MM-dd");
             string loginnumber = "1";
             string depaid = "1";
             string name = "1";
