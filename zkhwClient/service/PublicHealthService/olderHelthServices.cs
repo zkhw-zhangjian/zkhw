@@ -17,5 +17,9 @@ namespace zkhwClient.service
         {
             return hPD.queryOlderHelthService(pCa, time1, time2);
         }
+        public DataTable queryOlderHelthService0()
+        {
+            return hPD.queryOlderHelthService0();
+        }
     }
 }
