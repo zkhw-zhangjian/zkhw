@@ -195,6 +195,12 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmMain1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain1.Designer.cs">
+      <DependentUpon>frmMain1.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyEncrypt.cs" />
     <Compile Include="service\PublicHealthService\olderHelthServices.cs" />
     <Compile Include="service\PublicHealthService\diabetesPatientService.cs" />
