@@ -471,7 +471,8 @@ GROUP BY sex
                 {
                     if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
                     {
-                        ide.Add(dataGridView1.Rows[i].Cells[7].EditedFormattedValue.ToString());
+                        string id = dataGridView1["身份证号", i].Value.ToString();
+                        ide.Add(id);
                     }
                 }
                 string sql = string.Empty;
@@ -486,6 +487,7 @@ GROUP BY sex
                             {
                                 case "封面":
                                     sql = $@"SELECT 
+jk.id_number,
 jk.aichive_no,
 jk.Xzhuzhi,
 jk.address,
@@ -498,7 +500,7 @@ info.name,
 info.phone 
 from resident_base_info info 
 join 
-(SELECT * from zkhw_tj_jk ORDER BY createtime DESC LIMIT 1) jk
+(SELECT * from zkhw_tj_jk where id_number in('{string.Join(",", ide)}') ORDER BY createtime DESC LIMIT 1) jk
 on info.id_number=jk.id_number
 where info.id_number in('{string.Join(",", ide)}')";
                                     DataSet datas = DbHelperMySQL.Query(sql);
@@ -529,7 +531,7 @@ where info.id_number in('{string.Join(",", ide)}')";
                 {
                     MessageBox.Show("综合报告单不能和其它报告一起！");
                 }
-                PDF(list, dataSet);
+                PDF(list, dataSet, ide);
                 MessageBox.Show("成功！");
             }
             catch (Exception ex)
@@ -539,93 +541,243 @@ where info.id_number in('{string.Join(",", ide)}')";
             }
         }
 
-        private void PDF(List<string> list, DataSet dataSet)
+        private void PDF(List<string> list, DataSet dataSet, List<string> ide)
         {
             string str = Application.StartupPath;//项目路径
             Document doc = null;
-            DocumentBuilder builder = null;
             if (list.Count > 1)
             {
-                foreach (string item in list)
+                foreach (var item in ide)
                 {
-
-
+                    List<Report> reports = new List<Report>();
+                    foreach (var items in list)
+                    {
+                        Report report = new Report();
+                        DataRow data = dataSet.Tables[items].Select($"id_number={item}")[0];
+                        report.Name = items;
+                        report.Doc = PdfProcessing(items, data);
+                        reports.Add(report);
+                    }
+                    Report re = reports.Where(m => m.Name == "封面").FirstOrDefault();
+                    Report res = reports.Where(m => m.Name == "个人信息").FirstOrDefault();
+                    if (re != null)
+                    {
+                        if (res != null)
+                        {
+                            re.Doc.AppendDocument(res.Doc, ImportFormatMode.KeepSourceFormatting);
+                            reports.Remove(re);
+                            reports.Remove(res);
+                            if (reports != null && reports.Count > 0)
+                            {
+                                foreach (var rs in reports)
+                                {
+                                    re.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            reports.Remove(re);
+                            if (reports != null && reports.Count > 0)
+                            {
+                                foreach (var rs in reports)
+                                {
+                                    re.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
+                                }
+                            }
+                        }
+                        string urls = @str + $"/up/result/{item}.pdf";
+                        DeteleFile(urls);
+                        re.Doc.Save(urls, SaveFormat.Pdf);
+                    }
+                    else if (res != null)
+                    {
+                        reports.Remove(res);
+                        if (reports != null && reports.Count > 0)
+                        {
+                            foreach (var rs in reports)
+                            {
+                                res.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
+                            }
+                        }
+                        string urls = @str + $"/up/result/{item}.pdf";
+                        DeteleFile(urls);
+                        res.Doc.Save(urls, SaveFormat.Pdf);
+                    }
+                    else
+                    {
+                        Report rp = reports.Select(m => m).FirstOrDefault();
+                        reports.Remove(rp);
+                        if (reports != null && reports.Count > 0)
+                        {
+                            foreach (var rs in reports)
+                            {
+                                rp.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
+                            }
+                        }
+                        string urls = @str + $"/up/result/{item}.pdf";
+                        DeteleFile(urls);
+                        rp.Doc.Save(urls, SaveFormat.Pdf);
+                    }
                 }
             }
             else
             {
-                DateTime date = DateTime.Now;
                 switch (list[0])
                 {
                     case "封面":
-                        DataTable data = dataSet.Tables["封面"];
-                        doc = new Document(@str + $"/up/template/封面.doc");
-                        for (int i = 0; i < data.Rows.Count; i++)
+                        for (int i = 0; i < dataSet.Tables["封面"].Rows.Count; i++)
                         {
-                            builder = new DocumentBuilder(doc);
-                            var dic = new Dictionary<string, string>();
-                            dic.Add("编号", data.Rows[i]["aichive_no"].ToString());
-                            dic.Add("姓名", data.Rows[i]["name"].ToString());
-                            dic.Add("现住址", data.Rows[i]["Xzhuzhi"].ToString());
-                            dic.Add("户籍地址", data.Rows[i]["address"].ToString());
-                            dic.Add("联系电话", data.Rows[i]["phone"].ToString());
-                            dic.Add("乡镇名称", data.Rows[i]["XzjdName"].ToString());
-                            dic.Add("村委会名称", data.Rows[i]["CjwhName"].ToString());
-                            dic.Add("建档单位", data.Rows[i]["JddwName"].ToString());
-                            dic.Add("建档人", data.Rows[i]["JdrName"].ToString());
-                            dic.Add("责任医生", data.Rows[i]["ZrysName"].ToString());
-                            dic.Add("年", date.Year.ToString());
-                            dic.Add("月", date.Month.ToString());
-                            dic.Add("日", date.Day.ToString());
-                            //书签替换
-                            foreach (var key in dic.Keys)
-                            {
-                                builder.MoveToBookmark(key);
-                                builder.Write(dic[key]);
-                            }
-                            //保存为PDF文件，此处的SaveFormat支持很多种格式，如图片，epub,rtf 等等
-                            string url = @str + $"/up/result/{data.Rows[i]["id_number"].ToString()}.pdf";
-                            DeteleFile(url);
-                            doc.Save(url, SaveFormat.Pdf);
+                            DataRow data = dataSet.Tables["封面"].Rows[i];
+                            doc = PdfProcessing(list[0], data);
+                            string urls = @str + $"/up/result/{data["id_number"].ToString()}.pdf";
+                            DeteleFile(urls);
+                            doc.Save(urls, SaveFormat.Pdf);
                         }
                         break;
                     case "个人信息":
-                        DataTable gr = dataSet.Tables["个人信息"];
-                        doc = new Document(@str + $"/up/template/个人信息.doc");
-                        for (int i = 0; i < gr.Rows.Count; i++)
+                        for (int i = 0; i < dataSet.Tables["个人信息"].Rows.Count; i++)
                         {
-                            builder = new DocumentBuilder(doc);
-                            var dic = new Dictionary<string, string>();
-                            dic.Add("编号", gr.Rows[i]["archive_no"].ToString());
-                            dic.Add("姓名", gr.Rows[i]["name"].ToString());
-                            dic.Add("性别", ZF(gr.Rows[i]["sex"].ToString() == "男" ? "1" : "2"));
-                            dic.Add("出生日期", gr.Rows[i]["birthday"].ToString());
-                            dic.Add("身份证号", gr.Rows[i]["id_number"].ToString());
-                            dic.Add("工作单位", gr.Rows[i]["company"].ToString());
-                            dic.Add("本人电话", gr.Rows[i]["phone"].ToString());
-                            dic.Add("联系人姓名", gr.Rows[i]["link_name"].ToString());
-                            dic.Add("联系人电话", gr.Rows[i]["link_phone"].ToString());
-                            dic.Add("常住类型", gr.Rows[i]["ZrysName"].ToString());
-                            dic.Add("年", date.Year.ToString());
-                            dic.Add("月", date.Month.ToString());
-                            dic.Add("日", date.Day.ToString());
-                            //书签替换
-                            foreach (var key in dic.Keys)
-                            {
-                                builder.MoveToBookmark(key);
-                                builder.Write(dic[key]);
-                            }
-                            //保存为PDF文件，此处的SaveFormat支持很多种格式，如图片，epub,rtf 等等
-                            string url = @str + $"/up/result/{gr.Rows[i]["id_number"].ToString()}.pdf";
-                            DeteleFile(url);
-                            doc.Save(url, SaveFormat.Pdf);
+                            DataRow data = dataSet.Tables["个人信息"].Rows[i];
+                            doc = PdfProcessing(list[0], data);
+                            string urls = @str + $"/up/result/{data["id_number"].ToString()}.pdf";
+                            DeteleFile(urls);
+                            doc.Save(urls, SaveFormat.Pdf);
                         }
                         break;
                     default:
                         break;
                 }
             }
-            //this.button1.BackgroundImage = Image.FromFile(@str + "/images/check.png");
+        }
+
+        private Document PdfProcessing(string lx, DataRow data)
+        {
+            DateTime date = DateTime.Now;
+            string str = Application.StartupPath;//项目路径
+            Document doc = null;
+            DocumentBuilder builder = null;
+            switch (lx)
+            {
+                case "封面":
+                    doc = new Document(@str + $"/up/template/封面.doc");
+                    builder = new DocumentBuilder(doc);
+                    var dic = new Dictionary<string, string>();
+                    dic.Add("编号", data["aichive_no"].ToString());
+                    dic.Add("姓名", data["name"].ToString());
+                    dic.Add("现住址", data["Xzhuzhi"].ToString());
+                    dic.Add("户籍地址", data["address"].ToString());
+                    dic.Add("联系电话", data["phone"].ToString());
+                    dic.Add("乡镇名称", data["XzjdName"].ToString());
+                    dic.Add("村委会名称", data["CjwhName"].ToString());
+                    dic.Add("建档单位", data["JddwName"].ToString());
+                    dic.Add("建档人", data["JdrName"].ToString());
+                    dic.Add("责任医生", data["ZrysName"].ToString());
+                    dic.Add("年", date.Year.ToString());
+                    dic.Add("月", date.Month.ToString());
+                    dic.Add("日", date.Day.ToString());
+                    //书签替换
+                    foreach (var key in dic.Keys)
+                    {
+                        builder.MoveToBookmark(key);
+                        builder.Write(dic[key]);
+                    }
+                    return doc;
+                case "个人信息":
+                    doc = new Document(@str + $"/up/template/个人信息.doc");
+                    builder = new DocumentBuilder(doc);
+                    var dics = new Dictionary<string, string>();
+                    dics.Add("编号", data["archive_no"].ToString());
+                    dics.Add("姓名", data["name"].ToString());
+                    dics.Add("性别", ZF(data["sex"].ToString()));
+                    dics.Add("出生日期", data["birthday"].ToString());
+                    dics.Add("身份证号", data["id_number"].ToString());
+                    dics.Add("工作单位", data["company"].ToString());
+                    dics.Add("本人电话", data["phone"].ToString());
+                    dics.Add("联系人姓名", data["link_name"].ToString());
+                    dics.Add("联系人电话", data["link_phone"].ToString());
+                    dics.Add("常住类型", ZF(data["resident_type"].ToString()));
+                    dics.Add("民族", ZF(data["nation"].ToString()));
+                    dics.Add("血型", ZF(data["blood_group"].ToString()));
+                    dics.Add("RH", ZF(data["blood_rh"].ToString()));
+                    dics.Add("文化程度", ZF(data["education"].ToString()));
+                    dics.Add("职业", ZF(data["profession"].ToString()));
+                    dics.Add("婚姻状况", ZF(data["marital_status"].ToString()));
+                    dics.Add("医疗费用", ZF(data["pay_type"].ToString()));
+                    dics.Add("药物过敏史", ZF(data["drug_allergy"].ToString()));
+                    dics.Add("暴露史", ZF(data["exposure"].ToString()));
+                    dics.Add("疾病", ZF(data["disease_other"].ToString()));
+                    DataSet datas = DbHelperMySQL.Query($"SELECT * from operation_record where resident_base_info_id='{data["id"].ToString()}'");
+                    if (datas != null && datas.Tables.Count > 0 && datas.Tables[0].Rows.Count > 0)
+                    {
+                        DataTable da = datas.Tables[0];
+                        for (int j = 0; j < da.Rows.Count; j++)
+                        {
+                            dics.Add("手术" + j + 1, ZF(da.Rows[j]["operation_name"].ToString()));
+                            dics.Add("手术" + j + 1 + "时间", ZF(da.Rows[j]["operation_time"].ToString()));
+                        }
+                        dics.Add("手术", ZF("2"));
+                    }
+                    else
+                    {
+                        dics.Add("手术", ZF("1"));
+                    }
+                    DataSet ws = DbHelperMySQL.Query($"SELECT * from traumatism_record where resident_base_info_id='{data["id"].ToString()}'");
+                    if (ws != null && ws.Tables.Count > 0 && ws.Tables[0].Rows.Count > 0)
+                    {
+                        DataTable da = ws.Tables[0];
+                        for (int j = 0; j < da.Rows.Count; j++)
+                        {
+                            dics.Add("外伤" + j + 1, ZF(da.Rows[j]["traumatism_name"].ToString()));
+                            dics.Add("外伤" + j + 1 + "时间", ZF(da.Rows[j]["traumatism_time"].ToString()));
+                        }
+                        dics.Add("外伤", ZF("2"));
+                    }
+                    else
+                    {
+                        dics.Add("外伤", ZF("1"));
+                    }
+                    DataSet sx = DbHelperMySQL.Query($"SELECT * from metachysis_record where resident_base_info_id='{data["id"].ToString()}'");
+                    if (sx != null && sx.Tables.Count > 0 && sx.Tables[0].Rows.Count > 0)
+                    {
+                        DataTable da = sx.Tables[0];
+                        for (int j = 0; j < da.Rows.Count; j++)
+                        {
+                            dics.Add("输血" + j + 1, ZF(da.Rows[j]["metachysis_reasonn"].ToString()));
+                            dics.Add("输血" + j + 1 + "时间", ZF(da.Rows[j]["metachysis_time"].ToString()));
+                        }
+                        dics.Add("输血", ZF("2"));
+                    }
+                    else
+                    {
+                        dics.Add("输血", ZF("1"));
+                    }
+                    if (data["is_heredity"].ToString() == "1")
+                    {
+                        dics.Add("遗传病史", ZF(data["is_heredity"].ToString()));
+                    }
+                    else
+                    {
+                        dics.Add("遗传病史", data["heredity_name"].ToString() + "    " + ZF(data["profession"].ToString()));
+                    }
+
+                    dics.Add("残疾情况", ZF(data["is_deformity"].ToString()));
+                    dics.Add("厨房排风设施", ZF(data["kitchen"].ToString()));
+                    dics.Add("燃料类型", ZF(data["fuel"].ToString()));
+                    dics.Add("饮水", ZF(data["drink"].ToString()));
+                    dics.Add("厕所", ZF(data["toilet"].ToString()));
+                    dics.Add("禽畜栏", ZF(data["poultry"].ToString()));
+                    //书签替换
+                    foreach (var key in dics.Keys)
+                    {
+                        builder.MoveToBookmark(key);
+                        builder.Write(dics[key]);
+                    }
+                    return doc;
+                default:
+                    break;
+            }
+            return doc;
         }
 
         /// <summary>
@@ -657,73 +809,155 @@ where info.id_number in('{string.Join(",", ide)}')";
         private string ZF(string st)
         {
             string rule = string.Empty;
-            switch (st)
+            if (st.IndexOf(',') > 0)
             {
-                case "1":
-                    rule = "⑴";
-                    break;
-                case "2":
-                    rule = "⑵";
-                    break;
-                case "3":
-                    rule = "⑶";
-                    break;
-                case "4":
-                    rule = "⑷";
-                    break;
-                case "5":
-                    rule = "⑸";
-                    break;
-                case "6":
-                    rule = "⑹";
-                    break;
-                case "7":
-                    rule = "⑺";
-                    break;
-                case "8":
-                    rule = "⑻";
-                    break;
-                case "9":
-                    rule = "⑼";
-                    break;
-                case "10":
-                    rule = "⑽";
-                    break;
-                case "11":
-                    rule = "⑾";
-                    break;
-                case "12":
-                    rule = "⑿";
-                    break;
-                case "13":
-                    rule = "⒀";
-                    break;
-                case "14":
-                    rule = "⒁";
-                    break;
-                case "15":
-                    rule = "⒂";
-                    break;
-                case "16":
-                    rule = "⒃";
-                    break;
-                case "17":
-                    rule = "⒄";
-                    break;
-                case "18":
-                    rule = "⒅";
-                    break;
-                case "19":
-                    rule = "⒆";
-                    break;
-                case "20":
-                    rule = "⒇";
-                    break;
-                default:
-                    break;
-
+                string[] zi = st.Split(',');
+                foreach (var item in zi)
+                {
+                    switch (item)
+                    {
+                        case "1":
+                            rule += "⑴/";
+                            break;
+                        case "2":
+                            rule += "⑵/";
+                            break;
+                        case "3":
+                            rule += "⑶/";
+                            break;
+                        case "4":
+                            rule += "⑷/";
+                            break;
+                        case "5":
+                            rule += "⑸/";
+                            break;
+                        case "6":
+                            rule += "⑹/";
+                            break;
+                        case "7":
+                            rule += "⑺/";
+                            break;
+                        case "8":
+                            rule += "⑻/";
+                            break;
+                        case "9":
+                            rule += "⑼/";
+                            break;
+                        case "10":
+                            rule += "⑽/";
+                            break;
+                        case "11":
+                            rule += "⑾/";
+                            break;
+                        case "12":
+                            rule += "⑿/";
+                            break;
+                        case "13":
+                            rule += "⒀/";
+                            break;
+                        case "14":
+                            rule += "⒁/";
+                            break;
+                        case "15":
+                            rule += "⒂/";
+                            break;
+                        case "16":
+                            rule += "⒃/";
+                            break;
+                        case "17":
+                            rule += "⒄/";
+                            break;
+                        case "18":
+                            rule += "⒅/";
+                            break;
+                        case "19":
+                            rule += "⒆/";
+                            break;
+                        case "20":
+                            rule += "⒇/";
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                return rule.TrimEnd('/');
             }
-            return rule;
+            else
+            {
+                switch (st)
+                {
+                    case "1":
+                        rule = "⑴";
+                        break;
+                    case "2":
+                        rule = "⑵";
+                        break;
+                    case "3":
+                        rule = "⑶";
+                        break;
+                    case "4":
+                        rule = "⑷";
+                        break;
+                    case "5":
+                        rule = "⑸";
+                        break;
+                    case "6":
+                        rule = "⑹";
+                        break;
+                    case "7":
+                        rule = "⑺";
+                        break;
+                    case "8":
+                        rule = "⑻";
+                        break;
+                    case "9":
+                        rule = "⑼";
+                        break;
+                    case "10":
+                        rule = "⑽";
+                        break;
+                    case "11":
+                        rule = "⑾";
+                        break;
+                    case "12":
+                        rule = "⑿";
+                        break;
+                    case "13":
+                        rule = "⒀";
+                        break;
+                    case "14":
+                        rule = "⒁";
+                        break;
+                    case "15":
+                        rule = "⒂";
+                        break;
+                    case "16":
+                        rule = "⒃";
+                        break;
+                    case "17":
+                        rule = "⒄";
+                        break;
+                    case "18":
+                        rule = "⒅";
+                        break;
+                    case "19":
+                        rule = "⒆";
+                        break;
+                    case "20":
+                        rule = "⒇";
+                        break;
+                    default:
+                        break;
+
+                }
+                return rule;
+            }
         }
+    }
+
+    public class Report
+    {
+        public string Name { get; set; }
+        public Document Doc { get; set; }
     }
 }
