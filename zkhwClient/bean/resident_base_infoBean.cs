@@ -40,8 +40,8 @@ namespace zkhwClient.bean
         public string link_phone { get; set; }
         //常住类型
         public string resident_type { get; set; }
-        //户籍所在地
-        public string register_address { get; set; }
+        ////户籍所在地
+        //public string register_address { get; set; }
         //现住址
         public string residence_address { get; set; }
 

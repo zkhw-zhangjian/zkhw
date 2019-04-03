@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
@@ -60,7 +61,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -73,7 +73,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.textBox1);
@@ -91,10 +91,22 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(1, 76);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1153, 83);
+            this.groupBox1.Size = new System.Drawing.Size(1349, 83);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Enabled = false;
+            this.label5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label5.Location = new System.Drawing.Point(136, 55);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(216, 16);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "---姓名/身份证号/档案号---";
             // 
             // textBox1
             // 
@@ -225,20 +237,20 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(0, 20);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1153, 461);
+            this.dataGridView1.Size = new System.Drawing.Size(1349, 461);
             this.dataGridView1.TabIndex = 1;
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.label21);
             this.groupBox2.Controls.Add(this.label20);
@@ -257,7 +269,7 @@
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Location = new System.Drawing.Point(1, 7);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1153, 63);
+            this.groupBox2.Size = new System.Drawing.Size(1349, 63);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             // 
@@ -266,18 +278,18 @@
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label21.ForeColor = System.Drawing.Color.SkyBlue;
-            this.label21.Location = new System.Drawing.Point(971, 21);
+            this.label21.Location = new System.Drawing.Point(1162, 21);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(20, 20);
+            this.label21.Size = new System.Drawing.Size(86, 20);
             this.label21.TabIndex = 17;
-            this.label21.Text = "3";
+            this.label21.Text = "label21";
             // 
             // label20
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label20.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label20.Location = new System.Drawing.Point(862, 21);
+            this.label20.Location = new System.Drawing.Point(1062, 21);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(94, 20);
             this.label20.TabIndex = 16;
@@ -288,18 +300,18 @@
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label17.ForeColor = System.Drawing.Color.SkyBlue;
-            this.label17.Location = new System.Drawing.Point(809, 21);
+            this.label17.Location = new System.Drawing.Point(808, 21);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(31, 20);
+            this.label17.Size = new System.Drawing.Size(86, 20);
             this.label17.TabIndex = 15;
-            this.label17.Text = "20";
+            this.label17.Text = "label17";
             // 
             // label19
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label19.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label19.Location = new System.Drawing.Point(729, 21);
+            this.label19.Location = new System.Drawing.Point(900, 21);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(74, 20);
             this.label19.TabIndex = 14;
@@ -310,18 +322,18 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label18.ForeColor = System.Drawing.Color.SkyBlue;
-            this.label18.Location = new System.Drawing.Point(677, 21);
+            this.label18.Location = new System.Drawing.Point(970, 21);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(31, 20);
+            this.label18.Size = new System.Drawing.Size(86, 20);
             this.label18.TabIndex = 13;
-            this.label18.Text = "20";
+            this.label18.Text = "label18";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label16.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label16.Location = new System.Drawing.Point(604, 21);
+            this.label16.Location = new System.Drawing.Point(752, 21);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(63, 20);
             this.label16.TabIndex = 11;
@@ -332,18 +344,18 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label10.ForeColor = System.Drawing.Color.SkyBlue;
-            this.label10.Location = new System.Drawing.Point(567, 21);
+            this.label10.Location = new System.Drawing.Point(251, 21);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(31, 20);
+            this.label10.Size = new System.Drawing.Size(86, 20);
             this.label10.TabIndex = 10;
-            this.label10.Text = "30";
+            this.label10.Text = "label10";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label9.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label9.Location = new System.Drawing.Point(498, 21);
+            this.label9.Location = new System.Drawing.Point(591, 21);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(63, 20);
             this.label9.TabIndex = 9;
@@ -354,18 +366,18 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label15.ForeColor = System.Drawing.Color.SkyBlue;
-            this.label15.Location = new System.Drawing.Point(447, 21);
+            this.label15.Location = new System.Drawing.Point(649, 21);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(31, 20);
+            this.label15.Size = new System.Drawing.Size(86, 20);
             this.label15.TabIndex = 8;
-            this.label15.Text = "60";
+            this.label15.Text = "label15";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label14.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label14.Location = new System.Drawing.Point(408, 21);
+            this.label14.Location = new System.Drawing.Point(463, 21);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(30, 20);
             this.label14.TabIndex = 7;
@@ -376,11 +388,11 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label13.ForeColor = System.Drawing.Color.SkyBlue;
-            this.label13.Location = new System.Drawing.Point(371, 21);
+            this.label13.Location = new System.Drawing.Point(498, 21);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(31, 20);
+            this.label13.Size = new System.Drawing.Size(86, 20);
             this.label13.TabIndex = 6;
-            this.label13.Text = "13";
+            this.label13.Text = "label13";
             // 
             // label12
             // 
@@ -398,11 +410,11 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label11.ForeColor = System.Drawing.Color.SkyBlue;
-            this.label11.Location = new System.Drawing.Point(252, 21);
+            this.label11.Location = new System.Drawing.Point(371, 21);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(31, 20);
+            this.label11.Size = new System.Drawing.Size(86, 20);
             this.label11.TabIndex = 4;
-            this.label11.Text = "73";
+            this.label11.Text = "label11";
             // 
             // label8
             // 
@@ -428,29 +440,17 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.dataGridView1);
             this.groupBox3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox3.Location = new System.Drawing.Point(1, 165);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1153, 481);
+            this.groupBox3.Size = new System.Drawing.Size(1349, 481);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "新建自理能力评估";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Enabled = false;
-            this.label5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label5.Location = new System.Drawing.Point(136, 55);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(216, 16);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "---姓名/身份证号/档案号---";
             // 
             // button2
             // 
@@ -458,12 +458,13 @@
             this.button2.BackColor = System.Drawing.Color.SkyBlue;
             this.button2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(141, 652);
+            this.button2.Location = new System.Drawing.Point(239, 652);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(84, 32);
             this.button2.TabIndex = 4;
             this.button2.Text = "添加";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -471,7 +472,7 @@
             this.button3.BackColor = System.Drawing.Color.SkyBlue;
             this.button3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button3.Location = new System.Drawing.Point(376, 652);
+            this.button3.Location = new System.Drawing.Point(474, 652);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(89, 32);
             this.button3.TabIndex = 5;
@@ -484,7 +485,7 @@
             this.button4.BackColor = System.Drawing.Color.SkyBlue;
             this.button4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button4.Location = new System.Drawing.Point(643, 652);
+            this.button4.Location = new System.Drawing.Point(741, 652);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(96, 32);
             this.button4.TabIndex = 6;
@@ -498,7 +499,7 @@
             this.button5.BackColor = System.Drawing.Color.Red;
             this.button5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button5.Location = new System.Drawing.Point(899, 652);
+            this.button5.Location = new System.Drawing.Point(997, 652);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(93, 32);
             this.button5.TabIndex = 7;
@@ -510,7 +511,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1153, 697);
+            this.ClientSize = new System.Drawing.Size(1349, 697);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);

@@ -23,5 +23,12 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
+        public DataTable queryOlderHelthService0()
+        {
+            DataSet ds = new DataSet();
+            string sql = "select count(*) as label10,count(sex = '男') as label11,count(sex = '女') as label13,count(0<=total_score <= 3) as label15,count(4<=total_score <= 8) as label17,count(9<=total_score <= 18) as label18,count(total_score >= 19) as label21 from elderly_selfcare_estimate where test_date = '" + DateTime.Now.ToString("yyyy-MM-dd") + "'";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
     }
 }

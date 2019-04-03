@@ -40,6 +40,7 @@ namespace zkhwClient.view.PublicHealthView
 
         DataTable dtshenfen = new DataTable();
         grjdDao grjddao = new grjdDao();
+        jkInfoDao jkinfodao = new jkInfoDao();
         grjdxxBean grjdxx = null;
         public personRegist()
         {
@@ -61,7 +62,7 @@ namespace zkhwClient.view.PublicHealthView
             label13.BringToFront();
 
             label14.Text = DateTime.Now.Year.ToString() + "年" + DateTime.Now.Month.ToString() + "月" + DateTime.Now.Day.ToString() + "日";
-
+            registrationRecordCheck();//右侧统计信息
             //身份证读卡初始化
             try
             {
@@ -339,6 +340,8 @@ namespace zkhwClient.view.PublicHealthView
                 grjdxx.Cardcode = number;
                 grjdxx.IssuingAgencies = signdate;
                 grjdxx.CardPic = textBox3.Text + ".jpg";
+                grjdxx.photo_code = grjdxx.Cardcode + ".jpg";
+                grjdxx.age = DateTime.Now.Year - Int32.Parse(grjdxx.Birthday.Substring(0, 4));
             }
             else
             {
@@ -380,7 +383,6 @@ namespace zkhwClient.view.PublicHealthView
                 if (dt.Rows.Count < 1)
                 {
                     grjdxx.archive_no = basicInfoSettings.xcuncode + grjdxx.Cardcode.Substring(14);
-                    grjdxx.photo_code = grjdxx.Cardcode + ".jpg";
                     bool istrue = grjddao.addgrjdInfo(grjdxx);
                 }
                 jkBean jk = new jkBean();
@@ -393,6 +395,16 @@ namespace zkhwClient.view.PublicHealthView
                 jk.bar_code = barcode; 
                 jk.Pic1 = grjdxx.CardPic;
                 jk.Pic2 = grjdxx.Cardcode + ".jpg";
+                jk.village_code = basicInfoSettings.xcuncode;
+                jk.address = grjdxx.Zhuzhi;
+                jk.name = grjdxx.name;
+                jk.sex = grjdxx.Sex;
+                jk.age = grjdxx.age;
+                jk.JddwName = basicInfoSettings.organ_name;
+                jk.JdrName = basicInfoSettings.input_name;
+                jk.ZrysName = basicInfoSettings.zeren_doctor;
+                jk.XzjdName = basicInfoSettings.xzName;
+                jk.CjwhName = basicInfoSettings.xcName;
                 addjkbool = grjddao.addJkInfo(jk);
                 textBox5.Text = jk.aichive_no;
                 textBox6.Text = barcode;
@@ -450,9 +462,10 @@ namespace zkhwClient.view.PublicHealthView
                 this.dataGridView1.Columns[0].Width = 70;
                 this.dataGridView1.Columns[1].Width = 55;
                 this.dataGridView1.Columns[2].Width = 120;
+                this.dataGridView1.Columns[3].Width = 150;
                 this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
                 this.dataGridView1.AllowUserToAddRows = false;
-                int rows = this.dataGridView1.Rows.Count - 2 < 0 ? 0 : this.dataGridView1.Rows.Count - 2;
+                int rows = this.dataGridView1.Rows.Count - 1 < 0 ? 0 : this.dataGridView1.Rows.Count - 1;
                 for (int count = 0; count <= rows; count++)
                 {
                     this.dataGridView1.Rows[count].HeaderCell.Value = String.Format("{0}", count + 1);
@@ -463,24 +476,83 @@ namespace zkhwClient.view.PublicHealthView
             }
         }
 
+        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            MessageBox.Show("是否需要补打条形码？");
+        }
+
         //体检人数统计
         public void registrationRecordCheck()
         {
-            label16.Text = "";//计划体检人数
-            label19.Text = "";//登记人数
+            DataTable dt16num= grjddao.residentNum(basicInfoSettings.xcuncode);
+            if (dt16num != null&& dt16num.Rows.Count>0) {
+                label16.Text = dt16num.Rows[0][0].ToString();//计划体检人数
+            }
 
+            DataTable dt19num = grjddao.jkAllNum(basicInfoSettings.xcuncode);
+            if (dt19num != null && dt19num.Rows.Count > 0)
+            {
+                label19.Text = dt19num.Rows[0][0].ToString();//登记人数
+            }
 
-            label22.Text = ""; //40 - 64岁 男
-            label24.Text = ""; //40 - 64岁 女
+            int num22 = 0;
+            int num24 = 0;
+            int num27 = 0;
+            int num29 = 0;
+            int num32 = 0;
+            int num34 = 0;
+            int num37 = 0;
+            int num39 = 0;
+            DataTable dtjkifo =jkinfodao.selectjktjInfo(basicInfoSettings.xcuncode, basicInfoSettings.createtime);
+            if (dtjkifo != null && dtjkifo.Rows.Count > 0)
+            { 
+                for (int i=0;i< dtjkifo.Rows.Count;i++) {
+                   string sex = dtjkifo.Rows[i]["sex"].ToString();
+                   int age =Int32.Parse(dtjkifo.Rows[i]["age"].ToString());
+                    if (age >= 40 && age <= 64 && "男".Equals(sex)) {
+                        num22 += 1;
+                    }
+                    if (age >= 40 && age <= 64 && "女".Equals(sex))
+                    {
+                        num24 += 1;
+                    }
+                    if (age >= 65 && age <= 70 && "男".Equals(sex))
+                    {
+                        num27 += 1;
+                    }
+                    if (age >= 65 && age <= 70 && "女".Equals(sex))
+                    {
+                        num29 += 1;
+                    }
+                    if (age >= 71 && age <= 75 && "男".Equals(sex))
+                    {
+                        num32 += 1;
+                    }
+                    if (age >= 71 && age <= 75 && "女".Equals(sex))
+                    {
+                        num34 += 1;
+                    }
+                    if (age >= 75 && "男".Equals(sex))
+                    {
+                        num37 += 1;
+                    }
+                    if (age >= 75  && "女".Equals(sex))
+                    {
+                        num39 += 1;
+                    }
+                }
+            }
+            label22.Text = num22.ToString(); //40 - 64岁 男
+            label24.Text = num24.ToString(); //40 - 64岁 女
 
-            label27.Text = ""; //65 - 70岁 男
-            label29.Text = ""; //65 - 70岁 女
+            label27.Text = num27.ToString(); //65 - 70岁 男
+            label29.Text = num29.ToString(); //65 - 70岁 女
 
-            label32.Text = ""; //71 - 75岁 男
-            label34.Text = ""; //71 - 75岁 女
+            label32.Text = num32.ToString(); //71 - 75岁 男
+            label34.Text = num34.ToString(); //71 - 75岁 女
 
-            label37.Text = ""; //75岁以上 男
-            label39.Text = ""; //75岁以上 女
+            label37.Text = num37.ToString(); //75岁以上 男
+            label39.Text = num39.ToString(); //75岁以上 女
         }
     }
 }

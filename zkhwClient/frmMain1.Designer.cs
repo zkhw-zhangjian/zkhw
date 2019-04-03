@@ -1,6 +1,6 @@
 ﻿namespace zkhwClient
 {
-    partial class frmMain
+    partial class frmMain1
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -68,7 +68,10 @@
             this.血液分析ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.身高体重ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.心电图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.血液计ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.血压ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.血糖ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.体温枪ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.挂机ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
@@ -339,7 +342,10 @@
             this.血液分析ToolStripMenuItem,
             this.身高体重ToolStripMenuItem,
             this.心电图ToolStripMenuItem,
-            this.血压ToolStripMenuItem});
+            this.血液计ToolStripMenuItem,
+            this.血压ToolStripMenuItem,
+            this.血糖ToolStripMenuItem,
+            this.体温枪ToolStripMenuItem});
             this.使用帮助ToolStripMenuItem.Name = "使用帮助ToolStripMenuItem";
             this.使用帮助ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.使用帮助ToolStripMenuItem.Text = "使用帮助";
@@ -367,13 +373,13 @@
             // 
             this.尿液ToolStripMenuItem.Name = "尿液ToolStripMenuItem";
             this.尿液ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.尿液ToolStripMenuItem.Text = "尿常规";
+            this.尿液ToolStripMenuItem.Text = "尿液";
             // 
             // 血液分析ToolStripMenuItem
             // 
             this.血液分析ToolStripMenuItem.Name = "血液分析ToolStripMenuItem";
             this.血液分析ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.血液分析ToolStripMenuItem.Text = "血常规";
+            this.血液分析ToolStripMenuItem.Text = "血液分析";
             // 
             // 身高体重ToolStripMenuItem
             // 
@@ -387,11 +393,29 @@
             this.心电图ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.心电图ToolStripMenuItem.Text = "心电图";
             // 
+            // 血液计ToolStripMenuItem
+            // 
+            this.血液计ToolStripMenuItem.Name = "血液计ToolStripMenuItem";
+            this.血液计ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.血液计ToolStripMenuItem.Text = "血液计";
+            // 
             // 血压ToolStripMenuItem
             // 
             this.血压ToolStripMenuItem.Name = "血压ToolStripMenuItem";
             this.血压ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.血压ToolStripMenuItem.Text = "血压";
+            // 
+            // 血糖ToolStripMenuItem
+            // 
+            this.血糖ToolStripMenuItem.Name = "血糖ToolStripMenuItem";
+            this.血糖ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.血糖ToolStripMenuItem.Text = "血糖";
+            // 
+            // 体温枪ToolStripMenuItem
+            // 
+            this.体温枪ToolStripMenuItem.Name = "体温枪ToolStripMenuItem";
+            this.体温枪ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.体温枪ToolStripMenuItem.Text = "体温枪";
             // 
             // 挂机ToolStripMenuItem
             // 
@@ -402,15 +426,15 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.Color.SkyBlue;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(222, 28);
+            this.panel1.Location = new System.Drawing.Point(273, 28);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1130, 433);
+            this.panel1.Size = new System.Drawing.Size(1079, 433);
             this.panel1.TabIndex = 5;
             // 
             // button1
@@ -514,10 +538,10 @@
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(1136, 14);
+            this.label1.Location = new System.Drawing.Point(1139, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 16);
             this.label1.TabIndex = 15;
@@ -525,17 +549,17 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 28);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(216, 433);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(267, 433);
             this.flowLayoutPanel1.TabIndex = 16;
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.button2);
@@ -557,7 +581,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(748, 4);
+            this.label2.Location = new System.Drawing.Point(548, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(71, 12);
             this.label2.TabIndex = 18;
@@ -568,7 +592,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(825, 4);
+            this.label3.Location = new System.Drawing.Point(625, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 19;
@@ -579,7 +603,7 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.SystemColors.Control;
-            this.label4.Location = new System.Drawing.Point(550, 4);
+            this.label4.Location = new System.Drawing.Point(813, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 12);
             this.label4.TabIndex = 20;
@@ -590,7 +614,7 @@
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.SystemColors.Control;
-            this.label5.Location = new System.Drawing.Point(603, 4);
+            this.label5.Location = new System.Drawing.Point(866, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 12);
             this.label5.TabIndex = 21;
@@ -601,7 +625,7 @@
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.SystemColors.Control;
-            this.label6.Location = new System.Drawing.Point(1024, 4);
+            this.label6.Location = new System.Drawing.Point(1024, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(59, 12);
             this.label6.TabIndex = 22;
@@ -612,7 +636,7 @@
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.SystemColors.Control;
-            this.label7.Location = new System.Drawing.Point(1089, 4);
+            this.label7.Location = new System.Drawing.Point(1089, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 12);
             this.label7.TabIndex = 23;
@@ -623,7 +647,7 @@
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.SystemColors.Control;
-            this.label8.Location = new System.Drawing.Point(1178, 4);
+            this.label8.Location = new System.Drawing.Point(1178, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(71, 12);
             this.label8.TabIndex = 24;
@@ -634,7 +658,7 @@
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.SystemColors.Control;
-            this.label9.Location = new System.Drawing.Point(1255, 4);
+            this.label9.Location = new System.Drawing.Point(1255, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(41, 12);
             this.label9.TabIndex = 25;
@@ -644,7 +668,7 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // frmMain
+            // frmMain1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -665,11 +689,10 @@
             this.Controls.Add(this.menuStrip1);
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "frmMain";
+            this.Name = "frmMain1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "体检系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -732,7 +755,10 @@
         private System.Windows.Forms.ToolStripMenuItem 血液分析ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 身高体重ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 心电图ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 血液计ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 血压ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 血糖ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 体温枪ToolStripMenuItem;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;

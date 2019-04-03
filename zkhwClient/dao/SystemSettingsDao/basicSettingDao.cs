@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -15,6 +16,21 @@ namespace zkhwClient.dao
             String sql = "insert into basicInfo_setting (id,sheng_code,shi_code,qx_code,xz_code,cun_code,organ_code,organ_name,input_name,zeren_doctor,bc,xcg,sh,sgtz,ncg,xdt,xy,wx,other,captain,members,operation,car_name,create_user,create_name,create_time) values ('" + id + "', '" + sheng_code + "', '" + shi_code + "', '" + qx_code + "', '" + xz_code + "', '" + cun_code + "', '" + organ_code + "', '" + organ_name + "', '" + input_name + "', '" + zeren_doctor + "', '" + bc + "', '" + xcg + "', '" + sh + "', '" + sgtz + "', '" + ncg + "', '" + xdt + "', '" + xy + "', '" + wx + "', '" + other + "', '" + captain + "', '" + members + "', '" + operation + "', '" + car_name + "', '" + create_user + "', '" + create_name + "', '" + time + "')";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
+        }
+        public DataTable checkBasicsettingInfo()
+        {
+            DataSet ds = new DataSet();
+            String sql = "select sheng_code, shi_code, qx_code, xz_code, cun_code, organ_code, organ_name, input_name, zeren_doctor, bc, xcg, sh, sgtz, ncg, xdt, xy, wx, other, captain, members, operation, car_name,create_time from basicInfo_setting where 1=1 order by create_time desc";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+        //根据区域编号获取区域名称
+        public DataTable selectAreaBycode(string code)
+        {
+            DataSet ds = new DataSet();
+            String sql = "select name from code_area_config where code='"+code+"' ";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
         }
     }
 }

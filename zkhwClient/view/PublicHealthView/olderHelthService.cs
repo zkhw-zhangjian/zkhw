@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using zkhwClient.view.PublicHealthView;
 
 namespace zkhwClient.PublicHealth
 {
@@ -31,12 +32,26 @@ namespace zkhwClient.PublicHealth
         }
         private void queryOlderHelthService()
         {
+            //统计
+            DataTable dt0 = olderHelthS.queryOlderHelthService0();
+            if (dt0 != null && dt0.Rows.Count > 0)
+            {
+                this.label10.Text = dt0.Rows[0]["label10"].ToString();
+                this.label11.Text = dt0.Rows[0]["label11"].ToString();
+                this.label13.Text = dt0.Rows[0]["label13"].ToString();
+                this.label15.Text = dt0.Rows[0]["label15"].ToString();
+                this.label17.Text = dt0.Rows[0]["label17"].ToString();
+                this.label18.Text = dt0.Rows[0]["label18"].ToString();
+                this.label21.Text = dt0.Rows[0]["label21"].ToString();
+            }
+
+            //展示
             this.dataGridView1.DataSource = null;
             DataTable dt = olderHelthS.queryOlderHelthService(pCa, time1, time2);
             this.dataGridView1.DataSource = dt;
             this.dataGridView1.Columns[0].Visible = false;
             this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";
-            this.dataGridView1.Columns[2].HeaderCell.Value = "年龄";
+            this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
             this.dataGridView1.Columns[3].HeaderCell.Value = "总分";
             this.dataGridView1.Columns[4].HeaderCell.Value = "评判结果";
             this.dataGridView1.Columns[5].HeaderCell.Value = "测试日期";
@@ -94,6 +109,21 @@ namespace zkhwClient.PublicHealth
                     queryOlderHelthService();
                     MessageBox.Show("删除成功！");
                 }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            aUolderHelthService hm = new aUolderHelthService();
+            hm.label47.Text = "添加老年人生活自理能力评估表";
+            hm.Text = "添加老年人生活自理能力评估表";
+            if (hm.ShowDialog() == DialogResult.OK)
+            {
+                //刷新页面
+                queryOlderHelthService();
+                MessageBox.Show("添加成功！");
+
             }
         }
     }

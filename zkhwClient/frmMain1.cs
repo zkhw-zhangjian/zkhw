@@ -1,46 +1,43 @@
-﻿using System;
+﻿using zkhwClient.dao;
+using zkhwClient;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using zkhwClient.view.PublicHealthView;
 using zkhwClient.PublicHealth;
 using zkhwClient.view.HomeDoctorSigningView;
 using zkhwClient.view.UseHelpView;
 using zkhwClient.view.setting;
-using System.Diagnostics;
-using zkhwClient.dao;
-using System.Data;
 
 namespace zkhwClient
 {
-    public partial class frmMain : Form
+    public partial class frmMain1 : Form
     {
-        personRegist pR = null;
-        Process proHttp = new Process();
-        basicSettingDao bsdao = new basicSettingDao();
-        public frmMain()
+
+        public frmMain1()
         {
+
+
             InitializeComponent();
 
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
-            //proHttp.StartInfo.FileName = "C:\\Users\\5050\\Desktop\\healthCheck\\httpCeshi\\bin\\Debug\\httpCeshi.exe";
-            //proHttp.StartInfo.UseShellExecute = false;
-            //proHttp.Start();
-
+            //注册窗体关闭事件。
+            this.FormClosing += new FormClosingEventHandler(MainForm_Closing);
             this.timer1.Start();//时间控件定时器
 
             this.label1.Text = "一体化查体车  中科弘卫";
             this.label1.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
 
-            //获取首页右上角信息
-            DataTable dts= bsdao.checkBasicsettingInfo();
-            if (dts.Rows.Count>0) {
-                label3.Text= dts.Rows[0]["organ_name"].ToString();
-                label7.Text = dts.Rows[0]["input_name"].ToString();
-                label9.Text = dts.Rows[0]["zeren_doctor"].ToString();
-            }
             //默认主页面显示
             foreach (ToolStripMenuItem item in this.menuStrip1.Items)
             {
@@ -49,16 +46,14 @@ namespace zkhwClient
                     item.Checked = true;
                     item.BackColor = Color.CadetBlue;
                     this.flowLayoutPanel1.Controls.Clear();
-                    PictureBox[] picb = new PictureBox[item.DropDownItems.Count];
+                    Label[] Lab = new Label[item.DropDownItems.Count];
                     for (int i = 0; i < item.DropDownItems.Count; i++)
                     {
-                        picb[i] = new PictureBox();
-                        picb[i].SizeMode = PictureBoxSizeMode.StretchImage;
-                        picb[i].BorderStyle = BorderStyle.None;
+                        Lab[i] = new Label();
                         if (i == 0)//默认首项选中
                         {
-                            picb[i].BackColor = Color.Blue;
-                            pR = new personRegist();
+                            Lab[i].ForeColor = Color.LawnGreen;
+                            personRegist pR = new personRegist();
                             pR.TopLevel = false;
                             pR.Dock = DockStyle.Fill;
                             pR.FormBorderStyle = FormBorderStyle.None;
@@ -66,18 +61,12 @@ namespace zkhwClient
                             this.panel1.Controls.Add(pR);
                             pR.Show();
                         }
-                        picb[i].Size = new Size(216, 40);//大   小
-                        picb[i].Click += new EventHandler(picb_DouClick);
-                        picb[i].Tag = item.DropDownItems[i].Text;
-
-                        TextBox rt = new TextBox();
-                        rt.Width = 200;
-                        rt.Height = 40;
-                        rt.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
-                        rt.Enabled = false;
-                        rt.Text = item.DropDownItems[i].Text;
-                        rt.Parent = picb[i];//指定父级
-                        this.flowLayoutPanel1.Controls.Add(picb[i]);
+                        Lab[i].Font = new Font("宋体", 15F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
+                        Lab[i].Size = new Size(260, 40);//大   小
+                        Lab[i].Click += new EventHandler(Lab_DouClick);
+                        Lab[i].Tag = item.DropDownItems[i].Text;
+                        Lab[i].Text = item.DropDownItems[i].Text;
+                        this.flowLayoutPanel1.Controls.Add(Lab[i]);
                         item.DropDownItems[i].Visible = false; //看不见
                     };
                 }
@@ -99,11 +88,16 @@ namespace zkhwClient
             }
 
         }
-
+        //点击关闭按钮时触发此函数。
+        private void MainForm_Closing(object sender, CancelEventArgs e)
+        {
+            Application.Exit();//退出程序
+        }
         private void 用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             userManage um = new userManage();
             um.ShowDialog();
+
         }
 
         private void 密码修改ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -118,7 +112,6 @@ namespace zkhwClient
             DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                proHttp.Close();
                 service.loginLogService llse = new service.loginLogService();
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = frmLogin.name;
@@ -129,7 +122,9 @@ namespace zkhwClient
                     llse.addCheckLog(lb);
                 }
                 System.Environment.Exit(0);
+
             }
+
         }
         //挂机
         [DllImport("user32 ")]
@@ -149,19 +144,14 @@ namespace zkhwClient
                     item.Checked = true;
                     item.BackColor = Color.CadetBlue;
                     this.flowLayoutPanel1.Controls.Clear();
-                    PictureBox[] picb = new PictureBox[item.DropDownItems.Count];
+                    Label[] Lab = new Label[item.DropDownItems.Count];
                     for (int i = 0; i < item.DropDownItems.Count; i++)
                     {
-                        picb[i] = new PictureBox();
-                        picb[i].SizeMode = PictureBoxSizeMode.StretchImage;
-                        picb[i].BorderStyle = BorderStyle.None;
+                        Lab[i] = new Label();
                         if (i == 0)//默认首项选中
                         {
-                            pR.btnClose_Click();
-                            pR = null;
-                            
-                            picb[i].BackColor = Color.Blue;
-                            pR = new personRegist();
+                            Lab[i].ForeColor = Color.LawnGreen;
+                            personRegist pR = new personRegist();
                             pR.TopLevel = false;
                             pR.Dock = DockStyle.Fill;
                             pR.FormBorderStyle = FormBorderStyle.None;
@@ -169,18 +159,21 @@ namespace zkhwClient
                             this.panel1.Controls.Add(pR);
                             pR.Show();
                         }
-                        picb[i].Size = new Size(216, 40);//大   小
-                        picb[i].Click += new EventHandler(picb_DouClick);
-                        picb[i].Tag = item.DropDownItems[i].Text;
 
-                        TextBox rt = new TextBox();
-                        rt.Width = 200;
-                        rt.Height = 40;
-                        rt.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
-                        rt.Enabled = false;
-                        rt.Text = item.DropDownItems[i].Text;
-                        rt.Parent = picb[i];//指定父级
-                        this.flowLayoutPanel1.Controls.Add(picb[i]);
+                        Lab[i].Font = new Font("宋体", 15F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
+                        Lab[i].Size = new Size(260, 40);//大   小
+                        Lab[i].Click += new EventHandler(Lab_DouClick);
+                        Lab[i].Tag = item.DropDownItems[i].Text;
+                        Lab[i].Text = item.DropDownItems[i].Text;
+
+                        //TextBox rt = new TextBox();
+                        //rt.Width = 200;
+                        //rt.Height = 40;
+                        //rt.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
+                        //rt.Enabled = false;
+                        //rt.Text = item.DropDownItems[i].Text;
+                        //rt.Parent = Lab[i];//指定父级
+                        this.flowLayoutPanel1.Controls.Add(Lab[i]);
                         item.DropDownItems[i].Visible = false; //看不见
                     };
                 }
@@ -201,15 +194,13 @@ namespace zkhwClient
                     item.Checked = true;
                     item.BackColor = Color.CadetBlue;
                     this.flowLayoutPanel1.Controls.Clear();
-                    PictureBox[] picb = new PictureBox[item.DropDownItems.Count];
+                    Label[] Lab = new Label[item.DropDownItems.Count];
                     for (int i = 0; i < item.DropDownItems.Count; i++)
                     {
-                        picb[i] = new PictureBox();
-                        picb[i].SizeMode = PictureBoxSizeMode.StretchImage;
-                        picb[i].BorderStyle = BorderStyle.None;
+                        Lab[i] = new Label();
                         if (i == 0)//默认首项选中
                         {
-                            picb[i].BackColor = Color.Blue;
+                            Lab[i].ForeColor = Color.LawnGreen;
                             onSiteSigning pR = new onSiteSigning();
                             pR.TopLevel = false;
                             pR.Dock = DockStyle.Fill;
@@ -218,19 +209,14 @@ namespace zkhwClient
                             this.panel1.Controls.Add(pR);
                             pR.Show();
                         }
-                        picb[i].Size = new Size(216, 40);//大   小
-                        picb[i].Click += new EventHandler(picb_DouClick);
-                        picb[i].Tag = item.DropDownItems[i].Text;
-
-                        TextBox rt = new TextBox();
-                        rt.Width = 200;
-                        rt.Height = 40;
-                        rt.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
-                        rt.Enabled = false;
-                        rt.Text = item.DropDownItems[i].Text;
-                        rt.Parent = picb[i];//指定父级
-                        this.flowLayoutPanel1.Controls.Add(picb[i]);
+                        Lab[i].Font = new Font("宋体", 15F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
+                        Lab[i].Size = new Size(260, 40);//大   小
+                        Lab[i].Click += new EventHandler(Lab_DouClick);
+                        Lab[i].Tag = item.DropDownItems[i].Text;
+                        Lab[i].Text = item.DropDownItems[i].Text;
+                        this.flowLayoutPanel1.Controls.Add(Lab[i]);
                         item.DropDownItems[i].Visible = false; //看不见
+
                     };
                 }
                 else
@@ -241,31 +227,26 @@ namespace zkhwClient
 
             }
         }
-        private void picb_DouClick(object sender, EventArgs e)
+        private void Lab_DouClick(object sender, EventArgs e)
         {
-            PictureBox pic = (PictureBox)sender;
-            pic.BackColor = Color.Blue;
+            Label pic = (Label)sender;
+            //pic.BackColor = Color.Blue;
             string tag = pic.Tag.ToString();
-            if (!"人员登记".Equals(tag) && pR != null)
-            {
-                pR.btnClose_Click();
-                pR = null;
-            }
-            //选中打标
+            ////选中打标
             for (int i = 0; i < this.flowLayoutPanel1.Controls.Count; i++)
             {
                 if (this.flowLayoutPanel1.Controls[i].Tag.ToString() == tag)
                 {
-                    this.flowLayoutPanel1.Controls[i].BackColor = Color.Blue;
+                    this.flowLayoutPanel1.Controls[i].ForeColor = Color.LawnGreen;
                 }
                 else
                 {
-                    this.flowLayoutPanel1.Controls[i].BackColor = this.flowLayoutPanel1.BackColor;
+                    this.flowLayoutPanel1.Controls[i].ForeColor = this.flowLayoutPanel1.ForeColor;
                 }
             }
 
             if (tag == "人员登记")
-            {    //公共卫生模块
+            {               //公共卫生模块
                 personRegist pR = new personRegist();
                 pR.TopLevel = false;
                 pR.Dock = DockStyle.Fill;
@@ -486,7 +467,7 @@ namespace zkhwClient
                 pR.Show();
             }
             else if (tag == "软件系统")
-            {   //使用帮助模块 
+            {          //使用帮助模块 
                 softwareSystems pR = new softwareSystems();
                 pR.TopLevel = false;
                 pR.Dock = DockStyle.Fill;
@@ -525,7 +506,7 @@ namespace zkhwClient
                 this.panel1.Controls.Add(pR);
                 pR.Show();
             }
-            else if (tag == "血常规")
+            else if (tag == "血液分析")
             {
                 bloodAnalysis pR = new bloodAnalysis();
                 pR.TopLevel = false;
@@ -555,6 +536,16 @@ namespace zkhwClient
                 this.panel1.Controls.Add(pR);
                 pR.Show();
             }
+            else if (tag == "血液计")
+            {
+                bloodMeter pR = new bloodMeter();
+                pR.TopLevel = false;
+                pR.Dock = DockStyle.Fill;
+                pR.FormBorderStyle = FormBorderStyle.None;
+                this.panel1.Controls.Clear();
+                this.panel1.Controls.Add(pR);
+                pR.Show();
+            }
             else if (tag == "血压")
             {
                 bloodPressure pR = new bloodPressure();
@@ -566,10 +557,31 @@ namespace zkhwClient
                 pR.Show();
 
             }
+            else if (tag == "血糖")
+            {
+                bloodSugar pR = new bloodSugar();
+                pR.TopLevel = false;
+                pR.Dock = DockStyle.Fill;
+                pR.FormBorderStyle = FormBorderStyle.None;
+                this.panel1.Controls.Clear();
+                this.panel1.Controls.Add(pR);
+                pR.Show();
+            }
+            else if (tag == "体温枪")
+            {
+                bodyTemperatureGun pR = new bodyTemperatureGun();
+                pR.TopLevel = false;
+                pR.Dock = DockStyle.Fill;
+                pR.FormBorderStyle = FormBorderStyle.None;
+                this.panel1.Controls.Clear();
+                this.panel1.Controls.Add(pR);
+                pR.Show();
+            }
             else
             {
                 this.panel1.Controls.Clear();
             }
+
         }
 
         private void 数据分析ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -581,15 +593,13 @@ namespace zkhwClient
                     item.Checked = true;
                     item.BackColor = Color.CadetBlue;
                     this.flowLayoutPanel1.Controls.Clear();
-                    PictureBox[] picb = new PictureBox[item.DropDownItems.Count];
+                    Label[] Lab = new Label[item.DropDownItems.Count];
                     for (int i = 0; i < item.DropDownItems.Count; i++)
                     {
-                        picb[i] = new PictureBox();
-                        picb[i].SizeMode = PictureBoxSizeMode.StretchImage;
-                        picb[i].BorderStyle = BorderStyle.None;
+                        Lab[i] = new Label();
                         if (i == 0)//默认首项选中
                         {
-                            picb[i].BackColor = Color.Blue;
+                            Lab[i].ForeColor = Color.LawnGreen;
                             usageStatistics pR = new usageStatistics();
                             pR.TopLevel = false;
                             pR.Dock = DockStyle.Fill;
@@ -598,18 +608,13 @@ namespace zkhwClient
                             this.panel1.Controls.Add(pR);
                             pR.Show();
                         }
-                        picb[i].Size = new Size(216, 40);//大   小
-                        picb[i].Click += new EventHandler(picb_DouClick);
-                        picb[i].Tag = item.DropDownItems[i].Text;
+                        Lab[i].Font = new Font("宋体", 15F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
 
-                        TextBox rt = new TextBox();
-                        rt.Width = 200;
-                        rt.Height = 40;
-                        rt.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
-                        rt.Enabled = false;
-                        rt.Text = item.DropDownItems[i].Text;
-                        rt.Parent = picb[i];//指定父级
-                        this.flowLayoutPanel1.Controls.Add(picb[i]);
+                        Lab[i].Size = new Size(260, 40);//大   小
+                        Lab[i].Click += new EventHandler(Lab_DouClick);
+                        Lab[i].Tag = item.DropDownItems[i].Text;
+                        Lab[i].Text = item.DropDownItems[i].Text;
+                        this.flowLayoutPanel1.Controls.Add(Lab[i]);
                         item.DropDownItems[i].Visible = false; //看不见
                     };
                 }
@@ -631,15 +636,14 @@ namespace zkhwClient
                     item.Checked = true;
                     item.BackColor = Color.CadetBlue;
                     this.flowLayoutPanel1.Controls.Clear();
-                    PictureBox[] picb = new PictureBox[item.DropDownItems.Count];
+                    Label[] Lab = new Label[item.DropDownItems.Count];
                     for (int i = 0; i < item.DropDownItems.Count; i++)
                     {
-                        picb[i] = new PictureBox();
-                        picb[i].SizeMode = PictureBoxSizeMode.StretchImage;
-                        picb[i].BorderStyle = BorderStyle.None;
+                        Lab[i] = new Label();
                         if (i == 0)//默认首项选中
                         {
-                            picb[i].BackColor = Color.Blue;
+
+                            Lab[i].ForeColor = Color.LawnGreen;
                             basicInfoSettings pR = new basicInfoSettings();
                             pR.TopLevel = false;
                             pR.Dock = DockStyle.Fill;
@@ -648,18 +652,12 @@ namespace zkhwClient
                             this.panel1.Controls.Add(pR);
                             pR.Show();
                         }
-                        picb[i].Size = new Size(216, 40);//大   小
-                        picb[i].Click += new EventHandler(picb_DouClick);
-                        picb[i].Tag = item.DropDownItems[i].Text;
-
-                        TextBox rt = new TextBox();
-                        rt.Width = 200;
-                        rt.Height = 40;
-                        rt.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
-                        rt.Enabled = false;
-                        rt.Text = item.DropDownItems[i].Text;
-                        rt.Parent = picb[i];//指定父级
-                        this.flowLayoutPanel1.Controls.Add(picb[i]);
+                        Lab[i].Font = new Font("宋体", 15F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
+                        Lab[i].Size = new Size(260, 40);//大   小
+                        Lab[i].Click += new EventHandler(Lab_DouClick);
+                        Lab[i].Tag = item.DropDownItems[i].Text;
+                        Lab[i].Text = item.DropDownItems[i].Text;
+                        this.flowLayoutPanel1.Controls.Add(Lab[i]);
                         item.DropDownItems[i].Visible = false; //看不见
                     };
                 }
@@ -681,15 +679,14 @@ namespace zkhwClient
                     item.Checked = true;
                     item.BackColor = Color.CadetBlue;
                     this.flowLayoutPanel1.Controls.Clear();
-                    PictureBox[] picb = new PictureBox[item.DropDownItems.Count];
+                    Label[] Lab = new Label[item.DropDownItems.Count];
                     for (int i = 0; i < item.DropDownItems.Count; i++)
                     {
-                        picb[i] = new PictureBox();
-                        picb[i].SizeMode = PictureBoxSizeMode.StretchImage;
-                        picb[i].BorderStyle = BorderStyle.None;
+                        Lab[i] = new Label();
+
                         if (i == 0)//默认首项选中
                         {
-                            picb[i].BackColor = Color.Blue;
+                            Lab[i].ForeColor = Color.LawnGreen;
                             softwareSystems pR = new softwareSystems();
                             pR.TopLevel = false;
                             pR.Dock = DockStyle.Fill;
@@ -698,18 +695,20 @@ namespace zkhwClient
                             this.panel1.Controls.Add(pR);
                             pR.Show();
                         }
-                        picb[i].Size = new Size(216, 40);//大   小
-                        picb[i].Click += new EventHandler(picb_DouClick);
-                        picb[i].Tag = item.DropDownItems[i].Text;
+                        Lab[i].Font = new Font("宋体", 15F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
+                        Lab[i].Size = new Size(260, 40);//大   小
+                        Lab[i].Click += new EventHandler(Lab_DouClick);
+                        Lab[i].Tag = item.DropDownItems[i].Text;
+                        Lab[i].Text = item.DropDownItems[i].Text;
 
-                        TextBox rt = new TextBox();
-                        rt.Width = 200;
-                        rt.Height = 40;
-                        rt.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
-                        rt.Enabled = false;
-                        rt.Text = item.DropDownItems[i].Text;
-                        rt.Parent = picb[i];//指定父级
-                        this.flowLayoutPanel1.Controls.Add(picb[i]);
+                        //TextBox rt = new TextBox();
+                        //rt.Width = 200;
+                        //rt.Height = 40;
+                        //rt.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
+                        //rt.Enabled = false;
+                        //rt.Text = item.DropDownItems[i].Text;
+                        //rt.Parent = Lab[i];//指定父级
+                        this.flowLayoutPanel1.Controls.Add(Lab[i]);
                         item.DropDownItems[i].Visible = false; //看不见
                     };
                 }
@@ -725,16 +724,6 @@ namespace zkhwClient
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.label5.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-        }
-
-        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            //proHttp.Kill();
-            Process p = Process.GetCurrentProcess();
-            if (p != null)
-            {
-                p.Kill();
-            }
         }
     }
 }
