@@ -475,6 +475,7 @@ GROUP BY sex";
                         ide.Add(dataGridView1.Rows[i].Cells[7].EditedFormattedValue.ToString());
                     }
                 }
+                string sql = string.Empty;
                 foreach (Control ctrl in groupBox4.Controls)
                 {
                     if (ctrl is CheckBox)
@@ -485,14 +486,37 @@ GROUP BY sex";
                             switch (ctrl.Text)
                             {
                                 case "封面":
-                                    string sql1 = $@"select * from zkhw_tj_bgdc bgdc
-join zkhw_tj_jk jk on bgdc.id_number = jk.id_number
-where bgdc.id_number in('{string.Join(",", ide)}')";
-                                    DataSet datas = DbHelperMySQL.Query(sql1);
+                                    sql = $@"SELECT 
+jk.aichive_no,
+jk.Xzhuzhi,
+jk.address,
+jk.XzjdName,
+jk.CjwhName,
+jk.JddwName,
+jk.JdrName,
+jk.ZrysName,
+info.name,
+info.phone 
+from resident_base_info info 
+join 
+(SELECT * from zkhw_tj_jk ORDER BY createtime DESC LIMIT 1) jk
+on info.id_number=jk.id_number
+where info.id_number in('{string.Join(",", ide)}')";
+                                    DataSet datas = DbHelperMySQL.Query(sql);
                                     if (datas != null && datas.Tables.Count > 0)
                                     {
                                         DataTable data = datas.Tables[0].Copy();
                                         data.TableName = "封面";
+                                        dataSet.Tables.Add(data);
+                                    }
+                                    break;
+                                case "个人信息":
+                                    sql = $@"select * from resident_base_info base where base.id_number in('{string.Join(",", ide)}')";
+                                    DataSet gr = DbHelperMySQL.Query(sql);
+                                    if (gr != null && gr.Tables.Count > 0)
+                                    {
+                                        DataTable data = gr.Tables[0].Copy();
+                                        data.TableName = "个人信息";
                                         dataSet.Tables.Add(data);
                                     }
                                     break;
@@ -531,21 +555,21 @@ where bgdc.id_number in('{string.Join(",", ide)}')";
             }
             else
             {
+                DateTime date = DateTime.Now;
                 switch (list[0])
                 {
                     case "封面":
                         DataTable data = dataSet.Tables["封面"];
                         doc = new Document(@str + $"/up/template/封面.doc");
-                        DateTime date = DateTime.Now;
                         for (int i = 0; i < data.Rows.Count; i++)
                         {
                             builder = new DocumentBuilder(doc);
                             var dic = new Dictionary<string, string>();
-                            dic.Add("编号", "①");
+                            dic.Add("编号", data.Rows[i]["aichive_no"].ToString());
                             dic.Add("姓名", data.Rows[i]["name"].ToString());
                             dic.Add("现住址", data.Rows[i]["Xzhuzhi"].ToString());
                             dic.Add("户籍地址", data.Rows[i]["address"].ToString());
-                            dic.Add("联系电话", "无");
+                            dic.Add("联系电话", data.Rows[i]["phone"].ToString());
                             dic.Add("乡镇名称", data.Rows[i]["XzjdName"].ToString());
                             dic.Add("村委会名称", data.Rows[i]["CjwhName"].ToString());
                             dic.Add("建档单位", data.Rows[i]["JddwName"].ToString());
@@ -562,6 +586,38 @@ where bgdc.id_number in('{string.Join(",", ide)}')";
                             }
                             //保存为PDF文件，此处的SaveFormat支持很多种格式，如图片，epub,rtf 等等
                             string url = @str + $"/up/result/{data.Rows[i]["id_number"].ToString()}.pdf";
+                            DeteleFile(url);
+                            doc.Save(url, SaveFormat.Pdf);
+                        }
+                        break;
+                    case "个人信息":
+                        DataTable gr = dataSet.Tables["个人信息"];
+                        doc = new Document(@str + $"/up/template/个人信息.doc");
+                        for (int i = 0; i < gr.Rows.Count; i++)
+                        {
+                            builder = new DocumentBuilder(doc);
+                            var dic = new Dictionary<string, string>();
+                            dic.Add("编号", gr.Rows[i]["archive_no"].ToString());
+                            dic.Add("姓名", gr.Rows[i]["name"].ToString());
+                            dic.Add("性别", ZF(gr.Rows[i]["sex"].ToString() == "男" ? "1" : "2"));
+                            dic.Add("出生日期", gr.Rows[i]["birthday"].ToString());
+                            dic.Add("身份证号", gr.Rows[i]["id_number"].ToString());
+                            dic.Add("工作单位", gr.Rows[i]["company"].ToString());
+                            dic.Add("本人电话", gr.Rows[i]["phone"].ToString());
+                            dic.Add("联系人姓名", gr.Rows[i]["link_name"].ToString());
+                            dic.Add("联系人电话", gr.Rows[i]["link_phone"].ToString());
+                            dic.Add("常住类型", gr.Rows[i]["ZrysName"].ToString());
+                            dic.Add("年", date.Year.ToString());
+                            dic.Add("月", date.Month.ToString());
+                            dic.Add("日", date.Day.ToString());
+                            //书签替换
+                            foreach (var key in dic.Keys)
+                            {
+                                builder.MoveToBookmark(key);
+                                builder.Write(dic[key]);
+                            }
+                            //保存为PDF文件，此处的SaveFormat支持很多种格式，如图片，epub,rtf 等等
+                            string url = @str + $"/up/result/{gr.Rows[i]["id_number"].ToString()}.pdf";
                             DeteleFile(url);
                             doc.Save(url, SaveFormat.Pdf);
                         }
