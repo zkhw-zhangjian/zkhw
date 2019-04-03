@@ -105,11 +105,28 @@
             this.textBox29 = new System.Windows.Forms.TextBox();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.panel14 = new System.Windows.Forms.Panel();
+            this.checkBox17 = new System.Windows.Forms.CheckBox();
+            this.checkBox16 = new System.Windows.Forms.CheckBox();
+            this.checkBox15 = new System.Windows.Forms.CheckBox();
+            this.checkBox14 = new System.Windows.Forms.CheckBox();
             this.textBox28 = new System.Windows.Forms.TextBox();
             this.panel13 = new System.Windows.Forms.Panel();
+            this.checkBox13 = new System.Windows.Forms.CheckBox();
+            this.checkBox12 = new System.Windows.Forms.CheckBox();
+            this.checkBox11 = new System.Windows.Forms.CheckBox();
+            this.checkBox10 = new System.Windows.Forms.CheckBox();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.textBox27 = new System.Windows.Forms.TextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel12 = new System.Windows.Forms.Panel();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel8 = new System.Windows.Forms.Panel();
             this.radioButton46 = new System.Windows.Forms.RadioButton();
             this.radioButton45 = new System.Windows.Forms.RadioButton();
@@ -186,23 +203,6 @@
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
-            this.checkBox10 = new System.Windows.Forms.CheckBox();
-            this.checkBox11 = new System.Windows.Forms.CheckBox();
-            this.checkBox12 = new System.Windows.Forms.CheckBox();
-            this.checkBox13 = new System.Windows.Forms.CheckBox();
-            this.checkBox14 = new System.Windows.Forms.CheckBox();
-            this.checkBox15 = new System.Windows.Forms.CheckBox();
-            this.checkBox16 = new System.Windows.Forms.CheckBox();
-            this.checkBox17 = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).BeginInit();
@@ -1204,6 +1204,50 @@
             this.panel14.Size = new System.Drawing.Size(1142, 30);
             this.panel14.TabIndex = 94;
             // 
+            // checkBox17
+            // 
+            this.checkBox17.AutoSize = true;
+            this.checkBox17.Location = new System.Drawing.Point(302, -1);
+            this.checkBox17.Name = "checkBox17";
+            this.checkBox17.Size = new System.Drawing.Size(81, 24);
+            this.checkBox17.TabIndex = 7;
+            this.checkBox17.Tag = "4";
+            this.checkBox17.Text = "4射线";
+            this.checkBox17.UseVisualStyleBackColor = true;
+            // 
+            // checkBox16
+            // 
+            this.checkBox16.AutoSize = true;
+            this.checkBox16.Location = new System.Drawing.Point(202, 0);
+            this.checkBox16.Name = "checkBox16";
+            this.checkBox16.Size = new System.Drawing.Size(81, 24);
+            this.checkBox16.TabIndex = 6;
+            this.checkBox16.Tag = "3";
+            this.checkBox16.Text = "3毒物";
+            this.checkBox16.UseVisualStyleBackColor = true;
+            // 
+            // checkBox15
+            // 
+            this.checkBox15.AutoSize = true;
+            this.checkBox15.Location = new System.Drawing.Point(83, 0);
+            this.checkBox15.Name = "checkBox15";
+            this.checkBox15.Size = new System.Drawing.Size(102, 24);
+            this.checkBox15.TabIndex = 5;
+            this.checkBox15.Tag = "2";
+            this.checkBox15.Text = "2化学品";
+            this.checkBox15.UseVisualStyleBackColor = true;
+            // 
+            // checkBox14
+            // 
+            this.checkBox14.AutoSize = true;
+            this.checkBox14.Location = new System.Drawing.Point(4, 0);
+            this.checkBox14.Name = "checkBox14";
+            this.checkBox14.Size = new System.Drawing.Size(60, 24);
+            this.checkBox14.TabIndex = 4;
+            this.checkBox14.Tag = "1";
+            this.checkBox14.Text = "1无";
+            this.checkBox14.UseVisualStyleBackColor = true;
+            // 
             // textBox28
             // 
             this.textBox28.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -1228,6 +1272,61 @@
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(1142, 30);
             this.panel13.TabIndex = 92;
+            // 
+            // checkBox13
+            // 
+            this.checkBox13.AutoSize = true;
+            this.checkBox13.Location = new System.Drawing.Point(425, 1);
+            this.checkBox13.Name = "checkBox13";
+            this.checkBox13.Size = new System.Drawing.Size(81, 24);
+            this.checkBox13.TabIndex = 9;
+            this.checkBox13.Tag = "5";
+            this.checkBox13.Text = "5其他";
+            this.checkBox13.UseVisualStyleBackColor = true;
+            // 
+            // checkBox12
+            // 
+            this.checkBox12.AutoSize = true;
+            this.checkBox12.Location = new System.Drawing.Point(302, 1);
+            this.checkBox12.Name = "checkBox12";
+            this.checkBox12.Size = new System.Drawing.Size(102, 24);
+            this.checkBox12.TabIndex = 8;
+            this.checkBox12.Tag = "4";
+            this.checkBox12.Text = "4链霉素";
+            this.checkBox12.UseVisualStyleBackColor = true;
+            // 
+            // checkBox11
+            // 
+            this.checkBox11.AutoSize = true;
+            this.checkBox11.Location = new System.Drawing.Point(202, 1);
+            this.checkBox11.Name = "checkBox11";
+            this.checkBox11.Size = new System.Drawing.Size(81, 24);
+            this.checkBox11.TabIndex = 7;
+            this.checkBox11.Tag = "3";
+            this.checkBox11.Text = "3磺胺";
+            this.checkBox11.UseVisualStyleBackColor = true;
+            // 
+            // checkBox10
+            // 
+            this.checkBox10.AutoSize = true;
+            this.checkBox10.Location = new System.Drawing.Point(83, 1);
+            this.checkBox10.Name = "checkBox10";
+            this.checkBox10.Size = new System.Drawing.Size(102, 24);
+            this.checkBox10.TabIndex = 6;
+            this.checkBox10.Tag = "2";
+            this.checkBox10.Text = "2青霉素";
+            this.checkBox10.UseVisualStyleBackColor = true;
+            // 
+            // checkBox9
+            // 
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.Location = new System.Drawing.Point(4, 1);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(60, 24);
+            this.checkBox9.TabIndex = 5;
+            this.checkBox9.Tag = "1";
+            this.checkBox9.Text = "1无";
+            this.checkBox9.UseVisualStyleBackColor = true;
             // 
             // textBox27
             // 
@@ -1266,6 +1365,93 @@
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(1142, 59);
             this.panel12.TabIndex = 89;
+            // 
+            // checkBox8
+            // 
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.Location = new System.Drawing.Point(229, 30);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(81, 24);
+            this.checkBox8.TabIndex = 15;
+            this.checkBox8.Tag = "8";
+            this.checkBox8.Text = "8其他";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            // 
+            // checkBox7
+            // 
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.Location = new System.Drawing.Point(121, 30);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(102, 24);
+            this.checkBox7.TabIndex = 14;
+            this.checkBox7.Tag = "7";
+            this.checkBox7.Text = "7全自费";
+            this.checkBox7.UseVisualStyleBackColor = true;
+            // 
+            // checkBox6
+            // 
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Location = new System.Drawing.Point(3, 30);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(102, 24);
+            this.checkBox6.TabIndex = 13;
+            this.checkBox6.Tag = "6";
+            this.checkBox6.Text = "6全公费";
+            this.checkBox6.UseVisualStyleBackColor = true;
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(867, 5);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(165, 24);
+            this.checkBox5.TabIndex = 12;
+            this.checkBox5.Tag = "5";
+            this.checkBox5.Text = "5商业医疗保险";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(731, 5);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(123, 24);
+            this.checkBox4.TabIndex = 11;
+            this.checkBox4.Text = "4贫困救助";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(512, 5);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(207, 24);
+            this.checkBox3.TabIndex = 10;
+            this.checkBox3.Tag = "3";
+            this.checkBox3.Text = "3新型农村合作医疗";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(257, 5);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(249, 24);
+            this.checkBox2.TabIndex = 9;
+            this.checkBox2.Tag = "2";
+            this.checkBox2.Text = "2城镇居民基本医疗保险";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(3, 5);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(249, 24);
+            this.checkBox1.TabIndex = 8;
+            this.checkBox1.Tag = "1";
+            this.checkBox1.Text = "1城镇职工基本医疗保险";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // panel8
             // 
@@ -1483,10 +1669,11 @@
             // textBox25
             // 
             this.textBox25.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox25.Location = new System.Drawing.Point(3, 355);
+            this.textBox25.Location = new System.Drawing.Point(3, 339);
+            this.textBox25.Multiline = true;
             this.textBox25.Name = "textBox25";
             this.textBox25.ReadOnly = true;
-            this.textBox25.Size = new System.Drawing.Size(126, 30);
+            this.textBox25.Size = new System.Drawing.Size(126, 54);
             this.textBox25.TabIndex = 84;
             this.textBox25.Text = "职业";
             this.textBox25.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1641,10 +1828,11 @@
             // textBox24
             // 
             this.textBox24.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox24.Location = new System.Drawing.Point(3, 285);
+            this.textBox24.Location = new System.Drawing.Point(3, 271);
+            this.textBox24.Multiline = true;
             this.textBox24.Name = "textBox24";
             this.textBox24.ReadOnly = true;
-            this.textBox24.Size = new System.Drawing.Size(126, 30);
+            this.textBox24.Size = new System.Drawing.Size(126, 58);
             this.textBox24.TabIndex = 82;
             this.textBox24.Text = "文化程度";
             this.textBox24.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -2171,192 +2359,6 @@
             this.button4.Text = "保存";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(3, 5);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(249, 24);
-            this.checkBox1.TabIndex = 8;
-            this.checkBox1.Tag = "1";
-            this.checkBox1.Text = "1城镇职工基本医疗保险";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(257, 5);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(249, 24);
-            this.checkBox2.TabIndex = 9;
-            this.checkBox2.Tag = "2";
-            this.checkBox2.Text = "2城镇居民基本医疗保险";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(512, 5);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(207, 24);
-            this.checkBox3.TabIndex = 10;
-            this.checkBox3.Tag = "3";
-            this.checkBox3.Text = "3新型农村合作医疗";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(731, 5);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(123, 24);
-            this.checkBox4.TabIndex = 11;
-            this.checkBox4.Text = "4贫困救助";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // checkBox5
-            // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(867, 5);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(165, 24);
-            this.checkBox5.TabIndex = 12;
-            this.checkBox5.Tag = "5";
-            this.checkBox5.Text = "5商业医疗保险";
-            this.checkBox5.UseVisualStyleBackColor = true;
-            // 
-            // checkBox6
-            // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(3, 30);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(102, 24);
-            this.checkBox6.TabIndex = 13;
-            this.checkBox6.Tag = "6";
-            this.checkBox6.Text = "6全公费";
-            this.checkBox6.UseVisualStyleBackColor = true;
-            // 
-            // checkBox7
-            // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(121, 30);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(102, 24);
-            this.checkBox7.TabIndex = 14;
-            this.checkBox7.Tag = "7";
-            this.checkBox7.Text = "7全自费";
-            this.checkBox7.UseVisualStyleBackColor = true;
-            // 
-            // checkBox8
-            // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Location = new System.Drawing.Point(229, 30);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(81, 24);
-            this.checkBox8.TabIndex = 15;
-            this.checkBox8.Tag = "8";
-            this.checkBox8.Text = "8其他";
-            this.checkBox8.UseVisualStyleBackColor = true;
-            // 
-            // checkBox9
-            // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.Location = new System.Drawing.Point(4, 1);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(60, 24);
-            this.checkBox9.TabIndex = 5;
-            this.checkBox9.Tag = "1";
-            this.checkBox9.Text = "1无";
-            this.checkBox9.UseVisualStyleBackColor = true;
-            // 
-            // checkBox10
-            // 
-            this.checkBox10.AutoSize = true;
-            this.checkBox10.Location = new System.Drawing.Point(83, 1);
-            this.checkBox10.Name = "checkBox10";
-            this.checkBox10.Size = new System.Drawing.Size(102, 24);
-            this.checkBox10.TabIndex = 6;
-            this.checkBox10.Tag = "2";
-            this.checkBox10.Text = "2青霉素";
-            this.checkBox10.UseVisualStyleBackColor = true;
-            // 
-            // checkBox11
-            // 
-            this.checkBox11.AutoSize = true;
-            this.checkBox11.Location = new System.Drawing.Point(202, 1);
-            this.checkBox11.Name = "checkBox11";
-            this.checkBox11.Size = new System.Drawing.Size(81, 24);
-            this.checkBox11.TabIndex = 7;
-            this.checkBox11.Tag = "3";
-            this.checkBox11.Text = "3磺胺";
-            this.checkBox11.UseVisualStyleBackColor = true;
-            // 
-            // checkBox12
-            // 
-            this.checkBox12.AutoSize = true;
-            this.checkBox12.Location = new System.Drawing.Point(302, 1);
-            this.checkBox12.Name = "checkBox12";
-            this.checkBox12.Size = new System.Drawing.Size(102, 24);
-            this.checkBox12.TabIndex = 8;
-            this.checkBox12.Tag = "4";
-            this.checkBox12.Text = "4链霉素";
-            this.checkBox12.UseVisualStyleBackColor = true;
-            // 
-            // checkBox13
-            // 
-            this.checkBox13.AutoSize = true;
-            this.checkBox13.Location = new System.Drawing.Point(425, 1);
-            this.checkBox13.Name = "checkBox13";
-            this.checkBox13.Size = new System.Drawing.Size(81, 24);
-            this.checkBox13.TabIndex = 9;
-            this.checkBox13.Tag = "5";
-            this.checkBox13.Text = "5其他";
-            this.checkBox13.UseVisualStyleBackColor = true;
-            // 
-            // checkBox14
-            // 
-            this.checkBox14.AutoSize = true;
-            this.checkBox14.Location = new System.Drawing.Point(4, 0);
-            this.checkBox14.Name = "checkBox14";
-            this.checkBox14.Size = new System.Drawing.Size(60, 24);
-            this.checkBox14.TabIndex = 4;
-            this.checkBox14.Tag = "1";
-            this.checkBox14.Text = "1无";
-            this.checkBox14.UseVisualStyleBackColor = true;
-            // 
-            // checkBox15
-            // 
-            this.checkBox15.AutoSize = true;
-            this.checkBox15.Location = new System.Drawing.Point(83, 0);
-            this.checkBox15.Name = "checkBox15";
-            this.checkBox15.Size = new System.Drawing.Size(102, 24);
-            this.checkBox15.TabIndex = 5;
-            this.checkBox15.Tag = "2";
-            this.checkBox15.Text = "2化学品";
-            this.checkBox15.UseVisualStyleBackColor = true;
-            // 
-            // checkBox16
-            // 
-            this.checkBox16.AutoSize = true;
-            this.checkBox16.Location = new System.Drawing.Point(202, 0);
-            this.checkBox16.Name = "checkBox16";
-            this.checkBox16.Size = new System.Drawing.Size(81, 24);
-            this.checkBox16.TabIndex = 6;
-            this.checkBox16.Tag = "3";
-            this.checkBox16.Text = "3毒物";
-            this.checkBox16.UseVisualStyleBackColor = true;
-            // 
-            // checkBox17
-            // 
-            this.checkBox17.AutoSize = true;
-            this.checkBox17.Location = new System.Drawing.Point(302, -1);
-            this.checkBox17.Name = "checkBox17";
-            this.checkBox17.Size = new System.Drawing.Size(81, 24);
-            this.checkBox17.TabIndex = 7;
-            this.checkBox17.Tag = "4";
-            this.checkBox17.Text = "4射线";
-            this.checkBox17.UseVisualStyleBackColor = true;
             // 
             // aUPersonalBasicInfo
             // 
