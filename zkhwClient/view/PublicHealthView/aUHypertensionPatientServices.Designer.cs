@@ -274,10 +274,11 @@
             // textBox44
             // 
             this.textBox44.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox44.Location = new System.Drawing.Point(3, 867);
+            this.textBox44.Location = new System.Drawing.Point(3, 862);
+            this.textBox44.Multiline = true;
             this.textBox44.Name = "textBox44";
             this.textBox44.ReadOnly = true;
-            this.textBox44.Size = new System.Drawing.Size(231, 30);
+            this.textBox44.Size = new System.Drawing.Size(231, 43);
             this.textBox44.TabIndex = 63;
             this.textBox44.Text = "评价与建议";
             this.textBox44.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -340,10 +341,11 @@
             // textBox38
             // 
             this.textBox38.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox38.Location = new System.Drawing.Point(3, 637);
+            this.textBox38.Location = new System.Drawing.Point(3, 583);
+            this.textBox38.Multiline = true;
             this.textBox38.Name = "textBox38";
             this.textBox38.ReadOnly = true;
-            this.textBox38.Size = new System.Drawing.Size(231, 30);
+            this.textBox38.Size = new System.Drawing.Size(231, 111);
             this.textBox38.TabIndex = 57;
             this.textBox38.Text = "用药记录";
             this.textBox38.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -632,9 +634,10 @@
             // 
             this.textBox21.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox21.Location = new System.Drawing.Point(0, 91);
+            this.textBox21.Multiline = true;
             this.textBox21.Name = "textBox21";
             this.textBox21.ReadOnly = true;
-            this.textBox21.Size = new System.Drawing.Size(231, 30);
+            this.textBox21.Size = new System.Drawing.Size(231, 46);
             this.textBox21.TabIndex = 26;
             this.textBox21.Text = "其它体征";
             this.textBox21.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -832,10 +835,11 @@
             // textBox13
             // 
             this.textBox13.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox13.Location = new System.Drawing.Point(0, 69);
+            this.textBox13.Location = new System.Drawing.Point(0, 64);
+            this.textBox13.Multiline = true;
             this.textBox13.Name = "textBox13";
             this.textBox13.ReadOnly = true;
-            this.textBox13.Size = new System.Drawing.Size(126, 30);
+            this.textBox13.Size = new System.Drawing.Size(126, 43);
             this.textBox13.TabIndex = 19;
             this.textBox13.Text = "其他症状";
             this.textBox13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -843,10 +847,11 @@
             // textBox12
             // 
             this.textBox12.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox12.Location = new System.Drawing.Point(0, 19);
+            this.textBox12.Location = new System.Drawing.Point(0, 11);
+            this.textBox12.Multiline = true;
             this.textBox12.Name = "textBox12";
             this.textBox12.ReadOnly = true;
-            this.textBox12.Size = new System.Drawing.Size(126, 30);
+            this.textBox12.Size = new System.Drawing.Size(126, 47);
             this.textBox12.TabIndex = 18;
             this.textBox12.Text = "症状";
             this.textBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -969,9 +974,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(128, 53);
+            this.richTextBox1.Location = new System.Drawing.Point(128, 64);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1051, 54);
+            this.richTextBox1.Size = new System.Drawing.Size(1051, 43);
             this.richTextBox1.TabIndex = 16;
             this.richTextBox1.Text = "";
             // 

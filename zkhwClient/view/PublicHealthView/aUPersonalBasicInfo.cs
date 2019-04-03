@@ -428,25 +428,59 @@ namespace zkhwClient.view.PublicHealthView
             if (this.radioButton45.Checked == true) { resident_base_infoBean.marital_status = this.radioButton45.Text; };
             if (this.radioButton46.Checked == true) { resident_base_infoBean.marital_status = this.radioButton46.Text; };
 
-            if (this.radioButton47.Checked == true) { resident_base_infoBean.pay_type = this.radioButton47.Text; };
-            if (this.radioButton48.Checked == true) { resident_base_infoBean.pay_type = this.radioButton48.Text; };
-            if (this.radioButton49.Checked == true) { resident_base_infoBean.pay_type = this.radioButton49.Text; };
-            if (this.radioButton50.Checked == true) { resident_base_infoBean.pay_type = this.radioButton50.Text; };
-            if (this.radioButton51.Checked == true) { resident_base_infoBean.pay_type = this.radioButton51.Text; };
-            if (this.radioButton52.Checked == true) { resident_base_infoBean.pay_type = this.radioButton52.Text; };
-            if (this.radioButton53.Checked == true) { resident_base_infoBean.pay_type = this.radioButton53.Text; };
-            if (this.radioButton54.Checked == true) { resident_base_infoBean.pay_type = this.radioButton54.Text; };
+            foreach (Control ctr in this.panel12.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        resident_base_infoBean.pay_type += "," + ck.Text;
+                    }
+                }
+            }
+            if (resident_base_infoBean.pay_type != null && resident_base_infoBean.pay_type != "")
+            {
+                resident_base_infoBean.pay_type = resident_base_infoBean.pay_type.Substring(1);
+            }
 
-            if (this.radioButton55.Checked == true) { resident_base_infoBean.drug_allergy = this.radioButton55.Text; };
-            if (this.radioButton56.Checked == true) { resident_base_infoBean.drug_allergy = this.radioButton56.Text; };
-            if (this.radioButton57.Checked == true) { resident_base_infoBean.drug_allergy = this.radioButton57.Text; };
-            if (this.radioButton58.Checked == true) { resident_base_infoBean.drug_allergy = this.radioButton58.Text; };
-            if (this.radioButton59.Checked == true) { resident_base_infoBean.drug_allergy = this.radioButton59.Text; };
+            foreach (Control ctr in this.panel13.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        resident_base_infoBean.drug_allergy += "," + ck.Text;
+                    }
+                }
+            }
+            if (resident_base_infoBean.drug_allergy != null && resident_base_infoBean.drug_allergy != "")
+            {
+                resident_base_infoBean.drug_allergy = resident_base_infoBean.drug_allergy.Substring(1);
+            }
 
-            if (this.radioButton60.Checked == true) { resident_base_infoBean.exposure = this.radioButton60.Text; };
-            if (this.radioButton61.Checked == true) { resident_base_infoBean.exposure = this.radioButton61.Text; };
-            if (this.radioButton62.Checked == true) { resident_base_infoBean.exposure = this.radioButton62.Text; };
-            if (this.radioButton63.Checked == true) { resident_base_infoBean.exposure = this.radioButton63.Text; };
+            foreach (Control ctr in this.panel14.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        resident_base_infoBean.exposure += "," + ck.Text;
+                    }
+                }
+            }
+            if (resident_base_infoBean.exposure != null && resident_base_infoBean.exposure != "")
+            {
+                resident_base_infoBean.exposure = resident_base_infoBean.exposure.Substring(1);
+            }
 
 
 
