@@ -30,10 +30,8 @@ namespace zkhwClient.view.PublicHealthView
         }
         private void queryExaminatProgress()
         {
-
             time1 = this.dateTimePicker1.Text.ToString();//开始时间
             time2 = this.dateTimePicker2.Text.ToString();//结束时间
-
 
             dt = null;//traderecord.queryTradeRecord(time1, time2, userinfoName, tradeRecordCode, tradeMeans);
             if (dt != null)
@@ -54,7 +52,6 @@ namespace zkhwClient.view.PublicHealthView
                 this.dataGridView1.Columns[12].HeaderCell.Value = "交易时间";
                 this.dataGridView1.Columns[13].HeaderCell.Value = "交易方式";
 
-
                 this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
                 this.dataGridView1.AllowUserToAddRows = false;
                 this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -66,11 +63,11 @@ namespace zkhwClient.view.PublicHealthView
                     this.dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             queryExaminatProgress();
         }
     }

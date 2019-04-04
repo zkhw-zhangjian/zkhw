@@ -629,6 +629,12 @@
     <EmbeddedResource Include="view\SystemSettingsView\userManage.resx">
       <DependentUpon>userManage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\UseHelpView\biochemical.resx">
+      <DependentUpon>biochemical.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\UseHelpView\bloodAnalysis.resx">
+      <DependentUpon>bloodAnalysis.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="bin\Debug\Huazhan.exe.config" />
     <None Include="bin\Debug\Huazhan.vshost.exe.config" />
     <None Include="bin\Debug\Huazhan.vshost.exe.manifest" />

@@ -387,7 +387,7 @@ namespace zkhwClient.view.PublicHealthView
                 DataTable dt = grjddao.judgeRepeat(textBox3.Text);
                 if (dt.Rows.Count < 1)
                 {
-                    grjdxx.archive_no = basicInfoSettings.xcuncode + grjdxx.Cardcode.Substring(14);
+                    grjdxx.archive_no = basicInfoSettings.xcuncode + "0"+grjdxx.Cardcode.Substring(14);
                     bool istrue = grjddao.addgrjdInfo(grjdxx);
                 }
                 jkBean jk = new jkBean();

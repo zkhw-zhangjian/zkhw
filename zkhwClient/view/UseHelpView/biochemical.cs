@@ -15,5 +15,10 @@ namespace zkhwClient.view.UseHelpView
         {
             InitializeComponent();
         }
+
+        private void biochemical_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
