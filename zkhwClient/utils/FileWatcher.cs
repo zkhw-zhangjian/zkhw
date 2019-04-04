@@ -96,8 +96,8 @@ namespace zkhwClient
         {
             try
             {
-
-                string watchPath = @"D:\xindiantu";
+                return;
+                string watchPath = @"D:\xindiantu";//去掉文件夹的只读权限
 
                 m_watcherAoup.Path = watchPath;
                 m_watcherAoup.NotifyFilter = NotifyFilters.Attributes | NotifyFilters.CreationTime |
