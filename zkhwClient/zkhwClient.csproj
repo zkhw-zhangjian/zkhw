@@ -210,6 +210,7 @@
     <Compile Include="service\PublicHealthService\hypertensionPatientService.cs" />
     <Compile Include="service\PublicHealthService\personalBasicInfoService.cs" />
     <Compile Include="utils\CVRSDK.cs" />
+    <Compile Include="utils\FileWatcher.cs" />
     <Compile Include="view\PublicHealthView\aUolderHelthService.cs">
       <SubType>Form</SubType>
     </Compile>

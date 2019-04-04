@@ -45,11 +45,11 @@ namespace zkhwClient
             DataTable ret = service.UserService.UserExists(comboBox1.Text, txtPassword.Text);
             if (ret.Rows.Count == 1)
             {  //获取当前登录用户的机构
-                organCode=ret.Rows[0]["organ_code"].ToString();
+                organCode = ret.Rows[0]["organ_code"].ToString();
 
                 name = this.comboBox1.Text;
                 passw = this.txtPassword.Text;
- 
+
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = name;
                 lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -88,6 +88,18 @@ namespace zkhwClient
             this.comboBox1.DataSource = dd;//绑定数据源
             this.comboBox1.DisplayMember = "username";//显示给用户的数据集表项
             this.comboBox1.ValueMember = "username";//操作时获取的值 
+
+            //监听有没有B超的文件生成
+
+
+            //是否启动监听AOUP
+
+            //开启监控
+            FileWatcher.WatcheDirForAoup();
+
+
+
+
         }
     }
 }
