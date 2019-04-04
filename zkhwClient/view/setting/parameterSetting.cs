@@ -34,7 +34,7 @@ namespace zkhwClient.view.setting
             this.textBox4.Text = node.InnerText;
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             xmlDoc.Load(path);
             XmlNode node;
@@ -47,11 +47,11 @@ namespace zkhwClient.view.setting
             xmlDoc.Save(path);
 
             node = xmlDoc.SelectSingleNode("config/chejiahao");
-            node.InnerText = this.textBox2.Text;
+            node.InnerText = this.textBox3.Text;
             xmlDoc.Save(path);
 
             node = xmlDoc.SelectSingleNode("config/chepaihao");
-            node.InnerText = this.textBox2.Text;
+            node.InnerText = this.textBox4.Text;
             xmlDoc.Save(path);
             MessageBox.Show("保存成功！");
         }

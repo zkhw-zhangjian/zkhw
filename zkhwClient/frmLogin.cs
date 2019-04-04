@@ -59,7 +59,7 @@ namespace zkhwClient
                     lls.addCheckLog(lb);
                 }
                 this.Hide();
-                frmMain1 main = new frmMain1();
+                frmMain main = new frmMain();
                 main.Show();
             }
             else

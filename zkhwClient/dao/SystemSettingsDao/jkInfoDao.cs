@@ -13,7 +13,7 @@ namespace zkhwClient.dao
         public DataTable selectjkInfoBybarcode(string barcode)
         {
             DataSet ds = new DataSet();
-            string sql = "select k.aichive_no,k.id_number,k.bar_code from zkhw_tj_jk k where k.bar_code='" + barcode + "' order by k.createtime desc";
+            string sql = "select k.aichive_no,k.id_number,k.bar_code from zkhw_tj_jk k where k.bar_code='" + barcode + "' order by k.createtime desc limit 1";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }

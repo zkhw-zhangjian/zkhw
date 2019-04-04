@@ -36,10 +36,10 @@ namespace zkhwClient
 
         }
         private void frmMain_Load(object sender, EventArgs e)
-        {
-            //proHttp.StartInfo.FileName = "C:\\Users\\5050\\Desktop\\healthCheck\\httpCeshi\\bin\\Debug\\httpCeshi.exe";
-            //proHttp.StartInfo.UseShellExecute = false;
-            //proHttp.Start();
+        {   //http
+            proHttp.StartInfo.FileName = Application.StartupPath+"\\http\\httpCeshi.exe";
+            proHttp.StartInfo.UseShellExecute = false;
+            proHttp.Start();
 
             this.timer1.Start();//时间控件定时器
             this.timer2.Interval =Int32.Parse(Properties.Settings.Default.timeInterval);
@@ -753,7 +753,7 @@ namespace zkhwClient
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //proHttp.Kill();
+            proHttp.Kill();
             Process p = Process.GetCurrentProcess();
             if (p != null)
             {
@@ -783,7 +783,7 @@ namespace zkhwClient
             else
             {
                 bool bl = shenghuapath.IndexOf("Lis_DB.mdb") > -1 ? true : false;
-                if (bl == false) { MessageBox.Show("生化中间库地址不正确，请检查系统设置！"); return; }
+                if (bl == false) { MessageBox.Show("生化中间库地址不正确，请检查是否设置地址！"); return; }
                 string sql = "select lop.patient_id,lop.send_time,lopr.* from LisOutput lop, LisOutputResult lopr where lop.sample_id=lopr.sample_id and lop.sample_id=(select top 1 l.sample_id from LisOutput l order by l.sample_id desc)";
                 DataTable arr_dt = getShenghua(sql).Tables[0];
                 if (arr_dt.Rows.Count > 0)
@@ -791,10 +791,13 @@ namespace zkhwClient
                     shenghuaBean sh = new shenghuaBean();
                     sh.bar_code = arr_dt.Rows[0]["patient_id"].ToString();
                     DataTable dtjkinfo= jkdao.selectjkInfoBybarcode(sh.bar_code);
-                    if (dtjkinfo!=null&& dtjkinfo.Rows.Count>0)
+                    if (dtjkinfo != null && dtjkinfo.Rows.Count > 0)
                     {
                         sh.aichive_no = dtjkinfo.Rows[0]["aichive_no"].ToString();
                         sh.id_number = dtjkinfo.Rows[0]["id_number"].ToString();
+                    }
+                    else {
+                        return;
                     }
                     sh.createTime = Convert.ToDateTime(arr_dt.Rows[0]["send_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss");
                     for (int i = 0; i < arr_dt.Rows.Count; i++)
@@ -832,7 +835,7 @@ namespace zkhwClient
             else
             {
                 bool bl = xuechangguipath.IndexOf("Lis_DB.mdb") > -1 ? true : false;
-                if (bl == false) { MessageBox.Show("血球中间库地址不正确，请检查系统设置！"); return; }
+                if (bl == false) { MessageBox.Show("血球中间库地址不正确，请检查是否设置地址！"); return; }
                 string sql1 = "select lop.patient_id,lop.send_time,lopr.* from LisOutput lop, LisOutputResult lopr where lop.sample_id=lopr.sample_id and lop.sample_id=(select top 1 l.sample_id from LisOutput l order by l.sample_id desc)";
                 DataTable arr_dt1 = getXuechanggui(sql1).Tables[0];
                 if (arr_dt1.Rows.Count > 0)
@@ -844,6 +847,10 @@ namespace zkhwClient
                     {
                         xcg.aichive_no = dtjkinfo.Rows[0]["aichive_no"].ToString();
                         xcg.id_number = dtjkinfo.Rows[0]["id_number"].ToString();
+                    }
+                    else
+                    {
+                        return;
                     }
                     xcg.createTime = Convert.ToDateTime(arr_dt1.Rows[0]["send_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss");
                     for (int i = 0; i < arr_dt1.Rows.Count; i++)
