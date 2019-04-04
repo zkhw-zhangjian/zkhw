@@ -145,9 +145,9 @@ namespace zkhwClient.view.PublicHealthView
 
 
             //以下页面未用 数据库字段格式要求
-            diabetes_follow_recordBean.create_time = DateTime.Now.ToString();
-            diabetes_follow_recordBean.update_time = DateTime.Now.ToString();
-            diabetes_follow_recordBean.upload_time = DateTime.Now.ToString();
+            diabetes_follow_recordBean.create_time = DateTime.Now.ToString("yyyy-MM-dd");
+            diabetes_follow_recordBean.update_time = DateTime.Now.ToString("yyyy-MM-dd");
+            diabetes_follow_recordBean.upload_time = DateTime.Now.ToString("yyyy-MM-dd");
             diabetes_follow_recordBean.upload_status = "0";
 
             bool isfalse = diabetesPatient.aUdiabetesPatient(diabetes_follow_recordBean, id, goodsList);

@@ -35,16 +35,16 @@ namespace zkhwClient.view.PublicHealthView
             label4.Left = (this.panel1.Width - this.label4.Width) / 2;
             label4.BringToFront();
 
-            querypBasicInfo();
+            button5_Click(null,null);
         }
         private void button5_Click(object sender, EventArgs e)
         {
             pCa = this.textBox1.Text;
             if (pCa != "")
             {
-                this.label2.Text = "";
+                this.label5.Text = "";
             }
-            else { this.label2.Text = "---姓名/身份证号/档案号---"; }
+            else { this.label5.Text = "---姓名/身份证号/档案号---"; }
             time1 = this.dateTimePicker1.Text.ToString();//开始时间
             time2 = this.dateTimePicker2.Text.ToString();//结束时间
             querypBasicInfo();
@@ -88,7 +88,7 @@ namespace zkhwClient.view.PublicHealthView
             if (hm.ShowDialog() == DialogResult.OK)
             {
                 //刷新页面
-                querypBasicInfo();
+                button5_Click(null, null);
                 MessageBox.Show("添加成功！");
 
             }
@@ -160,28 +160,46 @@ namespace zkhwClient.view.PublicHealthView
                 if (dt.Rows[0]["marital_status"].ToString() == hm.radioButton45.Text) { hm.radioButton45.Checked = true; };
                 if (dt.Rows[0]["marital_status"].ToString() == hm.radioButton46.Text) { hm.radioButton46.Checked = true; };
 
-                if (dt.Rows[0]["pay_type"].ToString() == hm.radioButton47.Text) { hm.radioButton47.Checked = true; };
-                if (dt.Rows[0]["pay_type"].ToString() == hm.radioButton48.Text) { hm.radioButton48.Checked = true; };
-                if (dt.Rows[0]["pay_type"].ToString() == hm.radioButton49.Text) { hm.radioButton49.Checked = true; };
-                if (dt.Rows[0]["pay_type"].ToString() == hm.radioButton50.Text) { hm.radioButton50.Checked = true; };
-                if (dt.Rows[0]["pay_type"].ToString() == hm.radioButton51.Text) { hm.radioButton51.Checked = true; };
-                if (dt.Rows[0]["pay_type"].ToString() == hm.radioButton52.Text) { hm.radioButton52.Checked = true; };
-                if (dt.Rows[0]["pay_type"].ToString() == hm.radioButton53.Text) { hm.radioButton53.Checked = true; };
-                if (dt.Rows[0]["pay_type"].ToString() == hm.radioButton54.Text) { hm.radioButton54.Checked = true; };
 
-                if (dt.Rows[0]["drug_allergy"].ToString() == hm.radioButton55.Text) { hm.radioButton55.Checked = true; };
-                if (dt.Rows[0]["drug_allergy"].ToString() == hm.radioButton56.Text) { hm.radioButton56.Checked = true; };
-                if (dt.Rows[0]["drug_allergy"].ToString() == hm.radioButton57.Text) { hm.radioButton57.Checked = true; };
-                if (dt.Rows[0]["drug_allergy"].ToString() == hm.radioButton58.Text) { hm.radioButton58.Checked = true; };
-                if (dt.Rows[0]["drug_allergy"].ToString() == hm.radioButton59.Text) { hm.radioButton59.Checked = true; };
-
-                if (dt.Rows[0]["exposure"].ToString() == hm.radioButton60.Text) { hm.radioButton60.Checked = true; };
-                if (dt.Rows[0]["exposure"].ToString() == hm.radioButton61.Text) { hm.radioButton61.Checked = true; };
-                if (dt.Rows[0]["exposure"].ToString() == hm.radioButton62.Text) { hm.radioButton62.Checked = true; };
-                if (dt.Rows[0]["exposure"].ToString() == hm.radioButton63.Text) { hm.radioButton63.Checked = true; };
-
-
-
+                foreach (Control ctr in hm.panel12.Controls)
+                {
+                    //判断该控件是不是CheckBox
+                    if (ctr is CheckBox)
+                    {
+                        //将ctr转换成CheckBox并赋值给ck
+                        CheckBox ck = ctr as CheckBox;
+                        if (dt.Rows[0]["pay_type"].ToString().IndexOf(ck.Text) > -1)
+                        {
+                            ck.Checked = true;
+                        }
+                    }
+                }
+                foreach (Control ctr in hm.panel13.Controls)
+                {
+                    //判断该控件是不是CheckBox
+                    if (ctr is CheckBox)
+                    {
+                        //将ctr转换成CheckBox并赋值给ck
+                        CheckBox ck = ctr as CheckBox;
+                        if (dt.Rows[0]["drug_allergy"].ToString().IndexOf(ck.Text) > -1)
+                        {
+                            ck.Checked = true;
+                        }
+                    }
+                }
+                foreach (Control ctr in hm.panel14.Controls)
+                {
+                    //判断该控件是不是CheckBox
+                    if (ctr is CheckBox)
+                    {
+                        //将ctr转换成CheckBox并赋值给ck
+                        CheckBox ck = ctr as CheckBox;
+                        if (dt.Rows[0]["exposure"].ToString().IndexOf(ck.Text) > -1)
+                        {
+                            ck.Checked = true;
+                        }
+                    }
+                }
                 hm.richTextBox4.Text = dt.Rows[0]["heredity_name"].ToString();
                 foreach (Control ctr in hm.panel20.Controls)
                 {
@@ -234,7 +252,8 @@ namespace zkhwClient.view.PublicHealthView
             if (hm.ShowDialog() == DialogResult.OK)
             {
                 //刷新页面
-                querypBasicInfo();
+
+                button5_Click(null, null);
                 MessageBox.Show("修改成功！");
 
             }
@@ -253,7 +272,7 @@ namespace zkhwClient.view.PublicHealthView
                 if (istrue)
                 {
                     //刷新页面
-                    querypBasicInfo();
+                    button5_Click(null, null);
                     MessageBox.Show("删除成功！");
                 }
             }
