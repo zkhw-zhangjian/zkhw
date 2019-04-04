@@ -559,6 +559,9 @@
     <EmbeddedResource Include="view\PublicHealthView\aUHypertensionPatientServices.resx">
       <DependentUpon>aUHypertensionPatientServices.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\aUolderHelthService.resx">
+      <DependentUpon>aUolderHelthService.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\aUPersonalBasicInfo.resx">
       <DependentUpon>aUPersonalBasicInfo.cs</DependentUpon>
     </EmbeddedResource>
