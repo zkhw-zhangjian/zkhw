@@ -22,5 +22,17 @@ namespace zkhwClient.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("120000")]
+        public string timeInterval {
+            get {
+                return ((string)(this["timeInterval"]));
+            }
+            set {
+                this["timeInterval"] = value;
+            }
+        }
     }
 }

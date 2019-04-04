@@ -10,6 +10,9 @@ using zkhwClient.view.setting;
 using System.Diagnostics;
 using zkhwClient.dao;
 using System.Data;
+using System.Xml;
+using System.Threading;
+using System.Data.OleDb;
 
 namespace zkhwClient
 {
@@ -18,6 +21,15 @@ namespace zkhwClient
         personRegist pR = null;
         Process proHttp = new Process();
         basicSettingDao bsdao = new basicSettingDao();
+        tjcheckDao thdao = new tjcheckDao();
+        jkInfoDao jkdao = new jkInfoDao();
+        private OleDbDataAdapter oda = null;
+        private DataSet myds_data = null;
+        XmlDocument xmlDoc = new XmlDocument();
+        XmlNode node;
+        string path = @"config.xml";
+        string shenghuapath= "";
+        string xuechangguipath = "";
         public frmMain()
         {
             InitializeComponent();
@@ -30,6 +42,8 @@ namespace zkhwClient
             //proHttp.Start();
 
             this.timer1.Start();//时间控件定时器
+            this.timer2.Interval =Int32.Parse(Properties.Settings.Default.timeInterval);
+            this.timer2.Start();//定时获取生化和血球的数据
 
             this.label1.Text = "一体化查体车  中科弘卫";
             this.label1.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
@@ -485,6 +499,16 @@ namespace zkhwClient
                 this.panel1.Controls.Add(pR);
                 pR.Show();
             }
+            else if (tag == "参数设置")
+            {
+                parameterSetting pR = new parameterSetting();
+                pR.TopLevel = false;
+                pR.Dock = DockStyle.Fill;
+                pR.FormBorderStyle = FormBorderStyle.None;
+                this.panel1.Controls.Clear();
+                this.panel1.Controls.Add(pR);
+                pR.Show();
+            }
             else if (tag == "软件系统")
             {   //使用帮助模块 
                 softwareSystems pR = new softwareSystems();
@@ -735,6 +759,145 @@ namespace zkhwClient
             {
                 p.Kill();
             }
+        }
+        //定时任务获取生化和血球的数据
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            xmlDoc.Load(path);
+            node = xmlDoc.SelectSingleNode("config/shenghuaPath");
+            shenghuapath = node.InnerText;
+            node = xmlDoc.SelectSingleNode("config/xuechangguiPath");
+            xuechangguipath = node.InnerText;
+
+            Thread demoThread = new Thread(new ThreadStart(shAndxcg));
+            demoThread.IsBackground = true;
+            demoThread.Start();//启动线程 
+        }
+        private void shAndxcg()
+        {
+            if (shenghuapath == "")
+            {
+                MessageBox.Show("未获取到生化中间库地址，请检查是否设置地址！");
+                return;
+            }
+            else
+            {
+                bool bl = shenghuapath.IndexOf("Lis_DB.mdb") > -1 ? true : false;
+                if (bl == false) { MessageBox.Show("生化中间库地址不正确，请检查系统设置！"); return; }
+                string sql = "select lop.patient_id,lop.send_time,lopr.* from LisOutput lop, LisOutputResult lopr where lop.sample_id=lopr.sample_id and lop.sample_id=(select top 1 l.sample_id from LisOutput l order by l.sample_id desc)";
+                DataTable arr_dt = getShenghua(sql).Tables[0];
+                if (arr_dt.Rows.Count > 0)
+                {
+                    shenghuaBean sh = new shenghuaBean();
+                    sh.bar_code = arr_dt.Rows[0]["patient_id"].ToString();
+                    DataTable dtjkinfo= jkdao.selectjkInfoBybarcode(sh.bar_code);
+                    if (dtjkinfo!=null&& dtjkinfo.Rows.Count>0)
+                    {
+                        sh.aichive_no = dtjkinfo.Rows[0]["aichive_no"].ToString();
+                        sh.id_number = dtjkinfo.Rows[0]["id_number"].ToString();
+                    }
+                    sh.createTime = Convert.ToDateTime(arr_dt.Rows[0]["send_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss");
+                    for (int i = 0; i < arr_dt.Rows.Count; i++)
+                    {
+                        string item = arr_dt.Rows[i]["item"].ToString();
+                        switch (item)
+                        {
+                            case "ALB": sh.ALB = arr_dt.Rows[i]["result"].ToString(); break;
+                            case "ALP": sh.ALP = arr_dt.Rows[i]["result"].ToString(); break;
+                            case "ALT": sh.ALT = arr_dt.Rows[i]["result"].ToString(); break;
+                            case "AST": sh.AST = arr_dt.Rows[i]["result"].ToString(); break;
+                            case "CHO": sh.CHO = arr_dt.Rows[i]["result"].ToString(); break;
+                            case "Crea": sh.Crea = arr_dt.Rows[i]["result"].ToString(); break;
+                            case "DBIL": sh.DBIL = arr_dt.Rows[i]["result"].ToString(); break;
+                            case "GGT": sh.GGT = arr_dt.Rows[i]["result"].ToString(); break;
+                            case "GLU": sh.GLU = arr_dt.Rows[i]["result"].ToString(); break;
+                            case "HDL_C": sh.HDL_C = arr_dt.Rows[i]["result"].ToString(); break;
+                            case "LDL_C": sh.LDL_C = arr_dt.Rows[i]["result"].ToString(); break;
+                            case "TBIL": sh.TBIL = arr_dt.Rows[i]["result"].ToString(); break;
+                            case "TG": sh.TG = arr_dt.Rows[i]["result"].ToString(); break;
+                            case "TP": sh.TP = arr_dt.Rows[i]["result"].ToString(); break;
+                            case "UA": sh.UA = arr_dt.Rows[i]["result"].ToString(); break;
+                            case "UREA": sh.UREA = arr_dt.Rows[i]["result"].ToString(); break;
+                            default: break;
+                        }
+                    }
+                    thdao.insertShenghuaInfo(sh);
+                }
+            }
+            if (xuechangguipath == "")
+            {
+                MessageBox.Show("未获取到血球中间库地址，请检查是否设置地址！");
+                return;
+            }
+            else
+            {
+                bool bl = xuechangguipath.IndexOf("Lis_DB.mdb") > -1 ? true : false;
+                if (bl == false) { MessageBox.Show("血球中间库地址不正确，请检查系统设置！"); return; }
+                string sql1 = "select lop.patient_id,lop.send_time,lopr.* from LisOutput lop, LisOutputResult lopr where lop.sample_id=lopr.sample_id and lop.sample_id=(select top 1 l.sample_id from LisOutput l order by l.sample_id desc)";
+                DataTable arr_dt1 = getXuechanggui(sql1).Tables[0];
+                if (arr_dt1.Rows.Count > 0)
+                {
+                    xuechangguiBean xcg = new xuechangguiBean();
+                    xcg.bar_code = arr_dt1.Rows[0]["patient_id"].ToString();
+                    DataTable dtjkinfo = jkdao.selectjkInfoBybarcode(xcg.bar_code);
+                    if (dtjkinfo != null && dtjkinfo.Rows.Count > 0)
+                    {
+                        xcg.aichive_no = dtjkinfo.Rows[0]["aichive_no"].ToString();
+                        xcg.id_number = dtjkinfo.Rows[0]["id_number"].ToString();
+                    }
+                    xcg.createTime = Convert.ToDateTime(arr_dt1.Rows[0]["send_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss");
+                    for (int i = 0; i < arr_dt1.Rows.Count; i++)
+                    {
+                        string item = arr_dt1.Rows[i]["item"].ToString();
+                        switch (item)
+                        {
+                            case "HCT": xcg.HCT = arr_dt1.Rows[i]["result"].ToString(); break;
+                            case "HGB": xcg.HGB = arr_dt1.Rows[i]["result"].ToString(); break;
+                            case "LYM#": xcg.LYM = arr_dt1.Rows[i]["result"].ToString(); break;
+                            case "LYM%": xcg.LYMP = arr_dt1.Rows[i]["result"].ToString(); break;
+                            case "MCH": xcg.MCH = arr_dt1.Rows[i]["result"].ToString(); break;
+                            case "MCHC": xcg.MCHC = arr_dt1.Rows[i]["result"].ToString(); break;
+                            case "MCV": xcg.MCV = arr_dt1.Rows[i]["result"].ToString(); break;
+                            case "MPV": xcg.MPV = arr_dt1.Rows[i]["result"].ToString(); break;
+                            case "MXD#": xcg.MXD = arr_dt1.Rows[i]["result"].ToString(); break;
+                            case "MXD%": xcg.MXDP = arr_dt1.Rows[i]["result"].ToString(); break;
+                            case "NEUT#": xcg.NEUT = arr_dt1.Rows[i]["result"].ToString(); break;
+                            case "NEUT%": xcg.NEUTP = arr_dt1.Rows[i]["result"].ToString(); break;
+                            case "PCT": xcg.PCT = arr_dt1.Rows[i]["result"].ToString(); break;
+                            case "PDW": xcg.PDW = arr_dt1.Rows[i]["result"].ToString(); break;
+                            case "PLT": xcg.PLT = arr_dt1.Rows[i]["result"].ToString(); break;
+                            case "RBC": xcg.RBC = arr_dt1.Rows[i]["result"].ToString(); break;
+                            case "RDW_CV": xcg.RDW_CV = arr_dt1.Rows[i]["result"].ToString(); break;
+                            case "RDW_SD": xcg.RDW_SD = arr_dt1.Rows[i]["result"].ToString(); break;
+                            case "WBC": xcg.WBC = arr_dt1.Rows[i]["result"].ToString(); break;
+                            default: break;
+                        }
+                    }
+                    thdao.insertXuechangguiInfo(xcg);
+                }
+            }
+        }
+        /// <summary>
+        /// 生化表
+        /// </summary>
+        public DataSet getShenghua(string strSQL)
+        {
+            string strcon = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source =" + shenghuapath + "";
+            myds_data = new DataSet();
+            oda = new OleDbDataAdapter(strSQL, strcon);
+            oda.Fill(myds_data);
+            return myds_data;
+        }
+        /// <summary>
+        /// 血球表
+        /// </summary>
+        public DataSet getXuechanggui(string strSQL)
+        {
+            string strcon = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source =" + xuechangguipath + "";
+            myds_data = new DataSet();
+            oda = new OleDbDataAdapter(strSQL, strcon);
+            oda.Fill(myds_data);
+            return myds_data;
         }
     }
 }

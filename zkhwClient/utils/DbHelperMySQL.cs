@@ -119,7 +119,7 @@ namespace zkhwClient.dao
                         {
                             sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + e.Message + "\r\n"+ SQLString);
                         }
-                        throw e;
+                        return 0;
                     }
                 }
             }

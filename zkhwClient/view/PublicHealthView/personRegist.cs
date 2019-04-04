@@ -354,24 +354,29 @@ namespace zkhwClient.view.PublicHealthView
                 return;
             }
 
-            Random rand = new Random();
-            int randnum = rand.Next(10000, 99999);
-
+            //Random rand = new Random();
+            //int randnum = rand.Next(10000, 99999);
             xmlDoc.Load(path);
-            node = xmlDoc.SelectSingleNode("config/carCode");
+            node = xmlDoc.SelectSingleNode("config/chejiahao");
             carcode = node.InnerText;
+            carcode = carcode.Substring(carcode.Length-4, 4);
+            node = xmlDoc.SelectSingleNode("config/barnumCode");
+            string barnumCode = node.InnerText;
             if (carcode == null || carcode.Length != 4) { MessageBox.Show("车编号不正确，请确认系统设置中的车编号！"); return; };
 
             string nameCode = textBox1.Text + " " + Regex.Replace(textBox3.Text, "(\\d{4})\\d{4}(\\d{4})", "$1****$2");
 
             if (textBox1.Text == "" || textBox3.Text == "")
             {
-                OnPrintSampleBarcode(carcode + randnum.ToString(), Int32.Parse(this.numericUpDown1.Value.ToString()), "测试 2202****1410186221");
+                OnPrintSampleBarcode(carcode + barnumCode, Int32.Parse(this.numericUpDown1.Value.ToString()), "测试 2202****1410186221");
             }
             else
             {
-                OnPrintSampleBarcode(carcode + randnum.ToString(), Int32.Parse(this.numericUpDown1.Value.ToString()), nameCode);
+                OnPrintSampleBarcode(carcode + barnumCode, Int32.Parse(this.numericUpDown1.Value.ToString()), nameCode);
             }
+            node = xmlDoc.SelectSingleNode("config/barnumCode");
+            node.InnerText = (Int32.Parse(barnumCode)+1).ToString();
+            xmlDoc.Save(path);
         }
         //打印条码
         public void OnPrintSampleBarcode(string barcode, int pageCount, string nameCode)

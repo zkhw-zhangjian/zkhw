@@ -60,6 +60,7 @@
             this.基本信息设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设备管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.系统日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.中间库位置设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.使用帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.软件系统ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.b超ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,6 +93,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -305,7 +307,8 @@
             this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.基本信息设置ToolStripMenuItem,
             this.设备管理ToolStripMenuItem,
-            this.系统日志ToolStripMenuItem});
+            this.系统日志ToolStripMenuItem,
+            this.中间库位置设置ToolStripMenuItem});
             this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
             this.设置ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.设置ToolStripMenuItem.Text = "设置";
@@ -328,6 +331,12 @@
             this.系统日志ToolStripMenuItem.Name = "系统日志ToolStripMenuItem";
             this.系统日志ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.系统日志ToolStripMenuItem.Text = "系统日志";
+            // 
+            // 中间库位置设置ToolStripMenuItem
+            // 
+            this.中间库位置设置ToolStripMenuItem.Name = "中间库位置设置ToolStripMenuItem";
+            this.中间库位置设置ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.中间库位置设置ToolStripMenuItem.Text = "参数设置";
             // 
             // 使用帮助ToolStripMenuItem
             // 
@@ -644,6 +653,11 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // timer2
+            // 
+            this.timer2.Interval = 1000;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -744,6 +758,8 @@
         private System.Windows.Forms.ToolStripMenuItem 健康体检表ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 个人基本信息建档ToolStripMenuItem;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem 中间库位置设置ToolStripMenuItem;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 

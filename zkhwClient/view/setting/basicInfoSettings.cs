@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml;
 using zkhwClient.dao;
 
 namespace zkhwClient.view.setting
@@ -15,7 +16,7 @@ namespace zkhwClient.view.setting
         areaConfigDao areadao = new areaConfigDao();
         basicSettingDao bsdao = new basicSettingDao();
         UserDao userdao = new UserDao();
-        public static string xcuncode = "123";
+        public static string xcuncode = null;
         public static string xzName = null;
         public static string xcName = null;
         string xzcode = null;
@@ -26,6 +27,9 @@ namespace zkhwClient.view.setting
         public static string organ_name = null;
         public static string input_name = null;
         public static string createtime = null;
+        XmlDocument xmlDoc = new XmlDocument();
+        XmlNode node;
+        string path = @"config.xml";
         public basicInfoSettings()
         {
             InitializeComponent();
@@ -33,15 +37,20 @@ namespace zkhwClient.view.setting
         private void basicInfoSettings_Load(object sender, EventArgs e)
         {
             DataTable dtbasic= bsdao.checkBasicsettingInfo();
-            if (dtbasic.Rows.Count>0) {
-                zeren_doctor= dtbasic.Rows[0]["zeren_doctor"].ToString();
+            if (dtbasic.Rows.Count > 0) {
+                zeren_doctor = dtbasic.Rows[0]["zeren_doctor"].ToString();
                 organ_name = dtbasic.Rows[0]["organ_name"].ToString();
                 input_name = dtbasic.Rows[0]["input_name"].ToString();
-                createtime = dtbasic.Rows[0]["createtime"].ToString();
+                createtime = dtbasic.Rows[0]["create_time"].ToString();
                 xcuncode = dtbasic.Rows[0]["cun_code"].ToString();
                 xzcode = dtbasic.Rows[0]["xz_code"].ToString();
-                xzName= bsdao.selectAreaBycode(xzcode).Rows[0][0].ToString();
-                xcName = bsdao.selectAreaBycode(xcuncode).Rows[0][0].ToString();
+                if (xzcode != null && !"".Equals(xzcode))
+                {
+                    xzName = bsdao.selectAreaBycode(xzcode).Rows[0][0].ToString();
+                }
+                if (xcuncode != null && !"".Equals(xcuncode)) {
+                   xcName = bsdao.selectAreaBycode(xcuncode).Rows[0][0].ToString();
+                }
             }
             this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源
             this.comboBox1.DisplayMember = "name";//显示给用户的数据集表项
@@ -120,6 +129,11 @@ namespace zkhwClient.view.setting
                bool bl= bsdao.addBasicSetting(shengcode, shicode, qxcode, xzcode, xcuncode, organ_code, organ_name, input_name, zeren_doctor, bc, xcg, sh, sgtz, ncg, xdt, xy, wx, other, captain, members, operation, car_name, create_user, create_name);
                 if (bl) {
                     createtime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    //重置条码起始位置
+                    xmlDoc.Load(path);
+                    node = xmlDoc.SelectSingleNode("config/barnumCode");
+                    node.InnerText = "10001";
+                    xmlDoc.Save(path);
                     MessageBox.Show("数据保存成功！");
                 }
             }

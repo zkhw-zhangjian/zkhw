@@ -9,15 +9,13 @@ namespace zkhwClient.dao
 {
     class jkInfoDao
     {
-        //添加体检登记记录做统计使用
-        public bool addJkInfo(grjdxxBean grjdxx)
+        //根据条码号获取对应的身份证号和档案编号（取最新的一条记录）
+        public DataTable selectjkInfoBybarcode(string barcode)
         {
-            int rt = 0;
-            string id = Result.GetNewId();
-            string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");                                                                 
-            //String sql = "insert into zkhw_tj_bgdc (ID,aichive_no,id_number,bar_code,name,sex,birthday,healthchecktime,createtime) values ('" + id + "', '" + grjdxx.archive_no + "', '" + grjdxx.Cardcode + "', '" + grjdxx.b + "', '" + grjdxx.name + "', '" + grjdxx.Sex + "', '" + grjdxx.Birthday + "', '" + time + "', '" + time + "')";
-            //rt = DbHelperMySQL.ExecuteSql(sql);
-            return rt == 0 ? false : true;
+            DataSet ds = new DataSet();
+            string sql = "select k.aichive_no,k.id_number,k.bar_code from zkhw_tj_jk k where k.bar_code='" + barcode + "' order by k.createtime desc";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
         }
         //登记界面右侧 查询统计男女各多少人功能
         public DataTable selectjktjInfo(string areacode,string time)
