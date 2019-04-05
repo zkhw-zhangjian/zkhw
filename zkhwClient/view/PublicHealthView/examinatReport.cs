@@ -100,7 +100,7 @@ GROUP BY sex
                             id,
                             DATE_FORMAT(healthchecktime,'%Y%m%d') 登记时间,
                             area_duns 区域,
-                            bar_code 编号,
+                            aichive_no 编码,
                             name 姓名,
                             sex 性别,
                             id_number 身份证号,
@@ -471,7 +471,7 @@ GROUP BY sex
                 {
                     if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
                     {
-                        string id = dataGridView1["身份证号", i].Value.ToString();
+                        string id = dataGridView1["编码", i].Value.ToString();
                         ide.Add(id);
                     }
                 }
@@ -488,7 +488,7 @@ GROUP BY sex
                                 case "封面":
                                     sql = $@"SELECT 
 jk.id_number,
-jk.aichive_no,
+jk.aichive_no archive_no,
 jk.Xzhuzhi,
 jk.address,
 jk.XzjdName,
@@ -500,9 +500,9 @@ info.name,
 info.phone 
 from resident_base_info info 
 join 
-(SELECT * from zkhw_tj_jk where id_number in('{string.Join(",", ide)}') ORDER BY createtime DESC LIMIT 1) jk
-on info.id_number=jk.id_number
-where info.id_number in('{string.Join(",", ide)}')";
+(select * from (select * from zkhw_tj_jk order by createtime desc) as a group by aichive_no order by createtime desc) jk
+on info.archive_no=jk.aichive_no
+where info.archive_no in('{string.Join(",", ide)}')";
                                     DataSet datas = DbHelperMySQL.Query(sql);
                                     if (datas != null && datas.Tables.Count > 0)
                                     {
@@ -512,7 +512,7 @@ where info.id_number in('{string.Join(",", ide)}')";
                                     }
                                     break;
                                 case "个人信息":
-                                    sql = $@"select * from resident_base_info base where base.id_number in('{string.Join(",", ide)}')";
+                                    sql = $@"select * from resident_base_info base where base.archive_no in('{string.Join(",", ide)}')";
                                     DataSet gr = DbHelperMySQL.Query(sql);
                                     if (gr != null && gr.Tables.Count > 0)
                                     {
@@ -553,7 +553,7 @@ where info.id_number in('{string.Join(",", ide)}')";
                     foreach (var items in list)
                     {
                         Report report = new Report();
-                        DataRow data = dataSet.Tables[items].Select($"id_number={item}")[0];
+                        DataRow data = dataSet.Tables[items].Select($"archive_no={item}")[0];
                         report.Name = items;
                         report.Doc = PdfProcessing(items, data);
                         reports.Add(report);
@@ -630,7 +630,7 @@ where info.id_number in('{string.Join(",", ide)}')";
                         {
                             DataRow data = dataSet.Tables["封面"].Rows[i];
                             doc = PdfProcessing(list[0], data);
-                            string urls = @str + $"/up/result/{data["id_number"].ToString()}.pdf";
+                            string urls = @str + $"/up/result/{data["archive_no"].ToString()}.pdf";
                             DeteleFile(urls);
                             doc.Save(urls, SaveFormat.Pdf);
                         }
@@ -640,7 +640,7 @@ where info.id_number in('{string.Join(",", ide)}')";
                         {
                             DataRow data = dataSet.Tables["个人信息"].Rows[i];
                             doc = PdfProcessing(list[0], data);
-                            string urls = @str + $"/up/result/{data["id_number"].ToString()}.pdf";
+                            string urls = @str + $"/up/result/{data["archive_no"].ToString()}.pdf";
                             DeteleFile(urls);
                             doc.Save(urls, SaveFormat.Pdf);
                         }
@@ -663,7 +663,11 @@ where info.id_number in('{string.Join(",", ide)}')";
                     doc = new Document(@str + $"/up/template/封面.doc");
                     builder = new DocumentBuilder(doc);
                     var dic = new Dictionary<string, string>();
-                    dic.Add("编号", data["aichive_no"].ToString());
+                    string bh = data["archive_no"].ToString();
+                    for (int i = 0; i < bh.Length; i++)
+                    {
+                        dic.Add("编号" + (i + 1), bh[i].ToString());
+                    }
                     dic.Add("姓名", data["name"].ToString());
                     dic.Add("现住址", data["Xzhuzhi"].ToString());
                     dic.Add("户籍地址", data["address"].ToString());
@@ -687,40 +691,92 @@ where info.id_number in('{string.Join(",", ide)}')";
                     doc = new Document(@str + $"/up/template/个人信息.doc");
                     builder = new DocumentBuilder(doc);
                     var dics = new Dictionary<string, string>();
-                    dics.Add("编号", data["archive_no"].ToString());
+                    string grbh = data["archive_no"].ToString();
+                    grbh = grbh.Substring(9, grbh.Length - 9);
+                    for (int i = 0; i < grbh.Length; i++)
+                    {
+                        dics.Add("编号" + (i + 1), grbh[i].ToString());
+                    }
                     dics.Add("姓名", data["name"].ToString());
-                    dics.Add("性别", ZF(data["sex"].ToString()));
+                    dics.Add("性别", data["sex"].ToString());
                     dics.Add("出生日期", data["birthday"].ToString());
                     dics.Add("身份证号", data["id_number"].ToString());
                     dics.Add("工作单位", data["company"].ToString());
                     dics.Add("本人电话", data["phone"].ToString());
                     dics.Add("联系人姓名", data["link_name"].ToString());
                     dics.Add("联系人电话", data["link_phone"].ToString());
-                    dics.Add("常住类型", ZF(data["resident_type"].ToString()));
-                    dics.Add("民族", ZF(data["nation"].ToString()));
-                    dics.Add("血型", ZF(data["blood_group"].ToString()));
-                    dics.Add("RH", ZF(data["blood_rh"].ToString()));
-                    dics.Add("文化程度", ZF(data["education"].ToString()));
-                    dics.Add("职业", ZF(data["profession"].ToString()));
-                    dics.Add("婚姻状况", ZF(data["marital_status"].ToString()));
-                    dics.Add("医疗费用", ZF(data["pay_type"].ToString()));
-                    dics.Add("药物过敏史", ZF(data["drug_allergy"].ToString()));
-                    dics.Add("暴露史", ZF(data["exposure"].ToString()));
-                    dics.Add("疾病", ZF(data["disease_other"].ToString()));
+                    dics.Add("常住类型", data["resident_type"].ToString());
+                    dics.Add("民族", data["nation"].ToString());
+                    dics.Add("血型", data["blood_group"].ToString());
+                    dics.Add("RH", data["blood_rh"].ToString());
+                    dics.Add("文化程度", data["education"].ToString());
+                    dics.Add("职业", data["profession"].ToString());
+                    dics.Add("婚姻状况", data["marital_status"].ToString());
+                    string yyf = data["pay_type"].ToString();
+                    if (yyf.IndexOf(',') > 0)
+                    {
+                        string[] y = yyf.Split(',');
+                        for (int i = 0; i < y.Length; i++)
+                        {
+                            dics.Add("医疗费用" + (i + 1), y[i]);
+                        }
+                    }
+                    else
+                    {
+                        dics.Add("医疗费用1", yyf);
+                    }
+                    string ywgm = data["drug_allergy"].ToString();
+                    if (ywgm.IndexOf(',') > 0)
+                    {
+                        string[] y = ywgm.Split(',');
+                        for (int i = 0; i < y.Length; i++)
+                        {
+                            dics.Add("药物过敏史" + (i + 1), y[i]);
+                        }
+                    }
+                    else
+                    {
+                        dics.Add("药物过敏史1", ywgm);
+                    }
+                    string bls = data["exposure"].ToString();
+                    if (bls.IndexOf(',') > 0)
+                    {
+                        string[] y = bls.Split(',');
+                        for (int i = 0; i < y.Length; i++)
+                        {
+                            dics.Add("暴露史" + (i + 1), y[i]);
+                        }
+                    }
+                    else
+                    {
+                        dics.Add("暴露史1", bls);
+                    }
+                    DataSet jb = DbHelperMySQL.Query($"SELECT * from resident_diseases where resident_base_info_id='{data["id"].ToString()}'");
+                    if (jb != null && jb.Tables.Count > 0 && jb.Tables[0].Rows.Count > 0)
+                    {
+                        DataTable da = jb.Tables[0];
+                        for (int j = 0; j < da.Rows.Count; j++)
+                        {
+                            dics.Add("疾病" + (j + 1), da.Rows[j]["disease_type"].ToString());
+                            string time = da.Rows[j]["disease_date"].ToString();
+                            dics.Add("疾病时间" + (j + 1) + "年", time.Split('-')[0]);
+                            dics.Add("疾病时间" + (j + 1) + "月", time.Split('-')[1]);
+                        }
+                    }
                     DataSet datas = DbHelperMySQL.Query($"SELECT * from operation_record where resident_base_info_id='{data["id"].ToString()}'");
                     if (datas != null && datas.Tables.Count > 0 && datas.Tables[0].Rows.Count > 0)
                     {
                         DataTable da = datas.Tables[0];
                         for (int j = 0; j < da.Rows.Count; j++)
                         {
-                            dics.Add("手术" + j + 1, ZF(da.Rows[j]["operation_name"].ToString()));
-                            dics.Add("手术" + j + 1 + "时间", ZF(da.Rows[j]["operation_time"].ToString()));
+                            dics.Add("手术" + (j + 1), da.Rows[j]["operation_name"].ToString());
+                            dics.Add("手术" + (j + 1) + "时间", da.Rows[j]["operation_time"].ToString());
                         }
-                        dics.Add("手术", ZF("2"));
+                        dics.Add("手术", "2");
                     }
                     else
                     {
-                        dics.Add("手术", ZF("1"));
+                        dics.Add("手术", "1");
                     }
                     DataSet ws = DbHelperMySQL.Query($"SELECT * from traumatism_record where resident_base_info_id='{data["id"].ToString()}'");
                     if (ws != null && ws.Tables.Count > 0 && ws.Tables[0].Rows.Count > 0)
@@ -728,14 +784,14 @@ where info.id_number in('{string.Join(",", ide)}')";
                         DataTable da = ws.Tables[0];
                         for (int j = 0; j < da.Rows.Count; j++)
                         {
-                            dics.Add("外伤" + j + 1, ZF(da.Rows[j]["traumatism_name"].ToString()));
-                            dics.Add("外伤" + j + 1 + "时间", ZF(da.Rows[j]["traumatism_time"].ToString()));
+                            dics.Add("外伤" + (j + 1), da.Rows[j]["traumatism_name"].ToString());
+                            dics.Add("外伤" + (j + 1) + "时间", da.Rows[j]["traumatism_time"].ToString());
                         }
-                        dics.Add("外伤", ZF("2"));
+                        dics.Add("外伤", "2");
                     }
                     else
                     {
-                        dics.Add("外伤", ZF("1"));
+                        dics.Add("外伤", "1");
                     }
                     DataSet sx = DbHelperMySQL.Query($"SELECT * from metachysis_record where resident_base_info_id='{data["id"].ToString()}'");
                     if (sx != null && sx.Tables.Count > 0 && sx.Tables[0].Rows.Count > 0)
@@ -743,30 +799,105 @@ where info.id_number in('{string.Join(",", ide)}')";
                         DataTable da = sx.Tables[0];
                         for (int j = 0; j < da.Rows.Count; j++)
                         {
-                            dics.Add("输血" + j + 1, ZF(da.Rows[j]["metachysis_reasonn"].ToString()));
-                            dics.Add("输血" + j + 1 + "时间", ZF(da.Rows[j]["metachysis_time"].ToString()));
+                            dics.Add("输血" + (j + 1), da.Rows[j]["metachysis_reasonn"].ToString());
+                            dics.Add("输血" + (j + 1) + "时间", da.Rows[j]["metachysis_time"].ToString());
                         }
-                        dics.Add("输血", ZF("2"));
+                        dics.Add("输血", "2");
                     }
                     else
                     {
-                        dics.Add("输血", ZF("1"));
+                        dics.Add("输血", "1");
                     }
-                    if (data["is_heredity"].ToString() == "1")
+                    DataSet jz = DbHelperMySQL.Query($"SELECT * from family_record where resident_base_info_id='{data["id"].ToString()}'");
+                    if (jz != null && jz.Tables.Count > 0 && jz.Tables[0].Rows.Count > 0)
                     {
-                        dics.Add("遗传病史", ZF(data["is_heredity"].ToString()));
-                    }
-                    else
-                    {
-                        dics.Add("遗传病史", data["heredity_name"].ToString() + "    " + ZF(data["profession"].ToString()));
-                    }
+                        DataTable da = jz.Tables[0];
+                        DataRow[] fq = da.Select("relation='父亲'");
+                        if (fq != null && fq.Count() > 0)
+                        {
+                            for (int j = 0; j < fq.Count(); j++)
+                            {
+                                string fqs = fq[j]["disease_type"].ToString();
+                                if (fqs.IndexOf(',') > 0)
+                                {
+                                    string[] y = fqs.Split(',');
+                                    for (int i = 0; i < y.Length; i++)
+                                    {
+                                        dics.Add("家族史父亲" + (i + 1), y[i]);
+                                    }
+                                }
+                            }
+                        }
+                        DataRow[] mq = da.Select("relation='母亲'");
+                        if (mq != null && mq.Count() > 0)
+                        {
+                            for (int j = 0; j < mq.Count(); j++)
+                            {
+                                string fqs = fq[j]["disease_type"].ToString();
+                                if (fqs.IndexOf(',') > 0)
+                                {
+                                    string[] y = fqs.Split(',');
+                                    for (int i = 0; i < y.Length; i++)
+                                    {
+                                        dics.Add("家族史母亲" + (i + 1), y[i]);
+                                    }
+                                }
+                            }
+                        }
+                        DataRow[] jm = da.Select("relation='兄弟姐妹'");
+                        if (jm != null && jm.Count() > 0)
+                        {
 
-                    dics.Add("残疾情况", ZF(data["is_deformity"].ToString()));
-                    dics.Add("厨房排风设施", ZF(data["kitchen"].ToString()));
-                    dics.Add("燃料类型", ZF(data["fuel"].ToString()));
-                    dics.Add("饮水", ZF(data["drink"].ToString()));
-                    dics.Add("厕所", ZF(data["toilet"].ToString()));
-                    dics.Add("禽畜栏", ZF(data["poultry"].ToString()));
+                            for (int j = 0; j < jm.Count(); j++)
+                            {
+                                string fqs = fq[j]["disease_type"].ToString();
+                                if (fqs.IndexOf(',') > 0)
+                                {
+                                    string[] y = fqs.Split(',');
+                                    for (int i = 0; i < y.Length; i++)
+                                    {
+                                        dics.Add("家族史兄弟" + (i + 1), y[i]);
+                                    }
+                                }
+                            }
+                        }
+                        DataRow[] zn = da.Select("relation='子女'");
+                        if (zn != null && zn.Count() > 0)
+                        {
+                            for (int j = 0; j < zn.Count(); j++)
+                            {
+                                string fqs = fq[j]["disease_type"].ToString();
+                                if (fqs.IndexOf(',') > 0)
+                                {
+                                    string[] y = fqs.Split(',');
+                                    for (int i = 0; i < y.Length; i++)
+                                    {
+                                        dics.Add("家族史子女" + (i + 1), y[i]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    dics.Add("遗传病史名", data["heredity_name"].ToString());
+                    dics.Add("遗传病史", data["profession"].ToString());
+                    string cjqk = data["is_deformity"].ToString();
+                    if (cjqk.IndexOf(',') > 0)
+                    {
+                        string[] y = cjqk.Split(',');
+                        for (int i = 0; i < y.Length; i++)
+                        {
+                            dics.Add("残疾情况" + (i + 1), y[i]);
+                        }
+                    }
+                    else
+                    {
+                        dics.Add("残疾情况1", cjqk);
+                    }
+                    dics.Add("厨房排风设施", data["kitchen"].ToString());
+                    dics.Add("燃料类型", data["fuel"].ToString());
+                    dics.Add("饮水", data["drink"].ToString());
+                    dics.Add("厕所", data["toilet"].ToString());
+                    dics.Add("禽畜栏", data["poultry"].ToString());
                     //书签替换
                     foreach (var key in dics.Keys)
                     {
