@@ -102,6 +102,7 @@
             this.label6.Size = new System.Drawing.Size(114, 20);
             this.label6.TabIndex = 17;
             this.label6.Text = "下载花名册";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label5
             // 
@@ -118,33 +119,35 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(463, 53);
+            this.radioButton3.Checked = true;
+            this.radioButton3.Location = new System.Drawing.Point(286, 53);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(47, 16);
             this.radioButton3.TabIndex = 15;
             this.radioButton3.TabStop = true;
+            this.radioButton3.Tag = "3";
             this.radioButton3.Text = "全部";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(375, 53);
+            this.radioButton2.Location = new System.Drawing.Point(437, 53);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(59, 16);
             this.radioButton2.TabIndex = 14;
-            this.radioButton2.TabStop = true;
+            this.radioButton2.Tag = "2";
             this.radioButton2.Text = "已检验";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(282, 53);
+            this.radioButton1.Location = new System.Drawing.Point(354, 53);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(59, 16);
             this.radioButton1.TabIndex = 13;
-            this.radioButton1.TabStop = true;
+            this.radioButton1.Tag = "1";
             this.radioButton1.Text = "未检验";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
@@ -171,6 +174,7 @@
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(114, 20);
             this.comboBox5.TabIndex = 10;
+            this.comboBox5.SelectionChangeCommitted += new System.EventHandler(this.comboBox5_SelectionChangeCommitted);
             // 
             // comboBox4
             // 
@@ -179,6 +183,7 @@
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(108, 20);
             this.comboBox4.TabIndex = 9;
+            this.comboBox4.SelectionChangeCommitted += new System.EventHandler(this.comboBox4_SelectionChangeCommitted);
             // 
             // comboBox3
             // 
@@ -187,6 +192,7 @@
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(109, 20);
             this.comboBox3.TabIndex = 8;
+            this.comboBox3.SelectionChangeCommitted += new System.EventHandler(this.comboBox3_SelectionChangeCommitted);
             // 
             // comboBox2
             // 
@@ -195,6 +201,7 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(94, 20);
             this.comboBox2.TabIndex = 7;
+            this.comboBox2.SelectionChangeCommitted += new System.EventHandler(this.comboBox2_SelectionChangeCommitted);
             // 
             // comboBox1
             // 
@@ -203,6 +210,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(106, 20);
             this.comboBox1.TabIndex = 6;
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
             // 
             // label3
             // 
@@ -265,10 +273,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(1, 159);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(1099, 455);
             this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
             // groupBox2
             // 
@@ -294,7 +305,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label15.ForeColor = System.Drawing.Color.SkyBlue;
-            this.label15.Location = new System.Drawing.Point(804, 21);
+            this.label15.Location = new System.Drawing.Point(819, 21);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(31, 20);
             this.label15.TabIndex = 8;
@@ -305,7 +316,7 @@
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label14.ForeColor = System.Drawing.Color.SkyBlue;
-            this.label14.Location = new System.Drawing.Point(696, 21);
+            this.label14.Location = new System.Drawing.Point(711, 21);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(93, 20);
             this.label14.TabIndex = 7;
@@ -316,7 +327,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label13.ForeColor = System.Drawing.Color.SkyBlue;
-            this.label13.Location = new System.Drawing.Point(610, 21);
+            this.label13.Location = new System.Drawing.Point(625, 21);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(42, 20);
             this.label13.TabIndex = 6;
@@ -327,7 +338,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label12.ForeColor = System.Drawing.Color.SkyBlue;
-            this.label12.Location = new System.Drawing.Point(477, 21);
+            this.label12.Location = new System.Drawing.Point(505, 21);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(114, 20);
             this.label12.TabIndex = 5;
@@ -338,7 +349,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label11.ForeColor = System.Drawing.Color.SkyBlue;
-            this.label11.Location = new System.Drawing.Point(402, 21);
+            this.label11.Location = new System.Drawing.Point(423, 21);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(42, 20);
             this.label11.TabIndex = 4;
@@ -351,9 +362,9 @@
             this.label10.ForeColor = System.Drawing.Color.SkyBlue;
             this.label10.Location = new System.Drawing.Point(303, 21);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(93, 20);
+            this.label10.Size = new System.Drawing.Size(114, 20);
             this.label10.TabIndex = 3;
-            this.label10.Text = "登记人数";
+            this.label10.Text = "已登记人数";
             // 
             // label9
             // 

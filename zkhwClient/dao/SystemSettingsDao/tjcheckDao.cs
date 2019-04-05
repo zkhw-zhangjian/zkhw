@@ -24,8 +24,22 @@ namespace zkhwClient.dao
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
-
-
+        //查询B超检查信息根据档案号和条码号
+        public DataTable selectBichaoInfo(string aichive_no, string barcode)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select FubuBC,FubuResult,FubuDesc,QitaBC,QitaResult,QitaDesc from zkhw_tj_bc a where aichive_no = '" + aichive_no + "' and bar_code='"+ barcode + "'";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+        //修改B超检查信息根据档案号和条码号
+        public bool updateBichaoInfo(string aichive_no, string barcode, string FubuBC, string FubuResult, string FubuDesc, string QitaBC, string QitaResult, string QitaDesc)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_bc set FubuBC='" + FubuBC + "',FubuResult='" + FubuResult + "',FubuDesc='" + FubuDesc + "',QitaBC='" + QitaBC + "',QitaResult='" + QitaResult + "',QitaDesc='" + QitaDesc + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
         //更新设备的状态
         public bool updateShDevice()
         {

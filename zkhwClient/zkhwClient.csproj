@@ -462,6 +462,12 @@
     <Compile Include="view\public\traumatism_record.Designer.cs">
       <DependentUpon>traumatism_record.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\updateTjResult\updateBichao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateBichao.Designer.cs">
+      <DependentUpon>updateBichao.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\UseHelpView\biochemical.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -627,6 +633,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\SystemSettingsView\userManage.resx">
       <DependentUpon>userManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\updateBichao.resx">
+      <DependentUpon>updateBichao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\UseHelpView\biochemical.resx">
       <DependentUpon>biochemical.cs</DependentUpon>
