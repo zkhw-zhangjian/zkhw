@@ -152,7 +152,7 @@ namespace zkhwClient
             DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                proHttp.Close();
+                proHttp.Kill() ;
                 service.loginLogService llse = new service.loginLogService();
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = frmLogin.name;
@@ -162,7 +162,12 @@ namespace zkhwClient
                 {
                     llse.addCheckLog(lb);
                 }
-                System.Environment.Exit(0);
+                Process p = Process.GetCurrentProcess();
+                if (p != null)
+                {
+                    p.Kill();
+                }
+                Environment.Exit(0);
             }
         }
         //挂机
@@ -170,7 +175,6 @@ namespace zkhwClient
         public static extern bool LockWorkStation();//这个是调用windows的系统锁定 
         private void 挂机ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             LockWorkStation();
         }
 
@@ -317,6 +321,7 @@ namespace zkhwClient
                 this.panel1.Controls.Clear();
                 this.panel1.Controls.Add(pR);
                 pR.Show();
+                pR.queryExaminatProgress();
             }
             else if (tag == "体检报告")
             {

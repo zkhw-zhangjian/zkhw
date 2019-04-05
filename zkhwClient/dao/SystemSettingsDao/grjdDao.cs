@@ -10,7 +10,15 @@ namespace zkhwClient.dao
         public DataTable judgeRepeat(string cardcode)
         {
             DataSet ds = new DataSet();
-            string sql = "select name,sex,birthday,id_number,card_pic,5 from resident_base_info a where a.id_number = '" + cardcode + "'";
+            string sql = "select name,sex,birthday,id_number,card_pic,archive_no from resident_base_info a where a.id_number = '" + cardcode + "'";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+        //根据姓名和出生年月判断是否已存在居民档案信息
+        public DataTable judgeRepeatBync(string name,string birthday)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select name,sex,birthday,id_number,card_pic,address,nation,archive_no from resident_base_info a where a.name = '" + name + "' and a.birthday = '" + birthday + "'";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -38,12 +46,13 @@ namespace zkhwClient.dao
         }
 
         //保存体检统计信息
-        public bool addBgdcInfo(bean.grjdxxBean grjbxx,string barcode,string archive_no)
+        public bool addBgdcInfo(bean.grjdxxBean grjbxx,string barcode,string archive_no,string xcuncode)
         {
             int rt = 0;
             string id = Result.GetNewId();
             string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            String sql = "insert into zkhw_tj_bgdc (ID,aichive_no,id_number,bar_code,name,sex,birthday,healthchecktime,createtime) value('" + id + "','" + archive_no + "','" + grjbxx.Cardcode + "', '" + barcode + "', '" + grjbxx.name + "', '" + grjbxx.Sex + "', '" + grjbxx.Birthday + "', '" + time + "', '" + time + "')";
+            string time1 = DateTime.Now.ToString("yyyy-MM-dd");
+            String sql = "insert into zkhw_tj_bgdc (ID,aichive_no,id_number,bar_code,name,sex,birthday,healthchecktime,createtime,area_duns) value('" + id + "','" + archive_no + "','" + grjbxx.Cardcode + "', '" + barcode + "', '" + grjbxx.name + "', '" + grjbxx.Sex + "', '" + grjbxx.Birthday + "', '" + time1 + "', '" + time + "', '" + xcuncode + "')";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
