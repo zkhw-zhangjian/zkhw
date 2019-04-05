@@ -74,9 +74,9 @@ namespace zkhwClient.PublicHealth
             pCa = this.textBox1.Text;
             if (pCa != "")
             {
-                this.label2.Text = "";
+                this.label5.Text = "";
             }
-            else { this.label2.Text = "---姓名/身份证号/档案号---"; }
+            else { this.label5.Text = "---姓名/身份证号/档案号---"; }
             time1 = this.dateTimePicker1.Text.ToString();//开始时间
             time2 = this.dateTimePicker2.Text.ToString();//结束时间
             queryOlderHelthService();

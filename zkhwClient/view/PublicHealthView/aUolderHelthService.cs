@@ -62,7 +62,7 @@ namespace zkhwClient.view.PublicHealthView
             this.textBox19.Text += System.Environment.NewLine;
             this.textBox19.Text += System.Environment.NewLine;
             this.textBox19.Text += "3";
-
+///////////////////////////////////////////////
             this.textBox22.Text += System.Environment.NewLine;
             this.textBox22.Text += "独立完成";
             this.textBox22.Text += System.Environment.NewLine;
@@ -99,7 +99,14 @@ namespace zkhwClient.view.PublicHealthView
             this.textBox25.Text += System.Environment.NewLine;
             this.textBox25.Text += System.Environment.NewLine;
             this.textBox25.Text += "7";
-
+            ////////////////////////////////////////////////////////////////
+            this.textBox28.Text += System.Environment.NewLine;
+            this.textBox28.Text += "独立完成";
+            this.textBox28.Text += System.Environment.NewLine;
+            this.textBox28.Text += System.Environment.NewLine;
+            this.textBox28.Text += System.Environment.NewLine;
+            this.textBox28.Text += System.Environment.NewLine;
+            this.textBox28.Text += "0";
 
 
         }
