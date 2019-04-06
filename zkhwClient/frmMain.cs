@@ -54,8 +54,9 @@ namespace zkhwClient
             //    MessageBox.Show(watchPath + "\nB超监听开启失败，系统不能正常运行！\n请创建该文件后重新运行应用程序！", "提示");
             //    return;
             //}
-            
 
+            basicInfoSettings basicSet = new basicInfoSettings();
+            basicSet.Show();
             //http
             proHttp.StartInfo.FileName = Application.StartupPath+"\\http\\httpCeshi.exe";
             proHttp.StartInfo.UseShellExecute = false;
@@ -131,8 +132,6 @@ namespace zkhwClient
                     };
                 }//屏蔽其它功能菜单下拉选
             }
-            basicInfoSettings basicSet = new basicInfoSettings();
-            basicSet.Show();
         }
 
         private void 用户管理ToolStripMenuItem_Click(object sender, EventArgs e)

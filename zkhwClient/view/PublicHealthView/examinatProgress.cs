@@ -318,10 +318,10 @@ namespace zkhwClient.view.PublicHealthView
             DataTable dt19num = grjddao.jkAllNum(basicInfoSettings.xcuncode, basicInfoSettings.createtime);
             if (dt19num != null && dt19num.Rows.Count > 0)
             {
-                DataRow[] rownan = dt19num.Select("sex='男'");
-                DataRow[] rownv = dt19num.Select("sex='女'");
-                label16.Text = rownan.Length.ToString();
-                label17.Text = rownan.Length.ToString();
+                //DataRow[] rownan = dt19num.Select("sex='男'");
+                //DataRow[] rownv = dt19num.Select("sex='女'");
+                //label16.Text = rownan.Length.ToString();
+                //label17.Text = rownan.Length.ToString();
                 label11.Text = dt19num.Rows[0][0].ToString();//登记人数
             }
 
@@ -449,7 +449,7 @@ namespace zkhwClient.view.PublicHealthView
                 {   //获得文件路径
                     localFilePath = fileDialog.FileName.ToString();
                     CreateTable(dts.Copy(), localFilePath);
-                    MessageBox.Show("PDF文件生成成功!");
+                    //MessageBox.Show("PDF文件生成成功!");
                 }
             }
             else
@@ -510,7 +510,7 @@ namespace zkhwClient.view.PublicHealthView
                 table1.WidthPercentage = 100;//table占宽度百分比 100%
                 table1.SetWidths(new int[] { 100 });
                 table1.AddCell(new Phrase("应到人数：" + label9.Text, fontID));
-                table1.AddCell(new Phrase("登记人数：" + label11.Text+"    其中男性："+ label16.Text+"    女性："+ label17.Text, fontID));
+                table1.AddCell(new Phrase("登记人数：" + label11.Text, fontID));//+"    其中男性："+ label16.Text+"    女性："+ label17.Text
                 table1.AddCell(new Phrase("未到人数：" + label15.Text, fontID));
                 table1.AddCell(new Phrase("建档单位：" + basicInfoSettings.organ_name, fontID));
                 table1.AddCell(new Phrase("", fontID));

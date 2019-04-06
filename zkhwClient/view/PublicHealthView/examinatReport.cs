@@ -833,7 +833,7 @@ where info.archive_no in('{string.Join(",", ide)}')";
                         {
                             for (int j = 0; j < mq.Count(); j++)
                             {
-                                string fqs = fq[j]["disease_type"].ToString();
+                                string fqs = mq[j]["disease_type"].ToString();
                                 if (fqs.IndexOf(',') > 0)
                                 {
                                     string[] y = fqs.Split(',');
@@ -850,7 +850,7 @@ where info.archive_no in('{string.Join(",", ide)}')";
 
                             for (int j = 0; j < jm.Count(); j++)
                             {
-                                string fqs = fq[j]["disease_type"].ToString();
+                                string fqs = jm[j]["disease_type"].ToString();
                                 if (fqs.IndexOf(',') > 0)
                                 {
                                     string[] y = fqs.Split(',');
@@ -866,7 +866,7 @@ where info.archive_no in('{string.Join(",", ide)}')";
                         {
                             for (int j = 0; j < zn.Count(); j++)
                             {
-                                string fqs = fq[j]["disease_type"].ToString();
+                                string fqs = zn[j]["disease_type"].ToString();
                                 if (fqs.IndexOf(',') > 0)
                                 {
                                     string[] y = fqs.Split(',');
@@ -879,7 +879,7 @@ where info.archive_no in('{string.Join(",", ide)}')";
                         }
                     }
                     dics.Add("遗传病史名", data["heredity_name"].ToString());
-                    dics.Add("遗传病史", data["profession"].ToString());
+                    dics.Add("遗传病史", data["is_heredity"].ToString());
                     string cjqk = data["is_deformity"].ToString();
                     if (cjqk.IndexOf(',') > 0)
                     {
@@ -1083,6 +1083,10 @@ where info.archive_no in('{string.Join(",", ide)}')";
                 }
                 return rule;
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
         }
     }
 
