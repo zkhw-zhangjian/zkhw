@@ -341,11 +341,23 @@ namespace zkhwClient.view.PublicHealthView
                 ubichao.bar_code = str4;
                 ubichao.Show();
             } else if (columnIndex == 6) {
-
+                updateXindiantu uxindt = new updateXindiantu();
+                uxindt.time = str0;
+                uxindt.name = str1;
+                uxindt.aichive_no = str2;
+                uxindt.id_number = str3;
+                uxindt.bar_code = str4;
+                uxindt.Show();
             }
             else if (columnIndex == 7)
             {
-
+                updateShenghua uxindt = new updateShenghua();
+                uxindt.time = str0;
+                uxindt.name = str1;
+                uxindt.aichive_no = str2;
+                uxindt.id_number = str3;
+                uxindt.bar_code = str4;
+                uxindt.Show();
             }
             else if (columnIndex == 8)
             {

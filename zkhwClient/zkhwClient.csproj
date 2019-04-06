@@ -463,6 +463,18 @@
     <Compile Include="view\public\traumatism_record.Designer.cs">
       <DependentUpon>traumatism_record.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\updateTjResult\updateShenghua.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateShenghua.Designer.cs">
+      <DependentUpon>updateShenghua.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateXindiantu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateXindiantu.Designer.cs">
+      <DependentUpon>updateXindiantu.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\updateTjResult\updateBichao.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -637,6 +649,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\SystemSettingsView\userManage.resx">
       <DependentUpon>userManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\updateShenghua.resx">
+      <DependentUpon>updateShenghua.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\updateXindiantu.resx">
+      <DependentUpon>updateXindiantu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\updateTjResult\updateBichao.resx">
       <DependentUpon>updateBichao.cs</DependentUpon>
