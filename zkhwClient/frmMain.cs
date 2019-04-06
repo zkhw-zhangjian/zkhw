@@ -40,20 +40,20 @@ namespace zkhwClient
             //监听有没有B超的文件生成
 
             //验证监听文件是否存在
-            string watchPath = string.Empty;
+            //string watchPath = string.Empty;
            
-            //是否启动监听AOUP
-            if (System.IO.File.Exists(watchPath))
-            {
-                //开启监控
-                FileWatcher.WatcheDirForAoup();
+            ////是否启动监听AOUP
+            //if (System.IO.File.Exists(watchPath))
+            //{
+            //    //开启监控
+            //    FileWatcher.WatcheDirForAoup();
            
-            }
-            else
-            {
-                //MessageBox.Show(watchPath + "\nB超监听开启失败，系统不能正常运行！\n请创建该文件后重新运行应用程序！", "提示");
-                return;
-            }
+            //}
+            //else
+            //{
+            //    MessageBox.Show(watchPath + "\nB超监听开启失败，系统不能正常运行！\n请创建该文件后重新运行应用程序！", "提示");
+            //    return;
+            //}
 
              
             //http
@@ -152,7 +152,7 @@ namespace zkhwClient
             DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                proHttp.Close();
+                proHttp.Kill() ;
                 service.loginLogService llse = new service.loginLogService();
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = frmLogin.name;
@@ -162,7 +162,12 @@ namespace zkhwClient
                 {
                     llse.addCheckLog(lb);
                 }
-                System.Environment.Exit(0);
+                Process p = Process.GetCurrentProcess();
+                if (p != null)
+                {
+                    p.Kill();
+                }
+                Environment.Exit(0);
             }
         }
         //挂机
@@ -170,7 +175,6 @@ namespace zkhwClient
         public static extern bool LockWorkStation();//这个是调用windows的系统锁定 
         private void 挂机ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             LockWorkStation();
         }
 
@@ -317,6 +321,7 @@ namespace zkhwClient
                 this.panel1.Controls.Clear();
                 this.panel1.Controls.Add(pR);
                 pR.Show();
+                pR.queryExaminatProgress();
             }
             else if (tag == "体检报告")
             {

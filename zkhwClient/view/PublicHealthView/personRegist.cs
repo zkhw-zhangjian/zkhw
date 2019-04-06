@@ -30,14 +30,9 @@ namespace zkhwClient.view.PublicHealthView
         XmlDocument xmlDoc = new XmlDocument();
         XmlNode node;
         string path = @"config.xml";
-        string shenghuapath = "";
-        string xuechangguipath = "";
         string xindiantupath = "";
         string bichaopath = "";
         string carcode = null;
-        private OleDbDataAdapter oda = null;
-        private DataSet myds_data = null;
-
         DataTable dtshenfen = new DataTable();
         grjdDao grjddao = new grjdDao();
         jkInfoDao jkinfodao = new jkInfoDao();
@@ -214,33 +209,55 @@ namespace zkhwClient.view.PublicHealthView
                 //把身份证图片名称zp.bpm 修改为对应的名称
                 string pName = Application.StartupPath + "\\zp.bmp";
                 FileInfo inf = new FileInfo(pName);
-                if (textBox3.Text != null && !"".Equals(textBox3.Text) && textBox3.Text.Length == 18)
+                if (textBox1.Text != null && !"".Equals(textBox1.Text)&& textBox8.Text != null && !"".Equals(textBox8.Text))
                 {
-                    if (File.Exists(Application.StartupPath + "\\cardImg\\" + textBox3.Text + ".jpg"))
-                    {
-                        File.Delete(Application.StartupPath + "\\cardImg\\" + textBox3.Text + ".jpg");
+                    if (textBox3.Text != null && !"".Equals(textBox3.Text)) {
+                        if (File.Exists(Application.StartupPath + "\\cardImg\\" + textBox3.Text + ".jpg"))
+                        {
+                            File.Delete(Application.StartupPath + "\\cardImg\\" + textBox3.Text + ".jpg");
+                        }
+                        inf.MoveTo(Application.StartupPath + "\\cardImg\\" + textBox3.Text + ".jpg");
+
+                        pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + textBox3.Text + ".jpg";
+
+                        DataTable dt = grjddao.judgeRepeat(textBox3.Text);
+                        if (dt.Rows.Count > 0)
+                        {
+                            textBox1.Text = dt.Rows[0][0].ToString();
+                            textBox9.Text = dt.Rows[0][1].ToString();
+                            textBox8.Text = dt.Rows[0][2].ToString();
+                            textBox3.Text = dt.Rows[0][3].ToString();
+                            pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
+                            textBox5.Text = dt.Rows[0][5].ToString();
+                        };
+                        this.label41.Text = "读卡成功！";
                     }
-                    inf.MoveTo(Application.StartupPath + "\\cardImg\\" + textBox3.Text + ".jpg");
-                    
-                    pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + textBox3.Text + ".jpg";
+                    else {
+                        if (File.Exists(Application.StartupPath + "\\cardImg\\" + textBox1.Text + textBox8.Text + ".jpg"))
+                        {
+                            File.Delete(Application.StartupPath + "\\cardImg\\" + textBox1.Text + textBox8.Text + ".jpg");
+                        }
+                        inf.MoveTo(Application.StartupPath + "\\cardImg\\" + textBox1.Text + textBox8.Text + ".jpg");
+
+                        pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + textBox1.Text + textBox8.Text + ".jpg";
+
+                        DataTable dt = grjddao.judgeRepeatBync(textBox1.Text, textBox8.Text);
+                        if (dt.Rows.Count > 0)
+                        {
+                            textBox1.Text = dt.Rows[0][0].ToString();
+                            textBox9.Text = dt.Rows[0][1].ToString();
+                            textBox8.Text = dt.Rows[0][2].ToString();
+                            textBox3.Text = dt.Rows[0][3].ToString();
+                            pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
+                            richTextBox1.Text = dt.Rows[0][5].ToString();
+                            textBox2.Text = dt.Rows[0][6].ToString();
+                            textBox5.Text = dt.Rows[0][7].ToString();
+                        };
+                    }
                     if (File.Exists(pName))
                     {
                         File.Delete(pName);
                     }
-                    DataTable dt = grjddao.judgeRepeat(textBox3.Text);
-                    if (dt.Rows.Count > 0)
-                    {
-                        textBox1.Text = dt.Rows[0][0].ToString();
-                        textBox9.Text = dt.Rows[0][1].ToString();
-                        textBox8.Text = dt.Rows[0][2].ToString();
-                        textBox3.Text = dt.Rows[0][3].ToString();
-                        //richTextBox1.Text = dt.Rows[0][4].ToString();
-                        //textBox2.Text = dt.Rows[0][5].ToString();
-                        //textBox4.Text = dt.Rows[0][6].ToString();
-                        pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
-                        textBox5.Text = dt.Rows[0][5].ToString();
-                    };
-                    this.label41.Text = "读卡成功！";
                 }
                 else
                 {
@@ -251,7 +268,6 @@ namespace zkhwClient.view.PublicHealthView
                     }
                     pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\123.jpg";
                 }
-
             }
             catch (Exception ex)
             {
@@ -274,21 +290,40 @@ namespace zkhwClient.view.PublicHealthView
                     PngBitmapEncoder pE = new PngBitmapEncoder();
                     pE.Frames.Add(BitmapFrame.Create(bitmapSource));
 
-                    if (textBox3.Text != null && !"".Equals(textBox3.Text))
+                    if (textBox1.Text != null && !"".Equals(textBox1.Text) && textBox8.Text != null && !"".Equals(textBox8.Text))
                     {
-                        if (File.Exists(Application.StartupPath + "\\photoImg\\" + textBox3.Text + ".jpg"))
+                        if (textBox3.Text != null && !"".Equals(textBox3.Text))
                         {
-                            File.Delete(Application.StartupPath + "\\photoImg\\" + textBox3.Text + ".jpg");
+                            if (File.Exists(Application.StartupPath + "\\photoImg\\" + textBox3.Text + ".jpg"))
+                            {
+                                File.Delete(Application.StartupPath + "\\photoImg\\" + textBox3.Text + ".jpg");
+                            }
+                            string picName = Application.StartupPath + "\\photoImg" + "\\" + textBox3.Text + ".jpg";
+                            if (File.Exists(picName))
+                            {
+                                File.Delete(picName);
+                            }
+                            using (Stream stream = File.Create(picName))
+                            {
+                                pE.Save(stream);
+                                this.pictureBox2.ImageLocation = picName;
+                            }
                         }
-                        string picName = Application.StartupPath + "\\photoImg" + "\\" + textBox3.Text + ".jpg";
-                        if (File.Exists(picName))
-                        {
-                            File.Delete(picName);
-                        }
-                        using (Stream stream = File.Create(picName))
-                        {
-                            pE.Save(stream);
-                            this.pictureBox2.ImageLocation = picName;
+                        else {
+                            if (File.Exists(Application.StartupPath + "\\photoImg\\" + textBox1.Text + textBox8.Text + ".jpg"))
+                            {
+                                File.Delete(Application.StartupPath + "\\photoImg\\" + textBox1.Text + textBox8.Text + ".jpg");
+                            }
+                            string picName = Application.StartupPath + "\\photoImg" + "\\" + textBox1.Text + textBox8.Text + ".jpg";
+                            if (File.Exists(picName))
+                            {
+                                File.Delete(picName);
+                            }
+                            using (Stream stream = File.Create(picName))
+                            {
+                                pE.Save(stream);
+                                this.pictureBox2.ImageLocation = picName;
+                            }
                         }
                     }
                     else
@@ -329,7 +364,7 @@ namespace zkhwClient.view.PublicHealthView
             string name = textBox1.Text;
             string people = textBox2.Text;
 
-            if (number != null && !"".Equals(number) && name != null && !"".Equals(name) && birthday != null && !"".Equals(birthday))
+            if (name != null && !"".Equals(name) && birthday != null && !"".Equals(birthday))
             {
                 grjdxx = new grjdxxBean();
                 grjdxx.name = name;
@@ -354,8 +389,6 @@ namespace zkhwClient.view.PublicHealthView
                 return;
             }
 
-            //Random rand = new Random();
-            //int randnum = rand.Next(10000, 99999);
             xmlDoc.Load(path);
             node = xmlDoc.SelectSingleNode("config/chejiahao");
             carcode = node.InnerText;
@@ -366,14 +399,8 @@ namespace zkhwClient.view.PublicHealthView
 
             string nameCode = textBox1.Text + " " + Regex.Replace(textBox3.Text, "(\\d{4})\\d{4}(\\d{4})", "$1****$2");
 
-            if (textBox1.Text == "" || textBox3.Text == "")
-            {
-                OnPrintSampleBarcode(carcode + barnumCode, Int32.Parse(this.numericUpDown1.Value.ToString()), "测试 2202****1410186221");
-            }
-            else
-            {
-                OnPrintSampleBarcode(carcode + barnumCode, Int32.Parse(this.numericUpDown1.Value.ToString()), nameCode);
-            }
+            OnPrintSampleBarcode(carcode + barnumCode, Int32.Parse(this.numericUpDown1.Value.ToString()), nameCode);
+         
             node = xmlDoc.SelectSingleNode("config/barnumCode");
             node.InnerText = (Int32.Parse(barnumCode)+1).ToString();
             xmlDoc.Save(path);
@@ -382,12 +409,25 @@ namespace zkhwClient.view.PublicHealthView
         public void OnPrintSampleBarcode(string barcode, int pageCount, string nameCode)
         {
             bool addjkbool = false;
+            DataTable dt = null;
             if (grjdxx != null)
             {
-                DataTable dt = grjddao.judgeRepeat(textBox3.Text);
-                if (dt.Rows.Count < 1)
+                string cardcode= textBox3.Text;
+                if (cardcode != null && !"".Equals(cardcode)) {
+                    dt = grjddao.judgeRepeat(textBox3.Text);
+                }
+                else {
+                    dt = grjddao.judgeRepeatBync(textBox1.Text, textBox8.Text);
+                }
+                if (dt!=null&&dt.Rows.Count < 1)
                 {
-                    grjdxx.archive_no = basicInfoSettings.xcuncode + "0"+grjdxx.Cardcode.Substring(14);
+                    if (grjdxx.Cardcode != null && !"".Equals(grjdxx.Cardcode))
+                    {
+                        grjdxx.archive_no = basicInfoSettings.xcuncode + "0" + grjdxx.Cardcode.Substring(14);
+                    }
+                    else {
+                        grjdxx.archive_no = basicInfoSettings.xcuncode + barcode.Substring(5,4);
+                    }
                     bool istrue = grjddao.addgrjdInfo(grjdxx);
                 }
                 jkBean jk = new jkBean();
@@ -415,7 +455,7 @@ namespace zkhwClient.view.PublicHealthView
                 textBox6.Text = barcode;
                 if (addjkbool)
                 {   //体检信息统计表
-                    grjddao.addBgdcInfo(grjdxx, barcode, archive_no);
+                    grjddao.addBgdcInfo(grjdxx, barcode, archive_no, basicInfoSettings.xcuncode);
                 }
                 }
                 try
@@ -485,6 +525,7 @@ namespace zkhwClient.view.PublicHealthView
         {
             MessageBox.Show("是否需要补打条形码？");
         }
+
 
         //体检人数统计
         public void registrationRecordCheck()
