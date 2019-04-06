@@ -680,7 +680,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="up\template\个人信息.doc" />
-    <None Include="up\template\公卫表单模板.docx" />
     <None Include="up\template\封面.doc" />
   </ItemGroup>
   <ItemGroup>
