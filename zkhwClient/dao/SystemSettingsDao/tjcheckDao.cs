@@ -72,12 +72,94 @@ namespace zkhwClient.dao
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }
+        //查询血常规检查信息根据档案号和条码号
+        public DataTable selectXuechangguiInfo(string aichive_no, string barcode)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select WBC,RBC,PCT,PLT,HGB,HCT,MCV,MCH,MCHC,RDWCV,RDWSD,MONO,MONOP,GRAN,GRANP,NEUT,NEUTP,EO,EOP,BASO,BASOP,LYM,LYMP,MPV,PDW,MXD,MXDP,PLCR,OTHERS from zkhw_tj_xcg a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+        //修改血常规检查信息根据档案号和条码号
+        public bool updateXuechangguiInfo(string aichive_no, string barcode, string WBC, string RBC, string PCT, string PLT, string HGB, string HCT, string MCV, string MCH, string MCHC, string RDWCV, string RDWSD, string MONO, string MONOP, string GRAN, string GRANP, string NEUT, string NEUTP, string EO, string EOP, string BASO, string BASOP, string LYM, string LYMP, string MPV, string PDW, string MXD, string MXDP, string PLCR, string OTHERS)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_xcg set WBC='" + WBC + "',RBC='" + RBC + "',PCT='" + PCT + "',PLT='" + PLT + "',HGB='" + HGB + "',HCT='" + HCT + "',MCV='" + MCV + "',MCH='" + MCH + "',MCHC='" + MCHC + "',RDWCV='" + RDWCV + "',RDWSD='" + RDWSD + "',MONO='" + MONO + "',MONOP='" + MONOP + "',GRAN='" + GRAN + "',GRANP='" + GRANP + "',NEUT='" + NEUT + "',NEUTP='" + NEUTP + "',EO='" + EO + "',EOP='" + EOP + "',BASO='" + BASO + "',BASOP='" + BASOP + "',LYM='" + LYM + "',LYMP='" + LYMP + "',MPV='" + MPV + "',PDW='" + PDW + "',MXD='" + MXD + "',MXDP='" + MXDP + "',PLCR='" + PLCR + "',OTHERS='" + OTHERS + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
+        //查询尿常规检查信息根据档案号和条码号
+        public DataTable selectNiaochangguiInfo(string aichive_no, string barcode)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select WBC,LEU,NIT,URO,PRO,PH,BLD,SG,KET,BIL,GLU,Vc,MA,ACR,Ca,CR from zkhw_tj_ncg a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+        //修改尿常规检查信息根据档案号和条码号
+        public bool updateNiaochangguiInfo(string aichive_no, string barcode, string WBC, string LEU, string NIT, string URO, string PRO, string PH, string BLD, string SG, string KET, string BIL, string GLU, string Vc, string MA, string ACR, string Ca, string CR)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_ncg set WBC='" + WBC + "',LEU='" + LEU + "',NIT='" + NIT + "',URO='" + URO + "',PRO='" + PRO + "',PH='" + PH + "',BLD='" + BLD + "',SG='" + SG + "',KET='" + KET + "',BIL='" + BIL + "',GLU='" + GLU + "',Vc='" + Vc + "',MA='" + MA + "',ACR='" + ACR + "',Ca='" + Ca + "',CR='" + CR + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
+        //查询血压检查信息根据档案号和条码号
+        public DataTable selectXueyaInfo(string aichive_no, string barcode)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select DBP,SBP,Pulse from zkhw_tj_xy a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+        //修改血压检查信息根据档案号和条码号
+        public bool updateXueyaInfo(string aichive_no, string barcode, string DBP, string SBP, string Pulse)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_xy set DBP='" + DBP + "',SBP='" + SBP + "',Pulse='" + Pulse + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
+        //查询身高体重检查信息根据档案号和条码号
+        public DataTable selectSgtzInfo(string aichive_no, string barcode)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select Height,Weight,BMI from zkhw_tj_sgtz a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+        //修改身高体重检查信息根据档案号和条码号
+        public bool updateSgtzInfo(string aichive_no, string barcode, string Height, string Weight, string BMI)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_sgtz set Height='" + Height + "',Weight='" + Weight + "',BMI='" + BMI + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
         //更新设备的状态
         public bool updateShDevice()
         {
             int ret = 0;
             int flag = 1;
             String sql = "update zkhw_state_device set shonline='" + flag + "',shstate='" + flag + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
+
+        //更新体检进度tj_bgdc--血常规
+        public bool updateTJbgdcXuechanggui(string aichive_no, string barcode, int flag)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_bgdc set XueChangGui='" + flag + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
+        
+        //更新体检进度tj_bgdc--生化
+        public bool updateTJbgdcShenghua(string aichive_no, string barcode,int flag)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_bgdc set ShengHua='" + flag + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }

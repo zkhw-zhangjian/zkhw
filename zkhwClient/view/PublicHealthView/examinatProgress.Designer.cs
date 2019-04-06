@@ -58,6 +58,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -115,6 +117,7 @@
             this.label5.Size = new System.Drawing.Size(114, 20);
             this.label5.TabIndex = 16;
             this.label5.Text = "导出花名册";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // radioButton3
             // 
@@ -285,6 +288,8 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.label17);
+            this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.label15);
             this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.label13);
@@ -398,6 +403,26 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "体检进度";
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 45);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(11, 12);
+            this.label16.TabIndex = 9;
+            this.label16.Text = "0";
+            this.label16.Visible = false;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(59, 45);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(11, 12);
+            this.label17.TabIndex = 10;
+            this.label17.Text = "0";
+            this.label17.Visible = false;
+            // 
             // examinatProgress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -451,5 +476,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
     }
 }

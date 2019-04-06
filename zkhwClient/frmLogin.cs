@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using zkhwClient.view.setting;
 
 namespace zkhwClient
 {
@@ -95,7 +96,7 @@ namespace zkhwClient
             //是否启动监听AOUP
 
             //开启监控
-            FileWatcher.WatcheDirForAoup();
+            //FileWatcher.WatcheDirForAoup();
 
 
 

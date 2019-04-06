@@ -1047,9 +1047,9 @@
             this.groupBox4.Controls.Add(this.checkBox1);
             this.groupBox4.Controls.Add(this.label5);
             this.groupBox4.Location = new System.Drawing.Point(137, 13);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox4.Size = new System.Drawing.Size(663, 90);
             this.groupBox4.TabIndex = 18;
             this.groupBox4.TabStop = false;
@@ -1170,7 +1170,6 @@
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(35, 16);
             this.radioButton3.TabIndex = 17;
-            this.radioButton3.TabStop = true;
             this.radioButton3.Text = "A4";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
@@ -1218,13 +1217,13 @@
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(59, 16);
             this.radioButton2.TabIndex = 2;
-            this.radioButton2.TabStop = true;
             this.radioButton2.Text = "特色版";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
             this.radioButton1.Location = new System.Drawing.Point(62, 29);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(59, 16);

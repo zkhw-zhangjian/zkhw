@@ -41,21 +41,21 @@ namespace zkhwClient
 
             //验证监听文件是否存在
             //string watchPath = string.Empty;
-           
+
             ////是否启动监听AOUP
             //if (System.IO.File.Exists(watchPath))
             //{
             //    //开启监控
             //    FileWatcher.WatcheDirForAoup();
-           
+
             //}
             //else
             //{
             //    MessageBox.Show(watchPath + "\nB超监听开启失败，系统不能正常运行！\n请创建该文件后重新运行应用程序！", "提示");
             //    return;
             //}
+            
 
-             
             //http
             proHttp.StartInfo.FileName = Application.StartupPath+"\\http\\httpCeshi.exe";
             proHttp.StartInfo.UseShellExecute = false;
@@ -131,7 +131,8 @@ namespace zkhwClient
                     };
                 }//屏蔽其它功能菜单下拉选
             }
-
+            basicInfoSettings basicSet = new basicInfoSettings();
+            basicSet.Show();
         }
 
         private void 用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -849,7 +850,10 @@ namespace zkhwClient
                             default: break;
                         }
                     }
-                    thdao.insertShenghuaInfo(sh);
+                    bool istrue= thdao.insertShenghuaInfo(sh);
+                    if (istrue) {
+                        thdao.updateTJbgdcShenghua(sh.aichive_no,sh.bar_code,1);
+                    }
                 }
             }
             if (xuechangguipath == "")
@@ -905,7 +909,11 @@ namespace zkhwClient
                             default: break;
                         }
                     }
-                    thdao.insertXuechangguiInfo(xcg);
+                    bool istrue = thdao.insertXuechangguiInfo(xcg);
+                    if (istrue)
+                    {
+                        thdao.updateTJbgdcXuechanggui(xcg.aichive_no, xcg.bar_code, 1);
+                    }
                 }
             }
         }

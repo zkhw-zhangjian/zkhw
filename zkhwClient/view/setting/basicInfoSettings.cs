@@ -27,6 +27,7 @@ namespace zkhwClient.view.setting
         public static string organ_name = null;
         public static string input_name = null;
         public static string createtime = null;
+        public static string allareaname = null;
         XmlDocument xmlDoc = new XmlDocument();
         XmlNode node;
         string path = @"config.xml";
@@ -44,6 +45,7 @@ namespace zkhwClient.view.setting
                 createtime = dtbasic.Rows[0]["create_time"].ToString();
                 xcuncode = dtbasic.Rows[0]["cun_code"].ToString();
                 xzcode = dtbasic.Rows[0]["xz_code"].ToString();
+                allareaname = dtbasic.Rows[0]["allFullName"].ToString();
                 if (xzcode != null && !"".Equals(xzcode))
                 {
                     xzName = bsdao.selectAreaBycode(xzcode).Rows[0][0].ToString();
@@ -104,6 +106,7 @@ namespace zkhwClient.view.setting
         {
             xzName = this.comboBox4.Text;
             xcName = this.comboBox5.Text;
+            allareaname = this.comboBox1.Text + this.comboBox2.Text + this.comboBox3.Text + xzName + xcName;
             string organ_code = null;
             organ_name = textBox1.Text;
             input_name = this.comboBox6.SelectedValue.ToString();
@@ -126,7 +129,7 @@ namespace zkhwClient.view.setting
 
             if (xcuncode != null && !"".Equals(xcuncode))
             {
-               bool bl= bsdao.addBasicSetting(shengcode, shicode, qxcode, xzcode, xcuncode, organ_code, organ_name, input_name, zeren_doctor, bc, xcg, sh, sgtz, ncg, xdt, xy, wx, other, captain, members, operation, car_name, create_user, create_name);
+               bool bl= bsdao.addBasicSetting(shengcode, shicode, qxcode, xzcode, xcuncode, organ_code, organ_name, input_name, zeren_doctor, bc, xcg, sh, sgtz, ncg, xdt, xy, wx, other, captain, members, operation, car_name, create_user, create_name,allareaname);
                 if (bl) {
                     createtime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                     //重置条码起始位置

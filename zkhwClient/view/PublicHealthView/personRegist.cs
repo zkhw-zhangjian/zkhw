@@ -535,7 +535,7 @@ namespace zkhwClient.view.PublicHealthView
                 label16.Text = dt16num.Rows[0][0].ToString();//计划体检人数
             }
 
-            DataTable dt19num = grjddao.jkAllNum(basicInfoSettings.xcuncode);
+            DataTable dt19num = grjddao.jkAllNum(basicInfoSettings.xcuncode, basicInfoSettings.createtime);
             if (dt19num != null && dt19num.Rows.Count > 0)
             {
                 label19.Text = dt19num.Rows[0][0].ToString();//登记人数
