@@ -61,6 +61,70 @@ namespace zkhwClient.dao
                         }
                     }
                 }
+                if (goodsList0.Rows.Count > 0)
+                {
+                    for (int i = 0; i < goodsList0.Rows.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            sql1 += "insert into operation_record(resident_base_info_id,operation_name,operation_time) values ('" + id + "','" + goodsList0.Rows[i]["operation_name"] + "','" + goodsList0.Rows[i]["operation_time"] + "')";
+
+                        }
+                        else
+                        {
+                            sql1 += ",('" + id + "','" + goodsList0.Rows[i]["operation_name"] + "','" + goodsList0.Rows[i]["operation_time"] + "')";
+
+                        }
+                    }
+                }
+                if (goodsList1.Rows.Count > 0)
+                {
+                    for (int i = 0; i < goodsList1.Rows.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            sql2 += "insert into traumatism_record(resident_base_info_id,traumatism_name,traumatism_time) values ('" + id + "','" + goodsList1.Rows[i]["traumatism_name"] + "','" + goodsList1.Rows[i]["traumatism_time"] + "')";
+
+                        }
+                        else
+                        {
+                            sql2 += ",('" + id + "','" + goodsList1.Rows[i]["traumatism_name"] + "','" + goodsList1.Rows[i]["traumatism_time"] + "')";
+
+                        }
+                    }
+                }
+                if (goodsList2.Rows.Count > 0)
+                {
+                    for (int i = 0; i < goodsList2.Rows.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            sql3 += "insert into metachysis_record(resident_base_info_id,metachysis_reasonn,metachysis_time) values ('" + id + "','" + goodsList2.Rows[i]["metachysis_reasonn"] + "','" + goodsList2.Rows[i]["metachysis_time"] + "')";
+
+                        }
+                        else
+                        {
+                            sql3 += ",('" + id + "','" + goodsList2.Rows[i]["metachysis_reasonn"] + "','" + goodsList2.Rows[i]["metachysis_time"] + "')";
+
+                        }
+                    }
+                }
+                if (goodsList3.Rows.Count > 0)
+                {
+                    for (int i = 0; i < goodsList3.Rows.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            sql4 += "insert into family_record(resident_base_info_id,relation,disease_name) values ('" + id + "','" + goodsList3.Rows[i]["relation"] + "','" + goodsList3.Rows[i]["disease_name"] + "')";
+
+                        }
+                        else
+                        {
+                            sql4 += ",('" + id + "','" + goodsList3.Rows[i]["relation"] + "','" + goodsList3.Rows[i]["disease_name"] + "')";
+
+                        }
+                    }
+                }
             }
             else
             {

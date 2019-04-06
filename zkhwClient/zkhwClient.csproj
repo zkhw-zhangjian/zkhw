@@ -160,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="bean\diabetes_follow_recordBean.cs" />
+    <Compile Include="bean\elderly_selfcare_estimateBean.cs" />
     <Compile Include="bean\fuv_hypertensionBean.cs" />
     <Compile Include="bean\grjdxxBean.cs" />
     <Compile Include="bean\jkBean.cs" />

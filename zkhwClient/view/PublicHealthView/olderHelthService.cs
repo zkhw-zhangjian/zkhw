@@ -46,6 +46,8 @@ namespace zkhwClient.PublicHealth
             }
 
             //展示
+            time1 = this.dateTimePicker1.Text.ToString();//开始时间
+            time2 = this.dateTimePicker2.Text.ToString();//结束时间
             this.dataGridView1.DataSource = null;
             DataTable dt = olderHelthS.queryOlderHelthService(pCa, time1, time2);
             this.dataGridView1.DataSource = dt;
@@ -77,8 +79,6 @@ namespace zkhwClient.PublicHealth
                 this.label5.Text = "";
             }
             else { this.label5.Text = "---姓名/身份证号/档案号---"; }
-            time1 = this.dateTimePicker1.Text.ToString();//开始时间
-            time2 = this.dateTimePicker2.Text.ToString();//结束时间
             queryOlderHelthService();
         }
 
@@ -126,5 +126,41 @@ namespace zkhwClient.PublicHealth
 
             }
         }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            aUolderHelthService hm = new aUolderHelthService();
+            string id = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            hm.id = id;
+            hm.label47.Text = "修改老年人生活自理能力评估表";
+            hm.Text = "修改老年人生活自理能力评估表";
+            DataTable dt = olderHelthS.queryOlderHelthService(id);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                hm.textBox1.Text = dt.Rows[0]["name"].ToString();
+                hm.textBox2.Text = dt.Rows[0]["aichive_no"].ToString();
+                if (dt.Rows[0]["sex"].ToString() == hm.radioButton1.Text) { hm.radioButton1.Checked = true; };
+                if (dt.Rows[0]["sex"].ToString() == hm.radioButton2.Text) { hm.radioButton2.Checked = true; };
+                hm.textBox12.Text = dt.Rows[0]["id_number"].ToString();
+                string[] ck2 = dt.Rows[0]["answer_result"].ToString().Split(',');
+                hm.numericUpDown1.Value = Decimal.Parse(ck2[0]);
+                hm.numericUpDown2.Value = Decimal.Parse(ck2[1]);
+                hm.numericUpDown3.Value = Decimal.Parse(ck2[2]);
+                hm.numericUpDown4.Value = Decimal.Parse(ck2[3]);
+                hm.numericUpDown5.Value = Decimal.Parse(ck2[4]);
+                hm.numericUpDown6.Value = Decimal.Parse(dt.Rows[0]["total_score"].ToString());
+            }
+
+
+            if (hm.ShowDialog() == DialogResult.OK)
+            {
+                    //刷新页面
+
+                 queryOlderHelthService();
+                MessageBox.Show("修改成功！");
+
+            }
+        }
+
     }
 }

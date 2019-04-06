@@ -21,5 +21,17 @@ namespace zkhwClient.service
         {
             return hPD.queryOlderHelthService0();
         }
+        public DataTable query(string id_number)
+        {
+            return hPD.query(id_number);
+        }
+        public bool aUelderly_selfcare_estimate(bean.elderly_selfcare_estimateBean hm, string id)
+        {
+            return hPD.aUelderly_selfcare_estimate(hm, id);
+        }
+        public DataTable queryOlderHelthService(string id)
+        {
+            return hPD.queryOlderHelthService(id);
+        }
     }
 }
