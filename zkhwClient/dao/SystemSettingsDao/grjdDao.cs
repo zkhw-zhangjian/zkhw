@@ -60,7 +60,8 @@ namespace zkhwClient.dao
         public DataTable registrationRecordInfo(string name)
         {
             DataSet ds = new DataSet();
-            string sql = "select a.name,a.sex,a.id_number,a.archive_no,k.bar_code from resident_base_info a left join zkhw_tj_jk k on a.id_number=k.id_number and a.id_number like '%" + name + "%' or a.name like '%" + name + "%' or a.archive_no like '%" + name + "%' ";//GROUP BY a.id_number";
+            //string sql = "select a.name,(case when a.sex='1' then '男' else '女' end) sex  ,a.id_number,a.archive_no,k.bar_code from resident_base_info a right join zkhw_tj_jk k on a.id_number=k.id_number and a.id_number like '%" + name + "%' or a.name like '%" + name + "%' or a.archive_no like '%" + name + "%' GROUP BY k.id_number";
+            string sql = "select k.name,k.sex ,k.id_number,k.aichive_no,k.bar_code from zkhw_tj_jk k where k.id_number like '%" + name + "%' or k.name like '%" + name + "%' or k.aichive_no like '%" + name + "%'";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }

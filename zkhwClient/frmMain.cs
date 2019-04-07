@@ -59,9 +59,9 @@ namespace zkhwClient
             basicInfoSettings basicSet = new basicInfoSettings();
             basicSet.Show();
             //http
-            proHttp.StartInfo.FileName = Application.StartupPath+"\\http\\httpCeshi.exe";
-            proHttp.StartInfo.UseShellExecute = false;
-            proHttp.Start();
+            //proHttp.StartInfo.FileName = Application.StartupPath+"\\http\\httpCeshi.exe";
+            //proHttp.StartInfo.UseShellExecute = false;
+            //proHttp.Start();
 
             this.timer1.Start();//时间控件定时器
             this.timer2.Interval =Int32.Parse(Properties.Settings.Default.timeInterval);
@@ -153,7 +153,10 @@ namespace zkhwClient
             DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                proHttp.Kill() ;
+                //if (!proHttp.HasExited)
+                //{
+                //    proHttp.Kill();
+                //}
                 service.loginLogService llse = new service.loginLogService();
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = frmLogin.name;
@@ -779,7 +782,10 @@ namespace zkhwClient
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            proHttp.Kill();
+            //if (!proHttp.HasExited)
+            //{
+            //    proHttp.Kill();
+            //}
             Process p = Process.GetCurrentProcess();
             if (p != null)
             {
