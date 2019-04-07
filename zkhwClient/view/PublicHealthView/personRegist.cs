@@ -383,9 +383,9 @@ namespace zkhwClient.view.PublicHealthView
                 MessageBox.Show("居民信息填写不完整！");
                 return;
             }
-            if (pictureBox1.Image == null || pictureBox2.Image == null)
+            if (pictureBox2.Image == null)
             {
-                MessageBox.Show("没有身份证照片或摄像头拍摄照片,请重试!");
+                MessageBox.Show("没有摄像头拍摄照片,请重试!");
                 return;
             }
 
@@ -535,7 +535,7 @@ namespace zkhwClient.view.PublicHealthView
                 label16.Text = dt16num.Rows[0][0].ToString();//计划体检人数
             }
 
-            DataTable dt19num = grjddao.jkAllNum(basicInfoSettings.xcuncode);
+            DataTable dt19num = grjddao.jkAllNum(basicInfoSettings.xcuncode, basicInfoSettings.createtime);
             if (dt19num != null && dt19num.Rows.Count > 0)
             {
                 label19.Text = dt19num.Rows[0][0].ToString();//登记人数

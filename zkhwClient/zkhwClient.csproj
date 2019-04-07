@@ -464,6 +464,30 @@
     <Compile Include="view\public\traumatism_record.Designer.cs">
       <DependentUpon>traumatism_record.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\updateTjResult\updateShengoaTizhong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateShengoaTizhong.Designer.cs">
+      <DependentUpon>updateShengoaTizhong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateXueya.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateXueya.Designer.cs">
+      <DependentUpon>updateXueya.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateNiaochanggui.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateNiaochanggui.Designer.cs">
+      <DependentUpon>updateNiaochanggui.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateXuechanggui.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateXuechanggui.Designer.cs">
+      <DependentUpon>updateXuechanggui.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\updateTjResult\updateShenghua.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -650,6 +674,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\SystemSettingsView\userManage.resx">
       <DependentUpon>userManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\updateShengoaTizhong.resx">
+      <DependentUpon>updateShengoaTizhong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\updateXueya.resx">
+      <DependentUpon>updateXueya.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\updateNiaochanggui.resx">
+      <DependentUpon>updateNiaochanggui.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\updateXuechanggui.resx">
+      <DependentUpon>updateXuechanggui.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\updateTjResult\updateShenghua.resx">
       <DependentUpon>updateShenghua.cs</DependentUpon>

@@ -40,5 +40,22 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
+
+        //查询体检进度生成pdf花名册  获取未完成的人数
+        public DataTable querytjjdTopdf(string xcuncode, string time)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select name,sex,birthday,(case when BChao='1' and XinDian='1' and ShengHua='1' and XueChangGui='1' and NiaoChangGui='1' and XueYa='1' and Shengaotizhong='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
+            if (xcuncode != null && !"".Equals(xcuncode))
+            {
+                sql += " and area_duns='" + xcuncode + "'";
+            }
+            if (time != null && !"".Equals(time))
+            {
+                sql += " and createtime >='" + time + "'";
+            }
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
     }
 }

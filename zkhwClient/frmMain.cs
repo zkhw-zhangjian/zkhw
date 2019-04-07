@@ -13,6 +13,7 @@ using System.Data;
 using System.Xml;
 using System.Threading;
 using System.Data.OleDb;
+using System.IO;
 
 namespace zkhwClient
 {
@@ -41,13 +42,13 @@ namespace zkhwClient
 
             //验证监听文件是否存在
             //string watchPath = string.Empty;
-           
+
             ////是否启动监听AOUP
             //if (System.IO.File.Exists(watchPath))
             //{
             //    //开启监控
             //    FileWatcher.WatcheDirForAoup();
-           
+
             //}
             //else
             //{
@@ -55,7 +56,8 @@ namespace zkhwClient
             //    return;
             //}
 
-             
+            basicInfoSettings basicSet = new basicInfoSettings();
+            basicSet.Show();
             //http
             proHttp.StartInfo.FileName = Application.StartupPath+"\\http\\httpCeshi.exe";
             proHttp.StartInfo.UseShellExecute = false;
@@ -131,7 +133,6 @@ namespace zkhwClient
                     };
                 }//屏蔽其它功能菜单下拉选
             }
-
         }
 
         private void 用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -800,7 +801,7 @@ namespace zkhwClient
         }
         private void shAndxcg()
         {
-            if (shenghuapath == "")
+            if (shenghuapath == "" || !File.Exists(shenghuapath))
             {
                 MessageBox.Show("未获取到生化中间库地址，请检查是否设置地址！");
                 return;
@@ -849,10 +850,13 @@ namespace zkhwClient
                             default: break;
                         }
                     }
-                    thdao.insertShenghuaInfo(sh);
+                    bool istrue= thdao.insertShenghuaInfo(sh);
+                    if (istrue) {
+                        thdao.updateTJbgdcShenghua(sh.aichive_no,sh.bar_code,1);
+                    }
                 }
             }
-            if (xuechangguipath == "")
+            if (xuechangguipath == "" || !File.Exists(shenghuapath))
             {
                 MessageBox.Show("未获取到血球中间库地址，请检查是否设置地址！");
                 return;
@@ -905,7 +909,11 @@ namespace zkhwClient
                             default: break;
                         }
                     }
-                    thdao.insertXuechangguiInfo(xcg);
+                    bool istrue = thdao.insertXuechangguiInfo(xcg);
+                    if (istrue)
+                    {
+                        thdao.updateTJbgdcXuechanggui(xcg.aichive_no, xcg.bar_code, 1);
+                    }
                 }
             }
         }

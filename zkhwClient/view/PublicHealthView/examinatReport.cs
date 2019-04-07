@@ -99,7 +99,7 @@ GROUP BY sex
             string sql = $@"select SQL_CALC_FOUND_ROWS 
                             id,
                             DATE_FORMAT(healthchecktime,'%Y%m%d') 登记时间,
-                            area_duns 区域,
+                            (SELECT name from code_area_config where `code`=area_duns) 区域,
                             aichive_no 编码,
                             name 姓名,
                             sex 性别,
@@ -699,7 +699,12 @@ where info.archive_no in('{string.Join(",", ide)}')";
                     }
                     dics.Add("姓名", data["name"].ToString());
                     dics.Add("性别", data["sex"].ToString());
-                    dics.Add("出生日期", data["birthday"].ToString());
+                    string[] sr = data["birthday"].ToString().Split('-');
+                    string r = sr[0] + sr[1] + sr[2];
+                    for (int i = 0; i < r.Length; i++)
+                    {
+                        dics.Add("出生日期" + (i + 1), r[i].ToString());
+                    }
                     dics.Add("身份证号", data["id_number"].ToString());
                     dics.Add("工作单位", data["company"].ToString());
                     dics.Add("本人电话", data["phone"].ToString());
@@ -833,7 +838,7 @@ where info.archive_no in('{string.Join(",", ide)}')";
                         {
                             for (int j = 0; j < mq.Count(); j++)
                             {
-                                string fqs = fq[j]["disease_type"].ToString();
+                                string fqs = mq[j]["disease_type"].ToString();
                                 if (fqs.IndexOf(',') > 0)
                                 {
                                     string[] y = fqs.Split(',');
@@ -850,7 +855,7 @@ where info.archive_no in('{string.Join(",", ide)}')";
 
                             for (int j = 0; j < jm.Count(); j++)
                             {
-                                string fqs = fq[j]["disease_type"].ToString();
+                                string fqs = jm[j]["disease_type"].ToString();
                                 if (fqs.IndexOf(',') > 0)
                                 {
                                     string[] y = fqs.Split(',');
@@ -866,7 +871,7 @@ where info.archive_no in('{string.Join(",", ide)}')";
                         {
                             for (int j = 0; j < zn.Count(); j++)
                             {
-                                string fqs = fq[j]["disease_type"].ToString();
+                                string fqs = zn[j]["disease_type"].ToString();
                                 if (fqs.IndexOf(',') > 0)
                                 {
                                     string[] y = fqs.Split(',');
@@ -879,7 +884,7 @@ where info.archive_no in('{string.Join(",", ide)}')";
                         }
                     }
                     dics.Add("遗传病史名", data["heredity_name"].ToString());
-                    dics.Add("遗传病史", data["profession"].ToString());
+                    dics.Add("遗传病史", data["is_heredity"].ToString());
                     string cjqk = data["is_deformity"].ToString();
                     if (cjqk.IndexOf(',') > 0)
                     {
@@ -1083,6 +1088,10 @@ where info.archive_no in('{string.Join(",", ide)}')";
                 }
                 return rule;
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
         }
     }
 
