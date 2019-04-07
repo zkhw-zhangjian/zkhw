@@ -1417,6 +1417,7 @@
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(123, 24);
             this.checkBox4.TabIndex = 11;
+            this.checkBox4.Tag = "4";
             this.checkBox4.Text = "4贫困救助";
             this.checkBox4.UseVisualStyleBackColor = true;
             // 

@@ -107,58 +107,58 @@ namespace zkhwClient.view.PublicHealthView
             {
                 hm.textBox1.Text = dt.Rows[0]["name"].ToString();
                 hm.textBox2.Text = dt.Rows[0]["archive_no"].ToString();
-                if (dt.Rows[0]["sex"].ToString() == hm.radioButton1.Text) {  hm.radioButton1.Checked = true; };
-                if (dt.Rows[0]["sex"].ToString() == hm.radioButton2.Text) { hm.radioButton2.Checked = true; };
-                if (dt.Rows[0]["sex"].ToString() == hm.radioButton3.Text) { hm.radioButton3.Checked = true; };
-                if (dt.Rows[0]["sex"].ToString() == hm.radioButton25.Text) { hm.radioButton25.Checked = true; };
+                if (dt.Rows[0]["sex"].ToString() == hm.radioButton1.Tag.ToString()) {  hm.radioButton1.Checked = true; };
+                if (dt.Rows[0]["sex"].ToString() == hm.radioButton2.Tag.ToString()) { hm.radioButton2.Checked = true; };
+                if (dt.Rows[0]["sex"].ToString() == hm.radioButton3.Tag.ToString()) { hm.radioButton3.Checked = true; };
+                if (dt.Rows[0]["sex"].ToString() == hm.radioButton25.Tag.ToString()) { hm.radioButton25.Checked = true; };
                 hm.dateTimePicker1.Value = DateTime.Parse(dt.Rows[0]["birthday"].ToString());
                 hm.textBox12.Text = dt.Rows[0]["id_number"].ToString();
                 hm.textBox14.Text = dt.Rows[0]["company"].ToString();
                 hm.textBox16.Text = dt.Rows[0]["phone"].ToString();
                 hm.textBox18.Text = dt.Rows[0]["link_name"].ToString();
                 hm.textBox20.Text = dt.Rows[0]["link_phone"].ToString();
-                if (dt.Rows[0]["resident_type"].ToString() == hm.radioButton4.Text) { hm.radioButton4.Checked = true; };
-                if (dt.Rows[0]["resident_type"].ToString() == hm.radioButton5.Text) { hm.radioButton5.Checked = true; };
+                if (dt.Rows[0]["resident_type"].ToString() == hm.radioButton4.Tag.ToString()) { hm.radioButton4.Checked = true; };
+                if (dt.Rows[0]["resident_type"].ToString() == hm.radioButton5.Tag.ToString()) { hm.radioButton5.Checked = true; };
 
-                if (dt.Rows[0]["nation"].ToString() == hm.radioButton6.Text) { hm.radioButton6.Checked = true; };
-                if (dt.Rows[0]["nation"].ToString() == hm.radioButton7.Text) { hm.radioButton7.Checked = true; };
+                if (dt.Rows[0]["nation"].ToString() == hm.radioButton6.Tag.ToString()) { hm.radioButton6.Checked = true; };
+                if (dt.Rows[0]["nation"].ToString() == hm.radioButton7.Tag.ToString()) { hm.radioButton7.Checked = true; };
 
-                if (dt.Rows[0]["blood_group"].ToString() == hm.radioButton8.Text) { hm.radioButton8.Checked = true; };
-                if (dt.Rows[0]["blood_group"].ToString() == hm.radioButton9.Text) { hm.radioButton9.Checked = true; };
-                if (dt.Rows[0]["blood_group"].ToString() == hm.radioButton10.Text) { hm.radioButton10.Checked = true; };
-                if (dt.Rows[0]["blood_group"].ToString() == hm.radioButton11.Text) { hm.radioButton11.Checked = true; };
-                if (dt.Rows[0]["blood_group"].ToString() == hm.radioButton12.Text) { hm.radioButton12.Checked = true; };
+                if (dt.Rows[0]["blood_group"].ToString() == hm.radioButton8.Tag.ToString()) { hm.radioButton8.Checked = true; };
+                if (dt.Rows[0]["blood_group"].ToString() == hm.radioButton9.Tag.ToString()) { hm.radioButton9.Checked = true; };
+                if (dt.Rows[0]["blood_group"].ToString() == hm.radioButton10.Tag.ToString()) { hm.radioButton10.Checked = true; };
+                if (dt.Rows[0]["blood_group"].ToString() == hm.radioButton11.Tag.ToString()) { hm.radioButton11.Checked = true; };
+                if (dt.Rows[0]["blood_group"].ToString() == hm.radioButton12.Tag.ToString()) { hm.radioButton12.Checked = true; };
 
-                if (dt.Rows[0]["blood_rh"].ToString() == hm.radioButton13.Text) { hm.radioButton13.Checked = true; };
-                if (dt.Rows[0]["blood_rh"].ToString() == hm.radioButton14.Text) { hm.radioButton14.Checked = true; };
-                if (dt.Rows[0]["blood_rh"].ToString() == hm.radioButton15.Text) { hm.radioButton15.Checked = true; };
+                if (dt.Rows[0]["blood_rh"].ToString() == hm.radioButton13.Tag.ToString()) { hm.radioButton13.Checked = true; };
+                if (dt.Rows[0]["blood_rh"].ToString() == hm.radioButton14.Tag.ToString()) { hm.radioButton14.Checked = true; };
+                if (dt.Rows[0]["blood_rh"].ToString() == hm.radioButton15.Tag.ToString()) { hm.radioButton15.Checked = true; };
 
-                if (dt.Rows[0]["education"].ToString() == hm.radioButton22.Text) { hm.radioButton22.Checked = true; };
-                if (dt.Rows[0]["education"].ToString() == hm.radioButton23.Text) { hm.radioButton23.Checked = true; };
-                if (dt.Rows[0]["education"].ToString() == hm.radioButton24.Text) { hm.radioButton24.Checked = true; };
-                if (dt.Rows[0]["education"].ToString() == hm.radioButton26.Text) { hm.radioButton26.Checked = true; };
-                if (dt.Rows[0]["education"].ToString() == hm.radioButton27.Text) { hm.radioButton27.Checked = true; };
-                if (dt.Rows[0]["education"].ToString() == hm.radioButton28.Text) { hm.radioButton28.Checked = true; };
-                if (dt.Rows[0]["education"].ToString() == hm.radioButton29.Text) { hm.radioButton29.Checked = true; };
-                if (dt.Rows[0]["education"].ToString() == hm.radioButton30.Text) { hm.radioButton30.Checked = true; };
-                if (dt.Rows[0]["education"].ToString() == hm.radioButton31.Text) { hm.radioButton31.Checked = true; };
-                if (dt.Rows[0]["education"].ToString() == hm.radioButton32.Text) { hm.radioButton32.Checked = true; };
+                if (dt.Rows[0]["education"].ToString() == hm.radioButton22.Tag.ToString()) { hm.radioButton22.Checked = true; };
+                if (dt.Rows[0]["education"].ToString() == hm.radioButton23.Tag.ToString()) { hm.radioButton23.Checked = true; };
+                if (dt.Rows[0]["education"].ToString() == hm.radioButton24.Tag.ToString()) { hm.radioButton24.Checked = true; };
+                if (dt.Rows[0]["education"].ToString() == hm.radioButton26.Tag.ToString()) { hm.radioButton26.Checked = true; };
+                if (dt.Rows[0]["education"].ToString() == hm.radioButton27.Tag.ToString()) { hm.radioButton27.Checked = true; };
+                if (dt.Rows[0]["education"].ToString() == hm.radioButton28.Tag.ToString()) { hm.radioButton28.Checked = true; };
+                if (dt.Rows[0]["education"].ToString() == hm.radioButton29.Tag.ToString()) { hm.radioButton29.Checked = true; };
+                if (dt.Rows[0]["education"].ToString() == hm.radioButton30.Tag.ToString()) { hm.radioButton30.Checked = true; };
+                if (dt.Rows[0]["education"].ToString() == hm.radioButton31.Tag.ToString()) { hm.radioButton31.Checked = true; };
+                if (dt.Rows[0]["education"].ToString() == hm.radioButton32.Tag.ToString()) { hm.radioButton32.Checked = true; };
 
-                if (dt.Rows[0]["profession"].ToString() == hm.radioButton33.Text) { hm.radioButton33.Checked = true; };
-                if (dt.Rows[0]["profession"].ToString() == hm.radioButton34.Text) { hm.radioButton34.Checked = true; };
-                if (dt.Rows[0]["profession"].ToString() == hm.radioButton35.Text) { hm.radioButton35.Checked = true; };
-                if (dt.Rows[0]["profession"].ToString() == hm.radioButton36.Text) { hm.radioButton36.Checked = true; };
-                if (dt.Rows[0]["profession"].ToString() == hm.radioButton37.Text) { hm.radioButton37.Checked = true; };
-                if (dt.Rows[0]["profession"].ToString() == hm.radioButton38.Text) { hm.radioButton38.Checked = true; };
-                if (dt.Rows[0]["profession"].ToString() == hm.radioButton39.Text) { hm.radioButton39.Checked = true; };
-                if (dt.Rows[0]["profession"].ToString() == hm.radioButton40.Text) { hm.radioButton40.Checked = true; };
-                if (dt.Rows[0]["profession"].ToString() == hm.radioButton41.Text) { hm.radioButton41.Checked = true; };
+                if (dt.Rows[0]["profession"].ToString() == hm.radioButton33.Tag.ToString()) { hm.radioButton33.Checked = true; };
+                if (dt.Rows[0]["profession"].ToString() == hm.radioButton34.Tag.ToString()) { hm.radioButton34.Checked = true; };
+                if (dt.Rows[0]["profession"].ToString() == hm.radioButton35.Tag.ToString()) { hm.radioButton35.Checked = true; };
+                if (dt.Rows[0]["profession"].ToString() == hm.radioButton36.Tag.ToString()) { hm.radioButton36.Checked = true; };
+                if (dt.Rows[0]["profession"].ToString() == hm.radioButton37.Tag.ToString()) { hm.radioButton37.Checked = true; };
+                if (dt.Rows[0]["profession"].ToString() == hm.radioButton38.Tag.ToString()) { hm.radioButton38.Checked = true; };
+                if (dt.Rows[0]["profession"].ToString() == hm.radioButton39.Tag.ToString()) { hm.radioButton39.Checked = true; };
+                if (dt.Rows[0]["profession"].ToString() == hm.radioButton40.Tag.ToString()) { hm.radioButton40.Checked = true; };
+                if (dt.Rows[0]["profession"].ToString() == hm.radioButton41.Tag.ToString()) { hm.radioButton41.Checked = true; };
 
-                if (dt.Rows[0]["marital_status"].ToString() == hm.radioButton42.Text) { hm.radioButton42.Checked = true; };
-                if (dt.Rows[0]["marital_status"].ToString() == hm.radioButton43.Text) { hm.radioButton43.Checked = true; };
-                if (dt.Rows[0]["marital_status"].ToString() == hm.radioButton44.Text) { hm.radioButton44.Checked = true; };
-                if (dt.Rows[0]["marital_status"].ToString() == hm.radioButton45.Text) { hm.radioButton45.Checked = true; };
-                if (dt.Rows[0]["marital_status"].ToString() == hm.radioButton46.Text) { hm.radioButton46.Checked = true; };
+                if (dt.Rows[0]["marital_status"].ToString() == hm.radioButton42.Tag.ToString()) { hm.radioButton42.Checked = true; };
+                if (dt.Rows[0]["marital_status"].ToString() == hm.radioButton43.Tag.ToString()) { hm.radioButton43.Checked = true; };
+                if (dt.Rows[0]["marital_status"].ToString() == hm.radioButton44.Tag.ToString()) { hm.radioButton44.Checked = true; };
+                if (dt.Rows[0]["marital_status"].ToString() == hm.radioButton45.Tag.ToString()) { hm.radioButton45.Checked = true; };
+                if (dt.Rows[0]["marital_status"].ToString() == hm.radioButton46.Tag.ToString()) { hm.radioButton46.Checked = true; };
 
 
                 foreach (Control ctr in hm.panel12.Controls)
@@ -168,12 +168,18 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         //将ctr转换成CheckBox并赋值给ck
                         CheckBox ck = ctr as CheckBox;
-                        if (dt.Rows[0]["pay_type"].ToString().IndexOf(ck.Text) > -1)
+                        //if (dt.Rows[0]["pay_type"].ToString().IndexOf(ck.Text) > -1)
+                        string[] ck2 = dt.Rows[0]["pay_type"].ToString().Split(',');
+                        for (int i = 0; i < ck2.Length; i++)
                         {
-                            ck.Checked = true;
+                            if (ck2[i].ToString() == ck.Tag.ToString())
+                            {
+                                ck.Checked = true;
+                            }
                         }
                     }
                 }
+
                 foreach (Control ctr in hm.panel13.Controls)
                 {
                     //判断该控件是不是CheckBox
@@ -181,9 +187,13 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         //将ctr转换成CheckBox并赋值给ck
                         CheckBox ck = ctr as CheckBox;
-                        if (dt.Rows[0]["drug_allergy"].ToString().IndexOf(ck.Text) > -1)
+                        string[] ck2 = dt.Rows[0]["drug_allergy"].ToString().Split(',');
+                        for (int i = 0; i < ck2.Length; i++)
                         {
-                            ck.Checked = true;
+                            if (ck2[i].ToString() == ck.Tag.ToString())
+                            {
+                                ck.Checked = true;
+                            }
                         }
                     }
                 }
@@ -194,9 +204,13 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         //将ctr转换成CheckBox并赋值给ck
                         CheckBox ck = ctr as CheckBox;
-                        if (dt.Rows[0]["exposure"].ToString().IndexOf(ck.Text) > -1)
+                        string[] ck2 = dt.Rows[0]["exposure"].ToString().Split(',');
+                        for (int i = 0; i < ck2.Length; i++)
                         {
-                            ck.Checked = true;
+                            if (ck2[i].ToString() == ck.Tag.ToString())
+                            {
+                                ck.Checked = true;
+                            }
                         }
                     }
                 }
@@ -208,42 +222,46 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         //将ctr转换成CheckBox并赋值给ck
                         CheckBox ck = ctr as CheckBox;
-                        if (dt.Rows[0]["deformity_name"].ToString().IndexOf(ck.Text) > -1)
+                        string[] ck2 = dt.Rows[0]["deformity_name"].ToString().Split(',');
+                        for (int i = 0; i < ck2.Length; i++)
                         {
-                            ck.Checked = true;
+                            if (ck2[i].ToString() == ck.Tag.ToString())
+                            {
+                                ck.Checked = true;
+                            }
                         }
                     }
                 }
 
-                if (dt.Rows[0]["kitchen"].ToString() == hm.radioButton18.Text) { hm.radioButton18.Checked = true; };
-                if (dt.Rows[0]["kitchen"].ToString() == hm.radioButton19.Text) { hm.radioButton19.Checked = true; };
-                if (dt.Rows[0]["kitchen"].ToString() == hm.radioButton20.Text) { hm.radioButton20.Checked = true; };
-                if (dt.Rows[0]["kitchen"].ToString() == hm.radioButton21.Text) { hm.radioButton21.Checked = true; };
+                if (dt.Rows[0]["kitchen"].ToString() == hm.radioButton18.Tag.ToString()) { hm.radioButton18.Checked = true; };
+                if (dt.Rows[0]["kitchen"].ToString() == hm.radioButton19.Tag.ToString()) { hm.radioButton19.Checked = true; };
+                if (dt.Rows[0]["kitchen"].ToString() == hm.radioButton20.Tag.ToString()) { hm.radioButton20.Checked = true; };
+                if (dt.Rows[0]["kitchen"].ToString() == hm.radioButton21.Tag.ToString()) { hm.radioButton21.Checked = true; };
 
-                if (dt.Rows[0]["fuel"].ToString() == hm.radioButton70.Text) { hm.radioButton70.Checked = true; };
-                if (dt.Rows[0]["fuel"].ToString() == hm.radioButton71.Text) { hm.radioButton71.Checked = true; };
-                if (dt.Rows[0]["fuel"].ToString() == hm.radioButton72.Text) { hm.radioButton72.Checked = true; };
-                if (dt.Rows[0]["fuel"].ToString() == hm.radioButton73.Text) { hm.radioButton73.Checked = true; };
-                if (dt.Rows[0]["fuel"].ToString() == hm.radioButton74.Text) { hm.radioButton74.Checked = true; };
-                if (dt.Rows[0]["fuel"].ToString() == hm.radioButton75.Text) { hm.radioButton75.Checked = true; };
+                if (dt.Rows[0]["fuel"].ToString() == hm.radioButton70.Tag.ToString()) { hm.radioButton70.Checked = true; };
+                if (dt.Rows[0]["fuel"].ToString() == hm.radioButton71.Tag.ToString()) { hm.radioButton71.Checked = true; };
+                if (dt.Rows[0]["fuel"].ToString() == hm.radioButton72.Tag.ToString()) { hm.radioButton72.Checked = true; };
+                if (dt.Rows[0]["fuel"].ToString() == hm.radioButton73.Tag.ToString()) { hm.radioButton73.Checked = true; };
+                if (dt.Rows[0]["fuel"].ToString() == hm.radioButton74.Tag.ToString()) { hm.radioButton74.Checked = true; };
+                if (dt.Rows[0]["fuel"].ToString() == hm.radioButton75.Tag.ToString()) { hm.radioButton75.Checked = true; };
 
-                if (dt.Rows[0]["drink"].ToString() == hm.radioButton76.Text) { hm.radioButton76.Checked = true; };
-                if (dt.Rows[0]["drink"].ToString() == hm.radioButton77.Text) { hm.radioButton77.Checked = true; };
-                if (dt.Rows[0]["drink"].ToString() == hm.radioButton78.Text) { hm.radioButton78.Checked = true; };
-                if (dt.Rows[0]["drink"].ToString() == hm.radioButton79.Text) { hm.radioButton79.Checked = true; };
-                if (dt.Rows[0]["drink"].ToString() == hm.radioButton80.Text) { hm.radioButton80.Checked = true; };
-                if (dt.Rows[0]["drink"].ToString() == hm.radioButton81.Text) { hm.radioButton81.Checked = true; };
+                if (dt.Rows[0]["drink"].ToString() == hm.radioButton76.Tag.ToString()) { hm.radioButton76.Checked = true; };
+                if (dt.Rows[0]["drink"].ToString() == hm.radioButton77.Tag.ToString()) { hm.radioButton77.Checked = true; };
+                if (dt.Rows[0]["drink"].ToString() == hm.radioButton78.Tag.ToString()) { hm.radioButton78.Checked = true; };
+                if (dt.Rows[0]["drink"].ToString() == hm.radioButton79.Tag.ToString()) { hm.radioButton79.Checked = true; };
+                if (dt.Rows[0]["drink"].ToString() == hm.radioButton80.Tag.ToString()) { hm.radioButton80.Checked = true; };
+                if (dt.Rows[0]["drink"].ToString() == hm.radioButton81.Tag.ToString()) { hm.radioButton81.Checked = true; };
 
-                if (dt.Rows[0]["toilet"].ToString() == hm.radioButton82.Text) { hm.radioButton82.Checked = true; };
-                if (dt.Rows[0]["toilet"].ToString() == hm.radioButton83.Text) { hm.radioButton83.Checked = true; };
-                if (dt.Rows[0]["toilet"].ToString() == hm.radioButton84.Text) { hm.radioButton84.Checked = true; };
-                if (dt.Rows[0]["toilet"].ToString() == hm.radioButton85.Text) { hm.radioButton85.Checked = true; };
-                if (dt.Rows[0]["toilet"].ToString() == hm.radioButton86.Text) { hm.radioButton86.Checked = true; };
+                if (dt.Rows[0]["toilet"].ToString() == hm.radioButton82.Tag.ToString()) { hm.radioButton82.Checked = true; };
+                if (dt.Rows[0]["toilet"].ToString() == hm.radioButton83.Tag.ToString()) { hm.radioButton83.Checked = true; };
+                if (dt.Rows[0]["toilet"].ToString() == hm.radioButton84.Tag.ToString()) { hm.radioButton84.Checked = true; };
+                if (dt.Rows[0]["toilet"].ToString() == hm.radioButton85.Tag.ToString()) { hm.radioButton85.Checked = true; };
+                if (dt.Rows[0]["toilet"].ToString() == hm.radioButton86.Tag.ToString()) { hm.radioButton86.Checked = true; };
 
-                if (dt.Rows[0]["poultry"].ToString() == hm.radioButton87.Text) { hm.radioButton87.Checked = true; };
-                if (dt.Rows[0]["poultry"].ToString() == hm.radioButton88.Text) { hm.radioButton88.Checked = true; };
-                if (dt.Rows[0]["poultry"].ToString() == hm.radioButton89.Text) { hm.radioButton89.Checked = true; };
-                if (dt.Rows[0]["poultry"].ToString() == hm.radioButton90.Text) { hm.radioButton90.Checked = true; };
+                if (dt.Rows[0]["poultry"].ToString() == hm.radioButton87.Tag.ToString()) { hm.radioButton87.Checked = true; };
+                if (dt.Rows[0]["poultry"].ToString() == hm.radioButton88.Tag.ToString()) { hm.radioButton88.Checked = true; };
+                if (dt.Rows[0]["poultry"].ToString() == hm.radioButton89.Tag.ToString()) { hm.radioButton89.Checked = true; };
+                if (dt.Rows[0]["poultry"].ToString() == hm.radioButton90.Tag.ToString()) { hm.radioButton90.Checked = true; };
             }
             else { }
 
