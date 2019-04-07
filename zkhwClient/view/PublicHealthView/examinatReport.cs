@@ -99,7 +99,7 @@ GROUP BY sex
             string sql = $@"select SQL_CALC_FOUND_ROWS 
                             id,
                             DATE_FORMAT(healthchecktime,'%Y%m%d') 登记时间,
-                            area_duns 区域,
+                            (SELECT name from code_area_config where `code`=area_duns) 区域,
                             aichive_no 编码,
                             name 姓名,
                             sex 性别,
