@@ -13,6 +13,7 @@ using System.Data;
 using System.Xml;
 using System.Threading;
 using System.Data.OleDb;
+using System.IO;
 
 namespace zkhwClient
 {
@@ -800,7 +801,7 @@ namespace zkhwClient
         }
         private void shAndxcg()
         {
-            if (shenghuapath == "")
+            if (shenghuapath == "" || !File.Exists(shenghuapath))
             {
                 MessageBox.Show("未获取到生化中间库地址，请检查是否设置地址！");
                 return;
@@ -855,7 +856,7 @@ namespace zkhwClient
                     }
                 }
             }
-            if (xuechangguipath == "")
+            if (xuechangguipath == "" || !File.Exists(shenghuapath))
             {
                 MessageBox.Show("未获取到血球中间库地址，请检查是否设置地址！");
                 return;

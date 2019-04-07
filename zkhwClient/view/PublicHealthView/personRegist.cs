@@ -383,9 +383,9 @@ namespace zkhwClient.view.PublicHealthView
                 MessageBox.Show("居民信息填写不完整！");
                 return;
             }
-            if (pictureBox1.Image == null || pictureBox2.Image == null)
+            if (pictureBox2.Image == null)
             {
-                MessageBox.Show("没有身份证照片或摄像头拍摄照片,请重试!");
+                MessageBox.Show("没有摄像头拍摄照片,请重试!");
                 return;
             }
 

@@ -58,7 +58,7 @@ namespace zkhwClient.view.PublicHealthView
             {
                 dt = jkdao.querytjjd(time1, time2, xcuncode, jmxx);
             }
-            else { MessageBox.Show("时间段不能为空!"); return; };
+            else { this.dataGridView1.DataSource = null; MessageBox.Show("时间段不能为空!"); return; };
 
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -67,14 +67,15 @@ namespace zkhwClient.view.PublicHealthView
                     DataRow[] dr = dt.Select("BChao='" + ytj + "' and XinDian='" + ytj + "' and XueChangGui='" + ytj + "' and NiaoChangGui='" + ytj + "' and Shengaotizhong='" + ytj + "' and XueYa='" + ytj + "' and ShengHua='" + ytj + "'");
                     if (dr != null && dr.Length > 0)
                     {
-                        for (int i = dr.Length - 1; i >= 0; i--) {
+                        for (int i = dr.Length - 1; i >= 0; i--)
+                        {
                             dt.Rows.Remove(dr[i]);
                         }
                     }
                 }
                 else if (this.radioButton2.Checked)
                 {
-                    DataRow[] dr = dt.Select("BChao='"+ ytj + "' and XinDian='" + ytj + "' and XueChangGui='" + ytj + "' and NiaoChangGui='" + ytj + "' and Shengaotizhong='" + ytj + "' and XueYa='" + ytj + "' and ShengHua='" + ytj + "'");
+                    DataRow[] dr = dt.Select("BChao='" + ytj + "' and XinDian='" + ytj + "' and XueChangGui='" + ytj + "' and NiaoChangGui='" + ytj + "' and Shengaotizhong='" + ytj + "' and XueYa='" + ytj + "' and ShengHua='" + ytj + "'");
                     if (dr != null && dr.Length > 0)
                     {
                         DataTable tmp = dr[0].Table.Clone();  // 复制DataRow的表结构  
@@ -108,7 +109,7 @@ namespace zkhwClient.view.PublicHealthView
                 this.dataGridView1.Columns[7].Width = 125;
                 this.dataGridView1.Columns[8].Width = 125;
                 this.dataGridView1.Columns[9].Width = 125;
-                this.dataGridView1.Columns[10].Width = 125;                
+                this.dataGridView1.Columns[10].Width = 125;
                 this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
                 this.dataGridView1.AllowUserToAddRows = false;
                 int rows = this.dataGridView1.Rows.Count - 1 <= 0 ? 0 : this.dataGridView1.Rows.Count - 1;
@@ -131,7 +132,8 @@ namespace zkhwClient.view.PublicHealthView
                         this.dataGridView1.Rows[x].Cells[5].Value = "已经完成";
                         dataGridView1.Rows[x].Cells[5].Style.ForeColor = Color.Red;
                     }
-                    else {
+                    else
+                    {
                         this.dataGridView1.Rows[x].Cells[5].Value = "--";
                     }
 
@@ -255,6 +257,10 @@ namespace zkhwClient.view.PublicHealthView
                         this.dataGridView1.Rows[x].Cells[11].Value = "--";
                     }
                 }
+            }
+            else {
+                this.dataGridView1.DataSource = null;
+                MessageBox.Show("未查询出数据！");
             }
         }
 
