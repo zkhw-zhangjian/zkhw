@@ -13,7 +13,8 @@ namespace zkhwClient.view
     {
 
         public string relation = "";
-        public string disease_name = "";
+        public string disease_name = ""; 
+            public string disease_type = ""; 
         public family_record()
         {
             InitializeComponent();
@@ -42,12 +43,14 @@ namespace zkhwClient.view
                     if (ck.Checked)
                     {
                         disease_name += "," + ck.Text;
+                        disease_type += "," + ck.Tag.ToString();
                     }
                 }
             }
             if (disease_name != null && disease_name != "")
             {
                 disease_name = disease_name.Substring(1);
+                disease_type = disease_type.Substring(1);
             }
             this.DialogResult = DialogResult.OK;
 

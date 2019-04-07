@@ -14,6 +14,7 @@ namespace zkhwClient.view
 
         public string traumatism_name = "";
         public string traumatism_time = "";
+        public string traumatism_code = "1";
         public traumatism_record()
         {
             InitializeComponent();
@@ -31,7 +32,9 @@ namespace zkhwClient.view
         private void button1_Click(object sender, EventArgs e)
         {
             traumatism_name = this.textBox1.Text;
+            if (traumatism_name == "") { MessageBox.Show("外伤名称不能为空"); return; }
             traumatism_time = this.dateTimePicker1.Text;
+            traumatism_code = "2";
             this.DialogResult = DialogResult.OK;
 
         }
