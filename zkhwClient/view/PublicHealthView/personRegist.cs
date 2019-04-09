@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Xml;
 using zkhwClient.bean;
 using zkhwClient.dao;
+using zkhwClient.service;
 using zkhwClient.view.setting;
 
 namespace zkhwClient.view.PublicHealthView
@@ -36,7 +37,9 @@ namespace zkhwClient.view.PublicHealthView
         DataTable dtshenfen = new DataTable();
         grjdDao grjddao = new grjdDao();
         jkInfoDao jkinfodao = new jkInfoDao();
+        tjcheckDao jkjcheckdao = new tjcheckDao();
         grjdxxBean grjdxx = null;
+        loginLogService logservice = new loginLogService();
         public personRegist()
         {
             InitializeComponent();
@@ -85,15 +88,29 @@ namespace zkhwClient.view.PublicHealthView
                 if ((iRetCOM == 1) || (iRetUSB == 1))
                 {
                     this.label42.Text = "初始化成功！";
+                    jkjcheckdao.updateShDevice(1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
                 }
                 else
                 {
                     this.label42.Text = "初始化失败！";
+                    loginLogBean lb = new loginLogBean();
+                    lb.name = frmLogin.name;
+                    lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    lb.eventInfo = "身份证读卡初始化失败！";
+                    lb.type = "3";
+                    logservice.addCheckLog(lb);
+                    jkjcheckdao.updateShDevice(0, -1, -1, -1, -1, -1, -1, -1, -1, -1);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                loginLogBean lb = new loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "身份证读卡初始化失败！";
+                lb.type = "3";
+                logservice.addCheckLog(lb);
+                jkjcheckdao.updateShDevice(0, -1, -1, -1, -1, -1, -1, -1, -1, -1);
             }
 
             //摄像头初始化
@@ -121,6 +138,13 @@ namespace zkhwClient.view.PublicHealthView
             catch (ApplicationException)
             {
                 videoDevices = null;
+                loginLogBean lb = new loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "摄像头初始化失败！";
+                lb.type = "3";
+                logservice.addCheckLog(lb);
+                jkjcheckdao.updateShDevice(-1, 0, -1, -1, -1, -1, -1, -1, -1, -1);
             }
         }
         //读取身份证
@@ -153,12 +177,25 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 else
                 {
-                    MessageBox.Show("初始化失败！");
+                    //MessageBox.Show("初始化失败！");
+                    loginLogBean lb = new loginLogBean();
+                    lb.name = frmLogin.name;
+                    lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    lb.eventInfo = "身份证读卡初始化失败！";
+                    lb.type = "3";
+                    logservice.addCheckLog(lb);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("读卡错误,请重试！");
+                loginLogBean lb = new loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "身份证读卡失败！";
+                lb.type = "3";
+                logservice.addCheckLog(lb);
+                jkjcheckdao.updateShDevice(0, -1, -1, -1, -1, -1, -1, -1, -1, -1);
+                //MessageBox.Show("读卡错误,请重试！");
             }
         }
 
@@ -268,10 +305,17 @@ namespace zkhwClient.view.PublicHealthView
                     }
                     pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\123.jpg";
                 }
+                jkjcheckdao.updateShDevice(1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
+                loginLogBean lb = new loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "身份证读卡失败！";
+                lb.type = "3";
+                logservice.addCheckLog(lb);
             }
         }
 
@@ -340,10 +384,18 @@ namespace zkhwClient.view.PublicHealthView
                         }
                     }
                 }
+                jkjcheckdao.updateShDevice(-1, -1, 1, -1, -1, -1, -1, -1, -1, -1);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("摄像头异常：" + ex.Message + "\n" + ex.StackTrace);
+                //MessageBox.Show("摄像头异常：" + ex.Message + "\n" + ex.StackTrace);
+                loginLogBean lb = new loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "摄像头拍照失败！";
+                lb.type = "3";
+                logservice.addCheckLog(lb);
+                jkjcheckdao.updateShDevice(-1, 0, -1, -1, -1, -1, -1, -1, -1, -1);
             }
         }
         //关闭摄像头
@@ -479,11 +531,19 @@ namespace zkhwClient.view.PublicHealthView
                         btFormat.Close(BarTender.BtSaveOptions.btDoNotSaveChanges);
                         //打印完毕 
                         btApp.Quit(BarTender.BtSaveOptions.btDoNotSaveChanges);
-                    }
+                    jkjcheckdao.updateShDevice(-1, -1, 1, -1, -1, -1, -1, -1, -1, -1);
+                }
             }
             catch (Exception e)
             {
+                loginLogBean lb = new loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "打印机设备连接不正确！";
+                lb.type = "3";
+                logservice.addCheckLog(lb);
                 MessageBox.Show("打印机设备连接不正确,请重新连接或重启!");
+                jkjcheckdao.updateShDevice(-1, -1, 0, -1, -1, -1, -1, -1, -1, -1);
                 //throw e;
             }
         }
@@ -523,7 +583,7 @@ namespace zkhwClient.view.PublicHealthView
 
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            MessageBox.Show("是否需要补打条形码？");
+            //MessageBox.Show("是否需要补打条形码？");
         }
 
 

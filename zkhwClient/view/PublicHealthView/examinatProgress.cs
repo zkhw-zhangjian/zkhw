@@ -40,7 +40,7 @@ namespace zkhwClient.view.PublicHealthView
         private void examinatProgress_Load(object sender, EventArgs e)
         {
             //让默认的日期时间减一天
-            this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-4);
+            this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1);
             this.button1.BackgroundImage = System.Drawing.Image.FromFile(@str + "/images/check.png");
 
             this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源

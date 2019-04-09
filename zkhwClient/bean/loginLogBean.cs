@@ -14,6 +14,7 @@ namespace zkhwClient.bean
         public string createTime { get; set; }
         //事件
         public string eventInfo { get; set; }
-
+        //类型
+        public string type { get; set; }
     }
 }
