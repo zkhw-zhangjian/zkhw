@@ -653,6 +653,9 @@
     <EmbeddedResource Include="view\setting\parameterSetting.resx">
       <DependentUpon>parameterSetting.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\setting\systemlog.resx">
+      <DependentUpon>systemlog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\SystemSettingsView\passWordUpdate.resx">
       <DependentUpon>passWordUpdate.cs</DependentUpon>
     </EmbeddedResource>

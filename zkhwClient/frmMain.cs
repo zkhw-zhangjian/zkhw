@@ -59,13 +59,13 @@ namespace zkhwClient
             basicInfoSettings basicSet = new basicInfoSettings();
             basicSet.Show();
             //http
-            //proHttp.StartInfo.FileName = Application.StartupPath+"\\http\\httpCeshi.exe";
-            //proHttp.StartInfo.UseShellExecute = false;
-            //proHttp.Start();
+            proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
+            proHttp.StartInfo.UseShellExecute = false;
+            proHttp.Start();
 
             this.timer1.Start();//时间控件定时器
-            this.timer2.Interval =Int32.Parse(Properties.Settings.Default.timeInterval);
-            this.timer2.Start();//定时获取生化和血球的数据
+            //this.timer2.Interval =Int32.Parse(Properties.Settings.Default.timeInterval);
+            //this.timer2.Start();//定时获取生化和血球的数据
 
             this.label1.Text = "一体化查体车  中科弘卫";
             this.label1.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
@@ -153,10 +153,10 @@ namespace zkhwClient
             DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                //if (!proHttp.HasExited)
-                //{
-                //    proHttp.Kill();
-                //}
+                if (!proHttp.HasExited)
+                {
+                    proHttp.Kill();
+                }
                 service.loginLogService llse = new service.loginLogService();
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = frmLogin.name;
@@ -782,14 +782,28 @@ namespace zkhwClient
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //if (!proHttp.HasExited)
-            //{
-            //    proHttp.Kill();
-            //}
-            Process p = Process.GetCurrentProcess();
-            if (p != null)
+            DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
             {
-                p.Kill();
+                if (!proHttp.HasExited)
+                {
+                    proHttp.Kill();
+                }
+                service.loginLogService llse = new service.loginLogService();
+                bean.loginLogBean lb = new bean.loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "退出系统！";
+                if (lb.name != "admin" && lb.name != "" && lb.name != null)
+                {
+                    llse.addCheckLog(lb);
+                }
+                Process p = Process.GetCurrentProcess();
+                if (p != null)
+                {
+                    p.Kill();
+                }
+                //Environment.Exit(0);
             }
         }
         //定时任务获取生化和血球的数据

@@ -11,9 +11,9 @@ namespace zkhwClient.service
     class loginLogService
     {
         loginLogDao dao = new loginLogDao();
-        public DataTable checkLog(string time1, string time2)
+        public DataTable checkLog(string time1, string time2,string flag)
         {
-            return dao.checkLog(time1, time2);
+            return dao.checkLog(time1, time2,flag);
         }
         public bool addCheckLog(bean.loginLogBean lb)
         {
