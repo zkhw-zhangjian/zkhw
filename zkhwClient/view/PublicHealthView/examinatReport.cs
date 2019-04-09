@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using zkhwClient.dao;
+using zkhwClient.view.setting;
 
 namespace zkhwClient.view.PublicHealthView
 {
@@ -27,8 +28,8 @@ namespace zkhwClient.view.PublicHealthView
         private void BinData()
         {
             #region 报告统计数据绑定
-            string sql = @"SELECT count(sex)sun,sex
-from zkhw_tj_bgdc
+            string sql = $@"SELECT count(sex)sun,sex
+from zkhw_tj_bgdc where area_duns like '%{basicInfoSettings.xcuncode}%' and createtime>='{basicInfoSettings.createtime}'
 GROUP BY sex
 ";
             DataSet dataSet = DbHelperMySQL.Query(sql);
@@ -96,17 +97,20 @@ GROUP BY sex
             pairs.Add("timesta", timesta);
             pairs.Add("timeend", timeend);
             pairs.Add("juming", juming);
-            string sql = $@"select SQL_CALC_FOUND_ROWS 
-                            id,
-                            DATE_FORMAT(healthchecktime,'%Y%m%d') 登记时间,
-                            (SELECT name from code_area_config where `code`=area_duns) 区域,
-                            aichive_no 编码,
-                            name 姓名,
-                            sex 性别,
-                            id_number 身份证号,
-                            ShiFouTongBu 是否同步,
-                            BaoGaoShengChan 报告生产时间
-                            from zkhw_tj_bgdc where 1=1 ";
+            string sql = $@"select 
+DATE_FORMAT(base.create_time,'%Y%m%d') 登记时间,
+concat(base.province_name,base.city_name,base.county_name,base.towns_name,base.village_name) 区域,
+base.archive_no 编码,
+base.name 姓名,
+base.sex 性别,
+base.id_number 身份证号,
+base.is_synchro 是否同步,
+bgdc.BaoGaoShengChan 报告生产时间
+from resident_base_info base
+join 
+(select * from (select * from zkhw_tj_bgdc order by createtime desc) as a group by aichive_no order by createtime desc) bgdc
+on base.archive_no=bgdc.aichive_no
+where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'";
             if (pairs != null && pairs.Count > 0)
             {
                 if (!string.IsNullOrWhiteSpace(pairs["timesta"]) && !string.IsNullOrWhiteSpace(pairs["timeend"]))
@@ -153,14 +157,6 @@ GROUP BY sex
             {
                 this.dataGridView1.DataSource = data;
                 this.dataGridView1.Columns[0].Visible = false;
-                //this.dataGridView1.Columns[1].HeaderCell.Value = "登记时间";
-                //this.dataGridView1.Columns[2].HeaderCell.Value = "区域";
-                //this.dataGridView1.Columns[3].HeaderCell.Value = "编号";
-                //this.dataGridView1.Columns[4].HeaderCell.Value = "姓名";
-                //this.dataGridView1.Columns[5].HeaderCell.Value = "性别";
-                //this.dataGridView1.Columns[6].HeaderCell.Value = "身份证号";
-                //this.dataGridView1.Columns[7].HeaderCell.Value = "是否同步";
-                //this.dataGridView1.Columns[8].HeaderCell.Value = "报告生产时间";
                 if (buttonColumn == null)
                 {
                     buttonColumn = new DataGridViewButtonColumn();
@@ -182,7 +178,37 @@ GROUP BY sex
                 this.dataGridView1.ReadOnly = true;
             }
         }
-
+        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            //自动编号，与数据无关
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+               e.RowBounds.Location.Y,
+               dataGridView1.RowHeadersWidth - 4,
+               e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics,
+                  (e.RowIndex + 1).ToString(),
+                   dataGridView1.RowHeadersDefaultCellStyle.Font,
+                   rectangle,
+                   dataGridView1.RowHeadersDefaultCellStyle.ForeColor,
+                   TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
+        /// <summary>
+        /// CheckBox勾选
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            //checkbox 勾上
+            if ((bool)dataGridView1.Rows[e.RowIndex].Cells[0].EditedFormattedValue == true)
+            {
+                this.dataGridView1.Rows[e.RowIndex].Cells[0].Value = false;
+            }
+            else
+            {
+                this.dataGridView1.Rows[e.RowIndex].Cells[0].Value = true;
+            }
+        }
         /// <summary>
         /// 查询数据
         /// </summary>
@@ -224,7 +250,7 @@ GROUP BY sex
                     '0'
             END
             ) as 生化异常
-            from zkhw_tj_bgdc where birthday >= '0' and birthday<= '64' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+            from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and createtime>='{basicInfoSettings.createtime}' and birthday >= '0' and birthday<= '64' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
             GROUP BY sex;
 
             SELECT sex,'70',COUNT(sex) 人数,
@@ -253,7 +279,7 @@ GROUP BY sex
                     '0'
             END
             ) as 生化异常
-            from zkhw_tj_bgdc where birthday >= '65' and birthday<= '70' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+            from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and createtime>='{basicInfoSettings.createtime}' and birthday >= '65' and birthday<= '70' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
             GROUP BY sex;
 
             SELECT sex,'75',COUNT(sex) 人数,
@@ -282,7 +308,7 @@ GROUP BY sex
                     '0'
             END
             ) as 生化异常
-            from zkhw_tj_bgdc where birthday >= '70' and birthday<= '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+            from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and createtime>='{basicInfoSettings.createtime}' and birthday >= '70' and birthday<= '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
             GROUP BY sex;
 
             SELECT sex,'76',COUNT(sex) 人数,
@@ -311,7 +337,7 @@ GROUP BY sex
                     '0'
             END
             ) as 生化异常
-            from zkhw_tj_bgdc where birthday >= '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+            from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and createtime>='{basicInfoSettings.createtime}' and birthday >= '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
             GROUP BY sex";
             DataSet dataSet = DbHelperMySQL.Query(sql);
             if (dataSet != null && dataSet.Tables.Count > 0)
@@ -405,21 +431,7 @@ GROUP BY sex
             }
         }
 
-        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            //自动编号，与数据无关
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-               e.RowBounds.Location.Y,
-               dataGridView1.RowHeadersWidth - 4,
-               e.RowBounds.Height);
-            TextRenderer.DrawText(e.Graphics,
-                  (e.RowIndex + 1).ToString(),
-                   dataGridView1.RowHeadersDefaultCellStyle.Font,
-                   rectangle,
-                   dataGridView1.RowHeadersDefaultCellStyle.ForeColor,
-                   TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
-        }
-
+        #region 下拉框绑定
         /// <summary>
         /// 绑定下拉选项
         /// </summary>
@@ -459,7 +471,9 @@ GROUP BY sex
         {
             comboBoxBin(comboBox4, comboBox5);
         }
+        #endregion
 
+        #region 报告导出
         private void button2_Click(object sender, EventArgs e)
         {
             try
@@ -915,25 +929,6 @@ where info.archive_no in('{string.Join(",", ide)}')";
             }
             return doc;
         }
-
-        /// <summary>
-        /// CheckBox勾选
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            //checkbox 勾上
-            if ((bool)dataGridView1.Rows[e.RowIndex].Cells[0].EditedFormattedValue == true)
-            {
-                this.dataGridView1.Rows[e.RowIndex].Cells[0].Value = false;
-            }
-            else
-            {
-                this.dataGridView1.Rows[e.RowIndex].Cells[0].Value = true;
-            }
-        }
-
         private void DeteleFile(string url)
         {
             if (File.Exists(url))
@@ -941,154 +936,8 @@ where info.archive_no in('{string.Join(",", ide)}')";
                 File.Delete(url);
             }
         }
-
-        private string ZF(string st)
-        {
-            string rule = string.Empty;
-            if (st.IndexOf(',') > 0)
-            {
-                string[] zi = st.Split(',');
-                foreach (var item in zi)
-                {
-                    switch (item)
-                    {
-                        case "1":
-                            rule += "⑴/";
-                            break;
-                        case "2":
-                            rule += "⑵/";
-                            break;
-                        case "3":
-                            rule += "⑶/";
-                            break;
-                        case "4":
-                            rule += "⑷/";
-                            break;
-                        case "5":
-                            rule += "⑸/";
-                            break;
-                        case "6":
-                            rule += "⑹/";
-                            break;
-                        case "7":
-                            rule += "⑺/";
-                            break;
-                        case "8":
-                            rule += "⑻/";
-                            break;
-                        case "9":
-                            rule += "⑼/";
-                            break;
-                        case "10":
-                            rule += "⑽/";
-                            break;
-                        case "11":
-                            rule += "⑾/";
-                            break;
-                        case "12":
-                            rule += "⑿/";
-                            break;
-                        case "13":
-                            rule += "⒀/";
-                            break;
-                        case "14":
-                            rule += "⒁/";
-                            break;
-                        case "15":
-                            rule += "⒂/";
-                            break;
-                        case "16":
-                            rule += "⒃/";
-                            break;
-                        case "17":
-                            rule += "⒄/";
-                            break;
-                        case "18":
-                            rule += "⒅/";
-                            break;
-                        case "19":
-                            rule += "⒆/";
-                            break;
-                        case "20":
-                            rule += "⒇/";
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                return rule.TrimEnd('/');
-            }
-            else
-            {
-                switch (st)
-                {
-                    case "1":
-                        rule = "⑴";
-                        break;
-                    case "2":
-                        rule = "⑵";
-                        break;
-                    case "3":
-                        rule = "⑶";
-                        break;
-                    case "4":
-                        rule = "⑷";
-                        break;
-                    case "5":
-                        rule = "⑸";
-                        break;
-                    case "6":
-                        rule = "⑹";
-                        break;
-                    case "7":
-                        rule = "⑺";
-                        break;
-                    case "8":
-                        rule = "⑻";
-                        break;
-                    case "9":
-                        rule = "⑼";
-                        break;
-                    case "10":
-                        rule = "⑽";
-                        break;
-                    case "11":
-                        rule = "⑾";
-                        break;
-                    case "12":
-                        rule = "⑿";
-                        break;
-                    case "13":
-                        rule = "⒀";
-                        break;
-                    case "14":
-                        rule = "⒁";
-                        break;
-                    case "15":
-                        rule = "⒂";
-                        break;
-                    case "16":
-                        rule = "⒃";
-                        break;
-                    case "17":
-                        rule = "⒄";
-                        break;
-                    case "18":
-                        rule = "⒅";
-                        break;
-                    case "19":
-                        rule = "⒆";
-                        break;
-                    case "20":
-                        rule = "⒇";
-                        break;
-                    default:
-                        break;
-
-                }
-                return rule;
-            }
-        }
+        #endregion
+        
 
         private void button3_Click(object sender, EventArgs e)
         {
