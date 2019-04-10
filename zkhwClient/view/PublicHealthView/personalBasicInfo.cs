@@ -35,6 +35,7 @@ namespace zkhwClient.view.PublicHealthView
             label4.Left = (this.panel1.Width - this.label4.Width) / 2;
             label4.BringToFront();
 
+            //if (aichive_no != "") { pCa = aichive_no; }
             button5_Click(null,null);
         }
         private void button5_Click(object sender, EventArgs e)

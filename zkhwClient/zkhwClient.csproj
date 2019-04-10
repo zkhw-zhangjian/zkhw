@@ -464,6 +464,48 @@
     <Compile Include="view\public\traumatism_record.Designer.cs">
       <DependentUpon>traumatism_record.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\updateTjResult\checkXueya.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkXueya.Designer.cs">
+      <DependentUpon>checkXueya.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkXindt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkXindt.Designer.cs">
+      <DependentUpon>checkXindt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkSgtz.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkSgtz.Designer.cs">
+      <DependentUpon>checkSgtz.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkXuecg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkXuecg.Designer.cs">
+      <DependentUpon>checkXuecg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkNiaocg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkNiaocg.Designer.cs">
+      <DependentUpon>checkNiaocg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkShenghua.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkShenghua.Designer.cs">
+      <DependentUpon>checkShenghua.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkBichao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkBichao.Designer.cs">
+      <DependentUpon>checkBichao.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\updateTjResult\updateShengoaTizhong.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -677,6 +719,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\SystemSettingsView\userManage.resx">
       <DependentUpon>userManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\checkXueya.resx">
+      <DependentUpon>checkXueya.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\checkXindt.resx">
+      <DependentUpon>checkXindt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\checkSgtz.resx">
+      <DependentUpon>checkSgtz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\checkXuecg.resx">
+      <DependentUpon>checkXuecg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\checkNiaocg.resx">
+      <DependentUpon>checkNiaocg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\checkShenghua.resx">
+      <DependentUpon>checkShenghua.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\checkBichao.resx">
+      <DependentUpon>checkBichao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\updateTjResult\updateShengoaTizhong.resx">
       <DependentUpon>updateShengoaTizhong.cs</DependentUpon>

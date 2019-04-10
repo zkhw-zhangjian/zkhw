@@ -14,6 +14,7 @@ using System.Xml;
 using System.Threading;
 using System.Data.OleDb;
 using System.IO;
+using zkhwClient.view.updateTjResult;
 
 namespace zkhwClient
 {
@@ -162,6 +163,7 @@ namespace zkhwClient
                 lb.name = frmLogin.name;
                 lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 lb.eventInfo = "退出系统！";
+                lb.type = "1";
                 if (lb.name != "admin" && lb.name != "" && lb.name != null)
                 {
                     llse.addCheckLog(lb);
@@ -794,6 +796,7 @@ namespace zkhwClient
                 lb.name = frmLogin.name;
                 lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 lb.eventInfo = "退出系统！";
+                lb.type = "1";
                 if (lb.name != "admin" && lb.name != "" && lb.name != null)
                 {
                     llse.addCheckLog(lb);
@@ -958,6 +961,48 @@ namespace zkhwClient
             oda = new OleDbDataAdapter(strSQL, strcon);
             oda.Fill(myds_data);
             return myds_data;
+        }
+        //首页点击B超按钮
+        private void button1_Click(object sender, EventArgs e)
+        {
+            checkBichao checkBc = new checkBichao();
+            checkBc.Show();
+        }
+        //首页点击生化按钮
+        private void button2_Click(object sender, EventArgs e)
+        {
+            checkShenghua checkSh = new checkShenghua();
+            checkSh.Show();
+        }
+        //首页点击尿常规按钮
+        private void button3_Click(object sender, EventArgs e)
+        {
+            checkNiaocg checkNcg = new checkNiaocg();
+            checkNcg.Show();
+        }
+        //首页点击血常规按钮
+        private void button4_Click(object sender, EventArgs e)
+        {
+            checkXuecg checkXcg = new checkXuecg();
+            checkXcg.Show();
+        }
+        //首页点击身高体重按钮
+        private void button5_Click(object sender, EventArgs e)
+        {
+            checkSgtz checkSgTz = new checkSgtz();
+            checkSgTz.Show();
+        }
+        //首页点击心电图按钮
+        private void button6_Click(object sender, EventArgs e)
+        {
+            checkXindt checkXdt = new checkXindt();
+            checkXdt.Show();
+        }
+        //首页点击血压按钮
+        private void button7_Click(object sender, EventArgs e)
+        {
+            checkXueya checkXy = new checkXueya();
+            checkXy.Show();
         }
     }
 }

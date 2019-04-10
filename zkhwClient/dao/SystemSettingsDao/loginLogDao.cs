@@ -17,8 +17,7 @@ namespace zkhwClient.dao
         {
             int rt = 0;
             string id = Result.GetNewId();
-            string type = "1";
-             String sql = "insert into zkhw_log_syslog (id,userName,type,createtime,eventInfo) values ('" + id + "','" + lb.name + "','" + type + "', '" + lb.createTime + "', '" + lb.eventInfo + "')";
+             String sql = "insert into zkhw_log_syslog (id,userName,type,createtime,type,eventInfo) values ('" + id + "','" + lb.name + "','" + lb.type + "', '" + lb.createTime + "', '" + lb.eventInfo + "')";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }

@@ -55,6 +55,7 @@ namespace zkhwClient
                 lb.name = name;
                 lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 lb.eventInfo = "登录系统！";
+                lb.type = "1";
                 if (lb.name != "admin" && lb.name != "" && lb.name != null)
                 {
                     lls.addCheckLog(lb);

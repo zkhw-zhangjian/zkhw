@@ -136,15 +136,6 @@ namespace zkhwClient.dao
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }
-        //更新设备的状态
-        public bool updateShDevice()
-        {
-            int ret = 0;
-            int flag = 1;
-            String sql = "update zkhw_state_device set shonline='" + flag + "',shstate='" + flag + "'";
-            ret = DbHelperMySQL.ExecuteSql(sql);
-            return ret == 0 ? false : true;
-        }
 
         //更新体检进度tj_bgdc--血常规
         public bool updateTJbgdcXuechanggui(string aichive_no, string barcode, int flag)
@@ -160,6 +151,156 @@ namespace zkhwClient.dao
         {
             int ret = 0;
             String sql = "update zkhw_tj_bgdc set ShengHua='" + flag + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
+
+        //查询B超体检信息
+        public DataTable checkBichaoInfo(string time1, string time2,string xcuncode)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when BChao='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
+            if (xcuncode != null && !"".Equals(xcuncode))
+            {
+                sql += " and area_duns='" + xcuncode + "'";
+            }
+            if (time1 != null && !"".Equals(time1))
+            {
+                sql += " and createtime >='" + time1 + "'";
+            }
+            if (time2 != null && !"".Equals(time2))
+            {
+                sql += " and createtime <='" + time2 + "'";
+            }
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+        //查询生化体检信息
+        public DataTable checkShenghuaInfo(string time1, string time2, string xcuncode)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when ShengHua='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
+            if (xcuncode != null && !"".Equals(xcuncode))
+            {
+                sql += " and area_duns='" + xcuncode + "'";
+            }
+            if (time1 != null && !"".Equals(time1))
+            {
+                sql += " and createtime >='" + time1 + "'";
+            }
+            if (time2 != null && !"".Equals(time2))
+            {
+                sql += " and createtime <='" + time2 + "'";
+            }
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+        //查询尿常规体检信息
+        public DataTable checkNcgInfo(string time1, string time2, string xcuncode)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when NiaoChangGui='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
+            if (xcuncode != null && !"".Equals(xcuncode))
+            {
+                sql += " and area_duns='" + xcuncode + "'";
+            }
+            if (time1 != null && !"".Equals(time1))
+            {
+                sql += " and createtime >='" + time1 + "'";
+            }
+            if (time2 != null && !"".Equals(time2))
+            {
+                sql += " and createtime <='" + time2 + "'";
+            }
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+        //查询血常规体检信息
+        public DataTable checkXcgInfo(string time1, string time2, string xcuncode)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when XueChangGui='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
+            if (xcuncode != null && !"".Equals(xcuncode))
+            {
+                sql += " and area_duns='" + xcuncode + "'";
+            }
+            if (time1 != null && !"".Equals(time1))
+            {
+                sql += " and createtime >='" + time1 + "'";
+            }
+            if (time2 != null && !"".Equals(time2))
+            {
+                sql += " and createtime <='" + time2 + "'";
+            }
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+        //查询身高体重体检信息
+        public DataTable checkSgtzInfo(string time1, string time2, string xcuncode)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when Shengaotizhong='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
+            if (xcuncode != null && !"".Equals(xcuncode))
+            {
+                sql += " and area_duns='" + xcuncode + "'";
+            }
+            if (time1 != null && !"".Equals(time1))
+            {
+                sql += " and createtime >='" + time1 + "'";
+            }
+            if (time2 != null && !"".Equals(time2))
+            {
+                sql += " and createtime <='" + time2 + "'";
+            }
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+        //查询心电图体检信息
+        public DataTable checkXdtInfo(string time1, string time2, string xcuncode)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when XinDian='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
+            if (xcuncode != null && !"".Equals(xcuncode))
+            {
+                sql += " and area_duns='" + xcuncode + "'";
+            }
+            if (time1 != null && !"".Equals(time1))
+            {
+                sql += " and createtime >='" + time1 + "'";
+            }
+            if (time2 != null && !"".Equals(time2))
+            {
+                sql += " and createtime <='" + time2 + "'";
+            }
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+        //查询血压体检信息
+        public DataTable checkXueyaInfo(string time1, string time2, string xcuncode)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when XueYa='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
+            if (xcuncode != null && !"".Equals(xcuncode))
+            {
+                sql += " and area_duns='" + xcuncode + "'";
+            }
+            if (time1 != null && !"".Equals(time1))
+            {
+                sql += " and createtime >='" + time1 + "'";
+            }
+            if (time2 != null && !"".Equals(time2))
+            {
+                sql += " and createtime <='" + time2 + "'";
+            }
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+
+        //更新设备的状态
+        public bool updateShDevice(int sfzflag,int sxtflag,int dyjflag,int xcgflag,int shflag,int ncgflag,int xdtflag,int sgtzflag,int xyflag,int bcflag)
+        {
+            int ret = 0;
+            String sql = "update zkhw_state_device set sfz_online='" + sfzflag + "',sfz_tate='" + sfzflag + "',sxt_online='" + sxtflag + "',sxt_state='" + sxtflag + "',dyj_online='" + dyjflag + "',dyj_state='" + dyjflag + "',xcg_online='" + xcgflag + "',xcg_state='" + xcgflag + "',sh_online='" + shflag + "',sh_state='" + shflag + "',ncg_online='" + ncgflag + "',ncg_state='" + ncgflag + "',xdt_online='" + xdtflag + "',xdt_state='" + xdtflag + "',sgtz_online='" + sgtzflag + "',sgtz_state='" + sgtzflag + "',xy_online='" + xyflag + "',xy_state='" + xyflag + "',bc_online='" + bcflag + "',bc_state='" + bcflag + "' where ID='1'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }
