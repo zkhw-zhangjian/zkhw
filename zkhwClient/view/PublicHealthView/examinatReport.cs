@@ -16,6 +16,7 @@ namespace zkhwClient.view.PublicHealthView
 {
     public partial class examinatReport : Form
     {
+        #region 初始化数据
         public examinatReport()
         {
             InitializeComponent();
@@ -68,6 +69,9 @@ GROUP BY sex
             queryExaminatProgress(GetData(pagerControl1.PageIndex, pagerControl1.PageSize, out count));
             pagerControl1.DrawControl(count);
         }
+        #endregion
+
+        #region 列表展示
         void pagerControl1_OnPageChanged(object sender, EventArgs e)
         {
             int count = 0;
@@ -97,6 +101,11 @@ GROUP BY sex
             pairs.Add("timesta", timesta);
             pairs.Add("timeend", timeend);
             pairs.Add("juming", juming);
+            pairs.Add("sheng", sheng);
+            pairs.Add("xian", xian);
+            pairs.Add("cun", cun);
+            pairs.Add("zu", zu);
+            pairs.Add("shi", shi);
             string sql = $@"select 
 DATE_FORMAT(base.create_time,'%Y%m%d') 登记时间,
 concat(base.province_name,base.city_name,base.county_name,base.towns_name,base.village_name) 区域,
@@ -115,15 +124,33 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
             {
                 if (!string.IsNullOrWhiteSpace(pairs["timesta"]) && !string.IsNullOrWhiteSpace(pairs["timeend"]))
                 {
-                    sql += $" and date_format(healthchecktime,'%Y-%m-%d') between '{pairs["timesta"]}' and '{pairs["timeend"]}'";
+                    sql += $" and base.create_time(healthchecktime,'%Y-%m-%d') between '{pairs["timesta"]}' and '{pairs["timeend"]}'";
                 }
-
                 if (!string.IsNullOrWhiteSpace(pairs["juming"]))
                 {
-                    sql += $" or name='{pairs["juming"]}' or bar_code='{pairs["juming"]}' or id_number='{pairs["juming"]}'";
+                    sql += $" or name like '%{pairs["juming"]}%' or bar_code like '%{pairs["juming"]}%' or id_number like '%{pairs["juming"]}%'";
+                }
+                if (!string.IsNullOrWhiteSpace(pairs["sheng"]))
+                {
+                    sql += $" and base.province_code='{pairs["sheng"]}'";
+                }
+                if (!string.IsNullOrWhiteSpace(pairs["shi"]))
+                {
+                    sql += $" and base.city_code='{pairs["shi"]}'";
+                }
+                if (!string.IsNullOrWhiteSpace(pairs["xian"]))
+                {
+                    sql += $" and base.county_code='{pairs["xian"]}'";
+                }
+                if (!string.IsNullOrWhiteSpace(pairs["cun"]))
+                {
+                    sql += $" and base.towns_code='{pairs["cun"]}'";
+                }
+                if (!string.IsNullOrWhiteSpace(pairs["zu"]))
+                {
+                    sql += $" and base.village_code='{pairs["zu"]}'";
                 }
             }
-            //sql += $" and id > ({pageindex}-1)*{pagesize} limit {pagesize}; select found_rows()";
             sql += $@" and id >=(
             select id From zkhw_tj_bgdc Order By id limit {pageindex},1
             ) limit {pagesize}; select found_rows()";
@@ -220,7 +247,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
             queryExaminatProgress(GetData(pagerControl1.PageIndex, pagerControl1.PageSize, out count));
             pagerControl1.DrawControl(count);
         }
-
+        #endregion
         private void 统计查询_Click(object sender, EventArgs e)
         {
             string stan = dateTimePicker3.Value.ToString("yyyy-MM-dd");
@@ -937,7 +964,7 @@ where info.archive_no in('{string.Join(",", ide)}')";
             }
         }
         #endregion
-        
+
 
         private void button3_Click(object sender, EventArgs e)
         {
