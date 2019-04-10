@@ -505,6 +505,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
         {
             try
             {
+                DataTable ge = new DataTable();
                 List<string> list = new List<string>();
                 List<string> ide = new List<string>();
                 DataSet dataSet = new DataSet();
@@ -516,7 +517,16 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                         ide.Add(id);
                     }
                 }
+
                 string sql = string.Empty;
+                sql = $@"select * from resident_base_info base where base.archive_no in('{string.Join(",", ide)}')";
+                DataSet datas = DbHelperMySQL.Query(sql);
+                if (datas != null && datas.Tables.Count > 0)
+                {
+                    ge = datas.Tables[0].Copy();
+                    ge.TableName = "个人";
+                    dataSet.Tables.Add(ge);
+                }
                 foreach (Control ctrl in groupBox4.Controls)
                 {
                     if (ctrl is CheckBox)
@@ -526,41 +536,31 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                             list.Add(ctrl.Text);
                             switch (ctrl.Text)
                             {
-                                case "封面":
-                                    sql = $@"SELECT 
-jk.id_number,
-jk.aichive_no archive_no,
-jk.Xzhuzhi,
-jk.address,
-jk.XzjdName,
-jk.CjwhName,
-jk.JddwName,
-jk.JdrName,
-jk.ZrysName,
-info.name,
-info.phone 
-from resident_base_info info 
+                                case "化验报告单":
+                                    sql = $@"select * from resident_base_info base
+join
+(select * from (select * from physical_examination_record order by create_time desc) as a group by aichive_no order by create_time desc) record
+on base.archive_no=record.aichive_no
 join 
-(select * from (select * from zkhw_tj_jk order by createtime desc) as a group by aichive_no order by createtime desc) jk
-on info.archive_no=jk.aichive_no
-where info.archive_no in('{string.Join(",", ide)}')";
-                                    DataSet datas = DbHelperMySQL.Query(sql);
-                                    if (datas != null && datas.Tables.Count > 0)
+(select * from (select * from zkhw_tj_sh order by createtime desc) as a group by aichive_no order by createtime desc) sh
+on base.archive_no=sh.aichive_no
+join
+(select * from (select * from zkhw_tj_xcg order by createtime desc) as a group by aichive_no order by createtime desc)xcg
+on base.archive_no=xcg.aichive_no
+join
+(select * from (select * from zkhw_tj_ncg order by createtime desc) as a group by aichive_no order by createtime desc) ncg
+on base.archive_no=ncg.aichive_no
+where base.archive_no in('{string.Join(",", ide)}')";
+                                    DataSet data = DbHelperMySQL.Query(sql);
+                                    if (data != null && data.Tables.Count > 0)
                                     {
-                                        DataTable data = datas.Tables[0].Copy();
-                                        data.TableName = "封面";
-                                        dataSet.Tables.Add(data);
+                                        DataTable hy = data.Tables[0].Copy();
+                                        hy.TableName = "化验报告单";
+                                        dataSet.Tables.Add(hy);
                                     }
                                     break;
                                 case "个人信息":
-                                    sql = $@"select * from resident_base_info base where base.archive_no in('{string.Join(",", ide)}')";
-                                    DataSet gr = DbHelperMySQL.Query(sql);
-                                    if (gr != null && gr.Tables.Count > 0)
-                                    {
-                                        DataTable data = gr.Tables[0].Copy();
-                                        data.TableName = "个人信息";
-                                        dataSet.Tables.Add(data);
-                                    }
+
                                     break;
                                 default:
                                     break;
@@ -594,7 +594,15 @@ where info.archive_no in('{string.Join(",", ide)}')";
                     foreach (var items in list)
                     {
                         Report report = new Report();
-                        DataRow data = dataSet.Tables[items].Select($"archive_no={item}")[0];
+                        DataRow data = null;
+                        if (item == "封面" || item == "个人信息")
+                        {
+                            data = dataSet.Tables["个人"].Select($"archive_no={item}")[0];
+                        }
+                        else
+                        {
+                            data = dataSet.Tables[items].Select($"archive_no={item}")[0];
+                        }
                         report.Name = items;
                         report.Doc = PdfProcessing(items, data);
                         reports.Add(report);
@@ -667,9 +675,9 @@ where info.archive_no in('{string.Join(",", ide)}')";
                 switch (list[0])
                 {
                     case "封面":
-                        for (int i = 0; i < dataSet.Tables["封面"].Rows.Count; i++)
+                        for (int i = 0; i < dataSet.Tables["个人"].Rows.Count; i++)
                         {
-                            DataRow data = dataSet.Tables["封面"].Rows[i];
+                            DataRow data = dataSet.Tables["个人"].Rows[i];
                             doc = PdfProcessing(list[0], data);
                             string urls = @str + $"/up/result/{data["archive_no"].ToString()}.pdf";
                             DeteleFile(urls);
@@ -677,9 +685,9 @@ where info.archive_no in('{string.Join(",", ide)}')";
                         }
                         break;
                     case "个人信息":
-                        for (int i = 0; i < dataSet.Tables["个人信息"].Rows.Count; i++)
+                        for (int i = 0; i < dataSet.Tables["个人"].Rows.Count; i++)
                         {
-                            DataRow data = dataSet.Tables["个人信息"].Rows[i];
+                            DataRow data = dataSet.Tables["个人"].Rows[i];
                             doc = PdfProcessing(list[0], data);
                             string urls = @str + $"/up/result/{data["archive_no"].ToString()}.pdf";
                             DeteleFile(urls);
@@ -700,6 +708,7 @@ where info.archive_no in('{string.Join(",", ide)}')";
             DocumentBuilder builder = null;
             switch (lx)
             {
+                #region 封面
                 case "封面":
                     doc = new Document(@str + $"/up/template/封面.doc");
                     builder = new DocumentBuilder(doc);
@@ -710,14 +719,14 @@ where info.archive_no in('{string.Join(",", ide)}')";
                         dic.Add("编号" + (i + 1), bh[i].ToString());
                     }
                     dic.Add("姓名", data["name"].ToString());
-                    dic.Add("现住址", data["Xzhuzhi"].ToString());
+                    dic.Add("现住址", data["residence_address"].ToString());
                     dic.Add("户籍地址", data["address"].ToString());
                     dic.Add("联系电话", data["phone"].ToString());
-                    dic.Add("乡镇名称", data["XzjdName"].ToString());
-                    dic.Add("村委会名称", data["CjwhName"].ToString());
-                    dic.Add("建档单位", data["JddwName"].ToString());
-                    dic.Add("建档人", data["JdrName"].ToString());
-                    dic.Add("责任医生", data["ZrysName"].ToString());
+                    dic.Add("乡镇名称", data["towns_name"].ToString());
+                    dic.Add("村委会名称", data["village_name"].ToString() + "村委会");
+                    dic.Add("建档单位", data["aichive_org"].ToString());
+                    dic.Add("建档人", data["create_archives_name"].ToString());
+                    dic.Add("责任医生", data["doctor_name"].ToString());
                     dic.Add("年", date.Year.ToString());
                     dic.Add("月", date.Month.ToString());
                     dic.Add("日", date.Day.ToString());
@@ -728,6 +737,9 @@ where info.archive_no in('{string.Join(",", ide)}')";
                         builder.Write(dic[key]);
                     }
                     return doc;
+                #endregion
+
+                #region 个人信息
                 case "个人信息":
                     doc = new Document(@str + $"/up/template/个人信息.doc");
                     builder = new DocumentBuilder(doc);
@@ -951,6 +963,82 @@ where info.archive_no in('{string.Join(",", ide)}')";
                         builder.Write(dics[key]);
                     }
                     return doc;
+                #endregion
+
+                #region 化验报告单
+                case "化验报告单":
+                    doc = new Document(@str + $"/up/template/化验报告单.doc");
+                    builder = new DocumentBuilder(doc);
+                    var hy = new Dictionary<string, string>();
+                    hy.Add("条码号", data["bar_code"].ToString());
+                    hy.Add("地址", data["address"].ToString());
+                    hy.Add("姓名", data["name"].ToString());
+                    hy.Add("姓名1", data["name"].ToString());
+                    hy.Add("性别", data["sex"].ToString());
+                    hy.Add("性别1", data["sex"].ToString());
+                    hy.Add("生日", data["birthday"].ToString());
+                    hy.Add("生日1", data["birthday"].ToString());
+                    hy.Add("身份证号", data["id_number"].ToString());
+                    hy.Add("身份证号1", data["id_number"].ToString());
+                    hy.Add("身高", data["base_height"].ToString());
+                    hy.Add("体重", data["base_weight"].ToString());
+                    hy.Add("BMI", data["base_bmi"].ToString());
+                    hy.Add("腰围", data["base_waist"].ToString());
+                    hy.Add("体温", data["base_temperature"].ToString());
+                    hy.Add("呼吸频率", data["base_respiratory"].ToString());
+                    hy.Add("脉率", data["base_heartbeat"].ToString());
+                    hy.Add("左侧高压", data["base_blood_pressure_left_high"].ToString());
+                    hy.Add("左侧低压", data["base_blood_pressure_left_low"].ToString());
+                    hy.Add("右侧高压", data["base_blood_pressure_right_high"].ToString());
+                    hy.Add("右侧低压", data["base_blood_pressure_right_low"].ToString());
+                    hy.Add("白蛋白箭头", Convert.ToInt32(data["ALB"].ToString())>54?"↑":"↓");
+                    hy.Add("白蛋白结果", data["ALB"].ToString());
+                    hy.Add("碱性磷酸酶箭头", Convert.ToInt32(data["ALP"].ToString()) >100 ? "↑" : "↓");
+                    hy.Add("碱性磷酸酶结果", data["ALP"].ToString());
+                    hy.Add("谷丙转氨酶箭头", Convert.ToInt32(data["ALT"].ToString()) > 40 ? "↑" : "↓");
+                    hy.Add("谷丙转氨酶结果", data["ALT"].ToString());
+                    hy.Add("谷草转氨酶箭头", Convert.ToInt32(data["AST"].ToString()) > 40 ? "↑" : "↓");
+                    hy.Add("谷草转氨酶结果", data["AST"].ToString());
+                    hy.Add("胆固醇箭头", Convert.ToInt32(data["CHO"].ToString()) > 5 ? "↑" : "↓");
+                    hy.Add("胆固醇结果", data["CHO"].ToString());
+                    hy.Add("肌酐箭头", Convert.ToInt32(data["CREA"].ToString()) > 104 ? "↑" : "↓");
+                    hy.Add("肌酐结果", data["CREA"].ToString());
+                    hy.Add("直接胆红素箭头", Convert.ToInt32(data["DBIL"].ToString()) > 7 ? "↑" : "↓");
+                    hy.Add("直接胆红素结果", data["DBIL"].ToString());
+                    hy.Add("谷氨酰氨基箭头", Convert.ToInt32(data["GGT"].ToString()) > 50 ? "↑" : "↓");
+                    hy.Add("谷氨酰氨基结果", data["GGT"].ToString());
+                    hy.Add("葡萄糖箭头", Convert.ToInt32(data["GLU"].ToString()) > 6 ? "↑" : "↓");
+                    hy.Add("葡萄糖结果", data["GLU"].ToString());
+                    hy.Add("高密度脂蛋白箭头", Convert.ToInt32(data["HDLC"].ToString()) > 2 ? "↑" : "↓");
+                    hy.Add("高密度脂蛋白结果", data["HDLC"].ToString());
+                    hy.Add("低密度脂蛋白箭头", Convert.ToInt32(data["LDLC"].ToString()) > 4 ? "↑" : "↓");
+                    hy.Add("低密度脂蛋白结果", data["LDLC"].ToString());
+                    hy.Add("总胆红素箭头", Convert.ToInt32(data["TBIL"].ToString()) > 19 ? "↑" : "↓");
+                    hy.Add("总胆红素结果", data["TBIL"].ToString());
+                    hy.Add("甘油三酯箭头", Convert.ToInt32(data["TG"].ToString()) > 2 ? "↑" : "↓");
+                    hy.Add("甘油三酯结果", data["TG"].ToString());
+                    hy.Add("总蛋白箭头", Convert.ToInt32(data["TP"].ToString()) > 19 ? "↑" : "↓");
+                    hy.Add("总蛋白结果", data["TP"].ToString());
+                    hy.Add("尿酸箭头", Convert.ToInt32(data["UA"].ToString()) > 2 ? "↑" : "↓");
+                    hy.Add("尿酸结果", data["UA"].ToString());
+                    hy.Add("尿素箭头", Convert.ToInt32(data["UREA"].ToString()) > 83 ? "↑" : "↓");
+                    hy.Add("尿素结果", data["UREA"].ToString());
+                    hy.Add("送检日期", data["check_date"].ToString());
+                    hy.Add("送检日期1", data["check_date"].ToString());
+                    hy.Add("审核", data["check_date"].ToString());
+                    hy.Add("审核1", data["check_date"].ToString());
+                    hy.Add("报告日期", DateTime.Now.ToString("yyyy-MM-dd"));
+                    hy.Add("报告日期1", DateTime.Now.ToString("yyyy-MM-dd"));
+                    hy.Add("白蛋白箭头", Convert.ToInt32(data["ALB"].ToString()) > 54 ? "↑" : "↓");                                   
+                    hy.Add("送检日期", data["ALB"].ToString());
+                    //书签替换
+                    foreach (var key in hy.Keys)
+                    {
+                        builder.MoveToBookmark(key);
+                        builder.Write(hy[key]);
+                    }
+                    return doc;
+                #endregion
                 default:
                     break;
             }
