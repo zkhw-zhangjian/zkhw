@@ -300,7 +300,72 @@ namespace zkhwClient.dao
         public bool updateShDevice(int sfzflag,int sxtflag,int dyjflag,int xcgflag,int shflag,int ncgflag,int xdtflag,int sgtzflag,int xyflag,int bcflag)
         {
             int ret = 0;
-            String sql = "update zkhw_state_device set sfz_online='" + sfzflag + "',sfz_tate='" + sfzflag + "',sxt_online='" + sxtflag + "',sxt_state='" + sxtflag + "',dyj_online='" + dyjflag + "',dyj_state='" + dyjflag + "',xcg_online='" + xcgflag + "',xcg_state='" + xcgflag + "',sh_online='" + shflag + "',sh_state='" + shflag + "',ncg_online='" + ncgflag + "',ncg_state='" + ncgflag + "',xdt_online='" + xdtflag + "',xdt_state='" + xdtflag + "',sgtz_online='" + sgtzflag + "',sgtz_state='" + sgtzflag + "',xy_online='" + xyflag + "',xy_state='" + xyflag + "',bc_online='" + bcflag + "',bc_state='" + bcflag + "' where ID='1'";
+            String sql = "update zkhw_state_device set";
+            if (sfzflag>-1) {
+                sql += " sfz_online='" + sfzflag + "',sfz_tate='" + sfzflag + "'";
+            }
+            if (sxtflag>-1) {
+                sql += "sxt_online='" + sxtflag + "',sxt_state='" + sxtflag + "'";
+            }
+            if (dyjflag > -1)
+            {
+                sql += "dyj_online ='" + dyjflag + "',dyj_state='" + dyjflag + "'";
+            }
+            if (xcgflag > -1)
+            {
+                sql += "xcg_online ='" + xcgflag + "',xcg_state='" + xcgflag + "'";
+            }
+            if (shflag > -1)
+            {
+                sql += "sh_online ='" + shflag + "',sh_state='" + shflag + "'";
+            }
+            if (ncgflag > -1)
+            {
+                sql += "ncg_online ='" + ncgflag + "',ncg_state='" + ncgflag + "'";
+            }
+            if (xdtflag > -1)
+            {
+                sql += "xdt_online ='" + xdtflag + "',xdt_state='" + xdtflag + "'";
+            }
+            if (sgtzflag > -1)
+            {
+                sql += "sgtz_online ='" + sgtzflag + "',sgtz_state='" + sgtzflag + "'";
+            }
+            if (xyflag > -1)
+            {
+                sql += "xy_online ='" + xyflag + "',xy_state='" + xyflag + "'";
+            }
+            if (bcflag > -1)
+            {
+                sql += "bc_online ='" + bcflag + "',bc_state='" + bcflag + "'";
+            }
+            sql +=  " where ID ='1'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
+
+        //获取设备的状态
+        public DataTable checkDevice()
+        {
+            DataSet ds = new DataSet();
+            String sql = "select sfz_online,sfz_tate,sxt_online,sxt_state,dyj_online,dyj_state,xcg_online,xcg_state,sh_online,sh_state,ncg_online,ncg_state,xdt_online,xdt_state,sgtz_online,sgtz_state,xy_online,xy_state,bc_online,bc_state from zkhw_state_device where ID='1'";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+
+        //根据血常规检查结果修改健康体检表对应信息
+        public bool updatePEXcgInfo(string aichive_no, string barcode, string blood_hemoglobin, string blood_leukocyte, string blood_platelet)
+        {
+            int ret = 0;
+            String sql = "update physical_examination_record set blood_hemoglobin='" + blood_hemoglobin + "',blood_leukocyte='" + blood_leukocyte + "',blood_platelet='" + blood_platelet + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
+        //根据生化检查结果修改健康体检表对应信息
+        public bool updatePEShInfo(string aichive_no, string barcode, string tc, string tg, string ldl,string hdl)
+        {
+            int ret = 0;
+            String sql = "update physical_examination_record set tc='" + tc + "',tg='" + tg + "',ldl='" + ldl + "',hdl='" + hdl + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }

@@ -23,7 +23,7 @@ namespace zkhwClient
         personRegist pR = null;
         Process proHttp = new Process();
         basicSettingDao bsdao = new basicSettingDao();
-        tjcheckDao thdao = new tjcheckDao();
+        tjcheckDao tjdao = new tjcheckDao();
         jkInfoDao jkdao = new jkInfoDao();
         private OleDbDataAdapter oda = null;
         private DataSet myds_data = null;
@@ -67,6 +67,9 @@ namespace zkhwClient
             this.timer1.Start();//时间控件定时器
             //this.timer2.Interval =Int32.Parse(Properties.Settings.Default.timeInterval);
             //this.timer2.Start();//定时获取生化和血球的数据
+
+            this.timer3.Interval =Int32.Parse(Properties.Settings.Default.timer3Interval);
+            this.timer3.Start();//定时获取生化和血球的数据
 
             this.label1.Text = "一体化查体车  中科弘卫";
             this.label1.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
@@ -873,9 +876,10 @@ namespace zkhwClient
                             default: break;
                         }
                     }
-                    bool istrue= thdao.insertShenghuaInfo(sh);
+                    bool istrue= tjdao.insertShenghuaInfo(sh);
                     if (istrue) {
-                        thdao.updateTJbgdcShenghua(sh.aichive_no,sh.bar_code,1);
+                        tjdao.updateTJbgdcShenghua(sh.aichive_no,sh.bar_code,1);
+                        tjdao.updatePEShInfo(sh.aichive_no, sh.bar_code, sh.CHO, sh.TG, sh.LDL_C,sh.HDL_C);
                     }
                 }
             }
@@ -932,10 +936,11 @@ namespace zkhwClient
                             default: break;
                         }
                     }
-                    bool istrue = thdao.insertXuechangguiInfo(xcg);
+                    bool istrue = tjdao.insertXuechangguiInfo(xcg);
                     if (istrue)
                     {
-                        thdao.updateTJbgdcXuechanggui(xcg.aichive_no, xcg.bar_code, 1);
+                        tjdao.updateTJbgdcXuechanggui(xcg.aichive_no, xcg.bar_code, 1);
+                        tjdao.updatePEXcgInfo(xcg.aichive_no, xcg.bar_code, xcg.HGB,xcg.WBC,xcg.PLT);
                     }
                 }
             }
@@ -1003,6 +1008,101 @@ namespace zkhwClient
         {
             checkXueya checkXy = new checkXueya();
             checkXy.Show();
+        }
+
+        //首页底部设备状态更新
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+          DataTable dtDeviceType = tjdao.checkDevice();
+          string sfz_online = dtDeviceType.Rows[0]["sfz_online"].ToString();
+            if (sfz_online == "0" || "0".Equals(sfz_online))
+            {
+                this.button1.BackColor = Color.Red;
+            }
+            else {
+                this.button1.BackColor = Color.MediumAquamarine;
+            }
+            string sxt_online = dtDeviceType.Rows[0]["sxt_online"].ToString();
+            if (sxt_online == "0" || "0".Equals(sxt_online))
+            {
+                this.button2.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button2.BackColor = Color.MediumAquamarine;
+            }
+            string dyj_online = dtDeviceType.Rows[0]["dyj_online"].ToString();
+            if (dyj_online == "0" || "0".Equals(dyj_online))
+            {
+                this.button3.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button3.BackColor = Color.MediumAquamarine;
+            }
+            string xcg_online = dtDeviceType.Rows[0]["xcg_online"].ToString();
+            if (xcg_online == "0" || "0".Equals(xcg_online))
+            {
+                this.button4.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button4.BackColor = Color.MediumAquamarine;
+            }
+            string sh_online = dtDeviceType.Rows[0]["sh_online"].ToString();
+            if (sh_online == "0" || "0".Equals(sh_online))
+            {
+                this.button5.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button5.BackColor = Color.MediumAquamarine;
+            }
+            string ncg_online = dtDeviceType.Rows[0]["ncg_online"].ToString();
+            if (ncg_online == "0" || "0".Equals(ncg_online))
+            {
+                this.button6.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button6.BackColor = Color.MediumAquamarine;
+            }
+            string xdt_online = dtDeviceType.Rows[0]["xdt_online"].ToString();
+            if (xdt_online == "0" || "0".Equals(xdt_online))
+            {
+                this.button7.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button7.BackColor = Color.MediumAquamarine;
+            }
+            string sgtz_online = dtDeviceType.Rows[0]["sgtz_online"].ToString();
+            if (sgtz_online == "0" || "0".Equals(sgtz_online))
+            {
+                this.button8.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button8.BackColor = Color.MediumAquamarine;
+            }
+            string xy_online = dtDeviceType.Rows[0]["xy_online"].ToString();
+            if (xy_online == "0" || "0".Equals(xy_online))
+            {
+                this.button9.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button9.BackColor = Color.MediumAquamarine;
+            }
+            string bc_online = dtDeviceType.Rows[0]["bc_online"].ToString();
+            if (bc_online == "0" || "0".Equals(bc_online))
+            {
+                this.button10.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button10.BackColor = Color.MediumAquamarine;
+            }
         }
     }
 }

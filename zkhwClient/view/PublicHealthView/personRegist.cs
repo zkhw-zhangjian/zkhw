@@ -480,7 +480,11 @@ namespace zkhwClient.view.PublicHealthView
                     else {
                         grjdxx.archive_no = basicInfoSettings.xcuncode + barcode.Substring(5,4);
                     }
-                    bool istrue = grjddao.addgrjdInfo(grjdxx);
+                    grjdxx.aichive_org = basicInfoSettings.organ_name;
+                    grjdxx.doctor_name = basicInfoSettings.zeren_doctor;
+                    grjdxx.create_archives_name = basicInfoSettings.input_name;
+                    grjddao.addgrjdInfo(grjdxx);//添加个人信息档案
+                    grjddao.addPhysicalExaminationInfo(grjdxx, barcode);//添加健康体检表信息
                 }
                 jkBean jk = new jkBean();
                 string archive_no= grjdxx.archive_no;
