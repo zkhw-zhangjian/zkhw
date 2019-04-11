@@ -25,7 +25,7 @@ namespace zkhwClient.bean
         public string link_name { get; set; }
         public string link_phone { get; set; }
         public string resident_type { get; set; }
-        public string register_address { get; set; }
+        public string address { get; set; }
         public string residence_address { get; set; }
         public string blood_group { get; set; }
         public string blood_rh { get; set; }
@@ -58,10 +58,8 @@ namespace zkhwClient.bean
         public string photo_code { get; set; }
         public string aichive_org { get; set; }
         public string doctor_name { get; set; }
+        public string create_archives_name { get; set; }
         public string is_signing { get; set; }
-        public string is_synchro { get; set; }
-        public string synchro_result { get; set; }
-        public string synchro_time { get; set; }
         public string create_user { get; set; }
         public string create_name { get; set; }
         public string create_time { get; set; }
@@ -71,5 +69,7 @@ namespace zkhwClient.bean
         public string update_name { get; set; }
         public string update_time { get; set; }
         public string remark { get; set; }
+        public string upload_status { get; set; }
+        public string upload_time { get; set; }
     }
 }

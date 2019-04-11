@@ -84,6 +84,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button10 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -94,7 +95,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.button10 = new System.Windows.Forms.Button();
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -570,6 +571,17 @@
             this.panel2.Size = new System.Drawing.Size(1352, 46);
             this.panel2.TabIndex = 17;
             // 
+            // button10
+            // 
+            this.button10.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.button10.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button10.Location = new System.Drawing.Point(1000, 9);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(106, 26);
+            this.button10.TabIndex = 16;
+            this.button10.Text = "条码打印机";
+            this.button10.UseVisualStyleBackColor = false;
+            // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -667,16 +679,10 @@
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // button10
+            // timer3
             // 
-            this.button10.BackColor = System.Drawing.Color.MediumAquamarine;
-            this.button10.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button10.Location = new System.Drawing.Point(1000, 9);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(106, 26);
-            this.button10.TabIndex = 16;
-            this.button10.Text = "条码打印机";
-            this.button10.UseVisualStyleBackColor = false;
+            this.timer3.Interval = 60000;
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
             // frmMain
             // 
@@ -781,6 +787,7 @@
         private System.Windows.Forms.ToolStripMenuItem 中间库位置设置ToolStripMenuItem;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Timer timer3;
     }
 }
 

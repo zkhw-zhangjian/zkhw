@@ -161,6 +161,7 @@
   <ItemGroup>
     <Compile Include="bean\diabetes_follow_recordBean.cs" />
     <Compile Include="bean\elderly_selfcare_estimateBean.cs" />
+    <Compile Include="bean\elderly_tcm_recordBean.cs" />
     <Compile Include="bean\fuv_hypertensionBean.cs" />
     <Compile Include="bean\grjdxxBean.cs" />
     <Compile Include="bean\jkBean.cs" />
@@ -187,6 +188,7 @@
     <Compile Include="dao\SystemSettingsDao\tjcheckDao.cs" />
     <Compile Include="dao\SystemSettingsDao\loginLogDao.cs" />
     <Compile Include="dao\SystemSettingsDao\UserDao.cs" />
+    <Compile Include="dao\PublicHealthDao\tcmHealthServicesDao.cs" />
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -210,6 +212,7 @@
     <Compile Include="service\PublicHealthService\diabetesPatientService.cs" />
     <Compile Include="service\PublicHealthService\hypertensionPatientService.cs" />
     <Compile Include="service\PublicHealthService\personalBasicInfoService.cs" />
+    <Compile Include="service\PublicHealthService\tcmHealthService.cs" />
     <Compile Include="utils\CVRSDK.cs" />
     <Compile Include="utils\FileWatcher.cs" />
     <Compile Include="view\PublicHealthView\aUolderHelthService.cs">
@@ -673,6 +676,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\personRegist.resx">
       <DependentUpon>personRegist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\tcmHealthServices.resx">
+      <DependentUpon>tcmHealthServices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\public\family_record.resx">
       <DependentUpon>family_record.cs</DependentUpon>

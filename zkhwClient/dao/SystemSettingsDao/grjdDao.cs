@@ -29,7 +29,17 @@ namespace zkhwClient.dao
             string id = Result.GetNewId();
             string time=DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string status = "1";
-            String sql = "insert into resident_base_info (id,archive_no,name,sex,birthday,age,id_number,card_pic,register_address,photo_code,create_time,create_name,aichive_org,is_synchro) values ('" + id + "','" + grjd.archive_no + "','" + grjd.name + "','" + grjd.Sex + "', '" + grjd.Birthday + "', '" + grjd.age + "', '" + grjd.Cardcode + "', '" + grjd.CardPic + "', '" + grjd.Zhuzhi + "', '" + grjd.photo_code + "', '" + time + "', '" + grjd.create_name + "', '" + grjd.aichive_org + "', '" + status + "')";
+            String sql = "insert into resident_base_info (id,archive_no,name,sex,birthday,age,id_number,card_pic,address,photo_code,status,create_time,create_name,aichive_org,doctor_name,create_archives_name) values ('" + id + "','" + grjd.archive_no + "','" + grjd.name + "','" + grjd.Sex + "', '" + grjd.Birthday + "', '" + grjd.age + "', '" + grjd.Cardcode + "', '" + grjd.CardPic + "', '" + grjd.Zhuzhi + "', '" + grjd.photo_code + "', '" + status + "', '" + time + "', '" + grjd.create_name + "', '" + grjd.aichive_org + "', '" + grjd.aichive_org + "', '" + grjd.aichive_org + "', '" + grjd.aichive_org + "', '" + grjd.aichive_org + "')";
+            rt = DbHelperMySQL.ExecuteSql(sql);
+            return rt == 0 ? false : true;
+        }
+        //添加居民健康体检表信息
+        public bool addPhysicalExaminationInfo(bean.grjdxxBean grjd,string barcode)
+        {
+            int rt = 0;
+            string id = Result.GetNewId();
+            string time = DateTime.Now.ToString("yyyy-MM-dd");
+            String sql = "insert into physical_examination_record (id,archive_no,name,id_number,bar_code,check_date,doctor_name,create_name,create_time) values ('" + id + "','" + grjd.archive_no + "','" + grjd.name + "','" + grjd.Cardcode + "', '" + barcode + "', '" + time + "', '" + grjd.doctor_name + "', '" + grjd.create_name + "', '" + grjd.create_time + "')";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
@@ -38,7 +48,7 @@ namespace zkhwClient.dao
         {
             int rt = 0;
             string id = Result.GetNewId();
-            string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            string time = DateTime.Now.ToString("yyyy-MM-dd  HH:mm:ss");
             string uploadstatus = "0";
             String sql = "insert into zkhw_tj_jk (ID,aichive_no,id_number,bar_code,name,age,sex,Pic1,Pic2,village_code,address,Xzhuzhi,XzjdName,CjwhName,JddwName,JdrName,ZrysName,Caozuoyuan,SjName,Carcode,createtime,upload_status) values ('" + id + "','" + jkbar.aichive_no + "','" + jkbar.id_number + "', '" + jkbar.bar_code + "', '" + jkbar.name + "', '" + jkbar.age + "', '" + jkbar.sex + "', '" + jkbar.Pic1 + "', '" + jkbar.Pic2 + "', '" + jkbar.village_code + "', '" + jkbar.address + "', '" + jkbar.Xzhudi + "', '" + jkbar.XzjdName + "', '" + jkbar.CjwhName + "', '" + jkbar.JddwName + "', '" + jkbar.JdrName + "', '" + jkbar.ZrysName + "', '" + jkbar.Caozuoyuan + "', '" + jkbar.SjName + "', '" + jkbar.Carcode + "', '" + time + "', '" + uploadstatus + "')";
             rt = DbHelperMySQL.ExecuteSql(sql);
@@ -83,5 +93,6 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
+
     }
 }
