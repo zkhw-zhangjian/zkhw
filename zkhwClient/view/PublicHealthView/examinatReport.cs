@@ -537,27 +537,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                             switch (ctrl.Text)
                             {
                                 case "化验报告单":
-                                    sql = $@"select * from resident_base_info base
-join
-(select * from (select * from physical_examination_record order by create_time desc) as a group by aichive_no order by create_time desc) record
-on base.archive_no=record.aichive_no
-join 
-(select * from (select * from zkhw_tj_sh order by createtime desc) as a group by aichive_no order by createtime desc) sh
-on base.archive_no=sh.aichive_no
-join
-(select * from (select * from zkhw_tj_xcg order by createtime desc) as a group by aichive_no order by createtime desc)xcg
-on base.archive_no=xcg.aichive_no
-join
-(select * from (select * from zkhw_tj_ncg order by createtime desc) as a group by aichive_no order by createtime desc) ncg
-on base.archive_no=ncg.aichive_no
-where base.archive_no in('{string.Join(",", ide)}')";
-                                    DataSet data = DbHelperMySQL.Query(sql);
-                                    if (data != null && data.Tables.Count > 0)
-                                    {
-                                        DataTable hy = data.Tables[0].Copy();
-                                        hy.TableName = "化验报告单";
-                                        dataSet.Tables.Add(hy);
-                                    }
+
                                     break;
                                 case "个人信息":
 
@@ -594,15 +574,7 @@ where base.archive_no in('{string.Join(",", ide)}')";
                     foreach (var items in list)
                     {
                         Report report = new Report();
-                        DataRow data = null;
-                        if (item == "封面" || item == "个人信息")
-                        {
-                            data = dataSet.Tables["个人"].Select($"archive_no={item}")[0];
-                        }
-                        else
-                        {
-                            data = dataSet.Tables[items].Select($"archive_no={item}")[0];
-                        }
+                        DataRow data = dataSet.Tables["个人"].Select($"archive_no={item}")[0];
                         report.Name = items;
                         report.Doc = PdfProcessing(items, data);
                         reports.Add(report);
@@ -970,7 +942,6 @@ where base.archive_no in('{string.Join(",", ide)}')";
                     doc = new Document(@str + $"/up/template/化验报告单.doc");
                     builder = new DocumentBuilder(doc);
                     var hy = new Dictionary<string, string>();
-                    hy.Add("条码号", data["bar_code"].ToString());
                     hy.Add("地址", data["address"].ToString());
                     hy.Add("姓名", data["name"].ToString());
                     hy.Add("姓名1", data["name"].ToString());
@@ -980,62 +951,163 @@ where base.archive_no in('{string.Join(",", ide)}')";
                     hy.Add("生日1", data["birthday"].ToString());
                     hy.Add("身份证号", data["id_number"].ToString());
                     hy.Add("身份证号1", data["id_number"].ToString());
-                    hy.Add("身高", data["base_height"].ToString());
-                    hy.Add("体重", data["base_weight"].ToString());
-                    hy.Add("BMI", data["base_bmi"].ToString());
-                    hy.Add("腰围", data["base_waist"].ToString());
-                    hy.Add("体温", data["base_temperature"].ToString());
-                    hy.Add("呼吸频率", data["base_respiratory"].ToString());
-                    hy.Add("脉率", data["base_heartbeat"].ToString());
-                    hy.Add("左侧高压", data["base_blood_pressure_left_high"].ToString());
-                    hy.Add("左侧低压", data["base_blood_pressure_left_low"].ToString());
-                    hy.Add("右侧高压", data["base_blood_pressure_right_high"].ToString());
-                    hy.Add("右侧低压", data["base_blood_pressure_right_low"].ToString());
-                    hy.Add("白蛋白箭头", Convert.ToInt32(data["ALB"].ToString())>54?"↑":"↓");
-                    hy.Add("白蛋白结果", data["ALB"].ToString());
-                    hy.Add("碱性磷酸酶箭头", Convert.ToInt32(data["ALP"].ToString()) >100 ? "↑" : "↓");
-                    hy.Add("碱性磷酸酶结果", data["ALP"].ToString());
-                    hy.Add("谷丙转氨酶箭头", Convert.ToInt32(data["ALT"].ToString()) > 40 ? "↑" : "↓");
-                    hy.Add("谷丙转氨酶结果", data["ALT"].ToString());
-                    hy.Add("谷草转氨酶箭头", Convert.ToInt32(data["AST"].ToString()) > 40 ? "↑" : "↓");
-                    hy.Add("谷草转氨酶结果", data["AST"].ToString());
-                    hy.Add("胆固醇箭头", Convert.ToInt32(data["CHO"].ToString()) > 5 ? "↑" : "↓");
-                    hy.Add("胆固醇结果", data["CHO"].ToString());
-                    hy.Add("肌酐箭头", Convert.ToInt32(data["CREA"].ToString()) > 104 ? "↑" : "↓");
-                    hy.Add("肌酐结果", data["CREA"].ToString());
-                    hy.Add("直接胆红素箭头", Convert.ToInt32(data["DBIL"].ToString()) > 7 ? "↑" : "↓");
-                    hy.Add("直接胆红素结果", data["DBIL"].ToString());
-                    hy.Add("谷氨酰氨基箭头", Convert.ToInt32(data["GGT"].ToString()) > 50 ? "↑" : "↓");
-                    hy.Add("谷氨酰氨基结果", data["GGT"].ToString());
-                    hy.Add("葡萄糖箭头", Convert.ToInt32(data["GLU"].ToString()) > 6 ? "↑" : "↓");
-                    hy.Add("葡萄糖结果", data["GLU"].ToString());
-                    hy.Add("高密度脂蛋白箭头", Convert.ToInt32(data["HDLC"].ToString()) > 2 ? "↑" : "↓");
-                    hy.Add("高密度脂蛋白结果", data["HDLC"].ToString());
-                    hy.Add("低密度脂蛋白箭头", Convert.ToInt32(data["LDLC"].ToString()) > 4 ? "↑" : "↓");
-                    hy.Add("低密度脂蛋白结果", data["LDLC"].ToString());
-                    hy.Add("总胆红素箭头", Convert.ToInt32(data["TBIL"].ToString()) > 19 ? "↑" : "↓");
-                    hy.Add("总胆红素结果", data["TBIL"].ToString());
-                    hy.Add("甘油三酯箭头", Convert.ToInt32(data["TG"].ToString()) > 2 ? "↑" : "↓");
-                    hy.Add("甘油三酯结果", data["TG"].ToString());
-                    hy.Add("总蛋白箭头", Convert.ToInt32(data["TP"].ToString()) > 19 ? "↑" : "↓");
-                    hy.Add("总蛋白结果", data["TP"].ToString());
-                    hy.Add("尿酸箭头", Convert.ToInt32(data["UA"].ToString()) > 2 ? "↑" : "↓");
-                    hy.Add("尿酸结果", data["UA"].ToString());
-                    hy.Add("尿素箭头", Convert.ToInt32(data["UREA"].ToString()) > 83 ? "↑" : "↓");
-                    hy.Add("尿素结果", data["UREA"].ToString());
-                    hy.Add("送检日期", data["check_date"].ToString());
-                    hy.Add("送检日期1", data["check_date"].ToString());
-                    hy.Add("审核", data["check_date"].ToString());
-                    hy.Add("审核1", data["check_date"].ToString());
-                    hy.Add("报告日期", DateTime.Now.ToString("yyyy-MM-dd"));
-                    hy.Add("报告日期1", DateTime.Now.ToString("yyyy-MM-dd"));
-                    hy.Add("白蛋白箭头", Convert.ToInt32(data["ALB"].ToString()) > 54 ? "↑" : "↓");                                   
-                    hy.Add("送检日期", data["ALB"].ToString());
+                    DataSet jk = DbHelperMySQL.Query($"select * from physical_examination_record where aichive_no='{data["archive_no"].ToString()}' order by create_time desc LIMIT 1");
+                    if (jk != null && jk.Tables.Count > 0 && jk.Tables[0].Rows.Count > 0)
+                    {
+                        DataTable da = jk.Tables[0];
+                        for (int j = 0; j < da.Rows.Count; j++)
+                        {
+                            hy.Add("条码号", da.Rows[j]["bar_code"].ToString());
+                            hy.Add("身高", da.Rows[j]["base_height"].ToString());
+                            hy.Add("体重", da.Rows[j]["base_weight"].ToString());
+                            hy.Add("BMI", da.Rows[j]["base_bmi"].ToString());
+                            hy.Add("腰围", da.Rows[j]["base_waist"].ToString());
+                            hy.Add("体温", da.Rows[j]["base_temperature"].ToString());
+                            hy.Add("呼吸频率", da.Rows[j]["base_respiratory"].ToString());
+                            hy.Add("脉率", da.Rows[j]["base_heartbeat"].ToString());
+                            hy.Add("左侧高压", da.Rows[j]["base_blood_pressure_left_high"].ToString());
+                            hy.Add("左侧低压", da.Rows[j]["base_blood_pressure_left_low"].ToString());
+                            hy.Add("右侧高压", da.Rows[j]["base_blood_pressure_right_high"].ToString());
+                            hy.Add("右侧低压", da.Rows[j]["base_blood_pressure_right_low"].ToString());
+                            hy.Add("送检日期", da.Rows[j]["check_da.Rowste"].ToString());
+                            hy.Add("审核", "");
+                            hy.Add("审核1", "");
+                            hy.Add("报告日期", DateTime.Now.ToString("yyyy-MM-dd"));
+                            hy.Add("报告日期1", DateTime.Now.ToString("yyyy-MM-dd"));
+                        }
+                    }
+                    DataSet sh = DbHelperMySQL.Query($"select * from zkhw_tj_sh where aichive_no='{data["archive_no"].ToString()}' order by create_time desc LIMIT 1");
+                    if (sh != null && sh.Tables.Count > 0 && sh.Tables[0].Rows.Count > 0)
+                    {
+                        DataTable da = sh.Tables[0];
+                        for (int j = 0; j < da.Rows.Count; j++)
+                        {
+                            hy.Add("白蛋白箭头", Convert.ToDouble(da.Rows[j]["ALB"].ToString()) > 54 ? "↑" : "↓");
+                            hy.Add("白蛋白结果", da.Rows[j]["ALB"].ToString());
+                            hy.Add("碱性磷酸酶箭头", Convert.ToDouble(da.Rows[j]["ALP"].ToString()) > 100 ? "↑" : "↓");
+                            hy.Add("碱性磷酸酶结果", da.Rows[j]["ALP"].ToString());
+                            hy.Add("谷丙转氨酶箭头", Convert.ToDouble(da.Rows[j]["ALT"].ToString()) > 40 ? "↑" : "↓");
+                            hy.Add("谷丙转氨酶结果", da.Rows[j]["ALT"].ToString());
+                            hy.Add("谷草转氨酶箭头", Convert.ToDouble(da.Rows[j]["AST"].ToString()) > 40 ? "↑" : "↓");
+                            hy.Add("谷草转氨酶结果", da.Rows[j]["AST"].ToString());
+                            hy.Add("胆固醇箭头", Convert.ToDouble(da.Rows[j]["CHO"].ToString()) > 5 ? "↑" : "↓");
+                            hy.Add("胆固醇结果", da.Rows[j]["CHO"].ToString());
+                            hy.Add("肌酐箭头", Convert.ToDouble(da.Rows[j]["CREA"].ToString()) > 104 ? "↑" : "↓");
+                            hy.Add("肌酐结果", da.Rows[j]["CREA"].ToString());
+                            hy.Add("直接胆红素箭头", Convert.ToDouble(da.Rows[j]["DBIL"].ToString()) > 7 ? "↑" : "↓");
+                            hy.Add("直接胆红素结果", da.Rows[j]["DBIL"].ToString());
+                            hy.Add("谷氨酰氨基箭头", Convert.ToDouble(da.Rows[j]["GGT"].ToString()) > 50 ? "↑" : "↓");
+                            hy.Add("谷氨酰氨基结果", da.Rows[j]["GGT"].ToString());
+                            hy.Add("葡萄糖箭头", Convert.ToDouble(da.Rows[j]["GLU"].ToString()) > 6 ? "↑" : "↓");
+                            hy.Add("葡萄糖结果", da.Rows[j]["GLU"].ToString());
+                            hy.Add("高密度脂蛋白箭头", Convert.ToDouble(da.Rows[j]["HDLC"].ToString()) > 2 ? "↑" : "↓");
+                            hy.Add("高密度脂蛋白结果", da.Rows[j]["HDLC"].ToString());
+                            hy.Add("低密度脂蛋白箭头", Convert.ToDouble(da.Rows[j]["LDLC"].ToString()) > 4 ? "↑" : "↓");
+                            hy.Add("低密度脂蛋白结果", da.Rows[j]["LDLC"].ToString());
+                            hy.Add("总胆红素箭头", Convert.ToDouble(da.Rows[j]["TBIL"].ToString()) > 19 ? "↑" : "↓");
+                            hy.Add("总胆红素结果", da.Rows[j]["TBIL"].ToString());
+                            hy.Add("甘油三酯箭头", Convert.ToDouble(da.Rows[j]["TG"].ToString()) > 2 ? "↑" : "↓");
+                            hy.Add("甘油三酯结果", da.Rows[j]["TG"].ToString());
+                            hy.Add("总蛋白箭头", Convert.ToDouble(da.Rows[j]["TP"].ToString()) > 19 ? "↑" : "↓");
+                            hy.Add("总蛋白结果", da.Rows[j]["TP"].ToString());
+                            hy.Add("尿酸箭头", Convert.ToDouble(da.Rows[j]["UA"].ToString()) > 2 ? "↑" : "↓");
+                            hy.Add("尿酸结果", da.Rows[j]["UA"].ToString());
+                            hy.Add("尿素箭头", Convert.ToDouble(da.Rows[j]["UREA"].ToString()) > 83 ? "↑" : "↓");
+                            hy.Add("尿素结果", da.Rows[j]["UREA"].ToString());
+                        }
+                    }
+
+                    DataSet xcg = DbHelperMySQL.Query($"select * from zkhw_tj_xcg where aichive_no='{data["archive_no"].ToString()}' order by createtime desc LIMIT 1");
+                    if (xcg != null && xcg.Tables.Count > 0 && xcg.Tables[0].Rows.Count > 0)
+                    {
+                        DataTable da = xcg.Tables[0];
+                        for (int j = 0; j < da.Rows.Count; j++)
+                        {
+                            hy.Add("红细胞压积箭头", Convert.ToDouble(da.Rows[j]["HCT"].ToString()) > 50 ? "↑" : "↓");
+                            hy.Add("红细胞压积结果", da.Rows[j]["HCT"].ToString());
+                            hy.Add("血红蛋白箭头", Convert.ToDouble(da.Rows[j]["HGB"].ToString()) > 160 ? "↑" : "↓");
+                            hy.Add("血红蛋白结果", da.Rows[j]["HGB"].ToString());
+                            hy.Add("淋巴细胞数目箭头", Convert.ToDouble(da.Rows[j]["LYM"].ToString()) > 4 ? "↑" : "↓");
+                            hy.Add("淋巴细胞数目结果", da.Rows[j]["LYM"].ToString());
+                            hy.Add("淋巴细胞百分比箭头", Convert.ToDouble(da.Rows[j]["LYMP"].ToString()) > 40 ? "↑" : "↓");
+                            hy.Add("淋巴细胞百分比结果", da.Rows[j]["LYMP"].ToString());
+                            hy.Add("平均血红蛋白含量箭头", Convert.ToDouble(da.Rows[j]["MCH"].ToString()) > 40 ? "↑" : "↓");
+                            hy.Add("平均血红蛋白含量结果", da.Rows[j]["MCH"].ToString());
+                            hy.Add("平均血红蛋白浓度箭头", Convert.ToDouble(da.Rows[j]["MCHC"].ToString()) > 360 ? "↑" : "↓");
+                            hy.Add("平均血红蛋白浓度结果", da.Rows[j]["MCHC"].ToString());
+                            hy.Add("平均红细胞体积箭头", Convert.ToDouble(da.Rows[j]["MCV"].ToString()) > 95 ? "↑" : "↓");
+                            hy.Add("平均红细胞体积结果", da.Rows[j]["MCV"].ToString());
+                            hy.Add("平均血小板体积箭头", Convert.ToDouble(da.Rows[j]["MPV"].ToString()) > 11 ? "↑" : "↓");
+                            hy.Add("平均血小板体积结果", da.Rows[j]["MPV"].ToString());
+                            hy.Add("中间细胞数目箭头", Convert.ToDouble(da.Rows[j]["MXD"].ToString()) > 0.9 ? "↑" : "↓");
+                            hy.Add("中间细胞数目结果", da.Rows[j]["MXD"].ToString());
+                            hy.Add("中间细胞百分比箭头", Convert.ToDouble(da.Rows[j]["MXDP"].ToString()) > 12 ? "↑" : "↓");
+                            hy.Add("中间细胞百分比结果", da.Rows[j]["MXDP"].ToString());
+                            hy.Add("中性粒细胞数目箭头", Convert.ToDouble(da.Rows[j]["NEUT"].ToString()) > 7 ? "↑" : "↓");
+                            hy.Add("中性粒细胞数目结果", da.Rows[j]["NEUT"].ToString());
+                            hy.Add("中性粒细胞百分比箭头", Convert.ToDouble(da.Rows[j]["NEUTP"].ToString()) > 70 ? "↑" : "↓");
+                            hy.Add("中性粒细胞百分比结果", da.Rows[j]["NEUTP"].ToString());
+                            hy.Add("血小板压积箭头", Convert.ToDouble(da.Rows[j]["PCT"].ToString()) > 0.4 ? "↑" : "↓");
+                            hy.Add("血小板压积结果", da.Rows[j]["PCT"].ToString());
+                            hy.Add("血小板分布宽度箭头", Convert.ToDouble(da.Rows[j]["PDW"].ToString()) > 17 ? "↑" : "↓");
+                            hy.Add("血小板分布宽度结果", da.Rows[j]["PDW"].ToString());
+                            hy.Add("血小板数目箭头", Convert.ToDouble(da.Rows[j]["PLT"].ToString()) > 300 ? "↑" : "↓");
+                            hy.Add("血小板数目结果", da.Rows[j]["PLT"].ToString());
+                            hy.Add("红细胞数目箭头", Convert.ToDouble(da.Rows[j]["RBC"].ToString()) > 5.5 ? "↑" : "↓");
+                            hy.Add("红细胞数目结果", da.Rows[j]["RBC"].ToString());
+                            hy.Add("红细胞分布宽度CV箭头", Convert.ToDouble(da.Rows[j]["RDWCV"].ToString()) > 18 ? "↑" : "↓");
+                            hy.Add("红细胞分布宽度CV结果", da.Rows[j]["RDWCV"].ToString());
+                            hy.Add("红细胞分布宽度SD箭头", Convert.ToDouble(da.Rows[j]["RDWSD"].ToString()) > 56 ? "↑" : "↓");
+                            hy.Add("红细胞分布宽度SD结果", da.Rows[j]["RDWSD"].ToString());
+                            hy.Add("白细胞数目箭头", Convert.ToDouble(da.Rows[j]["WBC"].ToString()) > 10 ? "↑" : "↓");
+                            hy.Add("白细胞数目结果", da.Rows[j]["WBC"].ToString());
+                        }
+                    }
+
+                    DataSet ncg = DbHelperMySQL.Query($"select * from zkhw_tj_ncg where aichive_no='{data["archive_no"].ToString()}' order by createtime desc LIMIT 1");
+                    if (ncg != null && ncg.Tables.Count > 0 && ncg.Tables[0].Rows.Count > 0)
+                    {
+                        DataTable da = ncg.Tables[0];
+                        for (int j = 0; j < da.Rows.Count; j++)
+                        {
+                            hy.Add("白细胞结果", da.Rows[j]["WBC"].ToString());
+                            hy.Add("酮体结果", da.Rows[j]["KET"].ToString());
+                            hy.Add("亚硝酸盐结果", da.Rows[j]["NIT"].ToString());
+                            hy.Add("胆红素结果", da.Rows[j]["BIL"].ToString());
+                            hy.Add("蛋白质结果", da.Rows[j]["PRO"].ToString());
+                            hy.Add("尿液葡萄糖结果", da.Rows[j]["GLU"].ToString());
+                            hy.Add("尿比重箭头", Convert.ToDouble(da.Rows[j]["SG"].ToString()) > 1.035 ? "↑" : "↓");
+                            hy.Add("尿比重结果", da.Rows[j]["SG"].ToString());
+                            hy.Add("隐血结果", da.Rows[j]["BLD"].ToString());
+                            hy.Add("酸碱度箭头", Convert.ToDouble(da.Rows[j]["PH"].ToString()) > 8 ? "↑" : "↓");
+                            hy.Add("酸碱度结果", da.Rows[j]["PH"].ToString());
+                            hy.Add("维生素C箭头", Convert.ToDouble(da.Rows[j]["Vc"].ToString()) > 40 ? "↑" : "↓");
+                            hy.Add("维生素C结果", da.Rows[j]["Vc"].ToString());
+                        }
+                    }
+
                     //书签替换
                     foreach (var key in hy.Keys)
                     {
                         builder.MoveToBookmark(key);
                         builder.Write(hy[key]);
+                    }
+                    return doc;
+                #endregion
+
+                #region 
+                case "健康体检表":
+                    doc = new Document(@str + $"/up/template/健康体检表.doc");
+                    builder = new DocumentBuilder(doc);
+                    var jktj = new Dictionary<string, string>();
+                    jktj.Add("地址", data["address"].ToString());
+
+
+                    //书签替换
+                    foreach (var key in jktj.Keys)
+                    {
+                        builder.MoveToBookmark(key);
+                        builder.Write(jktj[key]);
                     }
                     return doc;
                 #endregion
