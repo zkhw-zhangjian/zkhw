@@ -110,10 +110,10 @@ namespace zkhwClient.bean
         public string doctor_name { get; set; }
         //是否签约
         public string is_signing { get; set; }
-        //是否同步
-        public string is_synchro { get; set; }//标记页面未用
-        //同步结果（成功/失败）
-        public string synchro_result { get; set; }//
+        ////是否同步
+        //public string is_synchro { get; set; }//标记页面未用
+        ////同步结果（成功/失败）
+        //public string synchro_result { get; set; }//
         //同步时间
         public string synchro_time { get; set; }//
         //create_user

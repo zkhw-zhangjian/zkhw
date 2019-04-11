@@ -35,6 +35,7 @@ namespace zkhwClient.view.PublicHealthView
             label4.Left = (this.panel1.Width - this.label4.Width) / 2;
             label4.BringToFront();
 
+            //if (aichive_no != "") { pCa = aichive_no; }
             button5_Click(null,null);
         }
         private void button5_Click(object sender, EventArgs e)
@@ -61,7 +62,7 @@ namespace zkhwClient.view.PublicHealthView
             this.dataGridView1.Columns[3].HeaderCell.Value = "创建人";
             this.dataGridView1.Columns[4].HeaderCell.Value = "创建时间";
             this.dataGridView1.Columns[5].HeaderCell.Value = "责任医生";
-            this.dataGridView1.Columns[6].HeaderCell.Value = "数据状态";
+            this.dataGridView1.Columns[6].HeaderCell.Value = "同步时间";
 
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;

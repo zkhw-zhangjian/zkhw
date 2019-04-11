@@ -570,7 +570,7 @@ namespace zkhwClient.view.PublicHealthView
             resident_base_infoBean.is_deformity = "0";
             resident_base_infoBean.is_poor = "0";
             resident_base_infoBean.is_signing = "0";
-            resident_base_infoBean.is_synchro = "0";
+
 
 
             bool isfalse = personalBasicInfoService.aUpersonalBasicInfo(resident_base_infoBean, id, goodsList, goodsList0, goodsList1, goodsList2, goodsList3);
