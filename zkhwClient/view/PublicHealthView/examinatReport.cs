@@ -188,8 +188,8 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                 {
                     buttonColumn = new DataGridViewButtonColumn();
                     buttonColumn.Name = "btnModify";
-                    buttonColumn.HeaderText = "修改";
-                    buttonColumn.DefaultCellStyle.NullValue = "修改";
+                    buttonColumn.HeaderText = "";
+                    buttonColumn.DefaultCellStyle.NullValue = "查看报告";
                     dataGridView1.Columns.Add(buttonColumn);
                 }
                 checkColumn = new DataGridViewCheckBoxColumn(); //插入第0列 
@@ -534,17 +534,6 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                         if (((CheckBox)ctrl).Checked)
                         {
                             list.Add(ctrl.Text);
-                            switch (ctrl.Text)
-                            {
-                                case "化验报告单":
-
-                                    break;
-                                case "个人信息":
-
-                                    break;
-                                default:
-                                    break;
-                            }
                         }
                     }
                 }
@@ -553,12 +542,19 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                     MessageBox.Show("综合报告单不能和其它报告一起！");
                 }
                 PDF(list, dataSet, ide);
-                MessageBox.Show("成功！");
+                DialogResult dr = MessageBox.Show("成功！是否打开文件夹",
+                                 "提示",
+                                 MessageBoxButtons.OKCancel,
+                                 MessageBoxIcon.Warning);
+                if (dr == DialogResult.OK)
+                {
+                    string str = Application.StartupPath;//项目路径
+                    OpenPdf(@str + $"/up/result/");
+                }
             }
             catch (Exception ex)
             {
-
-                throw;
+                MessageBox.Show("错误请联系管理员！");
             }
         }
 
@@ -581,30 +577,30 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                     }
                     Report re = reports.Where(m => m.Name == "封面").FirstOrDefault();
                     Report res = reports.Where(m => m.Name == "个人信息").FirstOrDefault();
-                    if (re != null)
+                    if (re != null && res != null)
                     {
-                        if (res != null)
+                        re.Doc.AppendDocument(res.Doc, ImportFormatMode.KeepSourceFormatting);
+                        reports.Remove(re);
+                        reports.Remove(res);
+                        if (reports != null && reports.Count > 0)
                         {
-                            re.Doc.AppendDocument(res.Doc, ImportFormatMode.KeepSourceFormatting);
-                            reports.Remove(re);
-                            reports.Remove(res);
-                            if (reports != null && reports.Count > 0)
+                            foreach (var rs in reports)
                             {
-                                foreach (var rs in reports)
-                                {
-                                    re.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
-                                }
+                                re.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
                             }
                         }
-                        else
+                        string urls = @str + $"/up/result/{item}.pdf";
+                        DeteleFile(urls);
+                        re.Doc.Save(urls, SaveFormat.Pdf);
+                    }
+                    else if (re != null)
+                    {
+                        reports.Remove(re);
+                        if (reports != null && reports.Count > 0)
                         {
-                            reports.Remove(re);
-                            if (reports != null && reports.Count > 0)
+                            foreach (var rs in reports)
                             {
-                                foreach (var rs in reports)
-                                {
-                                    re.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
-                                }
+                                re.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
                             }
                         }
                         string urls = @str + $"/up/result/{item}.pdf";
@@ -644,30 +640,53 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
             }
             else
             {
-                switch (list[0])
+                if (list[0] == "综合报告单")
                 {
-                    case "封面":
-                        for (int i = 0; i < dataSet.Tables["个人"].Rows.Count; i++)
+                    List<string> vs = new List<string>();
+                    vs.Add("封面");
+                    vs.Add("个人信息");
+                    vs.Add("化验报告单");
+                    vs.Add("健康体检表");
+                    vs.Add("心电图");
+                    vs.Add("B超");
+                    vs.Add("老年人生活自理能力评估");
+                    vs.Add("中医体质");
+                    vs.Add("结果");
+                    for (int i = 0; i < dataSet.Tables["个人"].Rows.Count; i++)
+                    {
+                        List<Report> reports = new List<Report>();
+                        DataRow data = dataSet.Tables["个人"].Rows[i];
+                        foreach (var item in vs)
                         {
-                            DataRow data = dataSet.Tables["个人"].Rows[i];
-                            doc = PdfProcessing(list[0], data);
-                            string urls = @str + $"/up/result/{data["archive_no"].ToString()}.pdf";
-                            DeteleFile(urls);
-                            doc.Save(urls, SaveFormat.Pdf);
+                            Report report = new Report();
+                            report.Doc = PdfProcessing(item, data);
+                            report.Name = item;
+                            reports.Add(report);
                         }
-                        break;
-                    case "个人信息":
-                        for (int i = 0; i < dataSet.Tables["个人"].Rows.Count; i++)
+                        Report re = reports.Where(m => m.Name == "封面").FirstOrDefault();
+                        Report res = reports.Where(m => m.Name == "个人信息").FirstOrDefault();
+                        re.Doc.AppendDocument(res.Doc, ImportFormatMode.KeepSourceFormatting);
+                        reports.Remove(re);
+                        reports.Remove(res);
+                        foreach (var item in reports)
                         {
-                            DataRow data = dataSet.Tables["个人"].Rows[i];
-                            doc = PdfProcessing(list[0], data);
-                            string urls = @str + $"/up/result/{data["archive_no"].ToString()}.pdf";
-                            DeteleFile(urls);
-                            doc.Save(urls, SaveFormat.Pdf);
+                            re.Doc.AppendDocument(item.Doc, ImportFormatMode.KeepSourceFormatting);
                         }
-                        break;
-                    default:
-                        break;
+                        string urls = @str + $"/up/result/{data["archive_no"].ToString()}.pdf";
+                        DeteleFile(urls);
+                        doc.Save(urls, SaveFormat.Pdf);
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < dataSet.Tables["个人"].Rows.Count; i++)
+                    {
+                        DataRow data = dataSet.Tables["个人"].Rows[i];
+                        doc = PdfProcessing(list[0], data);
+                        string urls = @str + $"/up/result/{data["archive_no"].ToString()}.pdf";
+                        DeteleFile(urls);
+                        doc.Save(urls, SaveFormat.Pdf);
+                    }
                 }
             }
         }
@@ -678,6 +697,12 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
             string str = Application.StartupPath;//项目路径
             Document doc = null;
             DocumentBuilder builder = null;
+            DataTable jkdata = null;
+            DataSet jk = DbHelperMySQL.Query($"select * from physical_examination_record where aichive_no='{data["archive_no"].ToString()}' order by create_time desc LIMIT 1");
+            if (jk != null && jk.Tables.Count > 0 && jk.Tables[0].Rows.Count > 0)
+            {
+                jkdata = jk.Tables[0];
+            }
             switch (lx)
             {
                 #region 封面
@@ -789,8 +814,8 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                         {
                             dics.Add("疾病" + (j + 1), da.Rows[j]["disease_type"].ToString());
                             string time = da.Rows[j]["disease_date"].ToString();
-                            dics.Add("疾病时间" + (j + 1) + "年", time.Split('-')[0]);
-                            dics.Add("疾病时间" + (j + 1) + "月", time.Split('-')[1]);
+                            dics.Add("疾病时间" + (j + 1) + "年", time?.Split('-')[0]);
+                            dics.Add("疾病时间" + (j + 1) + "月", time?.Split('-')[1]);
                         }
                     }
                     DataSet datas = DbHelperMySQL.Query($"SELECT * from operation_record where resident_base_info_id='{data["id"].ToString()}'");
@@ -951,31 +976,32 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                     hy.Add("生日1", data["birthday"].ToString());
                     hy.Add("身份证号", data["id_number"].ToString());
                     hy.Add("身份证号1", data["id_number"].ToString());
-                    DataSet jk = DbHelperMySQL.Query($"select * from physical_examination_record where aichive_no='{data["archive_no"].ToString()}' order by create_time desc LIMIT 1");
-                    if (jk != null && jk.Tables.Count > 0 && jk.Tables[0].Rows.Count > 0)
+
+                    if (jkdata != null && jkdata.Rows.Count > 0)
                     {
-                        DataTable da = jk.Tables[0];
-                        for (int j = 0; j < da.Rows.Count; j++)
+                        for (int j = 0; j < jkdata.Rows.Count; j++)
                         {
-                            hy.Add("条码号", da.Rows[j]["bar_code"].ToString());
-                            hy.Add("身高", da.Rows[j]["base_height"].ToString());
-                            hy.Add("体重", da.Rows[j]["base_weight"].ToString());
-                            hy.Add("BMI", da.Rows[j]["base_bmi"].ToString());
-                            hy.Add("腰围", da.Rows[j]["base_waist"].ToString());
-                            hy.Add("体温", da.Rows[j]["base_temperature"].ToString());
-                            hy.Add("呼吸频率", da.Rows[j]["base_respiratory"].ToString());
-                            hy.Add("脉率", da.Rows[j]["base_heartbeat"].ToString());
-                            hy.Add("左侧高压", da.Rows[j]["base_blood_pressure_left_high"].ToString());
-                            hy.Add("左侧低压", da.Rows[j]["base_blood_pressure_left_low"].ToString());
-                            hy.Add("右侧高压", da.Rows[j]["base_blood_pressure_right_high"].ToString());
-                            hy.Add("右侧低压", da.Rows[j]["base_blood_pressure_right_low"].ToString());
-                            hy.Add("送检日期", da.Rows[j]["check_da.Rowste"].ToString());
+                            hy.Add("条码号", jkdata.Rows[j]["bar_code"].ToString());
+                            hy.Add("身高", jkdata.Rows[j]["base_height"].ToString());
+                            hy.Add("体重", jkdata.Rows[j]["base_weight"].ToString());
+                            hy.Add("BMI", jkdata.Rows[j]["base_bmi"].ToString());
+                            hy.Add("腰围", jkdata.Rows[j]["base_waist"].ToString());
+                            hy.Add("体温", jkdata.Rows[j]["base_temperature"].ToString());
+                            hy.Add("呼吸频率", jkdata.Rows[j]["base_respiratory"].ToString());
+
+                            hy.Add("脉率", jkdata.Rows[j]["base_heartbeat"].ToString());
+                            hy.Add("左侧高压", jkdata.Rows[j]["base_blood_pressure_left_high"].ToString());
+                            hy.Add("左侧低压", jkdata.Rows[j]["base_blood_pressure_left_low"].ToString());
+                            hy.Add("右侧高压", jkdata.Rows[j]["base_blood_pressure_right_high"].ToString());
+                            hy.Add("右侧低压", jkdata.Rows[j]["base_blood_pressure_right_low"].ToString());
+                            hy.Add("送检日期", jkdata.Rows[j]["check_da.Rowste"].ToString());
                             hy.Add("审核", "");
                             hy.Add("审核1", "");
                             hy.Add("报告日期", DateTime.Now.ToString("yyyy-MM-dd"));
                             hy.Add("报告日期1", DateTime.Now.ToString("yyyy-MM-dd"));
                         }
                     }
+
                     DataSet sh = DbHelperMySQL.Query($"select * from zkhw_tj_sh where aichive_no='{data["archive_no"].ToString()}' order by create_time desc LIMIT 1");
                     if (sh != null && sh.Tables.Count > 0 && sh.Tables[0].Rows.Count > 0)
                     {
@@ -1095,19 +1121,626 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                     return doc;
                 #endregion
 
-                #region 
+                #region 健康体检表
                 case "健康体检表":
                     doc = new Document(@str + $"/up/template/健康体检表.doc");
                     builder = new DocumentBuilder(doc);
                     var jktj = new Dictionary<string, string>();
-                    jktj.Add("地址", data["address"].ToString());
-
+                    string jkbh = data["archive_no"].ToString();
+                    jkbh = jkbh.Substring(9, jkbh.Length - 9);
+                    for (int i = 0; i < jkbh.Length; i++)
+                    {
+                        jktj.Add("编号" + (i + 1), jkbh[i].ToString());
+                    }
+                    jktj.Add("姓名", data["name"].ToString());
+                    if (jkdata != null && jkdata.Rows.Count > 0)
+                    {
+                        for (int j = 0; j < jkdata.Rows.Count; j++)
+                        {
+                            string time = jkdata.Rows[j]["check_date"].ToString();
+                            jktj.Add("体检日期年", time?.Split('-')[0]);
+                            jktj.Add("体检日期月", time?.Split('-')[1]);
+                            jktj.Add("体检日期日", time?.Split('-')[2]);
+                            jktj.Add("责任医生", jkdata.Rows[j]["doctor_name"].ToString());
+                            string zz = jkdata.Rows[j]["symptom"].ToString();
+                            if (zz.IndexOf(',') > 0)
+                            {
+                                string[] y = zz.Split(',');
+                                for (int i = 0; i < y.Length; i++)
+                                {
+                                    jktj.Add("症状" + (i + 1), y[i]);
+                                }
+                            }
+                            else
+                            {
+                                jktj.Add("症状1", zz);
+                            }
+                            jktj.Add("体温", jkdata.Rows[j]["base_temperature"].ToString());
+                            jktj.Add("脉率", jkdata.Rows[j]["base_heartbeat"].ToString());
+                            jktj.Add("呼吸频率", jkdata.Rows[j]["base_respiratory"].ToString());
+                            jktj.Add("左侧高", jkdata.Rows[j]["base_blood_pressure_left_high"].ToString());
+                            jktj.Add("左侧低", jkdata.Rows[j]["base_blood_pressure_left_low"].ToString());
+                            jktj.Add("右侧高", jkdata.Rows[j]["base_blood_pressure_right_high"].ToString());
+                            jktj.Add("右侧低", jkdata.Rows[j]["base_blood_pressure_right_low"].ToString());
+                            jktj.Add("身高", jkdata.Rows[j]["base_height"].ToString());
+                            jktj.Add("体重", jkdata.Rows[j]["base_weight"].ToString());
+                            jktj.Add("腰围", jkdata.Rows[j]["base_waist"].ToString());
+                            jktj.Add("体质指数", jkdata.Rows[j]["base_bmi"].ToString());
+                            jktj.Add("健康自我评估", jkdata.Rows[j]["base_health_estimate"].ToString());
+                            jktj.Add("生活自我评估", jkdata.Rows[j]["base_selfcare_estimate"].ToString());
+                            jktj.Add("认知能力", jkdata.Rows[j]["base_cognition_estimate"].ToString());
+                            jktj.Add("情感状态", jkdata.Rows[j]["base_feeling_estimate"].ToString());
+                            jktj.Add("锻炼频率", jkdata.Rows[j]["lifeway_exercise_frequency"].ToString());
+                            jktj.Add("锻炼时间", jkdata.Rows[j]["lifeway_exercise_time"].ToString());
+                            jktj.Add("锻炼时间年", jkdata.Rows[j]["lifeway_exercise_year"].ToString());
+                            jktj.Add("锻炼方式", jkdata.Rows[j]["lifeway_exercise_type"].ToString());
+                            string ysxg = jkdata.Rows[j]["lifeway_diet"].ToString();
+                            if (ysxg.IndexOf(',') > 0)
+                            {
+                                string[] y = ysxg.Split(',');
+                                for (int i = 0; i < y.Length; i++)
+                                {
+                                    jktj.Add("饮食习惯" + (i + 1), y[i]);
+                                }
+                            }
+                            else
+                            {
+                                jktj.Add("饮食习惯1", ysxg);
+                            }
+                            jktj.Add("吸烟状况", jkdata.Rows[j]["lifeway_smoke_status"].ToString());
+                            jktj.Add("日吸烟量", jkdata.Rows[j]["lifeway_smoke_number"].ToString());
+                            jktj.Add("开始吸烟年龄", jkdata.Rows[j]["lifeway_smoke_startage"].ToString());
+                            jktj.Add("戒烟年龄", jkdata.Rows[j]["lifeway_smoke_endage"].ToString());
+                            jktj.Add("饮酒频率", jkdata.Rows[j]["lifeway_drink_status"].ToString());
+                            jktj.Add("日饮酒量", jkdata.Rows[j]["lifeway_drink_number"].ToString());
+                            jktj.Add("是否戒酒", jkdata.Rows[j]["lifeway_drink_stop"].ToString());
+                            jktj.Add("戒酒年龄", jkdata.Rows[j]["lifeway_drink_stopage"].ToString());
+                            jktj.Add("开始饮酒年龄", jkdata.Rows[j]["lifeway_drink_startage"].ToString());
+                            jktj.Add("是否曾醉酒", jkdata.Rows[j]["lifeway_drink_oneyear"].ToString());
+                            string yjzl = jkdata.Rows[j]["lifeway_drink_type"].ToString();
+                            if (yjzl.IndexOf(',') > 0)
+                            {
+                                string[] y = yjzl.Split(',');
+                                for (int i = 0; i < y.Length; i++)
+                                {
+                                    jktj.Add("饮酒种类" + (i + 1), y[i]);
+                                }
+                            }
+                            else
+                            {
+                                jktj.Add("饮酒种类1", yjzl);
+                            }
+                            jktj.Add("工种", jkdata.Rows[j]["lifeway_occupational_disease"].ToString());
+                            jktj.Add("工种名", jkdata.Rows[j]["lifeway_job"].ToString());
+                            jktj.Add("工种年限", jkdata.Rows[j]["lifeway_job_period"].ToString());
+                            jktj.Add("毒物种类1", jkdata.Rows[j]["lifeway_dust_preventive"].ToString());
+                            jktj.Add("毒物种类名1", jkdata.Rows[j]["lifeway_hazardous_dust"].ToString());
+                            jktj.Add("毒物种类2", jkdata.Rows[j]["lifeway_radiation_preventive"].ToString());
+                            jktj.Add("毒物种类名2", jkdata.Rows[j]["lifeway_hazardous_radiation"].ToString());
+                            jktj.Add("毒物种类3", jkdata.Rows[j]["lifeway_physical_preventive"].ToString());
+                            jktj.Add("毒物种类名3", jkdata.Rows[j]["lifeway_hazardous_physical"].ToString());
+                            jktj.Add("毒物种类4", jkdata.Rows[j]["lifeway_chemical_preventive"].ToString());
+                            jktj.Add("毒物种类名4", jkdata.Rows[j]["lifeway_hazardous_chemical"].ToString());
+                            jktj.Add("毒物种类5", jkdata.Rows[j]["lifeway_other_preventive"].ToString());
+                            jktj.Add("毒物种类名5", jkdata.Rows[j]["lifeway_hazardous_other"].ToString());
+                            jktj.Add("口唇", jkdata.Rows[j]["organ_lips"].ToString());
+                            string cl = jkdata.Rows[j]["organ_tooth"].ToString();
+                            if (cl.IndexOf(',') > 0)
+                            {
+                                string[] y = cl.Split(',');
+                                for (int i = 0; i < y.Length; i++)
+                                {
+                                    jktj.Add("齿列" + (i + 1), y[i]);
+                                }
+                            }
+                            else
+                            {
+                                jktj.Add("齿列1", cl);
+                            }
+                            jktj.Add("咽部", jkdata.Rows[j]["organ_guttur"].ToString());
+                            jktj.Add("左眼", jkdata.Rows[j]["organ_vision_left"].ToString());
+                            jktj.Add("右眼", jkdata.Rows[j]["organ_vision_right"].ToString());
+                            jktj.Add("矫正视力左眼", jkdata.Rows[j]["organ_correctedvision_left"].ToString());
+                            jktj.Add("矫正视力右眼", jkdata.Rows[j]["organ_correctedvision_right"].ToString());
+                            jktj.Add("听力", jkdata.Rows[j]["organ_hearing"].ToString());
+                            jktj.Add("运动功能", jkdata.Rows[j]["organ_movement"].ToString());
+                            jktj.Add("眼底", jkdata.Rows[j]["examination_eye"].ToString());
+                            jktj.Add("皮肤", jkdata.Rows[j]["examination_skin"].ToString());
+                            jktj.Add("巩膜", jkdata.Rows[j]["examination_sclera"].ToString());
+                            jktj.Add("淋巴结", jkdata.Rows[j]["examination_lymph"].ToString());
+                            jktj.Add("桶状胸", jkdata.Rows[j]["examination_barrel_chest"].ToString());
+                            jktj.Add("呼吸音", jkdata.Rows[j]["examination_breath_sounds"].ToString());
+                            jktj.Add("罗音", jkdata.Rows[j]["examination_rale"].ToString());
+                            jktj.Add("心率", jkdata.Rows[j]["examination_heart_rate"].ToString());
+                            jktj.Add("心律", jkdata.Rows[j]["examination_heart_rhythm"].ToString());
+                            jktj.Add("杂音", jkdata.Rows[j]["examination_heart_noise"].ToString());
+                            jktj.Add("压痛", jkdata.Rows[j]["examination_abdomen_tenderness"].ToString());
+                            jktj.Add("包块", jkdata.Rows[j]["examination_abdomen_mass"].ToString());
+                            jktj.Add("肝大", jkdata.Rows[j]["examination_abdomen_hepatomegaly"].ToString());
+                            jktj.Add("脾大", jkdata.Rows[j]["examination_abdomen_splenomegaly"].ToString());
+                            jktj.Add("移动性浊音", jkdata.Rows[j]["examination_abdomen_shiftingdullness"].ToString());
+                            jktj.Add("下肢水肿", jkdata.Rows[j]["examination_lowerextremity_edema"].ToString());
+                            jktj.Add("足背动脉搏动", jkdata.Rows[j]["examination_dorsal_artery"].ToString());
+                            jktj.Add("肛门指诊", jkdata.Rows[j]["examination_anus"].ToString());
+                            string lxx = jkdata.Rows[j]["examination_breast"].ToString();
+                            if (lxx.IndexOf(',') > 0)
+                            {
+                                string[] y = lxx.Split(',');
+                                for (int i = 0; i < y.Length; i++)
+                                {
+                                    jktj.Add("乳腺" + (i + 1), y[i]);
+                                }
+                            }
+                            else
+                            {
+                                jktj.Add("乳腺1", lxx);
+                            }
+                            jktj.Add("外阴", jkdata.Rows[j]["examination_woman_vulva"].ToString());
+                            jktj.Add("阴道", jkdata.Rows[j]["examination_woman_vagina"].ToString());
+                            jktj.Add("宫颈", jkdata.Rows[j]["examination_woman_cervix"].ToString());
+                            jktj.Add("宫体", jkdata.Rows[j]["examination_woman_corpus"].ToString());
+                            jktj.Add("附件", jkdata.Rows[j]["examination_woman_accessories"].ToString());
+                            jktj.Add("妇科其它", jkdata.Rows[j]["examination_other"].ToString());
+                            jktj.Add("血红蛋白", jkdata.Rows[j]["blood_hemoglobin"].ToString());
+                            jktj.Add("白细胞", jkdata.Rows[j]["blood_leukocyte"].ToString());
+                            jktj.Add("血小板", jkdata.Rows[j]["blood_platelet"].ToString());
+                            jktj.Add("尿蛋白", jkdata.Rows[j]["urine_protein"].ToString());
+                            jktj.Add("血常规其它", jkdata.Rows[j]["blood_other"].ToString());
+                            jktj.Add("尿糖", jkdata.Rows[j]["glycosuria"].ToString());
+                            jktj.Add("尿酮体", jkdata.Rows[j]["urine_acetone_bodies"].ToString());
+                            jktj.Add("尿潜血", jkdata.Rows[j]["bld"].ToString());
+                            jktj.Add("尿常规其它", jkdata.Rows[j]["urine_other"].ToString());
+                            jktj.Add("心电图", jkdata.Rows[j]["cardiogram"].ToString());
+                            jktj.Add("尿微量白蛋白", jkdata.Rows[j]["microalbuminuria"].ToString());
+                            jktj.Add("大便潜血", jkdata.Rows[j]["fob"].ToString());
+                            jktj.Add("糖化血红蛋白", jkdata.Rows[j]["glycosylated_hemoglobin"].ToString());
+                            jktj.Add("乙型肝炎", jkdata.Rows[j]["hb"].ToString());
+                            jktj.Add("血清谷丙转氨酶", jkdata.Rows[j]["sgft"].ToString());
+                            jktj.Add("血清谷草转氨酶", jkdata.Rows[j]["ast"].ToString());
+                            jktj.Add("白蛋白", jkdata.Rows[j]["albumin"].ToString());
+                            jktj.Add("总胆红素", jkdata.Rows[j]["total_bilirubin"].ToString());
+                            jktj.Add("结合胆红素", jkdata.Rows[j]["conjugated_bilirubin"].ToString());
+                            jktj.Add("血清肌酐", jkdata.Rows[j]["scr"].ToString());
+                            jktj.Add("血尿素", jkdata.Rows[j]["blood_urea"].ToString());
+                            jktj.Add("血钾浓度", jkdata.Rows[j]["blood_k"].ToString());
+                            jktj.Add("血钠浓度", jkdata.Rows[j]["blood_na"].ToString());
+                            jktj.Add("总胆固醇", jkdata.Rows[j]["tc"].ToString());
+                            jktj.Add("甘油三酯", jkdata.Rows[j]["tg"].ToString());
+                            jktj.Add("血清低密度脂蛋白胆固醇", jkdata.Rows[j]["ldl"].ToString());
+                            jktj.Add("血清高密度脂蛋白胆固醇", jkdata.Rows[j]["hdl"].ToString());
+                            jktj.Add("胸部X线片", jkdata.Rows[j]["chest_x"].ToString());
+                            jktj.Add("腹部B超", jkdata.Rows[j]["ultrasound_abdomen"].ToString());
+                            jktj.Add("B超其他", jkdata.Rows[j]["other_b"].ToString());
+                            jktj.Add("宫颈涂片", jkdata.Rows[j]["cervical_smear"].ToString());
+                            jktj.Add("辅助检查其它", jkdata.Rows[j]["other"].ToString());
+                            string lxgjb = jkdata.Rows[j]["cerebrovascular_disease"].ToString();
+                            if (lxgjb.IndexOf(',') > 0)
+                            {
+                                string[] y = lxgjb.Split(',');
+                                for (int i = 0; i < y.Length; i++)
+                                {
+                                    jktj.Add("脑血管疾病" + (i + 1), y[i]);
+                                }
+                            }
+                            else
+                            {
+                                jktj.Add("脑血管疾病1", lxgjb);
+                            }
+                            string szjb = jkdata.Rows[j]["kidney_disease"].ToString();
+                            if (szjb.IndexOf(',') > 0)
+                            {
+                                string[] y = szjb.Split(',');
+                                for (int i = 0; i < y.Length; i++)
+                                {
+                                    jktj.Add("肾脏疾病" + (i + 1), y[i]);
+                                }
+                            }
+                            else
+                            {
+                                jktj.Add("肾脏疾病1", szjb);
+                            }
+                            string xzjb = jkdata.Rows[j]["heart_disease"].ToString();
+                            if (xzjb.IndexOf(',') > 0)
+                            {
+                                string[] y = xzjb.Split(',');
+                                for (int i = 0; i < y.Length; i++)
+                                {
+                                    jktj.Add("心脏疾病" + (i + 1), y[i]);
+                                }
+                            }
+                            else
+                            {
+                                jktj.Add("心脏疾病1", xzjb);
+                            }
+                            string xgjb = jkdata.Rows[j]["vascular_disease"].ToString();
+                            if (xgjb.IndexOf(',') > 0)
+                            {
+                                string[] y = xgjb.Split(',');
+                                for (int i = 0; i < y.Length; i++)
+                                {
+                                    jktj.Add("血管疾病" + (i + 1), y[i]);
+                                }
+                            }
+                            else
+                            {
+                                jktj.Add("血管疾病1", xgjb);
+                            }
+                            string ybjb = jkdata.Rows[j]["ocular_diseases"].ToString();
+                            if (ybjb.IndexOf(',') > 0)
+                            {
+                                string[] y = ybjb.Split(',');
+                                for (int i = 0; i < y.Length; i++)
+                                {
+                                    jktj.Add("眼部疾病" + (i + 1), y[i]);
+                                }
+                            }
+                            else
+                            {
+                                jktj.Add("眼部疾病1", ybjb);
+                            }
+                            jktj.Add("神经系统疾病", jkdata.Rows[j]["nervous_system_disease"].ToString());
+                            jktj.Add("其他系统疾病", jkdata.Rows[j]["other_disease"].ToString());
+                            DataSet zys = DbHelperMySQL.Query($"select * from hospitalized_record where archive_no='{data["archive_no"].ToString()}'");
+                            if (zys != null && zys.Tables.Count > 0 && zys.Tables[0].Rows.Count > 0)
+                            {
+                                DataTable da = zys.Tables[0];
+                                for (int k = 0; k < da.Rows.Count; k++)
+                                {
+                                    if (jkdata.Rows[j]["hospitalized_type"].ToString() == "1")
+                                    {
+                                        jktj.Add("住院入时间" + (k + 1), da.Rows[k]["in_hospital_time"].ToString());
+                                        jktj.Add("住院出时间" + (k + 1), da.Rows[k]["leave_hospital_time"].ToString());
+                                        jktj.Add("住院原因" + (k + 1), da.Rows[k]["reason"].ToString());
+                                        jktj.Add("医疗机构" + (k + 1), da.Rows[k]["hospital_organ"].ToString());
+                                        jktj.Add("病案号" + (k + 1), da.Rows[k]["case_code"].ToString());
+                                    }
+                                    else if (jkdata.Rows[j]["hospitalized_type"].ToString() == "2")
+                                    {
+                                        jktj.Add("家庭病床建" + (k + 1), da.Rows[k]["in_hospital_time"].ToString());
+                                        jktj.Add("家庭病床撤" + (k + 1), da.Rows[k]["leave_hospital_time"].ToString());
+                                        jktj.Add("家庭病床原因" + (k + 1), da.Rows[k]["reason"].ToString());
+                                        jktj.Add("家庭病床医疗机构" + (k + 1), da.Rows[k]["hospital_organ"].ToString());
+                                        jktj.Add("家庭病床病案号" + (k + 1), da.Rows[k]["case_code"].ToString());
+                                    }
+                                }
+                            }
+                            DataSet yyqk = DbHelperMySQL.Query($"select * from take_medicine_record where archive_no='{data["archive_no"].ToString()}'");
+                            if (yyqk != null && yyqk.Tables.Count > 0 && yyqk.Tables[0].Rows.Count > 0)
+                            {
+                                DataTable da = yyqk.Tables[0];
+                                for (int k = 0; k < da.Rows.Count; k++)
+                                {
+                                    jktj.Add("药物名称" + (k + 1), da.Rows[k]["medicine_name"].ToString());
+                                    jktj.Add("药物用法" + (k + 1), da.Rows[k]["medicine_usage"].ToString());
+                                    jktj.Add("药物用量" + (k + 1), da.Rows[k]["medicine_dosage"].ToString());
+                                    jktj.Add("药物用药时间" + (k + 1), da.Rows[k]["medicine_time"].ToString());
+                                    jktj.Add("药物服药依从性" + (k + 1), da.Rows[k]["medicine_compliance"].ToString());
+                                }
+                            }
+                            DataSet jzym = DbHelperMySQL.Query($"select * from vaccination_record where archive_no='{data["archive_no"].ToString()}'");
+                            if (jzym != null && jzym.Tables.Count > 0 && jzym.Tables[0].Rows.Count > 0)
+                            {
+                                DataTable da = jzym.Tables[0];
+                                for (int k = 0; k < da.Rows.Count; k++)
+                                {
+                                    jktj.Add("预防接种名称" + (k + 1), da.Rows[k]["vaccination_name"].ToString());
+                                    jktj.Add("预防接种时间" + (k + 1), da.Rows[k]["vaccination_time"].ToString());
+                                    jktj.Add("预防接种机构" + (k + 1), da.Rows[k]["vaccination_organ"].ToString());
+                                }
+                            }
+                            jktj.Add("健康评价", jkdata.Rows[j]["health_evaluation"].ToString());
+                            jktj.Add("健康评价异常1", jkdata.Rows[j]["abnormal1"].ToString());
+                            jktj.Add("健康评价异常2", jkdata.Rows[j]["abnormal2"].ToString());
+                            jktj.Add("健康评价异常3", jkdata.Rows[j]["abnormal3"].ToString());
+                            jktj.Add("健康评价异常4", jkdata.Rows[j]["abnormal4"].ToString());
+                            string jkzd = jkdata.Rows[j]["health_guidance"].ToString();
+                            if (jkzd.IndexOf(',') > 0)
+                            {
+                                string[] y = jkzd.Split(',');
+                                for (int i = 0; i < y.Length; i++)
+                                {
+                                    jktj.Add("健康指导" + (i + 1), y[i]);
+                                }
+                            }
+                            else
+                            {
+                                jktj.Add("健康指导1", jkzd);
+                            }
+                            string wxyskz = jkdata.Rows[j]["danger_controlling"].ToString();
+                            if (wxyskz.IndexOf(',') > 0)
+                            {
+                                string[] y = wxyskz.Split(',');
+                                for (int i = 0; i < y.Length; i++)
+                                {
+                                    jktj.Add("危险因素控制" + (i + 1), y[i]);
+                                }
+                            }
+                            else
+                            {
+                                jktj.Add("危险因素控制1", wxyskz);
+                            }
+                            jktj.Add("减体重目标", jkdata.Rows[j]["target_weight"].ToString());
+                        }
+                    }
 
                     //书签替换
                     foreach (var key in jktj.Keys)
                     {
                         builder.MoveToBookmark(key);
                         builder.Write(jktj[key]);
+                    }
+                    return doc;
+                #endregion
+
+                #region 心电图
+                case "心电图":
+                    doc = new Document(@str + $"/up/template/心电图.doc");
+                    builder = new DocumentBuilder(doc);
+                    var xdt = new Dictionary<string, string>();
+                    xdt.Add("地址", data["address"].ToString());
+                    xdt.Add("姓名", data["name"].ToString());
+                    xdt.Add("性别", data["sex"].ToString());
+                    xdt.Add("生日", data["birthday"].ToString());
+                    xdt.Add("身份证号", data["id_number"].ToString());
+                    DataSet xdts = DbHelperMySQL.Query($"select * from zkhw_tj_xdt where aichive_no='{data["archive_no"].ToString()}' order by create_time desc LIMIT 1");
+                    if (xdts != null && xdts.Tables.Count > 0 && xdts.Tables[0].Rows.Count > 0)
+                    {
+                        DataTable da = xdts.Tables[0];
+                        for (int j = 0; j < da.Rows.Count; j++)
+                        {
+                            builder.MoveToBookmark("图片");
+                            builder.InsertImage(resizeImageFromFile(da.Rows[j]["imageUrl"].ToString(), 678, 960));
+                            xdt.Add("条码号", da.Rows[j]["bar_code"].ToString());
+                            xdt.Add("诊断医师", da.Rows[j]["XdtDoctor"].ToString());
+                            xdt.Add("诊断意见", da.Rows[j]["XdtResult"].ToString());
+                            xdt.Add("检查时间", da.Rows[j]["createtime"].ToString());
+                        }
+                    }
+                    //书签替换
+                    foreach (var key in xdt.Keys)
+                    {
+                        builder.MoveToBookmark(key);
+                        builder.Write(xdt[key]);
+                    }
+                    return doc;
+                #endregion
+
+                #region B超
+                case "B超":
+                    doc = new Document(@str + $"/up/template/B超.doc");
+                    builder = new DocumentBuilder(doc);
+                    var bc = new Dictionary<string, string>();
+                    bc.Add("地址", data["address"].ToString());
+                    bc.Add("姓名", data["name"].ToString());
+                    bc.Add("性别", data["sex"].ToString());
+                    bc.Add("生日", data["birthday"].ToString());
+                    bc.Add("身份证号", data["id_number"].ToString());
+                    DataSet bcs = DbHelperMySQL.Query($"select * from zkhw_tj_bc where aichive_no='{data["archive_no"].ToString()}' order by create_time desc LIMIT 1");
+                    if (bcs != null && bcs.Tables.Count > 0 && bcs.Tables[0].Rows.Count > 0)
+                    {
+                        DataTable da = bcs.Tables[0];
+                        for (int j = 0; j < da.Rows.Count; j++)
+                        {
+                            builder.MoveToBookmark("图片1");
+                            builder.InsertImage(resizeImageFromFile(da.Rows[j]["imageUrl_a"].ToString(), 768, 1024));
+                            builder.MoveToBookmark("图片2");
+                            builder.InsertImage(resizeImageFromFile(da.Rows[j]["imageUrl_b"].ToString(), 768, 1024));
+                            builder.MoveToBookmark("图片3");
+                            builder.InsertImage(resizeImageFromFile(da.Rows[j]["imageUrl_c"].ToString(), 768, 1024));
+                            builder.MoveToBookmark("图片4");
+                            builder.InsertImage(resizeImageFromFile(da.Rows[j]["imageUrl_d"].ToString(), 768, 1024));
+                            bc.Add("条码号", da.Rows[j]["bar_code"].ToString());
+                            bc.Add("诊断医师", "");
+                            bc.Add("检查所见", da.Rows[j]["FubuDesc"].ToString());
+                            bc.Add("诊断结果", da.Rows[j]["FubuResult"].ToString());
+                            bc.Add("检查时间", da.Rows[j]["createtime"].ToString());
+                        }
+                    }
+                    //书签替换
+                    foreach (var key in bc.Keys)
+                    {
+                        builder.MoveToBookmark(key);
+                        builder.Write(bc[key]);
+                    }
+                    return doc;
+                #endregion
+
+                #region 结果
+                case "结果":
+                    doc = new Document(@str + $"/up/template/结果.doc");
+                    builder = new DocumentBuilder(doc);
+                    var jg = new Dictionary<string, string>();
+
+                    if (jkdata != null && jkdata.Rows.Count > 0)
+                    {
+                        for (int j = 0; j < jkdata.Rows.Count; j++)
+                        {
+                            if (jkdata.Rows[j]["health_evaluation"].ToString() == "2")
+                            {
+                                jg.Add("结果", jkdata.Rows[j]["abnormal1"].ToString() + jkdata.Rows[j]["abnormal2"].ToString() + jkdata.Rows[j]["abnormal3"].ToString() + jkdata.Rows[j]["abnormal4"].ToString());
+                            }
+                        }
+                    }
+                    //书签替换
+                    foreach (var key in jg.Keys)
+                    {
+                        builder.MoveToBookmark(key);
+                        builder.Write(jg[key]);
+                    }
+                    return doc;
+                #endregion
+
+                #region 老年人生活自理能力评估
+                case "老年人生活自理能力评估":
+                    doc = new Document(@str + $"/up/template/老年人生活自理能力评估.doc");
+                    builder = new DocumentBuilder(doc);
+                    var zlpg = new Dictionary<string, string>();
+                    DataSet zlpgs = DbHelperMySQL.Query($"select * from elderly_selfcare_estimate where aichive_no='{data["archive_no"].ToString()}' order by create_time desc LIMIT 1");
+                    if (zlpgs != null && zlpgs.Tables.Count > 0 && zlpgs.Tables[0].Rows.Count > 0)
+                    {
+                        DataTable da = zlpgs.Tables[0];
+                        for (int j = 0; j < da.Rows.Count; j++)
+                        {
+                            string zz = da.Rows[j]["answer_result"].ToString();
+                            if (zz.IndexOf(',') > 0)
+                            {
+                                string[] y = zz.Split(',');
+                                for (int i = 0; i < y.Length; i++)
+                                {
+                                    zlpg.Add("评分" + (i + 1), y[i]);
+                                }
+                            }
+                            else
+                            {
+                                zlpg.Add("评分1", zz);
+                            }
+                            zlpg.Add("总分", da.Rows[j]["total_score"].ToString());
+                        }
+                    }
+                    //书签替换
+                    foreach (var key in zlpg.Keys)
+                    {
+                        builder.MoveToBookmark(key);
+                        builder.Write(zlpg[key]);
+                    }
+                    return doc;
+                #endregion
+
+                #region 中医体质
+                case "中医体质":
+                    doc = new Document(@str + $"/up/template/中医体质.doc");
+                    builder = new DocumentBuilder(doc);
+                    var zytz = new Dictionary<string, string>();
+                    string zybh = data["archive_no"].ToString();
+                    zybh = zybh.Substring(9, zybh.Length - 9);
+                    for (int i = 0; i < zybh.Length; i++)
+                    {
+                        zytz.Add("编号" + (i + 1), zybh[i].ToString());
+                    }
+                    zytz.Add("姓名", data["name"].ToString());
+                    DataSet zytzs = DbHelperMySQL.Query($"select * from elderly_tcm_record where aichive_no='{data["archive_no"].ToString()}' order by create_time desc LIMIT 1");
+                    if (zytzs != null && zytzs.Tables.Count > 0 && zytzs.Tables[0].Rows.Count > 0)
+                    {
+                        DataTable da = zytzs.Tables[0];
+                        for (int j = 0; j < da.Rows.Count; j++)
+                        {
+                            string[] zz = da.Rows[j]["answer_result"].ToString().Split('|');
+                            for (int i = 0; i < zz.Length; i++)
+                            {
+                                zytz.Add("a" + i + zz[i].Split(':')[1], "√");
+                            }
+                            int qz = 0;
+                            qz = Convert.ToInt32(da.Rows[j]["qixuzhi_score"]);
+                            zytz.Add("气虚质得分", qz.ToString());
+                            if (qz >= 11)
+                            {
+                                zytz.Add("气虚质是", "√");
+                            }
+                            else if (qz <= 9 && qz <= 10)
+                            {
+                                zytz.Add("气虚质倾向是", "√");
+                            }
+                            zytz.Add("气虚质" + da.Rows[j]["qixuzhi_result"].ToString(), "√");
+                            qz = Convert.ToInt32(da.Rows[j]["yangxuzhi_score"]);
+                            zytz.Add("阳虚质得分", qz.ToString());
+                            if (qz >= 11)
+                            {
+                                zytz.Add("阳虚质是", "√");
+                            }
+                            else if (qz <= 9 && qz <= 10)
+                            {
+                                zytz.Add("阳虚质倾向是", "√");
+                            }
+                            zytz.Add("阳虚质" + da.Rows[j]["yangxuzhi_result"].ToString(), "√");
+                            qz = Convert.ToInt32(da.Rows[j]["yinxuzhi_score"]);
+                            zytz.Add("阴虚质得分", qz.ToString());
+                            if (qz >= 11)
+                            {
+                                zytz.Add("阴虚质是", "√");
+                            }
+                            else if (qz <= 9 && qz <= 10)
+                            {
+                                zytz.Add("阴虚质倾向是", "√");
+                            }
+                            zytz.Add("阴虚质" + da.Rows[j]["yinxuzhi_result"].ToString(), "√");
+                            qz = Convert.ToInt32(da.Rows[j]["tanshizhi_score"]);
+                            zytz.Add("痰湿质得分", qz.ToString());
+                            if (qz >= 11)
+                            {
+                                zytz.Add("痰湿质是", "√");
+                            }
+                            else if (qz <= 9 && qz <= 10)
+                            {
+                                zytz.Add("痰湿质倾向是", "√");
+                            }
+                            zytz.Add("痰湿质" + da.Rows[j]["tanshizhi_result"].ToString(), "√");
+                            qz = Convert.ToInt32(da.Rows[j]["shirezhi_score"]);
+                            zytz.Add("湿热质得分", qz.ToString());
+                            if (qz >= 11)
+                            {
+                                zytz.Add("湿热质是", "√");
+                            }
+                            else if (qz <= 9 && qz <= 10)
+                            {
+                                zytz.Add("湿热质倾向是", "√");
+                            }
+                            zytz.Add("湿热质" + da.Rows[j]["shirezhi_result"].ToString(), "√");
+                            qz = Convert.ToInt32(da.Rows[j]["xueyuzhi_score"]);
+                            zytz.Add("血瘀质得分", qz.ToString());
+                            if (qz >= 11)
+                            {
+                                zytz.Add("血瘀质是", "√");
+                            }
+                            else if (qz <= 9 && qz <= 10)
+                            {
+                                zytz.Add("血瘀质倾向是", "√");
+                            }
+                            zytz.Add("血瘀质" + da.Rows[j]["xueyuzhi_result"].ToString(), "√");
+                            qz = Convert.ToInt32(da.Rows[j]["qiyuzhi_score"]);
+                            zytz.Add("气郁质得分", qz.ToString());
+                            if (qz >= 11)
+                            {
+                                zytz.Add("气郁质是", "√");
+                            }
+                            else if (qz <= 9 && qz <= 10)
+                            {
+                                zytz.Add("气郁质倾向是", "√");
+                            }
+                            zytz.Add("气郁质" + da.Rows[j]["qiyuzhi_result"].ToString(), "√");
+                            qz = Convert.ToInt32(da.Rows[j]["tebingzhi_sorce"]);
+                            zytz.Add("特禀质得分", qz.ToString());
+                            if (qz >= 11)
+                            {
+                                zytz.Add("特禀质是", "√");
+                            }
+                            else if (qz <= 9 && qz <= 10)
+                            {
+                                zytz.Add("特禀质倾向是", "√");
+                            }
+                            zytz.Add("气郁质" + da.Rows[j]["tebingzhi_result"].ToString(), "√");
+                            qz = Convert.ToInt32(da.Rows[j]["pinghezhi_sorce"]);
+                            zytz.Add("平和质得分", qz.ToString());
+                            if (qz >= 17)
+                            {
+                                zytz.Add("平和质是", "√");
+                            }
+                            else if (qz <= 10 && qz <= 16)
+                            {
+                                zytz.Add("平和质倾向是", "√");
+                            }
+                            zytz.Add("平和质" + da.Rows[j]["pinghezhi_result"].ToString(), "√");
+                            string time = jkdata.Rows[j]["test_date"].ToString();
+                            zytz.Add("填表日期年", time?.Split('-')[0]);
+                            zytz.Add("填表日期月", time?.Split('-')[1]);
+                            zytz.Add("填表日期日", time?.Split('-')[2]);
+                            zytz.Add("医生签名", "");
+                        }
+                    }
+                    //书签替换
+                    foreach (var key in zytz.Keys)
+                    {
+                        builder.MoveToBookmark(key);
+                        builder.Write(zytz[key]);
                     }
                     return doc;
                 #endregion
@@ -1123,11 +1756,116 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                 File.Delete(url);
             }
         }
+        private void OpenPdf(string url)
+        {
+            //定义一个ProcessStartInfo实例
+            System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo();
+            //设置启动进程的初始目录
+            info.WorkingDirectory = Application.StartupPath;
+            //设置启动进程的应用程序或文档名
+            info.FileName = url;
+            //设置启动进程的参数
+            info.Arguments = "";
+            //启动由包含进程启动信息的进程资源
+            try
+            {
+                System.Diagnostics.Process.Start(info);
+            }
+            catch (System.ComponentModel.Win32Exception we)
+            {
+                MessageBox.Show(this, we.Message);
+                return;
+            }
+        }
         #endregion
 
+        #region 图片处理
+        /// <summary>
+        /// 使用目录作为源调整图像大小
+        /// </summary>
+        /// <param name="OriginalFileLocation">图像位置</param>
+        /// <param name="heigth">新高度</param>
+        /// <param name="width">新宽度</param>
+        /// <param name="keepAspectRatio">保持纵横比</param>
+        /// <param name="getCenter">返回图像的中心位</param>
+        /// <returns>具有新维度的图像</returns>
+        public Image resizeImageFromFile(String OriginalFileLocation, int heigth, int width, Boolean keepAspectRatio, Boolean getCenter)
+        {
+            int newheigth = heigth;
+            System.Drawing.Image FullsizeImage = System.Drawing.Image.FromFile(OriginalFileLocation);
+
+            // Prevent using images internal thumbnail
+            FullsizeImage.RotateFlip(System.Drawing.RotateFlipType.Rotate180FlipNone);
+            FullsizeImage.RotateFlip(System.Drawing.RotateFlipType.Rotate180FlipNone);
+
+            if (keepAspectRatio || getCenter)
+            {
+                int bmpY = 0;
+                double resize = (double)FullsizeImage.Width / (double)width;//get the resize vector
+                if (getCenter)
+                {
+                    bmpY = (int)((FullsizeImage.Height - (heigth * resize)) / 2);// gives the Y value of the part that will be cut off, to show only the part in the center
+                    Rectangle section = new Rectangle(new Point(0, bmpY), new Size(FullsizeImage.Width, (int)(heigth * resize)));// create the section to cut of the original image
+                                                                                                                                 //System.Console.WriteLine("the section that will be cut off: " + section.Size.ToString() + " the Y value is minimized by: " + bmpY);
+                    Bitmap orImg = new Bitmap((Bitmap)FullsizeImage);//for the correct effect convert image to bitmap.
+                    FullsizeImage.Dispose();//clear the original image
+                    using (Bitmap tempImg = new Bitmap(section.Width, section.Height))
+                    {
+                        Graphics cutImg = Graphics.FromImage(tempImg);//              set the file to save the new image to.
+                        cutImg.DrawImage(orImg, 0, 0, section, GraphicsUnit.Pixel);// cut the image and save it to tempImg
+                        FullsizeImage = tempImg;//save the tempImg as FullsizeImage for resizing later
+                        orImg.Dispose();
+                        cutImg.Dispose();
+                        return FullsizeImage.GetThumbnailImage(width, heigth, null, IntPtr.Zero);
+                    }
+                }
+                else newheigth = (int)(FullsizeImage.Height / resize);//  set the new heigth of the current image
+            }//return the image resized to the given heigth and width
+            return FullsizeImage.GetThumbnailImage(width, newheigth, null, IntPtr.Zero);
+        }
+
+
+        /// <summary>
+        /// 使用目录作为源调整图像大小
+        /// </summary>
+        /// <param name="OriginalFileLocation">图像位置</param>
+        /// <param name="heigth">新高度</param>
+        /// <param name="width">新宽度</param>
+        /// <returns>具有新维度的图像</returns>
+        public Image resizeImageFromFile(String OriginalFileLocation, int heigth, int width)
+        {
+            return resizeImageFromFile(OriginalFileLocation, heigth, width, false, false);
+        }
+
+        /// <summary>
+        /// 使用目录作为源调整图像大小
+        /// </summary>
+        /// <param name="OriginalFileLocation">图像位置</param>
+        /// <param name="heigth">新高度</param>
+        /// <param name="width">新宽度</param>
+        /// <param name="keepAspectRatio">保持纵横比</param>
+        /// <returns>具有新维度的图像</returns>
+        public Image resizeImageFromFile(String OriginalFileLocation, int heigth, int width, Boolean keepAspectRatio)
+        {
+            return resizeImageFromFile(OriginalFileLocation, heigth, width, keepAspectRatio, false);
+        }
+        #endregion
 
         private void button3_Click(object sender, EventArgs e)
         {
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //点击button按钮事件
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "btnModify" && e.RowIndex >= 0)
+            {
+                //说明点击的列是DataGridViewButtonColumn列
+                DataGridViewColumn column = dataGridView1.Columns[e.ColumnIndex];
+                string id = dataGridView1["编码", e.RowIndex].Value.ToString();
+                string str = Application.StartupPath;//项目路径
+                OpenPdf(@str + $"/up/result/{id}.pdf");
+            }
         }
     }
 
