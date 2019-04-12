@@ -698,6 +698,9 @@
     <EmbeddedResource Include="view\setting\basicInfoSettings.resx">
       <DependentUpon>basicInfoSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\setting\deviceManagement.resx">
+      <DependentUpon>deviceManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\setting\parameterSetting.resx">
       <DependentUpon>parameterSetting.cs</DependentUpon>
     </EmbeddedResource>
