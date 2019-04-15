@@ -111,20 +111,21 @@ DATE_FORMAT(base.create_time,'%Y%m%d') 登记时间,
 concat(base.province_name,base.city_name,base.county_name,base.towns_name,base.village_name) 区域,
 base.archive_no 编码,
 base.name 姓名,
-base.sex 性别,
+(case base.sex when '1'then '男' when '2' then '女' when '9' then '未说明的性别' when '0' then '未知的性别' ELSE ''
+END)性别,
 base.id_number 身份证号,
-base.is_synchro 是否同步,
-bgdc.BaoGaoShengChan 报告生产时间
+base.upload_status 是否同步,
+bgdc.BaoGaoShengChan 报告生成时间
 from resident_base_info base
 join 
 (select * from (select * from zkhw_tj_bgdc order by createtime desc) as a group by aichive_no order by createtime desc) bgdc
 on base.archive_no=bgdc.aichive_no
-where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'";
+where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'";//base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'
             if (pairs != null && pairs.Count > 0)
             {
                 if (!string.IsNullOrWhiteSpace(pairs["timesta"]) && !string.IsNullOrWhiteSpace(pairs["timeend"]))
                 {
-                    sql += $" and base.create_time(healthchecktime,'%Y-%m-%d') between '{pairs["timesta"]}' and '{pairs["timeend"]}'";
+                    sql += $" and date_format(base.create_time,'%Y-%m-%d') between '{pairs["timesta"]}' and '{pairs["timeend"]}'";
                 }
                 if (!string.IsNullOrWhiteSpace(pairs["juming"]))
                 {
@@ -151,7 +152,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                     sql += $" and base.village_code='{pairs["zu"]}'";
                 }
             }
-            sql += $@" and id >=(
+            sql += $@" and base.id >=(
             select id From zkhw_tj_bgdc Order By id limit {pageindex},1
             ) limit {pagesize}; select found_rows()";
             DataSet dataSet = DbHelperMySQL.Query(sql);
@@ -540,6 +541,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                 if (list.Count > 1 && list.Exists(m => m == "综合报告单"))
                 {
                     MessageBox.Show("综合报告单不能和其它报告一起！");
+                    return;
                 }
                 PDF(list, dataSet, ide);
                 DialogResult dr = MessageBox.Show("成功！是否打开文件夹",
@@ -636,6 +638,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                         DeteleFile(urls);
                         rp.Doc.Save(urls, SaveFormat.Pdf);
                     }
+
                 }
             }
             else
@@ -674,7 +677,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                         }
                         string urls = @str + $"/up/result/{data["archive_no"].ToString()}.pdf";
                         DeteleFile(urls);
-                        doc.Save(urls, SaveFormat.Pdf);
+                        re.Doc.Save(urls, SaveFormat.Pdf);
                     }
                 }
                 else
@@ -733,7 +736,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                         builder.MoveToBookmark(key);
                         builder.Write(dic[key]);
                     }
-                    return doc;
+                    break;
                 #endregion
 
                 #region 个人信息
@@ -959,7 +962,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                         builder.MoveToBookmark(key);
                         builder.Write(dics[key]);
                     }
-                    return doc;
+                    break;
                 #endregion
 
                 #region 化验报告单
@@ -970,8 +973,8 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                     hy.Add("地址", data["address"].ToString());
                     hy.Add("姓名", data["name"].ToString());
                     hy.Add("姓名1", data["name"].ToString());
-                    hy.Add("性别", data["sex"].ToString());
-                    hy.Add("性别1", data["sex"].ToString());
+                    hy.Add("性别", Sex(data["sex"].ToString()));
+                    hy.Add("性别1", Sex(data["sex"].ToString()));
                     hy.Add("生日", data["birthday"].ToString());
                     hy.Add("生日1", data["birthday"].ToString());
                     hy.Add("身份证号", data["id_number"].ToString());
@@ -1002,7 +1005,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                         }
                     }
 
-                    DataSet sh = DbHelperMySQL.Query($"select * from zkhw_tj_sh where aichive_no='{data["archive_no"].ToString()}' order by create_time desc LIMIT 1");
+                    DataSet sh = DbHelperMySQL.Query($"select * from zkhw_tj_sh where aichive_no='{data["archive_no"].ToString()}' order by createtime desc LIMIT 1");
                     if (sh != null && sh.Tables.Count > 0 && sh.Tables[0].Rows.Count > 0)
                     {
                         DataTable da = sh.Tables[0];
@@ -1118,7 +1121,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                         builder.MoveToBookmark(key);
                         builder.Write(hy[key]);
                     }
-                    return doc;
+                    break;
                 #endregion
 
                 #region 健康体检表
@@ -1469,7 +1472,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                         builder.MoveToBookmark(key);
                         builder.Write(jktj[key]);
                     }
-                    return doc;
+                    break;
                 #endregion
 
                 #region 心电图
@@ -1479,10 +1482,10 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                     var xdt = new Dictionary<string, string>();
                     xdt.Add("地址", data["address"].ToString());
                     xdt.Add("姓名", data["name"].ToString());
-                    xdt.Add("性别", data["sex"].ToString());
+                    xdt.Add("性别", Sex(data["sex"].ToString()));
                     xdt.Add("生日", data["birthday"].ToString());
                     xdt.Add("身份证号", data["id_number"].ToString());
-                    DataSet xdts = DbHelperMySQL.Query($"select * from zkhw_tj_xdt where aichive_no='{data["archive_no"].ToString()}' order by create_time desc LIMIT 1");
+                    DataSet xdts = DbHelperMySQL.Query($"select * from zkhw_tj_xdt where aichive_no='{data["archive_no"].ToString()}' order by createtime desc LIMIT 1");
                     if (xdts != null && xdts.Tables.Count > 0 && xdts.Tables[0].Rows.Count > 0)
                     {
                         DataTable da = xdts.Tables[0];
@@ -1502,7 +1505,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                         builder.MoveToBookmark(key);
                         builder.Write(xdt[key]);
                     }
-                    return doc;
+                    break;
                 #endregion
 
                 #region B超
@@ -1512,10 +1515,10 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                     var bc = new Dictionary<string, string>();
                     bc.Add("地址", data["address"].ToString());
                     bc.Add("姓名", data["name"].ToString());
-                    bc.Add("性别", data["sex"].ToString());
+                    bc.Add("性别", Sex(data["sex"].ToString()));
                     bc.Add("生日", data["birthday"].ToString());
                     bc.Add("身份证号", data["id_number"].ToString());
-                    DataSet bcs = DbHelperMySQL.Query($"select * from zkhw_tj_bc where aichive_no='{data["archive_no"].ToString()}' order by create_time desc LIMIT 1");
+                    DataSet bcs = DbHelperMySQL.Query($"select * from zkhw_tj_bc where aichive_no='{data["archive_no"].ToString()}' order by createtime desc LIMIT 1");
                     if (bcs != null && bcs.Tables.Count > 0 && bcs.Tables[0].Rows.Count > 0)
                     {
                         DataTable da = bcs.Tables[0];
@@ -1542,7 +1545,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                         builder.MoveToBookmark(key);
                         builder.Write(bc[key]);
                     }
-                    return doc;
+                    break;
                 #endregion
 
                 #region 结果
@@ -1567,7 +1570,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                         builder.MoveToBookmark(key);
                         builder.Write(jg[key]);
                     }
-                    return doc;
+                    break;
                 #endregion
 
                 #region 老年人生活自理能力评估
@@ -1603,7 +1606,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                         builder.MoveToBookmark(key);
                         builder.Write(zlpg[key]);
                     }
-                    return doc;
+                    break;
                 #endregion
 
                 #region 中医体质
@@ -1742,12 +1745,31 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                         builder.MoveToBookmark(key);
                         builder.Write(zytz[key]);
                     }
-                    return doc;
+                    break;
                 #endregion
                 default:
                     break;
             }
+            string sql = $@"UPDATE zkhw_tj_bgdc set BaoGaoShengChan='{DateTime.Now.ToString("yyyy-MM-dd")}' where aichive_no='{data["archive_no"].ToString()}'";
+            int rue = DbHelperMySQL.ExecuteSql(sql);
             return doc;
+        }
+        private string Sex(string sex)
+        {
+            switch (sex)
+            {
+                case "1":
+                    return "男";
+                case "2":
+                    return "女";
+                case "9":
+                    return "未说明的性别";
+                case "0":
+                    return "未知的性别";
+                default:
+                    break;
+            }
+            return "";
         }
         private void DeteleFile(string url)
         {
