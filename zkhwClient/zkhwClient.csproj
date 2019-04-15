@@ -166,6 +166,7 @@
     <Compile Include="bean\grjdxxBean.cs" />
     <Compile Include="bean\jkBean.cs" />
     <Compile Include="bean\loginLogBean.cs" />
+    <Compile Include="bean\ltdOrganization.cs" />
     <Compile Include="bean\physical_examination_recordBean.cs" />
     <Compile Include="bean\resident_base_infoBean.cs" />
     <Compile Include="bean\shenghuaBean.cs" />
@@ -215,6 +216,7 @@
     <Compile Include="service\PublicHealthService\tcmHealthService.cs" />
     <Compile Include="utils\CVRSDK.cs" />
     <Compile Include="utils\FileWatcher.cs" />
+    <Compile Include="utils\Md5.cs" />
     <Compile Include="view\PublicHealthView\aUolderHelthService.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -424,6 +426,13 @@
     </Compile>
     <Compile Include="view\setting\systemlog.Designer.cs">
       <DependentUpon>systemlog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\SystemSettingsView\addUsers.cs" />
+    <Compile Include="view\SystemSettingsView\basicInfoInit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SystemSettingsView\basicInfoInit.Designer.cs">
+      <DependentUpon>basicInfoInit.cs</DependentUpon>
     </Compile>
     <Compile Include="view\SystemSettingsView\passWordUpdate.cs">
       <SubType>Form</SubType>
@@ -706,6 +715,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\setting\systemlog.resx">
       <DependentUpon>systemlog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\SystemSettingsView\basicInfoInit.resx">
+      <DependentUpon>basicInfoInit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\SystemSettingsView\passWordUpdate.resx">
       <DependentUpon>passWordUpdate.cs</DependentUpon>

@@ -4,10 +4,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using zkhwClient.utils;
 using zkhwClient.view.setting;
 
 namespace zkhwClient
@@ -42,15 +45,14 @@ namespace zkhwClient
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
+            //passw = this.txtPassword.Text;
+            //string md5passw= Md5.HashString(passw);
             //用户登录 获取用户的账号和密码并判断          
             DataTable ret = service.UserService.UserExists(comboBox1.Text, txtPassword.Text);
             if (ret.Rows.Count == 1)
             {  //获取当前登录用户的机构
                 organCode = ret.Rows[0]["organ_code"].ToString();
-
                 name = this.comboBox1.Text;
-                passw = this.txtPassword.Text;
-
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = name;
                 lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -85,6 +87,7 @@ namespace zkhwClient
             string str = Application.StartupPath;//项目路径   
             this.button1.BackgroundImage = Image.FromFile(@str + "/images/login1.png");
             this.button2.BackgroundImage = Image.FromFile(@str + "/images/tuichu.png");
+            this.button3.BackgroundImage = Image.FromFile(@str + "/images/sjtb.png");
             this.pictureBox1.Image = Image.FromFile(@str + "/images/logo.png");
             DataTable dd = us.listUser();
             this.comboBox1.DataSource = dd;//绑定数据源
@@ -102,6 +105,30 @@ namespace zkhwClient
 
 
 
+        }
+        //数据初始化
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (IsInternetAvailable())
+            {
+                
+            }
+            else {
+                MessageBox.Show("电脑未连接外网,请检查网络!");
+            }
+        }
+        //判断是否连接 外网
+        private bool IsInternetAvailable()
+        {
+            try
+            {
+                Dns.GetHostEntry("www.baidu.com"); //using System.Net;
+                return true;
+            }
+            catch (SocketException ex)
+            {
+                return false;
+            }
         }
     }
 }

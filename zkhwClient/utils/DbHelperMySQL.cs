@@ -18,6 +18,7 @@ namespace zkhwClient.dao
     {
         //数据库连接字符串(web.config来配置)，可以动态更改connectionString支持多数据库.		
         public static string connectionString = ConfigurationManager.ConnectionStrings["MySql_Connection"].ToString();
+        public static string connectionStringYpt = ConfigurationManager.ConnectionStrings["MySql_ConnectionYpt"].ToString();
         #region 公用方法
         /// <summary>
         /// 得到最大值
@@ -625,8 +626,6 @@ namespace zkhwClient.dao
             cmd.CommandType = CommandType.Text;//cmdType;
             if (cmdParms != null)
             {
-
-
                 foreach (MySqlParameter parameter in cmdParms)
                 {
                     if ((parameter.Direction == ParameterDirection.InputOutput || parameter.Direction == ParameterDirection.Input) &&
@@ -639,10 +638,29 @@ namespace zkhwClient.dao
             }
         }
 
+        /// <summary>
+        /// 执行查询语句，返回DataSet
+        /// </summary>
+        /// <param name="SQLString">查询语句</param>
+        /// <returns>DataSet</returns>
+        public static DataSet QueryYpt(string SQLString)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionStringYpt))
+            {
+                DataSet ds = new DataSet();
+                try
+                {
+                    connection.Open();
+                    MySqlDataAdapter command = new MySqlDataAdapter(SQLString, connection);
+                    command.Fill(ds, "ds");
+                }
+                catch (MySqlException ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                return ds;
+            }
+        }
         #endregion
-
-        
-
     }
-
 }
