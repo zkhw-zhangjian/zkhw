@@ -459,6 +459,7 @@
             this.comboBox15.Name = "comboBox15";
             this.comboBox15.Size = new System.Drawing.Size(121, 28);
             this.comboBox15.TabIndex = 1;
+            this.comboBox15.SelectionChangeCommitted += new System.EventHandler(this.comboBox15_SelectionChangeCommitted);
             // 
             // label14
             // 

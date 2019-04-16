@@ -170,6 +170,8 @@
     <Compile Include="bean\physical_examination_recordBean.cs" />
     <Compile Include="bean\resident_base_infoBean.cs" />
     <Compile Include="bean\shenghuaBean.cs" />
+    <Compile Include="bean\teamDoctorBean.cs" />
+    <Compile Include="bean\teamInfoBean.cs" />
     <Compile Include="bean\UserInfo.cs" />
     <Compile Include="bean\xuechangguiBean.cs" />
     <Compile Include="control\PagerControl.cs">

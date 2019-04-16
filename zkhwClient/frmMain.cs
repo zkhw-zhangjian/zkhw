@@ -211,9 +211,10 @@ namespace zkhwClient
                         picb[i].BorderStyle = BorderStyle.None;
                         if (i == 0)//默认首项选中
                         {
-                            pR.btnClose_Click();
-                            pR = null;
-                            
+                            if (pR!=null) {
+                                pR.btnClose_Click();
+                                pR = null;
+                            }
                             picb[i].BackColor = Color.Blue;
                             pR = new personRegist();
                             pR.TopLevel = false;

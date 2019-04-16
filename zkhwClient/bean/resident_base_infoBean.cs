@@ -8,24 +8,24 @@ namespace zkhwClient.bean
     class resident_base_infoBean
     {
         public string id { get; set; }
-
-
         //电子档案唯一编码
         public string archive_no { get; set; }
         //公卫平台电子档案编码
         public string pb_archive { get; set; }//标记页面未用
         //姓名
-        public string name { get; set; }//
+        public string name { get; set; }
         //性别
-        public string sex { get; set; }//
+        public string sex { get; set; }
         //出生日期
         public string birthday { get; set; }
+        //年龄
+        public string age { get; set; }
         //身份证号
-        public string id_number { get; set; }//
+        public string id_number { get; set; }
         //身份证地址
-        public string address { get; set; }//
+        public string address { get; set; }
         //民族
-        public string nation { get; set; }//
+        public string nation { get; set; }
         //签发机关
         public string IssuingAgencies { get; set; }
         //身份证照片
@@ -40,11 +40,10 @@ namespace zkhwClient.bean
         public string link_phone { get; set; }
         //常住类型
         public string resident_type { get; set; }
-        ////户籍所在地
-        //public string register_address { get; set; }
+        //户籍所在地
+        public string register_address { get; set; }
         //现住址
         public string residence_address { get; set; }
-
         //血型
         public string blood_group { get; set; }
         //RH血型
@@ -87,9 +86,8 @@ namespace zkhwClient.bean
         public string is_poor { get; set; }
         //厨房排风设施
         public string kitchen { get; set; }
-
         //燃料类型
-        public string fuel { get; set; }//
+        public string fuel { get; set; }
         //燃料类型(其它)
         public string other_fuel { get; set; }
         //饮水
@@ -97,33 +95,45 @@ namespace zkhwClient.bean
         //饮水(其它)
         public string other_drink { get; set; }
         //厕所
-        public string toilet { get; set; }//
+        public string toilet { get; set; }
         //禽畜栏
-        public string poultry { get; set; }//
+        public string poultry { get; set; }
         //健康卡号
-        public string medical_code { get; set; }//
+        public string medical_code { get; set; }
         //摄像头照片地址
-        public string photo_code { get; set; }//
+        public string photo_code { get; set; }
         //建档机构
         public string aichive_org { get; set; }
         //责任医生
         public string doctor_name { get; set; }
         //是否签约
         public string is_signing { get; set; }
-        ////是否同步
-        //public string is_synchro { get; set; }//标记页面未用
-        ////同步结果（成功/失败）
-        //public string synchro_result { get; set; }//
+        //是否同步
+        public string is_synchro { get; set; }
+        //同步结果（成功/失败）
+        public string synchro_result { get; set; }
         //同步时间
-        public string synchro_time { get; set; }//
+        public string synchro_time { get; set; }
+        public string province_code { get; set; }
+        public string province_name { get; set; }
+        public string city_code { get; set; }
+        public string city_name { get; set; }
+        public string county_code { get; set; }
+        public string county_name { get; set; }
+        public string towns_code { get; set; }
+        public string towns_name { get; set; }
+        public string village_code { get; set; }
+        public string village_name { get; set; }
+        public string status { get; set; }
+        public string remark { get; set; }
         //create_user
         public string create_user { get; set; }
         //创建人
-        public string create_name { get; set; }//
+        public string create_name { get; set; }
         //创建时间
-        public string create_time { get; set; }//
+        public string create_time { get; set; }
         //创建机构
-        public string create_org { get; set; }//
+        public string create_org { get; set; }
         //创建机构名称
         public string create_org_name { get; set; }
         //update_user

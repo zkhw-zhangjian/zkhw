@@ -60,7 +60,7 @@
             this.groupBox1.Size = new System.Drawing.Size(640, 215);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "初始化：";
+            this.groupBox1.Text = "初始化数据：";
             // 
             // label2
             // 
@@ -84,11 +84,11 @@
             this.button2.BackColor = System.Drawing.Color.SkyBlue;
             this.button2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(530, 102);
+            this.button2.Location = new System.Drawing.Point(509, 102);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(99, 34);
+            this.button2.Size = new System.Drawing.Size(120, 34);
             this.button2.TabIndex = 7;
-            this.button2.Text = "初始化";
+            this.button2.Text = "数据同步";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 

@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -120,7 +122,7 @@ namespace zkhwClient.view.setting
             string xy = this.comboBox14.SelectedValue.ToString();
             string wx = textBox3.Text;
             string other = textBox2.Text;
-            string captain = "";//this.comboBox15.SelectedValue.ToString();
+            string captain = this.comboBox15.SelectedValue.ToString();
             string members = textBox4.Text;
             string operation = this.comboBox16.SelectedValue.ToString();
             string car_name = this.comboBox17.SelectedValue.ToString();
@@ -144,12 +146,7 @@ namespace zkhwClient.view.setting
                 MessageBox.Show("区域选择不完整！");
             }
         }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("云平台同步当前机构的居民档案信息！");
-        }
-
+        
         private void showCombobox() {
             DataTable dtuserlist= userdao.listUserbyOrganCode(frmLogin.organCode);
             this.comboBox6.DataSource = dtuserlist.Copy();//绑定数据源
@@ -199,6 +196,56 @@ namespace zkhwClient.view.setting
             this.comboBox17.DataSource = dtuserlist.Copy();//绑定数据源
             this.comboBox17.DisplayMember = "uname";//显示给用户的数据集表项
             this.comboBox17.ValueMember = "uname";//操作时获取的值
+            //家医团队信息
+            DataTable dtTeamDz = bsdao.checkTeamInfoBycode(frmLogin.organCode);
+            if (dtTeamDz.Rows.Count>0) {
+                this.comboBox15.DataSource = dtTeamDz.Copy();//绑定数据源
+                this.comboBox15.DisplayMember = "team_lead_name";//显示给用户的数据集表项
+                this.comboBox15.ValueMember = "team_no";//操作时获取的值
+            }
+        }
+
+        //数据初始化
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (IsInternetAvailable())
+            {
+                basicInfoInit baseinfo = new basicInfoInit();
+                baseinfo.Show();
+            }
+            else
+            {
+                MessageBox.Show("电脑未连接外网,请检查网络!");
+            }
+        }
+
+        //判断是否连接 外网
+        private bool IsInternetAvailable()
+        {
+            try
+            {
+                Dns.GetHostEntry("www.baidu.com"); //using System.Net;
+                return true;
+            }
+            catch (SocketException ex)
+            {
+                return false;
+            }
+        }
+
+        private void comboBox15_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            //家医团队成员信息
+            string teamNo = this.comboBox15.SelectedValue.ToString();
+            DataTable dtTeamCy = bsdao.checkTeamInfoBycode(teamNo);
+            string names = "";
+            if (dtTeamCy.Rows.Count > 0)
+            {  
+                for (int i=0;i< dtTeamCy.Rows.Count;i++) {
+                    names += "," + dtTeamCy.Rows[i]["doctor_name"].ToString();
+                }
+            }
+            this.textBox4.Text = names.Substring(1);
         }
     }
 }

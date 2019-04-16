@@ -106,29 +106,5 @@ namespace zkhwClient
 
 
         }
-        //数据初始化
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (IsInternetAvailable())
-            {
-                
-            }
-            else {
-                MessageBox.Show("电脑未连接外网,请检查网络!");
-            }
-        }
-        //判断是否连接 外网
-        private bool IsInternetAvailable()
-        {
-            try
-            {
-                Dns.GetHostEntry("www.baidu.com"); //using System.Net;
-                return true;
-            }
-            catch (SocketException ex)
-            {
-                return false;
-            }
-        }
     }
 }

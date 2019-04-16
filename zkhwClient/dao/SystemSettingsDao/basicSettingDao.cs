@@ -32,5 +32,14 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
+
+        //根据团队编号获取队员信息
+        public DataTable checkTeamInfoBycode(string code)
+        {
+            DataSet ds = new DataSet();
+            String sql = "select doctor_name from team_doctor where team_no='" + code + "' ";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
     }
 }
