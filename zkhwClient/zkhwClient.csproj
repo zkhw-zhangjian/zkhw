@@ -965,6 +965,12 @@
     <Content Include="images\update.png" />
     <Content Include="images\xzwj.png" />
     <Content Include="images\身份证样图.png" />
+    <Content Include="up\template\B超.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="up\template\心电图.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="zkhw.ico" />
   </ItemGroup>
   <ItemGroup>
