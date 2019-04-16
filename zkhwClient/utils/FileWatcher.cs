@@ -4,7 +4,8 @@ using System.IO;
 
 using System.Diagnostics;
 using System.Threading;
-
+using System.Xml;
+using System.Xml.Linq;
 
 namespace zkhwClient
 {
@@ -89,7 +90,7 @@ namespace zkhwClient
         #region 监听目录
 
         /// <summary>
-        /// 监听aoup
+        /// 监听
         /// </summary>
         ///  <remarks>创建人员(日期): ★刘腾飞★(100202 18:16)</remarks>
         public static void WatcheDirForAoup()
@@ -104,12 +105,12 @@ namespace zkhwClient
                     NotifyFilters.DirectoryName | NotifyFilters.FileName | NotifyFilters.LastAccess |
                     NotifyFilters.LastWrite | NotifyFilters.Security | NotifyFilters.Size;
                 // Only watch text files.
-                
+
                 m_watcherAoup.Filter = "*.xml";
 
                 m_watcherAoup.Changed += new FileSystemEventHandler(OnChangedForAoup);
                 m_watcherAoup.EnableRaisingEvents = true;
-                //修改txt文件的时间，用于系统启动时监听一次AOUP的修改
+                //修改文件的时间，用于系统启动时监听一次修改
                 File.SetLastWriteTime(watchPath, DateTime.Now);
 
             }
@@ -172,7 +173,7 @@ namespace zkhwClient
 
 
         /// <summary>
-        /// aoup改变时候触发
+        /// 改变时候触发
         /// </summary>
         /// <param name="source"></param>
         /// <param name="e"></param>
@@ -189,6 +190,25 @@ namespace zkhwClient
                     try
                     {
                         File.SetLastWriteTime(e.FullPath, DateTime.Now);//修改txt文件的时间
+
+                        XmlDocument doc = new XmlDocument();
+
+                        doc.Normalize();
+                        doc.Load("");
+                        XElement edmx;
+                        try
+                        {
+
+                            edmx = XElement.Load("".ToString()); //加载文件
+
+                        }
+                        catch
+                        {
+
+                            return;
+                        }
+
+
                     }
                     catch
                     {
