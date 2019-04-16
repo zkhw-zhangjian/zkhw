@@ -6,7 +6,7 @@ using System.Text;
 
 namespace zkhwClient.dao
 {
-    class olderHelthServiceDao
+    class healthCheckupDao
     {
         public bool deleteOlderHelthService(string id)
         {
@@ -15,12 +15,11 @@ namespace zkhwClient.dao
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
-        public DataTable queryOlderHelthService(string pCa, string time1, string time2,string code)
+        public DataTable queryhealthCheckup(string pCa, string time1, string time2)
         {
             DataSet ds = new DataSet();
-            string sql = "select a.id,a.name,a.id_number,a.total_score,a.judgement_result,a.test_date,a.test_doctor from elderly_selfcare_estimate a, resident_base_info b where a.aichive_no = b.archive_no AND a.test_date >= '" + time1 + "' and a.test_date <= '" + time2 + "'";
-            if (code != "") { sql += " AND b.village_code='"+code+"'"; }
-            if (pCa != "") { sql += " AND (a.name like '%" + pCa + "%'  or a.id_number like '%" + pCa + "%'  or a.aichive_no like '%" + pCa + "%')"; }
+            string sql = "select aichive_no,id_number,bar_code,name,check_date,doctor_name from physical_examination_record where check_date >= '" + time1 + "' and check_date <= '" + time2 + "'";
+            if (pCa != "") { sql += " and (name like '%" + pCa + "%'  or id_number like '%" + pCa + "%'  or aichive_no like '%" + pCa + "%')"; }
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }

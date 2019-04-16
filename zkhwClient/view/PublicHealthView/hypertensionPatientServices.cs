@@ -6,15 +6,22 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using zkhwClient.dao;
 
 namespace zkhwClient.view.PublicHealthView
 {
     public partial class hypertensionPatientServices : Form
     {
         service.hypertensionPatientService hypertensionPatient = new service.hypertensionPatientService();
+        areaConfigDao areadao = new areaConfigDao();
         public string pCa= "";
         public string time1 = null;
         public string time2 = null;
+        string xcuncode = "";
+        string xzcode = null;
+        string qxcode = null;
+        string shicode = null;
+        string shengcode = null;
         public hypertensionPatientServices()
         {
             InitializeComponent();
@@ -29,6 +36,11 @@ namespace zkhwClient.view.PublicHealthView
             label4.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
             label4.Left = (this.panel1.Width - this.label4.Width) / 2;
             label4.BringToFront();
+
+            //区域
+            this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源
+            this.comboBox1.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox1.ValueMember = "code";//操作时获取的值 
 
             queryhypertensionPatientServices();
         }
@@ -48,7 +60,7 @@ namespace zkhwClient.view.PublicHealthView
         private void queryhypertensionPatientServices()
         {
             this.dataGridView1.DataSource = null;
-            DataTable dt = hypertensionPatient.queryHypertensionPatient(pCa, time1, time2);
+            DataTable dt = hypertensionPatient.queryHypertensionPatient(pCa, time1, time2, xcuncode);
             this.dataGridView1.DataSource = dt;
             this.dataGridView1.Columns[0].Visible = false;
             this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";
@@ -217,6 +229,49 @@ namespace zkhwClient.view.PublicHealthView
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             this.label2.Visible = this.textBox1.Text.Length < 1;
+        }
+
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            shengcode = this.comboBox1.SelectedValue.ToString();
+            this.comboBox2.DataSource = areadao.shiInfo(shengcode);//绑定数据源
+            this.comboBox2.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox2.ValueMember = "code";//操作时获取的值 
+            this.comboBox3.DataSource = null;
+            this.comboBox4.DataSource = null;
+            this.comboBox5.DataSource = null;
+        }
+
+        private void comboBox2_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            shicode = this.comboBox2.SelectedValue.ToString();
+            this.comboBox3.DataSource = areadao.quxianInfo(shicode);//绑定数据源
+            this.comboBox3.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox3.ValueMember = "code";//操作时获取的值 
+            this.comboBox4.DataSource = null;
+            this.comboBox5.DataSource = null;
+        }
+
+        private void comboBox3_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            qxcode = this.comboBox3.SelectedValue.ToString();
+            this.comboBox4.DataSource = areadao.zhenInfo(qxcode);//绑定数据源
+            this.comboBox4.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox4.ValueMember = "code";//操作时获取的值 
+            this.comboBox5.DataSource = null;
+        }
+
+        private void comboBox4_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            xzcode = this.comboBox4.SelectedValue.ToString();
+            this.comboBox5.DataSource = areadao.cunInfo(xzcode);//绑定数据源
+            this.comboBox5.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox5.ValueMember = "code";//操作时获取的值
+        }
+
+        private void comboBox5_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            xcuncode = this.comboBox5.SelectedValue.ToString();
         }
     }
 }

@@ -180,6 +180,7 @@
     <Compile Include="control\PagerControl.designer.cs">
       <DependentUpon>PagerControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="dao\PublicHealthDao\healthCheckupDao.cs" />
     <Compile Include="dao\PublicHealthDao\olderHelthServiceDao.cs" />
     <Compile Include="dao\PublicHealthDao\diabetesPatientDao.cs" />
     <Compile Include="dao\PublicHealthDao\hypertensionPatientDao.cs" />

@@ -13,9 +13,9 @@ namespace zkhwClient.service
         {
             return hPD.deleteOlderHelthService(id);
         }
-        public DataTable queryOlderHelthService(string pCa, string time1, string time2)
+        public DataTable queryOlderHelthService(string pCa, string time1, string time2,string code)
         {
-            return hPD.queryOlderHelthService(pCa, time1, time2);
+            return hPD.queryOlderHelthService(pCa, time1, time2,code);
         }
         public DataTable queryOlderHelthService0()
         {

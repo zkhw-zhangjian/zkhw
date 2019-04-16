@@ -87,7 +87,7 @@ namespace zkhwClient
             string str = Application.StartupPath;//项目路径   
             this.button1.BackgroundImage = Image.FromFile(@str + "/images/login1.png");
             this.button2.BackgroundImage = Image.FromFile(@str + "/images/tuichu.png");
-            this.button3.BackgroundImage = Image.FromFile(@str + "/images/sjtb.png");
+
             this.pictureBox1.Image = Image.FromFile(@str + "/images/logo.png");
             DataTable dd = us.listUser();
             this.comboBox1.DataSource = dd;//绑定数据源

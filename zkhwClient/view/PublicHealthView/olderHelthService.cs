@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using zkhwClient.dao;
 using zkhwClient.view.PublicHealthView;
 
 namespace zkhwClient.PublicHealth
@@ -13,11 +14,15 @@ namespace zkhwClient.PublicHealth
     public partial class olderHelthService : Form
     {
         service.olderHelthServices olderHelthS = new service.olderHelthServices();
-
+        areaConfigDao areadao = new areaConfigDao();
         public string pCa = "";
         public string time1 = null;
         public string time2 = null;
-
+        string xcuncode = "";
+        string xzcode = null;
+        string qxcode = null;
+        string shicode = null;
+        string shengcode = null;
         public olderHelthService()
         {
             InitializeComponent();
@@ -28,10 +33,10 @@ namespace zkhwClient.PublicHealth
             //让默认的日期时间减一天
             this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1);
             string str = Application.StartupPath;//项目路径
-            queryOlderHelthService();
-        }
-        private void queryOlderHelthService()
-        {
+            //区域
+            this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源
+            this.comboBox1.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox1.ValueMember = "code";//操作时获取的值 
             //统计
             DataTable dt0 = olderHelthS.queryOlderHelthService0();
             if (dt0 != null && dt0.Rows.Count > 0)
@@ -44,12 +49,16 @@ namespace zkhwClient.PublicHealth
                 this.label18.Text = dt0.Rows[0]["label18"].ToString();
                 this.label21.Text = dt0.Rows[0]["label21"].ToString();
             }
-
+            queryOlderHelthService();
+        }
+        private void queryOlderHelthService()
+        {
+            this.dataGridView1.DataSource = null;
             //展示
             time1 = this.dateTimePicker1.Text.ToString();//开始时间
             time2 = this.dateTimePicker2.Text.ToString();//结束时间
-            this.dataGridView1.DataSource = null;
-            DataTable dt = olderHelthS.queryOlderHelthService(pCa, time1, time2);
+
+            DataTable dt = olderHelthS.queryOlderHelthService(pCa, time1, time2, xcuncode);
             this.dataGridView1.DataSource = dt;
             this.dataGridView1.Columns[0].Visible = false;
             this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";
@@ -67,8 +76,6 @@ namespace zkhwClient.PublicHealth
             {
                 this.dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -155,11 +162,53 @@ namespace zkhwClient.PublicHealth
             if (hm.ShowDialog() == DialogResult.OK)
             {
                     //刷新页面
-
                  queryOlderHelthService();
                 MessageBox.Show("修改成功！");
 
             }
+        }
+
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            shengcode = this.comboBox1.SelectedValue.ToString();
+            this.comboBox2.DataSource = areadao.shiInfo(shengcode);//绑定数据源
+            this.comboBox2.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox2.ValueMember = "code";//操作时获取的值 
+            this.comboBox3.DataSource = null;
+            this.comboBox4.DataSource = null;
+            this.comboBox5.DataSource = null;
+        }
+
+        private void comboBox2_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            shicode = this.comboBox2.SelectedValue.ToString();
+            this.comboBox3.DataSource = areadao.quxianInfo(shicode);//绑定数据源
+            this.comboBox3.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox3.ValueMember = "code";//操作时获取的值 
+            this.comboBox4.DataSource = null;
+            this.comboBox5.DataSource = null;
+        }
+
+        private void comboBox3_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            qxcode = this.comboBox3.SelectedValue.ToString();
+            this.comboBox4.DataSource = areadao.zhenInfo(qxcode);//绑定数据源
+            this.comboBox4.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox4.ValueMember = "code";//操作时获取的值 
+            this.comboBox5.DataSource = null;
+        }
+
+        private void comboBox4_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            xzcode = this.comboBox4.SelectedValue.ToString();
+            this.comboBox5.DataSource = areadao.cunInfo(xzcode);//绑定数据源
+            this.comboBox5.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox5.ValueMember = "code";//操作时获取的值
+        }
+
+        private void comboBox5_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            xcuncode = this.comboBox5.SelectedValue.ToString();
         }
 
     }

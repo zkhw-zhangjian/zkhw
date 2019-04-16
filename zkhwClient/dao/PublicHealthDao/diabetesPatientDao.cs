@@ -8,11 +8,12 @@ namespace zkhwClient.dao
 {
     class diabetesPatientDao
     {
-        public DataTable querydiabetesPatient(string pCa, string time1, string time2)
+        public DataTable querydiabetesPatient(string pCa, string time1, string time2,string code)
         {
             DataSet ds = new DataSet();
-            string sql = "select id,name,id_number,create_name,visit_date,next_visit_date,upload_status from diabetes_follow_record where visit_date >= '" + time1 + "' and visit_date <= '" + time2 + "'";
-            if (pCa != "") { sql += " and (patientName like '%" + pCa + "%'  or id_number like '%" + pCa + "%'  or aichive_no like '%" + pCa + "%')"; }
+            string sql = "select a.id,name,a.id_number,a.create_name,a.visit_date,a.next_visit_date,a.upload_status from diabetes_follow_record a, resident_base_info b where a.aichive_no = b.archive_no and a.visit_date >= '" + time1 + "' and a.visit_date <= '" + time2 + "'";
+            if (code != "") { sql += " AND b.village_code='" + code + "'"; }
+            if (pCa != "") { sql += " and (a.patientName like '%" + pCa + "%'  or a.id_number like '%" + pCa + "%'  or a.aichive_no like '%" + pCa + "%')"; }
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
