@@ -4,7 +4,11 @@ using System.IO;
 
 using System.Diagnostics;
 using System.Threading;
-
+using System.Xml;
+using System.Windows.Forms;
+using System.Data;
+using MySql.Data.MySqlClient;
+using zkhwClient.dao;
 
 namespace zkhwClient
 {
@@ -96,6 +100,79 @@ namespace zkhwClient
         {
             try
             {
+                string str = Application.StartupPath;//项目路径
+                #region 心电图
+                XmlDocument doc = new XmlDocument();
+                doc.Load(@str + "/up/template/心电图.xml");
+                XmlNode xNode = doc.SelectSingleNode("zqecg/base/time");
+                string time = xNode.InnerText;
+                XmlNode id = doc.SelectSingleNode("zqecg/patient/id");
+                string ids = id.InnerText;
+                XmlNode baseline_drift = doc.SelectSingleNode("zqecg/record/baseline_drift");
+                string baseline_drifts = baseline_drift.InnerText;
+                XmlNode myoelectricity = doc.SelectSingleNode("zqecg/record/myoelectricity");
+                string myoelectricitys = myoelectricity.InnerText;
+                XmlNode frequency = doc.SelectSingleNode("zqecg/record/frequency");
+                string frequencys = frequency.InnerText;
+                XmlNode hr = doc.SelectSingleNode("zqecg/measure/hr");
+                string hrs = hr.InnerText;
+                XmlNode pr = doc.SelectSingleNode("zqecg/measure/pr");
+                string prs = pr.InnerText;
+                XmlNode qrs = doc.SelectSingleNode("zqecg/measure/qrs");
+                string qrss = qrs.InnerText;
+                XmlNode qt_ = doc.SelectSingleNode("zqecg/measure/qt_");
+                string qt_s = qt_.InnerText;
+                XmlNode qtc = doc.SelectSingleNode("zqecg/measure/qtc");
+                string qtcs = qtc.InnerText;
+                XmlNode p_ = doc.SelectSingleNode("zqecg/measure/p_");
+                string p_s = p_.InnerText;
+                XmlNode qrs_ = doc.SelectSingleNode("zqecg/measure/qrs_");
+                string qrs_s = qrs_.InnerText;
+                XmlNode t = doc.SelectSingleNode("zqecg/measure/t");
+                string ts = t.InnerText;
+                XmlNode rv5 = doc.SelectSingleNode("zqecg/measure/rv5");
+                string rv5s = rv5.InnerText;
+                XmlNode sv1 = doc.SelectSingleNode("zqecg/measure/sv1");
+                string sv1s = sv1.InnerText;
+                XmlNode diagnosis = doc.SelectSingleNode("zqecg/result/diagnosis");
+                string diagnosiss = diagnosis.InnerText;
+                XmlNode advicetext = doc.SelectSingleNode("zqecg/result/advicetext");
+                string advicetexts = advicetext.InnerText;
+                jkInfoDao jkInfoDao = new jkInfoDao();
+                DataTable data = jkInfoDao.selectjkInfoBybarcode(ids);
+                if (data != null && data.Rows.Count > 0)
+                {
+                    string issql = "insert into zkhw_tj_xdt(id,aichive_no,id_number,bar_code,XdtResult,XdtDesc,PR,QRS,QT,QTc,hr,p,pqrs,t,rv5,sv1,baseline_drift,myoelectricity,frequency) values(@id,@aichive_no,@id_number,@bar_code,@XdtResult,@XdtDesc,@PR,@QRS,@QT,@QTc,@hr,@p,@pqrs,@t,@rv5,@sv1,@baseline_drift,@myoelectricity,@frequency)";
+                    MySqlParameter[] args = new MySqlParameter[] {
+                    new MySqlParameter("@id",Result.GetNewId()),
+                    new MySqlParameter("@aichive_no", data.Rows[0]["aichive_no"].ToString()),
+                    new MySqlParameter("@id_number", data.Rows[0]["id_number"].ToString()),
+                    new MySqlParameter("@bar_code", data.Rows[0]["bar_code"].ToString()),
+                    new MySqlParameter("@XdtResult", diagnosiss),
+                    new MySqlParameter("@XdtDesc", advicetexts),
+                    new MySqlParameter("@PR", prs),
+                    new MySqlParameter("@QRS", qrss),
+                    new MySqlParameter("@QT", qt_s),
+                    new MySqlParameter("@QTc", qtcs),
+                    new MySqlParameter("@hr", hrs),
+                    new MySqlParameter("@p",p_s),
+                    new MySqlParameter("@pqrs", qrs_s),
+                    new MySqlParameter("@t", ts),
+                    new MySqlParameter("@rv5", rv5s),
+                    new MySqlParameter("@sv1", sv1s),
+                    new MySqlParameter("@baseline_drift", baseline_drifts),
+                    new MySqlParameter("@myoelectricity", myoelectricitys),
+                    new MySqlParameter("@frequency", frequencys),
+                };
+                    int rue = DbHelperMySQL.ExecuteSql(issql, args);
+                }
+                #endregion
+
+                #region B超
+
+                #endregion
+
+
                 return;
                 string watchPath = @"D:\xindiantu";//去掉文件夹的只读权限
 
@@ -104,7 +181,7 @@ namespace zkhwClient
                     NotifyFilters.DirectoryName | NotifyFilters.FileName | NotifyFilters.LastAccess |
                     NotifyFilters.LastWrite | NotifyFilters.Security | NotifyFilters.Size;
                 // Only watch text files.
-                
+
                 m_watcherAoup.Filter = "*.xml";
 
                 m_watcherAoup.Changed += new FileSystemEventHandler(OnChangedForAoup);
