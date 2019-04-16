@@ -117,6 +117,7 @@ namespace zkhwClient
                 lb.name = frmLogin.name;
                 lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 lb.eventInfo = "退出系统！";
+                lb.type = "1";
                 if (lb.name != "admin" && lb.name != "" && lb.name != null)
                 {
                     llse.addCheckLog(lb);

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Xml;
 using zkhwClient.bean;
 using zkhwClient.dao;
+using zkhwClient.service;
 using zkhwClient.view.setting;
 
 namespace zkhwClient.view.PublicHealthView
@@ -30,18 +31,15 @@ namespace zkhwClient.view.PublicHealthView
         XmlDocument xmlDoc = new XmlDocument();
         XmlNode node;
         string path = @"config.xml";
-        string shenghuapath = "";
-        string xuechangguipath = "";
         string xindiantupath = "";
         string bichaopath = "";
         string carcode = null;
-        private OleDbDataAdapter oda = null;
-        private DataSet myds_data = null;
-
         DataTable dtshenfen = new DataTable();
         grjdDao grjddao = new grjdDao();
         jkInfoDao jkinfodao = new jkInfoDao();
+        tjcheckDao jkjcheckdao = new tjcheckDao();
         grjdxxBean grjdxx = null;
+        loginLogService logservice = new loginLogService();
         public personRegist()
         {
             InitializeComponent();
@@ -90,15 +88,29 @@ namespace zkhwClient.view.PublicHealthView
                 if ((iRetCOM == 1) || (iRetUSB == 1))
                 {
                     this.label42.Text = "初始化成功！";
+                    jkjcheckdao.updateShDevice(1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
                 }
                 else
                 {
                     this.label42.Text = "初始化失败！";
+                    loginLogBean lb = new loginLogBean();
+                    lb.name = frmLogin.name;
+                    lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    lb.eventInfo = "身份证读卡初始化失败！";
+                    lb.type = "3";
+                    logservice.addCheckLog(lb);
+                    jkjcheckdao.updateShDevice(0, -1, -1, -1, -1, -1, -1, -1, -1, -1);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                loginLogBean lb = new loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "身份证读卡初始化失败！";
+                lb.type = "3";
+                logservice.addCheckLog(lb);
+                jkjcheckdao.updateShDevice(0, -1, -1, -1, -1, -1, -1, -1, -1, -1);
             }
 
             //摄像头初始化
@@ -126,6 +138,13 @@ namespace zkhwClient.view.PublicHealthView
             catch (ApplicationException)
             {
                 videoDevices = null;
+                loginLogBean lb = new loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "摄像头初始化失败！";
+                lb.type = "3";
+                logservice.addCheckLog(lb);
+                jkjcheckdao.updateShDevice(-1, 0, -1, -1, -1, -1, -1, -1, -1, -1);
             }
         }
         //读取身份证
@@ -158,12 +177,25 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 else
                 {
-                    MessageBox.Show("初始化失败！");
+                    //MessageBox.Show("初始化失败！");
+                    loginLogBean lb = new loginLogBean();
+                    lb.name = frmLogin.name;
+                    lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    lb.eventInfo = "身份证读卡初始化失败！";
+                    lb.type = "3";
+                    logservice.addCheckLog(lb);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("读卡错误,请重试！");
+                loginLogBean lb = new loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "身份证读卡失败！";
+                lb.type = "3";
+                logservice.addCheckLog(lb);
+                jkjcheckdao.updateShDevice(0, -1, -1, -1, -1, -1, -1, -1, -1, -1);
+                //MessageBox.Show("读卡错误,请重试！");
             }
         }
 
@@ -214,33 +246,55 @@ namespace zkhwClient.view.PublicHealthView
                 //把身份证图片名称zp.bpm 修改为对应的名称
                 string pName = Application.StartupPath + "\\zp.bmp";
                 FileInfo inf = new FileInfo(pName);
-                if (textBox3.Text != null && !"".Equals(textBox3.Text) && textBox3.Text.Length == 18)
+                if (textBox1.Text != null && !"".Equals(textBox1.Text)&& textBox8.Text != null && !"".Equals(textBox8.Text))
                 {
-                    if (File.Exists(Application.StartupPath + "\\cardImg\\" + textBox3.Text + ".jpg"))
-                    {
-                        File.Delete(Application.StartupPath + "\\cardImg\\" + textBox3.Text + ".jpg");
+                    if (textBox3.Text != null && !"".Equals(textBox3.Text)) {
+                        if (File.Exists(Application.StartupPath + "\\cardImg\\" + textBox3.Text + ".jpg"))
+                        {
+                            File.Delete(Application.StartupPath + "\\cardImg\\" + textBox3.Text + ".jpg");
+                        }
+                        inf.MoveTo(Application.StartupPath + "\\cardImg\\" + textBox3.Text + ".jpg");
+
+                        pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + textBox3.Text + ".jpg";
+
+                        DataTable dt = grjddao.judgeRepeat(textBox3.Text);
+                        if (dt.Rows.Count > 0)
+                        {
+                            textBox1.Text = dt.Rows[0][0].ToString();
+                            textBox9.Text = dt.Rows[0][1].ToString();
+                            textBox8.Text = dt.Rows[0][2].ToString();
+                            textBox3.Text = dt.Rows[0][3].ToString();
+                            pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
+                            textBox5.Text = dt.Rows[0][5].ToString();
+                        };
+                        this.label41.Text = "读卡成功！";
                     }
-                    inf.MoveTo(Application.StartupPath + "\\cardImg\\" + textBox3.Text + ".jpg");
-                    
-                    pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + textBox3.Text + ".jpg";
+                    else {
+                        if (File.Exists(Application.StartupPath + "\\cardImg\\" + textBox1.Text + textBox8.Text + ".jpg"))
+                        {
+                            File.Delete(Application.StartupPath + "\\cardImg\\" + textBox1.Text + textBox8.Text + ".jpg");
+                        }
+                        inf.MoveTo(Application.StartupPath + "\\cardImg\\" + textBox1.Text + textBox8.Text + ".jpg");
+
+                        pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + textBox1.Text + textBox8.Text + ".jpg";
+
+                        DataTable dt = grjddao.judgeRepeatBync(textBox1.Text, textBox8.Text);
+                        if (dt.Rows.Count > 0)
+                        {
+                            textBox1.Text = dt.Rows[0][0].ToString();
+                            textBox9.Text = dt.Rows[0][1].ToString();
+                            textBox8.Text = dt.Rows[0][2].ToString();
+                            textBox3.Text = dt.Rows[0][3].ToString();
+                            pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
+                            richTextBox1.Text = dt.Rows[0][5].ToString();
+                            textBox2.Text = dt.Rows[0][6].ToString();
+                            textBox5.Text = dt.Rows[0][7].ToString();
+                        };
+                    }
                     if (File.Exists(pName))
                     {
                         File.Delete(pName);
                     }
-                    DataTable dt = grjddao.judgeRepeat(textBox3.Text);
-                    if (dt.Rows.Count > 0)
-                    {
-                        textBox1.Text = dt.Rows[0][0].ToString();
-                        textBox9.Text = dt.Rows[0][1].ToString();
-                        textBox8.Text = dt.Rows[0][2].ToString();
-                        textBox3.Text = dt.Rows[0][3].ToString();
-                        //richTextBox1.Text = dt.Rows[0][4].ToString();
-                        //textBox2.Text = dt.Rows[0][5].ToString();
-                        //textBox4.Text = dt.Rows[0][6].ToString();
-                        pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
-                        textBox5.Text = dt.Rows[0][5].ToString();
-                    };
-                    this.label41.Text = "读卡成功！";
                 }
                 else
                 {
@@ -251,11 +305,17 @@ namespace zkhwClient.view.PublicHealthView
                     }
                     pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\123.jpg";
                 }
-
+                jkjcheckdao.updateShDevice(1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
+                loginLogBean lb = new loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "身份证读卡失败！";
+                lb.type = "3";
+                logservice.addCheckLog(lb);
             }
         }
 
@@ -274,21 +334,40 @@ namespace zkhwClient.view.PublicHealthView
                     PngBitmapEncoder pE = new PngBitmapEncoder();
                     pE.Frames.Add(BitmapFrame.Create(bitmapSource));
 
-                    if (textBox3.Text != null && !"".Equals(textBox3.Text))
+                    if (textBox1.Text != null && !"".Equals(textBox1.Text) && textBox8.Text != null && !"".Equals(textBox8.Text))
                     {
-                        if (File.Exists(Application.StartupPath + "\\photoImg\\" + textBox3.Text + ".jpg"))
+                        if (textBox3.Text != null && !"".Equals(textBox3.Text))
                         {
-                            File.Delete(Application.StartupPath + "\\photoImg\\" + textBox3.Text + ".jpg");
+                            if (File.Exists(Application.StartupPath + "\\photoImg\\" + textBox3.Text + ".jpg"))
+                            {
+                                File.Delete(Application.StartupPath + "\\photoImg\\" + textBox3.Text + ".jpg");
+                            }
+                            string picName = Application.StartupPath + "\\photoImg" + "\\" + textBox3.Text + ".jpg";
+                            if (File.Exists(picName))
+                            {
+                                File.Delete(picName);
+                            }
+                            using (Stream stream = File.Create(picName))
+                            {
+                                pE.Save(stream);
+                                this.pictureBox2.ImageLocation = picName;
+                            }
                         }
-                        string picName = Application.StartupPath + "\\photoImg" + "\\" + textBox3.Text + ".jpg";
-                        if (File.Exists(picName))
-                        {
-                            File.Delete(picName);
-                        }
-                        using (Stream stream = File.Create(picName))
-                        {
-                            pE.Save(stream);
-                            this.pictureBox2.ImageLocation = picName;
+                        else {
+                            if (File.Exists(Application.StartupPath + "\\photoImg\\" + textBox1.Text + textBox8.Text + ".jpg"))
+                            {
+                                File.Delete(Application.StartupPath + "\\photoImg\\" + textBox1.Text + textBox8.Text + ".jpg");
+                            }
+                            string picName = Application.StartupPath + "\\photoImg" + "\\" + textBox1.Text + textBox8.Text + ".jpg";
+                            if (File.Exists(picName))
+                            {
+                                File.Delete(picName);
+                            }
+                            using (Stream stream = File.Create(picName))
+                            {
+                                pE.Save(stream);
+                                this.pictureBox2.ImageLocation = picName;
+                            }
                         }
                     }
                     else
@@ -305,10 +384,18 @@ namespace zkhwClient.view.PublicHealthView
                         }
                     }
                 }
+                jkjcheckdao.updateShDevice(-1, -1, 1, -1, -1, -1, -1, -1, -1, -1);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("摄像头异常：" + ex.Message + "\n" + ex.StackTrace);
+                //MessageBox.Show("摄像头异常：" + ex.Message + "\n" + ex.StackTrace);
+                loginLogBean lb = new loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "摄像头拍照失败！";
+                lb.type = "3";
+                logservice.addCheckLog(lb);
+                jkjcheckdao.updateShDevice(-1, 0, -1, -1, -1, -1, -1, -1, -1, -1);
             }
         }
         //关闭摄像头
@@ -329,7 +416,7 @@ namespace zkhwClient.view.PublicHealthView
             string name = textBox1.Text;
             string people = textBox2.Text;
 
-            if (number != null && !"".Equals(number) && name != null && !"".Equals(name) && birthday != null && !"".Equals(birthday))
+            if (name != null && !"".Equals(name) && birthday != null && !"".Equals(birthday))
             {
                 grjdxx = new grjdxxBean();
                 grjdxx.name = name;
@@ -348,14 +435,12 @@ namespace zkhwClient.view.PublicHealthView
                 MessageBox.Show("居民信息填写不完整！");
                 return;
             }
-            if (pictureBox1.Image == null || pictureBox2.Image == null)
+            if (pictureBox2.Image == null)
             {
-                MessageBox.Show("没有身份证照片或摄像头拍摄照片,请重试!");
+                MessageBox.Show("没有摄像头拍摄照片,请重试!");
                 return;
             }
 
-            //Random rand = new Random();
-            //int randnum = rand.Next(10000, 99999);
             xmlDoc.Load(path);
             node = xmlDoc.SelectSingleNode("config/chejiahao");
             carcode = node.InnerText;
@@ -364,16 +449,10 @@ namespace zkhwClient.view.PublicHealthView
             string barnumCode = node.InnerText;
             if (carcode == null || carcode.Length != 4) { MessageBox.Show("车编号不正确，请确认系统设置中的车编号！"); return; };
 
-            string nameCode = textBox1.Text + " " + Regex.Replace(textBox3.Text, "(\\d{4})\\d{4}(\\d{4})", "$1****$2");
+            string nameCode = textBox1.Text + " " + Regex.Replace(textBox3.Text, "(\\d{6})\\d{10}(\\d{2})", "$1**********$2");
 
-            if (textBox1.Text == "" || textBox3.Text == "")
-            {
-                OnPrintSampleBarcode(carcode + barnumCode, Int32.Parse(this.numericUpDown1.Value.ToString()), "测试 2202****1410186221");
-            }
-            else
-            {
-                OnPrintSampleBarcode(carcode + barnumCode, Int32.Parse(this.numericUpDown1.Value.ToString()), nameCode);
-            }
+            OnPrintSampleBarcode(carcode + barnumCode, Int32.Parse(this.numericUpDown1.Value.ToString()), nameCode);
+         
             node = xmlDoc.SelectSingleNode("config/barnumCode");
             node.InnerText = (Int32.Parse(barnumCode)+1).ToString();
             xmlDoc.Save(path);
@@ -382,13 +461,30 @@ namespace zkhwClient.view.PublicHealthView
         public void OnPrintSampleBarcode(string barcode, int pageCount, string nameCode)
         {
             bool addjkbool = false;
+            DataTable dt = null;
             if (grjdxx != null)
             {
-                DataTable dt = grjddao.judgeRepeat(textBox3.Text);
-                if (dt.Rows.Count < 1)
+                string cardcode= textBox3.Text;
+                if (cardcode != null && !"".Equals(cardcode)) {
+                    dt = grjddao.judgeRepeat(textBox3.Text);
+                }
+                else {
+                    dt = grjddao.judgeRepeatBync(textBox1.Text, textBox8.Text);
+                }
+                if (dt!=null&&dt.Rows.Count < 1)
                 {
-                    grjdxx.archive_no = basicInfoSettings.xcuncode + "0"+grjdxx.Cardcode.Substring(14);
-                    bool istrue = grjddao.addgrjdInfo(grjdxx);
+                    if (grjdxx.Cardcode != null && !"".Equals(grjdxx.Cardcode))
+                    {
+                        grjdxx.archive_no = basicInfoSettings.xcuncode + "0" + grjdxx.Cardcode.Substring(14);
+                    }
+                    else {
+                        grjdxx.archive_no = basicInfoSettings.xcuncode + barcode.Substring(5,4);
+                    }
+                    grjdxx.aichive_org = basicInfoSettings.organ_name;
+                    grjdxx.doctor_name = basicInfoSettings.zeren_doctor;
+                    grjdxx.create_archives_name = basicInfoSettings.input_name;
+                    grjddao.addgrjdInfo(grjdxx);//添加个人信息档案
+                    grjddao.addPhysicalExaminationInfo(grjdxx, barcode);//添加健康体检表信息
                 }
                 jkBean jk = new jkBean();
                 string archive_no= grjdxx.archive_no;
@@ -415,7 +511,7 @@ namespace zkhwClient.view.PublicHealthView
                 textBox6.Text = barcode;
                 if (addjkbool)
                 {   //体检信息统计表
-                    grjddao.addBgdcInfo(grjdxx, barcode, archive_no);
+                    grjddao.addBgdcInfo(grjdxx, barcode, archive_no, basicInfoSettings.xcuncode);
                 }
                 }
                 try
@@ -439,11 +535,19 @@ namespace zkhwClient.view.PublicHealthView
                         btFormat.Close(BarTender.BtSaveOptions.btDoNotSaveChanges);
                         //打印完毕 
                         btApp.Quit(BarTender.BtSaveOptions.btDoNotSaveChanges);
-                    }
+                    jkjcheckdao.updateShDevice(-1, -1, 1, -1, -1, -1, -1, -1, -1, -1);
+                }
             }
             catch (Exception e)
             {
+                loginLogBean lb = new loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "打印机设备连接不正确！";
+                lb.type = "3";
+                logservice.addCheckLog(lb);
                 MessageBox.Show("打印机设备连接不正确,请重新连接或重启!");
+                jkjcheckdao.updateShDevice(-1, -1, 0, -1, -1, -1, -1, -1, -1, -1);
                 //throw e;
             }
         }
@@ -483,8 +587,9 @@ namespace zkhwClient.view.PublicHealthView
 
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            MessageBox.Show("是否需要补打条形码？");
+            //MessageBox.Show("是否需要补打条形码？");
         }
+
 
         //体检人数统计
         public void registrationRecordCheck()
@@ -494,7 +599,7 @@ namespace zkhwClient.view.PublicHealthView
                 label16.Text = dt16num.Rows[0][0].ToString();//计划体检人数
             }
 
-            DataTable dt19num = grjddao.jkAllNum(basicInfoSettings.xcuncode);
+            DataTable dt19num = grjddao.jkAllNum(basicInfoSettings.xcuncode, basicInfoSettings.createtime);
             if (dt19num != null && dt19num.Rows.Count > 0)
             {
                 label19.Text = dt19num.Rows[0][0].ToString();//登记人数

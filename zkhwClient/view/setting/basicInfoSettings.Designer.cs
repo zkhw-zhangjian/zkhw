@@ -459,6 +459,7 @@
             this.comboBox15.Name = "comboBox15";
             this.comboBox15.Size = new System.Drawing.Size(121, 28);
             this.comboBox15.TabIndex = 1;
+            this.comboBox15.SelectionChangeCommitted += new System.EventHandler(this.comboBox15_SelectionChangeCommitted);
             // 
             // label14
             // 
@@ -546,7 +547,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(99, 34);
             this.button1.TabIndex = 6;
-            this.button1.Text = "确认";
+            this.button1.Text = "保存";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -554,7 +555,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(919, 762);
+            this.ClientSize = new System.Drawing.Size(919, 600);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox4);
@@ -562,7 +563,9 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "basicInfoSettings";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "基本信息设置";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.basicInfoSettings_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

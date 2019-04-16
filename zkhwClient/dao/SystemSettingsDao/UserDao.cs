@@ -40,7 +40,7 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             if (ds.Tables[0].Rows.Count <= 0)
             {
-                string sql1 = "insert into zkhw_user_info (username,password,lasttime,loginnumber,depaid,name,type) values ('" + ui.UserName + "', '" + ui.Password + "', '" + ui.Lasttime + "', '" + ui.Loginnumber + "', '" + ui.Depaid + "', '" + ui.Name + "', '" + ui.Type + "')";
+                string sql1 = "insert into zkhw_user_info (username,password) values ('" + ui.UserName + "', '" + ui.Password + "')";
                 rt = DbHelperMySQL.ExecuteSql(sql1);
             }
 

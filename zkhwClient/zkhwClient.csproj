@@ -160,13 +160,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="bean\diabetes_follow_recordBean.cs" />
+    <Compile Include="bean\elderly_selfcare_estimateBean.cs" />
+    <Compile Include="bean\elderly_tcm_recordBean.cs" />
     <Compile Include="bean\fuv_hypertensionBean.cs" />
     <Compile Include="bean\grjdxxBean.cs" />
     <Compile Include="bean\jkBean.cs" />
     <Compile Include="bean\loginLogBean.cs" />
+    <Compile Include="bean\ltdOrganization.cs" />
     <Compile Include="bean\physical_examination_recordBean.cs" />
     <Compile Include="bean\resident_base_infoBean.cs" />
     <Compile Include="bean\shenghuaBean.cs" />
+    <Compile Include="bean\teamDoctorBean.cs" />
+    <Compile Include="bean\teamInfoBean.cs" />
     <Compile Include="bean\UserInfo.cs" />
     <Compile Include="bean\xuechangguiBean.cs" />
     <Compile Include="control\PagerControl.cs">
@@ -175,6 +180,7 @@
     <Compile Include="control\PagerControl.designer.cs">
       <DependentUpon>PagerControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="dao\PublicHealthDao\healthCheckupDao.cs" />
     <Compile Include="dao\PublicHealthDao\olderHelthServiceDao.cs" />
     <Compile Include="dao\PublicHealthDao\diabetesPatientDao.cs" />
     <Compile Include="dao\PublicHealthDao\hypertensionPatientDao.cs" />
@@ -186,6 +192,7 @@
     <Compile Include="dao\SystemSettingsDao\tjcheckDao.cs" />
     <Compile Include="dao\SystemSettingsDao\loginLogDao.cs" />
     <Compile Include="dao\SystemSettingsDao\UserDao.cs" />
+    <Compile Include="dao\PublicHealthDao\tcmHealthServicesDao.cs" />
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,8 +216,10 @@
     <Compile Include="service\PublicHealthService\diabetesPatientService.cs" />
     <Compile Include="service\PublicHealthService\hypertensionPatientService.cs" />
     <Compile Include="service\PublicHealthService\personalBasicInfoService.cs" />
+    <Compile Include="service\PublicHealthService\tcmHealthService.cs" />
     <Compile Include="utils\CVRSDK.cs" />
     <Compile Include="utils\FileWatcher.cs" />
+    <Compile Include="utils\Md5.cs" />
     <Compile Include="view\PublicHealthView\aUolderHelthService.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -421,6 +430,13 @@
     <Compile Include="view\setting\systemlog.Designer.cs">
       <DependentUpon>systemlog.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\SystemSettingsView\addUsers.cs" />
+    <Compile Include="view\SystemSettingsView\basicInfoInit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SystemSettingsView\basicInfoInit.Designer.cs">
+      <DependentUpon>basicInfoInit.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\SystemSettingsView\passWordUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -462,6 +478,90 @@
     </Compile>
     <Compile Include="view\public\traumatism_record.Designer.cs">
       <DependentUpon>traumatism_record.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkXueya.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkXueya.Designer.cs">
+      <DependentUpon>checkXueya.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkXindt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkXindt.Designer.cs">
+      <DependentUpon>checkXindt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkSgtz.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkSgtz.Designer.cs">
+      <DependentUpon>checkSgtz.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkXuecg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkXuecg.Designer.cs">
+      <DependentUpon>checkXuecg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkNiaocg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkNiaocg.Designer.cs">
+      <DependentUpon>checkNiaocg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkShenghua.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkShenghua.Designer.cs">
+      <DependentUpon>checkShenghua.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkBichao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\checkBichao.Designer.cs">
+      <DependentUpon>checkBichao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateShengoaTizhong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateShengoaTizhong.Designer.cs">
+      <DependentUpon>updateShengoaTizhong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateXueya.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateXueya.Designer.cs">
+      <DependentUpon>updateXueya.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateNiaochanggui.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateNiaochanggui.Designer.cs">
+      <DependentUpon>updateNiaochanggui.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateXuechanggui.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateXuechanggui.Designer.cs">
+      <DependentUpon>updateXuechanggui.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateShenghua.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateShenghua.Designer.cs">
+      <DependentUpon>updateShenghua.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateXindiantu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateXindiantu.Designer.cs">
+      <DependentUpon>updateXindiantu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateBichao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\updateTjResult\updateBichao.Designer.cs">
+      <DependentUpon>updateBichao.cs</DependentUpon>
     </Compile>
     <Compile Include="view\UseHelpView\biochemical.cs">
       <SubType>Form</SubType>
@@ -559,6 +659,9 @@
     <EmbeddedResource Include="view\PublicHealthView\aUHypertensionPatientServices.resx">
       <DependentUpon>aUHypertensionPatientServices.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\aUolderHelthService.resx">
+      <DependentUpon>aUolderHelthService.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\aUPersonalBasicInfo.resx">
       <DependentUpon>aUPersonalBasicInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -574,6 +677,9 @@
     <EmbeddedResource Include="view\PublicHealthView\examinatReport.resx">
       <DependentUpon>examinatReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\healthCheckup.resx">
+      <DependentUpon>healthCheckup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\hypertensionPatientServices.resx">
       <DependentUpon>hypertensionPatientServices.cs</DependentUpon>
     </EmbeddedResource>
@@ -585,6 +691,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\personRegist.resx">
       <DependentUpon>personRegist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\tcmHealthServices.resx">
+      <DependentUpon>tcmHealthServices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\public\family_record.resx">
       <DependentUpon>family_record.cs</DependentUpon>
@@ -604,8 +713,17 @@
     <EmbeddedResource Include="view\setting\basicInfoSettings.resx">
       <DependentUpon>basicInfoSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\setting\deviceManagement.resx">
+      <DependentUpon>deviceManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\setting\parameterSetting.resx">
       <DependentUpon>parameterSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\setting\systemlog.resx">
+      <DependentUpon>systemlog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\SystemSettingsView\basicInfoInit.resx">
+      <DependentUpon>basicInfoInit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\SystemSettingsView\passWordUpdate.resx">
       <DependentUpon>passWordUpdate.cs</DependentUpon>
@@ -629,6 +747,48 @@
     <EmbeddedResource Include="view\SystemSettingsView\userManage.resx">
       <DependentUpon>userManage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\checkXueya.resx">
+      <DependentUpon>checkXueya.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\checkXindt.resx">
+      <DependentUpon>checkXindt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\checkSgtz.resx">
+      <DependentUpon>checkSgtz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\checkXuecg.resx">
+      <DependentUpon>checkXuecg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\checkNiaocg.resx">
+      <DependentUpon>checkNiaocg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\checkShenghua.resx">
+      <DependentUpon>checkShenghua.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\checkBichao.resx">
+      <DependentUpon>checkBichao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\updateShengoaTizhong.resx">
+      <DependentUpon>updateShengoaTizhong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\updateXueya.resx">
+      <DependentUpon>updateXueya.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\updateNiaochanggui.resx">
+      <DependentUpon>updateNiaochanggui.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\updateXuechanggui.resx">
+      <DependentUpon>updateXuechanggui.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\updateShenghua.resx">
+      <DependentUpon>updateShenghua.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\updateXindiantu.resx">
+      <DependentUpon>updateXindiantu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\updateTjResult\updateBichao.resx">
+      <DependentUpon>updateBichao.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\UseHelpView\biochemical.resx">
       <DependentUpon>biochemical.cs</DependentUpon>
     </EmbeddedResource>
@@ -649,9 +809,33 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="up\template\个人信息.doc" />
-    <None Include="up\template\公卫表单模板.docx" />
-    <None Include="up\template\封面.doc" />
+    <None Include="up\template\B超.doc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="up\template\个人信息.doc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="up\template\中医体质.doc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="up\template\健康体检表.doc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="up\template\化验报告单.doc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="up\template\封面.doc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="up\template\心电图.doc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="up\template\结果.doc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="up\template\老年人生活自理能力评估.doc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -781,6 +965,12 @@
     <Content Include="images\update.png" />
     <Content Include="images\xzwj.png" />
     <Content Include="images\身份证样图.png" />
+    <Content Include="up\template\B超.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="up\template\心电图.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="zkhw.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -5,5 +5,8 @@
     <Setting Name="timeInterval" Type="System.String" Scope="User">
       <Value Profile="(Default)">120000</Value>
     </Setting>
+    <Setting Name="timer3Interval" Type="System.String" Scope="User">
+      <Value Profile="(Default)">60000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

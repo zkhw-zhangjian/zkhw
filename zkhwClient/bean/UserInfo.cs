@@ -8,16 +8,30 @@ namespace zkhwClient.bean
 {
     class UserInfo
     {
-        private String id;
-        private String userName;
-        private String password;
-        private String lasttime;
-        private String loginnumber;
-        private String depaid;
-        private String name;
-        private String type;
+        public String id;
+        public String userName;
+        public String password;
 
-
+        public string user_code { get; set; }
+        public string pub_usercode { get; set; }
+        public string user_name { get; set; }
+        public string username { get; set; }
+        public string sex { get; set; }
+        public string job_num { get; set; }
+        public string tele_phone { get; set; }
+        public string mail { get; set; }
+        public string birthday { get; set; }
+        public string organ_code { get; set; }
+        public string parent_organ { get; set; }
+        public string depart_code { get; set; }
+        public string user_type_code { get; set; }
+        public string data_level { get; set; }
+        public string status { get; set; }
+        public string is_delete { get; set; }
+        public string create_time { get; set; }
+        public string create_user_code { get; set; }
+        public string update_time { get; set; }
+        public string update_user_code { get; set; }
 
         public string Id
         {
@@ -55,66 +69,6 @@ namespace zkhwClient.bean
             set
             {
                 password = value;
-            }
-        }
-        public string Lasttime
-        {
-            get
-            {
-                return lasttime;
-            }
-
-            set
-            {
-                lasttime = value;
-            }
-        }
-        public string Loginnumber
-        {
-            get
-            {
-                return loginnumber;
-            }
-
-            set
-            {
-                loginnumber = value;
-            }
-        }
-        public string Depaid
-        {
-            get
-            {
-                return depaid;
-            }
-
-            set
-            {
-                depaid = value;
-            }
-        }
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-
-            set
-            {
-                name = value;
-            }
-        }
-        public string Type
-        {
-            get
-            {
-                return type;
-            }
-
-            set
-            {
-                type = value;
             }
         }
     }

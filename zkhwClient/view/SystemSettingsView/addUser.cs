@@ -44,24 +44,11 @@ namespace zkhwClient
             string pwd = this.textBox2.Text;
             string pwd1 = this.textBox3.Text;
 
-            string lasttime = DateTime.Now.ToString("yyyy-MM-dd");
-            string loginnumber = "1";
-            string depaid = "1";
-            string name = "1";
-            string type = "1";
-
-
-            if (name != null && !"".Equals(name) && pwd.Equals(pwd1))
+            if (userName != null && !"".Equals(userName) && pwd.Equals(pwd1))
             {
                 bean.UserInfo ui = new bean.UserInfo();
                 ui.UserName = userName;
                 ui.Password = pwd;
-                ui.Lasttime = lasttime;
-                ui.Loginnumber = loginnumber;
-                ui.Depaid = depaid;
-                ui.Name = name;
-                ui.Type = type;
-
 
                 service.UserService us = new service.UserService();
                 bool istrue = us.addUser(ui);

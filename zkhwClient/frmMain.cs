@@ -13,6 +13,13 @@ using System.Data;
 using System.Xml;
 using System.Threading;
 using System.Data.OleDb;
+using System.IO;
+using zkhwClient.view.updateTjResult;
+using System.Net;
+using System.Linq;
+using System.Text;
+using System.Net.Sockets;
+using System.Text.RegularExpressions;
 
 namespace zkhwClient
 {
@@ -21,7 +28,7 @@ namespace zkhwClient
         personRegist pR = null;
         Process proHttp = new Process();
         basicSettingDao bsdao = new basicSettingDao();
-        tjcheckDao thdao = new tjcheckDao();
+        tjcheckDao tjdao = new tjcheckDao();
         jkInfoDao jkdao = new jkInfoDao();
         private OleDbDataAdapter oda = null;
         private DataSet myds_data = null;
@@ -40,30 +47,35 @@ namespace zkhwClient
             //监听有没有B超的文件生成
 
             //验证监听文件是否存在
-            string watchPath = string.Empty;
-           
-            //是否启动监听AOUP
-            if (System.IO.File.Exists(watchPath))
-            {
-                //开启监控
-                FileWatcher.WatcheDirForAoup();
-           
-            }
-            else
-            {
-                //MessageBox.Show(watchPath + "\nB超监听开启失败，系统不能正常运行！\n请创建该文件后重新运行应用程序！", "提示");
-                return;
-            }
+            //string watchPath = string.Empty;
 
-             
+            ////是否启动监听AOUP
+            //if (System.IO.File.Exists(watchPath))
+            //{
+            //    //开启监控
+            //    FileWatcher.WatcheDirForAoup();
+
+            //}
+            //else
+            //{
+            //    MessageBox.Show(watchPath + "\nB超监听开启失败，系统不能正常运行！\n请创建该文件后重新运行应用程序！", "提示");
+            //    return;
+            //}
+
+            basicInfoSettings basicSet = new basicInfoSettings();
+            basicSet.Show();
             //http
-            proHttp.StartInfo.FileName = Application.StartupPath+"\\http\\httpCeshi.exe";
+            proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
             proHttp.StartInfo.UseShellExecute = false;
+            proHttp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             proHttp.Start();
 
             this.timer1.Start();//时间控件定时器
-            this.timer2.Interval =Int32.Parse(Properties.Settings.Default.timeInterval);
-            this.timer2.Start();//定时获取生化和血球的数据
+            //this.timer2.Interval =Int32.Parse(Properties.Settings.Default.timeInterval);
+            //this.timer2.Start();//定时获取生化和血球的数据
+
+            this.timer3.Interval =Int32.Parse(Properties.Settings.Default.timer3Interval);
+            this.timer3.Start();//1分钟定时刷新设备状态
 
             this.label1.Text = "一体化查体车  中科弘卫";
             this.label1.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
@@ -131,7 +143,7 @@ namespace zkhwClient
                     };
                 }//屏蔽其它功能菜单下拉选
             }
-
+            socketTcp();
         }
 
         private void 用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -152,17 +164,26 @@ namespace zkhwClient
             DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                proHttp.Close();
+                if (!proHttp.HasExited)
+                {
+                    proHttp.Kill();
+                }
                 service.loginLogService llse = new service.loginLogService();
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = frmLogin.name;
                 lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 lb.eventInfo = "退出系统！";
+                lb.type = "1";
                 if (lb.name != "admin" && lb.name != "" && lb.name != null)
                 {
                     llse.addCheckLog(lb);
                 }
-                System.Environment.Exit(0);
+                Process p = Process.GetCurrentProcess();
+                if (p != null)
+                {
+                    p.Kill();
+                }
+                Environment.Exit(0);
             }
         }
         //挂机
@@ -170,7 +191,6 @@ namespace zkhwClient
         public static extern bool LockWorkStation();//这个是调用windows的系统锁定 
         private void 挂机ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             LockWorkStation();
         }
 
@@ -191,9 +211,10 @@ namespace zkhwClient
                         picb[i].BorderStyle = BorderStyle.None;
                         if (i == 0)//默认首项选中
                         {
-                            pR.btnClose_Click();
-                            pR = null;
-                            
+                            if (pR!=null) {
+                                pR.btnClose_Click();
+                                pR = null;
+                            }
                             picb[i].BackColor = Color.Blue;
                             pR = new personRegist();
                             pR.TopLevel = false;
@@ -317,6 +338,7 @@ namespace zkhwClient
                 this.panel1.Controls.Clear();
                 this.panel1.Controls.Add(pR);
                 pR.Show();
+                pR.queryExaminatProgress();
             }
             else if (tag == "体检报告")
             {
@@ -773,11 +795,29 @@ namespace zkhwClient
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            proHttp.Kill();
-            Process p = Process.GetCurrentProcess();
-            if (p != null)
+            DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
             {
-                p.Kill();
+                if (!proHttp.HasExited)
+                {
+                    proHttp.Kill();
+                }
+                service.loginLogService llse = new service.loginLogService();
+                bean.loginLogBean lb = new bean.loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "退出系统！";
+                lb.type = "1";
+                if (lb.name != "admin" && lb.name != "" && lb.name != null)
+                {
+                    llse.addCheckLog(lb);
+                }
+                Process p = Process.GetCurrentProcess();
+                if (p != null)
+                {
+                    p.Kill();
+                }
+                //Environment.Exit(0);
             }
         }
         //定时任务获取生化和血球的数据
@@ -795,7 +835,7 @@ namespace zkhwClient
         }
         private void shAndxcg()
         {
-            if (shenghuapath == "")
+            if (shenghuapath == "" || !File.Exists(shenghuapath))
             {
                 MessageBox.Show("未获取到生化中间库地址，请检查是否设置地址！");
                 return;
@@ -844,10 +884,14 @@ namespace zkhwClient
                             default: break;
                         }
                     }
-                    thdao.insertShenghuaInfo(sh);
+                    bool istrue= tjdao.insertShenghuaInfo(sh);
+                    if (istrue) {
+                        tjdao.updateTJbgdcShenghua(sh.aichive_no,sh.bar_code,1);
+                        tjdao.updatePEShInfo(sh.aichive_no, sh.bar_code, sh.CHO, sh.TG, sh.LDL_C,sh.HDL_C);
+                    }
                 }
             }
-            if (xuechangguipath == "")
+            if (xuechangguipath == "" || !File.Exists(shenghuapath))
             {
                 MessageBox.Show("未获取到血球中间库地址，请检查是否设置地址！");
                 return;
@@ -900,7 +944,12 @@ namespace zkhwClient
                             default: break;
                         }
                     }
-                    thdao.insertXuechangguiInfo(xcg);
+                    bool istrue = tjdao.insertXuechangguiInfo(xcg);
+                    if (istrue)
+                    {
+                        tjdao.updateTJbgdcXuechanggui(xcg.aichive_no, xcg.bar_code, 1);
+                        tjdao.updatePEXcgInfo(xcg.aichive_no, xcg.bar_code, xcg.HGB,xcg.WBC,xcg.PLT);
+                    }
                 }
             }
         }
@@ -925,6 +974,344 @@ namespace zkhwClient
             oda = new OleDbDataAdapter(strSQL, strcon);
             oda.Fill(myds_data);
             return myds_data;
+        }
+        //首页点击B超按钮
+        private void button1_Click(object sender, EventArgs e)
+        {
+            checkBichao checkBc = new checkBichao();
+            checkBc.Show();
+        }
+        //首页点击生化按钮
+        private void button2_Click(object sender, EventArgs e)
+        {
+            checkShenghua checkSh = new checkShenghua();
+            checkSh.Show();
+        }
+        //首页点击尿常规按钮
+        private void button3_Click(object sender, EventArgs e)
+        {
+            checkNiaocg checkNcg = new checkNiaocg();
+            checkNcg.Show();
+        }
+        //首页点击血常规按钮
+        private void button4_Click(object sender, EventArgs e)
+        {
+            checkXuecg checkXcg = new checkXuecg();
+            checkXcg.Show();
+        }
+        //首页点击身高体重按钮
+        private void button5_Click(object sender, EventArgs e)
+        {
+            checkSgtz checkSgTz = new checkSgtz();
+            checkSgTz.Show();
+        }
+        //首页点击心电图按钮
+        private void button6_Click(object sender, EventArgs e)
+        {
+            checkXindt checkXdt = new checkXindt();
+            checkXdt.Show();
+        }
+        //首页点击血压按钮
+        private void button7_Click(object sender, EventArgs e)
+        {
+            checkXueya checkXy = new checkXueya();
+            checkXy.Show();
+        }
+
+        //首页底部设备状态更新
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+          DataTable dtDeviceType = tjdao.checkDevice();
+          string sfz_online = dtDeviceType.Rows[0]["sfz_online"].ToString();
+            if (sfz_online == "0" || "0".Equals(sfz_online))
+            {
+                this.button1.BackColor = Color.Red;
+            }
+            else {
+                this.button1.BackColor = Color.MediumAquamarine;
+            }
+            string sxt_online = dtDeviceType.Rows[0]["sxt_online"].ToString();
+            if (sxt_online == "0" || "0".Equals(sxt_online))
+            {
+                this.button2.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button2.BackColor = Color.MediumAquamarine;
+            }
+            string dyj_online = dtDeviceType.Rows[0]["dyj_online"].ToString();
+            if (dyj_online == "0" || "0".Equals(dyj_online))
+            {
+                this.button3.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button3.BackColor = Color.MediumAquamarine;
+            }
+            string xcg_online = dtDeviceType.Rows[0]["xcg_online"].ToString();
+            if (xcg_online == "0" || "0".Equals(xcg_online))
+            {
+                this.button4.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button4.BackColor = Color.MediumAquamarine;
+            }
+            string sh_online = dtDeviceType.Rows[0]["sh_online"].ToString();
+            if (sh_online == "0" || "0".Equals(sh_online))
+            {
+                this.button5.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button5.BackColor = Color.MediumAquamarine;
+            }
+            string ncg_online = dtDeviceType.Rows[0]["ncg_online"].ToString();
+            if (ncg_online == "0" || "0".Equals(ncg_online))
+            {
+                this.button6.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button6.BackColor = Color.MediumAquamarine;
+            }
+            string xdt_online = dtDeviceType.Rows[0]["xdt_online"].ToString();
+            if (xdt_online == "0" || "0".Equals(xdt_online))
+            {
+                this.button7.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button7.BackColor = Color.MediumAquamarine;
+            }
+            string sgtz_online = dtDeviceType.Rows[0]["sgtz_online"].ToString();
+            if (sgtz_online == "0" || "0".Equals(sgtz_online))
+            {
+                this.button8.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button8.BackColor = Color.MediumAquamarine;
+            }
+            string xy_online = dtDeviceType.Rows[0]["xy_online"].ToString();
+            if (xy_online == "0" || "0".Equals(xy_online))
+            {
+                this.button9.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button9.BackColor = Color.MediumAquamarine;
+            }
+            string bc_online = dtDeviceType.Rows[0]["bc_online"].ToString();
+            if (bc_online == "0" || "0".Equals(bc_online))
+            {
+                this.button10.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button10.BackColor = Color.MediumAquamarine;
+            }
+        }
+
+        private void socketTcp() {
+            //尿机IP地址解析
+            string hostName = Dns.GetHostName();   //获取本机名
+            IPHostEntry localhost = Dns.GetHostByName(hostName);//方法已过期，可以获取IPv4的地址
+            IPAddress ip = localhost.AddressList[0];
+            Socket serverSocket = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
+            //IPAddress ip = IPAddress.Parse("192.168.2.103");
+            IPEndPoint point = new IPEndPoint(ip, 9001);
+            //socket绑定监听地址
+            serverSocket.Bind(point);
+            //设置同时连接个数
+            serverSocket.Listen(10);
+
+            //利用线程后台执行监听,否则程序会假死
+            Thread thread = new Thread(Listen);
+            thread.IsBackground = true;
+            thread.Start(serverSocket);
+        }
+        /// <summary>
+        /// 监听连接
+        /// </summary>
+        private void Listen(object o)
+        {
+            var serverSocket = o as Socket;
+            while (true)
+            {
+                //等待连接并且创建一个负责通讯的socket
+                var send = serverSocket.Accept();
+                //获取链接的IP地址
+                //var sendIpoint = send.RemoteEndPoint.ToString();
+                //开启一个新线程不停接收消息
+                Thread thread = new Thread(Recive);
+                thread.IsBackground = true;
+                thread.Start(send);
+            }
+        }
+
+        /// <summary>
+        /// 接收消息
+        /// </summary>
+        /// <param name="o"></param>
+        private void Recive(object o)
+        {
+            
+                var send = o as Socket;
+                while (true)
+                {
+                    //获取发送过来的消息容器
+                    byte[] buffer = new byte[1024 * 2];
+                    var effective = 0;
+                    try
+                    {
+                        effective = send.Receive(buffer);
+                    }
+                    catch { break; }
+                    //有效字节为0则跳过
+                    if (effective == 0)
+                    {
+                        break;
+                    }
+                    string sendHL7new = "";
+                    string sendHL7 = "MSH|^~\\&|||Rayto||1||ACK^R01|1|P|2.3.1||||S||UNICODE|||MSA|AA|1|||||";
+                    string []sendArray= sendHL7.Split('|');
+                    byte[] buffernew = buffer.Skip(0).Take(effective).ToArray();
+                    string sHL7 = Encoding.Default.GetString(buffernew).Trim();
+                    if (sHL7.IndexOf("CHEMRAY420") > 0)
+                    {//解析生化协议报文数据
+                        shenghuaBean sh = new shenghuaBean();
+                        string[] sHL7Pids = Regex.Split(sHL7, "PID", RegexOptions.IgnoreCase);
+                        if (sHL7Pids.Length == 0) { return; };
+                        string[] MSHArray = sHL7Pids[0].Split('|');
+                        sendArray[6] = MSHArray[6];
+                        sendArray[9] = MSHArray[9];
+                        sendArray[17] = "ASCII";
+                        sendArray[22] = MSHArray[9];
+                        string[] sHL7PArray = sHL7Pids[1].Split('|');
+                        sh.bar_code = sHL7PArray[2];
+                        DataTable dtjkinfo = jkdao.selectjkInfoBybarcode(sh.bar_code);
+                        if (dtjkinfo != null && dtjkinfo.Rows.Count > 0)
+                        {
+                            sh.aichive_no = dtjkinfo.Rows[0]["aichive_no"].ToString();
+                            sh.id_number = dtjkinfo.Rows[0]["id_number"].ToString();
+                        }
+                        else
+                        {
+                            return;
+                        }
+                        //把HL7分成段
+                        string[] sHL7Lines = Regex.Split(sHL7, "OBX", RegexOptions.IgnoreCase);
+                        if (sHL7Lines.Length == 0) { return; };
+                        for (int i = 1; i < sHL7Lines.Length; i++)
+                        {
+                            string[] sHL7Array = sHL7Lines[i].Split('|');
+                            switch (sHL7Array[4])
+                            {
+                                case "ALB": sh.ALB = sHL7Array[5]; break;
+                                case "ALP": sh.ALP = sHL7Array[5]; break;
+                                case "ALT": sh.ALT = sHL7Array[5]; break;
+                                case "AST": sh.AST = sHL7Array[5]; break;
+                                case "CHO": sh.CHO = sHL7Array[5]; break;
+                                case "Crea": sh.Crea = sHL7Array[5]; break;
+                                case "DBIL": sh.DBIL = sHL7Array[5]; break;
+                                case "GGT": sh.GGT = sHL7Array[5]; break;
+                                case "GLU": sh.GLU = sHL7Array[5]; break;
+                                case "HDL_C": sh.HDL_C = sHL7Array[5]; break;
+                                case "LDL_C": sh.LDL_C = sHL7Array[5]; break;
+                                case "TBIL": sh.TBIL = sHL7Array[5]; break;
+                                case "TG": sh.TG = sHL7Array[5]; break;
+                                case "TP": sh.TP = sHL7Array[5]; break;
+                                case "UA": sh.UA = sHL7Array[5]; break;
+                                case "UREA": sh.UREA = sHL7Array[5]; break;
+                                default: break;
+                            }
+                        }
+                        sh.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        bool istrue = tjdao.insertShenghuaInfo(sh);
+                        if (istrue)
+                        {
+                            tjdao.updateTJbgdcShenghua(sh.aichive_no, sh.bar_code, 1);
+                            tjdao.updatePEShInfo(sh.aichive_no, sh.bar_code, sh.CHO, sh.TG, sh.LDL_C, sh.HDL_C);
+                        }
+                        //返回生化的确认数据报文
+                        for (int j=0;j< sendArray.Length;j++) {
+                            sendHL7new += "|"+sendArray[j];
+                        }
+                        byte[] sendBytes = Encoding.Unicode.GetBytes(sendHL7new.Substring(1));
+                        send.Send(sendBytes);
+                }else
+                    {//解析血球协议报文数据
+                    xuechangguiBean xcg = new xuechangguiBean();
+                    string[] sHL7Pids = Regex.Split(sHL7, "PID", RegexOptions.IgnoreCase);
+                    if (sHL7Pids.Length == 0) { return; };
+                    string[] MSHArray = sHL7Pids[0].Split('|');
+                    sendArray[6] = MSHArray[6];
+                    sendArray[9] = MSHArray[9];
+                    sendArray[22] = MSHArray[9];
+                    string[] sHL7PArray = sHL7Pids[1].Split('|');
+                    xcg.bar_code = sHL7PArray[2];
+                    DataTable dtjkinfo = jkdao.selectjkInfoBybarcode(xcg.bar_code);
+                    if (dtjkinfo != null && dtjkinfo.Rows.Count > 0)
+                    {
+                        xcg.aichive_no = dtjkinfo.Rows[0]["aichive_no"].ToString();
+                        xcg.id_number = dtjkinfo.Rows[0]["id_number"].ToString();
+                    }
+                    else
+                    {
+                        return;
+                    }
+                    xcg.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    //把HL7分成段
+                    string[] sHL7Lines = Regex.Split(sHL7, "OBX", RegexOptions.IgnoreCase);
+                    if (sHL7Lines.Length == 0) { return; };
+                    for (int i = 1; i < sHL7Lines.Length; i++)
+                    {
+                        string[] sHL7Array = sHL7Lines[i].Split('|');
+                        switch (sHL7Array[3])
+                        {
+                            case "HCT": xcg.HCT = sHL7Array[5]; break;
+                            case "HGB": xcg.HGB = sHL7Array[5]; break;
+                            case "LYMA": xcg.LYM = sHL7Array[5]; break;
+                            case "LYMP": xcg.LYMP = sHL7Array[5]; break;
+                            case "MCH": xcg.MCH = sHL7Array[5]; break;
+                            case "MCHC": xcg.MCHC = sHL7Array[5]; break;
+                            case "MCV": xcg.MCV = sHL7Array[5]; break;
+                            case "MPV": xcg.MPV = sHL7Array[5]; break;
+                            case "MXDA": xcg.MXD = sHL7Array[5]; break;
+                            case "MXDP": xcg.MXDP = sHL7Array[5]; break;
+                            case "NEUTA": xcg.NEUT = sHL7Array[5]; break;
+                            case "NEUTP": xcg.NEUTP = sHL7Array[5]; break;
+                            case "PCT": xcg.PCT = sHL7Array[5]; break;
+                            case "PDW": xcg.PDW = sHL7Array[5]; break;
+                            case "PLT": xcg.PLT = sHL7Array[5]; break;
+                            case "RBC": xcg.RBC = sHL7Array[5]; break;
+                            case "RDWCV": xcg.RDW_CV = sHL7Array[5]; break;
+                            case "RDWSD": xcg.RDW_SD = sHL7Array[5]; break;
+                            case "WBC": xcg.WBC = sHL7Array[5]; break;
+                            case "MONA": xcg.MONO = sHL7Array[5]; break;
+                            case "MONP": xcg.MONOP = sHL7Array[5]; break;
+                            case "GRAN": xcg.GRAN = sHL7Array[5]; break;
+                            case "GRANP": xcg.GRANP = sHL7Array[5]; break;
+                            case "PLCR": xcg.PLCR = sHL7Array[5]; break;
+                            default: break;
+                        }
+                    }
+                    bool istrue = tjdao.insertXuechangguiInfo(xcg);
+                    if (istrue)
+                    {
+                        tjdao.updateTJbgdcXuechanggui(xcg.aichive_no, xcg.bar_code, 1);
+                        tjdao.updatePEXcgInfo(xcg.aichive_no, xcg.bar_code, xcg.HGB, xcg.WBC, xcg.PLT);
+                    }
+                    //返回血球的确认数据报文
+                    for (int j = 0; j < sendArray.Length; j++)
+                    {
+                        sendHL7new += "|" + sendArray[j];
+                    }
+                    byte[] sendBytes = Encoding.Unicode.GetBytes(sendHL7new.Substring(1));
+                    send.Send(sendBytes);
+                }
+           }
         }
     }
 }

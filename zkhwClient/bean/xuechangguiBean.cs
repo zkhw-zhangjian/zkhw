@@ -48,6 +48,16 @@ namespace zkhwClient
 
         public string WBC { get; set; }
 
+        public string MONOP { get; set; }
+
+        public string MONO { get; set; }
+
+        public string GRANP { get; set; }
+
+        public string GRAN { get; set; }
+
+        public string PLCR { get; set; }
+
         public string createTime { get; set; }
 
         public string bar_code { get; set; }

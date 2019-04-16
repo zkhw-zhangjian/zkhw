@@ -84,6 +84,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button10 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -94,6 +95,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -432,6 +434,7 @@
             this.button1.TabIndex = 6;
             this.button1.Text = "B超";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -443,6 +446,7 @@
             this.button2.TabIndex = 7;
             this.button2.Text = "生化分析仪";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -454,6 +458,7 @@
             this.button3.TabIndex = 8;
             this.button3.Text = "尿液分析仪";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -465,6 +470,7 @@
             this.button4.TabIndex = 9;
             this.button4.Text = "血液分析仪";
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
@@ -476,6 +482,7 @@
             this.button5.TabIndex = 10;
             this.button5.Text = "身高体重仪";
             this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
@@ -487,6 +494,7 @@
             this.button6.TabIndex = 11;
             this.button6.Text = "心电图仪";
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
@@ -498,6 +506,7 @@
             this.button7.TabIndex = 12;
             this.button7.Text = "血压计";
             this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button8
             // 
@@ -546,6 +555,7 @@
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.button10);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.label1);
@@ -560,6 +570,17 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1352, 46);
             this.panel2.TabIndex = 17;
+            // 
+            // button10
+            // 
+            this.button10.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.button10.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button10.Location = new System.Drawing.Point(1000, 9);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(106, 26);
+            this.button10.TabIndex = 16;
+            this.button10.Text = "条码打印机";
+            this.button10.UseVisualStyleBackColor = false;
             // 
             // label2
             // 
@@ -657,6 +678,11 @@
             // 
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // timer3
+            // 
+            this.timer3.Interval = 60000;
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
             // frmMain
             // 
@@ -760,6 +786,8 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripMenuItem 中间库位置设置ToolStripMenuItem;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Timer timer3;
     }
 }
 
