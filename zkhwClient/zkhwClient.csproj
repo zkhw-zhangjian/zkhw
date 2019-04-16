@@ -676,6 +676,9 @@
     <EmbeddedResource Include="view\PublicHealthView\examinatReport.resx">
       <DependentUpon>examinatReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\healthCheckup.resx">
+      <DependentUpon>healthCheckup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\hypertensionPatientServices.resx">
       <DependentUpon>hypertensionPatientServices.cs</DependentUpon>
     </EmbeddedResource>

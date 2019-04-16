@@ -661,6 +661,30 @@ namespace zkhwClient.dao
                 return ds;
             }
         }
+        public static int ExecuteSqlYpt(string SQLString)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionStringYpt))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(SQLString, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                        int rows = cmd.ExecuteNonQuery();
+                        return rows;
+                    }
+                    catch (MySqlException e)
+                    {
+                        connection.Close();
+                        using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
+                        {
+                            sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + e.Message + "\r\n" + SQLString);
+                        }
+                        return 0;
+                    }
+                }
+            }
+        }
         #endregion
     }
 }
