@@ -1884,86 +1884,15 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
         {
             try
             {
-                DataSet info = DbHelperMySQL.Query($@"select * from resident_base_info where upload_status='0' 
-archive_no
-pb_archive
-name
-sex
-birthday
-age
-id_number
-card_pic
-company
-phone
-link_name
-link_phone
-resident_type
-address
-residence_address
-nation
-blood_group
-blood_rh
-education
-profession
-marital_status
-pay_type
-pay_other
-drug_allergy
-allergy_other
-exposure
-disease_other
-is_hypertension
-is_diabetes
-is_psychosis
-is_tuberculosis
-is_heredity
-heredity_name
-is_deformity
-deformity_name
-is_poor
-kitchen
-fuel
-other_fuel
-drink
-other_drink
-toilet
-poultry
-medical_code
-photo_code
-aichive_org
-doctor_name
-create_archives_name
-is_signing
-province_code
-province_name
-city_code
-city_name
-county_code
-county_name
-towns_code
-towns_name
-village_code
-village_name
-status
-remark
-create_user
-create_name
-create_time
-create_org
-create_org_name
-update_user
-update_name
-upload_status
-upload_time
-");
+                DataSet info = DbHelperMySQL.Query($@"select * from resident_base_info where upload_status='0'");
                 if (info != null && info.Tables.Count > 0 && info.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = info.Tables[0];
                     string sql = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
-                        sql += $@"insert into zkhw_tj_xdt (id,archive_no,pb_archive,name,sex,birthday,age,id_number,card_pic,company,phone,link_name,link_phone,resident_type,register_address,residence_address,nation,blood_group,blood_rh,education,profession,marital_status,pay_type,pay_other,drug_allergy,allergy_other,exposure,disease_other,is_hypertension,is_diabetes,is_psychosis,is_tuberculosis,is_heredity,heredity_name,is_deformity,deformity_name,is_poor,kitchen,fuel,other_fuel,drink,other_drink,toilet,poultry,medical_code,photo_code,aichive_org,doctor_name,is_signing,is_synchro,synchro_result,synchro_time,province_code,province_name,city_code,city_name,county_code,county_name,towns_code,towns_name,village_code,village_name,status,remark,create_user,create_name,create_time,create_org,create_org_name,update_user,update_name,update_time
-) values({ data.Rows[i]["id"]},@archive_no,@pb_archive,@name,@sex,@birthday,@age,@id_number,@card_pic,@company,@phone,@link_name,@link_phone,@resident_type,@register_address,@residence_address,@nation,@blood_group,@blood_rh,@education,@profession,@marital_status,@pay_type,@pay_other,@drug_allergy,@allergy_other,@exposure,@disease_other,@is_hypertension,@is_diabetes,@is_psychosis,@is_tuberculosis,@is_heredity,@heredity_name,@is_deformity,@deformity_name,@is_poor,@kitchen,@fuel,@other_fuel,@drink,@other_drink,@toilet,@poultry,@medical_code,@photo_code,@aichive_org,@doctor_name,@is_signing,@is_synchro,@synchro_result,@synchro_time,@province_code,@province_name,@city_code,@city_name,@county_code,@county_name,@towns_code,@towns_name,@village_code,@village_name,@status,@remark,@create_user,@create_name,@create_time,@create_org,@create_org_name,@update_user,@update_name,@update_time);";
+                        sql += $@"insert into zkhw_tj_xdt (id,archive_no,pb_archive,name,sex,birthday,age,id_number,card_pic,company,phone,link_name,link_phone,resident_type,register_address,residence_address,nation,blood_group,blood_rh,education,profession,marital_status,pay_type,pay_other,drug_allergy,allergy_other,exposure,disease_other,is_hypertension,is_diabetes,is_psychosis,is_tuberculosis,is_heredity,heredity_name,is_deformity,deformity_name,is_poor,kitchen,fuel,other_fuel,drink,other_drink,toilet,poultry,medical_code,photo_code,aichive_org,doctor_name,is_signing,synchro_time,province_code,province_name,city_code,city_name,county_code,county_name,towns_code,towns_name,village_code,village_name,status,remark,create_user,create_name,create_time,create_org,create_org_name,update_user,update_name,update_time
+) values({ data.Rows[i]["id"]},{data.Rows[i]["archive_no"]},{data.Rows[i]["pb_archive"]},{data.Rows[i]["name"]},{data.Rows[i]["sex"]},{data.Rows[i]["birthday"]},{data.Rows[i]["age"]},{data.Rows[i]["id_number"]},{data.Rows[i]["card_pic"]},{data.Rows[i]["company"]},{data.Rows[i]["phone"]},{data.Rows[i]["link_name"]},{data.Rows[i]["link_phone"]},{data.Rows[i]["resident_type"]},{data.Rows[i]["address"]},{data.Rows[i]["residence_address"]},{data.Rows[i]["nation"]},{data.Rows[i]["blood_group"]},{data.Rows[i]["blood_rh"]},{data.Rows[i]["education"]},{data.Rows[i]["profession"]},{data.Rows[i]["marital_status"]},{data.Rows[i]["pay_type"]},{data.Rows[i]["pay_other"]},{data.Rows[i]["drug_allergy"]},{data.Rows[i]["allergy_other"]},{data.Rows[i]["exposure"]},{data.Rows[i]["disease_other"]},{data.Rows[i]["is_hypertension"]},{data.Rows[i]["is_diabetes"]},{data.Rows[i]["is_psychosis"]},{data.Rows[i]["is_tuberculosis"]},{data.Rows[i]["is_heredity"]},{data.Rows[i]["heredity_name"]},{data.Rows[i]["is_deformity"]},{data.Rows[i]["deformity_name"]},{data.Rows[i]["is_poor"]},{data.Rows[i]["kitchen"]},{data.Rows[i]["fuel"]},{data.Rows[i]["other_fuel"]},{data.Rows[i]["drink"]},{data.Rows[i]["other_drink"]},{data.Rows[i]["toilet"]},{data.Rows[i]["poultry"]},{data.Rows[i]["medical_code"]},{data.Rows[i]["photo_code"]},{data.Rows[i]["aichive_org"]},{data.Rows[i]["doctor_name"]},{data.Rows[i]["is_signing"]},@synchro_time,{data.Rows[i]["province_code"]},{data.Rows[i]["province_name"]},{data.Rows[i]["city_code"]},{data.Rows[i]["city_name"]},{data.Rows[i]["county_code"]},{data.Rows[i]["county_name"]},{data.Rows[i]["towns_code"]},{data.Rows[i]["towns_name"]},{data.Rows[i]["village_code"]},{data.Rows[i]["village_name"]},{data.Rows[i]["status"]},{data.Rows[i]["remark"]},{data.Rows[i]["create_user"]},{data.Rows[i]["create_name"]},{data.Rows[i]["create_time"]},{data.Rows[i]["create_org"]},{data.Rows[i]["create_org_name"]},{data.Rows[i]["update_user"]},{data.Rows[i]["update_name"]},{data.Rows[i]["upload_time"]});";
                     }
                 }
             }
