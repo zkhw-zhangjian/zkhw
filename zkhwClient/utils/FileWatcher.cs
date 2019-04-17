@@ -142,7 +142,7 @@ namespace zkhwClient
                 DataTable data = jkInfoDao.selectjkInfoBybarcode(ids);
                 if (data != null && data.Rows.Count > 0)
                 {
-                    string issql = "insert into zkhw_tj_xdt(id,aichive_no,id_number,bar_code,XdtResult,XdtDesc,PR,QRS,QT,QTc,hr,p,pqrs,t,rv5,sv1,baseline_drift,myoelectricity,frequency) values(@id,@aichive_no,@id_number,@bar_code,@XdtResult,@XdtDesc,@PR,@QRS,@QT,@QTc,@hr,@p,@pqrs,@t,@rv5,@sv1,@baseline_drift,@myoelectricity,@frequency)";
+                    string issql = "insert into zkhw_tj_xdt(id,aichive_no,id_number,bar_code,XdtResult,XdtDesc,PR,QRS,QT,QTc,hr,p,pqrs,t,rv5,sv1,baseline_drift,myoelectricity,frequency,createtime,imageUrl) values(@id,@aichive_no,@id_number,@bar_code,@XdtResult,@XdtDesc,@PR,@QRS,@QT,@QTc,@hr,@p,@pqrs,@t,@rv5,@sv1,@baseline_drift,@myoelectricity,@frequency,@createtime,@imageUrl)";
                     MySqlParameter[] args = new MySqlParameter[] {
                     new MySqlParameter("@id",Result.GetNewId()),
                     new MySqlParameter("@aichive_no", data.Rows[0]["aichive_no"].ToString()),
@@ -163,7 +163,17 @@ namespace zkhwClient
                     new MySqlParameter("@baseline_drift", baseline_drifts),
                     new MySqlParameter("@myoelectricity", myoelectricitys),
                     new MySqlParameter("@frequency", frequencys),
+                    new MySqlParameter("@createtime", time),
+                    new MySqlParameter("@imageUrl", ids+".jpg")
                 };
+                    if (diagnosiss == "窦性心律和心律正常")
+                    {
+                        int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='1',cardiogram_img='{ids + ".jpg"}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
+                    }
+                    else
+                    {
+                        int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='2',cardiogram_img='{ids + ".jpg"}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
+                    }
                     int rue = DbHelperMySQL.ExecuteSql(issql, args);
                 }
                 #endregion

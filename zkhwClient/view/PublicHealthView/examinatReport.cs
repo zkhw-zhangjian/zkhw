@@ -1,4 +1,5 @@
 ﻿using Aspose.Words;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1873,10 +1874,112 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
         }
         #endregion
 
+        #region 数据上传
+        /// <summary>
+        /// 数据上传
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
-        }
+            try
+            {
+                DataSet info = DbHelperMySQL.Query($@"select * from resident_base_info where upload_status='0' 
+archive_no
+pb_archive
+name
+sex
+birthday
+age
+id_number
+card_pic
+company
+phone
+link_name
+link_phone
+resident_type
+address
+residence_address
+nation
+blood_group
+blood_rh
+education
+profession
+marital_status
+pay_type
+pay_other
+drug_allergy
+allergy_other
+exposure
+disease_other
+is_hypertension
+is_diabetes
+is_psychosis
+is_tuberculosis
+is_heredity
+heredity_name
+is_deformity
+deformity_name
+is_poor
+kitchen
+fuel
+other_fuel
+drink
+other_drink
+toilet
+poultry
+medical_code
+photo_code
+aichive_org
+doctor_name
+create_archives_name
+is_signing
+province_code
+province_name
+city_code
+city_name
+county_code
+county_name
+towns_code
+towns_name
+village_code
+village_name
+status
+remark
+create_user
+create_name
+create_time
+create_org
+create_org_name
+update_user
+update_name
+upload_status
+upload_time
+");
+                if (info != null && info.Tables.Count > 0 && info.Tables[0].Rows.Count > 0)
+                {
+                    DataTable data = info.Tables[0];
+                    string sql = string.Empty;
+                    for (int i = 0; i < data.Rows.Count; i++)
+                    {
+                        sql += $@"insert into zkhw_tj_xdt (id,archive_no,pb_archive,name,sex,birthday,age,id_number,card_pic,company,phone,link_name,link_phone,resident_type,register_address,residence_address,nation,blood_group,blood_rh,education,profession,marital_status,pay_type,pay_other,drug_allergy,allergy_other,exposure,disease_other,is_hypertension,is_diabetes,is_psychosis,is_tuberculosis,is_heredity,heredity_name,is_deformity,deformity_name,is_poor,kitchen,fuel,other_fuel,drink,other_drink,toilet,poultry,medical_code,photo_code,aichive_org,doctor_name,is_signing,is_synchro,synchro_result,synchro_time,province_code,province_name,city_code,city_name,county_code,county_name,towns_code,towns_name,village_code,village_name,status,remark,create_user,create_name,create_time,create_org,create_org_name,update_user,update_name,update_time
+) values({ data.Rows[i]["id"]},@archive_no,@pb_archive,@name,@sex,@birthday,@age,@id_number,@card_pic,@company,@phone,@link_name,@link_phone,@resident_type,@register_address,@residence_address,@nation,@blood_group,@blood_rh,@education,@profession,@marital_status,@pay_type,@pay_other,@drug_allergy,@allergy_other,@exposure,@disease_other,@is_hypertension,@is_diabetes,@is_psychosis,@is_tuberculosis,@is_heredity,@heredity_name,@is_deformity,@deformity_name,@is_poor,@kitchen,@fuel,@other_fuel,@drink,@other_drink,@toilet,@poultry,@medical_code,@photo_code,@aichive_org,@doctor_name,@is_signing,@is_synchro,@synchro_result,@synchro_time,@province_code,@province_name,@city_code,@city_name,@county_code,@county_name,@towns_code,@towns_name,@village_code,@village_name,@status,@remark,@create_user,@create_name,@create_time,@create_org,@create_org_name,@update_user,@update_name,@update_time);";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
 
+                throw;
+            }
+
+        }
+        #endregion
+        /// <summary>
+        /// 查看报告
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             //点击button按钮事件
