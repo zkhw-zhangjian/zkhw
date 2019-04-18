@@ -405,6 +405,7 @@ namespace zkhwClient
 
                         //插入数据库
                     }
+                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -421,9 +422,9 @@ namespace zkhwClient
                 }
             }
         }
-
-
         #endregion
+
+
     }
     class OrderFileClass
     {
