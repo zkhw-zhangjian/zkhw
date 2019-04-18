@@ -19,7 +19,6 @@ namespace zkhwClient
     /// </summary>
     public static class FileWatcher
     {
-       static jkInfoDao jkInfoDao = new jkInfoDao();
         /// <summary>
         /// 察看监听状态
         /// </summary>
@@ -204,7 +203,7 @@ namespace zkhwClient
         /// <param name="source"></param>
         /// <param name="e"></param>
         /// <remarks>创建人员(日期): ★刘腾飞★(100202 18:16)</remarks> 
-        public static void OnChangedForXinDianTu(object source, FileSystemEventArgs e)
+        private static void OnChangedForXinDianTu(object source, FileSystemEventArgs e)
         {
             if (e.ChangeType == WatcherChangeTypes.Changed)
             {
@@ -254,7 +253,7 @@ namespace zkhwClient
                         string diagnosiss = diagnosis.InnerText;
                         XmlNode advicetext = doc.SelectSingleNode("zqecg/result/advicetext");
                         string advicetexts = advicetext.InnerText;
-                        
+                        jkInfoDao jkInfoDao = new jkInfoDao();
                         DataTable data = jkInfoDao.selectjkInfoBybarcode(ids);
                         if (data != null && data.Rows.Count > 0)
                         {
@@ -349,6 +348,7 @@ namespace zkhwClient
                     doc.Load(e.FullPath);
                     XmlNodeList xNode = doc.SelectNodes("//Report[@Index='图片信息']/图片信息");
                     string id = doc.SelectSingleNode("//Report[@Index='病人信息']/ID").InnerText.Trim();
+                    string nam = doc.SelectSingleNode("//Report[@Index='基本信息']/报告名称").InnerText.Trim();
                     string cs = doc.SelectSingleNode("//Report[@Index='超声诊断']/超声诊断").InnerText;
                     string BuPic01 = string.Empty;
                     string BuPic02 = string.Empty;
@@ -377,37 +377,35 @@ namespace zkhwClient
 
                         }
                     }
+                    jkInfoDao jkInfoDao = new jkInfoDao();
                     DataTable data = jkInfoDao.selectjkInfoBybarcode(id);
                     if (data != null && data.Rows.Count > 0)
                     {
-                        string issql = "insert into zkhw_tj_bc(id,aichive_no,id_number,bar_code,FubuResult,FubuDesc,BuPic01,BuPic02,BuPic03,BuPic04,createtime) values(@id,@aichive_no,@id_number,@bar_code,@FubuResult,@FubuDesc,@BuPic01,@BuPic02,@BuPic03,@BuPic04,@createtime)";
+                        string issql = "insert into zkhw_tj_bc(id,aichive_no,id_number,bar_code,FubuResult,FubuBC,BuPic01,BuPic02,BuPic03,BuPic04,createtime) values(@id,@aichive_no,@id_number,@bar_code,@FubuResult,@FubuBC,@BuPic01,@BuPic02,@BuPic03,@BuPic04,@createtime)";
                         MySqlParameter[] args = new MySqlParameter[] {
                     new MySqlParameter("@id",Result.GetNewId()),
                     new MySqlParameter("@aichive_no", data.Rows[0]["aichive_no"].ToString()),
                     new MySqlParameter("@id_number", data.Rows[0]["id_number"].ToString()),
                     new MySqlParameter("@bar_code", data.Rows[0]["bar_code"].ToString()),
                     new MySqlParameter("@FubuResult", cs),
-                    new MySqlParameter("@FubuDesc", cs),
+                    new MySqlParameter("@FubuBC", nam),
                     new MySqlParameter("@BuPic01", BuPic01),
                     new MySqlParameter("@BuPic02", BuPic02),
                     new MySqlParameter("@BuPic03", BuPic03),
                     new MySqlParameter("@BuPic04", BuPic04),
-                    new MySqlParameter("@createtime", DateTime.Now),
+                    new MySqlParameter("@createtime", DateTime.Now)
                 };
-                        //if (diagnosiss == "窦性心律和心律正常")
-                        //{
-                        //    int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='1',cardiogram_img='{ids + ".jpg"}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
-                        //}
-                        //else
-                        //{
-                        //    int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='2',cardiogram_img='{ids + ".jpg"}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
-                        //}
+                        int tup = 0;
+                        if (!string.IsNullOrWhiteSpace(BuPic01))
+                        {
+                            tup = 1;
+                        }
+                        int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='1',abdomenB_img='{tup}',other_b='1',otherb_img='{tup}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
                         int rue = DbHelperMySQL.ExecuteSql(issql, args);
-                        
-                        m_watcherAoup.EnableRaisingEvents = true;
 
                         //插入数据库
                     }
+                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -424,9 +422,9 @@ namespace zkhwClient
                 }
             }
         }
-
-
         #endregion
+
+
     }
     class OrderFileClass
     {
@@ -484,5 +482,4 @@ namespace zkhwClient
         #endregion
         #endregion
     }
-    #endregion
 }
