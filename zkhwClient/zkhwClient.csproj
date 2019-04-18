@@ -219,7 +219,15 @@
     <Compile Include="service\PublicHealthService\tcmHealthService.cs" />
     <Compile Include="utils\CVRSDK.cs" />
     <Compile Include="utils\FileWatcher.cs" />
+    <Compile Include="utils\IntPtrFindWindow.cs" />
     <Compile Include="utils\Md5.cs" />
+    <Compile Include="utils\FSWControl.cs" />
+    <Compile Include="view\PublicHealthView\aUhealthcheckupServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\aUhealthcheckupServices.Designer.cs">
+      <DependentUpon>aUhealthcheckupServices.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\PublicHealthView\aUolderHelthService.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -652,6 +660,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\HomeDoctorSigningView\teamMembers.resx">
       <DependentUpon>teamMembers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\aUhealthcheckupServices.resx">
+      <DependentUpon>aUhealthcheckupServices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\aUdiabetesPatientServices.resx">
       <DependentUpon>aUdiabetesPatientServices.cs</DependentUpon>

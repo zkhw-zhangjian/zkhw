@@ -15,11 +15,12 @@ namespace zkhwClient.dao
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
-        public DataTable queryhealthCheckup(string pCa, string time1, string time2)
+        public DataTable queryhealthCheckup(string pCa, string time1, string time2,string code)
         {
             DataSet ds = new DataSet();
-            string sql = "select aichive_no,id_number,bar_code,name,check_date,doctor_name from physical_examination_record where check_date >= '" + time1 + "' and check_date <= '" + time2 + "'";
-            if (pCa != "") { sql += " and (name like '%" + pCa + "%'  or id_number like '%" + pCa + "%'  or aichive_no like '%" + pCa + "%')"; }
+            string sql = "select a.aichive_no,a.id_number,a.bar_code,a.name,a.check_date,a.doctor_name from physical_examination_record a,resident_base_info b where a.aichive_no = b.archive_no and a.check_date >= '" + time1 + "' and a.check_date <= '" + time2 + "'";
+            if (code != "") { sql += " AND b.village_code='" + code + "'"; }
+            if (pCa != "") { sql += " and (a.name like '%" + pCa + "%'  or a.id_number like '%" + pCa + "%'  or a.aichive_no like '%" + pCa + "%')"; }
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }

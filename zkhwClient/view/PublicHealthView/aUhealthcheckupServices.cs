@@ -9,20 +9,20 @@ using System.Windows.Forms;
 
 namespace zkhwClient.view.PublicHealthView
 {
-    public partial class aUdiabetesPatientServices : Form
+    public partial class aUhealthcheckupServices : Form
     {
 
         service.diabetesPatientService diabetesPatient = new service.diabetesPatientService();
         service.hypertensionPatientService hypertensionPatient = new service.hypertensionPatientService();
         public string id = "";
         DataTable goodsList = new DataTable();//用药记录清单表 follow_medicine_record
-        public aUdiabetesPatientServices()
+        public aUhealthcheckupServices()
         {
             InitializeComponent();
         }
         private void aUdiabetesPatientServices_Load(object sender, EventArgs e)
         {
-            this.label51.Text = "2型糖尿病患者健康管理服务";
+            this.label51.Text = "健康体检表";
             this.label51.ForeColor = Color.SkyBlue;
             label51.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
             label51.Left = (this.panel1.Width - this.label51.Width) / 2;
@@ -55,27 +55,27 @@ namespace zkhwClient.view.PublicHealthView
             diabetes_follow_recordBean.name = this.textBox1.Text.Replace(" ", "");
             diabetes_follow_recordBean.aichive_no = this.textBox2.Text.Replace(" ", "");
             diabetes_follow_recordBean.visit_date = this.dateTimePicker1.Value.ToString();
-            if (this.radioButton1.Checked == true) { diabetes_follow_recordBean.visit_type = this.radioButton1.Text; };
-            if (this.radioButton2.Checked == true) { diabetes_follow_recordBean.visit_type = this.radioButton2.Text; };
-            if (this.radioButton3.Checked == true) { diabetes_follow_recordBean.visit_type = this.radioButton3.Text; };
-            foreach (Control ctr in this.panel2.Controls)
-            {
-                //判断该控件是不是CheckBox
-                if (ctr is CheckBox)
-                {
-                    //将ctr转换成CheckBox并赋值给ck
-                    CheckBox ck = ctr as CheckBox;
-                    if (ck.Checked)
-                    {
-                        diabetes_follow_recordBean.symptom += "," + ck.Text;
-                    }
-                }
-            }
+            //if (this.radioButton1.Checked == true) { diabetes_follow_recordBean.visit_type = this.radioButton1.Text; };
+            //if (this.radioButton2.Checked == true) { diabetes_follow_recordBean.visit_type = this.radioButton2.Text; };
+            //if (this.radioButton3.Checked == true) { diabetes_follow_recordBean.visit_type = this.radioButton3.Text; };
+            //foreach (Control ctr in this.panel2.Controls)
+            //{
+            //    //判断该控件是不是CheckBox
+            //    if (ctr is CheckBox)
+            //    {
+            //        //将ctr转换成CheckBox并赋值给ck
+            //        CheckBox ck = ctr as CheckBox;
+            //        if (ck.Checked)
+            //        {
+            //            diabetes_follow_recordBean.symptom += "," + ck.Text;
+            //        }
+            //    }
+            //}
             if (diabetes_follow_recordBean.symptom != null && diabetes_follow_recordBean.symptom != "")
             {
                 diabetes_follow_recordBean.symptom = diabetes_follow_recordBean.symptom.Substring(1);
             }
-            diabetes_follow_recordBean.symptom_other = this.richTextBox1.Text;
+           // diabetes_follow_recordBean.symptom_other = this.richTextBox1.Text;
 
             diabetes_follow_recordBean.blood_pressure_high = this.numericUpDown9.Value.ToString();
             diabetes_follow_recordBean.blood_pressure_low = this.numericUpDown10.Value.ToString();
@@ -167,15 +167,15 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     //将ctr转换成CheckBox并赋值给ck
                     CheckBox ck = ctr as CheckBox;
-                    if (this.richTextBox1.Text.IndexOf(ck.Text) > -1)
-                    {
-                        ck.Checked = true;
-                    }
+                    //if (this.richTextBox1.Text.IndexOf(ck.Text) > -1)
+                    //{
+                    //    ck.Checked = true;
+                    //}
                 }
             }
             if (hm.ShowDialog() == DialogResult.OK)
             {
-                this.richTextBox1.Text = hm.other_symptom;
+                //this.richTextBox1.Text = hm.other_symptom;
             }
         }
 

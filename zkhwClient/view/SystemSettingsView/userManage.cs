@@ -42,30 +42,28 @@ namespace zkhwClient
         private void queryUser()
         {   //查询所有用户信息
             DataTable dd = us.listUser();
-            dd.Columns.Add("neir", typeof(string));
+            dd.Columns.Add("类别", typeof(string));
             foreach (DataRow rows in dd.Rows)
             {
-                if (rows[1].ToString() == "admin")
+                if (rows[0].ToString() == "admin")
                 {
-                    rows["neir"] = "管理员";
+                    rows["类别"] = "管理员";
                 }
                 else
                 {
-                    rows["neir"] = "普通用户";
+                    rows["类别"] = "普通用户";
                 }
-                rows[2] = "******";
+                rows[1] = "******";
             }
             this.dataGridView1.DataSource = dd;
-            this.dataGridView1.Columns[0].Visible = false;
-            this.dataGridView1.Columns[1].HeaderCell.Value = "用户名称(登录用)";
-            this.dataGridView1.Columns[2].HeaderCell.Value = "密码";
-            this.dataGridView1.Columns[3].HeaderCell.Value = "lasttime";
-            this.dataGridView1.Columns[4].HeaderCell.Value = "loginnumber";
-            this.dataGridView1.Columns[5].Visible = false;//depaid
-            this.dataGridView1.Columns[6].HeaderCell.Value = "name";
-            this.dataGridView1.Columns[7].HeaderCell.Value = "name";
-            this.dataGridView1.Columns[1].Width = 110;
-            this.dataGridView1.Columns[4].Width = 130;
+            this.dataGridView1.Columns[0].HeaderCell.Value = "用户名称(登录用)";
+            this.dataGridView1.Columns[1].HeaderCell.Value = "密码";
+            this.dataGridView1.Columns[2].HeaderCell.Value = "用户名称";
+            this.dataGridView1.Columns[3].HeaderCell.Value = "性别";
+            this.dataGridView1.Columns[4].HeaderCell.Value = "出生年月";
+            this.dataGridView1.Columns[5].HeaderCell.Value = "类别";
+            //this.dataGridView1.Columns[1].Width = 110;
+            //this.dataGridView1.Columns[4].Width = 130;
             this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;

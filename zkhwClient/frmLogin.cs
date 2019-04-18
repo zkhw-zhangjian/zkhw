@@ -95,12 +95,11 @@ namespace zkhwClient
             this.comboBox1.ValueMember = "username";//操作时获取的值 
 
             //监听有没有B超的文件生成
-
-
-            //是否启动监听AOUP
+             
 
             //开启监控
-            //FileWatcher.WatcheDirForAoup();
+            FileWatcher.WatcheDirForXinDianTu();
+            FileWatcher.WatcheDirForBChao();
 
 
 

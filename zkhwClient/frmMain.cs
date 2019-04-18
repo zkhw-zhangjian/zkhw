@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
+using zkhwClient.utils;
 
 namespace zkhwClient
 {
@@ -27,6 +28,8 @@ namespace zkhwClient
     {
         personRegist pR = null;
         Process proHttp = new Process();
+        Process proFtp = new Process();
+        Process proAsNet = new Process();
         basicSettingDao bsdao = new basicSettingDao();
         tjcheckDao tjdao = new tjcheckDao();
         jkInfoDao jkdao = new jkInfoDao();
@@ -44,6 +47,8 @@ namespace zkhwClient
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
+            //监听有没有心电的文件生成
+            FSWControl.WatcherStrat(@"E:\examine\xdt\", "*.xml", true, false);
             //监听有没有B超的文件生成
 
             //验证监听文件是否存在
@@ -55,24 +60,13 @@ namespace zkhwClient
             //    //开启监控
             //    FileWatcher.WatcheDirForAoup();
 
-            //}
-            //else
-            //{
-            //    MessageBox.Show(watchPath + "\nB超监听开启失败，系统不能正常运行！\n请创建该文件后重新运行应用程序！", "提示");
-            //    return;
-            //}
 
             basicInfoSettings basicSet = new basicInfoSettings();
             basicSet.Show();
-            //http
-            proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
-            proHttp.StartInfo.UseShellExecute = false;
-            proHttp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            proHttp.Start();
 
             this.timer1.Start();//时间控件定时器
-            //this.timer2.Interval =Int32.Parse(Properties.Settings.Default.timeInterval);
-            //this.timer2.Start();//定时获取生化和血球的数据
+            this.timer2.Interval = Int32.Parse(Properties.Settings.Default.timeInterval);
+            this.timer2.Start();//定时获取生化和血球的数据
 
             this.timer3.Interval =Int32.Parse(Properties.Settings.Default.timer3Interval);
             this.timer3.Start();//1分钟定时刷新设备状态
@@ -143,7 +137,34 @@ namespace zkhwClient
                     };
                 }//屏蔽其它功能菜单下拉选
             }
-            socketTcp();
+            //socketTcp();
+            //http
+            proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
+            proAsNet.StartInfo.CreateNoWindow = true;
+            proHttp.StartInfo.UseShellExecute = false;
+            proHttp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            proHttp.StartInfo.ErrorDialog = false;
+            proHttp.StartInfo.UseShellExecute = false;
+            proHttp.Start();
+            //AsNetWork  B超
+            proAsNet.StartInfo.FileName = Application.StartupPath + "\\AsNetWork\\ASNetWks.exe";
+            proAsNet.StartInfo.WorkingDirectory = Application.StartupPath + "\\AsNetWork";
+            proAsNet.StartInfo.CreateNoWindow = true;
+            proAsNet.StartInfo.ErrorDialog = false;
+            proAsNet.StartInfo.UseShellExecute = true;
+            proAsNet.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            proAsNet.Start();
+            Thread.Sleep(180);
+            IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
+            //ftp                 
+            proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.06\\ftpservice.exe";
+            proFtp.StartInfo.CreateNoWindow = true;
+            proFtp.StartInfo.UseShellExecute = false;
+            //proFtp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            proFtp.StartInfo.ErrorDialog = false;
+            proFtp.Start();
+            //Thread.Sleep(1000);
+            //IntPtrFindWindow.intptrwindows(proFtp.MainWindowHandle);
         }
 
         private void 用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -167,6 +188,14 @@ namespace zkhwClient
                 if (!proHttp.HasExited)
                 {
                     proHttp.Kill();
+                }
+                if (!proAsNet.HasExited)
+                {
+                    proAsNet.Kill();
+                }
+                if (!proFtp.HasExited)
+                {
+                    proFtp.Kill();
                 }
                 service.loginLogService llse = new service.loginLogService();
                 bean.loginLogBean lb = new bean.loginLogBean();
@@ -551,7 +580,11 @@ namespace zkhwClient
                 this.panel1.Controls.Add(pR);
                 pR.Show();
             }
-            else if (tag == "软件系统")
+            else if (tag == "体检设备说明书")
+            {   //使用帮助模块 
+                OpenPdf(Application.StartupPath+ "\\pdf\\仪器配置说明.docx");
+            }
+            else if (tag == "软件系统说明书")
             {   //使用帮助模块 
                 softwareSystems pR = new softwareSystems();
                 pR.TopLevel = false;
@@ -801,6 +834,14 @@ namespace zkhwClient
                 if (!proHttp.HasExited)
                 {
                     proHttp.Kill();
+                }
+                if (!proAsNet.HasExited)
+                {
+                    proAsNet.Kill();
+                }
+                if (!proFtp.HasExited)
+                {
+                    proFtp.Kill();
                 }
                 service.loginLogService llse = new service.loginLogService();
                 bean.loginLogBean lb = new bean.loginLogBean();
@@ -1112,7 +1153,26 @@ namespace zkhwClient
                 this.button10.BackColor = Color.MediumAquamarine;
             }
         }
-
+        private void OpenPdf(string url)
+        {
+            //定义一个ProcessStartInfo实例
+            ProcessStartInfo info = new ProcessStartInfo();
+            //设置启动进程的初始目录
+            info.WorkingDirectory = Application.StartupPath;
+            //设置启动进程的应用程序或文档名
+            info.FileName = url;
+            //设置启动进程的参数
+            info.Arguments = "";
+            //启动由包含进程启动信息的进程资源
+            try
+            {
+                Process.Start(info);
+            }
+            catch
+            {
+                return;
+            }
+        }
         private void socketTcp() {
             //尿机IP地址解析
             string hostName = Dns.GetHostName();   //获取本机名
@@ -1149,7 +1209,7 @@ namespace zkhwClient
                 thread.Start(send);
             }
         }
-
+        
         /// <summary>
         /// 接收消息
         /// </summary>
