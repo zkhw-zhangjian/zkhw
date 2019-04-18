@@ -45,22 +45,12 @@ namespace zkhwClient
         private void frmMain_Load(object sender, EventArgs e)
         {
             //监听有没有B超的文件生成
+            //监听有没有心电图的文件生成
 
-            //验证监听文件是否存在
-            //string watchPath = string.Empty;
+            //开启监控
+            FileWatcher.WatcheDirForXinDianTu();
+            FileWatcher.WatcheDirForBChao();
 
-            ////是否启动监听AOUP
-            //if (System.IO.File.Exists(watchPath))
-            //{
-            //    //开启监控
-            //    FileWatcher.WatcheDirForAoup();
-
-            //}
-            //else
-            //{
-            //    MessageBox.Show(watchPath + "\nB超监听开启失败，系统不能正常运行！\n请创建该文件后重新运行应用程序！", "提示");
-            //    return;
-            //}
 
             basicInfoSettings basicSet = new basicInfoSettings();
             basicSet.Show();
