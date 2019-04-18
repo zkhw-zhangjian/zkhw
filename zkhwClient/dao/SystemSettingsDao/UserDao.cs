@@ -24,7 +24,7 @@ namespace zkhwClient.dao
         }
         public DataTable listUser()
         {
-            String sql = "select * from zkhw_user_info";
+            String sql = "select username,password,user_name,sex,birthday from zkhw_user_info";
             DataSet ds = new DataSet();
             ds.Clear();
             ds = DbHelperMySQL.Query(sql);

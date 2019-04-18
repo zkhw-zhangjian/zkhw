@@ -152,7 +152,7 @@ namespace zkhwClient
             //AsNetWork  B超
             proAsNet.StartInfo.FileName = Application.StartupPath + "\\AsNetWork\\ASNetWks.exe";
             proAsNet.StartInfo.WorkingDirectory = Application.StartupPath + "\\AsNetWork";
-            //proAsNet.StartInfo.CreateNoWindow = true;
+            proAsNet.StartInfo.CreateNoWindow = true;
             proAsNet.StartInfo.ErrorDialog = false;
             proAsNet.StartInfo.UseShellExecute = true;
             proAsNet.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
@@ -161,8 +161,9 @@ namespace zkhwClient
             IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
             //ftp                 
             proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.06\\ftpservice.exe";
+            proFtp.StartInfo.CreateNoWindow = true;
             proFtp.StartInfo.UseShellExecute = false;
-            proFtp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            //proFtp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             proFtp.StartInfo.ErrorDialog = false;
             proFtp.Start();
             //Thread.Sleep(1000);
@@ -582,7 +583,11 @@ namespace zkhwClient
                 this.panel1.Controls.Add(pR);
                 pR.Show();
             }
-            else if (tag == "软件系统")
+            else if (tag == "体检设备说明书")
+            {   //使用帮助模块 
+                OpenPdf(Application.StartupPath+ "\\pdf\\仪器配置说明.docx");
+            }
+            else if (tag == "软件系统说明书")
             {   //使用帮助模块 
                 softwareSystems pR = new softwareSystems();
                 pR.TopLevel = false;
@@ -1151,7 +1156,26 @@ namespace zkhwClient
                 this.button10.BackColor = Color.MediumAquamarine;
             }
         }
-
+        private void OpenPdf(string url)
+        {
+            //定义一个ProcessStartInfo实例
+            ProcessStartInfo info = new ProcessStartInfo();
+            //设置启动进程的初始目录
+            info.WorkingDirectory = Application.StartupPath;
+            //设置启动进程的应用程序或文档名
+            info.FileName = url;
+            //设置启动进程的参数
+            info.Arguments = "";
+            //启动由包含进程启动信息的进程资源
+            try
+            {
+                Process.Start(info);
+            }
+            catch
+            {
+                return;
+            }
+        }
         private void socketTcp() {
             //尿机IP地址解析
             string hostName = Dns.GetHostName();   //获取本机名
@@ -1188,7 +1212,7 @@ namespace zkhwClient
                 thread.Start(send);
             }
         }
-
+        
         /// <summary>
         /// 接收消息
         /// </summary>
