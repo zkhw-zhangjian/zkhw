@@ -122,7 +122,8 @@ namespace zkhwClient.view.PublicHealthView
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            aUhealthcheckupServices auhcs = new aUhealthcheckupServices();
+            auhcs.Show();
         }
     }
 }

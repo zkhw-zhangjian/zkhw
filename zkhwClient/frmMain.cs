@@ -47,11 +47,6 @@ namespace zkhwClient
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
-            //监听有没有心电的文件生成
-            //FSWControl.WatcherStrat(@"E:\examine\xdt\", "*.xml", true, false);
-            //监听有没有B超的文件生成
-
-
             basicInfoSettings basicSet = new basicInfoSettings();
             basicSet.Show();
 
@@ -145,7 +140,7 @@ namespace zkhwClient
             proAsNet.StartInfo.UseShellExecute = true;
             proAsNet.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             proAsNet.Start();
-            Thread.Sleep(180);
+            Thread.Sleep(200);
             IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
             //ftp                 
             proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.06\\ftpservice.exe";
