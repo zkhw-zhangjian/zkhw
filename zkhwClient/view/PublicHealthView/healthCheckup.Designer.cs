@@ -118,6 +118,7 @@
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(114, 28);
             this.comboBox5.TabIndex = 10;
+            this.comboBox5.SelectionChangeCommitted += new System.EventHandler(this.comboBox5_SelectionChangeCommitted);
             // 
             // comboBox4
             // 
@@ -127,6 +128,7 @@
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(108, 28);
             this.comboBox4.TabIndex = 9;
+            this.comboBox4.SelectionChangeCommitted += new System.EventHandler(this.comboBox4_SelectionChangeCommitted);
             // 
             // comboBox3
             // 
@@ -136,6 +138,7 @@
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(109, 28);
             this.comboBox3.TabIndex = 8;
+            this.comboBox3.SelectionChangeCommitted += new System.EventHandler(this.comboBox3_SelectionChangeCommitted);
             // 
             // comboBox2
             // 
@@ -145,6 +148,7 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(111, 28);
             this.comboBox2.TabIndex = 7;
+            this.comboBox2.SelectionChangeCommitted += new System.EventHandler(this.comboBox2_SelectionChangeCommitted);
             // 
             // comboBox1
             // 
@@ -154,6 +158,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(106, 28);
             this.comboBox1.TabIndex = 6;
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
             // 
             // label3
             // 
@@ -297,6 +302,7 @@
             this.button2.TabIndex = 8;
             this.button2.Text = "添加";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // healthCheckup
             // 

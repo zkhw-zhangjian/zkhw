@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
+using zkhwClient.utils;
 
 namespace zkhwClient
 {
@@ -27,6 +28,8 @@ namespace zkhwClient
     {
         personRegist pR = null;
         Process proHttp = new Process();
+        Process proFtp = new Process();
+        Process proAsNet = new Process();
         basicSettingDao bsdao = new basicSettingDao();
         tjcheckDao tjdao = new tjcheckDao();
         jkInfoDao jkdao = new jkInfoDao();
@@ -44,11 +47,10 @@ namespace zkhwClient
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
+            //监听有没有心电的文件生成
+            FSWControl.WatcherStrat(@"E:\examine\xdt\", "*.xml", true, false);
             //监听有没有B超的文件生成
-
-            //验证监听文件是否存在
-            //string watchPath = string.Empty;
-
+            FSWControl.WatcherStratBchao(@"E:\examine\bc\", "*.xml", true, false);
             ////是否启动监听AOUP
             //if (System.IO.File.Exists(watchPath))
             //{
@@ -64,15 +66,10 @@ namespace zkhwClient
 
             basicInfoSettings basicSet = new basicInfoSettings();
             basicSet.Show();
-            //http
-            proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
-            proHttp.StartInfo.UseShellExecute = false;
-            proHttp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            proHttp.Start();
 
             this.timer1.Start();//时间控件定时器
-            //this.timer2.Interval =Int32.Parse(Properties.Settings.Default.timeInterval);
-            //this.timer2.Start();//定时获取生化和血球的数据
+            this.timer2.Interval = Int32.Parse(Properties.Settings.Default.timeInterval);
+            this.timer2.Start();//定时获取生化和血球的数据
 
             this.timer3.Interval =Int32.Parse(Properties.Settings.Default.timer3Interval);
             this.timer3.Start();//1分钟定时刷新设备状态
@@ -143,7 +140,33 @@ namespace zkhwClient
                     };
                 }//屏蔽其它功能菜单下拉选
             }
-            socketTcp();
+            //socketTcp();
+            //http
+            proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
+            proAsNet.StartInfo.CreateNoWindow = true;
+            proHttp.StartInfo.UseShellExecute = false;
+            proHttp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            proHttp.StartInfo.ErrorDialog = false;
+            proHttp.StartInfo.UseShellExecute = false;
+            proHttp.Start();
+            //AsNetWork  B超
+            proAsNet.StartInfo.FileName = Application.StartupPath + "\\AsNetWork\\ASNetWks.exe";
+            proAsNet.StartInfo.WorkingDirectory = Application.StartupPath + "\\AsNetWork";
+            //proAsNet.StartInfo.CreateNoWindow = true;
+            proAsNet.StartInfo.ErrorDialog = false;
+            proAsNet.StartInfo.UseShellExecute = true;
+            proAsNet.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            proAsNet.Start();
+            Thread.Sleep(180);
+            IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
+            //ftp                 
+            proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.06\\ftpservice.exe";
+            proFtp.StartInfo.UseShellExecute = false;
+            proFtp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            proFtp.StartInfo.ErrorDialog = false;
+            proFtp.Start();
+            //Thread.Sleep(1000);
+            //IntPtrFindWindow.intptrwindows(proFtp.MainWindowHandle);
         }
 
         private void 用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -167,6 +190,14 @@ namespace zkhwClient
                 if (!proHttp.HasExited)
                 {
                     proHttp.Kill();
+                }
+                if (!proAsNet.HasExited)
+                {
+                    proAsNet.Kill();
+                }
+                if (!proFtp.HasExited)
+                {
+                    proFtp.Kill();
                 }
                 service.loginLogService llse = new service.loginLogService();
                 bean.loginLogBean lb = new bean.loginLogBean();
@@ -801,6 +832,14 @@ namespace zkhwClient
                 if (!proHttp.HasExited)
                 {
                     proHttp.Kill();
+                }
+                if (!proAsNet.HasExited)
+                {
+                    proAsNet.Kill();
+                }
+                if (!proFtp.HasExited)
+                {
+                    proFtp.Kill();
                 }
                 service.loginLogService llse = new service.loginLogService();
                 bean.loginLogBean lb = new bean.loginLogBean();
