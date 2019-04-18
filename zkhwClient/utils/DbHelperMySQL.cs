@@ -64,7 +64,7 @@ namespace zkhwClient.dao
             {
                 return true;
             }
-        }    
+        }
         /// <summary>
         /// 是否存在（基于MySqlParameter）
         /// </summary>
@@ -95,7 +95,7 @@ namespace zkhwClient.dao
         #endregion
 
         #region  执行简单SQL语句
-       
+
         /// <summary>
         /// 执行SQL语句，返回影响的记录数
         /// </summary>
@@ -116,9 +116,9 @@ namespace zkhwClient.dao
                     catch (MySql.Data.MySqlClient.MySqlException e)
                     {
                         connection.Close();
-                        using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath+"/log.txt", true))
+                        using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
                         {
-                            sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + e.Message + "\r\n"+ SQLString);
+                            sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + e.Message + "\r\n" + SQLString);
                         }
                         return 0;
                     }
@@ -146,7 +146,7 @@ namespace zkhwClient.dao
                 }
             }
         }
-      
+
         /// <summary>
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
@@ -363,9 +363,10 @@ namespace zkhwClient.dao
             {
                 throw e;
             }
-            finally {
+            finally
+            {
                 myReader.Close();
-            }   
+            }
 
         }
         /// <summary>
@@ -469,7 +470,7 @@ namespace zkhwClient.dao
                         }
                         trans.Commit();
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         trans.Rollback();
                         throw;
@@ -682,6 +683,47 @@ namespace zkhwClient.dao
                         }
                         return 0;
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 执行多条SQL语句，实现数据库事务。
+        /// </summary>
+        /// <param name="SQLStringList">多条SQL语句</param>		
+        public static int ExecuteSqlTranYpt(List<String> SQLStringList)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionStringYpt))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conn;
+                MySqlTransaction tx = conn.BeginTransaction();
+                cmd.Transaction = tx;
+                try
+                {
+                    int count = 0;
+                    for (int n = 0; n < SQLStringList.Count; n++)
+                    {
+                        string strsql = SQLStringList[n];
+                        if (strsql.Trim().Length > 1)
+                        {
+                            cmd.CommandText = strsql;
+                            count += cmd.ExecuteNonQuery();
+                        }
+                    }
+                    tx.Commit();
+                    return count;
+                }
+                catch (MySqlException e)
+                {
+                    tx.Rollback();
+                    conn.Close();
+                    using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
+                    {
+                        sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + e.Message + "\r\n" + SQLStringList.ToString());
+                    }
+                    return 0;
                 }
             }
         }
