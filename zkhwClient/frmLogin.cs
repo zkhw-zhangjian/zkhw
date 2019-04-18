@@ -100,10 +100,6 @@ namespace zkhwClient
             //开启监控
             FileWatcher.WatcheDirForXinDianTu();
             FileWatcher.WatcheDirForBChao();
-
-
-
-
         }
     }
 }

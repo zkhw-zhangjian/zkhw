@@ -19,6 +19,7 @@ namespace zkhwClient
     /// </summary>
     public static class FileWatcher
     {
+       static jkInfoDao jkInfoDao = new jkInfoDao();
         /// <summary>
         /// 察看监听状态
         /// </summary>
@@ -203,7 +204,7 @@ namespace zkhwClient
         /// <param name="source"></param>
         /// <param name="e"></param>
         /// <remarks>创建人员(日期): ★刘腾飞★(100202 18:16)</remarks> 
-        private static void OnChangedForXinDianTu(object source, FileSystemEventArgs e)
+        public static void OnChangedForXinDianTu(object source, FileSystemEventArgs e)
         {
             if (e.ChangeType == WatcherChangeTypes.Changed)
             {
@@ -253,7 +254,7 @@ namespace zkhwClient
                         string diagnosiss = diagnosis.InnerText;
                         XmlNode advicetext = doc.SelectSingleNode("zqecg/result/advicetext");
                         string advicetexts = advicetext.InnerText;
-                        jkInfoDao jkInfoDao = new jkInfoDao();
+                        
                         DataTable data = jkInfoDao.selectjkInfoBybarcode(ids);
                         if (data != null && data.Rows.Count > 0)
                         {
@@ -376,7 +377,7 @@ namespace zkhwClient
 
                         }
                     }
-                    DataTable data = selectjkInfoBybarcode(id);
+                    DataTable data = jkInfoDao.selectjkInfoBybarcode(id);
                     if (data != null && data.Rows.Count > 0)
                     {
                         string issql = "insert into zkhw_tj_bc(id,aichive_no,id_number,bar_code,FubuResult,FubuDesc,BuPic01,BuPic02,BuPic03,BuPic04,createtime) values(@id,@aichive_no,@id_number,@bar_code,@FubuResult,@FubuDesc,@BuPic01,@BuPic02,@BuPic03,@BuPic04,@createtime)";
@@ -483,4 +484,5 @@ namespace zkhwClient
         #endregion
         #endregion
     }
+    #endregion
 }

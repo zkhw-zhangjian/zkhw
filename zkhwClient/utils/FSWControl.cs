@@ -64,7 +64,7 @@ namespace zkhwClient.dao
                     return;
                 Thread.Sleep(100);
             }
-            FileWatcher.WatcheDirForAoup();
+            FileWatcher.OnChangedForXinDianTu(null,null);
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace zkhwClient.dao
                     return;
                 Thread.Sleep(100);
             }
-            MessageBox.Show(e.FullPath);
+            FileWatcher.OnChangedForXinDianTu(null, null);
         }
         static bool IsFileReady(string filename)
         {

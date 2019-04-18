@@ -48,17 +48,8 @@ namespace zkhwClient
         private void frmMain_Load(object sender, EventArgs e)
         {
             //监听有没有心电的文件生成
-            FSWControl.WatcherStrat(@"E:\examine\xdt\", "*.xml", true, false);
+            //FSWControl.WatcherStrat(@"E:\examine\xdt\", "*.xml", true, false);
             //监听有没有B超的文件生成
-
-            //验证监听文件是否存在
-            //string watchPath = string.Empty;
-
-            ////是否启动监听AOUP
-            //if (System.IO.File.Exists(watchPath))
-            //{
-            //    //开启监控
-            //    FileWatcher.WatcheDirForAoup();
 
 
             basicInfoSettings basicSet = new basicInfoSettings();

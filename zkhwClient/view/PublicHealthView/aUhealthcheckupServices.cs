@@ -77,42 +77,42 @@ namespace zkhwClient.view.PublicHealthView
             }
            // diabetes_follow_recordBean.symptom_other = this.richTextBox1.Text;
 
-            diabetes_follow_recordBean.blood_pressure_high = this.numericUpDown9.Value.ToString();
-            diabetes_follow_recordBean.blood_pressure_low = this.numericUpDown10.Value.ToString();
-            diabetes_follow_recordBean.weight_now = this.numericUpDown11.Value.ToString();
-            diabetes_follow_recordBean.weight_next = this.numericUpDown12.Value.ToString();
-            diabetes_follow_recordBean.bmi_now = this.numericUpDown14.Value.ToString();
-            diabetes_follow_recordBean.bmi_next = this.numericUpDown15.Value.ToString();
-            foreach (Control ctr in this.panel11.Controls)
-            {
-                //判断该控件是不是CheckBox
-                if (ctr is CheckBox)
-                {
-                    //将ctr转换成CheckBox并赋值给ck
-                    CheckBox ck = ctr as CheckBox;
-                    if (ck.Checked)
-                    {
-                        diabetes_follow_recordBean.dorsal_artery += "," + ck.Text;
-                    }
-                }
-            }
+            //diabetes_follow_recordBean.blood_pressure_high = this.numericUpDown9.Value.ToString();
+            //diabetes_follow_recordBean.blood_pressure_low = this.numericUpDown10.Value.ToString();
+            //diabetes_follow_recordBean.weight_now = this.numericUpDown11.Value.ToString();
+            //diabetes_follow_recordBean.weight_next = this.numericUpDown12.Value.ToString();
+            //diabetes_follow_recordBean.bmi_now = this.numericUpDown14.Value.ToString();
+            //diabetes_follow_recordBean.bmi_next = this.numericUpDown15.Value.ToString();
+            //foreach (Control ctr in this.panel11.Controls)
+            //{
+            //    //判断该控件是不是CheckBox
+            //    if (ctr is CheckBox)
+            //    {
+            //        //将ctr转换成CheckBox并赋值给ck
+            //        CheckBox ck = ctr as CheckBox;
+            //        if (ck.Checked)
+            //        {
+            //            diabetes_follow_recordBean.dorsal_artery += "," + ck.Text;
+            //        }
+            //    }
+            //}
             if (diabetes_follow_recordBean.dorsal_artery != null && diabetes_follow_recordBean.dorsal_artery != "")
             {
                 diabetes_follow_recordBean.dorsal_artery = diabetes_follow_recordBean.dorsal_artery.Substring(1);
             }
 
-            diabetes_follow_recordBean.other = this.richTextBox3.Text;
+            //diabetes_follow_recordBean.other = this.richTextBox3.Text;
 
-            diabetes_follow_recordBean.smoke_now = this.numericUpDown1.Value.ToString();
-            diabetes_follow_recordBean.smoke_next = this.numericUpDown2.Value.ToString();
-            diabetes_follow_recordBean.drink_now = this.numericUpDown3.Value.ToString();
-            diabetes_follow_recordBean.drink_next = this.numericUpDown4.Value.ToString();
-            diabetes_follow_recordBean.sports_num_now = this.numericUpDown5.Value.ToString();
-            diabetes_follow_recordBean.sports_time_now = this.numericUpDown6.Value.ToString();
-            diabetes_follow_recordBean.sports_num_next = this.numericUpDown7.Value.ToString();
-            diabetes_follow_recordBean.sports_time_next = this.numericUpDown8.Value.ToString();
-            diabetes_follow_recordBean.staple_food_now = this.numericUpDown13.Value.ToString();
-            diabetes_follow_recordBean.staple_food_next = this.numericUpDown16.Value.ToString();
+            //diabetes_follow_recordBean.smoke_now = this.numericUpDown1.Value.ToString();
+            //diabetes_follow_recordBean.smoke_next = this.numericUpDown2.Value.ToString();
+            //diabetes_follow_recordBean.drink_now = this.numericUpDown3.Value.ToString();
+            //diabetes_follow_recordBean.drink_next = this.numericUpDown4.Value.ToString();
+            //diabetes_follow_recordBean.sports_num_now = this.numericUpDown5.Value.ToString();
+            //diabetes_follow_recordBean.sports_time_now = this.numericUpDown6.Value.ToString();
+            //diabetes_follow_recordBean.sports_num_next = this.numericUpDown7.Value.ToString();
+            //diabetes_follow_recordBean.sports_time_next = this.numericUpDown8.Value.ToString();
+            //diabetes_follow_recordBean.staple_food_now = this.numericUpDown13.Value.ToString();
+            //diabetes_follow_recordBean.staple_food_next = this.numericUpDown16.Value.ToString();
             if (this.radioButton10.Checked == true) { diabetes_follow_recordBean.psychological_recovery = this.radioButton10.Text; };
             if (this.radioButton11.Checked == true) { diabetes_follow_recordBean.psychological_recovery = this.radioButton11.Text; };
             if (this.radioButton12.Checked == true) { diabetes_follow_recordBean.psychological_recovery = this.radioButton12.Text; };
@@ -120,11 +120,11 @@ namespace zkhwClient.view.PublicHealthView
             if (this.radioButton14.Checked == true) { diabetes_follow_recordBean.medical_compliance = this.radioButton14.Text; };
             if (this.radioButton15.Checked == true) { diabetes_follow_recordBean.medical_compliance = this.radioButton15.Text; };
 
-            diabetes_follow_recordBean.blood_glucose = this.numericUpDown17.Value.ToString();
-            diabetes_follow_recordBean.glycosylated_hemoglobin = this.numericUpDown18.Value.ToString();
-            if (this.radioButton22.Checked == true) { diabetes_follow_recordBean.compliance = this.radioButton22.Text; };
-            if (this.radioButton23.Checked == true) { diabetes_follow_recordBean.compliance = this.radioButton23.Text; };
-            if (this.radioButton24.Checked == true) { diabetes_follow_recordBean.compliance = this.radioButton24.Text; };
+            //diabetes_follow_recordBean.blood_glucose = this.numericUpDown17.Value.ToString();
+            //diabetes_follow_recordBean.glycosylated_hemoglobin = this.numericUpDown18.Value.ToString();
+            //if (this.radioButton22.Checked == true) { diabetes_follow_recordBean.compliance = this.radioButton22.Text; };
+            //if (this.radioButton23.Checked == true) { diabetes_follow_recordBean.compliance = this.radioButton23.Text; };
+            //if (this.radioButton24.Checked == true) { diabetes_follow_recordBean.compliance = this.radioButton24.Text; };
             if (this.radioButton16.Checked == true) { diabetes_follow_recordBean.untoward_effect = this.radioButton16.Text; };
             if (this.radioButton17.Checked == true) { diabetes_follow_recordBean.untoward_effect = this.radioButton17.Text; };
             if (this.radioButton4.Checked == true) { diabetes_follow_recordBean.reactive_hypoglycemia = this.radioButton4.Text; };
@@ -136,11 +136,11 @@ namespace zkhwClient.view.PublicHealthView
             if (this.radioButton20.Checked == true) { diabetes_follow_recordBean.follow_type = this.radioButton20.Text; };
             if (this.radioButton21.Checked == true) { diabetes_follow_recordBean.follow_type = this.radioButton21.Text; };
             if (diabetes_follow_recordBean.follow_type == "") { MessageBox.Show("随访分类不能为空！"); return; };
-            diabetes_follow_recordBean.advice = this.richTextBox2.Text;
+            //diabetes_follow_recordBean.advice = this.richTextBox2.Text;
 
             diabetes_follow_recordBean.transfer_treatment_reason = this.textBox5.Text.Replace(" ", "");
             diabetes_follow_recordBean.transfer_treatment_department = this.textBox6.Text.Replace(" ", "");
-            diabetes_follow_recordBean.next_visit_date = this.dateTimePicker2.Value.ToString();
+            //diabetes_follow_recordBean.next_visit_date = this.dateTimePicker2.Value.ToString();
             diabetes_follow_recordBean.visit_doctor = this.textBox7.Text.Replace(" ", "");
 
 
@@ -204,26 +204,26 @@ namespace zkhwClient.view.PublicHealthView
         private void goodsListBind()
         {
 
-            this.dataGridView1.DataSource = goodsList;
-            this.dataGridView1.Columns[0].Visible = false;//id
-            this.dataGridView1.Columns[1].Visible = false;//follow_id
-            this.dataGridView1.Columns[2].HeaderCell.Value = "药物名称";
-            this.dataGridView1.Columns[3].HeaderCell.Value = "每日几次";
-            this.dataGridView1.Columns[4].HeaderCell.Value = "每次用量";
+            //this.dataGridView1.DataSource = goodsList;
+            //this.dataGridView1.Columns[0].Visible = false;//id
+            //this.dataGridView1.Columns[1].Visible = false;//follow_id
+            //this.dataGridView1.Columns[2].HeaderCell.Value = "药物名称";
+            //this.dataGridView1.Columns[3].HeaderCell.Value = "每日几次";
+            //this.dataGridView1.Columns[4].HeaderCell.Value = "每次用量";
 
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            //this.dataGridView1.ReadOnly = true;
+            //this.dataGridView1.AllowUserToAddRows = false;
+            //this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
+            //this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
 
-            if (this.dataGridView1.SelectedRows.Count > 0)
-            {
-                this.dataGridView1.SelectedRows[0].Selected = false;
-            }
-            if (goodsList != null && goodsList.Rows.Count > 0)
-            {
-                this.dataGridView1.Rows[goodsList.Rows.Count - 1].Selected = true;
-            }
+            //if (this.dataGridView1.SelectedRows.Count > 0)
+            //{
+            //    this.dataGridView1.SelectedRows[0].Selected = false;
+            //}
+            //if (goodsList != null && goodsList.Rows.Count > 0)
+            //{
+            //    this.dataGridView1.Rows[goodsList.Rows.Count - 1].Selected = true;
+            //}
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -231,8 +231,8 @@ namespace zkhwClient.view.PublicHealthView
             if (goodsList == null) { return; }
             if (goodsList.Rows.Count > 0)
             {
-                goodsList.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
-                goodsListBind();
+                //goodsList.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
+                //goodsListBind();
             }
         }
 
@@ -246,15 +246,15 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     //将ctr转换成CheckBox并赋值给ck
                     CheckBox ck = ctr as CheckBox;
-                    if (this.richTextBox2.Text.IndexOf(ck.Text) > -1)
-                    {
-                        ck.Checked = true;
-                    }
+                    //if (this.richTextBox2.Text.IndexOf(ck.Text) > -1)
+                    //{
+                    //    ck.Checked = true;
+                    //}
                 }
             }
             if (hm.ShowDialog() == DialogResult.OK)
             {
-                this.richTextBox2.Text = hm.advice;
+                
             }
         }
     }
