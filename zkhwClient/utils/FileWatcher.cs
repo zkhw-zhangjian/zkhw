@@ -93,87 +93,13 @@ namespace zkhwClient
         #region 监听目录
 
         /// <summary>
-        /// 监听aoup
+        /// 监听 心电图
         /// </summary>
         ///  <remarks>创建人员(日期): ★刘腾飞★(100202 18:16)</remarks>
-        public static void WatcheDirForAoup()
+        public static void WatcheDirForXinDianTu()
         {
             try
             {
-                string str = Application.StartupPath;//项目路径
-                #region 心电图
-                XmlDocument doc = new XmlDocument();
-                doc.Load(@str + "/up/template/心电图.xml");
-                XmlNode xNode = doc.SelectSingleNode("zqecg/base/time");
-                string time = xNode.InnerText;
-                XmlNode id = doc.SelectSingleNode("zqecg/patient/id");
-                string ids = id.InnerText;
-                XmlNode baseline_drift = doc.SelectSingleNode("zqecg/record/baseline_drift");
-                string baseline_drifts = baseline_drift.InnerText;
-                XmlNode myoelectricity = doc.SelectSingleNode("zqecg/record/myoelectricity");
-                string myoelectricitys = myoelectricity.InnerText;
-                XmlNode frequency = doc.SelectSingleNode("zqecg/record/frequency");
-                string frequencys = frequency.InnerText;
-                XmlNode hr = doc.SelectSingleNode("zqecg/measure/hr");
-                string hrs = hr.InnerText;
-                XmlNode pr = doc.SelectSingleNode("zqecg/measure/pr");
-                string prs = pr.InnerText;
-                XmlNode qrs = doc.SelectSingleNode("zqecg/measure/qrs");
-                string qrss = qrs.InnerText;
-                XmlNode qt_ = doc.SelectSingleNode("zqecg/measure/qt_");
-                string qt_s = qt_.InnerText;
-                XmlNode qtc = doc.SelectSingleNode("zqecg/measure/qtc");
-                string qtcs = qtc.InnerText;
-                XmlNode p_ = doc.SelectSingleNode("zqecg/measure/p_");
-                string p_s = p_.InnerText;
-                XmlNode qrs_ = doc.SelectSingleNode("zqecg/measure/qrs_");
-                string qrs_s = qrs_.InnerText;
-                XmlNode t = doc.SelectSingleNode("zqecg/measure/t");
-                string ts = t.InnerText;
-                XmlNode rv5 = doc.SelectSingleNode("zqecg/measure/rv5");
-                string rv5s = rv5.InnerText;
-                XmlNode sv1 = doc.SelectSingleNode("zqecg/measure/sv1");
-                string sv1s = sv1.InnerText;
-                XmlNode diagnosis = doc.SelectSingleNode("zqecg/result/diagnosis");
-                string diagnosiss = diagnosis.InnerText;
-                XmlNode advicetext = doc.SelectSingleNode("zqecg/result/advicetext");
-                string advicetexts = advicetext.InnerText;
-                jkInfoDao jkInfoDao = new jkInfoDao();
-                DataTable data = jkInfoDao.selectjkInfoBybarcode(ids);
-                if (data != null && data.Rows.Count > 0)
-                {
-                    string issql = "insert into zkhw_tj_xdt(id,aichive_no,id_number,bar_code,XdtResult,XdtDesc,PR,QRS,QT,QTc,hr,p,pqrs,t,rv5,sv1,baseline_drift,myoelectricity,frequency) values(@id,@aichive_no,@id_number,@bar_code,@XdtResult,@XdtDesc,@PR,@QRS,@QT,@QTc,@hr,@p,@pqrs,@t,@rv5,@sv1,@baseline_drift,@myoelectricity,@frequency)";
-                    MySqlParameter[] args = new MySqlParameter[] {
-                    new MySqlParameter("@id",Result.GetNewId()),
-                    new MySqlParameter("@aichive_no", data.Rows[0]["aichive_no"].ToString()),
-                    new MySqlParameter("@id_number", data.Rows[0]["id_number"].ToString()),
-                    new MySqlParameter("@bar_code", data.Rows[0]["bar_code"].ToString()),
-                    new MySqlParameter("@XdtResult", diagnosiss),
-                    new MySqlParameter("@XdtDesc", advicetexts),
-                    new MySqlParameter("@PR", prs),
-                    new MySqlParameter("@QRS", qrss),
-                    new MySqlParameter("@QT", qt_s),
-                    new MySqlParameter("@QTc", qtcs),
-                    new MySqlParameter("@hr", hrs),
-                    new MySqlParameter("@p",p_s),
-                    new MySqlParameter("@pqrs", qrs_s),
-                    new MySqlParameter("@t", ts),
-                    new MySqlParameter("@rv5", rv5s),
-                    new MySqlParameter("@sv1", sv1s),
-                    new MySqlParameter("@baseline_drift", baseline_drifts),
-                    new MySqlParameter("@myoelectricity", myoelectricitys),
-                    new MySqlParameter("@frequency", frequencys),
-                };
-                    int rue = DbHelperMySQL.ExecuteSql(issql, args);
-                }
-                #endregion
-
-                #region B超
-
-                #endregion
-
-
-                return;
                 string watchPath = @"D:\xindiantu";//去掉文件夹的只读权限
 
                 m_watcherAoup.Path = watchPath;
@@ -184,10 +110,57 @@ namespace zkhwClient
 
                 m_watcherAoup.Filter = "*.xml";
 
-                m_watcherAoup.Changed += new FileSystemEventHandler(OnChangedForAoup);
+                m_watcherAoup.Changed += new FileSystemEventHandler(OnChangedForXinDianTu);
                 m_watcherAoup.EnableRaisingEvents = true;
                 //修改txt文件的时间，用于系统启动时监听一次AOUP的修改
-                File.SetLastWriteTime(watchPath, DateTime.Now);
+                //File.SetLastWriteTime(watchPath, DateTime.Now);
+
+
+                #region B超
+
+                #endregion
+
+
+                return;
+
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        /// <summary>
+        /// 监听 b 超
+        /// </summary>
+        ///  <remarks>创建人员(日期): ★刘腾飞★(100202 18:16)</remarks>
+        public static void WatcheDirForBChao()
+        {
+            try
+            {
+                string watchPath = @"D:\Examine\bc";//去掉文件夹的只读权限
+
+                m_watcherAoup.Path = watchPath;
+                m_watcherAoup.NotifyFilter = NotifyFilters.Attributes | NotifyFilters.CreationTime |
+                    NotifyFilters.DirectoryName | NotifyFilters.FileName | NotifyFilters.LastAccess |
+                    NotifyFilters.LastWrite | NotifyFilters.Security | NotifyFilters.Size;
+                // Only watch text files.
+
+                m_watcherAoup.Filter = "*.xml";
+
+                m_watcherAoup.Changed += new FileSystemEventHandler(OnChangedForBChao);
+                m_watcherAoup.EnableRaisingEvents = true;
+                //修改txt文件的时间，用于系统启动时监听一次AOUP的修改
+                //File.SetLastWriteTime(watchPath, DateTime.Now);
+
+
+                #region B超
+
+                #endregion
+
+
+                return;
+
 
             }
             catch (Exception ex)
@@ -197,30 +170,6 @@ namespace zkhwClient
         }
 
 
-        /// <summary>
-        /// AOD 文件删除时出发
-        /// </summary>
-        ///  <remarks>创建人员(日期):★刘腾飞★(100603 23:34)</remarks>
-        private static void OnDeleteForAod(object sender, FileSystemEventArgs e)
-        {
-            if (e.ChangeType == WatcherChangeTypes.Deleted)
-            {
-                try
-                {
-                    RegisterAodTrackLog("AOD 文件已经被 PP5000 读取，并成功删除，可以生成下一订单！");
-                }
-                catch (Exception ex)
-                {
-                    ErrorMsg = ex.Message;
-                }
-                finally
-                {
-                    //如果遇到异常关闭了监听，则重新打开监听
-                    if (!m_watcherForAod.EnableRaisingEvents)
-                        m_watcherForAod.EnableRaisingEvents = true;
-                }
-            }
-        }
 
         /// <summary>
         /// AOD 文件创建时出发
@@ -249,12 +198,12 @@ namespace zkhwClient
 
 
         /// <summary>
-        /// aoup改变时候触发
+        /// 改变时候触发
         /// </summary>
         /// <param name="source"></param>
         /// <param name="e"></param>
         /// <remarks>创建人员(日期): ★刘腾飞★(100202 18:16)</remarks> 
-        private static void OnChangedForAoup(object source, FileSystemEventArgs e)
+        private static void OnChangedForXinDianTu(object source, FileSystemEventArgs e)
         {
             if (e.ChangeType == WatcherChangeTypes.Changed)
             {
@@ -265,16 +214,95 @@ namespace zkhwClient
                     m_watcherAoup.EnableRaisingEvents = false;
                     try
                     {
-                        File.SetLastWriteTime(e.FullPath, DateTime.Now);//修改txt文件的时间
+                        //File.SetLastWriteTime(e.FullPath, DateTime.Now);//修改txt文件的时间
+
+                        #region 心电图
+                        XmlDocument doc = new XmlDocument();
+                        doc.Load(e.FullPath);
+                        XmlNode xNode = doc.SelectSingleNode("zqecg/base/time");
+                        string time = xNode.InnerText;
+                        XmlNode id = doc.SelectSingleNode("zqecg/patient/id");
+                        string ids = id.InnerText;
+                        XmlNode baseline_drift = doc.SelectSingleNode("zqecg/record/baseline_drift");
+                        string baseline_drifts = baseline_drift.InnerText;
+                        XmlNode myoelectricity = doc.SelectSingleNode("zqecg/record/myoelectricity");
+                        string myoelectricitys = myoelectricity.InnerText;
+                        XmlNode frequency = doc.SelectSingleNode("zqecg/record/frequency");
+                        string frequencys = frequency.InnerText;
+                        XmlNode hr = doc.SelectSingleNode("zqecg/measure/hr");
+                        string hrs = hr.InnerText;
+                        XmlNode pr = doc.SelectSingleNode("zqecg/measure/pr");
+                        string prs = pr.InnerText;
+                        XmlNode qrs = doc.SelectSingleNode("zqecg/measure/qrs");
+                        string qrss = qrs.InnerText;
+                        XmlNode qt_ = doc.SelectSingleNode("zqecg/measure/qt_");
+                        string qt_s = qt_.InnerText;
+                        XmlNode qtc = doc.SelectSingleNode("zqecg/measure/qtc");
+                        string qtcs = qtc.InnerText;
+                        XmlNode p_ = doc.SelectSingleNode("zqecg/measure/p_");
+                        string p_s = p_.InnerText;
+                        XmlNode qrs_ = doc.SelectSingleNode("zqecg/measure/qrs_");
+                        string qrs_s = qrs_.InnerText;
+                        XmlNode t = doc.SelectSingleNode("zqecg/measure/t");
+                        string ts = t.InnerText;
+                        XmlNode rv5 = doc.SelectSingleNode("zqecg/measure/rv5");
+                        string rv5s = rv5.InnerText;
+                        XmlNode sv1 = doc.SelectSingleNode("zqecg/measure/sv1");
+                        string sv1s = sv1.InnerText;
+                        XmlNode diagnosis = doc.SelectSingleNode("zqecg/result/diagnosis");
+                        string diagnosiss = diagnosis.InnerText;
+                        XmlNode advicetext = doc.SelectSingleNode("zqecg/result/advicetext");
+                        string advicetexts = advicetext.InnerText;
+                        jkInfoDao jkInfoDao = new jkInfoDao();
+                        DataTable data = jkInfoDao.selectjkInfoBybarcode(ids);
+                        if (data != null && data.Rows.Count > 0)
+                        {
+                            string issql = "insert into zkhw_tj_xdt(id,aichive_no,id_number,bar_code,XdtResult,XdtDesc,PR,QRS,QT,QTc,hr,p,pqrs,t,rv5,sv1,baseline_drift,myoelectricity,frequency,createtime,imageUrl) values(@id,@aichive_no,@id_number,@bar_code,@XdtResult,@XdtDesc,@PR,@QRS,@QT,@QTc,@hr,@p,@pqrs,@t,@rv5,@sv1,@baseline_drift,@myoelectricity,@frequency,@createtime,@imageUrl)";
+                            MySqlParameter[] args = new MySqlParameter[] {
+                    new MySqlParameter("@id",Result.GetNewId()),
+                    new MySqlParameter("@aichive_no", data.Rows[0]["aichive_no"].ToString()),
+                    new MySqlParameter("@id_number", data.Rows[0]["id_number"].ToString()),
+                    new MySqlParameter("@bar_code", data.Rows[0]["bar_code"].ToString()),
+                    new MySqlParameter("@XdtResult", diagnosiss),
+                    new MySqlParameter("@XdtDesc", advicetexts),
+                    new MySqlParameter("@PR", prs),
+                    new MySqlParameter("@QRS", qrss),
+                    new MySqlParameter("@QT", qt_s),
+                    new MySqlParameter("@QTc", qtcs),
+                    new MySqlParameter("@hr", hrs),
+                    new MySqlParameter("@p",p_s),
+                    new MySqlParameter("@pqrs", qrs_s),
+                    new MySqlParameter("@t", ts),
+                    new MySqlParameter("@rv5", rv5s),
+                    new MySqlParameter("@sv1", sv1s),
+                    new MySqlParameter("@baseline_drift", baseline_drifts),
+                    new MySqlParameter("@myoelectricity", myoelectricitys),
+                    new MySqlParameter("@frequency", frequencys),
+                    new MySqlParameter("@createtime", time),
+                    new MySqlParameter("@imageUrl", ids+".jpg")
+                };
+                            if (diagnosiss == "窦性心律和心律正常")
+                            {
+                                int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='1',cardiogram_img='{ids + ".jpg"}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
+                            }
+                            else
+                            {
+                                int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='2',cardiogram_img='{ids + ".jpg"}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
+                            }
+                            int rue = DbHelperMySQL.ExecuteSql(issql, args);
+                        }
+                        #endregion
+
+
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        RegisterAoupTrackLog("文件被占用！正在请求重试 ... ");
+                        // RegisterAoupTrackLog("文件被占用！正在请求重试 ... ");
 
                         //进程阻塞2秒钟
                         Thread.Sleep(2000);
 
-                        File.SetLastWriteTime(e.FullPath, DateTime.Now);//修改txt文件的时间
+                        // File.SetLastWriteTime(e.FullPath, DateTime.Now);//修改txt文件的时间
                     }
                     m_watcherAoup.EnableRaisingEvents = true;
 
@@ -285,7 +313,106 @@ namespace zkhwClient
                 {
 
 
-                    RegisterAoupTrackLog(string.Format("AOUP监听异常！异常信息：{0}", ex.Message));
+                    // RegisterAoupTrackLog(string.Format("监听异常！异常信息：{0}", ex.Message));
+
+                }
+                finally
+                {
+                    //如果遇到异常关闭了监听，则重新打开监听
+                    if (!m_watcherAoup.EnableRaisingEvents)
+                        m_watcherAoup.EnableRaisingEvents = true;
+                }
+            }
+        }
+        /// <summary>
+        /// 改变时候触发
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="e"></param>
+        /// <remarks>创建人员(日期): ★刘腾飞★(100202 18:16)</remarks> 
+        private static void OnChangedForBChao(object source, FileSystemEventArgs e)
+        {
+            if (e.ChangeType == WatcherChangeTypes.Changed)
+            {
+                List<string> orderIdList = new List<string>();
+                try
+                {
+                    //1.由于客户机器首次读取时乱码，故先修改该文件后再读取内容
+                    m_watcherAoup.EnableRaisingEvents = false;
+
+                    //File.SetLastWriteTime(e.FullPath, DateTime.Now);//修改txt文件的时间
+
+                    #region B超
+                    string str = Application.StartupPath;//项目路径
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(e.FullPath);
+                    XmlNodeList xNode = doc.SelectNodes("//Report[@Index='图片信息']/图片信息");
+                    string id = doc.SelectSingleNode("//Report[@Index='病人信息']/ID").InnerText.Trim();
+                    string cs = doc.SelectSingleNode("//Report[@Index='超声诊断']/超声诊断").InnerText;
+                    string BuPic01 = string.Empty;
+                    string BuPic02 = string.Empty;
+                    string BuPic03 = string.Empty;
+                    string BuPic04 = string.Empty;
+                    if (xNode != null && xNode.Count > 0)
+                    {
+                        for (int i = 0; i < xNode.Count; i++)
+                        {
+                            if (i == 0)
+                            {
+                                BuPic01 = xNode[i].InnerText;
+                            }
+                            else if (i == 1)
+                            {
+                                BuPic02 = xNode[i].InnerText;
+                            }
+                            else if (i == 2)
+                            {
+                                BuPic03 = xNode[i].InnerText;
+                            }
+                            else if (i == 3)
+                            {
+                                BuPic04 = xNode[i].InnerText;
+                            }
+
+                        }
+                    }
+                    DataTable data = selectjkInfoBybarcode(id);
+                    if (data != null && data.Rows.Count > 0)
+                    {
+                        string issql = "insert into zkhw_tj_bc(id,aichive_no,id_number,bar_code,FubuResult,FubuDesc,BuPic01,BuPic02,BuPic03,BuPic04,createtime) values(@id,@aichive_no,@id_number,@bar_code,@FubuResult,@FubuDesc,@BuPic01,@BuPic02,@BuPic03,@BuPic04,@createtime)";
+                        MySqlParameter[] args = new MySqlParameter[] {
+                    new MySqlParameter("@id",Result.GetNewId()),
+                    new MySqlParameter("@aichive_no", data.Rows[0]["aichive_no"].ToString()),
+                    new MySqlParameter("@id_number", data.Rows[0]["id_number"].ToString()),
+                    new MySqlParameter("@bar_code", data.Rows[0]["bar_code"].ToString()),
+                    new MySqlParameter("@FubuResult", cs),
+                    new MySqlParameter("@FubuDesc", cs),
+                    new MySqlParameter("@BuPic01", BuPic01),
+                    new MySqlParameter("@BuPic02", BuPic02),
+                    new MySqlParameter("@BuPic03", BuPic03),
+                    new MySqlParameter("@BuPic04", BuPic04),
+                    new MySqlParameter("@createtime", DateTime.Now),
+                };
+                        //if (diagnosiss == "窦性心律和心律正常")
+                        //{
+                        //    int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='1',cardiogram_img='{ids + ".jpg"}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
+                        //}
+                        //else
+                        //{
+                        //    int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='2',cardiogram_img='{ids + ".jpg"}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
+                        //}
+                        int rue = DbHelperMySQL.ExecuteSql(issql, args);
+                        
+                        m_watcherAoup.EnableRaisingEvents = true;
+
+                        //插入数据库
+                    }
+                }
+                catch (Exception ex)
+                {
+
+
+                    // RegisterAoupTrackLog(string.Format("监听异常！异常信息：{0}", ex.Message));
 
                 }
                 finally

@@ -131,7 +131,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.label6 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.版式 = new System.Windows.Forms.Label();
@@ -1024,7 +1023,6 @@
             this.groupBox3.Controls.Add(this.groupBox4);
             this.groupBox3.Controls.Add(this.radioButton3);
             this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Controls.Add(this.button4);
             this.groupBox3.Controls.Add(this.button3);
             this.groupBox3.Controls.Add(this.button2);
             this.groupBox3.Controls.Add(this.版式);
@@ -1040,9 +1038,9 @@
             this.groupBox5.Controls.Add(this.radioButton1);
             this.groupBox5.Controls.Add(this.radioButton2);
             this.groupBox5.Location = new System.Drawing.Point(50, 13);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox5.Size = new System.Drawing.Size(83, 90);
             this.groupBox5.TabIndex = 19;
             this.groupBox5.TabStop = false;
@@ -1083,9 +1081,9 @@
             this.groupBox4.Controls.Add(this.checkBox1);
             this.groupBox4.Controls.Add(this.label5);
             this.groupBox4.Location = new System.Drawing.Point(137, 13);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox4.Size = new System.Drawing.Size(663, 90);
             this.groupBox4.TabIndex = 18;
             this.groupBox4.TabStop = false;
@@ -1220,18 +1218,9 @@
             this.label6.TabIndex = 16;
             this.label6.Text = "纸张类型：";
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(1018, 79);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 15;
-            this.button4.Text = "查看报告";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(917, 79);
+            this.button3.Location = new System.Drawing.Point(996, 79);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 14;
@@ -1241,7 +1230,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(809, 79);
+            this.button2.Location = new System.Drawing.Point(862, 79);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 13;
@@ -1264,7 +1253,7 @@
             this.pagerControl1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(78)))), ((int)(((byte)(151)))));
             this.pagerControl1.JumpText = "Go";
             this.pagerControl1.Location = new System.Drawing.Point(1, 770);
-            this.pagerControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pagerControl1.Margin = new System.Windows.Forms.Padding(4);
             this.pagerControl1.Name = "pagerControl1";
             this.pagerControl1.PageIndex = 1;
             this.pagerControl1.PageSize = 100;
@@ -1393,7 +1382,6 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Label 版式;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RadioButton radioButton3;
