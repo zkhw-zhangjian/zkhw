@@ -222,11 +222,29 @@
     <Compile Include="utils\IntPtrFindWindow.cs" />
     <Compile Include="utils\Md5.cs" />
     <Compile Include="utils\FSWControl.cs" />
-    <Compile Include="view\PublicHealthView\aUhealthcheckupServices.cs">
+    <Compile Include="view\PublicHealthView\aUhealthcheckupServices4.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\PublicHealthView\aUhealthcheckupServices.Designer.cs">
-      <DependentUpon>aUhealthcheckupServices.cs</DependentUpon>
+    <Compile Include="view\PublicHealthView\aUhealthcheckupServices4.Designer.cs">
+      <DependentUpon>aUhealthcheckupServices4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\aUhealthcheckupServices3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\aUhealthcheckupServices3.Designer.cs">
+      <DependentUpon>aUhealthcheckupServices3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\aUhealthcheckupServices2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\aUhealthcheckupServices2.Designer.cs">
+      <DependentUpon>aUhealthcheckupServices2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\aUhealthcheckupServices1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\aUhealthcheckupServices1.Designer.cs">
+      <DependentUpon>aUhealthcheckupServices1.cs</DependentUpon>
     </Compile>
     <Compile Include="view\PublicHealthView\aUolderHelthService.cs">
       <SubType>Form</SubType>
@@ -661,8 +679,17 @@
     <EmbeddedResource Include="view\HomeDoctorSigningView\teamMembers.resx">
       <DependentUpon>teamMembers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\PublicHealthView\aUhealthcheckupServices.resx">
-      <DependentUpon>aUhealthcheckupServices.cs</DependentUpon>
+    <EmbeddedResource Include="view\PublicHealthView\aUhealthcheckupServices4.resx">
+      <DependentUpon>aUhealthcheckupServices4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\aUhealthcheckupServices3.resx">
+      <DependentUpon>aUhealthcheckupServices3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\aUhealthcheckupServices2.resx">
+      <DependentUpon>aUhealthcheckupServices2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\aUhealthcheckupServices1.resx">
+      <DependentUpon>aUhealthcheckupServices1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\aUdiabetesPatientServices.resx">
       <DependentUpon>aUdiabetesPatientServices.cs</DependentUpon>

@@ -1,6 +1,6 @@
 ﻿namespace zkhwClient.view.PublicHealthView
 {
-    partial class aUhealthcheckupServices
+    partial class aUhealthcheckupServices1
     {
         /// <summary>
         /// Required designer variable.

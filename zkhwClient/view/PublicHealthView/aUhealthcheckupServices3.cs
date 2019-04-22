@@ -9,20 +9,19 @@ using System.Windows.Forms;
 
 namespace zkhwClient.view.PublicHealthView
 {
-    public partial class aUhealthcheckupServices : Form
+    public partial class aUhealthcheckupServices3 : Form
     {
-
         service.diabetesPatientService diabetesPatient = new service.diabetesPatientService();
         service.hypertensionPatientService hypertensionPatient = new service.hypertensionPatientService();
         public string id = "";
         DataTable goodsList = new DataTable();//用药记录清单表 follow_medicine_record
-        public aUhealthcheckupServices()
+        public aUhealthcheckupServices3()
         {
             InitializeComponent();
         }
         private void aUdiabetesPatientServices_Load(object sender, EventArgs e)
         {
-            this.label51.Text = "健康体检表";
+            this.label51.Text = "健康体检表第三页(共四页)";
             this.label51.ForeColor = Color.SkyBlue;
             label51.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
             label51.Left = (this.panel1.Width - this.label51.Width) / 2;
@@ -54,7 +53,6 @@ namespace zkhwClient.view.PublicHealthView
 
             diabetes_follow_recordBean.name = this.textBox1.Text.Replace(" ", "");
             diabetes_follow_recordBean.aichive_no = this.textBox2.Text.Replace(" ", "");
-            diabetes_follow_recordBean.visit_date = this.dateTimePicker1.Value.ToString();
             //if (this.radioButton1.Checked == true) { diabetes_follow_recordBean.visit_type = this.radioButton1.Text; };
             //if (this.radioButton2.Checked == true) { diabetes_follow_recordBean.visit_type = this.radioButton2.Text; };
             //if (this.radioButton3.Checked == true) { diabetes_follow_recordBean.visit_type = this.radioButton3.Text; };
@@ -155,6 +153,9 @@ namespace zkhwClient.view.PublicHealthView
             {
                 this.DialogResult = DialogResult.OK;
             }
+            this.Close();
+            aUhealthcheckupServices4 auhc4 = new aUhealthcheckupServices4();
+            auhc4.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)

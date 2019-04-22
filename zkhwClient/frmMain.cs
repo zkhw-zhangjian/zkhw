@@ -143,7 +143,7 @@ namespace zkhwClient
             Thread.Sleep(200);
             IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
             //ftp                 
-            proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.06\\ftpservice.exe";
+            proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.05\\ftpservice.exe";
             proFtp.StartInfo.CreateNoWindow = true;
             proFtp.StartInfo.UseShellExecute = false;
             //proFtp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
