@@ -1892,6 +1892,14 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                 string followid = string.Empty;
                 string fuvid = string.Empty;
                 string diabetesid = string.Empty;
+                string ncgid = string.Empty;
+                string sgtzid = string.Empty;
+                string shid = string.Empty;
+                string xcgid = string.Empty;
+                string xdtid = string.Empty;
+                string xyid = string.Empty;
+                string bcid = string.Empty;
+
                 #region 个人信息
                 DataSet info = DbHelperMySQL.Query($@"select * from resident_base_info where upload_status='0'");
                 if (info != null && info.Tables.Count > 0 && info.Tables[0].Rows.Count > 0)
@@ -1979,6 +1987,113 @@ values('{data.Rows[i]["id"]}','{data.Rows[i]["name"]}','{data.Rows[i]["aichive_n
                     }
                 }
                 #endregion
+
+                #region 尿常规记录表
+                DataSet ncg = DbHelperMySQL.Query($@"select * from zkhw_tj_ncg where upload_status='0'");
+                if (ncg != null && ncg.Tables.Count > 0 && ncg.Tables[0].Rows.Count > 0)
+                {
+                    DataTable data = ncg.Tables[0];
+                    string id = string.Empty;
+                    for (int i = 0; i < data.Rows.Count; i++)
+                    {
+                        sqllist.Add($@"insert into zkhw_tj_ncg (ID,aichive_no,id_number,bar_code,SocialSecurity,code,WBC,LEU,NIT,URO,PRO,PH,BLD,SG,KET,BIL,GLU,Vc,MA,ACR,Ca,CR,type,createtime,updatetime,synchronize_type,ZrysNCG
+                ) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["SocialSecurity"])},{Ifnull(data.Rows[i]["code"])},{Ifnull(data.Rows[i]["WBC"])},{Ifnull(data.Rows[i]["LEU"])},{Ifnull(data.Rows[i]["NIT"])},{Ifnull(data.Rows[i]["URO"])},{Ifnull(data.Rows[i]["PRO"])},{Ifnull(data.Rows[i]["PH"])},{Ifnull(data.Rows[i]["BLD"])},{Ifnull(data.Rows[i]["SG"])},{Ifnull(data.Rows[i]["KET"])},{Ifnull(data.Rows[i]["BIL"])},{Ifnull(data.Rows[i]["GLU"])},{Ifnull(data.Rows[i]["Vc"])},{Ifnull(data.Rows[i]["MA"])},{Ifnull(data.Rows[i]["ACR"])},{Ifnull(data.Rows[i]["Ca"])},{Ifnull(data.Rows[i]["CR"])},{Ifnull(data.Rows[i]["type"])},{Ifnull(data.Rows[i]["createtime"])},{Ifnull(data.Rows[i]["updatetime"])},{Ifnull(data.Rows[i]["synchronize_type"])},{Ifnull(data.Rows[i]["ZrysNCG"])});");
+                        ncgid += $"'{data.Rows[i]["id"]}',";
+                    }
+                }
+                #endregion
+
+                #region 用户表
+                DataSet sgtz = DbHelperMySQL.Query($@"select * from zkhw_tj_sgtz where upload_status='0'");
+                if (sgtz != null && sgtz.Tables.Count > 0 && sgtz.Tables[0].Rows.Count > 0)
+                {
+                    DataTable data = sgtz.Tables[0];
+                    string id = string.Empty;
+                    for (int i = 0; i < data.Rows.Count; i++)
+                    {
+                        sqllist.Add($@"insert into zkhw_tj_sgtz (ID,aichive_no,id_number,bar_code,BMI,Height,Weight,createtime) 
+values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["BMI"])},{Ifnull(data.Rows[i]["Height"])},{Ifnull(data.Rows[i]["Weight"])},{Ifnull(data.Rows[i]["createtime"])});");
+                        sgtzid += $"'{data.Rows[i]["id"]}',";
+                    }
+                }
+                #endregion
+
+                #region 生化记录表
+                DataSet sh = DbHelperMySQL.Query($@"select * from zkhw_tj_sh where upload_status='0'");
+                if (sh != null && sh.Tables.Count > 0 && sh.Tables[0].Rows.Count > 0)
+                {
+                    DataTable data = sh.Tables[0];
+                    string id = string.Empty;
+                    for (int i = 0; i < data.Rows.Count; i++)
+                    {
+                        sqllist.Add($@"insert into zkhw_tj_sh (ID,aichive_no,id_number,bar_code,ALT,AST,TBIL,DBIL,CREA,UREA,GLU,TG,CHO,HDLC,LDLC,ALB,UA,HCY,AFP,CEA,Ka,Na,TP,ALP,GGT,CHE,TBA,APOA1,APOB,CK,CKMB,LDHL,HBDH,aAMY,createtime,updatetime,synchronize_type,ZrysSH,low,high,timeCodeUnique
+) 
+values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["ALT"])},{Ifnull(data.Rows[i]["AST"])},{Ifnull(data.Rows[i]["TBIL"])},{Ifnull(data.Rows[i]["DBIL"])},{Ifnull(data.Rows[i]["CREA"])},{Ifnull(data.Rows[i]["UREA"])},{Ifnull(data.Rows[i]["GLU"])},{Ifnull(data.Rows[i]["TG"])},{Ifnull(data.Rows[i]["CHO"])},{Ifnull(data.Rows[i]["HDLC"])},{Ifnull(data.Rows[i]["LDLC"])},{Ifnull(data.Rows[i]["ALB"])},{Ifnull(data.Rows[i]["UA"])},{Ifnull(data.Rows[i]["HCY"])},{Ifnull(data.Rows[i]["AFP"])},{Ifnull(data.Rows[i]["CEA"])},{Ifnull(data.Rows[i]["Ka"])},{Ifnull(data.Rows[i]["Na"])},{Ifnull(data.Rows[i]["TP"])},{Ifnull(data.Rows[i]["ALP"])},{Ifnull(data.Rows[i]["GGT"])},{Ifnull(data.Rows[i]["CHE"])},{Ifnull(data.Rows[i]["TBA"])},{Ifnull(data.Rows[i]["APOA1"])},{Ifnull(data.Rows[i]["APOB"])},{Ifnull(data.Rows[i]["CK"])},{Ifnull(data.Rows[i]["CKMB"])},{Ifnull(data.Rows[i]["LDHL"])},{Ifnull(data.Rows[i]["HBDH"])},{Ifnull(data.Rows[i]["aAMY"])},{Ifnull(data.Rows[i]["createtime"])},{Ifnull(data.Rows[i]["updatetime"])},{Ifnull(data.Rows[i]["synchronize_type"])},{Ifnull(data.Rows[i]["ZrysSH"])},{Ifnull(data.Rows[i]["low"])},{Ifnull(data.Rows[i]["high"])},{Ifnull(data.Rows[i]["timeCodeUnique"])});");
+                        shid += $"'{data.Rows[i]["id"]}',";
+                    }
+                }
+                #endregion
+
+                #region 血常规记录表
+                DataSet xcg = DbHelperMySQL.Query($@"select * from zkhw_tj_xcg where upload_status='0'");
+                if (xcg != null && xcg.Tables.Count > 0 && xcg.Tables[0].Rows.Count > 0)
+                {
+                    DataTable data = xcg.Tables[0];
+                    string id = string.Empty;
+                    for (int i = 0; i < data.Rows.Count; i++)
+                    {
+                        sqllist.Add($@"insert into zkhw_tj_xcg (ID,aichive_no,id_number,bar_code,WBC,RBC,PCT,PLT,HGB,HCT,MCV,MCH,MCHC,RDWCV,RDWSD,MONO,MONOP,GRAN,GRANP,NEUT,NEUTP,EO,EOP,BASO,BASOP,LYM,LYMP,MPV,PDW,MXD,MXDP,PLCR,OTHERS,createtime,updatetime,synchronize_type,ZrysXCG,timeCodeUnique) 
+values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["WBC"])},{Ifnull(data.Rows[i]["RBC"])},{Ifnull(data.Rows[i]["PCT"])},{Ifnull(data.Rows[i]["PLT"])},{Ifnull(data.Rows[i]["HGB"])},{Ifnull(data.Rows[i]["HCT"])},{Ifnull(data.Rows[i]["MCV"])},{Ifnull(data.Rows[i]["MCH"])},{Ifnull(data.Rows[i]["MCHC"])},{Ifnull(data.Rows[i]["RDWCV"])},{Ifnull(data.Rows[i]["RDWSD"])},{Ifnull(data.Rows[i]["MONO"])},{Ifnull(data.Rows[i]["MONOP"])},{Ifnull(data.Rows[i]["GRAN"])},{Ifnull(data.Rows[i]["GRANP"])},{Ifnull(data.Rows[i]["NEUT"])},{Ifnull(data.Rows[i]["EO"])},{Ifnull(data.Rows[i]["EOP"])},{Ifnull(data.Rows[i]["BASO"])},{Ifnull(data.Rows[i]["BASOP"])},{Ifnull(data.Rows[i]["LYM"])},{Ifnull(data.Rows[i]["LYMP"])},{Ifnull(data.Rows[i]["MPV"])},{Ifnull(data.Rows[i]["PDW"])},{Ifnull(data.Rows[i]["MXD"])},{Ifnull(data.Rows[i]["MXDP"])},{Ifnull(data.Rows[i]["PLCR"])},{Ifnull(data.Rows[i]["OTHERS"])},{Ifnull(data.Rows[i]["createtime"])},{Ifnull(data.Rows[i]["updatetime"])},{Ifnull(data.Rows[i]["synchronize_type"])},{Ifnull(data.Rows[i]["ZrysXCG"])},{Ifnull(data.Rows[i]["timeCodeUnique"])});");
+                        xcgid += $"'{data.Rows[i]["id"]}',";
+                    }
+                }
+                #endregion
+
+                #region 心电图记录表
+                DataSet xdt = DbHelperMySQL.Query($@"select * from zkhw_tj_xdt where upload_status='0'");
+                if (xdt != null && xdt.Tables.Count > 0 && xdt.Tables[0].Rows.Count > 0)
+                {
+                    DataTable data = xdt.Tables[0];
+                    string id = string.Empty;
+                    for (int i = 0; i < data.Rows.Count; i++)
+                    {
+                        sqllist.Add($@"insert into zkhw_tj_xdt (ID,aichive_no,id_number,bar_code,SocialSecurity,code,XdtResult,XdtDesc,XdtDoctor,XdtName,Ventrate,PR,QRS,QT,QTc,P_R_T,DOB,Age,Gen,Dep,createtime,updatetime,synchronize_type,ZrysXDT,imageUrl,hr,p,pqrs,t,rv5,sv1,baseline_drift,myoelectricity,frequency
+) 
+values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["SocialSecurity"])},{Ifnull(data.Rows[i]["code"])},{Ifnull(data.Rows[i]["XdtResult"])},{Ifnull(data.Rows[i]["XdtDesc"])},{Ifnull(data.Rows[i]["XdtDoctor"])},{Ifnull(data.Rows[i]["XdtName"])},{Ifnull(data.Rows[i]["Ventrate"])},{Ifnull(data.Rows[i]["PR"])},{Ifnull(data.Rows[i]["QRS"])},{Ifnull(data.Rows[i]["QT"])},{Ifnull(data.Rows[i]["QTc"])},{Ifnull(data.Rows[i]["P_R_T"])},{Ifnull(data.Rows[i]["DOB"])},{Ifnull(data.Rows[i]["Age"])},{Ifnull(data.Rows[i]["Gen"])},{Ifnull(data.Rows[i]["Dep"])},{Ifnull(data.Rows[i]["createtime"])},{Ifnull(data.Rows[i]["updatetime"])},{Ifnull(data.Rows[i]["synchronize_type"])},{Ifnull(data.Rows[i]["ZrysXDT"])},{Ifnull(data.Rows[i]["imageUrl"])},{Ifnull(data.Rows[i]["hr"])},{Ifnull(data.Rows[i]["p"])},{Ifnull(data.Rows[i]["pqrs"])},{Ifnull(data.Rows[i]["t"])},{Ifnull(data.Rows[i]["rv5"])},{Ifnull(data.Rows[i]["sv1"])},{Ifnull(data.Rows[i]["baseline_drift"])},{Ifnull(data.Rows[i]["myoelectricity"])},{Ifnull(data.Rows[i]["frequency"])});");
+                        xdtid += $"'{data.Rows[i]["id"]}',";
+                    }
+                }
+                #endregion
+
+                #region 血压表
+                DataSet xy = DbHelperMySQL.Query($@"select * from zkhw_tj_xy where upload_status='0'");
+                if (xy != null && xy.Tables.Count > 0 && xy.Tables[0].Rows.Count > 0)
+                {
+                    DataTable data = xy.Tables[0];
+                    string id = string.Empty;
+                    for (int i = 0; i < data.Rows.Count; i++)
+                    {
+                        sqllist.Add($@"insert into zkhw_tj_xy (ID,aichive_no,id_number,bar_code,DBP,SBP,Pulse,createtime) 
+values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["DBP"])},{Ifnull(data.Rows[i]["code"])},{Ifnull(data.Rows[i]["SBP"])},{Ifnull(data.Rows[i]["Pulse"])},{Ifnull(data.Rows[i]["createtime"])});");
+                        xyid += $"'{data.Rows[i]["id"]}',";
+                    }
+                }
+                #endregion
+
+                #region B超表
+                DataSet bc = DbHelperMySQL.Query($@"select * from zkhw_tj_bc where upload_status='0'");
+                if (bc != null && bc.Tables.Count > 0 && bc.Tables[0].Rows.Count > 0)
+                {
+                    DataTable data = bc.Tables[0];
+                    string id = string.Empty;
+                    for (int i = 0; i < data.Rows.Count; i++)
+                    {
+                        sqllist.Add($@"insert into zkhw_tj_bc (ID,aichive_no,id_number,bar_code,SocialSecurity,code,FubuBC,FubuResult,FubuDesc,QitaBC,QitaResult,QitaDesc,BuPic01,BuPic02,BuPic03,BuPic04,createtime,updatetime,synchronize_type,ZrysBC,imageUrl_a,imageUrl_b,imageUrl_c,imageUrl_d) 
+values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["SocialSecurity"])},{Ifnull(data.Rows[i]["code"])},{Ifnull(data.Rows[i]["BuPic01"])},{Ifnull(data.Rows[i]["BuPic02"])},{Ifnull(data.Rows[i]["BuPic03"])},{Ifnull(data.Rows[i]["BuPic04"])},{Ifnull(data.Rows[i]["createtime"])},{Ifnull(data.Rows[i]["QitaDesc"])},{Ifnull(data.Rows[i]["QRS"])},{Ifnull(data.Rows[i]["QT"])},{Ifnull(data.Rows[i]["QTc"])},{Ifnull(data.Rows[i]["P_R_T"])},{Ifnull(data.Rows[i]["DOB"])},{Ifnull(data.Rows[i]["Age"])},{Ifnull(data.Rows[i]["updatetime"])},{Ifnull(data.Rows[i]["synchronize_type"])},{Ifnull(data.Rows[i]["ZrysBC"])},{Ifnull(data.Rows[i]["imageUrl_a"])},{Ifnull(data.Rows[i]["imageUrl_b"])},{Ifnull(data.Rows[i]["imageUrl_c"])},{Ifnull(data.Rows[i]["imageUrl_d"])});");
+                        bcid += $"'{data.Rows[i]["id"]}',";
+                    }
+                }
+                #endregion
                 int run = DbHelperMySQL.ExecuteSqlTranYpt(sqllist);
                 if (run > 0)
                 {
@@ -1988,6 +2103,13 @@ values('{data.Rows[i]["id"]}','{data.Rows[i]["name"]}','{data.Rows[i]["aichive_n
                     sqllistz.Add($"update follow_medicine_record set upload_status='1' where id in({followid.TrimEnd(',')});");
                     sqllistz.Add($"update fuv_hypertension set upload_status='1' where id in({fuvid.TrimEnd(',')});");
                     sqllistz.Add($"update diabetes_follow_record set upload_status='1' where id in({diabetesid.TrimEnd(',')});");
+                    sqllistz.Add($"update zkhw_tj_ncg set upload_status='1' where id in({ncgid.TrimEnd(',')});");
+                    sqllistz.Add($"update zkhw_tj_sgtz set upload_status='1' where id in({sgtzid.TrimEnd(',')});");
+                    sqllistz.Add($"update zkhw_tj_sh set upload_status='1' where id in({shid.TrimEnd(',')});");
+                    sqllistz.Add($"update zkhw_tj_xcg set upload_status='1' where id in({xcgid.TrimEnd(',')});");
+                    sqllistz.Add($"update zkhw_tj_xdt set upload_status='1' where id in({xdtid.TrimEnd(',')});");
+                    sqllistz.Add($"update zkhw_tj_xy set upload_status='1' where id in({xyid.TrimEnd(',')});");
+                    sqllistz.Add($"update zkhw_tj_bc set upload_status='1' where id in({bcid.TrimEnd(',')});");
                     int reu1 = DbHelperMySQL.ExecuteSqlTran(sqllistz);
                     if (reu1 > 0)
                     {
