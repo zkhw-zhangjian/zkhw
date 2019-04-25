@@ -16,7 +16,8 @@ namespace zkhwClient.dao
     public class FSWControl
     {
         static FileSystemWatcher watcher = new FileSystemWatcher();
-
+        static FileSystemWatcher watcherb = new FileSystemWatcher();
+        static FileSystemWatcher xuechanggui = new FileSystemWatcher();
         /// <summary>
         /// 初始化监听
         /// </summary>
@@ -64,7 +65,7 @@ namespace zkhwClient.dao
                     return;
                 Thread.Sleep(100);
             }
-            //FileWatcher.OnChangedForXinDianTu(null,null);
+            FileWatcher.OnChangedForXinDianTu(sender, e);
         }
 
         /// <summary>
@@ -79,20 +80,20 @@ namespace zkhwClient.dao
         public static void WatcherStratBchao(string StrWarcherPath, string FilterType, bool IsEnableRaising, bool IsInclude)
         {
             //初始化监听
-            watcher.BeginInit();
+            watcherb.BeginInit();
             //设置监听文件类型
-            watcher.Filter = FilterType;
+            watcherb.Filter = FilterType;
             //设置是否监听子目录
-            watcher.IncludeSubdirectories = IsInclude;
+            watcherb.IncludeSubdirectories = IsInclude;
             //设置是否启用监听?
-            watcher.EnableRaisingEvents = IsEnableRaising;
+            watcherb.EnableRaisingEvents = IsEnableRaising;
             //设置需要监听的更改类型(如:文件或者文件夹的属性,文件或者文件夹的创建时间;NotifyFilters枚举的内容)
-            watcher.NotifyFilter = NotifyFilters.Attributes | NotifyFilters.CreationTime | NotifyFilters.DirectoryName | NotifyFilters.FileName | NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.Security | NotifyFilters.Size;
+            watcherb.NotifyFilter = NotifyFilters.Attributes | NotifyFilters.CreationTime | NotifyFilters.DirectoryName | NotifyFilters.FileName | NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.Security | NotifyFilters.Size;
             //设置监听的路径
-            watcher.Path = StrWarcherPath;
+            watcherb.Path = StrWarcherPath;
             //注册创建文件或目录时的监听事件
-            watcher.Created += new FileSystemEventHandler(watch_createdbchao);
-            watcher.EndInit();
+            watcherb.Created += new FileSystemEventHandler(watch_createdbchao);
+            watcherb.EndInit();
         }
         private static void watch_createdbchao(object sender, FileSystemEventArgs e)
         {
@@ -103,7 +104,55 @@ namespace zkhwClient.dao
                     return;
                 Thread.Sleep(100);
             }
-            //FileWatcher.OnChangedForXinDianTu(null, null);
+            FileWatcher.OnChangedForBChao(sender, e);
+        }
+
+        /// <summary>
+        /// 初始化监听
+        /// </summary>
+        /// <param name="StrWarcherPath">需要监听的目录</param>
+        /// <param name="FilterType">需要监听的文件类型(筛选器字符串)</param>
+        /// <param name="IsEnableRaising">是否启用监听</param>
+        /// <param name="IsInclude">是否监听子目录</param>
+        public static void WatcherStratxcg(string StrWarcherPath, string FilterType, bool IsEnableRaising, bool IsInclude)
+        {
+            //初始化监听
+            xuechanggui.BeginInit();
+            //设置监听文件类型
+            xuechanggui.Filter = FilterType;
+            //设置是否监听子目录
+            xuechanggui.IncludeSubdirectories = IsInclude;
+            //设置是否启用监听?
+            xuechanggui.EnableRaisingEvents = IsEnableRaising;
+            //设置需要监听的更改类型(如:文件或者文件夹的属性,文件或者文件夹的创建时间;NotifyFilters枚举的内容)
+            xuechanggui.NotifyFilter = NotifyFilters.Attributes | NotifyFilters.CreationTime | NotifyFilters.LastWrite | NotifyFilters.Size;
+            //设置监听的路径
+            xuechanggui.Path = StrWarcherPath;
+            //注册创建文件或目录时的监听事件
+            //xuechanggui.Created += new FileSystemEventHandler(watch_changedxcg);
+            //注册当指定目录的文件或者目录发生改变的时候的监听事件
+            xuechanggui.Changed += new FileSystemEventHandler(watch_changedxcg);
+            //注册当删除目录的文件或者目录的时候的监听事件
+            //watcher.Deleted += new FileSystemEventHandler(watch_deleted);
+            //当指定目录的文件或者目录发生重命名的时候的监听事件
+            //watcher.Renamed += new RenamedEventHandler(watch_renamed);
+            //结束初始化
+            xuechanggui.EndInit();
+        }
+        private static void watch_changedxcg(object sender, FileSystemEventArgs e)
+        {
+            (sender as FileSystemWatcher).EnableRaisingEvents = false;
+            (sender as FileSystemWatcher).EnableRaisingEvents = true;//这样可以保证changed事件可以被重新触发。
+            //事件内容
+            while (!IsFileReady(e.FullPath))
+            {
+                if (!File.Exists(e.FullPath))
+                {
+                    return;
+                }
+                Thread.Sleep(500);
+            }
+            FileDataAddSql.OnChangedForxcg(sender, e);
         }
         static bool IsFileReady(string filename)
         {

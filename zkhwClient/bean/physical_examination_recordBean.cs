@@ -9,8 +9,6 @@ namespace zkhwClient.bean
     class physical_examination_recordBean
     {
         public string id { get; set; }
-
-
         //姓名
         public string name { get; set; }
         //电子档案编码
@@ -27,6 +25,8 @@ namespace zkhwClient.bean
         public string symptom_other { get; set; }//
         //检查日期
         public string check_date { get; set; }//
+        //责任医生
+        public string doctor_name { get; set; }
         //体温
         public string base_temperature { get; set; }
         //脉搏
@@ -95,6 +95,8 @@ namespace zkhwClient.bean
         public string lifeway_drink_oneyear { get; set; }
         //饮酒种类
         public string lifeway_drink_type { get; set; }
+        //饮酒种类其他
+        public string lifeway_drink_other { get; set; }
         //是否有职业病危害接触
         public string lifeway_occupational_disease { get; set; }//
         //工种
@@ -201,16 +203,26 @@ namespace zkhwClient.bean
         public string examination_heart_rhythm { get; set; }
         //心脏杂音
         public string examination_heart_noise { get; set; }
+        //心脏杂音异常说明
+        public string examination_noise_other { get; set; }
         //腹部压痛 
         public string examination_abdomen_tenderness { get; set; }
+        //腹部压痛异常说明
+        public string examination_tenderness_memo { get; set; }
         //腹部包块
         public string examination_abdomen_mass { get; set; }
+        //腹部包块异常说明
+        public string examination_mass_memo { get; set; }
         //腹部肝大
         public string examination_abdomen_hepatomegaly { get; set; }
+        //腹部肝大异常说明
+        public string examination_hepatomegaly_memo { get; set; }
         //腹部脾大
         public string examination_abdomen_splenomegaly { get; set; }
+        //腹部脾大异常说明
+        public string examination_splenomegaly_memo { get; set; }
         //移动性浊音
-        public string examination_abdomen_shiftingdullness { get; set; }//
+        public string examination_abdomen_shiftingdullness { get; set; }
         //下肢水肿
         public string examination_lowerextremity_edema { get; set; }
         //足背动脉搏动
@@ -227,15 +239,25 @@ namespace zkhwClient.bean
         public string examination_doctor { get; set; }//
         //妇科外阴
         public string examination_woman_vulva { get; set; }
+        //妇科外阴异常说明
+        public string examination_vulva_memo { get; set; }
         //妇科阴道
         public string examination_woman_vagina { get; set; }
-        //examination_woman_cervix
+        //妇科阴道异常说明
+        public string examination_vagina_memo { get; set; }
+        //妇科宫颈
         public string examination_woman_cervix { get; set; }
-        //examination_woman_corpus
+        //妇科宫颈异常说明
+        public string examination_cervix_memo { get; set; }
+        //妇科宫体
         public string examination_woman_corpus { get; set; }//标记页面未用
-        //examination_woman_accessories
+        //妇科宫体异常说明
+        public string examination_corpus_memo { get; set; }
+        //妇科附件
         public string examination_woman_accessories { get; set; }//
-        //examination_woman_doctor
+        //妇科附件异常说明
+        public string examination_accessories_memo { get; set; }
+        //妇科检查医生
         public string examination_woman_doctor { get; set; }//
         //查体其他
         public string examination_other { get; set; }
@@ -257,13 +279,15 @@ namespace zkhwClient.bean
         public string bld { get; set; }
         //尿常规其他
         public string urine_other { get; set; }//标记页面未用
-        //blood_glucose_mmol
+        //空腹血糖mmol
         public string blood_glucose_mmol { get; set; }//
-        //blood_glucose_mg
+        //空腹血糖mg
         public string blood_glucose_mg { get; set; }//
-        //cardiogram
+        //心电图
         public string cardiogram { get; set; }
-        //cardiogram_img
+        //心电图异常说明
+        public string cardiogram_memo { get; set; }
+        //心电图图片
         public string cardiogram_img { get; set; }//
         //尿微量白蛋白
         public string microalbuminuria { get; set; }//
@@ -301,18 +325,26 @@ namespace zkhwClient.bean
         public string hdl { get; set; }
         //胸部X线片
         public string chest_x { get; set; }
+        //胸部X线片异常说明
+        public string chestx_memo { get; set; }
         //胸部X图片
         public string chestx_img { get; set; }
         //腹部B超
         public string ultrasound_abdomen { get; set; }
+        //腹部B超异常说明
+        public string ultrasound_memo { get; set; }
         //腹部b超图片
         public string abdomenB_img { get; set; }
         //其他B超
         public string other_b { get; set; }
+        //其他B超异常说明
+        public string otherb_memo { get; set; }
         //其他B超图片
         public string otherb_img { get; set; }
         //宫颈涂片
         public string cervical_smear { get; set; }
+        //宫颈涂片异常说明
+        public string cervical_smear_memo { get; set; }
         //其他
         public string other { get; set; }
         //脑血管疾病
@@ -343,7 +375,7 @@ namespace zkhwClient.bean
         public string health_evaluation { get; set; }//
         //健康指导
         public string health_guidance { get; set; }//
-        //danger_controlling
+        //危险因素控制编号(多个)
         public string danger_controlling { get; set; }//
         //目标体重
         public string target_weight { get; set; }

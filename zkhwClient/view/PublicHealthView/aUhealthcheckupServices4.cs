@@ -112,27 +112,27 @@ namespace zkhwClient.view.PublicHealthView
             //diabetes_follow_recordBean.staple_food_now = this.numericUpDown13.Value.ToString();
             //diabetes_follow_recordBean.staple_food_next = this.numericUpDown16.Value.ToString();
             if (this.radioButton10.Checked == true) { diabetes_follow_recordBean.psychological_recovery = this.radioButton10.Text; };
-            if (this.radioButton11.Checked == true) { diabetes_follow_recordBean.psychological_recovery = this.radioButton11.Text; };
-            if (this.radioButton12.Checked == true) { diabetes_follow_recordBean.psychological_recovery = this.radioButton12.Text; };
-            if (this.radioButton13.Checked == true) { diabetes_follow_recordBean.medical_compliance = this.radioButton13.Text; };
-            if (this.radioButton14.Checked == true) { diabetes_follow_recordBean.medical_compliance = this.radioButton14.Text; };
-            if (this.radioButton15.Checked == true) { diabetes_follow_recordBean.medical_compliance = this.radioButton15.Text; };
+            //if (this.radioButton11.Checked == true) { diabetes_follow_recordBean.psychological_recovery = this.radioButton11.Text; };
+            //if (this.radioButton12.Checked == true) { diabetes_follow_recordBean.psychological_recovery = this.radioButton12.Text; };
+            //if (this.radioButton13.Checked == true) { diabetes_follow_recordBean.medical_compliance = this.radioButton13.Text; };
+            //if (this.radioButton14.Checked == true) { diabetes_follow_recordBean.medical_compliance = this.radioButton14.Text; };
+            //if (this.radioButton15.Checked == true) { diabetes_follow_recordBean.medical_compliance = this.radioButton15.Text; };
 
             //diabetes_follow_recordBean.blood_glucose = this.numericUpDown17.Value.ToString();
             //diabetes_follow_recordBean.glycosylated_hemoglobin = this.numericUpDown18.Value.ToString();
             //if (this.radioButton22.Checked == true) { diabetes_follow_recordBean.compliance = this.radioButton22.Text; };
             //if (this.radioButton23.Checked == true) { diabetes_follow_recordBean.compliance = this.radioButton23.Text; };
             //if (this.radioButton24.Checked == true) { diabetes_follow_recordBean.compliance = this.radioButton24.Text; };
-            if (this.radioButton16.Checked == true) { diabetes_follow_recordBean.untoward_effect = this.radioButton16.Text; };
-            if (this.radioButton17.Checked == true) { diabetes_follow_recordBean.untoward_effect = this.radioButton17.Text; };
+            //if (this.radioButton16.Checked == true) { diabetes_follow_recordBean.untoward_effect = this.radioButton16.Text; };
+            //if (this.radioButton17.Checked == true) { diabetes_follow_recordBean.untoward_effect = this.radioButton17.Text; };
             if (this.radioButton4.Checked == true) { diabetes_follow_recordBean.reactive_hypoglycemia = this.radioButton4.Text; };
             if (this.radioButton5.Checked == true) { diabetes_follow_recordBean.reactive_hypoglycemia = this.radioButton5.Text; };
             if (this.radioButton6.Checked == true) { diabetes_follow_recordBean.reactive_hypoglycemia = this.radioButton6.Text; };
 
-            if (this.radioButton18.Checked == true) { diabetes_follow_recordBean.follow_type = this.radioButton18.Text; };
-            if (this.radioButton19.Checked == true) { diabetes_follow_recordBean.follow_type = this.radioButton19.Text; };
-            if (this.radioButton20.Checked == true) { diabetes_follow_recordBean.follow_type = this.radioButton20.Text; };
-            if (this.radioButton21.Checked == true) { diabetes_follow_recordBean.follow_type = this.radioButton21.Text; };
+            //if (this.radioButton18.Checked == true) { diabetes_follow_recordBean.follow_type = this.radioButton18.Text; };
+            //if (this.radioButton19.Checked == true) { diabetes_follow_recordBean.follow_type = this.radioButton19.Text; };
+            //if (this.radioButton20.Checked == true) { diabetes_follow_recordBean.follow_type = this.radioButton20.Text; };
+            //if (this.radioButton21.Checked == true) { diabetes_follow_recordBean.follow_type = this.radioButton21.Text; };
             if (diabetes_follow_recordBean.follow_type == "") { MessageBox.Show("随访分类不能为空！"); return; };
             //diabetes_follow_recordBean.advice = this.richTextBox2.Text;
 

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -10,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using zkhwClient.dao;
 using zkhwClient.utils;
 using zkhwClient.view.setting;
 
@@ -24,7 +27,15 @@ namespace zkhwClient
         public static string organCode = null;
         service.loginLogService lls = new service.loginLogService();
         service.UserService us = new service.UserService();
-
+        XmlDocument xmlDoc = new XmlDocument();
+        string path = @"config.xml";
+        XmlNode node;
+        string shenghuapath = "";
+        string xuechangguipath = "";
+        tjcheckDao tjdao = new tjcheckDao();
+        jkInfoDao jkdao = new jkInfoDao();
+        private OleDbDataAdapter oda = null;
+        private DataSet myds_data = null;
         public frmLogin()
         {
             InitializeComponent();
@@ -94,12 +105,24 @@ namespace zkhwClient
             this.comboBox1.DisplayMember = "username";//显示给用户的数据集表项
             this.comboBox1.ValueMember = "username";//操作时获取的值 
 
-            //监听有没有B超的文件生成
-             
-
-            //开启监控
-            FileWatcher.WatcheDirForXinDianTu();
-            FileWatcher.WatcheDirForBChao();
+            //监听心电图和B超
+            FSWControl.WatcherStrat(@"E:\Examine\xdt","*.xml",true,true);
+            FSWControl.WatcherStratBchao(@"E:\Examine\bc", "*.xml", true, true);
+            //开启监控血常规和生化
+            xmlDoc.Load(path);
+            node = xmlDoc.SelectSingleNode("config/shenghuaPath");
+            shenghuapath = node.InnerText;
+            node = xmlDoc.SelectSingleNode("config/xuechangguiPath");
+            xuechangguipath = node.InnerText;
+            if (xuechangguipath == "" || !File.Exists(shenghuapath))
+            {
+                MessageBox.Show("未获取到血球中间库地址，请检查是否设置地址并重新启动软件！");
+                return;
+            }
+            else {
+                FSWControl.WatcherStratxcg(@"F:\血球", "Lis_DB.mdb", true, true);
+            }
+            //FileWatcher.WatcheDirForBChao();
         }
     }
 }

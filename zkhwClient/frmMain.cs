@@ -28,7 +28,7 @@ namespace zkhwClient
     {
         personRegist pR = null;
         Process proHttp = new Process();
-        Process proFtp = new Process();
+        //Process proFtp = new Process();
         Process proAsNet = new Process();
         basicSettingDao bsdao = new basicSettingDao();
         tjcheckDao tjdao = new tjcheckDao();
@@ -51,8 +51,8 @@ namespace zkhwClient
             basicSet.Show();
 
             this.timer1.Start();//时间控件定时器
-            this.timer2.Interval = Int32.Parse(Properties.Settings.Default.timeInterval);
-            this.timer2.Start();//定时获取生化和血球的数据
+            //this.timer2.Interval = Int32.Parse(Properties.Settings.Default.timeInterval);
+            //this.timer2.Start();//定时获取生化和血球的数据
 
             this.timer3.Interval =Int32.Parse(Properties.Settings.Default.timer3Interval);
             this.timer3.Start();//1分钟定时刷新设备状态
@@ -126,7 +126,7 @@ namespace zkhwClient
             //socketTcp();
             //http
             proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
-            proAsNet.StartInfo.CreateNoWindow = true;
+            proHttp.StartInfo.CreateNoWindow = true;
             proHttp.StartInfo.UseShellExecute = false;
             proHttp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             proHttp.StartInfo.ErrorDialog = false;
@@ -140,15 +140,15 @@ namespace zkhwClient
             proAsNet.StartInfo.UseShellExecute = true;
             proAsNet.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             proAsNet.Start();
-            Thread.Sleep(200);
+            Thread.Sleep(230);
             IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
             //ftp                 
-            proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.05\\ftpservice.exe";
-            proFtp.StartInfo.CreateNoWindow = true;
-            proFtp.StartInfo.UseShellExecute = false;
+                //proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.05\\ftpservice.exe";
+                //proFtp.StartInfo.CreateNoWindow = true;
+                //proFtp.StartInfo.UseShellExecute = false;
             //proFtp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            proFtp.StartInfo.ErrorDialog = false;
-            proFtp.Start();
+                //proFtp.StartInfo.ErrorDialog = false;
+                //proFtp.Start();
             //Thread.Sleep(1000);
             //IntPtrFindWindow.intptrwindows(proFtp.MainWindowHandle);
         }
@@ -179,10 +179,10 @@ namespace zkhwClient
                 {
                     proAsNet.Kill();
                 }
-                if (!proFtp.HasExited)
-                {
-                    proFtp.Kill();
-                }
+                //if (!proFtp.HasExited)
+                //{
+                //    proFtp.Kill();
+                //}
                 service.loginLogService llse = new service.loginLogService();
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = frmLogin.name;
@@ -202,7 +202,7 @@ namespace zkhwClient
             }
         }
         //挂机
-        [DllImport("user32 ")]
+        [DllImport("user32")]
         public static extern bool LockWorkStation();//这个是调用windows的系统锁定 
         private void 挂机ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -825,10 +825,10 @@ namespace zkhwClient
                 {
                     proAsNet.Kill();
                 }
-                if (!proFtp.HasExited)
-                {
-                    proFtp.Kill();
-                }
+                //if (!proFtp.HasExited)
+                //{
+                //    proFtp.Kill();
+                //}
                 service.loginLogService llse = new service.loginLogService();
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = frmLogin.name;

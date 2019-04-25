@@ -43,9 +43,9 @@
             this.老年人健康服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.高血压患者服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.型糖尿病患者服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.中医健康服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.严重精神病障碍患者服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.肺结核患者服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.中医健康服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.孕产妇ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.岁ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.预防接种服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,7 +108,7 @@
             this.密码修改ToolStripMenuItem});
             this.系统ToolStripMenuItem.Name = "系统ToolStripMenuItem";
             this.系统ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
-            this.系统ToolStripMenuItem.Text = "系统设置";
+            this.系统ToolStripMenuItem.Text = "用户管理";
             // 
             // 用户管理ToolStripMenuItem
             // 
@@ -219,6 +219,12 @@
             this.型糖尿病患者服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.型糖尿病患者服务ToolStripMenuItem.Text = "2型糖尿病患者服务";
             // 
+            // 中医健康服务ToolStripMenuItem
+            // 
+            this.中医健康服务ToolStripMenuItem.Name = "中医健康服务ToolStripMenuItem";
+            this.中医健康服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.中医健康服务ToolStripMenuItem.Text = "中医健康服务";
+            // 
             // 严重精神病障碍患者服务ToolStripMenuItem
             // 
             this.严重精神病障碍患者服务ToolStripMenuItem.Name = "严重精神病障碍患者服务ToolStripMenuItem";
@@ -230,12 +236,6 @@
             this.肺结核患者服务ToolStripMenuItem.Name = "肺结核患者服务ToolStripMenuItem";
             this.肺结核患者服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.肺结核患者服务ToolStripMenuItem.Text = "肺结核患者服务";
-            // 
-            // 中医健康服务ToolStripMenuItem
-            // 
-            this.中医健康服务ToolStripMenuItem.Name = "中医健康服务ToolStripMenuItem";
-            this.中医健康服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.中医健康服务ToolStripMenuItem.Text = "中医健康服务";
             // 
             // 孕产妇ToolStripMenuItem
             // 

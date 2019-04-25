@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
+using zkhwClient.bean;
 
 namespace zkhwClient.dao
 {
@@ -66,6 +68,178 @@ namespace zkhwClient.dao
             string sql = "select * from elderly_selfcare_estimate where id = '" + id + "'";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
+        }
+
+        public bool addPhysicalExaminationRecord1(physical_examination_recordBean per)
+        {
+            int ret = 0;
+            String sql = @"update physical_examination_record set symptom='" + per.symptom + "',symptom_other='" + per.symptom_other + "',base_temperature='" 
+                +per.base_temperature + "',base_heartbeat='" + per.base_heartbeat + "',base_respiratory='" + per.base_respiratory + "',base_blood_pressure_left_high='" 
+                + per.base_blood_pressure_left_high + "',base_blood_pressure_left_low='" + per.base_blood_pressure_left_low + "',base_blood_pressure_right_high='" 
+                + per.base_blood_pressure_right_high + "',base_blood_pressure_right_low= '" + per.base_blood_pressure_right_low + "',base_height='" 
+                + per.base_height + "',base_weight='" + per.base_weight + "',base_waist='" + per.base_waist + "',base_bmi= '" + per.base_bmi 
+                + "',base_health_estimate= '" + per.base_health_estimate + "',base_selfcare_estimate= '" + per.base_selfcare_estimate + "',base_cognition_estimate='" 
+                + per.base_cognition_estimate + "',base_cognition_score= '" + per.base_cognition_score + "',base_feeling_estimate='" + per.base_feeling_estimate 
+                + "',base_feeling_score='" + per.base_feeling_score + "',base_doctor='" + per.base_doctor + "',lifeway_exercise_frequency='" + per.lifeway_exercise_frequency
+                + "',lifeway_exercise_time='" + per.lifeway_exercise_time + "',lifeway_exercise_year='" + per.lifeway_exercise_year + "',lifeway_exercise_type='" + per.lifeway_exercise_type 
+                + "',lifeway_diet='" + per.lifeway_diet + "',lifeway_smoke_status='" + per.lifeway_smoke_status + "',lifeway_smoke_number='" + per.lifeway_smoke_number 
+                + "',lifeway_smoke_startage='" + per.lifeway_smoke_startage + "',lifeway_smoke_endage='" + per.lifeway_smoke_endage + "',lifeway_drink_status='" + per.lifeway_drink_status 
+                + "',lifeway_drink_number='" + per.lifeway_drink_number + "',lifeway_drink_stop='" + per.lifeway_drink_stop + "',lifeway_drink_stopage='" + per.lifeway_drink_stopage 
+                + "',lifeway_drink_startage='" + per.lifeway_drink_startage + "',lifeway_drink_oneyear='" + per.lifeway_drink_oneyear + "',lifeway_drink_type='" + per.lifeway_drink_type 
+                + "',lifeway_drink_other='" + per.lifeway_drink_other + "',lifeway_occupational_disease='" + per.lifeway_occupational_disease + "',lifeway_job='" + per.lifeway_job 
+                + "',lifeway_job_period='" + per.lifeway_job_period + "',lifeway_hazardous_dust='" + per.lifeway_hazardous_dust + "',lifeway_dust_preventive='" + per.lifeway_dust_preventive 
+                + "',lifeway_hazardous_radiation='" + per.lifeway_hazardous_radiation + "',lifeway_radiation_preventive='" + per.lifeway_radiation_preventive + "',lifeway_hazardous_physical='" 
+                + per.lifeway_hazardous_physical + "',lifeway_physical_preventive='" + per.lifeway_physical_preventive + "',lifeway_hazardous_chemical='" + per.lifeway_hazardous_chemical 
+                + "',lifeway_chemical_preventive='" + per.lifeway_chemical_preventive + "',lifeway_hazardous_other='" + per.lifeway_hazardous_other + "',lifeway_other_preventive='" + per.lifeway_other_preventive
+                + "',lifeway_doctor='" + per.lifeway_doctor + "' where aichive_no = '" + per.aichive_no + "' and bar_code = '" + per.bar_code + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+//organ_lips
+//organ_tooth
+//organ_hypodontia
+//organ_hypodontia_topleft
+//organ_hypodontia_topright
+//organ_hypodontia_bottomleft
+//organ_hypodontia_bottomright
+//organ_caries
+//organ_caries_topleft
+//organ_caries_topright
+//organ_caries_bottomleft
+//organ_caries_bottomright
+//organ_denture
+//organ_denture_topleft
+//organ_denture_topright
+//organ_denture_bottomleft
+//organ_denture_bottomright
+//organ_guttur
+//organ_vision_left
+//organ_vision_right
+//organ_correctedvision_left
+//organ_correctedvision_right
+//organ_hearing
+//organ_movement
+//organ_doctor
+//examination_eye
+//examination_eye_other
+//examination_skin
+//examination_skin_other
+//examination_sclera
+//examination_sclera_other
+//examination_lymph
+//examination_lymph_other
+//examination_barrel_chest
+//examination_breath_sounds
+//examination_rale
+//examination_rale_other
+//examination_heart_rate
+//examination_heart_rhythm
+//examination_heart_noise
+//examination_noise_other
+//examination_abdomen_tenderness
+//examination_tenderness_memo
+//examination_abdomen_mass
+//examination_mass_memo
+//examination_abdomen_hepatomegaly
+//examination_hepatomegaly_memo
+//examination_abdomen_splenomegaly
+//examination_splenomegaly_memo
+//examination_abdomen_shiftingdullness
+//examination_lowerextremity_edema
+//examination_dorsal_artery
+//examination_anus
+//examination_anus_other
+//examination_breast
+//examination_breast_other
+//examination_doctor
+//examination_woman_vulva
+//examination_vulva_memo
+//examination_woman_vagina
+//examination_vagina_memo
+//examination_woman_cervix
+//examination_cervix_memo
+//examination_woman_corpus
+//examination_corpus_memo
+//examination_woman_accessories
+//examination_accessories_memo
+//examination_woman_doctor
+//examination_other
+//blood_hemoglobin
+//blood_leukocyte
+//blood_platelet
+//blood_other
+//urine_protein
+//glycosuria
+//urine_acetone_bodies
+//bld
+//urine_other
+//blood_glucose_mmol
+//blood_glucose_mg
+//cardiogram
+//cardiogram_memo
+//cardiogram_img
+//microalbuminuria
+//fob
+//glycosylated_hemoglobin
+//hb
+//sgft
+//ast
+//albumin
+//total_bilirubin
+//conjugated_bilirubin
+//scr
+//blood_urea
+//blood_k
+//blood_na
+//tc
+//tg
+//ldl
+//hdl
+//chest_x
+//chestx_memo
+//chestx_img
+//ultrasound_abdomen
+//ultrasound_memo
+//abdomenB_img
+//other_b
+//otherb_memo
+//otherb_img
+//cervical_smear
+//cervical_smear_memo
+//other
+//cerebrovascular_disease
+//cerebrovascular_disease_other
+//kidney_disease
+//kidney_disease_other
+//heart_disease
+//heart_disease_other
+//vascular_disease
+//vascular_disease_other
+//ocular_diseases
+//ocular_diseases_other
+//nervous_system_disease
+//other_disease
+//health_evaluation
+//abnormal1
+//abnormal2
+//abnormal3
+//abnormal4
+//health_guidance
+//danger_controlling
+//target_weight
+//proposal_accination
+//danger_controlling_other
+//create_user
+//create_name
+//create_org
+//create_org_name
+//create_time
+//update_user
+//update_name
+//update_time
+//upload_status
+//upload_time
+//upload_result
+
         }
     }
 }

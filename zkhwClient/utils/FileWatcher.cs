@@ -100,7 +100,7 @@ namespace zkhwClient
         {
             try
             {
-                string watchPath = @"D:\xindiantu";//去掉文件夹的只读权限
+                string watchPath = @"D:\Examine\xindiantu";//去掉文件夹的只读权限
 
                 m_watcherAoup.Path = watchPath;
                 m_watcherAoup.NotifyFilter = NotifyFilters.Attributes | NotifyFilters.CreationTime |
@@ -127,7 +127,7 @@ namespace zkhwClient
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.StackTrace);
             }
         }
         /// <summary>
@@ -165,7 +165,7 @@ namespace zkhwClient
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.StackTrace);
             }
         }
 
@@ -203,15 +203,15 @@ namespace zkhwClient
         /// <param name="source"></param>
         /// <param name="e"></param>
         /// <remarks>创建人员(日期): ★刘腾飞★(100202 18:16)</remarks> 
-        private static void OnChangedForXinDianTu(object source, FileSystemEventArgs e)
+        public static void OnChangedForXinDianTu(object source, FileSystemEventArgs e)
         {
-            if (e.ChangeType == WatcherChangeTypes.Changed)
-            {
-                List<string> orderIdList = new List<string>();
+            //if (e.ChangeType == WatcherChangeTypes.Changed)
+            //{
+               // List<string> orderIdList = new List<string>();
                 try
                 {
                     //1.由于客户机器首次读取时乱码，故先修改该文件后再读取内容
-                    m_watcherAoup.EnableRaisingEvents = false;
+                    //m_watcherAoup.EnableRaisingEvents = false;
                     try
                     {
                         //File.SetLastWriteTime(e.FullPath, DateTime.Now);//修改txt文件的时间
@@ -292,37 +292,25 @@ namespace zkhwClient
                             int rue = DbHelperMySQL.ExecuteSql(issql, args);
                         }
                         #endregion
-
-
                     }
                     catch (Exception ex)
                     {
                         // RegisterAoupTrackLog("文件被占用！正在请求重试 ... ");
-
+                        MessageBox.Show(ex.StackTrace);
                         //进程阻塞2秒钟
-                        Thread.Sleep(2000);
-
-                        // File.SetLastWriteTime(e.FullPath, DateTime.Now);//修改txt文件的时间
                     }
-                    m_watcherAoup.EnableRaisingEvents = true;
-
-                    //插入数据库
-
                 }
                 catch (Exception ex)
                 {
-
-
-                    // RegisterAoupTrackLog(string.Format("监听异常！异常信息：{0}", ex.Message));
-
+                    //MessageBox.Show(ex.StackTrace);
                 }
                 finally
                 {
                     //如果遇到异常关闭了监听，则重新打开监听
-                    if (!m_watcherAoup.EnableRaisingEvents)
-                        m_watcherAoup.EnableRaisingEvents = true;
+                    //if (!m_watcherAoup.EnableRaisingEvents)
+                    //    m_watcherAoup.EnableRaisingEvents = true;
                 }
-            }
+            //}
         }
         /// <summary>
         /// 改变时候触发
@@ -330,18 +318,17 @@ namespace zkhwClient
         /// <param name="source"></param>
         /// <param name="e"></param>
         /// <remarks>创建人员(日期): ★刘腾飞★(100202 18:16)</remarks> 
-        private static void OnChangedForBChao(object source, FileSystemEventArgs e)
+        public static void OnChangedForBChao(object source, FileSystemEventArgs e)
         {
-            if (e.ChangeType == WatcherChangeTypes.Changed)
-            {
-                List<string> orderIdList = new List<string>();
+            //if (e.ChangeType == WatcherChangeTypes.Changed)
+            //{
+                //List<string> orderIdList = new List<string>();
                 try
                 {
                     //1.由于客户机器首次读取时乱码，故先修改该文件后再读取内容
-                    m_watcherAoup.EnableRaisingEvents = false;
+                    //m_watcherAoup.EnableRaisingEvents = false;
 
                     //File.SetLastWriteTime(e.FullPath, DateTime.Now);//修改txt文件的时间
-
                     #region B超
                     string str = Application.StartupPath;//项目路径
                     XmlDocument doc = new XmlDocument();
@@ -402,84 +389,22 @@ namespace zkhwClient
                         }
                         int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='1',abdomenB_img='{tup}',other_b='1',otherb_img='{tup}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
                         int rue = DbHelperMySQL.ExecuteSql(issql, args);
-
                         //插入数据库
                     }
                     #endregion
                 }
                 catch (Exception ex)
                 {
-
-
                     // RegisterAoupTrackLog(string.Format("监听异常！异常信息：{0}", ex.Message));
-
                 }
                 finally
                 {
                     //如果遇到异常关闭了监听，则重新打开监听
-                    if (!m_watcherAoup.EnableRaisingEvents)
-                        m_watcherAoup.EnableRaisingEvents = true;
+                    //if (!m_watcherAoup.EnableRaisingEvents)
+                    //    m_watcherAoup.EnableRaisingEvents = true;
                 }
-            }
+           // }
         }
-        #endregion
-
-
-    }
-    class OrderFileClass
-    {
-        #region 系统选项
-
-        #region 私有字段
-
-        private string m_txtName;
-        private string m_directoryName;
-        #endregion
-        #region 属性
-
-        public string TxtName
-        {
-            get
-            {
-                //if (string.IsNullOrEmpty(m_txtName))
-                //{
-                //    return null;
-                //}
-                return m_txtName;
-            }
-            set
-            { m_txtName = value; }
-
-            //get 
-            //{
-            //    string retRead = OprateFileClass.IniReadValue(startRun);
-            //    if (string.IsNullOrEmpty(retRead))
-            //    {
-            //        return retRead;
-            //    }
-            //    return null; 
-            //}
-            //set { OprateFileClass.IniWriteValue(startRun, value); }
-        }
-        public string DirectoryName
-        {
-            get
-            {
-                //if (string.IsNullOrEmpty(m_directoryName))
-                //{
-                //    return null;
-                //}
-                return m_directoryName;
-            }
-            set
-            { m_directoryName = value; }
-        }
-
-        #endregion
-        #region 方法
-
-
-        #endregion
         #endregion
     }
 }
