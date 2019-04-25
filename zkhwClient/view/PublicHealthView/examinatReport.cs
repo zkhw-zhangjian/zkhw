@@ -2003,7 +2003,7 @@ values('{data.Rows[i]["id"]}','{data.Rows[i]["name"]}','{data.Rows[i]["aichive_n
                 }
                 #endregion
 
-                #region 用户表
+                #region 身高体重
                 DataSet sgtz = DbHelperMySQL.Query($@"select * from zkhw_tj_sgtz where upload_status='0'");
                 if (sgtz != null && sgtz.Tables.Count > 0 && sgtz.Tables[0].Rows.Count > 0)
                 {

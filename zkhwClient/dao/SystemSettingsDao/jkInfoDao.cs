@@ -57,5 +57,21 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
+        //判断心电图是否有重复数据
+        public DataTable queryChongfuXdtData(string aichive_no, string bar_code)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select id from zkhw_tj_xdt where aichive_no >= '" + aichive_no + "' and bar_code <= '" + bar_code + "'";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+        //判断B超是否有重复数据
+        public DataTable queryChongfuBcData (string aichive_no, string bar_code)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select id from zkhw_tj_bc where aichive_no >= '" + aichive_no + "' and bar_code <= '" + bar_code + "'";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
     }
 }

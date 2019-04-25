@@ -270,24 +270,25 @@
             this.家医ToolStripMenuItem.Name = "家医ToolStripMenuItem";
             this.家医ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.家医ToolStripMenuItem.Text = "家医签约";
+            this.家医ToolStripMenuItem.Visible = false;
             this.家医ToolStripMenuItem.Click += new System.EventHandler(this.家医ToolStripMenuItem_Click);
             // 
             // 现场签约ToolStripMenuItem
             // 
             this.现场签约ToolStripMenuItem.Name = "现场签约ToolStripMenuItem";
-            this.现场签约ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.现场签约ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.现场签约ToolStripMenuItem.Text = "现场签约";
             // 
             // 团队成员ToolStripMenuItem
             // 
             this.团队成员ToolStripMenuItem.Name = "团队成员ToolStripMenuItem";
-            this.团队成员ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.团队成员ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.团队成员ToolStripMenuItem.Text = "团队成员";
             // 
             // 签约统计ToolStripMenuItem
             // 
             this.签约统计ToolStripMenuItem.Name = "签约统计ToolStripMenuItem";
-            this.签约统计ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.签约统计ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.签约统计ToolStripMenuItem.Text = "签约统计";
             // 
             // 数据分析ToolStripMenuItem
@@ -297,6 +298,7 @@
             this.数据分析ToolStripMenuItem.Name = "数据分析ToolStripMenuItem";
             this.数据分析ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.数据分析ToolStripMenuItem.Text = "数据分析";
+            this.数据分析ToolStripMenuItem.Visible = false;
             this.数据分析ToolStripMenuItem.Click += new System.EventHandler(this.数据分析ToolStripMenuItem_Click);
             // 
             // 使用情况统计ToolStripMenuItem

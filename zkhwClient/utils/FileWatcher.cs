@@ -257,30 +257,34 @@ namespace zkhwClient
                         DataTable data = jkInfoDao.selectjkInfoBybarcode(ids);
                         if (data != null && data.Rows.Count > 0)
                         {
+                            string aichive_no = data.Rows[0]["aichive_no"].ToString();
+                            string barcode = data.Rows[0]["bar_code"].ToString();
+                            DataTable dtnum= jkInfoDao.queryChongfuXdtData(aichive_no, barcode);
+                            if (dtnum.Rows.Count>0) { return; }
                             string issql = "insert into zkhw_tj_xdt(id,aichive_no,id_number,bar_code,XdtResult,XdtDesc,PR,QRS,QT,QTc,hr,p,pqrs,t,rv5,sv1,baseline_drift,myoelectricity,frequency,createtime,imageUrl) values(@id,@aichive_no,@id_number,@bar_code,@XdtResult,@XdtDesc,@PR,@QRS,@QT,@QTc,@hr,@p,@pqrs,@t,@rv5,@sv1,@baseline_drift,@myoelectricity,@frequency,@createtime,@imageUrl)";
                             MySqlParameter[] args = new MySqlParameter[] {
-                    new MySqlParameter("@id",Result.GetNewId()),
-                    new MySqlParameter("@aichive_no", data.Rows[0]["aichive_no"].ToString()),
-                    new MySqlParameter("@id_number", data.Rows[0]["id_number"].ToString()),
-                    new MySqlParameter("@bar_code", data.Rows[0]["bar_code"].ToString()),
-                    new MySqlParameter("@XdtResult", diagnosiss),
-                    new MySqlParameter("@XdtDesc", advicetexts),
-                    new MySqlParameter("@PR", prs),
-                    new MySqlParameter("@QRS", qrss),
-                    new MySqlParameter("@QT", qt_s),
-                    new MySqlParameter("@QTc", qtcs),
-                    new MySqlParameter("@hr", hrs),
-                    new MySqlParameter("@p",p_s),
-                    new MySqlParameter("@pqrs", qrs_s),
-                    new MySqlParameter("@t", ts),
-                    new MySqlParameter("@rv5", rv5s),
-                    new MySqlParameter("@sv1", sv1s),
-                    new MySqlParameter("@baseline_drift", baseline_drifts),
-                    new MySqlParameter("@myoelectricity", myoelectricitys),
-                    new MySqlParameter("@frequency", frequencys),
-                    new MySqlParameter("@createtime", time),
-                    new MySqlParameter("@imageUrl", ids+".jpg")
-                };
+                            new MySqlParameter("@id",Result.GetNewId()),
+                            new MySqlParameter("@aichive_no", data.Rows[0]["aichive_no"].ToString()),
+                            new MySqlParameter("@id_number", data.Rows[0]["id_number"].ToString()),
+                            new MySqlParameter("@bar_code", data.Rows[0]["bar_code"].ToString()),
+                            new MySqlParameter("@XdtResult", diagnosiss),
+                            new MySqlParameter("@XdtDesc", advicetexts),
+                            new MySqlParameter("@PR", prs),
+                            new MySqlParameter("@QRS", qrss),
+                            new MySqlParameter("@QT", qt_s),
+                            new MySqlParameter("@QTc", qtcs),
+                            new MySqlParameter("@hr", hrs),
+                            new MySqlParameter("@p",p_s),
+                            new MySqlParameter("@pqrs", qrs_s),
+                            new MySqlParameter("@t", ts),
+                            new MySqlParameter("@rv5", rv5s),
+                            new MySqlParameter("@sv1", sv1s),
+                            new MySqlParameter("@baseline_drift", baseline_drifts),
+                            new MySqlParameter("@myoelectricity", myoelectricitys),
+                            new MySqlParameter("@frequency", frequencys),
+                            new MySqlParameter("@createtime", time),
+                            new MySqlParameter("@imageUrl", ids+".jpg")
+                        };
                             if (diagnosiss == "窦性心律和心律正常")
                             {
                                 int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='1',cardiogram_img='{ids + ".jpg"}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
@@ -368,20 +372,24 @@ namespace zkhwClient
                     DataTable data = jkInfoDao.selectjkInfoBybarcode(id);
                     if (data != null && data.Rows.Count > 0)
                     {
+                        string aichive_no = data.Rows[0]["aichive_no"].ToString();
+                        string barcode = data.Rows[0]["bar_code"].ToString();
+                        DataTable dtnum = jkInfoDao.queryChongfuBcData(aichive_no, barcode);
+                        if (dtnum.Rows.Count > 0) { return; }
                         string issql = "insert into zkhw_tj_bc(id,aichive_no,id_number,bar_code,FubuResult,FubuBC,BuPic01,BuPic02,BuPic03,BuPic04,createtime) values(@id,@aichive_no,@id_number,@bar_code,@FubuResult,@FubuBC,@BuPic01,@BuPic02,@BuPic03,@BuPic04,@createtime)";
                         MySqlParameter[] args = new MySqlParameter[] {
-                    new MySqlParameter("@id",Result.GetNewId()),
-                    new MySqlParameter("@aichive_no", data.Rows[0]["aichive_no"].ToString()),
-                    new MySqlParameter("@id_number", data.Rows[0]["id_number"].ToString()),
-                    new MySqlParameter("@bar_code", data.Rows[0]["bar_code"].ToString()),
-                    new MySqlParameter("@FubuResult", cs),
-                    new MySqlParameter("@FubuBC", nam),
-                    new MySqlParameter("@BuPic01", BuPic01),
-                    new MySqlParameter("@BuPic02", BuPic02),
-                    new MySqlParameter("@BuPic03", BuPic03),
-                    new MySqlParameter("@BuPic04", BuPic04),
-                    new MySqlParameter("@createtime", DateTime.Now)
-                };
+                        new MySqlParameter("@id",Result.GetNewId()),
+                        new MySqlParameter("@aichive_no", data.Rows[0]["aichive_no"].ToString()),
+                        new MySqlParameter("@id_number", data.Rows[0]["id_number"].ToString()),
+                        new MySqlParameter("@bar_code", data.Rows[0]["bar_code"].ToString()),
+                        new MySqlParameter("@FubuResult", cs),
+                        new MySqlParameter("@FubuBC", nam),
+                        new MySqlParameter("@BuPic01", BuPic01),
+                        new MySqlParameter("@BuPic02", BuPic02),
+                        new MySqlParameter("@BuPic03", BuPic03),
+                        new MySqlParameter("@BuPic04", BuPic04),
+                        new MySqlParameter("@createtime", DateTime.Now)
+                    };
                         int tup = 0;
                         if (!string.IsNullOrWhiteSpace(BuPic01))
                         {
