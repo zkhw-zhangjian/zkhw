@@ -16,6 +16,5 @@ namespace zkhwClient.view.PublicHealthView
             InitializeComponent();
         }
 
-
     }
 }
