@@ -1178,6 +1178,8 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                             jktj.Add("锻炼时间", jkdata.Rows[j]["lifeway_exercise_time"].ToString());
                             jktj.Add("锻炼时间年", jkdata.Rows[j]["lifeway_exercise_year"].ToString());
                             jktj.Add("锻炼方式", jkdata.Rows[j]["lifeway_exercise_type"].ToString());
+                            jktj.Add("老年人认知能力得分", jkdata.Rows[j]["base_cognition_score"].ToString());
+                            jktj.Add("老年人情感状态得分", jkdata.Rows[j]["base_feeling_score"].ToString());
                             string ysxg = jkdata.Rows[j]["lifeway_diet"].ToString();
                             if (ysxg.IndexOf(',') > 0)
                             {

@@ -223,6 +223,12 @@
     <Compile Include="utils\IntPtrFindWindow.cs" />
     <Compile Include="utils\Md5.cs" />
     <Compile Include="utils\FSWControl.cs" />
+    <Compile Include="view\PublicHealthView\addtcmHealthServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\addtcmHealthServices.Designer.cs">
+      <DependentUpon>addtcmHealthServices.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\PublicHealthView\aUhealthcheckupServices4.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -679,6 +685,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\HomeDoctorSigningView\teamMembers.resx">
       <DependentUpon>teamMembers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\addtcmHealthServices.resx">
+      <DependentUpon>addtcmHealthServices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\aUhealthcheckupServices4.resx">
       <DependentUpon>aUhealthcheckupServices4.cs</DependentUpon>

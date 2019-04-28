@@ -106,22 +106,22 @@ namespace zkhwClient
             this.comboBox1.ValueMember = "username";//操作时获取的值 
 
             //监听心电图和B超
-            FSWControl.WatcherStrat(@"E:\Examine\xdt","*.xml",true,true);
-            FSWControl.WatcherStratBchao(@"E:\Examine\bc", "*.xml", true, true);
-            //开启监控血常规和生化
-            xmlDoc.Load(path);
-            node = xmlDoc.SelectSingleNode("config/shenghuaPath");
-            shenghuapath = node.InnerText;
-            node = xmlDoc.SelectSingleNode("config/xuechangguiPath");
-            xuechangguipath = node.InnerText;
-            if (xuechangguipath == "" || !File.Exists(shenghuapath))
-            {
-                MessageBox.Show("未获取到血球中间库地址，请检查是否设置地址并重新启动软件！");
-                return;
-            }
-            else {
-                FSWControl.WatcherStratxcg(@"F:\血球", "Lis_DB.mdb", true, true);
-            }
+            //FSWControl.WatcherStrat(@"E:\Examine\xdt","*.xml",true,true);
+            //FSWControl.WatcherStratBchao(@"E:\Examine\bc", "*.xml", true, true);
+            ////开启监控血常规和生化
+            //xmlDoc.Load(path);
+            //node = xmlDoc.SelectSingleNode("config/shenghuaPath");
+            //shenghuapath = node.InnerText;
+            //node = xmlDoc.SelectSingleNode("config/xuechangguiPath");
+            //xuechangguipath = node.InnerText;
+            //if (xuechangguipath == "" || !File.Exists(shenghuapath))
+            //{
+            //    MessageBox.Show("未获取到血球中间库地址，请检查是否设置地址并重新启动软件！");
+            //    return;
+            //}
+            //else {
+            //    FSWControl.WatcherStratxcg(@"F:\血球", "Lis_DB.mdb", true, true);
+            //}
             //FileWatcher.WatcheDirForBChao();
         }
     }
