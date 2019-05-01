@@ -85,7 +85,13 @@ namespace zkhwClient.view.PublicHealthView
                         }
                         dt = tmp;
                     }
+                    else
+                    {
+                        this.dataGridView1.DataSource = null;
+                        return;
+                    }
                 }
+                if (dt.Rows.Count < 1) { this.dataGridView1.DataSource = null; MessageBox.Show("未查询出数据!");return; }
                 this.dataGridView1.DataSource = dt;
                 this.dataGridView1.Columns[0].HeaderCell.Value = "体检时间";
                 this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";
@@ -267,6 +273,7 @@ namespace zkhwClient.view.PublicHealthView
         private void button1_Click(object sender, EventArgs e)
         {
             queryExaminatProgress();
+            registrationRecordCheck();//体检人数统计
         }
 
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
@@ -334,7 +341,7 @@ namespace zkhwClient.view.PublicHealthView
             DataTable dt20num = jkdao.querytjjdTopdf(basicInfoSettings.xcuncode, basicInfoSettings.createtime);
             if (dt20num != null && dt20num.Rows.Count > 0)
             {
-                DataRow[] row =dt20num.Select("type>='未完成'");
+                DataRow[] row =dt20num.Select("type='未完成'");
                 label13.Text = row.Length.ToString();//未完成人数
             }
             else

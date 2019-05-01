@@ -29,7 +29,9 @@ namespace zkhwClient.dao
             string id = Result.GetNewId();
             string time=DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string status = "1";
-            String sql = "insert into resident_base_info (id,archive_no,name,sex,birthday,age,id_number,card_pic,address,photo_code,status,create_time,create_name,aichive_org,doctor_name,create_archives_name) values ('" + id + "','" + grjd.archive_no + "','" + grjd.name + "','" + grjd.Sex + "', '" + grjd.Birthday + "', '" + grjd.age + "', '" + grjd.Cardcode + "', '" + grjd.CardPic + "', '" + grjd.Zhuzhi + "', '" + grjd.photo_code + "', '" + status + "', '" + time + "', '" + grjd.create_name + "', '" + grjd.aichive_org + "', '" + grjd.aichive_org + "', '" + grjd.aichive_org + "', '" + grjd.aichive_org + "', '" + grjd.aichive_org + "')";
+            String sql = "insert into resident_base_info (id,archive_no,name,sex,birthday,age,id_number,card_pic,address,photo_code,status,create_time,create_name,aichive_org,doctor_name,create_archives_name) values ('" + 
+                id + "','" + grjd.archive_no + "','" + grjd.name + "','" + grjd.Sex + "', '" + grjd.Birthday + "', '" + grjd.age + "', '" + grjd.Cardcode + "', '" + grjd.CardPic + "', '" + grjd.Zhuzhi + "', '" + grjd.photo_code + "', '" + status + "', '" 
+                + time + "', '" + grjd.create_name + "', '" + grjd.aichive_org + "', '" + grjd.doctor_name + "', '" + grjd.create_archives_name + "')";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
@@ -39,7 +41,7 @@ namespace zkhwClient.dao
             int rt = 0;
             string id = Result.GetNewId();
             string time = DateTime.Now.ToString("yyyy-MM-dd");
-            String sql = "insert into physical_examination_record (id,archive_no,name,id_number,bar_code,check_date,doctor_name,create_name,create_time) values ('" + id + "','" + grjd.archive_no + "','" + grjd.name + "','" + grjd.Cardcode + "', '" + barcode + "', '" + time + "', '" + grjd.doctor_name + "', '" + grjd.create_name + "', '" + grjd.create_time + "')";
+            String sql = "insert into physical_examination_record (id,aichive_no,name,id_number,bar_code,check_date,doctor_name,create_name,create_time) values ('" + id + "','" + grjd.archive_no + "','" + grjd.name + "','" + grjd.Cardcode + "', '" + barcode + "', '" + time + "', '" + grjd.doctor_name + "', '" + grjd.create_name + "', '" + grjd.create_time + "')";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
@@ -62,7 +64,7 @@ namespace zkhwClient.dao
             string id = Result.GetNewId();
             string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string time1 = DateTime.Now.ToString("yyyy-MM-dd");
-            String sql = "insert into zkhw_tj_bgdc (ID,aichive_no,id_number,bar_code,name,sex,birthday,healthchecktime,createtime,area_duns) value('" + id + "','" + archive_no + "','" + grjbxx.Cardcode + "', '" + barcode + "', '" + grjbxx.name + "', '" + grjbxx.Sex + "', '" + grjbxx.Birthday + "', '" + time1 + "', '" + time + "', '" + xcuncode + "')";
+            String sql = "insert into zkhw_tj_bgdc (ID,aichive_no,id_number,bar_code,name,sex,birthday,age,healthchecktime,createtime,area_duns) value('" + id + "','" + archive_no + "','" + grjbxx.Cardcode + "', '" + barcode + "', '" + grjbxx.name + "', '" + grjbxx.Sex + "', '" + grjbxx.Birthday + "', '" + grjbxx.age + "', '" + time1 + "', '" + time + "', '" + xcuncode + "')";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }

@@ -18,9 +18,9 @@ namespace zkhwClient.dao
         public DataTable queryOlderHelthService(string pCa, string time1, string time2,string code)
         {
             DataSet ds = new DataSet();
-            string sql = "select a.id,a.name,a.id_number,a.total_score,a.judgement_result,a.test_date,a.test_doctor from elderly_selfcare_estimate a, resident_base_info b where a.aichive_no = b.archive_no AND a.test_date >= '" + time1 + "' and a.test_date <= '" + time2 + "'";
+            string sql = "select b.name,b.archive_no,b.id_number,aa.total_score,aa.judgement_result,aa.test_date,aa.test_doctor from resident_base_info b left join(select a.id,a.name,a.aichive_no,a.id_number,a.total_score,a.judgement_result,a.test_date,a.test_doctor from elderly_selfcare_estimate a where a.test_date >= '" + time1 + "' and a.test_date <= '" + time2 + "') aa on b.archive_no =aa.aichive_no";
             if (code != "") { sql += " AND b.village_code='"+code+"'"; }
-            if (pCa != "") { sql += " AND (a.name like '%" + pCa + "%'  or a.id_number like '%" + pCa + "%'  or a.aichive_no like '%" + pCa + "%')"; }
+            if (pCa != "") { sql += " AND (aa.name like '%" + pCa + "%'  or aa.id_number like '%" + pCa + "%'  or aa.aichive_no like '%" + pCa + "%')"; }
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }

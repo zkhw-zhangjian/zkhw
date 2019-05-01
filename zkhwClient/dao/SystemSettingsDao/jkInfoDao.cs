@@ -61,7 +61,7 @@ namespace zkhwClient.dao
         public DataTable queryChongfuXdtData(string aichive_no, string bar_code)
         {
             DataSet ds = new DataSet();
-            string sql = "select id from zkhw_tj_xdt where aichive_no >= '" + aichive_no + "' and bar_code <= '" + bar_code + "'";
+            string sql = "select id from zkhw_tj_xdt where aichive_no = '" + aichive_no + "' and bar_code = '" + bar_code + "'";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -69,7 +69,7 @@ namespace zkhwClient.dao
         public DataTable queryChongfuBcData (string aichive_no, string bar_code)
         {
             DataSet ds = new DataSet();
-            string sql = "select id from zkhw_tj_bc where aichive_no >= '" + aichive_no + "' and bar_code <= '" + bar_code + "'";
+            string sql = "select id from zkhw_tj_bc where aichive_no = '" + aichive_no + "' and bar_code = '" + bar_code + "'";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }

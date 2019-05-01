@@ -67,6 +67,26 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.label51 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.panel31 = new System.Windows.Forms.Panel();
+            this.radioButton13 = new System.Windows.Forms.RadioButton();
+            this.radioButton14 = new System.Windows.Forms.RadioButton();
+            this.textBox23 = new System.Windows.Forms.TextBox();
+            this.panel30 = new System.Windows.Forms.Panel();
+            this.radioButton82 = new System.Windows.Forms.RadioButton();
+            this.radioButton83 = new System.Windows.Forms.RadioButton();
+            this.textBox61 = new System.Windows.Forms.TextBox();
+            this.panel29 = new System.Windows.Forms.Panel();
+            this.radioButton11 = new System.Windows.Forms.RadioButton();
+            this.radioButton12 = new System.Windows.Forms.RadioButton();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.panel28 = new System.Windows.Forms.Panel();
+            this.radioButton76 = new System.Windows.Forms.RadioButton();
+            this.radioButton79 = new System.Windows.Forms.RadioButton();
+            this.textBox56 = new System.Windows.Forms.TextBox();
+            this.panel27 = new System.Windows.Forms.Panel();
+            this.radioButton80 = new System.Windows.Forms.RadioButton();
+            this.radioButton81 = new System.Windows.Forms.RadioButton();
+            this.textBox59 = new System.Windows.Forms.TextBox();
             this.textBox50 = new System.Windows.Forms.TextBox();
             this.textBox49 = new System.Windows.Forms.TextBox();
             this.panel23 = new System.Windows.Forms.Panel();
@@ -123,25 +143,10 @@
             this.radioButton20 = new System.Windows.Forms.RadioButton();
             this.radioButton21 = new System.Windows.Forms.RadioButton();
             this.textBox25 = new System.Windows.Forms.TextBox();
-            this.textBox23 = new System.Windows.Forms.TextBox();
-            this.radioButton13 = new System.Windows.Forms.RadioButton();
-            this.radioButton14 = new System.Windows.Forms.RadioButton();
             this.textBox24 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.radioButton11 = new System.Windows.Forms.RadioButton();
-            this.radioButton12 = new System.Windows.Forms.RadioButton();
             this.textBox22 = new System.Windows.Forms.TextBox();
-            this.textBox61 = new System.Windows.Forms.TextBox();
-            this.textBox56 = new System.Windows.Forms.TextBox();
-            this.radioButton76 = new System.Windows.Forms.RadioButton();
-            this.radioButton82 = new System.Windows.Forms.RadioButton();
-            this.radioButton83 = new System.Windows.Forms.RadioButton();
-            this.radioButton79 = new System.Windows.Forms.RadioButton();
             this.textBox58 = new System.Windows.Forms.TextBox();
             this.textBox62 = new System.Windows.Forms.TextBox();
-            this.textBox59 = new System.Windows.Forms.TextBox();
-            this.radioButton80 = new System.Windows.Forms.RadioButton();
-            this.radioButton81 = new System.Windows.Forms.RadioButton();
             this.textBox60 = new System.Windows.Forms.TextBox();
             this.textBox55 = new System.Windows.Forms.TextBox();
             this.panel22 = new System.Windows.Forms.Panel();
@@ -206,6 +211,17 @@
             this.textBox19 = new System.Windows.Forms.TextBox();
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.panel26 = new System.Windows.Forms.Panel();
+            this.radioButton87 = new System.Windows.Forms.RadioButton();
+            this.radioButton88 = new System.Windows.Forms.RadioButton();
+            this.radioButton89 = new System.Windows.Forms.RadioButton();
+            this.panel25 = new System.Windows.Forms.Panel();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.textBox98 = new System.Windows.Forms.TextBox();
+            this.textBox97 = new System.Windows.Forms.TextBox();
             this.panel17 = new System.Windows.Forms.Panel();
             this.radioButton59 = new System.Windows.Forms.RadioButton();
             this.radioButton60 = new System.Windows.Forms.RadioButton();
@@ -237,11 +253,17 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.textBox99 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel24.SuspendLayout();
             this.panel5.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.panel31.SuspendLayout();
+            this.panel30.SuspendLayout();
+            this.panel29.SuspendLayout();
+            this.panel28.SuspendLayout();
+            this.panel27.SuspendLayout();
             this.panel23.SuspendLayout();
             this.panel14.SuspendLayout();
             this.panel13.SuspendLayout();
@@ -261,6 +283,8 @@
             this.panel18.SuspendLayout();
             this.panel6.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.panel26.SuspendLayout();
+            this.panel25.SuspendLayout();
             this.panel17.SuspendLayout();
             this.panel16.SuspendLayout();
             this.panel15.SuspendLayout();
@@ -319,9 +343,9 @@
             this.groupBox1.Controls.Add(this.textBox76);
             this.groupBox1.Controls.Add(this.textBox78);
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox1.Location = new System.Drawing.Point(1, 844);
+            this.groupBox1.Location = new System.Drawing.Point(1, 897);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1284, 140);
+            this.groupBox1.Size = new System.Drawing.Size(1294, 137);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             // 
@@ -701,6 +725,11 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.panel31);
+            this.groupBox4.Controls.Add(this.panel30);
+            this.groupBox4.Controls.Add(this.panel29);
+            this.groupBox4.Controls.Add(this.panel28);
+            this.groupBox4.Controls.Add(this.panel27);
             this.groupBox4.Controls.Add(this.textBox50);
             this.groupBox4.Controls.Add(this.textBox49);
             this.groupBox4.Controls.Add(this.panel23);
@@ -722,25 +751,10 @@
             this.groupBox4.Controls.Add(this.textBox26);
             this.groupBox4.Controls.Add(this.panel7);
             this.groupBox4.Controls.Add(this.textBox25);
-            this.groupBox4.Controls.Add(this.textBox23);
-            this.groupBox4.Controls.Add(this.radioButton13);
-            this.groupBox4.Controls.Add(this.radioButton14);
             this.groupBox4.Controls.Add(this.textBox24);
-            this.groupBox4.Controls.Add(this.textBox7);
-            this.groupBox4.Controls.Add(this.radioButton11);
-            this.groupBox4.Controls.Add(this.radioButton12);
             this.groupBox4.Controls.Add(this.textBox22);
-            this.groupBox4.Controls.Add(this.textBox61);
-            this.groupBox4.Controls.Add(this.textBox56);
-            this.groupBox4.Controls.Add(this.radioButton76);
-            this.groupBox4.Controls.Add(this.radioButton82);
-            this.groupBox4.Controls.Add(this.radioButton83);
-            this.groupBox4.Controls.Add(this.radioButton79);
             this.groupBox4.Controls.Add(this.textBox58);
             this.groupBox4.Controls.Add(this.textBox62);
-            this.groupBox4.Controls.Add(this.textBox59);
-            this.groupBox4.Controls.Add(this.radioButton80);
-            this.groupBox4.Controls.Add(this.radioButton81);
             this.groupBox4.Controls.Add(this.textBox60);
             this.groupBox4.Controls.Add(this.textBox55);
             this.groupBox4.Controls.Add(this.panel22);
@@ -768,11 +782,241 @@
             this.groupBox4.Controls.Add(this.textBox19);
             this.groupBox4.Controls.Add(this.textBox12);
             this.groupBox4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox4.Location = new System.Drawing.Point(1, 183);
+            this.groupBox4.Location = new System.Drawing.Point(1, 237);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(1303, 662);
+            this.groupBox4.Size = new System.Drawing.Size(1303, 674);
             this.groupBox4.TabIndex = 46;
             this.groupBox4.TabStop = false;
+            // 
+            // panel31
+            // 
+            this.panel31.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel31.Controls.Add(this.radioButton13);
+            this.panel31.Controls.Add(this.radioButton14);
+            this.panel31.Controls.Add(this.textBox23);
+            this.panel31.Location = new System.Drawing.Point(352, 325);
+            this.panel31.Name = "panel31";
+            this.panel31.Size = new System.Drawing.Size(470, 27);
+            this.panel31.TabIndex = 189;
+            // 
+            // radioButton13
+            // 
+            this.radioButton13.AutoSize = true;
+            this.radioButton13.Checked = true;
+            this.radioButton13.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioButton13.Location = new System.Drawing.Point(2, 2);
+            this.radioButton13.Name = "radioButton13";
+            this.radioButton13.Size = new System.Drawing.Size(59, 24);
+            this.radioButton13.TabIndex = 161;
+            this.radioButton13.TabStop = true;
+            this.radioButton13.Tag = "1";
+            this.radioButton13.Text = "1无";
+            this.radioButton13.UseVisualStyleBackColor = true;
+            // 
+            // radioButton14
+            // 
+            this.radioButton14.AutoSize = true;
+            this.radioButton14.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioButton14.Location = new System.Drawing.Point(67, 2);
+            this.radioButton14.Name = "radioButton14";
+            this.radioButton14.Size = new System.Drawing.Size(59, 24);
+            this.radioButton14.TabIndex = 162;
+            this.radioButton14.Tag = "2";
+            this.radioButton14.Text = "2有";
+            this.radioButton14.UseVisualStyleBackColor = true;
+            // 
+            // textBox23
+            // 
+            this.textBox23.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox23.Location = new System.Drawing.Point(132, 0);
+            this.textBox23.Name = "textBox23";
+            this.textBox23.Size = new System.Drawing.Size(333, 30);
+            this.textBox23.TabIndex = 163;
+            this.textBox23.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // panel30
+            // 
+            this.panel30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel30.Controls.Add(this.radioButton82);
+            this.panel30.Controls.Add(this.radioButton83);
+            this.panel30.Controls.Add(this.textBox61);
+            this.panel30.Location = new System.Drawing.Point(293, 294);
+            this.panel30.Name = "panel30";
+            this.panel30.Size = new System.Drawing.Size(445, 30);
+            this.panel30.TabIndex = 188;
+            // 
+            // radioButton82
+            // 
+            this.radioButton82.AutoSize = true;
+            this.radioButton82.Checked = true;
+            this.radioButton82.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioButton82.Location = new System.Drawing.Point(3, 2);
+            this.radioButton82.Name = "radioButton82";
+            this.radioButton82.Size = new System.Drawing.Size(59, 24);
+            this.radioButton82.TabIndex = 153;
+            this.radioButton82.TabStop = true;
+            this.radioButton82.Tag = "1";
+            this.radioButton82.Text = "1无";
+            this.radioButton82.UseVisualStyleBackColor = true;
+            // 
+            // radioButton83
+            // 
+            this.radioButton83.AutoSize = true;
+            this.radioButton83.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioButton83.Location = new System.Drawing.Point(68, 2);
+            this.radioButton83.Name = "radioButton83";
+            this.radioButton83.Size = new System.Drawing.Size(59, 24);
+            this.radioButton83.TabIndex = 154;
+            this.radioButton83.Tag = "2";
+            this.radioButton83.Text = "2有";
+            this.radioButton83.UseVisualStyleBackColor = true;
+            // 
+            // textBox61
+            // 
+            this.textBox61.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox61.Location = new System.Drawing.Point(133, -1);
+            this.textBox61.Name = "textBox61";
+            this.textBox61.Size = new System.Drawing.Size(309, 30);
+            this.textBox61.TabIndex = 155;
+            this.textBox61.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // panel29
+            // 
+            this.panel29.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel29.Controls.Add(this.radioButton11);
+            this.panel29.Controls.Add(this.radioButton12);
+            this.panel29.Controls.Add(this.textBox7);
+            this.panel29.Location = new System.Drawing.Point(828, 294);
+            this.panel29.Name = "panel29";
+            this.panel29.Size = new System.Drawing.Size(475, 30);
+            this.panel29.TabIndex = 187;
+            // 
+            // radioButton11
+            // 
+            this.radioButton11.AutoSize = true;
+            this.radioButton11.Checked = true;
+            this.radioButton11.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioButton11.Location = new System.Drawing.Point(3, 2);
+            this.radioButton11.Name = "radioButton11";
+            this.radioButton11.Size = new System.Drawing.Size(59, 24);
+            this.radioButton11.TabIndex = 157;
+            this.radioButton11.TabStop = true;
+            this.radioButton11.Tag = "1";
+            this.radioButton11.Text = "1无";
+            this.radioButton11.UseVisualStyleBackColor = true;
+            // 
+            // radioButton12
+            // 
+            this.radioButton12.AutoSize = true;
+            this.radioButton12.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioButton12.Location = new System.Drawing.Point(68, 2);
+            this.radioButton12.Name = "radioButton12";
+            this.radioButton12.Size = new System.Drawing.Size(59, 24);
+            this.radioButton12.TabIndex = 158;
+            this.radioButton12.Tag = "2";
+            this.radioButton12.Text = "2有";
+            this.radioButton12.UseVisualStyleBackColor = true;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox7.Location = new System.Drawing.Point(133, 0);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(337, 30);
+            this.textBox7.TabIndex = 159;
+            this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // panel28
+            // 
+            this.panel28.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel28.Controls.Add(this.radioButton76);
+            this.panel28.Controls.Add(this.radioButton79);
+            this.panel28.Controls.Add(this.textBox56);
+            this.panel28.Location = new System.Drawing.Point(828, 263);
+            this.panel28.Name = "panel28";
+            this.panel28.Size = new System.Drawing.Size(469, 30);
+            this.panel28.TabIndex = 186;
+            // 
+            // radioButton76
+            // 
+            this.radioButton76.AutoSize = true;
+            this.radioButton76.Checked = true;
+            this.radioButton76.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioButton76.Location = new System.Drawing.Point(3, 2);
+            this.radioButton76.Name = "radioButton76";
+            this.radioButton76.Size = new System.Drawing.Size(59, 24);
+            this.radioButton76.TabIndex = 149;
+            this.radioButton76.TabStop = true;
+            this.radioButton76.Tag = "1";
+            this.radioButton76.Text = "1无";
+            this.radioButton76.UseVisualStyleBackColor = true;
+            // 
+            // radioButton79
+            // 
+            this.radioButton79.AutoSize = true;
+            this.radioButton79.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioButton79.Location = new System.Drawing.Point(68, 2);
+            this.radioButton79.Name = "radioButton79";
+            this.radioButton79.Size = new System.Drawing.Size(59, 24);
+            this.radioButton79.TabIndex = 150;
+            this.radioButton79.Tag = "2";
+            this.radioButton79.Text = "2有";
+            this.radioButton79.UseVisualStyleBackColor = true;
+            // 
+            // textBox56
+            // 
+            this.textBox56.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox56.Location = new System.Drawing.Point(133, -1);
+            this.textBox56.Name = "textBox56";
+            this.textBox56.Size = new System.Drawing.Size(337, 30);
+            this.textBox56.TabIndex = 151;
+            this.textBox56.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // panel27
+            // 
+            this.panel27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel27.Controls.Add(this.radioButton80);
+            this.panel27.Controls.Add(this.radioButton81);
+            this.panel27.Controls.Add(this.textBox59);
+            this.panel27.Location = new System.Drawing.Point(293, 263);
+            this.panel27.Name = "panel27";
+            this.panel27.Size = new System.Drawing.Size(445, 30);
+            this.panel27.TabIndex = 185;
+            // 
+            // radioButton80
+            // 
+            this.radioButton80.AutoSize = true;
+            this.radioButton80.Checked = true;
+            this.radioButton80.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioButton80.Location = new System.Drawing.Point(3, 2);
+            this.radioButton80.Name = "radioButton80";
+            this.radioButton80.Size = new System.Drawing.Size(59, 24);
+            this.radioButton80.TabIndex = 145;
+            this.radioButton80.TabStop = true;
+            this.radioButton80.Tag = "1";
+            this.radioButton80.Text = "1无";
+            this.radioButton80.UseVisualStyleBackColor = true;
+            // 
+            // radioButton81
+            // 
+            this.radioButton81.AutoSize = true;
+            this.radioButton81.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioButton81.Location = new System.Drawing.Point(68, 2);
+            this.radioButton81.Name = "radioButton81";
+            this.radioButton81.Size = new System.Drawing.Size(59, 24);
+            this.radioButton81.TabIndex = 146;
+            this.radioButton81.Tag = "2";
+            this.radioButton81.Text = "2有";
+            this.radioButton81.UseVisualStyleBackColor = true;
+            // 
+            // textBox59
+            // 
+            this.textBox59.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox59.Location = new System.Drawing.Point(133, 0);
+            this.textBox59.Name = "textBox59";
+            this.textBox59.Size = new System.Drawing.Size(311, 30);
+            this.textBox59.TabIndex = 147;
+            this.textBox59.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox50
             // 
@@ -1458,42 +1702,6 @@
             this.textBox25.Text = "下肢水肿";
             this.textBox25.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // textBox23
-            // 
-            this.textBox23.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox23.Location = new System.Drawing.Point(492, 325);
-            this.textBox23.Name = "textBox23";
-            this.textBox23.Size = new System.Drawing.Size(311, 30);
-            this.textBox23.TabIndex = 163;
-            this.textBox23.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // radioButton13
-            // 
-            this.radioButton13.AutoSize = true;
-            this.radioButton13.Checked = true;
-            this.radioButton13.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton13.Location = new System.Drawing.Point(362, 327);
-            this.radioButton13.Name = "radioButton13";
-            this.radioButton13.Size = new System.Drawing.Size(59, 24);
-            this.radioButton13.TabIndex = 161;
-            this.radioButton13.TabStop = true;
-            this.radioButton13.Tag = "1";
-            this.radioButton13.Text = "1无";
-            this.radioButton13.UseVisualStyleBackColor = true;
-            // 
-            // radioButton14
-            // 
-            this.radioButton14.AutoSize = true;
-            this.radioButton14.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton14.Location = new System.Drawing.Point(427, 327);
-            this.radioButton14.Name = "radioButton14";
-            this.radioButton14.Size = new System.Drawing.Size(59, 24);
-            this.radioButton14.TabIndex = 162;
-            this.radioButton14.TabStop = true;
-            this.radioButton14.Tag = "2";
-            this.radioButton14.Text = "2有";
-            this.radioButton14.UseVisualStyleBackColor = true;
-            // 
             // textBox24
             // 
             this.textBox24.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -1505,40 +1713,6 @@
             this.textBox24.Text = "移动性浊音:";
             this.textBox24.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // textBox7
-            // 
-            this.textBox7.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox7.Location = new System.Drawing.Point(962, 294);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(337, 30);
-            this.textBox7.TabIndex = 159;
-            this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // radioButton11
-            // 
-            this.radioButton11.AutoSize = true;
-            this.radioButton11.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton11.Location = new System.Drawing.Point(832, 296);
-            this.radioButton11.Name = "radioButton11";
-            this.radioButton11.Size = new System.Drawing.Size(59, 24);
-            this.radioButton11.TabIndex = 157;
-            this.radioButton11.Tag = "1";
-            this.radioButton11.Text = "1无";
-            this.radioButton11.UseVisualStyleBackColor = true;
-            // 
-            // radioButton12
-            // 
-            this.radioButton12.AutoSize = true;
-            this.radioButton12.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton12.Location = new System.Drawing.Point(897, 296);
-            this.radioButton12.Name = "radioButton12";
-            this.radioButton12.Size = new System.Drawing.Size(59, 24);
-            this.radioButton12.TabIndex = 158;
-            this.radioButton12.TabStop = true;
-            this.radioButton12.Tag = "2";
-            this.radioButton12.Text = "2有";
-            this.radioButton12.UseVisualStyleBackColor = true;
-            // 
             // textBox22
             // 
             this.textBox22.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -1549,74 +1723,6 @@
             this.textBox22.TabIndex = 156;
             this.textBox22.Text = "脾大:";
             this.textBox22.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox61
-            // 
-            this.textBox61.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox61.Location = new System.Drawing.Point(427, 294);
-            this.textBox61.Name = "textBox61";
-            this.textBox61.Size = new System.Drawing.Size(311, 30);
-            this.textBox61.TabIndex = 155;
-            this.textBox61.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox56
-            // 
-            this.textBox56.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox56.Location = new System.Drawing.Point(962, 263);
-            this.textBox56.Name = "textBox56";
-            this.textBox56.Size = new System.Drawing.Size(337, 30);
-            this.textBox56.TabIndex = 151;
-            this.textBox56.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // radioButton76
-            // 
-            this.radioButton76.AutoSize = true;
-            this.radioButton76.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton76.Location = new System.Drawing.Point(832, 265);
-            this.radioButton76.Name = "radioButton76";
-            this.radioButton76.Size = new System.Drawing.Size(59, 24);
-            this.radioButton76.TabIndex = 149;
-            this.radioButton76.Tag = "1";
-            this.radioButton76.Text = "1无";
-            this.radioButton76.UseVisualStyleBackColor = true;
-            // 
-            // radioButton82
-            // 
-            this.radioButton82.AutoSize = true;
-            this.radioButton82.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton82.Location = new System.Drawing.Point(297, 296);
-            this.radioButton82.Name = "radioButton82";
-            this.radioButton82.Size = new System.Drawing.Size(59, 24);
-            this.radioButton82.TabIndex = 153;
-            this.radioButton82.Tag = "1";
-            this.radioButton82.Text = "1无";
-            this.radioButton82.UseVisualStyleBackColor = true;
-            // 
-            // radioButton83
-            // 
-            this.radioButton83.AutoSize = true;
-            this.radioButton83.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton83.Location = new System.Drawing.Point(362, 296);
-            this.radioButton83.Name = "radioButton83";
-            this.radioButton83.Size = new System.Drawing.Size(59, 24);
-            this.radioButton83.TabIndex = 154;
-            this.radioButton83.TabStop = true;
-            this.radioButton83.Tag = "2";
-            this.radioButton83.Text = "2有";
-            this.radioButton83.UseVisualStyleBackColor = true;
-            // 
-            // radioButton79
-            // 
-            this.radioButton79.AutoSize = true;
-            this.radioButton79.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton79.Location = new System.Drawing.Point(897, 265);
-            this.radioButton79.Name = "radioButton79";
-            this.radioButton79.Size = new System.Drawing.Size(59, 24);
-            this.radioButton79.TabIndex = 150;
-            this.radioButton79.TabStop = true;
-            this.radioButton79.Tag = "2";
-            this.radioButton79.Text = "2有";
-            this.radioButton79.UseVisualStyleBackColor = true;
             // 
             // textBox58
             // 
@@ -1639,40 +1745,6 @@
             this.textBox62.TabIndex = 152;
             this.textBox62.Text = "肝大:";
             this.textBox62.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox59
-            // 
-            this.textBox59.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox59.Location = new System.Drawing.Point(427, 263);
-            this.textBox59.Name = "textBox59";
-            this.textBox59.Size = new System.Drawing.Size(311, 30);
-            this.textBox59.TabIndex = 147;
-            this.textBox59.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // radioButton80
-            // 
-            this.radioButton80.AutoSize = true;
-            this.radioButton80.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton80.Location = new System.Drawing.Point(297, 264);
-            this.radioButton80.Name = "radioButton80";
-            this.radioButton80.Size = new System.Drawing.Size(59, 24);
-            this.radioButton80.TabIndex = 145;
-            this.radioButton80.Tag = "1";
-            this.radioButton80.Text = "1无";
-            this.radioButton80.UseVisualStyleBackColor = true;
-            // 
-            // radioButton81
-            // 
-            this.radioButton81.AutoSize = true;
-            this.radioButton81.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton81.Location = new System.Drawing.Point(362, 266);
-            this.radioButton81.Name = "radioButton81";
-            this.radioButton81.Size = new System.Drawing.Size(59, 24);
-            this.radioButton81.TabIndex = 146;
-            this.radioButton81.TabStop = true;
-            this.radioButton81.Tag = "2";
-            this.radioButton81.Text = "2有";
-            this.radioButton81.UseVisualStyleBackColor = true;
             // 
             // textBox60
             // 
@@ -1720,6 +1792,7 @@
             // radioButton77
             // 
             this.radioButton77.AutoSize = true;
+            this.radioButton77.Checked = true;
             this.radioButton77.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton77.Location = new System.Drawing.Point(10, 2);
             this.radioButton77.Name = "radioButton77";
@@ -2437,6 +2510,10 @@
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.panel26);
+            this.groupBox3.Controls.Add(this.panel25);
+            this.groupBox3.Controls.Add(this.textBox98);
+            this.groupBox3.Controls.Add(this.textBox97);
             this.groupBox3.Controls.Add(this.panel17);
             this.groupBox3.Controls.Add(this.textBox120);
             this.groupBox3.Controls.Add(this.panel16);
@@ -2456,18 +2533,149 @@
             this.groupBox3.Controls.Add(this.textBox1);
             this.groupBox3.Controls.Add(this.textBox5);
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox3.Location = new System.Drawing.Point(0, 32);
+            this.groupBox3.Location = new System.Drawing.Point(0, 34);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1284, 155);
+            this.groupBox3.Size = new System.Drawing.Size(1244, 203);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
+            // 
+            // panel26
+            // 
+            this.panel26.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel26.Controls.Add(this.radioButton87);
+            this.panel26.Controls.Add(this.radioButton88);
+            this.panel26.Controls.Add(this.radioButton89);
+            this.panel26.Location = new System.Drawing.Point(290, 78);
+            this.panel26.Name = "panel26";
+            this.panel26.Size = new System.Drawing.Size(1014, 30);
+            this.panel26.TabIndex = 118;
+            // 
+            // radioButton87
+            // 
+            this.radioButton87.AutoSize = true;
+            this.radioButton87.Checked = true;
+            this.radioButton87.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioButton87.Location = new System.Drawing.Point(10, 2);
+            this.radioButton87.Name = "radioButton87";
+            this.radioButton87.Size = new System.Drawing.Size(101, 24);
+            this.radioButton87.TabIndex = 30;
+            this.radioButton87.TabStop = true;
+            this.radioButton87.Tag = "1";
+            this.radioButton87.Text = "1无充血";
+            this.radioButton87.UseVisualStyleBackColor = true;
+            // 
+            // radioButton88
+            // 
+            this.radioButton88.AutoSize = true;
+            this.radioButton88.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioButton88.Location = new System.Drawing.Point(117, 2);
+            this.radioButton88.Name = "radioButton88";
+            this.radioButton88.Size = new System.Drawing.Size(80, 24);
+            this.radioButton88.TabIndex = 31;
+            this.radioButton88.Tag = "2";
+            this.radioButton88.Text = "2充血";
+            this.radioButton88.UseVisualStyleBackColor = true;
+            // 
+            // radioButton89
+            // 
+            this.radioButton89.AutoSize = true;
+            this.radioButton89.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioButton89.Location = new System.Drawing.Point(208, 2);
+            this.radioButton89.Name = "radioButton89";
+            this.radioButton89.Size = new System.Drawing.Size(164, 24);
+            this.radioButton89.TabIndex = 32;
+            this.radioButton89.Tag = "3";
+            this.radioButton89.Text = "3淋巴滤泡增生";
+            this.radioButton89.UseVisualStyleBackColor = true;
+            // 
+            // panel25
+            // 
+            this.panel25.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel25.Controls.Add(this.checkBox4);
+            this.panel25.Controls.Add(this.checkBox3);
+            this.panel25.Controls.Add(this.checkBox2);
+            this.panel25.Controls.Add(this.checkBox1);
+            this.panel25.Location = new System.Drawing.Point(290, 47);
+            this.panel25.Name = "panel25";
+            this.panel25.Size = new System.Drawing.Size(1014, 30);
+            this.panel25.TabIndex = 117;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox4.Location = new System.Drawing.Point(264, 2);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(145, 24);
+            this.checkBox4.TabIndex = 37;
+            this.checkBox4.Tag = "4";
+            this.checkBox4.Text = "4义牙(假牙)";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox3.Location = new System.Drawing.Point(177, 2);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(81, 24);
+            this.checkBox3.TabIndex = 36;
+            this.checkBox3.Tag = "3";
+            this.checkBox3.Text = "3龋齿";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox2.Location = new System.Drawing.Point(90, 2);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(81, 24);
+            this.checkBox2.TabIndex = 35;
+            this.checkBox2.Tag = "2";
+            this.checkBox2.Text = "2缺齿";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox1.Location = new System.Drawing.Point(3, 2);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(81, 24);
+            this.checkBox1.TabIndex = 34;
+            this.checkBox1.Tag = "1";
+            this.checkBox1.Text = "1正常";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // textBox98
+            // 
+            this.textBox98.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox98.Location = new System.Drawing.Point(210, 78);
+            this.textBox98.Name = "textBox98";
+            this.textBox98.ReadOnly = true;
+            this.textBox98.Size = new System.Drawing.Size(74, 30);
+            this.textBox98.TabIndex = 116;
+            this.textBox98.Text = "咽部";
+            this.textBox98.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBox97
+            // 
+            this.textBox97.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox97.Location = new System.Drawing.Point(209, 47);
+            this.textBox97.Name = "textBox97";
+            this.textBox97.ReadOnly = true;
+            this.textBox97.Size = new System.Drawing.Size(75, 30);
+            this.textBox97.TabIndex = 115;
+            this.textBox97.Text = "齿列";
+            this.textBox97.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // panel17
             // 
             this.panel17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel17.Controls.Add(this.radioButton59);
             this.panel17.Controls.Add(this.radioButton60);
-            this.panel17.Location = new System.Drawing.Point(290, 127);
+            this.panel17.Location = new System.Drawing.Point(209, 170);
             this.panel17.Name = "panel17";
             this.panel17.Size = new System.Drawing.Size(1014, 30);
             this.panel17.TabIndex = 114;
@@ -2502,7 +2710,7 @@
             // textBox120
             // 
             this.textBox120.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox120.Location = new System.Drawing.Point(183, 127);
+            this.textBox120.Location = new System.Drawing.Point(102, 170);
             this.textBox120.Name = "textBox120";
             this.textBox120.ReadOnly = true;
             this.textBox120.Size = new System.Drawing.Size(101, 30);
@@ -2515,7 +2723,7 @@
             this.panel16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel16.Controls.Add(this.radioButton52);
             this.panel16.Controls.Add(this.radioButton58);
-            this.panel16.Location = new System.Drawing.Point(290, 96);
+            this.panel16.Location = new System.Drawing.Point(209, 139);
             this.panel16.Name = "panel16";
             this.panel16.Size = new System.Drawing.Size(1014, 30);
             this.panel16.TabIndex = 112;
@@ -2550,7 +2758,7 @@
             // textBox119
             // 
             this.textBox119.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox119.Location = new System.Drawing.Point(183, 97);
+            this.textBox119.Location = new System.Drawing.Point(102, 140);
             this.textBox119.Name = "textBox119";
             this.textBox119.ReadOnly = true;
             this.textBox119.Size = new System.Drawing.Size(101, 30);
@@ -2561,7 +2769,7 @@
             // textBox118
             // 
             this.textBox118.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox118.Location = new System.Drawing.Point(1155, 46);
+            this.textBox118.Location = new System.Drawing.Point(1050, 110);
             this.textBox118.Name = "textBox118";
             this.textBox118.ReadOnly = true;
             this.textBox118.Size = new System.Drawing.Size(20, 30);
@@ -2572,7 +2780,7 @@
             // textBox117
             // 
             this.textBox117.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox117.Location = new System.Drawing.Point(974, 46);
+            this.textBox117.Location = new System.Drawing.Point(866, 110);
             this.textBox117.Name = "textBox117";
             this.textBox117.ReadOnly = true;
             this.textBox117.Size = new System.Drawing.Size(54, 30);
@@ -2583,7 +2791,7 @@
             // textBox51
             // 
             this.textBox51.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox51.Location = new System.Drawing.Point(1034, 46);
+            this.textBox51.Location = new System.Drawing.Point(926, 110);
             this.textBox51.Name = "textBox51";
             this.textBox51.Size = new System.Drawing.Size(118, 30);
             this.textBox51.TabIndex = 108;
@@ -2592,7 +2800,7 @@
             // textBox4
             // 
             this.textBox4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox4.Location = new System.Drawing.Point(811, 67);
+            this.textBox4.Location = new System.Drawing.Point(747, 110);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(118, 30);
             this.textBox4.TabIndex = 107;
@@ -2601,7 +2809,7 @@
             // textBox6
             // 
             this.textBox6.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox6.Location = new System.Drawing.Point(634, 67);
+            this.textBox6.Location = new System.Drawing.Point(570, 110);
             this.textBox6.Name = "textBox6";
             this.textBox6.ReadOnly = true;
             this.textBox6.Size = new System.Drawing.Size(171, 30);
@@ -2612,7 +2820,7 @@
             // textBox8
             // 
             this.textBox8.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox8.Location = new System.Drawing.Point(522, 67);
+            this.textBox8.Location = new System.Drawing.Point(458, 110);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(106, 30);
             this.textBox8.TabIndex = 105;
@@ -2621,7 +2829,7 @@
             // textBox9
             // 
             this.textBox9.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox9.Location = new System.Drawing.Point(352, 67);
+            this.textBox9.Location = new System.Drawing.Point(290, 110);
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(106, 30);
             this.textBox9.TabIndex = 104;
@@ -2630,7 +2838,7 @@
             // textBox10
             // 
             this.textBox10.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox10.Location = new System.Drawing.Point(464, 67);
+            this.textBox10.Location = new System.Drawing.Point(400, 110);
             this.textBox10.Name = "textBox10";
             this.textBox10.ReadOnly = true;
             this.textBox10.Size = new System.Drawing.Size(54, 30);
@@ -2641,10 +2849,10 @@
             // textBox11
             // 
             this.textBox11.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox11.Location = new System.Drawing.Point(290, 67);
+            this.textBox11.Location = new System.Drawing.Point(209, 110);
             this.textBox11.Name = "textBox11";
             this.textBox11.ReadOnly = true;
-            this.textBox11.Size = new System.Drawing.Size(58, 30);
+            this.textBox11.Size = new System.Drawing.Size(75, 30);
             this.textBox11.TabIndex = 102;
             this.textBox11.Text = "左眼";
             this.textBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -2652,7 +2860,7 @@
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox3.Location = new System.Drawing.Point(183, 67);
+            this.textBox3.Location = new System.Drawing.Point(102, 110);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(101, 30);
@@ -2663,10 +2871,10 @@
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox2.Location = new System.Drawing.Point(183, 16);
+            this.textBox2.Location = new System.Drawing.Point(209, 16);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(101, 30);
+            this.textBox2.Size = new System.Drawing.Size(75, 30);
             this.textBox2.TabIndex = 100;
             this.textBox2.Text = "口唇";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -2674,6 +2882,7 @@
             // panel15
             // 
             this.panel15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel15.Controls.Add(this.textBox99);
             this.panel15.Controls.Add(this.textBox96);
             this.panel15.Controls.Add(this.textBox95);
             this.panel15.Controls.Add(this.radioButton53);
@@ -2775,7 +2984,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(75, 144);
+            this.textBox1.Size = new System.Drawing.Size(101, 92);
             this.textBox1.TabIndex = 87;
             this.textBox1.Text = "口腔";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -2787,7 +2996,7 @@
             this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(95, 143);
+            this.textBox5.Size = new System.Drawing.Size(95, 187);
             this.textBox5.TabIndex = 80;
             this.textBox5.Text = "脏器功能";
             this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -2797,7 +3006,7 @@
             this.button5.BackColor = System.Drawing.Color.Red;
             this.button5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button5.Location = new System.Drawing.Point(1166, 983);
+            this.button5.Location = new System.Drawing.Point(1166, 1033);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(118, 38);
             this.button5.TabIndex = 42;
@@ -2810,13 +3019,23 @@
             this.button4.BackColor = System.Drawing.Color.LimeGreen;
             this.button4.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button4.Location = new System.Drawing.Point(912, 983);
+            this.button4.Location = new System.Drawing.Point(912, 1033);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(208, 38);
             this.button4.TabIndex = 41;
             this.button4.Text = "保存并转到下一页";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // textBox99
+            // 
+            this.textBox99.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox99.Location = new System.Drawing.Point(689, -1);
+            this.textBox99.Name = "textBox99";
+            this.textBox99.Size = new System.Drawing.Size(106, 30);
+            this.textBox99.TabIndex = 107;
+            this.textBox99.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox99.Visible = false;
             // 
             // aUhealthcheckupServices2
             // 
@@ -2840,6 +3059,16 @@
             this.panel5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.panel31.ResumeLayout(false);
+            this.panel31.PerformLayout();
+            this.panel30.ResumeLayout(false);
+            this.panel30.PerformLayout();
+            this.panel29.ResumeLayout(false);
+            this.panel29.PerformLayout();
+            this.panel28.ResumeLayout(false);
+            this.panel28.PerformLayout();
+            this.panel27.ResumeLayout(false);
+            this.panel27.PerformLayout();
             this.panel23.ResumeLayout(false);
             this.panel23.PerformLayout();
             this.panel14.ResumeLayout(false);
@@ -2878,6 +3107,10 @@
             this.panel6.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.panel26.ResumeLayout(false);
+            this.panel26.PerformLayout();
+            this.panel25.ResumeLayout(false);
+            this.panel25.PerformLayout();
             this.panel17.ResumeLayout(false);
             this.panel17.PerformLayout();
             this.panel16.ResumeLayout(false);
@@ -3098,5 +3331,22 @@
         public System.Windows.Forms.RadioButton radioButton47;
         public System.Windows.Forms.TextBox textBox95;
         public System.Windows.Forms.TextBox textBox96;
+        private System.Windows.Forms.TextBox textBox97;
+        private System.Windows.Forms.TextBox textBox98;
+        private System.Windows.Forms.Panel panel25;
+        private System.Windows.Forms.Panel panel26;
+        public System.Windows.Forms.RadioButton radioButton87;
+        public System.Windows.Forms.RadioButton radioButton88;
+        public System.Windows.Forms.RadioButton radioButton89;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.Panel panel27;
+        private System.Windows.Forms.Panel panel28;
+        private System.Windows.Forms.Panel panel29;
+        private System.Windows.Forms.Panel panel30;
+        private System.Windows.Forms.Panel panel31;
+        public System.Windows.Forms.TextBox textBox99;
     }
 }

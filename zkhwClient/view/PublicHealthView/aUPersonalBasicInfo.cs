@@ -578,6 +578,9 @@ namespace zkhwClient.view.PublicHealthView
             {
                 this.DialogResult = DialogResult.OK;
             }
+            else {
+                MessageBox.Show("保存失败");
+            }
         }
 
         private void textBox12_TextChanged(object sender, EventArgs e)

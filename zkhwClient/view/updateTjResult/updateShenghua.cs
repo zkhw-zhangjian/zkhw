@@ -37,8 +37,8 @@ namespace zkhwClient.view.updateTjResult
                 flag = true;
                 this.textBox5.Text = dtbichao.Rows[0]["ALT"].ToString();
                 this.textBox6.Text = dtbichao.Rows[0]["AST"].ToString();
-                this.textBox7.Text = dtbichao.Rows[0]["TBIL"].ToString();
-                this.textBox8.Text = dtbichao.Rows[0]["DBIL"].ToString();
+                this.textBox8.Text = dtbichao.Rows[0]["TBIL"].ToString();
+                this.textBox7.Text = dtbichao.Rows[0]["DBIL"].ToString();
                 this.textBox11.Text = dtbichao.Rows[0]["CREA"].ToString();
                 this.textBox10.Text = dtbichao.Rows[0]["UREA"].ToString();
                 this.textBox13.Text = dtbichao.Rows[0]["GLU"].ToString();

@@ -234,7 +234,8 @@ namespace zkhwClient.view.PublicHealthView
                 //byte[] samid = new byte[32];
                 //CVRSDK.CVR_GetSAMID(ref samid[0]);
                 richTextBox1.Text = Encoding.GetEncoding("GB2312").GetString(address).Replace("\0", "").Trim();
-                textBox9.Text = Encoding.GetEncoding("GB2312").GetString(sex).Replace("\0", "").Trim();
+                //textBox9.Text = Encoding.GetEncoding("GB2312").GetString(sex).Replace("\0", "").Trim();
+                this.comboBox1.Text = Encoding.GetEncoding("GB2312").GetString(sex).Replace("\0", "").Trim();
                 textBox8.Text = Encoding.GetEncoding("GB2312").GetString(birthday).Replace("\0", "").Trim();
                 textBox4.Text = Encoding.GetEncoding("GB2312").GetString(signdate).Replace("\0", "").Trim();
                 textBox3.Text = Encoding.GetEncoding("GB2312").GetString(number).Replace("\0", "").Trim();
@@ -261,7 +262,8 @@ namespace zkhwClient.view.PublicHealthView
                         if (dt.Rows.Count > 0)
                         {
                             textBox1.Text = dt.Rows[0][0].ToString();
-                            textBox9.Text = dt.Rows[0][1].ToString();
+                            //textBox9.Text = dt.Rows[0][1].ToString();
+                            this.comboBox1.Text = dt.Rows[0][1].ToString();
                             textBox8.Text = dt.Rows[0][2].ToString();
                             textBox3.Text = dt.Rows[0][3].ToString();
                             pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
@@ -282,7 +284,8 @@ namespace zkhwClient.view.PublicHealthView
                         if (dt.Rows.Count > 0)
                         {
                             textBox1.Text = dt.Rows[0][0].ToString();
-                            textBox9.Text = dt.Rows[0][1].ToString();
+                            //textBox9.Text = dt.Rows[0][1].ToString();
+                            this.comboBox1.Text = dt.Rows[0][1].ToString();
                             textBox8.Text = dt.Rows[0][2].ToString();
                             textBox3.Text = dt.Rows[0][3].ToString();
                             pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
@@ -409,7 +412,23 @@ namespace zkhwClient.view.PublicHealthView
         private void button1_Click(object sender, EventArgs e)
         {
             string address = richTextBox1.Text;
-            string sex = textBox9.Text;
+            string sexcomboBox = this.comboBox1.Text;
+            string sex = "1";
+            if ("男".Equals(sexcomboBox))
+            {
+                sex = "1";
+            }
+            else if ("女".Equals(sexcomboBox)) {
+                sex = "2";
+            }
+            else if ("未说明的性别".Equals(sexcomboBox))
+            {
+                sex = "9";
+            }
+            else if ("未知的性别".Equals(sexcomboBox))
+            {
+                sex = "0";
+            }
             string birthday = textBox8.Text;
             string signdate = textBox4.Text;
             string number = textBox3.Text;
@@ -435,11 +454,11 @@ namespace zkhwClient.view.PublicHealthView
                 MessageBox.Show("居民信息填写不完整！");
                 return;
             }
-            if (pictureBox2.Image == null)
-            {
-                MessageBox.Show("没有摄像头拍摄照片,请重试!");
-                return;
-            }
+            //if (pictureBox2.Image == null)
+            //{
+            //    MessageBox.Show("没有摄像头拍摄照片,请重试!");
+            //    return;
+            //}
 
             xmlDoc.Load(path);
             node = xmlDoc.SelectSingleNode("config/chejiahao");
@@ -465,32 +484,33 @@ namespace zkhwClient.view.PublicHealthView
             if (grjdxx != null)
             {
                 string cardcode= textBox3.Text;
+                string archive_no = "";
                 if (cardcode != null && !"".Equals(cardcode)) {
                     dt = grjddao.judgeRepeat(textBox3.Text);
                 }
                 else {
                     dt = grjddao.judgeRepeatBync(textBox1.Text, textBox8.Text);
                 }
-                if (dt!=null&&dt.Rows.Count < 1)
+                if (dt.Rows.Count < 1)
                 {
                     if (grjdxx.Cardcode != null && !"".Equals(grjdxx.Cardcode))
                     {
                         grjdxx.archive_no = basicInfoSettings.xcuncode + "0" + grjdxx.Cardcode.Substring(14);
                     }
-                    else {
-                        grjdxx.archive_no = basicInfoSettings.xcuncode + barcode.Substring(5,4);
+                    else
+                    {
+                        grjdxx.archive_no = basicInfoSettings.xcuncode + barcode.Substring(5, 4);
                     }
                     grjdxx.aichive_org = basicInfoSettings.organ_name;
                     grjdxx.doctor_name = basicInfoSettings.zeren_doctor;
                     grjdxx.create_archives_name = basicInfoSettings.input_name;
                     grjddao.addgrjdInfo(grjdxx);//添加个人信息档案
-                    grjddao.addPhysicalExaminationInfo(grjdxx, barcode);//添加健康体检表信息
+                    grjddao.addPhysicalExaminationInfo(grjdxx, barcode);//添加健康体检表信息 
+                }
+                else {
+                    archive_no = dt.Rows[0]["archive_no"].ToString();
                 }
                 jkBean jk = new jkBean();
-                string archive_no= grjdxx.archive_no;
-                if (archive_no==null|| archive_no=="") {
-                    archive_no = textBox5.Text;
-                }
                 jk.aichive_no = archive_no;
                 jk.id_number = grjdxx.Cardcode;
                 jk.bar_code = barcode; 
@@ -558,26 +578,32 @@ namespace zkhwClient.view.PublicHealthView
             if (name != null && !"".Equals(name))
             {
                 DataTable dtRegistration = grjddao.registrationRecordInfo(name);
-                //DataView dv = dtRegistration.DefaultView;//虚拟视图
-                //dv.Sort = "measureCode,meterNo,devtime asc";
-                //DataTable dts = dv.ToTable(true);
-                this.dataGridView1.DataSource = dtRegistration;
-                this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
-                this.dataGridView1.Columns[1].HeaderCell.Value = "性别";
-                this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
-                this.dataGridView1.Columns[3].HeaderCell.Value = "电子档案号";
-                this.dataGridView1.Columns[4].HeaderCell.Value = "条码号";
-                //this.dataGridView1.Columns[7].Visible = false;
-                this.dataGridView1.Columns[0].Width = 70;
-                this.dataGridView1.Columns[1].Width = 55;
-                this.dataGridView1.Columns[2].Width = 120;
-                this.dataGridView1.Columns[3].Width = 150;
-                this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
-                this.dataGridView1.AllowUserToAddRows = false;
-                int rows = this.dataGridView1.Rows.Count - 1 < 0 ? 0 : this.dataGridView1.Rows.Count - 1;
-                for (int count = 0; count <= rows; count++)
+                if (dtRegistration.Rows.Count > 0)
                 {
-                    this.dataGridView1.Rows[count].HeaderCell.Value = String.Format("{0}", count + 1);
+                    //DataView dv = dtRegistration.DefaultView;//虚拟视图
+                    //dv.Sort = "measureCode,meterNo,devtime asc";
+                    //DataTable dts = dv.ToTable(true);
+                    this.dataGridView1.DataSource = dtRegistration;
+                    this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
+                    this.dataGridView1.Columns[1].HeaderCell.Value = "性别";
+                    this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
+                    this.dataGridView1.Columns[3].HeaderCell.Value = "电子档案号";
+                    this.dataGridView1.Columns[4].HeaderCell.Value = "条码号";
+                    //this.dataGridView1.Columns[7].Visible = false;
+                    this.dataGridView1.Columns[0].Width = 70;
+                    this.dataGridView1.Columns[1].Width = 55;
+                    this.dataGridView1.Columns[2].Width = 120;
+                    this.dataGridView1.Columns[3].Width = 150;
+                    this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
+                    this.dataGridView1.AllowUserToAddRows = false;
+                    int rows = this.dataGridView1.Rows.Count - 1 < 0 ? 0 : this.dataGridView1.Rows.Count - 1;
+                    for (int count = 0; count <= rows; count++)
+                    {
+                        this.dataGridView1.Rows[count].HeaderCell.Value = String.Format("{0}", count + 1);
+                    }
+                }
+                else {
+                    MessageBox.Show("未查询出数据!");
                 }
             }
             else {

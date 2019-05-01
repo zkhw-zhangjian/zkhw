@@ -276,6 +276,7 @@
             this.button4.TabIndex = 10;
             this.button4.Text = "删除";
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
@@ -289,6 +290,7 @@
             this.button3.TabIndex = 9;
             this.button3.Text = "修改";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Visible = false;
             // 
             // button2
             // 

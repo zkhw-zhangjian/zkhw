@@ -106,6 +106,9 @@ namespace zkhwClient.view.setting
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            if (xcuncode==null||"".Equals(xcuncode)) {
+                MessageBox.Show("信息不完整!");return;
+            }
             xzName = this.comboBox4.Text;
             xcName = this.comboBox5.Text;
             allareaname = this.comboBox1.Text + this.comboBox2.Text + this.comboBox3.Text + xzName + xcName;
@@ -122,8 +125,8 @@ namespace zkhwClient.view.setting
             string xy = this.comboBox14.SelectedValue.ToString();
             string wx = textBox3.Text;
             string other = textBox2.Text;
-            string captain = this.comboBox15.SelectedValue.ToString();
-            string members = textBox4.Text;
+            string captain = ""; //this.comboBox15.SelectedValue.ToString();
+            string members = "";// textBox4.Text;
             string operation = this.comboBox16.SelectedValue.ToString();
             string car_name = this.comboBox17.SelectedValue.ToString();
             string create_user = null;

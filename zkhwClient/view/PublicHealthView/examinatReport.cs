@@ -17,6 +17,8 @@ namespace zkhwClient.view.PublicHealthView
 {
     public partial class examinatReport : Form
     {
+        string str = Application.StartupPath;//项目路径
+        service.loginLogService lls = new service.loginLogService();
         #region 初始化数据
         public examinatReport()
         {
@@ -30,7 +32,7 @@ namespace zkhwClient.view.PublicHealthView
         private void BinData()
         {
             #region 报告统计数据绑定
-            string sql = $@"SELECT count(sex)sun,sex
+            string sql = $@"SELECT count(sex) sun,sex
 from zkhw_tj_bgdc where area_duns like '%{basicInfoSettings.xcuncode}%' and createtime>='{basicInfoSettings.createtime}'
 GROUP BY sex
 ";
@@ -39,9 +41,14 @@ GROUP BY sex
             if (data != null && data.Rows.Count > 0)
             {
                 DataRow[] rows = data.Select("sex='女'");
+                if (rows.Length>0) { 
                 女.Text = rows[0]["sun"].ToString();
+                }
                 DataRow[] rowsn = data.Select("sex='男'");
-                男.Text = rowsn[0]["sun"].ToString();
+                if (rowsn.Length > 0)
+                {
+                    男.Text = rowsn[0]["sun"].ToString();
+                }
                 总数.Text = data.Compute("sum(sun)", "true").ToString();
             }
             #endregion
@@ -61,7 +68,6 @@ GROUP BY sex
         {
             //让默认的日期时间减一天
             this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1);
-            string str = Application.StartupPath;//项目路径
             this.button1.BackgroundImage = Image.FromFile(@str + "/images/check.png");
             this.统计查询.BackgroundImage = Image.FromFile(@str + "/images/check.png");
 
@@ -119,9 +125,9 @@ base.upload_status 是否同步,
 bgdc.BaoGaoShengChan 报告生成时间
 from resident_base_info base
 join 
-(select * from (select * from zkhw_tj_bgdc order by createtime desc) as a group by aichive_no order by createtime desc) bgdc
+(select * from zkhw_tj_bgdc group by aichive_no order by createtime desc) bgdc
 on base.archive_no=bgdc.aichive_no
-where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'";//base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'
+where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{basicInfoSettings.createtime}'";//base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'
             if (pairs != null && pairs.Count > 0)
             {
                 if (!string.IsNullOrWhiteSpace(pairs["timesta"]) && !string.IsNullOrWhiteSpace(pairs["timeend"]))
@@ -130,7 +136,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                 }
                 if (!string.IsNullOrWhiteSpace(pairs["juming"]))
                 {
-                    sql += $" or name like '%{pairs["juming"]}%' or bar_code like '%{pairs["juming"]}%' or id_number like '%{pairs["juming"]}%'";
+                    sql += $" or base.name like '%{pairs["juming"]}%' or base.bar_code like '%{pairs["juming"]}%' or base.id_number like '%{pairs["juming"]}%'";
                 }
                 if (!string.IsNullOrWhiteSpace(pairs["sheng"]))
                 {
@@ -153,15 +159,13 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                     sql += $" and base.village_code='{pairs["zu"]}'";
                 }
             }
-            sql += $@" and base.id >=(
-            select id From zkhw_tj_bgdc Order By id limit {pageindex},1
-            ) limit {pagesize}; select found_rows()";
+            sql += $@" limit {pagesize}; select found_rows()";// and base.id >=( select id From zkhw_tj_bgdc Order By id limit {pageindex},1)
             DataSet dataSet = DbHelperMySQL.Query(sql);
             DataTable dt = dataSet.Tables[0];
             count = Convert.ToInt32(dataSet.Tables[1].Rows[0][0]);
             return dt;
         }
-
+        //(select * from (select * from zkhw_tj_bgdc order by createtime desc) as a group by aichive_no order by createtime desc) bgdc
         //声明静态类变量
         private static DataGridViewCheckBoxColumn checkColumn = null;
         private static DataGridViewButtonColumn buttonColumn = null;
@@ -279,7 +283,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                     '0'
             END
             ) as 生化异常
-            from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and createtime>='{basicInfoSettings.createtime}' and birthday >= '0' and birthday<= '64' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+            from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and createtime>='{basicInfoSettings.createtime}' and age >= '0' and age<= '64' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
             GROUP BY sex;
 
             SELECT sex,'70',COUNT(sex) 人数,
@@ -308,7 +312,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                     '0'
             END
             ) as 生化异常
-            from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and createtime>='{basicInfoSettings.createtime}' and birthday >= '65' and birthday<= '70' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+            from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and createtime>='{basicInfoSettings.createtime}' and age >= '65' and age<= '70' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
             GROUP BY sex;
 
             SELECT sex,'75',COUNT(sex) 人数,
@@ -337,7 +341,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                     '0'
             END
             ) as 生化异常
-            from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and createtime>='{basicInfoSettings.createtime}' and birthday >= '70' and birthday<= '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+            from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and createtime>='{basicInfoSettings.createtime}' and age >= '70' and age<= '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
             GROUP BY sex;
 
             SELECT sex,'76',COUNT(sex) 人数,
@@ -366,7 +370,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                     '0'
             END
             ) as 生化异常
-            from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and createtime>='{basicInfoSettings.createtime}' and birthday >= '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+            from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and createtime>='{basicInfoSettings.createtime}' and age >= '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
             GROUP BY sex";
             DataSet dataSet = DbHelperMySQL.Query(sql);
             if (dataSet != null && dataSet.Tables.Count > 0)
@@ -511,24 +515,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                 List<string> list = new List<string>();
                 List<string> ide = new List<string>();
                 DataSet dataSet = new DataSet();
-                for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                {
-                    if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
-                    {
-                        string id = dataGridView1["编码", i].Value.ToString();
-                        ide.Add(id);
-                    }
-                }
 
-                string sql = string.Empty;
-                sql = $@"select * from resident_base_info base where base.archive_no in('{string.Join(",", ide)}')";
-                DataSet datas = DbHelperMySQL.Query(sql);
-                if (datas != null && datas.Tables.Count > 0)
-                {
-                    ge = datas.Tables[0].Copy();
-                    ge.TableName = "个人";
-                    dataSet.Tables.Add(ge);
-                }
                 foreach (Control ctrl in groupBox4.Controls)
                 {
                     if (ctrl is CheckBox)
@@ -544,26 +531,55 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                     MessageBox.Show("综合报告单不能和其它报告一起！");
                     return;
                 }
-                PDF(list, dataSet, ide);
-                DialogResult dr = MessageBox.Show("成功！是否打开文件夹",
-                                 "提示",
-                                 MessageBoxButtons.OKCancel,
-                                 MessageBoxIcon.Warning);
-                if (dr == DialogResult.OK)
+
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
-                    string str = Application.StartupPath;//项目路径
-                    OpenPdf(@str + $"/up/result/");
+                    if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
+                    {
+                        string id = dataGridView1["编码", i].Value.ToString();
+                        ide.Add(id);
+                    }
+                }
+                if (ide.Count<1) {
+                    MessageBox.Show("请选择要导出报告的人员!");return;
+                }
+                string sql = string.Empty;
+                sql = $@"select * from resident_base_info base where base.archive_no in('{string.Join(",", ide)}')";
+                DataSet datas = DbHelperMySQL.Query(sql);
+                if (datas != null && datas.Tables.Count > 0)
+                {
+                    ge = datas.Tables[0].Copy();
+                    ge.TableName = "个人";
+                    dataSet.Tables.Add(ge);
+                }
+
+                bool istue=PDF(list, dataSet, ide);
+                if (istue)
+                {
+                    DialogResult dr = MessageBox.Show("成功！是否打开文件夹",
+                                     "提示",
+                                     MessageBoxButtons.OKCancel,
+                                     MessageBoxIcon.Warning);
+                    if (dr == DialogResult.OK)
+                    {
+                        OpenPdf(@str + $"/up/result/");
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("错误请联系管理员！");
+                bean.loginLogBean lb = new bean.loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "报告导出异常！"+ ex.Message;
+                lb.type = "2";
+                lls.addCheckLog(lb);
+                MessageBox.Show("错误请联系管理员！11"+ ex.StackTrace);
             }
         }
 
-        private void PDF(List<string> list, DataSet dataSet, List<string> ide)
+        private bool PDF(List<string> list, DataSet dataSet, List<string> ide)
         {
-            string str = Application.StartupPath;//项目路径
             Document doc = null;
             if (list.Count > 1)
             {
@@ -641,9 +657,15 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                     }
 
                 }
+                return true;
             }
             else
             {
+                if (list == null|| list.Count ==0)
+                {
+                    MessageBox.Show("请选择你要生成的报告类型！");
+                    return false;
+                }
                 if (list[0] == "综合报告单")
                 {
                     List<string> vs = new List<string>();
@@ -692,13 +714,13 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                         doc.Save(urls, SaveFormat.Pdf);
                     }
                 }
+                return true;
             }
         }
 
         private Document PdfProcessing(string lx, DataRow data)
         {
             DateTime date = DateTime.Now;
-            string str = Application.StartupPath;//项目路径
             Document doc = null;
             DocumentBuilder builder = null;
             DataTable jkdata = null;
@@ -1012,10 +1034,17 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                         DataTable da = sh.Tables[0];
                         for (int j = 0; j < da.Rows.Count; j++)
                         {
-                            hy.Add("白蛋白箭头", Convert.ToDouble(da.Rows[j]["ALB"].ToString()) > 54 ? "↑" : "↓");
-                            hy.Add("白蛋白结果", da.Rows[j]["ALB"].ToString());
-                            hy.Add("碱性磷酸酶箭头", Convert.ToDouble(da.Rows[j]["ALP"].ToString()) > 100 ? "↑" : "↓");
-                            hy.Add("碱性磷酸酶结果", da.Rows[j]["ALP"].ToString());
+                            string alb=da.Rows[j]["ALB"].ToString();
+                            if (alb != null&&!"".Equals(alb)) {
+                                hy.Add("白蛋白箭头", Convert.ToDouble(da.Rows[j]["ALB"].ToString()) > 54 ? "↑" : "↓");
+                                hy.Add("白蛋白结果", da.Rows[j]["ALB"].ToString());
+                            }
+                            string alp = da.Rows[j]["ALP"].ToString();
+                            if (alp != null && !"".Equals(alp))
+                            {
+                                hy.Add("碱性磷酸酶箭头", Convert.ToDouble(alp) > 100 ? "↑" : "↓");
+                                hy.Add("碱性磷酸酶结果", da.Rows[j]["ALP"].ToString());
+                            }
                             hy.Add("谷丙转氨酶箭头", Convert.ToDouble(da.Rows[j]["ALT"].ToString()) > 40 ? "↑" : "↓");
                             hy.Add("谷丙转氨酶结果", da.Rows[j]["ALT"].ToString());
                             hy.Add("谷草转氨酶箭头", Convert.ToDouble(da.Rows[j]["AST"].ToString()) > 40 ? "↑" : "↓");
@@ -1024,10 +1053,18 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                             hy.Add("胆固醇结果", da.Rows[j]["CHO"].ToString());
                             hy.Add("肌酐箭头", Convert.ToDouble(da.Rows[j]["CREA"].ToString()) > 104 ? "↑" : "↓");
                             hy.Add("肌酐结果", da.Rows[j]["CREA"].ToString());
-                            hy.Add("直接胆红素箭头", Convert.ToDouble(da.Rows[j]["DBIL"].ToString()) > 7 ? "↑" : "↓");
-                            hy.Add("直接胆红素结果", da.Rows[j]["DBIL"].ToString());
-                            hy.Add("谷氨酰氨基箭头", Convert.ToDouble(da.Rows[j]["GGT"].ToString()) > 50 ? "↑" : "↓");
-                            hy.Add("谷氨酰氨基结果", da.Rows[j]["GGT"].ToString());
+                            string dbil = da.Rows[j]["DBIL"].ToString();
+                            if (dbil != null && !"".Equals(dbil))
+                            {
+                                hy.Add("直接胆红素箭头", Convert.ToDouble(dbil) > 7 ? "↑" : "↓");
+                                hy.Add("直接胆红素结果", da.Rows[j]["DBIL"].ToString());
+                            }
+                            string ggt = da.Rows[j]["GGT"].ToString();
+                            if (ggt != null && !"".Equals(ggt))
+                            {
+                                hy.Add("谷氨酰氨基箭头", Convert.ToDouble(ggt) > 50 ? "↑" : "↓");
+                                hy.Add("谷氨酰氨基结果", da.Rows[j]["GGT"].ToString());
+                            }
                             hy.Add("葡萄糖箭头", Convert.ToDouble(da.Rows[j]["GLU"].ToString()) > 6 ? "↑" : "↓");
                             hy.Add("葡萄糖结果", da.Rows[j]["GLU"].ToString());
                             hy.Add("高密度脂蛋白箭头", Convert.ToDouble(da.Rows[j]["HDLC"].ToString()) > 2 ? "↑" : "↓");
@@ -1038,10 +1075,18 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                             hy.Add("总胆红素结果", da.Rows[j]["TBIL"].ToString());
                             hy.Add("甘油三酯箭头", Convert.ToDouble(da.Rows[j]["TG"].ToString()) > 2 ? "↑" : "↓");
                             hy.Add("甘油三酯结果", da.Rows[j]["TG"].ToString());
-                            hy.Add("总蛋白箭头", Convert.ToDouble(da.Rows[j]["TP"].ToString()) > 19 ? "↑" : "↓");
-                            hy.Add("总蛋白结果", da.Rows[j]["TP"].ToString());
-                            hy.Add("尿酸箭头", Convert.ToDouble(da.Rows[j]["UA"].ToString()) > 2 ? "↑" : "↓");
-                            hy.Add("尿酸结果", da.Rows[j]["UA"].ToString());
+                            string tp = da.Rows[j]["TP"].ToString();
+                            if (tp != null && !"".Equals(tp))
+                            {
+                                hy.Add("总蛋白箭头", Convert.ToDouble(tp) > 19 ? "↑" : "↓");
+                                hy.Add("总蛋白结果", da.Rows[j]["TP"].ToString());
+                            }
+                            string ua = da.Rows[j]["UA"].ToString();
+                            if (ua != null && !"".Equals(ua))
+                            {
+                                hy.Add("尿酸箭头", Convert.ToDouble(ua) > 2 ? "↑" : "↓");
+                                hy.Add("尿酸结果", da.Rows[j]["UA"].ToString());
+                            }
                             hy.Add("尿素箭头", Convert.ToDouble(da.Rows[j]["UREA"].ToString()) > 83 ? "↑" : "↓");
                             hy.Add("尿素结果", da.Rows[j]["UREA"].ToString());
                         }
@@ -1493,7 +1538,10 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                         for (int j = 0; j < da.Rows.Count; j++)
                         {
                             builder.MoveToBookmark("图片");
-                            builder.InsertImage(resizeImageFromFile(da.Rows[j]["imageUrl"].ToString(), 678, 960));
+                            string imageUrl= da.Rows[j]["imageUrl"].ToString();
+                            if (imageUrl != null&&!"".Equals(imageUrl)) {
+                                builder.InsertImage(resizeImageFromFile(@str + "/xdtImg/" + imageUrl, 678, 960));
+                            }
                             xdt.Add("条码号", da.Rows[j]["bar_code"].ToString());
                             xdt.Add("诊断医师", da.Rows[j]["XdtDoctor"].ToString());
                             xdt.Add("诊断意见", da.Rows[j]["XdtResult"].ToString());
@@ -1525,14 +1573,30 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                         DataTable da = bcs.Tables[0];
                         for (int j = 0; j < da.Rows.Count; j++)
                         {
-                            builder.MoveToBookmark("图片1");
-                            builder.InsertImage(resizeImageFromFile(da.Rows[j]["imageUrl_a"].ToString(), 768, 1024));
-                            builder.MoveToBookmark("图片2");
-                            builder.InsertImage(resizeImageFromFile(da.Rows[j]["imageUrl_b"].ToString(), 768, 1024));
-                            builder.MoveToBookmark("图片3");
-                            builder.InsertImage(resizeImageFromFile(da.Rows[j]["imageUrl_c"].ToString(), 768, 1024));
-                            builder.MoveToBookmark("图片4");
-                            builder.InsertImage(resizeImageFromFile(da.Rows[j]["imageUrl_d"].ToString(), 768, 1024));
+                            string imageUrla = da.Rows[j]["BuPic01"].ToString();
+                            if (imageUrla != null && !"".Equals(imageUrla))
+                            {
+                                builder.MoveToBookmark("图片1");
+                                builder.InsertImage(resizeImageFromFile(@str + "/bcImg/" + imageUrla, 768, 1024));
+                            }
+                            string imageUrlb = da.Rows[j]["BuPic02"].ToString();
+                            if (imageUrlb != null && !"".Equals(imageUrlb))
+                            {
+                                builder.MoveToBookmark("图片2");
+                                builder.InsertImage(resizeImageFromFile(@str + "/bcImg/" + imageUrlb, 768, 1024));
+                            }
+                            string imageUrlc = da.Rows[j]["BuPic03"].ToString();
+                            if (imageUrlc != null && !"".Equals(imageUrlc))
+                            {
+                                builder.MoveToBookmark("图片3");
+                                builder.InsertImage(resizeImageFromFile(@str + "/bcImg/" + imageUrlc, 768, 1024));
+                            }
+                            string imageUrld = da.Rows[j]["BuPic04"].ToString();
+                            if (imageUrld != null && !"".Equals(imageUrld))
+                            {
+                                builder.MoveToBookmark("图片4");
+                                builder.InsertImage(resizeImageFromFile(@str + "/bcImg/" + imageUrld, 768, 1024));
+                            }
                             bc.Add("条码号", da.Rows[j]["bar_code"].ToString());
                             bc.Add("诊断医师", "");
                             bc.Add("检查所见", da.Rows[j]["FubuDesc"].ToString());
@@ -1784,7 +1848,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
             //定义一个ProcessStartInfo实例
             System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo();
             //设置启动进程的初始目录
-            info.WorkingDirectory = Application.StartupPath;
+            info.WorkingDirectory = str;
             //设置启动进程的应用程序或文档名
             info.FileName = url;
             //设置启动进程的参数
@@ -1907,8 +1971,8 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                     DataTable data = info.Tables[0];
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
-                        sqllist.Add($@"insert into resident_base_info (id,archive_no,pb_archive,name,sex,birthday,age,id_number,card_pic,company,phone,link_name,link_phone,resident_type,register_address,residence_address,nation,blood_group,blood_rh,education,profession,marital_status,pay_type,pay_other,drug_allergy,allergy_other,exposure,disease_other,is_hypertension,is_diabetes,is_psychosis,is_tuberculosis,is_heredity,heredity_name,is_deformity,deformity_name,is_poor,kitchen,fuel,other_fuel,drink,other_drink,toilet,poultry,medical_code,photo_code,aichive_org,doctor_name,is_signing,province_code,province_name,city_code,city_name,county_code,county_name,towns_code,towns_name,village_code,village_name,status,remark,create_user,create_name,create_time,create_org,create_org_name,update_user,update_name,update_time
-) values('{data.Rows[i]["id"]}','{data.Rows[i]["archive_no"]}','{data.Rows[i]["pb_archive"]}','{data.Rows[i]["name"]}','{data.Rows[i]["sex"]}','{data.Rows[i]["birthday"]}','{data.Rows[i]["age"]}','{data.Rows[i]["id_number"]}','{data.Rows[i]["card_pic"]}','{data.Rows[i]["company"]}','{data.Rows[i]["phone"]}','{data.Rows[i]["link_name"]}','{data.Rows[i]["link_phone"]}','{data.Rows[i]["resident_type"]}','{data.Rows[i]["address"]}','{data.Rows[i]["residence_address"]}','{data.Rows[i]["nation"]}','{data.Rows[i]["blood_group"]}','{data.Rows[i]["blood_rh"]}','{data.Rows[i]["education"]}','{data.Rows[i]["profession"]}','{data.Rows[i]["marital_status"]}','{data.Rows[i]["pay_type"]}','{data.Rows[i]["pay_other"]}','{data.Rows[i]["drug_allergy"]}','{data.Rows[i]["allergy_other"]}','{data.Rows[i]["exposure"]}','{data.Rows[i]["disease_other"]}','{data.Rows[i]["is_hypertension"]}','{data.Rows[i]["is_diabetes"]}','{data.Rows[i]["is_psychosis"]}','{data.Rows[i]["is_tuberculosis"]}','{data.Rows[i]["is_heredity"]}','{data.Rows[i]["heredity_name"]}','{data.Rows[i]["is_deformity"]}','{data.Rows[i]["deformity_name"]}',{data.Rows[i]["is_poor"]},'{data.Rows[i]["kitchen"]}','{data.Rows[i]["fuel"]}','{data.Rows[i]["other_fuel"]}','{data.Rows[i]["drink"]}','{data.Rows[i]["other_drink"]}','{data.Rows[i]["toilet"]}','{data.Rows[i]["poultry"]}','{data.Rows[i]["medical_code"]}','{data.Rows[i]["photo_code"]}','{data.Rows[i]["aichive_org"]}','{data.Rows[i]["doctor_name"]}',{data.Rows[i]["is_signing"]},'{data.Rows[i]["province_code"]}','{data.Rows[i]["province_name"]}','{data.Rows[i]["city_code"]}','{data.Rows[i]["city_name"]}','{data.Rows[i]["county_code"]}','{data.Rows[i]["county_name"]}','{data.Rows[i]["towns_code"]}','{data.Rows[i]["towns_name"]}','{data.Rows[i]["village_code"]}','{data.Rows[i]["village_name"]}','{data.Rows[i]["status"]}','{data.Rows[i]["remark"]}','{data.Rows[i]["create_user"]}','{data.Rows[i]["create_name"]}','{data.Rows[i]["create_time"].ToString().Replace('/', '-')}','{data.Rows[i]["create_org"]}','{data.Rows[i]["create_org_name"]}','{data.Rows[i]["update_user"]}','{data.Rows[i]["update_name"]}',{Ifnull(data.Rows[i]["upload_time"]).Replace('/', '-')});");
+                        sqllist.Add($@"insert into resident_base_info (id,archive_no,pb_archive,name,sex,birthday,age,id_number,card_pic,company,phone,link_name,link_phone,resident_type,register_address,residence_address,nation,blood_group,blood_rh,education,profession,marital_status,pay_type,pay_other,drug_allergy,allergy_other,exposure,disease_other,is_hypertension,is_diabetes,is_psychosis,is_tuberculosis,is_heredity,heredity_name,is_deformity,deformity_name,is_poor,kitchen,fuel,other_fuel,drink,other_drink,toilet,poultry,medical_code,photo_code,aichive_org,doctor_name,is_signing,province_code,province_name,city_code,city_name,county_code,county_name,towns_code,towns_name,village_code,village_name,status,remark,create_user,create_name,create_time,create_org,create_org_name
+) values('{data.Rows[i]["id"]}','{data.Rows[i]["archive_no"]}','{data.Rows[i]["pb_archive"]}','{data.Rows[i]["name"]}','{data.Rows[i]["sex"]}','{data.Rows[i]["birthday"]}','{data.Rows[i]["age"]}','{data.Rows[i]["id_number"]}','{data.Rows[i]["card_pic"]}','{data.Rows[i]["company"]}','{data.Rows[i]["phone"]}','{data.Rows[i]["link_name"]}','{data.Rows[i]["link_phone"]}','{data.Rows[i]["resident_type"]}','{data.Rows[i]["address"]}','{data.Rows[i]["residence_address"]}','{data.Rows[i]["nation"]}','{data.Rows[i]["blood_group"]}','{data.Rows[i]["blood_rh"]}','{data.Rows[i]["education"]}','{data.Rows[i]["profession"]}','{data.Rows[i]["marital_status"]}','{data.Rows[i]["pay_type"]}','{data.Rows[i]["pay_other"]}','{data.Rows[i]["drug_allergy"]}','{data.Rows[i]["allergy_other"]}','{data.Rows[i]["exposure"]}','{data.Rows[i]["disease_other"]}','{data.Rows[i]["is_hypertension"]}','{data.Rows[i]["is_diabetes"]}','{data.Rows[i]["is_psychosis"]}','{data.Rows[i]["is_tuberculosis"]}','{data.Rows[i]["is_heredity"]}','{data.Rows[i]["heredity_name"]}','{data.Rows[i]["is_deformity"]}','{data.Rows[i]["deformity_name"]}',{data.Rows[i]["is_poor"]},'{data.Rows[i]["kitchen"]}','{data.Rows[i]["fuel"]}','{data.Rows[i]["other_fuel"]}','{data.Rows[i]["drink"]}','{data.Rows[i]["other_drink"]}','{data.Rows[i]["toilet"]}','{data.Rows[i]["poultry"]}','{data.Rows[i]["medical_code"]}','{data.Rows[i]["photo_code"]}','{data.Rows[i]["aichive_org"]}','{data.Rows[i]["doctor_name"]}',{data.Rows[i]["is_signing"]},'{data.Rows[i]["province_code"]}','{data.Rows[i]["province_name"]}','{data.Rows[i]["city_code"]}','{data.Rows[i]["city_name"]}','{data.Rows[i]["county_code"]}','{data.Rows[i]["county_name"]}','{data.Rows[i]["towns_code"]}','{data.Rows[i]["towns_name"]}','{data.Rows[i]["village_code"]}','{data.Rows[i]["village_name"]}','{data.Rows[i]["status"]}','{data.Rows[i]["remark"]}','{data.Rows[i]["create_user"]}','{data.Rows[i]["create_name"]}','{Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss")}','{data.Rows[i]["create_org"]}','{data.Rows[i]["create_org_name"]}');");
                         infoid += $"'{data.Rows[i]["id"]}',";
                     }
                 }
@@ -1921,8 +1985,8 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                     DataTable data = record.Tables[0];
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
-                        sqllist.Add($@"insert into physical_examination_record (id,name,archive_no,id_number,batch_no,bar_code,symptom,symptom_other,check_date,base_temperature,base_heartbeat,base_respiratory,base_blood_pressure_left_high,base_blood_pressure_left_low,base_blood_pressure_right_high,base_blood_pressure_right_low,base_height,base_weight,base_waist,base_bmi,base_health_estimate,base_selfcare_estimate,base_cognition_estimate,base_cognition_score,base_feeling_estimate,base_feeling_score,base_doctor,lifeway_exercise_frequency,lifeway_exercise_time,lifeway_exercise_year,lifeway_exercise_type,lifeway_diet,lifeway_smoke_status,lifeway_smoke_number,lifeway_smoke_startage,lifeway_smoke_endage,lifeway_drink_status,lifeway_drink_number,lifeway_drink_stop,lifeway_drink_stopage,lifeway_drink_startage,lifeway_drink_oneyear,lifeway_drink_type,lifeway_occupational_disease,lifeway_job,lifeway_job_period,lifeway_hazardous_dust,lifeway_dust_preventive,lifeway_hazardous_radiation,lifeway_radiation_preventive,lifeway_hazardous_physical,lifeway_physical_preventive,lifeway_hazardous_chemical,lifeway_chemical_preventive,lifeway_hazardous_other,lifeway_other_preventive,lifeway_doctor,organ_lips,organ_tooth,organ_hypodontia,organ_hypodontia_topleft,organ_hypodontia_topright,organ_hypodontia_bottomleft,organ_hypodontia_bottomright,organ_caries,organ_caries_topleft,organ_caries_topright,organ_caries_bottomleft,organ_caries_bottomright,organ_denture,organ_denture_topleft,organ_denture_topright,organ_denture_bottomleft,organ_denture_bottomright,organ_guttur,organ_vision_left,organ_vision_right,organ_correctedvision_left,organ_correctedvision_right,organ_hearing,organ_movement,organ_doctor,examination_eye,examination_skin,examination_skin_other,examination_sclera,examination_sclera_other,examination_lymph,examination_lymph_other,examination_barrel_chest,examination_breath_sounds,examination_rale,examination_rale_other,examination_heart_rate,examination_heart_rhythm,examination_heart_noise,examination_abdomen_tenderness,examination_abdomen_mass,examination_abdomen_hepatomegaly,examination_abdomen_splenomegaly,examination_abdomen_shiftingdullness,examination_lowerextremity_edema,examination_dorsal_artery,examination_anus,examination_anus_other,examination_breast,examination_breast_other,examination_doctor,examination_woman_vulva,examination_woman_vagina,examination_woman_cervix,examination_woman_corpus,examination_woman_accessories,examination_woman_doctor,examination_other,blood_hemoglobin,blood_leukocyte,blood_platelet,blood_other,urine_protein,glycosuria,urine_acetone_bodies,bld,urine_other,blood_glucose_mmol,blood_glucose_mg,cardiogram,cardiogram_img,microalbuminuria,fob,glycosylated_hemoglobin,hb,sgft,ast,albumin,total_bilirubin,conjugated_bilirubin,scr,blood_urea,blood_k,blood_na,tc,tg,ldl,hdl,chest_x,chestx_img,ultrasound_abdomen,abdomenB_img,other_b,otherb_img,cervical_smear,other,cerebrovascular_disease,cerebrovascular_disease_other,kidney_disease,kidney_disease_other,heart_disease,heart_disease_other,vascular_disease,vascular_disease_other,ocular_diseases,ocular_diseases_other,nervous_system_disease,other_disease,health_evaluation,abnormal1,abnormal2,abnormal3,abnormal4,health_guidance,danger_controlling,target_weight,danger_controlling_other,create_user,create_name,create_org,create_org_name,create_time,update_user,update_name,update_time,upload_time,upload_result)
-values('{data.Rows[i]["id"]}','{data.Rows[i]["name"]}','{data.Rows[i]["aichive_no"]}','{data.Rows[i]["id_number"]}','{data.Rows[i]["batch_no"]}','{data.Rows[i]["bar_code"]}','{data.Rows[i]["symptom"]}','{data.Rows[i]["symptom_other"]}','{data.Rows[i]["check_date"]}','{data.Rows[i]["base_temperature"]}','{data.Rows[i]["base_heartbeat"]}','{data.Rows[i]["base_respiratory"]}',{Ifnull(data.Rows[i]["base_blood_pressure_left_high"])},{Ifnull(data.Rows[i]["base_blood_pressure_left_low"])},{Ifnull(data.Rows[i]["base_blood_pressure_right_high"])},{Ifnull(data.Rows[i]["base_blood_pressure_right_low"])},'{data.Rows[i]["base_height"]}','{data.Rows[i]["base_weight"]}','{data.Rows[i]["base_waist"]}','{data.Rows[i]["base_bmi"]}','{data.Rows[i]["base_health_estimate"]}','{data.Rows[i]["base_selfcare_estimate"]}','{data.Rows[i]["base_cognition_estimate"]}','{data.Rows[i]["base_cognition_score"]}','{data.Rows[i]["base_feeling_estimate"]}','{data.Rows[i]["base_feeling_score"]}','{data.Rows[i]["base_doctor"]}','{data.Rows[i]["lifeway_exercise_frequency"]}','{data.Rows[i]["lifeway_exercise_time"]}','{data.Rows[i]["lifeway_exercise_year"]}','{data.Rows[i]["lifeway_exercise_type"]}','{data.Rows[i]["lifeway_diet"]}','{data.Rows[i]["lifeway_smoke_status"]}','{data.Rows[i]["lifeway_smoke_number"]}','{data.Rows[i]["lifeway_smoke_startage"]}','{data.Rows[i]["lifeway_smoke_endage"]}','{data.Rows[i]["lifeway_drink_status"]}','{data.Rows[i]["lifeway_drink_number"]}','{data.Rows[i]["lifeway_drink_stop"]}','{data.Rows[i]["lifeway_drink_stopage"]}','{data.Rows[i]["lifeway_drink_startage"]}','{data.Rows[i]["lifeway_drink_oneyear"]}','{data.Rows[i]["lifeway_drink_type"]}','{data.Rows[i]["lifeway_occupational_disease"]}','{data.Rows[i]["lifeway_job"]}','{data.Rows[i]["lifeway_job_period"]}','{data.Rows[i]["lifeway_hazardous_dust"]}','{data.Rows[i]["lifeway_dust_preventive"]}','{data.Rows[i]["lifeway_hazardous_radiation"]}','{data.Rows[i]["lifeway_radiation_preventive"]}','{data.Rows[i]["lifeway_hazardous_physical"]}','{data.Rows[i]["lifeway_physical_preventive"]}','{data.Rows[i]["lifeway_hazardous_chemical"]}','{data.Rows[i]["lifeway_chemical_preventive"]}','{data.Rows[i]["lifeway_hazardous_other"]}','{data.Rows[i]["lifeway_other_preventive"]}','{data.Rows[i]["lifeway_doctor"]}','{data.Rows[i]["organ_lips"]}','{data.Rows[i]["organ_tooth"]}','{data.Rows[i]["organ_hypodontia"]}','{data.Rows[i]["organ_hypodontia_topleft"]}','{data.Rows[i]["organ_hypodontia_topright"]}','{data.Rows[i]["organ_hypodontia_bottomleft"]}','{data.Rows[i]["organ_hypodontia_bottomright"]}','{data.Rows[i]["organ_caries"]}','{data.Rows[i]["organ_caries_topleft"]}','{data.Rows[i]["organ_caries_topright"]}','{data.Rows[i]["organ_caries_bottomleft"]}','{data.Rows[i]["organ_caries_bottomright"]}','{data.Rows[i]["organ_denture"]}','{data.Rows[i]["organ_denture_topleft"]}','{data.Rows[i]["organ_denture_topright"]}','{data.Rows[i]["organ_denture_bottomleft"]}','{data.Rows[i]["organ_denture_bottomright"]}','{data.Rows[i]["organ_guttur"]}','{data.Rows[i]["organ_vision_left"]}','{data.Rows[i]["organ_vision_right"]}','{data.Rows[i]["organ_correctedvision_left"]}','{data.Rows[i]["organ_correctedvision_right"]}','{data.Rows[i]["organ_hearing"]}','{data.Rows[i]["organ_movement"]}','{data.Rows[i]["organ_doctor"]}','{data.Rows[i]["examination_eye"]}','{data.Rows[i]["examination_skin"]}','{data.Rows[i]["examination_skin_other"]}','{data.Rows[i]["examination_sclera"]}','{data.Rows[i]["examination_sclera_other"]}','{data.Rows[i]["examination_lymph"]}','{data.Rows[i]["examination_lymph_other"]}','{data.Rows[i]["examination_barrel_chest"]}','{data.Rows[i]["examination_breath_sounds"]}','{data.Rows[i]["examination_rale"]}','{data.Rows[i]["examination_rale_other"]}','{data.Rows[i]["examination_heart_rate"]}','{data.Rows[i]["examination_heart_rhythm"]}','{data.Rows[i]["examination_heart_noise"]}','{data.Rows[i]["examination_abdomen_tenderness"]}','{data.Rows[i]["examination_abdomen_mass"]}','{data.Rows[i]["examination_abdomen_hepatomegaly"]}','{data.Rows[i]["examination_abdomen_splenomegaly"]}','{data.Rows[i]["examination_abdomen_shiftingdullness"]}','{data.Rows[i]["examination_lowerextremity_edema"]}','{data.Rows[i]["examination_dorsal_artery"]}','{data.Rows[i]["examination_anus"]}','{data.Rows[i]["examination_anus_other"]}','{data.Rows[i]["examination_breast"]}','{data.Rows[i]["examination_breast_other"]}','{data.Rows[i]["examination_doctor"]}','{data.Rows[i]["examination_woman_vulva"]}','{data.Rows[i]["examination_woman_vagina"]}','{data.Rows[i]["examination_woman_cervix"]}','{data.Rows[i]["examination_woman_corpus"]}','{data.Rows[i]["examination_woman_accessories"]}','{data.Rows[i]["examination_woman_doctor"]}','{data.Rows[i]["examination_other"]}','{data.Rows[i]["blood_hemoglobin"]}','{data.Rows[i]["blood_leukocyte"]}','{data.Rows[i]["blood_platelet"]}','{data.Rows[i]["blood_other"]}','{data.Rows[i]["urine_protein"]}','{data.Rows[i]["glycosuria"]}','{data.Rows[i]["urine_acetone_bodies"]}','{data.Rows[i]["bld"]}','{data.Rows[i]["urine_other"]}','{data.Rows[i]["blood_glucose_mmol"]}','{data.Rows[i]["blood_glucose_mg"]}','{data.Rows[i]["cardiogram"]}','{data.Rows[i]["cardiogram_img"]}','{data.Rows[i]["microalbuminuria"]}','{data.Rows[i]["fob"]}','{data.Rows[i]["glycosylated_hemoglobin"]}','{data.Rows[i]["hb"]}','{data.Rows[i]["sgft"]}','{data.Rows[i]["ast"]}','{data.Rows[i]["albumin"]}','{data.Rows[i]["total_bilirubin"]}','{data.Rows[i]["conjugated_bilirubin"]}','{data.Rows[i]["scr"]}','{data.Rows[i]["blood_urea"]}','{data.Rows[i]["blood_k"]}','{data.Rows[i]["blood_na"]}','{data.Rows[i]["tc"]}','{data.Rows[i]["tg"]}','{data.Rows[i]["ldl"]}','{data.Rows[i]["hdl"]}','{data.Rows[i]["chest_x"]}','{data.Rows[i]["chestx_img"]}','{data.Rows[i]["ultrasound_abdomen"]}','{data.Rows[i]["abdomenB_img"]}','{data.Rows[i]["other_b"]}','{data.Rows[i]["otherb_img"]}','{data.Rows[i]["cervical_smear"]}','{data.Rows[i]["other"]}','{data.Rows[i]["cerebrovascular_disease"]}','{data.Rows[i]["cerebrovascular_disease_other"]}','{data.Rows[i]["kidney_disease"]}','{data.Rows[i]["kidney_disease_other"]}','{data.Rows[i]["heart_disease"]}','{data.Rows[i]["heart_disease_other"]}','{data.Rows[i]["vascular_disease"]}','{data.Rows[i]["vascular_disease_other"]}','{data.Rows[i]["ocular_diseases"]}','{data.Rows[i]["ocular_diseases_other"]}','{data.Rows[i]["nervous_system_disease"]}','{data.Rows[i]["other_disease"]}','{data.Rows[i]["health_evaluation"]}','{data.Rows[i]["abnormal1"]}','{data.Rows[i]["abnormal2"]}','{data.Rows[i]["abnormal3"]}','{data.Rows[i]["abnormal4"]}','{data.Rows[i]["health_guidance"]}','{data.Rows[i]["danger_controlling"]}','{data.Rows[i]["target_weight"]}','{data.Rows[i]["danger_controlling_other"]}','{data.Rows[i]["create_user"]}','{data.Rows[i]["create_name"]}','{data.Rows[i]["create_org"]}','{data.Rows[i]["create_org_name"]}',{Ifnull(data.Rows[i]["create_time"]).Replace('/', '-')},'{data.Rows[i]["update_user"]}','{data.Rows[i]["update_name"]}',{Ifnull(data.Rows[i]["update_time"]).Replace('/', '-')},{Ifnull(data.Rows[i]["upload_time"]).Replace('/', '-')},'{data.Rows[i]["upload_result"]}');");
+                        sqllist.Add($@"insert into physical_examination_record (id,name,archive_no,id_number,batch_no,bar_code,symptom,symptom_other,check_date,base_temperature,base_heartbeat,base_respiratory,base_blood_pressure_left_high,base_blood_pressure_left_low,base_blood_pressure_right_high,base_blood_pressure_right_low,base_height,base_weight,base_waist,base_bmi,base_health_estimate,base_selfcare_estimate,base_cognition_estimate,base_cognition_score,base_feeling_estimate,base_feeling_score,base_doctor,lifeway_exercise_frequency,lifeway_exercise_time,lifeway_exercise_year,lifeway_exercise_type,lifeway_diet,lifeway_smoke_status,lifeway_smoke_number,lifeway_smoke_startage,lifeway_smoke_endage,lifeway_drink_status,lifeway_drink_number,lifeway_drink_stop,lifeway_drink_stopage,lifeway_drink_startage,lifeway_drink_oneyear,lifeway_drink_type,lifeway_occupational_disease,lifeway_job,lifeway_job_period,lifeway_hazardous_dust,lifeway_dust_preventive,lifeway_hazardous_radiation,lifeway_radiation_preventive,lifeway_hazardous_physical,lifeway_physical_preventive,lifeway_hazardous_chemical,lifeway_chemical_preventive,lifeway_hazardous_other,lifeway_other_preventive,lifeway_doctor,organ_lips,organ_tooth,organ_hypodontia,organ_hypodontia_topleft,organ_hypodontia_topright,organ_hypodontia_bottomleft,organ_hypodontia_bottomright,organ_caries,organ_caries_topleft,organ_caries_topright,organ_caries_bottomleft,organ_caries_bottomright,organ_denture,organ_denture_topleft,organ_denture_topright,organ_denture_bottomleft,organ_denture_bottomright,organ_guttur,organ_vision_left,organ_vision_right,organ_correctedvision_left,organ_correctedvision_right,organ_hearing,organ_movement,organ_doctor,examination_eye,examination_skin,examination_skin_other,examination_sclera,examination_sclera_other,examination_lymph,examination_lymph_other,examination_barrel_chest,examination_breath_sounds,examination_rale,examination_rale_other,examination_heart_rate,examination_heart_rhythm,examination_heart_noise,examination_abdomen_tenderness,examination_abdomen_mass,examination_abdomen_hepatomegaly,examination_abdomen_splenomegaly,examination_abdomen_shiftingdullness,examination_lowerextremity_edema,examination_dorsal_artery,examination_anus,examination_anus_other,examination_breast,examination_breast_other,examination_doctor,examination_woman_vulva,examination_woman_vagina,examination_woman_cervix,examination_woman_corpus,examination_woman_accessories,examination_woman_doctor,examination_other,blood_hemoglobin,blood_leukocyte,blood_platelet,blood_other,urine_protein,glycosuria,urine_acetone_bodies,bld,urine_other,blood_glucose_mmol,blood_glucose_mg,cardiogram,cardiogram_img,microalbuminuria,fob,glycosylated_hemoglobin,hb,sgft,ast,albumin,total_bilirubin,conjugated_bilirubin,scr,blood_urea,blood_k,blood_na,tc,tg,ldl,hdl,chest_x,chestx_img,ultrasound_abdomen,abdomenB_img,other_b,otherb_img,cervical_smear,other,cerebrovascular_disease,cerebrovascular_disease_other,kidney_disease,kidney_disease_other,heart_disease,heart_disease_other,vascular_disease,vascular_disease_other,ocular_diseases,ocular_diseases_other,nervous_system_disease,other_disease,health_evaluation,abnormal1,abnormal2,abnormal3,abnormal4,health_guidance,danger_controlling,target_weight,danger_controlling_other,create_user,create_name,create_org,create_org_name,create_time)
+values('{data.Rows[i]["id"]}','{data.Rows[i]["name"]}','{data.Rows[i]["aichive_no"]}','{data.Rows[i]["id_number"]}','{data.Rows[i]["batch_no"]}','{data.Rows[i]["bar_code"]}','{data.Rows[i]["symptom"]}','{data.Rows[i]["symptom_other"]}','{data.Rows[i]["check_date"]}','{data.Rows[i]["base_temperature"]}','{data.Rows[i]["base_heartbeat"]}','{data.Rows[i]["base_respiratory"]}',{Ifnull(data.Rows[i]["base_blood_pressure_left_high"])},{Ifnull(data.Rows[i]["base_blood_pressure_left_low"])},{Ifnull(data.Rows[i]["base_blood_pressure_right_high"])},{Ifnull(data.Rows[i]["base_blood_pressure_right_low"])},'{data.Rows[i]["base_height"]}','{data.Rows[i]["base_weight"]}','{data.Rows[i]["base_waist"]}','{data.Rows[i]["base_bmi"]}','{data.Rows[i]["base_health_estimate"]}','{data.Rows[i]["base_selfcare_estimate"]}','{data.Rows[i]["base_cognition_estimate"]}','{data.Rows[i]["base_cognition_score"]}','{data.Rows[i]["base_feeling_estimate"]}','{data.Rows[i]["base_feeling_score"]}','{data.Rows[i]["base_doctor"]}','{data.Rows[i]["lifeway_exercise_frequency"]}','{data.Rows[i]["lifeway_exercise_time"]}','{data.Rows[i]["lifeway_exercise_year"]}','{data.Rows[i]["lifeway_exercise_type"]}','{data.Rows[i]["lifeway_diet"]}','{data.Rows[i]["lifeway_smoke_status"]}','{data.Rows[i]["lifeway_smoke_number"]}','{data.Rows[i]["lifeway_smoke_startage"]}','{data.Rows[i]["lifeway_smoke_endage"]}','{data.Rows[i]["lifeway_drink_status"]}','{data.Rows[i]["lifeway_drink_number"]}','{data.Rows[i]["lifeway_drink_stop"]}','{data.Rows[i]["lifeway_drink_stopage"]}','{data.Rows[i]["lifeway_drink_startage"]}','{data.Rows[i]["lifeway_drink_oneyear"]}','{data.Rows[i]["lifeway_drink_type"]}','{data.Rows[i]["lifeway_occupational_disease"]}','{data.Rows[i]["lifeway_job"]}','{data.Rows[i]["lifeway_job_period"]}','{data.Rows[i]["lifeway_hazardous_dust"]}','{data.Rows[i]["lifeway_dust_preventive"]}','{data.Rows[i]["lifeway_hazardous_radiation"]}','{data.Rows[i]["lifeway_radiation_preventive"]}','{data.Rows[i]["lifeway_hazardous_physical"]}','{data.Rows[i]["lifeway_physical_preventive"]}','{data.Rows[i]["lifeway_hazardous_chemical"]}','{data.Rows[i]["lifeway_chemical_preventive"]}','{data.Rows[i]["lifeway_hazardous_other"]}','{data.Rows[i]["lifeway_other_preventive"]}','{data.Rows[i]["lifeway_doctor"]}','{data.Rows[i]["organ_lips"]}','{data.Rows[i]["organ_tooth"]}','{data.Rows[i]["organ_hypodontia"]}','{data.Rows[i]["organ_hypodontia_topleft"]}','{data.Rows[i]["organ_hypodontia_topright"]}','{data.Rows[i]["organ_hypodontia_bottomleft"]}','{data.Rows[i]["organ_hypodontia_bottomright"]}','{data.Rows[i]["organ_caries"]}','{data.Rows[i]["organ_caries_topleft"]}','{data.Rows[i]["organ_caries_topright"]}','{data.Rows[i]["organ_caries_bottomleft"]}','{data.Rows[i]["organ_caries_bottomright"]}','{data.Rows[i]["organ_denture"]}','{data.Rows[i]["organ_denture_topleft"]}','{data.Rows[i]["organ_denture_topright"]}','{data.Rows[i]["organ_denture_bottomleft"]}','{data.Rows[i]["organ_denture_bottomright"]}','{data.Rows[i]["organ_guttur"]}','{data.Rows[i]["organ_vision_left"]}','{data.Rows[i]["organ_vision_right"]}','{data.Rows[i]["organ_correctedvision_left"]}','{data.Rows[i]["organ_correctedvision_right"]}','{data.Rows[i]["organ_hearing"]}','{data.Rows[i]["organ_movement"]}','{data.Rows[i]["organ_doctor"]}','{data.Rows[i]["examination_eye"]}','{data.Rows[i]["examination_skin"]}','{data.Rows[i]["examination_skin_other"]}','{data.Rows[i]["examination_sclera"]}','{data.Rows[i]["examination_sclera_other"]}','{data.Rows[i]["examination_lymph"]}','{data.Rows[i]["examination_lymph_other"]}','{data.Rows[i]["examination_barrel_chest"]}','{data.Rows[i]["examination_breath_sounds"]}','{data.Rows[i]["examination_rale"]}','{data.Rows[i]["examination_rale_other"]}','{data.Rows[i]["examination_heart_rate"]}','{data.Rows[i]["examination_heart_rhythm"]}','{data.Rows[i]["examination_heart_noise"]}','{data.Rows[i]["examination_abdomen_tenderness"]}','{data.Rows[i]["examination_abdomen_mass"]}','{data.Rows[i]["examination_abdomen_hepatomegaly"]}','{data.Rows[i]["examination_abdomen_splenomegaly"]}','{data.Rows[i]["examination_abdomen_shiftingdullness"]}','{data.Rows[i]["examination_lowerextremity_edema"]}','{data.Rows[i]["examination_dorsal_artery"]}','{data.Rows[i]["examination_anus"]}','{data.Rows[i]["examination_anus_other"]}','{data.Rows[i]["examination_breast"]}','{data.Rows[i]["examination_breast_other"]}','{data.Rows[i]["examination_doctor"]}','{data.Rows[i]["examination_woman_vulva"]}','{data.Rows[i]["examination_woman_vagina"]}','{data.Rows[i]["examination_woman_cervix"]}','{data.Rows[i]["examination_woman_corpus"]}','{data.Rows[i]["examination_woman_accessories"]}','{data.Rows[i]["examination_woman_doctor"]}','{data.Rows[i]["examination_other"]}','{data.Rows[i]["blood_hemoglobin"]}','{data.Rows[i]["blood_leukocyte"]}','{data.Rows[i]["blood_platelet"]}','{data.Rows[i]["blood_other"]}','{data.Rows[i]["urine_protein"]}','{data.Rows[i]["glycosuria"]}','{data.Rows[i]["urine_acetone_bodies"]}','{data.Rows[i]["bld"]}','{data.Rows[i]["urine_other"]}','{data.Rows[i]["blood_glucose_mmol"]}','{data.Rows[i]["blood_glucose_mg"]}','{data.Rows[i]["cardiogram"]}','{data.Rows[i]["cardiogram_img"]}','{data.Rows[i]["microalbuminuria"]}','{data.Rows[i]["fob"]}','{data.Rows[i]["glycosylated_hemoglobin"]}','{data.Rows[i]["hb"]}','{data.Rows[i]["sgft"]}','{data.Rows[i]["ast"]}','{data.Rows[i]["albumin"]}','{data.Rows[i]["total_bilirubin"]}','{data.Rows[i]["conjugated_bilirubin"]}','{data.Rows[i]["scr"]}','{data.Rows[i]["blood_urea"]}','{data.Rows[i]["blood_k"]}','{data.Rows[i]["blood_na"]}','{data.Rows[i]["tc"]}','{data.Rows[i]["tg"]}','{data.Rows[i]["ldl"]}','{data.Rows[i]["hdl"]}','{data.Rows[i]["chest_x"]}','{data.Rows[i]["chestx_img"]}','{data.Rows[i]["ultrasound_abdomen"]}','{data.Rows[i]["abdomenB_img"]}','{data.Rows[i]["other_b"]}','{data.Rows[i]["otherb_img"]}','{data.Rows[i]["cervical_smear"]}','{data.Rows[i]["other"]}','{data.Rows[i]["cerebrovascular_disease"]}','{data.Rows[i]["cerebrovascular_disease_other"]}','{data.Rows[i]["kidney_disease"]}','{data.Rows[i]["kidney_disease_other"]}','{data.Rows[i]["heart_disease"]}','{data.Rows[i]["heart_disease_other"]}','{data.Rows[i]["vascular_disease"]}','{data.Rows[i]["vascular_disease_other"]}','{data.Rows[i]["ocular_diseases"]}','{data.Rows[i]["ocular_diseases_other"]}','{data.Rows[i]["nervous_system_disease"]}','{data.Rows[i]["other_disease"]}','{data.Rows[i]["health_evaluation"]}','{data.Rows[i]["abnormal1"]}','{data.Rows[i]["abnormal2"]}','{data.Rows[i]["abnormal3"]}','{data.Rows[i]["abnormal4"]}','{data.Rows[i]["health_guidance"]}','{data.Rows[i]["danger_controlling"]}','{data.Rows[i]["target_weight"]}','{data.Rows[i]["danger_controlling_other"]}','{data.Rows[i]["create_user"]}','{data.Rows[i]["create_name"]}','{data.Rows[i]["create_org"]}','{data.Rows[i]["create_org_name"]}','{Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss")}');");
                         recordid += $"'{data.Rows[i]["id"]}',";
                     }
                 }
@@ -1936,8 +2000,8 @@ values('{data.Rows[i]["id"]}','{data.Rows[i]["name"]}','{data.Rows[i]["aichive_n
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
-                        sqllist.Add($@"insert into elderly_selfcare_estimate (id,name,archive_no,id_number,test_date,answer_result,total_score,judgement_result,test_doctor,create_user,create_name,create_org,create_org_name,create_time,update_user,update_name,update_time,upload_time,upload_result
-                ) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["test_date"])},{Ifnull(data.Rows[i]["answer_result"])},{Ifnull(data.Rows[i]["total_score"])},{Ifnull(data.Rows[i]["judgement_result"])},{Ifnull(data.Rows[i]["test_doctor"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(data.Rows[i]["create_time"]).Replace('/', '-')},{Ifnull(data.Rows[i]["update_user"])},{Ifnull(data.Rows[i]["update_name"])},{Ifnull(data.Rows[i]["upload_result"])},{Ifnull(data.Rows[i]["update_time"]).Replace('/', '-')},{Ifnull(data.Rows[i]["upload_result"])});");
+                        sqllist.Add($@"insert into elderly_selfcare_estimate (id,name,archive_no,id_number,test_date,answer_result,total_score,judgement_result,test_doctor,create_user,create_name,create_org,create_org_name,create_time
+                ) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["test_date"])},{Ifnull(data.Rows[i]["answer_result"])},{Ifnull(data.Rows[i]["total_score"])},{Ifnull(data.Rows[i]["judgement_result"])},{Ifnull(data.Rows[i]["test_doctor"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
                         estimateid += $"'{data.Rows[i]["id"]}',";
                     }
                 }
@@ -1951,9 +2015,9 @@ values('{data.Rows[i]["id"]}','{data.Rows[i]["name"]}','{data.Rows[i]["aichive_n
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
-                        sqllist.Add($@"insert into elderly_selfcare_estimate (id,follow_id,drug_name,num,dosage,create_user,create_name,create_time,update_user,update_name,update_time
+                        sqllist.Add($@"insert into follow_medicine_record (id,follow_id,drug_name,num,dosage,create_user,create_name,create_time
 
-                ) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["follow_id"])},{Ifnull(data.Rows[i]["drug_name"])},{Ifnull(data.Rows[i]["num"])},{Ifnull(data.Rows[i]["dosage"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_time"])},{Ifnull(data.Rows[i]["update_user"])},{Ifnull(data.Rows[i]["update_name"])},{Ifnull(data.Rows[i]["update_time"]).Replace('/', '-')});");
+                ) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["follow_id"])},{Ifnull(data.Rows[i]["drug_name"])},{Ifnull(data.Rows[i]["num"])},{Ifnull(data.Rows[i]["dosage"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
                         followid += $"'{data.Rows[i]["id"]}',";
                     }
                 }
@@ -1965,24 +2029,23 @@ values('{data.Rows[i]["id"]}','{data.Rows[i]["name"]}','{data.Rows[i]["aichive_n
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
-                        sqllist.Add($@"insert into fuv_hypertension (id,name,archive_no,Codebar,SocialSecuritycode,visit_date,visit_type,symptom,other_symptom,sbp,dbp,weight,target_weight,bmi,target_bmi,heart_rate,other_sign,smoken,target_somken,wine,target_wine,sport_week,sport_once,target_sport_week,target_sport_once,salt_intake,target_salt_intake,mind_adjust,doctor_obey,assist_examine,drug_obey,untoward_effect,untoward_effect_drug,visit_class,referral_code,next_visit_date,visit_doctor,advice,create_name,create_time,update_name,update_time,transfer_organ,transfer_reason
-) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["patientName"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["Codebar"])},{Ifnull(data.Rows[i]["SocialSecuritycode"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["visit_type"])},{Ifnull(data.Rows[i]["symptom"])},{Ifnull(data.Rows[i]["other_symptom"])},{Ifnull(data.Rows[i]["sbp"])},{Ifnull(data.Rows[i]["dbp"])},{Ifnull(data.Rows[i]["weight"])},{Ifnull(data.Rows[i]["target_weight"])},{Ifnull(data.Rows[i]["bmi"])},{Ifnull(data.Rows[i]["target_bmi"])},{Ifnull(data.Rows[i]["heart_rate"])},{Ifnull(data.Rows[i]["other_sign"])},{Ifnull(data.Rows[i]["smoken"])},{Ifnull(data.Rows[i]["target_somken"])},{Ifnull(data.Rows[i]["wine"])},{Ifnull(data.Rows[i]["target_wine"])},{Ifnull(data.Rows[i]["sport_week"])},{Ifnull(data.Rows[i]["sport_once"])},{Ifnull(data.Rows[i]["target_sport_week"])},{Ifnull(data.Rows[i]["target_sport_once"])},{Ifnull(data.Rows[i]["salt_intake"])},{Ifnull(data.Rows[i]["target_salt_intake"])},{Ifnull(data.Rows[i]["mind_adjust"])},{Ifnull(data.Rows[i]["doctor_obey"])},{Ifnull(data.Rows[i]["assist_examine"])},{Ifnull(data.Rows[i]["drug_obey"])},{Ifnull(data.Rows[i]["untoward_effect"])},{Ifnull(data.Rows[i]["untoward_effect_drug"])},{Ifnull(data.Rows[i]["visit_class"])},{Ifnull(data.Rows[i]["referral_code"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["advice"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_time"]).Replace('/', '-')},{Ifnull(data.Rows[i]["update_name"])},{Ifnull(data.Rows[i]["update_time"]).Replace('/', '-')},{Ifnull(data.Rows[i]["transfer_organ"])},{Ifnull(data.Rows[i]["transfer_reason"])});");
+                        sqllist.Add($@"insert into fuv_hypertension (id,name,archive_no,Codebar,visit_date,visit_type,symptom,other_symptom,sbp,dbp,weight,target_weight,bmi,target_bmi,heart_rate,other_sign,smoken,target_somken,wine,target_wine,sport_week,sport_once,target_sport_week,target_sport_once,salt_intake,target_salt_intake,mind_adjust,doctor_obey,assist_examine,drug_obey,untoward_effect,untoward_effect_drug,visit_class,referral_code,next_visit_date,visit_doctor,advice,create_name,create_time,transfer_organ,transfer_reason
+) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["patientName"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["Codebar"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["visit_type"])},{Ifnull(data.Rows[i]["symptom"])},{Ifnull(data.Rows[i]["other_symptom"])},{Ifnull(data.Rows[i]["sbp"])},{Ifnull(data.Rows[i]["dbp"])},{Ifnull(data.Rows[i]["weight"])},{Ifnull(data.Rows[i]["target_weight"])},{Ifnull(data.Rows[i]["bmi"])},{Ifnull(data.Rows[i]["target_bmi"])},{Ifnull(data.Rows[i]["heart_rate"])},{Ifnull(data.Rows[i]["other_sign"])},{Ifnull(data.Rows[i]["smoken"])},{Ifnull(data.Rows[i]["target_somken"])},{Ifnull(data.Rows[i]["wine"])},{Ifnull(data.Rows[i]["target_wine"])},{Ifnull(data.Rows[i]["sport_week"])},{Ifnull(data.Rows[i]["sport_once"])},{Ifnull(data.Rows[i]["target_sport_week"])},{Ifnull(data.Rows[i]["target_sport_once"])},{Ifnull(data.Rows[i]["salt_intake"])},{Ifnull(data.Rows[i]["target_salt_intake"])},{Ifnull(data.Rows[i]["mind_adjust"])},{Ifnull(data.Rows[i]["doctor_obey"])},{Ifnull(data.Rows[i]["assist_examine"])},{Ifnull(data.Rows[i]["drug_obey"])},{Ifnull(data.Rows[i]["untoward_effect"])},{Ifnull(data.Rows[i]["untoward_effect_drug"])},{Ifnull(data.Rows[i]["visit_class"])},{Ifnull(data.Rows[i]["referral_code"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["advice"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["transfer_organ"])},{Ifnull(data.Rows[i]["transfer_reason"])});");
                         fuvid += $"'{data.Rows[i]["id"]}',";
                     }
                 }
                 #endregion
 
                 #region 糖尿病
-                DataSet diabetes = DbHelperMySQL.Query($@"select * from diabetes_follow_record where upload_status='0'
-");
+                DataSet diabetes = DbHelperMySQL.Query($@"select * from diabetes_follow_record where upload_status='0'");
                 if (diabetes != null && diabetes.Tables.Count > 0 && diabetes.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = diabetes.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
-                        sqllist.Add($@"insert into diabetes_follow_record (id,name,archive_no,id_number,visit_date,visit_type,symptom,symptom_other,blood_pressure_high,blood_pressure_low,weight_now,weight_next,bmi_now,bmi_next,dorsal_artery,other,smoke_now,smoke_next,drink_now,drink_next,sports_num_now,sports_time_now,sports_num_next,sports_time_next,staple_food_now,staple_food_next,psychological_recovery,medical_compliance,blood_glucose,glycosylated_hemoglobin,check_date,compliance,untoward_effect,reactive_hypoglycemia,follow_type,insulin_name,insulin_usage,transfer_treatment,transfer_treatment_reason,transfer_treatment_department,next_visit_date,visit_doctor,create_user,create_name,create_org,create_org_name,create_time,update_user,update_name,update_time,upload_time,upload_result
-) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["visit_type"])},{Ifnull(data.Rows[i]["symptom"])},{Ifnull(data.Rows[i]["symptom_other"])},{Ifnull(data.Rows[i]["blood_pressure_high"])},{Ifnull(data.Rows[i]["blood_pressure_low"])},{Ifnull(data.Rows[i]["weight_now"])},{Ifnull(data.Rows[i]["weight_next"])},{Ifnull(data.Rows[i]["bmi_now"])},{Ifnull(data.Rows[i]["bmi_next"])},{Ifnull(data.Rows[i]["dorsal_artery"])},{Ifnull(data.Rows[i]["other"])},{Ifnull(data.Rows[i]["smoke_now"])},{Ifnull(data.Rows[i]["smoke_next"])},{Ifnull(data.Rows[i]["drink_now"])},{Ifnull(data.Rows[i]["drink_next"])},{Ifnull(data.Rows[i]["sports_num_now"])},{Ifnull(data.Rows[i]["sports_time_now"])},{Ifnull(data.Rows[i]["sports_num_next"])},{Ifnull(data.Rows[i]["sports_time_next"])},{Ifnull(data.Rows[i]["staple_food_now"])},{Ifnull(data.Rows[i]["staple_food_next"])},{Ifnull(data.Rows[i]["psychological_recovery"])},{Ifnull(data.Rows[i]["medical_compliance"])},{Ifnull(data.Rows[i]["blood_glucose"])},{Ifnull(data.Rows[i]["glycosylated_hemoglobin"])},{Ifnull(data.Rows[i]["check_date"])},{Ifnull(data.Rows[i]["compliance"])},{Ifnull(data.Rows[i]["untoward_effect"])},{Ifnull(data.Rows[i]["reactive_hypoglycemia"])},{Ifnull(data.Rows[i]["follow_type"])},{Ifnull(data.Rows[i]["insulin_name"])},{Ifnull(data.Rows[i]["insulin_usage"])},{Ifnull(data.Rows[i]["transfer_treatment"])},{Ifnull(data.Rows[i]["transfer_treatment_reason"])},{Ifnull(data.Rows[i]["transfer_treatment_department"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(data.Rows[i]["create_time"]).Replace('/', '-')},{Ifnull(data.Rows[i]["update_user"])},{Ifnull(data.Rows[i]["update_name"])},{Ifnull(data.Rows[i]["update_time"]).Replace('/', '-')},{Ifnull(data.Rows[i]["upload_time"]).Replace('/', '-')},{Ifnull(data.Rows[i]["upload_result"])});");
+                        sqllist.Add($@"insert into diabetes_follow_record (id,name,archive_no,id_number,visit_date,visit_type,symptom,symptom_other,blood_pressure_high,blood_pressure_low,weight_now,weight_next,bmi_now,bmi_next,dorsal_artery,other,smoke_now,smoke_next,drink_now,drink_next,sports_num_now,sports_time_now,sports_num_next,sports_time_next,staple_food_now,staple_food_next,psychological_recovery,medical_compliance,blood_glucose,glycosylated_hemoglobin,check_date,compliance,untoward_effect,reactive_hypoglycemia,follow_type,insulin_name,insulin_usage,transfer_treatment,transfer_treatment_reason,transfer_treatment_department,next_visit_date,visit_doctor,create_user,create_name,create_org,create_org_name,create_time
+) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["visit_type"])},{Ifnull(data.Rows[i]["symptom"])},{Ifnull(data.Rows[i]["symptom_other"])},{Ifnull(data.Rows[i]["blood_pressure_high"])},{Ifnull(data.Rows[i]["blood_pressure_low"])},{Ifnull(data.Rows[i]["weight_now"])},{Ifnull(data.Rows[i]["weight_next"])},{Ifnull(data.Rows[i]["bmi_now"])},{Ifnull(data.Rows[i]["bmi_next"])},{Ifnull(data.Rows[i]["dorsal_artery"])},{Ifnull(data.Rows[i]["other"])},{Ifnull(data.Rows[i]["smoke_now"])},{Ifnull(data.Rows[i]["smoke_next"])},{Ifnull(data.Rows[i]["drink_now"])},{Ifnull(data.Rows[i]["drink_next"])},{Ifnull(data.Rows[i]["sports_num_now"])},{Ifnull(data.Rows[i]["sports_time_now"])},{Ifnull(data.Rows[i]["sports_num_next"])},{Ifnull(data.Rows[i]["sports_time_next"])},{Ifnull(data.Rows[i]["staple_food_now"])},{Ifnull(data.Rows[i]["staple_food_next"])},{Ifnull(data.Rows[i]["psychological_recovery"])},{Ifnull(data.Rows[i]["medical_compliance"])},{Ifnull(data.Rows[i]["blood_glucose"])},{Ifnull(data.Rows[i]["glycosylated_hemoglobin"])},{Ifnull(data.Rows[i]["check_date"])},{Ifnull(data.Rows[i]["compliance"])},{Ifnull(data.Rows[i]["untoward_effect"])},{Ifnull(data.Rows[i]["reactive_hypoglycemia"])},{Ifnull(data.Rows[i]["follow_type"])},{Ifnull(data.Rows[i]["insulin_name"])},{Ifnull(data.Rows[i]["insulin_usage"])},{Ifnull(data.Rows[i]["transfer_treatment"])},{Ifnull(data.Rows[i]["transfer_treatment_reason"])},{Ifnull(data.Rows[i]["transfer_treatment_department"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
                         diabetesid += $"'{data.Rows[i]["id"]}',";
                     }
                 }
@@ -1996,9 +2059,13 @@ values('{data.Rows[i]["id"]}','{data.Rows[i]["name"]}','{data.Rows[i]["aichive_n
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
-                        sqllist.Add($@"insert into zkhw_tj_ncg (ID,aichive_no,id_number,bar_code,SocialSecurity,code,WBC,LEU,NIT,URO,PRO,PH,BLD,SG,KET,BIL,GLU,Vc,MA,ACR,Ca,CR,type,createtime,updatetime,synchronize_type,ZrysNCG
-                ) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["SocialSecurity"])},{Ifnull(data.Rows[i]["code"])},{Ifnull(data.Rows[i]["WBC"])},{Ifnull(data.Rows[i]["LEU"])},{Ifnull(data.Rows[i]["NIT"])},{Ifnull(data.Rows[i]["URO"])},{Ifnull(data.Rows[i]["PRO"])},{Ifnull(data.Rows[i]["PH"])},{Ifnull(data.Rows[i]["BLD"])},{Ifnull(data.Rows[i]["SG"])},{Ifnull(data.Rows[i]["KET"])},{Ifnull(data.Rows[i]["BIL"])},{Ifnull(data.Rows[i]["GLU"])},{Ifnull(data.Rows[i]["Vc"])},{Ifnull(data.Rows[i]["MA"])},{Ifnull(data.Rows[i]["ACR"])},{Ifnull(data.Rows[i]["Ca"])},{Ifnull(data.Rows[i]["CR"])},{Ifnull(data.Rows[i]["type"])},{Ifnull(data.Rows[i]["createtime"])},{Ifnull(data.Rows[i]["updatetime"])},{Ifnull(data.Rows[i]["synchronize_type"])},{Ifnull(data.Rows[i]["ZrysNCG"])});");
+                        string sqlncg = $@"insert into zkhw_tj_ncg (ID,aichive_no,id_number,bar_code,WBC,LEU,NIT,URO,PRO,PH,BLD,SG,KET,BIL,GLU,Vc,MA,ACR,Ca,CR,type,createtime,synchronize_type,ZrysNCG) values({ Ifnull(data.Rows[i]["id"])},{ Ifnull(data.Rows[i]["aichive_no"])},{ Ifnull(data.Rows[i]["id_number"])},{ Ifnull(data.Rows[i]["bar_code"])},{ Ifnull(data.Rows[i]["WBC"])},{ Ifnull(data.Rows[i]["LEU"])},{ Ifnull(data.Rows[i]["NIT"])},{ Ifnull(data.Rows[i]["URO"])},{ Ifnull(data.Rows[i]["PRO"])},{ Ifnull(data.Rows[i]["PH"])},{ Ifnull(data.Rows[i]["BLD"])},{ Ifnull(data.Rows[i]["SG"])},{ Ifnull(data.Rows[i]["KET"])},{ Ifnull(data.Rows[i]["BIL"])},{ Ifnull(data.Rows[i]["GLU"])},{ Ifnull(data.Rows[i]["Vc"])},{ Ifnull(data.Rows[i]["MA"])},{ Ifnull(data.Rows[i]["ACR"])},{ Ifnull(data.Rows[i]["Ca"])},{ Ifnull(data.Rows[i]["CR"])},{ Ifnull(data.Rows[i]["type"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["createtime"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{ Ifnull(data.Rows[i]["synchronize_type"])},{ Ifnull(data.Rows[i]["ZrysNCG"])});";
+                        sqllist.Add(sqlncg);
                         ncgid += $"'{data.Rows[i]["id"]}',";
+                        //using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
+                        //{
+                        //    sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "\n"+sqlncg);
+                        //}
                     }
                 }
                 #endregion
@@ -2012,7 +2079,7 @@ values('{data.Rows[i]["id"]}','{data.Rows[i]["name"]}','{data.Rows[i]["aichive_n
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
                         sqllist.Add($@"insert into zkhw_tj_sgtz (ID,aichive_no,id_number,bar_code,BMI,Height,Weight,createtime) 
-values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["BMI"])},{Ifnull(data.Rows[i]["Height"])},{Ifnull(data.Rows[i]["Weight"])},{Ifnull(data.Rows[i]["createtime"])});");
+values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["BMI"])},{Ifnull(data.Rows[i]["Height"])},{Ifnull(data.Rows[i]["Weight"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["createtime"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
                         sgtzid += $"'{data.Rows[i]["id"]}',";
                     }
                 }
@@ -2026,9 +2093,8 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
-                        sqllist.Add($@"insert into zkhw_tj_sh (ID,aichive_no,id_number,bar_code,ALT,AST,TBIL,DBIL,CREA,UREA,GLU,TG,CHO,HDLC,LDLC,ALB,UA,HCY,AFP,CEA,Ka,Na,TP,ALP,GGT,CHE,TBA,APOA1,APOB,CK,CKMB,LDHL,HBDH,aAMY,createtime,updatetime,synchronize_type,ZrysSH,low,high,timeCodeUnique
-) 
-values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["ALT"])},{Ifnull(data.Rows[i]["AST"])},{Ifnull(data.Rows[i]["TBIL"])},{Ifnull(data.Rows[i]["DBIL"])},{Ifnull(data.Rows[i]["CREA"])},{Ifnull(data.Rows[i]["UREA"])},{Ifnull(data.Rows[i]["GLU"])},{Ifnull(data.Rows[i]["TG"])},{Ifnull(data.Rows[i]["CHO"])},{Ifnull(data.Rows[i]["HDLC"])},{Ifnull(data.Rows[i]["LDLC"])},{Ifnull(data.Rows[i]["ALB"])},{Ifnull(data.Rows[i]["UA"])},{Ifnull(data.Rows[i]["HCY"])},{Ifnull(data.Rows[i]["AFP"])},{Ifnull(data.Rows[i]["CEA"])},{Ifnull(data.Rows[i]["Ka"])},{Ifnull(data.Rows[i]["Na"])},{Ifnull(data.Rows[i]["TP"])},{Ifnull(data.Rows[i]["ALP"])},{Ifnull(data.Rows[i]["GGT"])},{Ifnull(data.Rows[i]["CHE"])},{Ifnull(data.Rows[i]["TBA"])},{Ifnull(data.Rows[i]["APOA1"])},{Ifnull(data.Rows[i]["APOB"])},{Ifnull(data.Rows[i]["CK"])},{Ifnull(data.Rows[i]["CKMB"])},{Ifnull(data.Rows[i]["LDHL"])},{Ifnull(data.Rows[i]["HBDH"])},{Ifnull(data.Rows[i]["aAMY"])},{Ifnull(data.Rows[i]["createtime"])},{Ifnull(data.Rows[i]["updatetime"])},{Ifnull(data.Rows[i]["synchronize_type"])},{Ifnull(data.Rows[i]["ZrysSH"])},{Ifnull(data.Rows[i]["low"])},{Ifnull(data.Rows[i]["high"])},{Ifnull(data.Rows[i]["timeCodeUnique"])});");
+                        sqllist.Add($@"insert into zkhw_tj_sh (ID,aichive_no,id_number,bar_code,ALT,AST,TBIL,DBIL,CREA,UREA,GLU,TG,CHO,HDLC,LDLC,ALB,UA,HCY,AFP,CEA,Ka,Na,TP,ALP,GGT,CHE,TBA,APOA1,APOB,CK,CKMB,LDHL,HBDH,aAMY,createtime,synchronize_type,ZrysSH,low,high,timeCodeUnique) 
+                        values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["ALT"])},{Ifnull(data.Rows[i]["AST"])},{Ifnull(data.Rows[i]["TBIL"])},{Ifnull(data.Rows[i]["DBIL"])},{Ifnull(data.Rows[i]["CREA"])},{Ifnull(data.Rows[i]["UREA"])},{Ifnull(data.Rows[i]["GLU"])},{Ifnull(data.Rows[i]["TG"])},{Ifnull(data.Rows[i]["CHO"])},{Ifnull(data.Rows[i]["HDLC"])},{Ifnull(data.Rows[i]["LDLC"])},{Ifnull(data.Rows[i]["ALB"])},{Ifnull(data.Rows[i]["UA"])},{Ifnull(data.Rows[i]["HCY"])},{Ifnull(data.Rows[i]["AFP"])},{Ifnull(data.Rows[i]["CEA"])},{Ifnull(data.Rows[i]["Ka"])},{Ifnull(data.Rows[i]["Na"])},{Ifnull(data.Rows[i]["TP"])},{Ifnull(data.Rows[i]["ALP"])},{Ifnull(data.Rows[i]["GGT"])},{Ifnull(data.Rows[i]["CHE"])},{Ifnull(data.Rows[i]["TBA"])},{Ifnull(data.Rows[i]["APOA1"])},{Ifnull(data.Rows[i]["APOB"])},{Ifnull(data.Rows[i]["CK"])},{Ifnull(data.Rows[i]["CKMB"])},{Ifnull(data.Rows[i]["LDHL"])},{Ifnull(data.Rows[i]["HBDH"])},{Ifnull(data.Rows[i]["aAMY"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["createtime"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["synchronize_type"])},{Ifnull(data.Rows[i]["ZrysSH"])},{Ifnull(data.Rows[i]["low"])},{Ifnull(data.Rows[i]["high"])},{Ifnull(data.Rows[i]["timeCodeUnique"])});");
                         shid += $"'{data.Rows[i]["id"]}',";
                     }
                 }
@@ -2042,8 +2108,8 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
-                        sqllist.Add($@"insert into zkhw_tj_xcg (ID,aichive_no,id_number,bar_code,WBC,RBC,PCT,PLT,HGB,HCT,MCV,MCH,MCHC,RDWCV,RDWSD,MONO,MONOP,GRAN,GRANP,NEUT,NEUTP,EO,EOP,BASO,BASOP,LYM,LYMP,MPV,PDW,MXD,MXDP,PLCR,OTHERS,createtime,updatetime,synchronize_type,ZrysXCG,timeCodeUnique) 
-values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["WBC"])},{Ifnull(data.Rows[i]["RBC"])},{Ifnull(data.Rows[i]["PCT"])},{Ifnull(data.Rows[i]["PLT"])},{Ifnull(data.Rows[i]["HGB"])},{Ifnull(data.Rows[i]["HCT"])},{Ifnull(data.Rows[i]["MCV"])},{Ifnull(data.Rows[i]["MCH"])},{Ifnull(data.Rows[i]["MCHC"])},{Ifnull(data.Rows[i]["RDWCV"])},{Ifnull(data.Rows[i]["RDWSD"])},{Ifnull(data.Rows[i]["MONO"])},{Ifnull(data.Rows[i]["MONOP"])},{Ifnull(data.Rows[i]["GRAN"])},{Ifnull(data.Rows[i]["GRANP"])},{Ifnull(data.Rows[i]["NEUT"])},{Ifnull(data.Rows[i]["EO"])},{Ifnull(data.Rows[i]["EOP"])},{Ifnull(data.Rows[i]["BASO"])},{Ifnull(data.Rows[i]["BASOP"])},{Ifnull(data.Rows[i]["LYM"])},{Ifnull(data.Rows[i]["LYMP"])},{Ifnull(data.Rows[i]["MPV"])},{Ifnull(data.Rows[i]["PDW"])},{Ifnull(data.Rows[i]["MXD"])},{Ifnull(data.Rows[i]["MXDP"])},{Ifnull(data.Rows[i]["PLCR"])},{Ifnull(data.Rows[i]["OTHERS"])},{Ifnull(data.Rows[i]["createtime"])},{Ifnull(data.Rows[i]["updatetime"])},{Ifnull(data.Rows[i]["synchronize_type"])},{Ifnull(data.Rows[i]["ZrysXCG"])},{Ifnull(data.Rows[i]["timeCodeUnique"])});");
+                        sqllist.Add($@"insert into zkhw_tj_xcg (ID,aichive_no,id_number,bar_code,WBC,RBC,PCT,PLT,HGB,HCT,MCV,MCH,MCHC,RDWCV,RDWSD,MONO,MONOP,GRAN,GRANP,NEUT,NEUTP,EO,EOP,BASO,BASOP,LYM,LYMP,MPV,PDW,MXD,MXDP,PLCR,OTHERS,createtime,synchronize_type,ZrysXCG,timeCodeUnique) 
+values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["WBC"])},{Ifnull(data.Rows[i]["RBC"])},{Ifnull(data.Rows[i]["PCT"])},{Ifnull(data.Rows[i]["PLT"])},{Ifnull(data.Rows[i]["HGB"])},{Ifnull(data.Rows[i]["HCT"])},{Ifnull(data.Rows[i]["MCV"])},{Ifnull(data.Rows[i]["MCH"])},{Ifnull(data.Rows[i]["MCHC"])},{Ifnull(data.Rows[i]["RDWCV"])},{Ifnull(data.Rows[i]["RDWSD"])},{Ifnull(data.Rows[i]["MONO"])},{Ifnull(data.Rows[i]["MONOP"])},{Ifnull(data.Rows[i]["GRAN"])},{Ifnull(data.Rows[i]["GRANP"])},{Ifnull(data.Rows[i]["NEUT"])},{Ifnull(data.Rows[i]["EO"])},{Ifnull(data.Rows[i]["EOP"])},{Ifnull(data.Rows[i]["BASO"])},{Ifnull(data.Rows[i]["BASOP"])},{Ifnull(data.Rows[i]["LYM"])},{Ifnull(data.Rows[i]["LYMP"])},{Ifnull(data.Rows[i]["MPV"])},{Ifnull(data.Rows[i]["PDW"])},{Ifnull(data.Rows[i]["MXD"])},{Ifnull(data.Rows[i]["MXDP"])},{Ifnull(data.Rows[i]["PLCR"])},{Ifnull(data.Rows[i]["OTHERS"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["createtime"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["synchronize_type"])},{Ifnull(data.Rows[i]["ZrysXCG"])},{Ifnull(data.Rows[i]["timeCodeUnique"])});");
                         xcgid += $"'{data.Rows[i]["id"]}',";
                     }
                 }
@@ -2057,9 +2123,9 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
-                        sqllist.Add($@"insert into zkhw_tj_xdt (ID,aichive_no,id_number,bar_code,SocialSecurity,code,XdtResult,XdtDesc,XdtDoctor,XdtName,Ventrate,PR,QRS,QT,QTc,P_R_T,DOB,Age,Gen,Dep,createtime,updatetime,synchronize_type,ZrysXDT,imageUrl,hr,p,pqrs,t,rv5,sv1,baseline_drift,myoelectricity,frequency
+                        sqllist.Add($@"insert into zkhw_tj_xdt (ID,aichive_no,id_number,bar_code,XdtResult,XdtDesc,XdtDoctor,XdtName,Ventrate,PR,QRS,QT,QTc,P_R_T,DOB,Age,Gen,Dep,createtime,synchronize_type,ZrysXDT,imageUrl,hr,p,pqrs,t,rv5,sv1,baseline_drift,myoelectricity,frequency
 ) 
-values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["SocialSecurity"])},{Ifnull(data.Rows[i]["code"])},{Ifnull(data.Rows[i]["XdtResult"])},{Ifnull(data.Rows[i]["XdtDesc"])},{Ifnull(data.Rows[i]["XdtDoctor"])},{Ifnull(data.Rows[i]["XdtName"])},{Ifnull(data.Rows[i]["Ventrate"])},{Ifnull(data.Rows[i]["PR"])},{Ifnull(data.Rows[i]["QRS"])},{Ifnull(data.Rows[i]["QT"])},{Ifnull(data.Rows[i]["QTc"])},{Ifnull(data.Rows[i]["P_R_T"])},{Ifnull(data.Rows[i]["DOB"])},{Ifnull(data.Rows[i]["Age"])},{Ifnull(data.Rows[i]["Gen"])},{Ifnull(data.Rows[i]["Dep"])},{Ifnull(data.Rows[i]["createtime"])},{Ifnull(data.Rows[i]["updatetime"])},{Ifnull(data.Rows[i]["synchronize_type"])},{Ifnull(data.Rows[i]["ZrysXDT"])},{Ifnull(data.Rows[i]["imageUrl"])},{Ifnull(data.Rows[i]["hr"])},{Ifnull(data.Rows[i]["p"])},{Ifnull(data.Rows[i]["pqrs"])},{Ifnull(data.Rows[i]["t"])},{Ifnull(data.Rows[i]["rv5"])},{Ifnull(data.Rows[i]["sv1"])},{Ifnull(data.Rows[i]["baseline_drift"])},{Ifnull(data.Rows[i]["myoelectricity"])},{Ifnull(data.Rows[i]["frequency"])});");
+values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["XdtResult"])},{Ifnull(data.Rows[i]["XdtDesc"])},{Ifnull(data.Rows[i]["XdtDoctor"])},{Ifnull(data.Rows[i]["XdtName"])},{Ifnull(data.Rows[i]["Ventrate"])},{Ifnull(data.Rows[i]["PR"])},{Ifnull(data.Rows[i]["QRS"])},{Ifnull(data.Rows[i]["QT"])},{Ifnull(data.Rows[i]["QTc"])},{Ifnull(data.Rows[i]["P_R_T"])},{Ifnull(data.Rows[i]["DOB"])},{Ifnull(data.Rows[i]["Age"])},{Ifnull(data.Rows[i]["Gen"])},{Ifnull(data.Rows[i]["Dep"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["createtime"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["synchronize_type"])},{Ifnull(data.Rows[i]["ZrysXDT"])},{Ifnull(data.Rows[i]["imageUrl"])},{Ifnull(data.Rows[i]["hr"])},{Ifnull(data.Rows[i]["p"])},{Ifnull(data.Rows[i]["pqrs"])},{Ifnull(data.Rows[i]["t"])},{Ifnull(data.Rows[i]["rv5"])},{Ifnull(data.Rows[i]["sv1"])},{Ifnull(data.Rows[i]["baseline_drift"])},{Ifnull(data.Rows[i]["myoelectricity"])},{Ifnull(data.Rows[i]["frequency"])});");
                         xdtid += $"'{data.Rows[i]["id"]}',";
                     }
                 }
@@ -2074,7 +2140,7 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
                         sqllist.Add($@"insert into zkhw_tj_xy (ID,aichive_no,id_number,bar_code,DBP,SBP,Pulse,createtime) 
-values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["DBP"])},{Ifnull(data.Rows[i]["code"])},{Ifnull(data.Rows[i]["SBP"])},{Ifnull(data.Rows[i]["Pulse"])},{Ifnull(data.Rows[i]["createtime"])});");
+values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["DBP"])},{Ifnull(data.Rows[i]["SBP"])},{Ifnull(data.Rows[i]["Pulse"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["createtime"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
                         xyid += $"'{data.Rows[i]["id"]}',";
                     }
                 }
@@ -2088,8 +2154,8 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
-                        sqllist.Add($@"insert into zkhw_tj_bc (ID,aichive_no,id_number,bar_code,SocialSecurity,code,FubuBC,FubuResult,FubuDesc,QitaBC,QitaResult,QitaDesc,BuPic01,BuPic02,BuPic03,BuPic04,createtime,updatetime,synchronize_type,ZrysBC,imageUrl_a,imageUrl_b,imageUrl_c,imageUrl_d) 
-values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["SocialSecurity"])},{Ifnull(data.Rows[i]["code"])},{Ifnull(data.Rows[i]["BuPic01"])},{Ifnull(data.Rows[i]["BuPic02"])},{Ifnull(data.Rows[i]["BuPic03"])},{Ifnull(data.Rows[i]["BuPic04"])},{Ifnull(data.Rows[i]["createtime"])},{Ifnull(data.Rows[i]["QitaDesc"])},{Ifnull(data.Rows[i]["QRS"])},{Ifnull(data.Rows[i]["QT"])},{Ifnull(data.Rows[i]["QTc"])},{Ifnull(data.Rows[i]["P_R_T"])},{Ifnull(data.Rows[i]["DOB"])},{Ifnull(data.Rows[i]["Age"])},{Ifnull(data.Rows[i]["updatetime"])},{Ifnull(data.Rows[i]["synchronize_type"])},{Ifnull(data.Rows[i]["ZrysBC"])},{Ifnull(data.Rows[i]["imageUrl_a"])},{Ifnull(data.Rows[i]["imageUrl_b"])},{Ifnull(data.Rows[i]["imageUrl_c"])},{Ifnull(data.Rows[i]["imageUrl_d"])});");
+                        sqllist.Add($@"insert into zkhw_tj_bc (ID,aichive_no,id_number,bar_code,FubuBC,FubuResult,FubuDesc,QitaBC,QitaResult,QitaDesc,BuPic01,BuPic02,BuPic03,BuPic04,createtime,synchronize_type,ZrysBC,imageUrl_a,imageUrl_b,imageUrl_c,imageUrl_d) 
+values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["FubuBC"])},{Ifnull(data.Rows[i]["FubuResult"])},{Ifnull(data.Rows[i]["FubuDesc"])},{Ifnull(data.Rows[i]["QitaBC"])},{Ifnull(data.Rows[i]["QitaResult"])},{Ifnull(data.Rows[i]["QitaDesc"])},{Ifnull(data.Rows[i]["BuPic01"])},{Ifnull(data.Rows[i]["BuPic02"])},{Ifnull(data.Rows[i]["BuPic03"])},{Ifnull(data.Rows[i]["BuPic04"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["createtime"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["synchronize_type"])},{Ifnull(data.Rows[i]["ZrysBC"])},{Ifnull(data.Rows[i]["imageUrl_a"])},{Ifnull(data.Rows[i]["imageUrl_b"])},{Ifnull(data.Rows[i]["imageUrl_c"])},{Ifnull(data.Rows[i]["imageUrl_d"])});");
                         bcid += $"'{data.Rows[i]["id"]}',";
                     }
                 }
@@ -2097,40 +2163,94 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                 int run = DbHelperMySQL.ExecuteSqlTranYpt(sqllist);
                 if (run > 0)
                 {
+                    if (infoid!=null&&!"".Equals(infoid)) { 
                     sqllistz.Add($"update resident_base_info set upload_status='1' where id in({infoid.TrimEnd(',')});");
-                    sqllistz.Add($"update physical_examination_record set upload_status='1' where id in({recordid.TrimEnd(',')});");
-                    sqllistz.Add($"update elderly_selfcare_estimate set upload_status='1' where id in({estimateid.TrimEnd(',')});");
-                    sqllistz.Add($"update follow_medicine_record set upload_status='1' where id in({followid.TrimEnd(',')});");
-                    sqllistz.Add($"update fuv_hypertension set upload_status='1' where id in({fuvid.TrimEnd(',')});");
-                    sqllistz.Add($"update diabetes_follow_record set upload_status='1' where id in({diabetesid.TrimEnd(',')});");
-                    sqllistz.Add($"update zkhw_tj_ncg set upload_status='1' where id in({ncgid.TrimEnd(',')});");
-                    sqllistz.Add($"update zkhw_tj_sgtz set upload_status='1' where id in({sgtzid.TrimEnd(',')});");
-                    sqllistz.Add($"update zkhw_tj_sh set upload_status='1' where id in({shid.TrimEnd(',')});");
-                    sqllistz.Add($"update zkhw_tj_xcg set upload_status='1' where id in({xcgid.TrimEnd(',')});");
-                    sqllistz.Add($"update zkhw_tj_xdt set upload_status='1' where id in({xdtid.TrimEnd(',')});");
-                    sqllistz.Add($"update zkhw_tj_xy set upload_status='1' where id in({xyid.TrimEnd(',')});");
-                    sqllistz.Add($"update zkhw_tj_bc set upload_status='1' where id in({bcid.TrimEnd(',')});");
-                    int reu1 = DbHelperMySQL.ExecuteSqlTran(sqllistz);
+                    }
+                    if (recordid != null && !"".Equals(recordid))
+                    {
+                        sqllistz.Add($"update physical_examination_record set upload_status='1' where id in({recordid.TrimEnd(',')});");
+                    }
+                    if (estimateid != null && !"".Equals(estimateid))
+                    {
+                        sqllistz.Add($"update elderly_selfcare_estimate set upload_status='1' where id in({estimateid.TrimEnd(',')});");
+                    }
+                    if (followid != null && !"".Equals(followid))
+                    {
+                        sqllistz.Add($"update follow_medicine_record set upload_status='1' where id in({followid.TrimEnd(',')});");
+                    }
+                    if (fuvid != null && !"".Equals(fuvid))
+                    {
+                        sqllistz.Add($"update fuv_hypertension set upload_status='1' where id in({fuvid.TrimEnd(',')});");
+                    }
+                    if (diabetesid != null && !"".Equals(diabetesid))
+                    {
+                        sqllistz.Add($"update diabetes_follow_record set upload_status='1' where id in({diabetesid.TrimEnd(',')});");
+                    }
+                    if (ncgid != null && !"".Equals(ncgid))
+                    {
+                        sqllistz.Add($"update zkhw_tj_ncg set upload_status='1' where id in({ncgid.TrimEnd(',')});");
+                    }
+                    if (sgtzid != null && !"".Equals(sgtzid))
+                    {
+                        sqllistz.Add($"update zkhw_tj_sgtz set upload_status='1' where id in({sgtzid.TrimEnd(',')});");
+                    }
+                    if (shid != null && !"".Equals(shid))
+                    {
+                        sqllistz.Add($"update zkhw_tj_sh set upload_status='1' where id in({shid.TrimEnd(',')});");
+                    }
+                    if (xcgid != null && !"".Equals(xcgid))
+                    {
+                        sqllistz.Add($"update zkhw_tj_xcg set upload_status='1' where id in({xcgid.TrimEnd(',')});");
+                    }
+                    if (xdtid != null && !"".Equals(xdtid))
+                    {
+                        sqllistz.Add($"update zkhw_tj_xdt set upload_status='1' where id in({xdtid.TrimEnd(',')});");
+                    }
+                    if (xyid != null && !"".Equals(xyid))
+                    {
+                        sqllistz.Add($"update zkhw_tj_xy set upload_status='1' where id in({xyid.TrimEnd(',')});");
+                    }
+                    if (bcid != null && !"".Equals(bcid))
+                    {
+                        sqllistz.Add($"update zkhw_tj_bc set upload_status='1' where id in({bcid.TrimEnd(',')});");
+                    }
+                        int reu1 = DbHelperMySQL.ExecuteSqlTran(sqllistz);
                     if (reu1 > 0)
                     {
-                        MessageBox.Show("上传成功！");
+                        bean.loginLogBean lb = new bean.loginLogBean();
+                        lb.name = frmLogin.name;
+                        lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        lb.eventInfo = "数据上传成功！";
+                        lb.type = "2";
+                        lls.addCheckLog(lb);
+                        MessageBox.Show("数据上传成功！");
                     }
                     else
                     {
-                        MessageBox.Show("上传错误！");
-                        return;
+                        MessageBox.Show("上传错误！222");
                     }
-                    return;
                 }
                 else
                 {
-                    MessageBox.Show("上传错误！");
+                    bean.loginLogBean lb = new bean.loginLogBean();
+                    lb.name = frmLogin.name;
+                    lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    lb.eventInfo = "数据上传异常！";
+                    lb.type = "2";
+                    lls.addCheckLog(lb);
+                    MessageBox.Show("上传异常111，请检查网络是否通畅！");
                     return;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("错误请联系管理员！");
+                bean.loginLogBean lb = new bean.loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "数据上传异常！";
+                lb.type = "2";
+                lls.addCheckLog(lb);
+                MessageBox.Show("错误请联系管理员！"+ ex.Message+"\n"+ex.StackTrace);
                 return;
             }
 
@@ -2161,7 +2281,6 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                 //说明点击的列是DataGridViewButtonColumn列
                 DataGridViewColumn column = dataGridView1.Columns[e.ColumnIndex];
                 string id = dataGridView1["编码", e.RowIndex].Value.ToString();
-                string str = Application.StartupPath;//项目路径
                 OpenPdf(@str + $"/up/result/{id}.pdf");
             }
         }

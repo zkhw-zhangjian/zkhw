@@ -30,7 +30,7 @@ namespace zkhwClient.dao
         public DataTable checkLtdOrganizationBycode(string areacode)
         {
             DataSet ds = new DataSet();
-            string sql = "select * from ltd_organization  where towns_code > '" + areacode + "'";
+            string sql = "select * from ltd_organization  where towns_code = '" + areacode + "'";
             ds = DbHelperMySQL.QueryYpt(sql);
             return ds.Tables[0];
         }
@@ -39,7 +39,8 @@ namespace zkhwClient.dao
         {
             int rt = 0;
             string id = Result.GetNewId();
-            String sql = "insert into ltd_organization (id,pub_orgcode,organ_code,organ_name,organ_short_name,organ_level,organ_parent_code,create_user_code,create_time,update_user_code,update_time,is_delete.remark,province_code,province_name,city_code,city_name,county_code,county_name,towns_code,towns_name,village_code,village_name,address,lng.lat) values ";
+            String sql = "insert into ltd_organization (id,pub_orgcode,organ_code,organ_name,organ_short_name,organ_level,organ_parent_code,create_user_code,create_time,update_user_code,update_time,is_delete,remark,province_code,province_name,city_code,city_name,county_code,county_name,towns_code,towns_name,village_code,village_name,address,lng,lat) values ";
+
             for (int j = 0; j < list.Count; j++)
             {
                 if (j > 0)
@@ -58,7 +59,7 @@ namespace zkhwClient.dao
         public DataTable checkUsersBycode(string organcode)
         {
             DataSet ds = new DataSet();
-            string sql = "select * from ltd_user  where organ_code > '" + organcode + "'";
+            string sql = "select * from ltd_user  where organ_code = '" + organcode + "'";
             ds = DbHelperMySQL.QueryYpt(sql);
             return ds.Tables[0];
         }
@@ -72,11 +73,11 @@ namespace zkhwClient.dao
                 string id = Result.GetNewId();
                 if (j > 0)
                 {
-                    sql += " , ('" + id + "','" + list[j].username + "', '" + list[j].password + "','" + list[j].user_code + "','" + list[j].user_name + "','" + list[j].pub_usercode + "','" + list[j].sex + "','" + list[j].job_num + "','" + list[j].tele_phone + "','" + list[j].mail + "','" + list[j].birthday + "','" + list[j].organ_code + "','" + list[j].parent_organ + "','" + list[j].depart_code + "','" + list[j].user_type_code + "','" + list[j].data_level + "', '" + list[j].status + "', '" + list[j].is_delete + "', '" + list[j].create_time + "', '" + list[j].create_user_code + "', '" + list[j].create_user_code + "', '" + list[j].update_user_code + "')";
+                    sql += " , ('" + id + "','" + list[j].userName + "', '" + list[j].password + "','" + list[j].user_code + "','" + list[j].user_name + "','" + list[j].pub_usercode + "','" + list[j].sex + "','" + list[j].job_num + "','" + list[j].tele_phone + "','" + list[j].mail + "','" + list[j].birthday + "','" + list[j].organ_code + "','" + list[j].parent_organ + "','" + list[j].depart_code + "','" + list[j].user_type_code + "','" + list[j].data_level + "', '" + list[j].status + "', '" + list[j].is_delete + "', '" + list[j].create_time + "', '" + list[j].create_user_code + "', '" + list[j].update_time + "', '" + list[j].update_user_code + "')";
                 }
                 else
                 {
-                    sql += "('" + id + "','" + list[j].username + "', '" + list[j].password + "','" + list[j].user_code + "','" + list[j].user_name + "','" + list[j].pub_usercode + "','" + list[j].sex + "','" + list[j].job_num + "','" + list[j].tele_phone + "','" + list[j].mail + "','" + list[j].birthday + "','" + list[j].organ_code + "','" + list[j].parent_organ + "','" + list[j].depart_code + "','" + list[j].user_type_code + "','" + list[j].data_level + "', '" + list[j].status + "', '" + list[j].is_delete + "', '" + list[j].create_time + "', '" + list[j].create_user_code + "', '" + list[j].create_user_code + "', '" + list[j].update_user_code + "')";
+                    sql += "('" + id + "','" + list[j].userName + "', '" + list[j].password + "','" + list[j].user_code + "','" + list[j].user_name + "','" + list[j].pub_usercode + "','" + list[j].sex + "','" + list[j].job_num + "','" + list[j].tele_phone + "','" + list[j].mail + "','" + list[j].birthday + "','" + list[j].organ_code + "','" + list[j].parent_organ + "','" + list[j].depart_code + "','" + list[j].user_type_code + "','" + list[j].data_level + "', '" + list[j].status + "', '" + list[j].is_delete + "', '" + list[j].create_time + "', '" + list[j].create_user_code + "', '" + list[j].update_time + "', '" + list[j].update_user_code + "')";
                 }
             }
             rt = DbHelperMySQL.ExecuteSql(sql);
@@ -87,7 +88,7 @@ namespace zkhwClient.dao
         public DataTable checkResidentBycode(string areacode)
         {
             DataSet ds = new DataSet();
-            string sql = "select * from resident_base_info where towns_code > '" + areacode + "'";
+            string sql = "select * from resident_base_info where towns_code = '" + areacode + "'";
             ds = DbHelperMySQL.QueryYpt(sql);
             return ds.Tables[0];
         }
@@ -95,16 +96,16 @@ namespace zkhwClient.dao
         public bool addResidents(List<resident_base_infoBean> list)
         {
             int rt = 0;
-            String sql = "insert into resident_base_info (id,archive_no,pb_archive,name,sex,birthday,age,id_number,card_pic,company,phone,link_name,link_phone,resident_type,address,residence_address,nation,blood_group,blood_rh,education,profession,marital_status,pay_type,pay_other,drug_allergy,allergy_other,exposure,disease_other,is_hypertension,is_diabetes,is_psychosis,is_tuberculosis,is_heredity,heredity_name,is_deformity,deformity_name,is_poor,kitchen,fuel,other_fuel,drink,other_drink,toilet,poultry,medical_code,photo_code,aichive_org,doctor_name,create_archives_name,is_signing,province_code,province_name,city_code,city_name,county_code,county_name,towns_code,towns_name,village_code,village_name,status,remark,create_user,create_name,create_time,create_org,create_org_name,update_user,update_name,upload_status) values ";
-            for (int j = 0; j < list.Count; j++)
+            String sql = "insert into resident_base_info (id,archive_no,pb_archive,name,sex,birthday,id_number,card_pic,company,phone,link_name,link_phone,resident_type,address,residence_address,nation,blood_group,blood_rh,education,profession,marital_status,pay_type,pay_other,drug_allergy,allergy_other,exposure,disease_other,is_hypertension,is_diabetes,is_psychosis,is_tuberculosis,is_heredity,heredity_name,is_deformity,deformity_name,is_poor,kitchen,fuel,other_fuel,drink,other_drink,toilet,poultry,medical_code,photo_code,aichive_org,doctor_name,create_archives_name,is_signing,province_code,province_name,city_code,city_name,county_code,county_name,towns_code,towns_name,village_code,village_name,status,remark,create_user,create_name,create_time,create_org,create_org_name,update_user,update_name,upload_status) values ";
+            for (int j = 0; j < list.Count; j++)//,age  ,'" + list[j].age + "'
             {
                 if (j > 0)
                 {
-                    sql += " , ('" + list[j].id + "','" + list[j].archive_no + "', '" + list[j].pb_archive + "','" + list[j].name + "','" + list[j].sex + "','" + list[j].birthday + "','" + list[j].age + "','" + list[j].id_number + "','" + list[j].CardPic + "','" + list[j].company + "','" + list[j].phone + "','" + list[j].link_name + "','" + list[j].link_phone + "','" + list[j].resident_type + "','" + list[j].address + "','" + list[j].residence_address + "', '" + list[j].nation + "', '" + list[j].blood_group + "', '" + list[j].blood_rh + "', '" + list[j].education + "', '" + list[j].profession + "', '" + list[j].marital_status + "', '" + list[j].pay_type + "', '" + list[j].pay_other + "', '" + list[j].drug_allergy + "', '" + list[j].allergy_other + "', '" + list[j].exposure + "', '" + list[j].disease_other + "', '" + list[j].is_hypertension + "', '" + list[j].is_diabetes + "', '" + list[j].is_psychosis + "', '" + list[j].is_tuberculosis + "', '" + list[j].is_heredity + "', '" + list[j].heredity_name + "', '" + list[j].is_deformity + "', '" + list[j].deformity_name + "', '" + list[j].is_poor + "', '" + list[j].kitchen + "', '" + list[j].fuel + "', '" + list[j].other_fuel + "', '" + list[j].drink + "', '" + list[j].other_drink + "', '" + list[j].toilet + "', '" + list[j].poultry + "', '" + list[j].medical_code + "', '" + list[j].photo_code + "', '" + list[j].aichive_org + "', '" + list[j].doctor_name + "', '" + list[j].create_name + "', '" + list[j].is_signing + "', '" + list[j].province_code + "', '" + list[j].province_name + "', '" + list[j].city_code + "', '" + list[j].city_name + "', '" + list[j].county_code + "', '" + list[j].county_name + "', '" + list[j].towns_code + "', '" + list[j].towns_name + "', '" + list[j].village_code + "', '" + list[j].village_name + "', '" + list[j].status + "', '" + list[j].remark + "', '" + list[j].create_user + "', '" + list[j].create_name + "', '" + list[j].create_time + "', '" + list[j].create_org + "', '" + list[j].create_org_name + "', '" + list[j].update_user + "', '" + list[j].update_name + "', '1')";
+                    sql += " , ('" + list[j].id + "','" + list[j].archive_no + "', '" + list[j].pb_archive + "','" + list[j].name + "','" + list[j].sex + "','" + list[j].birthday + "','" + list[j].id_number + "','" + list[j].CardPic + "','" + list[j].company + "','" + list[j].phone + "','" + list[j].link_name + "','" + list[j].link_phone + "','" + list[j].resident_type + "','" + list[j].address + "','" + list[j].residence_address + "', '" + list[j].nation + "', '" + list[j].blood_group + "', '" + list[j].blood_rh + "', '" + list[j].education + "', '" + list[j].profession + "', '" + list[j].marital_status + "', '" + list[j].pay_type + "', '" + list[j].pay_other + "', '" + list[j].drug_allergy + "', '" + list[j].allergy_other + "', '" + list[j].exposure + "', '" + list[j].disease_other + "', '" + list[j].is_hypertension + "', '" + list[j].is_diabetes + "', '" + list[j].is_psychosis + "', '" + list[j].is_tuberculosis + "', '" + list[j].is_heredity + "', '" + list[j].heredity_name + "', '" + list[j].is_deformity + "', '" + list[j].deformity_name + "', '" + list[j].is_poor + "', '" + list[j].kitchen + "', '" + list[j].fuel + "', '" + list[j].other_fuel + "', '" + list[j].drink + "', '" + list[j].other_drink + "', '" + list[j].toilet + "', '" + list[j].poultry + "', '" + list[j].medical_code + "', '" + list[j].photo_code + "', '" + list[j].aichive_org + "', '" + list[j].doctor_name + "', '" + list[j].create_name + "', '" + list[j].is_signing + "', '" + list[j].province_code + "', '" + list[j].province_name + "', '" + list[j].city_code + "', '" + list[j].city_name + "', '" + list[j].county_code + "', '" + list[j].county_name + "', '" + list[j].towns_code + "', '" + list[j].towns_name + "', '" + list[j].village_code + "', '" + list[j].village_name + "', '" + list[j].status + "', '" + list[j].remark + "', '" + list[j].create_user + "', '" + list[j].create_name + "', '" + list[j].create_time + "', '" + list[j].create_org + "', '" + list[j].create_org_name + "', '" + list[j].update_user + "', '" + list[j].update_name + "', '1')";
                 }
                 else
                 {
-                    sql += "('" + list[j].id + "','" + list[j].archive_no + "', '" + list[j].pb_archive + "','" + list[j].name + "','" + list[j].sex + "','" + list[j].birthday + "','" + list[j].age + "','" + list[j].id_number + "','" + list[j].CardPic + "','" + list[j].company + "','" + list[j].phone + "','" + list[j].link_name + "','" + list[j].link_phone + "','" + list[j].resident_type + "','" + list[j].address + "','" + list[j].residence_address + "', '" + list[j].nation + "', '" + list[j].blood_group + "', '" + list[j].blood_rh + "', '" + list[j].education + "', '" + list[j].profession + "', '" + list[j].marital_status + "', '" + list[j].pay_type + "', '" + list[j].pay_other + "', '" + list[j].drug_allergy + "', '" + list[j].allergy_other + "', '" + list[j].exposure + "', '" + list[j].disease_other + "', '" + list[j].is_hypertension + "', '" + list[j].is_diabetes + "', '" + list[j].is_psychosis + "', '" + list[j].is_tuberculosis + "', '" + list[j].is_heredity + "', '" + list[j].heredity_name + "', '" + list[j].is_deformity + "', '" + list[j].deformity_name + "', '" + list[j].is_poor + "', '" + list[j].kitchen + "', '" + list[j].fuel + "', '" + list[j].other_fuel + "', '" + list[j].drink + "', '" + list[j].other_drink + "', '" + list[j].toilet + "', '" + list[j].poultry + "', '" + list[j].medical_code + "', '" + list[j].photo_code + "', '" + list[j].aichive_org + "', '" + list[j].doctor_name + "', '" + list[j].create_name + "', '" + list[j].is_signing + "', '" + list[j].province_code + "', '" + list[j].province_name + "', '" + list[j].city_code + "', '" + list[j].city_name + "', '" + list[j].county_code + "', '" + list[j].county_name + "', '" + list[j].towns_code + "', '" + list[j].towns_name + "', '" + list[j].village_code + "', '" + list[j].village_name + "', '" + list[j].status + "', '" + list[j].remark + "', '" + list[j].create_user + "', '" + list[j].create_name + "', '" + list[j].create_time + "', '" + list[j].create_org + "', '" + list[j].create_org_name + "', '" + list[j].update_user + "', '" + list[j].update_name + "', '1')";
+                    sql += "('" + list[j].id + "','" + list[j].archive_no + "', '" + list[j].pb_archive + "','" + list[j].name + "','" + list[j].sex + "','" + list[j].birthday + "','" + list[j].id_number + "','" + list[j].CardPic + "','" + list[j].company + "','" + list[j].phone + "','" + list[j].link_name + "','" + list[j].link_phone + "','" + list[j].resident_type + "','" + list[j].address + "','" + list[j].residence_address + "', '" + list[j].nation + "', '" + list[j].blood_group + "', '" + list[j].blood_rh + "', '" + list[j].education + "', '" + list[j].profession + "', '" + list[j].marital_status + "', '" + list[j].pay_type + "', '" + list[j].pay_other + "', '" + list[j].drug_allergy + "', '" + list[j].allergy_other + "', '" + list[j].exposure + "', '" + list[j].disease_other + "', '" + list[j].is_hypertension + "', '" + list[j].is_diabetes + "', '" + list[j].is_psychosis + "', '" + list[j].is_tuberculosis + "', '" + list[j].is_heredity + "', '" + list[j].heredity_name + "', '" + list[j].is_deformity + "', '" + list[j].deformity_name + "', '" + list[j].is_poor + "', '" + list[j].kitchen + "', '" + list[j].fuel + "', '" + list[j].other_fuel + "', '" + list[j].drink + "', '" + list[j].other_drink + "', '" + list[j].toilet + "', '" + list[j].poultry + "', '" + list[j].medical_code + "', '" + list[j].photo_code + "', '" + list[j].aichive_org + "', '" + list[j].doctor_name + "', '" + list[j].create_name + "', '" + list[j].is_signing + "', '" + list[j].province_code + "', '" + list[j].province_name + "', '" + list[j].city_code + "', '" + list[j].city_name + "', '" + list[j].county_code + "', '" + list[j].county_name + "', '" + list[j].towns_code + "', '" + list[j].towns_name + "', '" + list[j].village_code + "', '" + list[j].village_name + "', '" + list[j].status + "', '" + list[j].remark + "', '" + list[j].create_user + "', '" + list[j].create_name + "', '" + list[j].create_time + "', '" + list[j].create_org + "', '" + list[j].create_org_name + "', '" + list[j].update_user + "', '" + list[j].update_name + "', '1')";
                 }
             }
             rt = DbHelperMySQL.ExecuteSql(sql);
@@ -163,6 +164,30 @@ namespace zkhwClient.dao
                     sql += "('" + list[j].id + "','" + list[j].team_no + "','" + list[j].team_name + "', '" + list[j].doctor_no + "', '" + list[j].doctor_name + "', '" + list[j].position + "', '" + list[j].create_user + "', '" + list[j].create_name + "', '" + list[j].create_time + "', '" + list[j].update_user + "', '" + list[j].update_name + "', '" + list[j].update_time + "')";
                 }
             }
+            rt = DbHelperMySQL.ExecuteSql(sql);
+            return rt == 0 ? false : true;
+        }
+        //删除机构表信息，根据乡镇编号
+        public bool deleteLtdOrganization(string areacode)
+        {
+            int rt = 0;
+            String sql = "delete from ltd_organization where towns_code = '" + areacode + "'";
+            rt = DbHelperMySQL.ExecuteSql(sql);
+            return rt == 0 ? false : true;
+        }
+        //删除用户表信息，根据乡镇编号
+        public bool deleteUsersBycode(string areacode)
+        {
+            int rt = 0;
+            String sql = "delete from zkhw_user_info where organ_code in (select organ_code from ltd_organization where towns_code = '" + areacode + "')";
+            rt = DbHelperMySQL.ExecuteSql(sql);
+            return rt == 0 ? false : true;
+        }
+        //删除个人信息表信息，根据乡镇编号
+        public bool deleteResidentsBycode(string areacode)
+        {
+            int rt = 0;
+            String sql = "delete from resident_base_info where towns_code = '" + areacode + "'";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }

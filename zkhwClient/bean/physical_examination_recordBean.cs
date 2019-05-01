@@ -177,6 +177,8 @@ namespace zkhwClient.bean
         public string organ_doctor { get; set; }
         //眼底
         public string examination_eye { get; set; }
+        //眼底其他
+        public string examination_eye_other { get; set; }
         //皮肤
         public string examination_skin { get; set; }
         //皮肤其他
@@ -193,6 +195,8 @@ namespace zkhwClient.bean
         public string examination_barrel_chest { get; set; }
         //呼吸音
         public string examination_breath_sounds { get; set; }
+        //呼吸音异常说明
+        public string examination_breath_other { get; set; }
         //罗音
         public string examination_rale { get; set; }
         //罗音其他
@@ -223,6 +227,8 @@ namespace zkhwClient.bean
         public string examination_splenomegaly_memo { get; set; }
         //移动性浊音
         public string examination_abdomen_shiftingdullness { get; set; }
+        //移动性浊音异常说明
+        public string examination_shiftingdullness_memo { get; set; }
         //下肢水肿
         public string examination_lowerextremity_edema { get; set; }
         //足背动脉搏动
@@ -369,16 +375,27 @@ namespace zkhwClient.bean
         public string ocular_diseases_other { get; set; }
         //神经系统疾病
         public string nervous_system_disease { get; set; }
+        //神经系统疾病描述
+        public string nervous_disease_memo { get; set; }
         //其他系统疾病
-        public string other_disease { get; set; }//
+        public string other_disease { get; set; }
+        //其他系统疾病描述
+        public string other_disease_memo { get; set; }
         //健康评价
-        public string health_evaluation { get; set; }//
+        public string health_evaluation { get; set; }
+        //异常1，2，3，4
+        public string abnormal1 { get; set; }
+        public string abnormal2 { get; set; }        
+        public string abnormal3 { get; set; }
+        public string abnormal4 { get; set; }
         //健康指导
-        public string health_guidance { get; set; }//
+        public string health_guidance { get; set; }
         //危险因素控制编号(多个)
-        public string danger_controlling { get; set; }//
+        public string danger_controlling { get; set; }
         //目标体重
         public string target_weight { get; set; }
+        //建议接种疫苗
+        public string proposal_accination { get; set; }
         //其他危险因素控制
         public string danger_controlling_other { get; set; }
         //create_user

@@ -101,16 +101,18 @@
             // 
             // textBox1
             // 
+            this.textBox1.Enabled = false;
             this.textBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox1.Location = new System.Drawing.Point(133, 7);
+            this.textBox1.Location = new System.Drawing.Point(133, 55);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(316, 30);
             this.textBox1.TabIndex = 1;
             // 
             // textBox2
             // 
+            this.textBox2.Enabled = false;
             this.textBox2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox2.Location = new System.Drawing.Point(657, 7);
+            this.textBox2.Location = new System.Drawing.Point(657, 55);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(618, 30);
             this.textBox2.TabIndex = 3;
@@ -178,9 +180,9 @@
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Location = new System.Drawing.Point(12, 30);
+            this.panel1.Location = new System.Drawing.Point(12, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1331, 695);
+            this.panel1.Size = new System.Drawing.Size(1331, 721);
             this.panel1.TabIndex = 6;
             // 
             // numericUpDown6
@@ -706,8 +708,9 @@
             // 
             // textBox12
             // 
+            this.textBox12.Enabled = false;
             this.textBox12.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox12.Location = new System.Drawing.Point(657, 43);
+            this.textBox12.Location = new System.Drawing.Point(657, 91);
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(618, 30);
             this.textBox12.TabIndex = 67;
@@ -716,7 +719,7 @@
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox3.Location = new System.Drawing.Point(455, 43);
+            this.textBox3.Location = new System.Drawing.Point(455, 91);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(196, 30);
@@ -727,7 +730,7 @@
             // textBox11
             // 
             this.textBox11.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox11.Location = new System.Drawing.Point(-1, 43);
+            this.textBox11.Location = new System.Drawing.Point(-1, 91);
             this.textBox11.Name = "textBox11";
             this.textBox11.ReadOnly = true;
             this.textBox11.Size = new System.Drawing.Size(126, 30);
@@ -738,19 +741,19 @@
             // textBox9
             // 
             this.textBox9.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox9.Location = new System.Drawing.Point(455, 7);
+            this.textBox9.Location = new System.Drawing.Point(455, 55);
             this.textBox9.Name = "textBox9";
             this.textBox9.ReadOnly = true;
             this.textBox9.Size = new System.Drawing.Size(196, 30);
             this.textBox9.TabIndex = 54;
-            this.textBox9.Text = "编号";
+            this.textBox9.Text = "个人档案编号";
             this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox4
             // 
             this.textBox4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox4.ForeColor = System.Drawing.Color.SkyBlue;
-            this.textBox4.Location = new System.Drawing.Point(-1, 7);
+            this.textBox4.Location = new System.Drawing.Point(-1, 55);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(126, 30);
@@ -762,7 +765,7 @@
             // 
             this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel11.Controls.Add(this.label47);
-            this.panel11.Location = new System.Drawing.Point(3, 79);
+            this.panel11.Location = new System.Drawing.Point(0, 3);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(1272, 49);
             this.panel11.TabIndex = 50;
@@ -782,7 +785,7 @@
             this.panel3.Controls.Add(this.radioButton1);
             this.panel3.Controls.Add(this.radioButton2);
             this.panel3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.panel3.Location = new System.Drawing.Point(133, 40);
+            this.panel3.Location = new System.Drawing.Point(133, 88);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(316, 33);
             this.panel3.TabIndex = 37;

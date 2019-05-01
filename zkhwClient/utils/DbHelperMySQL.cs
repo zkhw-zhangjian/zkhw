@@ -175,9 +175,13 @@ namespace zkhwClient.dao
                     tx.Commit();
                     return count;
                 }
-                catch
+                catch(Exception e)
                 {
                     tx.Rollback();
+                    using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
+                    {
+                        sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + e.Message + "\r\n" + e.StackTrace);
+                    }
                     return 0;
                 }
             }
@@ -721,7 +725,7 @@ namespace zkhwClient.dao
                     conn.Close();
                     using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
                     {
-                        sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + e.Message + "\r\n" + SQLStringList.ToString());
+                        sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + e.Message+"\r\n"+e.StackTrace+ "\r\n" + SQLStringList.ToString());
                     }
                     return 0;
                 }

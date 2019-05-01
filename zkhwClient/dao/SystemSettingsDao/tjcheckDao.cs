@@ -28,7 +28,7 @@ namespace zkhwClient.dao
         public DataTable selectBichaoInfo(string aichive_no, string barcode)
         {
             DataSet ds = new DataSet();
-            string sql = "select FubuBC,FubuResult,FubuDesc,QitaBC,QitaResult,QitaDesc from zkhw_tj_bc a where aichive_no = '" + aichive_no + "' and bar_code='"+ barcode + "'";
+            string sql = "select FubuBC,FubuResult,FubuDesc,QitaBC,QitaResult,QitaDesc from zkhw_tj_bc a where aichive_no = '" + aichive_no + "' and bar_code='"+ barcode + "' order by createtime desc limit 1";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -44,7 +44,7 @@ namespace zkhwClient.dao
         public DataTable selectXindiantuInfo(string aichive_no, string barcode)
         {
             DataSet ds = new DataSet();
-            string sql = "select XdtResult,XdtDesc,Ventrate,PR,QRS,QT,QTc,P_R_T,DOB,Age,Gen,Dep from zkhw_tj_xdt a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            string sql = "select XdtResult,XdtDesc,Ventrate,PR,QRS,QT,QTc,P_R_T,DOB,Age,Gen,Dep from zkhw_tj_xdt a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "' order by createtime desc limit 1";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -60,7 +60,7 @@ namespace zkhwClient.dao
         public DataTable selectShenghuaInfo(string aichive_no, string barcode)
         {
             DataSet ds = new DataSet();
-            string sql = "select  ALT, AST, TBIL, DBIL, CREA, UREA, GLU, TG, CHO, HDLC, LDLC, ALB, UA, HCY, AFP, CEA, Ka, Na, TP, ALP, GGT, CHE, TBA, APOA1, APOB, CK, CKMB, LDHL, HBDH, aAMY from zkhw_tj_sh a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            string sql = "select  ALT, AST, TBIL, DBIL, CREA, UREA, GLU, TG, CHO, HDLC, LDLC, ALB, UA, HCY, AFP, CEA, Ka, Na, TP, ALP, GGT, CHE, TBA, APOA1, APOB, CK, CKMB, LDHL, HBDH, aAMY from zkhw_tj_sh a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "' order by createtime desc limit 1";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -76,7 +76,7 @@ namespace zkhwClient.dao
         public DataTable selectXuechangguiInfo(string aichive_no, string barcode)
         {
             DataSet ds = new DataSet();
-            string sql = "select WBC,RBC,PCT,PLT,HGB,HCT,MCV,MCH,MCHC,RDWCV,RDWSD,MONO,MONOP,GRAN,GRANP,NEUT,NEUTP,EO,EOP,BASO,BASOP,LYM,LYMP,MPV,PDW,MXD,MXDP,PLCR,OTHERS from zkhw_tj_xcg a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            string sql = "select WBC,RBC,PCT,PLT,HGB,HCT,MCV,MCH,MCHC,RDWCV,RDWSD,MONO,MONOP,GRAN,GRANP,NEUT,NEUTP,EO,EOP,BASO,BASOP,LYM,LYMP,MPV,PDW,MXD,MXDP,PLCR,OTHERS from zkhw_tj_xcg a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "' order by createtime desc limit 1";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -92,7 +92,7 @@ namespace zkhwClient.dao
         public DataTable selectNiaochangguiInfo(string aichive_no, string barcode)
         {
             DataSet ds = new DataSet();
-            string sql = "select WBC,LEU,NIT,URO,PRO,PH,BLD,SG,KET,BIL,GLU,Vc,MA,ACR,Ca,CR from zkhw_tj_ncg a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            string sql = "select WBC,LEU,NIT,URO,PRO,PH,BLD,SG,KET,BIL,GLU,Vc,MA,ACR,Ca,CR from zkhw_tj_ncg a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "' order by createtime desc limit 1";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -108,7 +108,7 @@ namespace zkhwClient.dao
         public DataTable selectXueyaInfo(string aichive_no, string barcode)
         {
             DataSet ds = new DataSet();
-            string sql = "select DBP,SBP,Pulse from zkhw_tj_xy a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            string sql = "select DBP,SBP,Pulse from zkhw_tj_xy a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "' order by createtime desc limit 1";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -124,7 +124,7 @@ namespace zkhwClient.dao
         public DataTable selectSgtzInfo(string aichive_no, string barcode)
         {
             DataSet ds = new DataSet();
-            string sql = "select Height,Weight,BMI from zkhw_tj_sgtz a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            string sql = "select Height,Weight,BMI from zkhw_tj_sgtz a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "' order by createtime desc limit 1";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }

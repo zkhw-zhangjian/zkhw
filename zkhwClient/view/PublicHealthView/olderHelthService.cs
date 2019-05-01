@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using zkhwClient.dao;
 using zkhwClient.view.PublicHealthView;
+using zkhwClient.view.setting;
 
 namespace zkhwClient.PublicHealth
 {
@@ -59,9 +60,10 @@ namespace zkhwClient.PublicHealth
             time2 = this.dateTimePicker2.Text.ToString();//结束时间
 
             DataTable dt = olderHelthS.queryOlderHelthService(pCa, time1, time2, xcuncode);
+            if (dt.Rows.Count<1) { MessageBox.Show("未查询出数据!");return; }
             this.dataGridView1.DataSource = dt;
-            this.dataGridView1.Columns[0].Visible = false;
-            this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";
+            this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
+            this.dataGridView1.Columns[1].HeaderCell.Value = "档案编号";
             this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
             this.dataGridView1.Columns[3].HeaderCell.Value = "总分";
             this.dataGridView1.Columns[4].HeaderCell.Value = "评判结果";
@@ -121,10 +123,16 @@ namespace zkhwClient.PublicHealth
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            if (dataGridView1.SelectedRows.Count < 1) { return; }
+            string name=dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            string archiveno = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+            string idnumber = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
             aUolderHelthService hm = new aUolderHelthService();
             hm.label47.Text = "添加老年人生活自理能力评估表";
             hm.Text = "添加老年人生活自理能力评估表";
+            hm.textBox1.Text = name;
+            hm.textBox2.Text = archiveno;
+            hm.textBox12.Text = idnumber;
             if (hm.ShowDialog() == DialogResult.OK)
             {
                 //刷新页面

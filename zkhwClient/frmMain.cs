@@ -317,11 +317,11 @@ namespace zkhwClient
             PictureBox pic = (PictureBox)sender;
             pic.BackColor = Color.Blue;
             string tag = pic.Tag.ToString();
-            if (!"人员登记".Equals(tag) && pR != null)
-            {
-                pR.btnClose_Click();
-                pR = null;
-            }
+            //if (!"人员登记".Equals(tag) && pR != null)
+            //{
+            //    pR.btnClose_Click();
+            //    pR = null;
+            //}
             //选中打标
             for (int i = 0; i < this.flowLayoutPanel1.Controls.Count; i++)
             {
@@ -337,7 +337,12 @@ namespace zkhwClient
 
             if (tag == "人员登记")
             {    //公共卫生模块
-                personRegist pR = new personRegist();
+                if (pR != null)
+                {
+                    pR.btnClose_Click();
+                    pR = null;
+                }
+                pR = new personRegist();
                 pR.TopLevel = false;
                 pR.Dock = DockStyle.Fill;
                 pR.FormBorderStyle = FormBorderStyle.None;
@@ -845,8 +850,8 @@ namespace zkhwClient
                 {
                     p.Kill();
                 }
-                //Environment.Exit(0);
             }
+            Environment.Exit(0);
         }
         //定时任务获取生化和血球的数据
         private void timer2_Tick(object sender, EventArgs e)
@@ -886,17 +891,18 @@ namespace zkhwClient
                         if (arr_dt2.Rows.Count > 0)
                         {
                             shenghuaBean sh = new shenghuaBean();
-                            sh.bar_code = arr_dt2.Rows[0]["patient_id"].ToString();
-                            DataTable dtjkinfo= jkdao.selectjkInfoBybarcode(sh.bar_code);
+                            sh.bar_code = arr_dt1.Rows[j]["patient_id"].ToString();
+                            sh.createTime = Convert.ToDateTime(arr_dt1.Rows[j]["send_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss");
+                            DataTable dtjkinfo = jkdao.selectjkInfoBybarcode(sh.bar_code);
                             if (dtjkinfo != null && dtjkinfo.Rows.Count > 0)
                             {
                                 sh.aichive_no = dtjkinfo.Rows[0]["aichive_no"].ToString();
                                 sh.id_number = dtjkinfo.Rows[0]["id_number"].ToString();
                             }
-                            else {
-                                return;
+                            else
+                            {
+                                continue;
                             }
-                            sh.createTime = Convert.ToDateTime(arr_dt2.Rows[0]["send_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss");
                             for (int i = 0; i < arr_dt2.Rows.Count; i++)
                             {
                                 string item = arr_dt2.Rows[i]["item"].ToString();
@@ -925,15 +931,14 @@ namespace zkhwClient
                             if (istrue) {
                                 tjdao.updateTJbgdcShenghua(sh.aichive_no,sh.bar_code,1);
                                 tjdao.updatePEShInfo(sh.aichive_no, sh.bar_code, sh.CHO, sh.TG, sh.LDL_C,sh.HDL_C);
+                                xmlDoc.Load(path);
+                                XmlNode node;
+                                node = xmlDoc.SelectSingleNode("config/shlasttime");
+                                node.InnerText = sh.createTime;
+                                xmlDoc.Save(path);
                             }
                         }
-                        if (j== arr_dt1.Rows.Count-1) {
-                            xmlDoc.Load(path);
-                            XmlNode node;
-                            node = xmlDoc.SelectSingleNode("config/shlasttime");
-                            node.InnerText = Convert.ToDateTime(arr_dt1.Rows[j]["send_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"); ;
-                            xmlDoc.Save(path);
-                        }
+                       
                     }
                 }
             }

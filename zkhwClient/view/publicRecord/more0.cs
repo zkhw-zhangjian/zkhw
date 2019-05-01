@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace zkhwClient.view
@@ -41,6 +35,11 @@ namespace zkhwClient.view
                 advice = advice.Substring(1);
             }
             this.DialogResult = DialogResult.OK;
+        }
+
+        private void more0_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

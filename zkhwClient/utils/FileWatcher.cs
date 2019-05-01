@@ -42,7 +42,7 @@ namespace zkhwClient
         /// <remarks>创建人员(日期):★刘腾飞★(100319 14:16)</remarks>
         /// </summary>
         public static String ErrorMsg = String.Empty;
-
+        static String str = Application.StartupPath;
         #region 方法
 
         /// <summary>
@@ -215,7 +215,6 @@ namespace zkhwClient
                     try
                     {
                         //File.SetLastWriteTime(e.FullPath, DateTime.Now);//修改txt文件的时间
-
                         #region 心电图
                         XmlDocument doc = new XmlDocument();
                         doc.Load(e.FullPath);
@@ -283,9 +282,16 @@ namespace zkhwClient
                             new MySqlParameter("@myoelectricity", myoelectricitys),
                             new MySqlParameter("@frequency", frequencys),
                             new MySqlParameter("@createtime", time),
-                            new MySqlParameter("@imageUrl", ids+".jpg")
+                            new MySqlParameter("@imageUrl", data.Rows[0]["aichive_no"].ToString()+"_"+ids+".jpg")
                         };
-                            if (diagnosiss == "窦性心律和心律正常")
+                        string pName = e.FullPath.Replace("xml","jpg");
+                        FileInfo inf = new FileInfo(pName);
+                        if (File.Exists(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString() + "_" + ids + ".jpg"))
+                        {
+                            File.Delete(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString() + "_" + ids + ".jpg");
+                        }
+                        inf.MoveTo(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString()+"_" + ids + ".jpg");
+                        if (diagnosiss.IndexOf("正常")>-1)
                             {
                                 int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='1',cardiogram_img='{ids + ".jpg"}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
                             }
@@ -293,8 +299,10 @@ namespace zkhwClient
                             {
                                 int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='2',cardiogram_img='{ids + ".jpg"}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
                             }
+                            string issqdgbc = "update zkhw_tj_bgdc set XinDian='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                            DbHelperMySQL.ExecuteSql(issqdgbc);
                             int rue = DbHelperMySQL.ExecuteSql(issql, args);
-                        }
+                    }
                         #endregion
                     }
                     catch (Exception ex)
@@ -307,12 +315,6 @@ namespace zkhwClient
                 catch (Exception ex)
                 {
                     //MessageBox.Show(ex.StackTrace);
-                }
-                finally
-                {
-                    //如果遇到异常关闭了监听，则重新打开监听
-                    //if (!m_watcherAoup.EnableRaisingEvents)
-                    //    m_watcherAoup.EnableRaisingEvents = true;
                 }
             //}
         }
@@ -334,7 +336,6 @@ namespace zkhwClient
 
                     //File.SetLastWriteTime(e.FullPath, DateTime.Now);//修改txt文件的时间
                     #region B超
-                    string str = Application.StartupPath;//项目路径
                     XmlDocument doc = new XmlDocument();
                     doc.Load(e.FullPath);
                     XmlNodeList xNode = doc.SelectNodes("//Report[@Index='图片信息']/图片信息");
@@ -345,28 +346,59 @@ namespace zkhwClient
                     string BuPic02 = string.Empty;
                     string BuPic03 = string.Empty;
                     string BuPic04 = string.Empty;
+                    int innum = 0;
                     if (xNode != null && xNode.Count > 0)
                     {
+                    Thread.Sleep(1000);
+                    innum=e.FullPath.LastIndexOf("\\");
+                    string fullPath=e.FullPath.Substring(0, innum + 1);
                         for (int i = 0; i < xNode.Count; i++)
                         {
                             if (i == 0)
                             {
                                 BuPic01 = xNode[i].InnerText;
-                            }
+                                string pName = fullPath+BuPic01;
+                                FileInfo inf = new FileInfo(pName);
+                                if (File.Exists(str + "\\bcImg\\" + BuPic01))
+                                {
+                                    File.Delete(str + "\\bcImg\\" + BuPic01);
+                                }
+                                inf.CopyTo(str + "\\bcImg\\" + BuPic01);
+                                }
                             else if (i == 1)
                             {
                                 BuPic02 = xNode[i].InnerText;
+                                string pName = fullPath + BuPic02;
+                                FileInfo inf = new FileInfo(pName);
+                                if (File.Exists(str + "\\bcImg\\" + BuPic02))
+                                {
+                                    File.Delete(str + "\\bcImg\\" + BuPic02);
+                                }
+                                inf.CopyTo(str + "\\bcImg\\" + BuPic02);
                             }
                             else if (i == 2)
                             {
                                 BuPic03 = xNode[i].InnerText;
-                            }
+                                string pName = fullPath + BuPic03;
+                                FileInfo inf = new FileInfo(pName);
+                                if (File.Exists(str + "\\bcImg\\" + BuPic03))
+                                {
+                                    File.Delete(str + "\\bcImg\\" + BuPic03);
+                                }
+                                inf.CopyTo(str + "\\bcImg\\" + BuPic03);
+                        }
                             else if (i == 3)
                             {
                                 BuPic04 = xNode[i].InnerText;
-                            }
-
+                                string pName = fullPath + BuPic04;
+                                FileInfo inf = new FileInfo(pName);
+                                if (File.Exists(str + "\\bcImg\\" + BuPic04))
+                                {
+                                    File.Delete(str + "\\bcImg\\" + BuPic04);
+                                }
+                                inf.CopyTo(str + "\\bcImg\\" + BuPic04);
                         }
+                      }
                     }
                     jkInfoDao jkInfoDao = new jkInfoDao();
                     DataTable data = jkInfoDao.selectjkInfoBybarcode(id);
@@ -397,21 +429,57 @@ namespace zkhwClient
                         }
                         int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='1',abdomenB_img='{tup}',other_b='1',otherb_img='{tup}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
                         int rue = DbHelperMySQL.ExecuteSql(issql, args);
-                        //插入数据库
-                    }
+                        string issqdgbc = "update zkhw_tj_bgdc set BChao='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                        DbHelperMySQL.ExecuteSql(issqdgbc);
+                        string filepath=e.FullPath.Substring(0, innum);
+                        DeleteDir(filepath);
+                    //插入数据库
+                }
                     #endregion
                 }
                 catch (Exception ex)
                 {
+                    MessageBox.Show(ex.Message+ "\n"+ex.StackTrace);
                     // RegisterAoupTrackLog(string.Format("监听异常！异常信息：{0}", ex.Message));
                 }
-                finally
-                {
-                    //如果遇到异常关闭了监听，则重新打开监听
-                    //if (!m_watcherAoup.EnableRaisingEvents)
-                    //    m_watcherAoup.EnableRaisingEvents = true;
-                }
            // }
+        }
+        public static void DeleteDir(string file)
+        {
+            try
+            {
+                //去除文件夹和子文件的只读属性
+                //去除文件夹的只读属性
+                System.IO.DirectoryInfo fileInfo = new DirectoryInfo(file);
+                fileInfo.Attributes = FileAttributes.Normal & FileAttributes.Directory;
+                //去除文件的只读属性
+                System.IO.File.SetAttributes(file, System.IO.FileAttributes.Normal);
+                //判断文件夹是否还存在
+
+                if (Directory.Exists(file))
+                {
+                    foreach (string f in Directory.GetFileSystemEntries(file))
+                    {
+                        if (File.Exists(f))
+
+                        {
+                            //如果有子文件删除文件
+                            File.Delete(f);
+                        }
+                        else
+                        {
+                            //循环递归删除子文件夹
+                            DeleteDir(f);
+                        }
+                    }
+                    //删除空文件夹
+                    Directory.Delete(file);
+               }
+            }
+            catch (Exception ex) // 异常处理
+            {
+
+            }
         }
         #endregion
     }

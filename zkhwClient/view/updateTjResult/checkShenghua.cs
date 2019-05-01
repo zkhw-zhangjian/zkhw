@@ -82,6 +82,9 @@ namespace zkhwClient.view.updateTjResult
                         }
                     }
                 }
+                if (dtbichao.Rows.Count<1) {
+                    this.dataGridView1.DataSource = null; MessageBox.Show("未查询出数据!"); return;
+                }
                 this.dataGridView1.DataSource = dtbichao;
                 this.dataGridView1.Columns[0].HeaderCell.Value = "体检时间";
                 this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";
@@ -91,10 +94,10 @@ namespace zkhwClient.view.updateTjResult
                 this.dataGridView1.Columns[5].HeaderCell.Value = "是否检验";
                 this.dataGridView1.Columns[0].Width = 120;
                 this.dataGridView1.Columns[1].Width = 120;
-                this.dataGridView1.Columns[2].Width = 180;
-                this.dataGridView1.Columns[3].Width = 180;
-                this.dataGridView1.Columns[4].Width = 130;
-                this.dataGridView1.Columns[5].Width = 120;
+                this.dataGridView1.Columns[2].Width = 160;
+                this.dataGridView1.Columns[3].Width = 160;
+                this.dataGridView1.Columns[4].Width = 110;
+                this.dataGridView1.Columns[5].Width = 100;
                 this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
                 this.dataGridView1.AllowUserToAddRows = false;
                 int rows = this.dataGridView1.Rows.Count - 1 <= 0 ? 0 : this.dataGridView1.Rows.Count - 1;

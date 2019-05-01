@@ -31,6 +31,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox118 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel14 = new System.Windows.Forms.Panel();
             this.textBox113 = new System.Windows.Forms.TextBox();
@@ -242,7 +243,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.textBox118 = new System.Windows.Forms.TextBox();
+            this.textBox119 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel14.SuspendLayout();
@@ -284,6 +285,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.textBox119);
             this.panel1.Controls.Add(this.textBox118);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.textBox10);
@@ -305,6 +307,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1316, 723);
             this.panel1.TabIndex = 6;
+            // 
+            // textBox118
+            // 
+            this.textBox118.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox118.Location = new System.Drawing.Point(141, 104);
+            this.textBox118.Name = "textBox118";
+            this.textBox118.Size = new System.Drawing.Size(114, 30);
+            this.textBox118.TabIndex = 83;
+            this.textBox118.Visible = false;
             // 
             // groupBox1
             // 
@@ -2478,7 +2489,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 123);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1293, 108);
+            this.groupBox3.Size = new System.Drawing.Size(1283, 108);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
@@ -2838,14 +2849,14 @@
             this.dateTimePicker1.Size = new System.Drawing.Size(316, 30);
             this.dateTimePicker1.TabIndex = 6;
             // 
-            // textBox118
+            // textBox119
             // 
-            this.textBox118.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox118.Location = new System.Drawing.Point(141, 104);
-            this.textBox118.Name = "textBox118";
-            this.textBox118.Size = new System.Drawing.Size(114, 30);
-            this.textBox118.TabIndex = 83;
-            this.textBox118.Visible = false;
+            this.textBox119.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox119.Location = new System.Drawing.Point(261, 104);
+            this.textBox119.Name = "textBox119";
+            this.textBox119.Size = new System.Drawing.Size(114, 30);
+            this.textBox119.TabIndex = 84;
+            this.textBox119.Visible = false;
             // 
             // aUhealthcheckupServices1
             // 
@@ -3114,5 +3125,6 @@
         public System.Windows.Forms.CheckBox checkBox36;
         private System.Windows.Forms.TextBox textBox117;
         public System.Windows.Forms.TextBox textBox118;
+        public System.Windows.Forms.TextBox textBox119;
     }
 }

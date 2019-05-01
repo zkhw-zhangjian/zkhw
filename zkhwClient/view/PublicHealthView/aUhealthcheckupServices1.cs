@@ -258,6 +258,7 @@ namespace zkhwClient.view.PublicHealthView
                 aUhealthcheckupServices2 auhc2 = new aUhealthcheckupServices2();
                 auhc2.textBox95.Text = per.aichive_no;
                 auhc2.textBox96.Text = per.bar_code;
+                auhc2.textBox99.Text = this.textBox119.Text;
                 auhc2.Show();
             }
             else {

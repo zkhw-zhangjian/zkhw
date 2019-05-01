@@ -947,9 +947,9 @@
             this.女.ForeColor = System.Drawing.SystemColors.ControlText;
             this.女.Location = new System.Drawing.Point(310, 17);
             this.女.Name = "女";
-            this.女.Size = new System.Drawing.Size(19, 12);
+            this.女.Size = new System.Drawing.Size(12, 12);
             this.女.TabIndex = 6;
-            this.女.Text = "40";
+            this.女.Text = "0";
             // 
             // label12
             // 
@@ -969,9 +969,9 @@
             this.男.ForeColor = System.Drawing.SystemColors.ControlText;
             this.男.Location = new System.Drawing.Point(250, 17);
             this.男.Name = "男";
-            this.男.Size = new System.Drawing.Size(26, 12);
+            this.男.Size = new System.Drawing.Size(12, 12);
             this.男.TabIndex = 4;
-            this.男.Text = "160";
+            this.男.Text = "0";
             // 
             // label10
             // 
@@ -991,9 +991,9 @@
             this.总数.ForeColor = System.Drawing.SystemColors.ControlText;
             this.总数.Location = new System.Drawing.Point(174, 17);
             this.总数.Name = "总数";
-            this.总数.Size = new System.Drawing.Size(26, 12);
+            this.总数.Size = new System.Drawing.Size(12, 12);
             this.总数.TabIndex = 2;
-            this.总数.Text = "200";
+            this.总数.Text = "0";
             // 
             // label8
             // 
@@ -1066,6 +1066,7 @@
             this.radioButton2.TabIndex = 2;
             this.radioButton2.Text = "特色版";
             this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.Visible = false;
             // 
             // groupBox4
             // 

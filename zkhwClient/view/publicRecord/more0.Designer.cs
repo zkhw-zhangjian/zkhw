@@ -146,6 +146,7 @@
             this.Name = "more0";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "更多";
+            this.Load += new System.EventHandler(this.more0_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

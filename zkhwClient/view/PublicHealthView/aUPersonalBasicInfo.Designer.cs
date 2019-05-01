@@ -2372,7 +2372,7 @@
             this.MinimizeBox = false;
             this.Name = "aUPersonalBasicInfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "高血压随访记录历史表";
+            this.Text = "个人基本信息建档";
             this.Load += new System.EventHandler(this.aUHypertensionPatientServices_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

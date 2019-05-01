@@ -56,10 +56,11 @@ namespace zkhwClient
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
-            //passw = this.txtPassword.Text;
-            //string md5passw= Md5.HashString(passw);
+            passw = this.txtPassword.Text;
+            string md5passw= Md5.HashString(passw);
             //用户登录 获取用户的账号和密码并判断          
-            DataTable ret = service.UserService.UserExists(comboBox1.Text, txtPassword.Text);
+            //DataTable ret = service.UserService.UserExists(comboBox1.Text, txtPassword.Text);
+            DataTable ret = service.UserService.UserExists(comboBox1.Text, md5passw);
             if (ret.Rows.Count == 1)
             {  //获取当前登录用户的机构
                 organCode = ret.Rows[0]["organ_code"].ToString();

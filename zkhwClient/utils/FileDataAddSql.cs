@@ -4,6 +4,7 @@ using System.Xml;
 using System.Data;
 using zkhwClient.dao;
 using System.Data.OleDb;
+using System.Windows.Forms;
 
 namespace zkhwClient
 {
@@ -30,7 +31,7 @@ namespace zkhwClient
             xuechangguipath = node.InnerText;
 
             xmlDoc.Load(path);
-            node = xmlDoc.SelectSingleNode("config/xuechangguiPath");
+            node = xmlDoc.SelectSingleNode("config/xcglasttime");
             lasttime = node.InnerText;
 
             string sql1 = "select lop.patient_id,lop.send_time,lopr.* from LisOutput lop, LisOutputResult lopr where lop.sample_id=lopr.sample_id and lop.sample_id=(select top 1 l.sample_id from LisOutput l order by l.sample_id desc)";
@@ -56,7 +57,6 @@ namespace zkhwClient
                     return;
                 }
                 xcg.createTime = newtime.ToString("yyyy-MM-dd HH:mm:ss");
-
                 for (int i = 0; i < arr_dt1.Rows.Count; i++)
                 {
                     string item = arr_dt1.Rows[i]["item"].ToString();
@@ -84,6 +84,7 @@ namespace zkhwClient
                         default: break;
                     }
                 }
+
                 bool istrue = tjdao.insertXuechangguiInfo(xcg);
                 if (istrue)
                 {

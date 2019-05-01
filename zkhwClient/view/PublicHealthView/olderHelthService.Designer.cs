@@ -456,7 +456,7 @@
             this.groupBox3.Size = new System.Drawing.Size(1349, 481);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "新建自理能力评估";
+            this.groupBox3.Text = "老年人健康服务列表";
             // 
             // button2
             // 
