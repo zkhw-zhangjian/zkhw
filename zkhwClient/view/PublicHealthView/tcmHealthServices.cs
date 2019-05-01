@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using zkhwClient.dao;
+using zkhwClient.view.setting;
 
 namespace zkhwClient.view.PublicHealthView
 {
@@ -33,8 +35,8 @@ namespace zkhwClient.view.PublicHealthView
             label4.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
             label4.Left = (this.panel1.Width - this.label4.Width) / 2;
             label4.BringToFront();
-
-            querytcmHealthServices();
+            GetData();
+            //querytcmHealthServices();
         }
         private void button5_Click(object sender, EventArgs e)
         {
@@ -44,9 +46,10 @@ namespace zkhwClient.view.PublicHealthView
                 this.label2.Text = "";
             }
             else { this.label2.Text = "---姓名/身份证号/档案号---"; }
-            time1 = this.dateTimePicker1.Text.ToString();//开始时间
-            time2 = this.dateTimePicker2.Text.ToString();//结束时间
-            querytcmHealthServices();
+            //time1 = this.dateTimePicker1.Text.ToString();//开始时间
+            //time2 = this.dateTimePicker2.Text.ToString();//结束时间
+            //querytcmHealthServices();
+            GetData();
         }
         private void querytcmHealthServices()
         {
@@ -80,6 +83,15 @@ namespace zkhwClient.view.PublicHealthView
         //添加 修改 高血压随访记录历史表 调此方法
         private void button1_Click(object sender, EventArgs e)
         {
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            addtcmHealthServices addtcm = new addtcmHealthServices();
+            addtcm.Name = dataGridView1["姓名", row].Value.ToString();
+            addtcm.aichive_no = dataGridView1["编码", row].Value.ToString();
+            addtcm.id_number = dataGridView1["身份证号", row].Value.ToString();
+            addtcm.IS = 1;
+            addtcm.StartPosition = FormStartPosition.CenterScreen;
+            addtcm.ShowDialog();
             //aUdiabetesPatientServices hm = new aUdiabetesPatientServices();
             //hm.label51.Text = "添加糖尿病患者服务";
             //hm.Text = "添加糖尿病患者服务";
@@ -92,8 +104,22 @@ namespace zkhwClient.view.PublicHealthView
             //}
         }
 
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            addtcmHealthServices addtcm = new addtcmHealthServices();
+            addtcm.Name = dataGridView1["姓名", row].Value.ToString();
+            addtcm.aichive_no = dataGridView1["编码", row].Value.ToString();
+            addtcm.id_number = dataGridView1["身份证号", row].Value.ToString();
+            addtcm.IS = 0;
+            addtcm.StartPosition = FormStartPosition.CenterScreen;
+            addtcm.ShowDialog();
             //if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             //aUdiabetesPatientServices dp = new aUdiabetesPatientServices();
             //string id = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
@@ -199,6 +225,11 @@ namespace zkhwClient.view.PublicHealthView
             //}
         }
 
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
@@ -208,11 +239,17 @@ namespace zkhwClient.view.PublicHealthView
             int tt = (int)rr;
             if (tt == 1)
             {//删除用户       
-                bool istrue = tcmHealthService.deletetcmHealthServices(id);
+             // bool istrue = tcmHealthService.deletetcmHealthServices(id);
+                int row = dataGridView1.CurrentRow.Index;
+                string Name = dataGridView1["姓名", row].Value.ToString();
+                string aichive_no = dataGridView1["编码", row].Value.ToString();
+                string id_number = dataGridView1["身份证号", row].Value.ToString();
+                bool istrue = deletetcmHealthServices(Name, aichive_no, id_number);
                 if (istrue)
                 {
                     //刷新页面
-                    querytcmHealthServices();
+                    //querytcmHealthServices();
+                    GetData();
                     MessageBox.Show("删除成功！");
                 }
             }
@@ -222,5 +259,133 @@ namespace zkhwClient.view.PublicHealthView
         {
             this.label2.Visible = this.textBox1.Text.Length < 1;
         }
+
+        /// <summary>
+        /// 查询数据
+        /// </summary>
+        /// <returns></returns>
+        private DataTable GetData()
+        {
+            string timesta = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+            string timeend = dateTimePicker2.Value.ToString("yyyy-MM-dd");
+            string sheng = comboBox1.SelectedValue?.ToString();
+            string shi = comboBox2.SelectedValue?.ToString();
+            string xian = comboBox3.SelectedValue?.ToString();
+            string cun = comboBox4.SelectedValue?.ToString();
+            string zu = comboBox5.SelectedValue?.ToString();
+            string juming = textBox1.Text;
+            var pairs = new Dictionary<string, string>();
+            pairs.Add("timesta", timesta);
+            pairs.Add("timeend", timeend);
+            pairs.Add("juming", juming);
+            pairs.Add("sheng", sheng);
+            pairs.Add("xian", xian);
+            pairs.Add("cun", cun);
+            pairs.Add("zu", zu);
+            pairs.Add("shi", shi);
+            string sql = $@"select 
+DATE_FORMAT(base.create_time,'%Y%m%d') 登记时间,
+concat(base.province_name,base.city_name,base.county_name,base.towns_name,base.village_name) 区域,
+base.archive_no 编码,
+base.name 姓名,
+(case base.sex when '1'then '男' when '2' then '女' when '9' then '未说明的性别' when '0' then '未知的性别' ELSE ''
+END)性别,
+base.id_number 身份证号,
+base.upload_status 是否同步,
+bgdc.BaoGaoShengChan 报告生成时间
+from resident_base_info base
+where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'";//base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'
+            if (pairs != null && pairs.Count > 0)
+            {
+                if (!string.IsNullOrWhiteSpace(pairs["timesta"]) && !string.IsNullOrWhiteSpace(pairs["timeend"]))
+                {
+                    sql += $" and date_format(base.create_time,'%Y-%m-%d') between '{pairs["timesta"]}' and '{pairs["timeend"]}'";
+                }
+                if (!string.IsNullOrWhiteSpace(pairs["juming"]))
+                {
+                    sql += $" or base.name like '%{pairs["juming"]}%' or base.bar_code like '%{pairs["juming"]}%' or base.id_number like '%{pairs["juming"]}%'";
+                }
+                if (!string.IsNullOrWhiteSpace(pairs["sheng"]))
+                {
+                    sql += $" and base.province_code='{pairs["sheng"]}'";
+                }
+                if (!string.IsNullOrWhiteSpace(pairs["shi"]))
+                {
+                    sql += $" and base.city_code='{pairs["shi"]}'";
+                }
+                if (!string.IsNullOrWhiteSpace(pairs["xian"]))
+                {
+                    sql += $" and base.county_code='{pairs["xian"]}'";
+                }
+                if (!string.IsNullOrWhiteSpace(pairs["cun"]))
+                {
+                    sql += $" and base.towns_code='{pairs["cun"]}'";
+                }
+                if (!string.IsNullOrWhiteSpace(pairs["zu"]))
+                {
+                    sql += $" and base.village_code='{pairs["zu"]}'";
+                }
+            }
+            DataSet dataSet = DbHelperMySQL.Query(sql);
+            DataTable dt = dataSet.Tables[0];
+            return dt;
+        }
+
+        /// <summary>
+        /// 删除数据
+        /// </summary>
+        /// <param name="name">姓名</param>
+        /// <param name="aichive_no">编号</param>
+        /// <param name="id_number">身份证id</param>
+        /// <returns></returns>
+        public bool deletetcmHealthServices(string name, string aichive_no, string id_number)
+        {
+            int rt = 0;
+            string sql = $"delete from elderly_tcm_record where name='{name}' and aichive_no='{aichive_no}' and id_number='{id_number}'";
+            rt = DbHelperMySQL.ExecuteSql(sql);
+            return rt == 0 ? false : true;
+        }
+
+        #region 下拉框绑定
+        /// <summary>
+        /// 绑定下拉选项
+        /// </summary>
+        /// <param name="combo">获取值</param>
+        /// <param name="box">绑定值</param>
+        private void comboBoxBin(ComboBox combo, ComboBox box)
+        {
+            string id = combo.SelectedValue?.ToString();
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                string sql1 = $"select code as ID,name as Name from code_area_config where parent_code='{id}'";
+                DataSet datas = DbHelperMySQL.Query(sql1);
+                if (datas != null && datas.Tables.Count > 0)
+                {
+                    List<ComboBoxData> ts = Result.ToDataList<ComboBoxData>(datas.Tables[0]);
+                    Result.Bind(box, ts, "Name", "ID", "--请选择--");
+                }
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxBin(comboBox1, comboBox2);
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxBin(comboBox2, comboBox3);
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxBin(comboBox3, comboBox4);
+        }
+
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxBin(comboBox4, comboBox5);
+        }
+        #endregion
     }
 }
