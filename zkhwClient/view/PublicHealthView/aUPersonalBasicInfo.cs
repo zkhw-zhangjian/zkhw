@@ -107,10 +107,6 @@ namespace zkhwClient.view.PublicHealthView
                 goodsList3.Rows.Add(drtmp);
             }
             goodsList3Bind();
-            ///////////////////////////////////
-
-
-
         }
 
         //既往史疾病清单表 resident_diseases////////////////////////////////////////////////////////////////////////////////////////
@@ -168,8 +164,7 @@ namespace zkhwClient.view.PublicHealthView
                 goodsListBind();
             }
         }
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //既往史手术清单表  operation_record////////////////////////////////////////////////////////////////////////////////////////
+     //既往史手术清单表  operation_record
         private void button3_Click(object sender, EventArgs e)
         {
             operation_record hm = new operation_record();
@@ -218,8 +213,7 @@ namespace zkhwClient.view.PublicHealthView
                 goodsList0Bind();
             }
         }
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //既往史外伤清单表 traumatism_record////////////////////////////////////////////////////////////////////////////////////////
+      //既往史外伤清单表 traumatism_record
         private void button7_Click(object sender, EventArgs e)
         {
             traumatism_record hm = new traumatism_record();
@@ -269,8 +263,7 @@ namespace zkhwClient.view.PublicHealthView
                 goodsList1Bind();
             }
         }
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //既往史输血清单表 metachysis_record////////////////////////////////////////////////////////////////////////////////////////
+        //既往史输血清单表 metachysis_record
         private void button9_Click(object sender, EventArgs e)
         {
             metachysis_record hm = new metachysis_record();
@@ -320,8 +313,7 @@ namespace zkhwClient.view.PublicHealthView
                 goodsList2Bind();
             }
         }
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //家族史表 family_record ////////////////////////////////////////////////////////////////////////////////////////
+        //家族史表 family_record
         private void button11_Click(object sender, EventArgs e)
         {
             family_record hm = new family_record();
@@ -377,9 +369,6 @@ namespace zkhwClient.view.PublicHealthView
                 goodsList3Bind();
             }
         }
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -499,28 +488,33 @@ namespace zkhwClient.view.PublicHealthView
             {
                 resident_base_infoBean.exposure = resident_base_infoBean.exposure.Substring(1);
             }
-
-
-
-            resident_base_infoBean.heredity_name = this.richTextBox4.Text;
-
-
-            foreach (Control ctr in this.panel20.Controls)
+            if (this.radioButton48.Checked == true) { resident_base_infoBean.is_heredity = this.radioButton48.Tag.ToString(); };
+            if (this.radioButton47.Checked == true) { resident_base_infoBean.is_heredity = this.radioButton47.Tag.ToString();
+                resident_base_infoBean.heredity_name = this.textBox36.Text;
+            };
+            if (!this.checkBox33.Checked)
             {
-                //判断该控件是不是CheckBox
-                if (ctr is CheckBox)
+                foreach (Control ctr in this.panel20.Controls)
                 {
-                    //将ctr转换成CheckBox并赋值给ck
-                    CheckBox ck = ctr as CheckBox;
-                    if (ck.Checked)
+                    //判断该控件是不是CheckBox
+                    if (ctr is CheckBox)
                     {
-                        resident_base_infoBean.deformity_name += "," + ck.Tag.ToString();
+                        //将ctr转换成CheckBox并赋值给ck
+                        CheckBox ck = ctr as CheckBox;
+                        if (ck.Checked)
+                        {
+                            resident_base_infoBean.is_deformity += "," + ck.Tag.ToString();
+                        }
                     }
                 }
+                if (resident_base_infoBean.is_deformity != null && resident_base_infoBean.is_deformity != "")
+                {
+                    resident_base_infoBean.is_deformity = resident_base_infoBean.is_deformity.Substring(1);
+                }
             }
-            if (resident_base_infoBean.deformity_name != null && resident_base_infoBean.deformity_name != "")
-            {
-                resident_base_infoBean.deformity_name = resident_base_infoBean.deformity_name.Substring(1);
+            else {
+                resident_base_infoBean.is_deformity = "8";
+                resident_base_infoBean.deformity_name = this.textBox37.Text;
             }
 
             if (this.radioButton18.Checked == true) { resident_base_infoBean.kitchen = this.radioButton18.Tag.ToString(); };
@@ -553,25 +547,18 @@ namespace zkhwClient.view.PublicHealthView
             if (this.radioButton89.Checked == true) { resident_base_infoBean.poultry = this.radioButton89.Tag.ToString(); };
             if (this.radioButton90.Checked == true) { resident_base_infoBean.poultry = this.radioButton90.Tag.ToString(); };
 
-
-
-
-
             ////以下页面未用 数据库字段格式要求
-            resident_base_infoBean.synchro_time = DateTime.Now.ToString("yyyy-MM-dd");
-            resident_base_infoBean.create_time = DateTime.Now.ToString("yyyy-MM-dd");
-            resident_base_infoBean.update_time = DateTime.Now.ToString("yyyy-MM-dd");
+            resident_base_infoBean.create_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            resident_base_infoBean.update_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            resident_base_infoBean.update_name = frmLogin.name;
 
             resident_base_infoBean.is_hypertension = "0";
             resident_base_infoBean.is_diabetes = "0";
             resident_base_infoBean.is_psychosis = "0";
             resident_base_infoBean.is_tuberculosis = "0";
-            resident_base_infoBean.is_heredity = "0";
-            resident_base_infoBean.is_deformity = "0";
+            //resident_base_infoBean.is_deformity = "0";
             resident_base_infoBean.is_poor = "0";
             resident_base_infoBean.is_signing = "0";
-
-
 
             bool isfalse = personalBasicInfoService.aUpersonalBasicInfo(resident_base_infoBean, id, goodsList, goodsList0, goodsList1, goodsList2, goodsList3);
             if (isfalse)
@@ -580,17 +567,6 @@ namespace zkhwClient.view.PublicHealthView
             }
             else {
                 MessageBox.Show("保存失败");
-            }
-        }
-
-        private void textBox12_TextChanged(object sender, EventArgs e)
-        {
-            if (this.textBox12.Text.Replace(" ", "").Length == 18 && id == "") {
-                DataTable dt = personalBasicInfoService.query(this.textBox12.Text.Replace(" ", ""));
-                if (dt.Rows.Count > 0) {
-                    this.textBox12.Text = "";
-                    MessageBox.Show("此身份证号已注册");
-                }
             }
         }
     }

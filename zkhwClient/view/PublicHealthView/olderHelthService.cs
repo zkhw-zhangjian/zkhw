@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using zkhwClient.dao;
+using zkhwClient.service;
 using zkhwClient.view.PublicHealthView;
 using zkhwClient.view.setting;
 
@@ -50,6 +51,7 @@ namespace zkhwClient.PublicHealth
                 this.label18.Text = dt0.Rows[0]["label18"].ToString();
                 this.label21.Text = dt0.Rows[0]["label21"].ToString();
             }
+            xcuncode = basicInfoSettings.xcuncode;
             queryOlderHelthService();
         }
         private void queryOlderHelthService()
@@ -69,7 +71,7 @@ namespace zkhwClient.PublicHealth
             this.dataGridView1.Columns[4].HeaderCell.Value = "评判结果";
             this.dataGridView1.Columns[5].HeaderCell.Value = "测试日期";
             this.dataGridView1.Columns[6].HeaderCell.Value = "测试医生";
-
+            this.dataGridView1.Columns[7].Visible = false;
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
             this.dataGridView1.AllowUserToAddRows = false;
@@ -105,13 +107,13 @@ namespace zkhwClient.PublicHealth
         private void button4_Click(object sender, EventArgs e)
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
-            string id = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            string archive_no = this.dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
 
             DialogResult rr = MessageBox.Show("确认删除？", "确认删除提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
             int tt = (int)rr;
             if (tt == 1)
             {//删除用户       
-                bool istrue = olderHelthS.deleteOlderHelthService(id);
+                bool istrue = olderHelthS.deleteOlderHelthService(archive_no);
                 if (istrue)
                 {
                     //刷新页面
@@ -127,12 +129,21 @@ namespace zkhwClient.PublicHealth
             string name=dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
             string archiveno = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
             string idnumber = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+            string sex = dataGridView1.SelectedRows[0].Cells[7].Value.ToString();
+            DataTable dt = olderHelthS.query(archiveno);
+            if (dt.Rows.Count > 0)
+            {
+                MessageBox.Show("此身份信息号已参加过评估了!");
+                return;
+            }
             aUolderHelthService hm = new aUolderHelthService();
             hm.label47.Text = "添加老年人生活自理能力评估表";
             hm.Text = "添加老年人生活自理能力评估表";
             hm.textBox1.Text = name;
             hm.textBox2.Text = archiveno;
             hm.textBox12.Text = idnumber;
+            hm.sex = sex;
+            hm.flag = 0;
             if (hm.ShowDialog() == DialogResult.OK)
             {
                 //刷新页面
@@ -145,17 +156,20 @@ namespace zkhwClient.PublicHealth
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             aUolderHelthService hm = new aUolderHelthService();
-            string id = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-            hm.id = id;
+            string name = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            string archiveno = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+            string idnumber = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+            string sex = dataGridView1.SelectedRows[0].Cells[7].Value.ToString();
             hm.label47.Text = "修改老年人生活自理能力评估表";
             hm.Text = "修改老年人生活自理能力评估表";
-            DataTable dt = olderHelthS.queryOlderHelthService(id);
+            hm.flag = 1;
+            hm.sex = sex;
+            hm.archiveno = archiveno;
+            DataTable dt = olderHelthS.queryOlderHelthService(archiveno);
             if (dt != null && dt.Rows.Count > 0)
             {
                 hm.textBox1.Text = dt.Rows[0]["name"].ToString();
                 hm.textBox2.Text = dt.Rows[0]["aichive_no"].ToString();
-                if (dt.Rows[0]["sex"].ToString() == hm.radioButton1.Text) { hm.radioButton1.Checked = true; };
-                if (dt.Rows[0]["sex"].ToString() == hm.radioButton2.Text) { hm.radioButton2.Checked = true; };
                 hm.textBox12.Text = dt.Rows[0]["id_number"].ToString();
                 string[] ck2 = dt.Rows[0]["answer_result"].ToString().Split(',');
                 hm.numericUpDown1.Value = Decimal.Parse(ck2[0]);
@@ -165,14 +179,11 @@ namespace zkhwClient.PublicHealth
                 hm.numericUpDown5.Value = Decimal.Parse(ck2[4]);
                 hm.numericUpDown6.Value = Decimal.Parse(dt.Rows[0]["total_score"].ToString());
             }
-
-
             if (hm.ShowDialog() == DialogResult.OK)
             {
                     //刷新页面
                  queryOlderHelthService();
                 MessageBox.Show("修改成功！");
-
             }
         }
 

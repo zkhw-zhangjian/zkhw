@@ -6,19 +6,24 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using zkhwClient.dao;
+using zkhwClient.view.setting;
 
 namespace zkhwClient.view.PublicHealthView
 {
     public partial class personalBasicInfo : Form
     {
-
         service.personalBasicInfoService pBasicInfo = new service.personalBasicInfoService();
-        //public string name = "";
-        //public string id_number = "";
-        //public string aichive_no = "";
+        areaConfigDao areadao = new areaConfigDao();
         public string pCa = "";
+        public string code = "";
         public string time1 = null;
         public string time2 = null;
+        public string shengcode = null;
+        public string shicode = null;
+        public string qxcode = null;
+        public string xzcode = null;
+        public string xcuncode = null;
         public personalBasicInfo()
         {
             InitializeComponent();
@@ -34,8 +39,11 @@ namespace zkhwClient.view.PublicHealthView
             label4.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
             label4.Left = (this.panel1.Width - this.label4.Width) / 2;
             label4.BringToFront();
-
-            //if (aichive_no != "") { pCa = aichive_no; }
+            //区域
+            this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源
+            this.comboBox1.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox1.ValueMember = "code";//操作时获取的值 
+            xcuncode = basicInfoSettings.xcuncode;
             button5_Click(null,null);
         }
         private void button5_Click(object sender, EventArgs e)
@@ -46,23 +54,24 @@ namespace zkhwClient.view.PublicHealthView
                 this.label5.Text = "";
             }
             else { this.label5.Text = "---姓名/身份证号/档案号---"; }
-            time1 = this.dateTimePicker1.Text.ToString();//开始时间
-            time2 = this.dateTimePicker2.Text.ToString();//结束时间
+            
             querypBasicInfo();
         }
-        //高血压随访记录历史表  关联传参调查询的方法
+        //个人基本建档记录历史表  关联传参调查询的方法
         private void querypBasicInfo()
         {
+            time1 = this.dateTimePicker1.Text.ToString();//开始时间
+            time2 = this.dateTimePicker2.Text.ToString();//结束时间
             this.dataGridView1.DataSource = null;
-            DataTable dt = pBasicInfo.queryPersonalBasicInfo(pCa, time1, time2);
+            DataTable dt = pBasicInfo.queryPersonalBasicInfo(pCa, time1, time2,code);
             this.dataGridView1.DataSource = dt;
             this.dataGridView1.Columns[0].Visible = false;
             this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";
-            this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
-            this.dataGridView1.Columns[3].HeaderCell.Value = "创建人";
-            this.dataGridView1.Columns[4].HeaderCell.Value = "创建时间";
-            this.dataGridView1.Columns[5].HeaderCell.Value = "责任医生";
-            this.dataGridView1.Columns[6].HeaderCell.Value = "同步时间";
+            this.dataGridView1.Columns[2].HeaderCell.Value = "档案编号";
+            this.dataGridView1.Columns[3].HeaderCell.Value = "身份证号";
+            this.dataGridView1.Columns[4].HeaderCell.Value = "创建人";
+            this.dataGridView1.Columns[5].HeaderCell.Value = "创建时间";
+            this.dataGridView1.Columns[6].HeaderCell.Value = "责任医生";
 
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
@@ -83,15 +92,19 @@ namespace zkhwClient.view.PublicHealthView
         //添加 修改 高血压随访记录历史表 调此方法
         private void button1_Click(object sender, EventArgs e)
         {
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            string name = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+            string archiveno = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
             aUPersonalBasicInfo hm = new aUPersonalBasicInfo();
             hm.label47.Text = "添加个人基本信息表";
             hm.Text = "添加个人基本信息表";
+            hm.textBox1.Text = name;
+            hm.textBox2.Text = archiveno;
             if (hm.ShowDialog() == DialogResult.OK)
             {
                 //刷新页面
                 button5_Click(null, null);
                 MessageBox.Show("添加成功！");
-
             }
         }
 
@@ -160,7 +173,14 @@ namespace zkhwClient.view.PublicHealthView
                 if (dt.Rows[0]["marital_status"].ToString() == hm.radioButton44.Tag.ToString()) { hm.radioButton44.Checked = true; };
                 if (dt.Rows[0]["marital_status"].ToString() == hm.radioButton45.Tag.ToString()) { hm.radioButton45.Checked = true; };
                 if (dt.Rows[0]["marital_status"].ToString() == hm.radioButton46.Tag.ToString()) { hm.radioButton46.Checked = true; };
-
+               
+                if (dt.Rows[0]["is_heredity"].ToString() == hm.radioButton48.Tag.ToString()) {
+                    hm.radioButton48.Checked = true;
+                }else if (dt.Rows[0]["is_heredity"].ToString() == hm.radioButton47.Tag.ToString())
+                {
+                    hm.radioButton47.Checked = true;
+                    hm.textBox36.Text=dt.Rows[0]["heredity_name"].ToString();
+                };
 
                 foreach (Control ctr in hm.panel12.Controls)
                 {
@@ -215,7 +235,7 @@ namespace zkhwClient.view.PublicHealthView
                         }
                     }
                 }
-                hm.richTextBox4.Text = dt.Rows[0]["heredity_name"].ToString();
+                
                 foreach (Control ctr in hm.panel20.Controls)
                 {
                     //判断该控件是不是CheckBox
@@ -223,11 +243,14 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         //将ctr转换成CheckBox并赋值给ck
                         CheckBox ck = ctr as CheckBox;
-                        string[] ck2 = dt.Rows[0]["deformity_name"].ToString().Split(',');
+                        string[] ck2 = dt.Rows[0]["is_deformity"].ToString().Split(',');
                         for (int i = 0; i < ck2.Length; i++)
                         {
                             if (ck2[i].ToString() == ck.Tag.ToString())
                             {
+                                if (ck2[i].ToString()=="8") {
+                                    hm.textBox37.Text = dt.Rows[0]["deformity_name"].ToString();
+                                }
                                 ck.Checked = true;
                             }
                         }
@@ -300,6 +323,49 @@ namespace zkhwClient.view.PublicHealthView
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             this.label5.Visible = this.textBox1.Text.Length < 1;
+        }
+
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            shengcode = this.comboBox1.SelectedValue.ToString();
+            this.comboBox2.DataSource = areadao.shiInfo(shengcode);//绑定数据源
+            this.comboBox2.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox2.ValueMember = "code";//操作时获取的值 
+            this.comboBox3.DataSource = null;
+            this.comboBox4.DataSource = null;
+            this.comboBox5.DataSource = null;
+        }
+
+        private void comboBox2_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            shicode = this.comboBox2.SelectedValue.ToString();
+            this.comboBox3.DataSource = areadao.quxianInfo(shicode);//绑定数据源
+            this.comboBox3.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox3.ValueMember = "code";//操作时获取的值 
+            this.comboBox4.DataSource = null;
+            this.comboBox5.DataSource = null;
+        }
+
+        private void comboBox3_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            qxcode = this.comboBox3.SelectedValue.ToString();
+            this.comboBox4.DataSource = areadao.zhenInfo(qxcode);//绑定数据源
+            this.comboBox4.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox4.ValueMember = "code";//操作时获取的值 
+            this.comboBox5.DataSource = null;
+        }
+
+        private void comboBox4_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            xzcode = this.comboBox4.SelectedValue.ToString();
+            this.comboBox5.DataSource = areadao.cunInfo(xzcode);//绑定数据源
+            this.comboBox5.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox5.ValueMember = "code";//操作时获取的值
+        }
+
+        private void comboBox5_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            xcuncode = this.comboBox5.SelectedValue.ToString();
         }
     }
 }

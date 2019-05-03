@@ -12,15 +12,11 @@ namespace zkhwClient.bean
         //电子档案编号
         public string aichive_no { get; set; }
         //身份证号
-        public string Cardcode { get; set; }//标记页面未用
+        public string id_number { get; set; }//标记页面未用
         //条码编号
         public string Codebar { get; set; }//
-        //社保卡号
-        public string SocialSecuritycode { get; set; }//
         //患者姓名
-        public string patientName { get; set; }
-        //患者年龄
-        public string patientAge { get; set; }//
+        public string name { get; set; }
         //数据状态
         public string dataSate { get; set; }//
         //高血压随访编码

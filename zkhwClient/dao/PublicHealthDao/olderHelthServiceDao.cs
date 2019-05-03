@@ -3,39 +3,41 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace zkhwClient.dao
 {
     class olderHelthServiceDao
     {
-        public bool deleteOlderHelthService(string id)
+        public bool deleteOlderHelthService(string archive_no)
         {
             int rt = 0;
-            string sql = "delete from elderly_selfcare_estimate  where id = '" + id + "';";
+            string sql = "delete from elderly_selfcare_estimate where aichive_no = '" + archive_no + "';";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
         public DataTable queryOlderHelthService(string pCa, string time1, string time2,string code)
         {
             DataSet ds = new DataSet();
-            string sql = "select b.name,b.archive_no,b.id_number,aa.total_score,aa.judgement_result,aa.test_date,aa.test_doctor from resident_base_info b left join(select a.id,a.name,a.aichive_no,a.id_number,a.total_score,a.judgement_result,a.test_date,a.test_doctor from elderly_selfcare_estimate a where a.test_date >= '" + time1 + "' and a.test_date <= '" + time2 + "') aa on b.archive_no =aa.aichive_no";
-            if (code != "") { sql += " AND b.village_code='"+code+"'"; }
-            if (pCa != "") { sql += " AND (aa.name like '%" + pCa + "%'  or aa.id_number like '%" + pCa + "%'  or aa.aichive_no like '%" + pCa + "%')"; }
+            string sql = "SELECT bb.name,bb.archive_no,bb.id_number,aa.total_score,aa.judgement_result,aa.test_date,aa.test_doctor,bb.sex FROM (select b.name, b.archive_no, b.id_number,b.sex from resident_base_info b where 1=1";
+            if (code != "") { sql += " AND b.village_code='" + code + "'"; }
+            if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
+            sql += ") bb LEFT JOIN(select a.aichive_no, a.total_score, a.judgement_result, a.test_date, a.test_doctor from elderly_selfcare_estimate a where a.test_date >= '" + time1 + "' and a.test_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
         public DataTable queryOlderHelthService0()
         {
             DataSet ds = new DataSet();
-            string sql = "select count(*) as label10,count(sex = '男') as label11,count(sex = '女') as label13,count(0<=total_score <= 3) as label15,count(4<=total_score <= 8) as label17,count(9<=total_score <= 18) as label18,count(total_score >= 19) as label21 from elderly_selfcare_estimate where test_date = '" + DateTime.Now.ToString("yyyy-MM-dd") + "'";
+            string sql = "select count(*) as label10,count(CASE WHEN sex = '1' THEN 1 END) as label11,count(CASE WHEN sex = '2' THEN 1 END) as label13,count(CASE WHEN total_score >=0 and total_score<= 3 THEN 1 END) as label15,count(CASE WHEN total_score>=4 and total_score<= 8 THEN 1 END) as label17,count(CASE WHEN total_score>=9 and total_score <= 18 THEN 1 END) as label18,count(CASE WHEN total_score >= 19 THEN 1 END) as label21 from elderly_selfcare_estimate where test_date = '" + DateTime.Now.ToString("yyyy-MM-dd") + "'";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
 
-        public DataTable query(string id_number)
+        public DataTable query(string archive_no)
         {
             DataSet ds = new DataSet();
-            string sql = "select * from elderly_selfcare_estimate where id_number = '" + id_number + "'";
+            string sql = "select * from elderly_selfcare_estimate where aichive_no = '" + archive_no + "'";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -52,18 +54,16 @@ namespace zkhwClient.dao
             }
             else
             {
-                //sql = @"update elderly_selfcare_estimate set name='" + hm.name + "',aichive_no='" + hm.aichive_no + "',id_number='" + hm.id_number + "',sex='" + hm.sex + "',test_date='" + hm.test_date + "',answer_result='" + hm.answer_result + "',total_score='" + hm.total_score + "',judgement_result='" + hm.judgement_result + "',test_doctor= '" + hm.test_doctor + "',create_user='" + hm.create_user + "',create_name='" + hm.create_name + "',create_org='" + hm.create_org + "',create_org_name= '" + hm.create_org_name + "',create_time= '" + hm.create_time + "',update_user= '" + hm.update_user + "',update_name= '" + hm.update_name + "',update_time='" + hm.update_time + "',upload_status= '" + hm.upload_status + "',upload_time='" + hm.upload_time + "',upload_result='" + hm.upload_result + "' where id = '" + id + "'";
-                sql = @"update elderly_selfcare_estimate set name='" + hm.name + "',aichive_no='" + hm.aichive_no + "',id_number='" + hm.id_number + "',sex='" + hm.sex + "',test_date='" + hm.test_date + "',answer_result='" + hm.answer_result + "',total_score='" + hm.total_score + "',judgement_result='" + hm.judgement_result + "',test_doctor= '" + hm.test_doctor + "',create_user='" + hm.create_user + "',create_name='" + hm.create_name + "',create_org='" + hm.create_org + "',create_org_name= '" + hm.create_org_name + "',update_user= '" + hm.update_user + "',update_name= '" + hm.update_name + "',update_time='" + hm.update_time + "',upload_status= '" + hm.upload_status + "',upload_time='" + hm.upload_time + "',upload_result='" + hm.upload_result + "' where id = '" + id + "'";
+                sql = @"update elderly_selfcare_estimate set test_date='" + hm.test_date + "',answer_result='" + hm.answer_result + "',total_score='" + hm.total_score + "',judgement_result='" + hm.judgement_result + "',test_doctor= '" + hm.test_doctor + "',create_user='" + hm.create_user + "',create_name='" + hm.create_name + "',create_org='" + hm.create_org + "',create_org_name= '" + hm.create_org_name + "',update_user= '" + hm.update_user + "',update_name= '" + hm.update_name + "',update_time='" + hm.update_time + "',upload_status= '" + hm.upload_status + "' where aichive_no = '" + id + "'";
 
             }
-
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }
-        public DataTable queryOlderHelthService(string id)
+        public DataTable queryOlderHelthService(string aichive_no)
         {
             DataSet ds = new DataSet();
-            string sql = "select * from elderly_selfcare_estimate where id = '" + id + "'";
+            string sql = "select * from elderly_selfcare_estimate where aichive_no = '" + aichive_no + "' order by create_time desc limit 1";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }

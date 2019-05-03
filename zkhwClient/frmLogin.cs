@@ -61,7 +61,7 @@ namespace zkhwClient
             //用户登录 获取用户的账号和密码并判断          
             //DataTable ret = service.UserService.UserExists(comboBox1.Text, txtPassword.Text);
             DataTable ret = service.UserService.UserExists(comboBox1.Text, md5passw);
-            if (ret.Rows.Count == 1)
+            if (ret.Rows.Count > 0)
             {  //获取当前登录用户的机构
                 organCode = ret.Rows[0]["organ_code"].ToString();
                 name = this.comboBox1.Text;

@@ -395,7 +395,7 @@ namespace zkhwClient.bean
         //目标体重
         public string target_weight { get; set; }
         //建议接种疫苗
-        public string proposal_accination { get; set; }
+        public string advise_bacterin { get; set; }
         //其他危险因素控制
         public string danger_controlling_other { get; set; }
         //create_user

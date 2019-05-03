@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using zkhwClient.view.setting;
 
 namespace zkhwClient.view.PublicHealthView
 {
@@ -13,7 +14,9 @@ namespace zkhwClient.view.PublicHealthView
     {
 
         service.olderHelthServices olderHelthServices = new service.olderHelthServices();
-        public string id = "";
+        public string archiveno = "";
+        public string sex = "";
+        public int flag = 0;
         public aUolderHelthService()
         {
             InitializeComponent();
@@ -233,11 +236,9 @@ namespace zkhwClient.view.PublicHealthView
         private void button4_Click(object sender, EventArgs e)
         {
             bean.elderly_selfcare_estimateBean elderly_selfcare_estimateBean = new bean.elderly_selfcare_estimateBean();
-
+            elderly_selfcare_estimateBean.sex = sex;
             elderly_selfcare_estimateBean.name = this.textBox1.Text.Replace(" ", "");
             elderly_selfcare_estimateBean.aichive_no = this.textBox2.Text.Replace(" ", "");
-            if (this.radioButton1.Checked == true) { elderly_selfcare_estimateBean.sex = this.radioButton1.Text; };
-            if (this.radioButton2.Checked == true) { elderly_selfcare_estimateBean.sex = this.radioButton2.Text; };
             elderly_selfcare_estimateBean.id_number = this.textBox12.Text.Replace(" ", "");
 
             elderly_selfcare_estimateBean.answer_result += "," + this.numericUpDown1.Value.ToString();
@@ -260,33 +261,18 @@ namespace zkhwClient.view.PublicHealthView
                 elderly_selfcare_estimateBean.judgement_result = "不能自理";
             }
             else { }
-            
-            
-
             //////以下页面未用 数据库字段格式要求
             elderly_selfcare_estimateBean.upload_time = DateTime.Now.ToString("yyyy-MM-dd");
             elderly_selfcare_estimateBean.create_time = DateTime.Now.ToString("yyyy-MM-dd");
             elderly_selfcare_estimateBean.update_time = DateTime.Now.ToString("yyyy-MM-dd"); 
             elderly_selfcare_estimateBean.upload_status = "0"; 
             elderly_selfcare_estimateBean.test_date = DateTime.Now.ToString("yyyy-MM-dd");
-
-            bool isfalse = olderHelthServices.aUelderly_selfcare_estimate(elderly_selfcare_estimateBean,id);
+            elderly_selfcare_estimateBean.create_name = frmLogin.name;
+            elderly_selfcare_estimateBean.test_doctor= basicInfoSettings.zeren_doctor;
+            bool isfalse = olderHelthServices.aUelderly_selfcare_estimate(elderly_selfcare_estimateBean, archiveno);
             if (isfalse)
             {
                 this.DialogResult = DialogResult.OK;
-            }
-        }
-
-        private void textBox12_TextChanged(object sender, EventArgs e)
-        {
-            if (this.textBox12.Text.Replace(" ", "").Length == 18 && id == "")
-            {
-                DataTable dt = olderHelthServices.query(this.textBox12.Text.Replace(" ", ""));
-                if (dt.Rows.Count > 0)
-                {
-                    this.textBox12.Text = "";
-                    MessageBox.Show("此身份证号已注册");
-                }
             }
         }
         private void countTotal()

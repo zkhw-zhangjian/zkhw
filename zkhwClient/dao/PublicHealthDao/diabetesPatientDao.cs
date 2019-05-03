@@ -11,9 +11,10 @@ namespace zkhwClient.dao
         public DataTable querydiabetesPatient(string pCa, string time1, string time2,string code)
         {
             DataSet ds = new DataSet();
-            string sql = "select a.id,a.name,a.id_number,a.create_name,a.visit_date,a.next_visit_date,a.upload_status from diabetes_follow_record a, resident_base_info b where a.aichive_no = b.archive_no and a.visit_date >= '" + time1 + "' and a.visit_date <= '" + time2 + "'";
+            string sql = "SELECT bb.name,bb.archive_no,bb.id_number,(case when aa.visit_type='1' then '门诊' when aa.visit_type='2' then '家庭' when aa.visit_type='3' then '电话' end) visit_type,aa.visit_date,aa.visit_doctor,aa.id FROM (select b.name, b.archive_no, b.id_number from resident_base_info b where 1=1";
             if (code != "") { sql += " AND b.village_code='" + code + "'"; }
-            if (pCa != "") { sql += " and (a.patientName like '%" + pCa + "%'  or a.id_number like '%" + pCa + "%'  or a.aichive_no like '%" + pCa + "%')"; }
+            if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
+            sql += ") bb LEFT JOIN(select a.id,a.aichive_no,a.visit_type,a.visit_date,a.visit_doctor from diabetes_follow_record a where a.visit_date >= '" + time1 + "' and a.visit_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -41,12 +42,12 @@ namespace zkhwClient.dao
                     {
                         if (i == 0)
                         {
-                            sql0 += "insert into follow_medicine_record(follow_id,drug_name,num,dosage) values ('" + id + "','" + goodsList.Rows[i]["drug_name"] + "','" + goodsList.Rows[i]["num"] + "','" + goodsList.Rows[i]["dosage"] + "')";
+                            sql0 += "insert into follow_medicine_record(follow_id,drug_name,num,dosage,upload_status,create_name,create_time) values ('" + id + "','" + goodsList.Rows[i]["drug_name"] + "','" + goodsList.Rows[i]["num"] + "','" + goodsList.Rows[i]["dosage"] + "','0','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
                         }
                         else
                         {
-                            sql0 += ",('" + id + "','" + goodsList.Rows[i]["drug_name"] + "','" + goodsList.Rows[i]["num"] + "','" + goodsList.Rows[i]["dosage"] + "')";
+                            sql0 += ",('" + id + "','" + goodsList.Rows[i]["drug_name"] + "','" + goodsList.Rows[i]["num"] + "','" + goodsList.Rows[i]["dosage"] + "','0','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
                         }
                     }
@@ -63,12 +64,12 @@ namespace zkhwClient.dao
                     {
                         if (i == 0)
                         {
-                            sql0 += "insert into follow_medicine_record(follow_id,drug_name,num,dosage) values ('" + id + "','" + goodsList.Rows[i]["drug_name"] + "','" + goodsList.Rows[i]["num"] + "','" + goodsList.Rows[i]["dosage"] + "')";
+                            sql0 += "insert into follow_medicine_record(follow_id,drug_name,num,dosage,upload_status,create_name,create_time) values ('" + id + "','" + goodsList.Rows[i]["drug_name"] + "','" + goodsList.Rows[i]["num"] + "','" + goodsList.Rows[i]["dosage"] + "','0','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
                         }
                         else
                         {
-                            sql0 += ",('" + id + "','" + goodsList.Rows[i]["drug_name"] + "','" + goodsList.Rows[i]["num"] + "','" + goodsList.Rows[i]["dosage"] + "')";
+                            sql0 += ",('" + id + "','" + goodsList.Rows[i]["drug_name"] + "','" + goodsList.Rows[i]["num"] + "','" + goodsList.Rows[i]["dosage"] + "','0','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
                         }
                     }

@@ -111,11 +111,11 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (checkBox9.Checked)
             {
-                per.target_weight = this.textBox39.Text;
+                per.advise_bacterin = this.textBox39.Text;
             }
             if (checkBox10.Checked)
             {
-                per.target_weight = this.textBox40.Text;
+                per.danger_controlling_other = this.textBox40.Text;
             }
             bool isfalse = hcd.addPhysicalExaminationRecord4(per, goodsList, goodsListym);
             if (isfalse)

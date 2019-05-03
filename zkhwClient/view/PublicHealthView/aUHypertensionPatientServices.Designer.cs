@@ -76,7 +76,6 @@
             this.numericUpDown15 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown14 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown12 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown11 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown10 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown9 = new System.Windows.Forms.NumericUpDown();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -153,6 +152,7 @@
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.numericUpDown11 = new System.Windows.Forms.NumericUpDown();
             this.panel1.SuspendLayout();
             this.panel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -165,7 +165,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -185,10 +184,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
             // 
+            this.textBox1.Enabled = false;
             this.textBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox1.Location = new System.Drawing.Point(133, 55);
             this.textBox1.Name = "textBox1";
@@ -197,6 +198,7 @@
             // 
             // textBox2
             // 
+            this.textBox2.Enabled = false;
             this.textBox2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox2.Location = new System.Drawing.Point(657, 55);
             this.textBox2.Name = "textBox2";
@@ -616,6 +618,7 @@
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.numericUpDown11);
             this.groupBox4.Controls.Add(this.textBox21);
             this.groupBox4.Controls.Add(this.textBox20);
             this.groupBox4.Controls.Add(this.textBox19);
@@ -629,7 +632,6 @@
             this.groupBox4.Controls.Add(this.numericUpDown15);
             this.groupBox4.Controls.Add(this.numericUpDown14);
             this.groupBox4.Controls.Add(this.numericUpDown12);
-            this.groupBox4.Controls.Add(this.numericUpDown11);
             this.groupBox4.Controls.Add(this.numericUpDown10);
             this.groupBox4.Controls.Add(this.numericUpDown9);
             this.groupBox4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -783,23 +785,6 @@
             this.numericUpDown12.Name = "numericUpDown12";
             this.numericUpDown12.Size = new System.Drawing.Size(123, 30);
             this.numericUpDown12.TabIndex = 7;
-            // 
-            // numericUpDown11
-            // 
-            this.numericUpDown11.Increment = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numericUpDown11.Location = new System.Drawing.Point(806, 25);
-            this.numericUpDown11.Maximum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.numericUpDown11.Name = "numericUpDown11";
-            this.numericUpDown11.Size = new System.Drawing.Size(120, 30);
-            this.numericUpDown11.TabIndex = 5;
             // 
             // numericUpDown10
             // 
@@ -1111,6 +1096,7 @@
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(200, 30);
             this.dateTimePicker2.TabIndex = 38;
+            this.dateTimePicker2.Value = new System.DateTime(2019, 5, 2, 0, 0, 0, 0);
             // 
             // groupBox2
             // 
@@ -1684,6 +1670,19 @@
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(316, 30);
             this.dateTimePicker1.TabIndex = 6;
+            this.dateTimePicker1.Value = new System.DateTime(2019, 5, 2, 0, 0, 0, 0);
+            // 
+            // numericUpDown11
+            // 
+            this.numericUpDown11.Location = new System.Drawing.Point(806, 24);
+            this.numericUpDown11.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.numericUpDown11.Name = "numericUpDown11";
+            this.numericUpDown11.Size = new System.Drawing.Size(120, 30);
+            this.numericUpDown11.TabIndex = 27;
             // 
             // aUHypertensionPatientServices
             // 
@@ -1716,7 +1715,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).EndInit();
             this.groupBox3.ResumeLayout(false);
@@ -1745,6 +1743,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1785,7 +1784,6 @@
         public System.Windows.Forms.RichTextBox richTextBox1;
         public System.Windows.Forms.NumericUpDown numericUpDown9;
         public System.Windows.Forms.NumericUpDown numericUpDown10;
-        public System.Windows.Forms.NumericUpDown numericUpDown11;
         public System.Windows.Forms.NumericUpDown numericUpDown12;
         public System.Windows.Forms.NumericUpDown numericUpDown14;
         public System.Windows.Forms.NumericUpDown numericUpDown15;
@@ -1875,5 +1873,6 @@
         private System.Windows.Forms.TextBox textBox46;
         private System.Windows.Forms.TextBox textBox47;
         private System.Windows.Forms.TextBox textBox48;
+        public System.Windows.Forms.NumericUpDown numericUpDown11;
     }
 }

@@ -20,7 +20,6 @@ namespace zkhwClient.view.PublicHealthView
         }
         private void aUHypertensionPatientServices_Load(object sender, EventArgs e)
         {
-            //this.label51.Text = "添加/修改糖尿病患者服务";
             this.label47.ForeColor = Color.SkyBlue;
             label47.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
             label47.Left = (this.panel1.Width - this.label47.Width) / 2;
@@ -77,12 +76,12 @@ namespace zkhwClient.view.PublicHealthView
         {
             bean.fuv_hypertensionBean fuv_hypertensionBean = new bean.fuv_hypertensionBean();
 
-            fuv_hypertensionBean.patientName = this.textBox1.Text.Replace(" ", "");
+            fuv_hypertensionBean.name = this.textBox1.Text.Replace(" ", "");
             fuv_hypertensionBean.aichive_no = this.textBox2.Text.Replace(" ", "");
-            fuv_hypertensionBean.visit_date = this.dateTimePicker1.Value.ToString();
-            if (this.radioButton1.Checked == true) { fuv_hypertensionBean.visit_type = this.radioButton1.Text; };
-            if (this.radioButton2.Checked == true) { fuv_hypertensionBean.visit_type = this.radioButton2.Text; };
-            if (this.radioButton3.Checked == true) { fuv_hypertensionBean.visit_type = this.radioButton3.Text; };
+            fuv_hypertensionBean.visit_date = this.dateTimePicker1.Text.ToString();
+            if (this.radioButton1.Checked == true) { fuv_hypertensionBean.visit_type = this.radioButton1.Tag.ToString(); };
+            if (this.radioButton2.Checked == true) { fuv_hypertensionBean.visit_type = this.radioButton2.Tag.ToString(); };
+            if (this.radioButton3.Checked == true) { fuv_hypertensionBean.visit_type = this.radioButton3.Tag.ToString(); };
             foreach (Control ctr in this.panel2.Controls)
             {
                 //判断该控件是不是CheckBox
@@ -92,7 +91,7 @@ namespace zkhwClient.view.PublicHealthView
                     CheckBox ck = ctr as CheckBox;
                     if (ck.Checked)
                     {
-                        fuv_hypertensionBean.symptom += "," + ck.Text;
+                        fuv_hypertensionBean.symptom += "," + ck.Tag.ToString();
                     }
                 }
             }
@@ -119,44 +118,42 @@ namespace zkhwClient.view.PublicHealthView
             fuv_hypertensionBean.sport_once = this.numericUpDown6.Value.ToString();
             fuv_hypertensionBean.target_sport_week = this.numericUpDown7.Value.ToString();
             fuv_hypertensionBean.target_sport_once = this.numericUpDown8.Value.ToString();
-            if (this.radioButton4.Checked == true) { fuv_hypertensionBean.salt_intake = this.radioButton4.Text; };
-            if (this.radioButton5.Checked == true) { fuv_hypertensionBean.salt_intake = this.radioButton5.Text; };
-            if (this.radioButton6.Checked == true) { fuv_hypertensionBean.salt_intake = this.radioButton6.Text; };
-            if (this.radioButton7.Checked == true) { fuv_hypertensionBean.target_salt_intake = this.radioButton7.Text; };
-            if (this.radioButton8.Checked == true) { fuv_hypertensionBean.target_salt_intake = this.radioButton8.Text; };
-            if (this.radioButton9.Checked == true) { fuv_hypertensionBean.target_salt_intake = this.radioButton9.Text; };
-            if (this.radioButton10.Checked == true) { fuv_hypertensionBean.mind_adjust = this.radioButton10.Text; };
-            if (this.radioButton11.Checked == true) { fuv_hypertensionBean.mind_adjust = this.radioButton11.Text; };
-            if (this.radioButton12.Checked == true) { fuv_hypertensionBean.mind_adjust = this.radioButton12.Text; };
-            if (this.radioButton13.Checked == true) { fuv_hypertensionBean.doctor_obey = this.radioButton13.Text; };
-            if (this.radioButton14.Checked == true) { fuv_hypertensionBean.doctor_obey = this.radioButton14.Text; };
-            if (this.radioButton15.Checked == true) { fuv_hypertensionBean.doctor_obey = this.radioButton15.Text; };
+            if (this.radioButton4.Checked == true) { fuv_hypertensionBean.salt_intake = this.radioButton4.Tag.ToString(); };
+            if (this.radioButton5.Checked == true) { fuv_hypertensionBean.salt_intake = this.radioButton5.Tag.ToString(); };
+            if (this.radioButton6.Checked == true) { fuv_hypertensionBean.salt_intake = this.radioButton6.Tag.ToString(); };
+            if (this.radioButton7.Checked == true) { fuv_hypertensionBean.target_salt_intake = this.radioButton7.Tag.ToString(); };
+            if (this.radioButton8.Checked == true) { fuv_hypertensionBean.target_salt_intake = this.radioButton8.Tag.ToString(); };
+            if (this.radioButton9.Checked == true) { fuv_hypertensionBean.target_salt_intake = this.radioButton9.Tag.ToString(); };
+            if (this.radioButton10.Checked == true) { fuv_hypertensionBean.mind_adjust = this.radioButton10.Tag.ToString(); };
+            if (this.radioButton11.Checked == true) { fuv_hypertensionBean.mind_adjust = this.radioButton11.Tag.ToString(); };
+            if (this.radioButton12.Checked == true) { fuv_hypertensionBean.mind_adjust = this.radioButton12.Tag.ToString(); };
+            if (this.radioButton13.Checked == true) { fuv_hypertensionBean.doctor_obey = this.radioButton13.Tag.ToString(); };
+            if (this.radioButton14.Checked == true) { fuv_hypertensionBean.doctor_obey = this.radioButton14.Tag.ToString(); };
+            if (this.radioButton15.Checked == true) { fuv_hypertensionBean.doctor_obey = this.radioButton15.Tag.ToString(); };
 
             fuv_hypertensionBean.assist_examine = this.textBox3.Text.Replace(" ", "");
-            if (this.radioButton22.Checked == true) { fuv_hypertensionBean.drug_obey = this.radioButton22.Text; };
-            if (this.radioButton23.Checked == true) { fuv_hypertensionBean.drug_obey = this.radioButton23.Text; };
-            if (this.radioButton24.Checked == true) { fuv_hypertensionBean.drug_obey = this.radioButton24.Text; };
-            if (this.radioButton16.Checked == true) { fuv_hypertensionBean.untoward_effect = this.radioButton16.Text; };
-            if (this.radioButton17.Checked == true) { fuv_hypertensionBean.untoward_effect = this.radioButton17.Text; };
+            if (this.radioButton22.Checked == true) { fuv_hypertensionBean.drug_obey = this.radioButton22.Tag.ToString(); };
+            if (this.radioButton23.Checked == true) { fuv_hypertensionBean.drug_obey = this.radioButton23.Tag.ToString(); };
+            if (this.radioButton24.Checked == true) { fuv_hypertensionBean.drug_obey = this.radioButton24.Tag.ToString(); };
+            if (this.radioButton16.Checked == true) { fuv_hypertensionBean.untoward_effect = this.radioButton16.Tag.ToString(); };
+            if (this.radioButton17.Checked == true) { fuv_hypertensionBean.untoward_effect = this.radioButton17.Tag.ToString(); };
             fuv_hypertensionBean.untoward_effect_drug = this.textBox8.Text.Replace(" ", "");
-            if (this.radioButton18.Checked == true) { fuv_hypertensionBean.visit_class = this.radioButton18.Text; };
-            if (this.radioButton19.Checked == true) { fuv_hypertensionBean.visit_class = this.radioButton19.Text; };
-            if (this.radioButton20.Checked == true) { fuv_hypertensionBean.visit_class = this.radioButton20.Text; };
-            if (this.radioButton21.Checked == true) { fuv_hypertensionBean.visit_class = this.radioButton21.Text; };
+            if (this.radioButton18.Checked == true) { fuv_hypertensionBean.visit_class = this.radioButton18.Tag.ToString(); };
+            if (this.radioButton19.Checked == true) { fuv_hypertensionBean.visit_class = this.radioButton19.Tag.ToString(); };
+            if (this.radioButton20.Checked == true) { fuv_hypertensionBean.visit_class = this.radioButton20.Tag.ToString(); };
+            if (this.radioButton21.Checked == true) { fuv_hypertensionBean.visit_class = this.radioButton21.Tag.ToString(); };
             if (fuv_hypertensionBean.visit_class == "") { MessageBox.Show("随访分类不能为空！"); return; };
             fuv_hypertensionBean.advice = this.richTextBox2.Text;
 
             fuv_hypertensionBean.transfer_reason = this.textBox5.Text.Replace(" ", "");
             fuv_hypertensionBean.transfer_organ = this.textBox6.Text.Replace(" ", "");
-            fuv_hypertensionBean.next_visit_date = this.dateTimePicker2.Value.ToString();
+            fuv_hypertensionBean.next_visit_date = this.dateTimePicker2.Text.ToString();
             fuv_hypertensionBean.visit_doctor = this.textBox7.Text.Replace(" ", "");
 
 
             //以下页面未用 数据库字段格式要求
-            //Cardcode,Codebar,SocialSecuritycode,patientAge,dataSate,hypertension_code,referral_code,create_name,create_time,update_name,update_time
             fuv_hypertensionBean.create_time = DateTime.Now.ToString("yyyy-MM-dd");
             fuv_hypertensionBean.update_time = DateTime.Now.ToString("yyyy-MM-dd");
-
 
             bool isfalse = hypertensionPatient.aUfuv_hypertension(fuv_hypertensionBean, id, goodsList);
             if (isfalse)

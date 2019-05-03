@@ -51,22 +51,23 @@ namespace zkhwClient.view.PublicHealthView
                 this.label2.Text = "";
             }
             else { this.label2.Text = "---姓名/身份证号/档案号---"; }
-            time1 = this.dateTimePicker1.Text.ToString();//开始时间
-            time2 = this.dateTimePicker2.Text.ToString();//结束时间
+            
             querydiabetesPatientServices();
         }
         private void querydiabetesPatientServices()
         {
+            time1 = this.dateTimePicker1.Text.ToString();//开始时间
+            time2 = this.dateTimePicker2.Text.ToString();//结束时间
             this.dataGridView1.DataSource = null;
             DataTable dt = diabetesPatient.querydiabetesPatient(pCa, time1, time2,xcuncode);
             this.dataGridView1.DataSource = dt;
-            this.dataGridView1.Columns[0].Visible = false;
-            this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";
+            this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
+            this.dataGridView1.Columns[1].HeaderCell.Value = "档案编号";
             this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
-            this.dataGridView1.Columns[3].HeaderCell.Value = "建档医生";
+            this.dataGridView1.Columns[3].HeaderCell.Value = "随访类型";
             this.dataGridView1.Columns[4].HeaderCell.Value = "随访日期";
-            this.dataGridView1.Columns[5].HeaderCell.Value = "下次随访日期";
-            this.dataGridView1.Columns[6].HeaderCell.Value = "数据状态";
+            this.dataGridView1.Columns[5].HeaderCell.Value = "随访医生";
+            this.dataGridView1.Columns[6].Visible = false;
 
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
@@ -87,9 +88,22 @@ namespace zkhwClient.view.PublicHealthView
         //添加 修改 高血压随访记录历史表 调此方法
         private void button1_Click(object sender, EventArgs e)
         {
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            string name = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            string archiveno = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+            string idnumber = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+            string id = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
+            DataTable dt = diabetesPatient.queryDiabetesPatient0(id);
+            if (dt.Rows.Count > 0)
+            {
+                MessageBox.Show("此身份信息已参加过了!");
+                return;
+            }
             aUdiabetesPatientServices hm = new aUdiabetesPatientServices();
             hm.label51.Text = "添加糖尿病患者服务";
             hm.Text = "添加糖尿病患者服务";
+            hm.textBox1.Text = name;
+            hm.textBox2.Text = archiveno;
             if (hm.ShowDialog() == DialogResult.OK)
             {
                 //刷新页面
@@ -102,7 +116,7 @@ namespace zkhwClient.view.PublicHealthView
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             aUdiabetesPatientServices dp = new aUdiabetesPatientServices();
-            string id = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            string id = this.dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
             dp.id = id;
             dp.label51.Text = "修改糖尿病患者服务";
             dp.Text = "修改糖尿病患者服务";
@@ -113,9 +127,9 @@ namespace zkhwClient.view.PublicHealthView
                 dp.textBox1.Text = dt.Rows[0]["name"].ToString();
                 dp.textBox2.Text = dt.Rows[0]["aichive_no"].ToString();
                 dp.dateTimePicker1.Value = DateTime.Parse(dt.Rows[0]["visit_date"].ToString());
-                if (dt.Rows[0]["visit_type"].ToString() == dp.radioButton1.Text) { dp.radioButton1.Checked = true; };
-                if (dt.Rows[0]["visit_type"].ToString() == dp.radioButton2.Text) { dp.radioButton2.Checked = true; };
-                if (dt.Rows[0]["visit_type"].ToString() == dp.radioButton3.Text) { dp.radioButton3.Checked = true; };
+                if (dt.Rows[0]["visit_type"].ToString() == dp.radioButton1.Tag.ToString()) { dp.radioButton1.Checked = true; };
+                if (dt.Rows[0]["visit_type"].ToString() == dp.radioButton2.Tag.ToString()) { dp.radioButton2.Checked = true; };
+                if (dt.Rows[0]["visit_type"].ToString() == dp.radioButton3.Tag.ToString()) { dp.radioButton3.Checked = true; };
                 foreach (Control ctr in dp.panel2.Controls)
                 {
                     //判断该控件是不是CheckBox
@@ -162,28 +176,29 @@ namespace zkhwClient.view.PublicHealthView
                 dp.numericUpDown8.Value = Decimal.Parse(dt.Rows[0]["sports_time_next"].ToString());
                 dp.numericUpDown13.Value = Decimal.Parse(dt.Rows[0]["staple_food_now"].ToString());
                 dp.numericUpDown16.Value = Decimal.Parse(dt.Rows[0]["staple_food_next"].ToString());
-                if (dt.Rows[0]["psychological_recovery"].ToString() == dp.radioButton10.Text) { dp.radioButton10.Checked = true; };
-                if (dt.Rows[0]["psychological_recovery"].ToString() == dp.radioButton11.Text) { dp.radioButton11.Checked = true; };
-                if (dt.Rows[0]["psychological_recovery"].ToString() == dp.radioButton12.Text) { dp.radioButton12.Checked = true; };
-                if (dt.Rows[0]["medical_compliance"].ToString() == dp.radioButton13.Text) { dp.radioButton13.Checked = true; };
-                if (dt.Rows[0]["medical_compliance"].ToString() == dp.radioButton14.Text) { dp.radioButton14.Checked = true; };
-                if (dt.Rows[0]["medical_compliance"].ToString() == dp.radioButton15.Text) { dp.radioButton15.Checked = true; };
+                if (dt.Rows[0]["psychological_recovery"].ToString() == dp.radioButton10.Tag.ToString()) { dp.radioButton10.Checked = true; };
+                if (dt.Rows[0]["psychological_recovery"].ToString() == dp.radioButton11.Tag.ToString()) { dp.radioButton11.Checked = true; };
+                if (dt.Rows[0]["psychological_recovery"].ToString() == dp.radioButton12.Tag.ToString()) { dp.radioButton12.Checked = true; };
+                if (dt.Rows[0]["medical_compliance"].ToString() == dp.radioButton13.Tag.ToString()) { dp.radioButton13.Checked = true; };
+                if (dt.Rows[0]["medical_compliance"].ToString() == dp.radioButton14.Tag.ToString()) { dp.radioButton14.Checked = true; };
+                if (dt.Rows[0]["medical_compliance"].ToString() == dp.radioButton15.Tag.ToString()) { dp.radioButton15.Checked = true; };
 
                 dp.numericUpDown17.Value = Decimal.Parse(dt.Rows[0]["blood_glucose"].ToString());
                 dp.numericUpDown18.Value = Decimal.Parse(dt.Rows[0]["glycosylated_hemoglobin"].ToString());
-                if (dt.Rows[0]["compliance"].ToString() == dp.radioButton22.Text) { dp.radioButton22.Checked = true; };
-                if (dt.Rows[0]["compliance"].ToString() == dp.radioButton23.Text) { dp.radioButton23.Checked = true; };
-                if (dt.Rows[0]["compliance"].ToString() == dp.radioButton24.Text) { dp.radioButton24.Checked = true; };
-                if (dt.Rows[0]["untoward_effect"].ToString() == dp.radioButton16.Text) { dp.radioButton16.Checked = true; };
-                if (dt.Rows[0]["untoward_effect"].ToString() == dp.radioButton17.Text) { dp.radioButton17.Checked = true; };
-                if (dt.Rows[0]["reactive_hypoglycemia"].ToString() == dp.radioButton4.Text) { dp.radioButton4.Checked = true; };
-                if (dt.Rows[0]["reactive_hypoglycemia"].ToString() == dp.radioButton5.Text) { dp.radioButton5.Checked = true; };
-                if (dt.Rows[0]["reactive_hypoglycemia"].ToString() == dp.radioButton6.Text) { dp.radioButton6.Checked = true; };
+                dp.dateTimePicker3.Value= DateTime.Parse(dt.Rows[0]["check_date"].ToString());
+                if (dt.Rows[0]["compliance"].ToString() == dp.radioButton22.Tag.ToString()) { dp.radioButton22.Checked = true; };
+                if (dt.Rows[0]["compliance"].ToString() == dp.radioButton23.Tag.ToString()) { dp.radioButton23.Checked = true; };
+                if (dt.Rows[0]["compliance"].ToString() == dp.radioButton24.Tag.ToString()) { dp.radioButton24.Checked = true; };
+                if (dt.Rows[0]["untoward_effect"].ToString() == dp.radioButton16.Tag.ToString()) { dp.radioButton16.Checked = true; };
+                if (dt.Rows[0]["untoward_effect"].ToString() == dp.radioButton17.Tag.ToString()) { dp.radioButton17.Checked = true; };
+                if (dt.Rows[0]["reactive_hypoglycemia"].ToString() == dp.radioButton4.Tag.ToString()) { dp.radioButton4.Checked = true; };
+                if (dt.Rows[0]["reactive_hypoglycemia"].ToString() == dp.radioButton5.Tag.ToString()) { dp.radioButton5.Checked = true; };
+                if (dt.Rows[0]["reactive_hypoglycemia"].ToString() == dp.radioButton6.Tag.ToString()) { dp.radioButton6.Checked = true; };
 
-                if (dt.Rows[0]["follow_type"].ToString() == dp.radioButton18.Text) { dp.radioButton18.Checked = true; };
-                if (dt.Rows[0]["follow_type"].ToString() == dp.radioButton19.Text) { dp.radioButton19.Checked = true; };
-                if (dt.Rows[0]["follow_type"].ToString() == dp.radioButton20.Text) { dp.radioButton20.Checked = true; };
-                if (dt.Rows[0]["follow_type"].ToString() == dp.radioButton21.Text) { dp.radioButton21.Checked = true; };
+                if (dt.Rows[0]["follow_type"].ToString() == dp.radioButton18.Tag.ToString()) { dp.radioButton18.Checked = true; };
+                if (dt.Rows[0]["follow_type"].ToString() == dp.radioButton19.Tag.ToString()) { dp.radioButton19.Checked = true; };
+                if (dt.Rows[0]["follow_type"].ToString() == dp.radioButton20.Tag.ToString()) { dp.radioButton20.Checked = true; };
+                if (dt.Rows[0]["follow_type"].ToString() == dp.radioButton21.Tag.ToString()) { dp.radioButton21.Checked = true; };
                 dp.richTextBox2.Text = dt.Rows[0]["advice"].ToString();
 
                 dp.textBox5.Text = dt.Rows[0]["transfer_treatment_reason"].ToString();
@@ -208,7 +223,7 @@ namespace zkhwClient.view.PublicHealthView
         private void button3_Click(object sender, EventArgs e)
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
-            string id = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            string id = this.dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
 
             DialogResult rr = MessageBox.Show("确认删除？", "确认删除提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
             int tt = (int)rr;

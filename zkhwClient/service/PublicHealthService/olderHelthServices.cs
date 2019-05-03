@@ -21,9 +21,9 @@ namespace zkhwClient.service
         {
             return hPD.queryOlderHelthService0();
         }
-        public DataTable query(string id_number)
+        public DataTable query(string archive_no)
         {
-            return hPD.query(id_number);
+            return hPD.query(archive_no);
         }
         public bool aUelderly_selfcare_estimate(bean.elderly_selfcare_estimateBean hm, string id)
         {

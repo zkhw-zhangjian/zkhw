@@ -118,11 +118,14 @@ namespace zkhwClient.dao
                 + per.examination_breast_other + "',examination_woman_vulva='" + per.examination_woman_vulva + "',examination_vulva_memo='" + per.examination_vulva_memo
                 + "',examination_woman_vagina='" + per.examination_woman_vagina + "',examination_vagina_memo='" + per.examination_vagina_memo + "',examination_woman_cervix='" + per.examination_woman_cervix
                 + "',examination_cervix_memo='" + per.examination_cervix_memo + "',examination_woman_corpus='" + per.examination_woman_corpus + "',examination_corpus_memo='" + per.examination_corpus_memo + "',examination_woman_accessories='" + per.examination_woman_accessories
-                + "',examination_accessories_memo='" + per.examination_accessories_memo + "',examination_other='" + per.examination_other + "' where aichive_no = '" + per.aichive_no + "' and bar_code = '" + per.bar_code + "'";
-            //blood_hemoglobin ='" + per.blood_hemoglobin + "',blood_leukocyte='" + per.blood_leukocyte
-            //+ "',blood_platelet='" + per.blood_platelet + "',blood_platelet='" + per.blood_platelet + "',blood_other='" + per.blood_other + "' 
-            ret = DbHelperMySQL.ExecuteSql(sql);
-            return ret == 0 ? false : true;
+                + "',examination_accessories_memo='" + per.examination_accessories_memo + "',examination_other='" + per.examination_other + "',blood_hemoglobin ='" + per.blood_hemoglobin + "',blood_leukocyte='" + per.blood_leukocyte + "',blood_platelet='" + per.blood_platelet + "',blood_other='" + per.blood_other + "',urine_protein='" + 
+                per.urine_protein + "',glycosuria='" + per.glycosuria + "',urine_acetone_bodies='" + per.urine_acetone_bodies + "',bld='" + per.bld + "',urine_other='" + per.urine_other + "',blood_glucose_mmol='" + per.blood_glucose_mmol + "' ,blood_glucose_mg='" + per.blood_glucose_mg + "',cardiogram='" + per.cardiogram 
+                + "',cardiogram_memo='" + per.cardiogram_memo + "', microalbuminuria='" + per.microalbuminuria + "',fob='" + per.fob + "',glycosylated_hemoglobin='" + per.glycosylated_hemoglobin + "',hb='" + per.hb + "',sgft='" + per.sgft
+                + "',ast='" + per.ast + "',albumin='" + per.albumin + "',total_bilirubin='" + per.total_bilirubin + "',conjugated_bilirubin='" + per.conjugated_bilirubin + "',scr='" + per.scr + "',blood_urea='" + per.blood_urea
+                + "',blood_k='" + per.blood_k + "',blood_na='" + per.blood_na + "',tc='" + per.tc + "',tg='" + per.tg + "',ldl='" + per.ldl + "',hdl='" + per.hdl
+                + "',chest_x='" + per.chest_x + "',chestx_memo='" + per.chestx_memo + "',ultrasound_abdomen='" + per.ultrasound_abdomen + "',ultrasound_memo='" + per.ultrasound_memo + "',cervical_smear='" + per.cervical_smear_memo + "',other='" + per.other + "' where aichive_no = '" + per.aichive_no + "' and bar_code = '" + per.bar_code + "'"; 
+                ret = DbHelperMySQL.ExecuteSql(sql);
+                return ret == 0 ? false : true;
         }
         //添加健康体检表  第三页
         public bool addPhysicalExaminationRecord3(physical_examination_recordBean per)
@@ -141,10 +144,6 @@ namespace zkhwClient.dao
                 + "',heart_disease='" + per.heart_disease + "',heart_disease_other ='" + per.heart_disease_other + "',vascular_disease_other='" + per.vascular_disease_other
                 + "',ocular_diseases='" + per.ocular_diseases + "',ocular_diseases_other='" + per.ocular_diseases_other + "',nervous_system_disease='" + per.nervous_system_disease
                 + "',nervous_disease_memo='" + per.nervous_disease_memo + "',other_disease='" + per.other_disease + "',other_disease_memo='" + per.other_disease_memo +"' where aichive_no = '" + per.aichive_no + "' and bar_code = '" + per.bar_code + "'";
-            //using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
-            //{
-            //    sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + sql);
-            //}
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }
@@ -181,13 +180,9 @@ namespace zkhwClient.dao
             String sql = @"update physical_examination_record set health_evaluation='" + per.health_evaluation + "',abnormal1='" + per.abnormal1 + "',abnormal2='"
                 + per.abnormal2 + "',abnormal3='" + per.abnormal3 + "',abnormal4='" + per.abnormal4 + "',health_guidance='"
                 + per.health_guidance + "',danger_controlling='" + per.danger_controlling + "',target_weight='"
-                + per.target_weight + "',proposal_accination= '" + per.proposal_accination + "',danger_controlling_other='"
+                + per.target_weight + "',proposal_accination= '" + per.advise_bacterin + "',danger_controlling_other='"
                 + per.danger_controlling_other + "',create_user='" + frmLogin.name + "',create_name='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
                 + "' where aichive_no = '" + per.aichive_no + "' and bar_code = '" + per.bar_code + "'";
-            //using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
-            //{
-            //    sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + sql);
-            //}
             ret = DbHelperMySQL.ExecuteSql(sql);
             if (ret>0) {
                 if (goodsList.Rows.Count > 0) {

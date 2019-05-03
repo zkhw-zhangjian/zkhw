@@ -20,8 +20,8 @@ namespace zkhwClient
             System.Threading.Mutex mutex = new System.Threading.Mutex(true, Application.ProductName, out ret);
             if (ret)
             {
-                KillProc("ASNetWks.exe");
-                KillProc("httpceshi.exe");
+                KillProc("ASNetWks");
+                KillProc("httpceshi");
                 Application.EnableVisualStyles();   //这两行实现   XP   可视风格   
                 Application.DoEvents();             //这两行实现   XP   可视风格
                                                     Application.Run(new frmLogin());

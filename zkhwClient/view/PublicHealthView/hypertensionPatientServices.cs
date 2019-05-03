@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using zkhwClient.dao;
+using zkhwClient.view.setting;
 
 namespace zkhwClient.view.PublicHealthView
 {
@@ -42,6 +43,7 @@ namespace zkhwClient.view.PublicHealthView
             this.comboBox1.DisplayMember = "name";//显示给用户的数据集表项
             this.comboBox1.ValueMember = "code";//操作时获取的值 
 
+            xcuncode = basicInfoSettings.xcuncode;
             queryhypertensionPatientServices();
         }
         private void button5_Click(object sender, EventArgs e)
@@ -52,24 +54,24 @@ namespace zkhwClient.view.PublicHealthView
                 this.label2.Text = "";
             }
             else { this.label2.Text = "---姓名/身份证号/档案号---"; }
-            time1 = this.dateTimePicker1.Text.ToString();//开始时间
-            time2 = this.dateTimePicker2.Text.ToString();//结束时间
+
             queryhypertensionPatientServices();
         }
         //高血压随访记录历史表  关联传参调查询的方法
         private void queryhypertensionPatientServices()
         {
+            time1 = this.dateTimePicker1.Text.ToString();//开始时间
+            time2 = this.dateTimePicker2.Text.ToString();//结束时间
             this.dataGridView1.DataSource = null;
             DataTable dt = hypertensionPatient.queryHypertensionPatient(pCa, time1, time2, xcuncode);
             this.dataGridView1.DataSource = dt;
-            this.dataGridView1.Columns[0].Visible = false;
-            this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";
-            this.dataGridView1.Columns[2].HeaderCell.Value = "年龄";
-            this.dataGridView1.Columns[3].HeaderCell.Value = "建档医生";
+            this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
+            this.dataGridView1.Columns[1].HeaderCell.Value = "档案编号";
+            this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
+            this.dataGridView1.Columns[3].HeaderCell.Value = "随访类型";
             this.dataGridView1.Columns[4].HeaderCell.Value = "随访日期";
-            this.dataGridView1.Columns[5].HeaderCell.Value = "下次随访日期";
-            this.dataGridView1.Columns[6].HeaderCell.Value = "数据状态";
-
+            this.dataGridView1.Columns[5].HeaderCell.Value = "随访医生";
+            this.dataGridView1.Columns[6].Visible = false;
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
             this.dataGridView1.AllowUserToAddRows = false;
@@ -78,7 +80,6 @@ namespace zkhwClient.view.PublicHealthView
             {
                 this.dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -101,9 +102,22 @@ namespace zkhwClient.view.PublicHealthView
             //this.panel3.Controls.Add(hm);
             //hm.Show();
             //方案二
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            string name = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            string archiveno = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+            string idnumber = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+            string id = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
+            DataTable dt = hypertensionPatient.queryHypertensionPatient0(id);
+            if (dt.Rows.Count > 0)
+            {
+                MessageBox.Show("此身份信息已参加过了!");
+                return;
+            }
             aUHypertensionPatientServices hm = new aUHypertensionPatientServices();
             hm.label47.Text = "添加高血压随访记录历史表";
             hm.Text = "添加高血压随访记录历史表";
+            hm.textBox1.Text = name;
+            hm.textBox2.Text = archiveno;
             if (hm.ShowDialog() == DialogResult.OK)
             {
                 //刷新页面
@@ -117,19 +131,19 @@ namespace zkhwClient.view.PublicHealthView
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             aUHypertensionPatientServices hm = new aUHypertensionPatientServices();
-            string id = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            string id = this.dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
             hm.id = id;
             hm.label47.Text = "修改高血压随访记录历史表";
             hm.Text = "修改高血压随访记录历史表";
             DataTable dt = hypertensionPatient.queryHypertensionPatient0(id);
             if (dt != null && dt.Rows.Count > 0)
             {
-                hm.textBox1.Text = dt.Rows[0]["patientName"].ToString();
+                hm.textBox1.Text = dt.Rows[0]["name"].ToString();
                 hm.textBox2.Text = dt.Rows[0]["aichive_no"].ToString();
                 hm.dateTimePicker1.Value = DateTime.Parse(dt.Rows[0]["visit_date"].ToString());
-                if (dt.Rows[0]["visit_type"].ToString() == hm.radioButton1.Text) { hm.radioButton1.Checked = true; };
-                if (dt.Rows[0]["visit_type"].ToString() == hm.radioButton2.Text) { hm.radioButton2.Checked = true; };
-                if (dt.Rows[0]["visit_type"].ToString() == hm.radioButton3.Text) { hm.radioButton3.Checked = true; };
+                if (dt.Rows[0]["visit_type"].ToString() == hm.radioButton1.Tag.ToString()) { hm.radioButton1.Checked = true; };
+                if (dt.Rows[0]["visit_type"].ToString() == hm.radioButton2.Tag.ToString()) { hm.radioButton2.Checked = true; };
+                if (dt.Rows[0]["visit_type"].ToString() == hm.radioButton3.Tag.ToString()) { hm.radioButton3.Checked = true; };
                 foreach (Control ctr in hm.panel2.Controls)
                 {
                     //判断该控件是不是CheckBox
@@ -137,7 +151,7 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         //将ctr转换成CheckBox并赋值给ck
                         CheckBox ck = ctr as CheckBox;
-                        if (dt.Rows[0]["symptom"].ToString().IndexOf(ck.Text) > -1)
+                        if (dt.Rows[0]["symptom"].ToString()==ck.Tag.ToString())
                         {
                             ck.Checked = true;
                         }
@@ -163,30 +177,30 @@ namespace zkhwClient.view.PublicHealthView
                 hm.numericUpDown6.Value = Decimal.Parse(dt.Rows[0]["sport_once"].ToString());
                 hm.numericUpDown7.Value = Decimal.Parse(dt.Rows[0]["target_sport_week"].ToString());
                 hm.numericUpDown8.Value = Decimal.Parse(dt.Rows[0]["target_sport_once"].ToString());
-                if (dt.Rows[0]["salt_intake"].ToString() == hm.radioButton4.Text) { hm.radioButton4.Checked = true; };
-                if (dt.Rows[0]["salt_intake"].ToString() == hm.radioButton5.Text) { hm.radioButton5.Checked = true; };
-                if (dt.Rows[0]["salt_intake"].ToString() == hm.radioButton6.Text) { hm.radioButton6.Checked = true; };
-                if (dt.Rows[0]["target_salt_intake"].ToString() == hm.radioButton7.Text) { hm.radioButton7.Checked = true; };
-                if (dt.Rows[0]["target_salt_intake"].ToString() == hm.radioButton8.Text) { hm.radioButton8.Checked = true; };
-                if (dt.Rows[0]["target_salt_intake"].ToString() == hm.radioButton9.Text) { hm.radioButton9.Checked = true; };
-                if (dt.Rows[0]["mind_adjust"].ToString() == hm.radioButton10.Text) { hm.radioButton10.Checked = true; };
-                if (dt.Rows[0]["mind_adjust"].ToString() == hm.radioButton11.Text) { hm.radioButton11.Checked = true; };
-                if (dt.Rows[0]["mind_adjust"].ToString() == hm.radioButton12.Text) { hm.radioButton12.Checked = true; };
-                if (dt.Rows[0]["doctor_obey"].ToString() == hm.radioButton13.Text) { hm.radioButton13.Checked = true; };
-                if (dt.Rows[0]["doctor_obey"].ToString() == hm.radioButton14.Text) { hm.radioButton14.Checked = true; };
-                if (dt.Rows[0]["doctor_obey"].ToString() == hm.radioButton15.Text) { hm.radioButton15.Checked = true; };
+                if (dt.Rows[0]["salt_intake"].ToString() == hm.radioButton4.Tag.ToString()) { hm.radioButton4.Checked = true; };
+                if (dt.Rows[0]["salt_intake"].ToString() == hm.radioButton5.Tag.ToString()) { hm.radioButton5.Checked = true; };
+                if (dt.Rows[0]["salt_intake"].ToString() == hm.radioButton6.Tag.ToString()) { hm.radioButton6.Checked = true; };
+                if (dt.Rows[0]["target_salt_intake"].ToString() == hm.radioButton7.Tag.ToString()) { hm.radioButton7.Checked = true; };
+                if (dt.Rows[0]["target_salt_intake"].ToString() == hm.radioButton8.Tag.ToString()) { hm.radioButton8.Checked = true; };
+                if (dt.Rows[0]["target_salt_intake"].ToString() == hm.radioButton9.Tag.ToString()) { hm.radioButton9.Checked = true; };
+                if (dt.Rows[0]["mind_adjust"].ToString() == hm.radioButton10.Tag.ToString()) { hm.radioButton10.Checked = true; };
+                if (dt.Rows[0]["mind_adjust"].ToString() == hm.radioButton11.Tag.ToString()) { hm.radioButton11.Checked = true; };
+                if (dt.Rows[0]["mind_adjust"].ToString() == hm.radioButton12.Tag.ToString()) { hm.radioButton12.Checked = true; };
+                if (dt.Rows[0]["doctor_obey"].ToString() == hm.radioButton13.Tag.ToString()) { hm.radioButton13.Checked = true; };
+                if (dt.Rows[0]["doctor_obey"].ToString() == hm.radioButton14.Tag.ToString()) { hm.radioButton14.Checked = true; };
+                if (dt.Rows[0]["doctor_obey"].ToString() == hm.radioButton15.Tag.ToString()) { hm.radioButton15.Checked = true; };
 
                 hm.textBox3.Text = dt.Rows[0]["assist_examine"].ToString();
-                if (dt.Rows[0]["drug_obey"].ToString() == hm.radioButton22.Text) { hm.radioButton22.Checked = true; };
-                if (dt.Rows[0]["drug_obey"].ToString() == hm.radioButton23.Text) { hm.radioButton23.Checked = true; };
-                if (dt.Rows[0]["drug_obey"].ToString() == hm.radioButton24.Text) { hm.radioButton24.Checked = true; };
-                if (dt.Rows[0]["untoward_effect"].ToString() == hm.radioButton16.Text) { hm.radioButton16.Checked = true; };
-                if (dt.Rows[0]["untoward_effect"].ToString() == hm.radioButton17.Text) { hm.radioButton17.Checked = true; };
+                if (dt.Rows[0]["drug_obey"].ToString() == hm.radioButton22.Tag.ToString()) { hm.radioButton22.Checked = true; };
+                if (dt.Rows[0]["drug_obey"].ToString() == hm.radioButton23.Tag.ToString()) { hm.radioButton23.Checked = true; };
+                if (dt.Rows[0]["drug_obey"].ToString() == hm.radioButton24.Tag.ToString()) { hm.radioButton24.Checked = true; };
+                if (dt.Rows[0]["untoward_effect"].ToString() == hm.radioButton16.Tag.ToString()) { hm.radioButton16.Checked = true; };
+                if (dt.Rows[0]["untoward_effect"].ToString() == hm.radioButton17.Tag.ToString()) { hm.radioButton17.Checked = true; };
                 hm.textBox8.Text = dt.Rows[0]["untoward_effect_drug"].ToString();
-                if (dt.Rows[0]["visit_class"].ToString() == hm.radioButton18.Text) { hm.radioButton18.Checked = true; };
-                if (dt.Rows[0]["visit_class"].ToString() == hm.radioButton19.Text) { hm.radioButton19.Checked = true; };
-                if (dt.Rows[0]["visit_class"].ToString() == hm.radioButton20.Text) { hm.radioButton20.Checked = true; };
-                if (dt.Rows[0]["visit_class"].ToString() == hm.radioButton21.Text) { hm.radioButton21.Checked = true; };
+                if (dt.Rows[0]["visit_class"].ToString() == hm.radioButton18.Tag.ToString()) { hm.radioButton18.Checked = true; };
+                if (dt.Rows[0]["visit_class"].ToString() == hm.radioButton19.Tag.ToString()) { hm.radioButton19.Checked = true; };
+                if (dt.Rows[0]["visit_class"].ToString() == hm.radioButton20.Tag.ToString()) { hm.radioButton20.Checked = true; };
+                if (dt.Rows[0]["visit_class"].ToString() == hm.radioButton21.Tag.ToString()) { hm.radioButton21.Checked = true; };
                 hm.richTextBox2.Text = dt.Rows[0]["advice"].ToString();
 
                 hm.textBox5.Text = dt.Rows[0]["transfer_reason"].ToString();
@@ -211,7 +225,7 @@ namespace zkhwClient.view.PublicHealthView
         private void button3_Click(object sender, EventArgs e)
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
-            string id = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            string id = this.dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
 
             DialogResult rr = MessageBox.Show("确认删除？", "确认删除提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
             int tt = (int)rr;

@@ -350,7 +350,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label10.ForeColor = System.Drawing.Color.SkyBlue;
-            this.label10.Location = new System.Drawing.Point(251, 21);
+            this.label10.Location = new System.Drawing.Point(234, 21);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(86, 20);
             this.label10.TabIndex = 10;
@@ -429,9 +429,9 @@
             this.label8.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label8.Location = new System.Drawing.Point(152, 21);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(93, 20);
+            this.label8.Size = new System.Drawing.Size(72, 20);
             this.label8.TabIndex = 1;
-            this.label8.Text = "完成登记";
+            this.label8.Text = "已完成";
             // 
             // label7
             // 
@@ -512,6 +512,7 @@
             this.button5.TabIndex = 7;
             this.button5.Text = "关闭";
             this.button5.UseVisualStyleBackColor = false;
+            this.button5.Visible = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // olderHelthService
