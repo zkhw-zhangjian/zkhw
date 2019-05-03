@@ -35,8 +35,16 @@ namespace zkhwClient.view.PublicHealthView
             label4.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
             label4.Left = (this.panel1.Width - this.label4.Width) / 2;
             label4.BringToFront();
-            GetData();
-            //querytcmHealthServices();
+            querytcmHealthServices();
+            #region 区域数据绑定
+            string sql1 = "select code as ID,name as Name from code_area_config where parent_code='-1';";
+            DataSet datas = DbHelperMySQL.Query(sql1);
+            if (datas != null && datas.Tables.Count > 0)
+            {
+                List<ComboBoxData> ts = Result.ToDataList<ComboBoxData>(datas.Tables[0]);
+                Result.Bind(comboBox1, ts, "Name", "ID", "--请选择--");
+            }
+            #endregion
         }
         private void button5_Click(object sender, EventArgs e)
         {
@@ -48,21 +56,21 @@ namespace zkhwClient.view.PublicHealthView
             else { this.label2.Text = "---姓名/身份证号/档案号---"; }
             //time1 = this.dateTimePicker1.Text.ToString();//开始时间
             //time2 = this.dateTimePicker2.Text.ToString();//结束时间
-            //querytcmHealthServices();
-            GetData();
+            querytcmHealthServices();
+
         }
         private void querytcmHealthServices()
         {
             this.dataGridView1.DataSource = null;
-            DataTable dt = tcmHealthService.querytcmHealthServices(pCa, time1, time2);
-            this.dataGridView1.DataSource = dt;
-            this.dataGridView1.Columns[0].Visible = false;
-            this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";
-            this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
-            this.dataGridView1.Columns[3].HeaderCell.Value = "档案编号";
-            this.dataGridView1.Columns[4].HeaderCell.Value = "测试日期";
-            this.dataGridView1.Columns[5].HeaderCell.Value = "测试医生";
-            this.dataGridView1.Columns[6].HeaderCell.Value = "数据状态";
+            //DataTable dt = tcmHealthService.querytcmHealthServices(pCa, time1, time2);
+            this.dataGridView1.DataSource = GetData();
+            //this.dataGridView1.Columns[0].Visible = false;
+            //this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";
+            //this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
+            //this.dataGridView1.Columns[3].HeaderCell.Value = "档案编号";
+            //this.dataGridView1.Columns[4].HeaderCell.Value = "测试日期";
+            //this.dataGridView1.Columns[5].HeaderCell.Value = "测试医生";
+            //this.dataGridView1.Columns[6].HeaderCell.Value = "数据状态";
 
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
@@ -85,11 +93,7 @@ namespace zkhwClient.view.PublicHealthView
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             int row = dataGridView1.CurrentRow.Index;
-            addtcmHealthServices addtcm = new addtcmHealthServices();
-            addtcm.Name = dataGridView1["姓名", row].Value.ToString();
-            addtcm.aichive_no = dataGridView1["编码", row].Value.ToString();
-            addtcm.id_number = dataGridView1["身份证号", row].Value.ToString();
-            addtcm.IS = 1;
+            addtcmHealthServices addtcm = new addtcmHealthServices(1, dataGridView1["姓名", row].Value.ToString(), dataGridView1["编码", row].Value.ToString(), dataGridView1["身份证号", row].Value.ToString());
             addtcm.StartPosition = FormStartPosition.CenterScreen;
             addtcm.ShowDialog();
             //aUdiabetesPatientServices hm = new aUdiabetesPatientServices();
@@ -113,11 +117,7 @@ namespace zkhwClient.view.PublicHealthView
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             int row = dataGridView1.CurrentRow.Index;
-            addtcmHealthServices addtcm = new addtcmHealthServices();
-            addtcm.Name = dataGridView1["姓名", row].Value.ToString();
-            addtcm.aichive_no = dataGridView1["编码", row].Value.ToString();
-            addtcm.id_number = dataGridView1["身份证号", row].Value.ToString();
-            addtcm.IS = 0;
+            addtcmHealthServices addtcm = new addtcmHealthServices(0, dataGridView1["姓名", row].Value.ToString(), dataGridView1["编码", row].Value.ToString(), dataGridView1["身份证号", row].Value.ToString());
             addtcm.StartPosition = FormStartPosition.CenterScreen;
             addtcm.ShowDialog();
             //if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
@@ -241,16 +241,19 @@ namespace zkhwClient.view.PublicHealthView
             {//删除用户       
              // bool istrue = tcmHealthService.deletetcmHealthServices(id);
                 int row = dataGridView1.CurrentRow.Index;
-                string Name = dataGridView1["姓名", row].Value.ToString();
-                string aichive_no = dataGridView1["编码", row].Value.ToString();
-                string id_number = dataGridView1["身份证号", row].Value.ToString();
+                string Name = dataGridView1["姓名", row].Value.ToString().Trim();
+                string aichive_no = dataGridView1["编码", row].Value.ToString().Trim();
+                string id_number = dataGridView1["身份证号", row].Value.ToString().Trim();
                 bool istrue = deletetcmHealthServices(Name, aichive_no, id_number);
                 if (istrue)
                 {
                     //刷新页面
-                    //querytcmHealthServices();
-                    GetData();
+                    querytcmHealthServices();
                     MessageBox.Show("删除成功！");
+                }
+                else
+                {
+                    MessageBox.Show("删除失败！");
                 }
             }
         }
@@ -291,8 +294,7 @@ base.name 姓名,
 (case base.sex when '1'then '男' when '2' then '女' when '9' then '未说明的性别' when '0' then '未知的性别' ELSE ''
 END)性别,
 base.id_number 身份证号,
-base.upload_status 是否同步,
-bgdc.BaoGaoShengChan 报告生成时间
+base.upload_status 是否同步
 from resident_base_info base
 where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'";//base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'
             if (pairs != null && pairs.Count > 0)

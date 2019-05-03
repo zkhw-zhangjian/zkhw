@@ -41,8 +41,9 @@ GROUP BY sex
             if (data != null && data.Rows.Count > 0)
             {
                 DataRow[] rows = data.Select("sex='女'");
-                if (rows.Length>0) { 
-                女.Text = rows[0]["sun"].ToString();
+                if (rows.Length > 0)
+                {
+                    女.Text = rows[0]["sun"].ToString();
                 }
                 DataRow[] rowsn = data.Select("sex='男'");
                 if (rowsn.Length > 0)
@@ -127,7 +128,7 @@ from resident_base_info base
 join 
 (select * from zkhw_tj_bgdc group by aichive_no order by createtime desc) bgdc
 on base.archive_no=bgdc.aichive_no
-where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{basicInfoSettings.createtime}'";//base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'
+where 1=1";//base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'
             if (pairs != null && pairs.Count > 0)
             {
                 if (!string.IsNullOrWhiteSpace(pairs["timesta"]) && !string.IsNullOrWhiteSpace(pairs["timeend"]))
@@ -537,14 +538,15 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                     if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
                     {
                         string id = dataGridView1["编码", i].Value.ToString();
-                        ide.Add(id);
+                        ide.Add("'" + id + "'");
                     }
                 }
-                if (ide.Count<1) {
-                    MessageBox.Show("请选择要导出报告的人员!");return;
+                if (ide.Count < 1)
+                {
+                    MessageBox.Show("请选择要导出报告的人员!"); return;
                 }
                 string sql = string.Empty;
-                sql = $@"select * from resident_base_info base where base.archive_no in('{string.Join(",", ide)}')";
+                sql = $@"select * from resident_base_info base where base.archive_no in({string.Join(",", ide)})";
                 DataSet datas = DbHelperMySQL.Query(sql);
                 if (datas != null && datas.Tables.Count > 0)
                 {
@@ -553,7 +555,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                     dataSet.Tables.Add(ge);
                 }
 
-                bool istue=PDF(list, dataSet, ide);
+                bool istue = PDF(list, dataSet, ide);
                 if (istue)
                 {
                     DialogResult dr = MessageBox.Show("成功！是否打开文件夹",
@@ -571,10 +573,10 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = frmLogin.name;
                 lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                lb.eventInfo = "报告导出异常！"+ ex.Message;
+                lb.eventInfo = "报告导出异常！" + ex.Message;
                 lb.type = "2";
                 lls.addCheckLog(lb);
-                MessageBox.Show("错误请联系管理员！11"+ ex.StackTrace);
+                MessageBox.Show("错误请联系管理员！11" + ex.StackTrace);
             }
         }
 
@@ -661,7 +663,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
             }
             else
             {
-                if (list == null|| list.Count ==0)
+                if (list == null || list.Count == 0)
                 {
                     MessageBox.Show("请选择你要生成的报告类型！");
                     return false;
@@ -1034,8 +1036,9 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                         DataTable da = sh.Tables[0];
                         for (int j = 0; j < da.Rows.Count; j++)
                         {
-                            string alb=da.Rows[j]["ALB"].ToString();
-                            if (alb != null&&!"".Equals(alb)) {
+                            string alb = da.Rows[j]["ALB"].ToString();
+                            if (alb != null && !"".Equals(alb))
+                            {
                                 hy.Add("白蛋白箭头", Convert.ToDouble(da.Rows[j]["ALB"].ToString()) > 54 ? "↑" : "↓");
                                 hy.Add("白蛋白结果", da.Rows[j]["ALB"].ToString());
                             }
@@ -1540,8 +1543,9 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                         for (int j = 0; j < da.Rows.Count; j++)
                         {
                             builder.MoveToBookmark("图片");
-                            string imageUrl= da.Rows[j]["imageUrl"].ToString();
-                            if (imageUrl != null&&!"".Equals(imageUrl)) {
+                            string imageUrl = da.Rows[j]["imageUrl"].ToString();
+                            if (imageUrl != null && !"".Equals(imageUrl))
+                            {
                                 builder.InsertImage(resizeImageFromFile(@str + "/xdtImg/" + imageUrl, 678, 960));
                             }
                             xdt.Add("条码号", da.Rows[j]["bar_code"].ToString());
@@ -2165,8 +2169,9 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                 int run = DbHelperMySQL.ExecuteSqlTranYpt(sqllist);
                 if (run > 0)
                 {
-                    if (infoid!=null&&!"".Equals(infoid)) { 
-                    sqllistz.Add($"update resident_base_info set upload_status='1' where id in({infoid.TrimEnd(',')});");
+                    if (infoid != null && !"".Equals(infoid))
+                    {
+                        sqllistz.Add($"update resident_base_info set upload_status='1' where id in({infoid.TrimEnd(',')});");
                     }
                     if (recordid != null && !"".Equals(recordid))
                     {
@@ -2216,7 +2221,7 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                     {
                         sqllistz.Add($"update zkhw_tj_bc set upload_status='1' where id in({bcid.TrimEnd(',')});");
                     }
-                        int reu1 = DbHelperMySQL.ExecuteSqlTran(sqllistz);
+                    int reu1 = DbHelperMySQL.ExecuteSqlTran(sqllistz);
                     if (reu1 > 0)
                     {
                         bean.loginLogBean lb = new bean.loginLogBean();
@@ -2252,7 +2257,7 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                 lb.eventInfo = "数据上传异常！";
                 lb.type = "2";
                 lls.addCheckLog(lb);
-                MessageBox.Show("错误请联系管理员！"+ ex.Message+"\n"+ex.StackTrace);
+                MessageBox.Show("错误请联系管理员！" + ex.Message + "\n" + ex.StackTrace);
                 return;
             }
 
