@@ -137,7 +137,7 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         //将ctr转换成CheckBox并赋值给ck
                         CheckBox ck = ctr as CheckBox;
-                        if (dt.Rows[0]["symptom"].ToString().IndexOf(ck.Text) > -1)
+                        if (dt.Rows[0]["symptom"].ToString().IndexOf(ck.Tag.ToString()) > -1)
                         {
                             ck.Checked = true;
                         }
@@ -158,7 +158,7 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         //将ctr转换成CheckBox并赋值给ck
                         CheckBox ck = ctr as CheckBox;
-                        if (dt.Rows[0]["dorsal_artery"].ToString().IndexOf(ck.Text) > -1)
+                        if (dt.Rows[0]["dorsal_artery"].ToString().IndexOf(ck.Tag.ToString()) > -1)
                         {
                             ck.Checked = true;
                         }

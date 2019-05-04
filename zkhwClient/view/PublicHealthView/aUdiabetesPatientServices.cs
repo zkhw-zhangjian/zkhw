@@ -67,7 +67,7 @@ namespace zkhwClient.view.PublicHealthView
                     CheckBox ck = ctr as CheckBox;
                     if (ck.Checked)
                     {
-                        diabetes_follow_recordBean.symptom += "," + ck.Text;
+                        diabetes_follow_recordBean.symptom += "," + ck.Tag.ToString();
                     }
                 }
             }
@@ -92,7 +92,7 @@ namespace zkhwClient.view.PublicHealthView
                     CheckBox ck = ctr as CheckBox;
                     if (ck.Checked)
                     {
-                        diabetes_follow_recordBean.dorsal_artery += "," + ck.Text;
+                        diabetes_follow_recordBean.dorsal_artery += "," + ck.Tag.ToString();
                     }
                 }
             }

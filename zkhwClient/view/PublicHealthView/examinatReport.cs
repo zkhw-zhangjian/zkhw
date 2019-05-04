@@ -137,7 +137,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
                 }
                 if (!string.IsNullOrWhiteSpace(pairs["juming"]))
                 {
-                    sql += $" or base.name like '%{pairs["juming"]}%' or base.bar_code like '%{pairs["juming"]}%' or base.id_number like '%{pairs["juming"]}%'";
+                    sql += $" or base.name like '%{pairs["juming"]}%' or base.id_number like '%{pairs["juming"]}%'";
                 }
                 if (!string.IsNullOrWhiteSpace(pairs["sheng"]))
                 {
