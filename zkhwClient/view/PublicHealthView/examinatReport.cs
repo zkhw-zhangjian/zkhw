@@ -9,6 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using zkhwClient.dao;
 using zkhwClient.view.setting;
@@ -1022,7 +1023,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             hy.Add("左侧低压", jkdata.Rows[j]["base_blood_pressure_left_low"].ToString());
                             hy.Add("右侧高压", jkdata.Rows[j]["base_blood_pressure_right_high"].ToString());
                             hy.Add("右侧低压", jkdata.Rows[j]["base_blood_pressure_right_low"].ToString());
-                            hy.Add("送检日期", jkdata.Rows[j]["check_da.Rowste"].ToString());
+                            hy.Add("送检日期", jkdata.Rows[j]["create_time"].ToString());
                             hy.Add("审核", "");
                             hy.Add("审核1", "");
                             hy.Add("报告日期", DateTime.Now.ToString("yyyy-MM-dd"));
@@ -1101,43 +1102,43 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                         DataTable da = xcg.Tables[0];
                         for (int j = 0; j < da.Rows.Count; j++)
                         {
-                            hy.Add("红细胞压积箭头", Convert.ToDouble(da.Rows[j]["HCT"].ToString()) > 50 ? "↑" : "↓");
+                            hy.Add("红细胞压积箭头", Convert.ToDouble(IsNumber(da.Rows[j]["HCT"].ToString()) ? da.Rows[j]["HCT"].ToString() : "0") > 50 ? "↑" : "↓");
                             hy.Add("红细胞压积结果", da.Rows[j]["HCT"].ToString());
-                            hy.Add("血红蛋白箭头", Convert.ToDouble(da.Rows[j]["HGB"].ToString()) > 160 ? "↑" : "↓");
+                            hy.Add("血红蛋白箭头", Convert.ToDouble(IsNumber(da.Rows[j]["HGB"].ToString()) ? da.Rows[j]["HGB"].ToString() : "0") > 160 ? "↑" : "↓");
                             hy.Add("血红蛋白结果", da.Rows[j]["HGB"].ToString());
-                            hy.Add("淋巴细胞数目箭头", Convert.ToDouble(da.Rows[j]["LYM"].ToString()) > 4 ? "↑" : "↓");
+                            hy.Add("淋巴细胞数目箭头", Convert.ToDouble(IsNumber(da.Rows[j]["LYM"].ToString()) ? da.Rows[j]["LYM"].ToString() : "0") > 4 ? "↑" : "↓");
                             hy.Add("淋巴细胞数目结果", da.Rows[j]["LYM"].ToString());
-                            hy.Add("淋巴细胞百分比箭头", Convert.ToDouble(da.Rows[j]["LYMP"].ToString()) > 40 ? "↑" : "↓");
+                            hy.Add("淋巴细胞百分比箭头", Convert.ToDouble(IsNumber(da.Rows[j]["LYMP"].ToString()) ? da.Rows[j]["LYMP"].ToString() : "0") > 40 ? "↑" : "↓");
                             hy.Add("淋巴细胞百分比结果", da.Rows[j]["LYMP"].ToString());
-                            hy.Add("平均血红蛋白含量箭头", Convert.ToDouble(da.Rows[j]["MCH"].ToString()) > 40 ? "↑" : "↓");
+                            hy.Add("平均血红蛋白含量箭头", Convert.ToDouble(IsNumber(da.Rows[j]["MCH"].ToString()) ? da.Rows[j]["MCH"].ToString() : "0") > 40 ? "↑" : "↓");
                             hy.Add("平均血红蛋白含量结果", da.Rows[j]["MCH"].ToString());
-                            hy.Add("平均血红蛋白浓度箭头", Convert.ToDouble(da.Rows[j]["MCHC"].ToString()) > 360 ? "↑" : "↓");
+                            hy.Add("平均血红蛋白浓度箭头", Convert.ToDouble(IsNumber(da.Rows[j]["MCHC"].ToString()) ? da.Rows[j]["MCHC"].ToString() : "0") > 360 ? "↑" : "↓");
                             hy.Add("平均血红蛋白浓度结果", da.Rows[j]["MCHC"].ToString());
-                            hy.Add("平均红细胞体积箭头", Convert.ToDouble(da.Rows[j]["MCV"].ToString()) > 95 ? "↑" : "↓");
+                            hy.Add("平均红细胞体积箭头", Convert.ToDouble(IsNumber(da.Rows[j]["MCV"].ToString()) ? da.Rows[j]["MCV"].ToString() : "0") > 95 ? "↑" : "↓");
                             hy.Add("平均红细胞体积结果", da.Rows[j]["MCV"].ToString());
-                            hy.Add("平均血小板体积箭头", Convert.ToDouble(da.Rows[j]["MPV"].ToString()) > 11 ? "↑" : "↓");
+                            hy.Add("平均血小板体积箭头", Convert.ToDouble(IsNumber(da.Rows[j]["MPV"].ToString()) ? da.Rows[j]["MPV"].ToString() : "0") > 11 ? "↑" : "↓");
                             hy.Add("平均血小板体积结果", da.Rows[j]["MPV"].ToString());
-                            hy.Add("中间细胞数目箭头", Convert.ToDouble(da.Rows[j]["MXD"].ToString()) > 0.9 ? "↑" : "↓");
+                            hy.Add("中间细胞数目箭头", Convert.ToDouble(IsNumber(da.Rows[j]["MXD"].ToString()) ? da.Rows[j]["MXD"].ToString() : "0") > 0.9 ? "↑" : "↓");
                             hy.Add("中间细胞数目结果", da.Rows[j]["MXD"].ToString());
-                            hy.Add("中间细胞百分比箭头", Convert.ToDouble(da.Rows[j]["MXDP"].ToString()) > 12 ? "↑" : "↓");
+                            hy.Add("中间细胞百分比箭头", Convert.ToDouble(IsNumber(da.Rows[j]["MXDP"].ToString())? da.Rows[j]["MXDP"].ToString() : "0") > 12 ? "↑" : "↓");
                             hy.Add("中间细胞百分比结果", da.Rows[j]["MXDP"].ToString());
-                            hy.Add("中性粒细胞数目箭头", Convert.ToDouble(da.Rows[j]["NEUT"].ToString()) > 7 ? "↑" : "↓");
+                            hy.Add("中性粒细胞数目箭头", Convert.ToDouble(IsNumber(da.Rows[j]["NEUT"].ToString())? da.Rows[j]["NEUT"].ToString() : "0") > 7 ? "↑" : "↓");
                             hy.Add("中性粒细胞数目结果", da.Rows[j]["NEUT"].ToString());
-                            hy.Add("中性粒细胞百分比箭头", Convert.ToDouble(da.Rows[j]["NEUTP"].ToString()) > 70 ? "↑" : "↓");
+                            hy.Add("中性粒细胞百分比箭头", Convert.ToDouble(IsNumber(da.Rows[j]["NEUTP"].ToString())? da.Rows[j]["NEUTP"].ToString() : "0") > 70 ? "↑" : "↓");
                             hy.Add("中性粒细胞百分比结果", da.Rows[j]["NEUTP"].ToString());
-                            hy.Add("血小板压积箭头", Convert.ToDouble(da.Rows[j]["PCT"].ToString()) > 0.4 ? "↑" : "↓");
+                            hy.Add("血小板压积箭头", Convert.ToDouble(IsNumber(da.Rows[j]["PCT"].ToString())? da.Rows[j]["PCT"].ToString() : "0") > 0.4 ? "↑" : "↓");
                             hy.Add("血小板压积结果", da.Rows[j]["PCT"].ToString());
-                            hy.Add("血小板分布宽度箭头", Convert.ToDouble(da.Rows[j]["PDW"].ToString()) > 17 ? "↑" : "↓");
+                            hy.Add("血小板分布宽度箭头", Convert.ToDouble(IsNumber(da.Rows[j]["PDW"].ToString())? da.Rows[j]["PDW"].ToString() : "0") > 17 ? "↑" : "↓");
                             hy.Add("血小板分布宽度结果", da.Rows[j]["PDW"].ToString());
-                            hy.Add("血小板数目箭头", Convert.ToDouble(da.Rows[j]["PLT"].ToString()) > 300 ? "↑" : "↓");
+                            hy.Add("血小板数目箭头", Convert.ToDouble(IsNumber(da.Rows[j]["PLT"].ToString())? da.Rows[j]["PLT"].ToString() : "0") > 300 ? "↑" : "↓");
                             hy.Add("血小板数目结果", da.Rows[j]["PLT"].ToString());
-                            hy.Add("红细胞数目箭头", Convert.ToDouble(da.Rows[j]["RBC"].ToString()) > 5.5 ? "↑" : "↓");
+                            hy.Add("红细胞数目箭头", Convert.ToDouble(IsNumber(da.Rows[j]["RBC"].ToString())? da.Rows[j]["RBC"].ToString() : "0") > 5.5 ? "↑" : "↓");
                             hy.Add("红细胞数目结果", da.Rows[j]["RBC"].ToString());
-                            hy.Add("红细胞分布宽度CV箭头", Convert.ToDouble(da.Rows[j]["RDWCV"].ToString()) > 18 ? "↑" : "↓");
+                            hy.Add("红细胞分布宽度CV箭头", Convert.ToDouble(IsNumber(da.Rows[j]["RDWCV"].ToString())? da.Rows[j]["RDWCV"].ToString() : "0") > 18 ? "↑" : "↓");
                             hy.Add("红细胞分布宽度CV结果", da.Rows[j]["RDWCV"].ToString());
-                            hy.Add("红细胞分布宽度SD箭头", Convert.ToDouble(da.Rows[j]["RDWSD"].ToString()) > 56 ? "↑" : "↓");
+                            hy.Add("红细胞分布宽度SD箭头", Convert.ToDouble(IsNumber(da.Rows[j]["RDWSD"].ToString())? da.Rows[j]["RDWSD"].ToString() : "0") > 56 ? "↑" : "↓");
                             hy.Add("红细胞分布宽度SD结果", da.Rows[j]["RDWSD"].ToString());
-                            hy.Add("白细胞数目箭头", Convert.ToDouble(da.Rows[j]["WBC"].ToString()) > 10 ? "↑" : "↓");
+                            hy.Add("白细胞数目箭头", Convert.ToDouble(IsNumber(da.Rows[j]["WBC"].ToString())? da.Rows[j]["WBC"].ToString() : "0") > 10 ? "↑" : "↓");
                             hy.Add("白细胞数目结果", da.Rows[j]["WBC"].ToString());
                         }
                     }
@@ -1870,6 +1871,21 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                 return;
             }
         }
+
+        private bool IsNumber(string strNumber)
+        {
+            Regex objNotNumberPattern = new Regex("[^0-9.-]");
+            Regex objTwoDotPattern = new Regex("[0-9]*[.][0-9]*[.][0-9]*");
+            Regex objTwoMinusPattern = new Regex("[0-9]*[-][0-9]*[-][0-9]*");
+            string strValidRealPattern = "^([-]|[.]|[-.]|[0-9])[0-9]*[.]*[0-9]+$";
+            string strValidIntegerPattern = "^([-]|[0-9])[0-9]*$";
+            Regex objNumberPattern = new Regex("(" + strValidRealPattern + ")|(" + strValidIntegerPattern + ")");
+
+            return !objNotNumberPattern.IsMatch(strNumber) &&
+                   !objTwoDotPattern.IsMatch(strNumber) &&
+                   !objTwoMinusPattern.IsMatch(strNumber) &&
+                   objNumberPattern.IsMatch(strNumber);
+        }
         #endregion
 
         #region 图片处理
@@ -2166,7 +2182,7 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                     }
                 }
                 #endregion
-                if (sqllist.Count<1) {MessageBox.Show("没有需要上传的数据,请稍后再试！"); return; }
+                if (sqllist.Count < 1) { MessageBox.Show("没有需要上传的数据,请稍后再试！"); return; }
                 int run = DbHelperMySQL.ExecuteSqlTranYpt(sqllist);
                 if (run > 0)
                 {
