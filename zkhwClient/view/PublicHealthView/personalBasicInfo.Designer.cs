@@ -251,9 +251,9 @@
             this.dateTimePicker2.CustomFormat = "yyyy-MM-dd";
             this.dateTimePicker2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(268, 31);
+            this.dateTimePicker2.Location = new System.Drawing.Point(263, 31);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(162, 30);
+            this.dateTimePicker2.Size = new System.Drawing.Size(167, 30);
             this.dateTimePicker2.TabIndex = 10;
             // 
             // label3
@@ -274,14 +274,14 @@
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Location = new System.Drawing.Point(65, 31);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(161, 30);
+            this.dateTimePicker1.Size = new System.Drawing.Size(170, 30);
             this.dateTimePicker1.TabIndex = 8;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(8, 38);
+            this.label2.Location = new System.Drawing.Point(8, 36);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 20);
             this.label2.TabIndex = 7;

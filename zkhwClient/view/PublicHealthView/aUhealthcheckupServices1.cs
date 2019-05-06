@@ -39,7 +39,7 @@ namespace zkhwClient.view.PublicHealthView
             per.bar_code = this.textBox118.Text;
             per.check_date = this.dateTimePicker1.Value.ToString();
             per.doctor_name = this.textBox51.Text.Replace(" ", "");
-
+            per.id= this.textBox120.Text;
             foreach (Control ctr in this.groupBox3.Controls)
             {
                 //判断该控件是不是CheckBox
@@ -258,6 +258,7 @@ namespace zkhwClient.view.PublicHealthView
                 aUhealthcheckupServices2 auhc2 = new aUhealthcheckupServices2();
                 auhc2.textBox95.Text = per.aichive_no;
                 auhc2.textBox96.Text = per.bar_code;
+                auhc2.textBox100.Text = per.id;
                 auhc2.textBox99.Text = this.textBox119.Text;
                 auhc2.Show();
             }

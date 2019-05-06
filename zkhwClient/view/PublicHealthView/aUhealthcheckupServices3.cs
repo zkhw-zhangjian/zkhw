@@ -38,6 +38,7 @@ namespace zkhwClient.view.PublicHealthView
             bean.physical_examination_recordBean per = new bean.physical_examination_recordBean();
             per.aichive_no = this.textBox106.Text;
             per.bar_code = this.textBox105.Text;
+            per.id = this.textBox108.Text;
 
             per.microalbuminuria = this.textBox77.Text;
 
@@ -190,6 +191,7 @@ namespace zkhwClient.view.PublicHealthView
                     hr = new hospitalizedRecord();
                     hr.archive_no = this.textBox106.Text;
                     hr.id_number = this.textBox107.Text;
+                    hr.exam_id= per.id;
                     hr.hospitalized_type = "1";
                     hr.in_hospital_time = intime1;
                     hr.leave_hospital_time = outtime1;
@@ -203,6 +205,7 @@ namespace zkhwClient.view.PublicHealthView
                     hr = new hospitalizedRecord();
                     hr.archive_no = this.textBox106.Text;
                     hr.id_number = this.textBox107.Text;
+                    hr.exam_id = per.id;
                     hr.hospitalized_type = "1";
                     hr.in_hospital_time = intime2;
                     hr.leave_hospital_time = outtime2;
@@ -242,6 +245,7 @@ namespace zkhwClient.view.PublicHealthView
                 auhc4.textBox1.Text = this.textBox106.Text;
                 auhc4.textBox2.Text = this.textBox105.Text;
                 auhc4.textBox3.Text = this.textBox107.Text;
+                auhc4.textBox4.Text = per.id;
                 auhc4.Show();
             }
         }

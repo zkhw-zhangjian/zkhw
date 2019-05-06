@@ -31,6 +31,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox120 = new System.Windows.Forms.TextBox();
+            this.textBox119 = new System.Windows.Forms.TextBox();
             this.textBox118 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel14 = new System.Windows.Forms.Panel();
@@ -243,7 +245,6 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.textBox119 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel14.SuspendLayout();
@@ -265,6 +266,7 @@
             // 
             // textBox1
             // 
+            this.textBox1.Enabled = false;
             this.textBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox1.Location = new System.Drawing.Point(141, 44);
             this.textBox1.Name = "textBox1";
@@ -273,6 +275,7 @@
             // 
             // textBox2
             // 
+            this.textBox2.Enabled = false;
             this.textBox2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox2.Location = new System.Drawing.Point(657, 44);
             this.textBox2.Name = "textBox2";
@@ -285,6 +288,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.textBox120);
             this.panel1.Controls.Add(this.textBox119);
             this.panel1.Controls.Add(this.textBox118);
             this.panel1.Controls.Add(this.groupBox1);
@@ -307,6 +311,24 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1316, 723);
             this.panel1.TabIndex = 6;
+            // 
+            // textBox120
+            // 
+            this.textBox120.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox120.Location = new System.Drawing.Point(383, 104);
+            this.textBox120.Name = "textBox120";
+            this.textBox120.Size = new System.Drawing.Size(114, 30);
+            this.textBox120.TabIndex = 85;
+            this.textBox120.Visible = false;
+            // 
+            // textBox119
+            // 
+            this.textBox119.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox119.Location = new System.Drawing.Point(261, 104);
+            this.textBox119.Name = "textBox119";
+            this.textBox119.Size = new System.Drawing.Size(114, 30);
+            this.textBox119.TabIndex = 84;
+            this.textBox119.Visible = false;
             // 
             // textBox118
             // 
@@ -1489,7 +1511,7 @@
             this.checkBox31.Size = new System.Drawing.Size(123, 24);
             this.checkBox31.TabIndex = 58;
             this.checkBox31.Tag = "1";
-            this.checkBox31.Text = "1荤素均匀";
+            this.checkBox31.Text = "1荤素均衡";
             this.checkBox31.UseVisualStyleBackColor = true;
             // 
             // textBox38
@@ -2489,7 +2511,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 123);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1283, 108);
+            this.groupBox3.Size = new System.Drawing.Size(1253, 108);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
@@ -2798,7 +2820,7 @@
             this.checkBox20.Size = new System.Drawing.Size(81, 24);
             this.checkBox20.TabIndex = 20;
             this.checkBox20.Tag = "2";
-            this.checkBox20.Text = "2头疼";
+            this.checkBox20.Text = "2头痛";
             this.checkBox20.UseVisualStyleBackColor = true;
             // 
             // checkBox21
@@ -2848,15 +2870,6 @@
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(316, 30);
             this.dateTimePicker1.TabIndex = 6;
-            // 
-            // textBox119
-            // 
-            this.textBox119.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox119.Location = new System.Drawing.Point(261, 104);
-            this.textBox119.Name = "textBox119";
-            this.textBox119.Size = new System.Drawing.Size(114, 30);
-            this.textBox119.TabIndex = 84;
-            this.textBox119.Visible = false;
             // 
             // aUhealthcheckupServices1
             // 
@@ -3126,5 +3139,6 @@
         private System.Windows.Forms.TextBox textBox117;
         public System.Windows.Forms.TextBox textBox118;
         public System.Windows.Forms.TextBox textBox119;
+        public System.Windows.Forms.TextBox textBox120;
     }
 }

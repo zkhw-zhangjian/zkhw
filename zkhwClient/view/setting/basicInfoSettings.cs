@@ -18,13 +18,16 @@ namespace zkhwClient.view.setting
         areaConfigDao areadao = new areaConfigDao();
         basicSettingDao bsdao = new basicSettingDao();
         UserDao userdao = new UserDao();
-        public static string xcuncode = null;
+        public static string shengName = null;
+        public static string shiName = null;
+        public static string qxName = null;
         public static string xzName = null;
         public static string xcName = null;
-        string xzcode = null;
-        string qxcode = null;
-        string shicode = null;
-        string shengcode = null;
+        public static string xcuncode = null;
+        public static string xzcode = null;
+        public static string qxcode = null;
+        public static string shicode = null;
+        public static string shengcode = null;
         public static string zeren_doctor = null;
         public static string organ_name = null;
         public static string input_name = null;
@@ -47,6 +50,9 @@ namespace zkhwClient.view.setting
                 createtime = dtbasic.Rows[0]["create_time"].ToString();
                 xcuncode = dtbasic.Rows[0]["cun_code"].ToString();
                 xzcode = dtbasic.Rows[0]["xz_code"].ToString();
+                shengcode = dtbasic.Rows[0]["sheng_code"].ToString();
+                shicode = dtbasic.Rows[0]["shi_code"].ToString();
+                qxcode = dtbasic.Rows[0]["qx_code"].ToString();
                 allareaname = dtbasic.Rows[0]["allFullName"].ToString();
                 if (xzcode != null && !"".Equals(xzcode))
                 {
@@ -55,6 +61,9 @@ namespace zkhwClient.view.setting
                 if (xcuncode != null && !"".Equals(xcuncode)) {
                    xcName = bsdao.selectAreaBycode(xcuncode).Rows[0][0].ToString();
                 }
+                shengName = bsdao.selectAreaBycode(shengcode).Rows[0][0].ToString();
+                shiName = bsdao.selectAreaBycode(shicode).Rows[0][0].ToString();
+                qxName = bsdao.selectAreaBycode(qxcode).Rows[0][0].ToString();
             }
             this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源
             this.comboBox1.DisplayMember = "name";//显示给用户的数据集表项
@@ -109,6 +118,9 @@ namespace zkhwClient.view.setting
             if (xcuncode==null||"".Equals(xcuncode)) {
                 MessageBox.Show("信息不完整!");return;
             }
+            shengName= this.comboBox1.Text;
+            shiName = this.comboBox2.Text;
+            qxName = this.comboBox3.Text;
             xzName = this.comboBox4.Text;
             xcName = this.comboBox5.Text;
             allareaname = this.comboBox1.Text + this.comboBox2.Text + this.comboBox3.Text + xzName + xcName;

@@ -364,6 +364,7 @@ namespace zkhwClient.view.PublicHealthView
         
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex==-1) { return; }
             string str0 = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
             string str1 = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
             string str2 = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();

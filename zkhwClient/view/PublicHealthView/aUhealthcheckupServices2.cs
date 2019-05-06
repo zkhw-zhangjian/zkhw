@@ -37,6 +37,7 @@ namespace zkhwClient.view.PublicHealthView
             bean.physical_examination_recordBean per = new bean.physical_examination_recordBean();
             per.aichive_no = this.textBox96.Text;
             per.bar_code = this.textBox95.Text;
+            per.id = this.textBox100.Text;
 
             if (this.radioButton55.Checked == true) { per.organ_lips = this.radioButton55.Tag.ToString(); };
             if (this.radioButton56.Checked == true) { per.organ_lips = this.radioButton56.Tag.ToString(); };
@@ -260,6 +261,7 @@ namespace zkhwClient.view.PublicHealthView
                 aUhealthcheckupServices3 auhc3 = new aUhealthcheckupServices3();
                 auhc3.textBox106.Text = per.aichive_no;
                 auhc3.textBox105.Text = per.bar_code;
+                auhc3.textBox108.Text = per.id;
                 auhc3.textBox107.Text = this.textBox99.Text;
                 auhc3.Show();
             }

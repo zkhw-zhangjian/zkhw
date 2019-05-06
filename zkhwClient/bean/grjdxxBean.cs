@@ -60,6 +60,16 @@ namespace zkhwClient.bean
         public string doctor_name { get; set; }
         public string create_archives_name { get; set; }
         public string is_signing { get; set; }
+        public string province_code { get; set; }
+        public string province_name { get; set; }
+        public string city_code { get; set; }
+        public string city_name { get; set; }
+        public string county_code { get; set; }
+        public string county_name { get; set; }
+        public string towns_code { get; set; }
+        public string towns_name { get; set; }
+        public string village_code { get; set; } 
+        public string village_name { get; set; }
         public string create_user { get; set; }
         public string create_name { get; set; }
         public string create_time { get; set; }

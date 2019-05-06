@@ -114,7 +114,7 @@
             // 
             this.comboBox5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(1017, 17);
+            this.comboBox5.Location = new System.Drawing.Point(995, 16);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(114, 28);
             this.comboBox5.TabIndex = 10;
@@ -124,7 +124,7 @@
             // 
             this.comboBox4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(903, 17);
+            this.comboBox4.Location = new System.Drawing.Point(881, 16);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(108, 28);
             this.comboBox4.TabIndex = 9;
@@ -134,7 +134,7 @@
             // 
             this.comboBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(788, 17);
+            this.comboBox3.Location = new System.Drawing.Point(766, 16);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(109, 28);
             this.comboBox3.TabIndex = 8;
@@ -144,7 +144,7 @@
             // 
             this.comboBox2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(671, 17);
+            this.comboBox2.Location = new System.Drawing.Point(649, 16);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(111, 28);
             this.comboBox2.TabIndex = 7;
@@ -154,7 +154,7 @@
             // 
             this.comboBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(559, 17);
+            this.comboBox1.Location = new System.Drawing.Point(537, 16);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(106, 28);
             this.comboBox1.TabIndex = 6;
@@ -164,7 +164,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(502, 21);
+            this.label3.Location = new System.Drawing.Point(480, 20);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(51, 20);
             this.label3.TabIndex = 5;
@@ -190,7 +190,7 @@
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker2.Location = new System.Drawing.Point(291, 15);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(176, 30);
+            this.dateTimePicker2.Size = new System.Drawing.Size(183, 30);
             this.dateTimePicker2.TabIndex = 3;
             // 
             // label2
@@ -210,7 +210,7 @@
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Location = new System.Drawing.Point(65, 15);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(176, 30);
+            this.dateTimePicker1.Size = new System.Drawing.Size(181, 30);
             this.dateTimePicker1.TabIndex = 1;
             // 
             // label1
@@ -290,7 +290,7 @@
             this.button3.TabIndex = 9;
             this.button3.Text = "修改";
             this.button3.UseVisualStyleBackColor = false;
-            this.button3.Visible = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -319,6 +319,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "healthCheckup";
             this.Text = "健康体检表";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.healthCheckup_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

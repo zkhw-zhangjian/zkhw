@@ -9,6 +9,7 @@ namespace zkhwClient.bean
     class hospitalizedRecord
     { 
         public string id { get; set; }
+        public string exam_id { get; set; }
         public string archive_no { get; set; }
         public string id_number { get; set; }
         public string hospitalized_type { get; set; }

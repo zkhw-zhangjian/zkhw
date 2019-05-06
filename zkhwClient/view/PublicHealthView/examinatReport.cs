@@ -128,7 +128,7 @@ from resident_base_info base
 join 
 (select * from zkhw_tj_bgdc group by aichive_no order by createtime desc) bgdc
 on base.archive_no=bgdc.aichive_no
-where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'";//base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'
+where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{basicInfoSettings.createtime}'";//base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'
             if (pairs != null && pairs.Count > 0)
             {
                 if (!string.IsNullOrWhiteSpace(pairs["timesta"]) && !string.IsNullOrWhiteSpace(pairs["timeend"]))
@@ -2166,6 +2166,7 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                     }
                 }
                 #endregion
+                if (sqllist.Count<1) {MessageBox.Show("没有需要上传的数据,请稍后再试！"); return; }
                 int run = DbHelperMySQL.ExecuteSqlTranYpt(sqllist);
                 if (run > 0)
                 {
@@ -2245,7 +2246,7 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                     lb.eventInfo = "数据上传异常！";
                     lb.type = "2";
                     lls.addCheckLog(lb);
-                    MessageBox.Show("上传异常111，请检查网络是否通畅！");
+                    MessageBox.Show("数据上传异常，请重试！");
                     return;
                 }
             }

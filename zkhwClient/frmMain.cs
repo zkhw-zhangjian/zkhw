@@ -880,7 +880,7 @@ namespace zkhwClient
                 bool bl = shenghuapath.IndexOf("Lis_DB.mdb") > -1 ? true : false;
                 if (bl == false) { MessageBox.Show("生化中间库地址不正确，请检查是否设置地址！"); return; }
 
-                string sql1 = "select sample_id,patient_id,send_time from LisOutput where send_time >= cdate('" + shlasttime + "')";
+                string sql1 = "select sample_id,patient_id,send_time from LisOutput where send_time > cdate('" + shlasttime + "')";
                 DataTable arr_dt1 = getShenghua(sql1).Tables[0];
                 if (arr_dt1.Rows.Count > 0)
                 {
