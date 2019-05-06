@@ -1022,7 +1022,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             hy.Add("左侧低压", jkdata.Rows[j]["base_blood_pressure_left_low"].ToString());
                             hy.Add("右侧高压", jkdata.Rows[j]["base_blood_pressure_right_high"].ToString());
                             hy.Add("右侧低压", jkdata.Rows[j]["base_blood_pressure_right_low"].ToString());
-                            hy.Add("送检日期", jkdata.Rows[j]["check_da.Rowste"].ToString());
+                            hy.Add("送检日期", jkdata.Rows[j]["create_time"].ToString());
                             hy.Add("审核", "");
                             hy.Add("审核1", "");
                             hy.Add("报告日期", DateTime.Now.ToString("yyyy-MM-dd"));
