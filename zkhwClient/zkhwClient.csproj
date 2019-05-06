@@ -756,6 +756,9 @@
     <EmbeddedResource Include="view\PublicHealthView\tcmHealthServices.resx">
       <DependentUpon>tcmHealthServices.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\tuberculosisPatientServices.resx">
+      <DependentUpon>tuberculosisPatientServices.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\publicRecord\family_record.resx">
       <DependentUpon>family_record.cs</DependentUpon>
     </EmbeddedResource>
