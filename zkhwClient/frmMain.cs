@@ -133,7 +133,7 @@ namespace zkhwClient
             //proHttp.StartInfo.ErrorDialog = false;
             //proHttp.StartInfo.UseShellExecute = false;
             //proHttp.Start();
-            ////AsNetWork  B超
+            //AsNetWork  B超
             //proAsNet.StartInfo.FileName = Application.StartupPath + "\\AsNetWork\\ASNetWks.exe";
             //proAsNet.StartInfo.WorkingDirectory = Application.StartupPath + "\\AsNetWork";
             //proAsNet.StartInfo.CreateNoWindow = true;
