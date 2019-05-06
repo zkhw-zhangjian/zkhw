@@ -1544,7 +1544,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                         {
                             builder.MoveToBookmark("图片");
                             string imageUrl = da.Rows[j]["imageUrl"].ToString();
-                            if (imageUrl != null && !"".Equals(imageUrl))
+                            if (imageUrl != null && !"".Equals(imageUrl) && File.Exists(@str + "/xdtImg/" + imageUrl))
                             {
                                 builder.InsertImage(resizeImageFromFile(@str + "/xdtImg/" + imageUrl, 678, 960));
                             }
@@ -1580,25 +1580,25 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                         for (int j = 0; j < da.Rows.Count; j++)
                         {
                             string imageUrla = da.Rows[j]["BuPic01"].ToString();
-                            if (imageUrla != null && !"".Equals(imageUrla))
+                            if (imageUrla != null && !"".Equals(imageUrla) && File.Exists(@str + "/bcImg/" + imageUrla))
                             {
                                 builder.MoveToBookmark("图片1");
                                 builder.InsertImage(resizeImageFromFile(@str + "/bcImg/" + imageUrla, 768, 1024));
                             }
                             string imageUrlb = da.Rows[j]["BuPic02"].ToString();
-                            if (imageUrlb != null && !"".Equals(imageUrlb))
+                            if (imageUrlb != null && !"".Equals(imageUrlb) && File.Exists(@str + "/bcImg/" + imageUrla))
                             {
                                 builder.MoveToBookmark("图片2");
                                 builder.InsertImage(resizeImageFromFile(@str + "/bcImg/" + imageUrlb, 768, 1024));
                             }
                             string imageUrlc = da.Rows[j]["BuPic03"].ToString();
-                            if (imageUrlc != null && !"".Equals(imageUrlc))
+                            if (imageUrlc != null && !"".Equals(imageUrlc) && File.Exists(@str + "/bcImg/" + imageUrla))
                             {
                                 builder.MoveToBookmark("图片3");
                                 builder.InsertImage(resizeImageFromFile(@str + "/bcImg/" + imageUrlc, 768, 1024));
                             }
                             string imageUrld = da.Rows[j]["BuPic04"].ToString();
-                            if (imageUrld != null && !"".Equals(imageUrld))
+                            if (imageUrld != null && !"".Equals(imageUrld) && File.Exists(@str + "/bcImg/" + imageUrla))
                             {
                                 builder.MoveToBookmark("图片4");
                                 builder.InsertImage(resizeImageFromFile(@str + "/bcImg/" + imageUrld, 768, 1024));
