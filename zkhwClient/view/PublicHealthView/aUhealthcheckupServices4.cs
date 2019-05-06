@@ -122,6 +122,7 @@ namespace zkhwClient.view.PublicHealthView
             if (isfalse)
             {
                 this.DialogResult = DialogResult.OK;
+                MessageBox.Show("保存成功!"); 
             }
         }
         //将用药记录 goodsList 绑定到页面 dataGridView1展示出来

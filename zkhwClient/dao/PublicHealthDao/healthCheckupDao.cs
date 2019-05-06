@@ -164,7 +164,7 @@ namespace zkhwClient.dao
             String sql = @"update physical_examination_record set health_evaluation='" + per.health_evaluation + "',abnormal1='" + per.abnormal1 + "',abnormal2='"
                 + per.abnormal2 + "',abnormal3='" + per.abnormal3 + "',abnormal4='" + per.abnormal4 + "',health_guidance='"
                 + per.health_guidance + "',danger_controlling='" + per.danger_controlling + "',target_weight='"
-                + per.target_weight + "',proposal_accination= '" + per.advise_bacterin + "',danger_controlling_other='"
+                + per.target_weight + "',advise_bacterin= '" + per.advise_bacterin + "',danger_controlling_other='"
                 + per.danger_controlling_other + "',create_user='" + frmLogin.name + "',create_name='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
                 + "' where id = '" + per.id + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);

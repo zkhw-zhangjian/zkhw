@@ -168,18 +168,18 @@ namespace zkhwClient.view.PublicHealthView
                 per.other_disease_memo = this.textBox48.Text;
             };
 
-            string intime1 = this.dateTimePicker1.Value.ToString();
-            string outtime1 = this.dateTimePicker2.Value.ToString();
+            string intime1 = this.dateTimePicker1.Text;
+            string outtime1 = this.dateTimePicker2.Text;
             string nowtime=DateTime.Now.ToString("yyyy-MM-dd");
             
-            string intime2 = this.dateTimePicker4.Value.ToString();
-            string outtime2 = this.dateTimePicker3.Value.ToString();
+            string intime2 = this.dateTimePicker4.Text;
+            string outtime2 = this.dateTimePicker3.Text;
             
-            string intime11 = this.dateTimePicker8.Value.ToString();
-            string outtime11 = this.dateTimePicker7.Value.ToString();
+            string intime11 = this.dateTimePicker8.Text;
+            string outtime11 = this.dateTimePicker7.Text;
            
-            string intime22 = this.dateTimePicker6.Value.ToString();
-            string outtime22 = this.dateTimePicker5.Value.ToString();
+            string intime22 = this.dateTimePicker6.Text;
+            string outtime22 = this.dateTimePicker5.Text;
            
             bool isfalse = hcd.addPhysicalExaminationRecord3(per);
 
