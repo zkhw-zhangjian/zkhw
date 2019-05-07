@@ -797,7 +797,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                     dics.Add("职业", data["profession"].ToString());
                     dics.Add("婚姻状况", data["marital_status"].ToString());
                     string yyf = data["pay_type"].ToString();
-                    if (yyf.IndexOf(',') > 0)
+                    if (yyf.IndexOf(',') >= 0)
                     {
                         string[] y = yyf.Split(',');
                         for (int i = 0; i < y.Length; i++)
@@ -810,7 +810,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                         dics.Add("医疗费用1", yyf);
                     }
                     string ywgm = data["drug_allergy"].ToString();
-                    if (ywgm.IndexOf(',') > 0)
+                    if (ywgm.IndexOf(',') >= 0)
                     {
                         string[] y = ywgm.Split(',');
                         for (int i = 0; i < y.Length; i++)
@@ -823,7 +823,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                         dics.Add("药物过敏史1", ywgm);
                     }
                     string bls = data["exposure"].ToString();
-                    if (bls.IndexOf(',') > 0)
+                    if (bls.IndexOf(',') >= 0)
                     {
                         string[] y = bls.Split(',');
                         for (int i = 0; i < y.Length; i++)
@@ -902,7 +902,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             for (int j = 0; j < fq.Count(); j++)
                             {
                                 string fqs = fq[j]["disease_type"].ToString();
-                                if (fqs.IndexOf(',') > 0)
+                                if (fqs.IndexOf(',') >= 0)
                                 {
                                     string[] y = fqs.Split(',');
                                     for (int i = 0; i < y.Length; i++)
@@ -918,7 +918,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             for (int j = 0; j < mq.Count(); j++)
                             {
                                 string fqs = mq[j]["disease_type"].ToString();
-                                if (fqs.IndexOf(',') > 0)
+                                if (fqs.IndexOf(',') >= 0)
                                 {
                                     string[] y = fqs.Split(',');
                                     for (int i = 0; i < y.Length; i++)
@@ -935,7 +935,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             for (int j = 0; j < jm.Count(); j++)
                             {
                                 string fqs = jm[j]["disease_type"].ToString();
-                                if (fqs.IndexOf(',') > 0)
+                                if (fqs.IndexOf(',') >= 0)
                                 {
                                     string[] y = fqs.Split(',');
                                     for (int i = 0; i < y.Length; i++)
@@ -951,7 +951,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             for (int j = 0; j < zn.Count(); j++)
                             {
                                 string fqs = zn[j]["disease_type"].ToString();
-                                if (fqs.IndexOf(',') > 0)
+                                if (fqs.IndexOf(',') >= 0)
                                 {
                                     string[] y = fqs.Split(',');
                                     for (int i = 0; i < y.Length; i++)
@@ -965,7 +965,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                     dics.Add("遗传病史名", data["heredity_name"].ToString());
                     dics.Add("遗传病史", data["is_heredity"].ToString());
                     string cjqk = data["is_deformity"].ToString();
-                    if (cjqk.IndexOf(',') > 0)
+                    if (cjqk.IndexOf(',') >= 0)
                     {
                         string[] y = cjqk.Split(',');
                         for (int i = 0; i < y.Length; i++)
@@ -1120,25 +1120,25 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             hy.Add("平均血小板体积结果", da.Rows[j]["MPV"].ToString());
                             hy.Add("中间细胞数目箭头", Convert.ToDouble(IsNumber(da.Rows[j]["MXD"].ToString()) ? da.Rows[j]["MXD"].ToString() : "0") > 0.9 ? "↑" : "↓");
                             hy.Add("中间细胞数目结果", da.Rows[j]["MXD"].ToString());
-                            hy.Add("中间细胞百分比箭头", Convert.ToDouble(IsNumber(da.Rows[j]["MXDP"].ToString())? da.Rows[j]["MXDP"].ToString() : "0") > 12 ? "↑" : "↓");
+                            hy.Add("中间细胞百分比箭头", Convert.ToDouble(IsNumber(da.Rows[j]["MXDP"].ToString()) ? da.Rows[j]["MXDP"].ToString() : "0") > 12 ? "↑" : "↓");
                             hy.Add("中间细胞百分比结果", da.Rows[j]["MXDP"].ToString());
-                            hy.Add("中性粒细胞数目箭头", Convert.ToDouble(IsNumber(da.Rows[j]["NEUT"].ToString())? da.Rows[j]["NEUT"].ToString() : "0") > 7 ? "↑" : "↓");
+                            hy.Add("中性粒细胞数目箭头", Convert.ToDouble(IsNumber(da.Rows[j]["NEUT"].ToString()) ? da.Rows[j]["NEUT"].ToString() : "0") > 7 ? "↑" : "↓");
                             hy.Add("中性粒细胞数目结果", da.Rows[j]["NEUT"].ToString());
-                            hy.Add("中性粒细胞百分比箭头", Convert.ToDouble(IsNumber(da.Rows[j]["NEUTP"].ToString())? da.Rows[j]["NEUTP"].ToString() : "0") > 70 ? "↑" : "↓");
+                            hy.Add("中性粒细胞百分比箭头", Convert.ToDouble(IsNumber(da.Rows[j]["NEUTP"].ToString()) ? da.Rows[j]["NEUTP"].ToString() : "0") > 70 ? "↑" : "↓");
                             hy.Add("中性粒细胞百分比结果", da.Rows[j]["NEUTP"].ToString());
-                            hy.Add("血小板压积箭头", Convert.ToDouble(IsNumber(da.Rows[j]["PCT"].ToString())? da.Rows[j]["PCT"].ToString() : "0") > 0.4 ? "↑" : "↓");
+                            hy.Add("血小板压积箭头", Convert.ToDouble(IsNumber(da.Rows[j]["PCT"].ToString()) ? da.Rows[j]["PCT"].ToString() : "0") > 0.4 ? "↑" : "↓");
                             hy.Add("血小板压积结果", da.Rows[j]["PCT"].ToString());
-                            hy.Add("血小板分布宽度箭头", Convert.ToDouble(IsNumber(da.Rows[j]["PDW"].ToString())? da.Rows[j]["PDW"].ToString() : "0") > 17 ? "↑" : "↓");
+                            hy.Add("血小板分布宽度箭头", Convert.ToDouble(IsNumber(da.Rows[j]["PDW"].ToString()) ? da.Rows[j]["PDW"].ToString() : "0") > 17 ? "↑" : "↓");
                             hy.Add("血小板分布宽度结果", da.Rows[j]["PDW"].ToString());
-                            hy.Add("血小板数目箭头", Convert.ToDouble(IsNumber(da.Rows[j]["PLT"].ToString())? da.Rows[j]["PLT"].ToString() : "0") > 300 ? "↑" : "↓");
+                            hy.Add("血小板数目箭头", Convert.ToDouble(IsNumber(da.Rows[j]["PLT"].ToString()) ? da.Rows[j]["PLT"].ToString() : "0") > 300 ? "↑" : "↓");
                             hy.Add("血小板数目结果", da.Rows[j]["PLT"].ToString());
-                            hy.Add("红细胞数目箭头", Convert.ToDouble(IsNumber(da.Rows[j]["RBC"].ToString())? da.Rows[j]["RBC"].ToString() : "0") > 5.5 ? "↑" : "↓");
+                            hy.Add("红细胞数目箭头", Convert.ToDouble(IsNumber(da.Rows[j]["RBC"].ToString()) ? da.Rows[j]["RBC"].ToString() : "0") > 5.5 ? "↑" : "↓");
                             hy.Add("红细胞数目结果", da.Rows[j]["RBC"].ToString());
-                            hy.Add("红细胞分布宽度CV箭头", Convert.ToDouble(IsNumber(da.Rows[j]["RDWCV"].ToString())? da.Rows[j]["RDWCV"].ToString() : "0") > 18 ? "↑" : "↓");
+                            hy.Add("红细胞分布宽度CV箭头", Convert.ToDouble(IsNumber(da.Rows[j]["RDWCV"].ToString()) ? da.Rows[j]["RDWCV"].ToString() : "0") > 18 ? "↑" : "↓");
                             hy.Add("红细胞分布宽度CV结果", da.Rows[j]["RDWCV"].ToString());
-                            hy.Add("红细胞分布宽度SD箭头", Convert.ToDouble(IsNumber(da.Rows[j]["RDWSD"].ToString())? da.Rows[j]["RDWSD"].ToString() : "0") > 56 ? "↑" : "↓");
+                            hy.Add("红细胞分布宽度SD箭头", Convert.ToDouble(IsNumber(da.Rows[j]["RDWSD"].ToString()) ? da.Rows[j]["RDWSD"].ToString() : "0") > 56 ? "↑" : "↓");
                             hy.Add("红细胞分布宽度SD结果", da.Rows[j]["RDWSD"].ToString());
-                            hy.Add("白细胞数目箭头", Convert.ToDouble(IsNumber(da.Rows[j]["WBC"].ToString())? da.Rows[j]["WBC"].ToString() : "0") > 10 ? "↑" : "↓");
+                            hy.Add("白细胞数目箭头", Convert.ToDouble(IsNumber(da.Rows[j]["WBC"].ToString()) ? da.Rows[j]["WBC"].ToString() : "0") > 10 ? "↑" : "↓");
                             hy.Add("白细胞数目结果", da.Rows[j]["WBC"].ToString());
                         }
                     }
@@ -1196,7 +1196,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             jktj.Add("体检日期日", time?.Split('-')[2]);
                             jktj.Add("责任医生", jkdata.Rows[j]["doctor_name"].ToString());
                             string zz = jkdata.Rows[j]["symptom"].ToString();
-                            if (zz.IndexOf(',') > 0)
+                            if (zz.IndexOf(',') >= 0)
                             {
                                 string[] y = zz.Split(',');
                                 for (int i = 0; i < y.Length; i++)
@@ -1230,7 +1230,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             jktj.Add("老年人认知能力得分", jkdata.Rows[j]["base_cognition_score"].ToString());
                             jktj.Add("老年人情感状态得分", jkdata.Rows[j]["base_feeling_score"].ToString());
                             string ysxg = jkdata.Rows[j]["lifeway_diet"].ToString();
-                            if (ysxg.IndexOf(',') > 0)
+                            if (ysxg.IndexOf(',') >= 0)
                             {
                                 string[] y = ysxg.Split(',');
                                 for (int i = 0; i < y.Length; i++)
@@ -1253,7 +1253,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             jktj.Add("开始饮酒年龄", jkdata.Rows[j]["lifeway_drink_startage"].ToString());
                             jktj.Add("是否曾醉酒", jkdata.Rows[j]["lifeway_drink_oneyear"].ToString());
                             string yjzl = jkdata.Rows[j]["lifeway_drink_type"].ToString();
-                            if (yjzl.IndexOf(',') > 0)
+                            if (yjzl.IndexOf(',') >= 0)
                             {
                                 string[] y = yjzl.Split(',');
                                 for (int i = 0; i < y.Length; i++)
@@ -1280,7 +1280,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             jktj.Add("毒物种类名5", jkdata.Rows[j]["lifeway_hazardous_other"].ToString());
                             jktj.Add("口唇", jkdata.Rows[j]["organ_lips"].ToString());
                             string cl = jkdata.Rows[j]["organ_tooth"].ToString();
-                            if (cl.IndexOf(',') > 0)
+                            if (cl.IndexOf(',') >= 0)
                             {
                                 string[] y = cl.Split(',');
                                 for (int i = 0; i < y.Length; i++)
@@ -1318,7 +1318,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             jktj.Add("足背动脉搏动", jkdata.Rows[j]["examination_dorsal_artery"].ToString());
                             jktj.Add("肛门指诊", jkdata.Rows[j]["examination_anus"].ToString());
                             string lxx = jkdata.Rows[j]["examination_breast"].ToString();
-                            if (lxx.IndexOf(',') > 0)
+                            if (lxx.IndexOf(',') >= 0)
                             {
                                 string[] y = lxx.Split(',');
                                 for (int i = 0; i < y.Length; i++)
@@ -1369,7 +1369,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             jktj.Add("宫颈涂片", jkdata.Rows[j]["cervical_smear"].ToString());
                             jktj.Add("辅助检查其它", jkdata.Rows[j]["other"].ToString());
                             string lxgjb = jkdata.Rows[j]["cerebrovascular_disease"].ToString();
-                            if (lxgjb.IndexOf(',') > 0)
+                            if (lxgjb.IndexOf(',') >= 0)
                             {
                                 string[] y = lxgjb.Split(',');
                                 for (int i = 0; i < y.Length; i++)
@@ -1382,7 +1382,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                                 jktj.Add("脑血管疾病1", lxgjb);
                             }
                             string szjb = jkdata.Rows[j]["kidney_disease"].ToString();
-                            if (szjb.IndexOf(',') > 0)
+                            if (szjb.IndexOf(',') >= 0)
                             {
                                 string[] y = szjb.Split(',');
                                 for (int i = 0; i < y.Length; i++)
@@ -1395,7 +1395,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                                 jktj.Add("肾脏疾病1", szjb);
                             }
                             string xzjb = jkdata.Rows[j]["heart_disease"].ToString();
-                            if (xzjb.IndexOf(',') > 0)
+                            if (xzjb.IndexOf(',') >= 0)
                             {
                                 string[] y = xzjb.Split(',');
                                 for (int i = 0; i < y.Length; i++)
@@ -1408,7 +1408,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                                 jktj.Add("心脏疾病1", xzjb);
                             }
                             string xgjb = jkdata.Rows[j]["vascular_disease"].ToString();
-                            if (xgjb.IndexOf(',') > 0)
+                            if (xgjb.IndexOf(',') >= 0)
                             {
                                 string[] y = xgjb.Split(',');
                                 for (int i = 0; i < y.Length; i++)
@@ -1421,7 +1421,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                                 jktj.Add("血管疾病1", xgjb);
                             }
                             string ybjb = jkdata.Rows[j]["ocular_diseases"].ToString();
-                            if (ybjb.IndexOf(',') > 0)
+                            if (ybjb.IndexOf(',') >= 0)
                             {
                                 string[] y = ybjb.Split(',');
                                 for (int i = 0; i < y.Length; i++)
@@ -1489,7 +1489,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             jktj.Add("健康评价异常3", jkdata.Rows[j]["abnormal3"].ToString());
                             jktj.Add("健康评价异常4", jkdata.Rows[j]["abnormal4"].ToString());
                             string jkzd = jkdata.Rows[j]["health_guidance"].ToString();
-                            if (jkzd.IndexOf(',') > 0)
+                            if (jkzd.IndexOf(',') >= 0)
                             {
                                 string[] y = jkzd.Split(',');
                                 for (int i = 0; i < y.Length; i++)
@@ -1502,7 +1502,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                                 jktj.Add("健康指导1", jkzd);
                             }
                             string wxyskz = jkdata.Rows[j]["danger_controlling"].ToString();
-                            if (wxyskz.IndexOf(',') > 0)
+                            if (wxyskz.IndexOf(',') >= 0)
                             {
                                 string[] y = wxyskz.Split(',');
                                 for (int i = 0; i < y.Length; i++)
@@ -1657,7 +1657,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                         for (int j = 0; j < da.Rows.Count; j++)
                         {
                             string zz = da.Rows[j]["answer_result"].ToString();
-                            if (zz.IndexOf(',') > 0)
+                            if (zz.IndexOf(',') >= 0)
                             {
                                 string[] y = zz.Split(',');
                                 for (int i = 0; i < y.Length; i++)
@@ -1707,103 +1707,184 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             int qz = 0;
                             qz = Convert.ToInt32(da.Rows[j]["qixuzhi_score"]);
                             zytz.Add("气虚质得分", qz.ToString());
-                            if (qz >= 11)
+                            if (da.Rows[j]["qixuzhi_result"].ToString() == "1")
                             {
                                 zytz.Add("气虚质是", "√");
+                                string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                if (qx.IndexOf(',') >= 0)
+                                {
+                                    string[] y = qx.Split(',');
+                                    for (int i = 0; i < y.Length; i++)
+                                    {
+                                        zytz.Add("气虚质" + y[i], "√");
+                                    }
+                                }
+                                else
+                                {
+                                    zytz.Add("气虚质" + qx, "√");
+                                }
                             }
-                            else if (qz <= 9 && qz <= 10)
-                            {
-                                zytz.Add("气虚质倾向是", "√");
-                            }
-                            zytz.Add("气虚质" + da.Rows[j]["qixuzhi_result"].ToString(), "√");
+
                             qz = Convert.ToInt32(da.Rows[j]["yangxuzhi_score"]);
                             zytz.Add("阳虚质得分", qz.ToString());
-                            if (qz >= 11)
+                            if (da.Rows[j]["yangxuzhi_result"].ToString() == "1")
                             {
                                 zytz.Add("阳虚质是", "√");
+                                string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                if (qx.IndexOf(',') >= 0)
+                                {
+                                    string[] y = qx.Split(',');
+                                    for (int i = 0; i < y.Length; i++)
+                                    {
+                                        zytz.Add("阳虚质" + y[i], "√");
+                                    }
+                                }
+                                else
+                                {
+                                    zytz.Add("阳虚质" + qx, "√");
+                                }
                             }
-                            else if (qz <= 9 && qz <= 10)
-                            {
-                                zytz.Add("阳虚质倾向是", "√");
-                            }
-                            zytz.Add("阳虚质" + da.Rows[j]["yangxuzhi_result"].ToString(), "√");
+
                             qz = Convert.ToInt32(da.Rows[j]["yinxuzhi_score"]);
                             zytz.Add("阴虚质得分", qz.ToString());
-                            if (qz >= 11)
+                            if (da.Rows[j]["yinxuzhi_result"].ToString() == "1")
                             {
                                 zytz.Add("阴虚质是", "√");
+                                string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                if (qx.IndexOf(',') >= 0)
+                                {
+                                    string[] y = qx.Split(',');
+                                    for (int i = 0; i < y.Length; i++)
+                                    {
+                                        zytz.Add("阴虚质" + y[i], "√");
+                                    }
+                                }
+                                else
+                                {
+                                    zytz.Add("阴虚质" + qx, "√");
+                                }
                             }
-                            else if (qz <= 9 && qz <= 10)
-                            {
-                                zytz.Add("阴虚质倾向是", "√");
-                            }
-                            zytz.Add("阴虚质" + da.Rows[j]["yinxuzhi_result"].ToString(), "√");
+
                             qz = Convert.ToInt32(da.Rows[j]["tanshizhi_score"]);
                             zytz.Add("痰湿质得分", qz.ToString());
-                            if (qz >= 11)
+                            if (da.Rows[j]["tanshizhi_result"].ToString() == "1")
                             {
                                 zytz.Add("痰湿质是", "√");
+                                string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                if (qx.IndexOf(',') >= 0)
+                                {
+                                    string[] y = qx.Split(',');
+                                    for (int i = 0; i < y.Length; i++)
+                                    {
+                                        zytz.Add("痰湿质" + y[i], "√");
+                                    }
+                                }
+                                else
+                                {
+                                    zytz.Add("痰湿质" + qx, "√");
+                                }
                             }
-                            else if (qz <= 9 && qz <= 10)
-                            {
-                                zytz.Add("痰湿质倾向是", "√");
-                            }
-                            zytz.Add("痰湿质" + da.Rows[j]["tanshizhi_result"].ToString(), "√");
+
                             qz = Convert.ToInt32(da.Rows[j]["shirezhi_score"]);
                             zytz.Add("湿热质得分", qz.ToString());
-                            if (qz >= 11)
+                            if (da.Rows[j]["shirezhi_result"].ToString() == "1")
                             {
                                 zytz.Add("湿热质是", "√");
+                                string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                if (qx.IndexOf(',') >= 0)
+                                {
+                                    string[] y = qx.Split(',');
+                                    for (int i = 0; i < y.Length; i++)
+                                    {
+                                        zytz.Add("湿热质" + y[i], "√");
+                                    }
+                                }
+                                else
+                                {
+                                    zytz.Add("湿热质" + qx, "√");
+                                }
                             }
-                            else if (qz <= 9 && qz <= 10)
-                            {
-                                zytz.Add("湿热质倾向是", "√");
-                            }
-                            zytz.Add("湿热质" + da.Rows[j]["shirezhi_result"].ToString(), "√");
+
                             qz = Convert.ToInt32(da.Rows[j]["xueyuzhi_score"]);
                             zytz.Add("血瘀质得分", qz.ToString());
-                            if (qz >= 11)
+                            if (da.Rows[j]["xueyuzhi_result"].ToString() == "1")
                             {
                                 zytz.Add("血瘀质是", "√");
+                                string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                if (qx.IndexOf(',') >= 0)
+                                {
+                                    string[] y = qx.Split(',');
+                                    for (int i = 0; i < y.Length; i++)
+                                    {
+                                        zytz.Add("血瘀质" + y[i], "√");
+                                    }
+                                }
+                                else
+                                {
+                                    zytz.Add("血瘀质" + qx, "√");
+                                }
                             }
-                            else if (qz <= 9 && qz <= 10)
-                            {
-                                zytz.Add("血瘀质倾向是", "√");
-                            }
-                            zytz.Add("血瘀质" + da.Rows[j]["xueyuzhi_result"].ToString(), "√");
+
                             qz = Convert.ToInt32(da.Rows[j]["qiyuzhi_score"]);
                             zytz.Add("气郁质得分", qz.ToString());
-                            if (qz >= 11)
+                            if (da.Rows[j]["qiyuzhi_result"].ToString() == "1")
                             {
                                 zytz.Add("气郁质是", "√");
+                                string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                if (qx.IndexOf(',') >= 0)
+                                {
+                                    string[] y = qx.Split(',');
+                                    for (int i = 0; i < y.Length; i++)
+                                    {
+                                        zytz.Add("气郁质" + y[i], "√");
+                                    }
+                                }
+                                else
+                                {
+                                    zytz.Add("气郁质" + qx, "√");
+                                }
                             }
-                            else if (qz <= 9 && qz <= 10)
-                            {
-                                zytz.Add("气郁质倾向是", "√");
-                            }
-                            zytz.Add("气郁质" + da.Rows[j]["qiyuzhi_result"].ToString(), "√");
+
                             qz = Convert.ToInt32(da.Rows[j]["tebingzhi_sorce"]);
                             zytz.Add("特禀质得分", qz.ToString());
-                            if (qz >= 11)
+                            if (da.Rows[j]["tebingzhi_result"].ToString() == "1")
                             {
                                 zytz.Add("特禀质是", "√");
+                                string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                if (qx.IndexOf(',') >= 0)
+                                {
+                                    string[] y = qx.Split(',');
+                                    for (int i = 0; i < y.Length; i++)
+                                    {
+                                        zytz.Add("特禀质" + y[i], "√");
+                                    }
+                                }
+                                else
+                                {
+                                    zytz.Add("特禀质" + qx, "√");
+                                }
                             }
-                            else if (qz <= 9 && qz <= 10)
-                            {
-                                zytz.Add("特禀质倾向是", "√");
-                            }
-                            zytz.Add("气郁质" + da.Rows[j]["tebingzhi_result"].ToString(), "√");
+
                             qz = Convert.ToInt32(da.Rows[j]["pinghezhi_sorce"]);
                             zytz.Add("平和质得分", qz.ToString());
-                            if (qz >= 17)
+                            if (da.Rows[j]["pinghezhi_result"].ToString() == "1")
                             {
                                 zytz.Add("平和质是", "√");
+                                string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                if (qx.IndexOf(',') >= 0)
+                                {
+                                    string[] y = qx.Split(',');
+                                    for (int i = 0; i < y.Length; i++)
+                                    {
+                                        zytz.Add("平和质" + y[i], "√");
+                                    }
+                                }
+                                else
+                                {
+                                    zytz.Add("平和质" + qx, "√");
+                                }
                             }
-                            else if (qz <= 10 && qz <= 16)
-                            {
-                                zytz.Add("平和质倾向是", "√");
-                            }
-                            zytz.Add("平和质" + da.Rows[j]["pinghezhi_result"].ToString(), "√");
+
                             string time = jkdata.Rows[j]["test_date"].ToString();
                             zytz.Add("填表日期年", time?.Split('-')[0]);
                             zytz.Add("填表日期月", time?.Split('-')[1]);
