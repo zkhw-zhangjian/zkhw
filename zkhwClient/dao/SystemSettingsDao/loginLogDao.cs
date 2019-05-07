@@ -191,5 +191,40 @@ namespace zkhwClient.dao
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
+        //删除阈值信息表信息
+        public bool deleteThresholdValue()
+        {
+            int rt = 0;
+            String sql = "delete from threshold_value";
+            rt = DbHelperMySQL.ExecuteSql(sql);
+            return rt == 0 ? false : true;
+        }
+        //获取阈值信息
+        public DataTable checkThresholdValue()
+        {
+            DataSet ds = new DataSet();
+            string sql = "select * from threshold_value where 1=1";
+            ds = DbHelperMySQL.QueryYpt(sql);
+            return ds.Tables[0];
+        }
+        //获取阈值信息，在本机的数据库机构表中存储
+        public bool addThresholdValues(List<thresholdValueBean> list)
+        {
+            int rt = 0;
+            String sql = "insert into threshold_value (id,class_type,type,warning_min,warning_max,threshold_min,threshold_max,create_user,create_name,create_time,update_user,update_name,update_time) values ";
+            for (int j = 0; j < list.Count; j++)
+            {
+                if (j > 0)
+                {
+                    sql += " , ('" + list[j].id + "','" + list[j].class_type + "','" + list[j].type + "', '" + list[j].warning_min + "', '" + list[j].warning_max + "', '" + list[j].threshold_min + "', '" + list[j].threshold_max + "', '" + list[j].create_user + "', '" + list[j].create_name + "', '" + list[j].create_time + "', '" + list[j].update_user + "', '" + list[j].update_name + "', '" + list[j].update_time + "')";
+                }
+                else
+                {
+                    sql += "('" + list[j].id + "','" + list[j].class_type + "','" + list[j].type + "', '" + list[j].warning_min + "', '" + list[j].warning_max + "', '" + list[j].threshold_min + "', '" + list[j].threshold_max + "', '" + list[j].create_user + "', '" + list[j].create_name + "', '" + list[j].create_time + "', '" + list[j].update_user + "', '" + list[j].update_name + "', '" + list[j].update_time + "')";
+                }
+            }
+            rt = DbHelperMySQL.ExecuteSql(sql);
+            return rt == 0 ? false : true;
+        }
     }
 }

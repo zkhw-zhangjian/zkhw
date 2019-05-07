@@ -19,6 +19,7 @@ namespace zkhwClient.view.updateTjResult
         public string bar_code = "";
         bool flag = false;
         tjcheckDao tjdao = new tjcheckDao();
+        public DataTable dttv = null;
         public updateXueya()
         {
             InitializeComponent();
@@ -35,8 +36,44 @@ namespace zkhwClient.view.updateTjResult
             if (dtbichao != null && dtbichao.Rows.Count > 0)
             {
                 flag = true;
-                this.textBox5.Text = dtbichao.Rows[0]["SBP"].ToString();
-                this.textBox6.Text = dtbichao.Rows[0]["DBP"].ToString();
+                string sbp=dtbichao.Rows[0]["SBP"].ToString();
+                if (sbp != "")
+                {
+                    double sbpdouble = double.Parse(sbp);
+                    DataRow[] drsbp = dttv.Select("type='SBP'");
+                    double sbpwmin = double.Parse(drsbp[0]["warning_min"].ToString());
+                    double sbpwmax = double.Parse(drsbp[0]["warning_max"].ToString());
+                    if (sbpdouble > sbpwmax || sbpdouble < sbpwmin)
+                    {
+                        this.textBox5.ForeColor = Color.Blue;
+                    }
+                    //double sbptmin = double.Parse(drsbp[0]["threshold_min"].ToString());
+                    //double sbptmax = double.Parse(drsbp[0]["threshold_max"].ToString());
+                    //if (sbpdouble > sbptmax || sbpdouble < sbptmin)
+                    //{
+                    //    this.textBox5.ForeColor = Color.Red;
+                    //}
+                }
+                this.textBox5.Text = sbp;
+                string dbp = dtbichao.Rows[0]["DBP"].ToString();
+                if (dbp != "")
+                {
+                    double dbpdouble = double.Parse(dbp);
+                    DataRow[] drdbp = dttv.Select("type='DBP'");
+                    double dbpwmin = double.Parse(drdbp[0]["warning_min"].ToString());
+                    double dbpwmax = double.Parse(drdbp[0]["warning_max"].ToString());
+                    if (dbpdouble > dbpwmax || dbpdouble < dbpwmin)
+                    {
+                        this.textBox6.ForeColor = Color.Blue;
+                    }
+                    //double dbptmin = double.Parse(drdbp[0]["threshold_min"].ToString());
+                    //double dbptmax = double.Parse(drdbp[0]["threshold_max"].ToString());
+                    //if (dbpdouble > dbptmax || dbpdouble < dbptmin)
+                    //{
+                    //    this.textBox6.ForeColor = Color.Red;
+                    //}
+                }
+                this.textBox6.Text = dbp;
                 this.textBox7.Text = dtbichao.Rows[0]["Pulse"].ToString();
             }
             else {

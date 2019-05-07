@@ -309,7 +309,7 @@ namespace zkhwClient.view.PublicHealthView
             if (goodsList2 == null) { return; }
             if (goodsList2.Rows.Count > 0)
             {
-                goodsList2.Rows.RemoveAt(this.dataGridView3.SelectedRows[0].Index);
+                goodsList2.Rows.RemoveAt(this.dataGridView4.SelectedRows[0].Index);
                 goodsList2Bind();
             }
         }

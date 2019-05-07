@@ -38,6 +38,7 @@ namespace zkhwClient.view.PublicHealthView
             bean.physical_examination_recordBean per = new bean.physical_examination_recordBean();
             per.aichive_no = this.textBox106.Text;
             per.bar_code = this.textBox105.Text;
+            per.id_number = this.textBox107.Text;
             per.id = this.textBox108.Text;
 
             per.microalbuminuria = this.textBox77.Text;
@@ -242,9 +243,9 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 this.Close();
                 aUhealthcheckupServices4 auhc4 = new aUhealthcheckupServices4();
-                auhc4.textBox1.Text = this.textBox106.Text;
-                auhc4.textBox2.Text = this.textBox105.Text;
-                auhc4.textBox3.Text = this.textBox107.Text;
+                auhc4.textBox1.Text = per.aichive_no;
+                auhc4.textBox2.Text = per.bar_code;
+                auhc4.textBox3.Text = per.id_number;
                 auhc4.textBox4.Text = per.id;
                 auhc4.Show();
             }
