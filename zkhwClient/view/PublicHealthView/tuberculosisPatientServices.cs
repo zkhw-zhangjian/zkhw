@@ -185,5 +185,10 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
         {
 
         }
+
+        private void 非首次随访添加_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
