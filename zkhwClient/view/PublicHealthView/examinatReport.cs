@@ -1441,7 +1441,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                                 DataTable da = zys.Tables[0];
                                 for (int k = 0; k < da.Rows.Count; k++)
                                 {
-                                    if (jkdata.Rows[j]["hospitalized_type"].ToString() == "1")
+                                    if (da.Rows[j]["hospitalized_type"].ToString() == "1")
                                     {
                                         jktj.Add("住院入时间" + (k + 1), da.Rows[k]["in_hospital_time"].ToString());
                                         jktj.Add("住院出时间" + (k + 1), da.Rows[k]["leave_hospital_time"].ToString());
