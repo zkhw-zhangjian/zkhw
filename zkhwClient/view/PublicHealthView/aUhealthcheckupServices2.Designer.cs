@@ -242,6 +242,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel15 = new System.Windows.Forms.Panel();
+            this.textBox99 = new System.Windows.Forms.TextBox();
             this.textBox96 = new System.Windows.Forms.TextBox();
             this.textBox95 = new System.Windows.Forms.TextBox();
             this.radioButton53 = new System.Windows.Forms.RadioButton();
@@ -253,7 +254,7 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.textBox99 = new System.Windows.Forms.TextBox();
+            this.textBox100 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel24.SuspendLayout();
@@ -345,7 +346,7 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(1, 897);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1294, 137);
+            this.groupBox1.Size = new System.Drawing.Size(1284, 137);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             // 
@@ -2535,7 +2536,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 34);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1244, 203);
+            this.groupBox3.Size = new System.Drawing.Size(1234, 203);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
@@ -2882,6 +2883,7 @@
             // panel15
             // 
             this.panel15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel15.Controls.Add(this.textBox100);
             this.panel15.Controls.Add(this.textBox99);
             this.panel15.Controls.Add(this.textBox96);
             this.panel15.Controls.Add(this.textBox95);
@@ -2894,6 +2896,16 @@
             this.panel15.Name = "panel15";
             this.panel15.Size = new System.Drawing.Size(1014, 30);
             this.panel15.TabIndex = 99;
+            // 
+            // textBox99
+            // 
+            this.textBox99.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox99.Location = new System.Drawing.Point(689, -1);
+            this.textBox99.Name = "textBox99";
+            this.textBox99.Size = new System.Drawing.Size(106, 30);
+            this.textBox99.TabIndex = 107;
+            this.textBox99.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox99.Visible = false;
             // 
             // textBox96
             // 
@@ -3027,15 +3039,15 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // textBox99
+            // textBox100
             // 
-            this.textBox99.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox99.Location = new System.Drawing.Point(689, -1);
-            this.textBox99.Name = "textBox99";
-            this.textBox99.Size = new System.Drawing.Size(106, 30);
-            this.textBox99.TabIndex = 107;
-            this.textBox99.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox99.Visible = false;
+            this.textBox100.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox100.Location = new System.Drawing.Point(801, 0);
+            this.textBox100.Name = "textBox100";
+            this.textBox100.Size = new System.Drawing.Size(106, 30);
+            this.textBox100.TabIndex = 108;
+            this.textBox100.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox100.Visible = false;
             // 
             // aUhealthcheckupServices2
             // 
@@ -3348,5 +3360,6 @@
         private System.Windows.Forms.Panel panel30;
         private System.Windows.Forms.Panel panel31;
         public System.Windows.Forms.TextBox textBox99;
+        public System.Windows.Forms.TextBox textBox100;
     }
 }

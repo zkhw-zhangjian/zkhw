@@ -70,6 +70,14 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
-
+        //通过机构编号获取机构名称
+        public DataTable checkOrganNameBycode(string organcode)
+        {
+            String sql = "select organ_name from ltd_organization where organ_code = '" + organcode + "' limit 1";
+            DataSet ds = new DataSet();
+            ds.Clear();
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
     }
 }

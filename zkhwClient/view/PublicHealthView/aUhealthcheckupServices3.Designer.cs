@@ -66,6 +66,7 @@
             this.textBox52 = new System.Windows.Forms.TextBox();
             this.textBox50 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox107 = new System.Windows.Forms.TextBox();
             this.textBox105 = new System.Windows.Forms.TextBox();
             this.textBox106 = new System.Windows.Forms.TextBox();
             this.textBox34 = new System.Windows.Forms.TextBox();
@@ -207,7 +208,7 @@
             this.textBox35 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.textBox107 = new System.Windows.Forms.TextBox();
+            this.textBox108 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -649,6 +650,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.textBox108);
             this.groupBox1.Controls.Add(this.textBox107);
             this.groupBox1.Controls.Add(this.textBox105);
             this.groupBox1.Controls.Add(this.textBox106);
@@ -719,9 +721,19 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(1, 43);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1277, 477);
+            this.groupBox1.Size = new System.Drawing.Size(1268, 477);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
+            // 
+            // textBox107
+            // 
+            this.textBox107.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox107.Location = new System.Drawing.Point(768, 13);
+            this.textBox107.Name = "textBox107";
+            this.textBox107.Size = new System.Drawing.Size(106, 30);
+            this.textBox107.TabIndex = 241;
+            this.textBox107.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox107.Visible = false;
             // 
             // textBox105
             // 
@@ -2354,15 +2366,15 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // textBox107
+            // textBox108
             // 
-            this.textBox107.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox107.Location = new System.Drawing.Point(768, 13);
-            this.textBox107.Name = "textBox107";
-            this.textBox107.Size = new System.Drawing.Size(106, 30);
-            this.textBox107.TabIndex = 241;
-            this.textBox107.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox107.Visible = false;
+            this.textBox108.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox108.Location = new System.Drawing.Point(881, 13);
+            this.textBox108.Name = "textBox108";
+            this.textBox108.Size = new System.Drawing.Size(106, 30);
+            this.textBox108.TabIndex = 242;
+            this.textBox108.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox108.Visible = false;
             // 
             // aUhealthcheckupServices3
             // 
@@ -2597,5 +2609,6 @@
         public System.Windows.Forms.TextBox textBox105;
         public System.Windows.Forms.TextBox textBox106;
         public System.Windows.Forms.TextBox textBox107;
+        public System.Windows.Forms.TextBox textBox108;
     }
 }

@@ -291,6 +291,7 @@ namespace zkhwClient
                             File.Delete(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString() + "_" + ids + ".jpg");
                         }
                         inf.MoveTo(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString()+"_" + ids + ".jpg");
+                        inf.Delete();
                         if (diagnosiss.IndexOf("正常")>-1)
                             {
                                 int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='1',cardiogram_img='{ids + ".jpg"}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
@@ -364,7 +365,8 @@ namespace zkhwClient
                                     File.Delete(str + "\\bcImg\\" + BuPic01);
                                 }
                                 inf.CopyTo(str + "\\bcImg\\" + BuPic01);
-                                }
+                                inf.Delete();
+                            }
                             else if (i == 1)
                             {
                                 BuPic02 = xNode[i].InnerText;
@@ -375,7 +377,8 @@ namespace zkhwClient
                                     File.Delete(str + "\\bcImg\\" + BuPic02);
                                 }
                                 inf.CopyTo(str + "\\bcImg\\" + BuPic02);
-                            }
+                                inf.Delete();
+                        }
                             else if (i == 2)
                             {
                                 BuPic03 = xNode[i].InnerText;
@@ -386,17 +389,20 @@ namespace zkhwClient
                                     File.Delete(str + "\\bcImg\\" + BuPic03);
                                 }
                                 inf.CopyTo(str + "\\bcImg\\" + BuPic03);
+                                inf.Delete();
                         }
                             else if (i == 3)
                             {
                                 BuPic04 = xNode[i].InnerText;
                                 string pName = fullPath + BuPic04;
                                 FileInfo inf = new FileInfo(pName);
+                                File.Move("","");
                                 if (File.Exists(str + "\\bcImg\\" + BuPic04))
                                 {
                                     File.Delete(str + "\\bcImg\\" + BuPic04);
                                 }
                                 inf.CopyTo(str + "\\bcImg\\" + BuPic04);
+                                inf.Delete();
                         }
                       }
                     }

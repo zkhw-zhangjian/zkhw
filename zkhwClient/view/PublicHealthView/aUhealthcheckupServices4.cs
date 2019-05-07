@@ -62,6 +62,7 @@ namespace zkhwClient.view.PublicHealthView
             per.aichive_no = this.textBox1.Text;
             per.bar_code = this.textBox2.Text;
             per.id_number = this.textBox3.Text;
+            per.id = this.textBox4.Text;
             if (this.radioButton39.Checked == true) { per.health_evaluation = this.radioButton39.Tag.ToString(); };
             if (this.radioButton40.Checked == true) {
                 per.health_evaluation = this.radioButton40.Tag.ToString();
@@ -121,6 +122,7 @@ namespace zkhwClient.view.PublicHealthView
             if (isfalse)
             {
                 this.DialogResult = DialogResult.OK;
+                MessageBox.Show("保存成功!"); 
             }
         }
         //将用药记录 goodsList 绑定到页面 dataGridView1展示出来

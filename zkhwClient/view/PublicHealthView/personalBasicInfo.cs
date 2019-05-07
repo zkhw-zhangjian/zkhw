@@ -60,8 +60,8 @@ namespace zkhwClient.view.PublicHealthView
         //个人基本建档记录历史表  关联传参调查询的方法
         private void querypBasicInfo()
         {
-            time1 = this.dateTimePicker1.Text.ToString();//开始时间
-            time2 = this.dateTimePicker2.Text.ToString();//结束时间
+            time1 = this.dateTimePicker1.Text.ToString() +" 00:00:00";//开始时间
+            time2 = this.dateTimePicker2.Text.ToString() + " 23:59:59";//结束时间
             this.dataGridView1.DataSource = null;
             DataTable dt = pBasicInfo.queryPersonalBasicInfo(pCa, time1, time2,code);
             this.dataGridView1.DataSource = dt;

@@ -305,39 +305,39 @@ namespace zkhwClient.dao
                 sql += " sfz_online='" + sfzflag + "',sfz_tate='" + sfzflag + "'";
             }
             if (sxtflag>-1) {
-                sql += "sxt_online='" + sxtflag + "',sxt_state='" + sxtflag + "'";
+                sql += " sxt_online='" + sxtflag + "',sxt_state='" + sxtflag + "'";
             }
             if (dyjflag > -1)
             {
-                sql += "dyj_online ='" + dyjflag + "',dyj_state='" + dyjflag + "'";
+                sql += " dyj_online ='" + dyjflag + "',dyj_state='" + dyjflag + "'";
             }
             if (xcgflag > -1)
             {
-                sql += "xcg_online ='" + xcgflag + "',xcg_state='" + xcgflag + "'";
+                sql += " xcg_online ='" + xcgflag + "',xcg_state='" + xcgflag + "'";
             }
             if (shflag > -1)
             {
-                sql += "sh_online ='" + shflag + "',sh_state='" + shflag + "'";
+                sql += " sh_online ='" + shflag + "',sh_state='" + shflag + "'";
             }
             if (ncgflag > -1)
             {
-                sql += "ncg_online ='" + ncgflag + "',ncg_state='" + ncgflag + "'";
+                sql += " ncg_online ='" + ncgflag + "',ncg_state='" + ncgflag + "'";
             }
             if (xdtflag > -1)
             {
-                sql += "xdt_online ='" + xdtflag + "',xdt_state='" + xdtflag + "'";
+                sql += " xdt_online ='" + xdtflag + "',xdt_state='" + xdtflag + "'";
             }
             if (sgtzflag > -1)
             {
-                sql += "sgtz_online ='" + sgtzflag + "',sgtz_state='" + sgtzflag + "'";
+                sql += " sgtz_online ='" + sgtzflag + "',sgtz_state='" + sgtzflag + "'";
             }
             if (xyflag > -1)
             {
-                sql += "xy_online ='" + xyflag + "',xy_state='" + xyflag + "'";
+                sql += " xy_online ='" + xyflag + "',xy_state='" + xyflag + "'";
             }
             if (bcflag > -1)
             {
-                sql += "bc_online ='" + bcflag + "',bc_state='" + bcflag + "'";
+                sql += " bc_online ='" + bcflag + "',bc_state='" + bcflag + "'";
             }
             sql +=  " where ID ='1'";
             ret = DbHelperMySQL.ExecuteSql(sql);

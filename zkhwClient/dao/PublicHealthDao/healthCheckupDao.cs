@@ -1,28 +1,48 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using zkhwClient.bean;
 
 namespace zkhwClient.dao
 {
     class healthCheckupDao
     {
-        public bool deleteOlderHelthService(string id)
+        public bool deletePhysical_examination_record(string id)
         {
             int rt = 0;
-            string sql = "delete from elderly_selfcare_estimate  where id = '" + id + "';";
+            string sql = "delete from physical_examination_record  where id = '" + id + "';";
+            rt = DbHelperMySQL.ExecuteSql(sql);
+            return rt == 0 ? false : true;
+        }
+        //删除疫苗信息
+        public bool deleteVaccination_record(string id) {
+            int rt = 0;
+            string sql = "delete from vaccination_record  where exam_id = '" + id + "';";
+            rt = DbHelperMySQL.ExecuteSql(sql);
+            return rt == 0 ? false : true;
+        }
+        //删除用药信息
+        public bool deleteTake_medicine_record(string id)
+        {
+            int rt = 0;
+            string sql = "delete from take_medicine_record  where exam_id = '" + id + "';";
+            rt = DbHelperMySQL.ExecuteSql(sql);
+            return rt == 0 ? false : true;
+        }
+        //删除住院史信息
+        public bool deleteHospitalized_record(string id)
+        {
+            int rt = 0;
+            string sql = "delete from hospitalized_record  where exam_id = '" + id + "';";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
         public DataTable queryhealthCheckup(string pCa, string time1, string time2,string code)
         {
             DataSet ds = new DataSet();
-            string sql = "select a.aichive_no,a.id_number,a.bar_code,a.name,a.check_date,a.doctor_name from physical_examination_record a,resident_base_info b where a.aichive_no = b.archive_no and a.check_date >= '" + time1 + "' and a.check_date <= '" + time2 + "'";
+            string sql = "SELECT bb.name,bb.archive_no,bb.id_number,aa.bar_code,aa.check_date,aa.doctor_name,aa.id FROM (select b.name, b.archive_no, b.id_number from resident_base_info b where 1=1";
             if (code != "") { sql += " AND b.village_code='" + code + "'"; }
-            if (pCa != "") { sql += " and (a.name like '%" + pCa + "%'  or a.id_number like '%" + pCa + "%'  or a.aichive_no like '%" + pCa + "%')"; }
+            if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
+            sql += ") bb LEFT JOIN(select a.id,a.aichive_no,a.bar_code,a.check_date,a.doctor_name from physical_examination_record a where a.check_date >= '" + time1 + "' and a.check_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -30,42 +50,6 @@ namespace zkhwClient.dao
         {
             DataSet ds = new DataSet();
             string sql = "select count(*) as label10,count(sex = '男') as label11,count(sex = '女') as label13,count(0<=total_score <= 3) as label15,count(4<=total_score <= 8) as label17,count(9<=total_score <= 18) as label18,count(total_score >= 19) as label21 from elderly_selfcare_estimate where test_date = '" + DateTime.Now.ToString("yyyy-MM-dd") + "'";
-            ds = DbHelperMySQL.Query(sql);
-            return ds.Tables[0];
-        }
-
-        public DataTable query(string id_number)
-        {
-            DataSet ds = new DataSet();
-            string sql = "select * from elderly_selfcare_estimate where id_number = '" + id_number + "'";
-            ds = DbHelperMySQL.Query(sql);
-            return ds.Tables[0];
-        }
-
-        public bool aUelderly_selfcare_estimate(bean.elderly_selfcare_estimateBean hm, string id)
-        {
-            int ret = 0;
-            String sql = "";
-            if (id == "")
-            {
-                id = Result.GetNewId();
-                sql = @"insert into elderly_selfcare_estimate (id,name,aichive_no,id_number,sex,test_date,answer_result,total_score,judgement_result,test_doctor,create_user,create_name,create_org,create_org_name,create_time,update_user,update_name,update_time,upload_status,upload_time,upload_result) values ";
-                sql += @" ('" + id + "','" + hm.name + "', '" + hm.aichive_no + "', '" + hm.id_number + "', '" + hm.sex + "', '" + hm.test_date + "', '" + hm.answer_result + "', '" + hm.total_score + "', '" + hm.judgement_result + "', '" + hm.test_doctor + "','" + hm.create_user + "','" + hm.create_name + "', '" + hm.create_org + "', '" + hm.create_org_name + "', '" + hm.create_time + "', '" + hm.update_user + "', '" + hm.update_name + "', '" + hm.update_time + "', '" + hm.upload_status + "', '" + hm.upload_time + "', '" + hm.upload_result + "')";
-            }
-            else
-            {
-                //sql = @"update elderly_selfcare_estimate set name='" + hm.name + "',aichive_no='" + hm.aichive_no + "',id_number='" + hm.id_number + "',sex='" + hm.sex + "',test_date='" + hm.test_date + "',answer_result='" + hm.answer_result + "',total_score='" + hm.total_score + "',judgement_result='" + hm.judgement_result + "',test_doctor= '" + hm.test_doctor + "',create_user='" + hm.create_user + "',create_name='" + hm.create_name + "',create_org='" + hm.create_org + "',create_org_name= '" + hm.create_org_name + "',create_time= '" + hm.create_time + "',update_user= '" + hm.update_user + "',update_name= '" + hm.update_name + "',update_time='" + hm.update_time + "',upload_status= '" + hm.upload_status + "',upload_time='" + hm.upload_time + "',upload_result='" + hm.upload_result + "' where id = '" + id + "'";
-                sql = @"update elderly_selfcare_estimate set name='" + hm.name + "',aichive_no='" + hm.aichive_no + "',id_number='" + hm.id_number + "',sex='" + hm.sex + "',test_date='" + hm.test_date + "',answer_result='" + hm.answer_result + "',total_score='" + hm.total_score + "',judgement_result='" + hm.judgement_result + "',test_doctor= '" + hm.test_doctor + "',create_user='" + hm.create_user + "',create_name='" + hm.create_name + "',create_org='" + hm.create_org + "',create_org_name= '" + hm.create_org_name + "',update_user= '" + hm.update_user + "',update_name= '" + hm.update_name + "',update_time='" + hm.update_time + "',upload_status= '" + hm.upload_status + "',upload_time='" + hm.upload_time + "',upload_result='" + hm.upload_result + "' where id = '" + id + "'";
-
-            }
-
-            ret = DbHelperMySQL.ExecuteSql(sql);
-            return ret == 0 ? false : true;
-        }
-        public DataTable queryOlderHelthService(string id)
-        {
-            DataSet ds = new DataSet();
-            string sql = "select * from elderly_selfcare_estimate where id = '" + id + "'";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -91,7 +75,7 @@ namespace zkhwClient.dao
                 + "',lifeway_hazardous_radiation='" + per.lifeway_hazardous_radiation + "',lifeway_radiation_preventive='" + per.lifeway_radiation_preventive + "',lifeway_hazardous_physical='" 
                 + per.lifeway_hazardous_physical + "',lifeway_physical_preventive='" + per.lifeway_physical_preventive + "',lifeway_hazardous_chemical='" + per.lifeway_hazardous_chemical 
                 + "',lifeway_chemical_preventive='" + per.lifeway_chemical_preventive + "',lifeway_hazardous_other='" + per.lifeway_hazardous_other + "',lifeway_other_preventive='" + per.lifeway_other_preventive
-                + "',lifeway_doctor='" + per.lifeway_doctor + "' where aichive_no = '" + per.aichive_no + "' and bar_code = '" + per.bar_code + "'";
+                + "',lifeway_doctor='" + per.lifeway_doctor + "' where id = '" + per.id + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }
@@ -123,7 +107,7 @@ namespace zkhwClient.dao
                 + "',cardiogram_memo='" + per.cardiogram_memo + "', microalbuminuria='" + per.microalbuminuria + "',fob='" + per.fob + "',glycosylated_hemoglobin='" + per.glycosylated_hemoglobin + "',hb='" + per.hb + "',sgft='" + per.sgft
                 + "',ast='" + per.ast + "',albumin='" + per.albumin + "',total_bilirubin='" + per.total_bilirubin + "',conjugated_bilirubin='" + per.conjugated_bilirubin + "',scr='" + per.scr + "',blood_urea='" + per.blood_urea
                 + "',blood_k='" + per.blood_k + "',blood_na='" + per.blood_na + "',tc='" + per.tc + "',tg='" + per.tg + "',ldl='" + per.ldl + "',hdl='" + per.hdl
-                + "',chest_x='" + per.chest_x + "',chestx_memo='" + per.chestx_memo + "',ultrasound_abdomen='" + per.ultrasound_abdomen + "',ultrasound_memo='" + per.ultrasound_memo + "',cervical_smear='" + per.cervical_smear_memo + "',other='" + per.other + "' where aichive_no = '" + per.aichive_no + "' and bar_code = '" + per.bar_code + "'"; 
+                + "',chest_x='" + per.chest_x + "',chestx_memo='" + per.chestx_memo + "',ultrasound_abdomen='" + per.ultrasound_abdomen + "',ultrasound_memo='" + per.ultrasound_memo + "',cervical_smear='" + per.cervical_smear_memo + "',other='" + per.other + "' where id = '" + per.id + "'"; 
                 ret = DbHelperMySQL.ExecuteSql(sql);
                 return ret == 0 ? false : true;
         }
@@ -143,7 +127,7 @@ namespace zkhwClient.dao
                 + "',cerebrovascular_disease_other='" + per.cerebrovascular_disease_other + "',kidney_disease='" + per.kidney_disease + "',kidney_disease_other='" + per.kidney_disease_other
                 + "',heart_disease='" + per.heart_disease + "',heart_disease_other ='" + per.heart_disease_other + "',vascular_disease_other='" + per.vascular_disease_other
                 + "',ocular_diseases='" + per.ocular_diseases + "',ocular_diseases_other='" + per.ocular_diseases_other + "',nervous_system_disease='" + per.nervous_system_disease
-                + "',nervous_disease_memo='" + per.nervous_disease_memo + "',other_disease='" + per.other_disease + "',other_disease_memo='" + per.other_disease_memo +"' where aichive_no = '" + per.aichive_no + "' and bar_code = '" + per.bar_code + "'";
+                + "',nervous_disease_memo='" + per.nervous_disease_memo + "',other_disease='" + per.other_disease + "',other_disease_memo='" + per.other_disease_memo +"' where id = '" + per.id + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }
@@ -152,7 +136,7 @@ namespace zkhwClient.dao
         {
             string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string id = Result.GetNewId();
-            string sql = @"insert into hospitalized_record (id,archive_no,id_number,hospitalized_type,in_hospital_time,leave_hospital_time,reason,hospital_organ,case_code,create_name,create_time) values ('" +id + "','" + hr.archive_no + "', '"+hr.id_number+"', '"+hr.hospitalized_type + "', '" + hr.in_hospital_time + "', '" + hr.leave_hospital_time + "', '" + hr.reason + "', '" + hr.hospital_organ + "', '" + hr.case_code + "', '" + frmLogin.name + "', '" + time + "')";
+            string sql = @"insert into hospitalized_record (id,exam_id,archive_no,id_number,hospitalized_type,in_hospital_time,leave_hospital_time,reason,hospital_organ,case_code,create_name,create_time) values ('" +id + "','" + hr.exam_id + "','" + hr.archive_no + "', '"+hr.id_number+"', '"+hr.hospitalized_type + "', '" + hr.in_hospital_time + "', '" + hr.leave_hospital_time + "', '" + hr.reason + "', '" + hr.hospital_organ + "', '" + hr.case_code + "', '" + frmLogin.name + "', '" + time + "')";
             int ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }
@@ -180,9 +164,9 @@ namespace zkhwClient.dao
             String sql = @"update physical_examination_record set health_evaluation='" + per.health_evaluation + "',abnormal1='" + per.abnormal1 + "',abnormal2='"
                 + per.abnormal2 + "',abnormal3='" + per.abnormal3 + "',abnormal4='" + per.abnormal4 + "',health_guidance='"
                 + per.health_guidance + "',danger_controlling='" + per.danger_controlling + "',target_weight='"
-                + per.target_weight + "',proposal_accination= '" + per.advise_bacterin + "',danger_controlling_other='"
+                + per.target_weight + "',advise_bacterin= '" + per.advise_bacterin + "',danger_controlling_other='"
                 + per.danger_controlling_other + "',create_user='" + frmLogin.name + "',create_name='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
-                + "' where aichive_no = '" + per.aichive_no + "' and bar_code = '" + per.bar_code + "'";
+                + "' where id = '" + per.id + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             if (ret>0) {
                 if (goodsList.Rows.Count > 0) {
@@ -196,7 +180,7 @@ namespace zkhwClient.dao
                         }
                         else
                         {
-                            sql0 += ",('" + Result.GetNewId() + "','" + per.bar_code + "','" + per.aichive_no + "','" + per.id_number + "','" + goodsList.Rows[i]["drug_name"] + "','" + goodsList.Rows[i]["drug_usage"] + "','" + goodsList.Rows[i]["drug_use"] + "','" + goodsList.Rows[i]["drug_time"] + "','" + goodsList.Rows[i]["drug_type"] + "','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+                            sql0 += ",('" + Result.GetNewId() + "','" + per.id + "','" + per.aichive_no + "','" + per.id_number + "','" + goodsList.Rows[i]["drug_name"] + "','" + goodsList.Rows[i]["drug_usage"] + "','" + goodsList.Rows[i]["drug_use"] + "','" + goodsList.Rows[i]["drug_time"] + "','" + goodsList.Rows[i]["drug_type"] + "','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
                         }
                     }
@@ -214,7 +198,7 @@ namespace zkhwClient.dao
                         }
                         else
                         {
-                            sql0 += ",('" + Result.GetNewId() + "','" + per.bar_code + "','" + per.aichive_no + "','" + per.id_number + "','" + goodsListym.Rows[i]["vaccination_name"] + "','" + goodsListym.Rows[i]["vaccination_time"] + "','" + goodsListym.Rows[i]["vaccination_organ_name"] + "','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+                            sql0 += ",('" + Result.GetNewId() + "','" + per.id + "','" + per.aichive_no + "','" + per.id_number + "','" + goodsListym.Rows[i]["vaccination_name"] + "','" + goodsListym.Rows[i]["vaccination_time"] + "','" + goodsListym.Rows[i]["vaccination_organ_name"] + "','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
                         }
                     }

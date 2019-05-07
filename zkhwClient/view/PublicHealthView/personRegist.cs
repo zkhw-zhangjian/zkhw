@@ -484,7 +484,6 @@ namespace zkhwClient.view.PublicHealthView
             if (grjdxx != null)
             {
                 string cardcode= textBox3.Text;
-                string archive_no = "";
                 if (cardcode != null && !"".Equals(cardcode)) {
                     dt = grjddao.judgeRepeat(textBox3.Text);
                 }
@@ -493,7 +492,7 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 if (dt.Rows.Count < 1)
                 {
-                    if (grjdxx.Cardcode != null && !"".Equals(grjdxx.Cardcode))
+                    if (!"".Equals(grjdxx.Cardcode))
                     {
                         grjdxx.archive_no = basicInfoSettings.xcuncode + "0" + grjdxx.Cardcode.Substring(14);
                     }
@@ -504,14 +503,26 @@ namespace zkhwClient.view.PublicHealthView
                     grjdxx.aichive_org = basicInfoSettings.organ_name;
                     grjdxx.doctor_name = basicInfoSettings.zeren_doctor;
                     grjdxx.create_archives_name = basicInfoSettings.input_name;
+                    grjdxx.residence_address = basicInfoSettings.allareaname;
+                    grjdxx.province_name = basicInfoSettings.shengName;
+                    grjdxx.province_code = basicInfoSettings.shengcode;
+                    grjdxx.city_code = basicInfoSettings.shicode;
+                    grjdxx.city_name = basicInfoSettings.shiName;
+                    grjdxx.county_code = basicInfoSettings.qxcode;
+                    grjdxx.county_name= basicInfoSettings.qxName;
+                    grjdxx.towns_code= basicInfoSettings.xzcode;
+                    grjdxx.towns_name = basicInfoSettings.xzName;
+                    grjdxx.village_code= basicInfoSettings.xcuncode;
+                    grjdxx.village_name = basicInfoSettings.xcName;
                     grjddao.addgrjdInfo(grjdxx);//添加个人信息档案
                     grjddao.addPhysicalExaminationInfo(grjdxx, barcode);//添加健康体检表信息 
+                    registrationRecordCheck();//右侧统计
                 }
                 else {
-                    archive_no = dt.Rows[0]["archive_no"].ToString();
+                    grjdxx.archive_no = dt.Rows[0]["archive_no"].ToString();
                 }
                 jkBean jk = new jkBean();
-                jk.aichive_no = archive_no;
+                jk.aichive_no = grjdxx.archive_no;
                 jk.id_number = grjdxx.Cardcode;
                 jk.bar_code = barcode; 
                 jk.Pic1 = grjdxx.CardPic;
@@ -531,7 +542,7 @@ namespace zkhwClient.view.PublicHealthView
                 textBox6.Text = barcode;
                 if (addjkbool)
                 {   //体检信息统计表
-                    grjddao.addBgdcInfo(grjdxx, barcode, archive_no, basicInfoSettings.xcuncode);
+                    grjddao.addBgdcInfo(grjdxx, barcode, basicInfoSettings.xcuncode);
                 }
                 }
                 try
@@ -556,6 +567,7 @@ namespace zkhwClient.view.PublicHealthView
                         //打印完毕 
                         btApp.Quit(BarTender.BtSaveOptions.btDoNotSaveChanges);
                     jkjcheckdao.updateShDevice(-1, -1, 1, -1, -1, -1, -1, -1, -1, -1);
+
                 }
             }
             catch (Exception e)
@@ -589,7 +601,6 @@ namespace zkhwClient.view.PublicHealthView
                     this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
                     this.dataGridView1.Columns[3].HeaderCell.Value = "电子档案号";
                     this.dataGridView1.Columns[4].HeaderCell.Value = "条码号";
-                    //this.dataGridView1.Columns[7].Visible = false;
                     this.dataGridView1.Columns[0].Width = 70;
                     this.dataGridView1.Columns[1].Width = 55;
                     this.dataGridView1.Columns[2].Width = 120;
@@ -645,34 +656,34 @@ namespace zkhwClient.view.PublicHealthView
                 for (int i=0;i< dtjkifo.Rows.Count;i++) {
                    string sex = dtjkifo.Rows[i]["sex"].ToString();
                    int age =Int32.Parse(dtjkifo.Rows[i]["age"].ToString());
-                    if (age >= 40 && age <= 64 && "男".Equals(sex)) {
+                    if (age >= 40 && age <= 64 && "1".Equals(sex)) {
                         num22 += 1;
                     }
-                    if (age >= 40 && age <= 64 && "女".Equals(sex))
+                    if (age >= 40 && age <= 64 && "2".Equals(sex))
                     {
                         num24 += 1;
                     }
-                    if (age >= 65 && age <= 70 && "男".Equals(sex))
+                    if (age >= 65 && age <= 70 && "1".Equals(sex))
                     {
                         num27 += 1;
                     }
-                    if (age >= 65 && age <= 70 && "女".Equals(sex))
+                    if (age >= 65 && age <= 70 && "2".Equals(sex))
                     {
                         num29 += 1;
                     }
-                    if (age >= 71 && age <= 75 && "男".Equals(sex))
+                    if (age >= 71 && age <= 75 && "1".Equals(sex))
                     {
                         num32 += 1;
                     }
-                    if (age >= 71 && age <= 75 && "女".Equals(sex))
+                    if (age >= 71 && age <= 75 && "2".Equals(sex))
                     {
                         num34 += 1;
                     }
-                    if (age >= 75 && "男".Equals(sex))
+                    if (age >= 75 && "1".Equals(sex))
                     {
                         num37 += 1;
                     }
-                    if (age >= 75  && "女".Equals(sex))
+                    if (age >= 75  && "2".Equals(sex))
                     {
                         num39 += 1;
                     }

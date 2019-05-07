@@ -102,7 +102,7 @@ namespace zkhwClient.dao
             {
                 if (!File.Exists(e.FullPath))
                     return;
-                Thread.Sleep(100);
+                Thread.Sleep(1000);
             }
             FileWatcher.OnChangedForBChao(sender, e);
         }

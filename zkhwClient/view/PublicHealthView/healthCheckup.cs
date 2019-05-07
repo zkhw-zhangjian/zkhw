@@ -3,6 +3,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using zkhwClient.dao;
+using zkhwClient.view.setting;
 
 namespace zkhwClient.view.PublicHealthView
 {
@@ -34,7 +35,7 @@ namespace zkhwClient.view.PublicHealthView
             this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源
             this.comboBox1.DisplayMember = "name";//显示给用户的数据集表项
             this.comboBox1.ValueMember = "code";//操作时获取的值 
-
+            xcuncode = basicInfoSettings.xcuncode;
             queryOlderHelthService();
         }
 
@@ -46,12 +47,13 @@ namespace zkhwClient.view.PublicHealthView
             this.dataGridView1.DataSource = null;
             DataTable dt = hcd.queryhealthCheckup(pCa, time1, time2,xcuncode);
             this.dataGridView1.DataSource = dt;
-            this.dataGridView1.Columns[0].HeaderCell.Value = "档案编号";
-            this.dataGridView1.Columns[1].HeaderCell.Value = "身份证号";
-            this.dataGridView1.Columns[2].HeaderCell.Value = "条码号";
-            this.dataGridView1.Columns[3].HeaderCell.Value = "姓名";
+            this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
+            this.dataGridView1.Columns[1].HeaderCell.Value = "档案编号";
+            this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
+            this.dataGridView1.Columns[3].HeaderCell.Value = "条码号";
             this.dataGridView1.Columns[4].HeaderCell.Value = "检查日期";
             this.dataGridView1.Columns[5].HeaderCell.Value = "责任医生";
+            this.dataGridView1.Columns[6].Visible = false;
 
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
@@ -126,27 +128,28 @@ namespace zkhwClient.view.PublicHealthView
         {
             if (this.dataGridView1.SelectedRows.Count > 0)
             {
-                string name = this.dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
-                string aichive_no = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-                string id_number = this.dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
-                string bar_code = this.dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+                string name = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+                string aichive_no = this.dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+                string id_number = this.dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+                string bar_code = this.dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
                 string check_date = this.dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
                 string doctor_name = this.dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
+                string id = this.dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
                 if (aichive_no != null && !"".Equals(aichive_no))
                 {
-                    //aUhealthcheckupServices1 auhcs = new aUhealthcheckupServices1();
-                    //auhcs.textBox1.Text = name;
-                    //auhcs.textBox118.Text = bar_code;
-                    //auhcs.textBox119.Text = id_number;
-                    //auhcs.textBox2.Text = aichive_no;
-                    //auhcs.dateTimePicker1.Value = DateTime.ParseExact(check_date, TarStr, format);
-                    //auhcs.textBox51.Text = doctor_name;
-                    //auhcs.Show();
-
-                    aUhealthcheckupServices4 auhcs = new aUhealthcheckupServices4();
-                    auhcs.textBox1.Text = bar_code;
+                    aUhealthcheckupServices1 auhcs = new aUhealthcheckupServices1();
+                    auhcs.textBox1.Text = name;
+                    auhcs.textBox118.Text = bar_code;
+                    auhcs.textBox119.Text = id_number;
+                    auhcs.textBox120.Text = id;
                     auhcs.textBox2.Text = aichive_no;
+                    auhcs.dateTimePicker1.Value = DateTime.ParseExact(check_date, TarStr, format);
+                    auhcs.textBox51.Text = doctor_name;
                     auhcs.Show();
+                    //aUhealthcheckupServices4 auhcs = new aUhealthcheckupServices4();
+                    //auhcs.textBox1.Text = bar_code;
+                    //auhcs.textBox2.Text = aichive_no;
+                    //auhcs.Show();
                 }
             }
             else {
@@ -156,7 +159,28 @@ namespace zkhwClient.view.PublicHealthView
         //删除数据
         private void button4_Click(object sender, EventArgs e)
         {
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            string id = this.dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
+            DialogResult rr = MessageBox.Show("确认删除？", "确认删除提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+            int tt = (int)rr;
+            if (tt == 1)
+            {//删除用户       
+                bool istrue = hcd.deletePhysical_examination_record(id);
+                if (istrue)
+                {
+                    hcd.deleteVaccination_record(id);
+                    hcd.deleteTake_medicine_record(id);
+                    hcd.deleteHospitalized_record(id);
+                    //刷新页面
+                    queryOlderHelthService();
+                    MessageBox.Show("删除成功！");
+                }
+            }
+        }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("开发中...");
         }
     }
 }

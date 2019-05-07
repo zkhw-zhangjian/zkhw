@@ -5,16 +5,10 @@ using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using zkhwClient.dao;
 using zkhwClient.utils;
-using zkhwClient.view.setting;
 
 namespace zkhwClient
 {
@@ -25,8 +19,10 @@ namespace zkhwClient
         public static string dataPassw = "";
         public static List<string> listpower = null;
         public static string organCode = null;
+        public static string organName = null;
         service.loginLogService lls = new service.loginLogService();
         service.UserService us = new service.UserService();
+        UserDao udao =new UserDao();
         XmlDocument xmlDoc = new XmlDocument();
         string path = @"config.xml";
         XmlNode node;
@@ -63,7 +59,10 @@ namespace zkhwClient
             DataTable ret = service.UserService.UserExists(comboBox1.Text, md5passw);
             if (ret.Rows.Count > 0)
             {  //获取当前登录用户的机构
-                organCode = ret.Rows[0]["organ_code"].ToString();
+                if (!"admin".Equals(this.comboBox1.Text)&& !"CS".Equals(this.comboBox1.Text)) {
+                    organCode = ret.Rows[0]["organ_code"].ToString();
+                    organName = udao.checkOrganNameBycode(organCode).Rows[0]["organ_name"].ToString();
+                }
                 name = this.comboBox1.Text;
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = name;
@@ -107,7 +106,7 @@ namespace zkhwClient
             this.comboBox1.ValueMember = "username";//操作时获取的值 
 
             //监听心电图和B超
-            //FSWControl.WatcherStrat(@"E:\Examine\xdt","*.xml",true,true);
+            //FSWControl.WatcherStrat(@"E:\Examine\xdt", "*.xml", true, true);
             //FSWControl.WatcherStratBchao(@"E:\Examine\bc", "*.xml", true, true);
             ////开启监控血常规和生化
             //xmlDoc.Load(path);
@@ -120,7 +119,8 @@ namespace zkhwClient
             //    MessageBox.Show("未获取到血球中间库地址，请检查是否设置地址并重新启动软件！");
             //    return;
             //}
-            //else {
+            //else
+            //{
             //    FSWControl.WatcherStratxcg(@"F:\血球", "Lis_DB.mdb", true, true);
             //}
             //FileWatcher.WatcheDirForBChao();

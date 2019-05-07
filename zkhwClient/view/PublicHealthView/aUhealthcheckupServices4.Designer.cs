@@ -76,6 +76,7 @@
             this.label51 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -101,6 +102,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.textBox4);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.dataGridView2);
@@ -653,6 +655,16 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // textBox4
+            // 
+            this.textBox4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox4.Location = new System.Drawing.Point(0, 163);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(93, 30);
+            this.textBox4.TabIndex = 342;
+            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox4.Visible = false;
+            // 
             // aUhealthcheckupServices4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -732,5 +744,6 @@
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
+        public System.Windows.Forms.TextBox textBox4;
     }
 }
