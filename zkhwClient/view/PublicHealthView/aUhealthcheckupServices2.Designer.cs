@@ -116,6 +116,11 @@
             this.textBox32 = new System.Windows.Forms.TextBox();
             this.textBox31 = new System.Windows.Forms.TextBox();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.textBox30 = new System.Windows.Forms.TextBox();
             this.textBox29 = new System.Windows.Forms.TextBox();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -250,11 +255,6 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel24.SuspendLayout();
@@ -346,7 +346,7 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(1, 897);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1254, 137);
+            this.groupBox1.Size = new System.Drawing.Size(1297, 137);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             // 
@@ -444,21 +444,19 @@
             this.textBox89.Name = "textBox89";
             this.textBox89.Size = new System.Drawing.Size(273, 30);
             this.textBox89.TabIndex = 125;
-            this.textBox89.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox88
             // 
             this.textBox88.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox88.Location = new System.Drawing.Point(1071, 14);
+            this.textBox88.Location = new System.Drawing.Point(1059, 14);
             this.textBox88.Name = "textBox88";
-            this.textBox88.Size = new System.Drawing.Size(232, 30);
+            this.textBox88.Size = new System.Drawing.Size(244, 30);
             this.textBox88.TabIndex = 124;
-            this.textBox88.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox87
             // 
             this.textBox87.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox87.Location = new System.Drawing.Point(1019, 14);
+            this.textBox87.Location = new System.Drawing.Point(1007, 14);
             this.textBox87.Name = "textBox87";
             this.textBox87.ReadOnly = true;
             this.textBox87.Size = new System.Drawing.Size(46, 30);
@@ -1360,6 +1358,66 @@
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(1095, 30);
             this.panel10.TabIndex = 171;
+            // 
+            // checkBox9
+            // 
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox9.Location = new System.Drawing.Point(519, 2);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(81, 24);
+            this.checkBox9.TabIndex = 164;
+            this.checkBox9.Tag = "5";
+            this.checkBox9.Text = "5其他";
+            this.checkBox9.UseVisualStyleBackColor = true;
+            // 
+            // checkBox8
+            // 
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox8.Location = new System.Drawing.Point(390, 2);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(123, 24);
+            this.checkBox8.TabIndex = 163;
+            this.checkBox8.Tag = "4";
+            this.checkBox8.Text = "4乳腺包块";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            // 
+            // checkBox7
+            // 
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox7.Location = new System.Drawing.Point(261, 2);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(123, 24);
+            this.checkBox7.TabIndex = 162;
+            this.checkBox7.Tag = "3";
+            this.checkBox7.Text = "3异常泌乳";
+            this.checkBox7.UseVisualStyleBackColor = true;
+            // 
+            // checkBox6
+            // 
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox6.Location = new System.Drawing.Point(132, 2);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(123, 24);
+            this.checkBox6.TabIndex = 161;
+            this.checkBox6.Tag = "2";
+            this.checkBox6.Text = "2乳房切除";
+            this.checkBox6.UseVisualStyleBackColor = true;
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox5.Location = new System.Drawing.Point(3, 2);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(123, 24);
+            this.checkBox5.TabIndex = 38;
+            this.checkBox5.Tag = "1";
+            this.checkBox5.Text = "1未及异常";
+            this.checkBox5.UseVisualStyleBackColor = true;
             // 
             // textBox30
             // 
@@ -2470,7 +2528,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 34);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1204, 203);
+            this.groupBox3.Size = new System.Drawing.Size(1184, 203);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
@@ -2982,66 +3040,6 @@
             this.button4.Text = "保存并转到下一页";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // checkBox5
-            // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox5.Location = new System.Drawing.Point(3, 2);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(123, 24);
-            this.checkBox5.TabIndex = 38;
-            this.checkBox5.Tag = "1";
-            this.checkBox5.Text = "1未及异常";
-            this.checkBox5.UseVisualStyleBackColor = true;
-            // 
-            // checkBox6
-            // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox6.Location = new System.Drawing.Point(132, 2);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(123, 24);
-            this.checkBox6.TabIndex = 161;
-            this.checkBox6.Tag = "2";
-            this.checkBox6.Text = "2乳房切除";
-            this.checkBox6.UseVisualStyleBackColor = true;
-            // 
-            // checkBox7
-            // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox7.Location = new System.Drawing.Point(261, 2);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(123, 24);
-            this.checkBox7.TabIndex = 162;
-            this.checkBox7.Tag = "3";
-            this.checkBox7.Text = "3异常泌乳";
-            this.checkBox7.UseVisualStyleBackColor = true;
-            // 
-            // checkBox8
-            // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox8.Location = new System.Drawing.Point(390, 2);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(123, 24);
-            this.checkBox8.TabIndex = 163;
-            this.checkBox8.Tag = "4";
-            this.checkBox8.Text = "4乳腺包块";
-            this.checkBox8.UseVisualStyleBackColor = true;
-            // 
-            // checkBox9
-            // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox9.Location = new System.Drawing.Point(519, 2);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(81, 24);
-            this.checkBox9.TabIndex = 164;
-            this.checkBox9.Tag = "5";
-            this.checkBox9.Text = "5其他";
-            this.checkBox9.UseVisualStyleBackColor = true;
             // 
             // aUhealthcheckupServices2
             // 

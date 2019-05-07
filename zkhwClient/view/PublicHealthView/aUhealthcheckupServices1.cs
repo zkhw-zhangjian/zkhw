@@ -142,7 +142,7 @@ namespace zkhwClient.view.PublicHealthView
                     CheckBox ck = ctr as CheckBox;
                     if (ck.Checked)
                     {
-                        per.lifeway_diet += "," + ck.Text;
+                        per.lifeway_diet += "," + ck.Tag.ToString();
                     }
                 }
             }
@@ -157,7 +157,7 @@ namespace zkhwClient.view.PublicHealthView
 
             per.lifeway_smoke_number = this.textBox29.Text.Replace(" ", "");
             per.lifeway_smoke_startage = this.textBox39.Text.Replace(" ", "");
-            per.lifeway_smoke_endage = this.textBox49.Text.Replace(" ", "");
+            per.lifeway_smoke_endage = this.textBox48.Text.Replace(" ", "");
 
             if (this.radioButton12.Checked == true) { per.lifeway_drink_status = this.radioButton12.Tag.ToString(); };
             if (this.radioButton13.Checked == true) { per.lifeway_drink_status = this.radioButton13.Tag.ToString(); };
@@ -184,7 +184,7 @@ namespace zkhwClient.view.PublicHealthView
                     CheckBox ck = ctr as CheckBox;
                     if (ck.Checked)
                     {
-                        per.lifeway_drink_type += "," + ck.Text;
+                        per.lifeway_drink_type += "," + ck.Tag.ToString();
                     }
                 }
             }
@@ -208,7 +208,8 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 else if(this.radioButton43.Checked == true)
                 {
-                    per.lifeway_dust_preventive = this.textBox100.Text.Replace(" ", ""); ;
+                    per.lifeway_dust_preventive = this.radioButton43.Tag.ToString();
+                    //this.textBox100.Text.Replace(" ", ""); ;
                 }
 
                 per.lifeway_hazardous_radiation = this.textBox103.Text.Replace(" ", "");
@@ -218,7 +219,8 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 else if (this.radioButton45.Checked == true)
                 {
-                    per.lifeway_radiation_preventive = this.textBox101.Text.Replace(" ", ""); ;
+                    per.lifeway_radiation_preventive = this.radioButton45.Tag.ToString();
+                    //this.textBox101.Text.Replace(" ", ""); ;
                 }
 
                 per.lifeway_hazardous_physical = this.textBox115.Text.Replace(" ", "");
@@ -228,7 +230,8 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 else if (this.radioButton51.Checked == true)
                 {
-                    per.lifeway_physical_preventive = this.textBox113.Text.Replace(" ", ""); ;
+                    per.lifeway_physical_preventive = this.radioButton51.Tag.ToString();
+                        //this.textBox113.Text.Replace(" ", ""); ;
                 }
 
                 per.lifeway_hazardous_chemical = this.textBox107.Text.Replace(" ", "");
@@ -238,7 +241,8 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 else if (this.radioButton47.Checked == true)
                 {
-                    per.lifeway_chemical_preventive = this.textBox105.Text.Replace(" ", ""); ;
+                    per.lifeway_chemical_preventive = this.radioButton47.Tag.ToString();
+                    //this.textBox105.Text.Replace(" ", ""); ;
                 }
 
                 per.lifeway_hazardous_other = this.textBox111.Text.Replace(" ", "");
@@ -248,7 +252,8 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 else if (this.radioButton49.Checked == true)
                 {
-                    per.lifeway_other_preventive = this.textBox109.Text.Replace(" ", ""); ;
+                    per.lifeway_other_preventive = this.radioButton49.Tag.ToString();
+                    //this.textBox109.Text.Replace(" ", ""); ;
                 }
             };
 

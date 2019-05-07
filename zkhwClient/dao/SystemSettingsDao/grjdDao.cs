@@ -42,7 +42,7 @@ namespace zkhwClient.dao
             string id = Result.GetNewId();
             string time = DateTime.Now.ToString("yyyy-MM-dd");
             string ctime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            String sql = "insert into physical_examination_record (id,aichive_no,name,id_number,bar_code,check_date,doctor_name,create_name,create_time) values ('" + id + "','" + grjd.archive_no + "','" + grjd.name + "','" + grjd.Cardcode + "', '" + barcode + "', '" + time + "', '" + grjd.doctor_name + "', '" + grjd.create_name + "', '" + ctime + "')";
+            String sql = "insert into physical_examination_record (id,aichive_no,name,id_number,bar_code,check_date,doctor_name,create_name,create_time,upload_status) values ('" + id + "','" + grjd.archive_no + "','" + grjd.name + "','" + grjd.Cardcode + "', '" + barcode + "', '" + time + "', '" + grjd.doctor_name + "', '" + grjd.create_name + "', '" + ctime + "', '" + rt + "')";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
