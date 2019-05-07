@@ -265,6 +265,7 @@
             this.非首次随访添加.TabIndex = 12;
             this.非首次随访添加.Text = "非首次随访添加";
             this.非首次随访添加.UseVisualStyleBackColor = false;
+            this.非首次随访添加.Click += new System.EventHandler(this.非首次随访添加_Click);
             // 
             // 关闭
             // 
