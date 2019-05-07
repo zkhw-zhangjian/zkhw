@@ -399,6 +399,7 @@ namespace zkhwClient.view.PublicHealthView
                 ush.aichive_no = str2;
                 ush.id_number = str3;
                 ush.bar_code = str4;
+                ush.dttv = dttv;
                 ush.Show();
             }
             else if (columnIndex == 8)

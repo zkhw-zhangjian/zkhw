@@ -47,12 +47,12 @@ namespace zkhwClient.view.updateTjResult
                     {
                         this.textBox5.ForeColor = Color.Blue;
                     }
-                    //double heighttmin = double.Parse(drheight[0]["threshold_min"].ToString());
-                    //double heighttmax = double.Parse(drheight[0]["threshold_max"].ToString());
-                    //if (heightdouble > heighttmax || heightdouble < heighttmin)
-                    //{
-                    //    this.textBox5.ForeColor = Color.Red;
-                    //}
+                    double heighttmin = double.Parse(drheight[0]["threshold_min"].ToString());
+                    double heighttmax = double.Parse(drheight[0]["threshold_max"].ToString());
+                    if (heightdouble > heighttmax || heightdouble < heighttmin)
+                    {
+                        this.textBox5.ForeColor = Color.Red;
+                    }
                 }
                 this.textBox5.Text = height;
                 string weight = dtbichao.Rows[0]["Weight"].ToString();
@@ -66,12 +66,12 @@ namespace zkhwClient.view.updateTjResult
                     {
                         this.textBox6.ForeColor = Color.Blue;
                     }
-                    //double weighttmin = double.Parse(drweightdouble[0]["threshold_min"].ToString());
-                    //double weighttmax = double.Parse(drweightdouble[0]["threshold_max"].ToString());
-                    //if (weightdouble > weighttmax || weightdouble < weighttmin)
-                    //{
-                    //    this.textBox6.ForeColor = Color.Red;
-                    //}
+                    double weighttmin = double.Parse(drweightdouble[0]["threshold_min"].ToString());
+                    double weighttmax = double.Parse(drweightdouble[0]["threshold_max"].ToString());
+                    if (weightdouble > weighttmax || weightdouble < weighttmin)
+                    {
+                        this.textBox6.ForeColor = Color.Red;
+                    }
                 }
                 this.textBox6.Text = weight;
                 this.textBox7.Text = dtbichao.Rows[0]["BMI"].ToString();

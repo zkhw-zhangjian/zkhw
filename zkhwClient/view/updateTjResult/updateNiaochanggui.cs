@@ -52,12 +52,12 @@ namespace zkhwClient.view.updateTjResult
                     {
                         this.textBox10.ForeColor = Color.Blue;
                     }
-                    //double phtmin = double.Parse(drsg[0]["threshold_min"].ToString());
-                    //double phtmax = double.Parse(drsg[0]["threshold_max"].ToString());
-                    //if (phdouble > phtmax || phdouble < phtmin)
-                    //{
-                    //    this.textBox10.ForeColor = Color.Red;
-                    //}
+                    double phtmin = double.Parse(drsg[0]["threshold_min"].ToString());
+                    double phtmax = double.Parse(drsg[0]["threshold_max"].ToString());
+                    if (phdouble > phtmax || phdouble < phtmin)
+                    {
+                        this.textBox10.ForeColor = Color.Red;
+                    }
                 }
                 this.textBox10.Text = ph;
                 this.textBox13.Text = dtbichao.Rows[0]["BLD"].ToString();
@@ -72,12 +72,12 @@ namespace zkhwClient.view.updateTjResult
                     {
                         this.textBox12.ForeColor = Color.Blue;
                     }
-                    //double sgtmin = double.Parse(drsg[0]["threshold_min"].ToString());
-                    //double sgtmax = double.Parse(drsg[0]["threshold_max"].ToString());
-                    //if (sgdouble > sgtmax || sgdouble < sgtmin)
-                    //{
-                    //    this.textBox12.ForeColor = Color.Red;
-                    //}
+                    double sgtmin = double.Parse(drsg[0]["threshold_min"].ToString());
+                    double sgtmax = double.Parse(drsg[0]["threshold_max"].ToString());
+                    if (sgdouble > sgtmax || sgdouble < sgtmin)
+                    {
+                        this.textBox12.ForeColor = Color.Red;
+                    }
                 }
                 this.textBox12.Text = sg;
                 this.textBox15.Text = dtbichao.Rows[0]["KET"].ToString();

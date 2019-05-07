@@ -19,6 +19,7 @@ namespace zkhwClient.view.updateTjResult
         public string bar_code = "";
         bool flag = false;
         tjcheckDao tjdao = new tjcheckDao();
+        public DataTable dttv = null;
         public updateShenghua()
         {
             InitializeComponent();
@@ -35,17 +36,198 @@ namespace zkhwClient.view.updateTjResult
             if (dtbichao != null && dtbichao.Rows.Count > 0)
             {
                 flag = true;
-                this.textBox5.Text = dtbichao.Rows[0]["ALT"].ToString();
-                this.textBox6.Text = dtbichao.Rows[0]["AST"].ToString();
-                this.textBox8.Text = dtbichao.Rows[0]["TBIL"].ToString();
+                string alt = dtbichao.Rows[0]["ALT"].ToString();
+                if (alt != "" && alt != "*")
+                {
+                    double altdouble = double.Parse(alt);
+                    DataRow[] dralt = dttv.Select("type='ALT'");
+                    double altwmin = double.Parse(dralt[0]["warning_min"].ToString());
+                    double altwmax = double.Parse(dralt[0]["warning_max"].ToString());
+                    if (altdouble > altwmax || altdouble < altwmin)
+                    {
+                        this.textBox5.ForeColor = Color.Blue;
+                    }
+                    double alttmin = double.Parse(dralt[0]["threshold_min"].ToString());
+                    double alttmax = double.Parse(dralt[0]["threshold_max"].ToString());
+                    if (altdouble > alttmax || altdouble < alttmin)
+                    {
+                        this.textBox5.ForeColor = Color.Red;
+                    }
+                }
+                this.textBox5.Text = alt;
+                string ast = dtbichao.Rows[0]["AST"].ToString();
+                if (ast != "" && ast != "*")
+                {
+                    double astdouble = double.Parse(ast);
+                    DataRow[] drast = dttv.Select("type='AST'");
+                    double astwmin = double.Parse(drast[0]["warning_min"].ToString());
+                    double astwmax = double.Parse(drast[0]["warning_max"].ToString());
+                    if (astdouble > astwmax || astdouble < astwmin)
+                    {
+                        this.textBox6.ForeColor = Color.Blue;
+                    }
+                    double asttmin = double.Parse(drast[0]["threshold_min"].ToString());
+                    double asttmax = double.Parse(drast[0]["threshold_max"].ToString());
+                    if (astdouble > asttmax || astdouble < asttmin)
+                    {
+                        this.textBox6.ForeColor = Color.Red;
+                    }
+                }
+                this.textBox6.Text = ast;
+                string tbil = dtbichao.Rows[0]["TBIL"].ToString();
+                if (tbil != "" && tbil != "*")
+                {
+                    double tbildouble = double.Parse(tbil);
+                    DataRow[] drtbil = dttv.Select("type='TBIL'");
+                    double tbilwmin = double.Parse(drtbil[0]["warning_min"].ToString());
+                    double tbilwmax = double.Parse(drtbil[0]["warning_max"].ToString());
+                    if (tbildouble > tbilwmax || tbildouble < tbilwmin)
+                    {
+                        this.textBox8.ForeColor = Color.Blue;
+                    }
+                    double tbiltmin = double.Parse(drtbil[0]["threshold_min"].ToString());
+                    double tbiltmax = double.Parse(drtbil[0]["threshold_max"].ToString());
+                    if (tbildouble > tbiltmax || tbildouble < tbiltmin)
+                    {
+                        this.textBox8.ForeColor = Color.Red;
+                    }
+                }
+                this.textBox8.Text = tbil;
                 this.textBox7.Text = dtbichao.Rows[0]["DBIL"].ToString();
-                this.textBox11.Text = dtbichao.Rows[0]["CREA"].ToString();
-                this.textBox10.Text = dtbichao.Rows[0]["UREA"].ToString();
-                this.textBox13.Text = dtbichao.Rows[0]["GLU"].ToString();
-                this.textBox12.Text = dtbichao.Rows[0]["TG"].ToString();
-                this.textBox15.Text = dtbichao.Rows[0]["CHO"].ToString();
-                this.textBox14.Text = dtbichao.Rows[0]["HDLC"].ToString();
-                this.textBox17.Text = dtbichao.Rows[0]["LDLC"].ToString();
+                string crea = dtbichao.Rows[0]["CREA"].ToString();
+                if (crea != "" && crea != "*")
+                {
+                    double creadouble = double.Parse(crea);
+                    DataRow[] drcrea = dttv.Select("type='CREA'");
+                    double creawmin = double.Parse(drcrea[0]["warning_min"].ToString());
+                    double creawmax = double.Parse(drcrea[0]["warning_max"].ToString());
+                    if (creadouble > creawmax || creadouble < creawmin)
+                    {
+                        this.textBox11.ForeColor = Color.Blue;
+                    }
+                    double creatmin = double.Parse(drcrea[0]["threshold_min"].ToString());
+                    double creatmax = double.Parse(drcrea[0]["threshold_max"].ToString());
+                    if (creadouble > creatmax || creadouble < creatmin)
+                    {
+                        this.textBox11.ForeColor = Color.Red;
+                    }
+                }
+                this.textBox11.Text = crea;
+                string urea = dtbichao.Rows[0]["UREA"].ToString();
+                if (urea != "" && urea != "*")
+                {
+                    double ureadouble = double.Parse(urea);
+                    DataRow[] drurea = dttv.Select("type='UREA'");
+                    double ureawmin = double.Parse(drurea[0]["warning_min"].ToString());
+                    double ureawmax = double.Parse(drurea[0]["warning_max"].ToString());
+                    if (ureadouble > ureawmax || ureadouble < ureawmin)
+                    {
+                        this.textBox10.ForeColor = Color.Blue;
+                    }
+                    double ureatmin = double.Parse(drurea[0]["threshold_min"].ToString());
+                    double ureatmax = double.Parse(drurea[0]["threshold_max"].ToString());
+                    if (ureadouble > ureatmax || ureadouble < ureatmin)
+                    {
+                        this.textBox10.ForeColor = Color.Red;
+                    }
+                }
+                this.textBox10.Text = urea;
+                string glu = dtbichao.Rows[0]["GLU"].ToString();
+                if (glu != "" && glu != "*")
+                {
+                    double gludouble = double.Parse(glu);
+                    DataRow[] drglu = dttv.Select("type='GLU'");
+                    double gluwmin = double.Parse(drglu[0]["warning_min"].ToString());
+                    double gluwmax = double.Parse(drglu[0]["warning_max"].ToString());
+                    if (gludouble > gluwmax || gludouble < gluwmin)
+                    {
+                        this.textBox13.ForeColor = Color.Blue;
+                    }
+                    double glutmin = double.Parse(drglu[0]["threshold_min"].ToString());
+                    double glutmax = double.Parse(drglu[0]["threshold_max"].ToString());
+                    if (gludouble > glutmax || gludouble < glutmin)
+                    {
+                        this.textBox13.ForeColor = Color.Red;
+                    }
+                }
+                this.textBox13.Text = glu;
+                string tg = dtbichao.Rows[0]["TG"].ToString();
+                if (tg != "" && tg != "*")
+                {
+                    double tgdouble = double.Parse(tg);
+                    DataRow[] drtg = dttv.Select("type='TG'");
+                    double tgwmin = double.Parse(drtg[0]["warning_min"].ToString());
+                    double tgwmax = double.Parse(drtg[0]["warning_max"].ToString());
+                    if (tgdouble > tgwmax || tgdouble < tgwmin)
+                    {
+                        this.textBox12.ForeColor = Color.Blue;
+                    }
+                    double tgtmin = double.Parse(drtg[0]["threshold_min"].ToString());
+                    double tgtmax = double.Parse(drtg[0]["threshold_max"].ToString());
+                    if (tgdouble > tgtmax || tgdouble < tgtmin)
+                    {
+                        this.textBox12.ForeColor = Color.Red;
+                    }
+                }
+                this.textBox12.Text = tg;
+                string cho = dtbichao.Rows[0]["CHO"].ToString();
+                if (cho != "" && cho != "*")
+                {
+                    double chodouble = double.Parse(cho);
+                    DataRow[] drcho = dttv.Select("type='CHO'");
+                    double chowmin = double.Parse(drcho[0]["warning_min"].ToString());
+                    double chowmax = double.Parse(drcho[0]["warning_max"].ToString());
+                    if (chodouble > chowmax || chodouble < chowmin)
+                    {
+                        this.textBox15.ForeColor = Color.Blue;
+                    }
+                    double chotmin = double.Parse(drcho[0]["threshold_min"].ToString());
+                    double chotmax = double.Parse(drcho[0]["threshold_max"].ToString());
+                    if (chodouble > chotmax || chodouble < chotmin)
+                    {
+                        this.textBox15.ForeColor = Color.Red;
+                    }
+                }
+                this.textBox15.Text = cho;
+                string hdlc = dtbichao.Rows[0]["HDLC"].ToString();
+                if (hdlc != "" && hdlc != "*")
+                {
+                    double hdlcdouble = double.Parse(hdlc);
+                    DataRow[] drhdlc = dttv.Select("type='HDLC'");
+                    double hdlcwmin = double.Parse(drhdlc[0]["warning_min"].ToString());
+                    double hdlcwmax = double.Parse(drhdlc[0]["warning_max"].ToString());
+                    if (hdlcdouble > hdlcwmax || hdlcdouble < hdlcwmin)
+                    {
+                        this.textBox14.ForeColor = Color.Blue;
+                    }
+                    double hdlctmin = double.Parse(drhdlc[0]["threshold_min"].ToString());
+                    double hdlctmax = double.Parse(drhdlc[0]["threshold_max"].ToString());
+                    if (hdlcdouble > hdlctmax || hdlcdouble < hdlctmin)
+                    {
+                        this.textBox14.ForeColor = Color.Red;
+                    }
+                }
+                this.textBox14.Text = hdlc;
+                string ldlc = dtbichao.Rows[0]["LDLC"].ToString();
+                if (ldlc != "" && ldlc != "*")
+                {
+                    double ldlcdouble = double.Parse(ldlc);
+                    DataRow[] drldlc = dttv.Select("type='LDLC'");
+                    double ldlcwmin = double.Parse(drldlc[0]["warning_min"].ToString());
+                    double ldlcwmax = double.Parse(drldlc[0]["warning_max"].ToString());
+                    if (ldlcdouble > ldlcwmax || ldlcdouble < ldlcwmin)
+                    {
+                        this.textBox17.ForeColor = Color.Blue;
+                    }
+                    double ldlctmin = double.Parse(drldlc[0]["threshold_min"].ToString());
+                    double ldlctmax = double.Parse(drldlc[0]["threshold_max"].ToString());
+                    if (ldlcdouble > ldlctmax || ldlcdouble < ldlctmin)
+                    {
+                        this.textBox17.ForeColor = Color.Red;
+                    }
+                }
+                this.textBox17.Text = ldlc;
+
                 this.textBox16.Text = dtbichao.Rows[0]["ALB"].ToString();
                 this.textBox19.Text = dtbichao.Rows[0]["UA"].ToString();
                 this.textBox18.Text = dtbichao.Rows[0]["HCY"].ToString();

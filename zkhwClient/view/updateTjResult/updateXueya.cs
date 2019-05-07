@@ -47,12 +47,12 @@ namespace zkhwClient.view.updateTjResult
                     {
                         this.textBox5.ForeColor = Color.Blue;
                     }
-                    //double sbptmin = double.Parse(drsbp[0]["threshold_min"].ToString());
-                    //double sbptmax = double.Parse(drsbp[0]["threshold_max"].ToString());
-                    //if (sbpdouble > sbptmax || sbpdouble < sbptmin)
-                    //{
-                    //    this.textBox5.ForeColor = Color.Red;
-                    //}
+                    double sbptmin = double.Parse(drsbp[0]["threshold_min"].ToString());
+                    double sbptmax = double.Parse(drsbp[0]["threshold_max"].ToString());
+                    if (sbpdouble > sbptmax || sbpdouble < sbptmin)
+                    {
+                        this.textBox5.ForeColor = Color.Red;
+                    }
                 }
                 this.textBox5.Text = sbp;
                 string dbp = dtbichao.Rows[0]["DBP"].ToString();
@@ -66,12 +66,12 @@ namespace zkhwClient.view.updateTjResult
                     {
                         this.textBox6.ForeColor = Color.Blue;
                     }
-                    //double dbptmin = double.Parse(drdbp[0]["threshold_min"].ToString());
-                    //double dbptmax = double.Parse(drdbp[0]["threshold_max"].ToString());
-                    //if (dbpdouble > dbptmax || dbpdouble < dbptmin)
-                    //{
-                    //    this.textBox6.ForeColor = Color.Red;
-                    //}
+                    double dbptmin = double.Parse(drdbp[0]["threshold_min"].ToString());
+                    double dbptmax = double.Parse(drdbp[0]["threshold_max"].ToString());
+                    if (dbpdouble > dbptmax || dbpdouble < dbptmin)
+                    {
+                        this.textBox6.ForeColor = Color.Red;
+                    }
                 }
                 this.textBox6.Text = dbp;
                 this.textBox7.Text = dtbichao.Rows[0]["Pulse"].ToString();
