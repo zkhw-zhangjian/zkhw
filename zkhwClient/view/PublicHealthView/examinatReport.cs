@@ -1885,10 +1885,10 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                                 }
                             }
 
-                            string time = jkdata.Rows[j]["test_date"].ToString();
+                            string time = da.Rows[j]["test_date"].ToString();
                             zytz.Add("填表日期年", time?.Split('-')[0]);
                             zytz.Add("填表日期月", time?.Split('-')[1]);
-                            zytz.Add("填表日期日", time?.Split('-')[2]);
+                            zytz.Add("填表日期日", time?.Split('-')[2].Split(' ')[0]);
                             zytz.Add("医生签名", "");
                         }
                     }
