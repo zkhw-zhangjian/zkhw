@@ -96,6 +96,13 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
-
+        //获取阈值信息表数据
+        public DataTable checkThresholdValues()
+        {
+            DataSet ds = new DataSet();
+            string sql = "select class_type,type,warning_min,warning_max,threshold_min,threshold_max from threshold_value a where 1=1";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
     }
 }

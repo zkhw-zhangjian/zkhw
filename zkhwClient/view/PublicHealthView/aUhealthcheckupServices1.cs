@@ -37,6 +37,7 @@ namespace zkhwClient.view.PublicHealthView
             per.name = this.textBox1.Text.Replace(" ", "");
             per.aichive_no = this.textBox2.Text.Replace(" ", "");
             per.bar_code = this.textBox118.Text;
+            per.id_number = this.textBox119.Text;
             per.check_date = this.dateTimePicker1.Value.ToString();
             per.doctor_name = this.textBox51.Text.Replace(" ", "");
             per.id= this.textBox120.Text;
@@ -49,16 +50,18 @@ namespace zkhwClient.view.PublicHealthView
                     CheckBox ck = ctr as CheckBox;
                     if (ck.Checked)
                     {
-                        per.symptom += "," + ck.Text;
+                        per.symptom += "," + ck.Tag.ToString();
                     }
                 }
             }
             if (per.symptom != null && per.symptom != "")
             {
                 per.symptom = per.symptom.Substring(1);
+                if (this.checkBox28.Checked) {
+                    per.symptom_other = this.textBox11.Text;
+                }
             }
-            per.symptom_other = this.textBox11.Text;
-
+            
             per.base_temperature = this.textBox52.Text.Replace(" ", "");
             per.base_heartbeat = this.textBox66.Text.Replace(" ", "");
             per.base_respiratory = this.textBox53.Text.Replace(" ", "");
@@ -259,7 +262,7 @@ namespace zkhwClient.view.PublicHealthView
                 auhc2.textBox95.Text = per.aichive_no;
                 auhc2.textBox96.Text = per.bar_code;
                 auhc2.textBox100.Text = per.id;
-                auhc2.textBox99.Text = this.textBox119.Text;
+                auhc2.textBox99.Text = per.id_number;
                 auhc2.Show();
             }
             else {

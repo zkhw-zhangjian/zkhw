@@ -33,6 +33,7 @@ namespace zkhwClient.view.PublicHealthView
         string xcuncode = null;
         string jmxx = null;
         string str = Application.StartupPath;//项目路径
+        DataTable dttv = new DataTable();
         public examinatProgress()
         {
             InitializeComponent();
@@ -46,6 +47,8 @@ namespace zkhwClient.view.PublicHealthView
             this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源
             this.comboBox1.DisplayMember = "name";//显示给用户的数据集表项
             this.comboBox1.ValueMember = "code";//操作时获取的值 
+
+            dttv=grjddao.checkThresholdValues();//获取阈值信息
             registrationRecordCheck();//体检人数统计
         }
         public void queryExaminatProgress()
@@ -406,6 +409,7 @@ namespace zkhwClient.view.PublicHealthView
                 uxcg.aichive_no = str2;
                 uxcg.id_number = str3;
                 uxcg.bar_code = str4;
+                uxcg.dttv = dttv;
                 uxcg.Show();
             }
             else if (columnIndex == 9)
@@ -416,6 +420,7 @@ namespace zkhwClient.view.PublicHealthView
                 uncg.aichive_no = str2;
                 uncg.id_number = str3;
                 uncg.bar_code = str4;
+                uncg.dttv = dttv;
                 uncg.Show();
             }
             else if (columnIndex == 10)
@@ -426,6 +431,7 @@ namespace zkhwClient.view.PublicHealthView
                 uxy.aichive_no = str2;
                 uxy.id_number = str3;
                 uxy.bar_code = str4;
+                uxy.dttv = dttv;
                 uxy.Show();
             }
             else if (columnIndex == 11)
@@ -436,6 +442,7 @@ namespace zkhwClient.view.PublicHealthView
                 usgtz.aichive_no = str2;
                 usgtz.id_number = str3;
                 usgtz.bar_code = str4;
+                usgtz.dttv = dttv;
                 usgtz.Show();
             }
         }

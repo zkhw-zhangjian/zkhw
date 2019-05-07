@@ -91,6 +91,7 @@
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.panel20 = new System.Windows.Forms.Panel();
+            this.textBox37 = new System.Windows.Forms.TextBox();
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
             this.checkBox33 = new System.Windows.Forms.CheckBox();
             this.checkBox32 = new System.Windows.Forms.CheckBox();
@@ -206,7 +207,6 @@
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.textBox37 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel19.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -1057,6 +1057,14 @@
             this.panel20.Size = new System.Drawing.Size(1142, 30);
             this.panel20.TabIndex = 108;
             // 
+            // textBox37
+            // 
+            this.textBox37.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox37.Location = new System.Drawing.Point(956, -1);
+            this.textBox37.Name = "textBox37";
+            this.textBox37.Size = new System.Drawing.Size(185, 30);
+            this.textBox37.TabIndex = 77;
+            // 
             // dataGridView5
             // 
             this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -1613,8 +1621,8 @@
             this.radioButton41.Name = "radioButton41";
             this.radioButton41.Size = new System.Drawing.Size(101, 24);
             this.radioButton41.TabIndex = 17;
-            this.radioButton41.Tag = "9";
-            this.radioButton41.Text = "9无职业";
+            this.radioButton41.Tag = "8";
+            this.radioButton41.Text = "8无职业";
             this.radioButton41.UseVisualStyleBackColor = true;
             // 
             // radioButton40
@@ -1624,8 +1632,8 @@
             this.radioButton40.Name = "radioButton40";
             this.radioButton40.Size = new System.Drawing.Size(269, 24);
             this.radioButton40.TabIndex = 16;
-            this.radioButton40.Tag = "8";
-            this.radioButton40.Text = "8不便分类的其他从业人员";
+            this.radioButton40.Tag = "7";
+            this.radioButton40.Text = "7不便分类的其他从业人员";
             this.radioButton40.UseVisualStyleBackColor = true;
             // 
             // radioButton39
@@ -1636,8 +1644,8 @@
             this.radioButton39.Size = new System.Drawing.Size(80, 24);
             this.radioButton39.TabIndex = 15;
             this.radioButton39.TabStop = true;
-            this.radioButton39.Tag = "7";
-            this.radioButton39.Text = "7军人";
+            this.radioButton39.Tag = "6";
+            this.radioButton39.Text = "6军人";
             this.radioButton39.UseVisualStyleBackColor = true;
             // 
             // radioButton38
@@ -1647,8 +1655,8 @@
             this.radioButton38.Name = "radioButton38";
             this.radioButton38.Size = new System.Drawing.Size(374, 24);
             this.radioButton38.TabIndex = 14;
-            this.radioButton38.Tag = "6";
-            this.radioButton38.Text = "6生产、运输设备操作人员及有关人员";
+            this.radioButton38.Tag = "5";
+            this.radioButton38.Text = "5生产、运输设备操作人员及有关人员";
             this.radioButton38.UseVisualStyleBackColor = true;
             // 
             // radioButton37
@@ -1658,8 +1666,8 @@
             this.radioButton37.Name = "radioButton37";
             this.radioButton37.Size = new System.Drawing.Size(353, 24);
             this.radioButton37.TabIndex = 13;
-            this.radioButton37.Tag = "5";
-            this.radioButton37.Text = "5农、林、牧、渔、水利业生产人员";
+            this.radioButton37.Tag = "4";
+            this.radioButton37.Text = "4农、林、牧、渔、水利业生产人员";
             this.radioButton37.UseVisualStyleBackColor = true;
             // 
             // radioButton36
@@ -1670,8 +1678,8 @@
             this.radioButton36.Size = new System.Drawing.Size(206, 24);
             this.radioButton36.TabIndex = 12;
             this.radioButton36.TabStop = true;
-            this.radioButton36.Tag = "4";
-            this.radioButton36.Text = "4商业、服务业人员";
+            this.radioButton36.Tag = "3";
+            this.radioButton36.Text = "3商业、服务业人员";
             this.radioButton36.UseVisualStyleBackColor = true;
             // 
             // radioButton35
@@ -1682,8 +1690,8 @@
             this.radioButton35.Size = new System.Drawing.Size(227, 24);
             this.radioButton35.TabIndex = 11;
             this.radioButton35.TabStop = true;
-            this.radioButton35.Tag = "3";
-            this.radioButton35.Text = "3办事人员和有关人员";
+            this.radioButton35.Tag = "2";
+            this.radioButton35.Text = "2办事人员和有关人员";
             this.radioButton35.UseVisualStyleBackColor = true;
             // 
             // radioButton34
@@ -1694,8 +1702,8 @@
             this.radioButton34.Size = new System.Drawing.Size(164, 24);
             this.radioButton34.TabIndex = 10;
             this.radioButton34.TabStop = true;
-            this.radioButton34.Tag = "2";
-            this.radioButton34.Text = "2专业技术人员";
+            this.radioButton34.Tag = "1";
+            this.radioButton34.Text = "1专业技术人员";
             this.radioButton34.UseVisualStyleBackColor = true;
             // 
             // radioButton33
@@ -1707,8 +1715,8 @@
             this.radioButton33.Size = new System.Drawing.Size(458, 24);
             this.radioButton33.TabIndex = 9;
             this.radioButton33.TabStop = true;
-            this.radioButton33.Tag = "1";
-            this.radioButton33.Text = "1国家机关、党群组织、企业、事业单位负责人";
+            this.radioButton33.Tag = "0";
+            this.radioButton33.Text = "0国家机关、党群组织、企业、事业单位负责人";
             this.radioButton33.UseVisualStyleBackColor = true;
             // 
             // textBox25
@@ -2403,14 +2411,6 @@
             this.button4.Text = "保存";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // textBox37
-            // 
-            this.textBox37.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox37.Location = new System.Drawing.Point(956, -1);
-            this.textBox37.Name = "textBox37";
-            this.textBox37.Size = new System.Drawing.Size(185, 30);
-            this.textBox37.TabIndex = 77;
             // 
             // aUPersonalBasicInfo
             // 

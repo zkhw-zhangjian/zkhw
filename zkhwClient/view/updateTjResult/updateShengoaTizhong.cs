@@ -19,6 +19,7 @@ namespace zkhwClient.view.updateTjResult
         public string bar_code = "";
         bool flag = false;
         tjcheckDao tjdao = new tjcheckDao();
+        public DataTable dttv = null;
         public updateShengoaTizhong()
         {
             InitializeComponent();
@@ -35,8 +36,44 @@ namespace zkhwClient.view.updateTjResult
             if (dtbichao != null && dtbichao.Rows.Count > 0)
             {
                 flag = true;
-                this.textBox5.Text = dtbichao.Rows[0]["Height"].ToString();
-                this.textBox6.Text = dtbichao.Rows[0]["Weight"].ToString();
+                string height = dtbichao.Rows[0]["Height"].ToString();
+                if (height != "")
+                {
+                    double heightdouble = double.Parse(height);
+                    DataRow[] drheight = dttv.Select("type='Height'");
+                    double heightwmin = double.Parse(drheight[0]["warning_min"].ToString());
+                    double heightwmax = double.Parse(drheight[0]["warning_max"].ToString());
+                    if (heightdouble > heightwmax || heightdouble < heightwmin)
+                    {
+                        this.textBox5.ForeColor = Color.Blue;
+                    }
+                    //double heighttmin = double.Parse(drheight[0]["threshold_min"].ToString());
+                    //double heighttmax = double.Parse(drheight[0]["threshold_max"].ToString());
+                    //if (heightdouble > heighttmax || heightdouble < heighttmin)
+                    //{
+                    //    this.textBox5.ForeColor = Color.Red;
+                    //}
+                }
+                this.textBox5.Text = height;
+                string weight = dtbichao.Rows[0]["Weight"].ToString();
+                if (weight != "")
+                {
+                    double weightdouble = double.Parse(weight);
+                    DataRow[] drweightdouble = dttv.Select("type='Weight'");
+                    double weightwmin = double.Parse(drweightdouble[0]["warning_min"].ToString());
+                    double weightwmax = double.Parse(drweightdouble[0]["warning_max"].ToString());
+                    if (weightdouble > weightwmax || weightdouble < weightwmin)
+                    {
+                        this.textBox6.ForeColor = Color.Blue;
+                    }
+                    //double weighttmin = double.Parse(drweightdouble[0]["threshold_min"].ToString());
+                    //double weighttmax = double.Parse(drweightdouble[0]["threshold_max"].ToString());
+                    //if (weightdouble > weighttmax || weightdouble < weighttmin)
+                    //{
+                    //    this.textBox6.ForeColor = Color.Red;
+                    //}
+                }
+                this.textBox6.Text = weight;
                 this.textBox7.Text = dtbichao.Rows[0]["BMI"].ToString();
             }
             else {

@@ -25,29 +25,35 @@ namespace zkhwClient.view.PublicHealthView
             label51.Left = (this.panel1.Width - this.label51.Width) / 2;
             label51.BringToFront();
 
-            DataTable dt = hcdao.queryTake_medicine_record(this.textBox1.Text);
+            DataTable dt = hcdao.queryTake_medicine_record(this.textBox4.Text);
             goodsList = dt.Clone();
-            for (int i = 0; i < dt.Rows.Count; i++)
+            if (dt.Rows.Count > 0)
             {
-                DataRow drtmp = goodsList.NewRow();
-                drtmp["drug_name"] = dt.Rows[i]["drug_name"].ToString();
-                drtmp["drug_usage"] = dt.Rows[i]["drug_usage"].ToString();
-                drtmp["drug_use"] = dt.Rows[i]["drug_use"].ToString();
-                drtmp["drug_time"] = dt.Rows[i]["drug_time"].ToString();
-                drtmp["drug_type"] = dt.Rows[i]["drug_type"].ToString();
-                goodsList.Rows.Add(drtmp);
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    DataRow drtmp = goodsList.NewRow();
+                    drtmp["drug_name"] = dt.Rows[i]["drug_name"].ToString();
+                    drtmp["drug_usage"] = dt.Rows[i]["drug_usage"].ToString();
+                    drtmp["drug_use"] = dt.Rows[i]["drug_use"].ToString();
+                    drtmp["drug_time"] = dt.Rows[i]["drug_time"].ToString();
+                    drtmp["drug_type"] = dt.Rows[i]["drug_type"].ToString();
+                    goodsList.Rows.Add(drtmp);
+                }
             }
             goodsListBind();//加载用药记录清单表
 
-            DataTable dtym = hcdao.queryVaccination_record(this.textBox1.Text);
+            DataTable dtym = hcdao.queryVaccination_record(this.textBox4.Text);
             goodsListym = dtym.Clone();
-            for (int i = 0; i < dtym.Rows.Count; i++)
+            if (dtym.Rows.Count > 0)
             {
-                DataRow drtmp = goodsListym.NewRow();
-                drtmp["vaccination_name"] = dt.Rows[i]["vaccination_name"].ToString();
-                drtmp["vaccination_time"] = dt.Rows[i]["vaccination_time"].ToString();
-                drtmp["vaccination_organ_name"] = dt.Rows[i]["vaccination_organ_name"].ToString();
-                goodsListym.Rows.Add(drtmp);
+                for (int i = 0; i < dtym.Rows.Count; i++)
+                {
+                    DataRow drtmp = goodsListym.NewRow();
+                    drtmp["vaccination_name"] = dtym.Rows[i]["vaccination_name"].ToString();
+                    drtmp["vaccination_time"] = dtym.Rows[i]["vaccination_time"].ToString();
+                    drtmp["vaccination_organ_name"] = dtym.Rows[i]["vaccination_organ_name"].ToString();
+                    goodsListym.Rows.Add(drtmp);
+                }
             }
             goodsListBindym();//加载用药记录清单表
         }
@@ -174,11 +180,14 @@ namespace zkhwClient.view.PublicHealthView
             take_medicine_record tmr = new take_medicine_record();
             if (tmr.ShowDialog() == DialogResult.OK)
             {
-                DataRow[] drr = goodsList.Select("drug_name = '" + tmr.drug_name.ToString() + "'");
-                if (drr.Length > 0)
+                if (goodsList.Rows.Count > 0)
                 {
-                    MessageBox.Show("用药记录已存在！");
-                    return;
+                    DataRow[] drr = goodsList.Select("drug_name = '" + tmr.drug_name.ToString() + "'");
+                    if (drr.Length > 0)
+                    {
+                        MessageBox.Show("用药记录已存在！");
+                        return;
+                    }
                 }
                 DataRow drtmp = goodsList.NewRow();
                 drtmp["drug_name"] = tmr.drug_name;
@@ -206,11 +215,14 @@ namespace zkhwClient.view.PublicHealthView
             vaccination_record vr = new vaccination_record();
             if (vr.ShowDialog() == DialogResult.OK)
             {
-                DataRow[] drr = goodsListym.Select("drug_name = '" + vr.vaccination_name + "'");
-                if (drr.Length > 0)
+                if (goodsListym.Rows.Count > 0)
                 {
-                    MessageBox.Show("疫苗记录已存在！");
-                    return;
+                    DataRow[] drr = goodsListym.Select("vaccination_name = '" + vr.vaccination_name + "'");
+                    if (drr.Length > 0)
+                    {
+                        MessageBox.Show("疫苗记录已存在！");
+                        return;
+                    }
                 }
                 DataRow drtmp = goodsListym.NewRow();
                 drtmp["vaccination_name"] = vr.vaccination_name;

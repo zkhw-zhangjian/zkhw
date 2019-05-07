@@ -35,8 +35,9 @@ namespace zkhwClient.view.PublicHealthView
         private void button4_Click(object sender, EventArgs e)
         {
             bean.physical_examination_recordBean per = new bean.physical_examination_recordBean();
-            per.aichive_no = this.textBox96.Text;
-            per.bar_code = this.textBox95.Text;
+            per.aichive_no = this.textBox95.Text;
+            per.bar_code = this.textBox96.Text;
+            per.id_number = this.textBox99.Text;
             per.id = this.textBox100.Text;
 
             if (this.radioButton55.Checked == true) { per.organ_lips = this.radioButton55.Tag.ToString(); };
@@ -189,16 +190,36 @@ namespace zkhwClient.view.PublicHealthView
                 per.examination_anus_other = this.textBox28.Text;
             };
 
-            if (this.radioButton34.Checked == true) { per.examination_breast = this.radioButton34.Tag.ToString(); };
-            if (this.radioButton35.Checked == true) { per.examination_breast = this.radioButton35.Tag.ToString(); };
-            if (this.radioButton33.Checked == true) { per.examination_breast = this.radioButton33.Tag.ToString(); };
-            if (this.radioButton32.Checked == true) { per.examination_breast = this.radioButton32.Tag.ToString(); };
-            if (this.radioButton31.Checked == true)
+            //if (this.radioButton34.Checked == true) { per.examination_breast = this.radioButton34.Tag.ToString(); };
+            //if (this.radioButton35.Checked == true) { per.examination_breast = this.radioButton35.Tag.ToString(); };
+            //if (this.radioButton33.Checked == true) { per.examination_breast = this.radioButton33.Tag.ToString(); };
+            //if (this.radioButton32.Checked == true) { per.examination_breast = this.radioButton32.Tag.ToString(); };
+            //if (this.radioButton31.Checked == true)
+            //{
+            //    per.examination_breast = this.radioButton31.Tag.ToString();
+            //    per.examination_breast_other = this.textBox30.Text;
+            //};
+            foreach (Control ctr in this.panel10.Controls)
             {
-                per.examination_breast = this.radioButton31.Tag.ToString();
-                per.examination_breast_other = this.textBox30.Text;
-            };
-
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.examination_breast += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.examination_breast != null && per.examination_breast != "")
+            {
+                per.examination_breast = per.examination_breast.Substring(1);
+                if (this.checkBox9.Checked) {
+                    per.examination_breast_other = this.textBox30.Text;
+                }
+            }
+            
             if (this.radioButton38.Checked == true) { per.examination_woman_vulva = this.radioButton38.Tag.ToString(); };
             if (this.radioButton39.Checked == true)
             {
@@ -262,7 +283,7 @@ namespace zkhwClient.view.PublicHealthView
                 auhc3.textBox106.Text = per.aichive_no;
                 auhc3.textBox105.Text = per.bar_code;
                 auhc3.textBox108.Text = per.id;
-                auhc3.textBox107.Text = this.textBox99.Text;
+                auhc3.textBox107.Text = per.id_number;
                 auhc3.Show();
             }
             else

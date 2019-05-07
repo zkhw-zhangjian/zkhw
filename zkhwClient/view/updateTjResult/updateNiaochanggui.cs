@@ -19,6 +19,7 @@ namespace zkhwClient.view.updateTjResult
         public string bar_code = "";
         bool flag = false;
         tjcheckDao tjdao = new tjcheckDao();
+        public DataTable dttv = null;
         public updateNiaochanggui()
         {
             InitializeComponent();
@@ -40,9 +41,45 @@ namespace zkhwClient.view.updateTjResult
                 this.textBox8.Text = dtbichao.Rows[0]["NIT"].ToString();
                 this.textBox7.Text = dtbichao.Rows[0]["URO"].ToString();
                 this.textBox11.Text = dtbichao.Rows[0]["PRO"].ToString();
-                this.textBox10.Text = dtbichao.Rows[0]["PH"].ToString();
+                string ph = dtbichao.Rows[0]["PH"].ToString();
+                if (ph != "")
+                {
+                    double phdouble = double.Parse(ph);
+                    DataRow[] drsg = dttv.Select("type='PH'");
+                    double phwmin = double.Parse(drsg[0]["warning_min"].ToString());
+                    double phwmax = double.Parse(drsg[0]["warning_max"].ToString());
+                    if (phdouble > phwmax || phdouble < phwmin)
+                    {
+                        this.textBox10.ForeColor = Color.Blue;
+                    }
+                    //double phtmin = double.Parse(drsg[0]["threshold_min"].ToString());
+                    //double phtmax = double.Parse(drsg[0]["threshold_max"].ToString());
+                    //if (phdouble > phtmax || phdouble < phtmin)
+                    //{
+                    //    this.textBox10.ForeColor = Color.Red;
+                    //}
+                }
+                this.textBox10.Text = ph;
                 this.textBox13.Text = dtbichao.Rows[0]["BLD"].ToString();
-                this.textBox12.Text = dtbichao.Rows[0]["SG"].ToString();
+                string sg=dtbichao.Rows[0]["SG"].ToString();
+                if (sg != "")
+                {
+                    double sgdouble = double.Parse(sg);
+                    DataRow[] drsg = dttv.Select("type='SG'");
+                    double sgwmin = double.Parse(drsg[0]["warning_min"].ToString());
+                    double sgwmax = double.Parse(drsg[0]["warning_max"].ToString());
+                    if (sgdouble > sgwmax || sgdouble < sgwmin)
+                    {
+                        this.textBox12.ForeColor = Color.Blue;
+                    }
+                    //double sgtmin = double.Parse(drsg[0]["threshold_min"].ToString());
+                    //double sgtmax = double.Parse(drsg[0]["threshold_max"].ToString());
+                    //if (sgdouble > sgtmax || sgdouble < sgtmin)
+                    //{
+                    //    this.textBox12.ForeColor = Color.Red;
+                    //}
+                }
+                this.textBox12.Text = sg;
                 this.textBox15.Text = dtbichao.Rows[0]["KET"].ToString();
                 this.textBox14.Text = dtbichao.Rows[0]["BIL"].ToString();
                 this.textBox17.Text = dtbichao.Rows[0]["GLU"].ToString();

@@ -41,6 +41,7 @@ namespace zkhwClient
         string shenghuapath= "";
         string xuechangguipath = "";
         string shlasttime = "";
+        string xcglasttime = "";
         public frmMain()
         {
             InitializeComponent();
@@ -126,23 +127,23 @@ namespace zkhwClient
             }
             //socketTcp();
             //http
-            proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
-            proHttp.StartInfo.CreateNoWindow = true;
-            proHttp.StartInfo.UseShellExecute = false;
-            proHttp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            proHttp.StartInfo.ErrorDialog = false;
-            proHttp.StartInfo.UseShellExecute = false;
-            proHttp.Start();
+            //proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
+            //proHttp.StartInfo.CreateNoWindow = true;
+            //proHttp.StartInfo.UseShellExecute = false;
+            //proHttp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            //proHttp.StartInfo.ErrorDialog = false;
+            //proHttp.StartInfo.UseShellExecute = false;
+            //proHttp.Start();
             //AsNetWork  B超
-            proAsNet.StartInfo.FileName = Application.StartupPath + "\\AsNetWork\\ASNetWks.exe";
-            proAsNet.StartInfo.WorkingDirectory = Application.StartupPath + "\\AsNetWork";
-            proAsNet.StartInfo.CreateNoWindow = true;
-            proAsNet.StartInfo.ErrorDialog = false;
-            proAsNet.StartInfo.UseShellExecute = true;
-            proAsNet.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            proAsNet.Start();
-            Thread.Sleep(230);
-            IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
+            //proAsNet.StartInfo.FileName = Application.StartupPath + "\\AsNetWork\\ASNetWks.exe";
+            //proAsNet.StartInfo.WorkingDirectory = Application.StartupPath + "\\AsNetWork";
+            //proAsNet.StartInfo.CreateNoWindow = true;
+            //proAsNet.StartInfo.ErrorDialog = false;
+            //proAsNet.StartInfo.UseShellExecute = true;
+            //proAsNet.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            //proAsNet.Start();
+            //Thread.Sleep(230);
+            //IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
             //ftp                 
             //proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.05\\ftpservice.exe";
             //proFtp.StartInfo.CreateNoWindow = true;
@@ -859,10 +860,12 @@ namespace zkhwClient
             xmlDoc.Load(path);
             node = xmlDoc.SelectSingleNode("config/shenghuaPath");
             shenghuapath = node.InnerText;
-            //node = xmlDoc.SelectSingleNode("config/xuechangguiPath");
-            //xuechangguipath = node.InnerText;
+            node = xmlDoc.SelectSingleNode("config/xuechangguiPath");
+            xuechangguipath = node.InnerText;
             node = xmlDoc.SelectSingleNode("config/shlasttime");
             shlasttime = node.InnerText;
+            node = xmlDoc.SelectSingleNode("config/xcglasttime");
+            xcglasttime = node.InnerText;
 
             Thread demoThread = new Thread(new ThreadStart(shAndxcg));
             demoThread.IsBackground = true;
@@ -880,7 +883,7 @@ namespace zkhwClient
                 bool bl = shenghuapath.IndexOf("Lis_DB.mdb") > -1 ? true : false;
                 if (bl == false) { MessageBox.Show("生化中间库地址不正确，请检查是否设置地址！"); return; }
 
-                string sql1 = "select sample_id,patient_id,send_time from LisOutput where send_time > cdate('" + shlasttime + "')";
+                string sql1 = "select sample_id,patient_id,send_time from LisOutput where send_time > cdate('" + shlasttime + "') order by send_time asc";
                 DataTable arr_dt1 = getShenghua(sql1).Tables[0];
                 if (arr_dt1.Rows.Count > 0)
                 {
@@ -928,81 +931,102 @@ namespace zkhwClient
                                 }
                             }
                             bool istrue= tjdao.insertShenghuaInfo(sh);
-                            if (istrue) {
-                                tjdao.updateTJbgdcShenghua(sh.aichive_no,sh.bar_code,1);
-                                tjdao.updatePEShInfo(sh.aichive_no, sh.bar_code, sh.CHO, sh.TG, sh.LDL_C,sh.HDL_C);
+                            if (istrue)
+                            {
+                                tjdao.updateTJbgdcShenghua(sh.aichive_no, sh.bar_code, 1);
+                                tjdao.updatePEShInfo(sh.aichive_no, sh.bar_code, sh.CHO, sh.TG, sh.LDL_C, sh.HDL_C);
                                 xmlDoc.Load(path);
                                 XmlNode node;
                                 node = xmlDoc.SelectSingleNode("config/shlasttime");
                                 node.InnerText = sh.createTime;
                                 xmlDoc.Save(path);
                             }
-                        }
-                       
+                        }                  
                     }
                 }
             }
-            //if (xuechangguipath == "" || !File.Exists(shenghuapath))
-            //{
-            //    MessageBox.Show("未获取到血球中间库地址，请检查是否设置地址！");
-            //    return;
-            //}
-            //else
-            //{
-            //    bool bl = xuechangguipath.IndexOf("Lis_DB.mdb") > -1 ? true : false;
-            //    if (bl == false) { MessageBox.Show("血球中间库地址不正确，请检查是否设置地址！"); return; }
-            //    string sql1 = "select lop.patient_id,lop.send_time,lopr.* from LisOutput lop, LisOutputResult lopr where lop.sample_id=lopr.sample_id and lop.sample_id=(select top 1 l.sample_id from LisOutput l order by l.sample_id desc)";
-            //    DataTable arr_dt1 = getXuechanggui(sql1).Tables[0];
-            //    if (arr_dt1.Rows.Count > 0)
-            //    {
-            //        xuechangguiBean xcg = new xuechangguiBean();
-            //        xcg.bar_code = arr_dt1.Rows[0]["patient_id"].ToString();
-            //        DataTable dtjkinfo = jkdao.selectjkInfoBybarcode(xcg.bar_code);
-            //        if (dtjkinfo != null && dtjkinfo.Rows.Count > 0)
-            //        {
-            //            xcg.aichive_no = dtjkinfo.Rows[0]["aichive_no"].ToString();
-            //            xcg.id_number = dtjkinfo.Rows[0]["id_number"].ToString();
-            //        }
-            //        else
-            //        {
-            //            return;
-            //        }
-            //        xcg.createTime = Convert.ToDateTime(arr_dt1.Rows[0]["send_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss");
-            //        for (int i = 0; i < arr_dt1.Rows.Count; i++)
-            //        {
-            //            string item = arr_dt1.Rows[i]["item"].ToString();
-            //            switch (item)
-            //            {
-            //                case "HCT": xcg.HCT = arr_dt1.Rows[i]["result"].ToString(); break;
-            //                case "HGB": xcg.HGB = arr_dt1.Rows[i]["result"].ToString(); break;
-            //                case "LYM#": xcg.LYM = arr_dt1.Rows[i]["result"].ToString(); break;
-            //                case "LYM%": xcg.LYMP = arr_dt1.Rows[i]["result"].ToString(); break;
-            //                case "MCH": xcg.MCH = arr_dt1.Rows[i]["result"].ToString(); break;
-            //                case "MCHC": xcg.MCHC = arr_dt1.Rows[i]["result"].ToString(); break;
-            //                case "MCV": xcg.MCV = arr_dt1.Rows[i]["result"].ToString(); break;
-            //                case "MPV": xcg.MPV = arr_dt1.Rows[i]["result"].ToString(); break;
-            //                case "MXD#": xcg.MXD = arr_dt1.Rows[i]["result"].ToString(); break;
-            //                case "MXD%": xcg.MXDP = arr_dt1.Rows[i]["result"].ToString(); break;
-            //                case "NEUT#": xcg.NEUT = arr_dt1.Rows[i]["result"].ToString(); break;
-            //                case "NEUT%": xcg.NEUTP = arr_dt1.Rows[i]["result"].ToString(); break;
-            //                case "PCT": xcg.PCT = arr_dt1.Rows[i]["result"].ToString(); break;
-            //                case "PDW": xcg.PDW = arr_dt1.Rows[i]["result"].ToString(); break;
-            //                case "PLT": xcg.PLT = arr_dt1.Rows[i]["result"].ToString(); break;
-            //                case "RBC": xcg.RBC = arr_dt1.Rows[i]["result"].ToString(); break;
-            //                case "RDW_CV": xcg.RDW_CV = arr_dt1.Rows[i]["result"].ToString(); break;
-            //                case "RDW_SD": xcg.RDW_SD = arr_dt1.Rows[i]["result"].ToString(); break;
-            //                case "WBC": xcg.WBC = arr_dt1.Rows[i]["result"].ToString(); break;
-            //                default: break;
-            //            }
-            //        }
-            //        bool istrue = tjdao.insertXuechangguiInfo(xcg);
-            //        if (istrue)
-            //        {
-            //            tjdao.updateTJbgdcXuechanggui(xcg.aichive_no, xcg.bar_code, 1);
-            //            tjdao.updatePEXcgInfo(xcg.aichive_no, xcg.bar_code, xcg.HGB,xcg.WBC,xcg.PLT);
-            //        }
-            //    }
-            //}
+            if (xuechangguipath == "" || !File.Exists(shenghuapath))
+            {
+                MessageBox.Show("未获取到血球中间库地址，请检查是否设置地址！");
+                return;
+            }
+            else
+            {
+                bool bl = xuechangguipath.IndexOf("Lis_DB.mdb") > -1 ? true : false;
+                if (bl == false) { MessageBox.Show("血球中间库地址不正确，请检查是否设置地址！"); return; }
+                string sql1 = "select sample_id,patient_id,send_time from LisOutput where send_time > cdate('" + xcglasttime + "') order by send_time asc";
+                DataTable arr_dt1 = getXuechanggui(sql1).Tables[0];
+                if (arr_dt1.Rows.Count > 0)
+                {
+                    for (int j = 0; j < arr_dt1.Rows.Count; j++)
+                    {
+                        //MessageBox.Show(arr_dt1.Rows.Count.ToString()+"*"+arr_dt1.Rows[j]["sample_id"].ToString()+"*"+arr_dt1.Rows[j]["patient_id"].ToString());
+                        string sql2 = "select lop.patient_id,lop.send_time,lopr.* from LisOutput lop, LisOutputResult lopr where lop.sample_id=lopr.sample_id and lop.sample_id='" + arr_dt1.Rows[j]["sample_id"].ToString() + "'";
+                        DataTable arr_dt2 = getXuechanggui(sql2).Tables[0];
+                        if (arr_dt2.Rows.Count > 0)
+                        {
+                            xuechangguiBean xcg = new xuechangguiBean();
+                            xcg.bar_code = arr_dt1.Rows[j]["patient_id"].ToString();
+                            DataTable dtjkinfo = jkdao.selectjkInfoBybarcode(xcg.bar_code);
+                            if (dtjkinfo != null && dtjkinfo.Rows.Count > 0)
+                            {
+                                xcg.aichive_no = dtjkinfo.Rows[0]["aichive_no"].ToString();
+                                xcg.id_number = dtjkinfo.Rows[0]["id_number"].ToString();
+                            }
+                            else
+                            {
+                                continue;
+                            }
+
+                            DateTime newtime = Convert.ToDateTime(arr_dt1.Rows[j]["send_time"].ToString());
+                            DateTime oldtime = Convert.ToDateTime(xcglasttime);
+                            if (newtime <= oldtime)
+                            {
+                                continue;
+                            }
+                            xcg.createTime = newtime.ToString("yyyy-MM-dd HH:mm:ss");
+                            for (int i = 0; i < arr_dt2.Rows.Count; i++)
+                            {
+                                string item = arr_dt2.Rows[i]["item"].ToString();
+                                switch (item)
+                                {
+                                    case "HCT": xcg.HCT = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "HGB": xcg.HGB = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "LYM#": xcg.LYM = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "LYM%": xcg.LYMP = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "MCH": xcg.MCH = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "MCHC": xcg.MCHC = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "MCV": xcg.MCV = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "MPV": xcg.MPV = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "MXD#": xcg.MXD = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "MXD%": xcg.MXDP = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "NEUT#": xcg.NEUT = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "NEUT%": xcg.NEUTP = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "PCT": xcg.PCT = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "PDW": xcg.PDW = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "PLT": xcg.PLT = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "RBC": xcg.RBC = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "RDW_CV": xcg.RDW_CV = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "RDW_SD": xcg.RDW_SD = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "WBC": xcg.WBC = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    default: break;
+                                }
+                            }
+                            bool istrue = tjdao.insertXuechangguiInfo(xcg);
+                            if (istrue)
+                            {
+                                xmlDoc.Load(path);
+                                XmlNode node;
+                                node = xmlDoc.SelectSingleNode("config/xcglasttime");
+                                node.InnerText = xcg.createTime;
+                                xmlDoc.Save(path);
+                                tjdao.updateTJbgdcXuechanggui(xcg.aichive_no, xcg.bar_code, 1);
+                                tjdao.updatePEXcgInfo(xcg.aichive_no, xcg.bar_code, xcg.HGB, xcg.WBC, xcg.PLT);
+                            }
+                        }
+                    }
+                }
+            }
         }
         /// <summary>
         /// 生化表

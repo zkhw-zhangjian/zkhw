@@ -142,18 +142,18 @@ namespace zkhwClient.dao
         }
 
         //健康体检表第四页  加载用药记录信息
-        public DataTable queryTake_medicine_record(string archiveno)
+        public DataTable queryTake_medicine_record(string id)
         {
             DataSet ds = new DataSet();
-            string sql = "select medicine_name drug_name,medicine_usage drug_usage,medicine_dosage drug_use,medicine_time drug_time,medicine_compliance drug_type from take_medicine_record where archive_no = '" + archiveno + "'";
+            string sql = "select medicine_name drug_name,medicine_usage drug_usage,medicine_dosage drug_use,medicine_time drug_time,medicine_compliance drug_type from take_medicine_record where exam_id = '" + id + "'";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
         //健康体检表第四页  加载疫苗记录信息
-        public DataTable queryVaccination_record(string archiveno)
+        public DataTable queryVaccination_record(string id)
         {
             DataSet ds = new DataSet();
-            string sql = "select vaccination_name,vaccination_time,vaccination_organ_name from vaccination_record where archive_no = '" + archiveno + "'";
+            string sql = "select vaccination_name,vaccination_time,vaccination_organ_name from vaccination_record where exam_id = '" + id + "'";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -175,7 +175,7 @@ namespace zkhwClient.dao
                     {
                         if (i == 0)
                         {
-                            sql0 += "insert into take_medicine_record(id,exam_id,archive_no,id_number,medicine_name,medicine_usage,medicine_dosage,medicine_time,medicine_compliance,create_name,create_time) values ('" + Result.GetNewId() + "','" + per.bar_code + "','" + per.aichive_no + "','" + per.id_number + "','" + per.bar_code + "','" + goodsList.Rows[i]["drug_name"] + "','" + goodsList.Rows[i]["drug_usage"] + "','" + goodsList.Rows[i]["drug_use"] + "','" + goodsList.Rows[i]["drug_time"] + "','" + goodsList.Rows[i]["drug_type"] + "','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+                            sql0 += "insert into take_medicine_record(id,exam_id,archive_no,id_number,medicine_name,medicine_usage,medicine_dosage,medicine_time,medicine_compliance,create_name,create_time) values ('" + Result.GetNewId() + "','" + per.id + "','" + per.aichive_no + "','" + per.id_number + "','" + goodsList.Rows[i]["drug_name"] + "','" + goodsList.Rows[i]["drug_usage"] + "','" + goodsList.Rows[i]["drug_use"] + "','" + goodsList.Rows[i]["drug_time"] + "','" + goodsList.Rows[i]["drug_type"] + "','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
                         }
                         else
@@ -193,7 +193,7 @@ namespace zkhwClient.dao
                     {
                         if (i == 0)
                         {
-                            sql0 += "insert into vaccination_record(id,exam_id,archive_no,id_number,vaccination_name,vaccination_time,vaccination_organ_name,create_name,create_time) values ('" + Result.GetNewId() + "','" + per.bar_code + "','" + per.aichive_no + "','" + per.id_number + "','" + goodsListym.Rows[i]["vaccination_name"] + "','" + goodsListym.Rows[i]["vaccination_time"] + "','" + goodsListym.Rows[i]["vaccination_organ_name"] + "','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+                            sql0 += "insert into vaccination_record(id,exam_id,archive_no,id_number,vaccination_name,vaccination_time,vaccination_organ_name,create_name,create_time) values ('" + Result.GetNewId() + "','" + per.id + "','" + per.aichive_no + "','" + per.id_number + "','" + goodsListym.Rows[i]["vaccination_name"] + "','" + goodsListym.Rows[i]["vaccination_time"] + "','" + goodsListym.Rows[i]["vaccination_organ_name"] + "','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
                         }
                         else
