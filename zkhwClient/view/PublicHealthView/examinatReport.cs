@@ -1279,6 +1279,14 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             jktj.Add("毒物种类5", jkdata.Rows[j]["lifeway_other_preventive"].ToString());
                             jktj.Add("毒物种类名5", jkdata.Rows[j]["lifeway_hazardous_other"].ToString());
                             jktj.Add("口唇", jkdata.Rows[j]["organ_lips"].ToString());
+                            jktj.Add("缺齿右上", jkdata.Rows[j]["organ_hypodontia_topright"].ToString());
+                            jktj.Add("缺齿右下", jkdata.Rows[j]["organ_hypodontia_bottomright"].ToString());
+                            jktj.Add("缺齿左上", jkdata.Rows[j]["organ_hypodontia_topleft"].ToString());
+                            jktj.Add("缺齿左下", jkdata.Rows[j]["organ_hypodontia_bottomleft"].ToString());
+                            jktj.Add("龋齿右上", jkdata.Rows[j]["organ_caries_topright"].ToString());
+                            jktj.Add("龋齿右下", jkdata.Rows[j]["organ_caries_bottomright"].ToString());
+                            jktj.Add("龋齿左上", jkdata.Rows[j]["organ_caries_topleft"].ToString());
+                            jktj.Add("龋齿左下", jkdata.Rows[j]["organ_caries_bottomleft"].ToString());
                             string cl = jkdata.Rows[j]["organ_tooth"].ToString();
                             if (cl.IndexOf(',') >= 0)
                             {
@@ -1439,23 +1447,27 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             if (zys != null && zys.Tables.Count > 0 && zys.Tables[0].Rows.Count > 0)
                             {
                                 DataTable da = zys.Tables[0];
+                                int a = 0;
+                                int b = 0;
                                 for (int k = 0; k < da.Rows.Count; k++)
                                 {
-                                    if (da.Rows[j]["hospitalized_type"].ToString() == "1")
+                                    if (da.Rows[k]["hospitalized_type"].ToString() == "1")
                                     {
-                                        jktj.Add("住院入时间" + (k + 1), da.Rows[k]["in_hospital_time"].ToString());
-                                        jktj.Add("住院出时间" + (k + 1), da.Rows[k]["leave_hospital_time"].ToString());
-                                        jktj.Add("住院原因" + (k + 1), da.Rows[k]["reason"].ToString());
-                                        jktj.Add("医疗机构" + (k + 1), da.Rows[k]["hospital_organ"].ToString());
-                                        jktj.Add("病案号" + (k + 1), da.Rows[k]["case_code"].ToString());
+                                        a++;
+                                        jktj.Add("住院入时间" + a, da.Rows[k]["in_hospital_time"].ToString());
+                                        jktj.Add("住院出时间" + a, da.Rows[k]["leave_hospital_time"].ToString());
+                                        jktj.Add("住院原因" + a, da.Rows[k]["reason"].ToString());
+                                        jktj.Add("医疗机构" + a, da.Rows[k]["hospital_organ"].ToString());
+                                        jktj.Add("病案号" + a, da.Rows[k]["case_code"].ToString());
                                     }
-                                    else if (jkdata.Rows[j]["hospitalized_type"].ToString() == "2")
+                                    else if (da.Rows[k]["hospitalized_type"].ToString() == "2")
                                     {
-                                        jktj.Add("家庭病床建" + (k + 1), da.Rows[k]["in_hospital_time"].ToString());
-                                        jktj.Add("家庭病床撤" + (k + 1), da.Rows[k]["leave_hospital_time"].ToString());
-                                        jktj.Add("家庭病床原因" + (k + 1), da.Rows[k]["reason"].ToString());
-                                        jktj.Add("家庭病床医疗机构" + (k + 1), da.Rows[k]["hospital_organ"].ToString());
-                                        jktj.Add("家庭病床病案号" + (k + 1), da.Rows[k]["case_code"].ToString());
+                                        b++;
+                                        jktj.Add("家庭病床建" + b, da.Rows[k]["in_hospital_time"].ToString());
+                                        jktj.Add("家庭病床撤" + b, da.Rows[k]["leave_hospital_time"].ToString());
+                                        jktj.Add("家庭病床原因" + b, da.Rows[k]["reason"].ToString());
+                                        jktj.Add("家庭病床医疗机构" + b, da.Rows[k]["hospital_organ"].ToString());
+                                        jktj.Add("家庭病床病案号" + b, da.Rows[k]["case_code"].ToString());
                                     }
                                 }
                             }
