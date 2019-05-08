@@ -2261,9 +2261,12 @@
             this.textBox67.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox67.Location = new System.Drawing.Point(564, 73);
             this.textBox67.Name = "textBox67";
+            this.textBox67.ReadOnly = true;
             this.textBox67.Size = new System.Drawing.Size(91, 30);
             this.textBox67.TabIndex = 53;
+            this.textBox67.Text = "点击计算";
             this.textBox67.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox67.Click += new System.EventHandler(this.textBox67_Click);
             // 
             // textBox68
             // 
@@ -2579,7 +2582,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 123);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1183, 108);
+            this.groupBox3.Size = new System.Drawing.Size(1173, 108);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 

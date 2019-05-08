@@ -296,5 +296,21 @@ namespace zkhwClient.view.PublicHealthView
                 
             }
         }
+
+        private void textBox67_Click(object sender, EventArgs e)
+        {
+            string weight = this.textBox46.Text;
+            string height = this.textBox56.Text;
+
+            if (weight != "" && height != "")
+            {
+                double douWeight = double.Parse(weight);
+                double douHeight = double.Parse(height) / 100;
+                this.textBox67.Text = (douWeight / (douHeight * douHeight)).ToString();
+            }
+            else {
+                MessageBox.Show("身高或体重未填写!");
+            }
+        }
     }
 }
