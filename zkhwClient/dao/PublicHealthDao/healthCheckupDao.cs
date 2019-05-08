@@ -57,7 +57,7 @@ namespace zkhwClient.dao
         public bool addPhysicalExaminationRecord1(physical_examination_recordBean per)
         {
             int ret = 0;
-            String sql = @"update physical_examination_record set symptom='" + per.symptom + "',symptom_other='" + per.symptom_other + "',base_temperature='" 
+            String sql = @"update physical_examination_record set doctor='"+per.doctor_name+"',symptom='" + per.symptom + "',symptom_other='" + per.symptom_other + "',base_temperature='" 
                 +per.base_temperature + "',base_heartbeat='" + per.base_heartbeat + "',base_respiratory='" + per.base_respiratory + "',base_blood_pressure_left_high='" 
                 + per.base_blood_pressure_left_high + "',base_blood_pressure_left_low='" + per.base_blood_pressure_left_low + "',base_blood_pressure_right_high='" 
                 + per.base_blood_pressure_right_high + "',base_blood_pressure_right_low= '" + per.base_blood_pressure_right_low + "',base_height='" 
