@@ -237,5 +237,84 @@ namespace zkhwClient.view.PublicHealthView
             }
             goodsListBind();
         }
+
+        private void checkBox1_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox1.Checked)
+            {
+                this.checkBox2.Checked = false;
+                this.checkBox3.Checked = false;
+                this.checkBox4.Checked = false;
+                this.checkBox5.Checked = false;
+                this.checkBox6.Checked = false;
+                this.checkBox7.Checked = false;
+                this.checkBox8.Checked = false;
+                this.checkBox9.Checked = false;
+            }
+        }
+
+        private void checkBox2_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox2.Checked)
+            {
+                this.checkBox1.Checked = false;
+            }
+        }
+
+        private void checkBox3_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox3.Checked)
+            {
+                this.checkBox1.Checked = false;
+            }
+        }
+
+        private void checkBox4_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox4.Checked)
+            {
+                this.checkBox1.Checked = false;
+            }
+        }
+
+        private void checkBox5_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox5.Checked)
+            {
+                this.checkBox1.Checked = false;
+            }
+        }
+
+        private void checkBox6_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox6.Checked)
+            {
+                this.checkBox1.Checked = false;
+            }
+        }
+
+        private void checkBox7_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox7.Checked)
+            {
+                this.checkBox1.Checked = false;
+            }
+        }
+
+        private void checkBox8_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox8.Checked)
+            {
+                this.checkBox1.Checked = false;
+            }
+        }
+
+        private void checkBox9_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox9.Checked)
+            {
+                this.checkBox1.Checked = false;
+            }
+        }
     }
 }
