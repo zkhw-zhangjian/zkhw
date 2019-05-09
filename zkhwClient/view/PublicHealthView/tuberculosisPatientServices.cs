@@ -183,12 +183,20 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
 
         private void 首次随访添加_Click(object sender, EventArgs e)
         {
-
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            addtuberculosisPatientServices addtcm = new addtuberculosisPatientServices(dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
+            addtcm.StartPosition = FormStartPosition.CenterScreen;
+            addtcm.ShowDialog();
         }
 
         private void 非首次随访添加_Click(object sender, EventArgs e)
         {
-
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            addTotuberculosisPatientServices addtcm = new addTotuberculosisPatientServices(dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
+            addtcm.StartPosition = FormStartPosition.CenterScreen;
+            addtcm.ShowDialog();
         }
     }
 }
