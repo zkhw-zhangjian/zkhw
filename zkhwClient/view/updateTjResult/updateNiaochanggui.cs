@@ -98,10 +98,10 @@ namespace zkhwClient.view.updateTjResult
                     double phdouble = double.Parse(ph);
                     if (phdouble==5.0 || phdouble == 5.5 || phdouble == 6.0 || phdouble == 6.5 || phdouble == 7.0 || phdouble == 7.5 || phdouble == 8.0 || phdouble == 8.5 || phdouble == 9.0)
                     {
-                        if (phdouble > 8.0 || phdouble < 4.6)
+                        if (phdouble > 8.0 && phdouble <= 9.0)
                         {
                             this.textBox10.ForeColor = Color.Blue;
-                        }else
+                        }else if(phdouble > 9.0 || phdouble < 5.0)
                         {
                             this.textBox10.ForeColor = Color.Red;
                         }
@@ -133,7 +133,7 @@ namespace zkhwClient.view.updateTjResult
                         {
                             this.textBox12.ForeColor = Color.Blue;
                         }
-                        else
+                        else if (sgdouble < 1.005 || sgdouble > 1.03)
                         {
                             this.textBox12.ForeColor = Color.Red;
                         }

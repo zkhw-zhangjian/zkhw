@@ -55,7 +55,7 @@ namespace zkhwClient.view.PublicHealthView
                     goodsListym.Rows.Add(drtmp);
                 }
             }
-            goodsListBindym();//加载用药记录清单表
+            goodsListBindym();//加载免疫疫苗记录清单表
         }
         private void button5_Click(object sender, EventArgs e)
         {

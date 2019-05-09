@@ -1492,7 +1492,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                                 {
                                     jktj.Add("预防接种名称" + (k + 1), da.Rows[k]["vaccination_name"].ToString());
                                     jktj.Add("预防接种时间" + (k + 1), da.Rows[k]["vaccination_time"].ToString());
-                                    jktj.Add("预防接种机构" + (k + 1), da.Rows[k]["vaccination_organ"].ToString());
+                                    jktj.Add("预防接种机构" + (k + 1), da.Rows[k]["vaccination_organ_name"].ToString());
                                 }
                             }
                             jktj.Add("健康评价", jkdata.Rows[j]["health_evaluation"].ToString());
