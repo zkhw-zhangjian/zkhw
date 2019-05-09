@@ -15,6 +15,10 @@ namespace zkhwClient.view.PublicHealthView
     public partial class addTotuberculosisPatientServices : Form
     {
         /// <summary>
+        /// 状态(1:新增 0:修改)
+        /// </summary>
+        public int IS { get; set; }
+        /// <summary>
         /// 姓名
         /// </summary>
         public string Names { get; set; }
@@ -32,15 +36,29 @@ namespace zkhwClient.view.PublicHealthView
         /// <param name="names">姓名</param>
         /// <param name="aichive_nos">档案编号</param>
         /// <param name="id_numbers">身份证号</param>
-        public addTotuberculosisPatientServices(string names, string aichive_nos, string id_numbers)
+        public addTotuberculosisPatientServices(int ps, string names, string aichive_nos, string id_numbers)
         {
             Names = names;
             aichive_no = aichive_nos;
             id_number = id_numbers;
+            IS = ps;
             if (GetRecord())
             {
                 MessageBox.Show("没有添加第一次随访记录不可新增！");
                 return;
+            }
+            this.Text = (IS == 1 ? "非首次随访添加" : "非首次随访修改");
+            if (IS == 0)
+            {
+                if (GetUpdate())
+                {
+                    SetData();
+                }
+                else
+                {
+                    MessageBox.Show("没有修改数据！");
+                    return;
+                }
             }
             InitializeComponent();
         }
@@ -99,7 +117,59 @@ namespace zkhwClient.view.PublicHealthView
 };
             return DbHelperMySQL.ExecuteSql(issql, args);
         }
-
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <returns></returns>
+        private int Update()
+        {
+            tuberculosis_follow_record info = GetData();
+            info.name = Names;
+            info.aichive_no = aichive_no;
+            info.Cardcode = id_number;
+            string issql = @"update tuberculosis_follow_record set visit_date=@visit_date,month_order=@month_order,supervisor_type=@supervisor_type,visit_type=@visit_type,symptom=@symptom,symptom_other=@symptom_other,smoke_now=@smoke_now,smoke_next=@smoke_next,drink_now=@drink_now,drink_next=@drink_next,chemotherapy_plan=@chemotherapy_plan,usage=@usage,drugs_type=@drugs_type,miss=@miss,untoward_effect=@untoward_effect,untoward_effect_info=@untoward_effect_info,complication=@complication,complication_info=@complication_info,transfer_treatment_department=@transfer_treatment_department,transfer_treatment_reason=@transfer_treatment_reason,twoweek_visit_result=@twoweek_visit_result,handling_suggestion=@handling_suggestion,next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,stop_date=@stop_date,stop_reason=@stop_reason,must_visit_num=@must_visit_num,@actual_visit_num=@actual_visit_num,must_medicine_num=@must_medicine_num,actual_medicine_num=@actual_medicine_num,medicine_rate=@medicine_rate,estimate_doctor=@estimate_doctor,update_user=@update_user,update_name=@update_name,update_time=@update_time where name=@name and aichive_no=@aichive_no and Cardcode=@Cardcode";
+            MySqlParameter[] args = new MySqlParameter[] {
+                    new MySqlParameter("@name", info.name),
+                    new MySqlParameter("@aichive_no", info.aichive_no),
+                    new MySqlParameter("@Cardcode", info.Cardcode),
+                    new MySqlParameter("@visit_date", info.visit_date),
+                    new MySqlParameter("@month_order", info.month_order),
+                    new MySqlParameter("@supervisor_type", info.supervisor_type),
+                    new MySqlParameter("@visit_type", info.visit_type),
+                    new MySqlParameter("@symptom",info.symptom),
+                    new MySqlParameter("@symptom_other", info.symptom_other),
+                    new MySqlParameter("@smoke_now",info.smoke_now),
+                    new MySqlParameter("@smoke_next", info.smoke_next),
+                    new MySqlParameter("@drink_now",info.drink_now),
+                    new MySqlParameter("@drink_next", info.drink_next),
+                    new MySqlParameter("@chemotherapy_plan", info.chemotherapy_plan),
+                    new MySqlParameter("@usage",info.usage),
+                    new MySqlParameter("@drugs_type", info.drugs_type),
+                    new MySqlParameter("@miss",info.miss),
+                    new MySqlParameter("@untoward_effect", info.untoward_effect),
+                    new MySqlParameter("@untoward_effect_info", info.untoward_effect_info),
+                    new MySqlParameter("@complication", info.complication),
+                    new MySqlParameter("@complication_info",info.complication_info),
+                    new MySqlParameter("@transfer_treatment_department", info.transfer_treatment_department),
+                    new MySqlParameter("@transfer_treatment_reason", info.transfer_treatment_reason),
+                    new MySqlParameter("@twoweek_visit_result", info.twoweek_visit_result),
+                    new MySqlParameter("@handling_suggestion", info.handling_suggestion),
+                    new MySqlParameter("@next_visit_date", info.next_visit_date),
+                    new MySqlParameter("@visit_doctor", info.visit_doctor),
+                    new MySqlParameter("@stop_date", info.stop_date),
+                    new MySqlParameter("@stop_reason", info.stop_reason),
+                    new MySqlParameter("@must_visit_num", info.must_visit_num),
+                    new MySqlParameter("@actual_visit_num", info.actual_visit_num),
+                    new MySqlParameter("@must_medicine_num", info.must_medicine_num),
+                    new MySqlParameter("@actual_medicine_num", info.actual_medicine_num),
+                    new MySqlParameter("@medicine_rate", info.medicine_rate),
+                    new MySqlParameter("@estimate_doctor", info.estimate_doctor),
+                    new MySqlParameter("@update_user", info.update_user),
+                    new MySqlParameter("@update_name", info.update_name),
+                    new MySqlParameter("@update_time", info.update_time),
+                    };
+            return DbHelperMySQL.ExecuteSql(issql, args);
+        }
         /// <summary>
         /// 获取界面数据
         /// </summary>
@@ -107,10 +177,259 @@ namespace zkhwClient.view.PublicHealthView
         private tuberculosis_follow_record GetData()
         {
             tuberculosis_follow_record info = new tuberculosis_follow_record();
+            info.visit_date = 随访时间1.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            info.month_order = 治疗月序1.Text;
+            foreach (Control item in 督导人员1.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.supervisor_type = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            foreach (Control item in 随访方式1.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.visit_type = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            foreach (Control item in 症状及体征1.Controls)
+            {
+                string symptom = string.Empty;
+                if (item is CheckBox)
+                {
+                    if (((CheckBox)item).Checked)
+                    {
+                        symptom += ((CheckBox)item).Tag.ToString() + ",";
+                    }
+                }
+                else if (item is RichTextBox)
+                {
+                    info.symptom_other = ((RichTextBox)item).Text;
+                }
+                info.symptom = symptom.TrimEnd(',');
+            }
+            info.smoke_now = Convert.ToInt32(吸烟a1.Text);
+            info.smoke_next = Convert.ToInt32(吸烟a2.Text);
+            info.drink_now = Convert.ToInt32(饮酒a1.Text);
+            info.drink_next = Convert.ToInt32(饮酒a2.Text);
+            info.chemotherapy_plan = 化疗方案1.Text;
+            foreach (Control item in 用法1.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.usage = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            foreach (Control item in 药品剂型1.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.drugs_type = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            info.miss = 漏服药次数1.Text;
+            foreach (Control item in 药物不良反应1.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.untoward_effect = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+                else if (item is TextBox)
+                {
+                    if (((TextBox)item).Name == "药物不良反应有1")
+                    {
+                        info.untoward_effect_info = ((TextBox)item).Text.ToString();
+                    }
 
+                }
+            }
+            info.transfer_treatment_department = 转诊科别1.Text;
+            info.transfer_treatment_reason = 转诊原因1.Text;
+            info.twoweek_visit_result = 转诊结果1.Text;
+            info.handling_suggestion = 处理意见1.Text;
+            info.next_visit_date = 下次随访时间1.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            info.visit_doctor = 随访医生签名1.Text;
+            foreach (Control item in 停止治疗原因1.Controls)
+            {
+                string symptom = string.Empty;
+                if (item is CheckBox)
+                {
+                    if (((CheckBox)item).Checked)
+                    {
+                        symptom += ((CheckBox)item).Tag.ToString() + ",";
+                    }
+                }
+                info.stop_reason = symptom.TrimEnd(',');
+            }
+            info.stop_date = 出现停止治疗时间1.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            info.must_visit_num = 应访视患者次数1.Text;
+            info.actual_visit_num = 实际访视次数1.Text;
+            info.must_medicine_num = 应服药次数1.Text;
+            info.actual_medicine_num = 实际服药次数1.Text;
+            info.medicine_rate = 服药率1.Text;
             return info;
         }
 
+        /// <summary>
+        /// 界面赋值
+        /// </summary>
+        private void SetData()
+        {
+            string sql = $@"select * from tuberculosis_follow_record where name='{Names}' and aichive_no='{aichive_no}' and Cardcode='{id_number}' order by create_time desc LIMIT 1";
+            DataSet jb = DbHelperMySQL.Query(sql);
+            if (jb != null && jb.Tables.Count > 0 && jb.Tables[0].Rows.Count > 0)
+            {
+                List<tuberculosis_follow_record> ts = Result.ToDataList<tuberculosis_follow_record>(jb.Tables[0]);
+                foreach (var dt in ts)
+                {
+                    随访时间1.Value = Convert.ToDateTime(dt.visit_date);
+                    治疗月序1.Text = dt.month_order;
+                    foreach (Control item in 督导人员1.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.supervisor_type)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 随访方式1.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.visit_type)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 症状及体征1.Controls)
+                    {
+                        if (item is CheckBox)
+                        {
+                            if (dt.symptom.IndexOf(",") >= 0)
+                            {
+                                string[] sys = dt.symptom.Split(',');
+                                if (item is CheckBox)
+                                {
+                                    if (sys.Contains(((CheckBox)item).Tag.ToString()))
+                                    {
+                                        ((CheckBox)item).Checked = true;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (((CheckBox)item).Tag.ToString() == dt.symptom)
+                                {
+                                    ((CheckBox)item).Checked = true;
+                                }
+                            }
+                        }
+                        else if (item is RichTextBox)
+                        {
+                            ((RichTextBox)item).Text = dt.symptom_other;
+                        }
+                    }
+                    吸烟a1.Text = dt.smoke_now.ToString();
+                    吸烟a2.Text = dt.smoke_next.ToString();
+                    饮酒a1.Text = dt.drink_now.ToString();
+                    饮酒a2.Text = dt.drink_next.ToString();
+                    化疗方案1.Text = dt.chemotherapy_plan;
+                    foreach (Control item in 用法1.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.usage)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 药品剂型1.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.drugs_type)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    漏服药次数1.Text = dt.miss;
+                    foreach (Control item in 药物不良反应1.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.untoward_effect)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                        else if (item is TextBox)
+                        {
+                            if (((TextBox)item).Name == "药物不良反应有1")
+                            {
+                                ((TextBox)item).Text = dt.untoward_effect_info;
+                            }
+                        }
+                    }
+                    转诊科别1.Text = dt.transfer_treatment_department;
+                    转诊原因1.Text = dt.transfer_treatment_reason;
+                    转诊结果1.Text = dt.twoweek_visit_result;
+                    处理意见1.Text = dt.handling_suggestion;
+                    下次随访时间1.Value = Convert.ToDateTime(dt.next_visit_date);
+                    随访医生签名1.Text = dt.visit_doctor;
+                    foreach (Control item in 停止治疗原因1.Controls)
+                    {
+                        if (item is CheckBox)
+                        {
+                            if (dt.stop_reason.IndexOf(",") >= 0)
+                            {
+                                string[] sys = dt.stop_reason.Split(',');
+                                if (item is CheckBox)
+                                {
+                                    if (sys.Contains(((CheckBox)item).Tag.ToString()))
+                                    {
+                                        ((CheckBox)item).Checked = true;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (((CheckBox)item).Tag.ToString() == dt.symptom)
+                                {
+                                    ((CheckBox)item).Checked = true;
+                                }
+                            }
+                        }
+                    }
+                    出现停止治疗时间1.Value = Convert.ToDateTime(dt.stop_date);
+                    应访视患者次数1.Text = dt.must_visit_num;
+                    实际访视次数1.Text = dt.actual_visit_num;
+                    应服药次数1.Text = dt.must_medicine_num;
+                    实际服药次数1.Text = dt.actual_medicine_num;
+                    服药率1.Text = dt.medicine_rate;
+                }
+            }
+        }
         /// <summary>
         /// 判断是否有第一次随访记录
         /// </summary>
@@ -126,6 +445,38 @@ namespace zkhwClient.view.PublicHealthView
             {
                 return true;
             }
+        }
+        /// <summary>
+        /// 判断是否有修改数据
+        /// </summary>
+        /// <returns></returns>
+        private bool GetUpdate()
+        {
+            DataSet data = DbHelperMySQL.Query($@"select * from tuberculosis_follow_record where name='{Names}' and aichive_no='{aichive_no}' and Cardcode='{id_number}'");
+            if (data != null && data.Tables[0] != null && data.Tables[0].Rows.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private void 确定_Click(object sender, EventArgs e)
+        {
+            if ((IS == 1 ? Insert() : Update()) > 0)
+            {
+                MessageBox.Show("成功！");
+            }
+            else
+            {
+                MessageBox.Show("失败！");
+            }
+        }
+
+        private void 取消_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
     /// <summary>
@@ -192,7 +543,7 @@ namespace zkhwClient.view.PublicHealthView
         /// <summary>
         /// 化疗方案
         /// </summary>
-        public int chemotherapy_plan { get; set; }
+        public string chemotherapy_plan { get; set; }
         /// <summary>
         /// 用法
         /// </summary>

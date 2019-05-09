@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.取消 = new System.Windows.Forms.Button();
-            this.确定 = new System.Windows.Forms.Button();
             this.to4 = new System.Windows.Forms.GroupBox();
             this.全程管理情况4 = new System.Windows.Forms.GroupBox();
             this.label85 = new System.Windows.Forms.Label();
@@ -67,7 +65,7 @@
             this.转诊科别4 = new System.Windows.Forms.TextBox();
             this.label98 = new System.Windows.Forms.Label();
             this.药物不良反应4 = new System.Windows.Forms.GroupBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.药物不良反应有4 = new System.Windows.Forms.TextBox();
             this.radioButton46 = new System.Windows.Forms.RadioButton();
             this.radioButton47 = new System.Windows.Forms.RadioButton();
             this.用药4 = new System.Windows.Forms.GroupBox();
@@ -457,37 +455,15 @@
             // groupBox1
             // 
             this.groupBox1.AutoSize = true;
-            this.groupBox1.Controls.Add(this.取消);
-            this.groupBox1.Controls.Add(this.确定);
             this.groupBox1.Controls.Add(this.to4);
             this.groupBox1.Controls.Add(this.to3);
             this.groupBox1.Controls.Add(this.to2);
             this.groupBox1.Controls.Add(this.to1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1180, 1441);
+            this.groupBox1.Size = new System.Drawing.Size(1180, 1395);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            // 
-            // 取消
-            // 
-            this.取消.Location = new System.Drawing.Point(988, 1381);
-            this.取消.Name = "取消";
-            this.取消.Size = new System.Drawing.Size(98, 40);
-            this.取消.TabIndex = 29;
-            this.取消.Text = "取消";
-            this.取消.UseVisualStyleBackColor = true;
-            this.取消.Click += new System.EventHandler(this.取消_Click);
-            // 
-            // 确定
-            // 
-            this.确定.Location = new System.Drawing.Point(869, 1381);
-            this.确定.Name = "确定";
-            this.确定.Size = new System.Drawing.Size(98, 40);
-            this.确定.TabIndex = 28;
-            this.确定.Text = "确定";
-            this.确定.UseVisualStyleBackColor = true;
-            this.确定.Click += new System.EventHandler(this.确定_Click);
             // 
             // to4
             // 
@@ -837,7 +813,7 @@
             // 
             // 药物不良反应4
             // 
-            this.药物不良反应4.Controls.Add(this.textBox11);
+            this.药物不良反应4.Controls.Add(this.药物不良反应有4);
             this.药物不良反应4.Controls.Add(this.radioButton46);
             this.药物不良反应4.Controls.Add(this.radioButton47);
             this.药物不良反应4.Location = new System.Drawing.Point(16, 787);
@@ -847,12 +823,12 @@
             this.药物不良反应4.TabStop = false;
             this.药物不良反应4.Text = "药物不良反应";
             // 
-            // textBox11
+            // 药物不良反应有4
             // 
-            this.textBox11.Location = new System.Drawing.Point(54, 46);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(196, 21);
-            this.textBox11.TabIndex = 8;
+            this.药物不良反应有4.Location = new System.Drawing.Point(54, 46);
+            this.药物不良反应有4.Name = "药物不良反应有4";
+            this.药物不良反应有4.Size = new System.Drawing.Size(196, 21);
+            this.药物不良反应有4.TabIndex = 8;
             // 
             // radioButton46
             // 
@@ -4744,7 +4720,7 @@
         private System.Windows.Forms.TextBox 转诊科别4;
         private System.Windows.Forms.Label label98;
         private System.Windows.Forms.GroupBox 药物不良反应4;
-        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox 药物不良反应有4;
         private System.Windows.Forms.RadioButton radioButton46;
         private System.Windows.Forms.RadioButton radioButton47;
         private System.Windows.Forms.GroupBox 用药4;
@@ -4800,7 +4776,5 @@
         private System.Windows.Forms.Label label111;
         private System.Windows.Forms.DateTimePicker 随访时间4;
         private System.Windows.Forms.Label label112;
-        private System.Windows.Forms.Button 确定;
-        private System.Windows.Forms.Button 取消;
     }
 }

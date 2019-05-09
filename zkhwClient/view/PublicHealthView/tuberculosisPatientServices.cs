@@ -185,7 +185,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             int row = dataGridView1.CurrentRow.Index;
-            addtuberculosisPatientServices addtcm = new addtuberculosisPatientServices(dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
+            addtuberculosisPatientServices addtcm = new addtuberculosisPatientServices(1, dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
             addtcm.StartPosition = FormStartPosition.CenterScreen;
             addtcm.ShowDialog();
         }
@@ -194,9 +194,107 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             int row = dataGridView1.CurrentRow.Index;
-            addTotuberculosisPatientServices addtcm = new addTotuberculosisPatientServices(dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
+            addTotuberculosisPatientServices addtcm = new addTotuberculosisPatientServices(1, dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
             addtcm.StartPosition = FormStartPosition.CenterScreen;
             addtcm.ShowDialog();
+        }
+
+        private void 首次随访修改_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            addtuberculosisPatientServices addtcm = new addtuberculosisPatientServices(0, dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
+            addtcm.StartPosition = FormStartPosition.CenterScreen;
+            addtcm.ShowDialog();
+        }
+
+        private void 非首次随访修改_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            addTotuberculosisPatientServices addtcm = new addTotuberculosisPatientServices(0, dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
+            addtcm.StartPosition = FormStartPosition.CenterScreen;
+            addtcm.ShowDialog();
+        }
+
+        private void 首次随访删除_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            string id = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+
+            DialogResult rr = MessageBox.Show("确认删除？", "确认删除提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+            int tt = (int)rr;
+            if (tt == 1)
+            {//删除用户       
+             // bool istrue = tcmHealthService.deletetcmHealthServices(id);
+                int row = dataGridView1.CurrentRow.Index;
+                string Name = dataGridView1["姓名", row].Value.ToString().Trim();
+                string aichive_no = dataGridView1["编码", row].Value.ToString().Trim();
+                string id_number = dataGridView1["身份证号", row].Value.ToString().Trim();
+                bool istrue = Deletes("tuberculosis_info", Name, aichive_no, id_number);
+                if (istrue)
+                {
+                    //刷新页面
+                    querytcmHealthServices();
+                    MessageBox.Show("删除成功！");
+                }
+                else
+                {
+                    MessageBox.Show("删除失败！");
+                }
+            }
+        }
+
+        private void 非首次随访删除_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            string id = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+
+            DialogResult rr = MessageBox.Show("确认删除？", "确认删除提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+            int tt = (int)rr;
+            if (tt == 1)
+            {//删除用户       
+             // bool istrue = tcmHealthService.deletetcmHealthServices(id);
+                int row = dataGridView1.CurrentRow.Index;
+                string Name = dataGridView1["姓名", row].Value.ToString().Trim();
+                string aichive_no = dataGridView1["编码", row].Value.ToString().Trim();
+                string id_number = dataGridView1["身份证号", row].Value.ToString().Trim();
+                bool istrue = Deletes("tuberculosis_follow_record", Name, aichive_no, id_number);
+                if (istrue)
+                {
+                    //刷新页面
+                    querytcmHealthServices();
+                    MessageBox.Show("删除成功！");
+                }
+                else
+                {
+                    MessageBox.Show("删除失败！");
+                }
+            }
+        }
+
+        private void 非首次随访明细_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            detaTotuberculosisPatientServices addtcm = new detaTotuberculosisPatientServices(dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
+            addtcm.StartPosition = FormStartPosition.CenterScreen;
+            addtcm.ShowDialog();
+        }
+
+        /// <summary>
+        /// 删除数据
+        /// </summary>
+        /// <param name="name">姓名</param>
+        /// <param name="aichive_no">编号</param>
+        /// <param name="id_number">身份证id</param>
+        /// <returns></returns>
+        public bool Deletes(string dataname, string name, string aichive_no, string id_number)
+        {
+            int rt = 0;
+            string sql = $"delete from {dataname} where name='{name}' and aichive_no='{aichive_no}' and Cardcode='{id_number}'";
+            rt = DbHelperMySQL.ExecuteSql(sql);
+            return rt == 0 ? false : true;
         }
     }
 }

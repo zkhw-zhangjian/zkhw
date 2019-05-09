@@ -48,8 +48,11 @@
             this.首次随访添加 = new System.Windows.Forms.Button();
             this.非首次随访添加 = new System.Windows.Forms.Button();
             this.关闭 = new System.Windows.Forms.Button();
-            this.删除 = new System.Windows.Forms.Button();
-            this.修改 = new System.Windows.Forms.Button();
+            this.非首次随访删除 = new System.Windows.Forms.Button();
+            this.首次随访修改 = new System.Windows.Forms.Button();
+            this.非首次随访修改 = new System.Windows.Forms.Button();
+            this.首次随访删除 = new System.Windows.Forms.Button();
+            this.非首次随访明细 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -245,7 +248,7 @@
             this.首次随访添加.BackColor = System.Drawing.Color.SkyBlue;
             this.首次随访添加.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.首次随访添加.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.首次随访添加.Location = new System.Drawing.Point(75, 568);
+            this.首次随访添加.Location = new System.Drawing.Point(170, 552);
             this.首次随访添加.Name = "首次随访添加";
             this.首次随访添加.Size = new System.Drawing.Size(152, 33);
             this.首次随访添加.TabIndex = 11;
@@ -259,7 +262,7 @@
             this.非首次随访添加.BackColor = System.Drawing.Color.SkyBlue;
             this.非首次随访添加.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.非首次随访添加.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.非首次随访添加.Location = new System.Drawing.Point(274, 568);
+            this.非首次随访添加.Location = new System.Drawing.Point(684, 552);
             this.非首次随访添加.Name = "非首次随访添加";
             this.非首次随访添加.Size = new System.Drawing.Size(171, 33);
             this.非首次随访添加.TabIndex = 12;
@@ -273,7 +276,7 @@
             this.关闭.BackColor = System.Drawing.Color.Red;
             this.关闭.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.关闭.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.关闭.Location = new System.Drawing.Point(995, 568);
+            this.关闭.Location = new System.Drawing.Point(818, 644);
             this.关闭.Name = "关闭";
             this.关闭.Size = new System.Drawing.Size(93, 33);
             this.关闭.TabIndex = 15;
@@ -281,40 +284,87 @@
             this.关闭.UseVisualStyleBackColor = false;
             this.关闭.Click += new System.EventHandler(this.关闭_Click);
             // 
-            // 删除
+            // 非首次随访删除
             // 
-            this.删除.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.删除.BackColor = System.Drawing.Color.SkyBlue;
-            this.删除.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.删除.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.删除.Location = new System.Drawing.Point(753, 568);
-            this.删除.Name = "删除";
-            this.删除.Size = new System.Drawing.Size(90, 33);
-            this.删除.TabIndex = 14;
-            this.删除.Text = "删除";
-            this.删除.UseVisualStyleBackColor = false;
+            this.非首次随访删除.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.非首次随访删除.BackColor = System.Drawing.Color.SkyBlue;
+            this.非首次随访删除.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.非首次随访删除.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.非首次随访删除.Location = new System.Drawing.Point(889, 591);
+            this.非首次随访删除.Name = "非首次随访删除";
+            this.非首次随访删除.Size = new System.Drawing.Size(171, 33);
+            this.非首次随访删除.TabIndex = 14;
+            this.非首次随访删除.Text = "非首次随访删除";
+            this.非首次随访删除.UseVisualStyleBackColor = false;
+            this.非首次随访删除.Click += new System.EventHandler(this.非首次随访删除_Click);
             // 
-            // 修改
+            // 首次随访修改
             // 
-            this.修改.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.修改.BackColor = System.Drawing.Color.SkyBlue;
-            this.修改.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.修改.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.修改.Location = new System.Drawing.Point(509, 568);
-            this.修改.Name = "修改";
-            this.修改.Size = new System.Drawing.Size(84, 33);
-            this.修改.TabIndex = 13;
-            this.修改.Text = "修改";
-            this.修改.UseVisualStyleBackColor = false;
+            this.首次随访修改.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.首次随访修改.BackColor = System.Drawing.Color.SkyBlue;
+            this.首次随访修改.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.首次随访修改.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.首次随访修改.Location = new System.Drawing.Point(171, 591);
+            this.首次随访修改.Name = "首次随访修改";
+            this.首次随访修改.Size = new System.Drawing.Size(151, 33);
+            this.首次随访修改.TabIndex = 13;
+            this.首次随访修改.Text = "首次随访修改";
+            this.首次随访修改.UseVisualStyleBackColor = false;
+            this.首次随访修改.Click += new System.EventHandler(this.首次随访修改_Click);
+            // 
+            // 非首次随访修改
+            // 
+            this.非首次随访修改.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.非首次随访修改.BackColor = System.Drawing.Color.SkyBlue;
+            this.非首次随访修改.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.非首次随访修改.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.非首次随访修改.Location = new System.Drawing.Point(684, 591);
+            this.非首次随访修改.Name = "非首次随访修改";
+            this.非首次随访修改.Size = new System.Drawing.Size(171, 33);
+            this.非首次随访修改.TabIndex = 16;
+            this.非首次随访修改.Text = "非首次随访修改";
+            this.非首次随访修改.UseVisualStyleBackColor = false;
+            this.非首次随访修改.Click += new System.EventHandler(this.非首次随访修改_Click);
+            // 
+            // 首次随访删除
+            // 
+            this.首次随访删除.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.首次随访删除.BackColor = System.Drawing.Color.SkyBlue;
+            this.首次随访删除.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.首次随访删除.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.首次随访删除.Location = new System.Drawing.Point(171, 634);
+            this.首次随访删除.Name = "首次随访删除";
+            this.首次随访删除.Size = new System.Drawing.Size(151, 33);
+            this.首次随访删除.TabIndex = 17;
+            this.首次随访删除.Text = "首次随访删除";
+            this.首次随访删除.UseVisualStyleBackColor = false;
+            this.首次随访删除.Click += new System.EventHandler(this.首次随访删除_Click);
+            // 
+            // 非首次随访明细
+            // 
+            this.非首次随访明细.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.非首次随访明细.BackColor = System.Drawing.Color.SkyBlue;
+            this.非首次随访明细.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.非首次随访明细.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.非首次随访明细.Location = new System.Drawing.Point(889, 552);
+            this.非首次随访明细.Name = "非首次随访明细";
+            this.非首次随访明细.Size = new System.Drawing.Size(171, 33);
+            this.非首次随访明细.TabIndex = 18;
+            this.非首次随访明细.Text = "非首次随访明细";
+            this.非首次随访明细.UseVisualStyleBackColor = false;
+            this.非首次随访明细.Click += new System.EventHandler(this.非首次随访明细_Click);
             // 
             // tuberculosisPatientServices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1181, 613);
+            this.ClientSize = new System.Drawing.Size(1181, 679);
+            this.Controls.Add(this.非首次随访明细);
+            this.Controls.Add(this.首次随访删除);
+            this.Controls.Add(this.非首次随访修改);
             this.Controls.Add(this.关闭);
-            this.Controls.Add(this.删除);
-            this.Controls.Add(this.修改);
+            this.Controls.Add(this.非首次随访删除);
+            this.Controls.Add(this.首次随访修改);
             this.Controls.Add(this.非首次随访添加);
             this.Controls.Add(this.首次随访添加);
             this.Controls.Add(this.dataGridView1);
@@ -352,7 +402,10 @@
         private System.Windows.Forms.Button 首次随访添加;
         private System.Windows.Forms.Button 非首次随访添加;
         private System.Windows.Forms.Button 关闭;
-        private System.Windows.Forms.Button 删除;
-        private System.Windows.Forms.Button 修改;
+        private System.Windows.Forms.Button 非首次随访删除;
+        private System.Windows.Forms.Button 首次随访修改;
+        private System.Windows.Forms.Button 非首次随访修改;
+        private System.Windows.Forms.Button 首次随访删除;
+        private System.Windows.Forms.Button 非首次随访明细;
     }
 }
