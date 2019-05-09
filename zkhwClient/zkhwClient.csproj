@@ -285,18 +285,6 @@
     <Compile Include="view\publicRecord\family_record.Designer.cs">
       <DependentUpon>family_record.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\HomeDoctorSigningView\addMember.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="view\HomeDoctorSigningView\addMember.Designer.cs">
-      <DependentUpon>addMember.cs</DependentUpon>
-    </Compile>
-    <Compile Include="view\HomeDoctorSigningView\addTeamMembers.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="view\HomeDoctorSigningView\addTeamMembers.Designer.cs">
-      <DependentUpon>addTeamMembers.cs</DependentUpon>
-    </Compile>
     <Compile Include="view\HomeDoctorSigningView\onSiteSigning.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -702,12 +690,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="view\HomeDoctorSigningView\addMember.resx">
-      <DependentUpon>addMember.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="view\HomeDoctorSigningView\addTeamMembers.resx">
-      <DependentUpon>addTeamMembers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\HomeDoctorSigningView\onSiteSigning.resx">
       <DependentUpon>onSiteSigning.cs</DependentUpon>

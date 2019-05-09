@@ -18,27 +18,20 @@ namespace zkhwClient.view.HomeDoctorSigningView
             ComboBoxBin();
         }
 
-        private void 新建团队_Click(object sender, EventArgs e)
-        {
-            addTeamMembers addTeam = new addTeamMembers();
-            addTeam.StartPosition = FormStartPosition.CenterScreen;
-            addTeam.ShowDialog();
-        }
-
         private void ComboBoxBin()
         {
-            string sql = "select ID,TuanDuiMingCheng from zkhw_qy_tdcy where TuanDuiMingCheng is not null";
+            string sql = "select team_no ID,team_name Name from team_info";
             DataSet datas = DbHelperMySQL.Query(sql);
             if (datas != null && datas.Tables.Count > 0)
             {
-                List<TDMC> ts = Result.ToDataList<TDMC>(datas.Tables[0]);
-                Result.Bind(comboBox1, ts, "TuanDuiMingCheng", "ID", "--请选择--");
+                List<ComboBoxData> ts = Result.ToDataList<ComboBoxData>(datas.Tables[0]);
+                Result.Bind(comboBox1, ts, "Name", "ID", "--请选择--");
             }
         }
 
         private void GroupBoxBin(string fid)
         {
-            
+
             string sql = $"select id,ZhiWei,ZhiWu,XingMing,LianXiFangShi from zkhw_qy_tdcy where FuID='{fid}' ORDER  BY ZhiWei asc";
             DataSet datas = DbHelperMySQL.Query(sql);
             if (datas != null && datas.Tables.Count > 0)
@@ -92,18 +85,7 @@ namespace zkhwClient.view.HomeDoctorSigningView
             }
         }
 
-        private void 新建成员_Click_1(object sender, EventArgs e)
-        {
-            addMember addMember = new addMember();
-            addMember.FID = comboBox1.SelectedValue?.ToString();
-            if (string.IsNullOrWhiteSpace(addMember.FID))
-            {
-                MessageBox.Show("前选择团队！");
-                return;
-            }
-            addMember.StartPosition = FormStartPosition.CenterScreen;
-            addMember.ShowDialog();
-        }
+
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -119,9 +101,5 @@ namespace zkhwClient.view.HomeDoctorSigningView
             }
         }
     }
-    public class TDMC
-    {
-        public string ID { get; set; }
-        public string TuanDuiMingCheng { get; set; }
-    }
+
 }
