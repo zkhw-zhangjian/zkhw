@@ -515,7 +515,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
             {
                 DataTable ge = new DataTable();
                 List<string> list = new List<string>();
-                List<string> ide = new List<string>();
+                List<ComboBoxData> ide = new List<ComboBoxData>();
                 DataSet dataSet = new DataSet();
 
                 foreach (Control ctrl in groupBox4.Controls)
@@ -536,10 +536,13 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
 
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
+                    ComboBoxData combo = new ComboBoxData();
                     if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
                     {
                         string id = dataGridView1["编码", i].Value.ToString();
-                        ide.Add("'" + id + "'");
+                        combo.ID = "'" + id + "'";
+                        combo.Name = dataGridView1["姓名", i].Value.ToString();
+                        ide.Add(combo);
                     }
                 }
                 if (ide.Count < 1)
@@ -547,7 +550,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                     MessageBox.Show("请选择要导出报告的人员!"); return;
                 }
                 string sql = string.Empty;
-                sql = $@"select * from resident_base_info base where base.archive_no in({string.Join(",", ide)})";
+                sql = $@"select * from resident_base_info base where base.archive_no in({string.Join(",", ide.Select(m => m.ID).ToList())})";
                 DataSet datas = DbHelperMySQL.Query(sql);
                 if (datas != null && datas.Tables.Count > 0)
                 {
@@ -581,7 +584,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
             }
         }
 
-        private bool PDF(List<string> list, DataSet dataSet, List<string> ide)
+        private bool PDF(List<string> list, DataSet dataSet, List<ComboBoxData> ide)
         {
             Document doc = null;
             if (list.Count > 1)
@@ -592,7 +595,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                     foreach (var items in list)
                     {
                         Report report = new Report();
-                        DataRow data = dataSet.Tables["个人"].Select($"archive_no={item}")[0];
+                        DataRow data = dataSet.Tables["个人"].Select($"archive_no={item.ID}")[0];
                         report.Name = items;
                         report.Doc = PdfProcessing(items, data);
                         reports.Add(report);
@@ -611,7 +614,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                                 re.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
                             }
                         }
-                        string urls = @str + $"/up/result/{item}.pdf";
+                        string urls = @str + $"/up/result/{item.Name + item.ID}.pdf";
                         DeteleFile(urls);
                         re.Doc.Save(urls, SaveFormat.Pdf);
                     }
@@ -625,7 +628,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                                 re.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
                             }
                         }
-                        string urls = @str + $"/up/result/{item}.pdf";
+                        string urls = @str + $"/up/result/{item.Name + item.ID}.pdf";
                         DeteleFile(urls);
                         re.Doc.Save(urls, SaveFormat.Pdf);
                     }
@@ -639,7 +642,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                                 res.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
                             }
                         }
-                        string urls = @str + $"/up/result/{item}.pdf";
+                        string urls = @str + $"/up/result/{item.Name + item.ID}.pdf";
                         DeteleFile(urls);
                         res.Doc.Save(urls, SaveFormat.Pdf);
                     }
@@ -654,7 +657,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                                 rp.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
                             }
                         }
-                        string urls = @str + $"/up/result/{item}.pdf";
+                        string urls = @str + $"/up/result/{item.Name + item.ID}.pdf";
                         DeteleFile(urls);
                         rp.Doc.Save(urls, SaveFormat.Pdf);
                     }
@@ -701,7 +704,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                         {
                             re.Doc.AppendDocument(item.Doc, ImportFormatMode.KeepSourceFormatting);
                         }
-                        string urls = @str + $"/up/result/{data["archive_no"].ToString()}.pdf";
+                        string urls = @str + $"/up/result/{data["name"].ToString() + data["archive_no"].ToString()}.pdf";
                         DeteleFile(urls);
                         re.Doc.Save(urls, SaveFormat.Pdf);
                     }
@@ -712,7 +715,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                     {
                         DataRow data = dataSet.Tables["个人"].Rows[i];
                         doc = PdfProcessing(list[0], data);
-                        string urls = @str + $"/up/result/{data["archive_no"].ToString()}.pdf";
+                        string urls = @str + $"/up/result/{data["name"].ToString() + data["archive_no"].ToString()}.pdf";
                         DeteleFile(urls);
                         doc.Save(urls, SaveFormat.Pdf);
                     }
@@ -2396,7 +2399,8 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                 //说明点击的列是DataGridViewButtonColumn列
                 DataGridViewColumn column = dataGridView1.Columns[e.ColumnIndex];
                 string id = dataGridView1["编码", e.RowIndex].Value.ToString();
-                OpenPdf(@str + $"/up/result/{id}.pdf");
+                string name = dataGridView1["姓名", e.RowIndex].Value.ToString();
+                OpenPdf(@str + $"/up/result/{name + id}.pdf");
             }
         }
     }
