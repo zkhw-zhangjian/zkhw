@@ -350,55 +350,54 @@ namespace zkhwClient
                     int innum = 0;
                     if (xNode != null && xNode.Count > 0)
                     {
-                    Thread.Sleep(2000);
                     innum=e.FullPath.LastIndexOf("\\");
                     string fullPath=e.FullPath.Substring(0, innum + 1);
                         for (int i = 0; i < xNode.Count; i++)
                         {
                             if (i == 0)
                             {
-                                BuPic01 = fullPath+@"\"+xNode[i].InnerText;
-                                //string pName = fullPath+BuPic01;
-                                //FileInfo inf = new FileInfo(pName);
-                                //if (File.Exists(str + "\\bcImg\\" + BuPic01))
-                                //{
-                                //    File.Delete(str + "\\bcImg\\" + BuPic01);
-                                //}
-                                //inf.MoveTo(str + "\\bcImg\\" + BuPic01);
+                                BuPic01 = xNode[i].InnerText;
+                                string pName = fullPath + BuPic01;
+                                FileInfo inf = new FileInfo(pName);
+                                if (File.Exists(str + "\\bcImg\\" + BuPic01))
+                                {
+                                    File.Delete(str + "\\bcImg\\" + BuPic01);
+                                }
+                                inf.MoveTo(str + "\\bcImg\\" + BuPic01);
                             }
                             else if (i == 1)
                             {
-                                BuPic02 = fullPath + @"\" + xNode[i].InnerText;
-                                //string pName = fullPath + BuPic02;
-                                //FileInfo inf = new FileInfo(pName);
-                                //if (File.Exists(str + "\\bcImg\\" + BuPic02))
-                                //{
-                                //    File.Delete(str + "\\bcImg\\" + BuPic02);
-                                //}
-                                //inf.MoveTo(str + "\\bcImg\\" + BuPic02);
-                        }
+                                BuPic02 = xNode[i].InnerText;
+                                string pName = fullPath + BuPic02;
+                                FileInfo inf = new FileInfo(pName);
+                                if (File.Exists(str + "\\bcImg\\" + BuPic02))
+                                {
+                                    File.Delete(str + "\\bcImg\\" + BuPic02);
+                                }
+                                inf.MoveTo(str + "\\bcImg\\" + BuPic02);
+                            }
                             else if (i == 2)
                             {
-                                BuPic03 = fullPath + @"\" + xNode[i].InnerText;
-                                //string pName = fullPath + BuPic03;
-                                //FileInfo inf = new FileInfo(pName);
-                                //if (File.Exists(str + "\\bcImg\\" + BuPic03))
-                                //{
-                                //    File.Delete(str + "\\bcImg\\" + BuPic03);
-                                //}
-                                //inf.MoveTo(str + "\\bcImg\\" + BuPic03);
-                        }
+                                BuPic03 = xNode[i].InnerText;
+                                string pName = fullPath + BuPic03;
+                                FileInfo inf = new FileInfo(pName);
+                                if (File.Exists(str + "\\bcImg\\" + BuPic03))
+                                {
+                                    File.Delete(str + "\\bcImg\\" + BuPic03);
+                                }
+                                inf.MoveTo(str + "\\bcImg\\" + BuPic03);
+                            }
                             else if (i == 3)
                             {
-                                BuPic04 = fullPath + @"\" + xNode[i].InnerText;
-                                //string pName = fullPath + BuPic04;
-                                //FileInfo inf = new FileInfo(pName);
-                                //if (File.Exists(str + "\\bcImg\\" + BuPic04))
-                                //{
-                                //    File.Delete(str + "\\bcImg\\" + BuPic04);
-                                //}
-                                //inf.MoveTo(str + "\\bcImg\\" + BuPic04);
-                        }
+                                BuPic04 = xNode[i].InnerText;
+                                string pName = fullPath + BuPic04;
+                                FileInfo inf = new FileInfo(pName);
+                                if (File.Exists(str + "\\bcImg\\" + BuPic04))
+                                {
+                                    File.Delete(str + "\\bcImg\\" + BuPic04);
+                                }
+                                inf.MoveTo(str + "\\bcImg\\" + BuPic04);
+                            }
                       }
                     }
                     jkInfoDao jkInfoDao = new jkInfoDao();
@@ -432,8 +431,8 @@ namespace zkhwClient
                         int rue = DbHelperMySQL.ExecuteSql(issql, args);
                         string issqdgbc = "update zkhw_tj_bgdc set BChao='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
                         DbHelperMySQL.ExecuteSql(issqdgbc);
-                        string filepath=e.FullPath.Substring(0, innum);
-                        DeleteDir(filepath);
+                    string filepath = e.FullPath.Substring(0, innum);
+                    DeleteDir(filepath);
                     //插入数据库
                 }
                     #endregion

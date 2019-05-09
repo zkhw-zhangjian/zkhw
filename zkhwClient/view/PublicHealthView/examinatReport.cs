@@ -1596,29 +1596,29 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                         DataTable da = bcs.Tables[0];
                         for (int j = 0; j < da.Rows.Count; j++)
                         {
-                            string imageUrla = da.Rows[j]["BuPic01"].ToString();
-                            if (imageUrla != null && !"".Equals(imageUrla) && File.Exists(@str + "/bcImg/" + imageUrla))
+                            string BuPic01 = da.Rows[j]["BuPic01"].ToString();
+                            if (BuPic01 != null && !"".Equals(BuPic01) && File.Exists(@str+@"\bcImg\"+BuPic01))
                             {
                                 builder.MoveToBookmark("图片1");
-                                builder.InsertImage(resizeImageFromFile(@str + "/bcImg/" + imageUrla, 768, 1024));
+                                builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic01, 400, 650));
                             }
-                            string imageUrlb = da.Rows[j]["BuPic02"].ToString();
-                            if (imageUrlb != null && !"".Equals(imageUrlb) && File.Exists(@str + "/bcImg/" + imageUrla))
+                            string BuPic02 = da.Rows[j]["BuPic02"].ToString();
+                            if (BuPic02 != null && !"".Equals(BuPic02) && File.Exists(@str + @"\bcImg\" + BuPic02))
                             {
                                 builder.MoveToBookmark("图片2");
-                                builder.InsertImage(resizeImageFromFile(@str + "/bcImg/" + imageUrlb, 768, 1024));
+                                builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic02, 400, 650));
                             }
-                            string imageUrlc = da.Rows[j]["BuPic03"].ToString();
-                            if (imageUrlc != null && !"".Equals(imageUrlc) && File.Exists(@str + "/bcImg/" + imageUrla))
+                            string BuPic03 = da.Rows[j]["BuPic03"].ToString();
+                            if (BuPic03 != null && !"".Equals(BuPic03) && File.Exists(@str + @"\bcImg\" + BuPic03))
                             {
                                 builder.MoveToBookmark("图片3");
-                                builder.InsertImage(resizeImageFromFile(@str + "/bcImg/" + imageUrlc, 768, 1024));
+                                builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic03, 400, 650));
                             }
-                            string imageUrld = da.Rows[j]["BuPic04"].ToString();
-                            if (imageUrld != null && !"".Equals(imageUrld) && File.Exists(@str + "/bcImg/" + imageUrla))
+                            string BuPic04 = da.Rows[j]["BuPic04"].ToString();
+                            if (BuPic04 != null && !"".Equals(BuPic04) && File.Exists(@str + @"\bcImg\" + BuPic04))
                             {
                                 builder.MoveToBookmark("图片4");
-                                builder.InsertImage(resizeImageFromFile(@str + "/bcImg/" + imageUrld, 768, 1024));
+                                builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic04, 400, 650));
                             }
                             bc.Add("条码号", da.Rows[j]["bar_code"].ToString());
                             bc.Add("诊断医师", "");

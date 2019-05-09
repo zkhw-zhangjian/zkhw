@@ -391,7 +391,11 @@ namespace zkhwClient.dao
                 }
                 catch (MySql.Data.MySqlClient.MySqlException ex)
                 {
-                    throw new Exception(ex.Message);
+                    //throw new Exception(ex.Message);
+                    using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
+                    {
+                        sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + ex.Message + "\r\n"+ex.StackTrace + "\r\n" + SQLString);
+                    }
                 }
                 return ds;
             }
