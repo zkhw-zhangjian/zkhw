@@ -1820,9 +1820,6 @@ namespace zkhwClient
                     string sendHL7 = "MSH|^~\\&|||Rayto||1||ACK^R01|1|P|2.3.1||||S||UNICODE|||MSA|AA|1|||||";
                     string []sendArray= sendHL7.Split('|');
                     byte[] buffernew = buffer.Skip(0).Take(effective).ToArray();
-                    if (buffernew.Length<120) {
-                        return;
-                    }
                 //totalByteRead.Concat(byteRead).ToArray();
                 string sHL7 = Encoding.Default.GetString(buffernew).Trim();
                 using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))

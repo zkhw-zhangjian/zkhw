@@ -40,7 +40,7 @@ namespace zkhwClient.view.updateTjResult
                 if (height != "")
                 {
                     double heightdouble = double.Parse(height);
-                    DataRow[] drheight = dttv.Select("type='Height'");
+                    DataRow[] drheight = dttv.Select("type='HEIGHT'");
                     double heightwmin = double.Parse(drheight[0]["warning_min"].ToString());
                     double heightwmax = double.Parse(drheight[0]["warning_max"].ToString());
                     if (heightdouble > heightwmax || heightdouble < heightwmin)
@@ -59,7 +59,7 @@ namespace zkhwClient.view.updateTjResult
                 if (weight != "")
                 {
                     double weightdouble = double.Parse(weight);
-                    DataRow[] drweightdouble = dttv.Select("type='Weight'");
+                    DataRow[] drweightdouble = dttv.Select("type='WEIGHT'");
                     double weightwmin = double.Parse(drweightdouble[0]["warning_min"].ToString());
                     double weightwmax = double.Parse(drweightdouble[0]["warning_max"].ToString());
                     if (weightdouble > weightwmax || weightdouble < weightwmin)

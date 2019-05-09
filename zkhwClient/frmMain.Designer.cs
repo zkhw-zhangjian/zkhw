@@ -254,12 +254,14 @@
             this.预防接种服务ToolStripMenuItem.Name = "预防接种服务ToolStripMenuItem";
             this.预防接种服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.预防接种服务ToolStripMenuItem.Text = "预防接种服务";
+            this.预防接种服务ToolStripMenuItem.Visible = false;
             // 
             // 健康教育服务ToolStripMenuItem
             // 
             this.健康教育服务ToolStripMenuItem.Name = "健康教育服务ToolStripMenuItem";
             this.健康教育服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.健康教育服务ToolStripMenuItem.Text = "健康教育服务";
+            this.健康教育服务ToolStripMenuItem.Visible = false;
             // 
             // 家医ToolStripMenuItem
             // 
@@ -276,19 +278,19 @@
             // 现场签约ToolStripMenuItem
             // 
             this.现场签约ToolStripMenuItem.Name = "现场签约ToolStripMenuItem";
-            this.现场签约ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.现场签约ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.现场签约ToolStripMenuItem.Text = "现场签约";
             // 
             // 团队成员ToolStripMenuItem
             // 
             this.团队成员ToolStripMenuItem.Name = "团队成员ToolStripMenuItem";
-            this.团队成员ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.团队成员ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.团队成员ToolStripMenuItem.Text = "团队成员";
             // 
             // 签约统计ToolStripMenuItem
             // 
             this.签约统计ToolStripMenuItem.Name = "签约统计ToolStripMenuItem";
-            this.签约统计ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.签约统计ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.签约统计ToolStripMenuItem.Text = "签约统计";
             // 
             // 数据分析ToolStripMenuItem

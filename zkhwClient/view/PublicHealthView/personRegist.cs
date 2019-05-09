@@ -497,8 +497,8 @@ namespace zkhwClient.view.PublicHealthView
             DataTable dt = null;
             if (grjdxx != null)
             {
-                string cardcode= textBox3.Text;
-                if (cardcode != null && !"".Equals(cardcode)) {
+                string cardcode= grjdxx.Cardcode;
+                if (!"".Equals(cardcode)) {
                     dt = grjddao.judgeRepeat(textBox3.Text);
                 }
                 else {
@@ -506,7 +506,7 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 if (dt.Rows.Count < 1)
                 {
-                    if (!"".Equals(grjdxx.Cardcode))
+                    if (!"".Equals(cardcode))
                     {
                         grjdxx.archive_no = basicInfoSettings.xcuncode + "0" + grjdxx.Cardcode.Substring(14);
                     }

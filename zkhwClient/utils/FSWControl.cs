@@ -91,6 +91,7 @@ namespace zkhwClient.dao
             //设置监听的路径
             watcherb.Path = StrWarcherPath;
             //注册创建文件或目录时的监听事件
+            //watcherb.Filter.
             watcherb.Created += new FileSystemEventHandler(watch_createdbchao);
             watcherb.EndInit();
         }

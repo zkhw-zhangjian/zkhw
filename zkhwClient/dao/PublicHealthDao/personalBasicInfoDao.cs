@@ -13,7 +13,7 @@ namespace zkhwClient.dao
             DataSet ds = new DataSet();
             string sql = "select id,name,archive_no,id_number,create_name,create_time,doctor_name from resident_base_info where create_time >= '" + time1 + "' and create_time <= '" + time2 + "'";
             if (code != "") { sql += " AND village_code='" + code + "'"; }
-            if (pCa != "") { sql += " and (name like '%" + pCa + "%'  or id_number like '%" + pCa + "%'  or aichive_no like '%" + pCa + "%')"; }
+            if (pCa != "") { sql += " and (name like '%" + pCa + "%'  or id_number like '%" + pCa + "%'  or archive_no like '%" + pCa + "%')"; }
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }

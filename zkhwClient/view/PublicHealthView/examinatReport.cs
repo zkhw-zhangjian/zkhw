@@ -235,6 +235,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             //checkbox 勾上
+            if (e.RowIndex==-1) { return; }
             if ((bool)dataGridView1.Rows[e.RowIndex].Cells[0].EditedFormattedValue == true)
             {
                 this.dataGridView1.Rows[e.RowIndex].Cells[0].Value = false;
