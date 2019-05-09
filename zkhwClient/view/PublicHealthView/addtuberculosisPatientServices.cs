@@ -15,6 +15,10 @@ namespace zkhwClient.view.PublicHealthView
     public partial class addtuberculosisPatientServices : Form
     {
         /// <summary>
+        /// 状态(1:新增 0:修改)
+        /// </summary>
+        public int IS { get; set; }
+        /// <summary>
         /// 姓名
         /// </summary>
         public string Names { get; set; }
@@ -32,15 +36,29 @@ namespace zkhwClient.view.PublicHealthView
         /// <param name="names">姓名</param>
         /// <param name="aichive_nos">档案编号</param>
         /// <param name="id_numbers">身份证号</param>
-        public addtuberculosisPatientServices(string names, string aichive_nos, string id_numbers)
+        public addtuberculosisPatientServices(int ps, string names, string aichive_nos, string id_numbers)
         {
             Names = names;
             aichive_no = aichive_nos;
             id_number = id_numbers;
+            IS = ps;
             if (GetRecord())
             {
                 MessageBox.Show("已有随访记录不可新增！");
                 return;
+            }
+            this.Text = (IS == 1 ? "首次随访添加" : "首次随访修改");
+            if (IS == 0)
+            {
+                if (GetUpdate())
+                {
+                    SetData();
+                }
+                else
+                {
+                    MessageBox.Show("没有修改数据！");
+                    return;
+                }
             }
             InitializeComponent();
         }
@@ -52,7 +70,7 @@ namespace zkhwClient.view.PublicHealthView
 
         private void 确定_Click(object sender, EventArgs e)
         {
-            if (Insert() > 0)
+            if ((IS == 1 ? Insert() : Update()) > 0)
             {
                 MessageBox.Show("成功！");
             }
@@ -116,7 +134,58 @@ namespace zkhwClient.view.PublicHealthView
                     };
             return DbHelperMySQL.ExecuteSql(issql, args);
         }
-
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <returns></returns>
+        private int Update()
+        {
+            tuberculosis_info info = GetData();
+            info.name = Names;
+            info.aichive_no = aichive_no;
+            info.Cardcode = id_number;
+            string issql = @"update tuberculosis_info set visit_date=@visit_date,visit_type=@visit_type,patient_type=@patient_type,sputum_bacterium_type=@sputum_bacterium_type,drug_fast_type=@drug_fast_type,symptom=@symptom,symptom_other=@symptom_other,chemotherapy_plan=@chemotherapy_plan,usage=@usage,drugs_type=@drugs_type,supervisor_type=@supervisor_type,supervisor_other=@supervisor_other,single_room=@single_room,ventilation=@ventilation,smoke_now=@smoke_now,smoke_next=@smoke_next,drink_now=@drink_now,drink_next=@drink_next,get_medicine_address=@get_medicine_address,get_medicine_date=@get_medicine_date,medicine_record=@medicine_record,medicine_leave=@medicine_leave,treatment_course=@treatment_course,erratically=@erratically,untoward_effect=@untoward_effect,further_consultation=@further_consultation,insist=@insist,habits_customs=@habits_customs,intimate_contact=@intimate_contact,next_visit_date=@next_visit_date,estimate_doctor,update_user=@update_user,update_name=@update_name,update_time=@update_time where name=@name and aichive_no=@aichive_no and Cardcode=@Cardcode";
+            MySqlParameter[] args = new MySqlParameter[] {
+                    new MySqlParameter("@name", info.name),
+                    new MySqlParameter("@aichive_no", info.aichive_no),
+                    new MySqlParameter("@Cardcode", info.Cardcode),
+                    new MySqlParameter("@visit_date", info.visit_date),
+                    new MySqlParameter("@visit_type", info.visit_type),
+                    new MySqlParameter("@patient_type", info.patient_type),
+                    new MySqlParameter("@sputum_bacterium_type",info.sputum_bacterium_type),
+                    new MySqlParameter("@drug_fast_type", info.drug_fast_type),
+                    new MySqlParameter("@symptom",info.symptom),
+                    new MySqlParameter("@symptom_other", info.symptom_other),
+                    new MySqlParameter("@chemotherapy_plan", info.chemotherapy_plan),
+                    new MySqlParameter("@usage",info.usage),
+                    new MySqlParameter("@drugs_type", info.drugs_type),
+                    new MySqlParameter("@supervisor_type", info.supervisor_type),
+                    new MySqlParameter("@supervisor_other", info.supervisor_other),
+                    new MySqlParameter("@single_room",info.single_room),
+                    new MySqlParameter("@ventilation", info.ventilation),
+                    new MySqlParameter("@smoke_now",info.smoke_now),
+                    new MySqlParameter("@smoke_next", info.smoke_next),
+                    new MySqlParameter("@drink_now",info.drink_now),
+                    new MySqlParameter("@drink_next", info.drink_next),
+                    new MySqlParameter("@get_medicine_address", info.get_medicine_address),
+                    new MySqlParameter("@get_medicine_date", info.get_medicine_date),
+                    new MySqlParameter("@medicine_record", info.medicine_record),
+                    new MySqlParameter("@medicine_leave", info.medicine_leave),
+                    new MySqlParameter("@treatment_course", info.treatment_course),
+                    new MySqlParameter("@erratically", info.erratically),
+                    new MySqlParameter("@untoward_effect", info.untoward_effect),
+                    new MySqlParameter("@further_consultation", info.further_consultation),
+                    new MySqlParameter("@insist", info.insist),
+                    new MySqlParameter("@habits_customs", info.habits_customs),
+                    new MySqlParameter("@intimate_contact", info.intimate_contact),
+                    new MySqlParameter("@next_visit_date", info.next_visit_date),
+                    new MySqlParameter("@estimate_doctor", info.estimate_doctor),
+                    new MySqlParameter("@update_user", info.update_user),
+                    new MySqlParameter("@update_name", info.update_name),
+                    new MySqlParameter("@update_time", info.update_time),
+                    };
+            return DbHelperMySQL.ExecuteSql(issql, args);
+        }
         /// <summary>
         /// 获取界面数据
         /// </summary>
@@ -131,7 +200,7 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (((RadioButton)item).Checked)
                     {
-                        info.patient_type = ((CheckBox)item).Tag.ToString();
+                        info.patient_type = ((RadioButton)item).Tag.ToString();
                     }
                 }
             }
@@ -141,7 +210,7 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (((RadioButton)item).Checked)
                     {
-                        info.drug_fast_type = ((CheckBox)item).Tag.ToString();
+                        info.drug_fast_type = ((RadioButton)item).Tag.ToString();
                     }
                 }
             }
@@ -151,7 +220,7 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (((RadioButton)item).Checked)
                     {
-                        info.visit_type = ((CheckBox)item).Tag.ToString();
+                        info.visit_type = ((RadioButton)item).Tag.ToString();
                     }
                 }
             }
@@ -161,7 +230,7 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (((RadioButton)item).Checked)
                     {
-                        info.sputum_bacterium_type = ((CheckBox)item).Tag.ToString();
+                        info.sputum_bacterium_type = ((RadioButton)item).Tag.ToString();
                     }
                 }
             }
@@ -188,7 +257,7 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (((RadioButton)item).Checked)
                     {
-                        info.usage = ((CheckBox)item).Tag.ToString();
+                        info.usage = ((RadioButton)item).Tag.ToString();
                     }
                 }
             }
@@ -198,7 +267,7 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (((RadioButton)item).Checked)
                     {
-                        info.drugs_type = ((CheckBox)item).Tag.ToString();
+                        info.drugs_type = ((RadioButton)item).Tag.ToString();
                     }
                 }
             }
@@ -208,7 +277,7 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (((RadioButton)item).Checked)
                     {
-                        info.supervisor_type = ((CheckBox)item).Tag.ToString();
+                        info.supervisor_type = ((RadioButton)item).Tag.ToString();
                     }
                 }
             }
@@ -218,7 +287,7 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (((RadioButton)item).Checked)
                     {
-                        info.single_room = ((CheckBox)item).Tag.ToString();
+                        info.single_room = ((RadioButton)item).Tag.ToString();
                     }
                 }
             }
@@ -228,7 +297,7 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (((RadioButton)item).Checked)
                     {
-                        info.ventilation = ((CheckBox)item).Tag.ToString();
+                        info.ventilation = ((RadioButton)item).Tag.ToString();
                     }
                 }
             }
@@ -244,7 +313,7 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (((RadioButton)item).Checked)
                     {
-                        info.medicine_record = ((CheckBox)item).Tag.ToString();
+                        info.medicine_record = ((RadioButton)item).Tag.ToString();
                     }
                 }
             }
@@ -254,7 +323,7 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (((RadioButton)item).Checked)
                     {
-                        info.medicine_leave = ((CheckBox)item).Tag.ToString();
+                        info.medicine_leave = ((RadioButton)item).Tag.ToString();
                     }
                 }
             }
@@ -264,7 +333,7 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (((RadioButton)item).Checked)
                     {
-                        info.treatment_course = ((CheckBox)item).Tag.ToString();
+                        info.treatment_course = ((RadioButton)item).Tag.ToString();
                     }
                 }
             }
@@ -274,7 +343,7 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (((RadioButton)item).Checked)
                     {
-                        info.erratically = ((CheckBox)item).Tag.ToString();
+                        info.erratically = ((RadioButton)item).Tag.ToString();
                     }
                 }
             }
@@ -284,7 +353,7 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (((RadioButton)item).Checked)
                     {
-                        info.untoward_effect = ((CheckBox)item).Tag.ToString();
+                        info.untoward_effect = ((RadioButton)item).Tag.ToString();
                     }
                 }
             }
@@ -294,7 +363,7 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (((RadioButton)item).Checked)
                     {
-                        info.further_consultation = ((CheckBox)item).Tag.ToString();
+                        info.further_consultation = ((RadioButton)item).Tag.ToString();
                     }
                 }
             }
@@ -304,7 +373,7 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (((RadioButton)item).Checked)
                     {
-                        info.insist = ((CheckBox)item).Tag.ToString();
+                        info.insist = ((RadioButton)item).Tag.ToString();
                     }
                 }
             }
@@ -314,7 +383,7 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (((RadioButton)item).Checked)
                     {
-                        info.habits_customs = ((CheckBox)item).Tag.ToString();
+                        info.habits_customs = ((RadioButton)item).Tag.ToString();
                     }
                 }
             }
@@ -324,14 +393,245 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (((RadioButton)item).Checked)
                     {
-                        info.intimate_contact = ((CheckBox)item).Tag.ToString();
+                        info.intimate_contact = ((RadioButton)item).Tag.ToString();
                     }
                 }
             }
             info.next_visit_date = 下次随访时间.Value.ToString("yyyy-MM-dd HH:mm:ss");
             return info;
         }
-
+        /// <summary>
+        /// 界面赋值
+        /// </summary>
+        private void SetData()
+        {
+            string sql = $@"select * from tuberculosis_info where name='{Names}' and aichive_no='{aichive_no}' and Cardcode='{id_number}' order by create_time desc LIMIT 1";
+            DataSet jb = DbHelperMySQL.Query(sql);
+            if (jb != null && jb.Tables.Count > 0 && jb.Tables[0].Rows.Count > 0)
+            {
+                List<tuberculosis_info> ts = Result.ToDataList<tuberculosis_info>(jb.Tables[0]);
+                foreach (var dt in ts)
+                {
+                    随访时间.Value = Convert.ToDateTime(dt.visit_date);
+                    foreach (Control item in 患者类型.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.patient_type)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 耐药情况.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.drug_fast_type)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 随访方式.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.visit_type)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 痰菌情况.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.sputum_bacterium_type)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 症状及体征.Controls)
+                    {
+                        if (item is CheckBox)
+                        {
+                            if (dt.symptom.IndexOf(",") >= 0)
+                            {
+                                string[] sys = dt.symptom.Split(',');
+                                if (item is CheckBox)
+                                {
+                                    if (sys.Contains(((CheckBox)item).Tag.ToString()))
+                                    {
+                                        ((CheckBox)item).Checked = true;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (((CheckBox)item).Tag.ToString() == dt.symptom)
+                                {
+                                    ((CheckBox)item).Checked = true;
+                                }
+                            }
+                        }
+                        else if (item is RichTextBox)
+                        {
+                            ((RichTextBox)item).Text = dt.symptom_other;
+                        }
+                    }
+                    化疗方案.Text = dt.chemotherapy_plan;
+                    foreach (Control item in 用法.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.usage)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 药品剂型.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.drugs_type)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 督导人员选择.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.supervisor_type)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 单独的居室.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.single_room)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 通风情况.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.ventilation)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    吸烟1.Text = dt.smoke_now.ToString();
+                    吸烟2.Text = dt.smoke_next.ToString();
+                    饮酒1.Text = dt.drink_now.ToString();
+                    饮酒2.Text = dt.drink_next.ToString();
+                    取药地点.Text = dt.get_medicine_address;
+                    取药时间.Value = Convert.ToDateTime(dt.get_medicine_date);
+                    foreach (Control item in 服药记录卡的填写.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.medicine_record)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 服药方法及药品存放.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.medicine_leave)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 肺结核治疗疗程.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.treatment_course)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 不规律服药危害.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.erratically)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 服药后不良反应及处理.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.untoward_effect)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 治疗期间复诊查痰.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.further_consultation)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 外出期间如何坚持服药.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.insist)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 生活习惯及注意事项.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.habits_customs)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 密切接触者检查.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.intimate_contact)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    下次随访时间.Value = Convert.ToDateTime(dt.next_visit_date);
+                }
+            }
+        }
         /// <summary>
         /// 判断是否有随访记录
         /// </summary>
@@ -346,6 +646,22 @@ namespace zkhwClient.view.PublicHealthView
             else
             {
                 return false;
+            }
+        }
+        /// <summary>
+        /// 判断是否有修改数据
+        /// </summary>
+        /// <returns></returns>
+        private bool GetUpdate()
+        {
+            DataSet data = DbHelperMySQL.Query($@"select * from tuberculosis_info where name='{Names}' and aichive_no='{aichive_no}' and Cardcode='{id_number}'");
+            if (data != null && data.Tables[0] != null && data.Tables[0].Rows.Count > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }
