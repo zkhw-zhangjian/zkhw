@@ -105,6 +105,7 @@ GROUP BY sex
             string xian = comboBox3.SelectedValue?.ToString();
             string cun = comboBox4.SelectedValue?.ToString();
             string zu = comboBox5.SelectedValue?.ToString();
+            MessageBox.Show(zu);
             string juming = textBox1.Text;
             var pairs = new Dictionary<string, string>();
             pairs.Add("timesta", timesta);
@@ -129,7 +130,7 @@ from resident_base_info base
 join 
 (select * from zkhw_tj_bgdc group by aichive_no order by createtime desc) bgdc
 on base.archive_no=bgdc.aichive_no
-where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{basicInfoSettings.createtime}'";//base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'
+where base.village_code='{basicInfoSettings.xcuncode}'";// and bgdc.createtime>='{basicInfoSettings.createtime}'base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'
             if (pairs != null && pairs.Count > 0)
             {
                 if (!string.IsNullOrWhiteSpace(pairs["timesta"]) && !string.IsNullOrWhiteSpace(pairs["timeend"]))

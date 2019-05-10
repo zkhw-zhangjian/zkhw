@@ -48,8 +48,7 @@
             this.肺结核患者服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.孕产妇ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.岁ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.预防接种服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.健康教育服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.儿童中医健康服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.家医ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.现场签约ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.团队成员ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -164,8 +163,7 @@
             this.肺结核患者服务ToolStripMenuItem,
             this.孕产妇ToolStripMenuItem,
             this.岁ToolStripMenuItem,
-            this.预防接种服务ToolStripMenuItem,
-            this.健康教育服务ToolStripMenuItem});
+            this.儿童中医健康服务ToolStripMenuItem});
             this.公共卫生ToolStripMenuItem.Name = "公共卫生ToolStripMenuItem";
             this.公共卫生ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.公共卫生ToolStripMenuItem.Text = "公共卫生";
@@ -249,19 +247,13 @@
             this.岁ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.岁ToolStripMenuItem.Text = "0—6岁儿童健康服务";
             // 
-            // 预防接种服务ToolStripMenuItem
+            // 儿童中医健康服务ToolStripMenuItem
             // 
-            this.预防接种服务ToolStripMenuItem.Name = "预防接种服务ToolStripMenuItem";
-            this.预防接种服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.预防接种服务ToolStripMenuItem.Text = "预防接种服务";
-            this.预防接种服务ToolStripMenuItem.Visible = false;
-            // 
-            // 健康教育服务ToolStripMenuItem
-            // 
-            this.健康教育服务ToolStripMenuItem.Name = "健康教育服务ToolStripMenuItem";
-            this.健康教育服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.健康教育服务ToolStripMenuItem.Text = "健康教育服务";
-            this.健康教育服务ToolStripMenuItem.Visible = false;
+            this.儿童中医健康服务ToolStripMenuItem.Name = "儿童中医健康服务ToolStripMenuItem";
+            this.儿童中医健康服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.儿童中医健康服务ToolStripMenuItem.Text = "儿童中医健康服务";
+            this.儿童中医健康服务ToolStripMenuItem.Visible = false;
+            this.儿童中医健康服务ToolStripMenuItem.Click += new System.EventHandler(this.预防接种服务ToolStripMenuItem_Click);
             // 
             // 家医ToolStripMenuItem
             // 
@@ -764,8 +756,7 @@
         private System.Windows.Forms.ToolStripMenuItem 中医健康服务ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 孕产妇ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 岁ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 预防接种服务ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 健康教育服务ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 儿童中医健康服务ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 现场签约ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 团队成员ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 签约统计ToolStripMenuItem;

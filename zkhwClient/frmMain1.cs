@@ -378,7 +378,7 @@ namespace zkhwClient
             }
             else if (tag == "预防接种服务")
             {
-                vaccinationServices pR = new vaccinationServices();
+                childrenCMHealthServices pR = new childrenCMHealthServices();
                 pR.TopLevel = false;
                 pR.Dock = DockStyle.Fill;
                 pR.FormBorderStyle = FormBorderStyle.None;

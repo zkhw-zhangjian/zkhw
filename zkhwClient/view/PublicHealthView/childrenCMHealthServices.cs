@@ -9,11 +9,16 @@ using System.Windows.Forms;
 
 namespace zkhwClient.view.PublicHealthView
 {
-    public partial class vaccinationServices : Form
+    public partial class childrenCMHealthServices : Form
     {
-        public vaccinationServices()
+        public childrenCMHealthServices()
         {
             InitializeComponent();
+        }
+
+        private void childrenCMHealthServices_Load(object sender, EventArgs e)
+        {
+            MessageBox.Show("开发中");
         }
     }
 }

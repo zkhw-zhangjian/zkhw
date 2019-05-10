@@ -1,6 +1,6 @@
 ﻿namespace zkhwClient.view.PublicHealthView
 {
-    partial class vaccinationServices
+    partial class childrenCMHealthServices
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // childrenCMHealthServices
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "vaccinationServices";
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Name = "childrenCMHealthServices";
+            this.Text = "childrenCMHealthServices";
+            this.Load += new System.EventHandler(this.childrenCMHealthServices_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

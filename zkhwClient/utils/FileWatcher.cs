@@ -334,7 +334,6 @@ namespace zkhwClient
                 {
                     //1.由于客户机器首次读取时乱码，故先修改该文件后再读取内容
                     //m_watcherAoup.EnableRaisingEvents = false;
-
                     File.SetLastWriteTime(e.FullPath, DateTime.Now);//修改txt文件的时间
                     #region B超
                     XmlDocument doc = new XmlDocument();
@@ -348,9 +347,10 @@ namespace zkhwClient
                     string BuPic03 = string.Empty;
                     string BuPic04 = string.Empty;
                     int innum = 0;
-                    if (xNode != null && xNode.Count > 0)
+                if (xNode != null && xNode.Count > 0)
                     {
                     innum=e.FullPath.LastIndexOf("\\");
+                    Thread.Sleep(3000);
                     string fullPath=e.FullPath.Substring(0, innum + 1);
                         for (int i = 0; i < xNode.Count; i++)
                         {

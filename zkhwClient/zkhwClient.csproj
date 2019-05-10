@@ -237,6 +237,12 @@
     <Compile Include="view\PublicHealthView\addTotuberculosisPatientServices.Designer.cs">
       <DependentUpon>addTotuberculosisPatientServices.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\PublicHealthView\childrenCMHealthServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\childrenCMHealthServices.Designer.cs">
+      <DependentUpon>childrenCMHealthServices.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\PublicHealthView\detaTotuberculosisPatientServices.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -416,12 +422,6 @@
     </Compile>
     <Compile Include="view\PublicHealthView\tuberculosisPatientServices.Designer.cs">
       <DependentUpon>tuberculosisPatientServices.cs</DependentUpon>
-    </Compile>
-    <Compile Include="view\PublicHealthView\vaccinationServices.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="view\PublicHealthView\vaccinationServices.Designer.cs">
-      <DependentUpon>vaccinationServices.cs</DependentUpon>
     </Compile>
     <Compile Include="view\publicRecord\follow_medicine_record.cs">
       <SubType>Form</SubType>
@@ -705,6 +705,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\addTotuberculosisPatientServices.resx">
       <DependentUpon>addTotuberculosisPatientServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\childrenCMHealthServices.resx">
+      <DependentUpon>childrenCMHealthServices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\detaTotuberculosisPatientServices.resx">
       <DependentUpon>detaTotuberculosisPatientServices.cs</DependentUpon>

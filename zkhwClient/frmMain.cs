@@ -475,16 +475,16 @@ namespace zkhwClient
                 this.panel1.Controls.Add(pR);
                 pR.Show();
             }
-            //else if (tag == "预防接种服务")
-            //{
-            //    vaccinationServices pR = new vaccinationServices();
-            //    pR.TopLevel = false;
-            //    pR.Dock = DockStyle.Fill;
-            //    pR.FormBorderStyle = FormBorderStyle.None;
-            //    this.panel1.Controls.Clear();
-            //    this.panel1.Controls.Add(pR);
-            //    pR.Show();
-            //}
+            else if (tag == "儿童中医健康服务")
+            {
+                childrenCMHealthServices pR = new childrenCMHealthServices();
+                pR.TopLevel = false;
+                pR.Dock = DockStyle.Fill;
+                pR.FormBorderStyle = FormBorderStyle.None;
+                this.panel1.Controls.Clear();
+                this.panel1.Controls.Add(pR);
+                pR.Show();
+            }
             //else if (tag == "健康教育服务")
             //{
             //    healthEducationServices pR = new healthEducationServices();
@@ -860,19 +860,19 @@ namespace zkhwClient
         //定时任务获取生化和血球的数据
         private void timer2_Tick(object sender, EventArgs e)
         {
-            //xmlDoc.Load(path);
-            //node = xmlDoc.SelectSingleNode("config/shenghuaPath");
-            //shenghuapath = node.InnerText;
-            //node = xmlDoc.SelectSingleNode("config/xuechangguiPath");
-            //xuechangguipath = node.InnerText;
-            //node = xmlDoc.SelectSingleNode("config/shlasttime");
-            //shlasttime = node.InnerText;
-            //node = xmlDoc.SelectSingleNode("config/xcglasttime");
-            //xcglasttime = node.InnerText;
+            xmlDoc.Load(path);
+            node = xmlDoc.SelectSingleNode("config/shenghuaPath");
+            shenghuapath = node.InnerText;
+            node = xmlDoc.SelectSingleNode("config/xuechangguiPath");
+            xuechangguipath = node.InnerText;
+            node = xmlDoc.SelectSingleNode("config/shlasttime");
+            shlasttime = node.InnerText;
+            node = xmlDoc.SelectSingleNode("config/xcglasttime");
+            xcglasttime = node.InnerText;
 
-            //Thread demoThread = new Thread(new ThreadStart(shAndxcg));
-            //demoThread.IsBackground = true;
-            //demoThread.Start();//启动线程 
+            Thread demoThread = new Thread(new ThreadStart(shAndxcg));
+            demoThread.IsBackground = true;
+            demoThread.Start();//启动线程 
         }
         private void shAndxcg()
         {
@@ -1800,27 +1800,26 @@ namespace zkhwClient
         /// <param name="o"></param>
         private void Recive(object o)
         {
-                var send = o as Socket;
-                while (true)
+            var send = o as Socket;
+            while (true)
+            {
+                //获取发送过来的消息容器
+                byte[] buffer = new byte[1024 * 2];
+                var effective = 0;
+                try
                 {
-                    //获取发送过来的消息容器
-                    byte[] buffer = new byte[1024 * 2];
-                    var effective = 0;
-                    try
-                    {
-                        effective = send.Receive(buffer);
-                    }
-                    catch { break; }
-                    //有效字节为0则跳过
-                    if (effective == 0)
-                    {
-                        break;
-                    }
-                    string sendHL7new = "";
-                    string sendHL7 = "MSH|^~\\&|||Rayto||1||ACK^R01|1|P|2.3.1||||S||UNICODE|||MSA|AA|1|||||";
-                    string []sendArray= sendHL7.Split('|');
-                    byte[] buffernew = buffer.Skip(0).Take(effective).ToArray();
-                //totalByteRead.Concat(byteRead).ToArray();
+                    effective = send.Receive(buffer);
+                }
+                catch { break; }
+                //有效字节为0则跳过
+                if (effective == 0)
+                {
+                    break;
+                }
+                string sendHL7new = "";
+                string sendHL7 = "MSH|^~\\&|||Rayto||1||ACK^R01|1|P|2.3.1||||S||UNICODE|||MSA|AA|1|||||";
+                string []sendArray= sendHL7.Split('|');
+                byte[] buffernew = buffer.Skip(0).Take(effective).ToArray();
                 string sHL7 = Encoding.Default.GetString(buffernew).Trim();
                 using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
                 {
@@ -1900,7 +1899,7 @@ namespace zkhwClient
                         sendArray[9] = MSHArray[9];
                         sendArray[22] = MSHArray[9];
                         string[] sHL7PArray = sHL7Pids[1].Split('|');
-                        xcg.bar_code = sHL7PArray[33];
+                        xcg.bar_code = sHL7PArray[2];
                         //DataTable dtjkinfo = jkdao.selectjkInfoBybarcode(xcg.bar_code);
                         //if (dtjkinfo != null && dtjkinfo.Rows.Count > 0)
                         //{
@@ -1969,6 +1968,11 @@ namespace zkhwClient
                     }
                }
            }
+        }
+
+        private void 预防接种服务ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1988,7 +1988,7 @@
             // 
             // comboBox1
             // 
-            this.comboBox1.DropDownHeight = 50;
+            this.comboBox1.DropDownHeight = 100;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.IntegralHeight = false;
             this.comboBox1.Location = new System.Drawing.Point(245, 0);
