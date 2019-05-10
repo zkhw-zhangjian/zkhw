@@ -30,6 +30,8 @@ namespace zkhwClient.view.PublicHealthView
         /// 身份证号
         /// </summary>
         public string id_number { get; set; }
+        public bool show { get; set; } = true;
+        public string mag { get; set; }
         /// <summary>
         /// 非首次随访添加
         /// </summary>
@@ -44,10 +46,12 @@ namespace zkhwClient.view.PublicHealthView
             IS = ps;
             if (GetRecord())
             {
-                MessageBox.Show("没有添加第一次随访记录不可新增！");
+                show = false;
+                mag = "没有添加第一次随访记录不可新增！";
                 return;
             }
             this.Text = (IS == 1 ? "非首次随访添加" : "非首次随访修改");
+            InitializeComponent();
             if (IS == 0)
             {
                 if (GetUpdate())
@@ -56,11 +60,11 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 else
                 {
-                    MessageBox.Show("没有修改数据！");
+                    show = false;
+                    mag = "没有修改数据！";
                     return;
                 }
             }
-            InitializeComponent();
         }
         /// <summary>
         /// 新增
@@ -72,7 +76,7 @@ namespace zkhwClient.view.PublicHealthView
             info.name = Names;
             info.aichive_no = aichive_no;
             info.Cardcode = id_number;
-            string issql = @"insert into tuberculosis_follow_record(id,name,aichive_no,Cardcode,visit_date,month_order,supervisor_type,visit_type,symptom,symptom_other,smoke_now,smoke_next,drink_now,drink_next,chemotherapy_plan,usage,drugs_type,miss,untoward_effect,untoward_effect_info,complication,complication_info,transfer_treatment_department,transfer_treatment_reason,twoweek_visit_result,handling_suggestion,next_visit_date,visit_doctor,stop_date,stop_reason,must_visit_num,actual_visit_num,must_medicine_num,actual_medicine_num,medicine_rate,estimate_doctor,create_user,create_name,create_time,upload_status) values(@id,@name,@aichive_no,@Cardcode,@visit_date,@month_order,@supervisor_type,@visit_type,@symptom,@symptom_other,@smoke_now,@smoke_next,@drink_now,@drink_next,@chemotherapy_plan,@usage,@drugs_type,@miss,@untoward_effect,@untoward_effect_info,@complication,@complication_info,@transfer_treatment_department,@transfer_treatment_reason,@twoweek_visit_result,@handling_suggestion,@next_visit_date,@visit_doctor,@stop_date,@stop_reason,@must_visit_num,@actual_visit_num,@must_medicine_num,@actual_medicine_num,@medicine_rate,@estimate_doctor,@create_user,@create_name,@create_time,@upload_status)";
+            string issql = @"insert into tuberculosis_follow_record(id,name,aichive_no,Cardcode,visit_date,month_order,supervisor_type,visit_type,symptom,symptom_other,smoke_now,smoke_next,drink_now,drink_next,chemotherapy_plan,`usage`,drugs_type,miss,untoward_effect,untoward_effect_info,complication,complication_info,transfer_treatment_department,transfer_treatment_reason,twoweek_visit_result,handling_suggestion,next_visit_date,visit_doctor,stop_date,stop_reason,must_visit_num,actual_visit_num,must_medicine_num,actual_medicine_num,medicine_rate,estimate_doctor,create_user,create_name,create_time,upload_status) values(@id,@name,@aichive_no,@Cardcode,@visit_date,@month_order,@supervisor_type,@visit_type,@symptom,@symptom_other,@smoke_now,@smoke_next,@drink_now,@drink_next,@chemotherapy_plan,@usage,@drugs_type,@miss,@untoward_effect,@untoward_effect_info,@complication,@complication_info,@transfer_treatment_department,@transfer_treatment_reason,@twoweek_visit_result,@handling_suggestion,@next_visit_date,@visit_doctor,@stop_date,@stop_reason,@must_visit_num,@actual_visit_num,@must_medicine_num,@actual_medicine_num,@medicine_rate,@estimate_doctor,@create_user,@create_name,@create_time,@upload_status)";
             MySqlParameter[] args = new MySqlParameter[] {
                     new MySqlParameter("@id",info.id),
                     new MySqlParameter("@name", info.name),
@@ -127,7 +131,7 @@ namespace zkhwClient.view.PublicHealthView
             info.name = Names;
             info.aichive_no = aichive_no;
             info.Cardcode = id_number;
-            string issql = @"update tuberculosis_follow_record set visit_date=@visit_date,month_order=@month_order,supervisor_type=@supervisor_type,visit_type=@visit_type,symptom=@symptom,symptom_other=@symptom_other,smoke_now=@smoke_now,smoke_next=@smoke_next,drink_now=@drink_now,drink_next=@drink_next,chemotherapy_plan=@chemotherapy_plan,usage=@usage,drugs_type=@drugs_type,miss=@miss,untoward_effect=@untoward_effect,untoward_effect_info=@untoward_effect_info,complication=@complication,complication_info=@complication_info,transfer_treatment_department=@transfer_treatment_department,transfer_treatment_reason=@transfer_treatment_reason,twoweek_visit_result=@twoweek_visit_result,handling_suggestion=@handling_suggestion,next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,stop_date=@stop_date,stop_reason=@stop_reason,must_visit_num=@must_visit_num,@actual_visit_num=@actual_visit_num,must_medicine_num=@must_medicine_num,actual_medicine_num=@actual_medicine_num,medicine_rate=@medicine_rate,estimate_doctor=@estimate_doctor,update_user=@update_user,update_name=@update_name,update_time=@update_time where name=@name and aichive_no=@aichive_no and Cardcode=@Cardcode";
+            string issql = @"update tuberculosis_follow_record set visit_date=@visit_date,month_order=@month_order,supervisor_type=@supervisor_type,visit_type=@visit_type,symptom=@symptom,symptom_other=@symptom_other,smoke_now=@smoke_now,smoke_next=@smoke_next,drink_now=@drink_now,drink_next=@drink_next,chemotherapy_plan=@chemotherapy_plan,`usage`=@usage,drugs_type=@drugs_type,miss=@miss,untoward_effect=@untoward_effect,untoward_effect_info=@untoward_effect_info,complication=@complication,complication_info=@complication_info,transfer_treatment_department=@transfer_treatment_department,transfer_treatment_reason=@transfer_treatment_reason,twoweek_visit_result=@twoweek_visit_result,handling_suggestion=@handling_suggestion,next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,stop_date=@stop_date,stop_reason=@stop_reason,must_visit_num=@must_visit_num,actual_visit_num=@actual_visit_num,must_medicine_num=@must_medicine_num,actual_medicine_num=@actual_medicine_num,medicine_rate=@medicine_rate,estimate_doctor=@estimate_doctor,update_user=@update_user,update_name=@update_name,update_time=@update_time where id=(select a.id from( select id from tuberculosis_follow_record where `name`=@name and aichive_no=@aichive_no and Cardcode=@Cardcode order by create_time desc LIMIT 1)a)";
             MySqlParameter[] args = new MySqlParameter[] {
                     new MySqlParameter("@name", info.name),
                     new MySqlParameter("@aichive_no", info.aichive_no),
@@ -199,9 +203,9 @@ namespace zkhwClient.view.PublicHealthView
                     }
                 }
             }
+            string symptom = string.Empty;
             foreach (Control item in 症状及体征1.Controls)
             {
-                string symptom = string.Empty;
                 if (item is CheckBox)
                 {
                     if (((CheckBox)item).Checked)
@@ -213,8 +217,8 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     info.symptom_other = ((RichTextBox)item).Text;
                 }
-                info.symptom = symptom.TrimEnd(',');
             }
+            info.symptom = symptom.TrimEnd(',');
             info.smoke_now = Convert.ToInt32(吸烟a1.Text);
             info.smoke_next = Convert.ToInt32(吸烟a2.Text);
             info.drink_now = Convert.ToInt32(饮酒a1.Text);
@@ -240,7 +244,7 @@ namespace zkhwClient.view.PublicHealthView
                     }
                 }
             }
-            info.miss = 漏服药次数1.Text;
+            info.miss = Convert.ToInt32(string.IsNullOrWhiteSpace(漏服药次数1.Text) ? "0" : 漏服药次数1.Text);
             foreach (Control item in 药物不良反应1.Controls)
             {
                 if (item is RadioButton)
@@ -265,18 +269,18 @@ namespace zkhwClient.view.PublicHealthView
             info.handling_suggestion = 处理意见1.Text;
             info.next_visit_date = 下次随访时间1.Value.ToString("yyyy-MM-dd HH:mm:ss");
             info.visit_doctor = 随访医生签名1.Text;
+            string stop_reason = string.Empty;
             foreach (Control item in 停止治疗原因1.Controls)
             {
-                string symptom = string.Empty;
                 if (item is CheckBox)
                 {
                     if (((CheckBox)item).Checked)
                     {
-                        symptom += ((CheckBox)item).Tag.ToString() + ",";
+                        stop_reason += ((CheckBox)item).Tag.ToString() + ",";
                     }
                 }
-                info.stop_reason = symptom.TrimEnd(',');
             }
+            info.stop_reason = symptom.TrimEnd(',');
             info.stop_date = 出现停止治疗时间1.Value.ToString("yyyy-MM-dd HH:mm:ss");
             info.must_visit_num = 应访视患者次数1.Text;
             info.actual_visit_num = 实际访视次数1.Text;
@@ -373,7 +377,7 @@ namespace zkhwClient.view.PublicHealthView
                             }
                         }
                     }
-                    漏服药次数1.Text = dt.miss;
+                    漏服药次数1.Text = dt.miss.ToString();
                     foreach (Control item in 药物不良反应1.Controls)
                     {
                         if (item is RadioButton)
@@ -436,7 +440,7 @@ namespace zkhwClient.view.PublicHealthView
         /// <returns></returns>
         private bool GetRecord()
         {
-            DataSet data = DbHelperMySQL.Query($@"select * from tuberculosis_info where name='{Names}' and aichive_no='{aichive_no}' and Cardcode='{id_number}'");
+            DataSet data = DbHelperMySQL.Query($@"select * from tuberculosis_info where name='{Names}' and archive_no='{aichive_no}' and Cardcode='{id_number}'");
             if (data != null && data.Tables[0] != null && data.Tables[0].Rows.Count > 0)
             {
                 return false;
@@ -555,7 +559,7 @@ namespace zkhwClient.view.PublicHealthView
         /// <summary>
         /// 漏服药次数
         /// </summary>
-        public string miss { get; set; }
+        public int miss { get; set; }
         /// <summary>
         /// 服药后的不良反应及处理
         /// </summary>

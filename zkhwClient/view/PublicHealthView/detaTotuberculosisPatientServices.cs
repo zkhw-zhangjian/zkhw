@@ -26,7 +26,8 @@ namespace zkhwClient.view.PublicHealthView
         /// 身份证号
         /// </summary>
         public string id_number { get; set; }
-
+        public bool show { get; set; } = true;
+        public string mag { get; set; }
         /// <summary>
         /// 非首次随访添加
         /// </summary>
@@ -40,7 +41,8 @@ namespace zkhwClient.view.PublicHealthView
             id_number = id_numbers;
             if (GetRecord())
             {
-                MessageBox.Show("没有详细信息！");
+                show = false;
+                mag = "没有详细信息！";
                 return;
             }
             InitializeComponent();
@@ -52,7 +54,7 @@ namespace zkhwClient.view.PublicHealthView
         /// </summary>
         private void SetData()
         {
-            string sql = $@"select * from tuberculosis_follow_record where name='{Names}' and aichive_no='{aichive_no}' and Cardcode='{id_number}' order by create_time desc LIMIT 1";
+            string sql = $@"select * from tuberculosis_follow_record where name='{Names}' and aichive_no='{aichive_no}' and Cardcode='{id_number}'";
             DataSet jb = DbHelperMySQL.Query(sql);
             if (jb != null && jb.Tables.Count > 0 && jb.Tables[0].Rows.Count > 0)
             {
@@ -64,7 +66,7 @@ namespace zkhwClient.view.PublicHealthView
                     Control sfsj = Controls.Find($"随访时间{a}", true)[0];
                     ((DateTimePicker)sfsj).Value = Convert.ToDateTime(dt.visit_date);
                     Control zlyx = Controls.Find($"治疗月序{a}", true)[0];
-                    ((TextBox)sfsj).Text = dt.month_order;
+                    ((TextBox)zlyx).Text = dt.month_order;
                     Control ddry = Controls.Find($"督导人员{a}", true)[0];
                     foreach (Control item in ((GroupBox)ddry).Controls)
                     {
@@ -149,7 +151,7 @@ namespace zkhwClient.view.PublicHealthView
                         }
                     }
                     Control lfycs = Controls.Find($"漏服药次数{a}", true)[0];
-                    ((TextBox)lfycs).Text = dt.miss;
+                    ((TextBox)lfycs).Text = dt.miss.ToString();
                     Control ywblfy = Controls.Find($"药物不良反应{a}", true)[0];
                     foreach (Control item in ((GroupBox)ywblfy).Controls)
                     {
@@ -173,7 +175,7 @@ namespace zkhwClient.view.PublicHealthView
                     Control zzyy = Controls.Find($"转诊原因{a}", true)[0];
                     ((TextBox)zzyy).Text = dt.transfer_treatment_reason;
                     Control zzjg = Controls.Find($"转诊结果{a}", true)[0];
-                    ((TextBox)zzjg).Text = dt.twoweek_visit_result;
+                    ((RichTextBox)zzjg).Text = dt.twoweek_visit_result;
                     Control clyj = Controls.Find($"处理意见{a}", true)[0];
                     ((TextBox)clyj).Text = dt.handling_suggestion;
                     Control xcfwsj = Controls.Find($"下次随访时间{a}", true)[0];

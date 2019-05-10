@@ -860,19 +860,19 @@ namespace zkhwClient
         //定时任务获取生化和血球的数据
         private void timer2_Tick(object sender, EventArgs e)
         {
-            xmlDoc.Load(path);
-            node = xmlDoc.SelectSingleNode("config/shenghuaPath");
-            shenghuapath = node.InnerText;
-            node = xmlDoc.SelectSingleNode("config/xuechangguiPath");
-            xuechangguipath = node.InnerText;
-            node = xmlDoc.SelectSingleNode("config/shlasttime");
-            shlasttime = node.InnerText;
-            node = xmlDoc.SelectSingleNode("config/xcglasttime");
-            xcglasttime = node.InnerText;
+            //xmlDoc.Load(path);
+            //node = xmlDoc.SelectSingleNode("config/shenghuaPath");
+            //shenghuapath = node.InnerText;
+            //node = xmlDoc.SelectSingleNode("config/xuechangguiPath");
+            //xuechangguipath = node.InnerText;
+            //node = xmlDoc.SelectSingleNode("config/shlasttime");
+            //shlasttime = node.InnerText;
+            //node = xmlDoc.SelectSingleNode("config/xcglasttime");
+            //xcglasttime = node.InnerText;
 
-            Thread demoThread = new Thread(new ThreadStart(shAndxcg));
-            demoThread.IsBackground = true;
-            demoThread.Start();//启动线程 
+            //Thread demoThread = new Thread(new ThreadStart(shAndxcg));
+            //demoThread.IsBackground = true;
+            //demoThread.Start();//启动线程 
         }
         private void shAndxcg()
         {
