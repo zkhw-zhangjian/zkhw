@@ -129,7 +129,7 @@ from resident_base_info base
 join 
 (select * from zkhw_tj_bgdc group by aichive_no order by createtime desc) bgdc
 on base.archive_no=bgdc.aichive_no
-where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{basicInfoSettings.createtime}'";//base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'
+where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{Convert.ToDateTime(basicInfoSettings.createtime).ToString("yyyy-MM-dd")}'";//base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'
             if (pairs != null && pairs.Count > 0)
             {
                 if (!string.IsNullOrWhiteSpace(pairs["timesta"]) && !string.IsNullOrWhiteSpace(pairs["timeend"]))
@@ -235,7 +235,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             //checkbox 勾上
-            if (e.RowIndex==-1) { return; }
+            if (e.RowIndex == -1) { return; }
             if ((bool)dataGridView1.Rows[e.RowIndex].Cells[0].EditedFormattedValue == true)
             {
                 this.dataGridView1.Rows[e.RowIndex].Cells[0].Value = false;
@@ -1599,7 +1599,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                         for (int j = 0; j < da.Rows.Count; j++)
                         {
                             string BuPic01 = da.Rows[j]["BuPic01"].ToString();
-                            if (BuPic01 != null && !"".Equals(BuPic01) && File.Exists(@str+@"\bcImg\"+BuPic01))
+                            if (BuPic01 != null && !"".Equals(BuPic01) && File.Exists(@str + @"\bcImg\" + BuPic01))
                             {
                                 builder.MoveToBookmark("图1");
                                 builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic01, 400, 650));
