@@ -1166,6 +1166,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             hy.Add("酸碱度结果", da.Rows[j]["PH"].ToString());
                             hy.Add("维生素C箭头", Convert.ToDouble(da.Rows[j]["Vc"].ToString()) > 40 ? "↑" : "↓");
                             hy.Add("维生素C结果", da.Rows[j]["Vc"].ToString());
+                            hy.Add("送检日期1", da.Rows[j]["createtime"].ToString());
                         }
                     }
 
