@@ -33,7 +33,7 @@ namespace zkhwClient.view.PublicHealthView
         string xcuncode = null;
         string jmxx = null;
         string str = Application.StartupPath;//项目路径
-        DataTable dttv = new DataTable();
+        DataTable dttv = null;
         public examinatProgress()
         {
             InitializeComponent();

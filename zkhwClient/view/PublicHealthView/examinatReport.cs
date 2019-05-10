@@ -235,6 +235,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             //checkbox 勾上
+            if (e.RowIndex==-1) { return; }
             if ((bool)dataGridView1.Rows[e.RowIndex].Cells[0].EditedFormattedValue == true)
             {
                 this.dataGridView1.Rows[e.RowIndex].Cells[0].Value = false;
@@ -516,7 +517,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
             {
                 DataTable ge = new DataTable();
                 List<string> list = new List<string>();
-                List<string> ide = new List<string>();
+                List<ComboBoxData> ide = new List<ComboBoxData>();
                 DataSet dataSet = new DataSet();
 
                 foreach (Control ctrl in groupBox4.Controls)
@@ -537,10 +538,13 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
 
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
+                    ComboBoxData combo = new ComboBoxData();
                     if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
                     {
                         string id = dataGridView1["编码", i].Value.ToString();
-                        ide.Add("'" + id + "'");
+                        combo.ID = "'" + id + "'";
+                        combo.Name = dataGridView1["姓名", i].Value.ToString();
+                        ide.Add(combo);
                     }
                 }
                 if (ide.Count < 1)
@@ -548,7 +552,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                     MessageBox.Show("请选择要导出报告的人员!"); return;
                 }
                 string sql = string.Empty;
-                sql = $@"select * from resident_base_info base where base.archive_no in({string.Join(",", ide)})";
+                sql = $@"select * from resident_base_info base where base.archive_no in({string.Join(",", ide.Select(m => m.ID).ToList())})";
                 DataSet datas = DbHelperMySQL.Query(sql);
                 if (datas != null && datas.Tables.Count > 0)
                 {
@@ -582,7 +586,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
             }
         }
 
-        private bool PDF(List<string> list, DataSet dataSet, List<string> ide)
+        private bool PDF(List<string> list, DataSet dataSet, List<ComboBoxData> ide)
         {
             Document doc = null;
             if (list.Count > 1)
@@ -593,7 +597,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                     foreach (var items in list)
                     {
                         Report report = new Report();
-                        DataRow data = dataSet.Tables["个人"].Select($"archive_no={item}")[0];
+                        DataRow data = dataSet.Tables["个人"].Select($"archive_no={item.ID}")[0];
                         report.Name = items;
                         report.Doc = PdfProcessing(items, data);
                         reports.Add(report);
@@ -612,7 +616,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                                 re.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
                             }
                         }
-                        string urls = @str + $"/up/result/{item}.pdf";
+                        string urls = @str + $"/up/result/{item.Name + item.ID}.pdf";
                         DeteleFile(urls);
                         re.Doc.Save(urls, SaveFormat.Pdf);
                     }
@@ -626,7 +630,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                                 re.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
                             }
                         }
-                        string urls = @str + $"/up/result/{item}.pdf";
+                        string urls = @str + $"/up/result/{item.Name + item.ID}.pdf";
                         DeteleFile(urls);
                         re.Doc.Save(urls, SaveFormat.Pdf);
                     }
@@ -640,7 +644,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                                 res.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
                             }
                         }
-                        string urls = @str + $"/up/result/{item}.pdf";
+                        string urls = @str + $"/up/result/{item.Name + item.ID}.pdf";
                         DeteleFile(urls);
                         res.Doc.Save(urls, SaveFormat.Pdf);
                     }
@@ -655,7 +659,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                                 rp.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
                             }
                         }
-                        string urls = @str + $"/up/result/{item}.pdf";
+                        string urls = @str + $"/up/result/{item.Name + item.ID}.pdf";
                         DeteleFile(urls);
                         rp.Doc.Save(urls, SaveFormat.Pdf);
                     }
@@ -702,7 +706,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                         {
                             re.Doc.AppendDocument(item.Doc, ImportFormatMode.KeepSourceFormatting);
                         }
-                        string urls = @str + $"/up/result/{data["archive_no"].ToString()}.pdf";
+                        string urls = @str + $"/up/result/{data["name"].ToString() + data["archive_no"].ToString()}.pdf";
                         DeteleFile(urls);
                         re.Doc.Save(urls, SaveFormat.Pdf);
                     }
@@ -713,7 +717,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                     {
                         DataRow data = dataSet.Tables["个人"].Rows[i];
                         doc = PdfProcessing(list[0], data);
-                        string urls = @str + $"/up/result/{data["archive_no"].ToString()}.pdf";
+                        string urls = @str + $"/up/result/{data["name"].ToString() + data["archive_no"].ToString()}.pdf";
                         DeteleFile(urls);
                         doc.Save(urls, SaveFormat.Pdf);
                     }
@@ -1163,6 +1167,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             hy.Add("酸碱度结果", da.Rows[j]["PH"].ToString());
                             hy.Add("维生素C箭头", Convert.ToDouble(da.Rows[j]["Vc"].ToString()) > 40 ? "↑" : "↓");
                             hy.Add("维生素C结果", da.Rows[j]["Vc"].ToString());
+                            hy.Add("送检日期1", da.Rows[j]["createtime"].ToString());
                         }
                     }
 
@@ -1280,6 +1285,14 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             jktj.Add("毒物种类5", jkdata.Rows[j]["lifeway_other_preventive"].ToString());
                             jktj.Add("毒物种类名5", jkdata.Rows[j]["lifeway_hazardous_other"].ToString());
                             jktj.Add("口唇", jkdata.Rows[j]["organ_lips"].ToString());
+                            jktj.Add("缺齿右上", jkdata.Rows[j]["organ_hypodontia_topright"].ToString());
+                            jktj.Add("缺齿右下", jkdata.Rows[j]["organ_hypodontia_bottomright"].ToString());
+                            jktj.Add("缺齿左上", jkdata.Rows[j]["organ_hypodontia_topleft"].ToString());
+                            jktj.Add("缺齿左下", jkdata.Rows[j]["organ_hypodontia_bottomleft"].ToString());
+                            jktj.Add("龋齿右上", jkdata.Rows[j]["organ_caries_topright"].ToString());
+                            jktj.Add("龋齿右下", jkdata.Rows[j]["organ_caries_bottomright"].ToString());
+                            jktj.Add("龋齿左上", jkdata.Rows[j]["organ_caries_topleft"].ToString());
+                            jktj.Add("龋齿左下", jkdata.Rows[j]["organ_caries_bottomleft"].ToString());
                             string cl = jkdata.Rows[j]["organ_tooth"].ToString();
                             if (cl.IndexOf(',') >= 0)
                             {
@@ -1440,23 +1453,27 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             if (zys != null && zys.Tables.Count > 0 && zys.Tables[0].Rows.Count > 0)
                             {
                                 DataTable da = zys.Tables[0];
+                                int a = 0;
+                                int b = 0;
                                 for (int k = 0; k < da.Rows.Count; k++)
                                 {
-                                    if (da.Rows[j]["hospitalized_type"].ToString() == "1")
+                                    if (da.Rows[k]["hospitalized_type"].ToString() == "1")
                                     {
-                                        jktj.Add("住院入时间" + (k + 1), da.Rows[k]["in_hospital_time"].ToString());
-                                        jktj.Add("住院出时间" + (k + 1), da.Rows[k]["leave_hospital_time"].ToString());
-                                        jktj.Add("住院原因" + (k + 1), da.Rows[k]["reason"].ToString());
-                                        jktj.Add("医疗机构" + (k + 1), da.Rows[k]["hospital_organ"].ToString());
-                                        jktj.Add("病案号" + (k + 1), da.Rows[k]["case_code"].ToString());
+                                        a++;
+                                        jktj.Add("住院入时间" + a, da.Rows[k]["in_hospital_time"].ToString());
+                                        jktj.Add("住院出时间" + a, da.Rows[k]["leave_hospital_time"].ToString());
+                                        jktj.Add("住院原因" + a, da.Rows[k]["reason"].ToString());
+                                        jktj.Add("医疗机构" + a, da.Rows[k]["hospital_organ"].ToString());
+                                        jktj.Add("病案号" + a, da.Rows[k]["case_code"].ToString());
                                     }
-                                    else if (jkdata.Rows[j]["hospitalized_type"].ToString() == "2")
+                                    else if (da.Rows[k]["hospitalized_type"].ToString() == "2")
                                     {
-                                        jktj.Add("家庭病床建" + (k + 1), da.Rows[k]["in_hospital_time"].ToString());
-                                        jktj.Add("家庭病床撤" + (k + 1), da.Rows[k]["leave_hospital_time"].ToString());
-                                        jktj.Add("家庭病床原因" + (k + 1), da.Rows[k]["reason"].ToString());
-                                        jktj.Add("家庭病床医疗机构" + (k + 1), da.Rows[k]["hospital_organ"].ToString());
-                                        jktj.Add("家庭病床病案号" + (k + 1), da.Rows[k]["case_code"].ToString());
+                                        b++;
+                                        jktj.Add("家庭病床建" + b, da.Rows[k]["in_hospital_time"].ToString());
+                                        jktj.Add("家庭病床撤" + b, da.Rows[k]["leave_hospital_time"].ToString());
+                                        jktj.Add("家庭病床原因" + b, da.Rows[k]["reason"].ToString());
+                                        jktj.Add("家庭病床医疗机构" + b, da.Rows[k]["hospital_organ"].ToString());
+                                        jktj.Add("家庭病床病案号" + b, da.Rows[k]["case_code"].ToString());
                                     }
                                 }
                             }
@@ -1481,7 +1498,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                                 {
                                     jktj.Add("预防接种名称" + (k + 1), da.Rows[k]["vaccination_name"].ToString());
                                     jktj.Add("预防接种时间" + (k + 1), da.Rows[k]["vaccination_time"].ToString());
-                                    jktj.Add("预防接种机构" + (k + 1), da.Rows[k]["vaccination_organ"].ToString());
+                                    jktj.Add("预防接种机构" + (k + 1), da.Rows[k]["vaccination_organ_name"].ToString());
                                 }
                             }
                             jktj.Add("健康评价", jkdata.Rows[j]["health_evaluation"].ToString());
@@ -1581,29 +1598,29 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                         DataTable da = bcs.Tables[0];
                         for (int j = 0; j < da.Rows.Count; j++)
                         {
-                            string imageUrla = da.Rows[j]["BuPic01"].ToString();
-                            if (imageUrla != null && !"".Equals(imageUrla) && File.Exists(@str + "/bcImg/" + imageUrla))
+                            string BuPic01 = da.Rows[j]["BuPic01"].ToString();
+                            if (BuPic01 != null && !"".Equals(BuPic01) && File.Exists(@str+@"\bcImg\"+BuPic01))
                             {
-                                builder.MoveToBookmark("图片1");
-                                builder.InsertImage(resizeImageFromFile(@str + "/bcImg/" + imageUrla, 768, 1024));
+                                builder.MoveToBookmark("图1");
+                                builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic01, 400, 650));
                             }
-                            string imageUrlb = da.Rows[j]["BuPic02"].ToString();
-                            if (imageUrlb != null && !"".Equals(imageUrlb) && File.Exists(@str + "/bcImg/" + imageUrla))
+                            string BuPic02 = da.Rows[j]["BuPic02"].ToString();
+                            if (BuPic02 != null && !"".Equals(BuPic02) && File.Exists(@str + @"\bcImg\" + BuPic02))
                             {
-                                builder.MoveToBookmark("图片2");
-                                builder.InsertImage(resizeImageFromFile(@str + "/bcImg/" + imageUrlb, 768, 1024));
+                                builder.MoveToBookmark("图2");
+                                builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic02, 400, 650));
                             }
-                            string imageUrlc = da.Rows[j]["BuPic03"].ToString();
-                            if (imageUrlc != null && !"".Equals(imageUrlc) && File.Exists(@str + "/bcImg/" + imageUrla))
+                            string BuPic03 = da.Rows[j]["BuPic03"].ToString();
+                            if (BuPic03 != null && !"".Equals(BuPic03) && File.Exists(@str + @"\bcImg\" + BuPic03))
                             {
-                                builder.MoveToBookmark("图片3");
-                                builder.InsertImage(resizeImageFromFile(@str + "/bcImg/" + imageUrlc, 768, 1024));
+                                builder.MoveToBookmark("图3");
+                                builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic03, 400, 650));
                             }
-                            string imageUrld = da.Rows[j]["BuPic04"].ToString();
-                            if (imageUrld != null && !"".Equals(imageUrld) && File.Exists(@str + "/bcImg/" + imageUrla))
+                            string BuPic04 = da.Rows[j]["BuPic04"].ToString();
+                            if (BuPic04 != null && !"".Equals(BuPic04) && File.Exists(@str + @"\bcImg\" + BuPic04))
                             {
-                                builder.MoveToBookmark("图片4");
-                                builder.InsertImage(resizeImageFromFile(@str + "/bcImg/" + imageUrld, 768, 1024));
+                                builder.MoveToBookmark("图4");
+                                builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic04, 400, 650));
                             }
                             bc.Add("条码号", da.Rows[j]["bar_code"].ToString());
                             bc.Add("诊断医师", "");
@@ -2075,7 +2092,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                     DataTable data = info.Tables[0];
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
-                        sqllist.Add($@"insert into resident_base_info (id,archive_no,pb_archive,name,sex,birthday,id_number,card_pic,company,phone,link_name,link_phone,resident_type,register_address,residence_address,nation,blood_group,blood_rh,education,profession,marital_status,pay_type,pay_other,drug_allergy,allergy_other,exposure,disease_other,is_hypertension,is_diabetes,is_psychosis,is_tuberculosis,is_heredity,heredity_name,is_deformity,deformity_name,is_poor,kitchen,fuel,other_fuel,drink,other_drink,toilet,poultry,medical_code,photo_code,aichive_org,doctor_name,province_code,province_name,city_code,city_name,county_code,county_name,towns_code,towns_name,village_code,village_name,status,remark,create_user,create_name,create_time,create_org,create_org_name
+                        sqllist.Add($@"insert into resident_info_temp (id,archive_no,pb_archive,name,sex,birthday,id_number,card_pic,company,phone,link_name,link_phone,resident_type,register_address,residence_address,nation,blood_group,blood_rh,education,profession,marital_status,pay_type,pay_other,drug_allergy,allergy_other,exposure,disease_other,is_hypertension,is_diabetes,is_psychosis,is_tuberculosis,is_heredity,heredity_name,is_deformity,deformity_name,is_poor,kitchen,fuel,other_fuel,drink,other_drink,toilet,poultry,medical_code,photo_code,aichive_org,doctor_name,province_code,province_name,city_code,city_name,county_code,county_name,towns_code,towns_name,village_code,village_name,status,remark,create_user,create_name,create_time,create_org,create_org_name
 ) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["archive_no"])},{Ifnull(data.Rows[i]["pb_archive"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["sex"])},{Ifnull(data.Rows[i]["birthday"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["card_pic"])},{Ifnull(data.Rows[i]["company"])},{Ifnull(data.Rows[i]["phone"])},{Ifnull(data.Rows[i]["link_name"])},{Ifnull(data.Rows[i]["link_phone"])},{Ifnull(data.Rows[i]["resident_type"])},{Ifnull(data.Rows[i]["address"])},{Ifnull(data.Rows[i]["residence_address"])},{Ifnull(data.Rows[i]["nation"])},{Ifnull(data.Rows[i]["blood_group"])},{Ifnull(data.Rows[i]["blood_rh"])},{Ifnull(data.Rows[i]["education"])},{Ifnull(data.Rows[i]["profession"])},{Ifnull(data.Rows[i]["marital_status"])},{Ifnull(data.Rows[i]["pay_type"])},{Ifnull(data.Rows[i]["pay_other"])},{Ifnull(data.Rows[i]["drug_allergy"])},{Ifnull(data.Rows[i]["allergy_other"])},{Ifnull(data.Rows[i]["exposure"])},{Ifnull(data.Rows[i]["disease_other"])},{Ifnull(data.Rows[i]["is_hypertension"])},{Ifnull(data.Rows[i]["is_diabetes"])},{Ifnull(data.Rows[i]["is_psychosis"])},{Ifnull(data.Rows[i]["is_tuberculosis"])},{Ifnull(data.Rows[i]["is_heredity"])},{Ifnull(data.Rows[i]["heredity_name"])},{Ifnull(data.Rows[i]["is_deformity"])},{Ifnull(data.Rows[i]["deformity_name"])},{Ifnull(data.Rows[i]["is_poor"])},{Ifnull(data.Rows[i]["kitchen"])},{Ifnull(data.Rows[i]["fuel"])},{Ifnull(data.Rows[i]["other_fuel"])},{Ifnull(data.Rows[i]["drink"])},{Ifnull(data.Rows[i]["other_drink"])},{Ifnull(data.Rows[i]["toilet"])},{Ifnull(data.Rows[i]["poultry"])},{Ifnull(data.Rows[i]["medical_code"])},{Ifnull(data.Rows[i]["photo_code"])},{Ifnull(data.Rows[i]["aichive_org"])},{Ifnull(data.Rows[i]["doctor_name"])},{Ifnull(data.Rows[i]["province_code"])},{Ifnull(data.Rows[i]["province_name"])},{Ifnull(data.Rows[i]["city_code"])},{Ifnull(data.Rows[i]["city_name"])},{Ifnull(data.Rows[i]["county_code"])},{Ifnull(data.Rows[i]["county_name"])},{Ifnull(data.Rows[i]["towns_code"])},{Ifnull(data.Rows[i]["towns_name"])},{Ifnull(data.Rows[i]["village_code"])},{Ifnull(data.Rows[i]["village_name"])},{Ifnull(data.Rows[i]["status"])},{Ifnull(data.Rows[i]["remark"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},'{Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss")}',{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])});");
                         infoid += $"'{data.Rows[i]["id"]}',";
                     }
@@ -2385,7 +2402,8 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                 //说明点击的列是DataGridViewButtonColumn列
                 DataGridViewColumn column = dataGridView1.Columns[e.ColumnIndex];
                 string id = dataGridView1["编码", e.RowIndex].Value.ToString();
-                OpenPdf(@str + $"/up/result/{id}.pdf");
+                string name = dataGridView1["姓名", e.RowIndex].Value.ToString();
+                OpenPdf(@str + $"/up/result/{name + id}.pdf");
             }
         }
     }

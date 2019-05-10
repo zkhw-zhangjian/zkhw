@@ -448,6 +448,20 @@ namespace zkhwClient.view.PublicHealthView
                 grjdxx.CardPic = textBox3.Text + ".jpg";
                 grjdxx.photo_code = grjdxx.Cardcode + ".jpg";
                 grjdxx.age = DateTime.Now.Year - Int32.Parse(grjdxx.Birthday.Substring(0, 4));
+                grjdxx.aichive_org = basicInfoSettings.organ_name;
+                grjdxx.doctor_name = basicInfoSettings.zeren_doctor;
+                grjdxx.create_archives_name = basicInfoSettings.input_name;
+                grjdxx.residence_address = basicInfoSettings.allareaname;
+                grjdxx.province_name = basicInfoSettings.shengName;
+                grjdxx.province_code = basicInfoSettings.shengcode;
+                grjdxx.city_code = basicInfoSettings.shicode;
+                grjdxx.city_name = basicInfoSettings.shiName;
+                grjdxx.county_code = basicInfoSettings.qxcode;
+                grjdxx.county_name = basicInfoSettings.qxName;
+                grjdxx.towns_code = basicInfoSettings.xzcode;
+                grjdxx.towns_name = basicInfoSettings.xzName;
+                grjdxx.village_code = basicInfoSettings.xcuncode;
+                grjdxx.village_name = basicInfoSettings.xcName;
             }
             else
             {
@@ -483,8 +497,8 @@ namespace zkhwClient.view.PublicHealthView
             DataTable dt = null;
             if (grjdxx != null)
             {
-                string cardcode= textBox3.Text;
-                if (cardcode != null && !"".Equals(cardcode)) {
+                string cardcode= grjdxx.Cardcode;
+                if (!"".Equals(cardcode)) {
                     dt = grjddao.judgeRepeat(textBox3.Text);
                 }
                 else {
@@ -492,35 +506,21 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 if (dt.Rows.Count < 1)
                 {
-                    if (!"".Equals(grjdxx.Cardcode))
+                    if (!"".Equals(cardcode))
                     {
                         grjdxx.archive_no = basicInfoSettings.xcuncode + "0" + grjdxx.Cardcode.Substring(14);
                     }
                     else
                     {
                         grjdxx.archive_no = basicInfoSettings.xcuncode + barcode.Substring(5, 4);
-                    }
-                    grjdxx.aichive_org = basicInfoSettings.organ_name;
-                    grjdxx.doctor_name = basicInfoSettings.zeren_doctor;
-                    grjdxx.create_archives_name = basicInfoSettings.input_name;
-                    grjdxx.residence_address = basicInfoSettings.allareaname;
-                    grjdxx.province_name = basicInfoSettings.shengName;
-                    grjdxx.province_code = basicInfoSettings.shengcode;
-                    grjdxx.city_code = basicInfoSettings.shicode;
-                    grjdxx.city_name = basicInfoSettings.shiName;
-                    grjdxx.county_code = basicInfoSettings.qxcode;
-                    grjdxx.county_name= basicInfoSettings.qxName;
-                    grjdxx.towns_code= basicInfoSettings.xzcode;
-                    grjdxx.towns_name = basicInfoSettings.xzName;
-                    grjdxx.village_code= basicInfoSettings.xcuncode;
-                    grjdxx.village_name = basicInfoSettings.xcName;
+                    }                  
                     grjddao.addgrjdInfo(grjdxx);//添加个人信息档案
-                    grjddao.addPhysicalExaminationInfo(grjdxx, barcode);//添加健康体检表信息 
                     registrationRecordCheck();//右侧统计
                 }
                 else {
                     grjdxx.archive_no = dt.Rows[0]["archive_no"].ToString();
                 }
+                grjddao.addPhysicalExaminationInfo(grjdxx, barcode);//添加健康体检表信息 
                 jkBean jk = new jkBean();
                 jk.aichive_no = grjdxx.archive_no;
                 jk.id_number = grjdxx.Cardcode;

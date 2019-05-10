@@ -30,7 +30,7 @@ namespace zkhwClient.view.publicRecord
             drug_name = this.textBox3.Text;
             drug_usage = this.textBox1.Text;
             drug_use = this.textBox2.Text;
-            drug_time = this.dateTimePicker1.Text.ToString();
+            drug_time = this.textBox4.Text;
             drug_type = this.comboBox1.Text;
             if (drug_name != "" && drug_usage != "" && drug_use != "") {
                 this.DialogResult = DialogResult.OK;

@@ -9,6 +9,7 @@ namespace zkhwClient.view.PublicHealthView
 {
     public partial class aUhealthcheckupServices4 : Form
     {
+        public string id = "";
         healthCheckupDao hcd = new healthCheckupDao();
         DataTable goodsList = new DataTable();//用药记录 take_medicine_record
         DataTable goodsListym = new DataTable();//疫苗记录 take_medicine_record
@@ -25,37 +26,94 @@ namespace zkhwClient.view.PublicHealthView
             label51.Left = (this.panel1.Width - this.label51.Width) / 2;
             label51.BringToFront();
 
-            DataTable dt = hcdao.queryTake_medicine_record(this.textBox4.Text);
+            DataTable dt = hcdao.queryTake_medicine_record(this.textBox1.Text);
             goodsList = dt.Clone();
-            if (dt.Rows.Count > 0)
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    DataRow drtmp = goodsList.NewRow();
-                    drtmp["drug_name"] = dt.Rows[i]["drug_name"].ToString();
-                    drtmp["drug_usage"] = dt.Rows[i]["drug_usage"].ToString();
-                    drtmp["drug_use"] = dt.Rows[i]["drug_use"].ToString();
-                    drtmp["drug_time"] = dt.Rows[i]["drug_time"].ToString();
-                    drtmp["drug_type"] = dt.Rows[i]["drug_type"].ToString();
-                    goodsList.Rows.Add(drtmp);
-                }
+                DataRow drtmp = goodsList.NewRow();
+                drtmp["drug_name"] = dt.Rows[i]["drug_name"].ToString();
+                drtmp["drug_usage"] = dt.Rows[i]["drug_usage"].ToString();
+                drtmp["drug_use"] = dt.Rows[i]["drug_use"].ToString();
+                drtmp["drug_time"] = dt.Rows[i]["drug_time"].ToString();
+                drtmp["drug_type"] = dt.Rows[i]["drug_type"].ToString();
+                goodsList.Rows.Add(drtmp);
             }
             goodsListBind();//加载用药记录清单表
 
-            DataTable dtym = hcdao.queryVaccination_record(this.textBox4.Text);
+            DataTable dtym = hcdao.queryVaccination_record(this.textBox1.Text);
             goodsListym = dtym.Clone();
-            if (dtym.Rows.Count > 0)
+            for (int i = 0; i < dtym.Rows.Count; i++)
             {
-                for (int i = 0; i < dtym.Rows.Count; i++)
-                {
-                    DataRow drtmp = goodsListym.NewRow();
-                    drtmp["vaccination_name"] = dtym.Rows[i]["vaccination_name"].ToString();
-                    drtmp["vaccination_time"] = dtym.Rows[i]["vaccination_time"].ToString();
-                    drtmp["vaccination_organ_name"] = dtym.Rows[i]["vaccination_organ_name"].ToString();
-                    goodsListym.Rows.Add(drtmp);
-                }
+                DataRow drtmp = goodsListym.NewRow();
+                drtmp["vaccination_name"] = dt.Rows[i]["vaccination_name"].ToString();
+                drtmp["vaccination_time"] = dt.Rows[i]["vaccination_time"].ToString();
+                drtmp["vaccination_organ_name"] = dt.Rows[i]["vaccination_organ_name"].ToString();
+                goodsListym.Rows.Add(drtmp);
             }
             goodsListBindym();//加载用药记录清单表
+
+            //查询赋值
+            if (id != "")
+            {
+                DataTable dtz = hcd.queryhealthCheckup(id);
+                if (dtz != null && dtz.Rows.Count > 0)
+                {
+                    this.textBox1.Text = dtz.Rows[0]["aichive_no"].ToString();
+                    this.textBox2.Text = dtz.Rows[0]["bar_code"].ToString();
+                    this.textBox3.Text = dtz.Rows[0]["id_number"].ToString();
+
+                    if (this.radioButton39.Tag.ToString() == dtz.Rows[0]["health_evaluation"].ToString()) { this.radioButton39.Checked = true; };
+                    if (this.radioButton40.Tag.ToString() == dtz.Rows[0]["health_evaluation"].ToString())
+                    {
+                        this.radioButton40.Checked = true;
+                        this.textBox48.Text = dtz.Rows[0]["abnormal1"].ToString();
+                        this.textBox29.Text = dtz.Rows[0]["abnormal2"].ToString();
+                        this.textBox31.Text = dtz.Rows[0]["abnormal3"].ToString();
+                        this.textBox33.Text = dtz.Rows[0]["abnormal4"].ToString();
+                    };
+
+                    foreach (Control ctr in this.panel2.Controls)
+                    {
+                        //判断该控件是不是CheckBox
+                        if (ctr is CheckBox)
+                        {
+                            //将ctr转换成CheckBox并赋值给ck
+                            CheckBox ck = ctr as CheckBox;
+                            if (dtz.Rows[0]["health_guidance"].ToString().IndexOf(ck.Text) > -1)
+                            {
+                                ck.Checked = true;
+                            }
+                        }
+                    }
+
+                    foreach (Control ctr in this.panel3.Controls)
+                    {
+                        //判断该控件是不是CheckBox
+                        if (ctr is CheckBox)
+                        {
+                            //将ctr转换成CheckBox并赋值给ck
+                            CheckBox ck = ctr as CheckBox;
+                            if (dtz.Rows[0]["danger_controlling"].ToString().IndexOf(ck.Text) > -1)
+                            {
+                                ck.Checked = true;
+                            }
+                        }
+                    }
+                    if (this.textBox37.Text == dtz.Rows[0]["target_weight"].ToString())
+                    {
+                        checkBox8.Checked = true;
+                    }
+                    if (this.textBox39.Text == dtz.Rows[0]["advise_bacterin"].ToString())
+                    {
+                        checkBox9.Checked = true;
+                        
+                    }
+                    if (this.textBox40.Text == dtz.Rows[0]["danger_controlling_other"].ToString())
+                    {
+                        checkBox10.Checked = true;                     
+                    }
+                }
+            }
         }
         private void button5_Click(object sender, EventArgs e)
         {
@@ -180,14 +238,11 @@ namespace zkhwClient.view.PublicHealthView
             take_medicine_record tmr = new take_medicine_record();
             if (tmr.ShowDialog() == DialogResult.OK)
             {
-                if (goodsList.Rows.Count > 0)
+                DataRow[] drr = goodsList.Select("drug_name = '" + tmr.drug_name.ToString() + "'");
+                if (drr.Length > 0)
                 {
-                    DataRow[] drr = goodsList.Select("drug_name = '" + tmr.drug_name.ToString() + "'");
-                    if (drr.Length > 0)
-                    {
-                        MessageBox.Show("用药记录已存在！");
-                        return;
-                    }
+                    MessageBox.Show("用药记录已存在！");
+                    return;
                 }
                 DataRow drtmp = goodsList.NewRow();
                 drtmp["drug_name"] = tmr.drug_name;
@@ -215,14 +270,11 @@ namespace zkhwClient.view.PublicHealthView
             vaccination_record vr = new vaccination_record();
             if (vr.ShowDialog() == DialogResult.OK)
             {
-                if (goodsListym.Rows.Count > 0)
+                DataRow[] drr = goodsListym.Select("drug_name = '" + vr.vaccination_name + "'");
+                if (drr.Length > 0)
                 {
-                    DataRow[] drr = goodsListym.Select("vaccination_name = '" + vr.vaccination_name + "'");
-                    if (drr.Length > 0)
-                    {
-                        MessageBox.Show("疫苗记录已存在！");
-                        return;
-                    }
+                    MessageBox.Show("疫苗记录已存在！");
+                    return;
                 }
                 DataRow drtmp = goodsListym.NewRow();
                 drtmp["vaccination_name"] = vr.vaccination_name;

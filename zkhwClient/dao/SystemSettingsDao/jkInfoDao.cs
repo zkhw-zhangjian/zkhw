@@ -16,6 +16,7 @@ namespace zkhwClient.dao
             DataSet ds = new DataSet();
             string sql = "select k.aichive_no,k.id_number,k.bar_code from zkhw_tj_jk k where k.bar_code='" + barcode + "' order by k.createtime desc limit 1";
             ds = DbHelperMySQL.Query(sql);
+            
             return ds.Tables[0];
         }
         //登记界面右侧 查询统计男女各多少人功能
@@ -24,7 +25,13 @@ namespace zkhwClient.dao
             DataSet ds = new DataSet();
             string sql = "select * from zkhw_tj_jk k where k.village_code='" + areacode + "' and k.createtime >= '" + time + "'";
             ds = DbHelperMySQL.Query(sql);
-            return ds.Tables[0];
+            if (ds.Tables.Count > 0)
+            {
+                return ds.Tables[0];
+            }
+            else {
+                return null;
+            }
         }
         //查询体检进度
         public DataTable querytjjd(string time1, string time2,string xcuncode, string jmxx)

@@ -54,8 +54,8 @@ namespace zkhwClient.view.updateTjResult
                         this.textBox5.ForeColor = Color.Red;
                     }
                 }
-               
                 this.textBox5.Text = wbc;
+
                 string rbc = dtbichao.Rows[0]["RBC"].ToString();
                 if (rbc != "" && rbc != "*")
                 {
@@ -73,9 +73,9 @@ namespace zkhwClient.view.updateTjResult
                     {
                         this.textBox6.ForeColor = Color.Red;
                     }
-                }
-                
+                }               
                 this.textBox6.Text = rbc;
+
                 string pct = dtbichao.Rows[0]["PCT"].ToString();
                 if (pct != "" && pct != "*")
                 {
@@ -95,6 +95,7 @@ namespace zkhwClient.view.updateTjResult
                     }
                 }
                 this.textBox8.Text = pct;
+
                 string plt = dtbichao.Rows[0]["PLT"].ToString();
                 if (plt != "" && plt != "*")
                 {
@@ -114,6 +115,7 @@ namespace zkhwClient.view.updateTjResult
                     }
                 }
                 this.textBox7.Text = plt;
+
                 string hgb = dtbichao.Rows[0]["HGB"].ToString();
                 if (hgb != "" && hgb != "*")
                 {
@@ -133,6 +135,7 @@ namespace zkhwClient.view.updateTjResult
                     }
                 }
                 this.textBox11.Text = hgb;
+
                 string hct = dtbichao.Rows[0]["HCT"].ToString();
                 if (hct != "" && hct != "*")
                 {
@@ -152,6 +155,7 @@ namespace zkhwClient.view.updateTjResult
                     }
                 }
                 this.textBox10.Text = hct;
+
                 string mcv = dtbichao.Rows[0]["MCV"].ToString();
                 if (mcv != "" && mcv != "*")
                 {
@@ -171,6 +175,7 @@ namespace zkhwClient.view.updateTjResult
                     }
                 }
                 this.textBox13.Text = mcv;
+
                 string mch = dtbichao.Rows[0]["MCH"].ToString();
                 if (mch != "" && mch != "*")
                 {
@@ -190,6 +195,7 @@ namespace zkhwClient.view.updateTjResult
                     }
                 }
                 this.textBox12.Text = mch;
+
                 string mchc = dtbichao.Rows[0]["MCHC"].ToString();
                 if (mchc != "" && mchc != "*")
                 {
@@ -209,6 +215,7 @@ namespace zkhwClient.view.updateTjResult
                     }
                 }
                 this.textBox15.Text = mchc;
+
                 string rdwcv = dtbichao.Rows[0]["RDWCV"].ToString();
                 if (rdwcv != "" && rdwcv != "*")
                 {
@@ -228,6 +235,7 @@ namespace zkhwClient.view.updateTjResult
                     }
                 }
                 this.textBox14.Text = rdwcv;
+
                 string rdwsd = dtbichao.Rows[0]["RDWSD"].ToString();
                 if (rdwsd != "" && rdwsd != "*")
                 {
@@ -272,6 +280,7 @@ namespace zkhwClient.view.updateTjResult
                     }
                 }
                 this.textBox20.Text = neut;
+
                 string neutp = dtbichao.Rows[0]["NEUTP"].ToString();
                 if (neutp != "" && neutp != "*")
                 {
@@ -316,6 +325,7 @@ namespace zkhwClient.view.updateTjResult
                     }
                 }
                 this.textBox28.Text = lym;
+
                 string lymp = dtbichao.Rows[0]["LYMP"].ToString();
                 if (lymp != "" && lymp != "*")
                 {
@@ -335,6 +345,7 @@ namespace zkhwClient.view.updateTjResult
                     }
                 }
                 this.textBox31.Text = lymp;
+
                 string mpv = dtbichao.Rows[0]["MPV"].ToString();
                 if (mpv != "" && mpv != "*")
                 {
@@ -354,6 +365,7 @@ namespace zkhwClient.view.updateTjResult
                     }
                 }
                 this.textBox30.Text = mpv;
+
                 string pdw = dtbichao.Rows[0]["PDW"].ToString();
                 if (pdw != "" && pdw != "*")
                 {
@@ -373,6 +385,7 @@ namespace zkhwClient.view.updateTjResult
                     }
                 }
                 this.textBox33.Text = pdw;
+
                 string mxd = dtbichao.Rows[0]["MXD"].ToString();
                 if (mxd != "" && mxd != "*")
                 {
@@ -392,6 +405,7 @@ namespace zkhwClient.view.updateTjResult
                     }
                 }
                 this.textBox32.Text = mxd;
+
                 string mxdp = dtbichao.Rows[0]["MXDP"].ToString();
                 if (mxdp != "" && mxdp != "*")
                 {

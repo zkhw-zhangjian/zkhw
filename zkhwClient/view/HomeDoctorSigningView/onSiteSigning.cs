@@ -23,8 +23,8 @@ namespace zkhwClient.view.HomeDoctorSigningView
             DataSet datas = DbHelperMySQL.Query(sql);
             if (datas != null && datas.Tables.Count > 0)
             {
-                List<TDMC> ts = Result.ToDataList<TDMC>(datas.Tables[0]);
-                Result.Bind(comboBox1, ts, "TuanDuiMingCheng", "ID", "--请选择--");
+                //List<TDMC> ts = Result.ToDataList<TDMC>(datas.Tables[0]);
+                //Result.Bind(comboBox1, ts, "TuanDuiMingCheng", "ID", "--请选择--");
             }
         }
     }

@@ -36,54 +36,167 @@ namespace zkhwClient.view.updateTjResult
             if (dtbichao != null && dtbichao.Rows.Count > 0)
             {
                 flag = true; 
-                this.textBox5.Text = dtbichao.Rows[0]["WBC"].ToString();
+                string wbc= dtbichao.Rows[0]["WBC"].ToString();
+                if (!"-".Equals(wbc)) {
+                    if ("+-".Equals(wbc) || "+1".Equals(wbc) || "+2".Equals(wbc) || "+3".Equals(wbc))
+                    {
+                        this.textBox5.ForeColor = Color.Blue;
+                    }
+                    else {
+                        this.textBox5.ForeColor = Color.Red;
+                    }
+                }
+                this.textBox5.Text = wbc;
+
                 this.textBox6.Text = dtbichao.Rows[0]["LEU"].ToString();
-                this.textBox8.Text = dtbichao.Rows[0]["NIT"].ToString();
-                this.textBox7.Text = dtbichao.Rows[0]["URO"].ToString();
-                this.textBox11.Text = dtbichao.Rows[0]["PRO"].ToString();
+
+                string nit = dtbichao.Rows[0]["NIT"].ToString();
+                if (!"-".Equals(nit))
+                {
+                    if ("+".Equals(nit))
+                    {
+                        this.textBox8.ForeColor = Color.Blue;
+                    }
+                    else
+                    {
+                        this.textBox8.ForeColor = Color.Red;
+                    }
+                }
+                this.textBox8.Text = nit;
+
+                string uro = dtbichao.Rows[0]["URO"].ToString();
+                if (!"Normal".Equals(uro))
+                {
+                    if ("+1".Equals(uro)|| "+2".Equals(uro) || "+3".Equals(uro))
+                    {
+                        this.textBox7.ForeColor = Color.Blue;
+                    }
+                    else
+                    {
+                        this.textBox7.ForeColor = Color.Red;
+                    }
+                }
+                this.textBox7.Text = uro;
+
+                string pro = dtbichao.Rows[0]["PRO"].ToString();
+                if (!"-".Equals(pro))
+                {
+                    if ("+-".Equals(pro) || "+1".Equals(pro) || "+2".Equals(pro) || "+3".Equals(pro) || "+4".Equals(pro))
+                    {
+                        this.textBox11.ForeColor = Color.Blue;
+                    }
+                    else
+                    {
+                        this.textBox11.ForeColor = Color.Red;
+                    }
+                }
+                this.textBox11.Text = pro;
+
                 string ph = dtbichao.Rows[0]["PH"].ToString();
                 if (ph != "")
                 {
                     double phdouble = double.Parse(ph);
-                    DataRow[] drsg = dttv.Select("type='PH'");
-                    double phwmin = double.Parse(drsg[0]["warning_min"].ToString());
-                    double phwmax = double.Parse(drsg[0]["warning_max"].ToString());
-                    if (phdouble > phwmax || phdouble < phwmin)
+                    if (phdouble==5.0 || phdouble == 5.5 || phdouble == 6.0 || phdouble == 6.5 || phdouble == 7.0 || phdouble == 7.5 || phdouble == 8.0 || phdouble == 8.5 || phdouble == 9.0)
                     {
-                        this.textBox10.ForeColor = Color.Blue;
-                    }
-                    double phtmin = double.Parse(drsg[0]["threshold_min"].ToString());
-                    double phtmax = double.Parse(drsg[0]["threshold_max"].ToString());
-                    if (phdouble > phtmax || phdouble < phtmin)
-                    {
-                        this.textBox10.ForeColor = Color.Red;
+                        if (phdouble > 8.0 && phdouble <= 9.0)
+                        {
+                            this.textBox10.ForeColor = Color.Blue;
+                        }else if(phdouble > 9.0 || phdouble < 5.0)
+                        {
+                            this.textBox10.ForeColor = Color.Red;
+                        }
                     }
                 }
                 this.textBox10.Text = ph;
-                this.textBox13.Text = dtbichao.Rows[0]["BLD"].ToString();
+
+                string bld = dtbichao.Rows[0]["BLD"].ToString();
+                if (!"-".Equals(bld))
+                {
+                    if ("+-".Equals(bld) || "+1".Equals(bld) || "+2".Equals(bld) || "+3".Equals(bld) )
+                    {
+                        this.textBox13.ForeColor = Color.Blue;
+                    }
+                    else
+                    {
+                        this.textBox13.ForeColor = Color.Red;
+                    }
+                }
+                this.textBox13.Text = bld;
+
                 string sg=dtbichao.Rows[0]["SG"].ToString();
                 if (sg != "")
                 {
                     double sgdouble = double.Parse(sg);
-                    DataRow[] drsg = dttv.Select("type='SG'");
-                    double sgwmin = double.Parse(drsg[0]["warning_min"].ToString());
-                    double sgwmax = double.Parse(drsg[0]["warning_max"].ToString());
-                    if (sgdouble > sgwmax || sgdouble < sgwmin)
+                    if (sgdouble == 1.005 || sgdouble == 1.01 || sgdouble == 1.015 || sgdouble == 1.02 || sgdouble == 1.025 || sgdouble == 1.03)
                     {
-                        this.textBox12.ForeColor = Color.Blue;
+                        if (sgdouble > 1.025 || sgdouble < 1.015)
+                        {
+                            this.textBox12.ForeColor = Color.Blue;
+                        }
+                        else if (sgdouble < 1.005 || sgdouble > 1.03)
+                        {
+                            this.textBox12.ForeColor = Color.Red;
+                        }
                     }
-                    double sgtmin = double.Parse(drsg[0]["threshold_min"].ToString());
-                    double sgtmax = double.Parse(drsg[0]["threshold_max"].ToString());
-                    if (sgdouble > sgtmax || sgdouble < sgtmin)
+                }   
+                this.textBox12.Text = sg;
+
+                string ket = dtbichao.Rows[0]["KET"].ToString();
+                if (!"-".Equals(ket))
+                {
+                    if ("+-".Equals(ket) || "+1".Equals(ket) || "+2".Equals(ket) || "+3".Equals(ket))
                     {
-                        this.textBox12.ForeColor = Color.Red;
+                        this.textBox15.ForeColor = Color.Blue;
+                    }
+                    else
+                    {
+                        this.textBox15.ForeColor = Color.Red;
                     }
                 }
-                this.textBox12.Text = sg;
-                this.textBox15.Text = dtbichao.Rows[0]["KET"].ToString();
-                this.textBox14.Text = dtbichao.Rows[0]["BIL"].ToString();
-                this.textBox17.Text = dtbichao.Rows[0]["GLU"].ToString();
+                this.textBox15.Text = ket;
+
+                string bil = dtbichao.Rows[0]["BIL"].ToString();
+                if (!"-".Equals(bil))
+                {
+                    if ("+1".Equals(bil) || "+2".Equals(bil) || "+3".Equals(bil))
+                    {
+                        this.textBox14.ForeColor = Color.Blue;
+                    }
+                    else
+                    {
+                        this.textBox14.ForeColor = Color.Red;
+                    }
+                }
+                this.textBox14.Text = bil;
+
+                string glu = dtbichao.Rows[0]["GLU"].ToString();
+                    if (!"-".Equals(glu))
+                    {
+                        if ("+-".Equals(glu) || "+1".Equals(glu) || "+2".Equals(glu) || "+3".Equals(glu) || "+4".Equals(glu))
+                        {
+                            this.textBox17.ForeColor = Color.Blue;
+                        }
+                        else
+                        {
+                            this.textBox17.ForeColor = Color.Red;
+                        }
+                    }
+                    this.textBox17.Text = glu;
+
+                    string vc = dtbichao.Rows[0]["Vc"].ToString();
+                if (!"-".Equals(vc))
+                {
+                    if ("+-".Equals(vc) || "+1".Equals(vc) || "+2".Equals(vc) || "+3".Equals(vc))
+                    {
+                        this.textBox16.ForeColor = Color.Blue;
+                    }
+                    else
+                    {
+                        this.textBox16.ForeColor = Color.Red;
+                    }
+                }
                 this.textBox16.Text = dtbichao.Rows[0]["Vc"].ToString();
+
                 this.textBox19.Text = dtbichao.Rows[0]["MA"].ToString();
                 this.textBox18.Text = dtbichao.Rows[0]["ACR"].ToString();
                 this.textBox21.Text = dtbichao.Rows[0]["Ca"].ToString();

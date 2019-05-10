@@ -237,6 +237,12 @@
     <Compile Include="view\PublicHealthView\addTotuberculosisPatientServices.Designer.cs">
       <DependentUpon>addTotuberculosisPatientServices.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\PublicHealthView\detaTotuberculosisPatientServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\detaTotuberculosisPatientServices.Designer.cs">
+      <DependentUpon>detaTotuberculosisPatientServices.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\PublicHealthView\addtuberculosisPatientServices.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -278,18 +284,6 @@
     </Compile>
     <Compile Include="view\publicRecord\family_record.Designer.cs">
       <DependentUpon>family_record.cs</DependentUpon>
-    </Compile>
-    <Compile Include="view\HomeDoctorSigningView\addMember.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="view\HomeDoctorSigningView\addMember.Designer.cs">
-      <DependentUpon>addMember.cs</DependentUpon>
-    </Compile>
-    <Compile Include="view\HomeDoctorSigningView\addTeamMembers.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="view\HomeDoctorSigningView\addTeamMembers.Designer.cs">
-      <DependentUpon>addTeamMembers.cs</DependentUpon>
     </Compile>
     <Compile Include="view\HomeDoctorSigningView\onSiteSigning.cs">
       <SubType>Form</SubType>
@@ -697,12 +691,6 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\HomeDoctorSigningView\addMember.resx">
-      <DependentUpon>addMember.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="view\HomeDoctorSigningView\addTeamMembers.resx">
-      <DependentUpon>addTeamMembers.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="view\HomeDoctorSigningView\onSiteSigning.resx">
       <DependentUpon>onSiteSigning.cs</DependentUpon>
     </EmbeddedResource>
@@ -717,6 +705,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\addTotuberculosisPatientServices.resx">
       <DependentUpon>addTotuberculosisPatientServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\detaTotuberculosisPatientServices.resx">
+      <DependentUpon>detaTotuberculosisPatientServices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\addtuberculosisPatientServices.resx">
       <DependentUpon>addtuberculosisPatientServices.cs</DependentUpon>
@@ -771,6 +762,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\personRegist.resx">
       <DependentUpon>personRegist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\psychiatricPatientServices.resx">
+      <DependentUpon>psychiatricPatientServices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\tcmHealthServices.resx">
       <DependentUpon>tcmHealthServices.cs</DependentUpon>

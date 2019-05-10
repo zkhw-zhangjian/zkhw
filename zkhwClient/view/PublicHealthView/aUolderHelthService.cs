@@ -64,7 +64,7 @@ namespace zkhwClient.view.PublicHealthView
             this.textBox19.Text += System.Environment.NewLine;
             this.textBox19.Text += System.Environment.NewLine;
             this.textBox19.Text += System.Environment.NewLine;
-            this.textBox19.Text += "3";
+            this.textBox19.Text += "5";
 ///////////////////////////////////////////////
             this.textBox22.Text += System.Environment.NewLine;
             this.textBox22.Text += "独立完成";
@@ -308,6 +308,225 @@ namespace zkhwClient.view.PublicHealthView
         private void numericUpDown5_ValueChanged(object sender, EventArgs e)
         {
             countTotal();
+        }
+
+        private void checkBox1_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox1.Checked) {
+                this.checkBox2.Checked = false;
+                this.checkBox3.Checked = false;
+                this.checkBox4.Checked = false;
+                this.numericUpDown1.Value = 0;
+            }
+        }
+
+        private void checkBox2_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox2.Checked)
+            {
+                this.checkBox1.Checked = false;
+                this.checkBox3.Checked = false;
+                this.checkBox4.Checked = false;
+                this.numericUpDown1.Value = 0;
+            }
+        }
+
+        private void checkBox3_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox3.Checked)
+            {
+                this.checkBox1.Checked = false;
+                this.checkBox2.Checked = false;
+                this.checkBox4.Checked = false;
+                this.numericUpDown1.Value = 3;
+            }
+        }
+
+        private void checkBox4_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox4.Checked)
+            {
+                this.checkBox1.Checked = false;
+                this.checkBox2.Checked = false;
+                this.checkBox3.Checked = false;
+                this.numericUpDown1.Value = 5;
+            }
+        }
+
+        private void checkBox5_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox5.Checked)
+            {
+                this.checkBox6.Checked = false;
+                this.checkBox7.Checked = false;
+                this.checkBox8.Checked = false;
+                this.numericUpDown2.Value = 0;
+            }
+        }
+
+        private void checkBox6_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox6.Checked)
+            {
+                this.checkBox5.Checked = false;
+                this.checkBox7.Checked = false;
+                this.checkBox8.Checked = false;
+                this.numericUpDown2.Value = 1;
+            }
+        }
+
+        private void checkBox7_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox7.Checked)
+            {
+                this.checkBox5.Checked = false;
+                this.checkBox6.Checked = false;
+                this.checkBox8.Checked = false;
+                this.numericUpDown2.Value = 3;
+            }
+        }
+
+        private void checkBox8_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox8.Checked)
+            {
+                this.checkBox5.Checked = false;
+                this.checkBox6.Checked = false;
+                this.checkBox7.Checked = false;
+                this.numericUpDown2.Value = 7;
+            }
+        }
+
+        private void checkBox9_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox9.Checked)
+            {
+                this.checkBox10.Checked = false;
+                this.checkBox11.Checked = false;
+                this.checkBox12.Checked = false;
+                this.numericUpDown3.Value = 0;
+            }
+        }
+
+        private void checkBox10_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox10.Checked)
+            {
+                this.checkBox9.Checked = false;
+                this.checkBox11.Checked = false;
+                this.checkBox12.Checked = false;
+                this.numericUpDown3.Value = 0;
+            }
+        }
+
+        private void checkBox11_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox11.Checked)
+            {
+                this.checkBox9.Checked = false;
+                this.checkBox10.Checked = false;
+                this.checkBox12.Checked = false;
+                this.numericUpDown3.Value = 3;
+            }
+        }
+
+        private void checkBox12_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox12.Checked)
+            {
+                this.checkBox9.Checked = false;
+                this.checkBox10.Checked = false;
+                this.checkBox11.Checked = false;
+                this.numericUpDown3.Value = 5;
+            }
+        }
+
+        private void checkBox13_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox13.Checked)
+            {
+                this.checkBox14.Checked = false;
+                this.checkBox15.Checked = false;
+                this.checkBox16.Checked = false;
+                this.numericUpDown4.Value = 0;
+            }
+        }
+
+        private void checkBox14_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox14.Checked)
+            {
+                this.checkBox13.Checked = false;
+                this.checkBox15.Checked = false;
+                this.checkBox16.Checked = false;
+                this.numericUpDown4.Value = 1;
+            }
+        }
+
+        private void checkBox15_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox15.Checked)
+            {
+                this.checkBox13.Checked = false;
+                this.checkBox14.Checked = false;
+                this.checkBox16.Checked = false;
+                this.numericUpDown4.Value = 5;
+            }
+        }
+
+        private void checkBox16_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox16.Checked)
+            {
+                this.checkBox13.Checked = false;
+                this.checkBox14.Checked = false;
+                this.checkBox15.Checked = false;
+                this.numericUpDown4.Value = 10;
+            }
+        }
+
+        private void checkBox17_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox17.Checked)
+            {
+                this.checkBox18.Checked = false;
+                this.checkBox19.Checked = false;
+                this.checkBox20.Checked = false;
+                this.numericUpDown5.Value = 0;
+            }
+        }
+
+        private void checkBox18_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox18.Checked)
+            {
+                this.checkBox17.Checked = false;
+                this.checkBox19.Checked = false;
+                this.checkBox20.Checked = false;
+                this.numericUpDown5.Value = 1;
+            }
+        }
+
+        private void checkBox19_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox19.Checked)
+            {
+                this.checkBox17.Checked = false;
+                this.checkBox18.Checked = false;
+                this.checkBox20.Checked = false;
+                this.numericUpDown5.Value = 5;
+            }
+        }
+
+        private void checkBox20_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox20.Checked)
+            {
+                this.checkBox17.Checked = false;
+                this.checkBox18.Checked = false;
+                this.checkBox19.Checked = false;
+                this.numericUpDown5.Value = 10;
+            }
         }
     }
 }

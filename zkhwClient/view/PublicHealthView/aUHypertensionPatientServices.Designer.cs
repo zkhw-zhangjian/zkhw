@@ -63,6 +63,7 @@
             this.radioButton23 = new System.Windows.Forms.RadioButton();
             this.radioButton22 = new System.Windows.Forms.RadioButton();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.numericUpDown11 = new System.Windows.Forms.NumericUpDown();
             this.textBox21 = new System.Windows.Forms.TextBox();
             this.textBox20 = new System.Windows.Forms.TextBox();
             this.textBox19 = new System.Windows.Forms.TextBox();
@@ -152,7 +153,6 @@
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.numericUpDown11 = new System.Windows.Forms.NumericUpDown();
             this.panel1.SuspendLayout();
             this.panel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -161,6 +161,7 @@
             this.panel9.SuspendLayout();
             this.panel8.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).BeginInit();
@@ -184,7 +185,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
@@ -302,7 +302,7 @@
             this.textBox42.Location = new System.Drawing.Point(388, 798);
             this.textBox42.Name = "textBox42";
             this.textBox42.ReadOnly = true;
-            this.textBox42.Size = new System.Drawing.Size(167, 30);
+            this.textBox42.Size = new System.Drawing.Size(140, 30);
             this.textBox42.TabIndex = 61;
             this.textBox42.Text = "不良反应说明";
             this.textBox42.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -550,6 +550,7 @@
             this.radioButton16.Tag = "1";
             this.radioButton16.Text = "1无";
             this.radioButton16.UseVisualStyleBackColor = true;
+            this.radioButton16.Click += new System.EventHandler(this.radioButton16_Click);
             // 
             // radioButton17
             // 
@@ -563,6 +564,7 @@
             this.radioButton17.Tag = "2";
             this.radioButton17.Text = "2有";
             this.radioButton17.UseVisualStyleBackColor = true;
+            this.radioButton17.Click += new System.EventHandler(this.radioButton17_Click);
             // 
             // panel8
             // 
@@ -640,6 +642,18 @@
             this.groupBox4.Size = new System.Drawing.Size(1306, 144);
             this.groupBox4.TabIndex = 46;
             this.groupBox4.TabStop = false;
+            // 
+            // numericUpDown11
+            // 
+            this.numericUpDown11.Location = new System.Drawing.Point(806, 24);
+            this.numericUpDown11.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.numericUpDown11.Name = "numericUpDown11";
+            this.numericUpDown11.Size = new System.Drawing.Size(120, 30);
+            this.numericUpDown11.TabIndex = 27;
             // 
             // textBox21
             // 
@@ -871,109 +885,118 @@
             // 
             this.checkBox9.AutoSize = true;
             this.checkBox9.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox9.Location = new System.Drawing.Point(999, 9);
+            this.checkBox9.Location = new System.Drawing.Point(1022, 9);
             this.checkBox9.Name = "checkBox9";
             this.checkBox9.Size = new System.Drawing.Size(123, 24);
             this.checkBox9.TabIndex = 8;
             this.checkBox9.Tag = "9";
             this.checkBox9.Text = "9下肢水肿";
             this.checkBox9.UseVisualStyleBackColor = true;
+            this.checkBox9.Click += new System.EventHandler(this.checkBox9_Click);
             // 
             // checkBox8
             // 
             this.checkBox8.AutoSize = true;
             this.checkBox8.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox8.Location = new System.Drawing.Point(870, 9);
+            this.checkBox8.Location = new System.Drawing.Point(897, 9);
             this.checkBox8.Name = "checkBox8";
             this.checkBox8.Size = new System.Drawing.Size(123, 24);
             this.checkBox8.TabIndex = 7;
             this.checkBox8.Tag = "8";
             this.checkBox8.Text = "8四肢发麻";
             this.checkBox8.UseVisualStyleBackColor = true;
+            this.checkBox8.Click += new System.EventHandler(this.checkBox8_Click);
             // 
             // checkBox7
             // 
             this.checkBox7.AutoSize = true;
             this.checkBox7.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox7.Location = new System.Drawing.Point(710, 9);
+            this.checkBox7.Location = new System.Drawing.Point(730, 9);
             this.checkBox7.Name = "checkBox7";
             this.checkBox7.Size = new System.Drawing.Size(165, 24);
             this.checkBox7.TabIndex = 6;
             this.checkBox7.Tag = "7";
             this.checkBox7.Text = "7鼻衄出血不止";
             this.checkBox7.UseVisualStyleBackColor = true;
+            this.checkBox7.Click += new System.EventHandler(this.checkBox7_Click);
             // 
             // checkBox6
             // 
             this.checkBox6.AutoSize = true;
             this.checkBox6.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox6.Location = new System.Drawing.Point(592, 9);
+            this.checkBox6.Location = new System.Drawing.Point(605, 9);
             this.checkBox6.Name = "checkBox6";
             this.checkBox6.Size = new System.Drawing.Size(123, 24);
             this.checkBox6.TabIndex = 5;
             this.checkBox6.Tag = "6";
             this.checkBox6.Text = "6心悸胸闷";
             this.checkBox6.UseVisualStyleBackColor = true;
+            this.checkBox6.Click += new System.EventHandler(this.checkBox6_Click);
             // 
             // checkBox5
             // 
             this.checkBox5.AutoSize = true;
             this.checkBox5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox5.Location = new System.Drawing.Point(471, 9);
+            this.checkBox5.Location = new System.Drawing.Point(479, 9);
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.Size = new System.Drawing.Size(123, 24);
             this.checkBox5.TabIndex = 4;
             this.checkBox5.Tag = "5";
             this.checkBox5.Text = "5呼吸困难";
             this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.Click += new System.EventHandler(this.checkBox5_Click);
             // 
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
             this.checkBox4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox4.Location = new System.Drawing.Point(353, 9);
+            this.checkBox4.Location = new System.Drawing.Point(356, 9);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(123, 24);
             this.checkBox4.TabIndex = 3;
             this.checkBox4.Tag = "4";
             this.checkBox4.Text = "4眼花耳鸣";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.Click += new System.EventHandler(this.checkBox4_Click);
             // 
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
             this.checkBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox3.Location = new System.Drawing.Point(230, 9);
+            this.checkBox3.Location = new System.Drawing.Point(232, 9);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(123, 24);
             this.checkBox3.TabIndex = 2;
             this.checkBox3.Tag = "3";
             this.checkBox3.Text = "3恶心呕吐";
             this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.Click += new System.EventHandler(this.checkBox3_Click);
             // 
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox2.Location = new System.Drawing.Point(112, 9);
+            this.checkBox2.Location = new System.Drawing.Point(109, 9);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(123, 24);
             this.checkBox2.TabIndex = 1;
             this.checkBox2.Tag = "2";
             this.checkBox2.Text = "2头痛头晕";
             this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.Click += new System.EventHandler(this.checkBox2_Click);
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox1.Location = new System.Drawing.Point(15, 9);
+            this.checkBox1.Location = new System.Drawing.Point(2, 9);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(102, 24);
             this.checkBox1.TabIndex = 0;
             this.checkBox1.Tag = "1";
             this.checkBox1.Text = "1无症状";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Click += new System.EventHandler(this.checkBox1_Click);
             // 
             // richTextBox1
             // 
@@ -999,9 +1022,9 @@
             // textBox8
             // 
             this.textBox8.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox8.Location = new System.Drawing.Point(557, 798);
+            this.textBox8.Location = new System.Drawing.Point(534, 798);
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(718, 30);
+            this.textBox8.Size = new System.Drawing.Size(741, 30);
             this.textBox8.TabIndex = 44;
             // 
             // panel3
@@ -1672,18 +1695,6 @@
             this.dateTimePicker1.TabIndex = 6;
             this.dateTimePicker1.Value = new System.DateTime(2019, 5, 2, 0, 0, 0, 0);
             // 
-            // numericUpDown11
-            // 
-            this.numericUpDown11.Location = new System.Drawing.Point(806, 24);
-            this.numericUpDown11.Maximum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.numericUpDown11.Name = "numericUpDown11";
-            this.numericUpDown11.Size = new System.Drawing.Size(120, 30);
-            this.numericUpDown11.TabIndex = 27;
-            // 
             // aUHypertensionPatientServices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1711,6 +1722,7 @@
             this.panel8.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).EndInit();
@@ -1743,7 +1755,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
             this.ResumeLayout(false);
 
         }

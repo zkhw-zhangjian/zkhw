@@ -30,8 +30,6 @@
         {
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.新建团队 = new System.Windows.Forms.Button();
-            this.新建成员 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.SuspendLayout();
             // 
@@ -53,26 +51,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "团队:";
             // 
-            // 新建团队
-            // 
-            this.新建团队.Location = new System.Drawing.Point(226, 21);
-            this.新建团队.Name = "新建团队";
-            this.新建团队.Size = new System.Drawing.Size(75, 23);
-            this.新建团队.TabIndex = 2;
-            this.新建团队.Text = "新建团队";
-            this.新建团队.UseVisualStyleBackColor = true;
-            this.新建团队.Click += new System.EventHandler(this.新建团队_Click);
-            // 
-            // 新建成员
-            // 
-            this.新建成员.Location = new System.Drawing.Point(327, 21);
-            this.新建成员.Name = "新建成员";
-            this.新建成员.Size = new System.Drawing.Size(75, 23);
-            this.新建成员.TabIndex = 4;
-            this.新建成员.Text = "新建成员";
-            this.新建成员.UseVisualStyleBackColor = true;
-            this.新建成员.Click += new System.EventHandler(this.新建成员_Click_1);
-            // 
             // groupBox1
             // 
             this.groupBox1.AutoSize = true;
@@ -88,9 +66,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1079, 635);
-            this.Controls.Add(this.新建成员);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.新建团队);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Name = "teamMembers";
@@ -104,8 +80,6 @@
 
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button 新建团队;
-        private System.Windows.Forms.Button 新建成员;
         private System.Windows.Forms.GroupBox groupBox1;
     }
 }

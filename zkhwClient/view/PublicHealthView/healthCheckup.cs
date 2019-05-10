@@ -145,6 +145,7 @@ namespace zkhwClient.view.PublicHealthView
                     auhcs.textBox2.Text = aichive_no;
                     auhcs.dateTimePicker1.Value = DateTime.ParseExact(check_date, TarStr, format);
                     auhcs.textBox51.Text = doctor_name;
+
                     auhcs.Show();
                     //aUhealthcheckupServices4 auhcs = new aUhealthcheckupServices4();
                     //auhcs.textBox1.Text = bar_code;
@@ -180,7 +181,39 @@ namespace zkhwClient.view.PublicHealthView
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("开发中...");
+            //MessageBox.Show("开发中...");
+            if (this.dataGridView1.SelectedRows.Count > 0)
+            {
+                string name = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+                string aichive_no = this.dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+                string id_number = this.dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+                string bar_code = this.dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
+                string check_date = this.dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
+                string doctor_name = this.dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
+                string id = this.dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
+                if (aichive_no != null && !"".Equals(aichive_no))
+                {
+                    aUhealthcheckupServices1 auhcs = new aUhealthcheckupServices1();
+                    auhcs.textBox1.Text = name;
+                    auhcs.textBox118.Text = bar_code;
+                    auhcs.textBox119.Text = id_number;
+                    auhcs.textBox120.Text = id;
+                    auhcs.textBox2.Text = aichive_no;
+                    auhcs.dateTimePicker1.Value = DateTime.ParseExact(check_date, TarStr, format);
+                    auhcs.textBox51.Text = doctor_name;
+
+                    auhcs.id = id;//祖
+                    auhcs.Show();
+                    //aUhealthcheckupServices4 auhcs = new aUhealthcheckupServices4();
+                    //auhcs.textBox1.Text = bar_code;
+                    //auhcs.textBox2.Text = aichive_no;
+                    //auhcs.Show();
+                }
+            }
+            else
+            {
+                MessageBox.Show("请选择一行！");
+            }
         }
     }
 }

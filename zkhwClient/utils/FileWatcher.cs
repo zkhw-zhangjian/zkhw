@@ -291,7 +291,7 @@ namespace zkhwClient
                             File.Delete(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString() + "_" + ids + ".jpg");
                         }
                         inf.MoveTo(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString()+"_" + ids + ".jpg");
-                        inf.Delete();
+
                         if (diagnosiss.IndexOf("正常")>-1)
                             {
                                 int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='1',cardiogram_img='{ids + ".jpg"}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
@@ -335,7 +335,7 @@ namespace zkhwClient
                     //1.由于客户机器首次读取时乱码，故先修改该文件后再读取内容
                     //m_watcherAoup.EnableRaisingEvents = false;
 
-                    //File.SetLastWriteTime(e.FullPath, DateTime.Now);//修改txt文件的时间
+                    File.SetLastWriteTime(e.FullPath, DateTime.Now);//修改txt文件的时间
                     #region B超
                     XmlDocument doc = new XmlDocument();
                     doc.Load(e.FullPath);
@@ -350,7 +350,6 @@ namespace zkhwClient
                     int innum = 0;
                     if (xNode != null && xNode.Count > 0)
                     {
-                    Thread.Sleep(1000);
                     innum=e.FullPath.LastIndexOf("\\");
                     string fullPath=e.FullPath.Substring(0, innum + 1);
                         for (int i = 0; i < xNode.Count; i++)
@@ -358,14 +357,13 @@ namespace zkhwClient
                             if (i == 0)
                             {
                                 BuPic01 = xNode[i].InnerText;
-                                string pName = fullPath+BuPic01;
+                                string pName = fullPath + BuPic01;
                                 FileInfo inf = new FileInfo(pName);
                                 if (File.Exists(str + "\\bcImg\\" + BuPic01))
                                 {
                                     File.Delete(str + "\\bcImg\\" + BuPic01);
                                 }
-                                inf.CopyTo(str + "\\bcImg\\" + BuPic01);
-                                inf.Delete();
+                                inf.MoveTo(str + "\\bcImg\\" + BuPic01);
                             }
                             else if (i == 1)
                             {
@@ -376,9 +374,8 @@ namespace zkhwClient
                                 {
                                     File.Delete(str + "\\bcImg\\" + BuPic02);
                                 }
-                                inf.CopyTo(str + "\\bcImg\\" + BuPic02);
-                                inf.Delete();
-                        }
+                                inf.MoveTo(str + "\\bcImg\\" + BuPic02);
+                            }
                             else if (i == 2)
                             {
                                 BuPic03 = xNode[i].InnerText;
@@ -388,22 +385,19 @@ namespace zkhwClient
                                 {
                                     File.Delete(str + "\\bcImg\\" + BuPic03);
                                 }
-                                inf.CopyTo(str + "\\bcImg\\" + BuPic03);
-                                inf.Delete();
-                        }
+                                inf.MoveTo(str + "\\bcImg\\" + BuPic03);
+                            }
                             else if (i == 3)
                             {
                                 BuPic04 = xNode[i].InnerText;
                                 string pName = fullPath + BuPic04;
                                 FileInfo inf = new FileInfo(pName);
-                                File.Move("","");
                                 if (File.Exists(str + "\\bcImg\\" + BuPic04))
                                 {
                                     File.Delete(str + "\\bcImg\\" + BuPic04);
                                 }
-                                inf.CopyTo(str + "\\bcImg\\" + BuPic04);
-                                inf.Delete();
-                        }
+                                inf.MoveTo(str + "\\bcImg\\" + BuPic04);
+                            }
                       }
                     }
                     jkInfoDao jkInfoDao = new jkInfoDao();
@@ -437,8 +431,8 @@ namespace zkhwClient
                         int rue = DbHelperMySQL.ExecuteSql(issql, args);
                         string issqdgbc = "update zkhw_tj_bgdc set BChao='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
                         DbHelperMySQL.ExecuteSql(issqdgbc);
-                        string filepath=e.FullPath.Substring(0, innum);
-                        DeleteDir(filepath);
+                    string filepath = e.FullPath.Substring(0, innum);
+                    DeleteDir(filepath);
                     //插入数据库
                 }
                     #endregion

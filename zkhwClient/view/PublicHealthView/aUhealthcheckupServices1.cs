@@ -25,6 +25,193 @@ namespace zkhwClient.view.PublicHealthView
             label51.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
             label51.Left = (this.panel1.Width - this.label51.Width) / 2;
             label51.BringToFront();
+
+            //查询赋值
+            if (id != "")
+            {
+                DataTable dt = hcd.queryhealthCheckup(id);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    this.textBox1.Text = dt.Rows[0]["name"].ToString(); 
+                    this.textBox2.Text = dt.Rows[0]["aichive_no"].ToString();
+                    this.textBox118.Text = dt.Rows[0]["bar_code"].ToString();
+                    this.dateTimePicker1.Value = DateTime.Parse(dt.Rows[0]["check_date"].ToString());
+                    this.textBox51.Text = dt.Rows[0]["doctor_name"].ToString();
+                    this.textBox120.Text = dt.Rows[0]["id"].ToString();
+                    foreach (Control ctr in this.groupBox3.Controls)
+                    {
+                        //判断该控件是不是CheckBox
+                        if (ctr is CheckBox)
+                        {
+                            //将ctr转换成CheckBox并赋值给ck
+                            CheckBox ck = ctr as CheckBox;
+                            if (dt.Rows[0]["symptom"].ToString().IndexOf(ck.Tag.ToString()) > -1)
+                            {
+                                ck.Checked = true;
+                            }
+                        }
+                    }
+                    this.textBox11.Text = dt.Rows[0]["symptom_other"].ToString();
+
+                    this.textBox52.Text = dt.Rows[0]["base_temperature"].ToString();
+                    this.textBox66.Text = dt.Rows[0]["base_heartbeat"].ToString();
+                    this.textBox53.Text = dt.Rows[0]["base_respiratory"].ToString();
+                    this.textBox14.Text = dt.Rows[0]["base_blood_pressure_left_high"].ToString();
+                    this.textBox58.Text = dt.Rows[0]["base_blood_pressure_left_low"].ToString();
+                    this.textBox63.Text = dt.Rows[0]["base_blood_pressure_right_high"].ToString();    
+                    this.textBox61.Text = dt.Rows[0]["base_blood_pressure_right_low"].ToString();
+
+                    this.textBox56.Text = dt.Rows[0]["base_height"].ToString();
+                    this.textBox45.Text = dt.Rows[0]["base_weight"].ToString();
+                    this.textBox42.Text = dt.Rows[0]["base_waist"].ToString();
+                    this.textBox67.Text = dt.Rows[0]["base_bmi"].ToString();
+
+                    if (this.radioButton1.Tag.ToString() == dt.Rows[0]["base_health_estimate"].ToString()) { this.radioButton1.Checked = true; };
+                    if (this.radioButton2.Tag.ToString() == dt.Rows[0]["base_health_estimate"].ToString()) { this.radioButton2.Checked = true; };
+                    if (this.radioButton3.Tag.ToString() == dt.Rows[0]["base_health_estimate"].ToString()) { this.radioButton3.Checked = true; };
+                    if (this.radioButton4.Tag.ToString() == dt.Rows[0]["base_health_estimate"].ToString()) { this.radioButton4.Checked = true; };
+                    if (this.radioButton5.Tag.ToString() == dt.Rows[0]["base_health_estimate"].ToString()) { this.radioButton5.Checked = true; };
+
+                    if (this.radioButton8.Tag.ToString() == dt.Rows[0]["base_selfcare_estimate"].ToString()) { this.radioButton8.Checked = true; };
+                    if (this.radioButton9.Tag.ToString() == dt.Rows[0]["base_selfcare_estimate"].ToString()) { this.radioButton9.Checked = true; };
+                    if (this.radioButton16.Tag.ToString() == dt.Rows[0]["base_selfcare_estimate"].ToString()) {this.radioButton16.Checked = true; };
+                    if (this.radioButton7.Tag.ToString() == dt.Rows[0]["base_selfcare_estimate"].ToString()) { this.radioButton7.Checked = true; };
+
+                    if (this.radioButton17.Tag.ToString() == dt.Rows[0]["base_cognition_estimate"].ToString()) { this.radioButton17.Checked = true; };
+                    if (this.radioButton18.Tag.ToString() == dt.Rows[0]["base_cognition_estimate"].ToString())
+                    {
+                        this.textBox72.Text = dt.Rows[0]["base_cognition_score"].ToString();
+                        this.radioButton18.Checked = true;
+                    };
+
+                    if (this.radioButton6.Tag.ToString() == dt.Rows[0]["base_feeling_estimate"].ToString()) { this.radioButton6.Checked = true; };
+                    if (this.radioButton10.Tag.ToString() == dt.Rows[0]["base_feeling_estimate"].ToString())
+                    {
+                        this.radioButton10.Checked = true;
+                        this.textBox20.Text = dt.Rows[0]["base_feeling_score"].ToString();
+                    };
+
+                    if (this.radioButton24.Tag.ToString() == dt.Rows[0]["lifeway_exercise_frequency"].ToString()) { this.radioButton24.Checked = true; };
+                    if (this.radioButton25.Tag.ToString() == dt.Rows[0]["lifeway_exercise_frequency"].ToString()) { this.radioButton25.Checked = true; };
+                    if (this.radioButton26.Tag.ToString() == dt.Rows[0]["lifeway_exercise_frequency"].ToString()) {  this.radioButton26.Checked = true; };
+                    if (this.radioButton23.Tag.ToString() == dt.Rows[0]["lifeway_exercise_frequency"].ToString()) {  this.radioButton23.Checked = true; };
+
+                    this.textBox80.Text = dt.Rows[0]["lifeway_exercise_time"].ToString();
+                    this.textBox75.Text = dt.Rows[0]["lifeway_exercise_year"].ToString();
+                    this.textBox77.Text = dt.Rows[0]["lifeway_exercise_type"].ToString();
+
+                    foreach (Control ctr in this.panel11.Controls)
+                    {
+                        //判断该控件是不是CheckBox
+                        if (ctr is CheckBox)
+                        {
+                            //将ctr转换成CheckBox并赋值给ck
+                            CheckBox ck = ctr as CheckBox;
+                            if (dt.Rows[0]["lifeway_diet"].ToString().IndexOf(ck.Text) > -1)
+                            {
+                                ck.Checked = true;
+                            }
+                        }
+                    }
+
+                    if (this.radioButton35.Tag.ToString() == dt.Rows[0]["lifeway_smoke_status"].ToString()) { this.radioButton35.Checked = true; };
+                    if (this.radioButton36.Tag.ToString() == dt.Rows[0]["lifeway_smoke_status"].ToString()) { this.radioButton36.Checked = true; };
+                    if (this.radioButton37.Tag.ToString() == dt.Rows[0]["lifeway_smoke_status"].ToString()) { this.radioButton37.Checked = true; };
+
+                    this.textBox29.Text = dt.Rows[0]["lifeway_smoke_number"].ToString();
+                    this.textBox39.Text = dt.Rows[0]["lifeway_smoke_startage"].ToString();
+                    this.textBox49.Text = dt.Rows[0]["lifeway_smoke_endage"].ToString();
+
+                    if (this.radioButton12.Tag.ToString() == dt.Rows[0]["lifeway_drink_status"].ToString()) { this.radioButton12.Checked = true; };
+                    if (this.radioButton13.Tag.ToString() == dt.Rows[0]["lifeway_drink_status"].ToString()) { this.radioButton13.Checked = true; };
+                    if (this.radioButton14.Tag.ToString() == dt.Rows[0]["lifeway_drink_status"].ToString()) { this.radioButton14.Checked = true; };
+                    if (this.radioButton11.Tag.ToString() == dt.Rows[0]["lifeway_drink_status"].ToString()) { this.radioButton11.Checked = true; };
+
+                    this.textBox25.Text = dt.Rows[0]["lifeway_drink_number"].ToString();
+                    if (this.radioButton19.Tag.ToString() == dt.Rows[0]["lifeway_drink_stop"].ToString()) { this.radioButton19.Checked = true; };
+                    if (this.radioButton20.Tag.ToString() == dt.Rows[0]["lifeway_drink_stop"].ToString())
+                    {
+
+                        this.radioButton20.Checked = true;
+                        this.textBox76.Text = dt.Rows[0]["lifeway_drink_stopage"].ToString();
+                    };
+                    this.textBox85.Text = dt.Rows[0]["lifeway_drink_startage"].ToString();
+                    if (this.radioButton15.Tag.ToString() == dt.Rows[0]["lifeway_drink_oneyear"].ToString()) { this.radioButton15.Checked = true; };
+                    if (this.radioButton21.Tag.ToString() == dt.Rows[0]["lifeway_drink_oneyear"].ToString()) { this.radioButton21.Checked = true; };
+
+                    foreach (Control ctr in this.panel13.Controls)
+                    {
+                        //判断该控件是不是CheckBox
+                        if (ctr is CheckBox)
+                        {
+                            //将ctr转换成CheckBox并赋值给ck
+                            CheckBox ck = ctr as CheckBox;
+                            if (dt.Rows[0]["lifeway_drink_type"].ToString().IndexOf(ck.Text) > -1)
+                            {
+                                ck.Checked = true;
+                            }
+                        }
+                    }
+                    this.textBox117.Text = dt.Rows[0]["lifeway_drink_other"].ToString();
+
+                    if (this.radioButton40.Tag.ToString() == dt.Rows[0]["lifeway_occupational_disease"].ToString()) { this.radioButton40.Checked = true; };
+                    if (this.radioButton41.Tag.ToString() == dt.Rows[0]["lifeway_occupational_disease"].ToString())
+                    {
+                        this.radioButton41.Checked = true;
+                        this.textBox92.Text = dt.Rows[0]["lifeway_job"].ToString();
+                        this.textBox95.Text = dt.Rows[0]["lifeway_job_period"].ToString();
+                        this.textBox98.Text = dt.Rows[0]["lifeway_hazardous_dust"].ToString();
+                        if (this.radioButton42.Tag.ToString() == dt.Rows[0]["lifeway_dust_preventive"].ToString())
+                        {
+                            this.radioButton42.Checked = true;
+                        }
+                        if (this.textBox100.Text == dt.Rows[0]["lifeway_dust_preventive"].ToString())
+                        {
+                            this.radioButton43.Checked = true;
+                        }
+
+                        this.textBox103.Text = dt.Rows[0]["lifeway_hazardous_radiation"].ToString();
+                        if (this.radioButton44.Tag.ToString() == dt.Rows[0]["lifeway_radiation_preventive"].ToString())
+                        {
+                            this.radioButton44.Checked = true;
+                        }
+                        else if (this.textBox101.Text == dt.Rows[0]["lifeway_radiation_preventive"].ToString())
+                        {
+                            this.radioButton45.Checked = true;
+                        }
+
+                        this.textBox115.Text = dt.Rows[0]["lifeway_hazardous_physical"].ToString();
+                        if (this.radioButton50.Tag.ToString() == dt.Rows[0]["lifeway_physical_preventive"].ToString())
+                        {
+                                this.radioButton50.Checked = true;
+                        }
+                        else if (this.textBox113.Text == dt.Rows[0]["lifeway_physical_preventive"].ToString())
+                        {
+                            this.radioButton51.Checked = true;
+                        }
+
+                        this.textBox107.Text = dt.Rows[0]["lifeway_hazardous_chemical"].ToString();
+                        if (this.radioButton46.Tag.ToString() == dt.Rows[0]["lifeway_chemical_preventive"].ToString())
+                        {
+                                this.radioButton46.Checked = true;
+                        }
+                        else if (this.textBox105.Text == dt.Rows[0]["lifeway_chemical_preventive"].ToString())
+                        {
+                            this.radioButton47.Checked = true;
+                        }
+
+                        this.textBox111.Text = dt.Rows[0]["lifeway_hazardous_other"].ToString();
+                        if (this.radioButton48.Tag.ToString() == dt.Rows[0]["lifeway_other_preventive"].ToString())
+                        {
+                                this.radioButton48.Checked = true;
+                        }
+                        else if (this.textBox109.Text == dt.Rows[0]["lifeway_other_preventive"].ToString())
+                        {
+                            this.radioButton49.Checked = true;
+                        }
+                    };
+                }
+            }
         }
         private void button5_Click(object sender, EventArgs e)
         {
@@ -37,7 +224,6 @@ namespace zkhwClient.view.PublicHealthView
             per.name = this.textBox1.Text.Replace(" ", "");
             per.aichive_no = this.textBox2.Text.Replace(" ", "");
             per.bar_code = this.textBox118.Text;
-            per.id_number = this.textBox119.Text;
             per.check_date = this.dateTimePicker1.Value.ToString();
             per.doctor_name = this.textBox51.Text.Replace(" ", "");
             per.id= this.textBox120.Text;
@@ -50,18 +236,16 @@ namespace zkhwClient.view.PublicHealthView
                     CheckBox ck = ctr as CheckBox;
                     if (ck.Checked)
                     {
-                        per.symptom += "," + ck.Tag.ToString();
+                        per.symptom += "," + ck.Text;
                     }
                 }
             }
             if (per.symptom != null && per.symptom != "")
             {
                 per.symptom = per.symptom.Substring(1);
-                if (this.checkBox28.Checked) {
-                    per.symptom_other = this.textBox11.Text;
-                }
             }
-            
+            per.symptom_other = this.textBox11.Text;
+
             per.base_temperature = this.textBox52.Text.Replace(" ", "");
             per.base_heartbeat = this.textBox66.Text.Replace(" ", "");
             per.base_respiratory = this.textBox53.Text.Replace(" ", "");
@@ -262,7 +446,8 @@ namespace zkhwClient.view.PublicHealthView
                 auhc2.textBox95.Text = per.aichive_no;
                 auhc2.textBox96.Text = per.bar_code;
                 auhc2.textBox100.Text = per.id;
-                auhc2.textBox99.Text = per.id_number;
+                auhc2.id = id;//祖
+                auhc2.textBox99.Text = this.textBox119.Text;
                 auhc2.Show();
             }
             else {
@@ -270,26 +455,26 @@ namespace zkhwClient.view.PublicHealthView
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            more0 hm = new more0();
-            foreach (Control ctr in hm.panel1.Controls)
-            {
-                //判断该控件是不是CheckBox
-                if (ctr is CheckBox)
-                {
-                    //将ctr转换成CheckBox并赋值给ck
-                    CheckBox ck = ctr as CheckBox;
-                    //if (this.richTextBox2.Text.IndexOf(ck.Text) > -1)
-                    //{
-                    //    ck.Checked = true;
-                    //}
-                }
-            }
-            if (hm.ShowDialog() == DialogResult.OK)
-            {
+        //private void button3_Click(object sender, EventArgs e)
+        //{
+        //    more0 this = new more0();
+        //    foreach (Control ctr in this.panel1.Controls)
+        //    {
+        //        //判断该控件是不是CheckBox
+        //        if (ctr is CheckBox)
+        //        {
+        //            //将ctr转换成CheckBox并赋值给ck
+        //            CheckBox ck = ctr as CheckBox;
+        //            //if (this.richTextBox2.Text.IndexOf(ck.Text) > -1)
+        //            //{
+        //            //    ck.Checked = true;
+        //            //}
+        //        }
+        //    }
+        //    if (this.ShowDialog() == DialogResult.OK)
+        //    {
                 
-            }
-        }
+        //    }
+        //}
     }
 }
