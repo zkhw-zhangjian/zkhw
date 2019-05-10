@@ -255,7 +255,6 @@
             this.radioButton42.Name = "radioButton42";
             this.radioButton42.Size = new System.Drawing.Size(71, 16);
             this.radioButton42.TabIndex = 5;
-            this.radioButton42.TabStop = true;
             this.radioButton42.Tag = "2";
             this.radioButton42.Text = "2 未掌握";
             this.radioButton42.UseVisualStyleBackColor = true;
@@ -263,6 +262,7 @@
             // radioButton43
             // 
             this.radioButton43.AutoSize = true;
+            this.radioButton43.Checked = true;
             this.radioButton43.Location = new System.Drawing.Point(121, 19);
             this.radioButton43.Name = "radioButton43";
             this.radioButton43.Size = new System.Drawing.Size(59, 16);
@@ -290,7 +290,6 @@
             this.radioButton40.Name = "radioButton40";
             this.radioButton40.Size = new System.Drawing.Size(71, 16);
             this.radioButton40.TabIndex = 5;
-            this.radioButton40.TabStop = true;
             this.radioButton40.Tag = "2";
             this.radioButton40.Text = "2 未掌握";
             this.radioButton40.UseVisualStyleBackColor = true;
@@ -298,6 +297,7 @@
             // radioButton41
             // 
             this.radioButton41.AutoSize = true;
+            this.radioButton41.Checked = true;
             this.radioButton41.Location = new System.Drawing.Point(121, 19);
             this.radioButton41.Name = "radioButton41";
             this.radioButton41.Size = new System.Drawing.Size(59, 16);
@@ -325,7 +325,6 @@
             this.radioButton38.Name = "radioButton38";
             this.radioButton38.Size = new System.Drawing.Size(71, 16);
             this.radioButton38.TabIndex = 5;
-            this.radioButton38.TabStop = true;
             this.radioButton38.Tag = "2";
             this.radioButton38.Text = "2 未掌握";
             this.radioButton38.UseVisualStyleBackColor = true;
@@ -333,6 +332,7 @@
             // radioButton39
             // 
             this.radioButton39.AutoSize = true;
+            this.radioButton39.Checked = true;
             this.radioButton39.Location = new System.Drawing.Point(121, 19);
             this.radioButton39.Name = "radioButton39";
             this.radioButton39.Size = new System.Drawing.Size(59, 16);
@@ -360,7 +360,6 @@
             this.radioButton36.Name = "radioButton36";
             this.radioButton36.Size = new System.Drawing.Size(71, 16);
             this.radioButton36.TabIndex = 5;
-            this.radioButton36.TabStop = true;
             this.radioButton36.Tag = "2";
             this.radioButton36.Text = "2 未掌握";
             this.radioButton36.UseVisualStyleBackColor = true;
@@ -368,6 +367,7 @@
             // radioButton37
             // 
             this.radioButton37.AutoSize = true;
+            this.radioButton37.Checked = true;
             this.radioButton37.Location = new System.Drawing.Point(121, 19);
             this.radioButton37.Name = "radioButton37";
             this.radioButton37.Size = new System.Drawing.Size(59, 16);
@@ -395,7 +395,6 @@
             this.radioButton34.Name = "radioButton34";
             this.radioButton34.Size = new System.Drawing.Size(71, 16);
             this.radioButton34.TabIndex = 5;
-            this.radioButton34.TabStop = true;
             this.radioButton34.Tag = "2";
             this.radioButton34.Text = "2 未掌握";
             this.radioButton34.UseVisualStyleBackColor = true;
@@ -403,6 +402,7 @@
             // radioButton35
             // 
             this.radioButton35.AutoSize = true;
+            this.radioButton35.Checked = true;
             this.radioButton35.Location = new System.Drawing.Point(121, 19);
             this.radioButton35.Name = "radioButton35";
             this.radioButton35.Size = new System.Drawing.Size(59, 16);
@@ -430,7 +430,6 @@
             this.radioButton32.Name = "radioButton32";
             this.radioButton32.Size = new System.Drawing.Size(71, 16);
             this.radioButton32.TabIndex = 5;
-            this.radioButton32.TabStop = true;
             this.radioButton32.Tag = "2";
             this.radioButton32.Text = "2 未掌握";
             this.radioButton32.UseVisualStyleBackColor = true;
@@ -438,6 +437,7 @@
             // radioButton33
             // 
             this.radioButton33.AutoSize = true;
+            this.radioButton33.Checked = true;
             this.radioButton33.Location = new System.Drawing.Point(121, 19);
             this.radioButton33.Name = "radioButton33";
             this.radioButton33.Size = new System.Drawing.Size(59, 16);
@@ -465,7 +465,6 @@
             this.radioButton30.Name = "radioButton30";
             this.radioButton30.Size = new System.Drawing.Size(71, 16);
             this.radioButton30.TabIndex = 5;
-            this.radioButton30.TabStop = true;
             this.radioButton30.Tag = "2";
             this.radioButton30.Text = "2 未掌握";
             this.radioButton30.UseVisualStyleBackColor = true;
@@ -473,6 +472,7 @@
             // radioButton31
             // 
             this.radioButton31.AutoSize = true;
+            this.radioButton31.Checked = true;
             this.radioButton31.Location = new System.Drawing.Point(121, 19);
             this.radioButton31.Name = "radioButton31";
             this.radioButton31.Size = new System.Drawing.Size(59, 16);
@@ -500,7 +500,6 @@
             this.radioButton28.Name = "radioButton28";
             this.radioButton28.Size = new System.Drawing.Size(71, 16);
             this.radioButton28.TabIndex = 5;
-            this.radioButton28.TabStop = true;
             this.radioButton28.Tag = "2";
             this.radioButton28.Text = "2 未掌握";
             this.radioButton28.UseVisualStyleBackColor = true;
@@ -508,6 +507,7 @@
             // radioButton29
             // 
             this.radioButton29.AutoSize = true;
+            this.radioButton29.Checked = true;
             this.radioButton29.Location = new System.Drawing.Point(121, 19);
             this.radioButton29.Name = "radioButton29";
             this.radioButton29.Size = new System.Drawing.Size(59, 16);
@@ -535,7 +535,6 @@
             this.radioButton26.Name = "radioButton26";
             this.radioButton26.Size = new System.Drawing.Size(71, 16);
             this.radioButton26.TabIndex = 5;
-            this.radioButton26.TabStop = true;
             this.radioButton26.Tag = "2";
             this.radioButton26.Text = "2 未掌握";
             this.radioButton26.UseVisualStyleBackColor = true;
@@ -543,6 +542,7 @@
             // radioButton27
             // 
             this.radioButton27.AutoSize = true;
+            this.radioButton27.Checked = true;
             this.radioButton27.Location = new System.Drawing.Point(121, 19);
             this.radioButton27.Name = "radioButton27";
             this.radioButton27.Size = new System.Drawing.Size(59, 16);
@@ -728,7 +728,6 @@
             this.radioButton24.Name = "radioButton24";
             this.radioButton24.Size = new System.Drawing.Size(59, 16);
             this.radioButton24.TabIndex = 4;
-            this.radioButton24.TabStop = true;
             this.radioButton24.Tag = "2";
             this.radioButton24.Text = "2 一般";
             this.radioButton24.UseVisualStyleBackColor = true;
@@ -740,7 +739,6 @@
             this.radioButton23.Name = "radioButton23";
             this.radioButton23.Size = new System.Drawing.Size(47, 16);
             this.radioButton23.TabIndex = 5;
-            this.radioButton23.TabStop = true;
             this.radioButton23.Tag = "3";
             this.radioButton23.Text = "3 差";
             this.radioButton23.UseVisualStyleBackColor = true;
@@ -748,6 +746,7 @@
             // radioButton25
             // 
             this.radioButton25.AutoSize = true;
+            this.radioButton25.Checked = true;
             this.radioButton25.Location = new System.Drawing.Point(20, 29);
             this.radioButton25.Name = "radioButton25";
             this.radioButton25.Size = new System.Drawing.Size(59, 16);
@@ -775,7 +774,6 @@
             this.radioButton21.Name = "radioButton21";
             this.radioButton21.Size = new System.Drawing.Size(47, 16);
             this.radioButton21.TabIndex = 3;
-            this.radioButton21.TabStop = true;
             this.radioButton21.Tag = "2";
             this.radioButton21.Text = "2 无";
             this.radioButton21.UseVisualStyleBackColor = true;
@@ -783,6 +781,7 @@
             // radioButton22
             // 
             this.radioButton22.AutoSize = true;
+            this.radioButton22.Checked = true;
             this.radioButton22.Location = new System.Drawing.Point(11, 20);
             this.radioButton22.Name = "radioButton22";
             this.radioButton22.Size = new System.Drawing.Size(47, 16);
@@ -812,7 +811,6 @@
             this.radioButton20.Name = "radioButton20";
             this.radioButton20.Size = new System.Drawing.Size(59, 16);
             this.radioButton20.TabIndex = 3;
-            this.radioButton20.TabStop = true;
             this.radioButton20.Tag = "4";
             this.radioButton20.Text = "4 其他";
             this.radioButton20.UseVisualStyleBackColor = true;
@@ -824,7 +822,6 @@
             this.radioButton19.Name = "radioButton19";
             this.radioButton19.Size = new System.Drawing.Size(71, 16);
             this.radioButton19.TabIndex = 2;
-            this.radioButton19.TabStop = true;
             this.radioButton19.Tag = "3";
             this.radioButton19.Text = "3 自服药";
             this.radioButton19.UseVisualStyleBackColor = true;
@@ -836,7 +833,6 @@
             this.radioButton18.Name = "radioButton18";
             this.radioButton18.Size = new System.Drawing.Size(59, 16);
             this.radioButton18.TabIndex = 1;
-            this.radioButton18.TabStop = true;
             this.radioButton18.Tag = "2";
             this.radioButton18.Text = "2 家属";
             this.radioButton18.UseVisualStyleBackColor = true;
@@ -844,6 +840,7 @@
             // radioButton17
             // 
             this.radioButton17.AutoSize = true;
+            this.radioButton17.Checked = true;
             this.radioButton17.Location = new System.Drawing.Point(33, 20);
             this.radioButton17.Name = "radioButton17";
             this.radioButton17.Size = new System.Drawing.Size(59, 16);
@@ -886,7 +883,6 @@
             this.radioButton16.Name = "radioButton16";
             this.radioButton16.Size = new System.Drawing.Size(71, 16);
             this.radioButton16.TabIndex = 5;
-            this.radioButton16.TabStop = true;
             this.radioButton16.Tag = "4";
             this.radioButton16.Text = "4 注射剂";
             this.radioButton16.UseVisualStyleBackColor = true;
@@ -898,7 +894,6 @@
             this.radioButton15.Name = "radioButton15";
             this.radioButton15.Size = new System.Drawing.Size(95, 16);
             this.radioButton15.TabIndex = 4;
-            this.radioButton15.TabStop = true;
             this.radioButton15.Tag = "3";
             this.radioButton15.Text = "3 板式组合药";
             this.radioButton15.UseVisualStyleBackColor = true;
@@ -910,7 +905,6 @@
             this.radioButton13.Name = "radioButton13";
             this.radioButton13.Size = new System.Drawing.Size(71, 16);
             this.radioButton13.TabIndex = 3;
-            this.radioButton13.TabStop = true;
             this.radioButton13.Tag = "2";
             this.radioButton13.Text = "2 散装药";
             this.radioButton13.UseVisualStyleBackColor = true;
@@ -918,6 +912,7 @@
             // radioButton14
             // 
             this.radioButton14.AutoSize = true;
+            this.radioButton14.Checked = true;
             this.radioButton14.Location = new System.Drawing.Point(6, 17);
             this.radioButton14.Name = "radioButton14";
             this.radioButton14.Size = new System.Drawing.Size(131, 16);
@@ -945,7 +940,6 @@
             this.radioButton12.Name = "radioButton12";
             this.radioButton12.Size = new System.Drawing.Size(59, 16);
             this.radioButton12.TabIndex = 1;
-            this.radioButton12.TabStop = true;
             this.radioButton12.Tag = "2";
             this.radioButton12.Text = "2 间歇";
             this.radioButton12.UseVisualStyleBackColor = true;
@@ -953,6 +947,7 @@
             // radioButton11
             // 
             this.radioButton11.AutoSize = true;
+            this.radioButton11.Checked = true;
             this.radioButton11.Location = new System.Drawing.Point(9, 17);
             this.radioButton11.Name = "radioButton11";
             this.radioButton11.Size = new System.Drawing.Size(65, 16);
@@ -1146,7 +1141,6 @@
             this.radioButton10.Name = "radioButton10";
             this.radioButton10.Size = new System.Drawing.Size(71, 16);
             this.radioButton10.TabIndex = 3;
-            this.radioButton10.TabStop = true;
             this.radioButton10.Tag = "3";
             this.radioButton10.Text = "3 未检测";
             this.radioButton10.UseVisualStyleBackColor = true;
@@ -1158,7 +1152,6 @@
             this.radioButton8.Name = "radioButton8";
             this.radioButton8.Size = new System.Drawing.Size(71, 16);
             this.radioButton8.TabIndex = 1;
-            this.radioButton8.TabStop = true;
             this.radioButton8.Tag = "2";
             this.radioButton8.Text = "2 非耐药";
             this.radioButton8.UseVisualStyleBackColor = true;
@@ -1166,6 +1159,7 @@
             // radioButton9
             // 
             this.radioButton9.AutoSize = true;
+            this.radioButton9.Checked = true;
             this.radioButton9.Location = new System.Drawing.Point(7, 20);
             this.radioButton9.Name = "radioButton9";
             this.radioButton9.Size = new System.Drawing.Size(59, 16);
@@ -1194,7 +1188,6 @@
             this.radioButton7.Name = "radioButton7";
             this.radioButton7.Size = new System.Drawing.Size(71, 16);
             this.radioButton7.TabIndex = 2;
-            this.radioButton7.TabStop = true;
             this.radioButton7.Tag = "3";
             this.radioButton7.Text = "3 未查痰";
             this.radioButton7.UseVisualStyleBackColor = true;
@@ -1206,7 +1199,6 @@
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(59, 16);
             this.radioButton5.TabIndex = 1;
-            this.radioButton5.TabStop = true;
             this.radioButton5.Tag = "2";
             this.radioButton5.Text = "2 阴性";
             this.radioButton5.UseVisualStyleBackColor = true;
@@ -1214,6 +1206,7 @@
             // radioButton6
             // 
             this.radioButton6.AutoSize = true;
+            this.radioButton6.Checked = true;
             this.radioButton6.Location = new System.Drawing.Point(7, 20);
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(59, 16);
@@ -1241,7 +1234,6 @@
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(59, 16);
             this.radioButton3.TabIndex = 1;
-            this.radioButton3.TabStop = true;
             this.radioButton3.Tag = "2";
             this.radioButton3.Text = "2 复治";
             this.radioButton3.UseVisualStyleBackColor = true;
@@ -1249,6 +1241,7 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
+            this.radioButton4.Checked = true;
             this.radioButton4.Location = new System.Drawing.Point(7, 20);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(59, 16);
@@ -1276,7 +1269,6 @@
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(59, 16);
             this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
             this.radioButton2.Tag = "2";
             this.radioButton2.Text = "2.家庭";
             this.radioButton2.UseVisualStyleBackColor = true;
@@ -1284,6 +1276,7 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
             this.radioButton1.Location = new System.Drawing.Point(10, 20);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(65, 16);

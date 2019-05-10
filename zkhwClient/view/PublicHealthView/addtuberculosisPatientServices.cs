@@ -30,6 +30,9 @@ namespace zkhwClient.view.PublicHealthView
         /// 身份证号
         /// </summary>
         public string id_number { get; set; }
+
+        public bool show { get; set; } = true;
+        public string mag { get; set; }
         /// <summary>
         /// 首次随访添加
         /// </summary>
@@ -44,10 +47,11 @@ namespace zkhwClient.view.PublicHealthView
             IS = ps;
             if (GetRecord())
             {
-                MessageBox.Show("已有随访记录不可新增！");
-                return;
+                show = false;
+                mag = "已有随访记录不可新增！";
             }
             this.Text = (IS == 1 ? "首次随访添加" : "首次随访修改");
+            InitializeComponent();
             if (IS == 0)
             {
                 if (GetUpdate())
@@ -56,11 +60,10 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 else
                 {
-                    MessageBox.Show("没有修改数据！");
-                    return;
+                    show = false;
+                    mag = "没有修改数据！";
                 }
             }
-            InitializeComponent();
         }
 
         private void 取消_Click(object sender, EventArgs e)
@@ -90,11 +93,11 @@ namespace zkhwClient.view.PublicHealthView
             info.name = Names;
             info.aichive_no = aichive_no;
             info.Cardcode = id_number;
-            string issql = @"insert into tuberculosis_info(id,name,aichive_no,Cardcode,visit_date,visit_type,patient_type,sputum_bacterium_type,drug_fast_type,symptom,symptom_other,chemotherapy_plan,usage,drugs_type,supervisor_type,supervisor_other,single_room,ventilation,smoke_now,smoke_next,drink_now,drink_next,get_medicine_address,get_medicine_date,medicine_record,medicine_leave,treatment_course,erratically,untoward_effect,further_consultation,insist,habits_customs,intimate_contact,next_visit_date,estimate_doctor,create_user,create_name,create_time,upload_status) values(@id,@name,@aichive_no,@Cardcode,@visit_date,@visit_type,@patient_type,@sputum_bacterium_type,@drug_fast_type,@symptom,@symptom_other,@chemotherapy_plan,@usage,@drugs_type,@supervisor_type,@supervisor_other,@single_room,@ventilation,@smoke_now,@smoke_next,@drink_now,@drink_next,@get_medicine_address,@get_medicine_date,@medicine_record,@medicine_leave,@treatment_course,@erratically,@untoward_effect,@further_consultation,@insist,@habits_customs,@intimate_contact,@next_visit_date,@estimate_doctor,@create_user,@create_name,@create_time,@upload_status)";
+            string issql = @"insert into tuberculosis_info(id,name,archive_no,Cardcode,visit_date,visit_type,patient_type,sputum_bacterium_type,drug_fast_type,symptom,symptom_other,chemotherapy_plan,`usage`,drugs_type,supervisor_type,supervisor_other,single_room,ventilation,smoke_now,smoke_next,drink_now,drink_next,get_medicine_address,get_medicine_date,medicine_record,medicine_leave,treatment_course,erratically,untoward_effect,further_consultation,insist,habits_customs,intimate_contact,next_visit_date,estimate_doctor,create_user,create_name,create_time,upload_status) values(@id,@name,@archive_no,@Cardcode,@visit_date,@visit_type,@patient_type,@sputum_bacterium_type,@drug_fast_type,@symptom,@symptom_other,@chemotherapy_plan,@usage,@drugs_type,@supervisor_type,@supervisor_other,@single_room,@ventilation,@smoke_now,@smoke_next,@drink_now,@drink_next,@get_medicine_address,@get_medicine_date,@medicine_record,@medicine_leave,@treatment_course,@erratically,@untoward_effect,@further_consultation,@insist,@habits_customs,@intimate_contact,@next_visit_date,@estimate_doctor,@create_user,@create_name,@create_time,@upload_status)";
             MySqlParameter[] args = new MySqlParameter[] {
                     new MySqlParameter("@id",info.id),
                     new MySqlParameter("@name", info.name),
-                    new MySqlParameter("@aichive_no", info.aichive_no),
+                    new MySqlParameter("@archive_no", info.aichive_no),
                     new MySqlParameter("@Cardcode", info.Cardcode),
                     new MySqlParameter("@visit_date", info.visit_date),
                     new MySqlParameter("@visit_type", info.visit_type),
@@ -144,10 +147,10 @@ namespace zkhwClient.view.PublicHealthView
             info.name = Names;
             info.aichive_no = aichive_no;
             info.Cardcode = id_number;
-            string issql = @"update tuberculosis_info set visit_date=@visit_date,visit_type=@visit_type,patient_type=@patient_type,sputum_bacterium_type=@sputum_bacterium_type,drug_fast_type=@drug_fast_type,symptom=@symptom,symptom_other=@symptom_other,chemotherapy_plan=@chemotherapy_plan,usage=@usage,drugs_type=@drugs_type,supervisor_type=@supervisor_type,supervisor_other=@supervisor_other,single_room=@single_room,ventilation=@ventilation,smoke_now=@smoke_now,smoke_next=@smoke_next,drink_now=@drink_now,drink_next=@drink_next,get_medicine_address=@get_medicine_address,get_medicine_date=@get_medicine_date,medicine_record=@medicine_record,medicine_leave=@medicine_leave,treatment_course=@treatment_course,erratically=@erratically,untoward_effect=@untoward_effect,further_consultation=@further_consultation,insist=@insist,habits_customs=@habits_customs,intimate_contact=@intimate_contact,next_visit_date=@next_visit_date,estimate_doctor,update_user=@update_user,update_name=@update_name,update_time=@update_time where name=@name and aichive_no=@aichive_no and Cardcode=@Cardcode";
+            string issql = @"update tuberculosis_info set visit_date=@visit_date,visit_type=@visit_type,patient_type=@patient_type,sputum_bacterium_type=@sputum_bacterium_type,drug_fast_type=@drug_fast_type,symptom=@symptom,symptom_other=@symptom_other,chemotherapy_plan=@chemotherapy_plan,`usage`=@usage,drugs_type=@drugs_type,supervisor_type=@supervisor_type,supervisor_other=@supervisor_other,single_room=@single_room,ventilation=@ventilation,smoke_now=@smoke_now,smoke_next=@smoke_next,drink_now=@drink_now,drink_next=@drink_next,get_medicine_address=@get_medicine_address,get_medicine_date=@get_medicine_date,medicine_record=@medicine_record,medicine_leave=@medicine_leave,treatment_course=@treatment_course,erratically=@erratically,untoward_effect=@untoward_effect,further_consultation=@further_consultation,insist=@insist,habits_customs=@habits_customs,intimate_contact=@intimate_contact,next_visit_date=@next_visit_date,estimate_doctor=@estimate_doctor,update_user=@update_user,update_name=@update_name,update_time=@update_time where name=@name and archive_no=@archive_no and Cardcode=@Cardcode";
             MySqlParameter[] args = new MySqlParameter[] {
                     new MySqlParameter("@name", info.name),
-                    new MySqlParameter("@aichive_no", info.aichive_no),
+                    new MySqlParameter("@archive_no", info.aichive_no),
                     new MySqlParameter("@Cardcode", info.Cardcode),
                     new MySqlParameter("@visit_date", info.visit_date),
                     new MySqlParameter("@visit_type", info.visit_type),
@@ -234,9 +237,9 @@ namespace zkhwClient.view.PublicHealthView
                     }
                 }
             }
+            string symptom = string.Empty;
             foreach (Control item in 症状及体征.Controls)
             {
-                string symptom = string.Empty;
                 if (item is CheckBox)
                 {
                     if (((CheckBox)item).Checked)
@@ -248,8 +251,8 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     info.symptom_other = ((RichTextBox)item).Text;
                 }
-                info.symptom = symptom.TrimEnd(',');
             }
+            info.symptom = symptom.TrimEnd(',');
             info.chemotherapy_plan = 化疗方案.Text;
             foreach (Control item in 用法.Controls)
             {
@@ -405,7 +408,7 @@ namespace zkhwClient.view.PublicHealthView
         /// </summary>
         private void SetData()
         {
-            string sql = $@"select * from tuberculosis_info where name='{Names}' and aichive_no='{aichive_no}' and Cardcode='{id_number}' order by create_time desc LIMIT 1";
+            string sql = $@"select * from tuberculosis_info where name='{Names}' and archive_no='{aichive_no}' and Cardcode='{id_number}' order by create_time desc LIMIT 1";
             DataSet jb = DbHelperMySQL.Query(sql);
             if (jb != null && jb.Tables.Count > 0 && jb.Tables[0].Rows.Count > 0)
             {
@@ -654,14 +657,14 @@ namespace zkhwClient.view.PublicHealthView
         /// <returns></returns>
         private bool GetUpdate()
         {
-            DataSet data = DbHelperMySQL.Query($@"select * from tuberculosis_info where name='{Names}' and aichive_no='{aichive_no}' and Cardcode='{id_number}'");
+            DataSet data = DbHelperMySQL.Query($@"select * from tuberculosis_info where name='{Names}' and archive_no='{aichive_no}' and Cardcode='{id_number}'");
             if (data != null && data.Tables[0] != null && data.Tables[0].Rows.Count > 0)
             {
-                return false;
+                return true;
             }
             else
             {
-                return true;
+                return false;
             }
         }
     }

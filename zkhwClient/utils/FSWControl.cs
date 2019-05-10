@@ -37,7 +37,7 @@ namespace zkhwClient.dao
             //设置需要监听的更改类型(如:文件或者文件夹的属性,文件或者文件夹的创建时间;NotifyFilters枚举的内容)
             watcher.NotifyFilter = NotifyFilters.Attributes | NotifyFilters.CreationTime | NotifyFilters.DirectoryName | NotifyFilters.FileName | NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.Security | NotifyFilters.Size;
             //设置监听的路径
-            watcher.Path = StrWarcherPath;
+            //watcher.Path = StrWarcherPath;
             //注册创建文件或目录时的监听事件
             watcher.Created += new FileSystemEventHandler(watch_created);
             //注册当指定目录的文件或者目录发生改变的时候的监听事件
@@ -89,7 +89,7 @@ namespace zkhwClient.dao
             //设置需要监听的更改类型(如:文件或者文件夹的属性,文件或者文件夹的创建时间;NotifyFilters枚举的内容)
             watcherb.NotifyFilter = NotifyFilters.Attributes | NotifyFilters.CreationTime | NotifyFilters.DirectoryName | NotifyFilters.FileName | NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.Security | NotifyFilters.Size;
             //设置监听的路径
-            watcherb.Path = StrWarcherPath;
+            //watcherb.Path = StrWarcherPath;
             //注册创建文件或目录时的监听事件
             //watcherb.Filter.
             watcherb.Created += new FileSystemEventHandler(watch_createdbchao);

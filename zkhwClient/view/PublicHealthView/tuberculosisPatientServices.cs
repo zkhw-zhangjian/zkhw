@@ -186,8 +186,16 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             int row = dataGridView1.CurrentRow.Index;
             addtuberculosisPatientServices addtcm = new addtuberculosisPatientServices(1, dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
-            addtcm.StartPosition = FormStartPosition.CenterScreen;
-            addtcm.ShowDialog();
+            if (addtcm.show)
+            {
+                addtcm.StartPosition = FormStartPosition.CenterScreen;
+                addtcm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show(addtcm.mag);
+            }
+
         }
 
         private void 非首次随访添加_Click(object sender, EventArgs e)
@@ -195,8 +203,15 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             int row = dataGridView1.CurrentRow.Index;
             addTotuberculosisPatientServices addtcm = new addTotuberculosisPatientServices(1, dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
-            addtcm.StartPosition = FormStartPosition.CenterScreen;
-            addtcm.ShowDialog();
+            if (addtcm.show)
+            {
+                addtcm.StartPosition = FormStartPosition.CenterScreen;
+                addtcm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show(addtcm.mag);
+            }
         }
 
         private void 首次随访修改_Click(object sender, EventArgs e)
@@ -204,8 +219,15 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             int row = dataGridView1.CurrentRow.Index;
             addtuberculosisPatientServices addtcm = new addtuberculosisPatientServices(0, dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
-            addtcm.StartPosition = FormStartPosition.CenterScreen;
-            addtcm.ShowDialog();
+            if (addtcm.show)
+            {
+                addtcm.StartPosition = FormStartPosition.CenterScreen;
+                addtcm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show(addtcm.mag);
+            }
         }
 
         private void 非首次随访修改_Click(object sender, EventArgs e)
@@ -213,8 +235,15 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             int row = dataGridView1.CurrentRow.Index;
             addTotuberculosisPatientServices addtcm = new addTotuberculosisPatientServices(0, dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
-            addtcm.StartPosition = FormStartPosition.CenterScreen;
-            addtcm.ShowDialog();
+            if (addtcm.show)
+            {
+                addtcm.StartPosition = FormStartPosition.CenterScreen;
+                addtcm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show(addtcm.mag);
+            }
         }
 
         private void 首次随访删除_Click(object sender, EventArgs e)
@@ -278,8 +307,15 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             int row = dataGridView1.CurrentRow.Index;
             detaTotuberculosisPatientServices addtcm = new detaTotuberculosisPatientServices(dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
-            addtcm.StartPosition = FormStartPosition.CenterScreen;
-            addtcm.ShowDialog();
+            if (addtcm.show)
+            {
+                addtcm.StartPosition = FormStartPosition.CenterScreen;
+                addtcm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show(addtcm.mag);
+            }
         }
 
         /// <summary>
@@ -292,7 +328,16 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{b
         public bool Deletes(string dataname, string name, string aichive_no, string id_number)
         {
             int rt = 0;
-            string sql = $"delete from {dataname} where name='{name}' and aichive_no='{aichive_no}' and Cardcode='{id_number}'";
+            string sql = string.Empty;
+            if (dataname == "tuberculosis_follow_record")
+            {
+                sql = $"delete from {dataname} where id=(select a.id from(select id from tuberculosis_follow_record where name='{name}' and aichive_no='{aichive_no}' and Cardcode='{id_number}' order by create_time desc LIMIT 1)a)";
+            }
+            else
+            {
+                sql = $"delete from {dataname} where name='{name}' and archive_no='{aichive_no}' and Cardcode='{id_number}'";
+            }
+
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
