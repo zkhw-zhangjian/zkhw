@@ -1600,25 +1600,25 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
                             string BuPic01 = da.Rows[j]["BuPic01"].ToString();
                             if (BuPic01 != null && !"".Equals(BuPic01) && File.Exists(@str+@"\bcImg\"+BuPic01))
                             {
-                                builder.MoveToBookmark("图片1");
+                                builder.MoveToBookmark("图1");
                                 builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic01, 400, 650));
                             }
                             string BuPic02 = da.Rows[j]["BuPic02"].ToString();
                             if (BuPic02 != null && !"".Equals(BuPic02) && File.Exists(@str + @"\bcImg\" + BuPic02))
                             {
-                                builder.MoveToBookmark("图片2");
+                                builder.MoveToBookmark("图2");
                                 builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic02, 400, 650));
                             }
                             string BuPic03 = da.Rows[j]["BuPic03"].ToString();
                             if (BuPic03 != null && !"".Equals(BuPic03) && File.Exists(@str + @"\bcImg\" + BuPic03))
                             {
-                                builder.MoveToBookmark("图片3");
+                                builder.MoveToBookmark("图3");
                                 builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic03, 400, 650));
                             }
                             string BuPic04 = da.Rows[j]["BuPic04"].ToString();
                             if (BuPic04 != null && !"".Equals(BuPic04) && File.Exists(@str + @"\bcImg\" + BuPic04))
                             {
-                                builder.MoveToBookmark("图片4");
+                                builder.MoveToBookmark("图4");
                                 builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic04, 400, 650));
                             }
                             bc.Add("条码号", da.Rows[j]["bar_code"].ToString());
