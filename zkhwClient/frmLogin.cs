@@ -106,8 +106,8 @@ namespace zkhwClient
             this.comboBox1.ValueMember = "username";//操作时获取的值 
 
             //监听心电图和B超
-            FSWControl.WatcherStrat(@"E:\Examine\xdt", "*.xml", true, true);
-            FSWControl.WatcherStratBchao(@"E:\Examine\bc", "*.xml", true, true);
+            //FSWControl.WatcherStrat(@"E:\Examine\xdt", "*.xml", true, true);
+            //FSWControl.WatcherStratBchao(@"E:\Examine\bc", "*.xml", true, true);
         }
     }
 }

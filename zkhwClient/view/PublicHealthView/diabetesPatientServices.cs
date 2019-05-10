@@ -207,7 +207,7 @@ namespace zkhwClient.view.PublicHealthView
                 dp.textBox7.Text = dt.Rows[0]["visit_doctor"].ToString();
 
             }
-            else { MessageBox.Show("没有此人的糖尿病服务信息,请重新查询!"); return; }
+            else { MessageBox.Show("没有此人的糖尿病服务信息,请先添加糖尿病服务信息!"); return; }
             if (dp.ShowDialog() == DialogResult.OK)
             {
                 //刷新页面

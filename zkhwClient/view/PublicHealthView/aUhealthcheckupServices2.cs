@@ -26,6 +26,242 @@ namespace zkhwClient.view.PublicHealthView
             label51.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
             label51.Left = (this.panel1.Width - this.label51.Width) / 2;
             label51.BringToFront();
+
+            //查询赋值
+            if (id != "")
+            {
+                DataTable dt = hcd.queryhealthCheckup(id);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    this.textBox96.Text = dt.Rows[0]["aichive_no"].ToString();
+                    this.textBox95.Text = dt.Rows[0]["bar_code"].ToString();
+                    this.textBox100.Text = dt.Rows[0]["id"].ToString();
+
+                    if (this.radioButton55.Tag.ToString() == dt.Rows[0]["organ_lips"].ToString()) {  this.radioButton55.Checked = true; };
+                    if (this.radioButton56.Tag.ToString() == dt.Rows[0]["organ_lips"].ToString()) {  this.radioButton56.Checked = true; };
+                    if (this.radioButton57.Tag.ToString() == dt.Rows[0]["organ_lips"].ToString()) { this.radioButton57.Checked = true; };
+                    if (this.radioButton54.Tag.ToString() == dt.Rows[0]["organ_lips"].ToString()) {this.radioButton54.Checked = true; };
+                    if (this.radioButton53.Tag.ToString() == dt.Rows[0]["organ_lips"].ToString()) { this.radioButton53.Checked = true; };
+
+                    if (dt.Rows[0]["organ_lips"].ToString() == "1")
+                    {
+                            this.checkBox1.Checked = true;
+                    }
+                    if (dt.Rows[0]["organ_hypodontia"].ToString() == "2")
+                    {
+                        this.checkBox2.Checked = true;
+                    }
+                    if (dt.Rows[0]["organ_caries"].ToString() == "3")
+                    {
+                        this.checkBox3.Checked = true;
+                    }
+                    if (dt.Rows[0]["organ_denture"].ToString() == "4")
+                    {
+                        this.checkBox4.Checked = true;
+                    }
+                    if (this.radioButton87.Tag.ToString() == dt.Rows[0]["organ_guttur"].ToString()) { this.radioButton87.Checked = true; };
+                    if (this.radioButton88.Tag.ToString() == dt.Rows[0]["organ_guttur"].ToString()) { this.radioButton88.Checked = true; };
+                    if (this.radioButton89.Tag.ToString() == dt.Rows[0]["organ_guttur"].ToString()) {  this.radioButton89.Checked = true; };
+
+                    this.textBox9.Text = dt.Rows[0]["organ_vision_left"].ToString();
+                    this.textBox8.Text = dt.Rows[0]["organ_vision_right"].ToString();
+                    this.textBox4.Text = dt.Rows[0]["organ_correctedvision_left"].ToString();
+                    this.textBox51.Text = dt.Rows[0]["organ_correctedvision_right"].ToString();
+
+                    if (this.radioButton52.Tag.ToString() == dt.Rows[0]["organ_hearing"].ToString()) {  this.radioButton52.Checked = true; };
+                    if (this.radioButton58.Tag.ToString() == dt.Rows[0]["organ_hearing"].ToString()) { this.radioButton58.Checked = true; };
+
+                    if (this.radioButton59.Tag.ToString() == dt.Rows[0]["organ_movement"].ToString()) { this.radioButton59.Checked = true; };
+                    if (this.radioButton60.Tag.ToString() == dt.Rows[0]["organ_movement"].ToString()) { this.radioButton60.Checked = true; };
+
+                    if (this.radioButton6.Tag.ToString() == dt.Rows[0]["examination_eye"].ToString()) {this.radioButton6.Checked = true; };
+                    if (this.radioButton10.Tag.ToString() == dt.Rows[0]["examination_eye"].ToString())
+                    {
+                        this.radioButton10.Checked = true;
+                        this.textBox13.Text = dt.Rows[0]["examination_eye_other"].ToString();
+                    };
+                    if (this.radioButton63.Tag.ToString() == dt.Rows[0]["examination_skin"].ToString()) { this.radioButton63.Checked = true; };
+                    if (this.radioButton64.Tag.ToString() == dt.Rows[0]["examination_skin"].ToString()) { this.radioButton64.Checked = true; };
+                    if (this.radioButton65.Tag.ToString() == dt.Rows[0]["examination_skin"].ToString()) { this.radioButton65.Checked = true; };
+                    if (this.radioButton62.Tag.ToString() == dt.Rows[0]["examination_skin"].ToString()) { this.radioButton62.Checked = true; };
+                    if (this.radioButton61.Tag.ToString() == dt.Rows[0]["examination_skin"].ToString()) { this.radioButton61.Checked = true; };
+                    if (this.radioButton66.Tag.ToString() == dt.Rows[0]["examination_skin"].ToString()) { this.radioButton66.Checked = true; };
+                    if (this.radioButton67.Tag.ToString() == dt.Rows[0]["examination_skin"].ToString())
+                    {
+                       this.radioButton67.Checked = true;
+                       this.textBox14.Text = dt.Rows[0]["examination_skin_other"].ToString();
+                    };
+
+                    if (this.radioButton72.Tag.ToString() == dt.Rows[0]["examination_sclera"].ToString()) { this.radioButton72.Checked = true; };
+                    if (this.radioButton74.Tag.ToString() == dt.Rows[0]["examination_sclera"].ToString()) { this.radioButton74.Checked = true; };
+                    if (this.radioButton71.Tag.ToString() == dt.Rows[0]["examination_sclera"].ToString()) { this.radioButton71.Checked = true; };
+                    if (this.radioButton68.Tag.ToString() == dt.Rows[0]["examination_sclera"].ToString())
+                    {
+                        this.radioButton68.Checked = true;
+                        this.textBox15.Text = dt.Rows[0]["examination_sclera_other"].ToString();
+                    };
+
+                    if (this.radioButton73.Tag.ToString() == dt.Rows[0]["examination_lymph"].ToString()) { this.radioButton73.Checked = true; };
+                    if (this.radioButton75.Tag.ToString() == dt.Rows[0]["examination_lymph"].ToString()) { this.radioButton75.Checked = true; };
+                    if (this.radioButton70.Tag.ToString() == dt.Rows[0]["examination_lymph"].ToString()) {this.radioButton70.Checked = true; };
+                    if (this.radioButton69.Tag.ToString() == dt.Rows[0]["examination_lymph"].ToString())
+                    {
+                        this.radioButton69.Checked = true;
+                        this.textBox16.Text = dt.Rows[0]["examination_lymph_other"].ToString();
+                    };
+
+                    if (this.radioButton1.Tag.ToString() == dt.Rows[0]["examination_barrel_chest"].ToString()) { this.radioButton1.Checked = true; };
+                    if (this.radioButton2.Tag.ToString() == dt.Rows[0]["examination_barrel_chest"].ToString()) { this.radioButton2.Checked = true; };
+
+                    if (this.radioButton3.Tag.ToString() == dt.Rows[0]["examination_breath_sounds"].ToString()) { this.radioButton3.Checked = true; };
+                    if (this.radioButton4.Tag.ToString() == dt.Rows[0]["examination_breath_sounds"].ToString())
+                    {
+                        this.radioButton4.Checked = true;
+                        this.textBox21.Text = dt.Rows[0]["examination_breath_other"].ToString();
+                    };
+
+                    if (this.radioButton8.Tag.ToString() == dt.Rows[0]["examination_rale"].ToString()) { this.radioButton8.Checked = true; };
+                    if (this.radioButton9.Tag.ToString() == dt.Rows[0]["examination_rale"].ToString()) { this.radioButton9.Checked = true; };
+                    if (this.radioButton7.Tag.ToString() == dt.Rows[0]["examination_rale"].ToString()) { this.radioButton7.Checked = true; };
+                    if (this.radioButton5.Tag.ToString() == dt.Rows[0]["examination_rale"].ToString())
+                    {
+                        this.radioButton5.Checked = true;
+                        this.textBox42.Text = dt.Rows[0]["examination_rale_other"].ToString();
+                    };
+
+                    this.textBox47.Text = dt.Rows[0]["examination_heart_rate"].ToString();
+                    if (this.radioButton16.Tag.ToString() == dt.Rows[0]["examination_heart_rhythm"].ToString()) { this.radioButton16.Checked = true; };
+                    if (this.radioButton17.Tag.ToString() == dt.Rows[0]["examination_heart_rhythm"].ToString()) { this.radioButton17.Checked = true; };
+                    if (this.radioButton18.Tag.ToString() == dt.Rows[0]["examination_heart_rhythm"].ToString()) { this.radioButton18.Checked = true; };
+
+                    if (this.radioButton77.Tag.ToString() == dt.Rows[0]["examination_heart_noise"].ToString()) { this.radioButton77.Checked = true; };
+                    if (this.radioButton78.Tag.ToString() == dt.Rows[0]["examination_heart_noise"].ToString())
+                    {
+                        this.radioButton78.Checked = true;
+                        this.textBox54.Text = dt.Rows[0]["examination_noise_other"].ToString();
+                    };
+
+                    if (this.radioButton80.Tag.ToString() == dt.Rows[0]["examination_abdomen_tenderness"].ToString()) { this.radioButton80.Checked = true; };
+                    if (this.radioButton81.Tag.ToString() == dt.Rows[0]["examination_abdomen_tenderness"].ToString())
+                    {
+                        this.radioButton81.Checked = true;
+                        this.textBox59.Text = dt.Rows[0]["examination_tenderness_memo"].ToString();
+                    };
+
+                    if (this.radioButton76.Tag.ToString() == dt.Rows[0]["examination_abdomen_mass"].ToString()) {this.radioButton76.Checked = true; };
+                    if (this.radioButton79.Tag.ToString() == dt.Rows[0]["examination_abdomen_mass"].ToString())
+                    {
+                        this.radioButton79.Checked = true;
+                        this.textBox56.Text = dt.Rows[0]["examination_mass_memo"].ToString();
+                    };
+
+                    if (this.radioButton82.Tag.ToString() == dt.Rows[0]["examination_abdomen_hepatomegaly"].ToString()) { this.radioButton82.Checked = true; };
+                    if (this.radioButton83.Tag.ToString() == dt.Rows[0]["examination_abdomen_hepatomegaly"].ToString())
+                    {
+                        this.radioButton83.Checked = true;
+                        this.textBox56.Text = dt.Rows[0]["examination_hepatomegaly_memo"].ToString();
+                    };
+
+                    if (this.radioButton11.Tag.ToString() == dt.Rows[0]["examination_abdomen_splenomegaly"].ToString()) { this.radioButton11.Checked = true; };
+                    if (this.radioButton12.Tag.ToString() == dt.Rows[0]["examination_abdomen_splenomegaly"].ToString())
+                    {
+                        this.radioButton12.Checked = true;
+                        this.textBox56.Text = dt.Rows[0]["examination_splenomegaly_memo"].ToString();
+                    };
+
+                    if (this.radioButton13.Tag.ToString() == dt.Rows[0]["examination_abdomen_shiftingdullness"].ToString()) { this.radioButton13.Checked = true; };
+                    if (this.radioButton14.Tag.ToString() == dt.Rows[0]["examination_abdomen_shiftingdullness"].ToString())
+                    {
+                        this.radioButton14.Checked = true;
+                        this.textBox23.Text = dt.Rows[0]["examination_shiftingdullness_memo"].ToString();
+                    };
+
+                    if (this.radioButton20.Tag.ToString() == dt.Rows[0]["examination_lowerextremity_edema"].ToString()) { this.radioButton20.Checked = true; };
+                    if (this.radioButton21.Tag.ToString() == dt.Rows[0]["examination_lowerextremity_edema"].ToString()) { this.radioButton21.Checked = true; };
+                    if (this.radioButton19.Tag.ToString() == dt.Rows[0]["examination_lowerextremity_edema"].ToString()) { this.radioButton19.Checked = true; };
+                    if (this.radioButton15.Tag.ToString() == dt.Rows[0]["examination_lowerextremity_edema"].ToString()) { this.radioButton15.Checked = true; };
+
+                    if (this.radioButton24.Tag.ToString() == dt.Rows[0]["examination_dorsal_artery"].ToString()) { this.radioButton24.Checked = true; };
+                    if (this.radioButton24.Tag.ToString() == dt.Rows[0]["examination_dorsal_artery"].ToString()) { this.radioButton25.Checked = true; };
+                    if (this.radioButton23.Tag.ToString() == dt.Rows[0]["examination_dorsal_artery"].ToString()) { this.radioButton23.Checked = true; };
+                    if (this.radioButton22.Tag.ToString() == dt.Rows[0]["examination_dorsal_artery"].ToString()) { this.radioButton22.Checked = true; };
+
+                    if (this.radioButton28.Tag.ToString() == dt.Rows[0]["examination_anus"].ToString()) { this.radioButton28.Checked = true; };
+                    if (this.radioButton28.Tag.ToString() == dt.Rows[0]["examination_anus"].ToString()) { this.radioButton29.Checked = true; };
+                    if (this.radioButton27.Tag.ToString() == dt.Rows[0]["examination_anus"].ToString()) { this.radioButton27.Checked = true; };
+                    if (this.radioButton26.Tag.ToString() == dt.Rows[0]["examination_anus"].ToString()) { this.radioButton26.Checked = true; };
+                    if (this.radioButton30.Tag.ToString() == dt.Rows[0]["examination_anus"].ToString())
+                    {
+                        this.radioButton30.Checked = true;
+                        this.textBox28.Text = dt.Rows[0]["examination_anus_other"].ToString();
+                    };
+
+                    if (this.radioButton34.Tag.ToString() == dt.Rows[0]["examination_breast"].ToString()) { this.radioButton34.Checked = true; };
+                    if (this.radioButton35.Tag.ToString() == dt.Rows[0]["examination_breast"].ToString()) { this.radioButton35.Checked = true; };
+                    if (this.radioButton33.Tag.ToString() == dt.Rows[0]["examination_breast"].ToString()) { this.radioButton33.Checked = true; };
+                    if (this.radioButton32.Tag.ToString() == dt.Rows[0]["examination_breast"].ToString()) { this.radioButton32.Checked = true; };
+                    if (this.radioButton31.Tag.ToString() == dt.Rows[0]["examination_breast"].ToString())
+                    {
+                        this.radioButton31.Checked = true;
+                        this.textBox30.Text = dt.Rows[0]["examination_breast_other"].ToString();
+                    };
+
+                    if (this.radioButton38.Tag.ToString() == dt.Rows[0]["examination_woman_vulva"].ToString()) { this.radioButton38.Checked = true; };
+                    if (this.radioButton39.Tag.ToString() == dt.Rows[0]["examination_woman_vulva"].ToString())
+                    {
+                        this.radioButton39.Checked = true;
+                        this.textBox33.Text = dt.Rows[0]["examination_vulva_memo"].ToString();
+                    };
+
+                    if (this.radioButton36.Tag.ToString() == dt.Rows[0]["examination_woman_vagina"].ToString()) { this.radioButton36.Checked = true; };
+                    if (this.radioButton37.Tag.ToString() == dt.Rows[0]["examination_woman_vagina"].ToString())
+                    {
+                        this.radioButton37.Checked = true;
+                        this.textBox34.Text = dt.Rows[0]["examination_vagina_memo"].ToString();
+                    };
+
+                    if (this.radioButton40.Tag.ToString() == dt.Rows[0]["examination_woman_cervix"].ToString()) { this.radioButton40.Checked = true; };
+                    if (this.radioButton41.Tag.ToString() == dt.Rows[0]["examination_woman_cervix"].ToString())
+                    {
+                        this.radioButton41.Checked = true;
+                        this.textBox36.Text = dt.Rows[0]["examination_cervix_memo"].ToString();
+                    };
+
+                    if (this.radioButton42.Tag.ToString() == dt.Rows[0]["examination_woman_corpus"].ToString()) { this.radioButton42.Checked = true; };
+                    if (this.radioButton43.Tag.ToString() == dt.Rows[0]["examination_woman_corpus"].ToString())
+                    {
+                        this.radioButton43.Checked = true;
+                        this.textBox38.Text = dt.Rows[0]["examination_corpus_memo"].ToString();
+                    };
+
+                    if (this.radioButton44.Tag.ToString() == dt.Rows[0]["examination_woman_accessories"].ToString()) { this.radioButton44.Checked = true; };
+                    if (this.radioButton45.Tag.ToString() == dt.Rows[0]["examination_woman_accessories"].ToString())
+                    {
+                        this.radioButton45.Checked = true;
+                        this.textBox40.Text = dt.Rows[0]["examination_accessories_memo"].ToString();
+                    };
+                    this.textBox50.Text = dt.Rows[0]["examination_other"].ToString();
+
+                    this.textBox77.Text = dt.Rows[0]["blood_hemoglobin"].ToString();
+                    this.textBox82.Text = dt.Rows[0]["blood_leukocyte"].ToString();
+                    this.textBox85.Text = dt.Rows[0]["blood_platelet"].ToString();
+                    this.textBox88.Text = dt.Rows[0]["blood_other"].ToString();
+                    this.textBox72.Text = dt.Rows[0]["urine_protein"].ToString();
+                    this.textBox71.Text = dt.Rows[0]["glycosuria"].ToString();
+                    this.textBox68.Text = dt.Rows[0]["urine_acetone_bodies"].ToString();
+                    this.textBox67.Text = dt.Rows[0]["bld"].ToString();
+                    this.textBox89.Text = dt.Rows[0]["urine_other"].ToString();
+                    this.textBox90.Text = dt.Rows[0]["blood_glucose_mmol"].ToString();
+                    this.textBox92.Text = dt.Rows[0]["blood_glucose_mg"].ToString();
+
+                    if (this.radioButton46.Tag.ToString() == dt.Rows[0]["cardiogram"].ToString()) { this.radioButton46.Checked = true; };
+                    if (this.radioButton47.Tag.ToString() == dt.Rows[0]["cardiogram"].ToString())
+                    {
+                        this.radioButton47.Checked = true;
+                        this.textBox94.Text = dt.Rows[0]["cardiogram_memo"].ToString();
+                    };
+                }
+            }
         }
         private void button5_Click(object sender, EventArgs e)
         {
@@ -35,9 +271,8 @@ namespace zkhwClient.view.PublicHealthView
         private void button4_Click(object sender, EventArgs e)
         {
             bean.physical_examination_recordBean per = new bean.physical_examination_recordBean();
-            per.aichive_no = this.textBox95.Text;
-            per.bar_code = this.textBox96.Text;
-            per.id_number = this.textBox99.Text;
+            per.aichive_no = this.textBox96.Text;
+            per.bar_code = this.textBox95.Text;
             per.id = this.textBox100.Text;
 
             if (this.radioButton55.Checked == true) { per.organ_lips = this.radioButton55.Tag.ToString(); };
@@ -190,36 +425,16 @@ namespace zkhwClient.view.PublicHealthView
                 per.examination_anus_other = this.textBox28.Text;
             };
 
-            //if (this.radioButton34.Checked == true) { per.examination_breast = this.radioButton34.Tag.ToString(); };
-            //if (this.radioButton35.Checked == true) { per.examination_breast = this.radioButton35.Tag.ToString(); };
-            //if (this.radioButton33.Checked == true) { per.examination_breast = this.radioButton33.Tag.ToString(); };
-            //if (this.radioButton32.Checked == true) { per.examination_breast = this.radioButton32.Tag.ToString(); };
-            //if (this.radioButton31.Checked == true)
-            //{
-            //    per.examination_breast = this.radioButton31.Tag.ToString();
-            //    per.examination_breast_other = this.textBox30.Text;
-            //};
-            foreach (Control ctr in this.panel10.Controls)
+            if (this.radioButton34.Checked == true) { per.examination_breast = this.radioButton34.Tag.ToString(); };
+            if (this.radioButton35.Checked == true) { per.examination_breast = this.radioButton35.Tag.ToString(); };
+            if (this.radioButton33.Checked == true) { per.examination_breast = this.radioButton33.Tag.ToString(); };
+            if (this.radioButton32.Checked == true) { per.examination_breast = this.radioButton32.Tag.ToString(); };
+            if (this.radioButton31.Checked == true)
             {
-                //判断该控件是不是CheckBox
-                if (ctr is CheckBox)
-                {
-                    //将ctr转换成CheckBox并赋值给ck
-                    CheckBox ck = ctr as CheckBox;
-                    if (ck.Checked)
-                    {
-                        per.examination_breast += "," + ck.Tag.ToString();
-                    }
-                }
-            }
-            if (per.examination_breast != null && per.examination_breast != "")
-            {
-                per.examination_breast = per.examination_breast.Substring(1);
-                if (this.checkBox9.Checked) {
-                    per.examination_breast_other = this.textBox30.Text;
-                }
-            }
-            
+                per.examination_breast = this.radioButton31.Tag.ToString();
+                per.examination_breast_other = this.textBox30.Text;
+            };
+
             if (this.radioButton38.Checked == true) { per.examination_woman_vulva = this.radioButton38.Tag.ToString(); };
             if (this.radioButton39.Checked == true)
             {
@@ -283,7 +498,8 @@ namespace zkhwClient.view.PublicHealthView
                 auhc3.textBox106.Text = per.aichive_no;
                 auhc3.textBox105.Text = per.bar_code;
                 auhc3.textBox108.Text = per.id;
-                auhc3.textBox107.Text = per.id_number;
+                auhc3.id = id;//祖
+                auhc3.textBox107.Text = this.textBox99.Text;
                 auhc3.Show();
             }
             else

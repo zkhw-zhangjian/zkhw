@@ -668,7 +668,6 @@
             this.textBox113.Size = new System.Drawing.Size(250, 30);
             this.textBox113.TabIndex = 161;
             this.textBox113.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox113.Visible = false;
             // 
             // textBox114
             // 
@@ -709,7 +708,6 @@
             this.textBox109.Size = new System.Drawing.Size(250, 30);
             this.textBox109.TabIndex = 155;
             this.textBox109.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox109.Visible = false;
             // 
             // textBox110
             // 
@@ -750,7 +748,6 @@
             this.textBox105.Size = new System.Drawing.Size(250, 30);
             this.textBox105.TabIndex = 149;
             this.textBox105.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox105.Visible = false;
             // 
             // textBox106
             // 
@@ -791,7 +788,6 @@
             this.textBox101.Size = new System.Drawing.Size(250, 30);
             this.textBox101.TabIndex = 143;
             this.textBox101.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox101.Visible = false;
             // 
             // textBox102
             // 
@@ -832,7 +828,6 @@
             this.textBox100.Size = new System.Drawing.Size(250, 30);
             this.textBox100.TabIndex = 137;
             this.textBox100.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox100.Visible = false;
             // 
             // textBox99
             // 
@@ -2261,12 +2256,9 @@
             this.textBox67.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox67.Location = new System.Drawing.Point(564, 73);
             this.textBox67.Name = "textBox67";
-            this.textBox67.ReadOnly = true;
             this.textBox67.Size = new System.Drawing.Size(91, 30);
             this.textBox67.TabIndex = 53;
-            this.textBox67.Text = "点击计算";
             this.textBox67.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox67.Click += new System.EventHandler(this.textBox67_Click);
             // 
             // textBox68
             // 
@@ -2582,7 +2574,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 123);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1173, 108);
+            this.groupBox3.Size = new System.Drawing.Size(1213, 108);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 

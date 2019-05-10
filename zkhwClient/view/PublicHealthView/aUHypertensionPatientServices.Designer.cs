@@ -302,7 +302,7 @@
             this.textBox42.Location = new System.Drawing.Point(388, 798);
             this.textBox42.Name = "textBox42";
             this.textBox42.ReadOnly = true;
-            this.textBox42.Size = new System.Drawing.Size(167, 30);
+            this.textBox42.Size = new System.Drawing.Size(140, 30);
             this.textBox42.TabIndex = 61;
             this.textBox42.Text = "不良反应说明";
             this.textBox42.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -550,6 +550,7 @@
             this.radioButton16.Tag = "1";
             this.radioButton16.Text = "1无";
             this.radioButton16.UseVisualStyleBackColor = true;
+            this.radioButton16.Click += new System.EventHandler(this.radioButton16_Click);
             // 
             // radioButton17
             // 
@@ -563,6 +564,7 @@
             this.radioButton17.Tag = "2";
             this.radioButton17.Text = "2有";
             this.radioButton17.UseVisualStyleBackColor = true;
+            this.radioButton17.Click += new System.EventHandler(this.radioButton17_Click);
             // 
             // panel8
             // 
@@ -1020,9 +1022,9 @@
             // textBox8
             // 
             this.textBox8.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox8.Location = new System.Drawing.Point(557, 798);
+            this.textBox8.Location = new System.Drawing.Point(534, 798);
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(718, 30);
+            this.textBox8.Size = new System.Drawing.Size(741, 30);
             this.textBox8.TabIndex = 44;
             // 
             // panel3

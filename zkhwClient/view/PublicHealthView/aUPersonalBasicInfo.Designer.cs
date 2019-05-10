@@ -169,6 +169,7 @@
             this.radioButton8 = new System.Windows.Forms.RadioButton();
             this.textBox23 = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.textBox22 = new System.Windows.Forms.TextBox();
@@ -1084,6 +1085,7 @@
             this.checkBox33.Tag = "8";
             this.checkBox33.Text = "8其他残疾";
             this.checkBox33.UseVisualStyleBackColor = true;
+            this.checkBox33.Click += new System.EventHandler(this.checkBox33_Click);
             // 
             // checkBox32
             // 
@@ -1975,6 +1977,7 @@
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.comboBox1);
             this.panel4.Controls.Add(this.radioButton7);
             this.panel4.Controls.Add(this.radioButton6);
             this.panel4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -1983,22 +1986,35 @@
             this.panel4.Size = new System.Drawing.Size(617, 30);
             this.panel4.TabIndex = 79;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownHeight = 50;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.IntegralHeight = false;
+            this.comboBox1.Location = new System.Drawing.Point(245, 0);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(150, 28);
+            this.comboBox1.TabIndex = 2;
+            this.comboBox1.Visible = false;
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
+            // 
             // radioButton7
             // 
             this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(106, 0);
+            this.radioButton7.Location = new System.Drawing.Point(106, 1);
             this.radioButton7.Name = "radioButton7";
             this.radioButton7.Size = new System.Drawing.Size(133, 24);
             this.radioButton7.TabIndex = 1;
             this.radioButton7.Tag = "99";
             this.radioButton7.Text = "99少数民族";
             this.radioButton7.UseVisualStyleBackColor = true;
+            this.radioButton7.Click += new System.EventHandler(this.radioButton7_Click);
             // 
             // radioButton6
             // 
             this.radioButton6.AutoSize = true;
             this.radioButton6.Checked = true;
-            this.radioButton6.Location = new System.Drawing.Point(13, 0);
+            this.radioButton6.Location = new System.Drawing.Point(13, 1);
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(91, 24);
             this.radioButton6.TabIndex = 0;
@@ -2006,6 +2022,7 @@
             this.radioButton6.Tag = "01";
             this.radioButton6.Text = "01汉族";
             this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioButton6.Click += new System.EventHandler(this.radioButton6_Click);
             // 
             // textBox22
             // 
@@ -2660,5 +2677,6 @@
         public System.Windows.Forms.RadioButton radioButton48;
         public System.Windows.Forms.TextBox textBox36;
         public System.Windows.Forms.TextBox textBox37;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

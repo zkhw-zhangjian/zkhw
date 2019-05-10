@@ -129,23 +129,23 @@ namespace zkhwClient
                 }//屏蔽其它功能菜单下拉选
             }
             //http
-            proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
-            proHttp.StartInfo.CreateNoWindow = true;
-            proHttp.StartInfo.UseShellExecute = false;
-            proHttp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            proHttp.StartInfo.ErrorDialog = false;
-            proHttp.StartInfo.UseShellExecute = false;
-            proHttp.Start();
+            //proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
+            //proHttp.StartInfo.CreateNoWindow = true;
+            //proHttp.StartInfo.UseShellExecute = false;
+            //proHttp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            //proHttp.StartInfo.ErrorDialog = false;
+            //proHttp.StartInfo.UseShellExecute = false;
+            //proHttp.Start();
             //AsNetWork  B超
-            proAsNet.StartInfo.FileName = Application.StartupPath + "\\AsNetWork\\ASNetWks.exe";
-            proAsNet.StartInfo.WorkingDirectory = Application.StartupPath + "\\AsNetWork";
-            proAsNet.StartInfo.CreateNoWindow = true;
-            proAsNet.StartInfo.ErrorDialog = false;
-            proAsNet.StartInfo.UseShellExecute = true;
-            proAsNet.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            proAsNet.Start();
-            Thread.Sleep(230);
-            IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
+            //proAsNet.StartInfo.FileName = Application.StartupPath + "\\AsNetWork\\ASNetWks.exe";
+            //proAsNet.StartInfo.WorkingDirectory = Application.StartupPath + "\\AsNetWork";
+            //proAsNet.StartInfo.CreateNoWindow = true;
+            //proAsNet.StartInfo.ErrorDialog = false;
+            //proAsNet.StartInfo.UseShellExecute = true;
+            //proAsNet.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            //proAsNet.Start();
+            //Thread.Sleep(230);
+            //IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
             //ftp                 
             //proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.05\\ftpservice.exe";
             //proFtp.StartInfo.CreateNoWindow = true;
@@ -475,26 +475,26 @@ namespace zkhwClient
                 this.panel1.Controls.Add(pR);
                 pR.Show();
             }
-            else if (tag == "预防接种服务")
-            {
-                vaccinationServices pR = new vaccinationServices();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if (tag == "健康教育服务")
-            {
-                healthEducationServices pR = new healthEducationServices();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
+            //else if (tag == "预防接种服务")
+            //{
+            //    vaccinationServices pR = new vaccinationServices();
+            //    pR.TopLevel = false;
+            //    pR.Dock = DockStyle.Fill;
+            //    pR.FormBorderStyle = FormBorderStyle.None;
+            //    this.panel1.Controls.Clear();
+            //    this.panel1.Controls.Add(pR);
+            //    pR.Show();
+            //}
+            //else if (tag == "健康教育服务")
+            //{
+            //    healthEducationServices pR = new healthEducationServices();
+            //    pR.TopLevel = false;
+            //    pR.Dock = DockStyle.Fill;
+            //    pR.FormBorderStyle = FormBorderStyle.None;
+            //    this.panel1.Controls.Clear();
+            //    this.panel1.Controls.Add(pR);
+            //    pR.Show();
+            //}
             else if (tag == "现场签约")
             {         //家医签约模块       
                 onSiteSigning pR = new onSiteSigning();

@@ -15,5 +15,10 @@ namespace zkhwClient.view.PublicHealthView
         {
             InitializeComponent();
         }
+
+        private void psychiatricPatientServices_Load(object sender, EventArgs e)
+        {
+            MessageBox.Show("开发中");
+        }
     }
 }
