@@ -256,6 +256,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and bgdc.createtime>='{ba
             pagerControl1.DrawControl(count);
         }
         #endregion
+
         private void 统计查询_Click(object sender, EventArgs e)
         {
             string stan = dateTimePicker3.Value.ToString("yyyy-MM-dd");
