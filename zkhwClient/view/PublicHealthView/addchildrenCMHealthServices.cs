@@ -44,7 +44,9 @@ namespace zkhwClient.view.PublicHealthView
             {
                 if (GetUpdate())
                 {
+                    InitializeComponent();
                     SetData();
+                    return;
                 }
                 else
                 {
@@ -80,14 +82,14 @@ namespace zkhwClient.view.PublicHealthView
         private int Insert()
         {
             List<children_tcm_record> infolist = GetData();
-            Hashtable hb = new Hashtable();
-            string sql = string.Empty;
-            MySqlParameter[] args = null;
+            List<DBSql> hb = new List<DBSql>();
+
             foreach (children_tcm_record info in infolist)
             {
-                sql = @"insert into children_tcm_record(id,name,aichive_no,id_number,age,visit_date,tcm_info,tcm_other,next_visit_date,visit_doctor,create_user,create_name,create_time,upload_status
-) values(@id,@name,@aichive_no,@id_number,@age,@visit_date,@tcm_info,@tcm_other,@next_visit_date,@visit_doctor,@create_user,@create_name,@create_time,@upload_status)";
-                args = new MySqlParameter[] {
+                DBSql sqls = new DBSql();
+                sqls.sql = @"insert into children_tcm_record(id,name,aichive_no,id_number,age,visit_date,tcm_info,tcm_other,next_visit_date,visit_doctor,create_user,create_name,create_time,upload_status
+) values(@id,@name,@aichive_no,@id_number,@age,@visit_date,@tcm_info,@tcm_other,@next_visit_date,@visit_doctor,@create_user,@create_name,@create_time,@upload_status);";
+                sqls.parameters = new MySqlParameter[] {
                     new MySqlParameter("@id",info.id),
                     new MySqlParameter("@name", info.name),
                     new MySqlParameter("@aichive_no", info.aichive_no),
@@ -103,7 +105,7 @@ namespace zkhwClient.view.PublicHealthView
                     new MySqlParameter("@create_time", info.create_time),
                     new MySqlParameter("@upload_status", info.upload_status),
                     };
-                hb.Add(sql, args);
+                hb.Add(sqls);
             }
             return DbHelperMySQL.ExecuteSqlTran(hb);
         }
@@ -114,13 +116,12 @@ namespace zkhwClient.view.PublicHealthView
         private int Update()
         {
             List<children_tcm_record> infolist = GetData();
-            Hashtable hb = new Hashtable();
-            string sql = string.Empty;
-            MySqlParameter[] args = null;
+            List<DBSql> hb = new List<DBSql>();
             foreach (children_tcm_record info in infolist)
             {
-                sql = @"update tuberculosis_info set visit_date=@visit_date,tcm_info=@tcm_info,tcm_other=@tcm_other,next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_user,update_name=@update_name,update_time=@update_time where name=@name and aichive_no=@aichive_no and id_number=@id_number and age=@age";
-                args = new MySqlParameter[] {
+                DBSql sqls = new DBSql();
+                sqls.sql = @"update children_tcm_record set visit_date=@visit_date,tcm_info=@tcm_info,tcm_other=@tcm_other,next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_user,update_name=@update_name,update_time=@update_time where name=@name and aichive_no=@aichive_no and id_number=@id_number and age=@age;";
+                sqls.parameters = new MySqlParameter[] {
                     new MySqlParameter("@id",info.id),
                     new MySqlParameter("@name", info.name),
                     new MySqlParameter("@aichive_no", info.aichive_no),
@@ -135,7 +136,7 @@ namespace zkhwClient.view.PublicHealthView
                     new MySqlParameter("@update_name", info.update_name),
                     new MySqlParameter("@update_time", info.update_time),
                     };
-                hb.Add(sql, args);
+                hb.Add(sqls);
             }
             return DbHelperMySQL.ExecuteSqlTran(hb);
         }
@@ -328,7 +329,7 @@ namespace zkhwClient.view.PublicHealthView
                 List<children_tcm_record> ts = Result.ToDataList<children_tcm_record>(jb.Tables[0]);
                 foreach (var dt in ts)
                 {
-                    Control yl = Controls.Find($"月龄{dt.age}", true)[0];
+                    Control yl = this.Controls.Find($"月龄{dt.age}", true)[0];
                     ((CheckBox)yl).Checked = true;
                     Control sfsj = Controls.Find($"随访日期{dt.age}", true)[0];
                     ((DateTimePicker)sfsj).Value = Convert.ToDateTime(dt.visit_date);
