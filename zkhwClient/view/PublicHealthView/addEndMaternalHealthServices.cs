@@ -12,7 +12,7 @@ using zkhwClient.view.setting;
 
 namespace zkhwClient.view.PublicHealthView
 {
-    public partial class addStartMaternalHealthServices : Form
+    public partial class addEndMaternalHealthServices : Form
     {
         /// <summary>
         /// 状态(1:新增 0:修改)
@@ -33,7 +33,7 @@ namespace zkhwClient.view.PublicHealthView
 
         public bool show { get; set; } = true;
         public string mag { get; set; }
-        public addStartMaternalHealthServices(int ps, string names, string aichive_nos, string id_numbers)
+        public addEndMaternalHealthServices(int ps, string names, string aichive_nos, string id_numbers)
         {
             Names = names;
             aichive_no = aichive_nos;
@@ -55,9 +55,8 @@ namespace zkhwClient.view.PublicHealthView
                 }
             }
             InitializeComponent();
-            this.Text = (IS == 1 ? "第2～5次产前随访添加" : "第2～5次产前随访修改");
+            this.Text = (IS == 1 ? "产后访视添加" : "产后访视修改");
         }
-
         private void 取消_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -80,13 +79,13 @@ namespace zkhwClient.view.PublicHealthView
         /// <returns></returns>
         private int Insert()
         {
-            List<gravida_follow_record> infolist = GetData();
+            List<gravida_after_record> infolist = GetData();
             List<DBSql> hb = new List<DBSql>();
             DBSql sqls = null;
-            foreach (gravida_follow_record info in infolist)
+            foreach (gravida_after_record info in infolist)
             {
                 sqls = new DBSql();
-                sqls.sql = @"insert into gravida_follow_record(id,name,aichive_no,id_number,order_num,visit_date,gestational_weeks,symptom,weight,fundus_height,abdomen_circumference,fetus_position,fetal_heart_rate,blood_pressure_high,blood_pressure_low,hemoglobin,urine_protein,check_other,`condition`,error_info,guidance,guidance_other,transfer_treatment,transfer_treatment_reason,transfer_treatment_department,next_visit_date,visit_doctor,create_user,create_name,create_time,upload_status) values(@id,@name,@aichive_no,@id_number,@order_num,@visit_date,@gestational_weeks,@symptom,@weight,@fundus_height,@abdomen_circumference,@fetus_position,@fetal_heart_rate,@blood_pressure_high,@blood_pressure_low,@hemoglobin,@urine_protein,@check_other,@condition,@error_info,@guidance,@guidance_other,@transfer_treatment,@transfer_treatment_reason,@transfer_treatment_department,@next_visit_date,@visit_doctor,@create_user,@create_name,@create_time,@upload_status);";
+                sqls.sql = @"insert into gravida_after_record(id,name,aichive_no,id_number,order_num,visit_date,childbirth,discharge_date,temperature,general_health_status,general_psychology_status,blood_pressure_high,blood_pressure_low,breast,breast_error,lyma,lyma_error,womb,womb_error,wound,wound_error,other,`condition`,error_info,guidance,guidance_other,transfer_treatment,transfer_treatment_reason,transfer_treatment_department,next_visit_date,visit_doctor,create_user,create_name,create_time,upload_status) values(@id,@name,@aichive_no,@id_number,@order_num,@visit_date,@childbirth,@discharge_date,@temperature,@general_health_status,@general_psychology_status,@blood_pressure_high,@blood_pressure_low,@breast,@breast_error,@lyma,@lyma_error,@womb,@womb_error,@wound,@wound_error,@other,@condition,@error_info,@guidance,@guidance_other,@transfer_treatment,@transfer_treatment_reason,@transfer_treatment_department,@next_visit_date,@visit_doctor,@create_user,@create_name,@create_time,@upload_status);";
                 sqls.parameters = new MySqlParameter[] {
                     new MySqlParameter("@id",info.id),
                     new MySqlParameter("@name", info.name),
@@ -94,18 +93,22 @@ namespace zkhwClient.view.PublicHealthView
                     new MySqlParameter("@id_number", info.id_number),
                     new MySqlParameter("@visit_date", info.visit_date),
                     new MySqlParameter("@order_num", info.order_num),
-                    new MySqlParameter("@gestational_weeks", info.gestational_weeks),
-                    new MySqlParameter("@symptom", info.symptom),
-                    new MySqlParameter("@weight", info.weight),
-                    new MySqlParameter("@fundus_height", info.fundus_height),
-                    new MySqlParameter("@abdomen_circumference", info.abdomen_circumference),
-                    new MySqlParameter("@fetus_position", info.fetus_position),
-                    new MySqlParameter("@fetal_heart_rate", info.fetal_heart_rate),
+                    new MySqlParameter("@childbirth", info.childbirth),
+                    new MySqlParameter("@discharge_date", info.discharge_date),
+                    new MySqlParameter("@temperature", info.temperature),
+                    new MySqlParameter("@general_health_status", info.general_health_status),
+                    new MySqlParameter("@general_psychology_status", info.general_psychology_status),
                     new MySqlParameter("@blood_pressure_high", info.blood_pressure_high),
                     new MySqlParameter("@blood_pressure_low", info.blood_pressure_low),
-                    new MySqlParameter("@hemoglobin", info.hemoglobin),
-                    new MySqlParameter("@urine_protein", info.urine_protein),
-                    new MySqlParameter("@check_other", info.check_other),
+                    new MySqlParameter("@breast", info.breast),
+                    new MySqlParameter("@breast_error", info.breast_error),
+                    new MySqlParameter("@lyma", info.lyma),
+                    new MySqlParameter("@lyma_error", info.lyma_error),
+                    new MySqlParameter("@womb", info.womb),
+                    new MySqlParameter("@womb_error", info.womb_error),
+                    new MySqlParameter("@wound", info.wound),
+                    new MySqlParameter("@wound_error", info.wound_error),
+                    new MySqlParameter("@other", info.other),
                     new MySqlParameter("@condition", info.condition),
                     new MySqlParameter("@error_info", info.error_info),
                     new MySqlParameter("@guidance", info.guidance),
@@ -130,16 +133,12 @@ namespace zkhwClient.view.PublicHealthView
         /// <returns></returns>
         private int Update()
         {
-            List<gravida_follow_record> infolist = GetData();
+            List<gravida_after_record> infolist = GetData();
             List<DBSql> hb = new List<DBSql>();
-            foreach (gravida_follow_record info in infolist)
+            foreach (gravida_after_record info in infolist)
             {
                 DBSql sqls = new DBSql();
-                sqls.sql = @"update gravida_follow_record set visit_date=@visit_date,gestational_weeks=@gestational_weeks,symptom=@symptom,
-weight=@weight,fundus_height=@fundus_height,abdomen_circumference=@abdomen_circumference,fetus_position=@fetus_position,
-fetal_heart_rate=@fetal_heart_rate,blood_pressure_high=@blood_pressure_high,blood_pressure_low=@blood_pressure_low,
-hemoglobin=@hemoglobin,urine_protein=@urine_protein,check_other=@check_other,`condition`=@condition,error_info=@error_info,
-guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_treatment,transfer_treatment_reason=@transfer_treatment_reason,transfer_treatment_department=@transfer_treatment_department,next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_user,update_name=@update_name,update_time=@update_time where name=@name and aichive_no=@aichive_no and id_number=@id_number and order_num=@order_num;";
+                sqls.sql = @"update gravida_after_record set visit_date=@visit_date,childbirth=@childbirth,discharge_date=@discharge_date,temperature=@temperature,general_health_status=@general_health_status,general_psychology_status=@general_psychology_status,blood_pressure_high=@blood_pressure_high,blood_pressure_low=@blood_pressure_low,breast=@breast,breast_error=@breast_error,lyma=@lyma,lyma_error=@lyma_error,womb=@womb,womb_error=@womb_error,wound=@wound,wound_error=@wound_error,other=@other,`condition`=@condition,error_info=@error_info,guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_treatment,transfer_treatment_reason=@transfer_treatment_reason,transfer_treatment_department=@transfer_treatment_department,next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_user,update_name=@update_name,update_time=@update_time where name=@name and aichive_no=@aichive_no and id_number=@id_number and order_num=@order_num;";
                 sqls.parameters = new MySqlParameter[] {
                     new MySqlParameter("@id",info.id),
                     new MySqlParameter("@name", info.name),
@@ -147,18 +146,22 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
                     new MySqlParameter("@id_number", info.id_number),
                     new MySqlParameter("@visit_date", info.visit_date),
                     new MySqlParameter("@order_num", info.order_num),
-                    new MySqlParameter("@gestational_weeks", info.gestational_weeks),
-                    new MySqlParameter("@symptom", info.symptom),
-                    new MySqlParameter("@weight", info.weight),
-                    new MySqlParameter("@fundus_height", info.fundus_height),
-                    new MySqlParameter("@abdomen_circumference", info.abdomen_circumference),
-                    new MySqlParameter("@fetus_position", info.fetus_position),
-                    new MySqlParameter("@fetal_heart_rate", info.fetal_heart_rate),
+                    new MySqlParameter("@childbirth", info.childbirth),
+                    new MySqlParameter("@discharge_date", info.discharge_date),
+                    new MySqlParameter("@temperature", info.temperature),
+                    new MySqlParameter("@general_health_status", info.general_health_status),
+                    new MySqlParameter("@general_psychology_status", info.general_psychology_status),
                     new MySqlParameter("@blood_pressure_high", info.blood_pressure_high),
                     new MySqlParameter("@blood_pressure_low", info.blood_pressure_low),
-                    new MySqlParameter("@hemoglobin", info.hemoglobin),
-                    new MySqlParameter("@urine_protein", info.urine_protein),
-                    new MySqlParameter("@check_other", info.check_other),
+                    new MySqlParameter("@breast", info.breast),
+                    new MySqlParameter("@breast_error", info.breast_error),
+                    new MySqlParameter("@lyma", info.lyma),
+                    new MySqlParameter("@lyma_error", info.lyma_error),
+                    new MySqlParameter("@womb", info.womb),
+                    new MySqlParameter("@womb_error", info.womb_error),
+                    new MySqlParameter("@wound", info.wound),
+                    new MySqlParameter("@wound_error", info.wound_error),
+                    new MySqlParameter("@other", info.other),
                     new MySqlParameter("@condition", info.condition),
                     new MySqlParameter("@error_info", info.error_info),
                     new MySqlParameter("@guidance", info.guidance),
@@ -180,30 +183,82 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
         /// 获取界面数据
         /// </summary>
         /// <returns></returns>
-        private List<gravida_follow_record> GetData()
+        private List<gravida_after_record> GetData()
         {
-            List<gravida_follow_record> infolist = new List<gravida_follow_record>();
-            if (第2次.Checked)
+            List<gravida_after_record> infolist = new List<gravida_after_record>();
+            if (产后7天.Checked)
             {
-                gravida_follow_record info = new gravida_follow_record();
+                gravida_after_record info = new gravida_after_record();
                 info.name = Names;
                 info.aichive_no = aichive_no;
                 info.id_number = id_number;
-                info.order_num = "2";
-                info.visit_date = 随访日期2.Value.ToString("yyyy-MM-dd HH:mm:ss");
-                info.gestational_weeks = Convert.ToInt32(孕周2.Text.Trim());
-                info.symptom = 孕妇自述症状2.Text.Trim();
-                info.weight = 体重2.Text.Trim();
-                info.fundus_height = 宫高2.Text.Trim();
-                info.abdomen_circumference = 腹围2.Text.Trim();
-                info.fetus_position = 胎儿的位置2.Text.Trim();
-                info.fetal_heart_rate = 胎心率2.Text.Trim();
-                info.blood_pressure_high = Convert.ToInt32(血压高2.Text.Trim());
-                info.blood_pressure_low = Convert.ToInt32(血压低2.Text.Trim());
-                info.hemoglobin = 血红蛋白2.Text.Trim();
-                info.urine_protein = 尿蛋白2.Text.Trim();
-                info.condition = 其他辅助检查2.Text.Trim();
-                foreach (Control item in 分类2.Controls)
+                info.order_num = "7";
+                info.visit_date = 随访日期7.Value.ToString("yyyy-MM-dd HH:mm:ss");
+                info.childbirth = 分娩日期7.Value.ToString("yyyy-MM-dd HH:mm:ss");
+                info.discharge_date = 出院日期7.Value.ToString("yyyy-MM-dd HH:mm:ss");
+                info.temperature = 体温7.Text.Trim();
+                info.general_health_status = 一般健康情况7.Text.Trim();
+                info.general_psychology_status = 一般心理状况7.Text.Trim();
+                info.blood_pressure_high = Convert.ToInt32(血压高7.Text.Trim());
+                info.blood_pressure_low = Convert.ToInt32(血压低7.Text.Trim());
+                foreach (Control item in 乳房7.Controls)
+                {
+                    if (item is RadioButton)
+                    {
+                        if (((RadioButton)item).Checked)
+                        {
+                            info.breast = ((RadioButton)item).Tag.ToString();
+                        }
+                    }
+                    else if (item is TextBox)
+                    {
+                        info.breast_error = ((TextBox)item).Text;
+                    }
+                }
+                foreach (Control item in 恶露7.Controls)
+                {
+                    if (item is RadioButton)
+                    {
+                        if (((RadioButton)item).Checked)
+                        {
+                            info.lyma = ((RadioButton)item).Tag.ToString();
+                        }
+                    }
+                    else if (item is TextBox)
+                    {
+                        info.lyma_error = ((TextBox)item).Text;
+                    }
+                }
+                foreach (Control item in 子宫7.Controls)
+                {
+                    if (item is RadioButton)
+                    {
+                        if (((RadioButton)item).Checked)
+                        {
+                            info.womb = ((RadioButton)item).Tag.ToString();
+                        }
+                    }
+                    else if (item is TextBox)
+                    {
+                        info.womb_error = ((TextBox)item).Text;
+                    }
+                }
+                foreach (Control item in 伤口7.Controls)
+                {
+                    if (item is RadioButton)
+                    {
+                        if (((RadioButton)item).Checked)
+                        {
+                            info.wound = ((RadioButton)item).Tag.ToString();
+                        }
+                    }
+                    else if (item is TextBox)
+                    {
+                        info.wound_error = ((TextBox)item).Text;
+                    }
+                }
+                info.other = 其他7.Text.Trim();
+                foreach (Control item in 分类7.Controls)
                 {
                     if (item is RadioButton)
                     {
@@ -216,9 +271,9 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
                     {
                         info.error_info = ((TextBox)item).Text;
                     }
-                }
+                }           
                 string guidance = string.Empty;
-                foreach (Control item in 指导2.Controls)
+                foreach (Control item in 指导7.Controls)
                 {
                     if (item is CheckBox)
                     {
@@ -233,7 +288,7 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
                     }
                 }
                 info.guidance = guidance.TrimEnd(',');
-                foreach (Control item in 转诊2.Controls)
+                foreach (Control item in 转诊7.Controls)
                 {
                     if (item is RadioButton)
                     {
@@ -244,41 +299,93 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
                     }
                     else if (item is TextBox)
                     {
-                        if (((TextBox)item).Name == "转诊原因2")
+                        if (((TextBox)item).Name == "转诊原因7")
                         {
                             info.transfer_treatment_reason = ((TextBox)item).Text;
                         }
-                        else if (((TextBox)item).Name == "转诊机构和科别2")
+                        else if (((TextBox)item).Name == "转诊机构和科别7")
                         {
                             info.transfer_treatment_department = ((TextBox)item).Text;
                         }
                     }
                 }
-                info.next_visit_date = 下次随访日期2.Value.ToString("yyyy-MM-dd HH:mm:ss");
-                info.visit_doctor = 随访医生签名2.Text.Trim();
+                info.next_visit_date = 下次随访日期7.Value.ToString("yyyy-MM-dd HH:mm:ss");
+                info.visit_doctor = 随访医生签名7.Text.Trim();
                 infolist.Add(info);
             }
-            if (第3次.Checked)
+            if (产后42天.Checked)
             {
-                gravida_follow_record info = new gravida_follow_record();
+                gravida_after_record info = new gravida_after_record();
                 info.name = Names;
                 info.aichive_no = aichive_no;
                 info.id_number = id_number;
-                info.order_num = "3";
-                info.visit_date = 随访日期3.Value.ToString("yyyy-MM-dd HH:mm:ss");
-                info.gestational_weeks = Convert.ToInt32(孕周3.Text.Trim());
-                info.symptom = 孕妇自述症状3.Text.Trim();
-                info.weight = 体重3.Text.Trim();
-                info.fundus_height = 宫高3.Text.Trim();
-                info.abdomen_circumference = 腹围3.Text.Trim();
-                info.fetus_position = 胎儿的位置3.Text.Trim();
-                info.fetal_heart_rate = 胎心率3.Text.Trim();
-                info.blood_pressure_high = Convert.ToInt32(血压高3.Text.Trim());
-                info.blood_pressure_low = Convert.ToInt32(血压低3.Text.Trim());
-                info.hemoglobin = 血红蛋白3.Text.Trim();
-                info.urine_protein = 尿蛋白3.Text.Trim();
-                info.condition = 其他辅助检查3.Text.Trim();
-                foreach (Control item in 分类3.Controls)
+                info.order_num = "42";
+                info.visit_date = 随访日期42.Value.ToString("yyyy-MM-dd HH:mm:ss");
+                info.childbirth = 分娩日期42.Value.ToString("yyyy-MM-dd HH:mm:ss");
+                info.discharge_date = 出院日期42.Value.ToString("yyyy-MM-dd HH:mm:ss");
+                info.temperature = 体温42.Text.Trim();
+                info.general_health_status = 一般健康情况42.Text.Trim();
+                info.general_psychology_status = 一般心理状况42.Text.Trim();
+                info.blood_pressure_high = Convert.ToInt32(血压高42.Text.Trim());
+                info.blood_pressure_low = Convert.ToInt32(血压低42.Text.Trim());
+                foreach (Control item in 乳房42.Controls)
+                {
+                    if (item is RadioButton)
+                    {
+                        if (((RadioButton)item).Checked)
+                        {
+                            info.breast = ((RadioButton)item).Tag.ToString();
+                        }
+                    }
+                    else if (item is TextBox)
+                    {
+                        info.breast_error = ((TextBox)item).Text;
+                    }
+                }
+                foreach (Control item in 恶露42.Controls)
+                {
+                    if (item is RadioButton)
+                    {
+                        if (((RadioButton)item).Checked)
+                        {
+                            info.lyma = ((RadioButton)item).Tag.ToString();
+                        }
+                    }
+                    else if (item is TextBox)
+                    {
+                        info.lyma_error = ((TextBox)item).Text;
+                    }
+                }
+                foreach (Control item in 子宫42.Controls)
+                {
+                    if (item is RadioButton)
+                    {
+                        if (((RadioButton)item).Checked)
+                        {
+                            info.womb = ((RadioButton)item).Tag.ToString();
+                        }
+                    }
+                    else if (item is TextBox)
+                    {
+                        info.womb_error = ((TextBox)item).Text;
+                    }
+                }
+                foreach (Control item in 伤口42.Controls)
+                {
+                    if (item is RadioButton)
+                    {
+                        if (((RadioButton)item).Checked)
+                        {
+                            info.wound = ((RadioButton)item).Tag.ToString();
+                        }
+                    }
+                    else if (item is TextBox)
+                    {
+                        info.wound_error = ((TextBox)item).Text;
+                    }
+                }
+                info.other = 其他42.Text.Trim();
+                foreach (Control item in 分类42.Controls)
                 {
                     if (item is RadioButton)
                     {
@@ -293,7 +400,7 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
                     }
                 }
                 string guidance = string.Empty;
-                foreach (Control item in 指导3.Controls)
+                foreach (Control item in 指导42.Controls)
                 {
                     if (item is CheckBox)
                     {
@@ -308,7 +415,7 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
                     }
                 }
                 info.guidance = guidance.TrimEnd(',');
-                foreach (Control item in 转诊3.Controls)
+                foreach (Control item in 转诊42.Controls)
                 {
                     if (item is RadioButton)
                     {
@@ -319,171 +426,21 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
                     }
                     else if (item is TextBox)
                     {
-                        if (((TextBox)item).Name == "转诊原因3")
+                        if (((TextBox)item).Name == "转诊原因42")
                         {
                             info.transfer_treatment_reason = ((TextBox)item).Text;
                         }
-                        else if (((TextBox)item).Name == "转诊机构和科别3")
+                        else if (((TextBox)item).Name == "转诊机构和科别42")
                         {
                             info.transfer_treatment_department = ((TextBox)item).Text;
                         }
                     }
                 }
-                info.next_visit_date = 下次随访日期3.Value.ToString("yyyy-MM-dd HH:mm:ss");
-                info.visit_doctor = 随访医生签名3.Text.Trim();
+                info.next_visit_date = 下次随访日期42.Value.ToString("yyyy-MM-dd HH:mm:ss");
+                info.visit_doctor = 随访医生签名42.Text.Trim();
                 infolist.Add(info);
             }
-            if (第4次.Checked)
-            {
-                gravida_follow_record info = new gravida_follow_record();
-                info.name = Names;
-                info.aichive_no = aichive_no;
-                info.id_number = id_number;
-                info.order_num = "4";
-                info.visit_date = 随访日期4.Value.ToString("yyyy-MM-dd HH:mm:ss");
-                info.gestational_weeks = Convert.ToInt32(孕周4.Text.Trim());
-                info.symptom = 孕妇自述症状4.Text.Trim();
-                info.weight = 体重4.Text.Trim();
-                info.fundus_height = 宫高4.Text.Trim();
-                info.abdomen_circumference = 腹围4.Text.Trim();
-                info.fetus_position = 胎儿的位置4.Text.Trim();
-                info.fetal_heart_rate = 胎心率4.Text.Trim();
-                info.blood_pressure_high = Convert.ToInt32(血压高4.Text.Trim());
-                info.blood_pressure_low = Convert.ToInt32(血压低4.Text.Trim());
-                info.hemoglobin = 血红蛋白4.Text.Trim();
-                info.urine_protein = 尿蛋白4.Text.Trim();
-                info.condition = 其他辅助检查4.Text.Trim();
-                foreach (Control item in 分类4.Controls)
-                {
-                    if (item is RadioButton)
-                    {
-                        if (((RadioButton)item).Checked)
-                        {
-                            info.condition = ((RadioButton)item).Tag.ToString();
-                        }
-                    }
-                    else if (item is TextBox)
-                    {
-                        info.error_info = ((TextBox)item).Text;
-                    }
-                }
-                string guidance = string.Empty;
-                foreach (Control item in 指导4.Controls)
-                {
-                    if (item is CheckBox)
-                    {
-                        if (((CheckBox)item).Checked)
-                        {
-                            guidance += ((CheckBox)item).Tag.ToString() + ",";
-                        }
-                    }
-                    else if (item is RichTextBox)
-                    {
-                        info.guidance_other = ((RichTextBox)item).Text;
-                    }
-                }
-                info.guidance = guidance.TrimEnd(',');
-                foreach (Control item in 转诊4.Controls)
-                {
-                    if (item is RadioButton)
-                    {
-                        if (((RadioButton)item).Checked)
-                        {
-                            info.transfer_treatment = ((RadioButton)item).Tag.ToString();
-                        }
-                    }
-                    else if (item is TextBox)
-                    {
-                        if (((TextBox)item).Name == "转诊原因4")
-                        {
-                            info.transfer_treatment_reason = ((TextBox)item).Text;
-                        }
-                        else if (((TextBox)item).Name == "转诊机构和科别4")
-                        {
-                            info.transfer_treatment_department = ((TextBox)item).Text;
-                        }
-                    }
-                }
-                info.next_visit_date = 下次随访日期4.Value.ToString("yyyy-MM-dd HH:mm:ss");
-                info.visit_doctor = 随访医生签名4.Text.Trim();
-                infolist.Add(info);
-            }
-            if (第5次.Checked)
-            {
-                gravida_follow_record info = new gravida_follow_record();
-                info.name = Names;
-                info.aichive_no = aichive_no;
-                info.id_number = id_number;
-                info.order_num = "5";
-                info.visit_date = 随访日期5.Value.ToString("yyyy-MM-dd HH:mm:ss");
-                info.gestational_weeks = Convert.ToInt32(孕周5.Text.Trim());
-                info.symptom = 孕妇自述症状5.Text.Trim();
-                info.weight = 体重5.Text.Trim();
-                info.fundus_height = 宫高5.Text.Trim();
-                info.abdomen_circumference = 腹围5.Text.Trim();
-                info.fetus_position = 胎儿的位置5.Text.Trim();
-                info.fetal_heart_rate = 胎心率5.Text.Trim();
-                info.blood_pressure_high = Convert.ToInt32(血压高5.Text.Trim());
-                info.blood_pressure_low = Convert.ToInt32(血压低5.Text.Trim());
-                info.hemoglobin = 血红蛋白5.Text.Trim();
-                info.urine_protein = 尿蛋白5.Text.Trim();
-                info.condition = 其他辅助检查5.Text.Trim();
-                foreach (Control item in 分类5.Controls)
-                {
-                    if (item is RadioButton)
-                    {
-                        if (((RadioButton)item).Checked)
-                        {
-                            info.condition = ((RadioButton)item).Tag.ToString();
-                        }
-                    }
-                    else if (item is TextBox)
-                    {
-                        info.error_info = ((TextBox)item).Text;
-                    }
-                }
-                string guidance = string.Empty;
-                foreach (Control item in 指导5.Controls)
-                {
-                    if (item is CheckBox)
-                    {
-                        if (((CheckBox)item).Checked)
-                        {
-                            guidance += ((CheckBox)item).Tag.ToString() + ",";
-                        }
-                    }
-                    else if (item is RichTextBox)
-                    {
-                        info.guidance_other = ((RichTextBox)item).Text;
-                    }
-                }
-                info.guidance = guidance.TrimEnd(',');
-                foreach (Control item in 转诊5.Controls)
-                {
-                    if (item is RadioButton)
-                    {
-                        if (((RadioButton)item).Checked)
-                        {
-                            info.transfer_treatment = ((RadioButton)item).Tag.ToString();
-                        }
-                    }
-                    else if (item is TextBox)
-                    {
-                        if (((TextBox)item).Name == "转诊原因5")
-                        {
-                            info.transfer_treatment_reason = ((TextBox)item).Text;
-                        }
-                        else if (((TextBox)item).Name == "转诊机构和科别5")
-                        {
-                            info.transfer_treatment_department = ((TextBox)item).Text;
-                        }
-                    }
-                }
-                info.next_visit_date = 下次随访日期5.Value.ToString("yyyy-MM-dd HH:mm:ss");
-                info.visit_doctor = 随访医生签名5.Text.Trim();
-                infolist.Add(info);
-            }
-
+           
             return infolist;
         }
         /// <summary>
@@ -491,41 +448,93 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
         /// </summary>
         private void SetData()
         {
-            string sql = $@"select * from gravida_follow_record where name='{Names}' and aichive_no='{aichive_no}' and id_number='{id_number}'";
+            string sql = $@"select * from gravida_after_record where name='{Names}' and aichive_no='{aichive_no}' and id_number='{id_number}'";
             DataSet jb = DbHelperMySQL.Query(sql);
             if (jb != null && jb.Tables.Count > 0 && jb.Tables[0].Rows.Count > 0)
             {
-                List<gravida_follow_record> ts = Result.ToDataList<gravida_follow_record>(jb.Tables[0]);
+                List<gravida_after_record> ts = Result.ToDataList<gravida_after_record>(jb.Tables[0]);
                 foreach (var dt in ts)
                 {
-                    Control yl = this.Controls.Find($"第{dt.order_num}次", true)[0];
+                    Control yl = this.Controls.Find($"产后{dt.order_num}天", true)[0];
                     ((CheckBox)yl).Checked = true;
                     Control sfsj = Controls.Find($"随访日期{dt.order_num}", true)[0];
                     ((DateTimePicker)sfsj).Value = Convert.ToDateTime(dt.visit_date);
-                    Control yz = Controls.Find($"孕周{dt.order_num}", true)[0];
-                    ((TextBox)yz).Text = dt.gestational_weeks.ToString();
-                    Control yfzszz = Controls.Find($"孕妇自述症状{dt.order_num}", true)[0];
-                    ((TextBox)yfzszz).Text = dt.symptom.ToString();
-                    Control tz = Controls.Find($"体重{dt.order_num}", true)[0];
-                    ((TextBox)tz).Text = dt.weight.ToString();
-                    Control gg = Controls.Find($"宫高{dt.order_num}", true)[0];
-                    ((TextBox)gg).Text = dt.fundus_height.ToString();
-                    Control fw = Controls.Find($"腹围{dt.order_num}", true)[0];
-                    ((TextBox)fw).Text = dt.abdomen_circumference.ToString();
-                    Control trwz = Controls.Find($"胎儿的位置{dt.order_num}", true)[0];
-                    ((TextBox)trwz).Text = dt.fetus_position.ToString();
-                    Control txl = Controls.Find($"胎心率{dt.order_num}", true)[0];
-                    ((TextBox)txl).Text = dt.fetal_heart_rate.ToString();
+                    Control yz = Controls.Find($"分娩日期{dt.order_num}", true)[0];
+                    ((DateTimePicker)yz).Value = Convert.ToDateTime(dt.childbirth);
+                    Control yfzszz = Controls.Find($"出院日期{dt.order_num}", true)[0];
+                    ((DateTimePicker)yfzszz).Value = Convert.ToDateTime(dt.discharge_date);
+                    Control tz = Controls.Find($"体温{dt.order_num}", true)[0];
+                    ((TextBox)tz).Text = dt.temperature.ToString();
+                    Control gg = Controls.Find($"一般健康情况{dt.order_num}", true)[0];
+                    ((TextBox)gg).Text = dt.general_health_status.ToString();
+                    Control fw = Controls.Find($"一般心理状况{dt.order_num}", true)[0];
+                    ((TextBox)fw).Text = dt.general_psychology_status.ToString();
                     Control gxy = Controls.Find($"血压高{dt.order_num}", true)[0];
                     ((TextBox)gxy).Text = dt.blood_pressure_high.ToString();
                     Control dxy = Controls.Find($"血压低{dt.order_num}", true)[0];
                     ((TextBox)dxy).Text = dt.blood_pressure_low.ToString();
-                    Control xhdb = Controls.Find($"血红蛋白{dt.order_num}", true)[0];
-                    ((TextBox)xhdb).Text = dt.hemoglobin.ToString();
-                    Control ldb = Controls.Find($"尿蛋白{dt.order_num}", true)[0];
-                    ((TextBox)ldb).Text = dt.urine_protein.ToString();
-                    Control qtfzjc = Controls.Find($"其他辅助检查{dt.order_num}", true)[0];
-                    ((TextBox)qtfzjc).Text = dt.check_other.ToString();
+                    Control rf = Controls.Find($"乳房{dt.order_num}", true)[0];
+                    foreach (Control item in ((GroupBox)rf).Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.breast)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                        else if (item is TextBox)
+                        {
+                            ((TextBox)item).Text = dt.breast_error;
+                        }
+                    }
+                    Control el = Controls.Find($"恶露{dt.order_num}", true)[0];
+                    foreach (Control item in ((GroupBox)el).Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.lyma)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                        else if (item is TextBox)
+                        {
+                            ((TextBox)item).Text = dt.lyma_error;
+                        }
+                    }
+                    Control zg = Controls.Find($"子宫{dt.order_num}", true)[0];
+                    foreach (Control item in ((GroupBox)zg).Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.womb)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                        else if (item is TextBox)
+                        {
+                            ((TextBox)item).Text = dt.womb_error;
+                        }
+                    }
+                    Control sk = Controls.Find($"伤口{dt.order_num}", true)[0];
+                    foreach (Control item in ((GroupBox)sk).Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.wound)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                        else if (item is TextBox)
+                        {
+                            ((TextBox)item).Text = dt.wound_error;
+                        }
+                    }
+                    Control qtfzjc = Controls.Find($"其他{dt.order_num}", true)[0];
+                    ((TextBox)qtfzjc).Text = dt.other.ToString();
                     Control fl = Controls.Find($"分类{dt.order_num}", true)[0];
                     foreach (Control item in ((GroupBox)fl).Controls)
                     {
@@ -540,7 +549,7 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
                         {
                             ((TextBox)item).Text = dt.error_info;
                         }
-                    }                
+                    }
                     Control zzjtz = Controls.Find($"指导{dt.order_num}", true)[0];
                     foreach (Control item in ((GroupBox)zzjtz).Controls)
                     {
@@ -605,7 +614,7 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
         /// <returns></returns>
         private bool GetUpdate()
         {
-            DataSet data = DbHelperMySQL.Query($@"select * from gravida_follow_record where name='{Names}' and aichive_no='{aichive_no}' and id_number='{id_number}'");
+            DataSet data = DbHelperMySQL.Query($@"select * from gravida_after_record where name='{Names}' and aichive_no='{aichive_no}' and id_number='{id_number}'");
             if (data != null && data.Tables[0] != null && data.Tables[0].Rows.Count > 0)
             {
                 return true;
@@ -617,9 +626,9 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
         }
     }
     /// <summary>
-    /// 产前随访记录表
+    /// 产后随访记录表
     /// </summary>
-    public class gravida_follow_record
+    public class gravida_after_record
     {
         /// <summary>
         /// id
@@ -646,33 +655,25 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
         /// </summary>
         public string order_num { get; set; }
         /// <summary>
-        /// 孕周
+        /// 分娩日期
         /// </summary>
-        public int? gestational_weeks { get; set; }
+        public string childbirth { get; set; }
         /// <summary>
-        /// 孕妇自述症状
+        /// 出院日期
         /// </summary>
-        public string symptom { get; set; }
+        public string discharge_date { get; set; }
         /// <summary>
-        /// 体重
+        /// 体温
         /// </summary>
-        public string weight { get; set; }
+        public string temperature { get; set; }
         /// <summary>
-        /// 宫高
+        /// 一般健康状况
         /// </summary>
-        public string fundus_height { get; set; }
+        public string general_health_status { get; set; }
         /// <summary>
-        /// 腹围
+        /// 一般心理状况
         /// </summary>
-        public string abdomen_circumference { get; set; }
-        /// <summary>
-        /// 胎儿的位置
-        /// </summary>
-        public string fetus_position { get; set; }
-        /// <summary>
-        /// 胎心率
-        /// </summary>
-        public string fetal_heart_rate { get; set; }
+        public string general_psychology_status { get; set; }
         /// <summary>
         /// 血压高
         /// </summary>
@@ -682,17 +683,41 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
         /// </summary>
         public int? blood_pressure_low { get; set; }
         /// <summary>
-        /// 血红蛋白
+        /// 乳房是否异常
         /// </summary>
-        public string hemoglobin { get; set; }
+        public string breast { get; set; }
         /// <summary>
-        /// 尿蛋白
+        /// 乳房异常信息
         /// </summary>
-        public string urine_protein { get; set; }
+        public string breast_error { get; set; }
         /// <summary>
-        /// 其他辅助检查
+        /// 恶露
         /// </summary>
-        public string check_other { get; set; }
+        public string lyma { get; set; }
+        /// <summary>
+        /// 恶露异常信息
+        /// </summary>
+        public string lyma_error { get; set; }
+        /// <summary>
+        /// 子宫
+        /// </summary>
+        public string womb { get; set; }
+        /// <summary>
+        /// 子宫异常信息
+        /// </summary>
+        public string womb_error { get; set; }
+        /// <summary>
+        /// 伤口
+        /// </summary>
+        public string wound { get; set; }
+        /// <summary>
+        /// 伤口异常
+        /// </summary>
+        public string wound_error { get; set; }
+        /// <summary>
+        /// 其他
+        /// </summary>
+        public string other { get; set; }
         /// <summary>
         /// 分类
         /// </summary>
@@ -709,7 +734,6 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
         /// 指导其他
         /// </summary>
         public string guidance_other { get; set; }
-        
         /// <summary>
         /// 转移治疗
         /// </summary>

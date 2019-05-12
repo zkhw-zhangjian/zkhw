@@ -122,22 +122,52 @@ namespace zkhwClient.view.PublicHealthView
 
         private void 第25次产前随访删除_Click(object sender, EventArgs e)
         {
-
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            deleteStartMaternalHealthServices addtcm = new deleteStartMaternalHealthServices(dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
+            addtcm.StartPosition = FormStartPosition.CenterScreen;
+            addtcm.ShowDialog();
         }
 
         private void 产后访视添加_Click(object sender, EventArgs e)
         {
-
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            addEndMaternalHealthServices addtcm = new addEndMaternalHealthServices(1, dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
+            if (addtcm.show)
+            {
+                addtcm.StartPosition = FormStartPosition.CenterScreen;
+                addtcm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show(addtcm.mag);
+            }
         }
 
         private void 产后访视修改_Click(object sender, EventArgs e)
         {
-
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            addEndMaternalHealthServices addtcm = new addEndMaternalHealthServices(0, dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
+            if (addtcm.show)
+            {
+                addtcm.StartPosition = FormStartPosition.CenterScreen;
+                addtcm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show(addtcm.mag);
+            }
         }
 
         private void 产后访视删除_Click(object sender, EventArgs e)
         {
-
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            deleteEndMaternalHealthServices addtcm = new deleteEndMaternalHealthServices(dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
+            addtcm.StartPosition = FormStartPosition.CenterScreen;
+            addtcm.ShowDialog();
         }
 
         private void 关闭_Click(object sender, EventArgs e)
