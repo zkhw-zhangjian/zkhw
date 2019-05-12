@@ -225,6 +225,12 @@
     <Compile Include="utils\IntPtrFindWindow.cs" />
     <Compile Include="utils\Md5.cs" />
     <Compile Include="utils\FSWControl.cs" />
+    <Compile Include="view\PublicHealthView\addchildHealthServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\addchildHealthServices.Designer.cs">
+      <DependentUpon>addchildHealthServices.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\PublicHealthView\addchildrenCMHealthServices.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -741,6 +747,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\HomeDoctorSigningView\teamMembers.resx">
       <DependentUpon>teamMembers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\addchildHealthServices.resx">
+      <DependentUpon>addchildHealthServices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\addchildrenCMHealthServices.resx">
       <DependentUpon>addchildrenCMHealthServices.cs</DependentUpon>
