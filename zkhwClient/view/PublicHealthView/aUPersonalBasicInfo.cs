@@ -260,8 +260,10 @@ namespace zkhwClient.view.PublicHealthView
             dtno.Rows.Add(newRow);
             this.comboBox1.DataSource = dtno;//绑定数据源
             this.comboBox1.DisplayMember = "name";//显示给用户的数据集表项
-            this.comboBox1.ValueMember = "id";//操作时获取的值 
-
+            this.comboBox1.ValueMember = "id";//操作时获取的值
+            if (mzid!="") {
+                this.comboBox1.SelectedValue = mzid;
+            }
             //既往史疾病清单表 
             DataTable dt = personalBasicInfoService.queryResident_diseases(id);
             goodsList = dt.Clone();
@@ -821,14 +823,71 @@ namespace zkhwClient.view.PublicHealthView
 
         private void checkBox33_Click(object sender, EventArgs e)
         {
-            if (this.checkBox33.Checked) {
+            if (this.checkBox33.Checked)
+            {
                 this.checkBox26.Checked = false;
+            }
+        }
+
+        private void checkBox26_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox26.Checked) {
                 this.checkBox27.Checked = false;
                 this.checkBox28.Checked = false;
                 this.checkBox29.Checked = false;
                 this.checkBox30.Checked = false;
                 this.checkBox31.Checked = false;
                 this.checkBox32.Checked = false;
+                this.checkBox33.Checked = false;
+                this.textBox37.Text = "";
+            }
+        }
+
+        private void checkBox27_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox27.Checked)
+            {
+                this.checkBox26.Checked = false;
+            }
+        }
+
+        private void checkBox28_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox28.Checked)
+            {
+                this.checkBox26.Checked = false;
+            }
+        }
+
+        private void checkBox29_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox29.Checked)
+            {
+                this.checkBox26.Checked = false;
+            }
+        }
+
+        private void checkBox30_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox30.Checked)
+            {
+                this.checkBox26.Checked = false;
+            }
+        }
+
+        private void checkBox31_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox31.Checked)
+            {
+                this.checkBox26.Checked = false;
+            }
+        }
+
+        private void checkBox32_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox32.Checked)
+            {
+                this.checkBox26.Checked = false;
             }
         }
     }

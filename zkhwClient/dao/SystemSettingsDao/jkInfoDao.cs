@@ -52,7 +52,7 @@ namespace zkhwClient.dao
         public DataTable querytjjdTopdf(string xcuncode, string time)
         {
             DataSet ds = new DataSet();
-            string sql = "select name,sex,birthday,(case when BChao='1' and XinDian='1' and ShengHua='1' and XueChangGui='1' and NiaoChangGui='1' and XueYa='1' and Shengaotizhong='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
+            string sql = "select name,sex,birthday,(case when BChao>='1' and XinDian>='1' and ShengHua>='1' and XueChangGui>='1' and NiaoChangGui>='1' and XueYa>='1' and Shengaotizhong>='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
             if (xcuncode != null && !"".Equals(xcuncode))
             {
                 sql += " and area_duns='" + xcuncode + "'";

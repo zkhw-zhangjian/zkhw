@@ -31,7 +31,7 @@ namespace zkhwClient.dao
             string status = "1";
             String sql = "insert into resident_base_info (id,archive_no,name,sex,birthday,age,id_number,card_pic,address,residence_address,province_code,province_name,city_code,city_name,county_code,county_name,towns_code,towns_name,village_code,village_name,photo_code,status,create_time,create_name,aichive_org,doctor_name,create_archives_name,create_org,create_org_name,upload_status) values ('" + 
                 id + "','" + grjd.archive_no + "','" + grjd.name + "','" + grjd.Sex + "', '" + grjd.Birthday + "', '" + grjd.age + "', '" + grjd.Cardcode + "', '" + grjd.CardPic + "', '" + grjd.Zhuzhi + "', '" + grjd.residence_address + "', '" + grjd.province_code + "', '" + grjd.province_name + "', '" + grjd.city_code + "', '" + grjd.city_name + "', '" + grjd.county_code + "', '" + grjd.county_name + "', '" + grjd.towns_code + "', '" + grjd.towns_name + "', '" + grjd.village_code + "', '" + grjd.village_name + "', '" + grjd.photo_code + "', '" + status + "', '" 
-                + time + "', '" + grjd.create_name + "', '" + grjd.aichive_org + "', '" + grjd.doctor_name + "', '" + grjd.create_archives_name + "', '" + frmLogin.organCode + "', '" + frmLogin.organName + "','0')";
+                + time + "', '" + frmLogin.name + "', '" + grjd.aichive_org + "', '" + grjd.doctor_name + "', '" + grjd.create_archives_name + "', '" + frmLogin.organCode + "', '" + frmLogin.organName + "','0')";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }

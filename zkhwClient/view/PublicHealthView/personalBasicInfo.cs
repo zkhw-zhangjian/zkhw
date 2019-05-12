@@ -133,10 +133,12 @@ namespace zkhwClient.view.PublicHealthView
                 hm.textBox20.Text = dt.Rows[0]["link_phone"].ToString();
                 if (dt.Rows[0]["resident_type"].ToString() == hm.radioButton4.Tag.ToString()) { hm.radioButton4.Checked = true; };
                 if (dt.Rows[0]["resident_type"].ToString() == hm.radioButton5.Tag.ToString()) { hm.radioButton5.Checked = true; };
-
-                if (dt.Rows[0]["nation"].ToString() == hm.radioButton6.Tag.ToString()) { hm.radioButton6.Checked = true; };
-                if (dt.Rows[0]["nation"].ToString() == hm.radioButton7.Tag.ToString()) { hm.radioButton7.Checked = true; };
-
+               string nation =dt.Rows[0]["nation"].ToString();
+                if (nation != null&&!"".Equals(nation)) {
+                    if (nation == hm.radioButton6.Tag.ToString()) {
+                        hm.radioButton6.Checked = true;
+                    } else { hm.radioButton7.Checked = true; hm.comboBox1.Visible = true; hm.mzid = nation; };
+                }
                 if (dt.Rows[0]["blood_group"].ToString() == hm.radioButton8.Tag.ToString()) { hm.radioButton8.Checked = true; };
                 if (dt.Rows[0]["blood_group"].ToString() == hm.radioButton9.Tag.ToString()) { hm.radioButton9.Checked = true; };
                 if (dt.Rows[0]["blood_group"].ToString() == hm.radioButton10.Tag.ToString()) { hm.radioButton10.Checked = true; };

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace zkhwClient.dao
 {
@@ -15,7 +16,7 @@ namespace zkhwClient.dao
             if (code != "") { sql += " AND b.village_code='" + code + "'"; }
             if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
             sql += ") bb LEFT JOIN(select a.id,a.aichive_no,a.visit_type,a.visit_date,a.visit_doctor from fuv_hypertension a where a.visit_date >= '" + time1 + "' and a.visit_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
-            ds = DbHelperMySQL.Query(sql); 
+            ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
         

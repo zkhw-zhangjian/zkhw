@@ -135,6 +135,8 @@ namespace zkhwClient.view.PublicHealthView
                 string check_date = this.dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
                 string doctor_name = this.dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
                 string id = this.dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
+                DataTable dtup= hcd.queryhealthCheckup(id);
+                if (dtup.Rows.Count>0) { MessageBox.Show(name+"已填写过健康体检表，请重新选择!");return; }
                 if (aichive_no != null && !"".Equals(aichive_no))
                 {
                     aUhealthcheckupServices1 auhcs = new aUhealthcheckupServices1();
@@ -143,7 +145,10 @@ namespace zkhwClient.view.PublicHealthView
                     auhcs.textBox119.Text = id_number;
                     auhcs.textBox120.Text = id;
                     auhcs.textBox2.Text = aichive_no;
-                    auhcs.dateTimePicker1.Value = DateTime.ParseExact(check_date, TarStr, format);
+                    if (check_date != "")
+                    {
+                        auhcs.dateTimePicker1.Value = DateTime.ParseExact(check_date, TarStr, format);
+                    }
                     auhcs.textBox51.Text = doctor_name;
 
                     auhcs.Show();
@@ -181,7 +186,6 @@ namespace zkhwClient.view.PublicHealthView
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show("开发中...");
             if (this.dataGridView1.SelectedRows.Count > 0)
             {
                 string name = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
@@ -199,7 +203,10 @@ namespace zkhwClient.view.PublicHealthView
                     auhcs.textBox119.Text = id_number;
                     auhcs.textBox120.Text = id;
                     auhcs.textBox2.Text = aichive_no;
-                    auhcs.dateTimePicker1.Value = DateTime.ParseExact(check_date, TarStr, format);
+                    if (check_date != "")
+                    {
+                        auhcs.dateTimePicker1.Value = DateTime.ParseExact(check_date, TarStr, format);
+                    }
                     auhcs.textBox51.Text = doctor_name;
 
                     auhcs.id = id;//祖

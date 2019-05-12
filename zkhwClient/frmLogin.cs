@@ -59,7 +59,7 @@ namespace zkhwClient
             DataTable ret = service.UserService.UserExists(comboBox1.Text, md5passw);
             if (ret.Rows.Count > 0)
             {  //获取当前登录用户的机构
-                if (!"admin".Equals(this.comboBox1.Text)&& !"CS".Equals(this.comboBox1.Text)) {
+                if (!"admin".Equals(this.comboBox1.Text) && !"CS".Equals(this.comboBox1.Text)) {
                     organCode = ret.Rows[0]["organ_code"].ToString();
                     organName = udao.checkOrganNameBycode(organCode).Rows[0]["organ_name"].ToString();
                 }

@@ -350,7 +350,7 @@ namespace zkhwClient
                 if (xNode != null && xNode.Count > 0)
                     {
                     innum=e.FullPath.LastIndexOf("\\");
-                    Thread.Sleep(3000);
+                    Thread.Sleep(5000);
                     string fullPath=e.FullPath.Substring(0, innum + 1);
                         for (int i = 0; i < xNode.Count; i++)
                         {

@@ -151,14 +151,13 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         //将ctr转换成CheckBox并赋值给ck
                         CheckBox ck = ctr as CheckBox;
-                        if (dt.Rows[0]["symptom"].ToString()==ck.Tag.ToString())
+                        if (dt.Rows[0]["symptom"].ToString().IndexOf(ck.Tag.ToString())>-1)
                         {
                             ck.Checked = true;
                         }
                     }
                 }
                 hm.richTextBox1.Text = dt.Rows[0]["other_symptom"].ToString();
-
 
                 hm.numericUpDown9.Value = Decimal.Parse(dt.Rows[0]["sbp"].ToString());
                 hm.numericUpDown10.Value = Decimal.Parse(dt.Rows[0]["dbp"].ToString());
@@ -209,10 +208,7 @@ namespace zkhwClient.view.PublicHealthView
                 hm.textBox7.Text = dt.Rows[0]["visit_doctor"].ToString();
 
             }
-            else { }
-
-
-
+            else { MessageBox.Show("未查询出高血压服务数据，请先添加!"); return; }
             if (hm.ShowDialog() == DialogResult.OK)
             {
                 //刷新页面

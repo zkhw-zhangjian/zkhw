@@ -329,6 +329,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{C
                 }
             }
             DataSet dataSet = DbHelperMySQL.Query(sql);
+            if (dataSet.Tables.Count<1) { MessageBox.Show("未查询出数据，请重新查询!"); return null; }
             DataTable dt = dataSet.Tables[0];
             return dt;
         }

@@ -270,7 +270,7 @@ namespace zkhwClient.view.PublicHealthView
             vaccination_record vr = new vaccination_record();
             if (vr.ShowDialog() == DialogResult.OK)
             {
-                DataRow[] drr = goodsListym.Select("drug_name = '" + vr.vaccination_name + "'");
+                DataRow[] drr = goodsListym.Select("vaccination_name = '" + vr.vaccination_name + "'");
                 if (drr.Length > 0)
                 {
                     MessageBox.Show("疫苗记录已存在！");

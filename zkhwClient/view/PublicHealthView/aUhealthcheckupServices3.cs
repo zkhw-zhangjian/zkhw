@@ -90,69 +90,80 @@ namespace zkhwClient.view.PublicHealthView
                     };
                     this.textBox34.Text = dt.Rows[0]["other"].ToString();
 
-                    if (this.radioButton9.Tag.ToString() == dt.Rows[0]["cerebrovascular_disease"].ToString()) {this.radioButton9.Checked = true; };
-                    if (this.radioButton10.Tag.ToString() == dt.Rows[0]["cerebrovascular_disease"].ToString()) { this.radioButton10.Checked = true; };
-                    if (this.radioButton11.Tag.ToString() == dt.Rows[0]["cerebrovascular_disease"].ToString()) { this.radioButton11.Checked = true; };
-                    if (this.radioButton12.Tag.ToString() == dt.Rows[0]["cerebrovascular_disease"].ToString()) { this.radioButton12.Checked = true; };
-                    if (this.radioButton13.Tag.ToString() == dt.Rows[0]["cerebrovascular_disease"].ToString()) { this.radioButton13.Checked = true; };
-                    if (this.radioButton14.Tag.ToString() == dt.Rows[0]["cerebrovascular_disease"].ToString())
+                    foreach (Control ctr in this.panel7.Controls)
                     {
-                        this.radioButton14.Checked = true;
-                        this.textBox36.Text = dt.Rows[0]["cerebrovascular_disease_other"].ToString();
-                    };
+                        //判断该控件是不是CheckBox
+                        if (ctr is CheckBox)
+                        {
+                            //将ctr转换成CheckBox并赋值给ck
+                            CheckBox ck = ctr as CheckBox;
+                            if (dt.Rows[0]["cerebrovascular_disease"].ToString().IndexOf(ck.Tag.ToString()) > -1)
+                            {
+                                ck.Checked = true;
+                            }
+                        }
+                    }
+                    this.textBox36.Text = dt.Rows[0]["cerebrovascular_disease_other"].ToString();
 
-                    if (this.radioButton19.Tag.ToString() == dt.Rows[0]["kidney_disease"].ToString()) {this.radioButton19.Checked = true; };
-                    if (this.radioButton20.Tag.ToString() == dt.Rows[0]["kidney_disease"].ToString()) {  this.radioButton20.Checked = true; };
-                    if (this.radioButton18.Tag.ToString() == dt.Rows[0]["kidney_disease"].ToString()) { this.radioButton18.Checked = true; };
-                    if (this.radioButton17.Tag.ToString() == dt.Rows[0]["kidney_disease"].ToString()) { this.radioButton17.Checked = true; };
-                    if (this.radioButton16.Tag.ToString() == dt.Rows[0]["kidney_disease"].ToString()) { this.radioButton16.Checked = true; };
-                    if (this.radioButton15.Text == dt.Rows[0]["kidney_disease"].ToString())
+                    foreach (Control ctr in this.panel8.Controls)
                     {
-                        this.radioButton15.Checked = true;
-                        this.textBox38.Text = dt.Rows[0]["kidney_disease_other"].ToString();
-                    };
+                        //判断该控件是不是CheckBox
+                        if (ctr is CheckBox)
+                        {
+                            //将ctr转换成CheckBox并赋值给ck
+                            CheckBox ck = ctr as CheckBox;
+                            if (dt.Rows[0]["kidney_disease"].ToString().IndexOf(ck.Tag.ToString()) > -1)
+                            {
+                                ck.Checked = true;
+                            }
+                        }
+                    }
+                    this.textBox38.Text = dt.Rows[0]["kidney_disease_other"].ToString();
 
-                    if (this.radioButton19.Tag.ToString() == dt.Rows[0]["kidney_disease"].ToString()) { this.radioButton19.Checked = true; };
-                    if (this.radioButton20.Tag.ToString() == dt.Rows[0]["kidney_disease"].ToString()) { this.radioButton20.Checked = true; };
-                    if (this.radioButton18.Tag.ToString() == dt.Rows[0]["kidney_disease"].ToString()) { this.radioButton18.Checked = true; };
-                    if (this.radioButton17.Tag.ToString() == dt.Rows[0]["kidney_disease"].ToString()) { this.radioButton17.Checked = true; };
-                    if (this.radioButton16.Tag.ToString() == dt.Rows[0]["kidney_disease"].ToString()) { this.radioButton16.Checked = true; };
-                    if (this.radioButton15.Tag.ToString() == dt.Rows[0]["kidney_disease"].ToString())
+                    foreach (Control ctr in this.panel9.Controls)
                     {
-                        this.radioButton15.Checked = true;
-                        this.textBox38.Text = dt.Rows[0]["kidney_disease_other"].ToString();
-                    };
+                        //判断该控件是不是CheckBox
+                        if (ctr is CheckBox)
+                        {
+                            //将ctr转换成CheckBox并赋值给ck
+                            CheckBox ck = ctr as CheckBox;
+                            if (dt.Rows[0]["heart_disease"].ToString().IndexOf(ck.Tag.ToString()) > -1)
+                            {
+                                ck.Checked = true;
+                            }
+                        }
+                    }
+                    this.textBox41.Text = dt.Rows[0]["heart_disease_other"].ToString();
 
-                    if (this.radioButton25.Tag.ToString() == dt.Rows[0]["heart_disease"].ToString()) { this.radioButton25.Checked = true; };
-                    if (this.radioButton26.Tag.ToString() == dt.Rows[0]["heart_disease"].ToString()) { this.radioButton26.Checked = true; };
-                    if (this.radioButton24.Tag.ToString() == dt.Rows[0]["heart_disease"].ToString()) { this.radioButton24.Checked = true; };
-                    if (this.radioButton23.Tag.ToString() == dt.Rows[0]["heart_disease"].ToString()) { this.radioButton23.Checked = true; };
-                    if (this.radioButton27.Tag.ToString() == dt.Rows[0]["heart_disease"].ToString()) { this.radioButton27.Checked = true; };
-                    if (this.radioButton22.Tag.ToString() == dt.Rows[0]["heart_disease"].ToString()) { this.radioButton22.Checked = true; };
-                    if (this.radioButton21.Tag.ToString() == dt.Rows[0]["heart_disease"].ToString())
+                    foreach (Control ctr in this.panel10.Controls)
                     {
-                        this.radioButton21.Checked = true;
-                        this.textBox41.Text = dt.Rows[0]["heart_disease_other"].ToString();
-                    };
+                        //判断该控件是不是CheckBox
+                        if (ctr is CheckBox)
+                        {
+                            //将ctr转换成CheckBox并赋值给ck
+                            CheckBox ck = ctr as CheckBox;
+                            if (dt.Rows[0]["vascular_disease"].ToString().IndexOf(ck.Tag.ToString()) > -1)
+                            {
+                                ck.Checked = true;
+                            }
+                        }
+                    }
+                    this.textBox42.Text = dt.Rows[0]["vascular_disease_other"].ToString();
 
-                    if (this.radioButton32.Tag.ToString() == dt.Rows[0]["vascular_disease"].ToString()) { this.radioButton32.Checked = true; };
-                    if (this.radioButton33.Tag.ToString() == dt.Rows[0]["vascular_disease"].ToString()) { this.radioButton33.Checked = true; };
-                    if (this.radioButton31.Tag.ToString() == dt.Rows[0]["vascular_disease"].ToString()) { this.radioButton31.Checked = true; };
-                    if (this.radioButton28.Tag.ToString() == dt.Rows[0]["vascular_disease"].ToString())
+                    foreach (Control ctr in this.panel11.Controls)
                     {
-                        this.radioButton28.Checked = true;
-                        this.textBox42.Text = dt.Rows[0]["vascular_disease_other"].ToString();
-                    };
-
-                    if (this.radioButton34.Tag.ToString() == dt.Rows[0]["ocular_diseases"].ToString()) { this.radioButton34.Checked = true; };
-                    if (this.radioButton35.Tag.ToString() == dt.Rows[0]["ocular_diseases"].ToString()) { this.radioButton35.Checked = true; };
-                    if (this.radioButton30.Tag.ToString() == dt.Rows[0]["ocular_diseases"].ToString()) { this.radioButton30.Checked = true; };
-                    if (this.radioButton36.Tag.ToString() == dt.Rows[0]["ocular_diseases"].ToString()) { this.radioButton36.Checked = true; };
-                    if (this.radioButton29.Tag.ToString() == dt.Rows[0]["ocular_diseases"].ToString())
-                    {
-                        this.radioButton29.Checked = true;
-                        this.textBox44.Text = dt.Rows[0]["ocular_diseases_other"].ToString();
-                    };
+                        //判断该控件是不是CheckBox
+                        if (ctr is CheckBox)
+                        {
+                            //将ctr转换成CheckBox并赋值给ck
+                            CheckBox ck = ctr as CheckBox;
+                            if (dt.Rows[0]["ocular_diseases"].ToString().IndexOf(ck.Tag.ToString()) > -1)
+                            {
+                                ck.Checked = true;
+                            }
+                        }
+                    }
+                    this.textBox44.Text = dt.Rows[0]["ocular_diseases_other"].ToString();
 
                     if (this.radioButton37.Tag.ToString() == dt.Rows[0]["nervous_system_disease"].ToString()) { this.radioButton37.Checked = true; };
                     if (this.radioButton38.Tag.ToString() == dt.Rows[0]["nervous_system_disease"].ToString())
@@ -287,69 +298,115 @@ namespace zkhwClient.view.PublicHealthView
             };
             per.other = this.textBox34.Text;
 
-            if (this.radioButton9.Checked == true) { per.cerebrovascular_disease = this.radioButton9.Tag.ToString(); };
-            if (this.radioButton10.Checked == true) { per.cerebrovascular_disease = this.radioButton10.Tag.ToString(); };
-            if (this.radioButton11.Checked == true) { per.cerebrovascular_disease = this.radioButton11.Tag.ToString(); };
-            if (this.radioButton12.Checked == true) { per.cerebrovascular_disease = this.radioButton12.Tag.ToString(); };
-            if (this.radioButton13.Checked == true) { per.cerebrovascular_disease = this.radioButton13.Tag.ToString(); };
-            if (this.radioButton14.Checked == true)
+            foreach (Control ctr in this.panel7.Controls)
             {
-                per.cerebrovascular_disease = this.radioButton14.Tag.ToString();
-                per.cerebrovascular_disease_other = this.textBox36.Text;
-            };
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.cerebrovascular_disease += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.cerebrovascular_disease != null && per.cerebrovascular_disease != "")
+            {
+                per.cerebrovascular_disease = per.cerebrovascular_disease.Substring(1);
+                if (this.checkBox6.Checked)
+                {
+                    per.cerebrovascular_disease_other = this.textBox36.Text;
+                }
+            }
 
-            if (this.radioButton19.Checked == true) { per.kidney_disease = this.radioButton19.Tag.ToString(); };
-            if (this.radioButton20.Checked == true) { per.kidney_disease = this.radioButton20.Tag.ToString(); };
-            if (this.radioButton18.Checked == true) { per.kidney_disease = this.radioButton18.Tag.ToString(); };
-            if (this.radioButton17.Checked == true) { per.kidney_disease = this.radioButton17.Tag.ToString(); };
-            if (this.radioButton16.Checked == true) { per.kidney_disease = this.radioButton16.Tag.ToString(); };
-            if (this.radioButton15.Checked == true)
+            foreach (Control ctr in this.panel8.Controls)
             {
-                per.kidney_disease = this.radioButton15.Text;
-                per.kidney_disease_other = this.textBox38.Text;
-            };
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.kidney_disease += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.kidney_disease != null && per.kidney_disease != "")
+            {
+                per.kidney_disease = per.kidney_disease.Substring(1);
+                if (this.checkBox12.Checked)
+                {
+                    per.kidney_disease_other = this.textBox38.Text;
+                }
+            }
 
-            if (this.radioButton19.Checked == true) { per.kidney_disease = this.radioButton19.Tag.ToString(); };
-            if (this.radioButton20.Checked == true) { per.kidney_disease = this.radioButton20.Tag.ToString(); };
-            if (this.radioButton18.Checked == true) { per.kidney_disease = this.radioButton18.Tag.ToString(); };
-            if (this.radioButton17.Checked == true) { per.kidney_disease = this.radioButton17.Tag.ToString(); };
-            if (this.radioButton16.Checked == true) { per.kidney_disease = this.radioButton16.Tag.ToString(); };
-            if (this.radioButton15.Checked == true)
+            foreach (Control ctr in this.panel9.Controls)
             {
-                per.kidney_disease = this.radioButton15.Tag.ToString();
-                per.kidney_disease_other = this.textBox38.Text;
-            };
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.heart_disease += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.heart_disease != null && per.heart_disease != "")
+            {
+                per.heart_disease = per.heart_disease.Substring(1);
+                if (this.checkBox19.Checked)
+                {
+                    per.heart_disease_other = this.textBox41.Text;
+                }
+            }
 
-            if (this.radioButton25.Checked == true) { per.heart_disease = this.radioButton25.Tag.ToString(); };
-            if (this.radioButton26.Checked == true) { per.heart_disease = this.radioButton26.Tag.ToString(); };
-            if (this.radioButton24.Checked == true) { per.heart_disease = this.radioButton24.Tag.ToString(); };
-            if (this.radioButton23.Checked == true) { per.heart_disease = this.radioButton23.Tag.ToString(); };
-            if (this.radioButton27.Checked == true) { per.heart_disease = this.radioButton27.Tag.ToString(); };
-            if (this.radioButton22.Checked == true) { per.heart_disease = this.radioButton22.Tag.ToString(); };
-            if (this.radioButton21.Checked == true)
+            foreach (Control ctr in this.panel10.Controls)
             {
-                per.heart_disease = this.radioButton21.Tag.ToString();
-                per.heart_disease_other = this.textBox41.Text;
-            };
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.vascular_disease += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.vascular_disease != null && per.vascular_disease != "")
+            {
+                per.vascular_disease = per.vascular_disease.Substring(1);
+                if (this.checkBox23.Checked)
+                {
+                    per.vascular_disease_other = this.textBox42.Text;
+                }
+            }
 
-            if (this.radioButton32.Checked == true) { per.vascular_disease = this.radioButton32.Tag.ToString(); };
-            if (this.radioButton33.Checked == true) { per.vascular_disease = this.radioButton33.Tag.ToString(); };
-            if (this.radioButton31.Checked == true) { per.vascular_disease = this.radioButton31.Tag.ToString(); };
-            if (this.radioButton28.Checked == true)
+            foreach (Control ctr in this.panel11.Controls)
             {
-                per.vascular_disease = this.radioButton28.Tag.ToString();
-                per.vascular_disease_other = this.textBox42.Text;
-            };
-
-            if (this.radioButton34.Checked == true) { per.ocular_diseases = this.radioButton34.Tag.ToString(); };
-            if (this.radioButton35.Checked == true) { per.ocular_diseases = this.radioButton35.Tag.ToString(); };
-            if (this.radioButton30.Checked == true) { per.ocular_diseases = this.radioButton30.Tag.ToString(); };
-            if (this.radioButton36.Checked == true) { per.ocular_diseases = this.radioButton36.Tag.ToString(); };
-            if (this.radioButton29.Checked == true)
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.ocular_diseases += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.ocular_diseases != null && per.ocular_diseases != "")
             {
-                per.ocular_diseases = this.radioButton29.Tag.ToString();
-                per.ocular_diseases_other = this.textBox44.Text;
-            };
+                per.ocular_diseases = per.ocular_diseases.Substring(1);
+                if (this.checkBox28.Checked)
+                {
+                    per.ocular_diseases_other = this.textBox44.Text;
+                }
+            }
 
             if (this.radioButton37.Checked == true) { per.nervous_system_disease = this.radioButton37.Tag.ToString(); };
             if (this.radioButton38.Checked == true)
@@ -445,6 +502,68 @@ namespace zkhwClient.view.PublicHealthView
                 auhc4.id = id;//祖
                 auhc4.textBox4.Text = per.id;
                 auhc4.Show();
+            }
+        }
+
+        private void checkBox1_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox1.Checked) {
+                this.checkBox2.Checked = false;
+                this.checkBox3.Checked = false;
+                this.checkBox4.Checked = false;
+                this.checkBox5.Checked = false;
+                this.checkBox6.Checked = false;
+                this.textBox36.Text = "";
+            }
+        }
+
+        private void checkBox7_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox7.Checked)
+            {
+                this.checkBox8.Checked = false;
+                this.checkBox9.Checked = false;
+                this.checkBox10.Checked = false;
+                this.checkBox11.Checked = false;
+                this.checkBox12.Checked = false;
+                this.textBox38.Text = "";
+            }
+        }
+
+        private void checkBox13_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox13.Checked)
+            {
+                this.checkBox14.Checked = false;
+                this.checkBox15.Checked = false;
+                this.checkBox16.Checked = false;
+                this.checkBox17.Checked = false;
+                this.checkBox18.Checked = false;
+                this.checkBox19.Checked = false;
+                this.textBox41.Text = "";
+            }
+        }
+
+        private void checkBox20_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox20.Checked)
+            {
+                this.checkBox21.Checked = false;
+                this.checkBox22.Checked = false;
+                this.checkBox23.Checked = false;
+                this.textBox42.Text = "";
+            }
+        }
+
+        private void checkBox24_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox24.Checked)
+            {
+                this.checkBox25.Checked = false;
+                this.checkBox26.Checked = false;
+                this.checkBox27.Checked = false;
+                this.checkBox28.Checked = false;
+                this.textBox44.Text = "";
             }
         }
     }

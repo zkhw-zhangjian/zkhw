@@ -679,5 +679,9 @@ namespace zkhwClient.view.PublicHealthView
             }
         }
 
+        private void addtcmHealthServices_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

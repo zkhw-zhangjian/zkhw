@@ -105,7 +105,6 @@ GROUP BY sex
             string xian = comboBox3.SelectedValue?.ToString();
             string cun = comboBox4.SelectedValue?.ToString();
             string zu = comboBox5.SelectedValue?.ToString();
-            MessageBox.Show(zu);
             string juming = textBox1.Text;
             var pairs = new Dictionary<string, string>();
             pairs.Add("timesta", timesta);
@@ -130,7 +129,7 @@ from resident_base_info base
 join 
 (select * from zkhw_tj_bgdc group by aichive_no order by createtime desc) bgdc
 on base.archive_no=bgdc.aichive_no
-where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{Convert.ToDateTime(basicInfoSettings.createtime).ToString("yyyy-MM-dd")}'";//base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'
+where 1=1";
             if (pairs != null && pairs.Count > 0)
             {
                 if (!string.IsNullOrWhiteSpace(pairs["timesta"]) && !string.IsNullOrWhiteSpace(pairs["timeend"]))
@@ -160,6 +159,9 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{C
                 if (!string.IsNullOrWhiteSpace(pairs["zu"]))
                 {
                     sql += $" and base.village_code='{pairs["zu"]}'";
+                }
+                else {
+                    sql += $" and base.village_code='{basicInfoSettings.xcuncode}'";
                 }
             }
             sql += $@" limit {pagesize}; select found_rows()";// and base.id >=( select id From zkhw_tj_bgdc Order By id limit {pageindex},1)
@@ -796,7 +798,14 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{C
                     dics.Add("联系人姓名", data["link_name"].ToString());
                     dics.Add("联系人电话", data["link_phone"].ToString());
                     dics.Add("常住类型", data["resident_type"].ToString());
-                    dics.Add("民族", data["nation"].ToString());
+                    string nation = data["nation"].ToString();
+                    if (nation != "" && !"".Equals(nation))
+                    {
+                        if ("01".Equals(nation)) {
+                            dics.Add("民族", nation);
+                        }
+                        dics.Add("少数民族名称", Result.GetNationId(nation));
+                    }
                     dics.Add("血型", data["blood_group"].ToString());
                     dics.Add("RH", data["blood_rh"].ToString());
                     dics.Add("文化程度", data["education"].ToString());

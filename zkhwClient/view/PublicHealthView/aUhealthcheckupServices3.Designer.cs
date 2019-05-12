@@ -66,6 +66,7 @@
             this.textBox52 = new System.Windows.Forms.TextBox();
             this.textBox50 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox108 = new System.Windows.Forms.TextBox();
             this.textBox107 = new System.Windows.Forms.TextBox();
             this.textBox105 = new System.Windows.Forms.TextBox();
             this.textBox106 = new System.Windows.Forms.TextBox();
@@ -163,52 +164,51 @@
             this.radioButton38 = new System.Windows.Forms.RadioButton();
             this.textBox47 = new System.Windows.Forms.TextBox();
             this.panel11 = new System.Windows.Forms.Panel();
-            this.radioButton36 = new System.Windows.Forms.RadioButton();
-            this.radioButton29 = new System.Windows.Forms.RadioButton();
-            this.radioButton30 = new System.Windows.Forms.RadioButton();
+            this.checkBox28 = new System.Windows.Forms.CheckBox();
+            this.checkBox27 = new System.Windows.Forms.CheckBox();
+            this.checkBox26 = new System.Windows.Forms.CheckBox();
+            this.checkBox25 = new System.Windows.Forms.CheckBox();
+            this.checkBox24 = new System.Windows.Forms.CheckBox();
             this.textBox44 = new System.Windows.Forms.TextBox();
-            this.radioButton34 = new System.Windows.Forms.RadioButton();
-            this.radioButton35 = new System.Windows.Forms.RadioButton();
             this.textBox45 = new System.Windows.Forms.TextBox();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.radioButton28 = new System.Windows.Forms.RadioButton();
-            this.radioButton31 = new System.Windows.Forms.RadioButton();
+            this.checkBox23 = new System.Windows.Forms.CheckBox();
+            this.checkBox22 = new System.Windows.Forms.CheckBox();
+            this.checkBox21 = new System.Windows.Forms.CheckBox();
+            this.checkBox20 = new System.Windows.Forms.CheckBox();
             this.textBox42 = new System.Windows.Forms.TextBox();
-            this.radioButton32 = new System.Windows.Forms.RadioButton();
-            this.radioButton33 = new System.Windows.Forms.RadioButton();
             this.textBox43 = new System.Windows.Forms.TextBox();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.radioButton27 = new System.Windows.Forms.RadioButton();
-            this.radioButton21 = new System.Windows.Forms.RadioButton();
-            this.radioButton22 = new System.Windows.Forms.RadioButton();
-            this.radioButton23 = new System.Windows.Forms.RadioButton();
-            this.radioButton24 = new System.Windows.Forms.RadioButton();
+            this.checkBox19 = new System.Windows.Forms.CheckBox();
+            this.checkBox18 = new System.Windows.Forms.CheckBox();
+            this.checkBox17 = new System.Windows.Forms.CheckBox();
+            this.checkBox16 = new System.Windows.Forms.CheckBox();
+            this.checkBox15 = new System.Windows.Forms.CheckBox();
+            this.checkBox14 = new System.Windows.Forms.CheckBox();
+            this.checkBox13 = new System.Windows.Forms.CheckBox();
             this.textBox41 = new System.Windows.Forms.TextBox();
-            this.radioButton25 = new System.Windows.Forms.RadioButton();
-            this.radioButton26 = new System.Windows.Forms.RadioButton();
             this.textBox40 = new System.Windows.Forms.TextBox();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.radioButton15 = new System.Windows.Forms.RadioButton();
-            this.radioButton16 = new System.Windows.Forms.RadioButton();
-            this.radioButton17 = new System.Windows.Forms.RadioButton();
-            this.radioButton18 = new System.Windows.Forms.RadioButton();
+            this.checkBox12 = new System.Windows.Forms.CheckBox();
+            this.checkBox11 = new System.Windows.Forms.CheckBox();
+            this.checkBox10 = new System.Windows.Forms.CheckBox();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
             this.textBox38 = new System.Windows.Forms.TextBox();
-            this.radioButton19 = new System.Windows.Forms.RadioButton();
-            this.radioButton20 = new System.Windows.Forms.RadioButton();
             this.textBox39 = new System.Windows.Forms.TextBox();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.radioButton14 = new System.Windows.Forms.RadioButton();
-            this.radioButton13 = new System.Windows.Forms.RadioButton();
-            this.radioButton12 = new System.Windows.Forms.RadioButton();
-            this.radioButton11 = new System.Windows.Forms.RadioButton();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.textBox36 = new System.Windows.Forms.TextBox();
-            this.radioButton9 = new System.Windows.Forms.RadioButton();
-            this.radioButton10 = new System.Windows.Forms.RadioButton();
             this.textBox37 = new System.Windows.Forms.TextBox();
             this.textBox35 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.textBox108 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -721,9 +721,19 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(1, 43);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1268, 477);
+            this.groupBox1.Size = new System.Drawing.Size(1314, 477);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
+            // 
+            // textBox108
+            // 
+            this.textBox108.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox108.Location = new System.Drawing.Point(881, 13);
+            this.textBox108.Name = "textBox108";
+            this.textBox108.Size = new System.Drawing.Size(106, 30);
+            this.textBox108.TabIndex = 242;
+            this.textBox108.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox108.Visible = false;
             // 
             // textBox107
             // 
@@ -1741,7 +1751,7 @@
             // textBox46
             // 
             this.textBox46.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox46.Location = new System.Drawing.Point(182, -1);
+            this.textBox46.Location = new System.Drawing.Point(211, -32);
             this.textBox46.Name = "textBox46";
             this.textBox46.Size = new System.Drawing.Size(460, 30);
             this.textBox46.TabIndex = 227;
@@ -1788,55 +1798,79 @@
             // panel11
             // 
             this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel11.Controls.Add(this.radioButton36);
-            this.panel11.Controls.Add(this.radioButton29);
-            this.panel11.Controls.Add(this.radioButton30);
+            this.panel11.Controls.Add(this.checkBox28);
+            this.panel11.Controls.Add(this.checkBox27);
+            this.panel11.Controls.Add(this.checkBox26);
+            this.panel11.Controls.Add(this.checkBox25);
+            this.panel11.Controls.Add(this.checkBox24);
             this.panel11.Controls.Add(this.textBox44);
-            this.panel11.Controls.Add(this.radioButton34);
-            this.panel11.Controls.Add(this.radioButton35);
             this.panel11.Location = new System.Drawing.Point(216, 169);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(1087, 30);
             this.panel11.TabIndex = 246;
             // 
-            // radioButton36
+            // checkBox28
             // 
-            this.radioButton36.AutoSize = true;
-            this.radioButton36.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton36.Location = new System.Drawing.Point(479, 2);
-            this.radioButton36.Name = "radioButton36";
-            this.radioButton36.Size = new System.Drawing.Size(101, 24);
-            this.radioButton36.TabIndex = 232;
-            this.radioButton36.TabStop = true;
-            this.radioButton36.Tag = "4";
-            this.radioButton36.Text = "4白内障";
-            this.radioButton36.UseVisualStyleBackColor = true;
+            this.checkBox28.AutoSize = true;
+            this.checkBox28.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox28.Location = new System.Drawing.Point(589, 1);
+            this.checkBox28.Name = "checkBox28";
+            this.checkBox28.Size = new System.Drawing.Size(81, 24);
+            this.checkBox28.TabIndex = 260;
+            this.checkBox28.Tag = "5";
+            this.checkBox28.Text = "5其他";
+            this.checkBox28.UseVisualStyleBackColor = true;
             // 
-            // radioButton29
+            // checkBox27
             // 
-            this.radioButton29.AutoSize = true;
-            this.radioButton29.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton29.Location = new System.Drawing.Point(590, 2);
-            this.radioButton29.Name = "radioButton29";
-            this.radioButton29.Size = new System.Drawing.Size(80, 24);
-            this.radioButton29.TabIndex = 231;
-            this.radioButton29.TabStop = true;
-            this.radioButton29.Tag = "5";
-            this.radioButton29.Text = "5其他";
-            this.radioButton29.UseVisualStyleBackColor = true;
+            this.checkBox27.AutoSize = true;
+            this.checkBox27.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox27.Location = new System.Drawing.Point(479, 2);
+            this.checkBox27.Name = "checkBox27";
+            this.checkBox27.Size = new System.Drawing.Size(102, 24);
+            this.checkBox27.TabIndex = 261;
+            this.checkBox27.Tag = "4";
+            this.checkBox27.Text = "4白内障";
+            this.checkBox27.UseVisualStyleBackColor = true;
             // 
-            // radioButton30
+            // checkBox26
             // 
-            this.radioButton30.AutoSize = true;
-            this.radioButton30.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton30.Location = new System.Drawing.Point(330, 2);
-            this.radioButton30.Name = "radioButton30";
-            this.radioButton30.Size = new System.Drawing.Size(143, 24);
-            this.radioButton30.TabIndex = 228;
-            this.radioButton30.TabStop = true;
-            this.radioButton30.Tag = "3";
-            this.radioButton30.Text = "3视乳头水肿";
-            this.radioButton30.UseVisualStyleBackColor = true;
+            this.checkBox26.AutoSize = true;
+            this.checkBox26.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox26.Location = new System.Drawing.Point(329, 2);
+            this.checkBox26.Name = "checkBox26";
+            this.checkBox26.Size = new System.Drawing.Size(144, 24);
+            this.checkBox26.TabIndex = 260;
+            this.checkBox26.Tag = "3";
+            this.checkBox26.Text = "3视乳头水肿";
+            this.checkBox26.UseVisualStyleBackColor = true;
+            // 
+            // checkBox25
+            // 
+            this.checkBox25.AutoSize = true;
+            this.checkBox25.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox25.Location = new System.Drawing.Point(116, 2);
+            this.checkBox25.Name = "checkBox25";
+            this.checkBox25.Size = new System.Drawing.Size(207, 24);
+            this.checkBox25.TabIndex = 260;
+            this.checkBox25.Tag = "2";
+            this.checkBox25.Text = "2视网膜出血或渗出";
+            this.checkBox25.UseVisualStyleBackColor = true;
+            // 
+            // checkBox24
+            // 
+            this.checkBox24.AutoSize = true;
+            this.checkBox24.Checked = true;
+            this.checkBox24.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox24.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox24.Location = new System.Drawing.Point(9, 2);
+            this.checkBox24.Name = "checkBox24";
+            this.checkBox24.Size = new System.Drawing.Size(102, 24);
+            this.checkBox24.TabIndex = 253;
+            this.checkBox24.Tag = "1";
+            this.checkBox24.Text = "1未发现";
+            this.checkBox24.UseVisualStyleBackColor = true;
+            this.checkBox24.Click += new System.EventHandler(this.checkBox24_Click);
             // 
             // textBox44
             // 
@@ -1846,33 +1880,6 @@
             this.textBox44.Size = new System.Drawing.Size(310, 30);
             this.textBox44.TabIndex = 227;
             this.textBox44.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // radioButton34
-            // 
-            this.radioButton34.AutoSize = true;
-            this.radioButton34.Checked = true;
-            this.radioButton34.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton34.Location = new System.Drawing.Point(10, 2);
-            this.radioButton34.Name = "radioButton34";
-            this.radioButton34.Size = new System.Drawing.Size(101, 24);
-            this.radioButton34.TabIndex = 30;
-            this.radioButton34.TabStop = true;
-            this.radioButton34.Tag = "1";
-            this.radioButton34.Text = "1未发现";
-            this.radioButton34.UseVisualStyleBackColor = true;
-            // 
-            // radioButton35
-            // 
-            this.radioButton35.AutoSize = true;
-            this.radioButton35.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton35.Location = new System.Drawing.Point(117, 2);
-            this.radioButton35.Name = "radioButton35";
-            this.radioButton35.Size = new System.Drawing.Size(206, 24);
-            this.radioButton35.TabIndex = 32;
-            this.radioButton35.TabStop = true;
-            this.radioButton35.Tag = "2";
-            this.radioButton35.Text = "2视网膜出血或渗出";
-            this.radioButton35.UseVisualStyleBackColor = true;
             // 
             // textBox45
             // 
@@ -1888,41 +1895,66 @@
             // panel10
             // 
             this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel10.Controls.Add(this.radioButton28);
-            this.panel10.Controls.Add(this.radioButton31);
+            this.panel10.Controls.Add(this.checkBox23);
+            this.panel10.Controls.Add(this.checkBox22);
+            this.panel10.Controls.Add(this.checkBox21);
+            this.panel10.Controls.Add(this.checkBox20);
             this.panel10.Controls.Add(this.textBox42);
-            this.panel10.Controls.Add(this.radioButton32);
-            this.panel10.Controls.Add(this.radioButton33);
             this.panel10.Location = new System.Drawing.Point(216, 138);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(1087, 30);
             this.panel10.TabIndex = 244;
             // 
-            // radioButton28
+            // checkBox23
             // 
-            this.radioButton28.AutoSize = true;
-            this.radioButton28.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton28.Location = new System.Drawing.Point(460, 2);
-            this.radioButton28.Name = "radioButton28";
-            this.radioButton28.Size = new System.Drawing.Size(80, 24);
-            this.radioButton28.TabIndex = 231;
-            this.radioButton28.TabStop = true;
-            this.radioButton28.Tag = "4";
-            this.radioButton28.Text = "4其他";
-            this.radioButton28.UseVisualStyleBackColor = true;
+            this.checkBox23.AutoSize = true;
+            this.checkBox23.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox23.Location = new System.Drawing.Point(459, 2);
+            this.checkBox23.Name = "checkBox23";
+            this.checkBox23.Size = new System.Drawing.Size(81, 24);
+            this.checkBox23.TabIndex = 259;
+            this.checkBox23.Tag = "4";
+            this.checkBox23.Text = "4其他";
+            this.checkBox23.UseVisualStyleBackColor = true;
             // 
-            // radioButton31
+            // checkBox22
             // 
-            this.radioButton31.AutoSize = true;
-            this.radioButton31.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton31.Location = new System.Drawing.Point(266, 2);
-            this.radioButton31.Name = "radioButton31";
-            this.radioButton31.Size = new System.Drawing.Size(185, 24);
-            this.radioButton31.TabIndex = 228;
-            this.radioButton31.TabStop = true;
-            this.radioButton31.Tag = "3";
-            this.radioButton31.Text = "3动脉闭塞性疾病";
-            this.radioButton31.UseVisualStyleBackColor = true;
+            this.checkBox22.AutoSize = true;
+            this.checkBox22.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox22.Location = new System.Drawing.Point(266, 2);
+            this.checkBox22.Name = "checkBox22";
+            this.checkBox22.Size = new System.Drawing.Size(186, 24);
+            this.checkBox22.TabIndex = 258;
+            this.checkBox22.Tag = "3";
+            this.checkBox22.Text = "3动脉闭塞性疾病";
+            this.checkBox22.UseVisualStyleBackColor = true;
+            // 
+            // checkBox21
+            // 
+            this.checkBox21.AutoSize = true;
+            this.checkBox21.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox21.Location = new System.Drawing.Point(116, 2);
+            this.checkBox21.Name = "checkBox21";
+            this.checkBox21.Size = new System.Drawing.Size(144, 24);
+            this.checkBox21.TabIndex = 258;
+            this.checkBox21.Tag = "2";
+            this.checkBox21.Text = "2夹层动脉瘤";
+            this.checkBox21.UseVisualStyleBackColor = true;
+            // 
+            // checkBox20
+            // 
+            this.checkBox20.AutoSize = true;
+            this.checkBox20.Checked = true;
+            this.checkBox20.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox20.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox20.Location = new System.Drawing.Point(9, 2);
+            this.checkBox20.Name = "checkBox20";
+            this.checkBox20.Size = new System.Drawing.Size(102, 24);
+            this.checkBox20.TabIndex = 252;
+            this.checkBox20.Tag = "1";
+            this.checkBox20.Text = "1未发现";
+            this.checkBox20.UseVisualStyleBackColor = true;
+            this.checkBox20.Click += new System.EventHandler(this.checkBox20_Click);
             // 
             // textBox42
             // 
@@ -1932,33 +1964,6 @@
             this.textBox42.Size = new System.Drawing.Size(310, 30);
             this.textBox42.TabIndex = 227;
             this.textBox42.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // radioButton32
-            // 
-            this.radioButton32.AutoSize = true;
-            this.radioButton32.Checked = true;
-            this.radioButton32.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton32.Location = new System.Drawing.Point(10, 2);
-            this.radioButton32.Name = "radioButton32";
-            this.radioButton32.Size = new System.Drawing.Size(101, 24);
-            this.radioButton32.TabIndex = 30;
-            this.radioButton32.TabStop = true;
-            this.radioButton32.Tag = "1";
-            this.radioButton32.Text = "1未发现";
-            this.radioButton32.UseVisualStyleBackColor = true;
-            // 
-            // radioButton33
-            // 
-            this.radioButton33.AutoSize = true;
-            this.radioButton33.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton33.Location = new System.Drawing.Point(117, 2);
-            this.radioButton33.Name = "radioButton33";
-            this.radioButton33.Size = new System.Drawing.Size(143, 24);
-            this.radioButton33.TabIndex = 32;
-            this.radioButton33.TabStop = true;
-            this.radioButton33.Tag = "2";
-            this.radioButton33.Text = "2夹层动脉瘤";
-            this.radioButton33.UseVisualStyleBackColor = true;
             // 
             // textBox43
             // 
@@ -1974,119 +1979,114 @@
             // panel9
             // 
             this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel9.Controls.Add(this.radioButton27);
-            this.panel9.Controls.Add(this.radioButton21);
-            this.panel9.Controls.Add(this.radioButton22);
-            this.panel9.Controls.Add(this.radioButton23);
-            this.panel9.Controls.Add(this.radioButton24);
+            this.panel9.Controls.Add(this.checkBox19);
+            this.panel9.Controls.Add(this.checkBox18);
+            this.panel9.Controls.Add(this.checkBox17);
+            this.panel9.Controls.Add(this.checkBox16);
+            this.panel9.Controls.Add(this.checkBox15);
+            this.panel9.Controls.Add(this.checkBox14);
+            this.panel9.Controls.Add(this.checkBox13);
             this.panel9.Controls.Add(this.textBox41);
-            this.panel9.Controls.Add(this.radioButton25);
-            this.panel9.Controls.Add(this.radioButton26);
             this.panel9.Location = new System.Drawing.Point(216, 77);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(1087, 60);
             this.panel9.TabIndex = 242;
             // 
-            // radioButton27
+            // checkBox19
             // 
-            this.radioButton27.AutoSize = true;
-            this.radioButton27.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton27.Location = new System.Drawing.Point(671, -1);
-            this.radioButton27.Name = "radioButton27";
-            this.radioButton27.Size = new System.Drawing.Size(185, 24);
-            this.radioButton27.TabIndex = 232;
-            this.radioButton27.TabStop = true;
-            this.radioButton27.Tag = "5";
-            this.radioButton27.Text = "5充血性心力衰竭";
-            this.radioButton27.UseVisualStyleBackColor = true;
+            this.checkBox19.AutoSize = true;
+            this.checkBox19.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox19.Location = new System.Drawing.Point(163, 30);
+            this.checkBox19.Name = "checkBox19";
+            this.checkBox19.Size = new System.Drawing.Size(81, 24);
+            this.checkBox19.TabIndex = 257;
+            this.checkBox19.Tag = "7";
+            this.checkBox19.Text = "7其他";
+            this.checkBox19.UseVisualStyleBackColor = true;
             // 
-            // radioButton21
+            // checkBox18
             // 
-            this.radioButton21.AutoSize = true;
-            this.radioButton21.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton21.Location = new System.Drawing.Point(164, 30);
-            this.radioButton21.Name = "radioButton21";
-            this.radioButton21.Size = new System.Drawing.Size(80, 24);
-            this.radioButton21.TabIndex = 231;
-            this.radioButton21.TabStop = true;
-            this.radioButton21.Tag = "7";
-            this.radioButton21.Text = "7其他";
-            this.radioButton21.UseVisualStyleBackColor = true;
+            this.checkBox18.AutoSize = true;
+            this.checkBox18.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox18.Location = new System.Drawing.Point(9, 30);
+            this.checkBox18.Name = "checkBox18";
+            this.checkBox18.Size = new System.Drawing.Size(144, 24);
+            this.checkBox18.TabIndex = 256;
+            this.checkBox18.Tag = "6";
+            this.checkBox18.Text = "6心前区疼痛";
+            this.checkBox18.UseVisualStyleBackColor = true;
             // 
-            // radioButton22
+            // checkBox17
             // 
-            this.radioButton22.AutoSize = true;
-            this.radioButton22.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton22.Location = new System.Drawing.Point(10, 30);
-            this.radioButton22.Name = "radioButton22";
-            this.radioButton22.Size = new System.Drawing.Size(143, 24);
-            this.radioButton22.TabIndex = 230;
-            this.radioButton22.TabStop = true;
-            this.radioButton22.Tag = "6";
-            this.radioButton22.Text = "6心前区疼痛";
-            this.radioButton22.UseVisualStyleBackColor = true;
+            this.checkBox17.AutoSize = true;
+            this.checkBox17.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox17.Location = new System.Drawing.Point(586, 3);
+            this.checkBox17.Name = "checkBox17";
+            this.checkBox17.Size = new System.Drawing.Size(186, 24);
+            this.checkBox17.TabIndex = 255;
+            this.checkBox17.Tag = "5";
+            this.checkBox17.Text = "5充血性心力衰竭";
+            this.checkBox17.UseVisualStyleBackColor = true;
             // 
-            // radioButton23
+            // checkBox16
             // 
-            this.radioButton23.AutoSize = true;
-            this.radioButton23.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton23.Location = new System.Drawing.Point(415, 2);
-            this.radioButton23.Name = "radioButton23";
-            this.radioButton23.Size = new System.Drawing.Size(206, 24);
-            this.radioButton23.TabIndex = 229;
-            this.radioButton23.TabStop = true;
-            this.radioButton23.Tag = "4";
-            this.radioButton23.Text = "4冠状动脉血运重建";
-            this.radioButton23.UseVisualStyleBackColor = true;
+            this.checkBox16.AutoSize = true;
+            this.checkBox16.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox16.Location = new System.Drawing.Point(373, 3);
+            this.checkBox16.Name = "checkBox16";
+            this.checkBox16.Size = new System.Drawing.Size(207, 24);
+            this.checkBox16.TabIndex = 254;
+            this.checkBox16.Tag = "4";
+            this.checkBox16.Text = "4冠状动脉血运重建";
+            this.checkBox16.UseVisualStyleBackColor = true;
             // 
-            // radioButton24
+            // checkBox15
             // 
-            this.radioButton24.AutoSize = true;
-            this.radioButton24.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton24.Location = new System.Drawing.Point(266, 2);
-            this.radioButton24.Name = "radioButton24";
-            this.radioButton24.Size = new System.Drawing.Size(101, 24);
-            this.radioButton24.TabIndex = 228;
-            this.radioButton24.TabStop = true;
-            this.radioButton24.Tag = "3";
-            this.radioButton24.Text = "3心绞痛";
-            this.radioButton24.UseVisualStyleBackColor = true;
+            this.checkBox15.AutoSize = true;
+            this.checkBox15.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox15.Location = new System.Drawing.Point(265, 3);
+            this.checkBox15.Name = "checkBox15";
+            this.checkBox15.Size = new System.Drawing.Size(102, 24);
+            this.checkBox15.TabIndex = 253;
+            this.checkBox15.Tag = "3";
+            this.checkBox15.Text = "3心绞痛";
+            this.checkBox15.UseVisualStyleBackColor = true;
+            // 
+            // checkBox14
+            // 
+            this.checkBox14.AutoSize = true;
+            this.checkBox14.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox14.Location = new System.Drawing.Point(116, 3);
+            this.checkBox14.Name = "checkBox14";
+            this.checkBox14.Size = new System.Drawing.Size(123, 24);
+            this.checkBox14.TabIndex = 252;
+            this.checkBox14.Tag = "2";
+            this.checkBox14.Text = "2心肌梗死";
+            this.checkBox14.UseVisualStyleBackColor = true;
+            // 
+            // checkBox13
+            // 
+            this.checkBox13.AutoSize = true;
+            this.checkBox13.Checked = true;
+            this.checkBox13.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox13.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox13.Location = new System.Drawing.Point(9, 3);
+            this.checkBox13.Name = "checkBox13";
+            this.checkBox13.Size = new System.Drawing.Size(102, 24);
+            this.checkBox13.TabIndex = 251;
+            this.checkBox13.Tag = "1";
+            this.checkBox13.Text = "1未发现";
+            this.checkBox13.UseVisualStyleBackColor = true;
+            this.checkBox13.Click += new System.EventHandler(this.checkBox13_Click);
             // 
             // textBox41
             // 
             this.textBox41.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox41.Location = new System.Drawing.Point(250, 30);
+            this.textBox41.Location = new System.Drawing.Point(250, 28);
             this.textBox41.Name = "textBox41";
             this.textBox41.Size = new System.Drawing.Size(329, 30);
             this.textBox41.TabIndex = 227;
             this.textBox41.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // radioButton25
-            // 
-            this.radioButton25.AutoSize = true;
-            this.radioButton25.Checked = true;
-            this.radioButton25.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton25.Location = new System.Drawing.Point(10, 2);
-            this.radioButton25.Name = "radioButton25";
-            this.radioButton25.Size = new System.Drawing.Size(101, 24);
-            this.radioButton25.TabIndex = 30;
-            this.radioButton25.TabStop = true;
-            this.radioButton25.Tag = "1";
-            this.radioButton25.Text = "1未发现";
-            this.radioButton25.UseVisualStyleBackColor = true;
-            // 
-            // radioButton26
-            // 
-            this.radioButton26.AutoSize = true;
-            this.radioButton26.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton26.Location = new System.Drawing.Point(117, 2);
-            this.radioButton26.Name = "radioButton26";
-            this.radioButton26.Size = new System.Drawing.Size(122, 24);
-            this.radioButton26.TabIndex = 32;
-            this.radioButton26.TabStop = true;
-            this.radioButton26.Tag = "2";
-            this.radioButton26.Text = "2心肌梗死";
-            this.radioButton26.UseVisualStyleBackColor = true;
             // 
             // textBox40
             // 
@@ -2103,69 +2103,92 @@
             // panel8
             // 
             this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel8.Controls.Add(this.radioButton15);
-            this.panel8.Controls.Add(this.radioButton16);
-            this.panel8.Controls.Add(this.radioButton17);
-            this.panel8.Controls.Add(this.radioButton18);
+            this.panel8.Controls.Add(this.checkBox12);
+            this.panel8.Controls.Add(this.checkBox11);
+            this.panel8.Controls.Add(this.checkBox10);
+            this.panel8.Controls.Add(this.checkBox9);
+            this.panel8.Controls.Add(this.checkBox8);
+            this.panel8.Controls.Add(this.checkBox7);
             this.panel8.Controls.Add(this.textBox38);
-            this.panel8.Controls.Add(this.radioButton19);
-            this.panel8.Controls.Add(this.radioButton20);
             this.panel8.Location = new System.Drawing.Point(216, 46);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(1087, 30);
             this.panel8.TabIndex = 240;
             // 
-            // radioButton15
+            // checkBox12
             // 
-            this.radioButton15.AutoSize = true;
-            this.radioButton15.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton15.Location = new System.Drawing.Point(671, 2);
-            this.radioButton15.Name = "radioButton15";
-            this.radioButton15.Size = new System.Drawing.Size(80, 24);
-            this.radioButton15.TabIndex = 231;
-            this.radioButton15.TabStop = true;
-            this.radioButton15.Tag = "6";
-            this.radioButton15.Text = "6其他";
-            this.radioButton15.UseVisualStyleBackColor = true;
+            this.checkBox12.AutoSize = true;
+            this.checkBox12.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox12.Location = new System.Drawing.Point(673, 2);
+            this.checkBox12.Name = "checkBox12";
+            this.checkBox12.Size = new System.Drawing.Size(81, 24);
+            this.checkBox12.TabIndex = 255;
+            this.checkBox12.Tag = "6";
+            this.checkBox12.Text = "6其他";
+            this.checkBox12.UseVisualStyleBackColor = true;
             // 
-            // radioButton16
+            // checkBox11
             // 
-            this.radioButton16.AutoSize = true;
-            this.radioButton16.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton16.Location = new System.Drawing.Point(543, 2);
-            this.radioButton16.Name = "radioButton16";
-            this.radioButton16.Size = new System.Drawing.Size(122, 24);
-            this.radioButton16.TabIndex = 230;
-            this.radioButton16.TabStop = true;
-            this.radioButton16.Tag = "5";
-            this.radioButton16.Text = "5慢性肾炎";
-            this.radioButton16.UseVisualStyleBackColor = true;
+            this.checkBox11.AutoSize = true;
+            this.checkBox11.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox11.Location = new System.Drawing.Point(544, 2);
+            this.checkBox11.Name = "checkBox11";
+            this.checkBox11.Size = new System.Drawing.Size(123, 24);
+            this.checkBox11.TabIndex = 254;
+            this.checkBox11.Tag = "5";
+            this.checkBox11.Text = "5慢性肾炎";
+            this.checkBox11.UseVisualStyleBackColor = true;
             // 
-            // radioButton17
+            // checkBox10
             // 
-            this.radioButton17.AutoSize = true;
-            this.radioButton17.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton17.Location = new System.Drawing.Point(415, 2);
-            this.radioButton17.Name = "radioButton17";
-            this.radioButton17.Size = new System.Drawing.Size(122, 24);
-            this.radioButton17.TabIndex = 229;
-            this.radioButton17.TabStop = true;
-            this.radioButton17.Tag = "4";
-            this.radioButton17.Text = "4急性肾炎";
-            this.radioButton17.UseVisualStyleBackColor = true;
+            this.checkBox10.AutoSize = true;
+            this.checkBox10.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox10.Location = new System.Drawing.Point(415, 2);
+            this.checkBox10.Name = "checkBox10";
+            this.checkBox10.Size = new System.Drawing.Size(123, 24);
+            this.checkBox10.TabIndex = 253;
+            this.checkBox10.Tag = "4";
+            this.checkBox10.Text = "4急性肾炎";
+            this.checkBox10.UseVisualStyleBackColor = true;
             // 
-            // radioButton18
+            // checkBox9
             // 
-            this.radioButton18.AutoSize = true;
-            this.radioButton18.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton18.Location = new System.Drawing.Point(266, 2);
-            this.radioButton18.Name = "radioButton18";
-            this.radioButton18.Size = new System.Drawing.Size(143, 24);
-            this.radioButton18.TabIndex = 228;
-            this.radioButton18.TabStop = true;
-            this.radioButton18.Tag = "3";
-            this.radioButton18.Text = "3肾功能衰竭";
-            this.radioButton18.UseVisualStyleBackColor = true;
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox9.Location = new System.Drawing.Point(265, 2);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(144, 24);
+            this.checkBox9.TabIndex = 252;
+            this.checkBox9.Tag = "3";
+            this.checkBox9.Text = "3肾功能衰竭";
+            this.checkBox9.UseVisualStyleBackColor = true;
+            // 
+            // checkBox8
+            // 
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox8.Location = new System.Drawing.Point(116, 2);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(144, 24);
+            this.checkBox8.TabIndex = 251;
+            this.checkBox8.Tag = "2";
+            this.checkBox8.Text = "2糖尿病肾病";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            // 
+            // checkBox7
+            // 
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.Checked = true;
+            this.checkBox7.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox7.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox7.Location = new System.Drawing.Point(10, 2);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(102, 24);
+            this.checkBox7.TabIndex = 250;
+            this.checkBox7.Tag = "1";
+            this.checkBox7.Text = "1未发现";
+            this.checkBox7.UseVisualStyleBackColor = true;
+            this.checkBox7.Click += new System.EventHandler(this.checkBox7_Click);
             // 
             // textBox38
             // 
@@ -2175,33 +2198,6 @@
             this.textBox38.Size = new System.Drawing.Size(329, 30);
             this.textBox38.TabIndex = 227;
             this.textBox38.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // radioButton19
-            // 
-            this.radioButton19.AutoSize = true;
-            this.radioButton19.Checked = true;
-            this.radioButton19.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton19.Location = new System.Drawing.Point(10, 2);
-            this.radioButton19.Name = "radioButton19";
-            this.radioButton19.Size = new System.Drawing.Size(101, 24);
-            this.radioButton19.TabIndex = 30;
-            this.radioButton19.TabStop = true;
-            this.radioButton19.Tag = "1";
-            this.radioButton19.Text = "1未发现";
-            this.radioButton19.UseVisualStyleBackColor = true;
-            // 
-            // radioButton20
-            // 
-            this.radioButton20.AutoSize = true;
-            this.radioButton20.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton20.Location = new System.Drawing.Point(117, 2);
-            this.radioButton20.Name = "radioButton20";
-            this.radioButton20.Size = new System.Drawing.Size(143, 24);
-            this.radioButton20.TabIndex = 32;
-            this.radioButton20.TabStop = true;
-            this.radioButton20.Tag = "2";
-            this.radioButton20.Text = "2糖尿病肾病";
-            this.radioButton20.UseVisualStyleBackColor = true;
             // 
             // textBox39
             // 
@@ -2217,105 +2213,101 @@
             // panel7
             // 
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel7.Controls.Add(this.radioButton14);
-            this.panel7.Controls.Add(this.radioButton13);
-            this.panel7.Controls.Add(this.radioButton12);
-            this.panel7.Controls.Add(this.radioButton11);
+            this.panel7.Controls.Add(this.checkBox6);
+            this.panel7.Controls.Add(this.checkBox5);
+            this.panel7.Controls.Add(this.checkBox4);
+            this.panel7.Controls.Add(this.checkBox3);
+            this.panel7.Controls.Add(this.checkBox2);
+            this.panel7.Controls.Add(this.checkBox1);
             this.panel7.Controls.Add(this.textBox36);
-            this.panel7.Controls.Add(this.radioButton9);
-            this.panel7.Controls.Add(this.radioButton10);
             this.panel7.Location = new System.Drawing.Point(216, 15);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(1087, 30);
             this.panel7.TabIndex = 238;
             // 
-            // radioButton14
+            // checkBox6
             // 
-            this.radioButton14.AutoSize = true;
-            this.radioButton14.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton14.Location = new System.Drawing.Point(776, 2);
-            this.radioButton14.Name = "radioButton14";
-            this.radioButton14.Size = new System.Drawing.Size(80, 24);
-            this.radioButton14.TabIndex = 231;
-            this.radioButton14.TabStop = true;
-            this.radioButton14.Tag = "6";
-            this.radioButton14.Text = "6其他";
-            this.radioButton14.UseVisualStyleBackColor = true;
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox6.Location = new System.Drawing.Point(779, 2);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(81, 24);
+            this.checkBox6.TabIndex = 254;
+            this.checkBox6.Tag = "6";
+            this.checkBox6.Text = "6其他";
+            this.checkBox6.UseVisualStyleBackColor = true;
             // 
-            // radioButton13
+            // checkBox5
             // 
-            this.radioButton13.AutoSize = true;
-            this.radioButton13.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton13.Location = new System.Drawing.Point(564, 2);
-            this.radioButton13.Name = "radioButton13";
-            this.radioButton13.Size = new System.Drawing.Size(206, 24);
-            this.radioButton13.TabIndex = 230;
-            this.radioButton13.TabStop = true;
-            this.radioButton13.Tag = "5";
-            this.radioButton13.Text = "5短暂性脑缺血发作";
-            this.radioButton13.UseVisualStyleBackColor = true;
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox5.Location = new System.Drawing.Point(566, 2);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(207, 24);
+            this.checkBox5.TabIndex = 253;
+            this.checkBox5.Tag = "5";
+            this.checkBox5.Text = "5短暂性脑缺血发作";
+            this.checkBox5.UseVisualStyleBackColor = true;
             // 
-            // radioButton12
+            // checkBox4
             // 
-            this.radioButton12.AutoSize = true;
-            this.radioButton12.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton12.Location = new System.Drawing.Point(373, 2);
-            this.radioButton12.Name = "radioButton12";
-            this.radioButton12.Size = new System.Drawing.Size(185, 24);
-            this.radioButton12.TabIndex = 229;
-            this.radioButton12.TabStop = true;
-            this.radioButton12.Tag = "4";
-            this.radioButton12.Text = "4蛛网膜下腔出血";
-            this.radioButton12.UseVisualStyleBackColor = true;
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox4.Location = new System.Drawing.Point(374, 2);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(186, 24);
+            this.checkBox4.TabIndex = 252;
+            this.checkBox4.Tag = "4";
+            this.checkBox4.Text = "4蛛网膜下腔出血";
+            this.checkBox4.UseVisualStyleBackColor = true;
             // 
-            // radioButton11
+            // checkBox3
             // 
-            this.radioButton11.AutoSize = true;
-            this.radioButton11.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton11.Location = new System.Drawing.Point(266, 2);
-            this.radioButton11.Name = "radioButton11";
-            this.radioButton11.Size = new System.Drawing.Size(101, 24);
-            this.radioButton11.TabIndex = 228;
-            this.radioButton11.TabStop = true;
-            this.radioButton11.Tag = "3";
-            this.radioButton11.Text = "3脑出血";
-            this.radioButton11.UseVisualStyleBackColor = true;
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox3.Location = new System.Drawing.Point(266, 2);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(102, 24);
+            this.checkBox3.TabIndex = 251;
+            this.checkBox3.Tag = "3";
+            this.checkBox3.Text = "3脑出血";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox2.Location = new System.Drawing.Point(116, 2);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(144, 24);
+            this.checkBox2.TabIndex = 250;
+            this.checkBox2.Tag = "2";
+            this.checkBox2.Text = "2缺血性卒中";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox1.Location = new System.Drawing.Point(10, 2);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(102, 24);
+            this.checkBox1.TabIndex = 249;
+            this.checkBox1.Tag = "1";
+            this.checkBox1.Text = "1未发现";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Click += new System.EventHandler(this.checkBox1_Click);
             // 
             // textBox36
             // 
             this.textBox36.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox36.Location = new System.Drawing.Point(862, -1);
+            this.textBox36.Location = new System.Drawing.Point(858, -1);
             this.textBox36.Name = "textBox36";
-            this.textBox36.Size = new System.Drawing.Size(224, 30);
+            this.textBox36.Size = new System.Drawing.Size(228, 30);
             this.textBox36.TabIndex = 227;
             this.textBox36.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // radioButton9
-            // 
-            this.radioButton9.AutoSize = true;
-            this.radioButton9.Checked = true;
-            this.radioButton9.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton9.Location = new System.Drawing.Point(10, 2);
-            this.radioButton9.Name = "radioButton9";
-            this.radioButton9.Size = new System.Drawing.Size(101, 24);
-            this.radioButton9.TabIndex = 30;
-            this.radioButton9.TabStop = true;
-            this.radioButton9.Tag = "1";
-            this.radioButton9.Text = "1未发现";
-            this.radioButton9.UseVisualStyleBackColor = true;
-            // 
-            // radioButton10
-            // 
-            this.radioButton10.AutoSize = true;
-            this.radioButton10.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton10.Location = new System.Drawing.Point(117, 2);
-            this.radioButton10.Name = "radioButton10";
-            this.radioButton10.Size = new System.Drawing.Size(143, 24);
-            this.radioButton10.TabIndex = 32;
-            this.radioButton10.TabStop = true;
-            this.radioButton10.Tag = "2";
-            this.radioButton10.Text = "2缺血性卒中";
-            this.radioButton10.UseVisualStyleBackColor = true;
             // 
             // textBox37
             // 
@@ -2365,16 +2357,6 @@
             this.button4.Text = "保存并转到下一页";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // textBox108
-            // 
-            this.textBox108.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox108.Location = new System.Drawing.Point(881, 13);
-            this.textBox108.Name = "textBox108";
-            this.textBox108.Size = new System.Drawing.Size(106, 30);
-            this.textBox108.TabIndex = 242;
-            this.textBox108.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox108.Visible = false;
             // 
             // aUhealthcheckupServices3
             // 
@@ -2519,47 +2501,19 @@
         private System.Windows.Forms.TextBox textBox35;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.TextBox textBox36;
-        public System.Windows.Forms.RadioButton radioButton9;
-        public System.Windows.Forms.RadioButton radioButton10;
         private System.Windows.Forms.TextBox textBox37;
-        public System.Windows.Forms.RadioButton radioButton11;
-        public System.Windows.Forms.RadioButton radioButton12;
-        public System.Windows.Forms.RadioButton radioButton13;
-        public System.Windows.Forms.RadioButton radioButton14;
         private System.Windows.Forms.Panel panel8;
-        public System.Windows.Forms.RadioButton radioButton15;
-        public System.Windows.Forms.RadioButton radioButton16;
-        public System.Windows.Forms.RadioButton radioButton17;
-        public System.Windows.Forms.RadioButton radioButton18;
         private System.Windows.Forms.TextBox textBox38;
-        public System.Windows.Forms.RadioButton radioButton19;
-        public System.Windows.Forms.RadioButton radioButton20;
         private System.Windows.Forms.TextBox textBox39;
         private System.Windows.Forms.TextBox textBox40;
         private System.Windows.Forms.Panel panel9;
-        public System.Windows.Forms.RadioButton radioButton21;
-        public System.Windows.Forms.RadioButton radioButton22;
-        public System.Windows.Forms.RadioButton radioButton23;
-        public System.Windows.Forms.RadioButton radioButton24;
         private System.Windows.Forms.TextBox textBox41;
-        public System.Windows.Forms.RadioButton radioButton25;
-        public System.Windows.Forms.RadioButton radioButton26;
-        public System.Windows.Forms.RadioButton radioButton27;
         private System.Windows.Forms.Panel panel10;
-        public System.Windows.Forms.RadioButton radioButton28;
-        public System.Windows.Forms.RadioButton radioButton31;
         private System.Windows.Forms.TextBox textBox42;
-        public System.Windows.Forms.RadioButton radioButton32;
-        public System.Windows.Forms.RadioButton radioButton33;
         private System.Windows.Forms.TextBox textBox43;
         private System.Windows.Forms.Panel panel11;
-        public System.Windows.Forms.RadioButton radioButton29;
-        public System.Windows.Forms.RadioButton radioButton30;
         private System.Windows.Forms.TextBox textBox44;
-        public System.Windows.Forms.RadioButton radioButton34;
-        public System.Windows.Forms.RadioButton radioButton35;
         private System.Windows.Forms.TextBox textBox45;
-        public System.Windows.Forms.RadioButton radioButton36;
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.TextBox textBox46;
         public System.Windows.Forms.RadioButton radioButton37;
@@ -2610,5 +2564,33 @@
         public System.Windows.Forms.TextBox textBox106;
         public System.Windows.Forms.TextBox textBox107;
         public System.Windows.Forms.TextBox textBox108;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.CheckBox checkBox7;
+        private System.Windows.Forms.CheckBox checkBox8;
+        private System.Windows.Forms.CheckBox checkBox9;
+        private System.Windows.Forms.CheckBox checkBox10;
+        private System.Windows.Forms.CheckBox checkBox11;
+        private System.Windows.Forms.CheckBox checkBox12;
+        private System.Windows.Forms.CheckBox checkBox13;
+        private System.Windows.Forms.CheckBox checkBox14;
+        private System.Windows.Forms.CheckBox checkBox15;
+        private System.Windows.Forms.CheckBox checkBox16;
+        private System.Windows.Forms.CheckBox checkBox17;
+        private System.Windows.Forms.CheckBox checkBox18;
+        private System.Windows.Forms.CheckBox checkBox19;
+        private System.Windows.Forms.CheckBox checkBox20;
+        private System.Windows.Forms.CheckBox checkBox21;
+        private System.Windows.Forms.CheckBox checkBox22;
+        private System.Windows.Forms.CheckBox checkBox23;
+        private System.Windows.Forms.CheckBox checkBox24;
+        private System.Windows.Forms.CheckBox checkBox25;
+        private System.Windows.Forms.CheckBox checkBox26;
+        private System.Windows.Forms.CheckBox checkBox27;
+        private System.Windows.Forms.CheckBox checkBox28;
     }
 }

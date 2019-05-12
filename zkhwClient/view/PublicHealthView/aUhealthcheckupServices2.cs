@@ -196,15 +196,20 @@ namespace zkhwClient.view.PublicHealthView
                         this.textBox28.Text = dt.Rows[0]["examination_anus_other"].ToString();
                     };
 
-                    if (this.radioButton34.Tag.ToString() == dt.Rows[0]["examination_breast"].ToString()) { this.radioButton34.Checked = true; };
-                    if (this.radioButton35.Tag.ToString() == dt.Rows[0]["examination_breast"].ToString()) { this.radioButton35.Checked = true; };
-                    if (this.radioButton33.Tag.ToString() == dt.Rows[0]["examination_breast"].ToString()) { this.radioButton33.Checked = true; };
-                    if (this.radioButton32.Tag.ToString() == dt.Rows[0]["examination_breast"].ToString()) { this.radioButton32.Checked = true; };
-                    if (this.radioButton31.Tag.ToString() == dt.Rows[0]["examination_breast"].ToString())
+                    foreach (Control ctr in this.panel10.Controls)
                     {
-                        this.radioButton31.Checked = true;
-                        this.textBox30.Text = dt.Rows[0]["examination_breast_other"].ToString();
-                    };
+                        //判断该控件是不是CheckBox
+                        if (ctr is CheckBox)
+                        {
+                            //将ctr转换成CheckBox并赋值给ck
+                            CheckBox ck = ctr as CheckBox;
+                            if (dt.Rows[0]["examination_breast"].ToString().IndexOf(ck.Tag.ToString()) > -1)
+                            {
+                                ck.Checked = true;
+                            }
+                        }
+                    }
+                    this.textBox30.Text = dt.Rows[0]["examination_breast_other"].ToString();
 
                     if (this.radioButton38.Tag.ToString() == dt.Rows[0]["examination_woman_vulva"].ToString()) { this.radioButton38.Checked = true; };
                     if (this.radioButton39.Tag.ToString() == dt.Rows[0]["examination_woman_vulva"].ToString())
@@ -425,15 +430,28 @@ namespace zkhwClient.view.PublicHealthView
                 per.examination_anus_other = this.textBox28.Text;
             };
 
-            if (this.radioButton34.Checked == true) { per.examination_breast = this.radioButton34.Tag.ToString(); };
-            if (this.radioButton35.Checked == true) { per.examination_breast = this.radioButton35.Tag.ToString(); };
-            if (this.radioButton33.Checked == true) { per.examination_breast = this.radioButton33.Tag.ToString(); };
-            if (this.radioButton32.Checked == true) { per.examination_breast = this.radioButton32.Tag.ToString(); };
-            if (this.radioButton31.Checked == true)
+            foreach (Control ctr in this.panel10.Controls)
             {
-                per.examination_breast = this.radioButton31.Tag.ToString();
-                per.examination_breast_other = this.textBox30.Text;
-            };
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.examination_breast = "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.examination_breast != null && per.examination_breast != "")
+            {
+                per.examination_breast = per.examination_breast.Substring(1);
+                if (this.checkBox9.Checked)
+                {
+                    per.examination_breast_other = this.textBox30.Text;
+                }
+            }
+            
 
             if (this.radioButton38.Checked == true) { per.examination_woman_vulva = this.radioButton38.Tag.ToString(); };
             if (this.radioButton39.Checked == true)
@@ -505,6 +523,17 @@ namespace zkhwClient.view.PublicHealthView
             else
             {
                 MessageBox.Show("保存不成功!");
+            }
+        }
+
+        private void checkBox5_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox5.Checked) {
+                this.checkBox6.Checked = false;
+                this.checkBox7.Checked = false;
+                this.checkBox8.Checked = false;
+                this.checkBox9.Checked = false;
+                this.textBox30.Text = "";
             }
         }
     }

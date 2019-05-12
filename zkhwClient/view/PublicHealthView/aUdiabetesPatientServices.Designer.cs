@@ -534,7 +534,7 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(0, 351);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1412, 214);
+            this.groupBox1.Size = new System.Drawing.Size(1428, 214);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             // 
@@ -1182,7 +1182,7 @@
             // 
             // numericUpDown11
             // 
-            this.numericUpDown11.Location = new System.Drawing.Point(898, 21);
+            this.numericUpDown11.Location = new System.Drawing.Point(694, 25);
             this.numericUpDown11.Maximum = new decimal(new int[] {
             500,
             0,
@@ -1207,21 +1207,20 @@
             // textBox18
             // 
             this.textBox18.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox18.Location = new System.Drawing.Point(627, 61);
+            this.textBox18.Location = new System.Drawing.Point(561, 61);
             this.textBox18.Name = "textBox18";
             this.textBox18.ReadOnly = true;
-            this.textBox18.Size = new System.Drawing.Size(265, 30);
+            this.textBox18.Size = new System.Drawing.Size(132, 30);
             this.textBox18.TabIndex = 26;
             this.textBox18.Text = "足背动脉搏动";
-            this.textBox18.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox17
             // 
             this.textBox17.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox17.Location = new System.Drawing.Point(350, 62);
+            this.textBox17.Location = new System.Drawing.Point(318, 62);
             this.textBox17.Name = "textBox17";
             this.textBox17.ReadOnly = true;
-            this.textBox17.Size = new System.Drawing.Size(145, 30);
+            this.textBox17.Size = new System.Drawing.Size(142, 30);
             this.textBox17.TabIndex = 25;
             this.textBox17.Text = "目标体质指数";
             this.textBox17.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1240,10 +1239,10 @@
             // textBox15
             // 
             this.textBox15.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox15.Location = new System.Drawing.Point(1024, 21);
+            this.textBox15.Location = new System.Drawing.Point(820, 25);
             this.textBox15.Name = "textBox15";
             this.textBox15.ReadOnly = true;
-            this.textBox15.Size = new System.Drawing.Size(132, 30);
+            this.textBox15.Size = new System.Drawing.Size(109, 30);
             this.textBox15.TabIndex = 23;
             this.textBox15.Text = "目标体重";
             this.textBox15.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1251,10 +1250,10 @@
             // textBox14
             // 
             this.textBox14.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox14.Location = new System.Drawing.Point(627, 22);
+            this.textBox14.Location = new System.Drawing.Point(561, 24);
             this.textBox14.Name = "textBox14";
             this.textBox14.ReadOnly = true;
-            this.textBox14.Size = new System.Drawing.Size(265, 30);
+            this.textBox14.Size = new System.Drawing.Size(132, 30);
             this.textBox14.TabIndex = 22;
             this.textBox14.Text = "体重（kg）";
             this.textBox14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1262,10 +1261,10 @@
             // textBox13
             // 
             this.textBox13.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox13.Location = new System.Drawing.Point(350, 23);
+            this.textBox13.Location = new System.Drawing.Point(318, 23);
             this.textBox13.Name = "textBox13";
             this.textBox13.ReadOnly = true;
-            this.textBox13.Size = new System.Drawing.Size(145, 30);
+            this.textBox13.Size = new System.Drawing.Size(142, 30);
             this.textBox13.TabIndex = 21;
             this.textBox13.Text = "舒张压";
             this.textBox13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1287,40 +1286,40 @@
             this.panel11.Controls.Add(this.checkBox12);
             this.panel11.Controls.Add(this.checkBox11);
             this.panel11.Controls.Add(this.checkBox10);
-            this.panel11.Location = new System.Drawing.Point(898, 60);
+            this.panel11.Location = new System.Drawing.Point(694, 60);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(391, 33);
+            this.panel11.Size = new System.Drawing.Size(568, 33);
             this.panel11.TabIndex = 19;
             // 
             // checkBox12
             // 
             this.checkBox12.AutoSize = true;
             this.checkBox12.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox12.Location = new System.Drawing.Point(245, 6);
+            this.checkBox12.Location = new System.Drawing.Point(338, 4);
             this.checkBox12.Name = "checkBox12";
-            this.checkBox12.Size = new System.Drawing.Size(81, 24);
+            this.checkBox12.Size = new System.Drawing.Size(229, 24);
             this.checkBox12.TabIndex = 2;
             this.checkBox12.Tag = "3";
-            this.checkBox12.Text = "3消失";
+            this.checkBox12.Text = "3消失(双侧左侧右侧)";
             this.checkBox12.UseVisualStyleBackColor = true;
             // 
             // checkBox11
             // 
             this.checkBox11.AutoSize = true;
             this.checkBox11.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox11.Location = new System.Drawing.Point(147, 6);
+            this.checkBox11.Location = new System.Drawing.Point(118, 4);
             this.checkBox11.Name = "checkBox11";
-            this.checkBox11.Size = new System.Drawing.Size(81, 24);
+            this.checkBox11.Size = new System.Drawing.Size(229, 24);
             this.checkBox11.TabIndex = 1;
             this.checkBox11.Tag = "2";
-            this.checkBox11.Text = "2减弱";
+            this.checkBox11.Text = "2减弱(双侧左侧右侧)";
             this.checkBox11.UseVisualStyleBackColor = true;
             // 
             // checkBox10
             // 
             this.checkBox10.AutoSize = true;
             this.checkBox10.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox10.Location = new System.Drawing.Point(15, 6);
+            this.checkBox10.Location = new System.Drawing.Point(3, 4);
             this.checkBox10.Name = "checkBox10";
             this.checkBox10.Size = new System.Drawing.Size(123, 24);
             this.checkBox10.TabIndex = 0;
@@ -1338,14 +1337,14 @@
             // 
             // numericUpDown15
             // 
-            this.numericUpDown15.Location = new System.Drawing.Point(501, 62);
+            this.numericUpDown15.Location = new System.Drawing.Point(469, 62);
             this.numericUpDown15.Maximum = new decimal(new int[] {
             500,
             0,
             0,
             0});
             this.numericUpDown15.Name = "numericUpDown15";
-            this.numericUpDown15.Size = new System.Drawing.Size(120, 30);
+            this.numericUpDown15.Size = new System.Drawing.Size(91, 30);
             this.numericUpDown15.TabIndex = 13;
             // 
             // numericUpDown14
@@ -1357,12 +1356,12 @@
             0,
             0});
             this.numericUpDown14.Name = "numericUpDown14";
-            this.numericUpDown14.Size = new System.Drawing.Size(120, 30);
+            this.numericUpDown14.Size = new System.Drawing.Size(91, 30);
             this.numericUpDown14.TabIndex = 11;
             // 
             // numericUpDown12
             // 
-            this.numericUpDown12.Location = new System.Drawing.Point(1162, 21);
+            this.numericUpDown12.Location = new System.Drawing.Point(931, 25);
             this.numericUpDown12.Maximum = new decimal(new int[] {
             500,
             0,
@@ -1374,14 +1373,14 @@
             // 
             // numericUpDown10
             // 
-            this.numericUpDown10.Location = new System.Drawing.Point(501, 23);
+            this.numericUpDown10.Location = new System.Drawing.Point(469, 23);
             this.numericUpDown10.Maximum = new decimal(new int[] {
             500,
             0,
             0,
             0});
             this.numericUpDown10.Name = "numericUpDown10";
-            this.numericUpDown10.Size = new System.Drawing.Size(120, 30);
+            this.numericUpDown10.Size = new System.Drawing.Size(91, 30);
             this.numericUpDown10.TabIndex = 3;
             // 
             // numericUpDown9
@@ -1393,7 +1392,7 @@
             0,
             0});
             this.numericUpDown9.Name = "numericUpDown9";
-            this.numericUpDown9.Size = new System.Drawing.Size(120, 30);
+            this.numericUpDown9.Size = new System.Drawing.Size(91, 30);
             this.numericUpDown9.TabIndex = 1;
             // 
             // groupBox3
@@ -1408,7 +1407,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 110);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1412, 90);
+            this.groupBox3.Size = new System.Drawing.Size(1428, 90);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
@@ -1694,7 +1693,7 @@
             this.groupBox2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox2.Location = new System.Drawing.Point(0, 870);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1412, 89);
+            this.groupBox2.Size = new System.Drawing.Size(1428, 89);
             this.groupBox2.TabIndex = 36;
             this.groupBox2.TabStop = false;
             // 

@@ -102,7 +102,6 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.textBox7 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox46 = new System.Windows.Forms.TextBox();
             this.textBox45 = new System.Windows.Forms.TextBox();
@@ -153,6 +152,7 @@
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.panel1.SuspendLayout();
             this.panel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -212,6 +212,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.dateTimePicker2);
+            this.panel1.Controls.Add(this.dateTimePicker1);
             this.panel1.Controls.Add(this.textBox48);
             this.panel1.Controls.Add(this.textBox47);
             this.panel1.Controls.Add(this.textBox44);
@@ -237,13 +239,11 @@
             this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.textBox7);
-            this.panel1.Controls.Add(this.dateTimePicker2);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.richTextBox2);
             this.panel1.Controls.Add(this.textBox3);
             this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Controls.Add(this.dateTimePicker1);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Location = new System.Drawing.Point(12, 30);
@@ -1110,17 +1110,6 @@
             this.textBox7.Size = new System.Drawing.Size(211, 30);
             this.textBox7.TabIndex = 40;
             // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.CustomFormat = "yyyy-MM-dd";
-            this.dateTimePicker2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(236, 995);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 30);
-            this.dateTimePicker2.TabIndex = 38;
-            this.dateTimePicker2.Value = new System.DateTime(2019, 5, 2, 0, 0, 0, 0);
-            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1689,11 +1678,20 @@
             this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
             this.dateTimePicker1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(133, 88);
+            this.dateTimePicker1.Location = new System.Drawing.Point(134, 88);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(316, 30);
-            this.dateTimePicker1.TabIndex = 6;
-            this.dateTimePicker1.Value = new System.DateTime(2019, 5, 2, 0, 0, 0, 0);
+            this.dateTimePicker1.TabIndex = 66;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker2.Location = new System.Drawing.Point(236, 995);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(200, 30);
+            this.dateTimePicker2.TabIndex = 67;
             // 
             // aUHypertensionPatientServices
             // 
@@ -1788,7 +1786,6 @@
         private System.Windows.Forms.Panel panel9;
         public System.Windows.Forms.TextBox textBox1;
         public System.Windows.Forms.TextBox textBox2;
-        public System.Windows.Forms.DateTimePicker dateTimePicker1;
         public System.Windows.Forms.RadioButton radioButton1;
         public System.Windows.Forms.RadioButton radioButton3;
         public System.Windows.Forms.RadioButton radioButton2;
@@ -1834,7 +1831,6 @@
         public System.Windows.Forms.RadioButton radioButton21;
         public System.Windows.Forms.TextBox textBox5;
         public System.Windows.Forms.TextBox textBox6;
-        public System.Windows.Forms.DateTimePicker dateTimePicker2;
         public System.Windows.Forms.TextBox textBox7;
         public System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel11;
@@ -1885,5 +1881,7 @@
         private System.Windows.Forms.TextBox textBox47;
         private System.Windows.Forms.TextBox textBox48;
         public System.Windows.Forms.NumericUpDown numericUpDown11;
+        public System.Windows.Forms.DateTimePicker dateTimePicker1;
+        public System.Windows.Forms.DateTimePicker dateTimePicker2;
     }
 }

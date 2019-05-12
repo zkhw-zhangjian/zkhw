@@ -1097,6 +1097,7 @@
             this.checkBox32.Tag = "7";
             this.checkBox32.Text = "7精神残疾";
             this.checkBox32.UseVisualStyleBackColor = true;
+            this.checkBox32.Click += new System.EventHandler(this.checkBox32_Click);
             // 
             // checkBox31
             // 
@@ -1108,6 +1109,7 @@
             this.checkBox31.Tag = "6";
             this.checkBox31.Text = "6智力残疾";
             this.checkBox31.UseVisualStyleBackColor = true;
+            this.checkBox31.Click += new System.EventHandler(this.checkBox31_Click);
             // 
             // checkBox30
             // 
@@ -1119,6 +1121,7 @@
             this.checkBox30.Tag = "5";
             this.checkBox30.Text = "5肢体残疾";
             this.checkBox30.UseVisualStyleBackColor = true;
+            this.checkBox30.Click += new System.EventHandler(this.checkBox30_Click);
             // 
             // checkBox29
             // 
@@ -1130,6 +1133,7 @@
             this.checkBox29.Tag = "4";
             this.checkBox29.Text = "4言语残疾";
             this.checkBox29.UseVisualStyleBackColor = true;
+            this.checkBox29.Click += new System.EventHandler(this.checkBox29_Click);
             // 
             // checkBox28
             // 
@@ -1141,6 +1145,7 @@
             this.checkBox28.Tag = "3";
             this.checkBox28.Text = "3听力残疾";
             this.checkBox28.UseVisualStyleBackColor = true;
+            this.checkBox28.Click += new System.EventHandler(this.checkBox28_Click);
             // 
             // checkBox27
             // 
@@ -1152,6 +1157,7 @@
             this.checkBox27.Tag = "2";
             this.checkBox27.Text = "2视力残疾";
             this.checkBox27.UseVisualStyleBackColor = true;
+            this.checkBox27.Click += new System.EventHandler(this.checkBox27_Click);
             // 
             // checkBox26
             // 
@@ -1163,6 +1169,7 @@
             this.checkBox26.Tag = "1";
             this.checkBox26.Text = "1无残疾";
             this.checkBox26.UseVisualStyleBackColor = true;
+            this.checkBox26.Click += new System.EventHandler(this.checkBox26_Click);
             // 
             // textBox6
             // 
@@ -1988,7 +1995,7 @@
             // 
             // comboBox1
             // 
-            this.comboBox1.DropDownHeight = 100;
+            this.comboBox1.DropDownHeight = 200;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.IntegralHeight = false;
             this.comboBox1.Location = new System.Drawing.Point(245, 0);
@@ -2677,6 +2684,6 @@
         public System.Windows.Forms.RadioButton radioButton48;
         public System.Windows.Forms.TextBox textBox36;
         public System.Windows.Forms.TextBox textBox37;
-        private System.Windows.Forms.ComboBox comboBox1;
+        public System.Windows.Forms.ComboBox comboBox1;
     }
 }

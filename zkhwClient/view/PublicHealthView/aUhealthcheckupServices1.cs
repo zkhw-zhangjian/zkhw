@@ -120,7 +120,7 @@ namespace zkhwClient.view.PublicHealthView
 
                     this.textBox29.Text = dt.Rows[0]["lifeway_smoke_number"].ToString();
                     this.textBox39.Text = dt.Rows[0]["lifeway_smoke_startage"].ToString();
-                    this.textBox49.Text = dt.Rows[0]["lifeway_smoke_endage"].ToString();
+                    this.textBox48.Text = dt.Rows[0]["lifeway_smoke_endage"].ToString();
 
                     if (this.radioButton12.Tag.ToString() == dt.Rows[0]["lifeway_drink_status"].ToString()) { this.radioButton12.Checked = true; };
                     if (this.radioButton13.Tag.ToString() == dt.Rows[0]["lifeway_drink_status"].ToString()) { this.radioButton13.Checked = true; };
@@ -236,7 +236,7 @@ namespace zkhwClient.view.PublicHealthView
                     CheckBox ck = ctr as CheckBox;
                     if (ck.Checked)
                     {
-                        per.symptom += "," + ck.Text;
+                        per.symptom += "," + ck.Tag.ToString();
                     }
                 }
             }
@@ -341,7 +341,7 @@ namespace zkhwClient.view.PublicHealthView
 
             per.lifeway_smoke_number = this.textBox29.Text.Replace(" ", "");
             per.lifeway_smoke_startage = this.textBox39.Text.Replace(" ", "");
-            per.lifeway_smoke_endage = this.textBox49.Text.Replace(" ", "");
+            per.lifeway_smoke_endage = this.textBox48.Text.Replace(" ", "");
 
             if (this.radioButton12.Checked == true) { per.lifeway_drink_status = this.radioButton12.Tag.ToString(); };
             if (this.radioButton13.Checked == true) { per.lifeway_drink_status = this.radioButton13.Tag.ToString(); };

@@ -665,9 +665,10 @@
             this.textBox113.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox113.Location = new System.Drawing.Point(634, 92);
             this.textBox113.Name = "textBox113";
-            this.textBox113.Size = new System.Drawing.Size(250, 30);
+            this.textBox113.Size = new System.Drawing.Size(408, 30);
             this.textBox113.TabIndex = 161;
             this.textBox113.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox113.Visible = false;
             // 
             // textBox114
             // 
@@ -705,9 +706,10 @@
             this.textBox109.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox109.Location = new System.Drawing.Point(634, 153);
             this.textBox109.Name = "textBox109";
-            this.textBox109.Size = new System.Drawing.Size(250, 30);
+            this.textBox109.Size = new System.Drawing.Size(405, 30);
             this.textBox109.TabIndex = 155;
             this.textBox109.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox109.Visible = false;
             // 
             // textBox110
             // 
@@ -745,9 +747,10 @@
             this.textBox105.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox105.Location = new System.Drawing.Point(634, 122);
             this.textBox105.Name = "textBox105";
-            this.textBox105.Size = new System.Drawing.Size(250, 30);
+            this.textBox105.Size = new System.Drawing.Size(405, 30);
             this.textBox105.TabIndex = 149;
             this.textBox105.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox105.Visible = false;
             // 
             // textBox106
             // 
@@ -785,9 +788,10 @@
             this.textBox101.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox101.Location = new System.Drawing.Point(634, 61);
             this.textBox101.Name = "textBox101";
-            this.textBox101.Size = new System.Drawing.Size(250, 30);
+            this.textBox101.Size = new System.Drawing.Size(408, 30);
             this.textBox101.TabIndex = 143;
             this.textBox101.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox101.Visible = false;
             // 
             // textBox102
             // 
@@ -825,9 +829,10 @@
             this.textBox100.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox100.Location = new System.Drawing.Point(634, 31);
             this.textBox100.Name = "textBox100";
-            this.textBox100.Size = new System.Drawing.Size(250, 30);
+            this.textBox100.Size = new System.Drawing.Size(405, 30);
             this.textBox100.TabIndex = 137;
             this.textBox100.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox100.Visible = false;
             // 
             // textBox99
             // 
@@ -2574,7 +2579,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 123);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1213, 108);
+            this.groupBox3.Size = new System.Drawing.Size(1203, 108);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
