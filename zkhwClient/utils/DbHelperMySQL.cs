@@ -175,7 +175,7 @@ namespace zkhwClient.dao
                     tx.Commit();
                     return count;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     tx.Rollback();
                     using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
@@ -394,7 +394,7 @@ namespace zkhwClient.dao
                     //throw new Exception(ex.Message);
                     using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
                     {
-                        sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + ex.Message + "\r\n"+ex.StackTrace + "\r\n" + SQLString);
+                        sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + ex.Message + "\r\n" + ex.StackTrace + "\r\n" + SQLString);
                     }
                 }
                 return ds;
@@ -457,7 +457,7 @@ namespace zkhwClient.dao
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
         /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的MySqlParameter[]）</param>
-        public static void ExecuteSqlTran(Hashtable SQLStringList)
+        public static int ExecuteSqlTran(Hashtable SQLStringList)
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
@@ -467,20 +467,59 @@ namespace zkhwClient.dao
                     MySqlCommand cmd = new MySqlCommand();
                     try
                     {
+                        int val = 0;
                         //循环
                         foreach (DictionaryEntry myDE in SQLStringList)
                         {
                             string cmdText = myDE.Key.ToString();
                             MySqlParameter[] cmdParms = (MySqlParameter[])myDE.Value;
                             PrepareCommand(cmd, conn, trans, cmdText, cmdParms);
-                            int val = cmd.ExecuteNonQuery();
+                            val = cmd.ExecuteNonQuery();
                             cmd.Parameters.Clear();
                         }
                         trans.Commit();
+                        return val;
                     }
                     catch (Exception e)
                     {
                         trans.Rollback();
+                        return 0;
+                        throw;
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// 执行多条SQL语句，实现数据库事务。
+        /// </summary>
+        /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的MySqlParameter[]）</param>
+        public static int ExecuteSqlTran(List<DBSql> SQLStringList)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                using (MySqlTransaction trans = conn.BeginTransaction())
+                {
+                    MySqlCommand cmd = new MySqlCommand();
+                    try
+                    {
+                        int val = 0;
+                        //循环
+                        foreach (var myDE in SQLStringList)
+                        {
+                            string cmdText = myDE.sql;
+                            MySqlParameter[] cmdParms = myDE.parameters;
+                            PrepareCommand(cmd, conn, trans, cmdText, cmdParms);
+                            val = cmd.ExecuteNonQuery();
+                            cmd.Parameters.Clear();
+                        }
+                        trans.Commit();
+                        return val;
+                    }
+                    catch (Exception e)
+                    {
+                        trans.Rollback();
+                        return 0;
                         throw;
                     }
                 }
@@ -729,12 +768,18 @@ namespace zkhwClient.dao
                     conn.Close();
                     using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
                     {
-                        sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + e.Message+"\r\n"+e.StackTrace+ "\r\n" + SQLStringList.ToString());
+                        sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + e.Message + "\r\n" + e.StackTrace + "\r\n" + SQLStringList.ToString());
                     }
                     return 0;
                 }
             }
         }
         #endregion
+    }
+
+    public class DBSql
+    {
+        public string sql { get; set; }
+        public MySqlParameter[] parameters { get; set; }
     }
 }

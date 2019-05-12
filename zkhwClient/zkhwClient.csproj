@@ -225,6 +225,36 @@
     <Compile Include="utils\IntPtrFindWindow.cs" />
     <Compile Include="utils\Md5.cs" />
     <Compile Include="utils\FSWControl.cs" />
+    <Compile Include="view\PublicHealthView\addchildHealthServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\addchildHealthServices.Designer.cs">
+      <DependentUpon>addchildHealthServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\addchildrenCMHealthServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\addchildrenCMHealthServices.Designer.cs">
+      <DependentUpon>addchildrenCMHealthServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\addEndMaternalHealthServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\addEndMaternalHealthServices.Designer.cs">
+      <DependentUpon>addEndMaternalHealthServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\addmaternalHealthServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\addmaternalHealthServices.Designer.cs">
+      <DependentUpon>addmaternalHealthServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\addStartMaternalHealthServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\addStartMaternalHealthServices.Designer.cs">
+      <DependentUpon>addStartMaternalHealthServices.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\PublicHealthView\addtcmHealthServices.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,6 +272,24 @@
     </Compile>
     <Compile Include="view\PublicHealthView\childrenCMHealthServices.Designer.cs">
       <DependentUpon>childrenCMHealthServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\deletechildrenCMHealthServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\deletechildrenCMHealthServices.Designer.cs">
+      <DependentUpon>deletechildrenCMHealthServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\deleteEndMaternalHealthServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\deleteEndMaternalHealthServices.Designer.cs">
+      <DependentUpon>deleteEndMaternalHealthServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\deleteStartMaternalHealthServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\deleteStartMaternalHealthServices.Designer.cs">
+      <DependentUpon>deleteStartMaternalHealthServices.cs</DependentUpon>
     </Compile>
     <Compile Include="view\PublicHealthView\detaTotuberculosisPatientServices.cs">
       <SubType>Form</SubType>
@@ -700,6 +748,21 @@
     <EmbeddedResource Include="view\HomeDoctorSigningView\teamMembers.resx">
       <DependentUpon>teamMembers.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\addchildHealthServices.resx">
+      <DependentUpon>addchildHealthServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\addchildrenCMHealthServices.resx">
+      <DependentUpon>addchildrenCMHealthServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\addEndMaternalHealthServices.resx">
+      <DependentUpon>addEndMaternalHealthServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\addmaternalHealthServices.resx">
+      <DependentUpon>addmaternalHealthServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\addStartMaternalHealthServices.resx">
+      <DependentUpon>addStartMaternalHealthServices.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\addtcmHealthServices.resx">
       <DependentUpon>addtcmHealthServices.cs</DependentUpon>
     </EmbeddedResource>
@@ -708,6 +771,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\childrenCMHealthServices.resx">
       <DependentUpon>childrenCMHealthServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\deletechildrenCMHealthServices.resx">
+      <DependentUpon>deletechildrenCMHealthServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\deleteEndMaternalHealthServices.resx">
+      <DependentUpon>deleteEndMaternalHealthServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\deleteStartMaternalHealthServices.resx">
+      <DependentUpon>deleteStartMaternalHealthServices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\detaTotuberculosisPatientServices.resx">
       <DependentUpon>detaTotuberculosisPatientServices.cs</DependentUpon>
@@ -756,6 +828,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\hypertensionPatientServices.resx">
       <DependentUpon>hypertensionPatientServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\maternalHealthServices.resx">
+      <DependentUpon>maternalHealthServices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\olderHelthService.resx">
       <DependentUpon>olderHelthService.cs</DependentUpon>
