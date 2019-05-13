@@ -80,23 +80,67 @@ namespace zkhwClient.view.PublicHealthView
         /// <returns></returns>
         private int Insert()
         {
-            List<children_tcm_record> infolist = GetData();
+            List<children_health_record> infolist = GetData();
             List<DBSql> hb = new List<DBSql>();
 
-            foreach (children_tcm_record info in infolist)
+            foreach (children_health_record info in infolist)
             {
                 DBSql sqls = new DBSql();
-                sqls.sql = @"insert into children_tcm_record(id,name,aichive_no,id_number,age,visit_date,tcm_info,tcm_other,next_visit_date,visit_doctor,create_user,create_name,create_time,upload_status
-) values(@id,@name,@aichive_no,@id_number,@age,@visit_date,@tcm_info,@tcm_other,@next_visit_date,@visit_doctor,@create_user,@create_name,@create_time,@upload_status);";
+                sqls.sql = @"insert into children_health_record(id,name,archive_no,id_number,age,visit_date,weight,weight_evaluate,height,height_evaluate,weight_height,physical_assessment,head_circumference,complexion,complexion_other,skin,anterior_fontanelle_wide,anterior_fontanelle_high,anterior_fontanelle,neck_mass,eye,vision,ear,hearing,oral_cavity,teething_num,caries_num,breast,abdominal,umbilical_cord,extremity,gait,rickets_symptom,rickets_sign,anus,hemoglobin,other,outdoor_time,vitamind_name,vitamind_num,growth,sicken_stasus,pneumonia_num,diarrhea_num,trauma_num,sicken_other,transfer_treatment,transfer_treatment_reason,transfer_treatment_department,guidance,guidance_other,next_visit_date,visit_doctor,create_user,create_name,create_time,upload_status) values(@id,@name,@archive_no,@id_number,@age,@visit_date,@weight,@weight_evaluate,@height,@height_evaluate,@weight_height,@physical_assessment,@head_circumference,@complexion,@complexion_other,@skin,@anterior_fontanelle_wide,@anterior_fontanelle_high,@anterior_fontanelle,@neck_mass,@eye,@vision,@ear,@hearing,@oral_cavity,@teething_num,@caries_num,@breast,@abdominal,@umbilical_cord,@extremity,@gait,@rickets_symptom,@rickets_sign,@anus,@hemoglobin,@other,@outdoor_time,@vitamind_name,@vitamind_num,@growth,@sicken_stasus,@pneumonia_num,@diarrhea_num,@trauma_num,@sicken_other,@transfer_treatment,@transfer_treatment_reason,@transfer_treatment_department,@guidance,@guidance_other,
+@next_visit_date,@visit_doctor,@create_user,@create_name,@create_time,@upload_status);";
                 sqls.parameters = new MySqlParameter[] {
                     new MySqlParameter("@id",info.id),
                     new MySqlParameter("@name", info.name),
-                    new MySqlParameter("@aichive_no", info.aichive_no),
+                    new MySqlParameter("@archive_no", info.archive_no),
                     new MySqlParameter("@id_number", info.id_number),
                     new MySqlParameter("@visit_date", info.visit_date),
                     new MySqlParameter("@age", info.age),
-                    new MySqlParameter("@tcm_info", info.tcm_info),
-                    new MySqlParameter("@tcm_other", info.tcm_other),
+                    new MySqlParameter("@visit_date", info.visit_date),
+                    new MySqlParameter("@weight", info.weight),
+                    new MySqlParameter("@weight_evaluate", info.weight_evaluate),
+                    new MySqlParameter("@height", info.height),
+                    new MySqlParameter("@height_evaluate", info.height_evaluate),
+                    new MySqlParameter("@weight_height", info.weight_height),
+                    new MySqlParameter("@physical_assessment", info.physical_assessment),
+                    new MySqlParameter("@head_circumference", info.head_circumference),
+                    new MySqlParameter("@complexion", info.complexion),
+                    new MySqlParameter("@complexion_other", info.complexion_other),
+                    new MySqlParameter("@skin", info.skin),
+                    new MySqlParameter("@anterior_fontanelle_wide", info.anterior_fontanelle_wide),
+                    new MySqlParameter("@anterior_fontanelle_high", info.anterior_fontanelle_high),
+                    new MySqlParameter("@anterior_fontanelle", info.anterior_fontanelle),
+                    new MySqlParameter("@neck_mass", info.neck_mass),
+                    new MySqlParameter("@eye", info.eye),
+                    new MySqlParameter("@vision", info.vision),
+                    new MySqlParameter("@ear", info.ear),
+                    new MySqlParameter("@hearing", info.hearing),
+                    new MySqlParameter("@oral_cavity", info.oral_cavity),
+                    new MySqlParameter("@teething_num", info.teething_num),
+                    new MySqlParameter("@caries_num", info.caries_num),
+                    new MySqlParameter("@breast", info.breast),
+                    new MySqlParameter("@abdominal", info.abdominal),
+                    new MySqlParameter("@umbilical_cord", info.umbilical_cord),
+                    new MySqlParameter("@extremity", info.extremity),
+                    new MySqlParameter("@gait", info.gait),
+                    new MySqlParameter("@rickets_symptom", info.rickets_symptom),
+                    new MySqlParameter("@rickets_sign", info.rickets_sign),
+                    new MySqlParameter("@anus", info.anus),
+                    new MySqlParameter("@hemoglobin", info.hemoglobin),
+                    new MySqlParameter("@other", info.other),
+                    new MySqlParameter("@outdoor_time", info.outdoor_time),
+                    new MySqlParameter("@vitamind_name", info.vitamind_name),
+                    new MySqlParameter("@vitamind_num", info.vitamind_num),
+                    new MySqlParameter("@growth", info.growth),
+                    new MySqlParameter("@sicken_stasus", info.sicken_stasus),
+                    new MySqlParameter("@pneumonia_num", info.pneumonia_num),
+                    new MySqlParameter("@diarrhea_num", info.diarrhea_num),
+                    new MySqlParameter("@trauma_num", info.trauma_num),
+                    new MySqlParameter("@sicken_other", info.sicken_other),
+                    new MySqlParameter("@transfer_treatment", info.transfer_treatment),
+                    new MySqlParameter("@transfer_treatment_reason", info.transfer_treatment_reason),
+                    new MySqlParameter("@transfer_treatment_department", info.transfer_treatment_department),
+                    new MySqlParameter("@guidance", info.guidance),
+                    new MySqlParameter("@guidance_other", info.guidance_other),
                     new MySqlParameter("@next_visit_date", info.next_visit_date),
                     new MySqlParameter("@visit_doctor", info.visit_doctor),
                     new MySqlParameter("@create_user", info.create_user),
@@ -114,21 +158,65 @@ namespace zkhwClient.view.PublicHealthView
         /// <returns></returns>
         private int Update()
         {
-            List<children_tcm_record> infolist = GetData();
+            List<children_health_record> infolist = GetData();
             List<DBSql> hb = new List<DBSql>();
-            foreach (children_tcm_record info in infolist)
+            foreach (children_health_record info in infolist)
             {
                 DBSql sqls = new DBSql();
-                sqls.sql = @"update children_tcm_record set visit_date=@visit_date,tcm_info=@tcm_info,tcm_other=@tcm_other,next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_user,update_name=@update_name,update_time=@update_time where name=@name and aichive_no=@aichive_no and id_number=@id_number and age=@age;";
+                sqls.sql = @"update children_health_record set visit_date=@visit_date,weight=@weight,weight_evaluate=@weight_evaluate,height=@height,height_evaluate=@height_evaluate,weight_height=@weight_height,physical_assessment=@physical_assessment,head_circumference=@head_circumference,complexion=@complexion,complexion_other=@complexion_other,skin=@skin,anterior_fontanelle_wide=@anterior_fontanelle_wide,anterior_fontanelle_high=@anterior_fontanelle_high,anterior_fontanelle=@anterior_fontanelle,neck_mass=@neck_mass,eye=@eye,vision=@vision,ear=@ear,hearing=@hearing,oral_cavity=@oral_cavity,teething_num=@teething_num,caries_num=@caries_num,breast=@breast,abdominal=@abdominal,umbilical_cord=@umbilical_cord,extremity=@extremity,gait=@gait,rickets_symptom=@rickets_symptom,rickets_sign=@rickets_sign,anus=@anus,hemoglobin=@hemoglobin,other=@other,outdoor_time=@outdoor_time,vitamind_name=@vitamind_name,vitamind_num=@vitamind_num,growth=@growth,sicken_stasus=@sicken_stasus,pneumonia_num=@pneumonia_num,diarrhea_num=@diarrhea_num,trauma_num=@trauma_num,sicken_other=@sicken_other,transfer_treatment=@transfer_treatment,transfer_treatment_reason=@transfer_treatment_reason,transfer_treatment_department=@transfer_treatment_department,guidance=@guidance,guidance_other=@guidance_other,next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_user,update_name=@update_name,update_time=@update_time where name=@name and archive_no=@archive_no and id_number=@id_number and age=@age;";
                 sqls.parameters = new MySqlParameter[] {
-                    new MySqlParameter("@id",info.id),
+                     new MySqlParameter("@id",info.id),
                     new MySqlParameter("@name", info.name),
-                    new MySqlParameter("@aichive_no", info.aichive_no),
+                    new MySqlParameter("@archive_no", info.archive_no),
                     new MySqlParameter("@id_number", info.id_number),
                     new MySqlParameter("@visit_date", info.visit_date),
                     new MySqlParameter("@age", info.age),
-                    new MySqlParameter("@tcm_info", info.tcm_info),
-                    new MySqlParameter("@tcm_other", info.tcm_other),
+                    new MySqlParameter("@visit_date", info.visit_date),
+                    new MySqlParameter("@weight", info.weight),
+                    new MySqlParameter("@weight_evaluate", info.weight_evaluate),
+                    new MySqlParameter("@height", info.height),
+                    new MySqlParameter("@height_evaluate", info.height_evaluate),
+                    new MySqlParameter("@weight_height", info.weight_height),
+                    new MySqlParameter("@physical_assessment", info.physical_assessment),
+                    new MySqlParameter("@head_circumference", info.head_circumference),
+                    new MySqlParameter("@complexion", info.complexion),
+                    new MySqlParameter("@complexion_other", info.complexion_other),
+                    new MySqlParameter("@skin", info.skin),
+                    new MySqlParameter("@anterior_fontanelle_wide", info.anterior_fontanelle_wide),
+                    new MySqlParameter("@anterior_fontanelle_high", info.anterior_fontanelle_high),
+                    new MySqlParameter("@anterior_fontanelle", info.anterior_fontanelle),
+                    new MySqlParameter("@neck_mass", info.neck_mass),
+                    new MySqlParameter("@eye", info.eye),
+                    new MySqlParameter("@vision", info.vision),
+                    new MySqlParameter("@ear", info.ear),
+                    new MySqlParameter("@hearing", info.hearing),
+                    new MySqlParameter("@oral_cavity", info.oral_cavity),
+                    new MySqlParameter("@teething_num", info.teething_num),
+                    new MySqlParameter("@caries_num", info.caries_num),
+                    new MySqlParameter("@breast", info.breast),
+                    new MySqlParameter("@abdominal", info.abdominal),
+                    new MySqlParameter("@umbilical_cord", info.umbilical_cord),
+                    new MySqlParameter("@extremity", info.extremity),
+                    new MySqlParameter("@gait", info.gait),
+                    new MySqlParameter("@rickets_symptom", info.rickets_symptom),
+                    new MySqlParameter("@rickets_sign", info.rickets_sign),
+                    new MySqlParameter("@anus", info.anus),
+                    new MySqlParameter("@hemoglobin", info.hemoglobin),
+                    new MySqlParameter("@other", info.other),
+                    new MySqlParameter("@outdoor_time", info.outdoor_time),
+                    new MySqlParameter("@vitamind_name", info.vitamind_name),
+                    new MySqlParameter("@vitamind_num", info.vitamind_num),
+                    new MySqlParameter("@growth", info.growth),
+                    new MySqlParameter("@sicken_stasus", info.sicken_stasus),
+                    new MySqlParameter("@pneumonia_num", info.pneumonia_num),
+                    new MySqlParameter("@diarrhea_num", info.diarrhea_num),
+                    new MySqlParameter("@trauma_num", info.trauma_num),
+                    new MySqlParameter("@sicken_other", info.sicken_other),
+                    new MySqlParameter("@transfer_treatment", info.transfer_treatment),
+                    new MySqlParameter("@transfer_treatment_reason", info.transfer_treatment_reason),
+                    new MySqlParameter("@transfer_treatment_department", info.transfer_treatment_department),
+                    new MySqlParameter("@guidance", info.guidance),
+                    new MySqlParameter("@guidance_other", info.guidance_other),
                     new MySqlParameter("@next_visit_date", info.next_visit_date),
                     new MySqlParameter("@visit_doctor", info.visit_doctor),
                     new MySqlParameter("@update_user", info.update_user),
@@ -143,9 +231,9 @@ namespace zkhwClient.view.PublicHealthView
         /// 获取界面数据
         /// </summary>
         /// <returns></returns>
-        private List<children_tcm_record> GetData()
+        private List<children_health_record> GetData()
         {
-            List<children_tcm_record> infolist = new List<children_tcm_record>();
+            List<children_health_record> infolist = new List<children_health_record>();
             //if (月龄6.Checked)
             //{
             //    children_tcm_record info = new children_tcm_record();
@@ -593,7 +681,7 @@ namespace zkhwClient.view.PublicHealthView
         /// <summary>
         /// 指导其他
         /// </summary>
-        public string guidance_other { get; set; }      
+        public string guidance_other { get; set; }
         /// <summary>
         /// 下次随访日期
         /// </summary>
