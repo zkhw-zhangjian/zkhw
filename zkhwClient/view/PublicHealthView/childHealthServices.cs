@@ -94,17 +94,43 @@ namespace zkhwClient.view.PublicHealthView
 
         private void 儿童健康检查添加_Click(object sender, EventArgs e)
         {
-
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            addToChildHealthServices addtcm = new addToChildHealthServices(1, dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
+            if (addtcm.show)
+            {
+                addtcm.StartPosition = FormStartPosition.CenterScreen;
+                addtcm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show(addtcm.mag);
+            }
         }
 
         private void 儿童健康检查修改_Click(object sender, EventArgs e)
         {
-
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            addToChildHealthServices addtcm = new addToChildHealthServices(0, dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
+            if (addtcm.show)
+            {
+                addtcm.StartPosition = FormStartPosition.CenterScreen;
+                addtcm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show(addtcm.mag);
+            }
         }
 
         private void 儿童健康检查删除_Click(object sender, EventArgs e)
         {
-
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            deleteToChildHealthServices addtcm = new deleteToChildHealthServices(dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
+            addtcm.StartPosition = FormStartPosition.CenterScreen;
+            addtcm.ShowDialog();
         }
 
         private void 关闭_Click(object sender, EventArgs e)
