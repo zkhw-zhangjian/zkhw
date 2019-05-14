@@ -35,32 +35,102 @@ namespace zkhwClient.view.PublicHealthView
 
         private void 新生儿家庭访视添加_Click(object sender, EventArgs e)
         {
-
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            addchildHealthServices addtcm = new addchildHealthServices(1, dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
+            if (addtcm.show)
+            {
+                addtcm.StartPosition = FormStartPosition.CenterScreen;
+                addtcm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show(addtcm.mag);
+            }
         }
 
         private void 新生儿家庭访视修改_Click(object sender, EventArgs e)
         {
-
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            addchildHealthServices addtcm = new addchildHealthServices(0, dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
+            if (addtcm.show)
+            {
+                addtcm.StartPosition = FormStartPosition.CenterScreen;
+                addtcm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show(addtcm.mag);
+            }
         }
 
         private void 新生儿家庭访视删除_Click(object sender, EventArgs e)
         {
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            string id = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
 
+            DialogResult rr = MessageBox.Show("确认删除？", "确认删除提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+            int tt = (int)rr;
+            if (tt == 1)
+            {//删除用户       
+                int row = dataGridView1.CurrentRow.Index;
+                string Name = dataGridView1["姓名", row].Value.ToString().Trim();
+                string aichive_no = dataGridView1["编码", row].Value.ToString().Trim();
+                string id_number = dataGridView1["身份证号", row].Value.ToString().Trim();
+                bool istrue = deletematernalHealthServices(Name, aichive_no, id_number);
+                if (istrue)
+                {
+                    //刷新页面
+                    querytcmHealthServices();
+                    MessageBox.Show("删除成功！");
+                }
+                else
+                {
+                    MessageBox.Show("删除失败！");
+                }
+            }
         }
 
         private void 儿童健康检查添加_Click(object sender, EventArgs e)
         {
-
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            addToChildHealthServices addtcm = new addToChildHealthServices(1, dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
+            if (addtcm.show)
+            {
+                addtcm.StartPosition = FormStartPosition.CenterScreen;
+                addtcm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show(addtcm.mag);
+            }
         }
 
         private void 儿童健康检查修改_Click(object sender, EventArgs e)
         {
-
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            addToChildHealthServices addtcm = new addToChildHealthServices(0, dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
+            if (addtcm.show)
+            {
+                addtcm.StartPosition = FormStartPosition.CenterScreen;
+                addtcm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show(addtcm.mag);
+            }
         }
 
         private void 儿童健康检查删除_Click(object sender, EventArgs e)
         {
-
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            deleteToChildHealthServices addtcm = new deleteToChildHealthServices(dataGridView1["姓名", row].Value.ToString().Trim(), dataGridView1["编码", row].Value.ToString().Trim(), dataGridView1["身份证号", row].Value.ToString().Trim());
+            addtcm.StartPosition = FormStartPosition.CenterScreen;
+            addtcm.ShowDialog();
         }
 
         private void 关闭_Click(object sender, EventArgs e)
@@ -181,7 +251,7 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{C
         public bool deletematernalHealthServices(string name, string aichive_no, string id_number)
         {
             int rt = 0;
-            string sql = $"delete from gravida_info where name='{name}' and aichive_no='{aichive_no}' and id_number='{id_number}'";
+            string sql = $"delete from neonatus_info where name='{name}' and archive_no='{aichive_no}' and id_number='{id_number}'";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }

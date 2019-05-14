@@ -267,6 +267,12 @@
     <Compile Include="view\PublicHealthView\addtcmHealthServices.Designer.cs">
       <DependentUpon>addtcmHealthServices.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\PublicHealthView\addToChildHealthServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\addToChildHealthServices.Designer.cs">
+      <DependentUpon>addToChildHealthServices.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\PublicHealthView\addTotuberculosisPatientServices.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -320,6 +326,12 @@
     </Compile>
     <Compile Include="view\PublicHealthView\deleteStartMaternalHealthServices.Designer.cs">
       <DependentUpon>deleteStartMaternalHealthServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\deleteToChildHealthServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\deleteToChildHealthServices.Designer.cs">
+      <DependentUpon>deleteToChildHealthServices.cs</DependentUpon>
     </Compile>
     <Compile Include="view\PublicHealthView\detaTotuberculosisPatientServices.cs">
       <SubType>Form</SubType>
@@ -808,6 +820,9 @@
     <EmbeddedResource Include="view\PublicHealthView\addtcmHealthServices.resx">
       <DependentUpon>addtcmHealthServices.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\addToChildHealthServices.resx">
+      <DependentUpon>addToChildHealthServices.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\addTotuberculosisPatientServices.resx">
       <DependentUpon>addTotuberculosisPatientServices.cs</DependentUpon>
     </EmbeddedResource>
@@ -834,6 +849,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\deleteStartMaternalHealthServices.resx">
       <DependentUpon>deleteStartMaternalHealthServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\deleteToChildHealthServices.resx">
+      <DependentUpon>deleteToChildHealthServices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\detaTotuberculosisPatientServices.resx">
       <DependentUpon>detaTotuberculosisPatientServices.cs</DependentUpon>

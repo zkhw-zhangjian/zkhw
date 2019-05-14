@@ -55,7 +55,7 @@ namespace zkhwClient.view.PublicHealthView
                 }
             }
             InitializeComponent();
-            this.Text = (IS == 1 ? "产后访视添加" : "产后访视修改");
+            this.Text = (IS == 1 ? "新生儿家庭访视添加" : "新生儿家庭访视修改");
         }
         private void 取消_Click(object sender, EventArgs e)
         {
@@ -190,7 +190,7 @@ namespace zkhwClient.view.PublicHealthView
             foreach (neonatus_info info in infolist)
             {
                 DBSql sqls = new DBSql();
-                sqls.sql = @"update neonatus_info set sex=@sex,birthday=@birthday,home_address=@home_address,father_name=@father_name,father_profession=@father_profession,father_phone=@father_phone,father_birthday=@father_birthday,mother_name=@mother_name,mother_profession=@mother_profession,mother_phone=@mother_phone,mother_birthday=@mother_birthday,gestational_weeks=@gestational_weeks,sicken_stasus=@sicken_stasus,sicken_other=@sicken_other,midwife_org=@midwife_org,birth_situation=@birth_situation,birth_other=@birth_other,asphyxia_neonatorum=@asphyxia_neonatorum,asphyxia_time=@asphyxia_time,deformity=@deformity,deformity_other=@deformity_other,hearing=@hearing,disease=@disease,disease_other=@disease_other,birth_weight=@birth_weight,weight=@weight,birth_height=@birth_height,feeding_patterns=@feeding_patterns,milk_num=@milk_num,milk_intake=@milk_intake,vomit=@vomit,shit=@shit,defecation_num=@defecation_num,temperature=@temperature,heart_rate=@heart_rate,breathing_rate=@breathing_rate,complexion=@complexion,complexion_other=@complexion_other,aurigo=@aurigo,aurigo_other=@aurigo_other,anterior_fontanelle_wide=@anterior_fontanelle_wide,anterior_fontanelle_high=@anterior_fontanelle_high,anterior_fontanelle=@anterior_fontanelle,anterior_fontanelle_other=@anterior_fontanelle_other,eye=@eye,extremity_mobility=@extremity_mobility,ear=@ear,neck_mass=@neck_mass,nose=@nose,skin=@skin,skin_other=@skin_other,oral_cavity=@oral_cavity,anus=@anus,heart_lung=@heart_lung,breast=@breast,abdominal_touch=@abdominal_touch,spine=@spine,aedea=@aedea,umbilical_cord=@umbilical_cord,umbilical_cord_other=@umbilical_cord_other,transfer_treatment=@transfer_treatment,transfer_treatment_reason=@transfer_treatment_reason,transfer_treatment_department=@transfer_treatment_department,guidance=@guidance,guidance_other=@guidance_other,visit_date=@visit_date,next_visit_date=@next_visit_date,next_visit_address=@next_visit_address,visit_doctor=@visit_doctor,province_code=@province_code,province_name=@province_name,city_code=@city_code,city_name=@city_name,county_code=@county_code,county_name=@county_name,towns_code=@towns_code,towns_name=@towns_name,village_code=@village_code,village_name=@village_name,update_user=@update_user,update_name=@update_name,update_time=@update_time where name=@name and aichive_no=@aichive_no and id_number=@id_number and order_num=@order_num;";
+                sqls.sql = @"update neonatus_info set sex=@sex,birthday=@birthday,home_address=@home_address,father_name=@father_name,father_profession=@father_profession,father_phone=@father_phone,father_birthday=@father_birthday,mother_name=@mother_name,mother_profession=@mother_profession,mother_phone=@mother_phone,mother_birthday=@mother_birthday,gestational_weeks=@gestational_weeks,sicken_stasus=@sicken_stasus,sicken_other=@sicken_other,midwife_org=@midwife_org,birth_situation=@birth_situation,birth_other=@birth_other,asphyxia_neonatorum=@asphyxia_neonatorum,asphyxia_time=@asphyxia_time,deformity=@deformity,deformity_other=@deformity_other,hearing=@hearing,disease=@disease,disease_other=@disease_other,birth_weight=@birth_weight,weight=@weight,birth_height=@birth_height,feeding_patterns=@feeding_patterns,milk_num=@milk_num,milk_intake=@milk_intake,vomit=@vomit,shit=@shit,defecation_num=@defecation_num,temperature=@temperature,heart_rate=@heart_rate,breathing_rate=@breathing_rate,complexion=@complexion,complexion_other=@complexion_other,aurigo=@aurigo,aurigo_other=@aurigo_other,anterior_fontanelle_wide=@anterior_fontanelle_wide,anterior_fontanelle_high=@anterior_fontanelle_high,anterior_fontanelle=@anterior_fontanelle,anterior_fontanelle_other=@anterior_fontanelle_other,eye=@eye,extremity_mobility=@extremity_mobility,ear=@ear,neck_mass=@neck_mass,nose=@nose,skin=@skin,skin_other=@skin_other,oral_cavity=@oral_cavity,anus=@anus,heart_lung=@heart_lung,breast=@breast,abdominal_touch=@abdominal_touch,spine=@spine,aedea=@aedea,umbilical_cord=@umbilical_cord,umbilical_cord_other=@umbilical_cord_other,transfer_treatment=@transfer_treatment,transfer_treatment_reason=@transfer_treatment_reason,transfer_treatment_department=@transfer_treatment_department,guidance=@guidance,guidance_other=@guidance_other,visit_date=@visit_date,next_visit_date=@next_visit_date,next_visit_address=@next_visit_address,visit_doctor=@visit_doctor,province_code=@province_code,province_name=@province_name,city_code=@city_code,city_name=@city_name,county_code=@county_code,county_name=@county_name,towns_code=@towns_code,towns_name=@towns_name,village_code=@village_code,village_name=@village_name,update_user=@update_user,update_name=@update_name,update_time=@update_time where name=@name and archive_no=@archive_no and id_number=@id_number;";
                 sqls.parameters = new MySqlParameter[] {
                     new MySqlParameter("@id",info.id),
                     new MySqlParameter("@name", info.name),
@@ -290,261 +290,408 @@ namespace zkhwClient.view.PublicHealthView
         private List<neonatus_info> GetData()
         {
             List<neonatus_info> infolist = new List<neonatus_info>();
-            //if (产后7天.Checked)
-            //{
-            //    neonatus_info info = new neonatus_info();
-            //    info.name = Names;
-            //    info.aichive_no = aichive_no;
-            //    info.id_number = id_number;
-            //    info.order_num = "7";
-            //    info.visit_date = 随访日期7.Value.ToString("yyyy-MM-dd HH:mm:ss");
-            //    info.childbirth = 分娩日期7.Value.ToString("yyyy-MM-dd HH:mm:ss");
-            //    info.discharge_date = 出院日期7.Value.ToString("yyyy-MM-dd HH:mm:ss");
-            //    info.temperature = 体温7.Text.Trim();
-            //    info.general_health_status = 一般健康情况7.Text.Trim();
-            //    info.general_psychology_status = 一般心理状况7.Text.Trim();
-            //    info.blood_pressure_high = Convert.ToInt32(血压高7.Text.Trim());
-            //    info.blood_pressure_low = Convert.ToInt32(血压低7.Text.Trim());
-            //    foreach (Control item in 乳房7.Controls)
-            //    {
-            //        if (item is RadioButton)
-            //        {
-            //            if (((RadioButton)item).Checked)
-            //            {
-            //                info.breast = ((RadioButton)item).Tag.ToString();
-            //            }
-            //        }
-            //        else if (item is TextBox)
-            //        {
-            //            info.breast_error = ((TextBox)item).Text;
-            //        }
-            //    }
-            //    foreach (Control item in 恶露7.Controls)
-            //    {
-            //        if (item is RadioButton)
-            //        {
-            //            if (((RadioButton)item).Checked)
-            //            {
-            //                info.lyma = ((RadioButton)item).Tag.ToString();
-            //            }
-            //        }
-            //        else if (item is TextBox)
-            //        {
-            //            info.lyma_error = ((TextBox)item).Text;
-            //        }
-            //    }
-            //    foreach (Control item in 子宫7.Controls)
-            //    {
-            //        if (item is RadioButton)
-            //        {
-            //            if (((RadioButton)item).Checked)
-            //            {
-            //                info.womb = ((RadioButton)item).Tag.ToString();
-            //            }
-            //        }
-            //        else if (item is TextBox)
-            //        {
-            //            info.womb_error = ((TextBox)item).Text;
-            //        }
-            //    }
-            //    foreach (Control item in 伤口7.Controls)
-            //    {
-            //        if (item is RadioButton)
-            //        {
-            //            if (((RadioButton)item).Checked)
-            //            {
-            //                info.wound = ((RadioButton)item).Tag.ToString();
-            //            }
-            //        }
-            //        else if (item is TextBox)
-            //        {
-            //            info.wound_error = ((TextBox)item).Text;
-            //        }
-            //    }
-            //    info.other = 其他7.Text.Trim();
-            //    foreach (Control item in 分类7.Controls)
-            //    {
-            //        if (item is RadioButton)
-            //        {
-            //            if (((RadioButton)item).Checked)
-            //            {
-            //                info.condition = ((RadioButton)item).Tag.ToString();
-            //            }
-            //        }
-            //        else if (item is TextBox)
-            //        {
-            //            info.error_info = ((TextBox)item).Text;
-            //        }
-            //    }
-            //    string guidance = string.Empty;
-            //    foreach (Control item in 指导7.Controls)
-            //    {
-            //        if (item is CheckBox)
-            //        {
-            //            if (((CheckBox)item).Checked)
-            //            {
-            //                guidance += ((CheckBox)item).Tag.ToString() + ",";
-            //            }
-            //        }
-            //        else if (item is RichTextBox)
-            //        {
-            //            info.guidance_other = ((RichTextBox)item).Text;
-            //        }
-            //    }
-            //    info.guidance = guidance.TrimEnd(',');
-            //    foreach (Control item in 转诊7.Controls)
-            //    {
-            //        if (item is RadioButton)
-            //        {
-            //            if (((RadioButton)item).Checked)
-            //            {
-            //                info.transfer_treatment = ((RadioButton)item).Tag.ToString();
-            //            }
-            //        }
-            //        else if (item is TextBox)
-            //        {
-            //            if (((TextBox)item).Name == "转诊原因7")
-            //            {
-            //                info.transfer_treatment_reason = ((TextBox)item).Text;
-            //            }
-            //            else if (((TextBox)item).Name == "转诊机构和科别7")
-            //            {
-            //                info.transfer_treatment_department = ((TextBox)item).Text;
-            //            }
-            //        }
-            //    }
-            //    info.next_visit_date = 下次随访日期7.Value.ToString("yyyy-MM-dd HH:mm:ss");
-            //    info.visit_doctor = 随访医生签名7.Text.Trim();
-            //    infolist.Add(info);
-            //}
-            //if (产后42天.Checked)
-            //{
-            //    gravida_after_record info = new gravida_after_record();
-            //    info.name = Names;
-            //    info.aichive_no = aichive_no;
-            //    info.id_number = id_number;
-            //    info.order_num = "42";
-            //    info.visit_date = 随访日期42.Value.ToString("yyyy-MM-dd HH:mm:ss");
-            //    info.childbirth = 分娩日期42.Value.ToString("yyyy-MM-dd HH:mm:ss");
-            //    info.discharge_date = 出院日期42.Value.ToString("yyyy-MM-dd HH:mm:ss");
-            //    info.temperature = 体温42.Text.Trim();
-            //    info.general_health_status = 一般健康情况42.Text.Trim();
-            //    info.general_psychology_status = 一般心理状况42.Text.Trim();
-            //    info.blood_pressure_high = Convert.ToInt32(血压高42.Text.Trim());
-            //    info.blood_pressure_low = Convert.ToInt32(血压低42.Text.Trim());
-            //    foreach (Control item in 乳房42.Controls)
-            //    {
-            //        if (item is RadioButton)
-            //        {
-            //            if (((RadioButton)item).Checked)
-            //            {
-            //                info.breast = ((RadioButton)item).Tag.ToString();
-            //            }
-            //        }
-            //        else if (item is TextBox)
-            //        {
-            //            info.breast_error = ((TextBox)item).Text;
-            //        }
-            //    }
-            //    foreach (Control item in 恶露42.Controls)
-            //    {
-            //        if (item is RadioButton)
-            //        {
-            //            if (((RadioButton)item).Checked)
-            //            {
-            //                info.lyma = ((RadioButton)item).Tag.ToString();
-            //            }
-            //        }
-            //        else if (item is TextBox)
-            //        {
-            //            info.lyma_error = ((TextBox)item).Text;
-            //        }
-            //    }
-            //    foreach (Control item in 子宫42.Controls)
-            //    {
-            //        if (item is RadioButton)
-            //        {
-            //            if (((RadioButton)item).Checked)
-            //            {
-            //                info.womb = ((RadioButton)item).Tag.ToString();
-            //            }
-            //        }
-            //        else if (item is TextBox)
-            //        {
-            //            info.womb_error = ((TextBox)item).Text;
-            //        }
-            //    }
-            //    foreach (Control item in 伤口42.Controls)
-            //    {
-            //        if (item is RadioButton)
-            //        {
-            //            if (((RadioButton)item).Checked)
-            //            {
-            //                info.wound = ((RadioButton)item).Tag.ToString();
-            //            }
-            //        }
-            //        else if (item is TextBox)
-            //        {
-            //            info.wound_error = ((TextBox)item).Text;
-            //        }
-            //    }
-            //    info.other = 其他42.Text.Trim();
-            //    foreach (Control item in 分类42.Controls)
-            //    {
-            //        if (item is RadioButton)
-            //        {
-            //            if (((RadioButton)item).Checked)
-            //            {
-            //                info.condition = ((RadioButton)item).Tag.ToString();
-            //            }
-            //        }
-            //        else if (item is TextBox)
-            //        {
-            //            info.error_info = ((TextBox)item).Text;
-            //        }
-            //    }
-            //    string guidance = string.Empty;
-            //    foreach (Control item in 指导42.Controls)
-            //    {
-            //        if (item is CheckBox)
-            //        {
-            //            if (((CheckBox)item).Checked)
-            //            {
-            //                guidance += ((CheckBox)item).Tag.ToString() + ",";
-            //            }
-            //        }
-            //        else if (item is RichTextBox)
-            //        {
-            //            info.guidance_other = ((RichTextBox)item).Text;
-            //        }
-            //    }
-            //    info.guidance = guidance.TrimEnd(',');
-            //    foreach (Control item in 转诊42.Controls)
-            //    {
-            //        if (item is RadioButton)
-            //        {
-            //            if (((RadioButton)item).Checked)
-            //            {
-            //                info.transfer_treatment = ((RadioButton)item).Tag.ToString();
-            //            }
-            //        }
-            //        else if (item is TextBox)
-            //        {
-            //            if (((TextBox)item).Name == "转诊原因42")
-            //            {
-            //                info.transfer_treatment_reason = ((TextBox)item).Text;
-            //            }
-            //            else if (((TextBox)item).Name == "转诊机构和科别42")
-            //            {
-            //                info.transfer_treatment_department = ((TextBox)item).Text;
-            //            }
-            //        }
-            //    }
-            //    info.next_visit_date = 下次随访日期42.Value.ToString("yyyy-MM-dd HH:mm:ss");
-            //    info.visit_doctor = 随访医生签名42.Text.Trim();
-            //    infolist.Add(info);
-            //}
-
+            neonatus_info info = new neonatus_info();
+            info.name = Names;
+            info.archive_no = aichive_no;
+            info.id_number = id_number;
+            foreach (Control item in 性别.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.sex = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            info.birthday = 出生日期.Text.Trim();
+            info.home_address = 家庭住址.Text.Trim();
+            info.father_name = 父亲姓名.Text.Trim();
+            info.father_profession = 父亲职业.Text.Trim();
+            info.father_phone = 父亲联系电话.Text.Trim();
+            info.father_birthday = 父亲出生日期.Text.Trim();
+            info.mother_name = 母亲姓名.Text.Trim();
+            info.mother_profession = 母亲职业.Text.Trim();
+            info.mother_phone = 母亲联系电话.Text.Trim();
+            info.mother_birthday = 母亲出生日期.Text.Trim();
+            info.gestational_weeks = Convert.ToInt32(出生孕周.Text.Trim());
+            string sicken_stasus = string.Empty;
+            foreach (Control item in 妊娠期间患病情况.Controls)
+            {
+                if (item is CheckBox)
+                {
+                    if (((CheckBox)item).Checked)
+                    {
+                        sicken_stasus += ((CheckBox)item).Tag.ToString() + ",";
+                    }
+                }
+                else if (item is RichTextBox)
+                {
+                    info.sicken_other = ((RichTextBox)item).Text;
+                }
+            }
+            info.sicken_stasus = sicken_stasus.TrimEnd(',');
+            info.midwife_org = 助产机构名称.Text.Trim();
+            string birth_situation = string.Empty;
+            foreach (Control item in 出生情况.Controls)
+            {
+                if (item is CheckBox)
+                {
+                    if (((CheckBox)item).Checked)
+                    {
+                        birth_situation += ((CheckBox)item).Tag.ToString() + ",";
+                    }
+                }
+                else if (item is RichTextBox)
+                {
+                    info.birth_other = ((RichTextBox)item).Text;
+                }
+            }
+            info.birth_situation = birth_situation.TrimEnd(',');
+            foreach (Control item in 新生儿窒息.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.asphyxia_neonatorum = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            foreach (Control item in 窒息时间.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.asphyxia_time = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            foreach (Control item in 畸型.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.deformity = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+                else if (item is TextBox)
+                {
+                    info.deformity_other = ((TextBox)item).Text;
+                }
+            }
+            foreach (Control item in 新生儿听力.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.hearing = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            string disease = string.Empty;
+            foreach (Control item in 新生儿疾病.Controls)
+            {
+                if (item is CheckBox)
+                {
+                    if (((CheckBox)item).Checked)
+                    {
+                        disease += ((CheckBox)item).Tag.ToString() + ",";
+                    }
+                }
+                else if (item is RichTextBox)
+                {
+                    info.disease_other = ((RichTextBox)item).Text;
+                }
+            }
+            info.disease = disease.TrimEnd(',');
+            info.birth_weight = 出生体重.Text.Trim();
+            info.weight = 目前体重.Text.Trim();
+            info.birth_height = 出生身高.Text.Trim();
+            foreach (Control item in 喂养方式.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.feeding_patterns = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            info.milk_num = Convert.ToInt32(吃奶次数.Text.Trim());
+            info.milk_intake = Convert.ToInt32(吃奶量.Text.Trim());
+            foreach (Control item in 呕吐.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.vomit = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            foreach (Control item in 大便.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.shit = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            info.defecation_num = 大便次数.Text.Trim();
+            info.temperature = 体温.Text.Trim();
+            info.heart_rate = Convert.ToInt32(心率.Text.Trim());
+            info.breathing_rate = Convert.ToInt32(呼吸频率.Text.Trim());
+            foreach (Control item in 面色.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.complexion = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+                else if (item is TextBox)
+                {
+                    info.complexion_other = ((TextBox)item).Text;
+                }
+            }
+            string aurigo = string.Empty;
+            foreach (Control item in 黄疸部位.Controls)
+            {
+                if (item is CheckBox)
+                {
+                    if (((CheckBox)item).Checked)
+                    {
+                        aurigo += ((CheckBox)item).Tag.ToString() + ",";
+                    }
+                }
+                else if (item is RichTextBox)
+                {
+                    info.aurigo_other = ((RichTextBox)item).Text;
+                }
+            }
+            info.aurigo = aurigo.TrimEnd(',');
+            foreach (Control item in 前囟.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.anterior_fontanelle = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+                else if (item is RichTextBox)
+                {
+                    info.anterior_fontanelle_other = ((RichTextBox)item).Text;
+                }
+                else if (item is TextBox)
+                {
+                    if (((TextBox)item).Name == "前囟宽")
+                    {
+                        info.anterior_fontanelle_wide = ((TextBox)item).Text;
+                    }
+                    else if (((TextBox)item).Name == "前囟高")
+                    {
+                        info.anterior_fontanelle_high = ((TextBox)item).Text;
+                    }
+                }
+            }
+            foreach (Control item in 眼睛.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.eye = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            foreach (Control item in 四肢活动度.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.extremity_mobility = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            foreach (Control item in 耳外观.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.ear = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            foreach (Control item in 颈部包块.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.neck_mass = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            foreach (Control item in 鼻.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.nose = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            foreach (Control item in 口腔.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.oral_cavity = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            foreach (Control item in 皮肤.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.skin = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+                else if (item is RichTextBox)
+                {
+                    info.skin_other = ((RichTextBox)item).Text;
+                }
+            }
+            foreach (Control item in 脐带.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.umbilical_cord = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+                else if (item is RichTextBox)
+                {
+                    info.umbilical_cord_other = ((RichTextBox)item).Text;
+                }
+            }
+            foreach (Control item in 肛门.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.anus = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            foreach (Control item in 心肺听诊.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.heart_lung = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            foreach (Control item in 胸部.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.breast = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            foreach (Control item in 腹部触诊.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.abdominal_touch = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            foreach (Control item in 脊柱.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.spine = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            foreach (Control item in 外生殖器.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.aedea = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+            }
+            foreach (Control item in 转诊.Controls)
+            {
+                if (item is RadioButton)
+                {
+                    if (((RadioButton)item).Checked)
+                    {
+                        info.transfer_treatment = ((RadioButton)item).Tag.ToString();
+                    }
+                }
+                else if (item is TextBox)
+                {
+                    if (((TextBox)item).Name == "转诊原因")
+                    {
+                        info.transfer_treatment_reason = ((TextBox)item).Text;
+                    }
+                    else if (((TextBox)item).Name == "转诊机构和科别")
+                    {
+                        info.transfer_treatment_department = ((TextBox)item).Text;
+                    }
+                }
+            }
+            string guidance = string.Empty;
+            foreach (Control item in 指导.Controls)
+            {
+                if (item is CheckBox)
+                {
+                    if (((CheckBox)item).Checked)
+                    {
+                        guidance += ((CheckBox)item).Tag.ToString() + ",";
+                    }
+                }
+                else if (item is RichTextBox)
+                {
+                    info.guidance_other = ((RichTextBox)item).Text;
+                }
+            }
+            info.guidance = guidance.TrimEnd(',');
+            info.next_visit_date = 下次随访日期.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            info.visit_date = 本次访视日期.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            info.next_visit_address = 下次随访地点.Text.Trim();
+            info.visit_doctor = 随访医生签名.Text.Trim();
+            infolist.Add(info);
             return infolist;
         }
         /// <summary>
@@ -552,33 +699,381 @@ namespace zkhwClient.view.PublicHealthView
         /// </summary>
         private void SetData()
         {
-            string sql = $@"select * from gravida_after_record where name='{Names}' and aichive_no='{aichive_no}' and id_number='{id_number}'";
+            string sql = $@"select * from neonatus_info where name='{Names}' and archive_no='{aichive_no}' and id_number='{id_number}'";
             DataSet jb = DbHelperMySQL.Query(sql);
             if (jb != null && jb.Tables.Count > 0 && jb.Tables[0].Rows.Count > 0)
             {
-                List<gravida_after_record> ts = Result.ToDataList<gravida_after_record>(jb.Tables[0]);
+                List<neonatus_info> ts = Result.ToDataList<neonatus_info>(jb.Tables[0]);
                 foreach (var dt in ts)
                 {
-                    Control yl = this.Controls.Find($"产后{dt.order_num}天", true)[0];
-                    ((CheckBox)yl).Checked = true;
-                    Control sfsj = Controls.Find($"随访日期{dt.order_num}", true)[0];
-                    ((DateTimePicker)sfsj).Value = Convert.ToDateTime(dt.visit_date);
-                    Control yz = Controls.Find($"分娩日期{dt.order_num}", true)[0];
-                    ((DateTimePicker)yz).Value = Convert.ToDateTime(dt.childbirth);
-                    Control yfzszz = Controls.Find($"出院日期{dt.order_num}", true)[0];
-                    ((DateTimePicker)yfzszz).Value = Convert.ToDateTime(dt.discharge_date);
-                    Control tz = Controls.Find($"体温{dt.order_num}", true)[0];
-                    ((TextBox)tz).Text = dt.temperature.ToString();
-                    Control gg = Controls.Find($"一般健康情况{dt.order_num}", true)[0];
-                    ((TextBox)gg).Text = dt.general_health_status.ToString();
-                    Control fw = Controls.Find($"一般心理状况{dt.order_num}", true)[0];
-                    ((TextBox)fw).Text = dt.general_psychology_status.ToString();
-                    Control gxy = Controls.Find($"血压高{dt.order_num}", true)[0];
-                    ((TextBox)gxy).Text = dt.blood_pressure_high.ToString();
-                    Control dxy = Controls.Find($"血压低{dt.order_num}", true)[0];
-                    ((TextBox)dxy).Text = dt.blood_pressure_low.ToString();
-                    Control rf = Controls.Find($"乳房{dt.order_num}", true)[0];
-                    foreach (Control item in ((GroupBox)rf).Controls)
+                    foreach (Control item in 性别.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.sex)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    出生日期.Text = dt.birthday;
+                    家庭住址.Text = dt.home_address;
+                    父亲姓名.Text = dt.father_name;
+                    父亲职业.Text = dt.father_profession;
+                    父亲联系电话.Text = dt.father_phone;
+                    父亲出生日期.Text = dt.father_birthday;
+                    母亲姓名.Text = dt.mother_name;
+                    母亲职业.Text = dt.mother_profession;
+                    母亲联系电话.Text = dt.mother_phone;
+                    母亲出生日期.Text = dt.mother_birthday;
+                    出生孕周.Text = dt.gestational_weeks.ToString();
+                    foreach (Control item in 妊娠期间患病情况.Controls)
+                    {
+                        if (item is CheckBox)
+                        {
+                            if (dt.sicken_stasus.IndexOf(",") >= 0)
+                            {
+                                string[] sys = dt.sicken_stasus.Split(',');
+                                if (item is CheckBox)
+                                {
+                                    if (sys.Contains(((CheckBox)item).Tag.ToString()))
+                                    {
+                                        ((CheckBox)item).Checked = true;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (((CheckBox)item).Tag.ToString() == dt.sicken_stasus)
+                                {
+                                    ((CheckBox)item).Checked = true;
+                                }
+                            }
+                        }
+                        else if (item is RichTextBox)
+                        {
+                            ((RichTextBox)item).Text = dt.sicken_other;
+                        }
+                    }
+                    助产机构名称.Text = dt.midwife_org;
+                    foreach (Control item in 出生情况.Controls)
+                    {
+                        if (item is CheckBox)
+                        {
+                            if (dt.birth_situation.IndexOf(",") >= 0)
+                            {
+                                string[] sys = dt.birth_situation.Split(',');
+                                if (item is CheckBox)
+                                {
+                                    if (sys.Contains(((CheckBox)item).Tag.ToString()))
+                                    {
+                                        ((CheckBox)item).Checked = true;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (((CheckBox)item).Tag.ToString() == dt.birth_situation)
+                                {
+                                    ((CheckBox)item).Checked = true;
+                                }
+                            }
+                        }
+                        else if (item is RichTextBox)
+                        {
+                            ((RichTextBox)item).Text = dt.birth_other;
+                        }
+                    }
+                    foreach (Control item in 新生儿窒息.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.asphyxia_neonatorum)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 窒息时间.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.asphyxia_time)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 畸型.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.deformity)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                        else if (item is TextBox)
+                        {
+                            ((TextBox)item).Text = dt.deformity_other;
+                        }
+                    }
+                    foreach (Control item in 新生儿听力.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.hearing)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 新生儿疾病.Controls)
+                    {
+                        if (item is CheckBox)
+                        {
+                            if (dt.disease.IndexOf(",") >= 0)
+                            {
+                                string[] sys = dt.disease.Split(',');
+                                if (item is CheckBox)
+                                {
+                                    if (sys.Contains(((CheckBox)item).Tag.ToString()))
+                                    {
+                                        ((CheckBox)item).Checked = true;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (((CheckBox)item).Tag.ToString() == dt.disease)
+                                {
+                                    ((CheckBox)item).Checked = true;
+                                }
+                            }
+                        }
+                        else if (item is RichTextBox)
+                        {
+                            ((RichTextBox)item).Text = dt.disease_other;
+                        }
+                    }
+                    出生体重.Text = dt.birth_weight;
+                    目前体重.Text = dt.weight;
+                    出生身高.Text = dt.birth_height;
+                    foreach (Control item in 新生儿听力.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.feeding_patterns)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    吃奶次数.Text = dt.milk_num.ToString();
+                    吃奶量.Text = dt.milk_intake.ToString();
+                    foreach (Control item in 呕吐.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.vomit)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 大便.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.shit)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    大便次数.Text = dt.defecation_num;
+                    体温.Text = dt.temperature;
+                    心率.Text = dt.heart_rate.ToString();
+                    呼吸频率.Text = dt.breathing_rate.ToString();
+                    foreach (Control item in 面色.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.complexion)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                        else if (item is TextBox)
+                        {
+                            ((TextBox)item).Text = dt.complexion_other;
+                        }
+                    }
+                    if (!string.IsNullOrWhiteSpace(dt.aurigo))
+                    {
+                        foreach (Control item in 黄疸部位.Controls)
+                        {
+                            if (item is CheckBox)
+                            {
+                                if (dt.aurigo.IndexOf(",") >= 0)
+                                {
+                                    string[] sys = dt.aurigo.Split(',');
+                                    if (item is CheckBox)
+                                    {
+                                        if (sys.Contains(((CheckBox)item).Tag.ToString()))
+                                        {
+                                            ((CheckBox)item).Checked = true;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (((CheckBox)item).Tag.ToString() == dt.aurigo)
+                                    {
+                                        ((CheckBox)item).Checked = true;
+                                    }
+                                }
+                            }
+                            else if (item is RichTextBox)
+                            {
+                                ((RichTextBox)item).Text = dt.aurigo_other;
+                            }
+                        }
+                    }
+                    foreach (Control item in 前囟.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.anterior_fontanelle)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                        else if (item is TextBox)
+                        {
+                            if (((TextBox)item).Name == "前囟宽")
+                            {
+                                ((TextBox)item).Text = dt.anterior_fontanelle_wide;
+                            }
+                            else if (((TextBox)item).Name == "前囟高")
+                            {
+                                ((TextBox)item).Text = dt.anterior_fontanelle_high;
+                            }
+                        }
+                        else if (item is RichTextBox)
+                        {
+                            ((RichTextBox)item).Text = dt.anterior_fontanelle_other;
+                        }
+                    }
+                    foreach (Control item in 眼睛.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.eye)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 四肢活动度.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.extremity_mobility)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 耳外观.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.ear)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 颈部包块.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.neck_mass)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 鼻.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.nose)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 口腔.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.oral_cavity)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 皮肤.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.skin)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                        else if (item is RichTextBox)
+                        {
+                            ((RichTextBox)item).Text = dt.skin_other;
+                        }
+                    }
+                    foreach (Control item in 脐带.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.umbilical_cord)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                        else if (item is RichTextBox)
+                        {
+                            ((RichTextBox)item).Text = dt.umbilical_cord_other;
+                        }
+                    }
+                    foreach (Control item in 肛门.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.anus)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 心肺听诊.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.heart_lung)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 胸部.Controls)
                     {
                         if (item is RadioButton)
                         {
@@ -587,75 +1082,59 @@ namespace zkhwClient.view.PublicHealthView
                                 ((RadioButton)item).Checked = true;
                             }
                         }
-                        else if (item is TextBox)
-                        {
-                            ((TextBox)item).Text = dt.breast_error;
-                        }
                     }
-                    Control el = Controls.Find($"恶露{dt.order_num}", true)[0];
-                    foreach (Control item in ((GroupBox)el).Controls)
+                    foreach (Control item in 腹部触诊.Controls)
                     {
                         if (item is RadioButton)
                         {
-                            if (((RadioButton)item).Tag.ToString() == dt.lyma)
+                            if (((RadioButton)item).Tag.ToString() == dt.abdominal_touch)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 脊柱.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.spine)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 外生殖器.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.aedea)
+                            {
+                                ((RadioButton)item).Checked = true;
+                            }
+                        }
+                    }
+                    foreach (Control item in 转诊.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            if (((RadioButton)item).Tag.ToString() == dt.transfer_treatment)
                             {
                                 ((RadioButton)item).Checked = true;
                             }
                         }
                         else if (item is TextBox)
                         {
-                            ((TextBox)item).Text = dt.lyma_error;
-                        }
-                    }
-                    Control zg = Controls.Find($"子宫{dt.order_num}", true)[0];
-                    foreach (Control item in ((GroupBox)zg).Controls)
-                    {
-                        if (item is RadioButton)
-                        {
-                            if (((RadioButton)item).Tag.ToString() == dt.womb)
+                            if (((TextBox)item).Name == $"转诊原因")
                             {
-                                ((RadioButton)item).Checked = true;
+                                ((TextBox)item).Text = dt.transfer_treatment_reason;
+                            }
+                            else if (((TextBox)item).Name == $"转诊机构和科别")
+                            {
+                                ((TextBox)item).Text = dt.transfer_treatment_department;
                             }
                         }
-                        else if (item is TextBox)
-                        {
-                            ((TextBox)item).Text = dt.womb_error;
-                        }
                     }
-                    Control sk = Controls.Find($"伤口{dt.order_num}", true)[0];
-                    foreach (Control item in ((GroupBox)sk).Controls)
-                    {
-                        if (item is RadioButton)
-                        {
-                            if (((RadioButton)item).Tag.ToString() == dt.wound)
-                            {
-                                ((RadioButton)item).Checked = true;
-                            }
-                        }
-                        else if (item is TextBox)
-                        {
-                            ((TextBox)item).Text = dt.wound_error;
-                        }
-                    }
-                    Control qtfzjc = Controls.Find($"其他{dt.order_num}", true)[0];
-                    ((TextBox)qtfzjc).Text = dt.other.ToString();
-                    Control fl = Controls.Find($"分类{dt.order_num}", true)[0];
-                    foreach (Control item in ((GroupBox)fl).Controls)
-                    {
-                        if (item is RadioButton)
-                        {
-                            if (((RadioButton)item).Tag.ToString() == dt.condition)
-                            {
-                                ((RadioButton)item).Checked = true;
-                            }
-                        }
-                        else if (item is TextBox)
-                        {
-                            ((TextBox)item).Text = dt.error_info;
-                        }
-                    }
-                    Control zzjtz = Controls.Find($"指导{dt.order_num}", true)[0];
-                    foreach (Control item in ((GroupBox)zzjtz).Controls)
+                    foreach (Control item in 指导.Controls)
                     {
                         if (item is CheckBox)
                         {
@@ -683,32 +1162,10 @@ namespace zkhwClient.view.PublicHealthView
                             ((RichTextBox)item).Text = dt.guidance_other;
                         }
                     }
-                    Control zz = Controls.Find($"转诊{dt.order_num}", true)[0];
-                    foreach (Control item in ((GroupBox)zz).Controls)
-                    {
-                        if (item is RadioButton)
-                        {
-                            if (((RadioButton)item).Tag.ToString() == dt.transfer_treatment)
-                            {
-                                ((RadioButton)item).Checked = true;
-                            }
-                        }
-                        else if (item is TextBox)
-                        {
-                            if (((TextBox)item).Name == $"转诊原因{dt.order_num}")
-                            {
-                                ((TextBox)item).Text = dt.transfer_treatment_reason;
-                            }
-                            else if (((TextBox)item).Name == $"转诊机构和科别{dt.order_num}")
-                            {
-                                ((TextBox)item).Text = dt.transfer_treatment_department;
-                            }
-                        }
-                    }
-                    Control xcsf = Controls.Find($"下次随访日期{dt.order_num}", true)[0];
-                    ((DateTimePicker)xcsf).Value = Convert.ToDateTime(dt.next_visit_date);
-                    Control xy1 = Controls.Find($"随访医生签名{dt.order_num}", true)[0];
-                    ((TextBox)xy1).Text = dt.visit_doctor.ToString();
+                    下次随访日期.Value = Convert.ToDateTime(dt.next_visit_date);
+                    本次访视日期.Value = Convert.ToDateTime(dt.visit_date);
+                    下次随访地点.Text = dt.next_visit_address;
+                    随访医生签名.Text = dt.visit_doctor;
                 }
             }
         }
@@ -718,7 +1175,7 @@ namespace zkhwClient.view.PublicHealthView
         /// <returns></returns>
         private bool GetUpdate()
         {
-            DataSet data = DbHelperMySQL.Query($@"select * from gravida_after_record where name='{Names}' and aichive_no='{aichive_no}' and id_number='{id_number}'");
+            DataSet data = DbHelperMySQL.Query($@"select * from neonatus_info where name='{Names}' and archive_no='{aichive_no}' and id_number='{id_number}'");
             if (data != null && data.Tables[0] != null && data.Tables[0].Rows.Count > 0)
             {
                 return true;
@@ -807,7 +1264,7 @@ namespace zkhwClient.view.PublicHealthView
         /// </summary>
         public string sicken_other { get; set; }
         /// <summary>
-        /// 呕吐
+        /// 助产机构名称
         /// </summary>
         public string midwife_org { get; set; }
         /// <summary>
@@ -827,7 +1284,7 @@ namespace zkhwClient.view.PublicHealthView
         /// </summary>
         public string asphyxia_time { get; set; }
         /// <summary>
-        /// 畸形
+        /// 畸型
         /// </summary>
         public string deformity { get; set; }
         /// <summary>
@@ -891,7 +1348,7 @@ namespace zkhwClient.view.PublicHealthView
         /// </summary>
         public int? heart_rate { get; set; }
         /// <summary>
-        /// 呼吸评率
+        /// 呼吸频率
         /// </summary>
         public int? breathing_rate { get; set; }
         /// <summary>
