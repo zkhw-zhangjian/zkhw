@@ -169,6 +169,8 @@
     <Compile Include="bean\loginLogBean.cs" />
     <Compile Include="bean\ltdOrganization.cs" />
     <Compile Include="bean\physical_examination_recordBean.cs" />
+    <Compile Include="bean\psychosis_follow_recordBean.cs" />
+    <Compile Include="bean\psychosis_infoBean.cs" />
     <Compile Include="bean\resident_base_infoBean.cs" />
     <Compile Include="bean\shenghuaBean.cs" />
     <Compile Include="bean\teamDoctorBean.cs" />
@@ -187,6 +189,8 @@
     <Compile Include="dao\PublicHealthDao\diabetesPatientDao.cs" />
     <Compile Include="dao\PublicHealthDao\hypertensionPatientDao.cs" />
     <Compile Include="dao\PublicHealthDao\personalBasicInfoDao.cs" />
+    <Compile Include="dao\PublicHealthDao\psychiatricPatientServicesDao.cs" />
+    <Compile Include="dao\PublicHealthDao\psychiatricPatientServicesDaoS.cs" />
     <Compile Include="dao\SystemSettingsDao\areaConfigDao.cs" />
     <Compile Include="dao\SystemSettingsDao\jkInfoDao.cs" />
     <Compile Include="dao\SystemSettingsDao\basicSettingDao.cs" />
@@ -218,6 +222,8 @@
     <Compile Include="service\PublicHealthService\diabetesPatientService.cs" />
     <Compile Include="service\PublicHealthService\hypertensionPatientService.cs" />
     <Compile Include="service\PublicHealthService\personalBasicInfoService.cs" />
+    <Compile Include="service\PublicHealthService\psychiatricPatientService.cs" />
+    <Compile Include="service\PublicHealthService\psychiatricPatientServiceS.cs" />
     <Compile Include="service\PublicHealthService\tcmHealthService.cs" />
     <Compile Include="utils\CVRSDK.cs" />
     <Compile Include="utils\FileDataAddSql.cs" />
@@ -266,6 +272,30 @@
     </Compile>
     <Compile Include="view\PublicHealthView\addTotuberculosisPatientServices.Designer.cs">
       <DependentUpon>addTotuberculosisPatientServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\aUhealthcheckTooth.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\aUhealthcheckTooth.Designer.cs">
+      <DependentUpon>aUhealthcheckTooth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\aUpsychiatricPatientServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\aUpsychiatricPatientServices.designer.cs">
+      <DependentUpon>aUpsychiatricPatientServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\aUpsychiatricPatientServicesS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\aUpsychiatricPatientServicesS.designer.cs">
+      <DependentUpon>aUpsychiatricPatientServicesS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\aUpsychiatricPatientServicesS1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\aUpsychiatricPatientServicesS1.designer.cs">
+      <DependentUpon>aUpsychiatricPatientServicesS1.cs</DependentUpon>
     </Compile>
     <Compile Include="view\PublicHealthView\childrenCMHealthServices.cs">
       <SubType>Form</SubType>
@@ -332,6 +362,24 @@
     </Compile>
     <Compile Include="view\PublicHealthView\aUolderHelthService.Designer.cs">
       <DependentUpon>aUolderHelthService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\psychiatricPatientServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\psychiatricPatientServices.designer.cs">
+      <DependentUpon>psychiatricPatientServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\psychiatricPatientServicesG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\psychiatricPatientServicesG.designer.cs">
+      <DependentUpon>psychiatricPatientServicesG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\psychiatricPatientServicesS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\psychiatricPatientServicesS.designer.cs">
+      <DependentUpon>psychiatricPatientServicesS.cs</DependentUpon>
     </Compile>
     <Compile Include="view\publicRecord\family_record.cs">
       <SubType>Form</SubType>
@@ -452,12 +500,6 @@
     </Compile>
     <Compile Include="view\PublicHealthView\personRegist.Designer.cs">
       <DependentUpon>personRegist.cs</DependentUpon>
-    </Compile>
-    <Compile Include="view\PublicHealthView\psychiatricPatientServices.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="view\PublicHealthView\psychiatricPatientServices.Designer.cs">
-      <DependentUpon>psychiatricPatientServices.cs</DependentUpon>
     </Compile>
     <Compile Include="view\PublicHealthView\tcmHealthServices.cs">
       <SubType>Form</SubType>
@@ -769,6 +811,18 @@
     <EmbeddedResource Include="view\PublicHealthView\addTotuberculosisPatientServices.resx">
       <DependentUpon>addTotuberculosisPatientServices.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\aUhealthcheckTooth.resx">
+      <DependentUpon>aUhealthcheckTooth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\aUpsychiatricPatientServices.resx">
+      <DependentUpon>aUpsychiatricPatientServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\aUpsychiatricPatientServicesS.resx">
+      <DependentUpon>aUpsychiatricPatientServicesS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\aUpsychiatricPatientServicesS1.resx">
+      <DependentUpon>aUpsychiatricPatientServicesS1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\childrenCMHealthServices.resx">
       <DependentUpon>childrenCMHealthServices.cs</DependentUpon>
     </EmbeddedResource>
@@ -843,6 +897,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\psychiatricPatientServices.resx">
       <DependentUpon>psychiatricPatientServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\psychiatricPatientServicesG.resx">
+      <DependentUpon>psychiatricPatientServicesG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\psychiatricPatientServicesS.resx">
+      <DependentUpon>psychiatricPatientServicesS.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\tcmHealthServices.resx">
       <DependentUpon>tcmHealthServices.cs</DependentUpon>

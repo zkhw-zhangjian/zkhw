@@ -21,6 +21,7 @@ using System.Text;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using zkhwClient.utils;
+using zkhwClient.view;
 
 namespace zkhwClient
 {
@@ -103,8 +104,8 @@ namespace zkhwClient
 
                         TextBox rt = new TextBox();
                         rt.Width = 200;
-                        rt.Height = 40;
-                        rt.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
+                        rt.Height = 35;
+                        rt.Font = new Font("微软雅黑", 13F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(134)));
                         rt.Enabled = false;
                         rt.Text = item.DropDownItems[i].Text;
                         rt.Parent = picb[i];//指定父级
@@ -128,7 +129,7 @@ namespace zkhwClient
                     };
                 }//屏蔽其它功能菜单下拉选
             }
-            socketTcp();
+            //socketTcp();
             //http
             //proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
             //proHttp.StartInfo.CreateNoWindow = true;
@@ -145,7 +146,7 @@ namespace zkhwClient
             //proAsNet.StartInfo.UseShellExecute = true;
             //proAsNet.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             //proAsNet.Start();
-            //Thread.Sleep(230);
+            //Thread.Sleep(300);
             //IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
             //ftp                 
             //proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.05\\ftpservice.exe";
@@ -860,19 +861,19 @@ namespace zkhwClient
         //定时任务获取生化和血球的数据
         private void timer2_Tick(object sender, EventArgs e)
         {
-            //xmlDoc.Load(path);
-            //node = xmlDoc.SelectSingleNode("config/shenghuaPath");
-            //shenghuapath = node.InnerText;
-            //node = xmlDoc.SelectSingleNode("config/xuechangguiPath");
-            //xuechangguipath = node.InnerText;
-            //node = xmlDoc.SelectSingleNode("config/shlasttime");
-            //shlasttime = node.InnerText;
-            //node = xmlDoc.SelectSingleNode("config/xcglasttime");
-            //xcglasttime = node.InnerText;
+            xmlDoc.Load(path);
+            node = xmlDoc.SelectSingleNode("config/shenghuaPath");
+            shenghuapath = node.InnerText;
+            node = xmlDoc.SelectSingleNode("config/xuechangguiPath");
+            xuechangguipath = node.InnerText;
+            node = xmlDoc.SelectSingleNode("config/shlasttime");
+            shlasttime = node.InnerText;
+            node = xmlDoc.SelectSingleNode("config/xcglasttime");
+            xcglasttime = node.InnerText;
 
-            //Thread demoThread = new Thread(new ThreadStart(shAndxcg));
-            //demoThread.IsBackground = true;
-            //demoThread.Start();//启动线程 
+            Thread demoThread = new Thread(new ThreadStart(shAndxcg));
+            demoThread.IsBackground = true;
+            demoThread.Start();//启动线程 
         }
         private void shAndxcg()
         {
@@ -1968,11 +1969,6 @@ namespace zkhwClient
                     }
                }
            }
-        }
-
-        private void 预防接种服务ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

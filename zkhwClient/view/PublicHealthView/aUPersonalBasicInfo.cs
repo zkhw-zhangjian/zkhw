@@ -407,7 +407,13 @@ namespace zkhwClient.view.PublicHealthView
                 drtmp["operation_name"] = hm.operation_name.ToString();
                 drtmp["operation_time"] = hm.operation_time.ToString();
                 drtmp["operation_code"] = hm.operation_code.ToString();
-                goodsList0.Rows.Add(drtmp);
+                if (goodsList0.Rows.Count <= 2)
+                {
+                    goodsList0.Rows.Add(drtmp);
+                }
+                else {
+                    MessageBox.Show("只能添加两条信息！");
+                }
             }
             goodsList0Bind();
         }
@@ -455,9 +461,15 @@ namespace zkhwClient.view.PublicHealthView
                 drtmp["resident_base_info_id"] = id;
                 drtmp["traumatism_name"] = hm.traumatism_name.ToString();
                 drtmp["traumatism_time"] = hm.traumatism_time.ToString();
-
                 drtmp["traumatism_code"] = hm.traumatism_code.ToString();
-                goodsList1.Rows.Add(drtmp);
+                if (goodsList1.Rows.Count <= 2)
+                {
+                    goodsList1.Rows.Add(drtmp);
+                }
+                else
+                {
+                    MessageBox.Show("只能添加两条信息！");
+                }
             }
             goodsList1Bind();
         }
@@ -505,15 +517,20 @@ namespace zkhwClient.view.PublicHealthView
                 drtmp["resident_base_info_id"] = id;
                 drtmp["metachysis_reasonn"] = hm.metachysis_reasonn.ToString();
                 drtmp["metachysis_time"] = hm.metachysis_time.ToString();
-
                 drtmp["metachysis_code"] = hm.metachysis_code.ToString();
-                goodsList2.Rows.Add(drtmp);
+                if (goodsList2.Rows.Count <= 2)
+                {
+                    goodsList2.Rows.Add(drtmp);
+                }
+                else
+                {
+                    MessageBox.Show("只能添加两条信息！");
+                }
             }
             goodsList2Bind();
         }
         private void goodsList2Bind()
         {
-
             this.dataGridView4.DataSource = goodsList2;
             this.dataGridView4.Columns[0].Visible = false;//id
             this.dataGridView4.Columns[1].Visible = false;//resident_base_info_id
@@ -683,7 +700,9 @@ namespace zkhwClient.view.PublicHealthView
             {
                 resident_base_infoBean.pay_type = resident_base_infoBean.pay_type.Substring(1);
             }
-
+            if (this.checkBox8.Checked) {
+                resident_base_infoBean.pay_other = this.textBox38.Text;
+            }
             foreach (Control ctr in this.panel13.Controls)
             {
                 //判断该控件是不是CheckBox
@@ -701,7 +720,10 @@ namespace zkhwClient.view.PublicHealthView
             {
                 resident_base_infoBean.drug_allergy = resident_base_infoBean.drug_allergy.Substring(1);
             }
-
+            if (this.checkBox13.Checked)
+            {
+                resident_base_infoBean.allergy_other = this.textBox39.Text;
+            }
             foreach (Control ctr in this.panel14.Controls)
             {
                 //判断该控件是不是CheckBox
@@ -888,6 +910,29 @@ namespace zkhwClient.view.PublicHealthView
             if (this.checkBox32.Checked)
             {
                 this.checkBox26.Checked = false;
+            }
+        }
+
+        private void checkBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox8.Checked)
+            {
+                this.textBox38.Enabled = true;
+            }
+            else {
+                this.textBox38.Enabled = false;
+            }
+        }
+
+        private void checkBox13_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox13.Checked)
+            {
+                this.textBox39.Enabled = true;
+            }
+            else
+            {
+                this.textBox39.Enabled = false;
             }
         }
     }

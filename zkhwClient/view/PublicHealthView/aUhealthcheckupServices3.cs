@@ -187,43 +187,43 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     for (int i = 0; i < dtZ.Rows.Count; i++)
                     {
-                        if (dt.Rows[i]["hospitalized_type"].ToString() == "1")
+                        if (dtZ.Rows[i]["hospitalized_type"].ToString() == "1")
                         {
 
                             if (j == 0)
                             {
-                                this.dateTimePicker1.Value = DateTime.Parse(dt.Rows[i]["in_hospital_time"].ToString());
-                                this.dateTimePicker2.Value = DateTime.Parse(dt.Rows[i]["leave_hospital_time"].ToString());
-                                this.textBox60.Text = dt.Rows[i]["reason"].ToString();
-                                this.textBox62.Text = dt.Rows[i]["hospital_organ"].ToString();
-                                this.textBox89.Text = dt.Rows[i]["case_code"].ToString();
+                                this.dateTimePicker1.Value = DateTime.Parse(dtZ.Rows[i]["in_hospital_time"].ToString());
+                                this.dateTimePicker2.Value = DateTime.Parse(dtZ.Rows[i]["leave_hospital_time"].ToString());
+                                this.textBox60.Text = dtZ.Rows[i]["reason"].ToString();
+                                this.textBox62.Text = dtZ.Rows[i]["hospital_organ"].ToString();
+                                this.textBox89.Text = dtZ.Rows[i]["case_code"].ToString();
                             }
                             else
                             {
-                                this.dateTimePicker4.Value = DateTime.Parse(dt.Rows[i]["in_hospital_time"].ToString());
-                                this.dateTimePicker3.Value = DateTime.Parse(dt.Rows[i]["leave_hospital_time"].ToString());
-                                this.textBox61.Text = dt.Rows[i]["reason"].ToString();
-                                this.textBox70.Text = dt.Rows[i]["hospital_organ"].ToString();
-                                this.textBox92.Text = dt.Rows[i]["case_code"].ToString();
+                                this.dateTimePicker4.Value = DateTime.Parse(dtZ.Rows[i]["in_hospital_time"].ToString());
+                                this.dateTimePicker3.Value = DateTime.Parse(dtZ.Rows[i]["leave_hospital_time"].ToString());
+                                this.textBox61.Text = dtZ.Rows[i]["reason"].ToString();
+                                this.textBox70.Text = dtZ.Rows[i]["hospital_organ"].ToString();
+                                this.textBox92.Text = dtZ.Rows[i]["case_code"].ToString();
                             }
                             j++;
                         }
                         else {
                             if (k == 0)
                             {
-                                this.dateTimePicker8.Value = DateTime.Parse(dt.Rows[i]["in_hospital_time"].ToString());
-                                this.dateTimePicker7.Value = DateTime.Parse(dt.Rows[i]["leave_hospital_time"].ToString());
-                                this.textBox98.Text = dt.Rows[i]["reason"].ToString();
-                                this.textBox96.Text = dt.Rows[i]["hospital_organ"].ToString();
-                                this.textBox94.Text = dt.Rows[i]["case_code"].ToString();
+                                this.dateTimePicker8.Value = DateTime.Parse(dtZ.Rows[i]["in_hospital_time"].ToString());
+                                this.dateTimePicker7.Value = DateTime.Parse(dtZ.Rows[i]["leave_hospital_time"].ToString());
+                                this.textBox98.Text = dtZ.Rows[i]["reason"].ToString();
+                                this.textBox96.Text = dtZ.Rows[i]["hospital_organ"].ToString();
+                                this.textBox94.Text = dtZ.Rows[i]["case_code"].ToString();
                             }
                             else
                             {
-                                this.dateTimePicker6.Value = DateTime.Parse(dt.Rows[i]["in_hospital_time"].ToString());
-                                this.dateTimePicker5.Value = DateTime.Parse(dt.Rows[i]["leave_hospital_time"].ToString());
-                                this.textBox97.Text = dt.Rows[i]["reason"].ToString();
-                                this.textBox95.Text = dt.Rows[i]["hospital_organ"].ToString();
-                                this.textBox93.Text = dt.Rows[i]["case_code"].ToString();
+                                this.dateTimePicker6.Value = DateTime.Parse(dtZ.Rows[i]["in_hospital_time"].ToString());
+                                this.dateTimePicker5.Value = DateTime.Parse(dtZ.Rows[i]["leave_hospital_time"].ToString());
+                                this.textBox97.Text = dtZ.Rows[i]["reason"].ToString();
+                                this.textBox95.Text = dtZ.Rows[i]["hospital_organ"].ToString();
+                                this.textBox93.Text = dtZ.Rows[i]["case_code"].ToString();
                             }
                             k++;
                         }
@@ -564,6 +564,125 @@ namespace zkhwClient.view.PublicHealthView
                 this.checkBox27.Checked = false;
                 this.checkBox28.Checked = false;
                 this.textBox44.Text = "";
+            }
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton2.Checked)
+            {
+                this.textBox25.Enabled = true;
+            }
+            else {
+                this.textBox25.Enabled = false;
+            }
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton4.Checked)
+            {
+                this.textBox27.Enabled = true;
+            }
+            else
+            {
+                this.textBox27.Enabled = false;
+            }
+        }
+
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton6.Checked)
+            {
+                this.textBox29.Enabled = true;
+            }
+            else
+            {
+                this.textBox29.Enabled = false;
+            }
+        }
+
+        private void radioButton8_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton8.Checked)
+            {
+                this.textBox31.Enabled = true;
+            }
+            else
+            {
+                this.textBox31.Enabled = false;
+            }
+        }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox6.Checked)
+            {
+                this.textBox36.Enabled = true;
+            }
+            else
+            {
+                this.textBox36.Enabled = false;
+            }
+        }
+
+        private void checkBox12_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox12.Checked)
+            {
+                this.textBox38.Enabled = true;
+            }
+            else
+            {
+                this.textBox38.Enabled = false;
+            }
+        }
+
+        private void checkBox19_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox19.Checked)
+            {
+                this.textBox41.Enabled = true;
+            }
+            else
+            {
+                this.textBox41.Enabled = false;
+            }
+        }
+
+        private void checkBox23_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox23.Checked)
+            {
+                this.textBox42.Enabled = true;
+            }
+            else
+            {
+                this.textBox42.Enabled = false;
+            }
+        }
+
+        private void checkBox28_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox28.Checked)
+            {
+                this.textBox44.Enabled = true;
+            }
+            else
+            {
+                this.textBox44.Enabled = false;
+            }
+        }
+
+        private void radioButton40_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton40.Checked)
+            {
+                this.textBox48.Enabled = true;
+            }
+            else
+            {
+                this.textBox48.Enabled = false;
             }
         }
     }

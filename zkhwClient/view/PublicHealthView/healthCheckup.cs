@@ -147,12 +147,11 @@ namespace zkhwClient.view.PublicHealthView
                     auhcs.textBox2.Text = aichive_no;
                     if (check_date != "")
                     {
-                        auhcs.dateTimePicker1.Value = DateTime.ParseExact(check_date, TarStr, format);
+                      auhcs.dateTimePicker1.Value = DateTime.ParseExact(check_date, TarStr, format);
                     }
                     auhcs.textBox51.Text = doctor_name;
-
                     auhcs.Show();
-                    //aUhealthcheckupServices4 auhcs = new aUhealthcheckupServices4();
+                    //aUhealthcheckupServices2 auhcs = new aUhealthcheckupServices2();
                     //auhcs.textBox1.Text = bar_code;
                     //auhcs.textBox2.Text = aichive_no;
                     //auhcs.Show();

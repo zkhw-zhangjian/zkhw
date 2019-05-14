@@ -455,6 +455,162 @@ namespace zkhwClient.view.PublicHealthView
             }
         }
 
+        private void checkBox28_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox28.Checked)
+            {
+                this.textBox11.Enabled = true;
+            }
+            else {
+                this.textBox11.Enabled = false;
+            }
+        }
+
+        private void radioButton17_Click(object sender, EventArgs e)
+        {
+            if (this.radioButton17.Checked) {
+                this.textBox72.Enabled = false;
+            }
+        }
+
+        private void radioButton18_Click(object sender, EventArgs e)
+        {
+            if (this.radioButton18.Checked)
+            {
+                this.textBox72.Enabled = true;
+            }
+        }
+
+        private void radioButton6_Click(object sender, EventArgs e)
+        {
+            if (this.radioButton16.Checked)
+            {
+                this.textBox20.Enabled = false;
+            }
+        }
+
+        private void radioButton10_Click(object sender, EventArgs e)
+        {
+            if (this.radioButton10.Checked)
+            {
+                this.textBox20.Enabled = true;
+            }
+        }
+
+        private void radioButton23_Click(object sender, EventArgs e)
+        {
+            if (this.radioButton23.Checked)
+            {
+                this.textBox80.Enabled = false;
+                this.textBox75.Enabled = false;
+                this.textBox77.Enabled = false;
+            }
+        }
+
+        private void radioButton24_Click(object sender, EventArgs e)
+        {
+            if (this.radioButton24.Checked)
+            {
+                this.textBox80.Enabled = true;
+                this.textBox75.Enabled = true;
+                this.textBox77.Enabled = true;
+            }
+        }
+
+        private void radioButton25_Click(object sender, EventArgs e)
+        {
+            if (this.radioButton25.Checked)
+            {
+                this.textBox80.Enabled = true;
+                this.textBox75.Enabled = true;
+                this.textBox77.Enabled = true;
+            }
+        }
+
+        private void radioButton26_Click(object sender, EventArgs e)
+        {
+            if (this.radioButton26.Checked)
+            {
+                this.textBox80.Enabled = true;
+                this.textBox75.Enabled = true;
+                this.textBox77.Enabled = true;
+            }
+        }
+
+        private void radioButton35_Click(object sender, EventArgs e)
+        {
+            if (this.radioButton35.Checked)
+            {
+                this.textBox29.Enabled = false;
+                this.textBox39.Enabled = false;
+                this.textBox48.Enabled = false;
+            }
+        }
+
+        private void radioButton36_Click(object sender, EventArgs e)
+        {
+            if (this.radioButton36.Checked)
+            {
+                this.textBox29.Enabled = false;
+                this.textBox39.Enabled = true;
+                this.textBox48.Enabled = true;
+            }
+        }
+
+        private void radioButton37_Click(object sender, EventArgs e)
+        {
+            if (this.radioButton37.Checked)
+            {
+                this.textBox29.Enabled = true;
+                this.textBox39.Enabled = true;
+                this.textBox48.Enabled = false;
+            }
+        }
+
+        private void radioButton12_Click(object sender, EventArgs e)
+        {
+            if (this.radioButton12.Checked)
+            {
+                this.textBox25.Enabled = false;
+                this.textBox85.Enabled = false;
+                this.panel8.Enabled = false;
+                this.panel9.Enabled = false;
+            }
+        }
+
+        private void radioButton13_Click(object sender, EventArgs e)
+        {
+            if (this.radioButton13.Checked)
+            {
+                this.textBox25.Enabled = true;
+                this.textBox85.Enabled = true;
+                this.panel8.Enabled = true;
+                this.panel9.Enabled = true;
+            }
+        }
+
+        private void radioButton14_Click(object sender, EventArgs e)
+        {
+            if (this.radioButton14.Checked)
+            {
+                this.textBox25.Enabled = true;
+                this.textBox85.Enabled = true;
+                this.panel8.Enabled = true;
+                this.panel9.Enabled = true;
+            }
+        }
+
+        private void radioButton11_Click(object sender, EventArgs e)
+        {
+            if (this.radioButton11.Checked)
+            {
+                this.textBox25.Enabled = true;
+                this.textBox85.Enabled = true;
+                this.panel8.Enabled = true;
+                this.panel9.Enabled = true;
+            }
+        }
+
         //private void button3_Click(object sender, EventArgs e)
         //{
         //    more0 this = new more0();
@@ -473,7 +629,7 @@ namespace zkhwClient.view.PublicHealthView
         //    }
         //    if (this.ShowDialog() == DialogResult.OK)
         //    {
-                
+
         //    }
         //}
     }

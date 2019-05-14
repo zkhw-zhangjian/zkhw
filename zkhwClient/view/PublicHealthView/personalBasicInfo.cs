@@ -199,6 +199,11 @@ namespace zkhwClient.view.PublicHealthView
                             {
                                 ck.Checked = true;
                             }
+                            if (ck2[i].ToString() == "8")
+                            {
+                                hm.textBox38.Enabled = true;
+                                hm.textBox38.Text = dt.Rows[0]["pay_other"].ToString();
+                            }
                         }
                     }
                 }
@@ -216,6 +221,11 @@ namespace zkhwClient.view.PublicHealthView
                             if (ck2[i].ToString() == ck.Tag.ToString())
                             {
                                 ck.Checked = true;
+                            }
+                            if (ck2[i].ToString() == "5")
+                            {
+                                hm.textBox39.Enabled = true;
+                                hm.textBox39.Text = dt.Rows[0]["allergy_other"].ToString();
                             }
                         }
                     }

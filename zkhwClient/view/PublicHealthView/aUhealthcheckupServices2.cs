@@ -15,6 +15,20 @@ namespace zkhwClient.view.PublicHealthView
         healthCheckupDao hcd = new healthCheckupDao();
         public string id = "";
         DataTable goodsList = new DataTable();//用药记录清单表 follow_medicine_record
+        public string hypodontia1 = "";
+        public string hypodontia2 = "";
+        public string hypodontia3 = "";
+        public string hypodontia4 = "";
+
+        public string caries1 = "";
+        public string caries2 = "";
+        public string caries3 = "";
+        public string caries4 = "";
+
+        public string denture1 = "";
+        public string denture2 = "";
+        public string denture3 = "";
+        public string denture4 = "";
         public aUhealthcheckupServices2()
         {
             InitializeComponent();
@@ -43,22 +57,40 @@ namespace zkhwClient.view.PublicHealthView
                     if (this.radioButton54.Tag.ToString() == dt.Rows[0]["organ_lips"].ToString()) {this.radioButton54.Checked = true; };
                     if (this.radioButton53.Tag.ToString() == dt.Rows[0]["organ_lips"].ToString()) { this.radioButton53.Checked = true; };
 
-                    if (dt.Rows[0]["organ_lips"].ToString() == "1")
+                    foreach (Control ctr in this.panel25.Controls)
                     {
-                            this.checkBox1.Checked = true;
+                        //判断该控件是不是CheckBox
+                        if (ctr is CheckBox)
+                        {
+                            //将ctr转换成CheckBox并赋值给ck
+                            CheckBox ck = ctr as CheckBox;
+                            if (dt.Rows[0]["organ_tooth"].ToString().IndexOf(ck.Tag.ToString()) > -1)
+                            {
+                                ck.Checked = true;
+                                if ("2".Equals(ck.Tag.ToString())) {
+                                    hypodontia1 = dt.Rows[0]["organ_hypodontia_topleft"].ToString();
+                                    hypodontia3 = dt.Rows[0]["organ_hypodontia_topright"].ToString();
+                                    hypodontia2 = dt.Rows[0]["organ_hypodontia_bottomleft"].ToString();
+                                    hypodontia4 = dt.Rows[0]["organ_hypodontia_bottomright"].ToString();
+                                }
+                                if ("3".Equals(ck.Tag.ToString()))
+                                {
+                                    caries1 = dt.Rows[0]["organ_caries_topleft"].ToString();
+                                    caries3 = dt.Rows[0]["organ_caries_topright"].ToString();
+                                    caries2 = dt.Rows[0]["organ_caries_bottomleft"].ToString();
+                                    caries4 = dt.Rows[0]["organ_caries_bottomright"].ToString();
+                                }
+                                if ("4".Equals(ck.Tag.ToString()))
+                                {
+                                    denture1 = dt.Rows[0]["organ_denture_topleft"].ToString();
+                                    denture3 = dt.Rows[0]["organ_denture_topright"].ToString();
+                                    denture2 = dt.Rows[0]["organ_denture_bottomleft"].ToString();
+                                    denture4 = dt.Rows[0]["organ_denture_bottomright"].ToString();
+                                }
+                            }
+                        }
                     }
-                    if (dt.Rows[0]["organ_hypodontia"].ToString() == "2")
-                    {
-                        this.checkBox2.Checked = true;
-                    }
-                    if (dt.Rows[0]["organ_caries"].ToString() == "3")
-                    {
-                        this.checkBox3.Checked = true;
-                    }
-                    if (dt.Rows[0]["organ_denture"].ToString() == "4")
-                    {
-                        this.checkBox4.Checked = true;
-                    }
+                 
                     if (this.radioButton87.Tag.ToString() == dt.Rows[0]["organ_guttur"].ToString()) { this.radioButton87.Checked = true; };
                     if (this.radioButton88.Tag.ToString() == dt.Rows[0]["organ_guttur"].ToString()) { this.radioButton88.Checked = true; };
                     if (this.radioButton89.Tag.ToString() == dt.Rows[0]["organ_guttur"].ToString()) {  this.radioButton89.Checked = true; };
@@ -286,21 +318,48 @@ namespace zkhwClient.view.PublicHealthView
             if (this.radioButton54.Checked == true) { per.organ_lips = this.radioButton54.Tag.ToString(); };
             if (this.radioButton53.Checked == true) { per.organ_lips = this.radioButton53.Tag.ToString(); };
 
-            if (this.checkBox1.Checked) {
-                per.organ_tooth = "1";
-            }
-            if (this.checkBox2.Checked)
+            foreach (Control ctr in this.panel25.Controls)
             {
-                per.organ_hypodontia = "2";
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.organ_tooth += "," + ck.Tag.ToString();
+                    }
+                    if ("checkBox2".Equals(ck.Name))
+                    {
+                        per.organ_hypodontia_topleft = hypodontia1;
+                        per.organ_hypodontia_bottomleft = hypodontia2;
+                        per.organ_hypodontia_topright = hypodontia3;
+                        per.organ_hypodontia_bottomright = hypodontia4;
+                        //per.organ_hypodontia = "1";
+                    }
+                    if ("checkBox3".Equals(ck.Name))
+                    {
+                        per.organ_caries_topleft = caries1;
+                        per.organ_caries_bottomleft = caries2;
+                        per.organ_caries_topright = caries3;
+                        per.organ_caries_bottomright = caries4;
+                        //per.organ_caries = "1";
+                    }
+                    if ("checkBox4".Equals(ck.Name))
+                    {
+                        per.organ_denture_topleft = denture1;
+                        per.organ_denture_bottomleft = denture2;
+                        per.organ_denture_topright = denture3;
+                        per.organ_denture_bottomleft = denture4;
+                        //per.organ_denture = "1";
+                    }
+                }
             }
-            if (this.checkBox3.Checked)
+            if (per.organ_tooth != null && per.organ_tooth != "")
             {
-                per.organ_caries = "3";
+                per.organ_tooth = per.organ_tooth.Substring(1);
             }
-            if (this.checkBox4.Checked)
-            {
-                per.organ_denture = "4";
-            }
+            
             if (this.radioButton87.Checked == true) { per.organ_guttur = this.radioButton87.Tag.ToString(); };
             if (this.radioButton88.Checked == true) { per.organ_guttur = this.radioButton88.Tag.ToString(); };
             if (this.radioButton89.Checked == true) { per.organ_guttur = this.radioButton89.Tag.ToString(); };
@@ -428,7 +487,7 @@ namespace zkhwClient.view.PublicHealthView
             {
                 per.examination_anus = this.radioButton30.Tag.ToString();
                 per.examination_anus_other = this.textBox28.Text;
-            };
+            }
 
             foreach (Control ctr in this.panel10.Controls)
             {
@@ -439,7 +498,7 @@ namespace zkhwClient.view.PublicHealthView
                     CheckBox ck = ctr as CheckBox;
                     if (ck.Checked)
                     {
-                        per.examination_breast = "," + ck.Tag.ToString();
+                        per.examination_breast += "," + ck.Tag.ToString();
                     }
                 }
             }
@@ -534,6 +593,298 @@ namespace zkhwClient.view.PublicHealthView
                 this.checkBox8.Checked = false;
                 this.checkBox9.Checked = false;
                 this.textBox30.Text = "";
+            }
+        }
+
+        private void checkBox2_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox2.Checked) {
+                this.checkBox1.Checked = false;
+                aUhealthcheckTooth auhtt = new aUhealthcheckTooth();
+                auhtt.tabControl1.TabPages.Remove(auhtt.tabPage2);
+                auhtt.tabControl1.TabPages.Remove(auhtt.tabPage3);
+                auhtt.hypodontia1 = hypodontia1;
+                auhtt.hypodontia2 = hypodontia2;
+                auhtt.hypodontia3 = hypodontia3;
+                auhtt.hypodontia4 = hypodontia4;
+                if (auhtt.ShowDialog() == DialogResult.OK) {
+                    hypodontia1 = auhtt.hypodontia1;
+                    hypodontia2 = auhtt.hypodontia2;
+                    hypodontia3 = auhtt.hypodontia3;
+                    hypodontia4 = auhtt.hypodontia4;
+                }
+            }
+        }
+
+        private void checkBox3_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox3.Checked)
+            {
+                this.checkBox1.Checked = false;
+                aUhealthcheckTooth auhtt = new aUhealthcheckTooth();
+                auhtt.tabControl1.TabPages.Remove(auhtt.tabPage1);
+                auhtt.tabControl1.TabPages.Remove(auhtt.tabPage3);
+                auhtt.caries1 = caries1;
+                auhtt.caries2 = caries2;
+                auhtt.caries3 = caries3;
+                auhtt.caries4 = caries4;
+                if (auhtt.ShowDialog() == DialogResult.OK)
+                {
+                    caries1 = auhtt.caries1;
+                    caries2 = auhtt.caries2;
+                    caries3 = auhtt.caries3;
+                    caries4 = auhtt.caries4;
+                }
+            }
+        }
+
+        private void checkBox4_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox4.Checked)
+            {
+                this.checkBox1.Checked = false;
+                aUhealthcheckTooth auhtt = new aUhealthcheckTooth();
+                auhtt.tabControl1.TabPages.Remove(auhtt.tabPage1);
+                auhtt.tabControl1.TabPages.Remove(auhtt.tabPage2);
+                auhtt.denture1 = denture1;
+                auhtt.denture2 = denture2;
+                auhtt.denture3 = denture3;
+                auhtt.denture4 = denture4;
+                if (auhtt.ShowDialog() == DialogResult.OK)
+                {
+                    denture1 = auhtt.denture1;
+                    denture2 = auhtt.denture2;
+                    denture3 = auhtt.denture3;
+                    denture4 = auhtt.denture4;
+                }
+            }
+        }
+
+        private void checkBox1_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox1.Checked)
+            {
+                this.checkBox2.Checked = false;
+                this.checkBox3.Checked = false;
+                this.checkBox4.Checked = false;
+            }
+        }
+
+        private void radioButton6_Click(object sender, EventArgs e)
+        {
+            if (this.radioButton6.Checked) {
+                this.textBox13.Enabled = false;
+            }
+        }
+
+        private void radioButton10_Click(object sender, EventArgs e)
+        {
+            if (this.radioButton10.Checked)
+            {
+                this.textBox13.Enabled = true;
+            }
+        }
+
+        private void radioButton67_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton67.Checked)
+            {
+                this.textBox14.Enabled = true;
+            }
+            else {
+                this.textBox14.Enabled = false;
+            }
+        }
+
+        private void radioButton68_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton68.Checked)
+            {
+                this.textBox15.Enabled = true;
+            }
+            else
+            {
+                this.textBox15.Enabled = false;
+            }
+        }
+
+        private void radioButton69_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton69.Checked)
+            {
+                this.textBox16.Enabled = true;
+            }
+            else
+            {
+                this.textBox16.Enabled = false;
+            }
+        }
+
+        private void radioButton78_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton78.Checked)
+            {
+                this.textBox54.Enabled = true;
+            }
+            else
+            {
+                this.textBox54.Enabled = false;
+            }
+        }
+
+        private void radioButton81_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton81.Checked)
+            {
+                this.textBox59.Enabled = true;
+            }
+            else
+            {
+                this.textBox59.Enabled = false;
+            }
+        }
+
+        private void radioButton79_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton79.Checked)
+            {
+                this.textBox56.Enabled = true;
+            }
+            else
+            {
+                this.textBox56.Enabled = false;
+            }
+        }
+
+        private void radioButton83_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton83.Checked)
+            {
+                this.textBox61.Enabled = true;
+            }
+            else
+            {
+                this.textBox61.Enabled = false;
+            }
+        }
+
+        private void radioButton12_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton12.Checked)
+            {
+                this.textBox7.Enabled = true;
+            }
+            else
+            {
+                this.textBox7.Enabled = false;
+            }
+        }
+
+        private void radioButton14_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton14.Checked)
+            {
+                this.textBox23.Enabled = true;
+            }
+            else
+            {
+                this.textBox23.Enabled = false;
+            }
+        }
+
+        private void radioButton30_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton30.Checked)
+            {
+                this.textBox28.Enabled = true;
+            }
+            else
+            {
+                this.textBox28.Enabled = false;
+            }
+        }
+
+        private void checkBox9_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox9.Checked)
+            {
+                this.textBox30.Enabled = true;
+            }
+            else
+            {
+                this.textBox30.Enabled = false;
+            }
+        }
+
+        private void radioButton39_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton39.Checked)
+            {
+                this.textBox33.Enabled = true;
+            }
+            else
+            {
+                this.textBox33.Enabled = false;
+            }
+        }
+
+        private void radioButton37_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton37.Checked)
+            {
+                this.textBox34.Enabled = true;
+            }
+            else
+            {
+                this.textBox34.Enabled = false;
+            }
+        }
+
+        private void radioButton41_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton41.Checked)
+            {
+                this.textBox36.Enabled = true;
+            }
+            else
+            {
+                this.textBox36.Enabled = false;
+            }
+        }
+
+        private void radioButton43_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton43.Checked)
+            {
+                this.textBox38.Enabled = true;
+            }
+            else
+            {
+                this.textBox38.Enabled = false;
+            }
+        }
+
+        private void radioButton45_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton45.Checked)
+            {
+                this.textBox40.Enabled = true;
+            }
+            else
+            {
+                this.textBox40.Enabled = false;
+            }
+        }
+
+        private void radioButton47_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton47.Checked)
+            {
+                this.textBox94.Enabled = true;
+            }
+            else
+            {
+                this.textBox94.Enabled = false;
             }
         }
     }

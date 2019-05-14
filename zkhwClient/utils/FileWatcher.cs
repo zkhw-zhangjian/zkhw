@@ -214,7 +214,7 @@ namespace zkhwClient
                     //m_watcherAoup.EnableRaisingEvents = false;
                     try
                     {
-                        //File.SetLastWriteTime(e.FullPath, DateTime.Now);//修改txt文件的时间
+                        File.SetLastWriteTime(e.FullPath, DateTime.Now);//修改txt文件的时间
                         #region 心电图
                         XmlDocument doc = new XmlDocument();
                         doc.Load(e.FullPath);

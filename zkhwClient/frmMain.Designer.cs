@@ -253,7 +253,6 @@
             this.儿童中医健康服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.儿童中医健康服务ToolStripMenuItem.Text = "儿童中医健康服务";
             this.儿童中医健康服务ToolStripMenuItem.Visible = false;
-            this.儿童中医健康服务ToolStripMenuItem.Click += new System.EventHandler(this.预防接种服务ToolStripMenuItem_Click);
             // 
             // 家医ToolStripMenuItem
             // 

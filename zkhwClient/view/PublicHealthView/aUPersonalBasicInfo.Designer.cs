@@ -208,6 +208,8 @@
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.textBox38 = new System.Windows.Forms.TextBox();
+            this.textBox39 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel19.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -1323,6 +1325,7 @@
             // panel13
             // 
             this.panel13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel13.Controls.Add(this.textBox39);
             this.panel13.Controls.Add(this.checkBox13);
             this.panel13.Controls.Add(this.checkBox12);
             this.panel13.Controls.Add(this.checkBox11);
@@ -1344,6 +1347,7 @@
             this.checkBox13.Tag = "5";
             this.checkBox13.Text = "5其他";
             this.checkBox13.UseVisualStyleBackColor = true;
+            this.checkBox13.CheckedChanged += new System.EventHandler(this.checkBox13_CheckedChanged);
             // 
             // checkBox12
             // 
@@ -1413,6 +1417,7 @@
             // panel12
             // 
             this.panel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel12.Controls.Add(this.textBox38);
             this.panel12.Controls.Add(this.checkBox8);
             this.panel12.Controls.Add(this.checkBox7);
             this.panel12.Controls.Add(this.checkBox6);
@@ -1437,6 +1442,7 @@
             this.checkBox8.Tag = "8";
             this.checkBox8.Text = "8其他";
             this.checkBox8.UseVisualStyleBackColor = true;
+            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
             // 
             // checkBox7
             // 
@@ -2436,6 +2442,24 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // textBox38
+            // 
+            this.textBox38.Enabled = false;
+            this.textBox38.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox38.Location = new System.Drawing.Point(316, 27);
+            this.textBox38.Name = "textBox38";
+            this.textBox38.Size = new System.Drawing.Size(398, 30);
+            this.textBox38.TabIndex = 74;
+            // 
+            // textBox39
+            // 
+            this.textBox39.Enabled = false;
+            this.textBox39.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox39.Location = new System.Drawing.Point(512, 0);
+            this.textBox39.Name = "textBox39";
+            this.textBox39.Size = new System.Drawing.Size(398, 30);
+            this.textBox39.TabIndex = 75;
+            // 
             // aUPersonalBasicInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2685,5 +2709,7 @@
         public System.Windows.Forms.TextBox textBox36;
         public System.Windows.Forms.TextBox textBox37;
         public System.Windows.Forms.ComboBox comboBox1;
+        public System.Windows.Forms.TextBox textBox38;
+        public System.Windows.Forms.TextBox textBox39;
     }
 }

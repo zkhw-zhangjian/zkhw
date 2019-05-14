@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Windows.Forms;
 using zkhwClient.bean;
 
 namespace zkhwClient.dao

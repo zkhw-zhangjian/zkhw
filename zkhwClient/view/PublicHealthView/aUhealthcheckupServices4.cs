@@ -45,9 +45,9 @@ namespace zkhwClient.view.PublicHealthView
             for (int i = 0; i < dtym.Rows.Count; i++)
             {
                 DataRow drtmp = goodsListym.NewRow();
-                drtmp["vaccination_name"] = dt.Rows[i]["vaccination_name"].ToString();
-                drtmp["vaccination_time"] = dt.Rows[i]["vaccination_time"].ToString();
-                drtmp["vaccination_organ_name"] = dt.Rows[i]["vaccination_organ_name"].ToString();
+                drtmp["vaccination_name"] = dtym.Rows[i]["vaccination_name"].ToString();
+                drtmp["vaccination_time"] = dtym.Rows[i]["vaccination_time"].ToString();
+                drtmp["vaccination_organ_name"] = dtym.Rows[i]["vaccination_organ_name"].ToString();
                 goodsListym.Rows.Add(drtmp);
             }
             goodsListBindym();//加载用药记录清单表
@@ -292,6 +292,23 @@ namespace zkhwClient.view.PublicHealthView
             {
                 goodsListym.Rows.RemoveAt(this.dataGridView2.SelectedRows[0].Index);
                 goodsListBindym();
+            }
+        }
+
+        private void radioButton40_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton40.Checked)
+            {
+                this.textBox48.Enabled = true;
+                this.textBox29.Enabled = true;
+                this.textBox31.Enabled = true;
+                this.textBox33.Enabled = true;
+            }
+            else {
+                this.textBox48.Enabled = false;
+                this.textBox29.Enabled = false;
+                this.textBox31.Enabled = false;
+                this.textBox33.Enabled = false;
             }
         }
     }

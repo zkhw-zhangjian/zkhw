@@ -346,7 +346,7 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(1, 897);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1284, 137);
+            this.groupBox1.Size = new System.Drawing.Size(1314, 137);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             // 
@@ -363,10 +363,11 @@
             // 
             // textBox94
             // 
+            this.textBox94.Enabled = false;
             this.textBox94.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox94.Location = new System.Drawing.Point(187, -1);
             this.textBox94.Name = "textBox94";
-            this.textBox94.Size = new System.Drawing.Size(572, 30);
+            this.textBox94.Size = new System.Drawing.Size(902, 30);
             this.textBox94.TabIndex = 161;
             this.textBox94.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -396,6 +397,7 @@
             this.radioButton47.Tag = "2";
             this.radioButton47.Text = "2异常";
             this.radioButton47.UseVisualStyleBackColor = true;
+            this.radioButton47.CheckedChanged += new System.EventHandler(this.radioButton47_CheckedChanged);
             // 
             // textBox93
             // 
@@ -825,9 +827,11 @@
             this.radioButton14.Tag = "2";
             this.radioButton14.Text = "2有";
             this.radioButton14.UseVisualStyleBackColor = true;
+            this.radioButton14.CheckedChanged += new System.EventHandler(this.radioButton14_CheckedChanged);
             // 
             // textBox23
             // 
+            this.textBox23.Enabled = false;
             this.textBox23.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox23.Location = new System.Drawing.Point(132, 0);
             this.textBox23.Name = "textBox23";
@@ -871,9 +875,11 @@
             this.radioButton83.Tag = "2";
             this.radioButton83.Text = "2有";
             this.radioButton83.UseVisualStyleBackColor = true;
+            this.radioButton83.CheckedChanged += new System.EventHandler(this.radioButton83_CheckedChanged);
             // 
             // textBox61
             // 
+            this.textBox61.Enabled = false;
             this.textBox61.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox61.Location = new System.Drawing.Point(133, -1);
             this.textBox61.Name = "textBox61";
@@ -917,9 +923,11 @@
             this.radioButton12.Tag = "2";
             this.radioButton12.Text = "2有";
             this.radioButton12.UseVisualStyleBackColor = true;
+            this.radioButton12.CheckedChanged += new System.EventHandler(this.radioButton12_CheckedChanged);
             // 
             // textBox7
             // 
+            this.textBox7.Enabled = false;
             this.textBox7.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox7.Location = new System.Drawing.Point(133, 0);
             this.textBox7.Name = "textBox7";
@@ -963,9 +971,11 @@
             this.radioButton79.Tag = "2";
             this.radioButton79.Text = "2有";
             this.radioButton79.UseVisualStyleBackColor = true;
+            this.radioButton79.CheckedChanged += new System.EventHandler(this.radioButton79_CheckedChanged);
             // 
             // textBox56
             // 
+            this.textBox56.Enabled = false;
             this.textBox56.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox56.Location = new System.Drawing.Point(133, -1);
             this.textBox56.Name = "textBox56";
@@ -1009,9 +1019,11 @@
             this.radioButton81.Tag = "2";
             this.radioButton81.Text = "2有";
             this.radioButton81.UseVisualStyleBackColor = true;
+            this.radioButton81.CheckedChanged += new System.EventHandler(this.radioButton81_CheckedChanged);
             // 
             // textBox59
             // 
+            this.textBox59.Enabled = false;
             this.textBox59.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox59.Location = new System.Drawing.Point(133, 0);
             this.textBox59.Name = "textBox59";
@@ -1053,6 +1065,7 @@
             // 
             // textBox40
             // 
+            this.textBox40.Enabled = false;
             this.textBox40.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox40.Location = new System.Drawing.Point(242, -1);
             this.textBox40.Name = "textBox40";
@@ -1086,6 +1099,7 @@
             this.radioButton45.Tag = "2";
             this.radioButton45.Text = "2异常";
             this.radioButton45.UseVisualStyleBackColor = true;
+            this.radioButton45.CheckedChanged += new System.EventHandler(this.radioButton45_CheckedChanged);
             // 
             // textBox48
             // 
@@ -1112,6 +1126,7 @@
             // 
             // textBox38
             // 
+            this.textBox38.Enabled = false;
             this.textBox38.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox38.Location = new System.Drawing.Point(242, -1);
             this.textBox38.Name = "textBox38";
@@ -1145,6 +1160,7 @@
             this.radioButton43.Tag = "2";
             this.radioButton43.Text = "2异常";
             this.radioButton43.UseVisualStyleBackColor = true;
+            this.radioButton43.CheckedChanged += new System.EventHandler(this.radioButton43_CheckedChanged);
             // 
             // textBox39
             // 
@@ -1171,6 +1187,7 @@
             // 
             // textBox36
             // 
+            this.textBox36.Enabled = false;
             this.textBox36.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox36.Location = new System.Drawing.Point(242, -1);
             this.textBox36.Name = "textBox36";
@@ -1204,6 +1221,7 @@
             this.radioButton41.Tag = "2";
             this.radioButton41.Text = "2异常";
             this.radioButton41.UseVisualStyleBackColor = true;
+            this.radioButton41.CheckedChanged += new System.EventHandler(this.radioButton41_CheckedChanged);
             // 
             // textBox37
             // 
@@ -1230,6 +1248,7 @@
             // 
             // textBox34
             // 
+            this.textBox34.Enabled = false;
             this.textBox34.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox34.Location = new System.Drawing.Point(242, -1);
             this.textBox34.Name = "textBox34";
@@ -1263,6 +1282,7 @@
             this.radioButton37.Tag = "2";
             this.radioButton37.Text = "2异常";
             this.radioButton37.UseVisualStyleBackColor = true;
+            this.radioButton37.CheckedChanged += new System.EventHandler(this.radioButton37_CheckedChanged);
             // 
             // textBox35
             // 
@@ -1289,6 +1309,7 @@
             // 
             // textBox33
             // 
+            this.textBox33.Enabled = false;
             this.textBox33.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox33.Location = new System.Drawing.Point(242, -1);
             this.textBox33.Name = "textBox33";
@@ -1322,6 +1343,7 @@
             this.radioButton39.Tag = "2";
             this.radioButton39.Text = "2异常";
             this.radioButton39.UseVisualStyleBackColor = true;
+            this.radioButton39.CheckedChanged += new System.EventHandler(this.radioButton39_CheckedChanged);
             // 
             // textBox32
             // 
@@ -1372,6 +1394,7 @@
             this.checkBox9.Tag = "5";
             this.checkBox9.Text = "5其他";
             this.checkBox9.UseVisualStyleBackColor = true;
+            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
             // 
             // checkBox8
             // 
@@ -1426,6 +1449,7 @@
             // 
             // textBox30
             // 
+            this.textBox30.Enabled = false;
             this.textBox30.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox30.Location = new System.Drawing.Point(614, -1);
             this.textBox30.Name = "textBox30";
@@ -1461,6 +1485,7 @@
             // 
             // textBox28
             // 
+            this.textBox28.Enabled = false;
             this.textBox28.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox28.Location = new System.Drawing.Point(571, -1);
             this.textBox28.Name = "textBox28";
@@ -1480,6 +1505,7 @@
             this.radioButton30.Tag = "5";
             this.radioButton30.Text = "5其他";
             this.radioButton30.UseVisualStyleBackColor = true;
+            this.radioButton30.CheckedChanged += new System.EventHandler(this.radioButton30_CheckedChanged);
             // 
             // radioButton26
             // 
@@ -1780,6 +1806,7 @@
             // 
             // textBox54
             // 
+            this.textBox54.Enabled = false;
             this.textBox54.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox54.Location = new System.Drawing.Point(140, -1);
             this.textBox54.Name = "textBox54";
@@ -1813,6 +1840,7 @@
             this.radioButton78.Tag = "2";
             this.radioButton78.Text = "2有";
             this.radioButton78.UseVisualStyleBackColor = true;
+            this.radioButton78.CheckedChanged += new System.EventHandler(this.radioButton78_CheckedChanged);
             // 
             // textBox53
             // 
@@ -2137,6 +2165,7 @@
             // 
             // textBox16
             // 
+            this.textBox16.Enabled = false;
             this.textBox16.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox16.Location = new System.Drawing.Point(403, -1);
             this.textBox16.Name = "textBox16";
@@ -2156,6 +2185,7 @@
             this.radioButton69.Tag = "4";
             this.radioButton69.Text = "4其他";
             this.radioButton69.UseVisualStyleBackColor = true;
+            this.radioButton69.CheckedChanged += new System.EventHandler(this.radioButton69_CheckedChanged);
             // 
             // radioButton70
             // 
@@ -2223,6 +2253,7 @@
             // 
             // textBox15
             // 
+            this.textBox15.Enabled = false;
             this.textBox15.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox15.Location = new System.Drawing.Point(358, -1);
             this.textBox15.Name = "textBox15";
@@ -2242,6 +2273,7 @@
             this.radioButton68.Tag = "4";
             this.radioButton68.Text = "4其他";
             this.radioButton68.UseVisualStyleBackColor = true;
+            this.radioButton68.CheckedChanged += new System.EventHandler(this.radioButton68_CheckedChanged);
             // 
             // radioButton71
             // 
@@ -2301,6 +2333,7 @@
             // 
             // textBox14
             // 
+            this.textBox14.Enabled = false;
             this.textBox14.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox14.Location = new System.Drawing.Point(661, -1);
             this.textBox14.Name = "textBox14";
@@ -2320,6 +2353,7 @@
             this.radioButton67.Tag = "7";
             this.radioButton67.Text = "7其他";
             this.radioButton67.UseVisualStyleBackColor = true;
+            this.radioButton67.CheckedChanged += new System.EventHandler(this.radioButton67_CheckedChanged);
             // 
             // radioButton66
             // 
@@ -2413,6 +2447,7 @@
             // 
             // textBox13
             // 
+            this.textBox13.Enabled = false;
             this.textBox13.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox13.Location = new System.Drawing.Point(183, -1);
             this.textBox13.Name = "textBox13";
@@ -2433,6 +2468,7 @@
             this.radioButton6.Tag = "1";
             this.radioButton6.Text = "1正常";
             this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioButton6.Click += new System.EventHandler(this.radioButton6_Click);
             // 
             // radioButton10
             // 
@@ -2446,6 +2482,7 @@
             this.radioButton10.Tag = "2";
             this.radioButton10.Text = "2异常";
             this.radioButton10.UseVisualStyleBackColor = true;
+            this.radioButton10.Click += new System.EventHandler(this.radioButton10_Click);
             // 
             // textBox70
             // 
@@ -2533,7 +2570,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 34);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1302, 203);
+            this.groupBox3.Size = new System.Drawing.Size(1282, 203);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
@@ -2609,6 +2646,7 @@
             this.checkBox4.Tag = "4";
             this.checkBox4.Text = "4义牙(假牙)";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.Click += new System.EventHandler(this.checkBox4_Click);
             // 
             // checkBox3
             // 
@@ -2621,6 +2659,7 @@
             this.checkBox3.Tag = "3";
             this.checkBox3.Text = "3龋齿";
             this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.Click += new System.EventHandler(this.checkBox3_Click);
             // 
             // checkBox2
             // 
@@ -2633,6 +2672,7 @@
             this.checkBox2.Tag = "2";
             this.checkBox2.Text = "2缺齿";
             this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.Click += new System.EventHandler(this.checkBox2_Click);
             // 
             // checkBox1
             // 
@@ -2645,6 +2685,7 @@
             this.checkBox1.Tag = "1";
             this.checkBox1.Text = "1正常";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Click += new System.EventHandler(this.checkBox1_Click);
             // 
             // textBox98
             // 

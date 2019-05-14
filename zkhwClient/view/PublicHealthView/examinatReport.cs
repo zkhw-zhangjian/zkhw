@@ -134,11 +134,11 @@ where 1=1";
             {
                 if (!string.IsNullOrWhiteSpace(pairs["timesta"]) && !string.IsNullOrWhiteSpace(pairs["timeend"]))
                 {
-                    sql += $" and date_format(base.create_time,'%Y-%m-%d') between '{pairs["timesta"]}' and '{pairs["timeend"]}'";
+                    sql += $" and date_format(bgdc.createtime,'%Y-%m-%d') between '{pairs["timesta"]}' and '{pairs["timeend"]}'";
                 }
                 if (!string.IsNullOrWhiteSpace(pairs["juming"]))
                 {
-                    sql += $" or base.name like '%{pairs["juming"]}%' or base.id_number like '%{pairs["juming"]}%'";
+                    sql += $" or base.name like '%{pairs["juming"]}%' or base.id_number like '%{pairs["juming"]}%' or base.archive_no like '%{pairs["juming"]}%'";
                 }
                 if (!string.IsNullOrWhiteSpace(pairs["sheng"]))
                 {
@@ -585,7 +585,7 @@ where 1=1";
                 lb.eventInfo = "报告导出异常！" + ex.Message;
                 lb.type = "2";
                 lls.addCheckLog(lb);
-                MessageBox.Show("错误请联系管理员！11" + ex.StackTrace);
+                MessageBox.Show("报告导出异常，请联系管理员！11" + ex.StackTrace);
             }
         }
 
@@ -775,7 +775,7 @@ where 1=1";
 
                 #region 个人信息
                 case "个人信息":
-                    doc = new Document(@str + $"/up/template/个人信息.doc");
+                    doc = new Document(@str + $"/up/template/个人信息档案.doc");
                     builder = new DocumentBuilder(doc);
                     var dics = new Dictionary<string, string>();
                     string grbh = data["archive_no"].ToString();
@@ -801,10 +801,15 @@ where 1=1";
                     string nation = data["nation"].ToString();
                     if (nation != "" && !"".Equals(nation))
                     {
-                        if ("01".Equals(nation)) {
+                        if ("01".Equals(nation))
+                        {
                             dics.Add("民族", nation);
                         }
-                        dics.Add("少数民族名称", Result.GetNationId(nation));
+                        else
+                        {
+                            dics.Add("民族", "99");
+                            dics.Add("少数民族名称", Result.GetNationId(nation));
+                        }
                     }
                     dics.Add("血型", data["blood_group"].ToString());
                     dics.Add("RH", data["blood_rh"].ToString());
@@ -1303,6 +1308,10 @@ where 1=1";
                             jktj.Add("龋齿右下", jkdata.Rows[j]["organ_caries_bottomright"].ToString());
                             jktj.Add("龋齿左上", jkdata.Rows[j]["organ_caries_topleft"].ToString());
                             jktj.Add("龋齿左下", jkdata.Rows[j]["organ_caries_bottomleft"].ToString());
+                            jktj.Add("义齿右上", jkdata.Rows[j]["organ_denture_topright"].ToString());
+                            jktj.Add("义齿右下", jkdata.Rows[j]["organ_denture_bottomright"].ToString());
+                            jktj.Add("义齿左上", jkdata.Rows[j]["organ_denture_topleft"].ToString());
+                            jktj.Add("义齿左下", jkdata.Rows[j]["organ_denture_bottomleft"].ToString());
                             string cl = jkdata.Rows[j]["organ_tooth"].ToString();
                             if (cl.IndexOf(',') >= 0)
                             {
@@ -2158,8 +2167,8 @@ values('{data.Rows[i]["id"]}','{data.Rows[i]["name"]}','{data.Rows[i]["aichive_n
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
-                        sqllist.Add($@"insert into fuv_hypertension (id,name,archive_no,Codebar,id_number,visit_date,visit_type,symptom,other_symptom,sbp,dbp,weight,target_weight,bmi,target_bmi,heart_rate,other_sign,smoken,target_somken,wine,target_wine,sport_week,sport_once,target_sport_week,target_sport_once,salt_intake,target_salt_intake,mind_adjust,doctor_obey,assist_examine,drug_obey,untoward_effect,untoward_effect_drug,visit_class,referral_code,next_visit_date,visit_doctor,advice,create_name,create_time,transfer_organ,transfer_reason
-) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["Codebar"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["visit_type"])},{Ifnull(data.Rows[i]["symptom"])},{Ifnull(data.Rows[i]["other_symptom"])},{Ifnull(data.Rows[i]["sbp"])},{Ifnull(data.Rows[i]["dbp"])},{Ifnull(data.Rows[i]["weight"])},{Ifnull(data.Rows[i]["target_weight"])},{Ifnull(data.Rows[i]["bmi"])},{Ifnull(data.Rows[i]["target_bmi"])},{Ifnull(data.Rows[i]["heart_rate"])},{Ifnull(data.Rows[i]["other_sign"])},{Ifnull(data.Rows[i]["smoken"])},{Ifnull(data.Rows[i]["target_somken"])},{Ifnull(data.Rows[i]["wine"])},{Ifnull(data.Rows[i]["target_wine"])},{Ifnull(data.Rows[i]["sport_week"])},{Ifnull(data.Rows[i]["sport_once"])},{Ifnull(data.Rows[i]["target_sport_week"])},{Ifnull(data.Rows[i]["target_sport_once"])},{Ifnull(data.Rows[i]["salt_intake"])},{Ifnull(data.Rows[i]["target_salt_intake"])},{Ifnull(data.Rows[i]["mind_adjust"])},{Ifnull(data.Rows[i]["doctor_obey"])},{Ifnull(data.Rows[i]["assist_examine"])},{Ifnull(data.Rows[i]["drug_obey"])},{Ifnull(data.Rows[i]["untoward_effect"])},{Ifnull(data.Rows[i]["untoward_effect_drug"])},{Ifnull(data.Rows[i]["visit_class"])},{Ifnull(data.Rows[i]["referral_code"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["advice"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["transfer_organ"])},{Ifnull(data.Rows[i]["transfer_reason"])});");
+                        sqllist.Add($@"insert into fuv_hypertension (id,name,archive_no,id_number,visit_date,visit_type,symptom,other_symptom,sbp,dbp,weight,target_weight,bmi,target_bmi,heart_rate,other_sign,smoken,target_somken,wine,target_wine,sport_week,sport_once,target_sport_week,target_sport_once,salt_intake,target_salt_intake,mind_adjust,doctor_obey,assist_examine,drug_obey,untoward_effect,untoward_effect_drug,visit_class,referral_code,next_visit_date,visit_doctor,advice,create_name,create_time,transfer_organ,transfer_reason
+) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["visit_type"])},{Ifnull(data.Rows[i]["symptom"])},{Ifnull(data.Rows[i]["other_symptom"])},{Ifnull(data.Rows[i]["sbp"])},{Ifnull(data.Rows[i]["dbp"])},{Ifnull(data.Rows[i]["weight"])},{Ifnull(data.Rows[i]["target_weight"])},{Ifnull(data.Rows[i]["bmi"])},{Ifnull(data.Rows[i]["target_bmi"])},{Ifnull(data.Rows[i]["heart_rate"])},{Ifnull(data.Rows[i]["other_sign"])},{Ifnull(data.Rows[i]["smoken"])},{Ifnull(data.Rows[i]["target_somken"])},{Ifnull(data.Rows[i]["wine"])},{Ifnull(data.Rows[i]["target_wine"])},{Ifnull(data.Rows[i]["sport_week"])},{Ifnull(data.Rows[i]["sport_once"])},{Ifnull(data.Rows[i]["target_sport_week"])},{Ifnull(data.Rows[i]["target_sport_once"])},{Ifnull(data.Rows[i]["salt_intake"])},{Ifnull(data.Rows[i]["target_salt_intake"])},{Ifnull(data.Rows[i]["mind_adjust"])},{Ifnull(data.Rows[i]["doctor_obey"])},{Ifnull(data.Rows[i]["assist_examine"])},{Ifnull(data.Rows[i]["drug_obey"])},{Ifnull(data.Rows[i]["untoward_effect"])},{Ifnull(data.Rows[i]["untoward_effect_drug"])},{Ifnull(data.Rows[i]["visit_class"])},{Ifnull(data.Rows[i]["referral_code"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["advice"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["transfer_organ"])},{Ifnull(data.Rows[i]["transfer_reason"])});");
                         fuvid += $"'{data.Rows[i]["id"]}',";
                     }
                 }

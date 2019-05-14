@@ -16,6 +16,7 @@ using zkhwClient.PublicHealth;
 using zkhwClient.view.HomeDoctorSigningView;
 using zkhwClient.view.UseHelpView;
 using zkhwClient.view.setting;
+using zkhwClient.view;
 
 namespace zkhwClient
 {
@@ -24,10 +25,7 @@ namespace zkhwClient
 
         public frmMain1()
         {
-
-
             InitializeComponent();
-
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
