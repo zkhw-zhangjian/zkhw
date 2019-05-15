@@ -263,6 +263,7 @@
             this.button5.TabIndex = 11;
             this.button5.Text = "关闭";
             this.button5.UseVisualStyleBackColor = false;
+            this.button5.Visible = false;
             // 
             // button4
             // 

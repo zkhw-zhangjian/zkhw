@@ -24,14 +24,8 @@ namespace zkhwClient
         service.UserService us = new service.UserService();
         UserDao udao =new UserDao();
         XmlDocument xmlDoc = new XmlDocument();
-        string path = @"config.xml";
-        XmlNode node;
-        string shenghuapath = "";
-        string xuechangguipath = "";
         tjcheckDao tjdao = new tjcheckDao();
         jkInfoDao jkdao = new jkInfoDao();
-        private OleDbDataAdapter oda = null;
-        private DataSet myds_data = null;
         public frmLogin()
         {
             InitializeComponent();

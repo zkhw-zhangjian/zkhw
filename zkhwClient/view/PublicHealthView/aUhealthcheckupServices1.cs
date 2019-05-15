@@ -26,6 +26,22 @@ namespace zkhwClient.view.PublicHealthView
             label51.Left = (this.panel1.Width - this.label51.Width) / 2;
             label51.BringToFront();
 
+            DataTable dtese= hcd.queryelderlySelfcareEstimate(this.textBox2.Text);
+            if (dtese.Rows.Count>0) {
+                int score = Int32.Parse( dtese.Rows[0]["total_score"].ToString());
+                if (score >= 0 && score <= 3) {
+                    this.radioButton8.Checked = true;
+                }else if (score >= 4 && score <= 8)
+                {
+                    this.radioButton9.Checked = true;
+                }else if (score >= 9 && score <= 18)
+                {
+                    this.radioButton16.Checked = true;
+                }else if (score >=19)
+                {
+                    this.radioButton7.Checked = true;
+                }
+            }
             //查询赋值
             if (id != "")
             {

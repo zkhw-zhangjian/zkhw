@@ -55,6 +55,14 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
+        //根据档案号查询老年人生活自理能力评估的分数
+        public DataTable queryelderlySelfcareEstimate(string id)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select id,total_score from elderly_selfcare_estimate where aichive_no= '" + id + "' order by create_time desc limit 1";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
 
         public DataTable queryOlderHelthService0()
         {

@@ -150,6 +150,7 @@ namespace zkhwClient.view.PublicHealthView
                       auhcs.dateTimePicker1.Value = DateTime.ParseExact(check_date, TarStr, format);
                     }
                     auhcs.textBox51.Text = doctor_name;
+                    auhcs.id = id;
                     auhcs.Show();
                     //aUhealthcheckupServices2 auhcs = new aUhealthcheckupServices2();
                     //auhcs.textBox1.Text = bar_code;

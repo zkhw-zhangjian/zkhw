@@ -126,115 +126,141 @@ namespace zkhwClient.view.PublicHealthView
                         }
                     }
                 }
-                #region 气虚质体质
-                a1.Text = "1．得分 " + qxlist.Sum();
-                if (qxlist.Sum() >= 11)
+                if (qxlist.Sum() > hplist.Sum() && qxlist.Sum() > tylist.Sum() && qxlist.Sum() > qylist.Sum() && qxlist.Sum() > xylist.Sum() && qxlist.Sum() > srlist.Sum() && qxlist.Sum() > tslist.Sum() && qxlist.Sum() > yixlist.Sum() && qxlist.Sum() > yxlist.Sum())
                 {
-                    a2.Checked = true;
-                    JingYong("1");
+                    #region 气虚质体质
+                    a1.Text = "1．得分 " + qxlist.Sum();
+                    if (qxlist.Sum() >= 1)
+                    {
+                        a2.Checked = true;
+                        JingYong("1");
+                    }
+                    else if (qxlist.Sum() >= 9 && qxlist.Sum() <= 10)
+                    {
+                        a3.Checked = true;
+                    }
+                    #endregion
                 }
-                else if (qxlist.Sum() >= 9 && qxlist.Sum() <= 10)
+                else if (yxlist.Sum() > hplist.Sum() && yxlist.Sum() > tylist.Sum() && yxlist.Sum() > qylist.Sum() && yxlist.Sum() > xylist.Sum() && yxlist.Sum() > srlist.Sum() && yxlist.Sum() > tslist.Sum() && yxlist.Sum() > yixlist.Sum() && yxlist.Sum() > qxlist.Sum())
                 {
-                    a3.Checked = true;
+                    #region 阳虚质体质
+                    b1.Text = "1．得分 " + yxlist.Sum();
+                    if (yxlist.Sum() >= 11)
+                    {
+                        b2.Checked = true;
+                        JingYong("2");
+                    }
+                    else if (yxlist.Sum() >= 9 && yxlist.Sum() <= 10)
+                    {
+                        b3.Checked = true;
+                    }
+                    #endregion
                 }
-                #endregion
-                #region 阳虚质体质
-                b1.Text = "1．得分 " + yxlist.Sum();
-                if (yxlist.Sum() >= 11)
+                else if (yixlist.Sum() > hplist.Sum() && yixlist.Sum() > tylist.Sum() && yixlist.Sum() > qylist.Sum() && yixlist.Sum() > xylist.Sum() && yixlist.Sum() > srlist.Sum() && yixlist.Sum() > tslist.Sum() && yixlist.Sum() > yxlist.Sum() && yixlist.Sum() > qxlist.Sum())
                 {
-                    b2.Checked = true;
-                    JingYong("2");
+                    #region 阴虚质体质
+                    c1.Text = "1．得分 " + yixlist.Sum();
+                    if (yixlist.Sum() >= 11)
+                    {
+                        c2.Checked = true;
+                        JingYong("3");
+                    }
+                    else if (yixlist.Sum() >= 9 && yixlist.Sum() <= 10)
+                    {
+                        c3.Checked = true;
+                    }
+                    #endregion
                 }
-                else if (yxlist.Sum() >= 9 && yxlist.Sum() <= 10)
+                else if (tslist.Sum() > hplist.Sum() && tslist.Sum() > tylist.Sum() && tslist.Sum() > qylist.Sum() && tslist.Sum() > xylist.Sum() && tslist.Sum() > srlist.Sum() && tslist.Sum() > yixlist.Sum() && tslist.Sum() > yxlist.Sum() && tslist.Sum() > qxlist.Sum())
                 {
-                    b3.Checked = true;
+                    #region 痰湿质体质
+                    d1.Text = "1．得分 " + tslist.Sum();
+                    if (tslist.Sum() >= 11)
+                    {
+                        d2.Checked = true;
+                        JingYong("4");
+                    }
+                    else if (tslist.Sum() >= 9 && tslist.Sum() <= 10)
+                    {
+                        d3.Checked = true;
+                    }
+                    #endregion
                 }
-                #endregion
-                #region 阴虚质体质
-                c1.Text = "1．得分 " + yixlist.Sum();
-                if (yixlist.Sum() >= 11)
+                else if (srlist.Sum() > hplist.Sum() && srlist.Sum() > tylist.Sum() && srlist.Sum() > qylist.Sum() && srlist.Sum() > xylist.Sum() && srlist.Sum() > tslist.Sum() && srlist.Sum() > yixlist.Sum() && srlist.Sum() > yxlist.Sum() && srlist.Sum() > qxlist.Sum())
                 {
-                    c2.Checked = true;
-                    JingYong("3");
+                    #region 湿热质体质
+                    e1.Text = "1．得分 " + srlist.Sum();
+                    if (srlist.Sum() >= 11)
+                    {
+                        e2.Checked = true;
+                        JingYong("5");
+                    }
+                    else if (srlist.Sum() >= 9 && srlist.Sum() <= 10)
+                    {
+                        e3.Checked = true;
+                    }
+                    #endregion
                 }
-                else if (yixlist.Sum() >= 9 && yixlist.Sum() <= 10)
+                else if (xylist.Sum() > hplist.Sum() && xylist.Sum() > tylist.Sum() && xylist.Sum() > qylist.Sum() && xylist.Sum() > srlist.Sum() && xylist.Sum() > tslist.Sum() && xylist.Sum() > yixlist.Sum() && xylist.Sum() > yxlist.Sum() && xylist.Sum() > qxlist.Sum())
                 {
-                    c3.Checked = true;
+                    #region 血瘀质体质
+                    f1.Text = "1．得分 " + xylist.Sum();
+                    if (xylist.Sum() >= 11)
+                    {
+                        f2.Checked = true;
+                        JingYong("6");
+                    }
+                    else if (xylist.Sum() >= 9 && xylist.Sum() <= 10)
+                    {
+                        f3.Checked = true;
+                    }
+                    #endregion
                 }
-                #endregion
-                #region 痰湿质体质
-                d1.Text = "1．得分 " + tslist.Sum();
-                if (tslist.Sum() >= 11)
+                else if (qylist.Sum() > hplist.Sum() && qylist.Sum() > tylist.Sum() && qylist.Sum() > xylist.Sum() && qylist.Sum() > srlist.Sum() && qylist.Sum() > tslist.Sum() && qylist.Sum() > yixlist.Sum() && qylist.Sum() > yxlist.Sum() && qylist.Sum() > qxlist.Sum())
                 {
-                    d2.Checked = true;
-                    JingYong("4");
+                    #region 气郁质体质
+                    g1.Text = "1．得分 " + qylist.Sum();
+                    if (qylist.Sum() >= 11)
+                    {
+                        g2.Checked = true;
+                        JingYong("7");
+                    }
+                    else if (qylist.Sum() >= 9 && qylist.Sum() <= 10)
+                    {
+                        g3.Checked = true;
+                    }
+                    #endregion
                 }
-                else if (tslist.Sum() >= 9 && tslist.Sum() <= 10)
+                else if (tylist.Sum() > hplist.Sum() && tylist.Sum() > qylist.Sum() && tylist.Sum() > xylist.Sum() && tylist.Sum() > srlist.Sum() && tylist.Sum() > tslist.Sum() && tylist.Sum() > yixlist.Sum() && tylist.Sum() > yxlist.Sum() && tylist.Sum() > qxlist.Sum())
                 {
-                    d3.Checked = true;
+                    #region 特禀质体质
+                    h1.Text = "1．得分 " + tylist.Sum();
+                    if (tylist.Sum() >= 11)
+                    {
+                        h2.Checked = true;
+                        JingYong("8");
+                    }
+                    else if (tylist.Sum() >= 9 && tylist.Sum() <= 10)
+                    {
+                        h3.Checked = true;
+                    }
+                    #endregion
                 }
-                #endregion
-                #region 湿热质体质
-                e1.Text = "1．得分 " + srlist.Sum();
-                if (srlist.Sum() >= 11)
+                else if (hplist.Sum() > tylist.Sum() && hplist.Sum() > qylist.Sum() && hplist.Sum() > xylist.Sum() && hplist.Sum() > srlist.Sum() && hplist.Sum() > tslist.Sum() && hplist.Sum() > yixlist.Sum() && hplist.Sum() > yxlist.Sum() && hplist.Sum() > qxlist.Sum())
                 {
-                    e2.Checked = true;
-                    JingYong("5");
+                    #region 平和质体质
+                    i1.Text = "1．得分 " + hplist.Sum();
+                    if (hplist.Sum() >= 17 && qxlist.Sum() <= 8 && yxlist.Sum() <= 8 && yixlist.Sum() <= 8 && tslist.Sum() <= 8 && srlist.Sum() <= 8 && xylist.Sum() <= 8 && qylist.Sum() <= 8 && tylist.Sum() <= 8)
+                    {
+                        i2.Checked = true;
+                        JingYong("9");
+                    }
+                    else if (hplist.Sum() >= 17 && qxlist.Sum() <= 10 && yxlist.Sum() <= 10 && yixlist.Sum() <= 10 && tslist.Sum() <= 10 && srlist.Sum() <= 10 && xylist.Sum() <= 10 && qylist.Sum() <= 10 && tylist.Sum() <= 10)
+                    {
+                        i3.Checked = true;
+                    }
+                    #endregion
                 }
-                else if (srlist.Sum() >= 9 && srlist.Sum() <= 10)
-                {
-                    e3.Checked = true;
-                }
-                #endregion
-                #region 血瘀质体质
-                f1.Text = "1．得分 " + xylist.Sum();
-                if (xylist.Sum() >= 11)
-                {
-                    f2.Checked = true;
-                    JingYong("6");
-                }
-                else if (xylist.Sum() >= 9 && xylist.Sum() <= 10)
-                {
-                    f3.Checked = true;
-                }
-                #endregion
-                #region 气郁质体质
-                g1.Text = "1．得分 " + qylist.Sum();
-                if (qylist.Sum() >= 11)
-                {
-                    g2.Checked = true;
-                    JingYong("7");
-                }
-                else if (qylist.Sum() >= 9 && qylist.Sum() <= 10)
-                {
-                    g3.Checked = true;
-                }
-                #endregion
-                #region 特禀质体质
-                h1.Text = "1．得分 " + tylist.Sum();
-                if (tylist.Sum() >= 11)
-                {
-                    h2.Checked = true;
-                    JingYong("8");
-                }
-                else if (tylist.Sum() >= 9 && tylist.Sum() <= 10)
-                {
-                    h3.Checked = true;
-                }
-                #endregion
-                #region 平和质体质
-                i1.Text = "1．得分 " + hplist.Sum();
-                if (hplist.Sum() >= 17 && qxlist.Sum() <= 8 && yxlist.Sum() <= 8 && yixlist.Sum() <= 8 && tslist.Sum() <= 8 && srlist.Sum() <= 8 && xylist.Sum() <= 8 && qylist.Sum() <= 8 && tylist.Sum() <= 8)
-                {
-                    i2.Checked = true;
-                    JingYong("9");
-                }
-                else if (hplist.Sum() >= 17 && qxlist.Sum() <= 10 && yxlist.Sum() <= 10 && yixlist.Sum() <= 10 && tslist.Sum() <= 10 && srlist.Sum() <= 10 && xylist.Sum() <= 10 && qylist.Sum() <= 10 && tylist.Sum() <= 10)
-                {
-                    i3.Checked = true;
-                }
-                #endregion
-
             }
             catch (Exception es)
             {
