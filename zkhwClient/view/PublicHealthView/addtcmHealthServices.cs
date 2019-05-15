@@ -68,7 +68,7 @@ namespace zkhwClient.view.PublicHealthView
         {
             try
             {
-
+                Clears();
                 string[] bh = GetFen().Split('|');
                 List<int> qxlist = new List<int>();
                 List<int> yxlist = new List<int>();
@@ -132,10 +132,11 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     a2.Checked = true;
                     JingYong("1");
+                    return;
                 }
                 else if (qxlist.Sum() >= 9 && qxlist.Sum() <= 10)
                 {
-                    a3.Checked = true;
+                    a3.Checked = true; JingYong("1"); return;
                 }
                 #endregion
                 #region 阳虚质体质
@@ -144,10 +145,11 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     b2.Checked = true;
                     JingYong("2");
+                    return;
                 }
                 else if (yxlist.Sum() >= 9 && yxlist.Sum() <= 10)
                 {
-                    b3.Checked = true;
+                    b3.Checked = true; JingYong("2"); return;
                 }
                 #endregion
                 #region 阴虚质体质
@@ -156,10 +158,11 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     c2.Checked = true;
                     JingYong("3");
+                    return;
                 }
                 else if (yixlist.Sum() >= 9 && yixlist.Sum() <= 10)
                 {
-                    c3.Checked = true;
+                    c3.Checked = true; JingYong("3"); return;
                 }
                 #endregion
                 #region 痰湿质体质
@@ -168,10 +171,11 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     d2.Checked = true;
                     JingYong("4");
+                    return;
                 }
                 else if (tslist.Sum() >= 9 && tslist.Sum() <= 10)
                 {
-                    d3.Checked = true;
+                    d3.Checked = true; JingYong("4"); return;
                 }
                 #endregion
                 #region 湿热质体质
@@ -180,10 +184,11 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     e2.Checked = true;
                     JingYong("5");
+                    return;
                 }
                 else if (srlist.Sum() >= 9 && srlist.Sum() <= 10)
                 {
-                    e3.Checked = true;
+                    e3.Checked = true; JingYong("5"); return;
                 }
                 #endregion
                 #region 血瘀质体质
@@ -192,10 +197,11 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     f2.Checked = true;
                     JingYong("6");
+                    return;
                 }
                 else if (xylist.Sum() >= 9 && xylist.Sum() <= 10)
                 {
-                    f3.Checked = true;
+                    f3.Checked = true; JingYong("6"); return;
                 }
                 #endregion
                 #region 气郁质体质
@@ -204,10 +210,11 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     g2.Checked = true;
                     JingYong("7");
+                    return;
                 }
                 else if (qylist.Sum() >= 9 && qylist.Sum() <= 10)
                 {
-                    g3.Checked = true;
+                    g3.Checked = true; JingYong("7"); return;
                 }
                 #endregion
                 #region 特禀质体质
@@ -216,10 +223,11 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     h2.Checked = true;
                     JingYong("8");
+                    return;
                 }
                 else if (tylist.Sum() >= 9 && tylist.Sum() <= 10)
                 {
-                    h3.Checked = true;
+                    h3.Checked = true; JingYong("8"); return;
                 }
                 #endregion
                 #region 平和质体质
@@ -228,10 +236,11 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     i2.Checked = true;
                     JingYong("9");
+                    return;
                 }
                 else if (hplist.Sum() >= 17 && qxlist.Sum() <= 10 && yxlist.Sum() <= 10 && yixlist.Sum() <= 10 && tslist.Sum() <= 10 && srlist.Sum() <= 10 && xylist.Sum() <= 10 && qylist.Sum() <= 10 && tylist.Sum() <= 10)
                 {
-                    i3.Checked = true;
+                    i3.Checked = true; JingYong("9"); return;
                 }
                 #endregion
 
@@ -272,12 +281,34 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (((GroupBox)ctrl).Name != "保健" + s)
                     {
+                        ((GroupBox)ctrl).Enabled = false;
                         foreach (Control item in ctrl.Controls)
                         {
                             if (item is CheckBox)
                             {
-                                ((CheckBox)item).Enabled = false;
+                                ((CheckBox)item).Checked = false;
                             }
+                        }
+                    }
+                    else if (((GroupBox)ctrl).Name == "保健" + s)
+                    {
+                        ((GroupBox)ctrl).Enabled = true;
+                    }
+                }
+            }
+        }
+
+        private void Clears()
+        {
+            foreach (Control ctrl in tableLayoutPanel2.Controls)
+            {
+                if (ctrl is GroupBox)
+                {
+                    foreach (Control item in ctrl.Controls)
+                    {
+                        if (item is RadioButton)
+                        {
+                            ((RadioButton)item).Checked = false;
                         }
                     }
                 }
