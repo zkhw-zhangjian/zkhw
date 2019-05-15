@@ -350,6 +350,7 @@ namespace zkhwClient.dao
             DataSet ds = new DataSet();
             String sql = "select sfz_online,sfz_tate,sxt_online,sxt_state,dyj_online,dyj_state,xcg_online,xcg_state,sh_online,sh_state,ncg_online,ncg_state,xdt_online,xdt_state,sgtz_online,sgtz_state,xy_online,xy_state,bc_online,bc_state from zkhw_state_device where ID='1'";
             ds = DbHelperMySQL.Query(sql);
+            if (ds.Tables.Count==0) { return null; }
             return ds.Tables[0];
         }
 

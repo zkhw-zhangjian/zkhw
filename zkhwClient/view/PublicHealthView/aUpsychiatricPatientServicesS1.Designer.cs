@@ -215,7 +215,7 @@
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Location = new System.Drawing.Point(149, 295);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 30);
+            this.dateTimePicker1.Size = new System.Drawing.Size(207, 30);
             this.dateTimePicker1.TabIndex = 135;
             // 
             // textBox28

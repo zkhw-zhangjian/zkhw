@@ -95,6 +95,7 @@ namespace zkhwClient.view.PublicHealthView
                 string aichive_no = this.dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
                 string id_number = this.dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
                 string id = this.dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
+
                 if (aichive_no != null && !"".Equals(aichive_no))
                 {
                     aUpsychiatricPatientServicesS hm = new aUpsychiatricPatientServicesS();
@@ -164,6 +165,49 @@ namespace zkhwClient.view.PublicHealthView
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             this.label2.Visible = this.textBox1.Text.Length < 1;
+        }
+
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            shengcode = this.comboBox1.SelectedValue.ToString();
+            this.comboBox2.DataSource = areadao.shiInfo(shengcode);//绑定数据源
+            this.comboBox2.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox2.ValueMember = "code";//操作时获取的值 
+            this.comboBox3.DataSource = null;
+            this.comboBox4.DataSource = null;
+            this.comboBox5.DataSource = null;
+        }
+
+        private void comboBox2_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            shicode = this.comboBox2.SelectedValue.ToString();
+            this.comboBox3.DataSource = areadao.quxianInfo(shicode);//绑定数据源
+            this.comboBox3.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox3.ValueMember = "code";//操作时获取的值 
+            this.comboBox4.DataSource = null;
+            this.comboBox5.DataSource = null;
+        }
+
+        private void comboBox3_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            qxcode = this.comboBox3.SelectedValue.ToString();
+            this.comboBox4.DataSource = areadao.zhenInfo(qxcode);//绑定数据源
+            this.comboBox4.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox4.ValueMember = "code";//操作时获取的值 
+            this.comboBox5.DataSource = null;
+        }
+
+        private void comboBox4_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            xzcode = this.comboBox4.SelectedValue.ToString();
+            this.comboBox5.DataSource = areadao.cunInfo(xzcode);//绑定数据源
+            this.comboBox5.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox5.ValueMember = "code";//操作时获取的值 
+        }
+
+        private void comboBox5_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            xcuncode = this.comboBox5.SelectedValue.ToString();
         }
     }
 }

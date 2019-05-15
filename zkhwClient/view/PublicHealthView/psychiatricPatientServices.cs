@@ -20,7 +20,7 @@ namespace zkhwClient.view
         private void tabControl1_Selected(object sender, EventArgs e)
         {
             int page = this.tabControl1.SelectedIndex;
-            if (page == 0)
+            if (page==0)
             {
                 psychiatricPatientServicesG pR = new psychiatricPatientServicesG();
                 pR.TopLevel = false;
@@ -29,8 +29,6 @@ namespace zkhwClient.view
                 this.panel1.Controls.Clear();
                 this.panel1.Controls.Add(pR);
                 pR.Show();
-
-
             }
             else
             {
@@ -41,7 +39,6 @@ namespace zkhwClient.view
                 this.panel1.Controls.Clear();
                 this.panel1.Controls.Add(pR);
                 pR.Show();
-
             }
         }
 

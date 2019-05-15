@@ -3517,7 +3517,7 @@
             this.label46.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label46.Location = new System.Drawing.Point(3, 161);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(80, 76);
+            this.label46.Size = new System.Drawing.Size(80, 61);
             this.label46.TabIndex = 82;
             this.label46.Text = "中医药\r\n保健\r\n指导";
             // 
@@ -4799,9 +4799,9 @@
             this.tableLayoutPanel2.Controls.Add(this.label43, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label44, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.气虚质体质, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label46, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.保健1, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.计算, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label46, 0, 2);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(7, 635);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;

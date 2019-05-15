@@ -23,5 +23,12 @@ namespace zkhwClient.dao
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
+        public DataTable checkTcmHealthServicesByno(string code)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select id from elderly_tcm_record where aichive_no = '" + code + "'";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
     }
 }

@@ -263,7 +263,10 @@ namespace zkhwClient.view
                 aUpsychiatricPatientServicesS1 auhc1 = new aUpsychiatricPatientServicesS1();
                 auhc1.id = id;//祖
                 auhc1.archive_no = this.textBox39.Text.Replace(" ", "");
-                auhc1.Show(); 
+                if (auhc1.ShowDialog()==DialogResult.OK) {
+                    this.DialogResult = DialogResult.OK;
+                    MessageBox.Show("数据保存成功!");
+                }
             }
             else
             {

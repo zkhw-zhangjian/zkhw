@@ -6,16 +6,16 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using zkhwClient.bean;
 
 namespace zkhwClient.view
 {
     public partial class aUpsychiatricPatientServicesS1 : Form
     {
-
         service.psychiatricPatientServiceS psychiatricPatientS = new service.psychiatricPatientServiceS();
         public string id = ""; 
-        public string archive_no = ""; 
-         DataTable goodsList = new DataTable();//用药记录清单表 follow_medicine_record
+        public string archive_no = "";
+        DataTable goodsList = new DataTable();//用药记录清单表 follow_medicine_record
         public aUpsychiatricPatientServicesS1()
         {
             InitializeComponent();
@@ -56,15 +56,19 @@ namespace zkhwClient.view
                             }
                         }
                     }
-
-                    this.dateTimePicker1.Value = DateTime.Parse(dt.Rows[0]["next_visit_date"].ToString());
+                    string next_visit_date=dt.Rows[0]["next_visit_date"].ToString();
+                    if (next_visit_date == null || "".Equals(next_visit_date))
+                    {
+                        this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
+                    }
+                    else
+                    {
+                        this.dateTimePicker1.Value = DateTime.Parse(dt.Rows[0]["next_visit_date"].ToString());
+                    }
                     this.textBox6.Text = dt.Rows[0]["visit_doctor"].ToString();
 
                     if (this.radioButton28.Text == dt.Rows[0]["next_visit_classify"].ToString()) {  this.radioButton28.Checked = true; };
                     if (this.radioButton29.Text == dt.Rows[0]["next_visit_classify"].ToString()) { this.radioButton29.Checked = true; };
-
-
-
                 }
 
                 DataTable dt1 = psychiatricPatientS.queryFollow_medicine_record(id);
@@ -91,16 +95,15 @@ namespace zkhwClient.view
 
         private void button4_Click(object sender, EventArgs e)
         {
-            bean.psychosis_follow_recordBean psychosis_follow_recordBean = new bean.psychosis_follow_recordBean();
+            psychosis_follow_recordBean psychosis_follow_recordbean = new psychosis_follow_recordBean();
+            if (this.radioButton54.Checked == true) { psychosis_follow_recordbean.transfer_treatment = this.radioButton54.Text; };
+            if (this.radioButton55.Checked == true) { psychosis_follow_recordbean.transfer_treatment = this.radioButton55.Text; };
 
-            if (this.radioButton54.Checked == true) { psychosis_follow_recordBean.transfer_treatment = this.radioButton54.Text; };
-            if (this.radioButton55.Checked == true) { psychosis_follow_recordBean.transfer_treatment = this.radioButton55.Text; };
+            psychosis_follow_recordbean.transfer_treatment_reason = this.textBox26.Text.Replace(" ", "");
 
-            psychosis_follow_recordBean.transfer_treatment_reason = this.textBox26.Text.Replace(" ", "");
-
-            if (this.radioButton25.Checked == true) { psychosis_follow_recordBean.treatment_effect = this.radioButton25.Text; };
-            if (this.radioButton8.Checked == true) { psychosis_follow_recordBean.treatment_effect = this.radioButton8.Text; };
-            if (this.radioButton9.Checked == true) { psychosis_follow_recordBean.treatment_effect = this.radioButton9.Text; };
+            if (this.radioButton25.Checked == true) { psychosis_follow_recordbean.treatment_effect = this.radioButton25.Text; };
+            if (this.radioButton8.Checked == true) { psychosis_follow_recordbean.treatment_effect = this.radioButton8.Text; };
+            if (this.radioButton9.Checked == true) { psychosis_follow_recordbean.treatment_effect = this.radioButton9.Text; };
 
 
             foreach (Control ctr in this.panel5.Controls)
@@ -112,22 +115,22 @@ namespace zkhwClient.view
                     CheckBox ck = ctr as CheckBox;
                     if (ck.Checked)
                     {
-                        psychosis_follow_recordBean.rehabilitation_measure += "," + ck.Text;
+                        psychosis_follow_recordbean.rehabilitation_measure += "," + ck.Text;
                     }
                 }
             }
-            if (psychosis_follow_recordBean.rehabilitation_measure != null && psychosis_follow_recordBean.rehabilitation_measure != "")
+            if (psychosis_follow_recordbean.rehabilitation_measure != null && psychosis_follow_recordbean.rehabilitation_measure != "")
             {
-                psychosis_follow_recordBean.rehabilitation_measure = psychosis_follow_recordBean.rehabilitation_measure.Substring(1);
+                psychosis_follow_recordbean.rehabilitation_measure = psychosis_follow_recordbean.rehabilitation_measure.Substring(1);
             }
-            psychosis_follow_recordBean.next_visit_date = this.dateTimePicker1.Value.ToString();
-            psychosis_follow_recordBean.visit_doctor = this.textBox6.Text.Replace(" ", "");
+            psychosis_follow_recordbean.next_visit_date = this.dateTimePicker1.Text;
+            psychosis_follow_recordbean.visit_doctor = this.textBox6.Text.Replace(" ", "");
 
-            if (this.radioButton28.Checked == true) { psychosis_follow_recordBean.next_visit_classify = this.radioButton28.Text; };
-            if (this.radioButton29.Checked == true) { psychosis_follow_recordBean.next_visit_classify = this.radioButton29.Text; };
+            if (this.radioButton28.Checked == true) { psychosis_follow_recordbean.next_visit_classify = this.radioButton28.Text; };
+            if (this.radioButton29.Checked == true) { psychosis_follow_recordbean.next_visit_classify = this.radioButton29.Text; };
 
 
-            bool isfalse = psychiatricPatientS.aUPsychosis_follow_record(psychosis_follow_recordBean,id,goodsList);
+            bool isfalse = psychiatricPatientS.aUPsychosis_follow_record(psychosis_follow_recordbean,id,goodsList);
             if (isfalse)
             {
                 this.DialogResult = DialogResult.OK;

@@ -218,8 +218,8 @@ namespace zkhwClient.view.PublicHealthView
                 byte[] birthday = new byte[30];
                 length = 16;
                 CVRSDK.GetPeopleBirthday(ref birthday[0], ref length);
-                byte[] address = new byte[30];
-                length = 70;
+                byte[] address = new byte[40];
+                length = 80;
                 CVRSDK.GetPeopleAddress(ref address[0], ref length);
                 byte[] validtermOfEnd = new byte[30];
                 length = 16;

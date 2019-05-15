@@ -2,6 +2,7 @@
 using System.Data;
 using zkhwClient.bean;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace zkhwClient.dao
 {
@@ -28,6 +29,7 @@ namespace zkhwClient.dao
             DataSet ds = new DataSet();
             ds.Clear();
             ds = DbHelperMySQL.Query(sql);
+            if (ds.Tables.Count==0) { MessageBox.Show("未查询到数据!");return null; }
             return ds.Tables[0];
         }
         public bool addUser(bean.UserInfo ui)

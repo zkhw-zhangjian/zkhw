@@ -57,8 +57,8 @@ namespace zkhwClient
             basicSet.Show();
             dttv = grjddao.checkThresholdValues();//获取阈值信息
             this.timer1.Start();//时间控件定时器
-            this.timer2.Interval = Int32.Parse(Properties.Settings.Default.timeInterval);
-            this.timer2.Start();//定时获取生化和血球的数据
+            //this.timer2.Interval = Int32.Parse(Properties.Settings.Default.timeInterval);
+            //this.timer2.Start();//定时获取生化和血球的数据
 
             this.timer3.Interval =Int32.Parse(Properties.Settings.Default.timer3Interval);
             this.timer3.Start();//1分钟定时刷新设备状态
@@ -177,14 +177,14 @@ namespace zkhwClient
             DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                if (!proHttp.HasExited)
-                {
-                    proHttp.Kill();
-                }
-                if (!proAsNet.HasExited)
-                {
-                    proAsNet.Kill();
-                }
+                //if (!proHttp.HasExited)
+                //{
+                //    proHttp.Kill();
+                //}
+                //if (!proAsNet.HasExited)
+                //{
+                //    proAsNet.Kill();
+                //}
                 //if (!proFtp.HasExited)
                 //{
                 //    proFtp.Kill();
@@ -828,14 +828,14 @@ namespace zkhwClient
             DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                if (!proHttp.HasExited)
-                {
-                    proHttp.Kill();
-                }
-                if (!proAsNet.HasExited)
-                {
-                    proAsNet.Kill();
-                }
+                //if (!proHttp.HasExited)
+                //{
+                //    proHttp.Kill();
+                //}
+                //if (!proAsNet.HasExited)
+                //{
+                //    proAsNet.Kill();
+                //}
                 //if (!proFtp.HasExited)
                 //{
                 //    proFtp.Kill();

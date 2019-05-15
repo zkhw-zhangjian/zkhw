@@ -46,7 +46,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1074, 0);
+            this.tabControl1.Size = new System.Drawing.Size(1074, 28);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.Tag = "";
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_Selected);
@@ -57,7 +57,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 30);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1066, 0);
+            this.tabPage1.Size = new System.Drawing.Size(1066, 74);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "患者信息";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -77,9 +77,9 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Location = new System.Drawing.Point(0, 30);
+            this.panel1.Location = new System.Drawing.Point(4, 30);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1074, 720);
+            this.panel1.Size = new System.Drawing.Size(1070, 719);
             this.panel1.TabIndex = 1;
             // 
             // psychiatricPatientServices
@@ -101,7 +101,7 @@
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        public System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Panel panel1;
     }
 }

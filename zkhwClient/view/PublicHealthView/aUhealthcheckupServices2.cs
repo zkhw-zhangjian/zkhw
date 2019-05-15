@@ -475,7 +475,7 @@ namespace zkhwClient.view.PublicHealthView
             if (this.radioButton15.Checked == true) { per.examination_lowerextremity_edema = this.radioButton15.Tag.ToString(); };
 
             if (this.radioButton24.Checked == true) { per.examination_dorsal_artery = this.radioButton24.Tag.ToString(); };
-            if (this.radioButton25.Checked == true) { per.examination_dorsal_artery = this.radioButton24.Tag.ToString(); };
+            if (this.radioButton25.Checked == true) { per.examination_dorsal_artery = this.radioButton25.Tag.ToString(); };
             if (this.radioButton23.Checked == true) { per.examination_dorsal_artery = this.radioButton23.Tag.ToString(); };
             if (this.radioButton22.Checked == true) { per.examination_dorsal_artery = this.radioButton22.Tag.ToString(); };
 
