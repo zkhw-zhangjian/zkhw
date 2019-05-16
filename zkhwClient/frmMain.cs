@@ -1649,6 +1649,9 @@ namespace zkhwClient
         private void timer3_Tick(object sender, EventArgs e)
         {
           DataTable dtDeviceType = tjdao.checkDevice();
+            if (dtDeviceType==null|| dtDeviceType.Rows.Count<1) {
+                return;
+            }
           string sfz_online = dtDeviceType.Rows[0]["sfz_online"].ToString();
             if (sfz_online == "0" || "0".Equals(sfz_online))
             {

@@ -346,7 +346,7 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(1, 897);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1314, 137);
+            this.groupBox1.Size = new System.Drawing.Size(1304, 137);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             // 
@@ -1884,8 +1884,8 @@
             this.radioButton18.Size = new System.Drawing.Size(122, 24);
             this.radioButton18.TabIndex = 32;
             this.radioButton18.TabStop = true;
-            this.radioButton18.Tag = "2";
-            this.radioButton18.Text = "2绝对不齐";
+            this.radioButton18.Tag = "3";
+            this.radioButton18.Text = "3绝对不齐";
             this.radioButton18.UseVisualStyleBackColor = true;
             // 
             // radioButton16
@@ -2570,7 +2570,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 34);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1282, 203);
+            this.groupBox3.Size = new System.Drawing.Size(1272, 203);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
