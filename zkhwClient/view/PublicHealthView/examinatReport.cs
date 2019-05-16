@@ -126,7 +126,7 @@ base.id_number 身份证号,
 base.upload_status 是否同步,
 bgdc.BaoGaoShengChan 报告生成时间
 from resident_base_info base
-join 
+left join 
 (select * from zkhw_tj_bgdc group by aichive_no order by createtime desc) bgdc
 on base.archive_no=bgdc.aichive_no
 where 1=1";
@@ -134,7 +134,7 @@ where 1=1";
             {
                 if (!string.IsNullOrWhiteSpace(pairs["timesta"]) && !string.IsNullOrWhiteSpace(pairs["timeend"]))
                 {
-                    sql += $" and date_format(bgdc.createtime,'%Y-%m-%d') between '{pairs["timesta"]}' and '{pairs["timeend"]}'";
+                    sql += $" and date_format(base.create_time,'%Y-%m-%d') between '{pairs["timesta"]}' and '{pairs["timeend"]}'";
                 }
                 if (!string.IsNullOrWhiteSpace(pairs["juming"]))
                 {
@@ -801,6 +801,9 @@ where 1=1";
                     string nation = data["nation"].ToString();
                     if (nation != "" && !"".Equals(nation))
                     {
+                        if (nation.Length==1) {
+                            nation = "0" + nation;
+                        }
                         if ("01".Equals(nation))
                         {
                             dics.Add("民族", nation);
