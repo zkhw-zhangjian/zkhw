@@ -592,6 +592,12 @@
     <Compile Include="view\SystemSettingsView\basicInfoInit.Designer.cs">
       <DependentUpon>basicInfoInit.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\SystemSettingsView\Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SystemSettingsView\Form2.designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\SystemSettingsView\passWordUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -969,6 +975,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\SystemSettingsView\basicInfoInit.resx">
       <DependentUpon>basicInfoInit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\SystemSettingsView\Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\SystemSettingsView\passWordUpdate.resx">
       <DependentUpon>passWordUpdate.cs</DependentUpon>

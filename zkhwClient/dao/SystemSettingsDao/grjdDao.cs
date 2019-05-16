@@ -15,7 +15,7 @@ namespace zkhwClient.dao
             return ds.Tables[0];
         }
         //根据姓名和出生年月判断是否已存在居民档案信息
-        public DataTable judgeRepeatBync(string name,string birthday)
+        public DataTable judgeRepeatBync(string name, string birthday)
         {
             DataSet ds = new DataSet();
             string sql = "select name,sex,birthday,id_number,card_pic,address,nation,archive_no from resident_base_info a where a.name = '" + name + "' and a.birthday = '" + birthday + "'";
@@ -27,16 +27,16 @@ namespace zkhwClient.dao
         {
             int rt = 0;
             string id = Result.GetNewId();
-            string time=DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string status = "1";
-            String sql = "insert into resident_base_info (id,archive_no,name,sex,birthday,age,id_number,card_pic,address,residence_address,province_code,province_name,city_code,city_name,county_code,county_name,towns_code,towns_name,village_code,village_name,photo_code,status,create_time,create_name,aichive_org,doctor_name,create_archives_name,create_org,create_org_name,upload_status) values ('" + 
-                id + "','" + grjd.archive_no + "','" + grjd.name + "','" + grjd.Sex + "', '" + grjd.Birthday + "', '" + grjd.age + "', '" + grjd.Cardcode + "', '" + grjd.CardPic + "', '" + grjd.Zhuzhi + "', '" + grjd.residence_address + "', '" + grjd.province_code + "', '" + grjd.province_name + "', '" + grjd.city_code + "', '" + grjd.city_name + "', '" + grjd.county_code + "', '" + grjd.county_name + "', '" + grjd.towns_code + "', '" + grjd.towns_name + "', '" + grjd.village_code + "', '" + grjd.village_name + "', '" + grjd.photo_code + "', '" + status + "', '" 
+            String sql = "insert into resident_base_info (id,archive_no,name,sex,birthday,age,id_number,card_pic,address,residence_address,province_code,province_name,city_code,city_name,county_code,county_name,towns_code,towns_name,village_code,village_name,photo_code,status,create_time,create_name,aichive_org,doctor_name,create_archives_name,create_org,create_org_name,upload_status) values ('" +
+                id + "','" + grjd.archive_no + "','" + grjd.name + "','" + grjd.Sex + "', '" + grjd.Birthday + "', '" + grjd.age + "', '" + grjd.Cardcode + "', '" + grjd.CardPic + "', '" + grjd.Zhuzhi + "', '" + grjd.residence_address + "', '" + grjd.province_code + "', '" + grjd.province_name + "', '" + grjd.city_code + "', '" + grjd.city_name + "', '" + grjd.county_code + "', '" + grjd.county_name + "', '" + grjd.towns_code + "', '" + grjd.towns_name + "', '" + grjd.village_code + "', '" + grjd.village_name + "', '" + grjd.photo_code + "', '" + status + "', '"
                 + time + "', '" + frmLogin.name + "', '" + grjd.aichive_org + "', '" + grjd.doctor_name + "', '" + grjd.create_archives_name + "', '" + frmLogin.organCode + "', '" + frmLogin.organName + "','0')";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
         //添加居民健康体检表信息
-        public bool addPhysicalExaminationInfo(bean.grjdxxBean grjd,string barcode)
+        public bool addPhysicalExaminationInfo(bean.grjdxxBean grjd, string barcode)
         {
             int rt = 0;
             string id = Result.GetNewId();
@@ -59,7 +59,7 @@ namespace zkhwClient.dao
         }
 
         //保存体检统计信息
-        public bool addBgdcInfo(bean.grjdxxBean grjbxx,string barcode,string xcuncode)
+        public bool addBgdcInfo(bean.grjdxxBean grjbxx, string barcode, string xcuncode)
         {
             int rt = 0;
             string id = Result.GetNewId();
@@ -89,7 +89,7 @@ namespace zkhwClient.dao
         }
 
         //获取已登记的总人数
-        public DataTable jkAllNum(string areacode,string time)
+        public DataTable jkAllNum(string areacode, string time)
         {
             DataSet ds = new DataSet();
             string sql = "select count(1) from zkhw_tj_jk a where a.village_code = '" + areacode + "' and a.createtime >= '" + time + "'";
@@ -103,6 +103,12 @@ namespace zkhwClient.dao
             string sql = "select class_type,type,warning_min,warning_max,threshold_min,threshold_max from threshold_value a where 1=1";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
+        }
+        public void updateGrjdInfo(string id)
+        {
+            string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            String sql = @"update resident_base_info set create_time='" + time + "' where archive = '" + id + "'";
+           DbHelperMySQL.ExecuteSql(sql);
         }
     }
 }

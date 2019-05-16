@@ -449,6 +449,8 @@ namespace zkhwClient.view.PublicHealthView
                 grjdxx.photo_code = grjdxx.Cardcode + ".jpg";
                 grjdxx.age = DateTime.Now.Year - Int32.Parse(grjdxx.Birthday.Substring(0, 4));
                 grjdxx.aichive_org = basicInfoSettings.organ_name;
+                grjdxx.create_org = frmLogin.organCode;
+                grjdxx.create_org_name= basicInfoSettings.organ_name;
                 grjdxx.doctor_name = basicInfoSettings.zeren_doctor;
                 grjdxx.create_archives_name = basicInfoSettings.input_name;
                 grjdxx.residence_address = basicInfoSettings.allareaname;
@@ -519,6 +521,7 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 else {
                     grjdxx.archive_no = dt.Rows[0]["archive_no"].ToString();
+                    grjddao.updateGrjdInfo(grjdxx.archive_no);
                 }
                 grjddao.addPhysicalExaminationInfo(grjdxx, barcode);//添加健康体检表信息 
                 jkBean jk = new jkBean();
