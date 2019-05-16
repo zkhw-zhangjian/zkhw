@@ -54,6 +54,7 @@ namespace zkhwClient.view.PublicHealthView
                     this.dateTimePicker1.Value = DateTime.Parse(dt.Rows[0]["check_date"].ToString());
                     this.textBox51.Text = dt.Rows[0]["doctor_name"].ToString();
                     this.textBox120.Text = dt.Rows[0]["id"].ToString();
+                    this.checkBox21.Checked = false;
                     foreach (Control ctr in this.groupBox3.Controls)
                     {
                         //判断该控件是不是CheckBox
@@ -162,7 +163,7 @@ namespace zkhwClient.view.PublicHealthView
                         {
                             //将ctr转换成CheckBox并赋值给ck
                             CheckBox ck = ctr as CheckBox;
-                            if (dt.Rows[0]["lifeway_drink_type"].ToString().IndexOf(ck.Text) > -1)
+                            if (dt.Rows[0]["lifeway_drink_type"].ToString().IndexOf(ck.Tag.ToString()) > -1)
                             {
                                 ck.Checked = true;
                             }

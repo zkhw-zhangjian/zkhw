@@ -2108,7 +2108,7 @@ where 1=1";
                 string bcid = string.Empty;
 
                 #region 个人信息
-                DataSet info = DbHelperMySQL.Query($@"select * from resident_base_info where upload_status='0'");
+                DataSet info = DbHelperMySQL.Query($@"select * from resident_base_info where upload_status ='0'");
                 if (info != null && info.Tables.Count > 0 && info.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = info.Tables[0];
@@ -2135,7 +2135,7 @@ values('{data.Rows[i]["id"]}','{data.Rows[i]["name"]}','{data.Rows[i]["aichive_n
                 }
                 #endregion
 
-                #region 老年人健康服务
+                #region 老年人生活自理评估
                 DataSet estimate = DbHelperMySQL.Query($@"select * from elderly_selfcare_estimate where upload_status='0'");
                 if (estimate != null && estimate.Tables.Count > 0 && estimate.Tables[0].Rows.Count > 0)
                 {

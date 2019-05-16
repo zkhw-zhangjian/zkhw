@@ -27,6 +27,19 @@ namespace zkhwClient.view
         private void button1_Click(object sender, EventArgs e)
         {
             relation = this.comboBox1.Text;
+            if (relation == "父亲") {
+                relation = "1";
+            } else if (relation == "母亲") {
+                relation = "2";
+            }
+            else if (relation == "兄弟姐妹")
+            {
+                relation = "3";
+            }
+            else if (relation == "子女")
+            {
+                relation = "4";
+            }
             foreach (Control ctr in this.panel1.Controls)
             {
                 //判断该控件是不是CheckBox

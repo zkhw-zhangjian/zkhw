@@ -332,7 +332,20 @@ namespace zkhwClient.view.PublicHealthView
                 DataRow drtmp = goodsList3.NewRow();
                 drtmp["id"] = dt3.Rows[i]["id"].ToString();
                 drtmp["resident_base_info_id"] = dt3.Rows[i]["resident_base_info_id"].ToString();
-                drtmp["relation"] = dt3.Rows[i]["relation"].ToString();
+                string relation=dt3.Rows[i]["relation"].ToString();
+                if (relation == "1") {
+                    drtmp["relation"] = "父亲";
+                }else if (relation == "2") {
+                    drtmp["relation"] = "母亲";
+                }
+                else if (relation == "3")
+                {
+                    drtmp["relation"] = "兄弟姐妹";
+                }
+                else if (relation == "4")
+                {
+                    drtmp["relation"] = "子女";
+                }
                 drtmp["disease_name"] = dt3.Rows[i]["disease_name"].ToString(); 
                 drtmp["disease_type"] = dt3.Rows[i]["disease_type"].ToString();
                 goodsList3.Rows.Add(drtmp);
