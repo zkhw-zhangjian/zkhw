@@ -2428,6 +2428,16 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                 OpenPdf(@str + $"/up/result/{name + id}.pdf");
             }
         }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            string name = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            string newurl = "http://1.85.36.75:8077/ehr/sdc/ehr/browse/noArchive_msg.jsp?duns=61011678359078X&verifyCode=123&archiveId=610423199112150013&flag=brows&doctorNo=610121197503152448&random=0.9859470667327924";
+            Form2 f2 = new Form2();
+            f2.url = newurl;
+            f2.ShowDialog();
+        }
     }
 
     public class Report
