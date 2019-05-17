@@ -1030,7 +1030,15 @@ where 1=1";
                     hy.Add("生日1", data["birthday"].ToString());
                     hy.Add("身份证号", data["id_number"].ToString());
                     hy.Add("身份证号1", data["id_number"].ToString());
-
+                    DataSet bcs = DbHelperMySQL.Query($"select * from zkhw_tj_bc where aichive_no='{data["archive_no"].ToString()}' order by createtime desc LIMIT 1");
+                    if (bcs != null && bcs.Tables.Count > 0 && bcs.Tables[0].Rows.Count > 0)
+                    {
+                        DataTable da = bcs.Tables[0];
+                        for (int j = 0; j < da.Rows.Count; j++)
+                        {
+                            hy.Add("B超诊断", da.Rows[j]["FubuResult"].ToString());
+                        }
+                    }
                     if (jkdata != null && jkdata.Rows.Count > 0)
                     {
                         for (int j = 0; j < jkdata.Rows.Count; j++)
@@ -1048,7 +1056,7 @@ where 1=1";
                             hy.Add("左侧低压", jkdata.Rows[j]["base_blood_pressure_left_low"].ToString());
                             hy.Add("右侧高压", jkdata.Rows[j]["base_blood_pressure_right_high"].ToString());
                             hy.Add("右侧低压", jkdata.Rows[j]["base_blood_pressure_right_low"].ToString());
-                            hy.Add("送检日期", jkdata.Rows[j]["create_time"].ToString());
+                            hy.Add("送检日期",string.IsNullOrWhiteSpace(jkdata.Rows[j]["create_time"].ToString())?"":Convert.ToDateTime( jkdata.Rows[j]["create_time"]).ToString("yyyy-MM-dd"));
                             hy.Add("审核", "");
                             hy.Add("审核1", "");
                             hy.Add("报告日期", DateTime.Now.ToString("yyyy-MM-dd"));
@@ -1339,11 +1347,15 @@ where 1=1";
                             jktj.Add("运动功能", jkdata.Rows[j]["organ_movement"].ToString());
                             jktj.Add("眼底", jkdata.Rows[j]["examination_eye"].ToString());
                             jktj.Add("皮肤", jkdata.Rows[j]["examination_skin"].ToString());
+                            jktj.Add("皮肤其他", jkdata.Rows[j]["examination_skin_other"].ToString());
                             jktj.Add("巩膜", jkdata.Rows[j]["examination_sclera"].ToString());
+                            jktj.Add("巩膜其他", jkdata.Rows[j]["examination_sclera_other"].ToString());
                             jktj.Add("淋巴结", jkdata.Rows[j]["examination_lymph"].ToString());
+                            jktj.Add("淋巴结其他", jkdata.Rows[j]["examination_lymph_other"].ToString());
                             jktj.Add("桶状胸", jkdata.Rows[j]["examination_barrel_chest"].ToString());
                             jktj.Add("呼吸音", jkdata.Rows[j]["examination_breath_sounds"].ToString());
                             jktj.Add("罗音", jkdata.Rows[j]["examination_rale"].ToString());
+                            jktj.Add("罗音其他", jkdata.Rows[j]["examination_rale_other"].ToString());
                             jktj.Add("心率", jkdata.Rows[j]["examination_heart_rate"].ToString());
                             jktj.Add("心律", jkdata.Rows[j]["examination_heart_rhythm"].ToString());
                             jktj.Add("杂音", jkdata.Rows[j]["examination_heart_noise"].ToString());
@@ -1369,10 +1381,15 @@ where 1=1";
                                 jktj.Add("乳腺1", lxx);
                             }
                             jktj.Add("外阴", jkdata.Rows[j]["examination_woman_vulva"].ToString());
+                            jktj.Add("外阴异常", jkdata.Rows[j]["examination_vulva_memo"].ToString());
                             jktj.Add("阴道", jkdata.Rows[j]["examination_woman_vagina"].ToString());
+                            jktj.Add("阴道异常", jkdata.Rows[j]["examination_vagina_memo"].ToString());
                             jktj.Add("宫颈", jkdata.Rows[j]["examination_woman_cervix"].ToString());
+                            jktj.Add("宫颈异常", jkdata.Rows[j]["examination_cervix_memo"].ToString());
                             jktj.Add("宫体", jkdata.Rows[j]["examination_woman_corpus"].ToString());
+                            jktj.Add("宫体异常", jkdata.Rows[j]["examination_corpus_memo"].ToString());
                             jktj.Add("附件", jkdata.Rows[j]["examination_woman_accessories"].ToString());
+                            jktj.Add("附件异常", jkdata.Rows[j]["examination_accessories_memo"].ToString());
                             jktj.Add("妇科其它", jkdata.Rows[j]["examination_other"].ToString());
                             jktj.Add("血红蛋白", jkdata.Rows[j]["blood_hemoglobin"].ToString());
                             jktj.Add("白细胞", jkdata.Rows[j]["blood_leukocyte"].ToString());
@@ -1383,7 +1400,11 @@ where 1=1";
                             jktj.Add("尿酮体", jkdata.Rows[j]["urine_acetone_bodies"].ToString());
                             jktj.Add("尿潜血", jkdata.Rows[j]["bld"].ToString());
                             jktj.Add("尿常规其它", jkdata.Rows[j]["urine_other"].ToString());
+                            jktj.Add("尿常规其它", jkdata.Rows[j]["urine_other"].ToString());
+                            jktj.Add("空腹血糖1", jkdata.Rows[j]["blood_glucose_mmol"].ToString());
+                            jktj.Add("空腹血糖2", jkdata.Rows[j]["blood_glucose_mg"].ToString());
                             jktj.Add("心电图", jkdata.Rows[j]["cardiogram"].ToString());
+                            jktj.Add("心电图异常", jkdata.Rows[j]["cardiogram_memo"].ToString());
                             jktj.Add("尿微量白蛋白", jkdata.Rows[j]["microalbuminuria"].ToString());
                             jktj.Add("大便潜血", jkdata.Rows[j]["fob"].ToString());
                             jktj.Add("糖化血红蛋白", jkdata.Rows[j]["glycosylated_hemoglobin"].ToString());
