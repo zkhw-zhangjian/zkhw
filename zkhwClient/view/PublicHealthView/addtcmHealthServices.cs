@@ -125,6 +125,7 @@ namespace zkhwClient.view.PublicHealthView
                             hplist.Add(Convert.ToInt32(zi[1]));
                         }
                     }
+
                 }
                 if (qxlist.Sum() > hplist.Sum() && qxlist.Sum() > tylist.Sum() && qxlist.Sum() > qylist.Sum() && qxlist.Sum() > xylist.Sum() && qxlist.Sum() > srlist.Sum() && qxlist.Sum() > tslist.Sum() && qxlist.Sum() > yixlist.Sum() && qxlist.Sum() > yxlist.Sum())
                 {
@@ -259,6 +260,14 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         i3.Checked = true;
                     }
+                    #endregion
+                }
+                else
+                {
+                    #region 平和质体质
+                    i1.Text = "1．得分 " + hplist.Sum();
+                    i2.Checked = true;
+                    JingYong("9");
                     #endregion
                 }
             }
@@ -401,7 +410,7 @@ namespace zkhwClient.view.PublicHealthView
             //vs.Add("气郁质体质", qylist.Sum());
             //vs.Add("特禀质体质", tylist.Sum());
             //vs.Add("平和质体质", hplist.Sum());
-            
+
             if (qxlist.Sum() > hplist.Sum() && qxlist.Sum() > tylist.Sum() && qxlist.Sum() > qylist.Sum() && qxlist.Sum() > xylist.Sum() && qxlist.Sum() > srlist.Sum() && qxlist.Sum() > tslist.Sum() && qxlist.Sum() > yixlist.Sum() && qxlist.Sum() > yxlist.Sum())
             {
                 vs.Add("气虚质体质", qxlist.Sum());
