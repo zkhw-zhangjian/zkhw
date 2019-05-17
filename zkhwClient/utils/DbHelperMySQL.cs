@@ -759,6 +759,10 @@ namespace zkhwClient.dao
                         {
                             cmd.CommandText = strsql;
                             count += cmd.ExecuteNonQuery();
+                            using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
+                            {
+                                sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ")+ "\r\n" + strsql );
+                            }
                         }
                     }
                     tx.Commit();
@@ -770,7 +774,7 @@ namespace zkhwClient.dao
                     conn.Close();
                     using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
                     {
-                        sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + e.Message + "\r\n" + e.StackTrace + "\r\n" + SQLStringList.ToString());
+                        sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + e.Message + "\r\n" + e.StackTrace );
                     }
                     return 0;
                 }

@@ -721,7 +721,7 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(1, 43);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1305, 477);
+            this.groupBox1.Size = new System.Drawing.Size(1287, 477);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             // 
@@ -733,7 +733,6 @@
             this.textBox108.Size = new System.Drawing.Size(106, 30);
             this.textBox108.TabIndex = 242;
             this.textBox108.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox108.Visible = false;
             // 
             // textBox107
             // 
@@ -743,7 +742,6 @@
             this.textBox107.Size = new System.Drawing.Size(106, 30);
             this.textBox107.TabIndex = 241;
             this.textBox107.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox107.Visible = false;
             // 
             // textBox105
             // 
@@ -753,7 +751,6 @@
             this.textBox105.Size = new System.Drawing.Size(106, 30);
             this.textBox105.TabIndex = 240;
             this.textBox105.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox105.Visible = false;
             // 
             // textBox106
             // 
@@ -763,7 +760,6 @@
             this.textBox106.Size = new System.Drawing.Size(106, 30);
             this.textBox106.TabIndex = 239;
             this.textBox106.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox106.Visible = false;
             // 
             // textBox34
             // 
@@ -1871,8 +1867,6 @@
             // checkBox24
             // 
             this.checkBox24.AutoSize = true;
-            this.checkBox24.Checked = true;
-            this.checkBox24.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox24.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.checkBox24.Location = new System.Drawing.Point(9, 2);
             this.checkBox24.Name = "checkBox24";
@@ -1957,8 +1951,6 @@
             // checkBox20
             // 
             this.checkBox20.AutoSize = true;
-            this.checkBox20.Checked = true;
-            this.checkBox20.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox20.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.checkBox20.Location = new System.Drawing.Point(9, 2);
             this.checkBox20.Name = "checkBox20";
@@ -2082,8 +2074,6 @@
             // checkBox13
             // 
             this.checkBox13.AutoSize = true;
-            this.checkBox13.Checked = true;
-            this.checkBox13.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox13.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.checkBox13.Location = new System.Drawing.Point(9, 3);
             this.checkBox13.Name = "checkBox13";
@@ -2195,8 +2185,6 @@
             // checkBox7
             // 
             this.checkBox7.AutoSize = true;
-            this.checkBox7.Checked = true;
-            this.checkBox7.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox7.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.checkBox7.Location = new System.Drawing.Point(10, 2);
             this.checkBox7.Name = "checkBox7";
@@ -2307,8 +2295,6 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.checkBox1.Location = new System.Drawing.Point(10, 2);
             this.checkBox1.Name = "checkBox1";
