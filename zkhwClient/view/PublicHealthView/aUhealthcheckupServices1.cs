@@ -124,7 +124,7 @@ namespace zkhwClient.view.PublicHealthView
                         {
                             //将ctr转换成CheckBox并赋值给ck
                             CheckBox ck = ctr as CheckBox;
-                            if (dt.Rows[0]["lifeway_diet"].ToString().IndexOf(ck.Text) > -1)
+                            if (dt.Rows[0]["lifeway_diet"].ToString().IndexOf(ck.Tag.ToString()) > -1)
                             {
                                 ck.Checked = true;
                             }
@@ -343,7 +343,7 @@ namespace zkhwClient.view.PublicHealthView
                     CheckBox ck = ctr as CheckBox;
                     if (ck.Checked)
                     {
-                        per.lifeway_diet += "," + ck.Text;
+                        per.lifeway_diet += "," + ck.Tag.ToString();
                     }
                 }
             }
@@ -385,7 +385,7 @@ namespace zkhwClient.view.PublicHealthView
                     CheckBox ck = ctr as CheckBox;
                     if (ck.Checked)
                     {
-                        per.lifeway_drink_type += "," + ck.Text;
+                        per.lifeway_drink_type += "," + ck.Tag.ToString();
                     }
                 }
             }

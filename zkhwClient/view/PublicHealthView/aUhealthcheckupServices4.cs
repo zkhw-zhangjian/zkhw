@@ -26,7 +26,7 @@ namespace zkhwClient.view.PublicHealthView
             label51.Left = (this.panel1.Width - this.label51.Width) / 2;
             label51.BringToFront();
 
-            DataTable dt = hcdao.queryTake_medicine_record(this.textBox1.Text);
+            DataTable dt = hcdao.queryTake_medicine_record(this.textBox4.Text);
             goodsList = dt.Clone();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -40,7 +40,7 @@ namespace zkhwClient.view.PublicHealthView
             }
             goodsListBind();//加载用药记录清单表
 
-            DataTable dtym = hcdao.queryVaccination_record(this.textBox1.Text);
+            DataTable dtym = hcdao.queryVaccination_record(this.textBox4.Text);
             goodsListym = dtym.Clone();
             for (int i = 0; i < dtym.Rows.Count; i++)
             {
@@ -79,7 +79,7 @@ namespace zkhwClient.view.PublicHealthView
                         {
                             //将ctr转换成CheckBox并赋值给ck
                             CheckBox ck = ctr as CheckBox;
-                            if (dtz.Rows[0]["health_guidance"].ToString().IndexOf(ck.Text) > -1)
+                            if (dtz.Rows[0]["health_guidance"].ToString().IndexOf(ck.Tag.ToString()) > -1)
                             {
                                 ck.Checked = true;
                             }
@@ -93,7 +93,7 @@ namespace zkhwClient.view.PublicHealthView
                         {
                             //将ctr转换成CheckBox并赋值给ck
                             CheckBox ck = ctr as CheckBox;
-                            if (dtz.Rows[0]["danger_controlling"].ToString().IndexOf(ck.Text) > -1)
+                            if (dtz.Rows[0]["danger_controlling"].ToString().IndexOf(ck.Tag.ToString()) > -1)
                             {
                                 ck.Checked = true;
                             }
@@ -123,10 +123,7 @@ namespace zkhwClient.view.PublicHealthView
         private void button4_Click(object sender, EventArgs e)
         {
             bean.physical_examination_recordBean per = new bean.physical_examination_recordBean();
-            per.aichive_no = this.textBox1.Text;
-            per.bar_code = this.textBox2.Text;
-            per.id_number = this.textBox3.Text;
-            per.id = this.textBox4.Text;
+           
             if (this.radioButton39.Checked == true) { per.health_evaluation = this.radioButton39.Tag.ToString(); };
             if (this.radioButton40.Checked == true) {
                 per.health_evaluation = this.radioButton40.Tag.ToString();
@@ -145,7 +142,7 @@ namespace zkhwClient.view.PublicHealthView
                     CheckBox ck = ctr as CheckBox;
                     if (ck.Checked)
                     {
-                        per.health_guidance += "," + ck.Text;
+                        per.health_guidance += "," + ck.Tag.ToString();
                     }
                 }
             }
@@ -163,7 +160,7 @@ namespace zkhwClient.view.PublicHealthView
                     CheckBox ck = ctr as CheckBox;
                     if (ck.Checked)
                     {
-                        per.danger_controlling += "," + ck.Text;
+                        per.danger_controlling += "," + ck.Tag.ToString();
                     }
                 }
             }
@@ -182,6 +179,10 @@ namespace zkhwClient.view.PublicHealthView
             {
                 per.danger_controlling_other = this.textBox40.Text;
             }
+            per.aichive_no = this.textBox1.Text;
+            per.bar_code = this.textBox2.Text;
+            per.id_number = this.textBox3.Text;
+            per.id = this.textBox4.Text;
             bool isfalse = hcd.addPhysicalExaminationRecord4(per, goodsList, goodsListym);
             if (isfalse)
             {

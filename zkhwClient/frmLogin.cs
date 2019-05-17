@@ -20,6 +20,7 @@ namespace zkhwClient
         public static List<string> listpower = null;
         public static string organCode = null;
         public static string organName = null;
+        public static string userCode = null;
         service.loginLogService lls = new service.loginLogService();
         service.UserService us = new service.UserService();
         UserDao udao =new UserDao();
@@ -53,10 +54,11 @@ namespace zkhwClient
             DataTable ret = service.UserService.UserExists(comboBox1.Text, md5passw);
             if (ret.Rows.Count > 0)
             {  //获取当前登录用户的机构
-                if (!"admin".Equals(this.comboBox1.Text) && !"CS".Equals(this.comboBox1.Text)) {
+                //if (!"admin".Equals(this.comboBox1.Text) && !"CS".Equals(this.comboBox1.Text)) {
+                    userCode = ret.Rows[0]["user_code"].ToString();
                     organCode = ret.Rows[0]["organ_code"].ToString();
                     organName = udao.checkOrganNameBycode(organCode).Rows[0]["organ_name"].ToString();
-                }
+                //}
                 name = this.comboBox1.Text;
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = name;

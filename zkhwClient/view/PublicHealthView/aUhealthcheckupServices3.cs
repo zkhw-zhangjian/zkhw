@@ -27,26 +27,26 @@ namespace zkhwClient.view.PublicHealthView
             label51.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
             label51.Left = (this.panel1.Width - this.label51.Width) / 2;
             label51.BringToFront();
-
+            id = this.textBox108.Text;
             //查询赋值
             if (id != "")
             {
                 DataTable dt = hcd.queryhealthCheckup(id);
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    this.textBox106.Text = dt.Rows[0]["aichive_no"].ToString();
-                    this.textBox105.Text = dt.Rows[0]["bar_code"].ToString();
-                    this.textBox108.Text = dt.Rows[0]["id"].ToString();
+                    //this.textBox106.Text = dt.Rows[0]["aichive_no"].ToString();
+                    //this.textBox105.Text = dt.Rows[0]["bar_code"].ToString();
+                    //this.textBox108.Text = dt.Rows[0]["id"].ToString();
 
                     this.textBox77.Text = dt.Rows[0]["microalbuminuria"].ToString();
-
+                    MessageBox.Show(dt.Rows[0]["microalbuminuria"].ToString()+"-----");
                     if (this.radioButton48.Tag.ToString() == dt.Rows[0]["fob"].ToString()) { this.radioButton48.Checked = true; };
                     if (this.radioButton49.Tag.ToString() == dt.Rows[0]["fob"].ToString()) {this.radioButton49.Checked = true; };
                     this.textBox90.Text = dt.Rows[0]["glycosylated_hemoglobin"].ToString();
 
                     if (this.radioButton46.Tag.ToString() == dt.Rows[0]["hb"].ToString()) { this.radioButton46.Checked = true; };
                     if (this.radioButton47.Tag.ToString() == dt.Rows[0]["hb"].ToString()) { this.radioButton47.Checked = true; };
-
+                    MessageBox.Show(dt.Rows[0]["fob"].ToString() +"--"+ this.textBox3.Text+"---"+this.textBox6.Text);
                     this.textBox3.Text = dt.Rows[0]["sgft"].ToString();
                     this.textBox6.Text = dt.Rows[0]["ast"].ToString();
                     this.textBox10.Text = dt.Rows[0]["albumin"].ToString();
@@ -244,9 +244,6 @@ namespace zkhwClient.view.PublicHealthView
         private void button4_Click(object sender, EventArgs e)
         {
             bean.physical_examination_recordBean per = new bean.physical_examination_recordBean();
-            per.aichive_no = this.textBox106.Text;
-            per.bar_code = this.textBox105.Text;
-            per.id = this.textBox108.Text;
 
             per.microalbuminuria = this.textBox77.Text;
 
@@ -434,9 +431,12 @@ namespace zkhwClient.view.PublicHealthView
            
             string intime22 = this.dateTimePicker6.Text;
             string outtime22 = this.dateTimePicker5.Text;
-           
-            bool isfalse = hcd.addPhysicalExaminationRecord3(per);
 
+            per.aichive_no = this.textBox106.Text;
+            per.bar_code = this.textBox105.Text;
+            per.id_number = this.textBox107.Text;
+            per.id = this.textBox108.Text;
+            bool isfalse = hcd.addPhysicalExaminationRecord3(per);
             if (isfalse)
             {
                 hospitalizedRecord  hr= null;
@@ -499,7 +499,7 @@ namespace zkhwClient.view.PublicHealthView
                 auhc4.textBox1.Text = this.textBox106.Text;
                 auhc4.textBox2.Text = this.textBox105.Text;
                 auhc4.textBox3.Text = this.textBox107.Text;
-                auhc4.id = id;//祖
+                auhc4.id = per.id;//祖
                 auhc4.textBox4.Text = per.id;
                 auhc4.Show();
             }

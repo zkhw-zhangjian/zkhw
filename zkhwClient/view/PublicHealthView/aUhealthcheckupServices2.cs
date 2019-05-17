@@ -47,9 +47,9 @@ namespace zkhwClient.view.PublicHealthView
                 DataTable dt = hcd.queryhealthCheckup(id);
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    this.textBox96.Text = dt.Rows[0]["aichive_no"].ToString();
-                    this.textBox95.Text = dt.Rows[0]["bar_code"].ToString();
-                    this.textBox100.Text = dt.Rows[0]["id"].ToString();
+                    //this.textBox96.Text = dt.Rows[0]["aichive_no"].ToString();
+                    //this.textBox95.Text = dt.Rows[0]["bar_code"].ToString();
+                    //this.textBox100.Text = dt.Rows[0]["id"].ToString();
 
                     if (this.radioButton55.Tag.ToString() == dt.Rows[0]["organ_lips"].ToString()) {  this.radioButton55.Checked = true; };
                     if (this.radioButton56.Tag.ToString() == dt.Rows[0]["organ_lips"].ToString()) {  this.radioButton56.Checked = true; };
@@ -575,7 +575,7 @@ namespace zkhwClient.view.PublicHealthView
                 auhc3.textBox106.Text = per.aichive_no;
                 auhc3.textBox105.Text = per.bar_code;
                 auhc3.textBox108.Text = per.id;
-                auhc3.id = id;//祖
+                auhc3.id = per.id;//祖
                 auhc3.textBox107.Text = this.textBox99.Text;
                 auhc3.Show();
             }

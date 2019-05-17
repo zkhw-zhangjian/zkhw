@@ -122,10 +122,7 @@ namespace zkhwClient.dao
                 + "',examination_cervix_memo='" + per.examination_cervix_memo + "',examination_woman_corpus='" + per.examination_woman_corpus + "',examination_corpus_memo='" + per.examination_corpus_memo + "',examination_woman_accessories='" + per.examination_woman_accessories
                 + "',examination_accessories_memo='" + per.examination_accessories_memo + "',examination_other='" + per.examination_other + "',blood_hemoglobin ='" + per.blood_hemoglobin + "',blood_leukocyte='" + per.blood_leukocyte + "',blood_platelet='" + per.blood_platelet + "',blood_other='" + per.blood_other + "',urine_protein='" + 
                 per.urine_protein + "',glycosuria='" + per.glycosuria + "',urine_acetone_bodies='" + per.urine_acetone_bodies + "',bld='" + per.bld + "',urine_other='" + per.urine_other + "',blood_glucose_mmol='" + per.blood_glucose_mmol + "' ,blood_glucose_mg='" + per.blood_glucose_mg + "',cardiogram='" + per.cardiogram 
-                + "',cardiogram_memo='" + per.cardiogram_memo + "', microalbuminuria='" + per.microalbuminuria + "',fob='" + per.fob + "',glycosylated_hemoglobin='" + per.glycosylated_hemoglobin + "',hb='" + per.hb + "',sgft='" + per.sgft
-                + "',ast='" + per.ast + "',albumin='" + per.albumin + "',total_bilirubin='" + per.total_bilirubin + "',conjugated_bilirubin='" + per.conjugated_bilirubin + "',scr='" + per.scr + "',blood_urea='" + per.blood_urea
-                + "',blood_k='" + per.blood_k + "',blood_na='" + per.blood_na + "',tc='" + per.tc + "',tg='" + per.tg + "',ldl='" + per.ldl + "',hdl='" + per.hdl
-                + "',chest_x='" + per.chest_x + "',chestx_memo='" + per.chestx_memo + "',ultrasound_abdomen='" + per.ultrasound_abdomen + "',ultrasound_memo='" + per.ultrasound_memo + "',cervical_smear='" + per.cervical_smear_memo + "',other='" + per.other + "' where id = '" + per.id + "'"; 
+                + "',cardiogram_memo='" + per.cardiogram_memo + "'' where id = '" + per.id + "'"; 
                 ret = DbHelperMySQL.ExecuteSql(sql);
                 return ret == 0 ? false : true;
         }
@@ -143,7 +140,7 @@ namespace zkhwClient.dao
                 + "',other_b='" + per.other_b + "',otherb_memo='" + per.otherb_memo + "',cervical_smear='" + per.cervical_smear
                 + "',cervical_smear_memo='" + per.cervical_smear_memo + "',other='" + per.other + "',cerebrovascular_disease='" + per.cerebrovascular_disease
                 + "',cerebrovascular_disease_other='" + per.cerebrovascular_disease_other + "',kidney_disease='" + per.kidney_disease + "',kidney_disease_other='" + per.kidney_disease_other
-                + "',heart_disease='" + per.heart_disease + "',heart_disease_other ='" + per.heart_disease_other + "',vascular_disease_other='" + per.vascular_disease_other
+                + "',heart_disease='" + per.heart_disease + "',heart_disease_other ='" + per.heart_disease_other + "',vascular_disease='" + per.vascular_disease + "',vascular_disease_other='" + per.vascular_disease_other
                 + "',ocular_diseases='" + per.ocular_diseases + "',ocular_diseases_other='" + per.ocular_diseases_other + "',nervous_system_disease='" + per.nervous_system_disease
                 + "',nervous_disease_memo='" + per.nervous_disease_memo + "',other_disease='" + per.other_disease + "',other_disease_memo='" + per.other_disease_memo +"' where id = '" + per.id + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
@@ -167,18 +164,18 @@ namespace zkhwClient.dao
             return ds.Tables[0];
         }
         //健康体检表第四页  加载用药记录信息
-        public DataTable queryTake_medicine_record(string archiveno)
+        public DataTable queryTake_medicine_record(string id)
         {
             DataSet ds = new DataSet();
-            string sql = "select medicine_name drug_name,medicine_usage drug_usage,medicine_dosage drug_use,medicine_time drug_time,medicine_compliance drug_type from take_medicine_record where archive_no = '" + archiveno + "'";
+            string sql = "select medicine_name drug_name,medicine_usage drug_usage,medicine_dosage drug_use,medicine_time drug_time,medicine_compliance drug_type from take_medicine_record where exam_id = '" + id + "'";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
         //健康体检表第四页  加载疫苗记录信息
-        public DataTable queryVaccination_record(string archiveno)
+        public DataTable queryVaccination_record(string id)
         {
             DataSet ds = new DataSet();
-            string sql = "select vaccination_name,vaccination_time,vaccination_organ_name from vaccination_record where archive_no = '" + archiveno + "'";
+            string sql = "select vaccination_name,vaccination_time,vaccination_organ_name from vaccination_record where exam_id = '" + id + "'";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -190,17 +187,18 @@ namespace zkhwClient.dao
                 + per.abnormal2 + "',abnormal3='" + per.abnormal3 + "',abnormal4='" + per.abnormal4 + "',health_guidance='"
                 + per.health_guidance + "',danger_controlling='" + per.danger_controlling + "',target_weight='"
                 + per.target_weight + "',advise_bacterin= '" + per.advise_bacterin + "',danger_controlling_other='"
-                + per.danger_controlling_other + "',create_user='" + frmLogin.name + "',create_name='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
-                + "' where id = '" + per.id + "'";
+                + per.danger_controlling_other + "',create_user='" + frmLogin.userCode + "',create_name='" + frmLogin.name + "',create_org='" + frmLogin.organCode + "',create_org_name='" + frmLogin.organName + "',update_user='" + frmLogin.userCode + "',update_name='" + frmLogin.name + "',update_time='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where id = '" + per.id + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             if (ret>0) {
                 if (goodsList.Rows.Count > 0) {
+                    string sql1 = "delete from take_medicine_record  where exam_id = '" + per.id + "';";
+                    DbHelperMySQL.ExecuteSql(sql1);
                     string sql0 = "";
                     for (int i = 0; i < goodsList.Rows.Count; i++)
                     {
                         if (i == 0)
                         {
-                            sql0 += "insert into take_medicine_record(id,exam_id,archive_no,id_number,medicine_name,medicine_usage,medicine_dosage,medicine_time,medicine_compliance,create_name,create_time) values ('" + Result.GetNewId() + "','" + per.bar_code + "','" + per.aichive_no + "','" + per.id_number + "','" + per.bar_code + "','" + goodsList.Rows[i]["drug_name"] + "','" + goodsList.Rows[i]["drug_usage"] + "','" + goodsList.Rows[i]["drug_use"] + "','" + goodsList.Rows[i]["drug_time"] + "','" + goodsList.Rows[i]["drug_type"] + "','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+                            sql0 += "insert into take_medicine_record(id,exam_id,archive_no,id_number,medicine_name,medicine_usage,medicine_dosage,medicine_time,medicine_compliance,create_name,create_time) values ('" + Result.GetNewId() + "','" + per.id + "','" + per.aichive_no + "','" + per.id_number + "','" + goodsList.Rows[i]["drug_name"] + "','" + goodsList.Rows[i]["drug_usage"] + "','" + goodsList.Rows[i]["drug_use"] + "','" + goodsList.Rows[i]["drug_time"] + "','" + goodsList.Rows[i]["drug_type"] + "','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
                         }
                         else
@@ -213,12 +211,14 @@ namespace zkhwClient.dao
                 }
                 if (goodsListym.Rows.Count > 0)
                 {
+                    string sql1 = "delete from vaccination_record  where exam_id = '" + per.id + "';";
+                    DbHelperMySQL.ExecuteSql(sql1);
                     string sql0 = "";
                     for (int i = 0; i < goodsListym.Rows.Count; i++)
                     {
                         if (i == 0)
                         {
-                            sql0 += "insert into vaccination_record(id,exam_id,archive_no,id_number,vaccination_name,vaccination_time,vaccination_organ_name,create_name,create_time) values ('" + Result.GetNewId() + "','" + per.bar_code + "','" + per.aichive_no + "','" + per.id_number + "','" + goodsListym.Rows[i]["vaccination_name"] + "','" + goodsListym.Rows[i]["vaccination_time"] + "','" + goodsListym.Rows[i]["vaccination_organ_name"] + "','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+                            sql0 += "insert into vaccination_record(id,exam_id,archive_no,id_number,vaccination_name,vaccination_time,vaccination_organ_name,create_name,create_time) values ('" + Result.GetNewId() + "','" + per.id + "','" + per.aichive_no + "','" + per.id_number + "','" + goodsListym.Rows[i]["vaccination_name"] + "','" + goodsListym.Rows[i]["vaccination_time"] + "','" + goodsListym.Rows[i]["vaccination_organ_name"] + "','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
                         }
                         else
