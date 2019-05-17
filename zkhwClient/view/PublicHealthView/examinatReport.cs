@@ -1637,10 +1637,10 @@ where 1=1";
                     bc.Add("性别", Sex(data["sex"].ToString()));
                     bc.Add("生日", data["birthday"].ToString());
                     bc.Add("身份证号", data["id_number"].ToString());
-                    DataSet bcs = DbHelperMySQL.Query($"select * from zkhw_tj_bc where aichive_no='{data["archive_no"].ToString()}' order by createtime desc LIMIT 1");
-                    if (bcs != null && bcs.Tables.Count > 0 && bcs.Tables[0].Rows.Count > 0)
+                    DataSet bcss = DbHelperMySQL.Query($"select * from zkhw_tj_bc where aichive_no='{data["archive_no"].ToString()}' order by createtime desc LIMIT 1");
+                    if (bcss != null && bcss.Tables.Count > 0 && bcss.Tables[0].Rows.Count > 0)
                     {
-                        DataTable da = bcs.Tables[0];
+                        DataTable da = bcss.Tables[0];
                         for (int j = 0; j < da.Rows.Count; j++)
                         {
                             string BuPic01 = da.Rows[j]["BuPic01"].ToString();
