@@ -60,8 +60,8 @@ namespace zkhwClient
             //this.timer2.Interval = Int32.Parse(Properties.Settings.Default.timeInterval);
             //this.timer2.Start();//定时获取生化和血球的数据
 
-            this.timer3.Interval =Int32.Parse(Properties.Settings.Default.timer3Interval);
-            this.timer3.Start();//1分钟定时刷新设备状态
+            //this.timer3.Interval =Int32.Parse(Properties.Settings.Default.timer3Interval);
+            //this.timer3.Start();//1分钟定时刷新设备状态
 
             this.label1.Text = "一体化查体车  中科弘卫";
             this.label1.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));

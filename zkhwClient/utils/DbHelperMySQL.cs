@@ -115,11 +115,11 @@ namespace zkhwClient.dao
                     }
                     catch (MySql.Data.MySqlClient.MySqlException e)
                     {
-                        connection.Close();
                         using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
                         {
                             sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + e.Message + "\r\n" + SQLString);
                         }
+                        connection.Close();
                         return 0;
                     }
                 }
