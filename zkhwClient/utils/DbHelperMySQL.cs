@@ -747,11 +747,13 @@ namespace zkhwClient.dao
                 cmd.Connection = conn;
                 MySqlTransaction tx = conn.BeginTransaction();
                 cmd.Transaction = tx;
+                int a = 0;
                 try
                 {
                     int count = 0;
                     for (int n = 0; n < SQLStringList.Count; n++)
                     {
+                        a=n;
                         string strsql = SQLStringList[n];
                         if (strsql.Trim().Length > 1)
                         {
