@@ -1672,10 +1672,59 @@ where 1=1";
                     {
                         for (int j = 0; j < jkdata.Rows.Count; j++)
                         {
+                            string sm = string.Empty;
+                            if (!string.IsNullOrWhiteSpace(jkdata.Rows[j]["base_blood_pressure_left_high"].ToString()) && !string.IsNullOrWhiteSpace(jkdata.Rows[j]["base_blood_pressure_left_low"].ToString()) || !string.IsNullOrWhiteSpace(jkdata.Rows[j]["base_blood_pressure_right_high"].ToString()) && !string.IsNullOrWhiteSpace(jkdata.Rows[j]["base_blood_pressure_right_low"].ToString()))
+                            {
+                                if (Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_left_high"]) > 140 && Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_left_low"]) > 90)
+                                {
+                                    sm += @"高血压是指以体循环动脉血压（收缩压和/或舒张压）增高为主要特征（收缩压≥140毫米汞柱，舒张压≥90毫米汞柱），可伴有心、脑、肾等器官的功能或器质性损害的临床综合征。高血压是最常见的慢性病，也是心脑血管病最主要的危险因素。
+
+健康指导：
+
+1、改善生活行为：减轻并控制体重、少盐少脂，增加运动、戒烟限酒、减轻精神压力、保持心理平衡。
+
+2、高血压患者应用药物控制血压。应定期随访和测量血压，预防心脑肾并发症的发生，降低心脑血管事件的发生率。";
+                                }
+                                else if (Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_high"]) > 140 && Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_low"]) > 90)
+                                {
+                                    sm += @"高血压是指以体循环动脉血压（收缩压和/或舒张压）增高为主要特征（收缩压≥140毫米汞柱，舒张压≥90毫米汞柱），可伴有心、脑、肾等器官的功能或器质性损害的临床综合征。高血压是最常见的慢性病，也是心脑血管病最主要的危险因素。
+
+健康指导：
+
+1、改善生活行为：减轻并控制体重、少盐少脂，增加运动、戒烟限酒、减轻精神压力、保持心理平衡。
+
+2、高血压患者应用药物控制血压。应定期随访和测量血压，预防心脑肾并发症的发生，降低心脑血管事件的发生率。";
+                                }
+                            }
+                            if (jkdata.Rows[j]["cardiogram"].ToString() == "2")
+                            {
+                                sm += @"不正常心电图：
+
+心电图作为辅助检查，请医生结合临床症状进行诊断。
+
+健康指导：
+
+注意锻炼身体，保持良好的生活习惯，注意饮食，不吸烟避免饮酒及高脂饮食。";
+                            }
+                            if (!string.IsNullOrWhiteSpace(jkdata.Rows[j]["blood_leukocyte"].ToString()))
+                            {
+                                if (Convert.ToInt32(jkdata.Rows[j]["blood_leukocyte"])>10)
+                                {
+                                    sm += @"白细胞（WBC）：
+
+白细胞低，说明身体抵抗力差，容易感冒、皮肤表面容易感染病。
+
+白细胞高，说明身体可能有炎症，受到细菌、病毒感染，炎症反应等，
+
+如白细胞指标高出或低于太多，应及时到医院做进一步的检查。 ";
+                                }
+  
+                            }
                             if (jkdata.Rows[j]["health_evaluation"].ToString() == "2")
                             {
-                                jg.Add("结果", jkdata.Rows[j]["abnormal1"].ToString() + jkdata.Rows[j]["abnormal2"].ToString() + jkdata.Rows[j]["abnormal3"].ToString() + jkdata.Rows[j]["abnormal4"].ToString());
+                                sm += jkdata.Rows[j]["abnormal1"].ToString() + jkdata.Rows[j]["abnormal2"].ToString() + jkdata.Rows[j]["abnormal3"].ToString() + jkdata.Rows[j]["abnormal4"].ToString();
                             }
+                            jg.Add("结果", sm);
                         }
                     }
                     //书签替换
