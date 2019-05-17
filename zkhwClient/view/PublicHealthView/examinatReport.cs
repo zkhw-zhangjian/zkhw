@@ -1400,7 +1400,7 @@ where 1=1";
                             jktj.Add("尿酮体", jkdata.Rows[j]["urine_acetone_bodies"].ToString());
                             jktj.Add("尿潜血", jkdata.Rows[j]["bld"].ToString());
                             jktj.Add("尿常规其它", jkdata.Rows[j]["urine_other"].ToString());
-                            jktj.Add("尿常规其它", jkdata.Rows[j]["urine_other"].ToString());
+                            
                             jktj.Add("空腹血糖1", jkdata.Rows[j]["blood_glucose_mmol"].ToString());
                             jktj.Add("空腹血糖2", jkdata.Rows[j]["blood_glucose_mg"].ToString());
                             jktj.Add("心电图", jkdata.Rows[j]["cardiogram"].ToString());
