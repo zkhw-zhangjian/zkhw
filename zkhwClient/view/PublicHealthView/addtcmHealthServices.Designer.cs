@@ -3517,7 +3517,7 @@
             this.label46.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label46.Location = new System.Drawing.Point(3, 161);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(80, 61);
+            this.label46.Size = new System.Drawing.Size(80, 72);
             this.label46.TabIndex = 82;
             this.label46.Text = "中医药\r\n保健\r\n指导";
             // 

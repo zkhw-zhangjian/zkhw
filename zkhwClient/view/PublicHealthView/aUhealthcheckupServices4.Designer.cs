@@ -77,6 +77,8 @@
             this.label51 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -102,6 +104,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.richTextBox1);
+            this.groupBox2.Controls.Add(this.textBox5);
             this.groupBox2.Controls.Add(this.textBox4);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.button3);
@@ -121,7 +125,7 @@
             this.groupBox2.Controls.Add(this.textBox50);
             this.groupBox2.Location = new System.Drawing.Point(2, 43);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1302, 769);
+            this.groupBox2.Size = new System.Drawing.Size(1302, 801);
             this.groupBox2.TabIndex = 61;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = " ";
@@ -258,7 +262,7 @@
             this.panel3.Controls.Add(this.textBox35);
             this.panel3.Location = new System.Drawing.Point(703, 553);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(593, 206);
+            this.panel3.Size = new System.Drawing.Size(593, 162);
             this.panel3.TabIndex = 332;
             // 
             // checkBox10
@@ -410,7 +414,7 @@
             this.panel2.Controls.Add(this.checkBox1);
             this.panel2.Location = new System.Drawing.Point(101, 553);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(596, 206);
+            this.panel2.Size = new System.Drawing.Size(596, 162);
             this.panel2.TabIndex = 331;
             // 
             // checkBox3
@@ -452,11 +456,11 @@
             // textBox34
             // 
             this.textBox34.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox34.Location = new System.Drawing.Point(0, 553);
+            this.textBox34.Location = new System.Drawing.Point(2, 553);
             this.textBox34.Multiline = true;
             this.textBox34.Name = "textBox34";
             this.textBox34.ReadOnly = true;
-            this.textBox34.Size = new System.Drawing.Size(95, 206);
+            this.textBox34.Size = new System.Drawing.Size(95, 162);
             this.textBox34.TabIndex = 330;
             this.textBox34.Text = "健康指导";
             this.textBox34.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -649,7 +653,7 @@
             this.button5.BackColor = System.Drawing.Color.Red;
             this.button5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button5.Location = new System.Drawing.Point(1166, 832);
+            this.button5.Location = new System.Drawing.Point(1166, 849);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(118, 38);
             this.button5.TabIndex = 42;
@@ -662,13 +666,33 @@
             this.button4.BackColor = System.Drawing.Color.LimeGreen;
             this.button4.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button4.Location = new System.Drawing.Point(996, 832);
+            this.button4.Location = new System.Drawing.Point(996, 849);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(124, 38);
             this.button4.TabIndex = 41;
             this.button4.Text = "保存";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // textBox5
+            // 
+            this.textBox5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox5.Location = new System.Drawing.Point(6, 721);
+            this.textBox5.Multiline = true;
+            this.textBox5.Name = "textBox5";
+            this.textBox5.ReadOnly = true;
+            this.textBox5.Size = new System.Drawing.Size(91, 74);
+            this.textBox5.TabIndex = 343;
+            this.textBox5.Text = "健康建议";
+            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(100, 721);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(1196, 74);
+            this.richTextBox1.TabIndex = 344;
+            this.richTextBox1.Text = "";
             // 
             // aUhealthcheckupServices4
             // 
@@ -750,5 +774,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
         public System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

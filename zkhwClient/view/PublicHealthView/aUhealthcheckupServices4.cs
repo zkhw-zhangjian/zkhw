@@ -112,6 +112,7 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         checkBox10.Checked = true;                     
                     }
+                    this.richTextBox1.Text = dtz.Rows[0]["healthAdvice"].ToString();
                 }
             }
         }
@@ -178,6 +179,10 @@ namespace zkhwClient.view.PublicHealthView
             if (checkBox10.Checked)
             {
                 per.danger_controlling_other = this.textBox40.Text;
+            }
+            per.healthAdvice=this.richTextBox1.Text;
+            if (per.healthAdvice==null||"".Equals(per.healthAdvice)) {
+                MessageBox.Show("健康建议不能为空!");return;
             }
             per.aichive_no = this.textBox1.Text;
             per.bar_code = this.textBox2.Text;

@@ -122,7 +122,7 @@ namespace zkhwClient.dao
                 + "',examination_cervix_memo='" + per.examination_cervix_memo + "',examination_woman_corpus='" + per.examination_woman_corpus + "',examination_corpus_memo='" + per.examination_corpus_memo + "',examination_woman_accessories='" + per.examination_woman_accessories
                 + "',examination_accessories_memo='" + per.examination_accessories_memo + "',examination_other='" + per.examination_other + "',blood_hemoglobin ='" + per.blood_hemoglobin + "',blood_leukocyte='" + per.blood_leukocyte + "',blood_platelet='" + per.blood_platelet + "',blood_other='" + per.blood_other + "',urine_protein='" + 
                 per.urine_protein + "',glycosuria='" + per.glycosuria + "',urine_acetone_bodies='" + per.urine_acetone_bodies + "',bld='" + per.bld + "',urine_other='" + per.urine_other + "',blood_glucose_mmol='" + per.blood_glucose_mmol + "' ,blood_glucose_mg='" + per.blood_glucose_mg + "',cardiogram='" + per.cardiogram 
-                + "',cardiogram_memo='" + per.cardiogram_memo + "'' where id = '" + per.id + "'"; 
+                + "',cardiogram_memo='" + per.cardiogram_memo + "' where id = '" + per.id + "'"; 
                 ret = DbHelperMySQL.ExecuteSql(sql);
                 return ret == 0 ? false : true;
         }
@@ -187,7 +187,7 @@ namespace zkhwClient.dao
                 + per.abnormal2 + "',abnormal3='" + per.abnormal3 + "',abnormal4='" + per.abnormal4 + "',health_guidance='"
                 + per.health_guidance + "',danger_controlling='" + per.danger_controlling + "',target_weight='"
                 + per.target_weight + "',advise_bacterin= '" + per.advise_bacterin + "',danger_controlling_other='"
-                + per.danger_controlling_other + "',create_user='" + frmLogin.userCode + "',create_name='" + frmLogin.name + "',create_org='" + frmLogin.organCode + "',create_org_name='" + frmLogin.organName + "',update_user='" + frmLogin.userCode + "',update_name='" + frmLogin.name + "',update_time='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where id = '" + per.id + "'";
+                + per.danger_controlling_other + "',healthAdvice='" + per.healthAdvice + "',create_user='" + frmLogin.userCode + "',create_name='" + frmLogin.name + "',create_org='" + frmLogin.organCode + "',create_org_name='" + frmLogin.organName + "',update_user='" + frmLogin.userCode + "',update_name='" + frmLogin.name + "',update_time='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where id = '" + per.id + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             if (ret>0) {
                 if (goodsList.Rows.Count > 0) {
