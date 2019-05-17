@@ -398,6 +398,9 @@ namespace zkhwClient.bean
         public string advise_bacterin { get; set; }
         //其他危险因素控制
         public string danger_controlling_other { get; set; }
+
+        //健康建议
+        public string healthAdvice { get; set; }
         //create_user
         public string create_user { get; set; }
         //create_name

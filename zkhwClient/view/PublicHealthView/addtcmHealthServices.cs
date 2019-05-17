@@ -130,7 +130,7 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     #region 气虚质体质
                     a1.Text = "1．得分 " + qxlist.Sum();
-                    if (qxlist.Sum() >= 1)
+                    if (qxlist.Sum() >= 11)
                     {
                         a2.Checked = true;
                         JingYong("1");
@@ -138,6 +138,7 @@ namespace zkhwClient.view.PublicHealthView
                     else if (qxlist.Sum() >= 9 && qxlist.Sum() <= 10)
                     {
                         a3.Checked = true;
+                        JingYong("1");
                     }
                     #endregion
                 }
@@ -153,6 +154,7 @@ namespace zkhwClient.view.PublicHealthView
                     else if (yxlist.Sum() >= 9 && yxlist.Sum() <= 10)
                     {
                         b3.Checked = true;
+                        JingYong("2");
                     }
                     #endregion
                 }
@@ -168,6 +170,7 @@ namespace zkhwClient.view.PublicHealthView
                     else if (yixlist.Sum() >= 9 && yixlist.Sum() <= 10)
                     {
                         c3.Checked = true;
+                        JingYong("3");
                     }
                     #endregion
                 }
@@ -183,6 +186,7 @@ namespace zkhwClient.view.PublicHealthView
                     else if (tslist.Sum() >= 9 && tslist.Sum() <= 10)
                     {
                         d3.Checked = true;
+                        JingYong("4");
                     }
                     #endregion
                 }
@@ -198,6 +202,7 @@ namespace zkhwClient.view.PublicHealthView
                     else if (srlist.Sum() >= 9 && srlist.Sum() <= 10)
                     {
                         e3.Checked = true;
+                        JingYong("5");
                     }
                     #endregion
                 }
@@ -213,6 +218,7 @@ namespace zkhwClient.view.PublicHealthView
                     else if (xylist.Sum() >= 9 && xylist.Sum() <= 10)
                     {
                         f3.Checked = true;
+                        JingYong("6");
                     }
                     #endregion
                 }
@@ -228,6 +234,7 @@ namespace zkhwClient.view.PublicHealthView
                     else if (qylist.Sum() >= 9 && qylist.Sum() <= 10)
                     {
                         g3.Checked = true;
+                        JingYong("7");
                     }
                     #endregion
                 }
@@ -243,6 +250,7 @@ namespace zkhwClient.view.PublicHealthView
                     else if (tylist.Sum() >= 9 && tylist.Sum() <= 10)
                     {
                         h3.Checked = true;
+                        JingYong("8");
                     }
                     #endregion
                 }
@@ -258,6 +266,7 @@ namespace zkhwClient.view.PublicHealthView
                     else if (hplist.Sum() >= 17 && qxlist.Sum() <= 10 && yxlist.Sum() <= 10 && yixlist.Sum() <= 10 && tslist.Sum() <= 10 && srlist.Sum() <= 10 && xylist.Sum() <= 10 && qylist.Sum() <= 10 && tylist.Sum() <= 10)
                     {
                         i3.Checked = true;
+                        JingYong("9");
                     }
                     #endregion
                 }

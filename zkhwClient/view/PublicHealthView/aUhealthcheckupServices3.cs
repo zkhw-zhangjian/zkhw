@@ -39,14 +39,13 @@ namespace zkhwClient.view.PublicHealthView
                     //this.textBox108.Text = dt.Rows[0]["id"].ToString();
 
                     this.textBox77.Text = dt.Rows[0]["microalbuminuria"].ToString();
-                    MessageBox.Show(dt.Rows[0]["microalbuminuria"].ToString()+"-----");
+
                     if (this.radioButton48.Tag.ToString() == dt.Rows[0]["fob"].ToString()) { this.radioButton48.Checked = true; };
                     if (this.radioButton49.Tag.ToString() == dt.Rows[0]["fob"].ToString()) {this.radioButton49.Checked = true; };
                     this.textBox90.Text = dt.Rows[0]["glycosylated_hemoglobin"].ToString();
 
                     if (this.radioButton46.Tag.ToString() == dt.Rows[0]["hb"].ToString()) { this.radioButton46.Checked = true; };
                     if (this.radioButton47.Tag.ToString() == dt.Rows[0]["hb"].ToString()) { this.radioButton47.Checked = true; };
-                    MessageBox.Show(dt.Rows[0]["fob"].ToString() +"--"+ this.textBox3.Text+"---"+this.textBox6.Text);
                     this.textBox3.Text = dt.Rows[0]["sgft"].ToString();
                     this.textBox6.Text = dt.Rows[0]["ast"].ToString();
                     this.textBox10.Text = dt.Rows[0]["albumin"].ToString();

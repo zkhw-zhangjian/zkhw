@@ -452,14 +452,14 @@ namespace zkhwClient.view.PublicHealthView
             if (this.radioButton83.Checked == true)
             {
                 per.examination_abdomen_hepatomegaly = this.radioButton83.Tag.ToString();
-                per.examination_hepatomegaly_memo = this.textBox56.Text;
+                per.examination_hepatomegaly_memo = this.textBox61.Text;
             };
 
             if (this.radioButton11.Checked == true) { per.examination_abdomen_splenomegaly = this.radioButton11.Tag.ToString(); };
             if (this.radioButton12.Checked == true)
             {
                 per.examination_abdomen_splenomegaly = this.radioButton12.Tag.ToString();
-                per.examination_splenomegaly_memo = this.textBox56.Text;
+                per.examination_splenomegaly_memo = this.textBox7.Text;
             };
 
             if (this.radioButton13.Checked == true) { per.examination_abdomen_shiftingdullness = this.radioButton13.Tag.ToString(); };

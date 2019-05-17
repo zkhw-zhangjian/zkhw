@@ -721,7 +721,7 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(1, 43);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1287, 477);
+            this.groupBox1.Size = new System.Drawing.Size(1278, 477);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             // 
@@ -733,6 +733,7 @@
             this.textBox108.Size = new System.Drawing.Size(106, 30);
             this.textBox108.TabIndex = 242;
             this.textBox108.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox108.Visible = false;
             // 
             // textBox107
             // 
@@ -742,6 +743,7 @@
             this.textBox107.Size = new System.Drawing.Size(106, 30);
             this.textBox107.TabIndex = 241;
             this.textBox107.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox107.Visible = false;
             // 
             // textBox105
             // 
@@ -751,6 +753,7 @@
             this.textBox105.Size = new System.Drawing.Size(106, 30);
             this.textBox105.TabIndex = 240;
             this.textBox105.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox105.Visible = false;
             // 
             // textBox106
             // 
@@ -760,6 +763,7 @@
             this.textBox106.Size = new System.Drawing.Size(106, 30);
             this.textBox106.TabIndex = 239;
             this.textBox106.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox106.Visible = false;
             // 
             // textBox34
             // 
