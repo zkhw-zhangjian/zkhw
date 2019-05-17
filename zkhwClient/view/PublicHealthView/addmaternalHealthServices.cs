@@ -503,7 +503,7 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
             info.urine_other = 尿常规其他.Text;
             info.blood_sugar = 血糖.Text;
             info.blood_group = 血型.Text;
-            info.blood_rh = Convert.ToInt32(RH.Text);
+            info.blood_rh = string.IsNullOrWhiteSpace(RH.Text) ? 0 : Convert.ToInt32(RH.Text);
             info.sgft = 血清谷丙转氨酶.Text;
             info.ast = 血清谷草转氨酶.Text;
             info.albumin = 白蛋白.Text;
