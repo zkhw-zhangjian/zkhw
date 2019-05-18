@@ -120,7 +120,11 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{C
                 }
             }
             DataSet dataSet = DbHelperMySQL.Query(sql);
-            DataTable dt = dataSet.Tables[0];
+            DataTable dt = null;
+            if (dataSet != null && dataSet.Tables.Count>0 && dataSet.Tables[0].Rows.Count > 0)
+            {
+                dt = dataSet.Tables[0];
+            }
             return dt;
         }
 
