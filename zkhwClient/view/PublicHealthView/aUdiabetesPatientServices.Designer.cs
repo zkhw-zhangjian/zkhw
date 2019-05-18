@@ -159,6 +159,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.textBox51 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -534,7 +535,7 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(0, 351);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1428, 214);
+            this.groupBox1.Size = new System.Drawing.Size(1444, 214);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             // 
@@ -1407,7 +1408,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 110);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1428, 90);
+            this.groupBox3.Size = new System.Drawing.Size(1444, 90);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
@@ -1592,6 +1593,7 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.textBox51);
             this.panel3.Controls.Add(this.radioButton1);
             this.panel3.Controls.Add(this.radioButton2);
             this.panel3.Controls.Add(this.radioButton3);
@@ -1693,7 +1695,7 @@
             this.groupBox2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox2.Location = new System.Drawing.Point(0, 870);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1428, 89);
+            this.groupBox2.Size = new System.Drawing.Size(1444, 89);
             this.groupBox2.TabIndex = 36;
             this.groupBox2.TabStop = false;
             // 
@@ -1763,6 +1765,16 @@
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(316, 30);
             this.dateTimePicker1.TabIndex = 6;
+            // 
+            // textBox51
+            // 
+            this.textBox51.Enabled = false;
+            this.textBox51.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox51.Location = new System.Drawing.Point(311, -1);
+            this.textBox51.Name = "textBox51";
+            this.textBox51.Size = new System.Drawing.Size(316, 30);
+            this.textBox51.TabIndex = 12;
+            this.textBox51.Visible = false;
             // 
             // aUdiabetesPatientServices
             // 
@@ -1963,5 +1975,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridView dataGridView1;
         public System.Windows.Forms.NumericUpDown numericUpDown11;
+        public System.Windows.Forms.TextBox textBox51;
     }
 }

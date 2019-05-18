@@ -55,6 +55,7 @@ namespace zkhwClient.view.PublicHealthView
             diabetes_follow_recordBean.name = this.textBox1.Text.Replace(" ", "");
             diabetes_follow_recordBean.aichive_no = this.textBox2.Text.Replace(" ", "");
             diabetes_follow_recordBean.visit_date = this.dateTimePicker1.Text;
+            diabetes_follow_recordBean.id_number = this.textBox51.Text;
             if (this.radioButton1.Checked == true) { diabetes_follow_recordBean.visit_type = this.radioButton1.Tag.ToString(); };
             if (this.radioButton2.Checked == true) { diabetes_follow_recordBean.visit_type = this.radioButton2.Tag.ToString(); };
             if (this.radioButton3.Checked == true) { diabetes_follow_recordBean.visit_type = this.radioButton3.Tag.ToString(); };

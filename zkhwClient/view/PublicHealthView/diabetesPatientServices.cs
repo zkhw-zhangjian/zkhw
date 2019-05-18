@@ -104,6 +104,7 @@ namespace zkhwClient.view.PublicHealthView
             hm.Text = "添加糖尿病患者服务";
             hm.textBox1.Text = name;
             hm.textBox2.Text = archiveno;
+            hm.textBox51.Text = idnumber;
             if (hm.ShowDialog() == DialogResult.OK)
             {
                 //刷新页面

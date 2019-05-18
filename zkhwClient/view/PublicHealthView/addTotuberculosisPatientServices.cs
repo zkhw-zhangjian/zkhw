@@ -76,12 +76,14 @@ namespace zkhwClient.view.PublicHealthView
             info.name = Names;
             info.aichive_no = aichive_no;
             info.Cardcode = id_number;
-            string issql = @"insert into tuberculosis_follow_record(id,name,aichive_no,Cardcode,visit_date,month_order,supervisor_type,visit_type,symptom,symptom_other,smoke_now,smoke_next,drink_now,drink_next,chemotherapy_plan,`usage`,drugs_type,miss,untoward_effect,untoward_effect_info,complication,complication_info,transfer_treatment_department,transfer_treatment_reason,twoweek_visit_result,handling_suggestion,next_visit_date,visit_doctor,stop_date,stop_reason,must_visit_num,actual_visit_num,must_medicine_num,actual_medicine_num,medicine_rate,estimate_doctor,create_user,create_name,create_time,upload_status) values(@id,@name,@aichive_no,@Cardcode,@visit_date,@month_order,@supervisor_type,@visit_type,@symptom,@symptom_other,@smoke_now,@smoke_next,@drink_now,@drink_next,@chemotherapy_plan,@usage,@drugs_type,@miss,@untoward_effect,@untoward_effect_info,@complication,@complication_info,@transfer_treatment_department,@transfer_treatment_reason,@twoweek_visit_result,@handling_suggestion,@next_visit_date,@visit_doctor,@stop_date,@stop_reason,@must_visit_num,@actual_visit_num,@must_medicine_num,@actual_medicine_num,@medicine_rate,@estimate_doctor,@create_user,@create_name,@create_time,@upload_status)";
+            info.id_number = id_number;
+            string issql = @"insert into tuberculosis_follow_record(id,name,aichive_no,Cardcode,id_number,visit_date,month_order,supervisor_type,visit_type,symptom,symptom_other,smoke_now,smoke_next,drink_now,drink_next,chemotherapy_plan,`usage`,drugs_type,miss,untoward_effect,untoward_effect_info,complication,complication_info,transfer_treatment_department,transfer_treatment_reason,twoweek_visit_result,handling_suggestion,next_visit_date,visit_doctor,stop_date,stop_reason,must_visit_num,actual_visit_num,must_medicine_num,actual_medicine_num,medicine_rate,estimate_doctor,create_user,create_name,create_time,upload_status) values(@id,@name,@aichive_no,@Cardcode,@visit_date,@month_order,@supervisor_type,@visit_type,@symptom,@symptom_other,@smoke_now,@smoke_next,@drink_now,@drink_next,@chemotherapy_plan,@usage,@drugs_type,@miss,@untoward_effect,@untoward_effect_info,@complication,@complication_info,@transfer_treatment_department,@transfer_treatment_reason,@twoweek_visit_result,@handling_suggestion,@next_visit_date,@visit_doctor,@stop_date,@stop_reason,@must_visit_num,@actual_visit_num,@must_medicine_num,@actual_medicine_num,@medicine_rate,@estimate_doctor,@create_user,@create_name,@create_time,@upload_status)";
             MySqlParameter[] args = new MySqlParameter[] {
                     new MySqlParameter("@id",info.id),
                     new MySqlParameter("@name", info.name),
                     new MySqlParameter("@aichive_no", info.aichive_no),
                     new MySqlParameter("@Cardcode", info.Cardcode),
+                    new MySqlParameter("@id_number",info.id_number ),
                     new MySqlParameter("@visit_date", info.visit_date),
                     new MySqlParameter("@month_order", info.month_order),
                     new MySqlParameter("@supervisor_type",info.supervisor_type),
@@ -504,6 +506,8 @@ namespace zkhwClient.view.PublicHealthView
         /// 身份证号
         /// </summary>
         public string Cardcode { get; set; }
+
+        public string id_number { get; set; }
         /// <summary>
         /// 访问日期
         /// </summary>

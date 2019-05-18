@@ -79,6 +79,7 @@ namespace zkhwClient.view.PublicHealthView
             fuv_hypertensionBean.name = this.textBox1.Text.Replace(" ", "");
             fuv_hypertensionBean.aichive_no = this.textBox2.Text.Replace(" ", "");
             fuv_hypertensionBean.visit_date = this.dateTimePicker1.Text.ToString();
+            fuv_hypertensionBean.id_number = this.textBox49.Text;
             if (this.radioButton1.Checked == true) { fuv_hypertensionBean.visit_type = this.radioButton1.Tag.ToString(); };
             if (this.radioButton2.Checked == true) { fuv_hypertensionBean.visit_type = this.radioButton2.Tag.ToString(); };
             if (this.radioButton3.Checked == true) { fuv_hypertensionBean.visit_type = this.radioButton3.Tag.ToString(); };

@@ -118,6 +118,7 @@ namespace zkhwClient.view.PublicHealthView
             hm.Text = "添加高血压随访记录历史表";
             hm.textBox1.Text = name;
             hm.textBox2.Text = archiveno;
+            hm.textBox49.Text = idnumber;
             if (hm.ShowDialog() == DialogResult.OK)
             {
                 //刷新页面

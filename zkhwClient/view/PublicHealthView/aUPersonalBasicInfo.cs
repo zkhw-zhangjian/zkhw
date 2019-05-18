@@ -420,7 +420,7 @@ namespace zkhwClient.view.PublicHealthView
                 drtmp["operation_name"] = hm.operation_name.ToString();
                 drtmp["operation_time"] = hm.operation_time.ToString();
                 drtmp["operation_code"] = hm.operation_code.ToString();
-                if (goodsList0.Rows.Count <= 2)
+                if (goodsList0.Rows.Count > 2)
                 {
                     goodsList0.Rows.Add(drtmp);
                 }
@@ -475,7 +475,7 @@ namespace zkhwClient.view.PublicHealthView
                 drtmp["traumatism_name"] = hm.traumatism_name.ToString();
                 drtmp["traumatism_time"] = hm.traumatism_time.ToString();
                 drtmp["traumatism_code"] = hm.traumatism_code.ToString();
-                if (goodsList1.Rows.Count <= 2)
+                if (goodsList1.Rows.Count > 2)
                 {
                     goodsList1.Rows.Add(drtmp);
                 }
@@ -531,7 +531,7 @@ namespace zkhwClient.view.PublicHealthView
                 drtmp["metachysis_reasonn"] = hm.metachysis_reasonn.ToString();
                 drtmp["metachysis_time"] = hm.metachysis_time.ToString();
                 drtmp["metachysis_code"] = hm.metachysis_code.ToString();
-                if (goodsList2.Rows.Count <= 2)
+                if (goodsList2.Rows.Count > 2)
                 {
                     goodsList2.Rows.Add(drtmp);
                 }

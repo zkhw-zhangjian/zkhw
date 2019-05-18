@@ -93,12 +93,14 @@ namespace zkhwClient.view.PublicHealthView
             info.name = Names;
             info.aichive_no = aichive_no;
             info.Cardcode = id_number;
-            string issql = @"insert into tuberculosis_info(id,name,archive_no,Cardcode,visit_date,visit_type,patient_type,sputum_bacterium_type,drug_fast_type,symptom,symptom_other,chemotherapy_plan,`usage`,drugs_type,supervisor_type,supervisor_other,single_room,ventilation,smoke_now,smoke_next,drink_now,drink_next,get_medicine_address,get_medicine_date,medicine_record,medicine_leave,treatment_course,erratically,untoward_effect,further_consultation,insist,habits_customs,intimate_contact,next_visit_date,estimate_doctor,create_user,create_name,create_time,upload_status) values(@id,@name,@archive_no,@Cardcode,@visit_date,@visit_type,@patient_type,@sputum_bacterium_type,@drug_fast_type,@symptom,@symptom_other,@chemotherapy_plan,@usage,@drugs_type,@supervisor_type,@supervisor_other,@single_room,@ventilation,@smoke_now,@smoke_next,@drink_now,@drink_next,@get_medicine_address,@get_medicine_date,@medicine_record,@medicine_leave,@treatment_course,@erratically,@untoward_effect,@further_consultation,@insist,@habits_customs,@intimate_contact,@next_visit_date,@estimate_doctor,@create_user,@create_name,@create_time,@upload_status)";
+            info.id_number = id_number;
+            string issql = @"insert into tuberculosis_info(id,name,archive_no,id_number,Cardcode,visit_date,visit_type,patient_type,sputum_bacterium_type,drug_fast_type,symptom,symptom_other,chemotherapy_plan,`usage`,drugs_type,supervisor_type,supervisor_other,single_room,ventilation,smoke_now,smoke_next,drink_now,drink_next,get_medicine_address,get_medicine_date,medicine_record,medicine_leave,treatment_course,erratically,untoward_effect,further_consultation,insist,habits_customs,intimate_contact,next_visit_date,estimate_doctor,create_user,create_name,create_time,upload_status) values(@id,@name,@archive_no,@Cardcode,@visit_date,@visit_type,@patient_type,@sputum_bacterium_type,@drug_fast_type,@symptom,@symptom_other,@chemotherapy_plan,@usage,@drugs_type,@supervisor_type,@supervisor_other,@single_room,@ventilation,@smoke_now,@smoke_next,@drink_now,@drink_next,@get_medicine_address,@get_medicine_date,@medicine_record,@medicine_leave,@treatment_course,@erratically,@untoward_effect,@further_consultation,@insist,@habits_customs,@intimate_contact,@next_visit_date,@estimate_doctor,@create_user,@create_name,@create_time,@upload_status)";
             MySqlParameter[] args = new MySqlParameter[] {
                     new MySqlParameter("@id",info.id),
                     new MySqlParameter("@name", info.name),
                     new MySqlParameter("@archive_no", info.aichive_no),
                     new MySqlParameter("@Cardcode", info.Cardcode),
+                    new MySqlParameter("@id_number", info.id_number),
                     new MySqlParameter("@visit_date", info.visit_date),
                     new MySqlParameter("@visit_type", info.visit_type),
                     new MySqlParameter("@patient_type", info.patient_type),
@@ -667,6 +669,11 @@ namespace zkhwClient.view.PublicHealthView
                 return false;
             }
         }
+
+        private void addtuberculosisPatientServices_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
     /// <summary>
@@ -690,6 +697,8 @@ namespace zkhwClient.view.PublicHealthView
         /// 身份证号
         /// </summary>
         public string Cardcode { get; set; }
+
+        public string id_number { get; set; }
         /// <summary>
         /// 访问日期
         /// </summary>

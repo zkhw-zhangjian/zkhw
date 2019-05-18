@@ -178,7 +178,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(812, 1340);
+            this.groupBox1.Size = new System.Drawing.Size(812, 1354);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -194,7 +194,7 @@
             // 
             // 确定
             // 
-            this.确定.Location = new System.Drawing.Point(578, 1282);
+            this.确定.Location = new System.Drawing.Point(560, 1283);
             this.确定.Name = "确定";
             this.确定.Size = new System.Drawing.Size(85, 36);
             this.确定.TabIndex = 16;
@@ -1312,6 +1312,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "addtuberculosisPatientServices";
             this.Text = "首次随访添加";
+            this.Load += new System.EventHandler(this.addtuberculosisPatientServices_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
