@@ -506,25 +506,25 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
                     Control yz = Controls.Find($"孕周{dt.order_num}", true)[0];
                     ((TextBox)yz).Text = dt.gestational_weeks.ToString();
                     Control yfzszz = Controls.Find($"孕妇自述症状{dt.order_num}", true)[0];
-                    ((TextBox)yfzszz).Text = dt.symptom.ToString();
+                    ((TextBox)yfzszz).Text = dt.symptom?.ToString();
                     Control tz = Controls.Find($"体重{dt.order_num}", true)[0];
-                    ((TextBox)tz).Text = dt.weight.ToString();
+                    ((TextBox)tz).Text = dt.weight?.ToString();
                     Control gg = Controls.Find($"宫高{dt.order_num}", true)[0];
-                    ((TextBox)gg).Text = dt.fundus_height.ToString();
+                    ((TextBox)gg).Text = dt.fundus_height?.ToString();
                     Control fw = Controls.Find($"腹围{dt.order_num}", true)[0];
-                    ((TextBox)fw).Text = dt.abdomen_circumference.ToString();
+                    ((TextBox)fw).Text = dt.abdomen_circumference?.ToString();
                     Control trwz = Controls.Find($"胎儿的位置{dt.order_num}", true)[0];
-                    ((TextBox)trwz).Text = dt.fetus_position.ToString();
+                    ((TextBox)trwz).Text = dt.fetus_position?.ToString();
                     Control txl = Controls.Find($"胎心率{dt.order_num}", true)[0];
-                    ((TextBox)txl).Text = dt.fetal_heart_rate.ToString();
+                    ((TextBox)txl).Text = dt.fetal_heart_rate?.ToString();
                     Control gxy = Controls.Find($"血压高{dt.order_num}", true)[0];
-                    ((TextBox)gxy).Text = dt.blood_pressure_high.ToString();
+                    ((TextBox)gxy).Text = dt.blood_pressure_high?.ToString();
                     Control dxy = Controls.Find($"血压低{dt.order_num}", true)[0];
-                    ((TextBox)dxy).Text = dt.blood_pressure_low.ToString();
+                    ((TextBox)dxy).Text = dt.blood_pressure_low?.ToString();
                     Control xhdb = Controls.Find($"血红蛋白{dt.order_num}", true)[0];
-                    ((TextBox)xhdb).Text = dt.hemoglobin.ToString();
+                    ((TextBox)xhdb).Text = dt.hemoglobin?.ToString();
                     Control ldb = Controls.Find($"尿蛋白{dt.order_num}", true)[0];
-                    ((TextBox)ldb).Text = dt.urine_protein.ToString();
+                    ((TextBox)ldb).Text = dt.urine_protein?.ToString();
                     Control qtfzjc = Controls.Find($"其他辅助检查{dt.order_num}", true)[0];
                     ((TextBox)qtfzjc).Text = dt.check_other?.ToString();
                     Control fl = Controls.Find($"分类{dt.order_num}", true)[0];
@@ -596,7 +596,7 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
                     Control xcsf = Controls.Find($"下次随访日期{dt.order_num}", true)[0];
                     ((DateTimePicker)xcsf).Value = Convert.ToDateTime(dt.next_visit_date);
                     Control xy1 = Controls.Find($"随访医生签名{dt.order_num}", true)[0];
-                    ((TextBox)xy1).Text = dt.visit_doctor.ToString();
+                    ((TextBox)xy1).Text = dt.visit_doctor?.ToString();
                 }
             }
         }
