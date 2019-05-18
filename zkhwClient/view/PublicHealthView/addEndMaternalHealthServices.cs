@@ -757,19 +757,19 @@ namespace zkhwClient.view.PublicHealthView
         /// <summary>
         /// 创建用户
         /// </summary>
-        public string create_user { get; set; } = basicInfoSettings.zeren_doctor;
+        public string create_user { get; set; } = frmLogin.userCode;
         /// <summary>
         /// 创建用户名
         /// </summary>
-        public string create_name { get; set; } = basicInfoSettings.zeren_doctor;
+        public string create_name { get; set; } = frmLogin.name;
         /// <summary>
         /// 创建组织
         /// </summary>
-        public string create_org { get; set; }
+        public string create_org { get; set; } = frmLogin.organCode;
         /// <summary>
         /// 创建组织名
         /// </summary>
-        public string create_org_name { get; set; }
+        public string create_org_name { get; set; } = frmLogin.organName;
         /// <summary>
         /// 创建时间
         /// </summary>
@@ -777,11 +777,11 @@ namespace zkhwClient.view.PublicHealthView
         /// <summary>
         /// 修改用户
         /// </summary>
-        public string update_user { get; set; } = basicInfoSettings.zeren_doctor;
+        public string update_user { get; set; } = frmLogin.userCode;
         /// <summary>
         /// 修改用户名
         /// </summary>
-        public string update_name { get; set; } = basicInfoSettings.zeren_doctor;
+        public string update_name { get; set; } = frmLogin.name;
         /// <summary>
         /// 修改时间
         /// </summary>
