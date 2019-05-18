@@ -263,7 +263,10 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{C
             }
             return dt;
         }
-
+        private void textBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.label2.Text = "";
+        }
         /// <summary>
         /// 初始数据
         /// </summary>

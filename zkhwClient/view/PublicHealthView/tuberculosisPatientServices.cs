@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using zkhwClient.dao;
@@ -345,5 +346,11 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{C
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
+
+        private void textBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.label2.Text = "";
+        }
     }
+
 }

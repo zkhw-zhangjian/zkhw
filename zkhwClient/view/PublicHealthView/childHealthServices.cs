@@ -245,6 +245,10 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{C
             }
             #endregion
         }
+        private void textBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.label2.Text = "";
+        }
         /// <summary>
         /// 删除数据
         /// </summary>

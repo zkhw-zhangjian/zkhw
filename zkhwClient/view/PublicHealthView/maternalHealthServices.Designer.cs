@@ -61,10 +61,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("宋体", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.Location = new System.Drawing.Point(672, 11);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(157, 15);
+            this.label4.Size = new System.Drawing.Size(397, 38);
             this.label4.TabIndex = 13;
             this.label4.Text = "孕产妇健康服务记录表";
             // 
@@ -87,9 +88,9 @@
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(3, 58);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(1516, 156);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
@@ -100,7 +101,7 @@
             this.comboBox5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox5.FormattingEnabled = true;
             this.comboBox5.Location = new System.Drawing.Point(1327, 40);
-            this.comboBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox5.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(160, 33);
             this.comboBox5.TabIndex = 17;
@@ -110,7 +111,7 @@
             this.comboBox4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox4.FormattingEnabled = true;
             this.comboBox4.Location = new System.Drawing.Point(1157, 40);
-            this.comboBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox4.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(160, 33);
             this.comboBox4.TabIndex = 16;
@@ -121,7 +122,7 @@
             this.comboBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Location = new System.Drawing.Point(988, 40);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox3.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(160, 33);
             this.comboBox3.TabIndex = 15;
@@ -132,7 +133,7 @@
             this.comboBox2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(819, 40);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(160, 33);
             this.comboBox2.TabIndex = 14;
@@ -143,7 +144,7 @@
             this.comboBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(649, 40);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(160, 33);
             this.comboBox1.TabIndex = 13;
@@ -166,7 +167,7 @@
             this.dateTimePicker2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker2.Location = new System.Drawing.Point(376, 38);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(200, 36);
             this.dateTimePicker2.TabIndex = 11;
@@ -188,7 +189,7 @@
             this.dateTimePicker1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Location = new System.Drawing.Point(108, 38);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(211, 36);
             this.dateTimePicker1.TabIndex = 9;
@@ -223,7 +224,7 @@
             this.查询.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.查询.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.查询.Location = new System.Drawing.Point(649, 95);
-            this.查询.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.查询.Margin = new System.Windows.Forms.Padding(4);
             this.查询.Name = "查询";
             this.查询.Size = new System.Drawing.Size(123, 38);
             this.查询.TabIndex = 6;
@@ -235,10 +236,11 @@
             // 
             this.textBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox1.Location = new System.Drawing.Point(164, 95);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(468, 36);
             this.textBox1.TabIndex = 1;
+            this.textBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox1_MouseClick);
             // 
             // label1
             // 
@@ -255,7 +257,7 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(4, 221);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(1515, 411);
@@ -268,7 +270,7 @@
             this.第1次产前检查添加.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.第1次产前检查添加.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.第1次产前检查添加.Location = new System.Drawing.Point(45, 640);
-            this.第1次产前检查添加.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.第1次产前检查添加.Margin = new System.Windows.Forms.Padding(4);
             this.第1次产前检查添加.Name = "第1次产前检查添加";
             this.第1次产前检查添加.Size = new System.Drawing.Size(267, 41);
             this.第1次产前检查添加.TabIndex = 15;
@@ -283,7 +285,7 @@
             this.第25次产前随访添加.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.第25次产前随访添加.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.第25次产前随访添加.Location = new System.Drawing.Point(379, 640);
-            this.第25次产前随访添加.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.第25次产前随访添加.Margin = new System.Windows.Forms.Padding(4);
             this.第25次产前随访添加.Name = "第25次产前随访添加";
             this.第25次产前随访添加.Size = new System.Drawing.Size(311, 41);
             this.第25次产前随访添加.TabIndex = 16;
@@ -298,7 +300,7 @@
             this.产后访视添加.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.产后访视添加.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.产后访视添加.Location = new System.Drawing.Point(735, 640);
-            this.产后访视添加.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.产后访视添加.Margin = new System.Windows.Forms.Padding(4);
             this.产后访视添加.Name = "产后访视添加";
             this.产后访视添加.Size = new System.Drawing.Size(311, 41);
             this.产后访视添加.TabIndex = 17;
@@ -313,7 +315,7 @@
             this.产后访视修改.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.产后访视修改.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.产后访视修改.Location = new System.Drawing.Point(735, 689);
-            this.产后访视修改.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.产后访视修改.Margin = new System.Windows.Forms.Padding(4);
             this.产后访视修改.Name = "产后访视修改";
             this.产后访视修改.Size = new System.Drawing.Size(311, 41);
             this.产后访视修改.TabIndex = 20;
@@ -328,7 +330,7 @@
             this.第25次产前随访修改.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.第25次产前随访修改.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.第25次产前随访修改.Location = new System.Drawing.Point(379, 689);
-            this.第25次产前随访修改.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.第25次产前随访修改.Margin = new System.Windows.Forms.Padding(4);
             this.第25次产前随访修改.Name = "第25次产前随访修改";
             this.第25次产前随访修改.Size = new System.Drawing.Size(311, 41);
             this.第25次产前随访修改.TabIndex = 19;
@@ -343,7 +345,7 @@
             this.第1次产前检查修改.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.第1次产前检查修改.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.第1次产前检查修改.Location = new System.Drawing.Point(45, 689);
-            this.第1次产前检查修改.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.第1次产前检查修改.Margin = new System.Windows.Forms.Padding(4);
             this.第1次产前检查修改.Name = "第1次产前检查修改";
             this.第1次产前检查修改.Size = new System.Drawing.Size(267, 41);
             this.第1次产前检查修改.TabIndex = 18;
@@ -358,7 +360,7 @@
             this.产后访视删除.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.产后访视删除.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.产后访视删除.Location = new System.Drawing.Point(735, 738);
-            this.产后访视删除.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.产后访视删除.Margin = new System.Windows.Forms.Padding(4);
             this.产后访视删除.Name = "产后访视删除";
             this.产后访视删除.Size = new System.Drawing.Size(311, 41);
             this.产后访视删除.TabIndex = 23;
@@ -373,7 +375,7 @@
             this.第25次产前随访删除.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.第25次产前随访删除.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.第25次产前随访删除.Location = new System.Drawing.Point(379, 738);
-            this.第25次产前随访删除.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.第25次产前随访删除.Margin = new System.Windows.Forms.Padding(4);
             this.第25次产前随访删除.Name = "第25次产前随访删除";
             this.第25次产前随访删除.Size = new System.Drawing.Size(311, 41);
             this.第25次产前随访删除.TabIndex = 22;
@@ -388,7 +390,7 @@
             this.第1次产前检查删除.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.第1次产前检查删除.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.第1次产前检查删除.Location = new System.Drawing.Point(45, 738);
-            this.第1次产前检查删除.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.第1次产前检查删除.Margin = new System.Windows.Forms.Padding(4);
             this.第1次产前检查删除.Name = "第1次产前检查删除";
             this.第1次产前检查删除.Size = new System.Drawing.Size(267, 41);
             this.第1次产前检查删除.TabIndex = 21;
@@ -413,7 +415,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "maternalHealthServices";
             this.Text = "孕产妇健康服务";
             this.groupBox1.ResumeLayout(false);
