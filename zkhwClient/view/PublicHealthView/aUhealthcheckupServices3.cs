@@ -289,7 +289,7 @@ namespace zkhwClient.view.PublicHealthView
             if (this.radioButton7.Checked == true) { per.cervical_smear = this.radioButton7.Tag.ToString(); };
             if (this.radioButton8.Checked == true)
             {
-                per.cervical_smear = this.radioButton7.Tag.ToString();
+                per.cervical_smear = this.radioButton8.Tag.ToString();
                 per.cervical_smear_memo = this.textBox31.Text;
             };
             per.other = this.textBox34.Text;

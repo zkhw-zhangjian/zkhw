@@ -1766,7 +1766,18 @@ where 1=1";
                                 sm += jkdata.Rows[j]["abnormal1"].ToString() + jkdata.Rows[j]["abnormal2"].ToString() + jkdata.Rows[j]["abnormal3"].ToString() + jkdata.Rows[j]["abnormal4"].ToString();
                             }
                             //jktj.Add("血红蛋白", 
-                            jkdata.Rows[j]["blood_hemoglobin"].ToString();
+                            string blood_hemoglobin = jkdata.Rows[j]["blood_hemoglobin"].ToString();
+                            if (!string.IsNullOrWhiteSpace(blood_hemoglobin))
+                            {
+                                if (Convert.ToDouble(blood_hemoglobin) < 110 )
+                                {
+                                    sm += @"血红蛋白（HGB）：血红蛋白低，请注意。";
+                                }
+                                else if(Convert.ToDouble(blood_hemoglobin) > 160)
+                                {
+                                    sm += @"血红蛋白（HGB）：血红蛋白高，请注意。";
+                                }
+                            }
                             //jktj.Add("白细胞", 
                             string blood_leukocyte = jkdata.Rows[j]["blood_leukocyte"].ToString();
                             if (!string.IsNullOrWhiteSpace(blood_leukocyte))
@@ -1784,23 +1795,59 @@ where 1=1";
 
                             }
                             //jktj.Add("血小板", 
-                            jkdata.Rows[j]["blood_platelet"].ToString();
+                            string blood_platelet=jkdata.Rows[j]["blood_platelet"].ToString();
+                            if (!string.IsNullOrWhiteSpace(blood_platelet))
+                            {
+                                if (Convert.ToDouble(blood_platelet) < 100)
+                                {
+                                    sm += @"血小板（PLT）：血小板含量低，请咨询医生人员。";
+                                }
+                                else if (Convert.ToDouble(blood_platelet) > 300)
+                                {
+                                    sm += @"血小板（PLT）：血小板含量高，请咨询医生人员。";
+                                }
+                            }
                             //jktj.Add("尿蛋白", 
-                            jkdata.Rows[j]["urine_protein"].ToString();
-                            //jktj.Add("血常规其它", 
-                            jkdata.Rows[j]["blood_other"].ToString();
+                            string urine_protein = jkdata.Rows[j]["urine_protein"].ToString();
+                            if (!string.IsNullOrWhiteSpace(urine_protein))
+                            {
+                                if (urine_protein!="-")
+                                {
+                                    sm += @"尿蛋白（PRO）：尿蛋白呈阳性，请咨询医生人员。";
+                                }
+                            }
                             //jktj.Add("尿糖", 
-                            jkdata.Rows[j]["glycosuria"].ToString();
+                            string glycosuria = jkdata.Rows[j]["glycosuria"].ToString();
+                            if (!string.IsNullOrWhiteSpace(glycosuria))
+                            {
+                                if (glycosuria != "-")
+                                {
+                                    sm += @"尿糖（GLU）：尿糖呈阳性，请咨询医生人员。";
+                                }
+                            }
                             //jktj.Add("尿酮体", 
-                            jkdata.Rows[j]["urine_acetone_bodies"].ToString();
+                            string urine_acetone_bodies = jkdata.Rows[j]["urine_acetone_bodies"].ToString();
+                            if (!string.IsNullOrWhiteSpace(urine_acetone_bodies))
+                            {
+                                if (urine_acetone_bodies != "-")
+                                {
+                                    sm += @"尿酮体（KET）：尿酮体呈阳性，请咨询医生人员。";
+                                }
+                            }
                             //jktj.Add("尿潜血", 
-                            jkdata.Rows[j]["bld"].ToString();
-                            //jktj.Add("尿常规其它", 
-                            jkdata.Rows[j]["urine_other"].ToString();
+                            string bld = jkdata.Rows[j]["bld"].ToString();
+                            if (!string.IsNullOrWhiteSpace(bld))
+                            {
+                                if (bld != "-")
+                                {
+                                    sm += @"尿潜血（BLD）：尿潜血呈阳性，请咨询医生人员。";
+                                }
+                            }
 
                             //jktj.Add("空腹血糖1", 
                             jkdata.Rows[j]["blood_glucose_mmol"].ToString();
-                            //jktj.Add("空腹血糖2", jkdata.Rows[j]["blood_glucose_mg"].ToString());
+                            //jktj.Add("空腹血糖2", 
+                            jkdata.Rows[j]["blood_glucose_mg"].ToString();
 
                             //jktj.Add("心电图异常", 
                             jkdata.Rows[j]["cardiogram_memo"].ToString();
@@ -1812,10 +1859,7 @@ where 1=1";
                             jkdata.Rows[j]["glycosylated_hemoglobin"].ToString();
                             //jktj.Add("乙型肝炎", 
                             jkdata.Rows[j]["hb"].ToString();
-                            //jktj.Add("血清谷丙转氨酶", 
-                            jkdata.Rows[j]["sgft"].ToString();
-                            //jktj.Add("血清谷草转氨酶", 
-                            jkdata.Rows[j]["ast"].ToString();
+                           
                             //jktj.Add("白蛋白", 
                             jkdata.Rows[j]["albumin"].ToString();
                             //jktj.Add("总胆红素", 
@@ -1826,18 +1870,12 @@ where 1=1";
                             jkdata.Rows[j]["scr"].ToString();
                             //jktj.Add("血尿素", 
                             jkdata.Rows[j]["blood_urea"].ToString();
-                            //jktj.Add("血钾浓度", 
-                            jkdata.Rows[j]["blood_k"].ToString();
-                            //jktj.Add("血钠浓度", 
-                            jkdata.Rows[j]["blood_na"].ToString();
+                           
                             //jktj.Add("总胆固醇", 
                             jkdata.Rows[j]["tc"].ToString();
                             //jktj.Add("甘油三酯", 
                             jkdata.Rows[j]["tg"].ToString();
-                            //jktj.Add("血清低密度脂蛋白胆固醇", 
-                            jkdata.Rows[j]["ldl"].ToString();
-                            //jktj.Add("血清高密度脂蛋白胆固醇", 
-                            jkdata.Rows[j]["hdl"].ToString();
+                           
 
                             jg.Add("结果", sm);
                         }

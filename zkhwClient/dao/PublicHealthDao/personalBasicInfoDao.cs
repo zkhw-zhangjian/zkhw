@@ -206,14 +206,30 @@ namespace zkhwClient.dao
                 {
                     for (int i = 0; i < goodsList3.Rows.Count; i++)
                     {
+                        string relation = "";
+                        if (goodsList3.Rows[i]["relation"].ToString() == "父亲")
+                        {
+                            relation = "1";
+                        }
+                        else if (goodsList3.Rows[i]["relation"].ToString() == "母亲")
+                        {
+                            relation = "2";
+                        }
+                        else if (goodsList3.Rows[i]["relation"].ToString() == "兄弟姐妹")
+                        {
+                            relation = "3";
+                        }
+                        else if (goodsList3.Rows[i]["relation"].ToString() == "子女")
+                        {
+                            relation = "4";
+                        }
                         if (i == 0)
                         {
-                            sql4 += "insert into family_record(resident_base_info_id,relation,disease_name,disease_type) values ('" + id + "','" + goodsList3.Rows[i]["relation"] + "','" + goodsList3.Rows[i]["disease_name"] + "','" + goodsList3.Rows[i]["disease_type"] + "')";
-
+                            sql4 += "insert into family_record(resident_base_info_id,relation,disease_name,disease_type) values ('" + id + "','" + relation + "','" + goodsList3.Rows[i]["disease_name"] + "','" + goodsList3.Rows[i]["disease_type"] + "')";
                         }
                         else
                         {
-                            sql4 += ",('" + id + "','" + goodsList3.Rows[i]["relation"] + "','" + goodsList3.Rows[i]["disease_name"] + "','" + goodsList3.Rows[i]["disease_type"] + "')";
+                            sql4 += ",('" + id + "','" + relation + "','" + goodsList3.Rows[i]["disease_name"] + "','" + goodsList3.Rows[i]["disease_type"] + "')";
 
                         }
                     }
