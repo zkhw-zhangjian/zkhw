@@ -94,7 +94,7 @@ namespace zkhwClient.view.PublicHealthView
             info.aichive_no = aichive_no;
             info.Cardcode = id_number;
             info.id_number = id_number;
-            string issql = @"insert into tuberculosis_info(id,name,archive_no,id_number,Cardcode,visit_date,visit_type,patient_type,sputum_bacterium_type,drug_fast_type,symptom,symptom_other,chemotherapy_plan,`usage`,drugs_type,supervisor_type,supervisor_other,single_room,ventilation,smoke_now,smoke_next,drink_now,drink_next,get_medicine_address,get_medicine_date,medicine_record,medicine_leave,treatment_course,erratically,untoward_effect,further_consultation,insist,habits_customs,intimate_contact,next_visit_date,estimate_doctor,create_user,create_name,create_time,upload_status) values(@id,@name,@archive_no,@id_number,@Cardcode,@visit_date,@visit_type,@patient_type,@sputum_bacterium_type,@drug_fast_type,@symptom,@symptom_other,@chemotherapy_plan,@usage,@drugs_type,@supervisor_type,@supervisor_other,@single_room,@ventilation,@smoke_now,@smoke_next,@drink_now,@drink_next,@get_medicine_address,@get_medicine_date,@medicine_record,@medicine_leave,@treatment_course,@erratically,@untoward_effect,@further_consultation,@insist,@habits_customs,@intimate_contact,@next_visit_date,@estimate_doctor,@create_user,@create_name,@create_time,@upload_status)";
+            string issql = @"insert into tuberculosis_info(id,name,archive_no,id_number,Cardcode,visit_date,visit_type,patient_type,sputum_bacterium_type,drug_fast_type,symptom,symptom_other,chemotherapy_plan,`usage`,drugs_type,supervisor_type,supervisor_other,single_room,ventilation,smoke_now,smoke_next,drink_now,drink_next,get_medicine_address,get_medicine_date,medicine_record,medicine_leave,treatment_course,erratically,untoward_effect,further_consultation,insist,habits_customs,intimate_contact,next_visit_date,estimate_doctor,create_user,create_name,create_time,create_org,create_org_name,upload_status) values(@id,@name,@archive_no,@id_number,@Cardcode,@visit_date,@visit_type,@patient_type,@sputum_bacterium_type,@drug_fast_type,@symptom,@symptom_other,@chemotherapy_plan,@usage,@drugs_type,@supervisor_type,@supervisor_other,@single_room,@ventilation,@smoke_now,@smoke_next,@drink_now,@drink_next,@get_medicine_address,@get_medicine_date,@medicine_record,@medicine_leave,@treatment_course,@erratically,@untoward_effect,@further_consultation,@insist,@habits_customs,@intimate_contact,@next_visit_date,@estimate_doctor,@create_user,@create_name,@create_time,@create_org,@create_org_name,@upload_status)";
             MySqlParameter[] args = new MySqlParameter[] {
                     new MySqlParameter("@id",info.id),
                     new MySqlParameter("@name", info.name),
@@ -135,6 +135,8 @@ namespace zkhwClient.view.PublicHealthView
                     new MySqlParameter("@create_user", info.create_user),
                     new MySqlParameter("@create_name", info.create_name),
                     new MySqlParameter("@create_time", info.create_time),
+                    new MySqlParameter("@create_org", info.create_org),
+                    new MySqlParameter("@create_org_name", info.create_org_name),
                     new MySqlParameter("@upload_status", info.upload_status),
                     };
             return DbHelperMySQL.ExecuteSql(issql, args);
