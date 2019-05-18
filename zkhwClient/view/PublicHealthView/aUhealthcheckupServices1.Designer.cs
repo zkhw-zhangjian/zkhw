@@ -1832,6 +1832,7 @@
             // 
             // textBox51
             // 
+            this.textBox51.Enabled = false;
             this.textBox51.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox51.Location = new System.Drawing.Point(657, 74);
             this.textBox51.Name = "textBox51";
@@ -2606,7 +2607,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 123);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1295, 108);
+            this.groupBox3.Size = new System.Drawing.Size(1285, 108);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
