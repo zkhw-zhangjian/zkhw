@@ -199,8 +199,8 @@ namespace zkhwClient.view.PublicHealthView
                 info.temperature = 体温7.Text.Trim();
                 info.general_health_status = 一般健康情况7.Text.Trim();
                 info.general_psychology_status = 一般心理状况7.Text.Trim();
-                info.blood_pressure_high = Convert.ToInt32(血压高7.Text.Trim());
-                info.blood_pressure_low = Convert.ToInt32(血压低7.Text.Trim());
+                info.blood_pressure_high =string.IsNullOrWhiteSpace(血压高7.Text.Trim()) ?0: Convert.ToInt32(血压高7.Text.Trim());
+                info.blood_pressure_low = string.IsNullOrWhiteSpace(血压低7.Text.Trim()) ? 0 : Convert.ToInt32(血压低7.Text.Trim()); 
                 foreach (Control item in 乳房7.Controls)
                 {
                     if (item is RadioButton)
@@ -326,8 +326,8 @@ namespace zkhwClient.view.PublicHealthView
                 info.temperature = 体温42.Text.Trim();
                 info.general_health_status = 一般健康情况42.Text.Trim();
                 info.general_psychology_status = 一般心理状况42.Text.Trim();
-                info.blood_pressure_high = Convert.ToInt32(血压高42.Text.Trim());
-                info.blood_pressure_low = Convert.ToInt32(血压低42.Text.Trim());
+                info.blood_pressure_high = string.IsNullOrWhiteSpace(血压高42.Text.Trim()) ? 0 : Convert.ToInt32(血压高42.Text.Trim());
+                info.blood_pressure_low = string.IsNullOrWhiteSpace(血压低42.Text.Trim()) ? 0 : Convert.ToInt32(血压低42.Text.Trim());
                 foreach (Control item in 乳房42.Controls)
                 {
                     if (item is RadioButton)

@@ -35,15 +35,17 @@ namespace zkhwClient.view.PublicHealthView
         public string mag { get; set; }
         public addchildHealthServices(int ps, string names, string aichive_nos, string id_numbers)
         {
+            InitializeComponent();
             Names = names;
             aichive_no = aichive_nos;
             id_number = id_numbers;
             IS = ps;
+            this.Text = (IS == 1 ? "新生儿家庭访视添加" : "新生儿家庭访视修改");
             if (IS == 0)
             {
                 if (GetUpdate())
                 {
-                    InitializeComponent();
+
                     SetData();
                     return;
                 }
@@ -54,8 +56,6 @@ namespace zkhwClient.view.PublicHealthView
                     return;
                 }
             }
-            InitializeComponent();
-            this.Text = (IS == 1 ? "新生儿家庭访视添加" : "新生儿家庭访视修改");
         }
         private void 取消_Click(object sender, EventArgs e)
         {
@@ -304,17 +304,17 @@ namespace zkhwClient.view.PublicHealthView
                     }
                 }
             }
-            info.birthday = 出生日期.Text.Trim();
+            info.birthday = 出生日期.Value.ToString("yyyy-MM-dd");
             info.home_address = 家庭住址.Text.Trim();
             info.father_name = 父亲姓名.Text.Trim();
             info.father_profession = 父亲职业.Text.Trim();
             info.father_phone = 父亲联系电话.Text.Trim();
-            info.father_birthday = 父亲出生日期.Text.Trim();
+            info.father_birthday = 父亲出生日期.Value.ToString("yyyy-MM-dd");
             info.mother_name = 母亲姓名.Text.Trim();
             info.mother_profession = 母亲职业.Text.Trim();
             info.mother_phone = 母亲联系电话.Text.Trim();
-            info.mother_birthday = 母亲出生日期.Text.Trim();
-            info.gestational_weeks = Convert.ToInt32(出生孕周.Text.Trim());
+            info.mother_birthday = 母亲出生日期.Value.ToString("yyyy-MM-dd");
+            info.gestational_weeks = string.IsNullOrWhiteSpace(出生孕周.Text.Trim()) ? 0 : Convert.ToInt32(出生孕周.Text.Trim());
             string sicken_stasus = string.Empty;
             foreach (Control item in 妊娠期间患病情况.Controls)
             {
@@ -421,8 +421,8 @@ namespace zkhwClient.view.PublicHealthView
                     }
                 }
             }
-            info.milk_num = Convert.ToInt32(吃奶次数.Text.Trim());
-            info.milk_intake = Convert.ToInt32(吃奶量.Text.Trim());
+            info.milk_num = string.IsNullOrWhiteSpace(吃奶次数.Text.Trim()) ? 0 : Convert.ToInt32(吃奶次数.Text.Trim());
+            info.milk_intake = string.IsNullOrWhiteSpace(吃奶量.Text.Trim()) ? 0 : Convert.ToInt32(吃奶量.Text.Trim());
             foreach (Control item in 呕吐.Controls)
             {
                 if (item is RadioButton)
@@ -445,8 +445,8 @@ namespace zkhwClient.view.PublicHealthView
             }
             info.defecation_num = 大便次数.Text.Trim();
             info.temperature = 体温.Text.Trim();
-            info.heart_rate = Convert.ToInt32(心率.Text.Trim());
-            info.breathing_rate = Convert.ToInt32(呼吸频率.Text.Trim());
+            info.heart_rate = string.IsNullOrWhiteSpace(心率.Text.Trim()) ? 0 : Convert.ToInt32(心率.Text.Trim());
+            info.breathing_rate = string.IsNullOrWhiteSpace(呼吸频率.Text.Trim()) ? 0 : Convert.ToInt32(呼吸频率.Text.Trim());
             foreach (Control item in 面色.Controls)
             {
                 if (item is RadioButton)
@@ -716,16 +716,16 @@ namespace zkhwClient.view.PublicHealthView
                             }
                         }
                     }
-                    出生日期.Text = dt.birthday;
+                    出生日期.Value = Convert.ToDateTime(dt.birthday);
                     家庭住址.Text = dt.home_address;
                     父亲姓名.Text = dt.father_name;
                     父亲职业.Text = dt.father_profession;
                     父亲联系电话.Text = dt.father_phone;
-                    父亲出生日期.Text = dt.father_birthday;
+                    父亲出生日期.Value = Convert.ToDateTime(dt.father_birthday);
                     母亲姓名.Text = dt.mother_name;
                     母亲职业.Text = dt.mother_profession;
                     母亲联系电话.Text = dt.mother_phone;
-                    母亲出生日期.Text = dt.mother_birthday;
+                    母亲出生日期.Value = Convert.ToDateTime(dt.mother_birthday);
                     出生孕周.Text = dt.gestational_weeks.ToString();
                     foreach (Control item in 妊娠期间患病情况.Controls)
                     {
