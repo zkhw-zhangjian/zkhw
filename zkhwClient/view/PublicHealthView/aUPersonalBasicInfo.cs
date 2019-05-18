@@ -332,20 +332,7 @@ namespace zkhwClient.view.PublicHealthView
                 DataRow drtmp = goodsList3.NewRow();
                 drtmp["id"] = dt3.Rows[i]["id"].ToString();
                 drtmp["resident_base_info_id"] = dt3.Rows[i]["resident_base_info_id"].ToString();
-                string relation=dt3.Rows[i]["relation"].ToString();
-                if (relation == "1") {
-                    drtmp["relation"] = "父亲";
-                }else if (relation == "2") {
-                    drtmp["relation"] = "母亲";
-                }
-                else if (relation == "3")
-                {
-                    drtmp["relation"] = "兄弟姐妹";
-                }
-                else if (relation == "4")
-                {
-                    drtmp["relation"] = "子女";
-                }
+                drtmp["relation"] = dt3.Rows[i]["relation"].ToString();
                 drtmp["disease_name"] = dt3.Rows[i]["disease_name"].ToString(); 
                 drtmp["disease_type"] = dt3.Rows[i]["disease_type"].ToString();
                 goodsList3.Rows.Add(drtmp);
@@ -411,6 +398,10 @@ namespace zkhwClient.view.PublicHealthView
      //既往史手术清单表  operation_record
         private void button3_Click(object sender, EventArgs e)
         {
+            if (goodsList0.Rows.Count >= 2)
+            {
+                MessageBox.Show("不能超过2条数据!"); return;
+            }
             operation_record hm = new operation_record();
             if (hm.ShowDialog() == DialogResult.OK)
             {
@@ -420,13 +411,7 @@ namespace zkhwClient.view.PublicHealthView
                 drtmp["operation_name"] = hm.operation_name.ToString();
                 drtmp["operation_time"] = hm.operation_time.ToString();
                 drtmp["operation_code"] = hm.operation_code.ToString();
-                if (goodsList0.Rows.Count <= 2)
-                {
-                    goodsList0.Rows.Add(drtmp);
-                }
-                else {
-                    MessageBox.Show("只能添加两条信息！");
-                }
+                goodsList0.Rows.Add(drtmp);
             }
             goodsList0Bind();
         }
@@ -466,6 +451,10 @@ namespace zkhwClient.view.PublicHealthView
       //既往史外伤清单表 traumatism_record
         private void button7_Click(object sender, EventArgs e)
         {
+            if (goodsList1.Rows.Count >= 2)
+            {
+                MessageBox.Show("不能超过2条数据!"); return;
+            }
             traumatism_record hm = new traumatism_record();
             if (hm.ShowDialog() == DialogResult.OK)
             {
@@ -475,14 +464,7 @@ namespace zkhwClient.view.PublicHealthView
                 drtmp["traumatism_name"] = hm.traumatism_name.ToString();
                 drtmp["traumatism_time"] = hm.traumatism_time.ToString();
                 drtmp["traumatism_code"] = hm.traumatism_code.ToString();
-                if (goodsList1.Rows.Count <= 2)
-                {
-                    goodsList1.Rows.Add(drtmp);
-                }
-                else
-                {
-                    MessageBox.Show("只能添加两条信息！");
-                }
+                goodsList1.Rows.Add(drtmp);
             }
             goodsList1Bind();
         }
@@ -522,6 +504,10 @@ namespace zkhwClient.view.PublicHealthView
         //既往史输血清单表 metachysis_record
         private void button9_Click(object sender, EventArgs e)
         {
+            if (goodsList2.Rows.Count >= 2)
+            {
+                MessageBox.Show("不能超过2条数据!"); return;
+            }
             metachysis_record hm = new metachysis_record();
             if (hm.ShowDialog() == DialogResult.OK)
             {
@@ -531,14 +517,8 @@ namespace zkhwClient.view.PublicHealthView
                 drtmp["metachysis_reasonn"] = hm.metachysis_reasonn.ToString();
                 drtmp["metachysis_time"] = hm.metachysis_time.ToString();
                 drtmp["metachysis_code"] = hm.metachysis_code.ToString();
-                if (goodsList2.Rows.Count <= 2)
-                {
-                    goodsList2.Rows.Add(drtmp);
-                }
-                else
-                {
-                    MessageBox.Show("只能添加两条信息！");
-                }
+                goodsList2.Rows.Add(drtmp);
+                
             }
             goodsList2Bind();
         }
@@ -589,23 +569,6 @@ namespace zkhwClient.view.PublicHealthView
                 DataRow drtmp = goodsList3.NewRow();
                 drtmp["id"] = 0;
                 drtmp["resident_base_info_id"] = id;
-                string relation= hm.relation.ToString();
-                if (relation == "父亲")
-                {
-                    drtmp["relation"] = "1";
-                }
-                else if (relation == "母亲")
-                {
-                    drtmp["relation"] = "2";
-                }
-                else if (relation == "兄弟姐妹")
-                {
-                    drtmp["relation"] = "3";
-                }
-                else if (relation == "子女")
-                {
-                    drtmp["relation"] = "4";
-                }
                 drtmp["relation"] = hm.relation.ToString();
                 drtmp["disease_name"] = hm.disease_name.ToString();
                 drtmp["disease_type"] = hm.disease_type.ToString();
