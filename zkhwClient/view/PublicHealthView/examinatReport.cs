@@ -753,6 +753,12 @@ where 1=1";
                     {
                         dic.Add("编号" + (i + 1), bh[i].ToString());
                     }
+                    string card_pic = data["card_pic"].ToString();
+                    if (card_pic != null && !"".Equals(card_pic) && File.Exists(@str + @"\up\pic\" + card_pic))
+                    {
+                        builder.MoveToBookmark("图片");
+                        builder.InsertImage(resizeImageFromFile(@str + @"\up\pic\" + card_pic, 172, 184));
+                    }
                     dic.Add("姓名", data["name"].ToString());
                     dic.Add("现住址", data["residence_address"].ToString());
                     dic.Add("户籍地址", data["address"].ToString());
@@ -794,6 +800,7 @@ where 1=1";
                         dics.Add("出生日期" + (i + 1), r[i].ToString());
                     }
                     dics.Add("身份证号", data["id_number"].ToString());
+                   
                     dics.Add("工作单位", data["company"].ToString());
                     dics.Add("本人电话", data["phone"].ToString());
                     dics.Add("联系人姓名", data["link_name"].ToString());
@@ -847,6 +854,7 @@ where 1=1";
                     {
                         dics.Add("药物过敏史1", ywgm);
                     }
+                    dics.Add("药物过敏史其他", data["allergy_other"].ToString());
                     string bls = data["exposure"].ToString();
                     if (bls.IndexOf(',') >= 0)
                     {
@@ -1002,6 +1010,7 @@ where 1=1";
                     {
                         dics.Add("残疾情况1", cjqk);
                     }
+                    dics.Add("残疾其他", data["deformity_name"].ToString());
                     dics.Add("厨房排风设施", data["kitchen"].ToString());
                     dics.Add("燃料类型", data["fuel"].ToString());
                     dics.Add("饮水", data["drink"].ToString());

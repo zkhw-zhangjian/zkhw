@@ -33,6 +33,8 @@ namespace zkhwClient.view.PublicHealthView
         /// 身份证号
         /// </summary>
         public string id_number { get; set; }
+        public bool show { get; set; } = true;
+        public string mag { get; set; }
         public addtcmHealthServices(int s, string name, string no, string id)
         {
             InitializeComponent();
@@ -42,9 +44,16 @@ namespace zkhwClient.view.PublicHealthView
             id_number = id.Trim();
             姓名.Text = Names;
             this.Text = (IS == 1 ? "新增" : "修改");
-            if (IS == 0)
+            if (GetUpdate())
             {
                 GetData();
+                return;
+            }
+            else
+            {
+                show = false;
+                mag = "没有修改数据！";
+                return;
             }
         }
 
@@ -857,7 +866,22 @@ namespace zkhwClient.view.PublicHealthView
                 }
             }
         }
-
+        /// <summary>
+        /// 判断是否有修改数据
+        /// </summary>
+        /// <returns></returns>
+        private bool GetUpdate()
+        {
+            DataSet data = DbHelperMySQL.Query($@"select * from elderly_tcm_record where name='{Names}' and aichive_no='{aichive_no}' and id_number='{id_number}'");
+            if (data != null && data.Tables[0] != null && data.Tables[0].Rows.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         private void addtcmHealthServices_Load(object sender, EventArgs e)
         {
 
