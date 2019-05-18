@@ -66,7 +66,7 @@ namespace zkhwClient.view.PublicHealthView
                     Control sfsj = Controls.Find($"随访时间{a}", true)[0];
                     ((DateTimePicker)sfsj).Value = Convert.ToDateTime(dt.visit_date);
                     Control zlyx = Controls.Find($"治疗月序{a}", true)[0];
-                    ((TextBox)zlyx).Text = dt.month_order;
+                    ((TextBox)zlyx).Text = dt.month_order.ToString();
                     Control ddry = Controls.Find($"督导人员{a}", true)[0];
                     foreach (Control item in ((GroupBox)ddry).Controls)
                     {
@@ -210,13 +210,13 @@ namespace zkhwClient.view.PublicHealthView
                     Control cxtzzlsj = Controls.Find($"出现停止治疗时间{a}", true)[0];
                     ((DateTimePicker)cxtzzlsj).Value = Convert.ToDateTime(dt.stop_date);
                     Control yfshzcs = Controls.Find($"应访视患者次数{a}", true)[0];
-                    ((TextBox)yfshzcs).Text = dt.must_visit_num;
+                    ((TextBox)yfshzcs).Text = dt.must_visit_num.ToString();
                     Control sjfscs = Controls.Find($"实际访视次数{a}", true)[0];
-                    ((TextBox)sjfscs).Text = dt.actual_visit_num;
+                    ((TextBox)sjfscs).Text = dt.actual_visit_num.ToString();
                     Control yfycs = Controls.Find($"应服药次数{a}", true)[0];
-                    ((TextBox)yfycs).Text = dt.must_medicine_num;
+                    ((TextBox)yfycs).Text = dt.must_medicine_num.ToString();
                     Control sjfycs = Controls.Find($"实际服药次数{a}", true)[0];
-                    ((TextBox)sjfycs).Text = dt.actual_medicine_num;
+                    ((TextBox)sjfycs).Text = dt.actual_medicine_num.ToString();
                     Control fyl = Controls.Find($"服药率{a}", true)[0];
                     ((TextBox)fyl).Text = dt.medicine_rate;
                 }

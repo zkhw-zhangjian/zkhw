@@ -94,7 +94,7 @@ namespace zkhwClient.view.PublicHealthView
             info.aichive_no = aichive_no;
             info.Cardcode = id_number;
             info.id_number = id_number;
-            string issql = @"insert into tuberculosis_info(id,name,archive_no,id_number,Cardcode,visit_date,visit_type,patient_type,sputum_bacterium_type,drug_fast_type,symptom,symptom_other,chemotherapy_plan,`usage`,drugs_type,supervisor_type,supervisor_other,single_room,ventilation,smoke_now,smoke_next,drink_now,drink_next,get_medicine_address,get_medicine_date,medicine_record,medicine_leave,treatment_course,erratically,untoward_effect,further_consultation,insist,habits_customs,intimate_contact,next_visit_date,estimate_doctor,create_user,create_name,create_time,upload_status) values(@id,@name,@archive_no,@Cardcode,@visit_date,@visit_type,@patient_type,@sputum_bacterium_type,@drug_fast_type,@symptom,@symptom_other,@chemotherapy_plan,@usage,@drugs_type,@supervisor_type,@supervisor_other,@single_room,@ventilation,@smoke_now,@smoke_next,@drink_now,@drink_next,@get_medicine_address,@get_medicine_date,@medicine_record,@medicine_leave,@treatment_course,@erratically,@untoward_effect,@further_consultation,@insist,@habits_customs,@intimate_contact,@next_visit_date,@estimate_doctor,@create_user,@create_name,@create_time,@upload_status)";
+            string issql = @"insert into tuberculosis_info(id,name,archive_no,id_number,Cardcode,visit_date,visit_type,patient_type,sputum_bacterium_type,drug_fast_type,symptom,symptom_other,chemotherapy_plan,`usage`,drugs_type,supervisor_type,supervisor_other,single_room,ventilation,smoke_now,smoke_next,drink_now,drink_next,get_medicine_address,get_medicine_date,medicine_record,medicine_leave,treatment_course,erratically,untoward_effect,further_consultation,insist,habits_customs,intimate_contact,next_visit_date,estimate_doctor,create_user,create_name,create_time,upload_status) values(@id,@name,@archive_no,@id_number,@Cardcode,@visit_date,@visit_type,@patient_type,@sputum_bacterium_type,@drug_fast_type,@symptom,@symptom_other,@chemotherapy_plan,@usage,@drugs_type,@supervisor_type,@supervisor_other,@single_room,@ventilation,@smoke_now,@smoke_next,@drink_now,@drink_next,@get_medicine_address,@get_medicine_date,@medicine_record,@medicine_leave,@treatment_course,@erratically,@untoward_effect,@further_consultation,@insist,@habits_customs,@intimate_contact,@next_visit_date,@estimate_doctor,@create_user,@create_name,@create_time,@upload_status)";
             MySqlParameter[] args = new MySqlParameter[] {
                     new MySqlParameter("@id",info.id),
                     new MySqlParameter("@name", info.name),
@@ -306,10 +306,10 @@ namespace zkhwClient.view.PublicHealthView
                     }
                 }
             }
-            info.smoke_now = Convert.ToInt32(吸烟1.Text);
-            info.smoke_next = Convert.ToInt32(吸烟2.Text);
-            info.drink_now = Convert.ToInt32(饮酒1.Text);
-            info.drink_next = Convert.ToInt32(饮酒2.Text);
+            info.smoke_now = string.IsNullOrWhiteSpace(吸烟1.Text) ? 0 : Convert.ToInt32(吸烟1.Text);
+            info.smoke_next = string.IsNullOrWhiteSpace(吸烟2.Text) ? 0 : Convert.ToInt32(吸烟2.Text);
+            info.drink_now = string.IsNullOrWhiteSpace(饮酒1.Text) ? 0 : Convert.ToInt32(饮酒1.Text);
+            info.drink_next = string.IsNullOrWhiteSpace(饮酒2.Text) ? 0 : Convert.ToInt32(饮酒2.Text);
             info.get_medicine_address = 取药地点.Text;
             info.get_medicine_date = 取药时间.Value.ToString("yyyy-MM-dd HH:mm:ss");
             foreach (Control item in 服药记录卡的填写.Controls)
