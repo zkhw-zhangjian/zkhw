@@ -346,7 +346,7 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(1, 897);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1304, 137);
+            this.groupBox1.Size = new System.Drawing.Size(1294, 137);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             // 
@@ -2119,11 +2119,11 @@
             this.radioButton1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton1.Location = new System.Drawing.Point(10, 2);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(80, 24);
+            this.radioButton1.Size = new System.Drawing.Size(59, 24);
             this.radioButton1.TabIndex = 30;
             this.radioButton1.TabStop = true;
             this.radioButton1.Tag = "1";
-            this.radioButton1.Text = "1正常";
+            this.radioButton1.Text = "1否";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // radioButton2
@@ -2132,11 +2132,11 @@
             this.radioButton2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton2.Location = new System.Drawing.Point(96, 2);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(80, 24);
+            this.radioButton2.Size = new System.Drawing.Size(59, 24);
             this.radioButton2.TabIndex = 31;
             this.radioButton2.TabStop = true;
             this.radioButton2.Tag = "2";
-            this.radioButton2.Text = "2异常";
+            this.radioButton2.Text = "2是";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // textBox18
@@ -2570,7 +2570,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 34);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1272, 203);
+            this.groupBox3.Size = new System.Drawing.Size(1262, 203);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 

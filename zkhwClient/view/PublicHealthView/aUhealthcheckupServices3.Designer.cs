@@ -346,12 +346,12 @@
             // 
             // dateTimePicker5
             // 
-            this.dateTimePicker5.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker5.CustomFormat = "yyyy-MM";
             this.dateTimePicker5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker5.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker5.Location = new System.Drawing.Point(384, 157);
             this.dateTimePicker5.Name = "dateTimePicker5";
-            this.dateTimePicker5.Size = new System.Drawing.Size(147, 30);
+            this.dateTimePicker5.Size = new System.Drawing.Size(143, 30);
             this.dateTimePicker5.TabIndex = 273;
             // 
             // textBox99
@@ -367,7 +367,7 @@
             // 
             // dateTimePicker6
             // 
-            this.dateTimePicker6.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker6.CustomFormat = "yyyy-MM";
             this.dateTimePicker6.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker6.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker6.Location = new System.Drawing.Point(214, 157);
@@ -377,12 +377,12 @@
             // 
             // dateTimePicker7
             // 
-            this.dateTimePicker7.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker7.CustomFormat = "yyyy-MM";
             this.dateTimePicker7.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker7.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker7.Location = new System.Drawing.Point(384, 128);
             this.dateTimePicker7.Name = "dateTimePicker7";
-            this.dateTimePicker7.Size = new System.Drawing.Size(147, 30);
+            this.dateTimePicker7.Size = new System.Drawing.Size(143, 30);
             this.dateTimePicker7.TabIndex = 270;
             // 
             // textBox100
@@ -398,7 +398,7 @@
             // 
             // dateTimePicker8
             // 
-            this.dateTimePicker8.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker8.CustomFormat = "yyyy-MM";
             this.dateTimePicker8.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker8.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker8.Location = new System.Drawing.Point(214, 128);
@@ -506,12 +506,12 @@
             // 
             // dateTimePicker3
             // 
-            this.dateTimePicker3.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker3.CustomFormat = "yyyy-MM";
             this.dateTimePicker3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker3.Location = new System.Drawing.Point(384, 68);
             this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(147, 30);
+            this.dateTimePicker3.Size = new System.Drawing.Size(143, 30);
             this.dateTimePicker3.TabIndex = 257;
             // 
             // textBox59
@@ -527,22 +527,22 @@
             // 
             // dateTimePicker4
             // 
-            this.dateTimePicker4.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker4.CustomFormat = "yyyy-MM";
             this.dateTimePicker4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker4.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker4.Location = new System.Drawing.Point(214, 68);
             this.dateTimePicker4.Name = "dateTimePicker4";
-            this.dateTimePicker4.Size = new System.Drawing.Size(151, 30);
+            this.dateTimePicker4.Size = new System.Drawing.Size(147, 30);
             this.dateTimePicker4.TabIndex = 255;
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker2.CustomFormat = "yyyy-MM";
             this.dateTimePicker2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker2.Location = new System.Drawing.Point(384, 39);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(147, 30);
+            this.dateTimePicker2.Size = new System.Drawing.Size(143, 30);
             this.dateTimePicker2.TabIndex = 254;
             // 
             // textBox58
@@ -558,12 +558,12 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker1.CustomFormat = "yyyy-MM";
             this.dateTimePicker1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Location = new System.Drawing.Point(214, 39);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(151, 30);
+            this.dateTimePicker1.Size = new System.Drawing.Size(147, 30);
             this.dateTimePicker1.TabIndex = 252;
             // 
             // textBox57
@@ -721,7 +721,7 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(1, 43);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1278, 477);
+            this.groupBox1.Size = new System.Drawing.Size(1269, 477);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             // 

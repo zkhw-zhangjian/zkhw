@@ -353,7 +353,7 @@ namespace zkhwClient.view.PublicHealthView
                 per.organ_denture_topleft = denture1;
                 per.organ_denture_bottomleft = denture2;
                 per.organ_denture_topright = denture3;
-                per.organ_denture_bottomleft = denture4;
+                per.organ_denture_bottomright = denture4;
                 //per.organ_denture = "1";
             }
             if (per.organ_tooth != null && per.organ_tooth != "")

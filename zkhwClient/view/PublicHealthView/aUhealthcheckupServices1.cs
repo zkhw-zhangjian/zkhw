@@ -181,8 +181,7 @@ namespace zkhwClient.view.PublicHealthView
                         if (this.radioButton42.Tag.ToString() == dt.Rows[0]["lifeway_dust_preventive"].ToString())
                         {
                             this.radioButton42.Checked = true;
-                        }
-                        if (this.textBox100.Text == dt.Rows[0]["lifeway_dust_preventive"].ToString())
+                        }else if ("2" == dt.Rows[0]["lifeway_dust_preventive"].ToString())
                         {
                             this.radioButton43.Checked = true;
                         }
@@ -192,7 +191,7 @@ namespace zkhwClient.view.PublicHealthView
                         {
                             this.radioButton44.Checked = true;
                         }
-                        else if (this.textBox101.Text == dt.Rows[0]["lifeway_radiation_preventive"].ToString())
+                        else if ("2"== dt.Rows[0]["lifeway_radiation_preventive"].ToString())
                         {
                             this.radioButton45.Checked = true;
                         }
@@ -202,7 +201,7 @@ namespace zkhwClient.view.PublicHealthView
                         {
                                 this.radioButton50.Checked = true;
                         }
-                        else if (this.textBox113.Text == dt.Rows[0]["lifeway_physical_preventive"].ToString())
+                        else if ("2" == dt.Rows[0]["lifeway_physical_preventive"].ToString())
                         {
                             this.radioButton51.Checked = true;
                         }
@@ -212,7 +211,7 @@ namespace zkhwClient.view.PublicHealthView
                         {
                                 this.radioButton46.Checked = true;
                         }
-                        else if (this.textBox105.Text == dt.Rows[0]["lifeway_chemical_preventive"].ToString())
+                        else if ("2" == dt.Rows[0]["lifeway_chemical_preventive"].ToString())
                         {
                             this.radioButton47.Checked = true;
                         }
@@ -222,7 +221,7 @@ namespace zkhwClient.view.PublicHealthView
                         {
                                 this.radioButton48.Checked = true;
                         }
-                        else if (this.textBox109.Text == dt.Rows[0]["lifeway_other_preventive"].ToString())
+                        else if ("2" == dt.Rows[0]["lifeway_other_preventive"].ToString())
                         {
                             this.radioButton49.Checked = true;
                         }
@@ -409,7 +408,8 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 else if(this.radioButton43.Checked == true)
                 {
-                    per.lifeway_dust_preventive = this.textBox100.Text.Replace(" ", ""); ;
+                    //per.lifeway_dust_preventive = this.textBox100.Text.Replace(" ", "");
+                    per.lifeway_dust_preventive = this.radioButton43.Tag.ToString();
                 }
 
                 per.lifeway_hazardous_radiation = this.textBox103.Text.Replace(" ", "");
@@ -419,7 +419,8 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 else if (this.radioButton45.Checked == true)
                 {
-                    per.lifeway_radiation_preventive = this.textBox101.Text.Replace(" ", ""); ;
+                    //per.lifeway_radiation_preventive = this.textBox101.Text.Replace(" ", "");
+                    per.lifeway_radiation_preventive = this.radioButton45.Tag.ToString();
                 }
 
                 per.lifeway_hazardous_physical = this.textBox115.Text.Replace(" ", "");
@@ -429,7 +430,8 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 else if (this.radioButton51.Checked == true)
                 {
-                    per.lifeway_physical_preventive = this.textBox113.Text.Replace(" ", ""); ;
+                    //per.lifeway_physical_preventive = this.textBox113.Text.Replace(" ", "");
+                    per.lifeway_physical_preventive = this.radioButton51.Tag.ToString();
                 }
 
                 per.lifeway_hazardous_chemical = this.textBox107.Text.Replace(" ", "");
@@ -439,7 +441,8 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 else if (this.radioButton47.Checked == true)
                 {
-                    per.lifeway_chemical_preventive = this.textBox105.Text.Replace(" ", ""); ;
+                    //per.lifeway_chemical_preventive = this.textBox105.Text.Replace(" ", "");
+                    per.lifeway_chemical_preventive = this.radioButton47.Tag.ToString();
                 }
 
                 per.lifeway_hazardous_other = this.textBox111.Text.Replace(" ", "");
@@ -449,7 +452,8 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 else if (this.radioButton49.Checked == true)
                 {
-                    per.lifeway_other_preventive = this.textBox109.Text.Replace(" ", ""); ;
+                    //per.lifeway_other_preventive = this.textBox109.Text.Replace(" ", "");
+                    per.lifeway_other_preventive = this.radioButton49.Tag.ToString();
                 }
             };
 
