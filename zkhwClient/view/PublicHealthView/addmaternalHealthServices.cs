@@ -80,9 +80,9 @@ namespace zkhwClient.view.PublicHealthView
         {
             gravida_info info = GetData();
 
-            string sql = @"insert into gravida_info(id,name,aichive_no,id_number,visit_date,gestational_weeks,gravida_age,husband_name,husband_age,husband_phone,pregnant_num,natural_labour_num,cesarean_num,last_menstruation_date,due_date,past_illness,past_illness_other,family_history,family_history_other,habits_customs,habits_customs_other,isoperation,operation_name,natural_abortion_num,abactio_num,fetaldeath_num,stillbirth_num,neonatal_death_num,birth_defect_num,height,weight,bmi,blood_pressure_high,blood_pressure_low,heart,heart_other,lungs,lungs_other,vulva,vulva_other,vagina,vagina_other,cervix,cervix_other,corpus,corpus_other,accessories,accessories_other,hemoglobin,leukocyte,platelet,blood_other,urine_protein,glycosuria,urine_acetone_bodies,bld,urine_other,blood_sugar,blood_group,blood_rh,sgft,ast,albumin,total_bilirubin,conjugated_bilirubin,scr,blood_urea,vaginal_fluid,vaginal_fluid_other,vaginal_cleaning,hb,hbsab,hbeag,hbeab,hbcab,syphilis,hiv,b_ultrasonic,other,general_assessment,assessment_error,health_guidance,health_guidance_other,transfer_treatment,transfer_treatment_reason,transfer_treatment_department,next_visit_date,visit_doctor,create_user,create_name,create_time,upload_status
+            string sql = @"insert into gravida_info(id,name,aichive_no,id_number,visit_date,gestational_weeks,gravida_age,husband_name,husband_age,husband_phone,pregnant_num,natural_labour_num,cesarean_num,last_menstruation_date,due_date,past_illness,past_illness_other,family_history,family_history_other,habits_customs,habits_customs_other,isoperation,operation_name,natural_abortion_num,abactio_num,fetaldeath_num,stillbirth_num,neonatal_death_num,birth_defect_num,height,weight,bmi,blood_pressure_high,blood_pressure_low,heart,heart_other,lungs,lungs_other,vulva,vulva_other,vagina,vagina_other,cervix,cervix_other,corpus,corpus_other,accessories,accessories_other,hemoglobin,leukocyte,platelet,blood_other,urine_protein,glycosuria,urine_acetone_bodies,bld,urine_other,blood_sugar,blood_group,blood_rh,sgft,ast,albumin,total_bilirubin,conjugated_bilirubin,scr,blood_urea,vaginal_fluid,vaginal_fluid_other,vaginal_cleaning,hb,hbsab,hbeag,hbeab,hbcab,syphilis,hiv,b_ultrasonic,other,general_assessment,assessment_error,health_guidance,health_guidance_other,transfer_treatment,transfer_treatment_reason,transfer_treatment_department,next_visit_date,visit_doctor,create_user,create_name,create_time,create_org,create_org_name,upload_status
 ) values(@id,@name,@aichive_no,@id_number,@visit_date,@gestational_weeks,@gravida_age,@husband_name,@husband_age,@husband_phone,@pregnant_num,@natural_labour_num,@cesarean_num,@last_menstruation_date,@due_date,@past_illness,@past_illness_other,@family_history,@family_history_other,@habits_customs,@habits_customs_other,@isoperation,@operation_name,@natural_abortion_num,@abactio_num,@fetaldeath_num,@stillbirth_num,@neonatal_death_num,@birth_defect_num,@height,@weight,@bmi,@blood_pressure_high,@blood_pressure_low,@heart,@heart_other,@lungs,@lungs_other,@vulva,@vulva_other,@vagina,@vagina_other,@cervix,@cervix_other,@corpus,@corpus_other,@accessories,@accessories_other,@hemoglobin,@leukocyte,@platelet,@blood_other,@urine_protein,@glycosuria,@urine_acetone_bodies,@bld,@urine_other,@blood_sugar,@blood_group,@blood_rh,@sgft,@ast,@albumin,@total_bilirubin,@conjugated_bilirubin,@scr,@blood_urea,@vaginal_fluid,@vaginal_fluid_other,@vaginal_cleaning,@hb,@hbsab,@hbeag,@hbeab,@hbcab,@syphilis,@hiv,@b_ultrasonic,@other,@general_assessment,@assessment_error,@health_guidance,@health_guidance_other,@transfer_treatment,@transfer_treatment_reason,@transfer_treatment_department,
-@next_visit_date,@visit_doctor,@create_user,@create_name,@create_time,@upload_status);";
+@next_visit_date,@visit_doctor,@create_user,@create_name,@create_time,@create_org,@create_org_name,@upload_status);";
             MySqlParameter[] mySqls = new MySqlParameter[] {
                     new MySqlParameter("@id",info.id),
                     new MySqlParameter("@name", info.name),
@@ -174,6 +174,8 @@ namespace zkhwClient.view.PublicHealthView
                     new MySqlParameter("@visit_doctor", info.visit_doctor),
                     new MySqlParameter("@create_user", info.create_user),
                     new MySqlParameter("@create_name", info.create_name),
+                    new MySqlParameter("@create_org", info.create_org),
+                    new MySqlParameter("@create_org_name", info.create_org_name),
                     new MySqlParameter("@create_time", info.create_time),
                     new MySqlParameter("@upload_status", info.upload_status),
             };
@@ -311,14 +313,14 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
             info.id_number = id_number;
             info.visit_date = 填表日期.Value.ToString("yyyy-MM-dd HH:mm:ss");
             info.gestational_weeks = string.IsNullOrWhiteSpace(孕周.Text) ? 0 : Convert.ToInt32(孕周.Text);
-            info.gravida_age = string.IsNullOrWhiteSpace(孕妇年龄.Text) ? 0 : Convert.ToInt32(孕妇年龄.Text); 
+            info.gravida_age = string.IsNullOrWhiteSpace(孕妇年龄.Text) ? 0 : Convert.ToInt32(孕妇年龄.Text);
             info.husband_name = 丈夫姓名.Text;
             info.husband_age = string.IsNullOrWhiteSpace(丈夫年龄.Text) ? 0 : Convert.ToInt32(丈夫年龄.Text);
             info.husband_phone = 丈夫电话.Text;
-            info.pregnant_num = string.IsNullOrWhiteSpace(孕次.Text) ? 0 : Convert.ToInt32(孕次.Text); 
-            info.natural_labour_num = string.IsNullOrWhiteSpace(阴道分娩次数.Text) ? 0 : Convert.ToInt32(阴道分娩次数.Text); 
-            info.cesarean_num = string.IsNullOrWhiteSpace(剖腹产次数.Text) ? 0 : Convert.ToInt32(剖腹产次数.Text); 
-            info.last_menstruation_date = 末次月经.Text;
+            info.pregnant_num = string.IsNullOrWhiteSpace(孕次.Text) ? 0 : Convert.ToInt32(孕次.Text);
+            info.natural_labour_num = string.IsNullOrWhiteSpace(阴道分娩次数.Text) ? 0 : Convert.ToInt32(阴道分娩次数.Text);
+            info.cesarean_num = string.IsNullOrWhiteSpace(剖腹产次数.Text) ? 0 : Convert.ToInt32(剖腹产次数.Text);
+            info.last_menstruation_date = 末次月经.Value.ToString("yyyy-MM-dd");
             info.due_date = 预产期.Value.ToString("yyyy-MM-dd HH:mm:ss");
             string past_illness = string.Empty;
             foreach (Control item in 既往史.Controls)
@@ -382,17 +384,17 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
                     info.operation_name = ((TextBox)item).Text;
                 }
             }
-            info.natural_abortion_num = string.IsNullOrWhiteSpace(自然流产次数.Text) ? 0 : Convert.ToInt32(自然流产次数.Text); 
-            info.abactio_num = string.IsNullOrWhiteSpace(人工流产次数.Text) ? 0 : Convert.ToInt32(人工流产次数.Text); 
+            info.natural_abortion_num = string.IsNullOrWhiteSpace(自然流产次数.Text) ? 0 : Convert.ToInt32(自然流产次数.Text);
+            info.abactio_num = string.IsNullOrWhiteSpace(人工流产次数.Text) ? 0 : Convert.ToInt32(人工流产次数.Text);
             info.fetaldeath_num = string.IsNullOrWhiteSpace(死胎次数.Text) ? 0 : Convert.ToInt32(死胎次数.Text);
-            info.stillbirth_num = string.IsNullOrWhiteSpace(死产次数.Text) ? 0 : Convert.ToInt32(死产次数.Text); 
-            info.neonatal_death_num = string.IsNullOrWhiteSpace(新生儿死亡次数.Text) ? 0 : Convert.ToInt32(新生儿死亡次数.Text); 
+            info.stillbirth_num = string.IsNullOrWhiteSpace(死产次数.Text) ? 0 : Convert.ToInt32(死产次数.Text);
+            info.neonatal_death_num = string.IsNullOrWhiteSpace(新生儿死亡次数.Text) ? 0 : Convert.ToInt32(新生儿死亡次数.Text);
             info.birth_defect_num = string.IsNullOrWhiteSpace(出生缺陷儿次数.Text) ? 0 : Convert.ToInt32(出生缺陷儿次数.Text);
             info.height = 身高.Text;
             info.weight = 体重.Text;
             info.bmi = 体质指数.Text;
             info.blood_pressure_high = string.IsNullOrWhiteSpace(血压高.Text) ? 0 : Convert.ToInt32(血压高.Text);
-            info.blood_pressure_low = string.IsNullOrWhiteSpace(血压低.Text) ? 0 : Convert.ToInt32(血压低.Text); 
+            info.blood_pressure_low = string.IsNullOrWhiteSpace(血压低.Text) ? 0 : Convert.ToInt32(血压低.Text);
             foreach (Control item in 心脏.Controls)
             {
                 if (item is RadioButton)
@@ -491,7 +493,7 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
                     info.accessories_other = ((TextBox)item).Text;
                 }
             }
-            info.hemoglobin = string.IsNullOrWhiteSpace(血红蛋白.Text) ? 0 : Convert.ToInt32(血红蛋白.Text); 
+            info.hemoglobin = 血红蛋白.Text;
             info.leukocyte = 白细胞计数.Text;
             info.platelet = 血小板计数.Text;
             info.blood_other = 血液中其他.Text;
@@ -502,7 +504,7 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
             info.urine_other = 尿常规其他.Text;
             info.blood_sugar = 血糖.Text;
             info.blood_group = 血型.Text;
-            info.blood_rh = string.IsNullOrWhiteSpace(RH.Text) ? 0 : Convert.ToInt32(RH.Text);
+            info.blood_rh = RH.Text;
             info.sgft = 血清谷丙转氨酶.Text;
             info.ast = 血清谷草转氨酶.Text;
             info.albumin = 白蛋白.Text;
@@ -636,7 +638,7 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
                     孕次.Text = dt.pregnant_num.ToString();
                     阴道分娩次数.Text = dt.natural_labour_num.ToString();
                     剖腹产次数.Text = dt.cesarean_num.ToString();
-                    末次月经.Text = dt.last_menstruation_date;
+                    末次月经.Value = Convert.ToDateTime(dt.last_menstruation_date);
                     预产期.Value = Convert.ToDateTime(dt.due_date);
                     foreach (Control item in 既往史.Controls)
                     {
@@ -1212,7 +1214,7 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
         /// <summary>
         /// 血红蛋白
         /// </summary>
-        public int? hemoglobin { get; set; }
+        public string hemoglobin { get; set; }
         /// <summary>
         /// 白细胞计数
         /// </summary>
@@ -1256,7 +1258,7 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
         /// <summary>
         /// RH
         /// </summary>
-        public int? blood_rh { get; set; }
+        public string blood_rh { get; set; }
         /// <summary>
         /// 血清谷丙转氨酶
         /// </summary>
@@ -1380,11 +1382,11 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
         /// <summary>
         /// 创建组织
         /// </summary>
-        public string create_org { get; set; }= frmLogin.organCode;
+        public string create_org { get; set; } = frmLogin.organCode;
         /// <summary>
         /// 创建组织名
         /// </summary>
-        public string create_org_name { get; set; }= frmLogin.organName;
+        public string create_org_name { get; set; } = frmLogin.organName;
         /// <summary>
         /// 创建时间
         /// </summary>
