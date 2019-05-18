@@ -72,12 +72,17 @@ namespace zkhwClient.view.PublicHealthView
         /// <returns></returns>
         private int Insert()
         {
+            if (GetCount() >= 4)
+            {
+                MessageBox.Show("已添加四次，无法再添加");
+                return 0;
+            }
             tuberculosis_follow_record info = GetData();
             info.name = Names;
             info.aichive_no = aichive_no;
             info.Cardcode = id_number;
             info.id_number = id_number;
-            string issql = @"insert into tuberculosis_follow_record(id,name,aichive_no,Cardcode,id_number,visit_date,month_order,supervisor_type,visit_type,symptom,symptom_other,smoke_now,smoke_next,drink_now,drink_next,chemotherapy_plan,`usage`,drugs_type,miss,untoward_effect,untoward_effect_info,complication,complication_info,transfer_treatment_department,transfer_treatment_reason,twoweek_visit_result,handling_suggestion,next_visit_date,visit_doctor,stop_date,stop_reason,must_visit_num,actual_visit_num,must_medicine_num,actual_medicine_num,medicine_rate,estimate_doctor,create_user,create_name,create_time,upload_status) values(@id,@name,@aichive_no,@Cardcode,@visit_date,@month_order,@supervisor_type,@visit_type,@symptom,@symptom_other,@smoke_now,@smoke_next,@drink_now,@drink_next,@chemotherapy_plan,@usage,@drugs_type,@miss,@untoward_effect,@untoward_effect_info,@complication,@complication_info,@transfer_treatment_department,@transfer_treatment_reason,@twoweek_visit_result,@handling_suggestion,@next_visit_date,@visit_doctor,@stop_date,@stop_reason,@must_visit_num,@actual_visit_num,@must_medicine_num,@actual_medicine_num,@medicine_rate,@estimate_doctor,@create_user,@create_name,@create_time,@upload_status)";
+            string issql = @"insert into tuberculosis_follow_record(id,name,aichive_no,Cardcode,id_number,visit_date,month_order,supervisor_type,visit_type,symptom,symptom_other,smoke_now,smoke_next,drink_now,drink_next,chemotherapy_plan,`usage`,drugs_type,miss,untoward_effect,untoward_effect_info,complication,complication_info,transfer_treatment_department,transfer_treatment_reason,twoweek_visit_result,handling_suggestion,next_visit_date,visit_doctor,stop_date,stop_reason,must_visit_num,actual_visit_num,must_medicine_num,actual_medicine_num,medicine_rate,estimate_doctor,create_user,create_name,create_time,upload_status) values(@id,@name,@aichive_no,@Cardcode,@id_number,@visit_date,@month_order,@supervisor_type,@visit_type,@symptom,@symptom_other,@smoke_now,@smoke_next,@drink_now,@drink_next,@chemotherapy_plan,@usage,@drugs_type,@miss,@untoward_effect,@untoward_effect_info,@complication,@complication_info,@transfer_treatment_department,@transfer_treatment_reason,@twoweek_visit_result,@handling_suggestion,@next_visit_date,@visit_doctor,@stop_date,@stop_reason,@must_visit_num,@actual_visit_num,@must_medicine_num,@actual_medicine_num,@medicine_rate,@estimate_doctor,@create_user,@create_name,@create_time,@upload_status)";
             MySqlParameter[] args = new MySqlParameter[] {
                     new MySqlParameter("@id",info.id),
                     new MySqlParameter("@name", info.name),
@@ -184,7 +189,7 @@ namespace zkhwClient.view.PublicHealthView
         {
             tuberculosis_follow_record info = new tuberculosis_follow_record();
             info.visit_date = 随访时间1.Value.ToString("yyyy-MM-dd HH:mm:ss");
-            info.month_order = 治疗月序1.Text;
+            info.month_order = string.IsNullOrWhiteSpace(治疗月序1.Text) ? 0 : Convert.ToInt32(治疗月序1.Text);
             foreach (Control item in 督导人员1.Controls)
             {
                 if (item is RadioButton)
@@ -221,10 +226,10 @@ namespace zkhwClient.view.PublicHealthView
                 }
             }
             info.symptom = symptom.TrimEnd(',');
-            info.smoke_now = Convert.ToInt32(吸烟a1.Text);
-            info.smoke_next = Convert.ToInt32(吸烟a2.Text);
-            info.drink_now = Convert.ToInt32(饮酒a1.Text);
-            info.drink_next = Convert.ToInt32(饮酒a2.Text);
+            info.smoke_now = string.IsNullOrWhiteSpace(吸烟a1.Text) ? 0 : Convert.ToInt32(吸烟a1.Text);
+            info.smoke_next = string.IsNullOrWhiteSpace(吸烟a2.Text) ? 0 : Convert.ToInt32(吸烟a2.Text);
+            info.drink_now = string.IsNullOrWhiteSpace(饮酒a1.Text) ? 0 : Convert.ToInt32(饮酒a1.Text);
+            info.drink_next = string.IsNullOrWhiteSpace(饮酒a2.Text) ? 0 : Convert.ToInt32(饮酒a2.Text);
             info.chemotherapy_plan = 化疗方案1.Text;
             foreach (Control item in 用法1.Controls)
             {
@@ -282,12 +287,12 @@ namespace zkhwClient.view.PublicHealthView
                     }
                 }
             }
-            info.stop_reason = symptom.TrimEnd(',');
+            info.stop_reason = stop_reason.TrimEnd(',');
             info.stop_date = 出现停止治疗时间1.Value.ToString("yyyy-MM-dd HH:mm:ss");
-            info.must_visit_num = 应访视患者次数1.Text;
-            info.actual_visit_num = 实际访视次数1.Text;
-            info.must_medicine_num = 应服药次数1.Text;
-            info.actual_medicine_num = 实际服药次数1.Text;
+            info.must_visit_num = string.IsNullOrWhiteSpace(应访视患者次数1.Text) ? 0 : Convert.ToInt32(应访视患者次数1.Text);
+            info.actual_visit_num = string.IsNullOrWhiteSpace(实际访视次数1.Text) ? 0 : Convert.ToInt32(实际访视次数1.Text);
+            info.must_medicine_num = string.IsNullOrWhiteSpace(应服药次数1.Text) ? 0 : Convert.ToInt32(应服药次数1.Text);
+            info.actual_medicine_num = string.IsNullOrWhiteSpace(实际服药次数1.Text) ? 0 : Convert.ToInt32(实际服药次数1.Text);
             info.medicine_rate = 服药率1.Text;
             return info;
         }
@@ -305,7 +310,7 @@ namespace zkhwClient.view.PublicHealthView
                 foreach (var dt in ts)
                 {
                     随访时间1.Value = Convert.ToDateTime(dt.visit_date);
-                    治疗月序1.Text = dt.month_order;
+                    治疗月序1.Text = dt.month_order.ToString();
                     foreach (Control item in 督导人员1.Controls)
                     {
                         if (item is RadioButton)
@@ -403,35 +408,39 @@ namespace zkhwClient.view.PublicHealthView
                     处理意见1.Text = dt.handling_suggestion;
                     下次随访时间1.Value = Convert.ToDateTime(dt.next_visit_date);
                     随访医生签名1.Text = dt.visit_doctor;
-                    foreach (Control item in 停止治疗原因1.Controls)
+                    if (!string.IsNullOrWhiteSpace(dt.stop_reason))
                     {
-                        if (item is CheckBox)
+                        foreach (Control item in 停止治疗原因1.Controls)
                         {
-                            if (dt.stop_reason.IndexOf(",") >= 0)
+                            if (item is CheckBox)
                             {
-                                string[] sys = dt.stop_reason.Split(',');
-                                if (item is CheckBox)
+                                if (dt.stop_reason.IndexOf(",") >= 0)
                                 {
-                                    if (sys.Contains(((CheckBox)item).Tag.ToString()))
+                                    string[] sys = dt.stop_reason.Split(',');
+                                    if (item is CheckBox)
+                                    {
+                                        if (sys.Contains(((CheckBox)item).Tag.ToString()))
+                                        {
+                                            ((CheckBox)item).Checked = true;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (((CheckBox)item).Tag.ToString() == dt.stop_reason)
                                     {
                                         ((CheckBox)item).Checked = true;
                                     }
                                 }
                             }
-                            else
-                            {
-                                if (((CheckBox)item).Tag.ToString() == dt.symptom)
-                                {
-                                    ((CheckBox)item).Checked = true;
-                                }
-                            }
                         }
                     }
+                    
                     出现停止治疗时间1.Value = Convert.ToDateTime(dt.stop_date);
-                    应访视患者次数1.Text = dt.must_visit_num;
-                    实际访视次数1.Text = dt.actual_visit_num;
-                    应服药次数1.Text = dt.must_medicine_num;
-                    实际服药次数1.Text = dt.actual_medicine_num;
+                    应访视患者次数1.Text = dt.must_visit_num.ToString();
+                    实际访视次数1.Text = dt.actual_visit_num.ToString();
+                    应服药次数1.Text = dt.must_medicine_num.ToString();
+                    实际服药次数1.Text = dt.actual_medicine_num.ToString();
                     服药率1.Text = dt.medicine_rate;
                 }
             }
@@ -450,6 +459,22 @@ namespace zkhwClient.view.PublicHealthView
             else
             {
                 return true;
+            }
+        }
+        /// <summary>
+        /// 判断是否有第一次随访记录
+        /// </summary>
+        /// <returns></returns>
+        private int GetCount()
+        {
+            DataSet data = DbHelperMySQL.Query($@"select COUNT(id) co from tuberculosis_follow_record where name='{Names}' and aichive_no='{aichive_no}' and Cardcode='{id_number}'");
+            if (data != null && data.Tables.Count > 0 && data.Tables[0].Rows.Count > 0)
+            {
+                return Convert.ToInt32(data.Tables[0].Rows[0][0]);
+            }
+            else
+            {
+                return 0;
             }
         }
         /// <summary>
@@ -515,7 +540,7 @@ namespace zkhwClient.view.PublicHealthView
         /// <summary>
         /// 治疗月序
         /// </summary>
-        public string month_order { get; set; }
+        public int? month_order { get; set; }
         /// <summary>
         /// 督导人员选择
         /// </summary>
@@ -615,19 +640,19 @@ namespace zkhwClient.view.PublicHealthView
         /// <summary>
         /// 应该随访次数
         /// </summary>
-        public string must_visit_num { get; set; }
+        public int? must_visit_num { get; set; }
         /// <summary>
         /// 实际随访次数
         /// </summary>
-        public string actual_visit_num { get; set; }
+        public int? actual_visit_num { get; set; }
         /// <summary>
         /// 应服药次数
         /// </summary>
-        public string must_medicine_num { get; set; }
+        public int? must_medicine_num { get; set; }
         /// <summary>
         /// 实际服药次数
         /// </summary>
-        public string actual_medicine_num { get; set; }
+        public int? actual_medicine_num { get; set; }
         /// <summary>
         /// 服药率
         /// </summary>

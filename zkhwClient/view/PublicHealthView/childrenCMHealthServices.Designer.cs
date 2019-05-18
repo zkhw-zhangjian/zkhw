@@ -48,7 +48,6 @@
             this.添加 = new System.Windows.Forms.Button();
             this.修改 = new System.Windows.Forms.Button();
             this.删除 = new System.Windows.Forms.Button();
-            this.关闭 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -56,10 +55,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("宋体", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.Location = new System.Drawing.Point(683, 21);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(217, 15);
+            this.label4.Size = new System.Drawing.Size(549, 38);
             this.label4.TabIndex = 11;
             this.label4.Text = "儿童中医药健康管理服务记录表";
             // 
@@ -234,6 +234,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(468, 36);
             this.textBox1.TabIndex = 1;
+            this.textBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox1_MouseClick);
             // 
             // label1
             // 
@@ -301,34 +302,18 @@
             this.删除.UseVisualStyleBackColor = false;
             this.删除.Click += new System.EventHandler(this.删除_Click);
             // 
-            // 关闭
-            // 
-            this.关闭.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.关闭.BackColor = System.Drawing.Color.Red;
-            this.关闭.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.关闭.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.关闭.Location = new System.Drawing.Point(847, 658);
-            this.关闭.Margin = new System.Windows.Forms.Padding(4);
-            this.关闭.Name = "关闭";
-            this.关闭.Size = new System.Drawing.Size(124, 41);
-            this.关闭.TabIndex = 16;
-            this.关闭.Text = "关闭";
-            this.关闭.UseVisualStyleBackColor = false;
-            this.关闭.Click += new System.EventHandler(this.关闭_Click);
-            // 
             // childrenCMHealthServices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1545, 712);
-            this.Controls.Add(this.关闭);
             this.Controls.Add(this.删除);
             this.Controls.Add(this.修改);
             this.Controls.Add(this.添加);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "childrenCMHealthServices";
             this.Text = "儿童中医药健康管理服务记录";
             this.Load += new System.EventHandler(this.childrenCMHealthServices_Load);
@@ -362,6 +347,5 @@
         private System.Windows.Forms.Button 添加;
         private System.Windows.Forms.Button 修改;
         private System.Windows.Forms.Button 删除;
-        private System.Windows.Forms.Button 关闭;
     }
 }

@@ -35,6 +35,8 @@ namespace zkhwClient.view.PublicHealthView
         public string mag { get; set; }
         public addmaternalHealthServices(int ps, string names, string aichive_nos, string id_numbers)
         {
+            InitializeComponent();
+            this.Text = (IS == 1 ? "第1次产前检查添加" : "第1次产前检查修改");
             Names = names;
             aichive_no = aichive_nos;
             id_number = id_numbers;
@@ -43,7 +45,6 @@ namespace zkhwClient.view.PublicHealthView
             {
                 if (GetUpdate())
                 {
-                    InitializeComponent();
                     SetData();
                     return;
                 }
@@ -54,8 +55,6 @@ namespace zkhwClient.view.PublicHealthView
                     return;
                 }
             }
-            InitializeComponent();
-            this.Text = (IS == 1 ? "第1次产前检查添加" : "第1次产前检查修改");
         }
         private void 取消_Click(object sender, EventArgs e)
         {
@@ -311,14 +310,14 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
             info.aichive_no = aichive_no;
             info.id_number = id_number;
             info.visit_date = 填表日期.Value.ToString("yyyy-MM-dd HH:mm:ss");
-            info.gestational_weeks = Convert.ToInt32(孕周.Text);
-            info.gravida_age = Convert.ToInt32(孕妇年龄.Text);
+            info.gestational_weeks = string.IsNullOrWhiteSpace(孕周.Text) ? 0 : Convert.ToInt32(孕周.Text);
+            info.gravida_age = string.IsNullOrWhiteSpace(孕妇年龄.Text) ? 0 : Convert.ToInt32(孕妇年龄.Text); 
             info.husband_name = 丈夫姓名.Text;
-            info.husband_age = Convert.ToInt32(丈夫年龄.Text);
+            info.husband_age = string.IsNullOrWhiteSpace(丈夫年龄.Text) ? 0 : Convert.ToInt32(丈夫年龄.Text);
             info.husband_phone = 丈夫电话.Text;
-            info.pregnant_num = Convert.ToInt32(孕次.Text);
-            info.natural_labour_num = Convert.ToInt32(阴道分娩次数.Text);
-            info.cesarean_num = Convert.ToInt32(剖腹产次数.Text);
+            info.pregnant_num = string.IsNullOrWhiteSpace(孕次.Text) ? 0 : Convert.ToInt32(孕次.Text); 
+            info.natural_labour_num = string.IsNullOrWhiteSpace(阴道分娩次数.Text) ? 0 : Convert.ToInt32(阴道分娩次数.Text); 
+            info.cesarean_num = string.IsNullOrWhiteSpace(剖腹产次数.Text) ? 0 : Convert.ToInt32(剖腹产次数.Text); 
             info.last_menstruation_date = 末次月经.Text;
             info.due_date = 预产期.Value.ToString("yyyy-MM-dd HH:mm:ss");
             string past_illness = string.Empty;
@@ -383,17 +382,17 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
                     info.operation_name = ((TextBox)item).Text;
                 }
             }
-            info.natural_abortion_num = Convert.ToInt32(自然流产次数.Text);
-            info.abactio_num = Convert.ToInt32(人工流产次数.Text);
-            info.fetaldeath_num = Convert.ToInt32(死胎次数.Text);
-            info.stillbirth_num = Convert.ToInt32(死产次数.Text);
-            info.neonatal_death_num = Convert.ToInt32(新生儿死亡次数.Text);
-            info.birth_defect_num = Convert.ToInt32(出生缺陷儿次数.Text);
+            info.natural_abortion_num = string.IsNullOrWhiteSpace(自然流产次数.Text) ? 0 : Convert.ToInt32(自然流产次数.Text); 
+            info.abactio_num = string.IsNullOrWhiteSpace(人工流产次数.Text) ? 0 : Convert.ToInt32(人工流产次数.Text); 
+            info.fetaldeath_num = string.IsNullOrWhiteSpace(死胎次数.Text) ? 0 : Convert.ToInt32(死胎次数.Text);
+            info.stillbirth_num = string.IsNullOrWhiteSpace(死产次数.Text) ? 0 : Convert.ToInt32(死产次数.Text); 
+            info.neonatal_death_num = string.IsNullOrWhiteSpace(新生儿死亡次数.Text) ? 0 : Convert.ToInt32(新生儿死亡次数.Text); 
+            info.birth_defect_num = string.IsNullOrWhiteSpace(出生缺陷儿次数.Text) ? 0 : Convert.ToInt32(出生缺陷儿次数.Text);
             info.height = 身高.Text;
             info.weight = 体重.Text;
             info.bmi = 体质指数.Text;
-            info.blood_pressure_high = Convert.ToInt32(血压高.Text);
-            info.blood_pressure_low = Convert.ToInt32(血压低.Text);
+            info.blood_pressure_high = string.IsNullOrWhiteSpace(血压高.Text) ? 0 : Convert.ToInt32(血压高.Text);
+            info.blood_pressure_low = string.IsNullOrWhiteSpace(血压低.Text) ? 0 : Convert.ToInt32(血压低.Text); 
             foreach (Control item in 心脏.Controls)
             {
                 if (item is RadioButton)
@@ -492,7 +491,7 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
                     info.accessories_other = ((TextBox)item).Text;
                 }
             }
-            info.hemoglobin = Convert.ToInt32(血红蛋白.Text);
+            info.hemoglobin = string.IsNullOrWhiteSpace(血红蛋白.Text) ? 0 : Convert.ToInt32(血红蛋白.Text); 
             info.leukocyte = 白细胞计数.Text;
             info.platelet = 血小板计数.Text;
             info.blood_other = 血液中其他.Text;
@@ -503,7 +502,7 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
             info.urine_other = 尿常规其他.Text;
             info.blood_sugar = 血糖.Text;
             info.blood_group = 血型.Text;
-            info.blood_rh = Convert.ToInt32(RH.Text);
+            info.blood_rh = string.IsNullOrWhiteSpace(RH.Text) ? 0 : Convert.ToInt32(RH.Text);
             info.sgft = 血清谷丙转氨酶.Text;
             info.ast = 血清谷草转氨酶.Text;
             info.albumin = 白蛋白.Text;
