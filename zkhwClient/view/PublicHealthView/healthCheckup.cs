@@ -140,26 +140,26 @@ namespace zkhwClient.view.PublicHealthView
                 if (dtup.Rows.Count>0) { MessageBox.Show(name+"已填写过健康体检表，请重新选择!");return; }
                 if (aichive_no != null && !"".Equals(aichive_no))
                 {
-                    //aUhealthcheckupServices1 auhcs = new aUhealthcheckupServices1();
-                    //auhcs.textBox1.Text = name;
-                    //auhcs.textBox118.Text = bar_code;
-                    //auhcs.textBox119.Text = id_number;
-                    //auhcs.textBox120.Text = id;
-                    //auhcs.textBox2.Text = aichive_no;
-                    //if (check_date != "")
-                    //{
-                    //    auhcs.dateTimePicker1.Value = DateTime.ParseExact(check_date, TarStr, format);
-                    //}
-                    //auhcs.textBox51.Text = doctor_name;
-                    //auhcs.id = id;
-                    //auhcs.Show();
-                    aUhealthcheckupServices3 auhcs = new aUhealthcheckupServices3();
+                    aUhealthcheckupServices1 auhcs = new aUhealthcheckupServices1();
+                    auhcs.textBox1.Text = name;
+                    auhcs.textBox118.Text = bar_code;
+                    auhcs.textBox119.Text = id_number;
+                    auhcs.textBox120.Text = id;
+                    auhcs.textBox2.Text = aichive_no;
+                    if (check_date != "")
+                    {
+                        auhcs.dateTimePicker1.Value = DateTime.ParseExact(check_date, TarStr, format);
+                    }
+                    auhcs.textBox51.Text = doctor_name;
                     auhcs.id = id;
-                    auhcs.textBox107.Text = id_number;
-                    auhcs.textBox106.Text = aichive_no;
-                    auhcs.textBox105.Text = bar_code;
-                    auhcs.textBox108.Text = id;
                     auhcs.Show();
+                    //aUhealthcheckupServices3 auhcs = new aUhealthcheckupServices3();
+                    //auhcs.id = id;
+                    //auhcs.textBox107.Text = id_number;
+                    //auhcs.textBox106.Text = aichive_no;
+                    //auhcs.textBox105.Text = bar_code;
+                    //auhcs.textBox108.Text = id;
+                    //auhcs.Show();
                 }
             }
             else {
@@ -216,9 +216,11 @@ namespace zkhwClient.view.PublicHealthView
 
                     auhcs.id = id;//祖
                     auhcs.Show();
-                    //aUhealthcheckupServices4 auhcs = new aUhealthcheckupServices4();
-                    //auhcs.textBox1.Text = bar_code;
-                    //auhcs.textBox2.Text = aichive_no;
+                    //aUhealthcheckupServices3 auhcs = new aUhealthcheckupServices3();
+                    //auhcs.textBox107.Text = id_number;
+                    //auhcs.textBox106.Text = aichive_no;
+                    //auhcs.textBox105.Text = bar_code;
+                    //auhcs.textBox108.Text = id;
                     //auhcs.Show();
                 }
             }

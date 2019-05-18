@@ -102,8 +102,10 @@ namespace zkhwClient.dao
         {
             int ret = 0;
             String sql = @"update physical_examination_record set organ_lips='" + per.organ_lips + "',organ_tooth='" + per.organ_tooth + "',organ_hypodontia='"
-                + per.organ_hypodontia + "',organ_caries='" + per.organ_caries + "',organ_denture='" + per.organ_denture + "',organ_guttur='"
-                + per.organ_guttur + "',organ_vision_left='" + per.organ_vision_left + "',organ_vision_right='"
+                + per.organ_hypodontia + "',organ_hypodontia_topleft='" + per.organ_hypodontia_topleft + "',organ_hypodontia_topright='" + per.organ_hypodontia_topright + "',organ_hypodontia_bottomleft='" + per.organ_hypodontia_bottomleft + "',organ_hypodontia_bottomright='" + per.organ_hypodontia_bottomright 
+                + "',organ_caries='" + per.organ_caries + "',organ_caries_topleft='" + per.organ_caries_topleft + "',organ_caries_topright='" + per.organ_caries_topright + "',organ_caries_bottomleft='" + per.organ_caries_bottomleft + "',organ_caries_bottomright='" + per.organ_caries_bottomright 
+                + "',organ_denture='" + per.organ_denture + "',organ_denture_topleft='" + per.organ_denture_topleft + "',organ_denture_topright='" + per.organ_denture_topright + "',organ_denture_bottomleft='" + per.organ_denture_bottomleft + "',organ_denture_bottomright='" + per.organ_denture_bottomright 
+                + "',organ_guttur='"+ per.organ_guttur + "',organ_vision_left='"+ per.organ_vision_left + "',organ_vision_right='"
                 + per.organ_vision_right + "',organ_correctedvision_left= '" + per.organ_correctedvision_left + "',organ_correctedvision_right='"
                 + per.organ_correctedvision_right + "',organ_hearing='" + per.organ_hearing + "',organ_movement='" + per.organ_movement + "',examination_eye= '" + per.examination_eye
                 + "',examination_eye_other= '" + per.examination_eye_other + "',examination_skin= '" + per.examination_skin + "',examination_skin_other='"
@@ -147,8 +149,10 @@ namespace zkhwClient.dao
             return ret == 0 ? false : true;
         }
         //添加健康体检表  第三页 添加住院史
-        public bool addHospitalizedRecord(hospitalizedRecord hr)
+        public bool addHospitalizedRecord(hospitalizedRecord hr,string hospitalized_type)
         {
+            string sql1 = "delete from hospitalized_record  where exam_id = '" + hr.exam_id + "' and hospitalized_type='" + hospitalized_type + "';";
+            DbHelperMySQL.ExecuteSql(sql1);
             string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string id = Result.GetNewId();
             string sql = @"insert into hospitalized_record (id,exam_id,archive_no,id_number,hospitalized_type,in_hospital_time,leave_hospital_time,reason,hospital_organ,case_code,create_name,create_time) values ('" +id + "','" + hr.exam_id + "','" + hr.archive_no + "', '"+hr.id_number+"', '"+hr.hospitalized_type + "', '" + hr.in_hospital_time + "', '" + hr.leave_hospital_time + "', '" + hr.reason + "', '" + hr.hospital_organ + "', '" + hr.case_code + "', '" + frmLogin.name + "', '" + time + "')";

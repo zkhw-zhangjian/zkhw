@@ -93,24 +93,24 @@ namespace zkhwClient.view.PublicHealthView
                         {
                             //将ctr转换成CheckBox并赋值给ck
                             CheckBox ck = ctr as CheckBox;
+                            
                             if (dtz.Rows[0]["danger_controlling"].ToString().IndexOf(ck.Tag.ToString()) > -1)
                             {
-                                ck.Checked = true;
+                               ck.Checked = true;
                             }
                         }
                     }
-                    if (this.textBox37.Text == dtz.Rows[0]["target_weight"].ToString())
+                    if (this.checkBox8.Checked)
                     {
-                        checkBox8.Checked = true;
+                        this.textBox37.Text = dtz.Rows[0]["target_weight"].ToString();
                     }
-                    if (this.textBox39.Text == dtz.Rows[0]["advise_bacterin"].ToString())
+                    if (this.checkBox9.Checked)
                     {
-                        checkBox9.Checked = true;
-                        
+                        this.textBox39.Text = dtz.Rows[0]["advise_bacterin"].ToString();
                     }
-                    if (this.textBox40.Text == dtz.Rows[0]["danger_controlling_other"].ToString())
+                    if (this.checkBox10.Checked)
                     {
-                        checkBox10.Checked = true;                     
+                       this.textBox40.Text = dtz.Rows[0]["danger_controlling_other"].ToString();                     
                     }
                     this.richTextBox1.Text = dtz.Rows[0]["healthAdvice"].ToString();
                 }

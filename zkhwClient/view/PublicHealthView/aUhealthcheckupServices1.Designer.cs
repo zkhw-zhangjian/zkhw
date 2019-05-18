@@ -1568,7 +1568,7 @@
             this.checkBox33.Name = "checkBox33";
             this.checkBox33.Size = new System.Drawing.Size(123, 24);
             this.checkBox33.TabIndex = 60;
-            this.checkBox33.Tag = "1";
+            this.checkBox33.Tag = "3";
             this.checkBox33.Text = "3素食为主";
             this.checkBox33.UseVisualStyleBackColor = true;
             // 
@@ -1587,8 +1587,6 @@
             // checkBox31
             // 
             this.checkBox31.AutoSize = true;
-            this.checkBox31.Checked = true;
-            this.checkBox31.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox31.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.checkBox31.Location = new System.Drawing.Point(3, 2);
             this.checkBox31.Name = "checkBox31";
@@ -2608,7 +2606,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 123);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1305, 108);
+            this.groupBox3.Size = new System.Drawing.Size(1295, 108);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 

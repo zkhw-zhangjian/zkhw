@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using zkhwClient.dao;
 using zkhwClient.view.setting;
@@ -66,6 +67,7 @@ namespace zkhwClient.view.PublicHealthView
 
         private void 计算_Click(object sender, EventArgs e)
         {
+            Thread.Sleep(1000);
             try
             {
                 Clears();
@@ -257,22 +259,22 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 else if (hplist.Sum() > tylist.Sum() && hplist.Sum() > qylist.Sum() && hplist.Sum() > xylist.Sum() && hplist.Sum() > srlist.Sum() && hplist.Sum() > tslist.Sum() && hplist.Sum() > yixlist.Sum() && hplist.Sum() > yxlist.Sum() && hplist.Sum() > qxlist.Sum())
                 {
-                    #region 平和质体质
-                    i1.Text = "1．得分 " + hplist.Sum();
-                    if (hplist.Sum() >= 17 && qxlist.Sum() <= 8 && yxlist.Sum() <= 8 && yixlist.Sum() <= 8 && tslist.Sum() <= 8 && srlist.Sum() <= 8 && xylist.Sum() <= 8 && qylist.Sum() <= 8 && tylist.Sum() <= 8)
-                    {
-                        i2.Checked = true;
-                        JingYong("9");
-                    }
-                    else if (hplist.Sum() >= 17 && qxlist.Sum() <= 10 && yxlist.Sum() <= 10 && yixlist.Sum() <= 10 && tslist.Sum() <= 10 && srlist.Sum() <= 10 && xylist.Sum() <= 10 && qylist.Sum() <= 10 && tylist.Sum() <= 10)
-                    {
-                        i3.Checked = true;
-                        JingYong("9");
-                    }
-                    #endregion
-                }
-                else
-                {
+                //    #region 平和质体质
+                //    i1.Text = "1．得分 " + hplist.Sum();
+                //    if (hplist.Sum() >= 17 && qxlist.Sum() <= 8 && yxlist.Sum() <= 8 && yixlist.Sum() <= 8 && tslist.Sum() <= 8 && srlist.Sum() <= 8 && xylist.Sum() <= 8 && qylist.Sum() <= 8 && tylist.Sum() <= 8)
+                //    {
+                //        i2.Checked = true;
+                //        JingYong("9");
+                //    }
+                //    else if (hplist.Sum() >= 17 && qxlist.Sum() <= 10 && yxlist.Sum() <= 10 && yixlist.Sum() <= 10 && tslist.Sum() <= 10 && srlist.Sum() <= 10 && xylist.Sum() <= 10 && qylist.Sum() <= 10 && tylist.Sum() <= 10)
+                //    {
+                //        i3.Checked = true;
+                //        JingYong("9");
+                //    }
+                //    #endregion
+                //}
+                //else
+                //{
                     #region 平和质体质
                     i1.Text = "1．得分 " + hplist.Sum();
                     i2.Checked = true;
@@ -589,7 +591,8 @@ namespace zkhwClient.view.PublicHealthView
                     new MySqlParameter("@tebingzhi_sorce", tz["特禀质体质"]),
                     new MySqlParameter("@tebingzhi_result",tz["特禀质体质"]>=11?1:0),
                     new MySqlParameter("@pinghezhi_sorce", tz["平和质体质"]),
-                    new MySqlParameter("@pinghezhi_result", (tz["平和质体质"]>=17&&tz["气虚质体质"]<=8&&tz["阳虚质体质"]<=8&&tz["阴虚质体质"]<=8&&tz["痰湿质体质"]<=8&&tz["湿热质体质"]<=8&&tz["血瘀质体质"]<=8&&tz["气郁质体质"]<=8&&tz["特禀质体质"]<=8)?1:0),
+                    //new MySqlParameter("@pinghezhi_result", (tz["平和质体质"]>=17&&tz["气虚质体质"]<=8&&tz["阳虚质体质"]<=8&&tz["阴虚质体质"]<=8&&tz["痰湿质体质"]<=8&&tz["湿热质体质"]<=8&&tz["血瘀质体质"]<=8&&tz["气郁质体质"]<=8&&tz["特禀质体质"]<=8)?1:0),
+                    new MySqlParameter("@pinghezhi_result", (tz["平和质体质"]>=1)?1:0),
                     new MySqlParameter("@tcm_guidance", bj),
                     new MySqlParameter("@test_doctor", YS),
                     new MySqlParameter("@create_user", YS),
@@ -630,7 +633,8 @@ namespace zkhwClient.view.PublicHealthView
                     new MySqlParameter("@tebingzhi_sorce", tz["特禀质体质"]),
                     new MySqlParameter("@tebingzhi_result",tz["特禀质体质"]>=11?1:0),
                     new MySqlParameter("@pinghezhi_sorce", tz["平和质体质"]),
-                    new MySqlParameter("@pinghezhi_result", (tz["平和质体质"]>=17&&tz["气虚质体质"]<=8&&tz["阳虚质体质"]<=8&&tz["阴虚质体质"]<=8&&tz["痰湿质体质"]<=8&&tz["湿热质体质"]<=8&&tz["血瘀质体质"]<=8&&tz["气郁质体质"]<=8&&tz["特禀质体质"]<=8)?1:0),
+                    //new MySqlParameter("@pinghezhi_result", (tz["平和质体质"]>=17&&tz["气虚质体质"]<=8&&tz["阳虚质体质"]<=8&&tz["阴虚质体质"]<=8&&tz["痰湿质体质"]<=8&&tz["湿热质体质"]<=8&&tz["血瘀质体质"]<=8&&tz["气郁质体质"]<=8&&tz["特禀质体质"]<=8)?1:0),
+                    new MySqlParameter("@pinghezhi_result", (tz["平和质体质"]>=1)?1:0),
                     new MySqlParameter("@tcm_guidance", bj),
                     new MySqlParameter("@test_doctor", YS),
                     new MySqlParameter("@update_user", YS),

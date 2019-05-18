@@ -454,6 +454,7 @@
             this.Name = "aUhealthcheckTooth";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "口腔-齿列";
+            this.Load += new System.EventHandler(this.aUhealthcheckTooth_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

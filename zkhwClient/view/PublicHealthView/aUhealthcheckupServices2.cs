@@ -191,14 +191,14 @@ namespace zkhwClient.view.PublicHealthView
                     if (this.radioButton83.Tag.ToString() == dt.Rows[0]["examination_abdomen_hepatomegaly"].ToString())
                     {
                         this.radioButton83.Checked = true;
-                        this.textBox56.Text = dt.Rows[0]["examination_hepatomegaly_memo"].ToString();
+                        this.textBox61.Text = dt.Rows[0]["examination_hepatomegaly_memo"].ToString();
                     };
 
                     if (this.radioButton11.Tag.ToString() == dt.Rows[0]["examination_abdomen_splenomegaly"].ToString()) { this.radioButton11.Checked = true; };
                     if (this.radioButton12.Tag.ToString() == dt.Rows[0]["examination_abdomen_splenomegaly"].ToString())
                     {
                         this.radioButton12.Checked = true;
-                        this.textBox56.Text = dt.Rows[0]["examination_splenomegaly_memo"].ToString();
+                        this.textBox7.Text = dt.Rows[0]["examination_splenomegaly_memo"].ToString();
                     };
 
                     if (this.radioButton13.Tag.ToString() == dt.Rows[0]["examination_abdomen_shiftingdullness"].ToString()) { this.radioButton13.Checked = true; };
@@ -308,8 +308,8 @@ namespace zkhwClient.view.PublicHealthView
         private void button4_Click(object sender, EventArgs e)
         {
             bean.physical_examination_recordBean per = new bean.physical_examination_recordBean();
-            per.aichive_no = this.textBox96.Text;
-            per.bar_code = this.textBox95.Text;
+            per.aichive_no = this.textBox95.Text;
+            per.bar_code = this.textBox96.Text;
             per.id = this.textBox100.Text;
 
             if (this.radioButton55.Checked == true) { per.organ_lips = this.radioButton55.Tag.ToString(); };
@@ -329,31 +329,32 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         per.organ_tooth += "," + ck.Tag.ToString();
                     }
-                    if ("checkBox2".Equals(ck.Name))
-                    {
-                        per.organ_hypodontia_topleft = hypodontia1;
-                        per.organ_hypodontia_bottomleft = hypodontia2;
-                        per.organ_hypodontia_topright = hypodontia3;
-                        per.organ_hypodontia_bottomright = hypodontia4;
-                        //per.organ_hypodontia = "1";
-                    }
-                    if ("checkBox3".Equals(ck.Name))
-                    {
-                        per.organ_caries_topleft = caries1;
-                        per.organ_caries_bottomleft = caries2;
-                        per.organ_caries_topright = caries3;
-                        per.organ_caries_bottomright = caries4;
-                        //per.organ_caries = "1";
-                    }
-                    if ("checkBox4".Equals(ck.Name))
-                    {
-                        per.organ_denture_topleft = denture1;
-                        per.organ_denture_bottomleft = denture2;
-                        per.organ_denture_topright = denture3;
-                        per.organ_denture_bottomleft = denture4;
-                        //per.organ_denture = "1";
-                    }
+                    
                 }
+            }
+            if (this.checkBox2.Checked)
+            {
+                per.organ_hypodontia_topleft = hypodontia1;
+                per.organ_hypodontia_bottomleft = hypodontia2;
+                per.organ_hypodontia_topright = hypodontia3;
+                per.organ_hypodontia_bottomright = hypodontia4;
+                //per.organ_hypodontia = "1";
+            }
+            if (this.checkBox3.Checked)
+            {
+                per.organ_caries_topleft = caries1;
+                per.organ_caries_bottomleft = caries2;
+                per.organ_caries_topright = caries3;
+                per.organ_caries_bottomright = caries4;
+                //per.organ_caries = "1";
+            }
+            if (this.checkBox4.Checked)
+            {
+                per.organ_denture_topleft = denture1;
+                per.organ_denture_bottomleft = denture2;
+                per.organ_denture_topright = denture3;
+                per.organ_denture_bottomleft = denture4;
+                //per.organ_denture = "1";
             }
             if (per.organ_tooth != null && per.organ_tooth != "")
             {

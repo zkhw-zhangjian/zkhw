@@ -2847,7 +2847,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
         {
             if (Convert.IsDBNull(dataRow))
             {
-                return "null";
+                return "NULL";
             }
             else
             {
@@ -2857,7 +2857,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 }
                 else
                 {
-                    return "null";
+                    return "NULL";
                 }
             }
         }

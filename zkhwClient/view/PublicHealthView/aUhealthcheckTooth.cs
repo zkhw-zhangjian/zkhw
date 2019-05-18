@@ -72,5 +72,23 @@ namespace zkhwClient.view.PublicHealthView
             denture4 = this.textBox8.Text;
             this.DialogResult = DialogResult.OK;
         }
+
+        private void aUhealthcheckTooth_Load(object sender, EventArgs e)
+        {
+            this.textBox9.Text = hypodontia1;
+            this.textBox1.Text = hypodontia2;
+            this.textBox2.Text = hypodontia3;
+            this.textBox3.Text = hypodontia4;
+
+            this.textBox7.Text = caries1;
+            this.textBox6.Text = caries2;
+            this.textBox5.Text = caries3;
+            this.textBox4.Text = caries4;
+
+            this.textBox12.Text = denture1;
+            this.textBox11.Text = denture2;
+            this.textBox10.Text = denture3;
+            this.textBox8.Text = denture4;
+        }
     }
 }
