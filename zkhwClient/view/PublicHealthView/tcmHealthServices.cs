@@ -114,8 +114,15 @@ namespace zkhwClient.view.PublicHealthView
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             int row = dataGridView1.CurrentRow.Index;
             addtcmHealthServices addtcm = new addtcmHealthServices(0, dataGridView1["姓名", row].Value.ToString(), dataGridView1["编码", row].Value.ToString(), dataGridView1["身份证号", row].Value.ToString());
-            addtcm.StartPosition = FormStartPosition.CenterScreen;
-            addtcm.ShowDialog();
+            if (addtcm.show)
+            {
+                addtcm.StartPosition = FormStartPosition.CenterScreen;
+                addtcm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show(addtcm.mag);
+            }
         }
 
         /// <summary>
@@ -189,7 +196,7 @@ END)性别,
 base.id_number 身份证号,
 base.upload_status 是否同步
 from resident_base_info base
-where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{Convert.ToDateTime(basicInfoSettings.createtime).ToString("yyyy-MM-dd")}'";//base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'
+where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{Convert.ToDateTime(basicInfoSettings.createtime).ToString("yyyy-MM-dd")}' ";//
             if (pairs != null && pairs.Count > 0)
             {
                 if (!string.IsNullOrWhiteSpace(pairs["timesta"]) && !string.IsNullOrWhiteSpace(pairs["timeend"]))
