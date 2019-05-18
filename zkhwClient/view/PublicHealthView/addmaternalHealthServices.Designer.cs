@@ -48,7 +48,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.剖腹产次数 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.末次月经 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.预产期 = new System.Windows.Forms.DateTimePicker();
             this.既往史 = new System.Windows.Forms.GroupBox();
@@ -242,11 +241,12 @@
             this.随访医生签名 = new System.Windows.Forms.TextBox();
             this.取消 = new System.Windows.Forms.Button();
             this.to1 = new System.Windows.Forms.GroupBox();
-            this.确定 = new System.Windows.Forms.Button();
             this.总体评估 = new System.Windows.Forms.GroupBox();
+            this.评估异常 = new System.Windows.Forms.TextBox();
             this.radioButton27 = new System.Windows.Forms.RadioButton();
             this.radioButton28 = new System.Windows.Forms.RadioButton();
-            this.评估异常 = new System.Windows.Forms.TextBox();
+            this.确定 = new System.Windows.Forms.Button();
+            this.末次月经 = new System.Windows.Forms.DateTimePicker();
             this.既往史.SuspendLayout();
             this.家族史.SuspendLayout();
             this.个人史.SuspendLayout();
@@ -455,14 +455,6 @@
             this.label11.Size = new System.Drawing.Size(67, 15);
             this.label11.TabIndex = 19;
             this.label11.Text = "末次月经";
-            // 
-            // 末次月经
-            // 
-            this.末次月经.Location = new System.Drawing.Point(88, 120);
-            this.末次月经.Margin = new System.Windows.Forms.Padding(4);
-            this.末次月经.Name = "末次月经";
-            this.末次月经.Size = new System.Drawing.Size(157, 25);
-            this.末次月经.TabIndex = 20;
             // 
             // label12
             // 
@@ -2582,6 +2574,7 @@
             // to1
             // 
             this.to1.AutoSize = true;
+            this.to1.Controls.Add(this.末次月经);
             this.to1.Controls.Add(this.总体评估);
             this.to1.Controls.Add(this.取消);
             this.to1.Controls.Add(this.确定);
@@ -2632,7 +2625,6 @@
             this.to1.Controls.Add(this.既往史);
             this.to1.Controls.Add(this.预产期);
             this.to1.Controls.Add(this.label12);
-            this.to1.Controls.Add(this.末次月经);
             this.to1.Controls.Add(this.label11);
             this.to1.Controls.Add(this.剖腹产次数);
             this.to1.Controls.Add(this.label10);
@@ -2661,16 +2653,6 @@
             this.to1.TabIndex = 0;
             this.to1.TabStop = false;
             // 
-            // 确定
-            // 
-            this.确定.Location = new System.Drawing.Point(431, 2731);
-            this.确定.Name = "确定";
-            this.确定.Size = new System.Drawing.Size(121, 37);
-            this.确定.TabIndex = 56;
-            this.确定.Text = "确定";
-            this.确定.UseVisualStyleBackColor = true;
-            this.确定.Click += new System.EventHandler(this.确定_Click);
-            // 
             // 总体评估
             // 
             this.总体评估.Controls.Add(this.评估异常);
@@ -2684,6 +2666,13 @@
             this.总体评估.TabIndex = 50;
             this.总体评估.TabStop = false;
             this.总体评估.Text = "总体评估";
+            // 
+            // 评估异常
+            // 
+            this.评估异常.Location = new System.Drawing.Point(362, 24);
+            this.评估异常.Name = "评估异常";
+            this.评估异常.Size = new System.Drawing.Size(306, 25);
+            this.评估异常.TabIndex = 2;
             // 
             // radioButton27
             // 
@@ -2711,12 +2700,23 @@
             this.radioButton28.Text = "1 未见异常";
             this.radioButton28.UseVisualStyleBackColor = true;
             // 
-            // 评估异常
+            // 确定
             // 
-            this.评估异常.Location = new System.Drawing.Point(362, 24);
-            this.评估异常.Name = "评估异常";
-            this.评估异常.Size = new System.Drawing.Size(306, 25);
-            this.评估异常.TabIndex = 2;
+            this.确定.Location = new System.Drawing.Point(431, 2731);
+            this.确定.Name = "确定";
+            this.确定.Size = new System.Drawing.Size(121, 37);
+            this.确定.TabIndex = 56;
+            this.确定.Text = "确定";
+            this.确定.UseVisualStyleBackColor = true;
+            this.确定.Click += new System.EventHandler(this.确定_Click);
+            // 
+            // 末次月经
+            // 
+            this.末次月经.Location = new System.Drawing.Point(86, 120);
+            this.末次月经.Margin = new System.Windows.Forms.Padding(4);
+            this.末次月经.Name = "末次月经";
+            this.末次月经.Size = new System.Drawing.Size(181, 25);
+            this.末次月经.TabIndex = 58;
             // 
             // addmaternalHealthServices
             // 
@@ -2805,7 +2805,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox 剖腹产次数;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox 末次月经;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.DateTimePicker 预产期;
         private System.Windows.Forms.GroupBox 既往史;
@@ -3004,5 +3003,6 @@
         private System.Windows.Forms.RadioButton radioButton27;
         private System.Windows.Forms.RadioButton radioButton28;
         private System.Windows.Forms.TextBox 评估异常;
+        private System.Windows.Forms.DateTimePicker 末次月经;
     }
 }

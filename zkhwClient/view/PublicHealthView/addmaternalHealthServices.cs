@@ -313,14 +313,14 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
             info.id_number = id_number;
             info.visit_date = 填表日期.Value.ToString("yyyy-MM-dd HH:mm:ss");
             info.gestational_weeks = string.IsNullOrWhiteSpace(孕周.Text) ? 0 : Convert.ToInt32(孕周.Text);
-            info.gravida_age = string.IsNullOrWhiteSpace(孕妇年龄.Text) ? 0 : Convert.ToInt32(孕妇年龄.Text); 
+            info.gravida_age = string.IsNullOrWhiteSpace(孕妇年龄.Text) ? 0 : Convert.ToInt32(孕妇年龄.Text);
             info.husband_name = 丈夫姓名.Text;
             info.husband_age = string.IsNullOrWhiteSpace(丈夫年龄.Text) ? 0 : Convert.ToInt32(丈夫年龄.Text);
             info.husband_phone = 丈夫电话.Text;
-            info.pregnant_num = string.IsNullOrWhiteSpace(孕次.Text) ? 0 : Convert.ToInt32(孕次.Text); 
-            info.natural_labour_num = string.IsNullOrWhiteSpace(阴道分娩次数.Text) ? 0 : Convert.ToInt32(阴道分娩次数.Text); 
-            info.cesarean_num = string.IsNullOrWhiteSpace(剖腹产次数.Text) ? 0 : Convert.ToInt32(剖腹产次数.Text); 
-            info.last_menstruation_date = 末次月经.Text;
+            info.pregnant_num = string.IsNullOrWhiteSpace(孕次.Text) ? 0 : Convert.ToInt32(孕次.Text);
+            info.natural_labour_num = string.IsNullOrWhiteSpace(阴道分娩次数.Text) ? 0 : Convert.ToInt32(阴道分娩次数.Text);
+            info.cesarean_num = string.IsNullOrWhiteSpace(剖腹产次数.Text) ? 0 : Convert.ToInt32(剖腹产次数.Text);
+            info.last_menstruation_date = 末次月经.Value.ToString("yyyy-MM-dd");
             info.due_date = 预产期.Value.ToString("yyyy-MM-dd HH:mm:ss");
             string past_illness = string.Empty;
             foreach (Control item in 既往史.Controls)
@@ -384,17 +384,17 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
                     info.operation_name = ((TextBox)item).Text;
                 }
             }
-            info.natural_abortion_num = string.IsNullOrWhiteSpace(自然流产次数.Text) ? 0 : Convert.ToInt32(自然流产次数.Text); 
-            info.abactio_num = string.IsNullOrWhiteSpace(人工流产次数.Text) ? 0 : Convert.ToInt32(人工流产次数.Text); 
+            info.natural_abortion_num = string.IsNullOrWhiteSpace(自然流产次数.Text) ? 0 : Convert.ToInt32(自然流产次数.Text);
+            info.abactio_num = string.IsNullOrWhiteSpace(人工流产次数.Text) ? 0 : Convert.ToInt32(人工流产次数.Text);
             info.fetaldeath_num = string.IsNullOrWhiteSpace(死胎次数.Text) ? 0 : Convert.ToInt32(死胎次数.Text);
-            info.stillbirth_num = string.IsNullOrWhiteSpace(死产次数.Text) ? 0 : Convert.ToInt32(死产次数.Text); 
-            info.neonatal_death_num = string.IsNullOrWhiteSpace(新生儿死亡次数.Text) ? 0 : Convert.ToInt32(新生儿死亡次数.Text); 
+            info.stillbirth_num = string.IsNullOrWhiteSpace(死产次数.Text) ? 0 : Convert.ToInt32(死产次数.Text);
+            info.neonatal_death_num = string.IsNullOrWhiteSpace(新生儿死亡次数.Text) ? 0 : Convert.ToInt32(新生儿死亡次数.Text);
             info.birth_defect_num = string.IsNullOrWhiteSpace(出生缺陷儿次数.Text) ? 0 : Convert.ToInt32(出生缺陷儿次数.Text);
             info.height = 身高.Text;
             info.weight = 体重.Text;
             info.bmi = 体质指数.Text;
             info.blood_pressure_high = string.IsNullOrWhiteSpace(血压高.Text) ? 0 : Convert.ToInt32(血压高.Text);
-            info.blood_pressure_low = string.IsNullOrWhiteSpace(血压低.Text) ? 0 : Convert.ToInt32(血压低.Text); 
+            info.blood_pressure_low = string.IsNullOrWhiteSpace(血压低.Text) ? 0 : Convert.ToInt32(血压低.Text);
             foreach (Control item in 心脏.Controls)
             {
                 if (item is RadioButton)
@@ -493,7 +493,7 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
                     info.accessories_other = ((TextBox)item).Text;
                 }
             }
-            info.hemoglobin = string.IsNullOrWhiteSpace(血红蛋白.Text) ? 0 : Convert.ToInt32(血红蛋白.Text); 
+            info.hemoglobin = string.IsNullOrWhiteSpace(血红蛋白.Text) ? 0 : Convert.ToInt32(血红蛋白.Text);
             info.leukocyte = 白细胞计数.Text;
             info.platelet = 血小板计数.Text;
             info.blood_other = 血液中其他.Text;
@@ -638,7 +638,7 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
                     孕次.Text = dt.pregnant_num.ToString();
                     阴道分娩次数.Text = dt.natural_labour_num.ToString();
                     剖腹产次数.Text = dt.cesarean_num.ToString();
-                    末次月经.Text = dt.last_menstruation_date;
+                    末次月经.Value = Convert.ToDateTime(dt.last_menstruation_date);
                     预产期.Value = Convert.ToDateTime(dt.due_date);
                     foreach (Control item in 既往史.Controls)
                     {
@@ -1382,11 +1382,11 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
         /// <summary>
         /// 创建组织
         /// </summary>
-        public string create_org { get; set; }= frmLogin.organCode;
+        public string create_org { get; set; } = frmLogin.organCode;
         /// <summary>
         /// 创建组织名
         /// </summary>
-        public string create_org_name { get; set; }= frmLogin.organName;
+        public string create_org_name { get; set; } = frmLogin.organName;
         /// <summary>
         /// 创建时间
         /// </summary>
