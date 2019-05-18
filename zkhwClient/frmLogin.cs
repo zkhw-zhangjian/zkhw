@@ -100,7 +100,7 @@ namespace zkhwClient
             DataTable dd = us.listUser();
             this.comboBox1.DataSource = dd;//绑定数据源
             this.comboBox1.DisplayMember = "username";//显示给用户的数据集表项
-            this.comboBox1.ValueMember = "username";//操作时获取的值 
+            this.comboBox1.ValueMember = "username";//操作时获取的值
 
             //监听心电图和B超
             //FSWControl.WatcherStrat(@"E:\Examine\xdt", "*.xml", true, true);

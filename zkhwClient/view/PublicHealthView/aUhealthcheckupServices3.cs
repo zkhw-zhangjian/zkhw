@@ -420,7 +420,7 @@ namespace zkhwClient.view.PublicHealthView
 
             string intime1 = this.dateTimePicker1.Text;
             string outtime1 = this.dateTimePicker2.Text;
-            string nowtime=DateTime.Now.ToString("yyyy-MM-dd");
+            //string nowtime=DateTime.Now.ToString("yyyy-MM-dd");
             
             string intime2 = this.dateTimePicker4.Text;
             string outtime2 = this.dateTimePicker3.Text;
@@ -440,8 +440,8 @@ namespace zkhwClient.view.PublicHealthView
             if (isfalse)
             {
                 hospitalizedRecord  hr= null;
-                if (!nowtime.Equals(intime1) || !nowtime.Equals(outtime1))
-                {
+                //if (!nowtime.Equals(intime1) || !nowtime.Equals(outtime1))
+                //{
                     hr = new hospitalizedRecord();
                     hr.archive_no = this.textBox106.Text;
                     hr.id_number = this.textBox107.Text;
@@ -453,9 +453,9 @@ namespace zkhwClient.view.PublicHealthView
                     hr.hospital_organ= this.textBox62.Text;
                     hr.case_code= this.textBox89.Text;
                     hcd.addHospitalizedRecord(hr,"1");
-                }
-                if (!nowtime.Equals(intime2) || !nowtime.Equals(outtime2))
-                {
+                //}
+                //if (!nowtime.Equals(intime2) || !nowtime.Equals(outtime2))
+                //{
                     hr = new hospitalizedRecord();
                     hr.archive_no = this.textBox106.Text;
                     hr.id_number = this.textBox107.Text;
@@ -467,9 +467,9 @@ namespace zkhwClient.view.PublicHealthView
                     hr.hospital_organ = this.textBox70.Text;
                     hr.case_code = this.textBox92.Text;
                     hcd.addHospitalizedRecord(hr,"0");
-                }
-                if (!nowtime.Equals(intime11) || !nowtime.Equals(outtime11))
-                {
+                //}
+                //if (!nowtime.Equals(intime11) || !nowtime.Equals(outtime11))
+                //{
                     hr = new hospitalizedRecord();
                     hr.archive_no = this.textBox106.Text;
                     hr.id_number = this.textBox107.Text;
@@ -481,9 +481,9 @@ namespace zkhwClient.view.PublicHealthView
                     hr.hospital_organ = this.textBox96.Text;
                     hr.case_code = this.textBox94.Text;
                     hcd.addHospitalizedRecord(hr,"2");
-                }
-                if (!nowtime.Equals(intime22) || !nowtime.Equals(outtime22))
-                {
+                //}
+                //if (!nowtime.Equals(intime22) || !nowtime.Equals(outtime22))
+                //{
                     hr = new hospitalizedRecord();
                     hr.exam_id = per.id;
                     hr.archive_no = this.textBox106.Text;
@@ -495,7 +495,7 @@ namespace zkhwClient.view.PublicHealthView
                     hr.hospital_organ = this.textBox95.Text;
                     hr.case_code = this.textBox93.Text;
                     hcd.addHospitalizedRecord(hr,"0");
-                }
+                //}
                 this.Close();
                 aUhealthcheckupServices4 auhc4 = new aUhealthcheckupServices4();
                 auhc4.textBox1.Text = this.textBox106.Text;

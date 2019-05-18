@@ -342,7 +342,7 @@ namespace zkhwClient
                     string id = doc.SelectSingleNode("//Report[@Index='病人信息']/ID").InnerText.Trim();
                     string nam = doc.SelectSingleNode("//Report[@Index='基本信息']/报告名称").InnerText.Trim();
                     string cs = doc.SelectSingleNode("//Report[@Index='超声诊断']/超声诊断").InnerText;
-                    if (cs.Length > 50)
+                    if (cs.Length > 30)
                     {
                         int num = cs.IndexOf("诊断结果");
                         cs.Substring(num, cs.Length-1);

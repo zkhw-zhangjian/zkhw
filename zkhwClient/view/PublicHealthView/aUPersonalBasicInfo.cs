@@ -420,7 +420,7 @@ namespace zkhwClient.view.PublicHealthView
                 drtmp["operation_name"] = hm.operation_name.ToString();
                 drtmp["operation_time"] = hm.operation_time.ToString();
                 drtmp["operation_code"] = hm.operation_code.ToString();
-                if (goodsList0.Rows.Count > 2)
+                if (goodsList0.Rows.Count <= 2)
                 {
                     goodsList0.Rows.Add(drtmp);
                 }
@@ -475,7 +475,7 @@ namespace zkhwClient.view.PublicHealthView
                 drtmp["traumatism_name"] = hm.traumatism_name.ToString();
                 drtmp["traumatism_time"] = hm.traumatism_time.ToString();
                 drtmp["traumatism_code"] = hm.traumatism_code.ToString();
-                if (goodsList1.Rows.Count > 2)
+                if (goodsList1.Rows.Count <= 2)
                 {
                     goodsList1.Rows.Add(drtmp);
                 }
@@ -531,7 +531,7 @@ namespace zkhwClient.view.PublicHealthView
                 drtmp["metachysis_reasonn"] = hm.metachysis_reasonn.ToString();
                 drtmp["metachysis_time"] = hm.metachysis_time.ToString();
                 drtmp["metachysis_code"] = hm.metachysis_code.ToString();
-                if (goodsList2.Rows.Count > 2)
+                if (goodsList2.Rows.Count <= 2)
                 {
                     goodsList2.Rows.Add(drtmp);
                 }
@@ -589,6 +589,23 @@ namespace zkhwClient.view.PublicHealthView
                 DataRow drtmp = goodsList3.NewRow();
                 drtmp["id"] = 0;
                 drtmp["resident_base_info_id"] = id;
+                string relation= hm.relation.ToString();
+                if (relation == "父亲")
+                {
+                    drtmp["relation"] = "1";
+                }
+                else if (relation == "母亲")
+                {
+                    drtmp["relation"] = "2";
+                }
+                else if (relation == "兄弟姐妹")
+                {
+                    drtmp["relation"] = "3";
+                }
+                else if (relation == "子女")
+                {
+                    drtmp["relation"] = "4";
+                }
                 drtmp["relation"] = hm.relation.ToString();
                 drtmp["disease_name"] = hm.disease_name.ToString();
                 drtmp["disease_type"] = hm.disease_type.ToString();
@@ -619,6 +636,25 @@ namespace zkhwClient.view.PublicHealthView
             if (goodsList3 != null && goodsList3.Rows.Count > 0)
             {
                 this.dataGridView6.Rows[goodsList3.Rows.Count - 1].Selected = true;
+            }
+            for (int i = 0; i < this.dataGridView6.Rows.Count; i++) {
+                string ftype = this.dataGridView6.Rows[i].Cells[2].Value.ToString();
+                if (ftype == "1")
+                {
+                    this.dataGridView6.Rows[i].Cells[2].Value = "父亲";
+                }
+                else if(ftype == "2")
+                {
+                    this.dataGridView6.Rows[i].Cells[2].Value = "母亲";
+                }
+                else if (ftype == "3")
+                {
+                    this.dataGridView6.Rows[i].Cells[2].Value = "兄弟姐妹";
+                }
+                else if (ftype == "4")
+                {
+                    this.dataGridView6.Rows[i].Cells[2].Value = "子女";
+                }
             }
         }
         private void button12_Click(object sender, EventArgs e)
@@ -758,8 +794,7 @@ namespace zkhwClient.view.PublicHealthView
             if (this.radioButton47.Checked == true) { resident_base_infoBean.is_heredity = this.radioButton47.Tag.ToString();
                 resident_base_infoBean.heredity_name = this.textBox36.Text;
             };
-            if (!this.checkBox33.Checked)
-            {
+            
                 foreach (Control ctr in this.panel20.Controls)
                 {
                     //判断该控件是不是CheckBox
@@ -776,12 +811,9 @@ namespace zkhwClient.view.PublicHealthView
                 if (resident_base_infoBean.is_deformity != null && resident_base_infoBean.is_deformity != "")
                 {
                     resident_base_infoBean.is_deformity = resident_base_infoBean.is_deformity.Substring(1);
+                    if(this.checkBox33.Checked)resident_base_infoBean.deformity_name = this.textBox37.Text;
                 }
-            }
-            else {
-                resident_base_infoBean.is_deformity = "8";
-                resident_base_infoBean.deformity_name = this.textBox37.Text;
-            }
+            
 
             if (this.radioButton18.Checked == true) { resident_base_infoBean.kitchen = this.radioButton18.Tag.ToString(); };
             if (this.radioButton19.Checked == true) { resident_base_infoBean.kitchen = this.radioButton19.Tag.ToString(); };
