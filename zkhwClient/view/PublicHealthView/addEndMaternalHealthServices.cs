@@ -85,7 +85,7 @@ namespace zkhwClient.view.PublicHealthView
             foreach (gravida_after_record info in infolist)
             {
                 sqls = new DBSql();
-                sqls.sql = @"insert into gravida_after_record(id,name,aichive_no,id_number,order_num,visit_date,childbirth,discharge_date,temperature,general_health_status,general_psychology_status,blood_pressure_high,blood_pressure_low,breast,breast_error,lyma,lyma_error,womb,womb_error,wound,wound_error,other,`condition`,error_info,guidance,guidance_other,transfer_treatment,transfer_treatment_reason,transfer_treatment_department,next_visit_date,visit_doctor,create_user,create_name,create_time,upload_status) values(@id,@name,@aichive_no,@id_number,@order_num,@visit_date,@childbirth,@discharge_date,@temperature,@general_health_status,@general_psychology_status,@blood_pressure_high,@blood_pressure_low,@breast,@breast_error,@lyma,@lyma_error,@womb,@womb_error,@wound,@wound_error,@other,@condition,@error_info,@guidance,@guidance_other,@transfer_treatment,@transfer_treatment_reason,@transfer_treatment_department,@next_visit_date,@visit_doctor,@create_user,@create_name,@create_time,@upload_status);";
+                sqls.sql = @"insert into gravida_after_record(id,name,aichive_no,id_number,order_num,visit_date,childbirth,discharge_date,temperature,general_health_status,general_psychology_status,blood_pressure_high,blood_pressure_low,breast,breast_error,lyma,lyma_error,womb,womb_error,wound,wound_error,other,`condition`,error_info,guidance,guidance_other,transfer_treatment,transfer_treatment_reason,transfer_treatment_department,next_visit_date,visit_doctor,create_user,create_name,create_time,create_org,create_org_name,upload_status) values(@id,@name,@aichive_no,@id_number,@order_num,@visit_date,@childbirth,@discharge_date,@temperature,@general_health_status,@general_psychology_status,@blood_pressure_high,@blood_pressure_low,@breast,@breast_error,@lyma,@lyma_error,@womb,@womb_error,@wound,@wound_error,@other,@condition,@error_info,@guidance,@guidance_other,@transfer_treatment,@transfer_treatment_reason,@transfer_treatment_department,@next_visit_date,@visit_doctor,@create_user,@create_name,@create_time,@create_org,@create_org_name,@upload_status);";
                 sqls.parameters = new MySqlParameter[] {
                     new MySqlParameter("@id",info.id),
                     new MySqlParameter("@name", info.name),
@@ -121,6 +121,8 @@ namespace zkhwClient.view.PublicHealthView
                     new MySqlParameter("@create_user", info.create_user),
                     new MySqlParameter("@create_name", info.create_name),
                     new MySqlParameter("@create_time", info.create_time),
+                      new MySqlParameter("@create_org", info.create_org),
+                    new MySqlParameter("@create_org_name", info.create_org_name),
                     new MySqlParameter("@upload_status", info.upload_status),
                     };
                 hb.Add(sqls);
