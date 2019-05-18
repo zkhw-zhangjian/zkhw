@@ -35,6 +35,8 @@ namespace zkhwClient.view.PublicHealthView
         public string mag { get; set; }
         public addStartMaternalHealthServices(int ps, string names, string aichive_nos, string id_numbers)
         {
+            InitializeComponent();
+            this.Text = (IS == 1 ? "第2～5次产前随访添加" : "第2～5次产前随访修改");
             Names = names;
             aichive_no = aichive_nos;
             id_number = id_numbers;
@@ -43,7 +45,7 @@ namespace zkhwClient.view.PublicHealthView
             {
                 if (GetUpdate())
                 {
-                    InitializeComponent();
+                    
                     SetData();
                     return;
                 }
@@ -54,8 +56,7 @@ namespace zkhwClient.view.PublicHealthView
                     return;
                 }
             }
-            InitializeComponent();
-            this.Text = (IS == 1 ? "第2～5次产前随访添加" : "第2～5次产前随访修改");
+           
         }
 
         private void 取消_Click(object sender, EventArgs e)
@@ -191,15 +192,15 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
                 info.id_number = id_number;
                 info.order_num = "2";
                 info.visit_date = 随访日期2.Value.ToString("yyyy-MM-dd HH:mm:ss");
-                info.gestational_weeks = Convert.ToInt32(孕周2.Text.Trim());
+                info.gestational_weeks = string.IsNullOrWhiteSpace(孕周2.Text.Trim()) ? 0 : Convert.ToInt32(孕周2.Text.Trim());
                 info.symptom = 孕妇自述症状2.Text.Trim();
                 info.weight = 体重2.Text.Trim();
                 info.fundus_height = 宫高2.Text.Trim();
                 info.abdomen_circumference = 腹围2.Text.Trim();
                 info.fetus_position = 胎儿的位置2.Text.Trim();
                 info.fetal_heart_rate = 胎心率2.Text.Trim();
-                info.blood_pressure_high = Convert.ToInt32(血压高2.Text.Trim());
-                info.blood_pressure_low = Convert.ToInt32(血压低2.Text.Trim());
+                info.blood_pressure_high =string.IsNullOrWhiteSpace(血压高2.Text.Trim()) ?0: Convert.ToInt32(血压高2.Text.Trim());
+                info.blood_pressure_low = string.IsNullOrWhiteSpace(血压低2.Text.Trim()) ? 0 : Convert.ToInt32(血压低2.Text.Trim()); 
                 info.hemoglobin = 血红蛋白2.Text.Trim();
                 info.urine_protein = 尿蛋白2.Text.Trim();
                 info.condition = 其他辅助检查2.Text.Trim();
@@ -266,15 +267,15 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
                 info.id_number = id_number;
                 info.order_num = "3";
                 info.visit_date = 随访日期3.Value.ToString("yyyy-MM-dd HH:mm:ss");
-                info.gestational_weeks = Convert.ToInt32(孕周3.Text.Trim());
+                info.gestational_weeks = string.IsNullOrWhiteSpace(孕周3.Text.Trim()) ? 0 : Convert.ToInt32(孕周3.Text.Trim());
                 info.symptom = 孕妇自述症状3.Text.Trim();
                 info.weight = 体重3.Text.Trim();
                 info.fundus_height = 宫高3.Text.Trim();
                 info.abdomen_circumference = 腹围3.Text.Trim();
                 info.fetus_position = 胎儿的位置3.Text.Trim();
                 info.fetal_heart_rate = 胎心率3.Text.Trim();
-                info.blood_pressure_high = Convert.ToInt32(血压高3.Text.Trim());
-                info.blood_pressure_low = Convert.ToInt32(血压低3.Text.Trim());
+                info.blood_pressure_high = string.IsNullOrWhiteSpace(血压高3.Text.Trim()) ? 0 : Convert.ToInt32(血压高3.Text.Trim());
+                info.blood_pressure_low = string.IsNullOrWhiteSpace(血压低3.Text.Trim()) ? 0 : Convert.ToInt32(血压低3.Text.Trim());
                 info.hemoglobin = 血红蛋白3.Text.Trim();
                 info.urine_protein = 尿蛋白3.Text.Trim();
                 info.condition = 其他辅助检查3.Text.Trim();
@@ -341,15 +342,15 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
                 info.id_number = id_number;
                 info.order_num = "4";
                 info.visit_date = 随访日期4.Value.ToString("yyyy-MM-dd HH:mm:ss");
-                info.gestational_weeks = Convert.ToInt32(孕周4.Text.Trim());
+                info.gestational_weeks = string.IsNullOrWhiteSpace(孕周4.Text.Trim()) ? 0 : Convert.ToInt32(孕周4.Text.Trim());
                 info.symptom = 孕妇自述症状4.Text.Trim();
                 info.weight = 体重4.Text.Trim();
                 info.fundus_height = 宫高4.Text.Trim();
                 info.abdomen_circumference = 腹围4.Text.Trim();
                 info.fetus_position = 胎儿的位置4.Text.Trim();
                 info.fetal_heart_rate = 胎心率4.Text.Trim();
-                info.blood_pressure_high = Convert.ToInt32(血压高4.Text.Trim());
-                info.blood_pressure_low = Convert.ToInt32(血压低4.Text.Trim());
+                info.blood_pressure_high = string.IsNullOrWhiteSpace(血压高4.Text.Trim()) ? 0 : Convert.ToInt32(血压高4.Text.Trim());
+                info.blood_pressure_low = string.IsNullOrWhiteSpace(血压低4.Text.Trim()) ? 0 : Convert.ToInt32(血压低4.Text.Trim());
                 info.hemoglobin = 血红蛋白4.Text.Trim();
                 info.urine_protein = 尿蛋白4.Text.Trim();
                 info.condition = 其他辅助检查4.Text.Trim();
@@ -416,15 +417,15 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
                 info.id_number = id_number;
                 info.order_num = "5";
                 info.visit_date = 随访日期5.Value.ToString("yyyy-MM-dd HH:mm:ss");
-                info.gestational_weeks = Convert.ToInt32(孕周5.Text.Trim());
+                info.gestational_weeks = string.IsNullOrWhiteSpace(孕周5.Text.Trim()) ? 0 : Convert.ToInt32(孕周5.Text.Trim());
                 info.symptom = 孕妇自述症状5.Text.Trim();
                 info.weight = 体重5.Text.Trim();
                 info.fundus_height = 宫高5.Text.Trim();
                 info.abdomen_circumference = 腹围5.Text.Trim();
                 info.fetus_position = 胎儿的位置5.Text.Trim();
                 info.fetal_heart_rate = 胎心率5.Text.Trim();
-                info.blood_pressure_high = Convert.ToInt32(血压高5.Text.Trim());
-                info.blood_pressure_low = Convert.ToInt32(血压低5.Text.Trim());
+                info.blood_pressure_high = string.IsNullOrWhiteSpace(血压高5.Text.Trim()) ? 0 : Convert.ToInt32(血压高5.Text.Trim());
+                info.blood_pressure_low = string.IsNullOrWhiteSpace(血压低5.Text.Trim()) ? 0 : Convert.ToInt32(血压低5.Text.Trim());
                 info.hemoglobin = 血红蛋白5.Text.Trim();
                 info.urine_protein = 尿蛋白5.Text.Trim();
                 info.condition = 其他辅助检查5.Text.Trim();
@@ -525,7 +526,7 @@ guidance=@guidance,guidance_other=@guidance_other,transfer_treatment=@transfer_t
                     Control ldb = Controls.Find($"尿蛋白{dt.order_num}", true)[0];
                     ((TextBox)ldb).Text = dt.urine_protein.ToString();
                     Control qtfzjc = Controls.Find($"其他辅助检查{dt.order_num}", true)[0];
-                    ((TextBox)qtfzjc).Text = dt.check_other.ToString();
+                    ((TextBox)qtfzjc).Text = dt.check_other?.ToString();
                     Control fl = Controls.Find($"分类{dt.order_num}", true)[0];
                     foreach (Control item in ((GroupBox)fl).Controls)
                     {
