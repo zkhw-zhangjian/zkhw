@@ -55,19 +55,43 @@ namespace zkhwClient.view.PublicHealthView
                     this.textBox51.Text = dt.Rows[0]["doctor_name"].ToString();
                     this.textBox120.Text = dt.Rows[0]["id"].ToString();
                     this.checkBox21.Checked = false;
-                    foreach (Control ctr in this.groupBox3.Controls)
+                    
+                    //将ctr转换成CheckBox并赋值给ck
+                    string symptom=dt.Rows[0]["symptom"].ToString();
+                    if (symptom != "" && symptom.IndexOf(',') > -1)
                     {
-                        //判断该控件是不是CheckBox
-                        if (ctr is CheckBox)
+                        string[] sym = symptom.Split(',');
+                        for (int i = 0; i < sym.Length; i++)
                         {
-                            //将ctr转换成CheckBox并赋值给ck
-                            CheckBox ck = ctr as CheckBox;
-                            if (dt.Rows[0]["symptom"].ToString().IndexOf(ck.Tag.ToString()) > -1)
+                            foreach (Control ctr in this.groupBox3.Controls)
                             {
-                                ck.Checked = true;
+                                CheckBox ck = ctr as CheckBox;
+                                //判断该控件是不是CheckBox
+                                if (ck is CheckBox)
+                                {
+                                    if (ck.Tag.ToString()==sym[i]) {
+                                        ck.Checked = true;
+                                    }
+                                }
                             }
                         }
                     }
+                    else if (symptom != ""&& symptom.Length==1)
+                    {
+                        foreach (Control ctr in this.groupBox3.Controls)
+                        {
+                            CheckBox ck = ctr as CheckBox;
+                            //判断该控件是不是CheckBox
+                            if (ck is CheckBox)
+                            {
+                                if (ck.Tag.ToString() == symptom)
+                                {
+                                    ck.Checked = true;
+                                }
+                            }
+                        }
+                    }
+                          
                     this.textBox11.Text = dt.Rows[0]["symptom_other"].ToString();
 
                     this.textBox52.Text = dt.Rows[0]["base_temperature"].ToString();
