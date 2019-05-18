@@ -929,7 +929,7 @@ where 1=1";
                     if (jz != null && jz.Tables.Count > 0 && jz.Tables[0].Rows.Count > 0)
                     {
                         DataTable da = jz.Tables[0];
-                        DataRow[] fq = da.Select("relation='父亲'");
+                        DataRow[] fq = da.Select("relation='1'");
                         if (fq != null && fq.Count() > 0)
                         {
                             for (int j = 0; j < fq.Count(); j++)
@@ -945,7 +945,7 @@ where 1=1";
                                 }
                             }
                         }
-                        DataRow[] mq = da.Select("relation='母亲'");
+                        DataRow[] mq = da.Select("relation='2'");
                         if (mq != null && mq.Count() > 0)
                         {
                             for (int j = 0; j < mq.Count(); j++)
@@ -961,7 +961,7 @@ where 1=1";
                                 }
                             }
                         }
-                        DataRow[] jm = da.Select("relation='兄弟姐妹'");
+                        DataRow[] jm = da.Select("relation='3'");
                         if (jm != null && jm.Count() > 0)
                         {
 
@@ -978,7 +978,7 @@ where 1=1";
                                 }
                             }
                         }
-                        DataRow[] zn = da.Select("relation='子女'");
+                        DataRow[] zn = da.Select("relation='4'");
                         if (zn != null && zn.Count() > 0)
                         {
                             for (int j = 0; j < zn.Count(); j++)
@@ -1732,33 +1732,22 @@ where 1=1";
                                 if (Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_left_high"]) > 140 && Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_left_low"]) > 90)
                                 {
                                     sm += @"高血压是指以体循环动脉血压（收缩压和/或舒张压）增高为主要特征（收缩压≥140毫米汞柱，舒张压≥90毫米汞柱），可伴有心、脑、肾等器官的功能或器质性损害的临床综合征。高血压是最常见的慢性病，也是心脑血管病最主要的危险因素。
-
 健康指导：
-
 1、改善生活行为：减轻并控制体重、少盐少脂，增加运动、戒烟限酒、减轻精神压力、保持心理平衡。
-
 2、高血压患者应用药物控制血压。应定期随访和测量血压，预防心脑肾并发症的发生，降低心脑血管事件的发生率。";
                                 }
                                 else if (Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_high"]) > 140 && Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_low"]) > 90)
                                 {
                                     sm += @"高血压是指以体循环动脉血压（收缩压和/或舒张压）增高为主要特征（收缩压≥140毫米汞柱，舒张压≥90毫米汞柱），可伴有心、脑、肾等器官的功能或器质性损害的临床综合征。高血压是最常见的慢性病，也是心脑血管病最主要的危险因素。
-
 健康指导：
-
 1、改善生活行为：减轻并控制体重、少盐少脂，增加运动、戒烟限酒、减轻精神压力、保持心理平衡。
-
 2、高血压患者应用药物控制血压。应定期随访和测量血压，预防心脑肾并发症的发生，降低心脑血管事件的发生率。";
                                 }
                             }
                             if (jkdata.Rows[j]["cardiogram"].ToString() == "2")
                             {
-                                sm += @"不正常心电图：
-
-心电图作为辅助检查，请医生结合临床症状进行诊断。
-
-健康指导：
-
-注意锻炼身体，保持良好的生活习惯，注意饮食，不吸烟避免饮酒及高脂饮食。";
+                                sm += @"不正常心电图：心电图作为辅助检查，请医生结合临床症状进行诊断。
+健康指导：注意锻炼身体，保持良好的生活习惯，注意饮食，不吸烟避免饮酒及高脂饮食。";
                             }
                             
                             if (jkdata.Rows[j]["health_evaluation"].ToString() == "2")
@@ -1804,7 +1793,9 @@ where 1=1";
                                 }
                                 else if (Convert.ToDouble(blood_platelet) > 300)
                                 {
-                                    sm += @"血小板（PLT）：血小板含量高，请咨询医生人员。";
+                                    sm += @"血小板（PLT）：
+  血小板是人体的抢救员，主要行使凝血功能。血小板减少，或会存在再生障碍性贫血、放的性损伤、急性白血病，上呼吸道感染等症状或疾病。
+ 血小板增多，可能出现在感染、出血、手术之后，也可能是由于一些并发症或会存在骨髓增生疾病。。";
                                 }
                             }
                             //jktj.Add("尿蛋白", 
@@ -1813,7 +1804,7 @@ where 1=1";
                             {
                                 if (urine_protein!="-")
                                 {
-                                    sm += @"尿蛋白（PRO）：尿蛋白呈阳性，请咨询医生人员。";
+                                    sm += @"尿蛋白（PRO）：尿蛋白呈阳性，可能有急性肾小球肾炎、糖尿病肾性病变,请咨询医生。";
                                 }
                             }
                             //jktj.Add("尿糖", 
@@ -1822,7 +1813,7 @@ where 1=1";
                             {
                                 if (glycosuria != "-")
                                 {
-                                    sm += @"尿糖（GLU）：尿糖呈阳性，请咨询医生人员。";
+                                    sm += @"尿糖（GLU）：尿糖呈阳性，可能有糖尿病、甲亢、肢端肥大症等，请咨询医生人员。";
                                 }
                             }
                             //jktj.Add("尿酮体", 
@@ -1831,7 +1822,7 @@ where 1=1";
                             {
                                 if (urine_acetone_bodies != "-")
                                 {
-                                    sm += @"尿酮体（KET）：尿酮体呈阳性，请咨询医生人员。";
+                                    sm += @"尿酮体（KET）：尿酮体呈阳性，可能酸中毒、糖尿病、呕吐、腹泻，请咨询医生人员。";
                                 }
                             }
                             //jktj.Add("尿潜血", 
@@ -1845,37 +1836,71 @@ where 1=1";
                             }
 
                             //jktj.Add("空腹血糖1", 
-                            jkdata.Rows[j]["blood_glucose_mmol"].ToString();
+                            string blood_glucose_mmol = jkdata.Rows[j]["blood_glucose_mmol"].ToString();
+                            if (!string.IsNullOrWhiteSpace(blood_glucose_mmol))
+                            {
+                                if (Convert.ToDouble(blood_glucose_mmol) > 6.1 && Convert.ToDouble(blood_glucose_mmol) < 8)
+                                {
+                                    sm += @"血糖：血糖偏高，请注意，请咨询医生人员。";
+                                }
+                                else if(Convert.ToDouble(blood_glucose_mmol) > 8)
+                                {
+                                    sm += @"糖尿病：
+糖尿病是一组以高血糖为特征的代谢性疾病。高血糖则是由于胰岛素分泌缺陷或其生物作用受损，或两者兼有引起。糖尿病时长期存在的高血糖，导致各种组织，特别是眼、肾、心脏、血管、神经的慢性损害、功能障碍。 
+血糖是诊断糖尿病的惟一标准。有明显多饮、多尿、多食和消瘦 “三多一少”症状者，只要一次异常血糖值即可诊断。疲乏无力，肥胖等无症状者诊断糖尿病需要两次异常血糖值。可疑者需做75g葡萄糖耐量试验。空腹血糖大于或等于7.0毫摩尔/升，和/或餐后两小时血糖大于或等于11.1毫摩尔/升即可确诊。诊断糖尿病后分型为1型糖尿病和2型糖尿病。
+健康指导：
+糖尿病患者要在医生的指导下，增强控制好血糖的信心。定期监测血糖指标，改变生活习惯和方式，药物治疗和锻炼相结合，适当增加运动锻炼，循序渐进。戒烟戒酒，控制饮食（低热量），低盐低脂，优质蛋白，控制碳水化合物，补足维生素，保持情绪稳定。";
+                                }
+                            }
                             //jktj.Add("空腹血糖2", 
-                            jkdata.Rows[j]["blood_glucose_mg"].ToString();
-
-                            //jktj.Add("心电图异常", 
-                            jkdata.Rows[j]["cardiogram_memo"].ToString();
-                            //jktj.Add("尿微量白蛋白", 
-                            jkdata.Rows[j]["microalbuminuria"].ToString();
-                            //jktj.Add("大便潜血", 
-                            jkdata.Rows[j]["fob"].ToString();
-                            //jktj.Add("糖化血红蛋白", 
-                            jkdata.Rows[j]["glycosylated_hemoglobin"].ToString();
-                            //jktj.Add("乙型肝炎", 
-                            jkdata.Rows[j]["hb"].ToString();
-                           
-                            //jktj.Add("白蛋白", 
-                            jkdata.Rows[j]["albumin"].ToString();
-                            //jktj.Add("总胆红素", 
-                            jkdata.Rows[j]["total_bilirubin"].ToString();
-                            //jktj.Add("结合胆红素", 
-                            jkdata.Rows[j]["conjugated_bilirubin"].ToString();
+                            //string blood_glucose_mg = jkdata.Rows[j]["blood_glucose_mg"].ToString();  
+           
                             //jktj.Add("血清肌酐", 
-                            jkdata.Rows[j]["scr"].ToString();
-                            //jktj.Add("血尿素", 
-                            jkdata.Rows[j]["blood_urea"].ToString();
-                           
+                            string scr =jkdata.Rows[j]["scr"].ToString();
+                            if (!string.IsNullOrWhiteSpace(scr))
+                            {
+                                if (Convert.ToDouble(scr) >115)
+                                {
+                                    sm += @"肌酐：肌酐值偏高，请注意，可能是急慢性肾炎、重症肾盂肾炎、各种原因所致的急慢性肾功能障碍，以及心衰、休克、烧伤、失水、大量内出血、肾上腺皮质功能减退症、前列腺肥大、慢性尿路梗阻等。";
+                                }
+                            }
+
                             //jktj.Add("总胆固醇", 
-                            jkdata.Rows[j]["tc"].ToString();
+                            string tc = jkdata.Rows[j]["tc"].ToString();
                             //jktj.Add("甘油三酯", 
-                            jkdata.Rows[j]["tg"].ToString();
-                           
+                            string tg = jkdata.Rows[j]["tg"].ToString();
+                            int flg = 0;
+                            if (!string.IsNullOrWhiteSpace(tc))
+                            {
+                                if (Convert.ToDouble(tc) > 5.72)
+                                {
+                                    flg = 1;
+                                }
+                            }
+                            if (!string.IsNullOrWhiteSpace(tg))
+                            {
+                                if (Convert.ToDouble(tg) > 1.7)
+                                {
+                                    flg = 1;
+                                }
+                            }
+                            if (flg==1) {
+                                sm += @"高血脂：
+    高脂血症是体内脂类代谢紊乱，导致血脂水平增高，并由此引发一系列临床病理表现的病症。一般成年人空腹血清总胆固醇＞5.72mmol/L或甘油三脂＞1.70mmol/L或高密度脂蛋白＜0.91mmol/L，即可诊断为高脂血症。大量研究表明，高脂血症可引发许多疾病，与中风、心肌梗死、心脏猝死、糖尿病、高血压、脂肪肝等的发病有着密切关系，是形成冠心病的主要因素之一。
+健康指导：
+  避免高脂血症的危害主要有三大防治原则：
+  1、改变饮食习惯，提倡科学合理的饮食结构；
+   高血脂症一定要注意合理膳食，要坚持“四低一高”原则，即“低热量、低胆固醇、低脂肪、低糖，高纤维”。
+（1）食物多样，谷类为主，粗细搭配，日常饮食中的主食中可适量增加玉米、莜面、燕麦等成分，少食单糖、蔗糖和甜食。
+（2）常吃蔬菜、水果和薯类，注意增加深色或绿色蔬菜比例，大蒜和洋葱有降低血清胆固醇、提高高密度脂蛋白的作用，香菇和木耳有降低血清胆固醇及防治动脉粥样硬化的作用。
+（3）常吃奶类、豆类及其制品。
+（4）经常吃适量鱼、禽、瘦肉，少吃肥肉和荤油；应禁食肥肉、动物内脏、人造黄油、奶油等。
+  2、建立良好的生活习惯，提倡健康的生活方式；
+（1）血脂高的人群最好每年常规化验一次血脂。
+（2）保证能量摄入，防止超重和肥胖，吃清淡少盐的膳食。
+（3）戒烟限酒，合理增加运动，运动方式可根据自己的情况及环境而定，可选择慢跑、体操、太极拳、气功、游泳、爬山及使用健身器材等。
+  3、及时应用药物进行系统治疗。治疗高脂血症的西药大体包括：他汀类、贝特类、胆汁酸螯合剂、烟酸类等。";
+                            }
 
                             jg.Add("结果", sm);
                         }
