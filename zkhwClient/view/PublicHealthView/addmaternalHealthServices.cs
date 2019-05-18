@@ -493,7 +493,7 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
                     info.accessories_other = ((TextBox)item).Text;
                 }
             }
-            info.hemoglobin = string.IsNullOrWhiteSpace(血红蛋白.Text) ? 0 : Convert.ToInt32(血红蛋白.Text);
+            info.hemoglobin = 血红蛋白.Text;
             info.leukocyte = 白细胞计数.Text;
             info.platelet = 血小板计数.Text;
             info.blood_other = 血液中其他.Text;
@@ -1214,7 +1214,7 @@ next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_
         /// <summary>
         /// 血红蛋白
         /// </summary>
-        public int? hemoglobin { get; set; }
+        public string hemoglobin { get; set; }
         /// <summary>
         /// 白细胞计数
         /// </summary>
