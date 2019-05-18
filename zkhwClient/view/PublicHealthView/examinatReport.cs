@@ -1760,25 +1760,85 @@ where 1=1";
 
 注意锻炼身体，保持良好的生活习惯，注意饮食，不吸烟避免饮酒及高脂饮食。";
                             }
-                            if (!string.IsNullOrWhiteSpace(jkdata.Rows[j]["blood_leukocyte"].ToString()))
-                            {
-                                string blood_leukocyte =jkdata.Rows[j]["blood_leukocyte"].ToString();
-                                if (Convert.ToDouble(jkdata.Rows[j]["blood_leukocyte"]) > 10)
-                                {
-                                    sm += @"白细胞（WBC）：
-
-白细胞低，说明身体抵抗力差，容易感冒、皮肤表面容易感染病。
-
-白细胞高，说明身体可能有炎症，受到细菌、病毒感染，炎症反应等，
-
-如白细胞指标高出或低于太多，应及时到医院做进一步的检查。 ";
-                                }
-
-                            }
+                            
                             if (jkdata.Rows[j]["health_evaluation"].ToString() == "2")
                             {
                                 sm += jkdata.Rows[j]["abnormal1"].ToString() + jkdata.Rows[j]["abnormal2"].ToString() + jkdata.Rows[j]["abnormal3"].ToString() + jkdata.Rows[j]["abnormal4"].ToString();
                             }
+                            //jktj.Add("血红蛋白", 
+                            jkdata.Rows[j]["blood_hemoglobin"].ToString();
+                            //jktj.Add("白细胞", 
+                            string blood_leukocyte = jkdata.Rows[j]["blood_leukocyte"].ToString();
+                            if (!string.IsNullOrWhiteSpace(blood_leukocyte))
+                            {
+                                if (Convert.ToDouble(blood_leukocyte) > 10)
+                                {
+                                    sm += @"白细胞（WBC）：
+
+                            白细胞低，说明身体抵抗力差，容易感冒、皮肤表面容易感染病。
+
+                            白细胞高，说明身体可能有炎症，受到细菌、病毒感染，炎症反应等，
+
+                            如白细胞指标高出或低于太多，应及时到医院做进一步的检查。 ";
+                                }
+
+                            }
+                            //jktj.Add("血小板", 
+                            jkdata.Rows[j]["blood_platelet"].ToString();
+                            //jktj.Add("尿蛋白", 
+                            jkdata.Rows[j]["urine_protein"].ToString();
+                            //jktj.Add("血常规其它", 
+                            jkdata.Rows[j]["blood_other"].ToString();
+                            //jktj.Add("尿糖", 
+                            jkdata.Rows[j]["glycosuria"].ToString();
+                            //jktj.Add("尿酮体", 
+                            jkdata.Rows[j]["urine_acetone_bodies"].ToString();
+                            //jktj.Add("尿潜血", 
+                            jkdata.Rows[j]["bld"].ToString();
+                            //jktj.Add("尿常规其它", 
+                            jkdata.Rows[j]["urine_other"].ToString();
+
+                            //jktj.Add("空腹血糖1", 
+                            jkdata.Rows[j]["blood_glucose_mmol"].ToString();
+                            //jktj.Add("空腹血糖2", jkdata.Rows[j]["blood_glucose_mg"].ToString());
+
+                            //jktj.Add("心电图异常", 
+                            jkdata.Rows[j]["cardiogram_memo"].ToString();
+                            //jktj.Add("尿微量白蛋白", 
+                            jkdata.Rows[j]["microalbuminuria"].ToString();
+                            //jktj.Add("大便潜血", 
+                            jkdata.Rows[j]["fob"].ToString();
+                            //jktj.Add("糖化血红蛋白", 
+                            jkdata.Rows[j]["glycosylated_hemoglobin"].ToString();
+                            //jktj.Add("乙型肝炎", 
+                            jkdata.Rows[j]["hb"].ToString();
+                            //jktj.Add("血清谷丙转氨酶", 
+                            jkdata.Rows[j]["sgft"].ToString();
+                            //jktj.Add("血清谷草转氨酶", 
+                            jkdata.Rows[j]["ast"].ToString();
+                            //jktj.Add("白蛋白", 
+                            jkdata.Rows[j]["albumin"].ToString();
+                            //jktj.Add("总胆红素", 
+                            jkdata.Rows[j]["total_bilirubin"].ToString();
+                            //jktj.Add("结合胆红素", 
+                            jkdata.Rows[j]["conjugated_bilirubin"].ToString();
+                            //jktj.Add("血清肌酐", 
+                            jkdata.Rows[j]["scr"].ToString();
+                            //jktj.Add("血尿素", 
+                            jkdata.Rows[j]["blood_urea"].ToString();
+                            //jktj.Add("血钾浓度", 
+                            jkdata.Rows[j]["blood_k"].ToString();
+                            //jktj.Add("血钠浓度", 
+                            jkdata.Rows[j]["blood_na"].ToString();
+                            //jktj.Add("总胆固醇", 
+                            jkdata.Rows[j]["tc"].ToString();
+                            //jktj.Add("甘油三酯", 
+                            jkdata.Rows[j]["tg"].ToString();
+                            //jktj.Add("血清低密度脂蛋白胆固醇", 
+                            jkdata.Rows[j]["ldl"].ToString();
+                            //jktj.Add("血清高密度脂蛋白胆固醇", 
+                            jkdata.Rows[j]["hdl"].ToString();
+
                             jg.Add("结果", sm);
                         }
                     }
