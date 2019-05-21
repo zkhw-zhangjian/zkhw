@@ -33,14 +33,16 @@ namespace zkhwClient.view
                 DataTable dt = psychiatricPatientS.queryPsychosis_follow_record(id);
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    if (this.radioButton54.Text == dt.Rows[0]["transfer_treatment"].ToString()) { this.radioButton54.Checked = true; };
-                    if (this.radioButton55.Text == dt.Rows[0]["transfer_treatment"].ToString()) { this.radioButton55.Checked = true; };
+                    if (this.radioButton54.Tag.ToString() == dt.Rows[0]["transfer_treatment"].ToString()) { this.radioButton54.Checked = true; };
+                    if (this.radioButton55.Tag.ToString() == dt.Rows[0]["transfer_treatment"].ToString()) { this.radioButton55.Checked = true; };
 
                     this.textBox26.Text = dt.Rows[0]["transfer_treatment_reason"].ToString();
-
-                    if (this.radioButton25.Text == dt.Rows[0]["treatment_effect"].ToString()) { this.radioButton25.Checked = true; };
-                    if (this.radioButton8.Text == dt.Rows[0]["treatment_effect"].ToString()) { this.radioButton8.Checked = true; };
-                    if (this.radioButton9.Text == dt.Rows[0]["treatment_effect"].ToString()) { this.radioButton9.Checked = true; };
+                    this.textBox3.Text = dt.Rows[0]["transfer_treatment_department"].ToString();
+                    if (this.radioButton25.Tag.ToString() == dt.Rows[0]["treatment_effect"].ToString()) { this.radioButton25.Checked = true; };
+                    if (this.radioButton8.Tag.ToString() == dt.Rows[0]["treatment_effect"].ToString()) { this.radioButton8.Checked = true; };
+                    if (this.radioButton9.Tag.ToString() == dt.Rows[0]["treatment_effect"].ToString()) { this.radioButton9.Checked = true; };
+                    if (this.radioButton1.Tag.ToString() == dt.Rows[0]["treatment_effect"].ToString()) { this.radioButton1.Checked = true; };
+                    if (this.radioButton2.Tag.ToString() == dt.Rows[0]["treatment_effect"].ToString()) { this.radioButton2.Checked = true; };
 
 
                     foreach (Control ctr in this.panel5.Controls)
@@ -50,11 +52,20 @@ namespace zkhwClient.view
                         {
                             //将ctr转换成CheckBox并赋值给ck
                             CheckBox ck = ctr as CheckBox;
-                            if (dt.Rows[0]["rehabilitation_measure"].ToString().IndexOf(ck.Text.ToString()) > -1)
+                            if (dt.Rows[0]["rehabilitation_measure"].ToString().IndexOf(ck.Tag.ToString()) > -1)
                             {
                                 ck.Checked = true;
                             }
                         }
+                    }
+                    this.textBox7.Text = dt.Rows[0]["rehabilitation_measure_other"].ToString();
+
+                    string next_visit_classify=dt.Rows[0]["next_visit_classify"].ToString();
+                    if (next_visit_classify != "")
+                    {
+                        if (this.radioButton4.Tag.ToString() == dt.Rows[0]["next_visit_classify"].ToString()) { this.radioButton4.Checked = true; };
+                        if (this.radioButton3.Tag.ToString() == dt.Rows[0]["next_visit_classify"].ToString()) { this.radioButton3.Checked = true; };
+                        if (this.radioButton5.Tag.ToString() == dt.Rows[0]["next_visit_classify"].ToString()) { this.radioButton5.Checked = true; };
                     }
                     string next_visit_date=dt.Rows[0]["next_visit_date"].ToString();
                     if (next_visit_date == null || "".Equals(next_visit_date))
@@ -67,9 +78,7 @@ namespace zkhwClient.view
                     }
                     this.textBox6.Text = dt.Rows[0]["visit_doctor"].ToString();
 
-                    if (this.radioButton28.Text == dt.Rows[0]["next_visit_classify"].ToString()) {  this.radioButton28.Checked = true; };
-                    if (this.radioButton29.Text == dt.Rows[0]["next_visit_classify"].ToString()) { this.radioButton29.Checked = true; };
-                }
+                 }
 
                 DataTable dt1 = psychiatricPatientS.queryFollow_medicine_record(id);
                 goodsList = dt1.Clone();
@@ -96,14 +105,22 @@ namespace zkhwClient.view
         private void button4_Click(object sender, EventArgs e)
         {
             psychosis_follow_recordBean psychosis_follow_recordbean = new psychosis_follow_recordBean();
-            if (this.radioButton54.Checked == true) { psychosis_follow_recordbean.transfer_treatment = this.radioButton54.Text; };
-            if (this.radioButton55.Checked == true) { psychosis_follow_recordbean.transfer_treatment = this.radioButton55.Text; };
+            if (this.radioButton54.Checked == true) { psychosis_follow_recordbean.transfer_treatment = this.radioButton54.Tag.ToString();
+            }else
+            if (this.radioButton55.Checked == true) { psychosis_follow_recordbean.transfer_treatment = this.radioButton55.Tag.ToString(); };
 
             psychosis_follow_recordbean.transfer_treatment_reason = this.textBox26.Text.Replace(" ", "");
+            psychosis_follow_recordbean.transfer_treatment_department = this.textBox3.Text.Replace(" ", "");
 
-            if (this.radioButton25.Checked == true) { psychosis_follow_recordbean.treatment_effect = this.radioButton25.Text; };
-            if (this.radioButton8.Checked == true) { psychosis_follow_recordbean.treatment_effect = this.radioButton8.Text; };
-            if (this.radioButton9.Checked == true) { psychosis_follow_recordbean.treatment_effect = this.radioButton9.Text; };
+            if (this.radioButton25.Checked == true) { psychosis_follow_recordbean.treatment_effect = this.radioButton25.Tag.ToString();
+            }else
+            if (this.radioButton8.Checked == true) { psychosis_follow_recordbean.treatment_effect = this.radioButton8.Tag.ToString();
+            }else
+            if (this.radioButton9.Checked == true) { psychosis_follow_recordbean.treatment_effect = this.radioButton9.Tag.ToString();
+            }else
+            if (this.radioButton1.Checked == true) { psychosis_follow_recordbean.treatment_effect = this.radioButton1.Tag.ToString();
+            }else
+            if (this.radioButton2.Checked == true) { psychosis_follow_recordbean.treatment_effect = this.radioButton2.Tag.ToString(); };
 
 
             foreach (Control ctr in this.panel5.Controls)
@@ -115,7 +132,7 @@ namespace zkhwClient.view
                     CheckBox ck = ctr as CheckBox;
                     if (ck.Checked)
                     {
-                        psychosis_follow_recordbean.rehabilitation_measure += "," + ck.Text;
+                        psychosis_follow_recordbean.rehabilitation_measure += "," + ck.Tag.ToString();
                     }
                 }
             }
@@ -123,11 +140,14 @@ namespace zkhwClient.view
             {
                 psychosis_follow_recordbean.rehabilitation_measure = psychosis_follow_recordbean.rehabilitation_measure.Substring(1);
             }
+            psychosis_follow_recordbean.rehabilitation_measure_other = this.textBox7.Text ;
+
             psychosis_follow_recordbean.next_visit_date = this.dateTimePicker1.Text;
             psychosis_follow_recordbean.visit_doctor = this.textBox6.Text.Replace(" ", "");
 
-            if (this.radioButton28.Checked == true) { psychosis_follow_recordbean.next_visit_classify = this.radioButton28.Text; };
-            if (this.radioButton29.Checked == true) { psychosis_follow_recordbean.next_visit_classify = this.radioButton29.Text; };
+            if (this.radioButton4.Checked == true) { psychosis_follow_recordbean.next_visit_classify = this.radioButton4.Tag.ToString(); };
+            if (this.radioButton3.Checked == true) { psychosis_follow_recordbean.next_visit_classify = this.radioButton3.Tag.ToString(); };
+            if (this.radioButton5.Checked == true) { psychosis_follow_recordbean.next_visit_classify = this.radioButton5.Tag.ToString(); };
 
 
             bool isfalse = psychiatricPatientS.aUPsychosis_follow_record(psychosis_follow_recordbean,id,goodsList);

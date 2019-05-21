@@ -52,8 +52,8 @@ namespace zkhwClient.view.PublicHealthView
                 this.label2.Text = "";
             }
             else { this.label2.Text = "---姓名/身份证号/档案号---"; }
-            time1 = this.dateTimePicker1.Text.ToString();//开始时间
-            time2 = this.dateTimePicker2.Text.ToString();//结束时间
+            //time1 = this.dateTimePicker1.Text.ToString();//开始时间
+            //time2 = this.dateTimePicker2.Text.ToString();//结束时间
             queryPsychosis_info();
         }
         private void queryPsychosis_info()
@@ -66,9 +66,9 @@ namespace zkhwClient.view.PublicHealthView
             this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
             this.dataGridView1.Columns[1].HeaderCell.Value = "档案编号";
             this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
-            this.dataGridView1.Columns[3].HeaderCell.Value = "填表日期";
+            this.dataGridView1.Columns[3].HeaderCell.Value = "随访日期";
             this.dataGridView1.Columns[4].HeaderCell.Value = "监护人";
-            this.dataGridView1.Columns[5].HeaderCell.Value = "签字医生";
+            this.dataGridView1.Columns[5].HeaderCell.Value = "随访医生";
             this.dataGridView1.Columns[6].Visible = false;
 
             this.dataGridView1.ReadOnly = true;
@@ -138,6 +138,7 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         //刷新页面
                         queryPsychosis_info();
+                        MessageBox.Show("修改成功！");
                     }
                 }
             }

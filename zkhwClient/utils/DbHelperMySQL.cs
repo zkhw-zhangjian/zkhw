@@ -745,38 +745,42 @@ namespace zkhwClient.dao
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conn;
-                MySqlTransaction tx = conn.BeginTransaction();
-                cmd.Transaction = tx;
+               
                 int a = 0;
                 try
                 {
                     int count = 0;
                     for (int n = 0; n < SQLStringList.Count; n++)
                     {
-                        a=n;
-                        string strsql = SQLStringList[n];
-                        if (strsql.Trim().Length > 1)
+                        MySqlTransaction tx = conn.BeginTransaction();
+                        cmd.Transaction = tx;
+                        try
                         {
+                            a = n;
+                            string strsql = SQLStringList[n];
                             cmd.CommandText = strsql;
                             count += cmd.ExecuteNonQuery();
+                            tx.Commit();
+                        }
+                        catch(MySqlException e)
+                        {
                             using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
                             {
-                                sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ")+ "\r\n" + strsql );
+                                sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + e.Message + "\r\n" + SQLStringList[n]);
                             }
+                            tx.Rollback();
                         }
                     }
-                    tx.Commit();
+
                     return count;
                 }
                 catch (MySqlException e)
                 {
-                    tx.Rollback();
                     conn.Close();
-                    using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
-                    {
-                        sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + e.Message + "\r\n" + e.StackTrace );
-                    }
                     return 0;
+                }
+                finally {
+                    conn.Close();
                 }
             }
         }

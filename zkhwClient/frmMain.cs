@@ -397,7 +397,7 @@ namespace zkhwClient
                 this.panel1.Controls.Add(pR);
                 pR.Show();
             }
-            else if (tag == "老年人健康服务")
+            else if (tag == "老年人生活自理能力评估")
             {
                 olderHelthService pR = new olderHelthService();
                 pR.TopLevel = false;
@@ -447,7 +447,7 @@ namespace zkhwClient
                 this.panel1.Controls.Add(pR);
                 pR.Show();
             }
-            else if (tag == "中医健康服务")
+            else if (tag == "老年人中医体质辨识")
             {
                 tcmHealthServices pR = new tcmHealthServices();
                 pR.TopLevel = false;

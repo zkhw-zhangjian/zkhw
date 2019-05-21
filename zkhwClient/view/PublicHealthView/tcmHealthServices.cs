@@ -22,6 +22,7 @@ namespace zkhwClient.view.PublicHealthView
         public string pCa = "";
         public string time1 = null;
         public string time2 = null;
+        public string cun = null;
         public tcmHealthServices()
         {
             InitializeComponent();
@@ -35,7 +36,7 @@ namespace zkhwClient.view.PublicHealthView
             label4.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
             label4.Left = (this.panel1.Width - this.label4.Width) / 2;
             label4.BringToFront();
-            querytcmHealthServices();
+            
             #region 区域数据绑定
             string sql1 = "select code as ID,name as Name from code_area_config where parent_code='-1';";
             DataSet datas = DbHelperMySQL.Query(sql1);
@@ -44,6 +45,8 @@ namespace zkhwClient.view.PublicHealthView
                 List<ComboBoxData> ts = Result.ToDataList<ComboBoxData>(datas.Tables[0]);
                 Result.Bind(comboBox1, ts, "Name", "ID", "--请选择--");
             }
+            cun = basicInfoSettings.xcuncode;
+            querytcmHealthServices();
             #endregion
         }
         private void button5_Click(object sender, EventArgs e)
@@ -56,21 +59,31 @@ namespace zkhwClient.view.PublicHealthView
             else { this.label2.Text = "---姓名/身份证号/档案号---"; }
             //time1 = this.dateTimePicker1.Text.ToString();//开始时间
             //time2 = this.dateTimePicker2.Text.ToString();//结束时间
+            string cun = comboBox5.SelectedValue?.ToString();
             querytcmHealthServices();
 
         }
         private void querytcmHealthServices()
         {
             this.dataGridView1.DataSource = null;
-            //DataTable dt = tcmHealthService.querytcmHealthServices(pCa, time1, time2);
-            this.dataGridView1.DataSource = GetData();
-            //this.dataGridView1.Columns[0].Visible = false;
-            //this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";
-            //this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
-            //this.dataGridView1.Columns[3].HeaderCell.Value = "档案编号";
-            //this.dataGridView1.Columns[4].HeaderCell.Value = "测试日期";
-            //this.dataGridView1.Columns[5].HeaderCell.Value = "测试医生";
-            //this.dataGridView1.Columns[6].HeaderCell.Value = "数据状态";
+            //this.dataGridView1.DataSource = GetData();
+            time1 = this.dateTimePicker1.Text.ToString();//开始时间
+            time2 = this.dateTimePicker2.Text.ToString();//结束时间
+            string sql = "SELECT bb.name,bb.archive_no,bb.id_number,aa.test_date,aa.test_doctor,aa.id FROM (select b.name, b.archive_no, b.id_number from resident_base_info b where 1=1 and age >= '65'";
+            if (cun != "") { sql += " AND b.village_code='" + cun + "'"; }
+            if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
+            sql += ") bb LEFT JOIN(select id,aichive_no,test_date,test_doctor from elderly_tcm_record where test_date >= '" + time1 + "' and test_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
+            
+            DataSet dataSet = DbHelperMySQL.Query(sql);
+            if (dataSet.Tables.Count < 1) { MessageBox.Show("未查询出数据，请重新查询!"); return; }
+            DataTable dt = dataSet.Tables[0];
+            this.dataGridView1.DataSource = dt;
+            this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
+            this.dataGridView1.Columns[1].HeaderCell.Value = "档案编号";
+            this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
+            this.dataGridView1.Columns[3].HeaderCell.Value = "填表日期";
+            this.dataGridView1.Columns[4].HeaderCell.Value = "签字医生";
+            this.dataGridView1.Columns[5].Visible = false;
 
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
@@ -80,7 +93,6 @@ namespace zkhwClient.view.PublicHealthView
             {
                 this.dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -93,15 +105,17 @@ namespace zkhwClient.view.PublicHealthView
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             int row = dataGridView1.CurrentRow.Index;
-            string code=dataGridView1["编码", row].Value.ToString();
+            string code=dataGridView1["archive_no", row].Value.ToString();
             DataTable dtcode= tcmHealthService.checkTcmHealthServicesByno(code);
             if (dtcode.Rows.Count>0) {
                 MessageBox.Show("此患者已参见过中医体质服务了,请重新选择!");
                 return;
             }
-            addtcmHealthServices addtcm = new addtcmHealthServices(1, dataGridView1["姓名", row].Value.ToString(), dataGridView1["编码", row].Value.ToString(), dataGridView1["身份证号", row].Value.ToString());
+            addtcmHealthServices addtcm = new addtcmHealthServices(1, dataGridView1["name", row].Value.ToString(), dataGridView1["archive_no", row].Value.ToString(), dataGridView1["id_number", row].Value.ToString());
             addtcm.StartPosition = FormStartPosition.CenterScreen;
-            addtcm.ShowDialog();
+            if (addtcm.ShowDialog()==DialogResult.OK) {
+                querytcmHealthServices();
+            } 
         }
 
         /// <summary>
@@ -113,11 +127,12 @@ namespace zkhwClient.view.PublicHealthView
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             int row = dataGridView1.CurrentRow.Index;
-            addtcmHealthServices addtcm = new addtcmHealthServices(0, dataGridView1["姓名", row].Value.ToString(), dataGridView1["编码", row].Value.ToString(), dataGridView1["身份证号", row].Value.ToString());
+            addtcmHealthServices addtcm = new addtcmHealthServices(0, dataGridView1["name", row].Value.ToString(), dataGridView1["archive_no", row].Value.ToString(), dataGridView1["id_number", row].Value.ToString());
             if (addtcm.show)
             {
                 addtcm.StartPosition = FormStartPosition.CenterScreen;
                 addtcm.ShowDialog();
+                querytcmHealthServices();
             }
             else
             {
@@ -141,9 +156,9 @@ namespace zkhwClient.view.PublicHealthView
             {//删除用户       
              // bool istrue = tcmHealthService.deletetcmHealthServices(id);
                 int row = dataGridView1.CurrentRow.Index;
-                string Name = dataGridView1["姓名", row].Value.ToString().Trim();
-                string aichive_no = dataGridView1["编码", row].Value.ToString().Trim();
-                string id_number = dataGridView1["身份证号", row].Value.ToString().Trim();
+                string Name = dataGridView1["name", row].Value.ToString().Trim();
+                string aichive_no = dataGridView1["archive_no", row].Value.ToString().Trim();
+                string id_number = dataGridView1["id_number", row].Value.ToString().Trim();
                 bool istrue = deletetcmHealthServices(Name, aichive_no, id_number);
                 if (istrue)
                 {
@@ -161,77 +176,6 @@ namespace zkhwClient.view.PublicHealthView
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             this.label2.Visible = this.textBox1.Text.Length < 1;
-        }
-
-        /// <summary>
-        /// 查询数据
-        /// </summary>
-        /// <returns></returns>
-        private DataTable GetData()
-        {
-            string timesta = dateTimePicker1.Value.ToString("yyyy-MM-dd");
-            string timeend = dateTimePicker2.Value.ToString("yyyy-MM-dd");
-            string sheng = comboBox1.SelectedValue?.ToString();
-            string shi = comboBox2.SelectedValue?.ToString();
-            string xian = comboBox3.SelectedValue?.ToString();
-            string cun = comboBox4.SelectedValue?.ToString();
-            string zu = comboBox5.SelectedValue?.ToString();
-            string juming = textBox1.Text;
-            var pairs = new Dictionary<string, string>();
-            pairs.Add("timesta", timesta);
-            pairs.Add("timeend", timeend);
-            pairs.Add("juming", juming);
-            pairs.Add("sheng", sheng);
-            pairs.Add("xian", xian);
-            pairs.Add("cun", cun);
-            pairs.Add("zu", zu);
-            pairs.Add("shi", shi);
-            string sql = $@"select 
-DATE_FORMAT(base.create_time,'%Y%m%d') 登记时间,
-concat(base.province_name,base.city_name,base.county_name,base.towns_name,base.village_name) 区域,
-base.archive_no 编码,
-base.name 姓名,
-(case base.sex when '1'then '男' when '2' then '女' when '9' then '未说明的性别' when '0' then '未知的性别' ELSE ''
-END)性别,
-base.id_number 身份证号,
-base.upload_status 是否同步
-from resident_base_info base
-where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{Convert.ToDateTime(basicInfoSettings.createtime).ToString("yyyy-MM-dd")}' ";//
-            if (pairs != null && pairs.Count > 0)
-            {
-                if (!string.IsNullOrWhiteSpace(pairs["timesta"]) && !string.IsNullOrWhiteSpace(pairs["timeend"]))
-                {
-                    sql += $" and date_format(base.create_time,'%Y-%m-%d') between '{pairs["timesta"]}' and '{pairs["timeend"]}'";
-                }
-                if (!string.IsNullOrWhiteSpace(pairs["juming"]))
-                {
-                    sql += $" or base.name like '%{pairs["juming"]}%' or base.bar_code like '%{pairs["juming"]}%' or base.id_number like '%{pairs["juming"]}%'";
-                }
-                if (!string.IsNullOrWhiteSpace(pairs["sheng"]))
-                {
-                    sql += $" and base.province_code='{pairs["sheng"]}'";
-                }
-                if (!string.IsNullOrWhiteSpace(pairs["shi"]))
-                {
-                    sql += $" and base.city_code='{pairs["shi"]}'";
-                }
-                if (!string.IsNullOrWhiteSpace(pairs["xian"]))
-                {
-                    sql += $" and base.county_code='{pairs["xian"]}'";
-                }
-                if (!string.IsNullOrWhiteSpace(pairs["cun"]))
-                {
-                    sql += $" and base.towns_code='{pairs["cun"]}'";
-                }
-                if (!string.IsNullOrWhiteSpace(pairs["zu"]))
-                {
-                    sql += $" and base.village_code='{pairs["zu"]}'";
-                }
-            }
-            DataSet dataSet = DbHelperMySQL.Query(sql);
-            if (dataSet.Tables.Count<1) { MessageBox.Show("未查询出数据，请重新查询!"); return null; }
-            DataTable dt = dataSet.Tables[0];
-            return dt;
         }
 
         /// <summary>

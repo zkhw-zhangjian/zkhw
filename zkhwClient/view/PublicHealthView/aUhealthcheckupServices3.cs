@@ -191,8 +191,15 @@ namespace zkhwClient.view.PublicHealthView
 
                             if (j == 0)
                             {
+                                string in_hospital_time = dtZ.Rows[i]["in_hospital_time"].ToString();
+                                string leave_hospital_time = dtZ.Rows[i]["leave_hospital_time"].ToString();
+                                if (in_hospital_time!="") { 
                                 this.dateTimePicker1.Value = DateTime.Parse(dtZ.Rows[i]["in_hospital_time"].ToString());
-                                this.dateTimePicker2.Value = DateTime.Parse(dtZ.Rows[i]["leave_hospital_time"].ToString());
+                                }
+                                if (leave_hospital_time != "")
+                                {
+                                    this.dateTimePicker2.Value = DateTime.Parse(dtZ.Rows[i]["leave_hospital_time"].ToString());
+                                }
                                 this.textBox60.Text = dtZ.Rows[i]["reason"].ToString();
                                 this.textBox62.Text = dtZ.Rows[i]["hospital_organ"].ToString();
                                 this.textBox89.Text = dtZ.Rows[i]["case_code"].ToString();

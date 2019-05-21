@@ -4823,11 +4823,11 @@
             // 
             // 确定
             // 
-            this.确定.Location = new System.Drawing.Point(1202, 53);
+            this.确定.Location = new System.Drawing.Point(1233, 53);
             this.确定.Name = "确定";
             this.确定.Size = new System.Drawing.Size(92, 34);
             this.确定.TabIndex = 14;
-            this.确定.Text = "确定";
+            this.确定.Text = "保存";
             this.确定.UseVisualStyleBackColor = true;
             this.确定.Click += new System.EventHandler(this.确定_Click);
             // 

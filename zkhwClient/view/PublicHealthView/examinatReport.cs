@@ -1731,17 +1731,13 @@ where 1=1";
                             {
                                 if (Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_left_high"]) > 140 && Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_left_low"]) > 90)
                                 {
-                                    sm += @"高血压是指以体循环动脉血压（收缩压和/或舒张压）增高为主要特征（收缩压≥140毫米汞柱，舒张压≥90毫米汞柱），可伴有心、脑、肾等器官的功能或器质性损害的临床综合征。高血压是最常见的慢性病，也是心脑血管病最主要的危险因素。
-健康指导：
-1、改善生活行为：减轻并控制体重、少盐少脂，增加运动、戒烟限酒、减轻精神压力、保持心理平衡。
-2、高血压患者应用药物控制血压。应定期随访和测量血压，预防心脑肾并发症的发生，降低心脑血管事件的发生率。";
+                                    sm += "高压：" + Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_left_high"]) + "     低压：" + Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_left_low"]) + "血压值偏高，疑似高血压，请咨询医护人员。"
++ "健康指导：1、改善生活行为：减轻并控制体重、少盐少脂，增加运动、戒烟限酒、减轻精神压力、保持心理平衡。2、高血压患者应用药物控制血压。应定期随访和测量血压，预防心脑肾并发症的发生，降低心脑血管事件的发生率。";
                                 }
                                 else if (Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_high"]) > 140 && Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_low"]) > 90)
                                 {
-                                    sm += @"高血压是指以体循环动脉血压（收缩压和/或舒张压）增高为主要特征（收缩压≥140毫米汞柱，舒张压≥90毫米汞柱），可伴有心、脑、肾等器官的功能或器质性损害的临床综合征。高血压是最常见的慢性病，也是心脑血管病最主要的危险因素。
-健康指导：
-1、改善生活行为：减轻并控制体重、少盐少脂，增加运动、戒烟限酒、减轻精神压力、保持心理平衡。
-2、高血压患者应用药物控制血压。应定期随访和测量血压，预防心脑肾并发症的发生，降低心脑血管事件的发生率。";
+                                    sm += "高压："+ Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_high"]) + "     低压：" + Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_low"]) + "血压值偏高，疑似高血压，请咨询医护人员。" +
+"健康指导：1、改善生活行为：减轻并控制体重、少盐少脂，增加运动、戒烟限酒、减轻精神压力、保持心理平衡。2、高血压患者应用药物控制血压。应定期随访和测量血压，预防心脑肾并发症的发生，降低心脑血管事件的发生率。";
                                 }
                             }
                             if (jkdata.Rows[j]["cardiogram"].ToString() == "2")
@@ -1752,7 +1748,7 @@ where 1=1";
                             
                             if (jkdata.Rows[j]["health_evaluation"].ToString() == "2")
                             {
-                                sm += jkdata.Rows[j]["abnormal1"].ToString() + jkdata.Rows[j]["abnormal2"].ToString() + jkdata.Rows[j]["abnormal3"].ToString() + jkdata.Rows[j]["abnormal4"].ToString();
+                                sm += jkdata.Rows[j]["abnormal1"].ToString() + "   " + jkdata.Rows[j]["abnormal2"].ToString() + "   " + jkdata.Rows[j]["abnormal3"].ToString() + "   " + jkdata.Rows[j]["abnormal4"].ToString();
                             }
                             //jktj.Add("血红蛋白", 
                             string blood_hemoglobin = jkdata.Rows[j]["blood_hemoglobin"].ToString();
@@ -1760,11 +1756,11 @@ where 1=1";
                             {
                                 if (Convert.ToDouble(blood_hemoglobin) < 110 )
                                 {
-                                    sm += @"血红蛋白（HGB）：血红蛋白低，请注意。";
+                                    sm += @"血红蛋白（HGB）：" + blood_hemoglobin + " g/L " + "  血红蛋白低，请咨询医护人员。";
                                 }
                                 else if(Convert.ToDouble(blood_hemoglobin) > 160)
                                 {
-                                    sm += @"血红蛋白（HGB）：血红蛋白高，请注意。";
+                                    sm += @"血红蛋白（HGB）：" + blood_hemoglobin + " CELL/μL " + "  血红蛋白高，请咨询医护人员。";
                                 }
                             }
                             //jktj.Add("白细胞", 
@@ -1773,13 +1769,8 @@ where 1=1";
                             {
                                 if (Convert.ToDouble(blood_leukocyte) > 10)
                                 {
-                                    sm += @"白细胞（WBC）：
-
-                            白细胞低，说明身体抵抗力差，容易感冒、皮肤表面容易感染病。
-
-                            白细胞高，说明身体可能有炎症，受到细菌、病毒感染，炎症反应等，
-
-                            如白细胞指标高出或低于太多，应及时到医院做进一步的检查。 ";
+                                    sm += @"白细胞（WBC）：" + blood_leukocyte + " CELL/μL " + //"白细胞低，说明身体抵抗力差，容易感冒、皮肤表面容易感染病。"+
+                                    "白细胞高，说明身体可能有炎症，受到细菌、病毒感染，炎症反应等，如白细胞指标高出或低于太多，应及时到医院做进一步的检查。";
                                 }
 
                             }
@@ -1789,13 +1780,11 @@ where 1=1";
                             {
                                 if (Convert.ToDouble(blood_platelet) < 100)
                                 {
-                                    sm += @"血小板（PLT）：血小板含量低，请咨询医生人员。";
+                                    sm += @"血小板（PLT）：" + blood_platelet + " mmol/L" + "血小板含量低，血小板减少，或会存在再生障碍性贫血、放的性损伤、急性白血病，上呼吸道感染等症状或疾病，请咨询医生人员。";
                                 }
                                 else if (Convert.ToDouble(blood_platelet) > 300)
                                 {
-                                    sm += @"血小板（PLT）：
-  血小板是人体的抢救员，主要行使凝血功能。血小板减少，或会存在再生障碍性贫血、放的性损伤、急性白血病，上呼吸道感染等症状或疾病。
- 血小板增多，可能出现在感染、出血、手术之后，也可能是由于一些并发症或会存在骨髓增生疾病。。";
+                                    sm += @"血小板（PLT）：" + blood_platelet + " mmol/L" + "血小板含量高，血小板增多，可能出现在感染、出血、手术之后，也可能是由于一些并发症或会存在骨髓增生疾病，请咨询医生人员。";
                                 }
                             }
                             //jktj.Add("尿蛋白", 
@@ -1804,7 +1793,7 @@ where 1=1";
                             {
                                 if (urine_protein!="-")
                                 {
-                                    sm += @"尿蛋白（PRO）：尿蛋白呈阳性，可能有急性肾小球肾炎、糖尿病肾性病变,请咨询医生。";
+                                    sm += @"尿蛋白（PRO）：" + urine_protein  + "    尿蛋白呈阳性，可能有急性肾小球肾炎、糖尿病肾性病变,请咨询，请咨询医护人员。";
                                 }
                             }
                             //jktj.Add("尿糖", 
@@ -1813,7 +1802,7 @@ where 1=1";
                             {
                                 if (glycosuria != "-")
                                 {
-                                    sm += @"尿糖（GLU）：尿糖呈阳性，可能有糖尿病、甲亢、肢端肥大症等，请咨询医生人员。";
+                                    sm += @"尿糖（GLU）：" + glycosuria+" mmol/L" + "尿糖呈阳性，可能有糖尿病、甲亢、肢端肥大症等，请咨询，请咨询医护人员。";
                                 }
                             }
                             //jktj.Add("尿酮体", 
@@ -1822,7 +1811,7 @@ where 1=1";
                             {
                                 if (urine_acetone_bodies != "-")
                                 {
-                                    sm += @"尿酮体（KET）：尿酮体呈阳性，可能酸中毒、糖尿病、呕吐、腹泻，请咨询医生人员。";
+                                    sm += @"尿酮体（KET）：" + urine_acetone_bodies+ "   尿酮体呈阳性，可能酸中毒、糖尿病、呕吐、腹泻，请咨询，请咨询医护人员。";
                                 }
                             }
                             //jktj.Add("尿潜血", 
@@ -1831,7 +1820,7 @@ where 1=1";
                             {
                                 if (bld != "-")
                                 {
-                                    sm += @"尿潜血（BLD）：尿潜血呈阳性，请咨询医生人员。";
+                                    sm += @"尿潜血（BLD）：" + bld + "CELL/μL" + "   尿潜血呈阳性，请咨询，请咨询医护人员。";
                                 }
                             }
 
@@ -1841,11 +1830,12 @@ where 1=1";
                             {
                                 if (Convert.ToDouble(blood_glucose_mmol) > 6.1 && Convert.ToDouble(blood_glucose_mmol) < 8)
                                 {
-                                    sm += @"血糖：血糖偏高，请注意，请咨询医生人员。";
+                                    sm += @"血糖：" + blood_glucose_mmol + "mmol/L" + "   血糖偏高，疑似糖尿病，请咨询医护人员。";
                                 }
                                 else if(Convert.ToDouble(blood_glucose_mmol) > 8)
                                 {
-                                    sm += @"糖尿病：
+                                    sm += @"血糖：" + blood_glucose_mmol + "mmol/L" + "   血糖偏高，疑似糖尿病，请咨询医护人员。";
+                                    sm += @"
 糖尿病是一组以高血糖为特征的代谢性疾病。高血糖则是由于胰岛素分泌缺陷或其生物作用受损，或两者兼有引起。糖尿病时长期存在的高血糖，导致各种组织，特别是眼、肾、心脏、血管、神经的慢性损害、功能障碍。 
 血糖是诊断糖尿病的惟一标准。有明显多饮、多尿、多食和消瘦 “三多一少”症状者，只要一次异常血糖值即可诊断。疲乏无力，肥胖等无症状者诊断糖尿病需要两次异常血糖值。可疑者需做75g葡萄糖耐量试验。空腹血糖大于或等于7.0毫摩尔/升，和/或餐后两小时血糖大于或等于11.1毫摩尔/升即可确诊。诊断糖尿病后分型为1型糖尿病和2型糖尿病。
 健康指导：
@@ -1861,7 +1851,7 @@ where 1=1";
                             {
                                 if (Convert.ToDouble(scr) >115)
                                 {
-                                    sm += @"肌酐：肌酐值偏高，请注意，可能是急慢性肾炎、重症肾盂肾炎、各种原因所致的急慢性肾功能障碍，以及心衰、休克、烧伤、失水、大量内出血、肾上腺皮质功能减退症、前列腺肥大、慢性尿路梗阻等。";
+                                    sm += @"肌酐：" + scr+ "umol/l" + "肌酐值偏高，可能是急慢性肾炎、重症肾盂肾炎、等其他炎症，请咨询医护人员。";
                                 }
                             }
 
@@ -1875,6 +1865,7 @@ where 1=1";
                                 if (Convert.ToDouble(tc) > 5.72)
                                 {
                                     flg = 1;
+                                    sm += "总胆固醇:" + tc+" "+"mmol/l";
                                 }
                             }
                             if (!string.IsNullOrWhiteSpace(tg))
@@ -1882,26 +1873,17 @@ where 1=1";
                                 if (Convert.ToDouble(tg) > 1.7)
                                 {
                                     flg = 1;
+                                    sm += "甘油三酯 :" + tg + " " + "mmol/l";
                                 }
                             }
                             if (flg==1) {
-                                sm += @"高血脂：
-    高脂血症是体内脂类代谢紊乱，导致血脂水平增高，并由此引发一系列临床病理表现的病症。一般成年人空腹血清总胆固醇＞5.72mmol/L或甘油三脂＞1.70mmol/L或高密度脂蛋白＜0.91mmol/L，即可诊断为高脂血症。大量研究表明，高脂血症可引发许多疾病，与中风、心肌梗死、心脏猝死、糖尿病、高血压、脂肪肝等的发病有着密切关系，是形成冠心病的主要因素之一。
+                                sm += @"胆固醇或甘油三酯偏，疑似高血脂，请咨询医护人员。
 健康指导：
-  避免高脂血症的危害主要有三大防治原则：
-  1、改变饮食习惯，提倡科学合理的饮食结构；
-   高血脂症一定要注意合理膳食，要坚持“四低一高”原则，即“低热量、低胆固醇、低脂肪、低糖，高纤维”。
+  1、改变饮食习惯，提倡科学合理的饮食结构：
 （1）食物多样，谷类为主，粗细搭配，日常饮食中的主食中可适量增加玉米、莜面、燕麦等成分，少食单糖、蔗糖和甜食。
 （2）常吃蔬菜、水果和薯类，注意增加深色或绿色蔬菜比例，大蒜和洋葱有降低血清胆固醇、提高高密度脂蛋白的作用，香菇和木耳有降低血清胆固醇及防治动脉粥样硬化的作用。
-（3）常吃奶类、豆类及其制品。
-（4）经常吃适量鱼、禽、瘦肉，少吃肥肉和荤油；应禁食肥肉、动物内脏、人造黄油、奶油等。
-  2、建立良好的生活习惯，提倡健康的生活方式；
-（1）血脂高的人群最好每年常规化验一次血脂。
-（2）保证能量摄入，防止超重和肥胖，吃清淡少盐的膳食。
-（3）戒烟限酒，合理增加运动，运动方式可根据自己的情况及环境而定，可选择慢跑、体操、太极拳、气功、游泳、爬山及使用健身器材等。
-  3、及时应用药物进行系统治疗。治疗高脂血症的西药大体包括：他汀类、贝特类、胆汁酸螯合剂、烟酸类等。";
+（3）戒烟限酒，合理增加运动，运动方式可根据自己的情况及环境而定，可选择慢跑、体操、太极拳、气功、游泳、爬山及使用健身器材等。";
                             }
-
                             jg.Add("结果", sm);
                         }
                     }
@@ -2158,7 +2140,7 @@ where 1=1";
                             zytz.Add("填表日期年", time?.Split('-')[0]);
                             zytz.Add("填表日期月", time?.Split('-')[1]);
                             zytz.Add("填表日期日", time?.Split('-')[2].Split(' ')[0]);
-                            zytz.Add("医生签名", "");
+                            zytz.Add("医生签名", da.Rows[j]["test_doctor"].ToString());
                         }
                     }
                     //书签替换
@@ -2371,7 +2353,7 @@ where 1=1";
                             {
                                 sqllist.Add($@"insert into traumatism_record (id,archive_no,id_number,traumatism_name,traumatism_time) 
 values({Ifnull(data1.Rows[a]["id"])},{Ifnull(data1.Rows[a]["archive_no"])},{Ifnull(data1.Rows[a]["id_number"])},{Ifnull(data1.Rows[a]["traumatism_name"])},{Ifnull(Convert.ToDateTime(data1.Rows[a]["traumatism_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
-                                //wsjlid += $"'{data1.Rows[i]["id"]}',";
+
                             }
                         }
 
@@ -2384,7 +2366,7 @@ values({Ifnull(data1.Rows[a]["id"])},{Ifnull(data1.Rows[a]["archive_no"])},{Ifnu
                             {
                                 sqllist.Add($@"insert into metachysis_record (id,archive_no,id_number,metachysis_reasonn,metachysis_time) 
 values({Ifnull(data2.Rows[b]["id"])},{Ifnull(data2.Rows[b]["archive_no"])},{Ifnull(data2.Rows[b]["id_number"])},{Ifnull(data2.Rows[b]["metachysis_reasonn"])},{Ifnull(Convert.ToDateTime(data2.Rows[b]["metachysis_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
-                                //sxzbid += $"'{data2.Rows[i]["id"]}',";
+                               
                             }
                         }
 
@@ -2397,7 +2379,7 @@ values({Ifnull(data2.Rows[b]["id"])},{Ifnull(data2.Rows[b]["archive_no"])},{Ifnu
                             {
                                 sqllist.Add($@"insert into operation_record (id,archive_no,id_number,operation_name,operation_time) 
 values({Ifnull(data3.Rows[c]["id"])},{Ifnull(data3.Rows[c]["archive_no"])},{Ifnull(data3.Rows[c]["id_number"])},{Ifnull(data3.Rows[c]["operation_name"])},{Ifnull(Convert.ToDateTime(data3.Rows[c]["operation_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
-                                //ssjlid += $"'{data3.Rows[c]["id"]}',";
+                                
                             }
                         }
 
@@ -2410,7 +2392,7 @@ values({Ifnull(data3.Rows[c]["id"])},{Ifnull(data3.Rows[c]["archive_no"])},{Ifnu
                             {
                                 sqllist.Add($@"insert into resident_diseases (id,archive_no,id_number,disease_type,disease_name,disease_date) 
 values({Ifnull(data4.Rows[d]["id"])},{Ifnull(data4.Rows[d]["archive_no"])},{Ifnull(data4.Rows[d]["id_number"])},{Ifnull(data4.Rows[d]["disease_type"])},{Ifnull(data4.Rows[d]["disease_name"])},{Ifnull(data4.Rows[d]["disease_date"])});");
-                                //jbjlid += $"'{data4.Rows[d]["id"]}',";
+                                
                             }
                         }
 
@@ -2423,7 +2405,7 @@ values({Ifnull(data4.Rows[d]["id"])},{Ifnull(data4.Rows[d]["archive_no"])},{Ifnu
                             {
                                 sqllist.Add($@"insert into family_record (id,archive_no,id_number,relation,disease_code,disease_name) 
 values({Ifnull(data5.Rows[f]["id"])},{Ifnull(data5.Rows[f]["archive_no"])},{Ifnull(data5.Rows[f]["id_number"])},{Ifnull(data5.Rows[f]["relation"])},{Ifnull(data5.Rows[f]["disease_type"])},{Ifnull(data5.Rows[f]["disease_name"])});");
-                                //jtbsid += $"'{data5.Rows[i]["id"]}',";
+                                
                             }
                         }
                         sqllist.Add($@"insert into resident_info_temp (id,archive_no,pb_archive,name,sex,birthday,id_number,card_pic,company,phone,link_name,link_phone,resident_type,register_address,residence_address,nation,blood_group,blood_rh,education,profession,marital_status,pay_type,pay_other,drug_allergy,allergy_other,exposure,disease_other,is_hypertension,is_diabetes,is_psychosis,is_tuberculosis,is_heredity,heredity_name,is_deformity,deformity_name,is_poor,kitchen,fuel,other_fuel,drink,other_drink,toilet,poultry,medical_code,photo_code,aichive_org,doctor_name,province_code,province_name,city_code,city_name,county_code,county_name,towns_code,towns_name,village_code,village_name,status,remark,create_user,create_name,create_time,create_org,create_org_name
@@ -2520,8 +2502,8 @@ values({Ifnull(data5.Rows[f]["id"])},{Ifnull(data5.Rows[f]["archive_no"])},{Ifnu
                                 followid += $"'{data1.Rows[i]["id"]}',";
                             }
                         }
-                        sqllist.Add($@"insert into fuv_hypertension (id,name,archive_no,id_number,visit_date,visit_type,symptom,other_symptom,sbp,dbp,weight,target_weight,bmi,target_bmi,heart_rate,other_sign,smoken,target_somken,wine,target_wine,sport_week,sport_once,target_sport_week,target_sport_once,salt_intake,target_salt_intake,mind_adjust,doctor_obey,assist_examine,drug_obey,untoward_effect,untoward_effect_drug,visit_class,referral_code,next_visit_date,visit_doctor,advice,create_name,create_time,transfer_organ,transfer_reason
-) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["visit_type"])},{Ifnull(data.Rows[i]["symptom"])},{Ifnull(data.Rows[i]["other_symptom"])},{Ifnull(data.Rows[i]["sbp"])},{Ifnull(data.Rows[i]["dbp"])},{Ifnull(data.Rows[i]["weight"])},{Ifnull(data.Rows[i]["target_weight"])},{Ifnull(data.Rows[i]["bmi"])},{Ifnull(data.Rows[i]["target_bmi"])},{Ifnull(data.Rows[i]["heart_rate"])},{Ifnull(data.Rows[i]["other_sign"])},{Ifnull(data.Rows[i]["smoken"])},{Ifnull(data.Rows[i]["target_somken"])},{Ifnull(data.Rows[i]["wine"])},{Ifnull(data.Rows[i]["target_wine"])},{Ifnull(data.Rows[i]["sport_week"])},{Ifnull(data.Rows[i]["sport_once"])},{Ifnull(data.Rows[i]["target_sport_week"])},{Ifnull(data.Rows[i]["target_sport_once"])},{Ifnull(data.Rows[i]["salt_intake"])},{Ifnull(data.Rows[i]["target_salt_intake"])},{Ifnull(data.Rows[i]["mind_adjust"])},{Ifnull(data.Rows[i]["doctor_obey"])},{Ifnull(data.Rows[i]["assist_examine"])},{Ifnull(data.Rows[i]["drug_obey"])},{Ifnull(data.Rows[i]["untoward_effect"])},{Ifnull(data.Rows[i]["untoward_effect_drug"])},{Ifnull(data.Rows[i]["visit_class"])},{Ifnull(data.Rows[i]["referral_code"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["advice"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["transfer_organ"])},{Ifnull(data.Rows[i]["transfer_reason"])});");
+                        sqllist.Add($@"insert into fuv_hypertension (id,name,archive_no,id_number,visit_date,visit_type,symptom,other_symptom,sbp,dbp,weight,target_weight,bmi,target_bmi,heart_rate,other_sign,smoken,target_somken,wine,target_wine,sport_week,sport_once,target_sport_week,target_sport_once,salt_intake,target_salt_intake,mind_adjust,doctor_obey,assist_examine,drug_obey,untoward_effect,untoward_effect_drug,visit_class,referral_code,next_visit_date,visit_doctor,advice,create_user,create_name,create_time,create_org,create_org_name,transfer_organ,transfer_reason
+) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["visit_type"])},{Ifnull(data.Rows[i]["symptom"])},{Ifnull(data.Rows[i]["other_symptom"])},{Ifnull(data.Rows[i]["sbp"])},{Ifnull(data.Rows[i]["dbp"])},{Ifnull(data.Rows[i]["weight"])},{Ifnull(data.Rows[i]["target_weight"])},{Ifnull(data.Rows[i]["bmi"])},{Ifnull(data.Rows[i]["target_bmi"])},{Ifnull(data.Rows[i]["heart_rate"])},{Ifnull(data.Rows[i]["other_sign"])},{Ifnull(data.Rows[i]["smoken"])},{Ifnull(data.Rows[i]["target_somken"])},{Ifnull(data.Rows[i]["wine"])},{Ifnull(data.Rows[i]["target_wine"])},{Ifnull(data.Rows[i]["sport_week"])},{Ifnull(data.Rows[i]["sport_once"])},{Ifnull(data.Rows[i]["target_sport_week"])},{Ifnull(data.Rows[i]["target_sport_once"])},{Ifnull(data.Rows[i]["salt_intake"])},{Ifnull(data.Rows[i]["target_salt_intake"])},{Ifnull(data.Rows[i]["mind_adjust"])},{Ifnull(data.Rows[i]["doctor_obey"])},{Ifnull(data.Rows[i]["assist_examine"])},{Ifnull(data.Rows[i]["drug_obey"])},{Ifnull(data.Rows[i]["untoward_effect"])},{Ifnull(data.Rows[i]["untoward_effect_drug"])},{Ifnull(data.Rows[i]["visit_class"])},{Ifnull(data.Rows[i]["referral_code"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["advice"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(data.Rows[i]["transfer_organ"])},{Ifnull(data.Rows[i]["transfer_reason"])});");
                         fuvid += $"'{data.Rows[i]["id"]}',";
                     }
                 }
@@ -2782,8 +2764,6 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                     }
                 }
 
-              
-
                 DataSet jsbgr = DbHelperMySQL.Query($@"select * from psychosis_info where upload_status='0'");
                 if (jsbgr != null && jsbgr.Tables.Count > 0 && jsbgr.Tables[0].Rows.Count > 0)
                 {
@@ -2806,7 +2786,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
                         sqllist.Add($@"insert into psychosis_follow_record (id,name,archive_no,id_number,visit_date,visit_type,miss_reason,miss_reason_other,die_date,die_reason,physical_disease,die_reason_other,fatalness,symptom,symptom_other,insight,sleep_status,dietary_status,self_help,housework,work,learning_ability,interpersonal,dangerous_act,slight_trouble_num,cause_trouble_num,cause_accident_num,harm_other_num,autolesion_num,attempted_suicide_num,isolation,hospitalized_status,out_hospital_date,laboratory_examination,compliance,untoward_effect,untoward_effect_info,treatment_effect,transfer_treatment,transfer_treatment_reason,transfer_treatment_department,rehabilitation_measure,rehabilitation_measure_other,next_visit_classify,next_visit_date,visit_doctor,create_user,create_name,create_org,create_org_name,create_time,upload_status) 
-values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["archive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["visit_type"])},{Ifnull(data.Rows[i]["miss_reason"])},{Ifnull(data.Rows[i]["miss_reason_other"])},{Ifnull(data.Rows[i]["die_date"])},{Ifnull(data.Rows[i]["die_reason"])},{Ifnull(data.Rows[i]["physical_disease"])},{Ifnull(data.Rows[i]["die_reason_other"])},{Ifnull(data.Rows[i]["fatalness"])},{Ifnull(data.Rows[i]["symptom"])},{Ifnull(data.Rows[i]["symptom_other"])},{Ifnull(data.Rows[i]["insight"])},{Ifnull(data.Rows[i]["sleep_status"])},{Ifnull(data.Rows[i]["dietary_status"])},{Ifnull(data.Rows[i]["self_help"])},{Ifnull(data.Rows[i]["housework"])},{Ifnull(data.Rows[i]["work"])},{Ifnull(data.Rows[i]["learning_ability"])},{Ifnull(data.Rows[i]["interpersonal"])},{Ifnull(data.Rows[i]["dangerous_act"])},{Ifnull(data.Rows[i]["slight_trouble_num"])},{Ifnull(data.Rows[i]["cause_trouble_num"])},{Ifnull(data.Rows[i]["cause_accident_num"])},{Ifnull(data.Rows[i]["harm_other_num"])},{Ifnull(data.Rows[i]["autolesion_num"])},{Ifnull(data.Rows[i]["attempted_suicide_num"])},{Ifnull(data.Rows[i]["isolation"])},{Ifnull(data.Rows[i]["hospitalized_status"])},{Ifnull(data.Rows[i]["out_hospital_date"])},{Ifnull(data.Rows[i]["laboratory_examination"])},{Ifnull(data.Rows[i]["compliance"])},{Ifnull(data.Rows[i]["untoward_effect"])},{Ifnull(data.Rows[i]["untoward_effect_info"])},{Ifnull(data.Rows[i]["treatment_effect"])},{Ifnull(data.Rows[i]["transfer_treatment"])},{Ifnull(data.Rows[i]["transfer_treatment_reason"])},{Ifnull(data.Rows[i]["transfer_treatment_department"])},{Ifnull(data.Rows[i]["rehabilitation_measure"])},{Ifnull(data.Rows[i]["rehabilitation_measure_other"])},{Ifnull(data.Rows[i]["next_visit_classify"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["upload_status"])}
+values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["archive_no"])},{Ifnull(data.Rows[i]["Cardcode"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["visit_type"])},{Ifnull(data.Rows[i]["miss_reason"])},{Ifnull(data.Rows[i]["miss_reason_other"])},{Ifnull(data.Rows[i]["die_date"])},{Ifnull(data.Rows[i]["die_reason"])},{Ifnull(data.Rows[i]["physical_disease"])},{Ifnull(data.Rows[i]["die_reason_other"])},{Ifnull(data.Rows[i]["fatalness"])},{Ifnull(data.Rows[i]["symptom"])},{Ifnull(data.Rows[i]["symptom_other"])},{Ifnull(data.Rows[i]["insight"])},{Ifnull(data.Rows[i]["sleep_status"])},{Ifnull(data.Rows[i]["dietary_status"])},{Ifnull(data.Rows[i]["self_help"])},{Ifnull(data.Rows[i]["housework"])},{Ifnull(data.Rows[i]["work"])},{Ifnull(data.Rows[i]["learning_ability"])},{Ifnull(data.Rows[i]["interpersonal"])},{Ifnull(data.Rows[i]["dangerous_act"])},{Ifnull(data.Rows[i]["slight_trouble_num"])},{Ifnull(data.Rows[i]["cause_trouble_num"])},{Ifnull(data.Rows[i]["cause_accident_num"])},{Ifnull(data.Rows[i]["harm_other_num"])},{Ifnull(data.Rows[i]["autolesion_num"])},{Ifnull(data.Rows[i]["attempted_suicide_num"])},{Ifnull(data.Rows[i]["isolation"])},{Ifnull(data.Rows[i]["hospitalized_status"])},{Ifnull(data.Rows[i]["out_hospital_date"])},{Ifnull(data.Rows[i]["laboratory_examination"])},{Ifnull(data.Rows[i]["compliance"])},{Ifnull(data.Rows[i]["untoward_effect"])},{Ifnull(data.Rows[i]["untoward_effect_info"])},{Ifnull(data.Rows[i]["treatment_effect"])},{Ifnull(data.Rows[i]["transfer_treatment"])},{Ifnull(data.Rows[i]["transfer_treatment_reason"])},{Ifnull(data.Rows[i]["transfer_treatment_department"])},{Ifnull(data.Rows[i]["rehabilitation_measure"])},{Ifnull(data.Rows[i]["rehabilitation_measure_other"])},{Ifnull(data.Rows[i]["next_visit_classify"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["upload_status"])}
 );");
                         jsbsfid += $"'{data.Rows[i]["id"]}',";
                     }
@@ -2935,7 +2915,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                     }
                     else
                     {
-                        MessageBox.Show("上传错误！222");
+                        MessageBox.Show("上传异常,请联系运维人员!");
                     }
                 }
                 else
@@ -2946,7 +2926,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                     lb.eventInfo = "数据上传异常！";
                     lb.type = "2";
                     lls.addCheckLog(lb);
-                    MessageBox.Show("数据上传异常，请重试！");
+                    MessageBox.Show("数据上传异常,请联系运维人员!");
                     return;
                 }
             }

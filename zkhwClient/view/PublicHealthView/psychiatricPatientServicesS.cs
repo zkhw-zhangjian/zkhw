@@ -107,6 +107,7 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         //刷新页面
                         queryPsychosis_info();
+                        MessageBox.Show("添加成功!");
                     }
                 }
             }
@@ -135,6 +136,7 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         //刷新页面
                         queryPsychosis_info();
+                        MessageBox.Show("修改成功!");
                     }
                 }
             }

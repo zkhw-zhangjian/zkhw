@@ -137,7 +137,7 @@ namespace zkhwClient.view.PublicHealthView
                 string id = this.dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
                 if (id==null||"".Equals(id)) { MessageBox.Show("未查询到此人的健康体检信息,请调整时间间隔，再点击查询！！"); return; }
                 DataTable dtup= hcd.queryhealthCheckup(id);
-                if (dtup.Rows.Count>0) { MessageBox.Show(name+"已填写过健康体检表，请重新选择!");return; }
+                if (dtup.Rows.Count>0) { MessageBox.Show(name+"已有健康体检基本信息，请点击修改按钮!");return; }
                 if (aichive_no != null && !"".Equals(aichive_no))
                 {
                     aUhealthcheckupServices1 auhcs = new aUhealthcheckupServices1();

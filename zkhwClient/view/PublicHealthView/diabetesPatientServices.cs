@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using zkhwClient.dao;
+using zkhwClient.view.setting;
 
 namespace zkhwClient.view.PublicHealthView
 {
@@ -40,7 +41,7 @@ namespace zkhwClient.view.PublicHealthView
             this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源
             this.comboBox1.DisplayMember = "name";//显示给用户的数据集表项
             this.comboBox1.ValueMember = "code";//操作时获取的值 
-
+            xcuncode= basicInfoSettings.xcuncode;
             querydiabetesPatientServices();
         }
         private void button5_Click(object sender, EventArgs e)

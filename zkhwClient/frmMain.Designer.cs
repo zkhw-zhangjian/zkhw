@@ -156,9 +156,9 @@
             this.个人基本信息建档ToolStripMenuItem,
             this.健康体检表ToolStripMenuItem,
             this.老年人健康服务ToolStripMenuItem,
+            this.中医健康服务ToolStripMenuItem,
             this.高血压患者服务ToolStripMenuItem,
             this.型糖尿病患者服务ToolStripMenuItem,
-            this.中医健康服务ToolStripMenuItem,
             this.严重精神病障碍患者服务ToolStripMenuItem,
             this.肺结核患者服务ToolStripMenuItem,
             this.孕产妇ToolStripMenuItem,
@@ -203,7 +203,7 @@
             // 
             this.老年人健康服务ToolStripMenuItem.Name = "老年人健康服务ToolStripMenuItem";
             this.老年人健康服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.老年人健康服务ToolStripMenuItem.Text = "老年人健康服务";
+            this.老年人健康服务ToolStripMenuItem.Text = "老年人生活自理能力评估";
             // 
             // 高血压患者服务ToolStripMenuItem
             // 
@@ -221,7 +221,7 @@
             // 
             this.中医健康服务ToolStripMenuItem.Name = "中医健康服务ToolStripMenuItem";
             this.中医健康服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.中医健康服务ToolStripMenuItem.Text = "中医健康服务";
+            this.中医健康服务ToolStripMenuItem.Text = "老年人中医体质辨识";
             // 
             // 严重精神病障碍患者服务ToolStripMenuItem
             // 
