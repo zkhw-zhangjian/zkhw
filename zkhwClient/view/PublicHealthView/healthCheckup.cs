@@ -29,7 +29,7 @@ namespace zkhwClient.view.PublicHealthView
 
         private void healthCheckup_Load(object sender, EventArgs e)
         {
-            this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1);
+            this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
 
             //区域
             this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源
@@ -135,7 +135,7 @@ namespace zkhwClient.view.PublicHealthView
                 string check_date = this.dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
                 string doctor_name = this.dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
                 string id = this.dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
-                if (id==null||"".Equals(id)) { MessageBox.Show("未查询到此人的健康体检信息,请调整时间间隔，再点击查询！！"); return; }
+                //if (id==null||"".Equals(id)) { MessageBox.Show("未查询到此人的健康体检信息,请调整时间间隔，再点击查询！！"); return; }
                 DataTable dtup= hcd.queryhealthCheckup(id);
                 if (dtup.Rows.Count>0) { MessageBox.Show(name+"已有健康体检基本信息，请点击修改按钮!");return; }
                 if (aichive_no != null && !"".Equals(aichive_no))

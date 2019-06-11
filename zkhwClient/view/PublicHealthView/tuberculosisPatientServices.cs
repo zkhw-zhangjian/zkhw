@@ -351,6 +351,11 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{C
         {
             this.label2.Text = "";
         }
+
+        private void tuberculosisPatientServices_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

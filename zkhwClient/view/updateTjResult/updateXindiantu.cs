@@ -68,9 +68,22 @@ namespace zkhwClient.view.updateTjResult
                 string Age = this.textBox14.Text;
                 string Gen = this.textBox15.Text;
                 string Dep = this.textBox16.Text;
+                string barcode=this.textBox2.Text;
                 bool istrue= tjdao.updateXindiantuInfo(aichive_no, bar_code, XdtResult, XdtDesc, Ventrate, PR, QRS, QT, QTc, P_R_T, DOB, Age, Gen, Dep);
                 if (istrue)
                 {
+                    if (XdtDesc.IndexOf("正常") > -1)
+                    {
+                        DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='1' where aichive_no='"+ aichive_no + "'and bar_code= '"+ barcode + "'");
+                        string istruedgbc = "update zkhw_tj_bgdc set XinDian='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                        DbHelperMySQL.ExecuteSql(istruedgbc);
+                    }
+                    else
+                    {
+                        DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='2',cardiogram_memo='"+XdtDesc+"' where aichive_no='"+ aichive_no + "'and bar_code= '"+ barcode + "'");
+                        string issqdgbc = "update zkhw_tj_bgdc set XinDian='3' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                        DbHelperMySQL.ExecuteSql(issqdgbc);
+                    }
                     MessageBox.Show("数据保存成功!");
                 }
                 else {

@@ -51,9 +51,22 @@ namespace zkhwClient.view.updateTjResult
                 string QitaBC = this.textBox11.Text;
                 string QitaResult = this.textBox10.Text;
                 string QitaDesc = this.textBox8.Text;
+                string barcode = this.textBox2.Text;
                 bool istrue= tjdao.updateBichaoInfo(aichive_no, bar_code, FubuBC, FubuResult, FubuDesc, QitaBC, QitaResult, QitaDesc);
                 if (istrue)
                 {
+                    if (FubuResult.IndexOf("未见异常") > -1 || FubuResult.IndexOf("未见明显异常") > -1)
+                    {
+                        DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='1' where aichive_no='"+ aichive_no + "' and bar_code='" + barcode + "'");
+                        string issqdgbc = "update zkhw_tj_bgdc set BChao='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                        DbHelperMySQL.ExecuteSql(issqdgbc);
+                    }
+                    else
+                    {
+                        DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='2',ultrasound_memo='"+ FubuResult + "' where aichive_no='"+ aichive_no + "' and bar_code='" + barcode + "'");
+                        string issqdgbc = "update zkhw_tj_bgdc set BChao='3' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                        DbHelperMySQL.ExecuteSql(issqdgbc);
+                    }
                     MessageBox.Show("数据保存成功!");
                 }
                 else {

@@ -33,7 +33,7 @@ namespace zkhwClient.PublicHealth
         private void examinatProgress_Load(object sender, EventArgs e)
         {
             //让默认的日期时间减一天
-            this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1);
+            this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
             string str = Application.StartupPath;//项目路径
             //区域
             this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源
@@ -62,7 +62,7 @@ namespace zkhwClient.PublicHealth
             time2 = this.dateTimePicker2.Text.ToString();//结束时间
 
             DataTable dt = olderHelthS.queryOlderHelthService(pCa, time1, time2, xcuncode);
-            if (dt.Rows.Count<1) { MessageBox.Show("未查询出数据!");return; }
+            if (dt.Rows.Count < 1) { MessageBox.Show("未查询出数据!"); return; }
             this.dataGridView1.DataSource = dt;
             this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
             this.dataGridView1.Columns[1].HeaderCell.Value = "档案编号";
@@ -80,6 +80,7 @@ namespace zkhwClient.PublicHealth
             {
                 this.dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+            xcuncode = "";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -126,7 +127,7 @@ namespace zkhwClient.PublicHealth
         private void button2_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count < 1) { return; }
-            string name=dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            string name = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
             string archiveno = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
             string idnumber = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
             string sex = dataGridView1.SelectedRows[0].Cells[7].Value.ToString();
@@ -166,6 +167,7 @@ namespace zkhwClient.PublicHealth
             hm.sex = sex;
             hm.archiveno = archiveno;
             DataTable dt = olderHelthS.queryOlderHelthService(archiveno);
+            if (dt == null|| dt.Rows.Count<1) {MessageBox.Show("此人未参加自理能力评估,请先添加!"); return; }
             if (dt != null && dt.Rows.Count > 0)
             {
                 hm.textBox1.Text = dt.Rows[0]["name"].ToString();

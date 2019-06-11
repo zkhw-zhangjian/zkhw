@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web.Script.Serialization;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interop;
@@ -14,12 +15,14 @@ using System.Xml;
 using zkhwClient.bean;
 using zkhwClient.dao;
 using zkhwClient.service;
+using zkhwClient.utils;
 using zkhwClient.view.setting;
 
 namespace zkhwClient.view.PublicHealthView
 {
     public partial class personRegist : Form
     {
+        static JavaScriptSerializer serializer = new JavaScriptSerializer();
         string str = Application.StartupPath;//项目路径
         int iRetUSB = 0, iRetCOM = 0;
         bool isClose = false;
@@ -263,13 +266,20 @@ namespace zkhwClient.view.PublicHealthView
                         {
                             textBox1.Text = dt.Rows[0][0].ToString();
                             //textBox9.Text = dt.Rows[0][1].ToString();
-                            this.comboBox1.Text = dt.Rows[0][1].ToString();
+                            string sexflag= dt.Rows[0][1].ToString();
+                            if (sexflag == "1")
+                            {
+                                this.comboBox1.Text = "男";
+                            } else if (sexflag == "2") {
+                                this.comboBox1.Text = "女";
+                            }
                             textBox8.Text = dt.Rows[0][2].ToString();
                             textBox3.Text = dt.Rows[0][3].ToString();
                             pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
                             textBox5.Text = dt.Rows[0][5].ToString();
                         };
                         this.label41.Text = "读卡成功！";
+                        checkPerson();//判断居民一周内是否做过体检
                     }
                     else {
                         if (File.Exists(Application.StartupPath + "\\cardImg\\" + textBox1.Text + textBox8.Text + ".jpg"))
@@ -285,7 +295,15 @@ namespace zkhwClient.view.PublicHealthView
                         {
                             textBox1.Text = dt.Rows[0][0].ToString();
                             //textBox9.Text = dt.Rows[0][1].ToString();
-                            this.comboBox1.Text = dt.Rows[0][1].ToString();
+                            string sexflag = dt.Rows[0][1].ToString();
+                            if (sexflag == "1")
+                            {
+                                this.comboBox1.Text = "男";
+                            }
+                            else if (sexflag == "2")
+                            {
+                                this.comboBox1.Text = "女";
+                            }
                             textBox8.Text = dt.Rows[0][2].ToString();
                             textBox3.Text = dt.Rows[0][3].ToString();
                             pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
@@ -434,7 +452,17 @@ namespace zkhwClient.view.PublicHealthView
             string number = textBox3.Text;
             string name = textBox1.Text;
             string people = textBox2.Text;
-
+            if (number==null|| number == "" || "".Equals(number)) {
+                MessageBox.Show("身份证号不能为空,如未带身份证，请手动填写身份证号!");
+                return;
+            }
+            string time1 = DateTime.Now.ToString("yyyy-MM-dd")+" 00:00:00";
+            DataTable dttjjk = grjddao.selectTjjk(number, time1);
+            if (dttjjk != null && dttjjk.Rows.Count > 0)
+            {
+                MessageBox.Show("此居民在今天内已经登记过,不能再次登记,如需补打条码，请点击补打条码按钮!");
+                return;
+            }
             if (name != null && !"".Equals(name) && birthday != null && !"".Equals(birthday))
             {
                 grjdxx = new grjdxxBean();
@@ -489,7 +517,11 @@ namespace zkhwClient.view.PublicHealthView
             OnPrintSampleBarcode(carcode + barnumCode, Int32.Parse(this.numericUpDown1.Value.ToString()), nameCode);
          
             node = xmlDoc.SelectSingleNode("config/barnumCode");
-            node.InnerText = (Int32.Parse(barnumCode)+1).ToString();
+            int fnum= Int32.Parse(barnumCode) + 1;
+            if (fnum==100000){
+                fnum = 10001;
+            }
+            node.InnerText = fnum.ToString();
             xmlDoc.Save(path);
         }
         //打印条码
@@ -510,18 +542,22 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (!"".Equals(cardcode))
                     {
-                        grjdxx.archive_no = basicInfoSettings.xcuncode + "0" + grjdxx.Cardcode.Substring(14);
+                        //grjdxx.archive_no = basicInfoSettings.xcuncode + "0" + grjdxx.Cardcode.Substring(14);
+                        grjdxx.archive_no = cardcode;
                     }
-                    else
-                    {
-                        grjdxx.archive_no = basicInfoSettings.xcuncode + barcode.Substring(5, 4);
-                    }                  
+                    //else
+                    //{
+                    //    grjdxx.archive_no = basicInfoSettings.xcuncode + barcode.Substring(5, 4);
+                    //}
+                    grjdxx.doctor_id = basicInfoSettings.zeren_doctorId;
                     grjddao.addgrjdInfo(grjdxx);//添加个人信息档案
                     registrationRecordCheck();//右侧统计
                 }
                 else {
                     grjdxx.archive_no = dt.Rows[0]["archive_no"].ToString();
-                    grjddao.updateGrjdInfo(grjdxx.archive_no);
+                    grjdxx.doctor_id= dt.Rows[0]["doctor_id"].ToString();
+                    grjddao.updateGrjdInfo(grjdxx.archive_no, grjdxx.photo_code);
+                    grjddao.updategejdInfo(grjdxx);
                 }
                 grjddao.addPhysicalExaminationInfo(grjdxx, barcode);//添加健康体检表信息 
                 jkBean jk = new jkBean();
@@ -583,7 +619,7 @@ namespace zkhwClient.view.PublicHealthView
                 logservice.addCheckLog(lb);
                 MessageBox.Show("打印机设备连接不正确,请重新连接或重启!");
                 jkjcheckdao.updateShDevice(-1, -1, 0, -1, -1, -1, -1, -1, -1, -1);
-                //throw e;
+                MessageBox.Show(e.Message+"---"+e.StackTrace);
             }
         }
         //右侧查询按钮
@@ -625,11 +661,59 @@ namespace zkhwClient.view.PublicHealthView
             }
         }
 
-        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //MessageBox.Show("是否需要补打条形码？");
-        }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string idnumber = this.textBox3.Text;
+            if (idnumber != null && idnumber.Length == 18)
+            {
+                string nameCodenew = textBox1.Text + " " + Regex.Replace(textBox3.Text, "(\\d{6})\\d{10}(\\d{2})", "$1**********$2");
+                string codenew = "";
+                int fnum = Int32.Parse(this.numericUpDown1.Value.ToString());
+            
+                DataTable dttjjk = grjddao.selectTjjk(idnumber);
+                if (dttjjk != null && dttjjk.Rows.Count > 0)
+                {
+                    codenew = dttjjk.Rows[0]["bar_code"].ToString();
+
+                    //调用Bartender 
+                    btApp = new BarTender.Application();
+                    //获取打印模板,指定打印机 
+                    btFormat = btApp.Formats.Open(@str + "\\cs1.btw", false, "");
+                    // 同样标签的份数 
+                    btFormat.PrintSetup.IdenticalCopiesOfLabel = fnum;
+                    // 序列标签数 
+                    btFormat.PrintSetup.NumberSerializedLabels = 1;
+                    //设置参数 code
+                    btFormat.SetNamedSubStringValue("code", codenew);
+                    btFormat.SetNamedSubStringValue("nameCode", nameCodenew);
+                    //打印开始 第2个参数是 是否显示打印机属性的。可以设置打印机路径 
+                    btFormat.PrintOut(false, false);
+                    //关闭摸板文件，并且关闭文件流 
+                    btFormat.Close(BarTender.BtSaveOptions.btDoNotSaveChanges);
+                    //打印完毕 
+                    btApp.Quit(BarTender.BtSaveOptions.btDoNotSaveChanges);
+                }
+                else {
+                    MessageBox.Show("此身份证号没有登记过，请检查!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("身份证号不正确,请检查!");
+            }
+        }
+        private void checkPerson()
+        {   
+            string time1 = DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd HH:mm:ss");
+            string time2 = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            string idnumber = this.textBox3.Text;
+            DataTable dttjjk = grjddao.selectTjjk(idnumber,time1,time2);
+            if (dttjjk != null && dttjjk.Rows.Count > 0)
+            {
+                MessageBox.Show("此居民在一周内已经登记体检过一次,如需继续上次体检,请点击补打条码按钮!");
+            }
+        }
 
         //体检人数统计
         public void registrationRecordCheck()

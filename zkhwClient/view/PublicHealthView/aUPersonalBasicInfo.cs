@@ -648,6 +648,9 @@ namespace zkhwClient.view.PublicHealthView
             if (this.radioButton25.Checked == true) { resident_base_infoBean.sex = this.radioButton25.Tag.ToString(); };
             resident_base_infoBean.birthday = this.dateTimePicker1.Text;
             resident_base_infoBean.id_number = this.textBox12.Text.Replace(" ", "");
+            if (resident_base_infoBean.id_number=="" || resident_base_infoBean.id_number.Length!=18) {
+                MessageBox.Show("身份证号码不正确!");return;
+            }
             resident_base_infoBean.company = this.textBox14.Text.Replace(" ", "");
             resident_base_infoBean.phone = this.textBox16.Text.Replace(" ", "");
             resident_base_infoBean.link_name = this.textBox18.Text.Replace(" ", "");
@@ -812,7 +815,8 @@ namespace zkhwClient.view.PublicHealthView
             resident_base_infoBean.create_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             resident_base_infoBean.update_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             resident_base_infoBean.update_name = frmLogin.name;
-
+            resident_base_infoBean.create_name = frmLogin.name;
+            resident_base_infoBean.create_user = frmLogin.userCode;
             resident_base_infoBean.is_hypertension = "0";
             resident_base_infoBean.is_diabetes = "0";
             resident_base_infoBean.is_psychosis = "0";

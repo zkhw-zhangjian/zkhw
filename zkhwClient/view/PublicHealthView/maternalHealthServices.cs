@@ -220,10 +220,9 @@ base.archive_no 编码,
 base.name 姓名,
 (case base.sex when '1'then '男' when '2' then '女' when '9' then '未说明的性别' when '0' then '未知的性别' ELSE ''
 END)性别,
-base.id_number 身份证号,
-base.upload_status 是否同步
+base.id_number 身份证号
 from resident_base_info base
-where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{Convert.ToDateTime(basicInfoSettings.createtime).ToString("yyyy-MM-dd")}'";//base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{basicInfoSettings.createtime}'
+where base.village_code='{basicInfoSettings.xcuncode}' and base.sex='2'";
             if (pairs != null && pairs.Count > 0)
             {
                 if (!string.IsNullOrWhiteSpace(pairs["timesta"]) && !string.IsNullOrWhiteSpace(pairs["timeend"]))
@@ -340,5 +339,10 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{C
             comboBoxBin(comboBox4, comboBox5);
         }
         #endregion
+
+        private void maternalHealthServices_Load(object sender, EventArgs e)
+        {
+          this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
+        }
     }
 }

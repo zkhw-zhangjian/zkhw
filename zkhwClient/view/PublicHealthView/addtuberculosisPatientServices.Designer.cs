@@ -1312,7 +1312,6 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "addtuberculosisPatientServices";
             this.Text = "首次随访添加";
-            this.Load += new System.EventHandler(this.addtuberculosisPatientServices_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

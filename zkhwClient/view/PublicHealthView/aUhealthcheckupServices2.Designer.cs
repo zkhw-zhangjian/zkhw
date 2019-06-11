@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel24 = new System.Windows.Forms.Panel();
             this.textBox94 = new System.Windows.Forms.TextBox();
@@ -297,6 +299,8 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.groupBox4);
@@ -305,8 +309,34 @@
             this.panel1.Controls.Add(this.button4);
             this.panel1.Location = new System.Drawing.Point(5, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1316, 745);
+            this.panel1.Size = new System.Drawing.Size(1326, 700);
             this.panel1.TabIndex = 6;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.LimeGreen;
+            this.button2.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button2.Location = new System.Drawing.Point(919, 1032);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(208, 38);
+            this.button2.TabIndex = 62;
+            this.button2.Text = "转到末页";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.LimeGreen;
+            this.button1.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button1.Location = new System.Drawing.Point(421, 1032);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(208, 38);
+            this.button1.TabIndex = 61;
+            this.button1.Text = "返回到首页";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox1
             // 
@@ -346,7 +376,7 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(1, 897);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1264, 137);
+            this.groupBox1.Size = new System.Drawing.Size(1314, 137);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             // 
@@ -830,7 +860,7 @@
             // 
             this.textBox23.Enabled = false;
             this.textBox23.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox23.Location = new System.Drawing.Point(132, 0);
+            this.textBox23.Location = new System.Drawing.Point(132, -2);
             this.textBox23.Name = "textBox23";
             this.textBox23.Size = new System.Drawing.Size(333, 30);
             this.textBox23.TabIndex = 163;
@@ -1066,13 +1096,11 @@
             // radioButton44
             // 
             this.radioButton44.AutoSize = true;
-            this.radioButton44.Checked = true;
             this.radioButton44.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton44.Location = new System.Drawing.Point(10, 2);
             this.radioButton44.Name = "radioButton44";
             this.radioButton44.Size = new System.Drawing.Size(122, 24);
             this.radioButton44.TabIndex = 30;
-            this.radioButton44.TabStop = true;
             this.radioButton44.Tag = "1";
             this.radioButton44.Text = "1未见异常";
             this.radioButton44.UseVisualStyleBackColor = true;
@@ -1126,13 +1154,11 @@
             // radioButton42
             // 
             this.radioButton42.AutoSize = true;
-            this.radioButton42.Checked = true;
             this.radioButton42.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton42.Location = new System.Drawing.Point(10, 2);
             this.radioButton42.Name = "radioButton42";
             this.radioButton42.Size = new System.Drawing.Size(122, 24);
             this.radioButton42.TabIndex = 30;
-            this.radioButton42.TabStop = true;
             this.radioButton42.Tag = "1";
             this.radioButton42.Text = "1未见异常";
             this.radioButton42.UseVisualStyleBackColor = true;
@@ -1186,13 +1212,11 @@
             // radioButton40
             // 
             this.radioButton40.AutoSize = true;
-            this.radioButton40.Checked = true;
             this.radioButton40.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton40.Location = new System.Drawing.Point(10, 2);
             this.radioButton40.Name = "radioButton40";
             this.radioButton40.Size = new System.Drawing.Size(122, 24);
             this.radioButton40.TabIndex = 30;
-            this.radioButton40.TabStop = true;
             this.radioButton40.Tag = "1";
             this.radioButton40.Text = "1未见异常";
             this.radioButton40.UseVisualStyleBackColor = true;
@@ -1246,13 +1270,11 @@
             // radioButton36
             // 
             this.radioButton36.AutoSize = true;
-            this.radioButton36.Checked = true;
             this.radioButton36.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton36.Location = new System.Drawing.Point(10, 2);
             this.radioButton36.Name = "radioButton36";
             this.radioButton36.Size = new System.Drawing.Size(122, 24);
             this.radioButton36.TabIndex = 30;
-            this.radioButton36.TabStop = true;
             this.radioButton36.Tag = "1";
             this.radioButton36.Text = "1未见异常";
             this.radioButton36.UseVisualStyleBackColor = true;
@@ -1306,13 +1328,11 @@
             // radioButton38
             // 
             this.radioButton38.AutoSize = true;
-            this.radioButton38.Checked = true;
             this.radioButton38.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton38.Location = new System.Drawing.Point(10, 2);
             this.radioButton38.Name = "radioButton38";
             this.radioButton38.Size = new System.Drawing.Size(122, 24);
             this.radioButton38.TabIndex = 30;
-            this.radioButton38.TabStop = true;
             this.radioButton38.Tag = "1";
             this.radioButton38.Text = "1未见异常";
             this.radioButton38.UseVisualStyleBackColor = true;
@@ -1421,8 +1441,6 @@
             // checkBox5
             // 
             this.checkBox5.AutoSize = true;
-            this.checkBox5.Checked = true;
-            this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.checkBox5.Location = new System.Drawing.Point(11, 2);
             this.checkBox5.Name = "checkBox5";
@@ -1520,13 +1538,11 @@
             // radioButton28
             // 
             this.radioButton28.AutoSize = true;
-            this.radioButton28.Checked = true;
             this.radioButton28.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton28.Location = new System.Drawing.Point(10, 2);
             this.radioButton28.Name = "radioButton28";
             this.radioButton28.Size = new System.Drawing.Size(122, 24);
             this.radioButton28.TabIndex = 30;
-            this.radioButton28.TabStop = true;
             this.radioButton28.Tag = "1";
             this.radioButton28.Text = "1未及异常";
             this.radioButton28.UseVisualStyleBackColor = true;
@@ -1576,7 +1592,6 @@
             this.radioButton22.Name = "radioButton22";
             this.radioButton22.Size = new System.Drawing.Size(206, 24);
             this.radioButton22.TabIndex = 36;
-            this.radioButton22.TabStop = true;
             this.radioButton22.Tag = "4";
             this.radioButton22.Text = "4触及右侧弱或消失";
             this.radioButton22.UseVisualStyleBackColor = true;
@@ -1589,7 +1604,6 @@
             this.radioButton23.Name = "radioButton23";
             this.radioButton23.Size = new System.Drawing.Size(206, 24);
             this.radioButton23.TabIndex = 33;
-            this.radioButton23.TabStop = true;
             this.radioButton23.Tag = "3";
             this.radioButton23.Text = "3触及左侧弱或消失";
             this.radioButton23.UseVisualStyleBackColor = true;
@@ -1597,13 +1611,11 @@
             // radioButton24
             // 
             this.radioButton24.AutoSize = true;
-            this.radioButton24.Checked = true;
             this.radioButton24.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton24.Location = new System.Drawing.Point(10, 2);
             this.radioButton24.Name = "radioButton24";
             this.radioButton24.Size = new System.Drawing.Size(101, 24);
             this.radioButton24.TabIndex = 30;
-            this.radioButton24.TabStop = true;
             this.radioButton24.Tag = "1";
             this.radioButton24.Text = "1未触及";
             this.radioButton24.UseVisualStyleBackColor = true;
@@ -1611,6 +1623,7 @@
             // radioButton25
             // 
             this.radioButton25.AutoSize = true;
+            this.radioButton25.Checked = true;
             this.radioButton25.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton25.Location = new System.Drawing.Point(118, 2);
             this.radioButton25.Name = "radioButton25";
@@ -2435,13 +2448,11 @@
             // radioButton6
             // 
             this.radioButton6.AutoSize = true;
-            this.radioButton6.Checked = true;
             this.radioButton6.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton6.Location = new System.Drawing.Point(10, 2);
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(80, 24);
             this.radioButton6.TabIndex = 30;
-            this.radioButton6.TabStop = true;
             this.radioButton6.Tag = "1";
             this.radioButton6.Text = "1正常";
             this.radioButton6.UseVisualStyleBackColor = true;
@@ -2455,7 +2466,6 @@
             this.radioButton10.Name = "radioButton10";
             this.radioButton10.Size = new System.Drawing.Size(80, 24);
             this.radioButton10.TabIndex = 31;
-            this.radioButton10.TabStop = true;
             this.radioButton10.Tag = "2";
             this.radioButton10.Text = "2异常";
             this.radioButton10.UseVisualStyleBackColor = true;
@@ -2522,6 +2532,7 @@
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.AutoSize = true;
             this.groupBox3.Controls.Add(this.panel26);
             this.groupBox3.Controls.Add(this.panel25);
             this.groupBox3.Controls.Add(this.textBox98);
@@ -2547,7 +2558,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 34);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1232, 203);
+            this.groupBox3.Size = new System.Drawing.Size(1309, 232);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
@@ -2559,7 +2570,7 @@
             this.panel26.Controls.Add(this.radioButton89);
             this.panel26.Location = new System.Drawing.Point(290, 78);
             this.panel26.Name = "panel26";
-            this.panel26.Size = new System.Drawing.Size(1014, 30);
+            this.panel26.Size = new System.Drawing.Size(1010, 30);
             this.panel26.TabIndex = 118;
             // 
             // radioButton87
@@ -2609,7 +2620,7 @@
             this.panel25.Controls.Add(this.checkBox1);
             this.panel25.Location = new System.Drawing.Point(290, 47);
             this.panel25.Name = "panel25";
-            this.panel25.Size = new System.Drawing.Size(1014, 30);
+            this.panel25.Size = new System.Drawing.Size(1010, 30);
             this.panel25.TabIndex = 117;
             // 
             // checkBox4
@@ -2621,7 +2632,7 @@
             this.checkBox4.Size = new System.Drawing.Size(145, 24);
             this.checkBox4.TabIndex = 37;
             this.checkBox4.Tag = "4";
-            this.checkBox4.Text = "4义牙(假牙)";
+            this.checkBox4.Text = "4义齿(假牙)";
             this.checkBox4.UseVisualStyleBackColor = true;
             this.checkBox4.Click += new System.EventHandler(this.checkBox4_Click);
             // 
@@ -2909,7 +2920,7 @@
             this.panel15.Controls.Add(this.radioButton57);
             this.panel15.Location = new System.Drawing.Point(290, 16);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(1014, 30);
+            this.panel15.Size = new System.Drawing.Size(1010, 30);
             this.panel15.TabIndex = 99;
             // 
             // textBox100
@@ -3056,11 +3067,11 @@
             this.button4.BackColor = System.Drawing.Color.LimeGreen;
             this.button4.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button4.Location = new System.Drawing.Point(912, 1033);
+            this.button4.Location = new System.Drawing.Point(671, 1032);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(208, 38);
             this.button4.TabIndex = 41;
-            this.button4.Text = "保存并转到下一页";
+            this.button4.Text = "转到第三页";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -3078,6 +3089,7 @@
             this.Text = "健康体检表";
             this.Load += new System.EventHandler(this.aUdiabetesPatientServices_Load);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel24.ResumeLayout(false);
@@ -3376,5 +3388,7 @@
         private System.Windows.Forms.CheckBox checkBox7;
         private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.CheckBox checkBox9;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

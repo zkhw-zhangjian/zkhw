@@ -41,7 +41,7 @@ namespace zkhwClient.view.PublicHealthView
         private void examinatProgress_Load(object sender, EventArgs e)
         {
             //让默认的日期时间减一天
-            this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1);
+            this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
             this.button1.BackgroundImage = System.Drawing.Image.FromFile(@str + "/images/check.png");
 
             this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源
@@ -67,18 +67,19 @@ namespace zkhwClient.view.PublicHealthView
             {
                 if (this.radioButton1.Checked)
                 {
-                    DataRow[] dr = dt.Select("BChao='" + ytj + "' and XinDian='" + ytj + "' and XueChangGui='" + ytj + "' and NiaoChangGui='" + ytj + "' and Shengaotizhong='" + ytj + "' and XueYa='" + ytj + "' and ShengHua='" + ytj + "'");
+                    DataRow[] dr = dt.Select("BChao>='" + ytj + "' and XinDian>='" + ytj + "' and XueChangGui>='" + ytj + "' and NiaoChangGui>='" + ytj + "' and Shengaotizhong>='" + ytj + "' and XueYa>='" + ytj + "' and ShengHua>='" + ytj + "'");
                     if (dr != null && dr.Length > 0)
                     {
                         for (int i = dr.Length - 1; i >= 0; i--)
                         {
                             dt.Rows.Remove(dr[i]);
                         }
+                        dt.AcceptChanges();
                     }
                 }
                 else if (this.radioButton2.Checked)
                 {
-                    DataRow[] dr = dt.Select("BChao='" + ytj + "' and XinDian='" + ytj + "' and XueChangGui='" + ytj + "' and NiaoChangGui='" + ytj + "' and Shengaotizhong='" + ytj + "' and XueYa='" + ytj + "' and ShengHua='" + ytj + "'");
+                    DataRow[] dr = dt.Select("BChao>='" + ytj + "' and XinDian>='" + ytj + "' and XueChangGui>='" + ytj + "' and NiaoChangGui>='" + ytj + "' and Shengaotizhong>='" + ytj + "' and XueYa>='" + ytj + "' and ShengHua>='" + ytj + "'");
                     if (dr != null && dr.Length > 0)
                     {
                         DataTable tmp = dr[0].Table.Clone();  // 复制DataRow的表结构  
@@ -501,8 +502,8 @@ namespace zkhwClient.view.PublicHealthView
                 iTextSharp.text.Font font = new iTextSharp.text.Font(baseFT, 10);//内容字体
                 iTextSharp.text.Font fontID = new iTextSharp.text.Font(baseFT, 16);//内容字体
 
-                //标题 
-                Paragraph pdftitle = new Paragraph(basicInfoSettings.createtime + "-"+ DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss"), font);
+                //标题  
+                Paragraph pdftitle = new Paragraph(Convert.ToDateTime(basicInfoSettings.createtime).ToString("yyyy-MM-dd HH:mm:ss") + " - "+ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), font);
                 pdftitle.Alignment = 1;
                 doc.Add(pdftitle);
 

@@ -125,6 +125,7 @@ namespace zkhwClient.view.PublicHealthView
                 if (dt.Rows[0]["sex"].ToString() == hm.radioButton2.Tag.ToString()) { hm.radioButton2.Checked = true; };
                 if (dt.Rows[0]["sex"].ToString() == hm.radioButton3.Tag.ToString()) { hm.radioButton3.Checked = true; };
                 if (dt.Rows[0]["sex"].ToString() == hm.radioButton25.Tag.ToString()) { hm.radioButton25.Checked = true; };
+                if(dt.Rows[0]["birthday"].ToString()!="")
                 hm.dateTimePicker1.Value = DateTime.Parse(dt.Rows[0]["birthday"].ToString());
                 hm.textBox12.Text = dt.Rows[0]["id_number"].ToString();
                 hm.textBox14.Text = dt.Rows[0]["company"].ToString();
@@ -306,7 +307,6 @@ namespace zkhwClient.view.PublicHealthView
             if (hm.ShowDialog() == DialogResult.OK)
             {
                 //刷新页面
-
                 button5_Click(null, null);
                 MessageBox.Show("修改成功！");
 

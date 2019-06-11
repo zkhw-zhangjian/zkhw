@@ -20,7 +20,7 @@ namespace zkhwClient.dao
         {
             DataSet ds = new DataSet();
             string sql = "SELECT bb.name,bb.archive_no,bb.id_number,aa.total_score,aa.judgement_result,aa.test_date,aa.test_doctor,bb.sex FROM (select b.name, b.archive_no, b.id_number,b.sex from resident_base_info b where 1=1 and age >= '65'";
-            if (code != "") { sql += " AND b.village_code='" + code + "'"; }
+            if (code != null && !"".Equals(code)) { sql += " AND b.village_code='" + code + "'"; }
             if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
             sql += ") bb LEFT JOIN(select a.aichive_no, a.total_score, a.judgement_result, a.test_date, a.test_doctor from elderly_selfcare_estimate a where a.test_date >= '" + time1 + "' and a.test_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
             ds = DbHelperMySQL.Query(sql);
@@ -49,15 +49,15 @@ namespace zkhwClient.dao
             if (id == "")
             {
                 id = Result.GetNewId();
-                sql = @"insert into elderly_selfcare_estimate (id,name,aichive_no,id_number,sex,test_date,answer_result,total_score,judgement_result,test_doctor,create_user,create_name,create_org,create_org_name,create_time,update_user,update_name,update_time,upload_status,upload_time,upload_result) values ";
-                sql += @" ('" + id + "','" + hm.name + "', '" + hm.aichive_no + "', '" + hm.id_number + "', '" + hm.sex + "', '" + hm.test_date + "', '" + hm.answer_result + "', '" + hm.total_score + "', '" + hm.judgement_result + "', '" + hm.test_doctor + "','" + frmLogin.userCode + "','" + frmLogin.name + "', '" + frmLogin.organCode + "', '" + frmLogin.organName + "', '" + hm.create_time + "', '" + hm.update_user + "', '" + hm.update_name + "', '" + hm.update_time + "', '" + hm.upload_status + "', '" + hm.upload_time + "', '" + hm.upload_result + "')";
+                sql = @"insert into elderly_selfcare_estimate (id,name,aichive_no,id_number,sex,test_date,answer_result,total_score,judgement_result,test_doctor,create_user,create_name,create_org,create_org_name,create_time,upload_status) values ";
+                sql += @" ('" + id + "','" + hm.name + "', '" + hm.aichive_no + "', '" + hm.id_number + "', '" + hm.sex + "', '" + hm.test_date + "', '" + hm.answer_result + "', '" + hm.total_score + "', '" + hm.judgement_result + "', '" + hm.test_doctor + "','" + frmLogin.userCode + "','" + frmLogin.name + "', '" + frmLogin.organCode + "', '" + frmLogin.organName + "', '" + hm.create_time + "', '" + hm.upload_status + "')";
             }
             else
             {
                 sql = @"update elderly_selfcare_estimate set test_date='" + hm.test_date + "',answer_result='" + hm.answer_result + "',total_score='" + hm.total_score + "',judgement_result='" + hm.judgement_result + "',test_doctor= '" + hm.test_doctor + "',update_user= '" + frmLogin.userCode + "',update_name= '" + frmLogin.name + "',update_time='" + hm.update_time + "',upload_status= '" + hm.upload_status + "' where aichive_no = '" + id + "'";
-
             }
             ret = DbHelperMySQL.ExecuteSql(sql);
+
             return ret == 0 ? false : true;
         }
         public DataTable queryOlderHelthService(string aichive_no)

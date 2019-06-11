@@ -62,15 +62,353 @@ namespace zkhwClient.view.PublicHealthView
                     this.textBox2.Text = dtz.Rows[0]["bar_code"].ToString();
                     this.textBox3.Text = dtz.Rows[0]["id_number"].ToString();
 
-                    if (this.radioButton39.Tag.ToString() == dtz.Rows[0]["health_evaluation"].ToString()) { this.radioButton39.Checked = true; };
-                    if (this.radioButton40.Tag.ToString() == dtz.Rows[0]["health_evaluation"].ToString())
+                    if (this.radioButton39.Tag.ToString() == dtz.Rows[0]["health_evaluation"].ToString())
+                    {
+                        this.radioButton39.Checked = true;
+                    }
+                    else if (this.radioButton40.Tag.ToString() == dtz.Rows[0]["health_evaluation"].ToString())
                     {
                         this.radioButton40.Checked = true;
                         this.textBox48.Text = dtz.Rows[0]["abnormal1"].ToString();
                         this.textBox29.Text = dtz.Rows[0]["abnormal2"].ToString();
                         this.textBox31.Text = dtz.Rows[0]["abnormal3"].ToString();
                         this.textBox33.Text = dtz.Rows[0]["abnormal4"].ToString();
-                    };
+                    }
+                    else
+                    {
+                        string temperature = dtz.Rows[0]["base_temperature"].ToString();
+                        if (temperature != null && !"".Equals(temperature))
+                        {
+                            double temdouble = Convert.ToDouble(temperature);
+                            if (temdouble >= 37)
+                            {
+                                this.textBox48.Text += "体温偏高 ";
+                            }
+                        }
+                        string base_bmi = dtz.Rows[0]["base_bmi"].ToString();
+                        if (base_bmi != null && !"".Equals(base_bmi))
+                        {
+                            double bmidouble = Convert.ToDouble(base_bmi);
+                            if (bmidouble >= 28)
+                            {
+                                this.textBox48.Text += "体质偏胖 ";
+                            }
+                            else if (bmidouble <= 16)
+                            {
+                                this.textBox48.Text += "体质偏瘦 ";
+                            }
+                        }
+                        if (!string.IsNullOrWhiteSpace(dtz.Rows[0]["base_blood_pressure_right_high"].ToString()) || !string.IsNullOrWhiteSpace(dtz.Rows[0]["base_blood_pressure_right_low"].ToString()))
+                        {
+                            if (Convert.ToInt32(dtz.Rows[0]["base_blood_pressure_right_high"]) > 140 || Convert.ToInt32(dtz.Rows[0]["base_blood_pressure_right_low"]) > 90)
+                            {
+                                this.textBox48.Text += "血压偏高 ";
+                            }
+                            else if (Convert.ToInt32(dtz.Rows[0]["base_blood_pressure_right_high"]) < 90 || Convert.ToInt32(dtz.Rows[0]["base_blood_pressure_right_low"]) < 60)
+                            {
+                                this.textBox48.Text += "血压偏低 ";
+                            }
+                        }
+
+                        string organ_lips = dtz.Rows[0]["organ_lips"].ToString();
+                        if (organ_lips != null && !"".Equals(organ_lips))
+                        {
+                            int organdouble = Convert.ToInt32(organ_lips);
+                            if (organdouble != 1)
+                            {
+                                this.textBox29.Text += "口唇异常 ";
+                            }
+                        }
+
+                        string organ_tooth = dtz.Rows[0]["organ_tooth"].ToString();
+                        if (organ_tooth != null && !"".Equals(organ_tooth))
+                        {
+                            int toothdouble = Convert.ToInt32(organ_tooth);
+                            if (toothdouble > 0)
+                            {
+                                this.textBox29.Text += "齿列异常 ";
+                            }
+                        }
+
+                        string organ_guttur = dtz.Rows[0]["organ_guttur"].ToString();
+                        if (organ_guttur != null && !"".Equals(organ_guttur))
+                        {
+                            int gutturdouble = Convert.ToInt32(organ_guttur);
+                            if (gutturdouble > 1)
+                            {
+                                this.textBox29.Text += "咽部异常 ";
+                            }
+                        }
+                        string organ_hearing = dtz.Rows[0]["organ_hearing"].ToString();
+                        if (organ_hearing != null && !"".Equals(organ_hearing))
+                        {
+                            int hearingdouble = Convert.ToInt32(organ_hearing);
+                            if (hearingdouble > 1)
+                            {
+                                this.textBox29.Text += "听力听不清 ";
+                            }
+                        }
+                        string organ_movement = dtz.Rows[0]["organ_movement"].ToString();
+                        if (organ_movement != null && !"".Equals(organ_movement))
+                        {
+                            int movementdouble = Convert.ToInt32(organ_movement);
+                            if (movementdouble > 1)
+                            {
+                                this.textBox29.Text += "运动无法完成 ";
+                            }
+                        }
+                        string examination_skin = dtz.Rows[0]["examination_skin"].ToString();
+                        if (examination_skin != null && !"".Equals(examination_skin))
+                        {
+                            int skindouble = Convert.ToInt32(examination_skin);
+                            if (skindouble > 1)
+                            {
+                                this.textBox29.Text += "皮肤异常 ";
+                            }
+                        }
+                        string examination_sclera = dtz.Rows[0]["examination_sclera"].ToString();
+                        if (examination_sclera != null && !"".Equals(examination_sclera))
+                        {
+                            int scleradouble = Convert.ToInt32(examination_sclera);
+                            if (scleradouble > 1)
+                            {
+                                this.textBox29.Text += "巩膜异常 ";
+                            }
+                        }
+                        string examination_lymph = dtz.Rows[0]["examination_lymph"].ToString();
+                        if (examination_lymph != null && !"".Equals(examination_lymph))
+                        {
+                            int lymphdouble = Convert.ToInt32(examination_lymph);
+                            if (lymphdouble > 1)
+                            {
+                                this.textBox29.Text += "有淋巴结 ";
+                            }
+                        }
+                        string examination_barrel_chest = dtz.Rows[0]["examination_barrel_chest"].ToString();
+                        if (examination_barrel_chest != null && !"".Equals(examination_barrel_chest))
+                        {
+                            int barrel_chestdouble = Convert.ToInt32(examination_barrel_chest);
+                            if (barrel_chestdouble > 1)
+                            {
+                                this.textBox29.Text += "是桶状胸 ";
+                            }
+                        }
+                        string examination_breath_sounds = dtz.Rows[0]["examination_breath_sounds"].ToString();
+                        if (examination_breath_sounds != null && !"".Equals(examination_breath_sounds))
+                        {
+                            int breath_soundsdouble = Convert.ToInt32(examination_breath_sounds);
+                            if (breath_soundsdouble > 1)
+                            {
+                                this.textBox29.Text += "呼吸音异常 ";
+                            }
+                        }
+                        string examination_rale = dtz.Rows[0]["examination_rale"].ToString();
+                        if (examination_rale != null && !"".Equals(examination_rale))
+                        {
+                            int raledouble = Convert.ToInt32(examination_rale);
+                            if (raledouble > 1)
+                            {
+                                this.textBox29.Text += "罗音异常 ";
+                            }
+                        }
+                        string examination_heart_rate = dtz.Rows[0]["examination_heart_rate"].ToString();
+                        if (examination_heart_rate != null && !"".Equals(examination_heart_rate))
+                        {
+                            int hraledouble = Convert.ToInt32(examination_heart_rate);
+                            if (hraledouble > 100)
+                            {
+                                this.textBox29.Text += "心率偏快 ";
+                            }
+                            else if (hraledouble < 60)
+                            {
+                                this.textBox29.Text += "心率偏慢 ";
+                            }
+                        }
+                        string examination_heart_rhythm = dtz.Rows[0]["examination_heart_rhythm"].ToString();
+                        if (examination_heart_rhythm != null && !"".Equals(examination_heart_rhythm))
+                        {
+                            int rhythmdouble = Convert.ToInt32(examination_heart_rhythm);
+                            if (rhythmdouble > 1)
+                            {
+                                this.textBox29.Text += "心律不齐 ";
+                            }
+                        }
+                        string examination_heart_noise = dtz.Rows[0]["examination_heart_noise"].ToString();
+                        if (examination_heart_noise != null && !"".Equals(examination_heart_noise))
+                        {
+                            int noisedouble = Convert.ToInt32(examination_heart_noise);
+                            if (noisedouble > 1)
+                            {
+                                this.textBox29.Text += "心脏有杂音 ";
+                            }
+                        }
+                        string examination_abdomen_tenderness = dtz.Rows[0]["examination_abdomen_tenderness"].ToString();
+                        if (examination_abdomen_tenderness != null && !"".Equals(examination_abdomen_tenderness))
+                        {
+                            int tendernessdouble = Convert.ToInt32(examination_abdomen_tenderness);
+                            if (tendernessdouble > 1)
+                            {
+                                this.textBox29.Text += "腹部有压痛 ";
+                            }
+                        }
+                        string examination_abdomen_mass = dtz.Rows[0]["examination_abdomen_mass"].ToString();
+                        if (examination_abdomen_mass != null && !"".Equals(examination_abdomen_mass))
+                        {
+                            int massdouble = Convert.ToInt32(examination_abdomen_mass);
+                            if (massdouble > 1)
+                            {
+                                this.textBox29.Text += "腹部有包块 ";
+                            }
+                        }
+                        string examination_abdomen_hepatomegaly = dtz.Rows[0]["examination_abdomen_hepatomegaly"].ToString();
+                        if (examination_abdomen_hepatomegaly != null && !"".Equals(examination_abdomen_hepatomegaly))
+                        {
+                            int hepatomegalydouble = Convert.ToInt32(examination_abdomen_hepatomegaly);
+                            if (hepatomegalydouble > 1)
+                            {
+                                this.textBox29.Text += "腹部肝大 ";
+                            }
+                        }
+                        string examination_abdomen_splenomegaly = dtz.Rows[0]["examination_abdomen_splenomegaly"].ToString();
+                        if (examination_abdomen_splenomegaly != null && !"".Equals(examination_abdomen_splenomegaly))
+                        {
+                            int splenomegalydouble = Convert.ToInt32(examination_abdomen_splenomegaly);
+                            if (splenomegalydouble > 1)
+                            {
+                                this.textBox29.Text += "腹部脾大 ";
+                            }
+                        }
+                        string examination_abdomen_shiftingdullness = dtz.Rows[0]["examination_abdomen_shiftingdullness"].ToString();
+                        if (examination_abdomen_shiftingdullness != null && !"".Equals(examination_abdomen_shiftingdullness))
+                        {
+                            int shiftingdullnessdouble = Convert.ToInt32(examination_abdomen_shiftingdullness);
+                            if (shiftingdullnessdouble > 1)
+                            {
+                                this.textBox29.Text += "腹部有移动性浊音 ";
+                            }
+                        }
+                        string examination_lowerextremity_edema = dtz.Rows[0]["examination_lowerextremity_edema"].ToString();
+                        if (examination_lowerextremity_edema != null && !"".Equals(examination_lowerextremity_edema))
+                        {
+                            int edemadouble = Convert.ToInt32(examination_lowerextremity_edema);
+                            if (edemadouble > 1)
+                            {
+                                this.textBox29.Text += "下肢有水肿 ";
+                            }
+                        }
+                        bool xcgflag = false;
+                        string blood_hemoglobin = dtz.Rows[0]["blood_hemoglobin"].ToString();
+                        if (blood_hemoglobin != null && !"".Equals(blood_hemoglobin))
+                        {
+                            if (Convert.ToDouble(blood_hemoglobin) < 110 || Convert.ToDouble(blood_hemoglobin) > 160)
+                            {
+                                xcgflag = true;
+                            }
+                        }
+                        string blood_leukocyte = dtz.Rows[0]["blood_leukocyte"].ToString();
+                        if (blood_leukocyte != null && !"".Equals(blood_leukocyte))
+                        {
+                            if (Convert.ToDouble(blood_leukocyte) >10)
+                            {
+                                xcgflag = true;
+                            }
+                        }
+                        string blood_platelet = dtz.Rows[0]["blood_platelet"].ToString();
+                        if (blood_platelet != null && !"".Equals(blood_platelet))
+                        {
+                            if (Convert.ToDouble(blood_platelet) > 300 || Convert.ToDouble(blood_platelet)<100)
+                            {
+                                xcgflag = true;
+                            }
+                        }
+                        if(xcgflag) this.textBox31.Text += "血常规有异常 ";
+
+                        bool ncgflag = false;
+                        string urine_protein = dtz.Rows[0]["urine_protein"].ToString();
+                        if (urine_protein != null && !"".Equals(urine_protein)&& urine_protein != "-")
+                        {
+                             ncgflag = true;
+                        }
+                        string glycosuria = dtz.Rows[0]["glycosuria"].ToString();
+                        if (glycosuria != null && !"".Equals(glycosuria) && glycosuria != "-")
+                        {
+                            ncgflag = true;
+                        }
+                        string urine_acetone_bodies = dtz.Rows[0]["urine_acetone_bodies"].ToString();
+                        if (urine_acetone_bodies != null && !"".Equals(urine_acetone_bodies) && urine_acetone_bodies != "-")
+                        {
+                            ncgflag = true;
+                        }
+                        string bld = dtz.Rows[0]["bld"].ToString();
+                        if (bld != null && !"".Equals(bld) && bld != "-")
+                        {
+                            ncgflag = true;
+                        }
+                        if (ncgflag) this.textBox31.Text += "尿常规有异常 ";
+
+                        string blood_glucose_mmol = dtz.Rows[0]["blood_glucose_mmol"].ToString();
+                        if (blood_glucose_mmol != null && !"".Equals(blood_glucose_mmol))
+                        {
+                            if (Convert.ToDouble(blood_platelet)>7) { this.textBox31.Text += "空腹血糖值偏高 "; }
+                        }
+                        string cardiogram = dtz.Rows[0]["cardiogram"].ToString();
+                        if (cardiogram=="2")
+                        {
+                            this.textBox31.Text += "心电图:"+ dtz.Rows[0]["cardiogram_memo"].ToString()+" "; 
+                        }
+
+                        bool shflag = false;
+                        string sgft = dtz.Rows[0]["sgft"].ToString();
+                        if (sgft != null && !"".Equals(sgft))
+                        {
+                            if (Convert.ToDouble(sgft) > 40) { shflag = true; }
+                        }
+                        string ast = dtz.Rows[0]["ast"].ToString();
+                        if (ast != null && !"".Equals(ast))
+                        {
+                            if (Convert.ToDouble(ast) > 40) { shflag = true; }
+                        }
+                        string albumin = dtz.Rows[0]["albumin"].ToString();
+                        if (albumin != null && !"".Equals(albumin))
+                        {
+                            if (Convert.ToDouble(albumin) > 54|| Convert.ToDouble(albumin)<34) { shflag = true; }
+                        }
+                        string total_bilirubin = dtz.Rows[0]["total_bilirubin"].ToString();
+                        if (total_bilirubin != null && !"".Equals(total_bilirubin))
+                        {
+                            if (Convert.ToDouble(total_bilirubin) > 20 || Convert.ToDouble(total_bilirubin) < 2) { shflag = true; }
+                        }
+                        string conjugated_bilirubin = dtz.Rows[0]["conjugated_bilirubin"].ToString();
+                        if (conjugated_bilirubin != null && !"".Equals(conjugated_bilirubin))
+                        {
+                            if (Convert.ToDouble(conjugated_bilirubin) > 6.8 || Convert.ToDouble(conjugated_bilirubin) < 1.7) { shflag = true; }
+                        }
+                        string scr = dtz.Rows[0]["scr"].ToString();
+                        if (scr != null && !"".Equals(scr))
+                        {
+                            if (Convert.ToDouble(scr) > 115 || Convert.ToDouble(scr) < 44) { shflag = true; }
+                        }
+                        string blood_urea = dtz.Rows[0]["blood_urea"].ToString();
+                        if (blood_urea != null && !"".Equals(blood_urea))
+                        {
+                            if (Convert.ToDouble(blood_urea) > 8.2 || Convert.ToDouble(blood_urea) < 1.7) { shflag = true; }
+                        }
+                        string tc = dtz.Rows[0]["tc"].ToString();
+                        if (tc != null && !"".Equals(tc))
+                        {
+                            if (Convert.ToDouble(tc) > 5.2) { shflag = true; }
+                        }
+                        string tg = dtz.Rows[0]["tg"].ToString();
+                        if (tg != null && !"".Equals(tg))
+                        {
+                            if (Convert.ToDouble(tg) > 1.7) { shflag = true; }
+                        }
+                        if (shflag) this.textBox31.Text += "生化有异常 ";
+                        if (dtz.Rows[0]["ultrasound_abdomen"].ToString() == "2")
+                        {
+                            this.textBox31.Text +="B超:"+ dtz.Rows[0]["ultrasound_memo"].ToString();
+                        }
+                    }
 
                     foreach (Control ctr in this.panel2.Controls)
                     {
@@ -191,8 +529,15 @@ namespace zkhwClient.view.PublicHealthView
             bool isfalse = hcd.addPhysicalExaminationRecord4(per, goodsList, goodsListym);
             if (isfalse)
             {
-                this.DialogResult = DialogResult.OK;
-                MessageBox.Show("保存成功!"); 
+                MessageBox.Show("数据保存成功!");
+                if (per.id_number!=""&& per.id_number.Length==18) {
+                  string yl = per.id_number.Substring(6, 4) + "-" + per.id_number.Substring(10, 2) + "-" + per.id_number.Substring(12, 2);
+                  int year1 = DateTime.Parse(yl).Year;
+                  int year2 = DateTime.Now.Year;
+                    if (year2-year1>=65) {
+                        MessageBox.Show("此患者已满65周岁,还需要填写老年人生活自理能力评估表，和老年人中医体质表!");
+                    }
+                }
             }
         }
         //将用药记录 goodsList 绑定到页面 dataGridView1展示出来
@@ -316,6 +661,249 @@ namespace zkhwClient.view.PublicHealthView
                 this.textBox31.Enabled = false;
                 this.textBox33.Enabled = false;
             }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            bean.physical_examination_recordBean per = new bean.physical_examination_recordBean();
+
+            if (this.radioButton39.Checked == true) { per.health_evaluation = this.radioButton39.Tag.ToString(); };
+            if (this.radioButton40.Checked == true)
+            {
+                per.health_evaluation = this.radioButton40.Tag.ToString();
+                per.abnormal1 = this.textBox48.Text;
+                per.abnormal2 = this.textBox29.Text;
+                per.abnormal3 = this.textBox31.Text;
+                per.abnormal4 = this.textBox33.Text;
+            };
+
+            foreach (Control ctr in this.panel2.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.health_guidance += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.health_guidance != null && per.health_guidance != "")
+            {
+                per.health_guidance = per.health_guidance.Substring(1);
+            }
+
+            foreach (Control ctr in this.panel3.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.danger_controlling += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.danger_controlling != null && per.danger_controlling != "")
+            {
+                per.danger_controlling = per.danger_controlling.Substring(1);
+            }
+            if (checkBox8.Checked)
+            {
+                per.target_weight = this.textBox37.Text;
+            }
+            if (checkBox9.Checked)
+            {
+                per.advise_bacterin = this.textBox39.Text;
+            }
+            if (checkBox10.Checked)
+            {
+                per.danger_controlling_other = this.textBox40.Text;
+            }
+            per.healthAdvice = this.richTextBox1.Text;
+            if (per.healthAdvice == null || "".Equals(per.healthAdvice))
+            {
+                MessageBox.Show("健康建议不能为空!"); return;
+            }
+            per.aichive_no = this.textBox1.Text;
+            per.bar_code = this.textBox2.Text;
+            per.id_number = this.textBox3.Text;
+            per.id = this.textBox4.Text;
+            bool isfalse = hcd.addPhysicalExaminationRecord4(per, goodsList, goodsListym);
+            this.Close();
+            aUhealthcheckupServices3 auhc3 = new aUhealthcheckupServices3();
+            auhc3.textBox106.Text = this.textBox1.Text;
+            auhc3.textBox105.Text = this.textBox2.Text;
+            auhc3.textBox107.Text = this.textBox3.Text;
+            auhc3.id = per.id;//祖
+            auhc3.textBox108.Text = per.id;
+            auhc3.Show();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            bean.physical_examination_recordBean per = new bean.physical_examination_recordBean();
+
+            if (this.radioButton39.Checked == true) { per.health_evaluation = this.radioButton39.Tag.ToString(); };
+            if (this.radioButton40.Checked == true)
+            {
+                per.health_evaluation = this.radioButton40.Tag.ToString();
+                per.abnormal1 = this.textBox48.Text;
+                per.abnormal2 = this.textBox29.Text;
+                per.abnormal3 = this.textBox31.Text;
+                per.abnormal4 = this.textBox33.Text;
+            };
+
+            foreach (Control ctr in this.panel2.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.health_guidance += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.health_guidance != null && per.health_guidance != "")
+            {
+                per.health_guidance = per.health_guidance.Substring(1);
+            }
+
+            foreach (Control ctr in this.panel3.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.danger_controlling += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.danger_controlling != null && per.danger_controlling != "")
+            {
+                per.danger_controlling = per.danger_controlling.Substring(1);
+            }
+            if (checkBox8.Checked)
+            {
+                per.target_weight = this.textBox37.Text;
+            }
+            if (checkBox9.Checked)
+            {
+                per.advise_bacterin = this.textBox39.Text;
+            }
+            if (checkBox10.Checked)
+            {
+                per.danger_controlling_other = this.textBox40.Text;
+            }
+            per.healthAdvice = this.richTextBox1.Text;
+            if (per.healthAdvice == null || "".Equals(per.healthAdvice))
+            {
+                MessageBox.Show("健康建议不能为空!"); return;
+            }
+            per.aichive_no = this.textBox1.Text;
+            per.bar_code = this.textBox2.Text;
+            per.id_number = this.textBox3.Text;
+            per.id = this.textBox4.Text;
+            bool isfalse = hcd.addPhysicalExaminationRecord4(per, goodsList, goodsListym);
+            this.Close();
+            aUhealthcheckupServices1 auhc1 = new aUhealthcheckupServices1();
+            auhc1.textBox2.Text = this.textBox1.Text;
+            auhc1.textBox118.Text = this.textBox2.Text;
+            auhc1.textBox120.Text = per.id;
+            auhc1.id = per.id;//祖
+            auhc1.textBox119.Text = this.textBox3.Text;
+            auhc1.Show();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            bean.physical_examination_recordBean per = new bean.physical_examination_recordBean();
+
+            if (this.radioButton39.Checked == true) { per.health_evaluation = this.radioButton39.Tag.ToString(); };
+            if (this.radioButton40.Checked == true)
+            {
+                per.health_evaluation = this.radioButton40.Tag.ToString();
+                per.abnormal1 = this.textBox48.Text;
+                per.abnormal2 = this.textBox29.Text;
+                per.abnormal3 = this.textBox31.Text;
+                per.abnormal4 = this.textBox33.Text;
+            };
+
+            foreach (Control ctr in this.panel2.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.health_guidance += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.health_guidance != null && per.health_guidance != "")
+            {
+                per.health_guidance = per.health_guidance.Substring(1);
+            }
+
+            foreach (Control ctr in this.panel3.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.danger_controlling += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.danger_controlling != null && per.danger_controlling != "")
+            {
+                per.danger_controlling = per.danger_controlling.Substring(1);
+            }
+            if (checkBox8.Checked)
+            {
+                per.target_weight = this.textBox37.Text;
+            }
+            if (checkBox9.Checked)
+            {
+                per.advise_bacterin = this.textBox39.Text;
+            }
+            if (checkBox10.Checked)
+            {
+                per.danger_controlling_other = this.textBox40.Text;
+            }
+            per.healthAdvice = this.richTextBox1.Text;
+            if (per.healthAdvice == null || "".Equals(per.healthAdvice))
+            {
+                MessageBox.Show("健康建议不能为空!"); return;
+            }
+            per.aichive_no = this.textBox1.Text;
+            per.bar_code = this.textBox2.Text;
+            per.id_number = this.textBox3.Text;
+            per.id = this.textBox4.Text;
+            bool isfalse = hcd.addPhysicalExaminationRecord4(per, goodsList, goodsListym);
+            this.Close();
+            aUhealthcheckupServices2 auhc2 = new aUhealthcheckupServices2();
+            auhc2.textBox95.Text = this.textBox1.Text;
+            auhc2.textBox96.Text = this.textBox2.Text;
+            auhc2.textBox100.Text = per.id;
+            auhc2.id = id;//祖
+            auhc2.textBox99.Text = this.textBox3.Text;
+            auhc2.Show();
         }
     }
 }

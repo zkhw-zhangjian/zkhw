@@ -94,6 +94,11 @@ namespace zkhwClient.view.PublicHealthView
             info.aichive_no = aichive_no;
             info.Cardcode = id_number;
             info.id_number = id_number;
+            info.create_user = frmLogin.userCode;
+            info.create_name = frmLogin.name;
+            info.create_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            info.create_org = frmLogin.organCode;
+            info.create_org_name = frmLogin.organName;
             string issql = @"insert into tuberculosis_info(id,name,archive_no,id_number,Cardcode,visit_date,visit_type,patient_type,sputum_bacterium_type,drug_fast_type,symptom,symptom_other,chemotherapy_plan,`usage`,drugs_type,supervisor_type,supervisor_other,single_room,ventilation,smoke_now,smoke_next,drink_now,drink_next,get_medicine_address,get_medicine_date,medicine_record,medicine_leave,treatment_course,erratically,untoward_effect,further_consultation,insist,habits_customs,intimate_contact,next_visit_date,estimate_doctor,create_user,create_name,create_time,create_org,create_org_name,upload_status) values(@id,@name,@archive_no,@id_number,@Cardcode,@visit_date,@visit_type,@patient_type,@sputum_bacterium_type,@drug_fast_type,@symptom,@symptom_other,@chemotherapy_plan,@usage,@drugs_type,@supervisor_type,@supervisor_other,@single_room,@ventilation,@smoke_now,@smoke_next,@drink_now,@drink_next,@get_medicine_address,@get_medicine_date,@medicine_record,@medicine_leave,@treatment_course,@erratically,@untoward_effect,@further_consultation,@insist,@habits_customs,@intimate_contact,@next_visit_date,@estimate_doctor,@create_user,@create_name,@create_time,@create_org,@create_org_name,@upload_status)";
             MySqlParameter[] args = new MySqlParameter[] {
                     new MySqlParameter("@id",info.id),
@@ -137,7 +142,7 @@ namespace zkhwClient.view.PublicHealthView
                     new MySqlParameter("@create_time", info.create_time),
                     new MySqlParameter("@create_org", info.create_org),
                     new MySqlParameter("@create_org_name", info.create_org_name),
-                    new MySqlParameter("@upload_status", info.upload_status),
+                    new MySqlParameter("@upload_status", "0"),
                     };
             return DbHelperMySQL.ExecuteSql(issql, args);
         }
@@ -151,6 +156,9 @@ namespace zkhwClient.view.PublicHealthView
             info.name = Names;
             info.aichive_no = aichive_no;
             info.Cardcode = id_number;
+            info.update_user= frmLogin.userCode;
+            info.update_name=frmLogin.name;
+            info.update_time= DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string issql = @"update tuberculosis_info set visit_date=@visit_date,visit_type=@visit_type,patient_type=@patient_type,sputum_bacterium_type=@sputum_bacterium_type,drug_fast_type=@drug_fast_type,symptom=@symptom,symptom_other=@symptom_other,chemotherapy_plan=@chemotherapy_plan,`usage`=@usage,drugs_type=@drugs_type,supervisor_type=@supervisor_type,supervisor_other=@supervisor_other,single_room=@single_room,ventilation=@ventilation,smoke_now=@smoke_now,smoke_next=@smoke_next,drink_now=@drink_now,drink_next=@drink_next,get_medicine_address=@get_medicine_address,get_medicine_date=@get_medicine_date,medicine_record=@medicine_record,medicine_leave=@medicine_leave,treatment_course=@treatment_course,erratically=@erratically,untoward_effect=@untoward_effect,further_consultation=@further_consultation,insist=@insist,habits_customs=@habits_customs,intimate_contact=@intimate_contact,next_visit_date=@next_visit_date,estimate_doctor=@estimate_doctor,update_user=@update_user,update_name=@update_name,update_time=@update_time where name=@name and archive_no=@archive_no and Cardcode=@Cardcode";
             MySqlParameter[] args = new MySqlParameter[] {
                     new MySqlParameter("@name", info.name),
@@ -672,10 +680,6 @@ namespace zkhwClient.view.PublicHealthView
             }
         }
 
-        private void addtuberculosisPatientServices_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 
     /// <summary>

@@ -169,8 +169,8 @@ namespace zkhwClient.view.setting
                         }
                     }
                 }
-                
-                    //同步云平台家医团队信息
+
+                //同步云平台家医团队信息
                 //    DataTable dtTeams = logindao.checkTeanInfoBycode(xzcode);
                 //    if (dtTeams.Rows.Count > 0)
                 //    {
@@ -233,115 +233,118 @@ namespace zkhwClient.view.setting
                 //            this.progressBar1.Value = 40;
                 //}
 
-                    //同步个人档案信息
-                    DataTable dtresident = logindao.checkResidentBycode(xzcode);
-                    if (dtresident.Rows.Count > 0)
+                //同步个人档案信息
+                DataTable dtresident = logindao.checkResidentBycode(xzcode);
+                if (dtresident.Rows.Count > 0)
+                {
+                    List<resident_base_infoBean> listresident = new List<resident_base_infoBean>();
+                    int insert_num = 0;
+                    for (int i = 0; i < dtresident.Rows.Count; i++)
                     {
-                        List<resident_base_infoBean> listresident = new List<resident_base_infoBean>();
-                        int insert_num = 0;
-                        for (int i = 0; i < dtresident.Rows.Count; i++)
+                        resident = new resident_base_infoBean();
+                        resident.id = dtresident.Rows[i]["id"].ToString();
+                        resident.archive_no = dtresident.Rows[i]["archive_no"].ToString();
+                        resident.pb_archive = dtresident.Rows[i]["pb_archive"].ToString();
+                        resident.name = dtresident.Rows[i]["name"].ToString();
+                        resident.sex = dtresident.Rows[i]["sex"].ToString();
+                        resident.birthday = dtresident.Rows[i]["birthday"].ToString();
+                        string age = dtresident.Rows[i]["age"].ToString();
+                        resident.age = age == null || "".Equals(age) ? "0" : age;
+                        resident.id_number = dtresident.Rows[i]["id_number"].ToString();
+                        resident.CardPic = dtresident.Rows[i]["card_pic"].ToString();
+                        resident.company = dtresident.Rows[i]["company"].ToString();
+                        resident.phone = dtresident.Rows[i]["phone"].ToString();
+                        resident.link_name = dtresident.Rows[i]["link_name"].ToString();
+                        resident.link_phone = dtresident.Rows[i]["link_phone"].ToString();
+                        resident.resident_type = dtresident.Rows[i]["resident_type"].ToString();
+                        resident.register_address = dtresident.Rows[i]["register_address"].ToString();
+                        resident.residence_address = dtresident.Rows[i]["residence_address"].ToString();
+                        resident.nation = dtresident.Rows[i]["nation"].ToString();
+                        resident.blood_group = dtresident.Rows[i]["blood_group"].ToString();
+                        resident.blood_rh = dtresident.Rows[i]["blood_rh"].ToString();
+                        resident.education = dtresident.Rows[i]["education"].ToString();
+                        resident.profession = dtresident.Rows[i]["profession"].ToString();
+                        resident.marital_status = dtresident.Rows[i]["marital_status"].ToString();
+                        resident.pay_type = dtresident.Rows[i]["pay_type"].ToString();
+                        resident.pay_other = dtresident.Rows[i]["pay_other"].ToString();
+                        resident.drug_allergy = dtresident.Rows[i]["drug_allergy"].ToString();
+                        resident.allergy_other = dtresident.Rows[i]["allergy_other"].ToString();
+                        resident.exposure = dtresident.Rows[i]["exposure"].ToString();
+                        resident.disease_other = dtresident.Rows[i]["disease_other"].ToString();
+                        string is_hypertension = dtresident.Rows[i]["is_hypertension"].ToString();
+                        resident.is_hypertension = is_hypertension == null || "".Equals(is_hypertension) ? "0" : is_hypertension;
+                        string is_diabetes = dtresident.Rows[i]["is_diabetes"].ToString();
+                        resident.is_diabetes = is_diabetes == null || "".Equals(is_diabetes) ? "0" : is_diabetes;
+                        string is_psychosis = dtresident.Rows[i]["is_psychosis"].ToString();
+                        resident.is_psychosis = is_psychosis == null || "".Equals(is_psychosis) ? "0" : is_psychosis;
+                        string is_tuberculosis = dtresident.Rows[i]["is_tuberculosis"].ToString();
+                        resident.is_tuberculosis = is_tuberculosis == null || "".Equals(is_tuberculosis) ? "0" : is_tuberculosis;
+                        string is_heredity = dtresident.Rows[i]["is_heredity"].ToString();
+                        resident.is_heredity = is_heredity == null || "".Equals(is_heredity) ? "0" : is_heredity;
+                        resident.heredity_name = dtresident.Rows[i]["heredity_name"].ToString();
+                        resident.is_deformity = dtresident.Rows[i]["is_deformity"].ToString();
+                        resident.deformity_name = dtresident.Rows[i]["deformity_name"].ToString();
+                        resident.is_poor = dtresident.Rows[i]["is_poor"].ToString();
+                        resident.kitchen = dtresident.Rows[i]["kitchen"].ToString();
+                        resident.fuel = dtresident.Rows[i]["fuel"].ToString();
+                        resident.other_fuel = dtresident.Rows[i]["other_fuel"].ToString();
+                        resident.drink = dtresident.Rows[i]["drink"].ToString();
+                        resident.other_drink = dtresident.Rows[i]["other_drink"].ToString();
+                        resident.toilet = dtresident.Rows[i]["toilet"].ToString();
+                        resident.poultry = dtresident.Rows[i]["poultry"].ToString();
+                        resident.medical_code = dtresident.Rows[i]["medical_code"].ToString();
+                        resident.photo_code = dtresident.Rows[i]["photo_code"].ToString();
+                        resident.aichive_org = dtresident.Rows[i]["aichive_org"].ToString();
+                        resident.doctor_id = dtresident.Rows[i]["doctor_id"].ToString();
+                        resident.doctor_name = dtresident.Rows[i]["doctor_name"].ToString();
+                        string is_signing = dtresident.Rows[i]["is_signing"].ToString();
+                        resident.is_signing = is_signing == null || "".Equals(is_signing) ? "0" : is_signing;
+                        string is_synchro = dtresident.Rows[i]["is_synchro"].ToString();
+                        resident.is_synchro = is_synchro == null || "".Equals(is_synchro) ? "0" : is_synchro;
+                        resident.synchro_result = dtresident.Rows[i]["synchro_result"].ToString();
+                        resident.synchro_time = dtresident.Rows[i]["synchro_time"].ToString();
+                        resident.province_code = dtresident.Rows[i]["province_code"].ToString();
+                        resident.province_name = dtresident.Rows[i]["province_name"].ToString();
+                        resident.city_code = dtresident.Rows[i]["city_code"].ToString();
+                        resident.city_name = dtresident.Rows[i]["city_name"].ToString();
+                        resident.county_code = dtresident.Rows[i]["county_code"].ToString();
+                        resident.county_name = dtresident.Rows[i]["county_name"].ToString();
+                        resident.towns_code = dtresident.Rows[i]["towns_code"].ToString();
+                        resident.towns_name = dtresident.Rows[i]["towns_name"].ToString();
+                        resident.village_code = dtresident.Rows[i]["village_code"].ToString();
+                        resident.village_name = dtresident.Rows[i]["village_name"].ToString();
+                        resident.status = dtresident.Rows[i]["status"].ToString();
+                        resident.remark = dtresident.Rows[i]["remark"].ToString();
+                        resident.create_user = dtresident.Rows[i]["create_user"].ToString();
+                        resident.create_name = dtresident.Rows[i]["create_name"].ToString();
+                        string create_time = dtresident.Rows[i]["create_time"].ToString();
+                        resident.create_time = create_time == null || "".Equals(create_time) ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") : Convert.ToDateTime(create_time).ToString("yyyy-MM-dd HH:mm:ss");
+                        resident.create_org = dtresident.Rows[i]["create_org"].ToString();
+                        resident.create_org_name = dtresident.Rows[i]["create_org_name"].ToString();
+                        resident.update_user = dtresident.Rows[i]["update_user"].ToString();
+                        resident.update_name = dtresident.Rows[i]["update_name"].ToString();
+                        string update_time = dtresident.Rows[i]["update_time"].ToString();
+                        resident.update_time = update_time == null || "".Equals(update_time) ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") : Convert.ToDateTime(update_time).ToString("yyyy-MM-dd HH:mm:ss");
+                        listresident.Add(resident);
+                        insert_num += 1;
+                        if (insert_num % 1000 == 0 || (i == dtresident.Rows.Count - 1 && listresident.Count > 0))
                         {
-                            resident = new resident_base_infoBean();
-                            resident.id = dtresident.Rows[i]["id"].ToString();
-                            resident.archive_no = dtresident.Rows[i]["archive_no"].ToString();
-                            resident.pb_archive = dtresident.Rows[i]["pb_archive"].ToString();
-                            resident.name = dtresident.Rows[i]["name"].ToString();
-                            resident.sex = dtresident.Rows[i]["sex"].ToString();
-                            resident.birthday = dtresident.Rows[i]["birthday"].ToString();
-                            //string age = dtresident.Rows[i]["age"].ToString();
-                            //resident.age = age == null || "".Equals(age) ? null : age;
-                            resident.id_number = dtresident.Rows[i]["id_number"].ToString();
-                            resident.CardPic = dtresident.Rows[i]["card_pic"].ToString();
-                            resident.company = dtresident.Rows[i]["company"].ToString();
-                            resident.phone = dtresident.Rows[i]["phone"].ToString();
-                            resident.link_name = dtresident.Rows[i]["link_name"].ToString();
-                            resident.link_phone = dtresident.Rows[i]["link_phone"].ToString();
-                            resident.resident_type = dtresident.Rows[i]["resident_type"].ToString();
-                            resident.register_address = dtresident.Rows[i]["register_address"].ToString();
-                            resident.residence_address = dtresident.Rows[i]["residence_address"].ToString();
-                            resident.nation = dtresident.Rows[i]["nation"].ToString();
-                            resident.blood_group = dtresident.Rows[i]["blood_group"].ToString();
-                            resident.blood_rh = dtresident.Rows[i]["blood_rh"].ToString();
-                            resident.education = dtresident.Rows[i]["education"].ToString();
-                            resident.profession = dtresident.Rows[i]["profession"].ToString();
-                            resident.marital_status = dtresident.Rows[i]["marital_status"].ToString();
-                            resident.pay_type = dtresident.Rows[i]["pay_type"].ToString();
-                            resident.pay_other = dtresident.Rows[i]["pay_other"].ToString();
-                            resident.drug_allergy = dtresident.Rows[i]["drug_allergy"].ToString();
-                            resident.allergy_other = dtresident.Rows[i]["allergy_other"].ToString();
-                            resident.exposure = dtresident.Rows[i]["exposure"].ToString();
-                            resident.disease_other = dtresident.Rows[i]["disease_other"].ToString();
-                            string is_hypertension=dtresident.Rows[i]["is_hypertension"].ToString();
-                            resident.is_hypertension = is_hypertension == null ||"".Equals(is_hypertension)?"0": is_hypertension;
-                            string is_diabetes = dtresident.Rows[i]["is_diabetes"].ToString();
-                            resident.is_diabetes = is_diabetes == null || "".Equals(is_diabetes) ? "0" : is_diabetes;
-                            string is_psychosis = dtresident.Rows[i]["is_psychosis"].ToString();
-                            resident.is_psychosis = is_psychosis == null || "".Equals(is_psychosis) ? "0" : is_psychosis;
-                            string is_tuberculosis = dtresident.Rows[i]["is_tuberculosis"].ToString();
-                            resident.is_tuberculosis = is_tuberculosis == null || "".Equals(is_tuberculosis) ? "0" : is_tuberculosis;
-                            string is_heredity = dtresident.Rows[i]["is_heredity"].ToString();
-                            resident.is_heredity = is_heredity == null || "".Equals(is_heredity) ? "0" : is_heredity;
-                            resident.heredity_name = dtresident.Rows[i]["heredity_name"].ToString();
-                            resident.is_deformity = dtresident.Rows[i]["is_deformity"].ToString();
-                            resident.deformity_name = dtresident.Rows[i]["deformity_name"].ToString();
-                            resident.is_poor = dtresident.Rows[i]["is_poor"].ToString();
-                            resident.kitchen = dtresident.Rows[i]["kitchen"].ToString();
-                            resident.fuel = dtresident.Rows[i]["fuel"].ToString();
-                            resident.other_fuel = dtresident.Rows[i]["other_fuel"].ToString();
-                            resident.drink = dtresident.Rows[i]["drink"].ToString();
-                            resident.other_drink = dtresident.Rows[i]["other_drink"].ToString();
-                            resident.toilet = dtresident.Rows[i]["toilet"].ToString();
-                            resident.poultry = dtresident.Rows[i]["poultry"].ToString();
-                            resident.medical_code = dtresident.Rows[i]["medical_code"].ToString();
-                            resident.photo_code = dtresident.Rows[i]["photo_code"].ToString();
-                            resident.aichive_org = dtresident.Rows[i]["aichive_org"].ToString();
-                            resident.doctor_name = dtresident.Rows[i]["doctor_name"].ToString();
-                            string is_signing = dtresident.Rows[i]["is_signing"].ToString();
-                            resident.is_signing = is_signing == null || "".Equals(is_signing) ? "0" : is_signing;
-                            string is_synchro = dtresident.Rows[i]["is_synchro"].ToString();
-                            resident.is_synchro = is_synchro == null || "".Equals(is_synchro) ? "0" : is_synchro;
-                            resident.synchro_result = dtresident.Rows[i]["synchro_result"].ToString();
-                            resident.synchro_time = dtresident.Rows[i]["synchro_time"].ToString();
-                            resident.province_code = dtresident.Rows[i]["province_code"].ToString();
-                            resident.province_name = dtresident.Rows[i]["province_name"].ToString();
-                            resident.city_code = dtresident.Rows[i]["city_code"].ToString();
-                            resident.city_name = dtresident.Rows[i]["city_name"].ToString();
-                            resident.county_code = dtresident.Rows[i]["county_code"].ToString();
-                            resident.county_name = dtresident.Rows[i]["county_name"].ToString();
-                            resident.towns_code = dtresident.Rows[i]["towns_code"].ToString();
-                            resident.towns_name = dtresident.Rows[i]["towns_name"].ToString();
-                            resident.village_code = dtresident.Rows[i]["village_code"].ToString();
-                            resident.village_name = dtresident.Rows[i]["village_name"].ToString();
-                            resident.status = dtresident.Rows[i]["status"].ToString();
-                            resident.remark = dtresident.Rows[i]["remark"].ToString();
-                            resident.create_user = dtresident.Rows[i]["create_user"].ToString();
-                            resident.create_name = dtresident.Rows[i]["create_name"].ToString();
-                            string create_time = dtresident.Rows[i]["create_time"].ToString();
-                            resident.create_time = create_time == null || "".Equals(create_time) ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") : Convert.ToDateTime(create_time).ToString("yyyy-MM-dd HH:mm:ss");
-                            resident.create_org = dtresident.Rows[i]["create_org"].ToString();
-                            resident.create_org_name = dtresident.Rows[i]["create_org_name"].ToString();
-                            resident.update_user = dtresident.Rows[i]["update_user"].ToString();
-                            resident.update_name = dtresident.Rows[i]["update_name"].ToString();
-                            string update_time = dtresident.Rows[i]["update_time"].ToString();
-                            resident.update_time = update_time == null || "".Equals(update_time) ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") : Convert.ToDateTime(update_time).ToString("yyyy-MM-dd HH:mm:ss");
-                            listresident.Add(resident);
-                            insert_num += 1;
-                            if (insert_num%1000==0 || (i == dtresident.Rows.Count - 1 && listresident.Count > 0)) {
-                                bool bl= logindao.addResidents(listresident);
-                                if (bl) {
-                                    listresident.Clear();
-                                    insert_num = 0;
-                                }
+                            bool bl = logindao.addResidents(listresident);
+                            if (bl)
+                            {
+                                listresident.Clear();
+                                insert_num = 0;
+                            }
                         }
                     }
                 }
                 this.progressBar1.Value = 100;
                 MessageBox.Show("数据同步已完成");
             }
-                    else
-                    {
-                        MessageBox.Show("区域选择不完整！");
-                    }
+            else
+            {
+                MessageBox.Show("区域选择不完整！");
+            }
         }
         //根据区域编号，添加用户信息
         private void addUsersBycode(string organcode)
@@ -374,7 +377,7 @@ namespace zkhwClient.view.setting
                     string status = dtUsers.Rows[i]["status"].ToString();
                     user.status = status == null || "".Equals(status) ? "0" : status;
                     string is_delete = dtUsers.Rows[i]["is_delete"].ToString();
-                    user.is_delete = is_delete == null || "".Equals(is_delete) ? "0" : status;
+                    user.is_delete = is_delete == null || "".Equals(is_delete) ? "0" : is_delete;
                     string create_time = dtUsers.Rows[i]["create_time"].ToString();
                     user.create_time = create_time == "" || "".Equals(create_time) ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") : Convert.ToDateTime(create_time).ToString("yyyy-MM-dd HH:mm:ss");
                     string update_time = dtUsers.Rows[i]["update_time"].ToString();

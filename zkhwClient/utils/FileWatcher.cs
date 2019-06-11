@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Data;
 using MySql.Data.MySqlClient;
 using zkhwClient.dao;
+using zkhwClient.view.setting;
 
 namespace zkhwClient
 {
@@ -254,20 +255,25 @@ namespace zkhwClient
                         string advicetexts = advicetext.InnerText;
                         jkInfoDao jkInfoDao = new jkInfoDao();
                         DataTable data = jkInfoDao.selectjkInfoBybarcode(ids);
-                        if (data != null && data.Rows.Count > 0)
+                    if (data != null && data.Rows.Count > 0)
+                    {
+                        string aichive_no = data.Rows[0]["aichive_no"].ToString();
+                        string barcode = data.Rows[0]["bar_code"].ToString();
+                        DataTable dtnum = jkInfoDao.queryChongfuXdtData(aichive_no, barcode);
+                        advicetexts = advicetexts.Replace("在不知道病人的性别/年龄情况下做的诊断结论", "").Replace("---", "").Replace("***","");
+                        string issql = "";
+                        MySqlParameter[] args = null;
+                        if (dtnum.Rows.Count < 1)
                         {
-                            string aichive_no = data.Rows[0]["aichive_no"].ToString();
-                            string barcode = data.Rows[0]["bar_code"].ToString();
-                            DataTable dtnum= jkInfoDao.queryChongfuXdtData(aichive_no, barcode);
-                            if (dtnum.Rows.Count>0) { return; }
-                            string issql = "insert into zkhw_tj_xdt(id,aichive_no,id_number,bar_code,XdtResult,XdtDesc,PR,QRS,QT,QTc,hr,p,pqrs,t,rv5,sv1,baseline_drift,myoelectricity,frequency,createtime,imageUrl) values(@id,@aichive_no,@id_number,@bar_code,@XdtResult,@XdtDesc,@PR,@QRS,@QT,@QTc,@hr,@p,@pqrs,@t,@rv5,@sv1,@baseline_drift,@myoelectricity,@frequency,@createtime,@imageUrl)";
-                            MySqlParameter[] args = new MySqlParameter[] {
+                            issql = "insert into zkhw_tj_xdt(id,aichive_no,id_number,bar_code,XdtResult,XdtDesc,XdtDoctor,PR,QRS,QT,QTc,hr,p,pqrs,t,rv5,sv1,baseline_drift,myoelectricity,frequency,createtime,imageUrl) values(@id,@aichive_no,@id_number,@bar_code,@XdtResult,@XdtDesc,@XdtDoctor,@PR,@QRS,@QT,@QTc,@hr,@p,@pqrs,@t,@rv5,@sv1,@baseline_drift,@myoelectricity,@frequency,@createtime,@imageUrl)";
+                            args = new MySqlParameter[] {
                             new MySqlParameter("@id",Result.GetNewId()),
                             new MySqlParameter("@aichive_no", data.Rows[0]["aichive_no"].ToString()),
                             new MySqlParameter("@id_number", data.Rows[0]["id_number"].ToString()),
                             new MySqlParameter("@bar_code", data.Rows[0]["bar_code"].ToString()),
                             new MySqlParameter("@XdtResult", diagnosiss),
                             new MySqlParameter("@XdtDesc", advicetexts),
+                            new MySqlParameter("@XdtDoctor", basicInfoSettings.xdt),
                             new MySqlParameter("@PR", prs),
                             new MySqlParameter("@QRS", qrss),
                             new MySqlParameter("@QT", qt_s),
@@ -284,25 +290,35 @@ namespace zkhwClient
                             new MySqlParameter("@createtime", time),
                             new MySqlParameter("@imageUrl", data.Rows[0]["aichive_no"].ToString()+"_"+ids+".jpg")
                         };
-                        string pName = e.FullPath.Replace("xml","jpg");
+                        }
+                        else {
+                            string imgurl=data.Rows[0]["aichive_no"].ToString() + "_" + ids + ".jpg";
+                            string issql1 = "update zkhw_tj_xdt set XdtResult='"+ diagnosiss + "',XdtDesc='" + advicetexts + "',PR='" + qrs + "',QRS='" + qrss + "',QT='" + qt_s + "',QTc='" + qtcs + "',hr='" + hrs + "',p='" + p_s + "',pqrs='" + qrs_s + "',t='" + ts + "',rv5='" + rv5s + "',sv1='" + sv1s + "',baseline_drift='" + baseline_drifts + "',myoelectricity='" + myoelectricitys + "',frequency='" + frequencys + "',createtime='" + time + "',imageUrl='" + imgurl + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                            DbHelperMySQL.ExecuteSql(issql1);
+                        }
+                        string pName = e.FullPath.Replace("xml", "jpg");
                         FileInfo inf = new FileInfo(pName);
                         if (File.Exists(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString() + "_" + ids + ".jpg"))
                         {
                             File.Delete(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString() + "_" + ids + ".jpg");
                         }
-                        inf.MoveTo(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString()+"_" + ids + ".jpg");
-
-                        if (diagnosiss.IndexOf("正常")>-1)
-                            {
-                                int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='1',cardiogram_img='{ids + ".jpg"}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
-                            }
-                            else
-                            {
-                                int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='2',cardiogram_img='{ids + ".jpg"}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
-                            }
-                            string issqdgbc = "update zkhw_tj_bgdc set XinDian='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                        //inf.MoveTo(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString()+"_" + ids + ".jpg");
+                        inf.CopyTo(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString() + "_" + ids + ".jpg");
+                       
+                        if (advicetexts.IndexOf("正常") > -1)
+                        {
+                            int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='1',cardiogram_img='{ids + ".jpg"}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
+                            string istruedgbc = "update zkhw_tj_bgdc set XinDian='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                            DbHelperMySQL.ExecuteSql(istruedgbc);
+                        }
+                        else
+                        {
+                            int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='2',cardiogram_memo='{advicetexts}',cardiogram_img='{ids + ".jpg"}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
+                            string issqdgbc = "update zkhw_tj_bgdc set XinDian='3' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
                             DbHelperMySQL.ExecuteSql(issqdgbc);
-                            int rue = DbHelperMySQL.ExecuteSql(issql, args);
+                        }
+                        
+                        int rue = DbHelperMySQL.ExecuteSql(issql, args);
                     }
                         #endregion
                     }
@@ -341,11 +357,13 @@ namespace zkhwClient
                     XmlNodeList xNode = doc.SelectNodes("//Report[@Index='图片信息']/图片信息");
                     string id = doc.SelectSingleNode("//Report[@Index='病人信息']/ID").InnerText.Trim();
                     string nam = doc.SelectSingleNode("//Report[@Index='基本信息']/报告名称").InnerText.Trim();
-                    string cs = doc.SelectSingleNode("//Report[@Index='超声诊断']/超声诊断").InnerText;
-                    if (cs.Length > 30)
+                    string cs = doc.SelectSingleNode("//Report[@Index='超声诊断']/超声诊断").InnerText.Trim();
+                    string csresult = "";
+                    if (cs.Length >0)
                     {
+                        cs = cs.Replace("|","").Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", "");
                         int num = cs.IndexOf("诊断结果");
-                        cs.Substring(num, cs.Length-1);
+                        csresult=cs.Substring(num);
                     }
                     string BuPic01 = string.Empty;
                     string BuPic02 = string.Empty;
@@ -358,6 +376,7 @@ namespace zkhwClient
                     Thread.Sleep(5000);
                     string fullPath=e.FullPath.Substring(0, innum + 1);
                         for (int i = 0; i < xNode.Count; i++)
+                        //for (int i = 0; i < 2; i++)
                         {
                             if (i == 0)
                             {
@@ -381,40 +400,43 @@ namespace zkhwClient
                                 }
                                 inf.MoveTo(str + "\\bcImg\\" + BuPic02);
                             }
-                            else if (i == 2)
+                        else if (i == 2)
+                        {
+                            BuPic03 = xNode[i].InnerText;
+                            string pName = fullPath + BuPic03;
+                            FileInfo inf = new FileInfo(pName);
+                            if (File.Exists(str + "\\bcImg\\" + BuPic03))
                             {
-                                BuPic03 = xNode[i].InnerText;
-                                string pName = fullPath + BuPic03;
-                                FileInfo inf = new FileInfo(pName);
-                                if (File.Exists(str + "\\bcImg\\" + BuPic03))
-                                {
-                                    File.Delete(str + "\\bcImg\\" + BuPic03);
-                                }
-                                inf.MoveTo(str + "\\bcImg\\" + BuPic03);
+                                File.Delete(str + "\\bcImg\\" + BuPic03);
                             }
-                            else if (i == 3)
+                            inf.MoveTo(str + "\\bcImg\\" + BuPic03);
+                        }
+                        else if (i == 3)
+                        {
+                            BuPic04 = xNode[i].InnerText;
+                            string pName = fullPath + BuPic04;
+                            FileInfo inf = new FileInfo(pName);
+                            if (File.Exists(str + "\\bcImg\\" + BuPic04))
                             {
-                                BuPic04 = xNode[i].InnerText;
-                                string pName = fullPath + BuPic04;
-                                FileInfo inf = new FileInfo(pName);
-                                if (File.Exists(str + "\\bcImg\\" + BuPic04))
-                                {
-                                    File.Delete(str + "\\bcImg\\" + BuPic04);
-                                }
-                                inf.MoveTo(str + "\\bcImg\\" + BuPic04);
+                                File.Delete(str + "\\bcImg\\" + BuPic04);
                             }
-                      }
+                            inf.MoveTo(str + "\\bcImg\\" + BuPic04);
+                        }
+                    }
                     }
                     jkInfoDao jkInfoDao = new jkInfoDao();
                     DataTable data = jkInfoDao.selectjkInfoBybarcode(id);
-                    if (data != null && data.Rows.Count > 0)
+                if (data != null && data.Rows.Count > 0)
+                {
+                    string aichive_no = data.Rows[0]["aichive_no"].ToString();
+                    string barcode = data.Rows[0]["bar_code"].ToString();
+                    DataTable dtnum = jkInfoDao.queryChongfuBcData(aichive_no, barcode);
+                    string issql = "";
+                    MySqlParameter[] args = null;
+                    if (dtnum.Rows.Count < 1)
                     {
-                        string aichive_no = data.Rows[0]["aichive_no"].ToString();
-                        string barcode = data.Rows[0]["bar_code"].ToString();
-                        DataTable dtnum = jkInfoDao.queryChongfuBcData(aichive_no, barcode);
-                        if (dtnum.Rows.Count > 0) { return; }
-                        string issql = "insert into zkhw_tj_bc(id,aichive_no,id_number,bar_code,FubuResult,FubuBC,BuPic01,BuPic02,BuPic03,BuPic04,createtime) values(@id,@aichive_no,@id_number,@bar_code,@FubuResult,@FubuBC,@BuPic01,@BuPic02,@BuPic03,@BuPic04,@createtime)";
-                        MySqlParameter[] args = new MySqlParameter[] {
+                        issql = "insert into zkhw_tj_bc(id,aichive_no,id_number,bar_code,FubuResult,FubuBC,BuPic01,BuPic02,createtime,ZrysBC) values(@id,@aichive_no,@id_number,@bar_code,@FubuResult,@FubuBC,@BuPic01,@BuPic02,@createtime,@ZrysBC)";
+                        args = new MySqlParameter[] {
                         new MySqlParameter("@id",Result.GetNewId()),
                         new MySqlParameter("@aichive_no", data.Rows[0]["aichive_no"].ToString()),
                         new MySqlParameter("@id_number", data.Rows[0]["id_number"].ToString()),
@@ -423,19 +445,31 @@ namespace zkhwClient
                         new MySqlParameter("@FubuBC", nam),
                         new MySqlParameter("@BuPic01", BuPic01),
                         new MySqlParameter("@BuPic02", BuPic02),
-                        new MySqlParameter("@BuPic03", BuPic03),
-                        new MySqlParameter("@BuPic04", BuPic04),
-                        new MySqlParameter("@createtime", DateTime.Now)
+                        new MySqlParameter("@createtime", DateTime.Now),
+                        new MySqlParameter("@ZrysBC", basicInfoSettings.bc)
                     };
-                        int tup = 0;
-                        if (!string.IsNullOrWhiteSpace(BuPic01))
-                        {
-                            tup = 1;
-                        }
-                        int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='1',abdomenB_img='{tup}',other_b='1',otherb_img='{tup}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
-                        int rue = DbHelperMySQL.ExecuteSql(issql, args);
+                    }
+                    else {
+                        string issql1 = "update zkhw_tj_bc set FubuResult= '" + cs + "',FubuBC= '" + nam + "',BuPic01= '" + BuPic01 + "',BuPic02= '" + BuPic02 + "' where aichive_no = '" + data.Rows[0]["aichive_no"].ToString() + "' and bar_code='" + data.Rows[0]["bar_code"].ToString() + "'";
+                        DbHelperMySQL.ExecuteSql(issql1);
+                    }
+                    int tup = 0;
+                    if (!string.IsNullOrWhiteSpace(BuPic01))
+                    {
+                        tup = 1;
+                    }
+                    if (cs.IndexOf("未见异常") > -1|| cs.IndexOf("未见明显异常") > -1)
+                    {
+                        int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='1',abdomenB_img='{tup}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'");
                         string issqdgbc = "update zkhw_tj_bgdc set BChao='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
                         DbHelperMySQL.ExecuteSql(issqdgbc);
+                    }
+                    else {
+                        int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='2',ultrasound_memo='{csresult}',abdomenB_img='{tup}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'");
+                        string issqdgbc = "update zkhw_tj_bgdc set BChao='3' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                        DbHelperMySQL.ExecuteSql(issqdgbc);
+                    }
+                    int rue = DbHelperMySQL.ExecuteSql(issql, args);
                     string filepath = e.FullPath.Substring(0, innum);
                     DeleteDir(filepath);
                     //插入数据库
@@ -444,9 +478,11 @@ namespace zkhwClient
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message+ "\n"+ex.StackTrace);
-                    // RegisterAoupTrackLog(string.Format("监听异常！异常信息：{0}", ex.Message));
-                }
+                    using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
+                    {
+                        sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + ex.Message + "\r\n" + ex.StackTrace);
+                    }
+            }
            // }
         }
         public static void DeleteDir(string file)

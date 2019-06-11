@@ -18,9 +18,9 @@ namespace zkhwClient.service
             return hPD.deletetcmHealthServices(id);
         }
 
-        public DataTable checkTcmHealthServicesByno(string code)
+        public DataTable checkTcmHealthServicesByno(string code,string idnum)
         {
-            return hPD.checkTcmHealthServicesByno(code);
+            return hPD.checkTcmHealthServicesByno(code,idnum);
         }
     }
 }

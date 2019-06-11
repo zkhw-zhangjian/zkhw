@@ -39,9 +39,9 @@ namespace zkhwClient.dao
             //设置监听的路径
             watcher.Path = StrWarcherPath;
             //注册创建文件或目录时的监听事件
-            //watcher.Created += new FileSystemEventHandler(watch_created);
+            watcher.Created += new FileSystemEventHandler(watch_created);
             //注册当指定目录的文件或者目录发生改变的时候的监听事件
-            watcher.Changed += new FileSystemEventHandler(watch_created);
+            //watcher.Changed += new FileSystemEventHandler(watch_created);
             //注册当删除目录的文件或者目录的时候的监听事件
             //watcher.Deleted += new FileSystemEventHandler(watch_deleted);
             //当指定目录的文件或者目录发生重命名的时候的监听事件

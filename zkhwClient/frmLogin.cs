@@ -14,6 +14,7 @@ namespace zkhwClient
 {
     public partial class frmLogin : Form
     {
+        public static string loginname = null;
         public static string name = null;
         public static string passw = null;
         public static string dataPassw = "";
@@ -23,7 +24,7 @@ namespace zkhwClient
         public static string userCode = null;
         service.loginLogService lls = new service.loginLogService();
         service.UserService us = new service.UserService();
-        UserDao udao =new UserDao();
+        UserDao udao = new UserDao();
         XmlDocument xmlDoc = new XmlDocument();
         tjcheckDao tjdao = new tjcheckDao();
         jkInfoDao jkdao = new jkInfoDao();
@@ -47,8 +48,9 @@ namespace zkhwClient
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
+            loginname=this.comboBox1.Text;
             passw = this.txtPassword.Text;
-            string md5passw= Md5.HashString(passw);
+            string md5passw = Md5.HashString(passw);
             //用户登录 获取用户的账号和密码并判断          
             //DataTable ret = service.UserService.UserExists(comboBox1.Text, txtPassword.Text);
             DataTable ret = service.UserService.UserExists(comboBox1.Text, md5passw);
@@ -58,9 +60,10 @@ namespace zkhwClient
                 if (!"admin".Equals(this.comboBox1.Text))
                 {
                     organCode = ret.Rows[0]["organ_code"].ToString();
+
                     organName = udao.checkOrganNameBycode(organCode).Rows[0]["organ_name"].ToString();
                 }
-                name = this.comboBox1.Text;
+                name = ret.Rows[0]["user_name"].ToString();
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = name;
                 lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -101,10 +104,44 @@ namespace zkhwClient
             this.comboBox1.DataSource = dd;//绑定数据源
             this.comboBox1.DisplayMember = "username";//显示给用户的数据集表项
             this.comboBox1.ValueMember = "username";//操作时获取的值
-
-            //监听心电图和B超
+            //删除文件夹
+            //DeleteDir1(@"E:\Examine\xdt");
+            //DeleteDir1(@"E:\Examine\bc");
+            ////监听心电图和B超
             //FSWControl.WatcherStrat(@"E:\Examine\xdt", "*.xml", true, true);
             //FSWControl.WatcherStratBchao(@"E:\Examine\bc", "*.xml", true, true);
+        }
+       
+        /// 删除文件夹及其内容
+        /// </summary>
+        /// <param name="dir"></param>
+        public void DeleteDir1(string dir)
+        {
+            try
+            {
+                //去除文件夹和子文件的只读属性
+                //去除文件夹的只读属性
+                System.IO.DirectoryInfo fileInfo = new DirectoryInfo(dir);
+                fileInfo.Attributes = FileAttributes.Normal & FileAttributes.Directory;
+                //去除文件的只读属性
+                System.IO.File.SetAttributes(dir, System.IO.FileAttributes.Normal);
+                //判断文件夹是否还存在
+
+                if (Directory.Exists(dir))
+                {
+                    System.IO.DirectoryInfo directory = new System.IO.DirectoryInfo(dir);
+                    Empty1(directory);
+                }
+            }
+            catch// 异常处理
+            {
+
+            }
+        }
+        public void Empty1(System.IO.DirectoryInfo directory)
+        {
+            foreach (FileInfo file in directory.GetFiles()) file.Delete();
+            foreach (System.IO.DirectoryInfo subDirectory in directory.GetDirectories()) subDirectory.Delete(true);
         }
     }
 }

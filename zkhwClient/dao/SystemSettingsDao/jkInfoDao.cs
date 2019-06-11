@@ -15,8 +15,7 @@ namespace zkhwClient.dao
         {
             DataSet ds = new DataSet();
             string sql = "select k.aichive_no,k.id_number,k.bar_code from zkhw_tj_jk k where k.bar_code='" + barcode + "' order by k.createtime desc limit 1";
-            ds = DbHelperMySQL.Query(sql);
-            
+            ds = DbHelperMySQL.Query(sql);          
             return ds.Tables[0];
         }
         //登记界面右侧 查询统计男女各多少人功能
@@ -52,7 +51,7 @@ namespace zkhwClient.dao
         public DataTable querytjjdTopdf(string xcuncode, string time)
         {
             DataSet ds = new DataSet();
-            string sql = "select name,sex,birthday,(case when BChao>='1' and XinDian>='1' and ShengHua>='1' and XueChangGui>='1' and NiaoChangGui>='1' and XueYa>='1' and Shengaotizhong>='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
+            string sql = "select name,(case sex when '1' then '男' when '2' then '女' ELSE ''END) sex,birthday,(case when BChao>='1' and XinDian>='1' and ShengHua>='1' and XueChangGui>='1' and NiaoChangGui>='1' and XueYa>='1' and Shengaotizhong>='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
             if (xcuncode != null && !"".Equals(xcuncode))
             {
                 sql += " and area_duns='" + xcuncode + "'";

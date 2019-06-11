@@ -255,7 +255,7 @@ namespace zkhwClient.view.updateTjResult
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            if (flag) {
+            //if (flag) {
                 string ALT= this.textBox5.Text;
                 string AST = this.textBox6.Text;
                 string TBIL = this.textBox7.Text;
@@ -286,7 +286,7 @@ namespace zkhwClient.view.updateTjResult
                 string LDHL = this.textBox32.Text;
                 string HBDH = this.textBox35.Text;
                 string aAMY = this.textBox34.Text;
-                bool istrue= tjdao.updateShenghuaInfo(aichive_no, bar_code, ALT, AST, TBIL, DBIL, CREA, UREA, GLU, TG, CHO, HDLC, LDLC, ALB, UA, HCY, AFP, CEA, Ka, Na, TP, ALP, GGT, CHE, TBA, APOA1, APOB, CK, CKMB, LDHL, HBDH, aAMY);
+                bool istrue= tjdao.updateShenghuaInfo(aichive_no, id_number,bar_code, ALT, AST, TBIL, DBIL, CREA, UREA, GLU, TG, CHO, HDLC, LDLC, ALB, UA, HCY, AFP, CEA, Ka, Na, TP, ALP, GGT, CHE, TBA, APOA1, APOB, CK, CKMB, LDHL, HBDH, aAMY);
                 if (istrue)
                 {
                     MessageBox.Show("数据保存成功!");
@@ -294,7 +294,7 @@ namespace zkhwClient.view.updateTjResult
                 else {
                     MessageBox.Show("数据保存失败!");
                 }
-            }
+            //}
         }
 
     }

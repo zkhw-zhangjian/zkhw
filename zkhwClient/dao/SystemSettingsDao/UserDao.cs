@@ -25,7 +25,7 @@ namespace zkhwClient.dao
         }
         public DataTable listUser()
         {
-            String sql = "select username,password,user_name,sex,birthday from zkhw_user_info";
+            String sql = "select username,password,user_name,sex,birthday from zkhw_user_info where 1=1 and username <> 'admin'";
             DataSet ds = new DataSet();
             ds.Clear();
             ds = DbHelperMySQL.Query(sql);
@@ -66,7 +66,7 @@ namespace zkhwClient.dao
         //基本设置中，获取乡镇卫生院的医护人员信息
         public DataTable listUserbyOrganCode(String code)
         {
-            String sql = "select user_code ucode,user_name uname from zkhw_user_info"; //organ_code = '" + code + "'";
+            String sql = "select user_code ucode,user_name uname from zkhw_user_info where username !='admin'";// and organ_code = '" + code + "'";
             DataSet ds = new DataSet();
             ds.Clear();
             ds = DbHelperMySQL.Query(sql);

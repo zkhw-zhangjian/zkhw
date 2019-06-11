@@ -29,7 +29,13 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBox31 = new System.Windows.Forms.CheckBox();
+            this.checkBox32 = new System.Windows.Forms.CheckBox();
+            this.checkBox30 = new System.Windows.Forms.CheckBox();
+            this.checkBox29 = new System.Windows.Forms.CheckBox();
             this.textBox93 = new System.Windows.Forms.TextBox();
             this.textBox94 = new System.Windows.Forms.TextBox();
             this.textBox95 = new System.Windows.Forms.TextBox();
@@ -235,6 +241,8 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.panel5);
@@ -243,11 +251,41 @@
             this.panel1.Controls.Add(this.button4);
             this.panel1.Location = new System.Drawing.Point(5, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1316, 705);
+            this.panel1.Size = new System.Drawing.Size(1328, 700);
             this.panel1.TabIndex = 6;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.LimeGreen;
+            this.button2.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button2.Location = new System.Drawing.Point(410, 967);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(208, 38);
+            this.button2.TabIndex = 63;
+            this.button2.Text = "转到首页";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.LimeGreen;
+            this.button1.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button1.Location = new System.Drawing.Point(660, 967);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(208, 38);
+            this.button1.TabIndex = 62;
+            this.button1.Text = "返回第二页";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.checkBox31);
+            this.groupBox2.Controls.Add(this.checkBox32);
+            this.groupBox2.Controls.Add(this.checkBox30);
+            this.groupBox2.Controls.Add(this.checkBox29);
             this.groupBox2.Controls.Add(this.textBox93);
             this.groupBox2.Controls.Add(this.textBox94);
             this.groupBox2.Controls.Add(this.textBox95);
@@ -290,8 +328,49 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = " ";
             // 
+            // checkBox31
+            // 
+            this.checkBox31.AutoSize = true;
+            this.checkBox31.Location = new System.Drawing.Point(200, 164);
+            this.checkBox31.Name = "checkBox31";
+            this.checkBox31.Size = new System.Drawing.Size(15, 14);
+            this.checkBox31.TabIndex = 282;
+            this.checkBox31.UseVisualStyleBackColor = true;
+            this.checkBox31.CheckedChanged += new System.EventHandler(this.checkBox31_CheckedChanged);
+            // 
+            // checkBox32
+            // 
+            this.checkBox32.AutoSize = true;
+            this.checkBox32.Location = new System.Drawing.Point(200, 133);
+            this.checkBox32.Name = "checkBox32";
+            this.checkBox32.Size = new System.Drawing.Size(15, 14);
+            this.checkBox32.TabIndex = 281;
+            this.checkBox32.UseVisualStyleBackColor = true;
+            this.checkBox32.CheckedChanged += new System.EventHandler(this.checkBox32_CheckedChanged);
+            // 
+            // checkBox30
+            // 
+            this.checkBox30.AutoSize = true;
+            this.checkBox30.Location = new System.Drawing.Point(200, 77);
+            this.checkBox30.Name = "checkBox30";
+            this.checkBox30.Size = new System.Drawing.Size(15, 14);
+            this.checkBox30.TabIndex = 280;
+            this.checkBox30.UseVisualStyleBackColor = true;
+            this.checkBox30.CheckedChanged += new System.EventHandler(this.checkBox30_CheckedChanged);
+            // 
+            // checkBox29
+            // 
+            this.checkBox29.AutoSize = true;
+            this.checkBox29.Location = new System.Drawing.Point(200, 46);
+            this.checkBox29.Name = "checkBox29";
+            this.checkBox29.Size = new System.Drawing.Size(15, 14);
+            this.checkBox29.TabIndex = 62;
+            this.checkBox29.UseVisualStyleBackColor = true;
+            this.checkBox29.CheckedChanged += new System.EventHandler(this.checkBox29_CheckedChanged);
+            // 
             // textBox93
             // 
+            this.textBox93.Enabled = false;
             this.textBox93.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox93.Location = new System.Drawing.Point(1143, 157);
             this.textBox93.Name = "textBox93";
@@ -301,6 +380,7 @@
             // 
             // textBox94
             // 
+            this.textBox94.Enabled = false;
             this.textBox94.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox94.Location = new System.Drawing.Point(1143, 128);
             this.textBox94.Name = "textBox94";
@@ -310,6 +390,7 @@
             // 
             // textBox95
             // 
+            this.textBox95.Enabled = false;
             this.textBox95.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox95.Location = new System.Drawing.Point(835, 157);
             this.textBox95.Name = "textBox95";
@@ -319,6 +400,7 @@
             // 
             // textBox96
             // 
+            this.textBox96.Enabled = false;
             this.textBox96.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox96.Location = new System.Drawing.Point(835, 128);
             this.textBox96.Name = "textBox96";
@@ -328,6 +410,7 @@
             // 
             // textBox97
             // 
+            this.textBox97.Enabled = false;
             this.textBox97.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox97.Location = new System.Drawing.Point(533, 157);
             this.textBox97.Name = "textBox97";
@@ -337,6 +420,7 @@
             // 
             // textBox98
             // 
+            this.textBox98.Enabled = false;
             this.textBox98.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox98.Location = new System.Drawing.Point(533, 128);
             this.textBox98.Name = "textBox98";
@@ -347,11 +431,12 @@
             // dateTimePicker5
             // 
             this.dateTimePicker5.CustomFormat = "yyyy-MM";
+            this.dateTimePicker5.Enabled = false;
             this.dateTimePicker5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker5.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker5.Location = new System.Drawing.Point(384, 157);
             this.dateTimePicker5.Name = "dateTimePicker5";
-            this.dateTimePicker5.Size = new System.Drawing.Size(143, 30);
+            this.dateTimePicker5.Size = new System.Drawing.Size(147, 30);
             this.dateTimePicker5.TabIndex = 273;
             // 
             // textBox99
@@ -368,6 +453,7 @@
             // dateTimePicker6
             // 
             this.dateTimePicker6.CustomFormat = "yyyy-MM";
+            this.dateTimePicker6.Enabled = false;
             this.dateTimePicker6.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker6.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker6.Location = new System.Drawing.Point(214, 157);
@@ -378,11 +464,12 @@
             // dateTimePicker7
             // 
             this.dateTimePicker7.CustomFormat = "yyyy-MM";
+            this.dateTimePicker7.Enabled = false;
             this.dateTimePicker7.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker7.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker7.Location = new System.Drawing.Point(384, 128);
             this.dateTimePicker7.Name = "dateTimePicker7";
-            this.dateTimePicker7.Size = new System.Drawing.Size(143, 30);
+            this.dateTimePicker7.Size = new System.Drawing.Size(147, 30);
             this.dateTimePicker7.TabIndex = 270;
             // 
             // textBox100
@@ -399,6 +486,7 @@
             // dateTimePicker8
             // 
             this.dateTimePicker8.CustomFormat = "yyyy-MM";
+            this.dateTimePicker8.Enabled = false;
             this.dateTimePicker8.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker8.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker8.Location = new System.Drawing.Point(214, 128);
@@ -452,6 +540,7 @@
             // 
             // textBox92
             // 
+            this.textBox92.Enabled = false;
             this.textBox92.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox92.Location = new System.Drawing.Point(1143, 68);
             this.textBox92.Name = "textBox92";
@@ -461,6 +550,7 @@
             // 
             // textBox89
             // 
+            this.textBox89.Enabled = false;
             this.textBox89.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox89.Location = new System.Drawing.Point(1143, 39);
             this.textBox89.Name = "textBox89";
@@ -470,6 +560,7 @@
             // 
             // textBox70
             // 
+            this.textBox70.Enabled = false;
             this.textBox70.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox70.Location = new System.Drawing.Point(835, 68);
             this.textBox70.Name = "textBox70";
@@ -479,6 +570,7 @@
             // 
             // textBox62
             // 
+            this.textBox62.Enabled = false;
             this.textBox62.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox62.Location = new System.Drawing.Point(835, 39);
             this.textBox62.Name = "textBox62";
@@ -488,6 +580,7 @@
             // 
             // textBox61
             // 
+            this.textBox61.Enabled = false;
             this.textBox61.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox61.Location = new System.Drawing.Point(533, 68);
             this.textBox61.Name = "textBox61";
@@ -497,6 +590,7 @@
             // 
             // textBox60
             // 
+            this.textBox60.Enabled = false;
             this.textBox60.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox60.Location = new System.Drawing.Point(533, 39);
             this.textBox60.Name = "textBox60";
@@ -507,11 +601,12 @@
             // dateTimePicker3
             // 
             this.dateTimePicker3.CustomFormat = "yyyy-MM";
+            this.dateTimePicker3.Enabled = false;
             this.dateTimePicker3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker3.Location = new System.Drawing.Point(384, 68);
             this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(143, 30);
+            this.dateTimePicker3.Size = new System.Drawing.Size(147, 30);
             this.dateTimePicker3.TabIndex = 257;
             // 
             // textBox59
@@ -528,6 +623,7 @@
             // dateTimePicker4
             // 
             this.dateTimePicker4.CustomFormat = "yyyy-MM";
+            this.dateTimePicker4.Enabled = false;
             this.dateTimePicker4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker4.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker4.Location = new System.Drawing.Point(214, 68);
@@ -538,11 +634,12 @@
             // dateTimePicker2
             // 
             this.dateTimePicker2.CustomFormat = "yyyy-MM";
+            this.dateTimePicker2.Enabled = false;
             this.dateTimePicker2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker2.Location = new System.Drawing.Point(384, 39);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(143, 30);
+            this.dateTimePicker2.Size = new System.Drawing.Size(147, 30);
             this.dateTimePicker2.TabIndex = 254;
             // 
             // textBox58
@@ -559,6 +656,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.CustomFormat = "yyyy-MM";
+            this.dateTimePicker1.Enabled = false;
             this.dateTimePicker1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Location = new System.Drawing.Point(214, 39);
@@ -617,7 +715,7 @@
             this.textBox53.Multiline = true;
             this.textBox53.Name = "textBox53";
             this.textBox53.ReadOnly = true;
-            this.textBox53.Size = new System.Drawing.Size(113, 88);
+            this.textBox53.Size = new System.Drawing.Size(95, 88);
             this.textBox53.TabIndex = 243;
             this.textBox53.Text = "家庭病床史";
             this.textBox53.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -629,7 +727,7 @@
             this.textBox52.Multiline = true;
             this.textBox52.Name = "textBox52";
             this.textBox52.ReadOnly = true;
-            this.textBox52.Size = new System.Drawing.Size(113, 88);
+            this.textBox52.Size = new System.Drawing.Size(95, 88);
             this.textBox52.TabIndex = 242;
             this.textBox52.Text = "住院史";
             this.textBox52.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -721,7 +819,7 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(1, 43);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1251, 477);
+            this.groupBox1.Size = new System.Drawing.Size(1305, 477);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             // 
@@ -807,13 +905,11 @@
             // radioButton7
             // 
             this.radioButton7.AutoSize = true;
-            this.radioButton7.Checked = true;
             this.radioButton7.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton7.Location = new System.Drawing.Point(10, 2);
             this.radioButton7.Name = "radioButton7";
             this.radioButton7.Size = new System.Drawing.Size(80, 24);
             this.radioButton7.TabIndex = 30;
-            this.radioButton7.TabStop = true;
             this.radioButton7.Tag = "1";
             this.radioButton7.Text = "1正常";
             this.radioButton7.UseVisualStyleBackColor = true;
@@ -996,13 +1092,11 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
             this.radioButton1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton1.Location = new System.Drawing.Point(10, 2);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(80, 24);
             this.radioButton1.TabIndex = 30;
-            this.radioButton1.TabStop = true;
             this.radioButton1.Tag = "1";
             this.radioButton1.Text = "1正常";
             this.radioButton1.UseVisualStyleBackColor = true;
@@ -1369,7 +1463,7 @@
             // textBox9
             // 
             this.textBox9.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox9.Location = new System.Drawing.Point(1256, 137);
+            this.textBox9.Location = new System.Drawing.Point(1251, 137);
             this.textBox9.Name = "textBox9";
             this.textBox9.ReadOnly = true;
             this.textBox9.Size = new System.Drawing.Size(45, 30);
@@ -1380,7 +1474,7 @@
             // textBox10
             // 
             this.textBox10.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox10.Location = new System.Drawing.Point(1103, 137);
+            this.textBox10.Location = new System.Drawing.Point(1098, 137);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(149, 30);
             this.textBox10.TabIndex = 194;
@@ -1389,7 +1483,7 @@
             // textBox11
             // 
             this.textBox11.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox11.Location = new System.Drawing.Point(1020, 137);
+            this.textBox11.Location = new System.Drawing.Point(1015, 137);
             this.textBox11.Name = "textBox11";
             this.textBox11.ReadOnly = true;
             this.textBox11.Size = new System.Drawing.Size(79, 30);
@@ -1484,13 +1578,11 @@
             // radioButton46
             // 
             this.radioButton46.AutoSize = true;
-            this.radioButton46.Checked = true;
             this.radioButton46.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton46.Location = new System.Drawing.Point(10, 2);
             this.radioButton46.Name = "radioButton46";
             this.radioButton46.Size = new System.Drawing.Size(80, 24);
             this.radioButton46.TabIndex = 30;
-            this.radioButton46.TabStop = true;
             this.radioButton46.Tag = "1";
             this.radioButton46.Text = "1阴性";
             this.radioButton46.UseVisualStyleBackColor = true;
@@ -1521,13 +1613,11 @@
             // radioButton48
             // 
             this.radioButton48.AutoSize = true;
-            this.radioButton48.Checked = true;
             this.radioButton48.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton48.Location = new System.Drawing.Point(10, 2);
             this.radioButton48.Name = "radioButton48";
             this.radioButton48.Size = new System.Drawing.Size(80, 24);
             this.radioButton48.TabIndex = 30;
-            this.radioButton48.TabStop = true;
             this.radioButton48.Tag = "1";
             this.radioButton48.Text = "1阴性";
             this.radioButton48.UseVisualStyleBackColor = true;
@@ -1592,7 +1682,7 @@
             this.textBox63.ReadOnly = true;
             this.textBox63.Size = new System.Drawing.Size(197, 30);
             this.textBox63.TabIndex = 113;
-            this.textBox63.Text = "乙肝肝炎表面抗原*";
+            this.textBox63.Text = "乙型肝炎表面抗原*";
             this.textBox63.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox64
@@ -1755,11 +1845,10 @@
             // textBox46
             // 
             this.textBox46.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox46.Location = new System.Drawing.Point(211, -32);
+            this.textBox46.Location = new System.Drawing.Point(182, -1);
             this.textBox46.Name = "textBox46";
             this.textBox46.Size = new System.Drawing.Size(460, 30);
             this.textBox46.TabIndex = 227;
-            this.textBox46.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // radioButton37
             // 
@@ -1787,6 +1876,7 @@
             this.radioButton38.Tag = "2";
             this.radioButton38.Text = "2有";
             this.radioButton38.UseVisualStyleBackColor = true;
+            this.radioButton38.CheckedChanged += new System.EventHandler(this.radioButton38_CheckedChanged);
             // 
             // textBox47
             // 
@@ -1837,6 +1927,7 @@
             this.checkBox27.Tag = "4";
             this.checkBox27.Text = "4白内障";
             this.checkBox27.UseVisualStyleBackColor = true;
+            this.checkBox27.Click += new System.EventHandler(this.checkBox27_Click);
             // 
             // checkBox26
             // 
@@ -1849,6 +1940,7 @@
             this.checkBox26.Tag = "3";
             this.checkBox26.Text = "3视乳头水肿";
             this.checkBox26.UseVisualStyleBackColor = true;
+            this.checkBox26.Click += new System.EventHandler(this.checkBox26_Click);
             // 
             // checkBox25
             // 
@@ -1861,10 +1953,13 @@
             this.checkBox25.Tag = "2";
             this.checkBox25.Text = "2视网膜出血或渗出";
             this.checkBox25.UseVisualStyleBackColor = true;
+            this.checkBox25.Click += new System.EventHandler(this.checkBox25_Click);
             // 
             // checkBox24
             // 
             this.checkBox24.AutoSize = true;
+            this.checkBox24.Checked = true;
+            this.checkBox24.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox24.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.checkBox24.Location = new System.Drawing.Point(9, 2);
             this.checkBox24.Name = "checkBox24";
@@ -1932,6 +2027,7 @@
             this.checkBox22.Tag = "3";
             this.checkBox22.Text = "3动脉闭塞性疾病";
             this.checkBox22.UseVisualStyleBackColor = true;
+            this.checkBox22.Click += new System.EventHandler(this.checkBox22_Click);
             // 
             // checkBox21
             // 
@@ -1944,10 +2040,13 @@
             this.checkBox21.Tag = "2";
             this.checkBox21.Text = "2夹层动脉瘤";
             this.checkBox21.UseVisualStyleBackColor = true;
+            this.checkBox21.Click += new System.EventHandler(this.checkBox21_Click);
             // 
             // checkBox20
             // 
             this.checkBox20.AutoSize = true;
+            this.checkBox20.Checked = true;
+            this.checkBox20.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox20.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.checkBox20.Location = new System.Drawing.Point(9, 2);
             this.checkBox20.Name = "checkBox20";
@@ -2018,6 +2117,7 @@
             this.checkBox18.Tag = "6";
             this.checkBox18.Text = "6心前区疼痛";
             this.checkBox18.UseVisualStyleBackColor = true;
+            this.checkBox18.Click += new System.EventHandler(this.checkBox18_Click);
             // 
             // checkBox17
             // 
@@ -2030,6 +2130,7 @@
             this.checkBox17.Tag = "5";
             this.checkBox17.Text = "5充血性心力衰竭";
             this.checkBox17.UseVisualStyleBackColor = true;
+            this.checkBox17.Click += new System.EventHandler(this.checkBox17_Click);
             // 
             // checkBox16
             // 
@@ -2042,6 +2143,7 @@
             this.checkBox16.Tag = "4";
             this.checkBox16.Text = "4冠状动脉血运重建";
             this.checkBox16.UseVisualStyleBackColor = true;
+            this.checkBox16.Click += new System.EventHandler(this.checkBox16_Click);
             // 
             // checkBox15
             // 
@@ -2054,6 +2156,7 @@
             this.checkBox15.Tag = "3";
             this.checkBox15.Text = "3心绞痛";
             this.checkBox15.UseVisualStyleBackColor = true;
+            this.checkBox15.Click += new System.EventHandler(this.checkBox15_Click);
             // 
             // checkBox14
             // 
@@ -2066,10 +2169,13 @@
             this.checkBox14.Tag = "2";
             this.checkBox14.Text = "2心肌梗死";
             this.checkBox14.UseVisualStyleBackColor = true;
+            this.checkBox14.Click += new System.EventHandler(this.checkBox14_Click);
             // 
             // checkBox13
             // 
             this.checkBox13.AutoSize = true;
+            this.checkBox13.Checked = true;
+            this.checkBox13.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox13.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.checkBox13.Location = new System.Drawing.Point(9, 3);
             this.checkBox13.Name = "checkBox13";
@@ -2140,6 +2246,7 @@
             this.checkBox11.Tag = "5";
             this.checkBox11.Text = "5慢性肾炎";
             this.checkBox11.UseVisualStyleBackColor = true;
+            this.checkBox11.Click += new System.EventHandler(this.checkBox11_Click);
             // 
             // checkBox10
             // 
@@ -2152,6 +2259,7 @@
             this.checkBox10.Tag = "4";
             this.checkBox10.Text = "4急性肾炎";
             this.checkBox10.UseVisualStyleBackColor = true;
+            this.checkBox10.Click += new System.EventHandler(this.checkBox10_Click);
             // 
             // checkBox9
             // 
@@ -2164,6 +2272,7 @@
             this.checkBox9.Tag = "3";
             this.checkBox9.Text = "3肾功能衰竭";
             this.checkBox9.UseVisualStyleBackColor = true;
+            this.checkBox9.Click += new System.EventHandler(this.checkBox9_Click);
             // 
             // checkBox8
             // 
@@ -2176,10 +2285,13 @@
             this.checkBox8.Tag = "2";
             this.checkBox8.Text = "2糖尿病肾病";
             this.checkBox8.UseVisualStyleBackColor = true;
+            this.checkBox8.Click += new System.EventHandler(this.checkBox8_Click);
             // 
             // checkBox7
             // 
             this.checkBox7.AutoSize = true;
+            this.checkBox7.Checked = true;
+            this.checkBox7.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox7.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.checkBox7.Location = new System.Drawing.Point(10, 2);
             this.checkBox7.Name = "checkBox7";
@@ -2249,6 +2361,7 @@
             this.checkBox5.Tag = "5";
             this.checkBox5.Text = "5短暂性脑缺血发作";
             this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.Click += new System.EventHandler(this.checkBox5_Click);
             // 
             // checkBox4
             // 
@@ -2261,6 +2374,7 @@
             this.checkBox4.Tag = "4";
             this.checkBox4.Text = "4蛛网膜下腔出血";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.Click += new System.EventHandler(this.checkBox4_Click);
             // 
             // checkBox3
             // 
@@ -2273,6 +2387,7 @@
             this.checkBox3.Tag = "3";
             this.checkBox3.Text = "3脑出血";
             this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.Click += new System.EventHandler(this.checkBox3_Click);
             // 
             // checkBox2
             // 
@@ -2285,10 +2400,13 @@
             this.checkBox2.Tag = "2";
             this.checkBox2.Text = "2缺血性卒中";
             this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.Click += new System.EventHandler(this.checkBox2_Click);
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.checkBox1.Location = new System.Drawing.Point(10, 2);
             this.checkBox1.Name = "checkBox1";
@@ -2353,7 +2471,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(208, 38);
             this.button4.TabIndex = 41;
-            this.button4.Text = "保存并转到下一页";
+            this.button4.Text = "转到末页";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -2365,7 +2483,6 @@
             this.ClientSize = new System.Drawing.Size(1333, 750);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "aUhealthcheckupServices3";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "健康体检表";
@@ -2591,5 +2708,11 @@
         private System.Windows.Forms.CheckBox checkBox26;
         private System.Windows.Forms.CheckBox checkBox27;
         private System.Windows.Forms.CheckBox checkBox28;
+        private System.Windows.Forms.CheckBox checkBox29;
+        private System.Windows.Forms.CheckBox checkBox30;
+        private System.Windows.Forms.CheckBox checkBox31;
+        private System.Windows.Forms.CheckBox checkBox32;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

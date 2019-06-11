@@ -235,7 +235,7 @@ namespace zkhwClient.view.PublicHealthView
                     }
                     #endregion
                 }
-                else if (qylist.Sum() > hplist.Sum() && qylist.Sum() > tylist.Sum() && qylist.Sum() > xylist.Sum() && qylist.Sum() > srlist.Sum() && qylist.Sum() > tslist.Sum() && qylist.Sum() > yixlist.Sum() && qylist.Sum() > yxlist.Sum() && qylist.Sum() > qxlist.Sum())
+                else if (qylist.Sum() >= hplist.Sum() && qylist.Sum() > tylist.Sum() && qylist.Sum() > xylist.Sum() && qylist.Sum() > srlist.Sum() && qylist.Sum() > tslist.Sum() && qylist.Sum() > yixlist.Sum() && qylist.Sum() > yxlist.Sum() && qylist.Sum() > qxlist.Sum())
                 {
                     #region 气郁质体质
                     g1.Text = "1．得分 " + qylist.Sum();
@@ -267,7 +267,7 @@ namespace zkhwClient.view.PublicHealthView
                     }
                     #endregion
                 }
-                else if (hplist.Sum() > tylist.Sum() && hplist.Sum() > qylist.Sum() && hplist.Sum() > xylist.Sum() && hplist.Sum() > srlist.Sum() && hplist.Sum() > tslist.Sum() && hplist.Sum() > yixlist.Sum() && hplist.Sum() > yxlist.Sum() && hplist.Sum() > qxlist.Sum())
+                else if (hplist.Sum() >= tylist.Sum() && hplist.Sum() >= qylist.Sum() && hplist.Sum() >= xylist.Sum() && hplist.Sum() >= srlist.Sum() && hplist.Sum() >= tslist.Sum() && hplist.Sum() >= yixlist.Sum() && hplist.Sum() >= yxlist.Sum() && hplist.Sum() >= qxlist.Sum())
                 {
                 //    #region 平和质体质
                 //    i1.Text = "1．得分 " + hplist.Sum();

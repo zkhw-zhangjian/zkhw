@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace zkhwClient.dao
 {
@@ -23,10 +24,10 @@ namespace zkhwClient.dao
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
-        public DataTable checkTcmHealthServicesByno(string code)
+        public DataTable checkTcmHealthServicesByno(string code,string idnum)
         {
             DataSet ds = new DataSet();
-            string sql = "select id from elderly_tcm_record where aichive_no = '" + code + "'";
+            string sql = "select id from elderly_tcm_record where aichive_no = '" + code + "' and id_number = '"+ idnum + "'";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }

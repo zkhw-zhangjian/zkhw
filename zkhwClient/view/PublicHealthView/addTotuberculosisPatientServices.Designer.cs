@@ -1112,12 +1112,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(723, 587);
+            this.ClientSize = new System.Drawing.Size(740, 587);
             this.Controls.Add(this.取消);
             this.Controls.Add(this.确定);
             this.Controls.Add(this.to1);
             this.Name = "addTotuberculosisPatientServices";
             this.Text = "非首次随访添加";
+            this.Load += new System.EventHandler(this.addTotuberculosisPatientServices_Load);
             this.to1.ResumeLayout(false);
             this.to1.PerformLayout();
             this.全程管理情况1.ResumeLayout(false);

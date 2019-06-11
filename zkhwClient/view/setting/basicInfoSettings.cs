@@ -29,10 +29,19 @@ namespace zkhwClient.view.setting
         public static string shicode = null;
         public static string shengcode = null;
         public static string zeren_doctor = null;
+        public static string zeren_doctorId = null;
         public static string organ_name = null;
         public static string input_name = null;
         public static string createtime = null;
         public static string allareaname = null;
+        public static string bc = null;
+        public static string xcg = null;
+        public static string sh = null;
+        public static string sgtz = null;
+        public static string ncg = null;
+        public static string xdt = null;
+        public static string xy = null;
+        public static string wx = null;
         XmlDocument xmlDoc = new XmlDocument();
         XmlNode node;
         string path = @"config.xml";
@@ -42,9 +51,15 @@ namespace zkhwClient.view.setting
         }
         private void basicInfoSettings_Load(object sender, EventArgs e)
         {
+            this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源
+            this.comboBox1.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox1.ValueMember = "code";//操作时获取的值 
+            showCombobox();
+
             DataTable dtbasic= bsdao.checkBasicsettingInfo();
             if (dtbasic.Rows.Count > 0) {
                 zeren_doctor = dtbasic.Rows[0]["zeren_doctor"].ToString();
+                zeren_doctorId = dtbasic.Rows[0]["update_user"].ToString();
                 organ_name = dtbasic.Rows[0]["organ_name"].ToString();
                 input_name = dtbasic.Rows[0]["input_name"].ToString();
                 createtime = dtbasic.Rows[0]["create_time"].ToString();
@@ -54,6 +69,17 @@ namespace zkhwClient.view.setting
                 shicode = dtbasic.Rows[0]["shi_code"].ToString();
                 qxcode = dtbasic.Rows[0]["qx_code"].ToString();
                 allareaname = dtbasic.Rows[0]["allFullName"].ToString();
+                bc = dtbasic.Rows[0]["bc"].ToString();
+                xcg = dtbasic.Rows[0]["xcg"].ToString();
+                sh = dtbasic.Rows[0]["sh"].ToString();
+                sgtz = dtbasic.Rows[0]["sgtz"].ToString();
+                ncg = dtbasic.Rows[0]["ncg"].ToString();
+                xdt = dtbasic.Rows[0]["xdt"].ToString();
+                xy = dtbasic.Rows[0]["xy"].ToString();
+                wx = dtbasic.Rows[0]["wx"].ToString();
+                string czy = dtbasic.Rows[0]["operation"].ToString();
+                string carname = dtbasic.Rows[0]["car_name"].ToString();
+                string other = dtbasic.Rows[0]["other"].ToString();
                 if (xzcode != null && !"".Equals(xzcode))
                 {
                     xzName = bsdao.selectAreaBycode(xzcode).Rows[0][0].ToString();
@@ -64,11 +90,29 @@ namespace zkhwClient.view.setting
                 shengName = bsdao.selectAreaBycode(shengcode).Rows[0][0].ToString();
                 shiName = bsdao.selectAreaBycode(shicode).Rows[0][0].ToString();
                 qxName = bsdao.selectAreaBycode(qxcode).Rows[0][0].ToString();
-            }
-            this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源
-            this.comboBox1.DisplayMember = "name";//显示给用户的数据集表项
-            this.comboBox1.ValueMember = "code";//操作时获取的值 
-            showCombobox();
+
+                this.comboBox1.Text = shengName;
+                this.comboBox2.Text = shiName;
+                this.comboBox3.Text = qxName;
+                this.comboBox4.Text = xzName;
+                this.comboBox5.Text = xcName;
+                this.textBox1.Text = organ_name;
+                this.comboBox6.Text = input_name;
+                this.comboBox7.Text = zeren_doctor;
+
+                this.comboBox8.Text = bc;
+                this.comboBox9.Text = xcg;
+                this.comboBox10.Text = sh;
+                this.comboBox11.Text = sgtz;
+                this.comboBox12.Text = ncg;
+                this.comboBox13.Text = xdt;
+                this.comboBox14.Text = xy;
+                this.comboBox16.Text = czy;
+                this.comboBox17.Text = carname;
+
+                this.textBox2.Text = wx;
+                this.textBox3.Text = other;
+            }    
         }
 
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
@@ -127,15 +171,16 @@ namespace zkhwClient.view.setting
             string organ_code = null;
             organ_name = textBox1.Text;
             input_name = this.comboBox6.SelectedValue.ToString();
-            zeren_doctor = this.comboBox7.SelectedValue.ToString();
-            string bc = this.comboBox8.SelectedValue.ToString();
-            string xcg = this.comboBox9.SelectedValue.ToString();
-            string sh = this.comboBox10.SelectedValue.ToString();
-            string sgtz = this.comboBox11.SelectedValue.ToString();
-            string ncg = this.comboBox12.SelectedValue.ToString();
-            string xdt = this.comboBox13.SelectedValue.ToString();
-            string xy = this.comboBox14.SelectedValue.ToString();
-            string wx = textBox3.Text;
+            zeren_doctor = this.comboBox7.Text;
+            zeren_doctorId = this.comboBox7.SelectedValue.ToString();
+            bc = this.comboBox8.SelectedValue.ToString();
+            xcg = this.comboBox9.SelectedValue.ToString();
+            sh = this.comboBox10.SelectedValue.ToString();
+            sgtz = this.comboBox11.SelectedValue.ToString();
+            ncg = this.comboBox12.SelectedValue.ToString();
+            xdt = this.comboBox13.SelectedValue.ToString();
+            xy = this.comboBox14.SelectedValue.ToString();
+            wx = textBox3.Text;
             string other = textBox2.Text;
             string captain = ""; //this.comboBox15.SelectedValue.ToString();
             string members = "";// textBox4.Text;
@@ -146,14 +191,14 @@ namespace zkhwClient.view.setting
 
             if (xcuncode != null && !"".Equals(xcuncode))
             {
-               bool bl= bsdao.addBasicSetting(shengcode, shicode, qxcode, xzcode, xcuncode, organ_code, organ_name, input_name, zeren_doctor, bc, xcg, sh, sgtz, ncg, xdt, xy, wx, other, captain, members, operation, car_name, create_user, create_name,allareaname);
+               bool bl= bsdao.addBasicSetting(shengcode, shicode, qxcode, xzcode, xcuncode, organ_code, organ_name, input_name, zeren_doctor, bc, xcg, sh, sgtz, ncg, xdt, xy, wx, other, captain, members, operation, car_name, create_user, create_name, zeren_doctorId, allareaname);
                 if (bl) {
-                    createtime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    //重置条码起始位置
-                    xmlDoc.Load(path);
-                    node = xmlDoc.SelectSingleNode("config/barnumCode");
-                    node.InnerText = "10001";
-                    xmlDoc.Save(path);
+                    //createtime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    ////重置条码起始位置
+                    //xmlDoc.Load(path);
+                    //node = xmlDoc.SelectSingleNode("config/barnumCode");
+                    //node.InnerText = "10001";
+                    //xmlDoc.Save(path);
                     MessageBox.Show("数据保存成功！");
                 }
             }
@@ -170,7 +215,7 @@ namespace zkhwClient.view.setting
 
             this.comboBox7.DataSource = dtuserlist.Copy();//绑定数据源
             this.comboBox7.DisplayMember = "uname";//显示给用户的数据集表项
-            this.comboBox7.ValueMember = "uname";//操作时获取的值
+            this.comboBox7.ValueMember = "ucode";//操作时获取的值
 
             this.comboBox8.DataSource = dtuserlist.Copy();//绑定数据源
             this.comboBox8.DisplayMember = "uname";//显示给用户的数据集表项
@@ -212,12 +257,12 @@ namespace zkhwClient.view.setting
             this.comboBox17.DisplayMember = "uname";//显示给用户的数据集表项
             this.comboBox17.ValueMember = "uname";//操作时获取的值
             //家医团队信息
-            DataTable dtTeamDz = bsdao.checkTeamInfoBycode(frmLogin.organCode);
-            if (dtTeamDz.Rows.Count>0) {
-                this.comboBox15.DataSource = dtTeamDz.Copy();//绑定数据源
-                this.comboBox15.DisplayMember = "team_lead_name";//显示给用户的数据集表项
-                this.comboBox15.ValueMember = "team_no";//操作时获取的值
-            }
+            //DataTable dtTeamDz = bsdao.checkTeamInfoBycode(frmLogin.organCode);
+            //if (dtTeamDz.Rows.Count>0) {
+            //    this.comboBox15.DataSource = dtTeamDz.Copy();//绑定数据源
+            //    this.comboBox15.DisplayMember = "team_lead_name";//显示给用户的数据集表项
+            //    this.comboBox15.ValueMember = "team_no";//操作时获取的值
+            //}
         }
 
         //数据初始化

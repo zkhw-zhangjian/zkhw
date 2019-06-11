@@ -41,7 +41,7 @@ namespace zkhwClient.view.PublicHealthView
                     this.textBox77.Text = dt.Rows[0]["microalbuminuria"].ToString();
 
                     if (this.radioButton48.Tag.ToString() == dt.Rows[0]["fob"].ToString()) { this.radioButton48.Checked = true; };
-                    if (this.radioButton49.Tag.ToString() == dt.Rows[0]["fob"].ToString()) {this.radioButton49.Checked = true; };
+                    if (this.radioButton49.Tag.ToString() == dt.Rows[0]["fob"].ToString()) { this.radioButton49.Checked = true; };
                     this.textBox90.Text = dt.Rows[0]["glycosylated_hemoglobin"].ToString();
 
                     if (this.radioButton46.Tag.ToString() == dt.Rows[0]["hb"].ToString()) { this.radioButton46.Checked = true; };
@@ -67,7 +67,7 @@ namespace zkhwClient.view.PublicHealthView
                         this.textBox25.Text = dt.Rows[0]["chestx_memo"].ToString();
                     };
 
-                    if (this.radioButton3.Tag.ToString() == dt.Rows[0]["ultrasound_abdomen"].ToString()) {this.radioButton3.Checked = true; };
+                    if (this.radioButton3.Tag.ToString() == dt.Rows[0]["ultrasound_abdomen"].ToString()) { this.radioButton3.Checked = true; };
                     if (this.radioButton4.Tag.ToString() == dt.Rows[0]["ultrasound_abdomen"].ToString())
                     {
                         this.radioButton4.Checked = true;
@@ -82,7 +82,7 @@ namespace zkhwClient.view.PublicHealthView
                     };
 
                     if (this.radioButton7.Tag.ToString() == dt.Rows[0]["cervical_smear"].ToString()) { this.radioButton7.Checked = true; };
-                    if (this.radioButton7.Tag.ToString() == dt.Rows[0]["cervical_smear"].ToString())
+                    if (this.radioButton8.Tag.ToString() == dt.Rows[0]["cervical_smear"].ToString())
                     {
                         this.radioButton8.Checked = true;
                         this.textBox31.Text = dt.Rows[0]["cervical_smear_memo"].ToString();
@@ -171,7 +171,7 @@ namespace zkhwClient.view.PublicHealthView
                         this.textBox46.Text = dt.Rows[0]["nervous_disease_memo"].ToString();
                     };
 
-                    if (this.radioButton39.Tag.ToString() == dt.Rows[0]["other_disease"].ToString()) {this.radioButton39.Checked = true; };
+                    if (this.radioButton39.Tag.ToString() == dt.Rows[0]["other_disease"].ToString()) { this.radioButton39.Checked = true; };
                     if (this.radioButton40.Tag.ToString() == dt.Rows[0]["other_disease"].ToString())
                     {
                         this.radioButton40.Checked = true;
@@ -188,13 +188,14 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         if (dtZ.Rows[i]["hospitalized_type"].ToString() == "1")
                         {
-
                             if (j == 0)
                             {
+                                this.checkBox29.Checked = true;
                                 string in_hospital_time = dtZ.Rows[i]["in_hospital_time"].ToString();
                                 string leave_hospital_time = dtZ.Rows[i]["leave_hospital_time"].ToString();
-                                if (in_hospital_time!="") { 
-                                this.dateTimePicker1.Value = DateTime.Parse(dtZ.Rows[i]["in_hospital_time"].ToString());
+                                if (in_hospital_time != "")
+                                {
+                                    this.dateTimePicker1.Value = DateTime.Parse(dtZ.Rows[i]["in_hospital_time"].ToString());
                                 }
                                 if (leave_hospital_time != "")
                                 {
@@ -206,6 +207,7 @@ namespace zkhwClient.view.PublicHealthView
                             }
                             else
                             {
+                                this.checkBox30.Checked = true;
                                 this.dateTimePicker4.Value = DateTime.Parse(dtZ.Rows[i]["in_hospital_time"].ToString());
                                 this.dateTimePicker3.Value = DateTime.Parse(dtZ.Rows[i]["leave_hospital_time"].ToString());
                                 this.textBox61.Text = dtZ.Rows[i]["reason"].ToString();
@@ -214,9 +216,11 @@ namespace zkhwClient.view.PublicHealthView
                             }
                             j++;
                         }
-                        else {
+                        else
+                        {
                             if (k == 0)
                             {
+                                this.checkBox32.Checked = true;
                                 this.dateTimePicker8.Value = DateTime.Parse(dtZ.Rows[i]["in_hospital_time"].ToString());
                                 this.dateTimePicker7.Value = DateTime.Parse(dtZ.Rows[i]["leave_hospital_time"].ToString());
                                 this.textBox98.Text = dtZ.Rows[i]["reason"].ToString();
@@ -225,6 +229,7 @@ namespace zkhwClient.view.PublicHealthView
                             }
                             else
                             {
+                                this.checkBox31.Checked = true;
                                 this.dateTimePicker6.Value = DateTime.Parse(dtZ.Rows[i]["in_hospital_time"].ToString());
                                 this.dateTimePicker5.Value = DateTime.Parse(dtZ.Rows[i]["leave_hospital_time"].ToString());
                                 this.textBox97.Text = dtZ.Rows[i]["reason"].ToString();
@@ -275,7 +280,9 @@ namespace zkhwClient.view.PublicHealthView
             per.hdl = this.textBox22.Text;
 
             if (this.radioButton1.Checked == true) { per.chest_x = this.radioButton1.Tag.ToString(); };
-            if (this.radioButton2.Checked == true) { per.chest_x = this.radioButton2.Tag.ToString();
+            if (this.radioButton2.Checked == true)
+            {
+                per.chest_x = this.radioButton2.Tag.ToString();
                 per.chestx_memo = this.textBox25.Text;
             };
 
@@ -428,13 +435,13 @@ namespace zkhwClient.view.PublicHealthView
             string intime1 = this.dateTimePicker1.Text;
             string outtime1 = this.dateTimePicker2.Text;
             //string nowtime=DateTime.Now.ToString("yyyy-MM-dd");
-            
+
             string intime2 = this.dateTimePicker4.Text;
             string outtime2 = this.dateTimePicker3.Text;
-            
+
             string intime11 = this.dateTimePicker8.Text;
             string outtime11 = this.dateTimePicker7.Text;
-           
+
             string intime22 = this.dateTimePicker6.Text;
             string outtime22 = this.dateTimePicker5.Text;
 
@@ -446,9 +453,13 @@ namespace zkhwClient.view.PublicHealthView
 
             if (isfalse)
             {
-                hospitalizedRecord  hr= null;
-                //if (!nowtime.Equals(intime1) || !nowtime.Equals(outtime1))
-                //{
+                hospitalizedRecord hr = null;
+
+                if (this.checkBox29.Checked)
+                {
+                    string text60 = this.textBox60.Text;
+                    string text62 = this.textBox62.Text;
+                    if (text60 == "" || text62 == "") { MessageBox.Show("住院史信息填写不完整!"); return; }
                     hr = new hospitalizedRecord();
                     hr.archive_no = this.textBox106.Text;
                     hr.id_number = this.textBox107.Text;
@@ -457,12 +468,16 @@ namespace zkhwClient.view.PublicHealthView
                     hr.in_hospital_time = intime1;
                     hr.leave_hospital_time = outtime1;
                     hr.reason = this.textBox60.Text;
-                    hr.hospital_organ= this.textBox62.Text;
-                    hr.case_code= this.textBox89.Text;
-                    hcd.addHospitalizedRecord(hr,"1");
-                //}
-                //if (!nowtime.Equals(intime2) || !nowtime.Equals(outtime2))
-                //{
+                    hr.hospital_organ = this.textBox62.Text;
+                    hr.case_code = this.textBox89.Text;
+                    hcd.addHospitalizedRecord(hr, "1");
+                }
+
+                if (this.checkBox30.Checked)
+                {
+                    string text61 = this.textBox61.Text;
+                    string text70 = this.textBox70.Text;
+                    if (text61 == "" || text70 == "") { MessageBox.Show("住院史信息填写不完整!"); return; }
                     hr = new hospitalizedRecord();
                     hr.archive_no = this.textBox106.Text;
                     hr.id_number = this.textBox107.Text;
@@ -473,10 +488,13 @@ namespace zkhwClient.view.PublicHealthView
                     hr.reason = this.textBox61.Text;
                     hr.hospital_organ = this.textBox70.Text;
                     hr.case_code = this.textBox92.Text;
-                    hcd.addHospitalizedRecord(hr,"0");
-                //}
-                //if (!nowtime.Equals(intime11) || !nowtime.Equals(outtime11))
-                //{
+                    hcd.addHospitalizedRecord(hr, "0");
+                }
+                if (this.checkBox32.Checked)
+                {
+                    string text98 = this.textBox98.Text;
+                    string text96 = this.textBox96.Text;
+                    if (text98 == "" || text96 == "") { MessageBox.Show("住院史信息填写不完整!"); return; }
                     hr = new hospitalizedRecord();
                     hr.archive_no = this.textBox106.Text;
                     hr.id_number = this.textBox107.Text;
@@ -487,10 +505,13 @@ namespace zkhwClient.view.PublicHealthView
                     hr.reason = this.textBox98.Text;
                     hr.hospital_organ = this.textBox96.Text;
                     hr.case_code = this.textBox94.Text;
-                    hcd.addHospitalizedRecord(hr,"2");
-                //}
-                //if (!nowtime.Equals(intime22) || !nowtime.Equals(outtime22))
-                //{
+                    hcd.addHospitalizedRecord(hr, "2");
+                }
+                if (this.checkBox31.Checked)
+                {
+                    string text97 = this.textBox97.Text;
+                    string text95 = this.textBox95.Text;
+                    if (text97 == "" || text95 == "") { MessageBox.Show("住院史信息填写不完整!"); return; }
                     hr = new hospitalizedRecord();
                     hr.exam_id = per.id;
                     hr.archive_no = this.textBox106.Text;
@@ -501,8 +522,8 @@ namespace zkhwClient.view.PublicHealthView
                     hr.reason = this.textBox97.Text;
                     hr.hospital_organ = this.textBox95.Text;
                     hr.case_code = this.textBox93.Text;
-                    hcd.addHospitalizedRecord(hr,"0");
-                //}
+                    hcd.addHospitalizedRecord(hr, "0");
+                }
                 this.Close();
                 aUhealthcheckupServices4 auhc4 = new aUhealthcheckupServices4();
                 auhc4.textBox1.Text = this.textBox106.Text;
@@ -516,7 +537,8 @@ namespace zkhwClient.view.PublicHealthView
 
         private void checkBox1_Click(object sender, EventArgs e)
         {
-            if (this.checkBox1.Checked) {
+            if (this.checkBox1.Checked)
+            {
                 this.checkBox2.Checked = false;
                 this.checkBox3.Checked = false;
                 this.checkBox4.Checked = false;
@@ -582,7 +604,8 @@ namespace zkhwClient.view.PublicHealthView
             {
                 this.textBox25.Enabled = true;
             }
-            else {
+            else
+            {
                 this.textBox25.Enabled = false;
             }
         }
@@ -627,6 +650,7 @@ namespace zkhwClient.view.PublicHealthView
         {
             if (this.checkBox6.Checked)
             {
+                this.checkBox1.Checked = false;
                 this.textBox36.Enabled = true;
             }
             else
@@ -639,6 +663,7 @@ namespace zkhwClient.view.PublicHealthView
         {
             if (this.checkBox12.Checked)
             {
+                this.checkBox7.Checked = false;
                 this.textBox38.Enabled = true;
             }
             else
@@ -651,6 +676,7 @@ namespace zkhwClient.view.PublicHealthView
         {
             if (this.checkBox19.Checked)
             {
+                this.checkBox13.Checked = false;
                 this.textBox41.Enabled = true;
             }
             else
@@ -663,6 +689,7 @@ namespace zkhwClient.view.PublicHealthView
         {
             if (this.checkBox23.Checked)
             {
+                this.checkBox20.Checked = false;
                 this.textBox42.Enabled = true;
             }
             else
@@ -675,6 +702,7 @@ namespace zkhwClient.view.PublicHealthView
         {
             if (this.checkBox28.Checked)
             {
+                this.checkBox24.Checked = false;
                 this.textBox44.Enabled = true;
             }
             else
@@ -692,6 +720,807 @@ namespace zkhwClient.view.PublicHealthView
             else
             {
                 this.textBox48.Enabled = false;
+            }
+        }
+
+        private void checkBox29_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox29.Checked)
+            {
+                this.dateTimePicker1.Enabled = true;
+                this.dateTimePicker2.Enabled = true;
+                this.textBox60.Enabled = true;
+                this.textBox62.Enabled = true;
+                this.textBox89.Enabled = true;
+            }
+            else
+            {
+                this.dateTimePicker1.Enabled = false;
+                this.dateTimePicker2.Enabled = false;
+                this.textBox60.Enabled = false;
+                this.textBox62.Enabled = false;
+                this.textBox89.Enabled = false;
+            }
+        }
+
+        private void checkBox30_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox30.Checked)
+            {
+                this.dateTimePicker4.Enabled = true;
+                this.dateTimePicker3.Enabled = true;
+                this.textBox61.Enabled = true;
+                this.textBox70.Enabled = true;
+                this.textBox92.Enabled = true;
+            }
+            else
+            {
+                this.dateTimePicker4.Enabled = false;
+                this.dateTimePicker3.Enabled = false;
+                this.textBox61.Enabled = false;
+                this.textBox70.Enabled = false;
+                this.textBox92.Enabled = false;
+            }
+        }
+
+        private void checkBox32_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox32.Checked)
+            {
+                this.dateTimePicker8.Enabled = true;
+                this.dateTimePicker7.Enabled = true;
+                this.textBox98.Enabled = true;
+                this.textBox96.Enabled = true;
+                this.textBox94.Enabled = true;
+            }
+            else
+            {
+                this.dateTimePicker8.Enabled = false;
+                this.dateTimePicker7.Enabled = false;
+                this.textBox98.Enabled = false;
+                this.textBox96.Enabled = false;
+                this.textBox94.Enabled = false;
+            }
+        }
+
+        private void checkBox31_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox31.Checked)
+            {
+                this.dateTimePicker6.Enabled = true;
+                this.dateTimePicker5.Enabled = true;
+                this.textBox97.Enabled = true;
+                this.textBox95.Enabled = true;
+                this.textBox93.Enabled = true;
+            }
+            else
+            {
+                this.dateTimePicker6.Enabled = false;
+                this.dateTimePicker5.Enabled = false;
+                this.textBox97.Enabled = false;
+                this.textBox95.Enabled = false;
+                this.textBox93.Enabled = false;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            bean.physical_examination_recordBean per = new bean.physical_examination_recordBean();
+
+            per.microalbuminuria = this.textBox77.Text;
+
+            if (this.radioButton48.Checked == true) { per.fob = this.radioButton48.Tag.ToString(); };
+            if (this.radioButton49.Checked == true) { per.fob = this.radioButton49.Tag.ToString(); };
+            per.glycosylated_hemoglobin = this.textBox90.Text;
+
+            if (this.radioButton46.Checked == true) { per.hb = this.radioButton46.Tag.ToString(); };
+            if (this.radioButton47.Checked == true) { per.hb = this.radioButton47.Tag.ToString(); };
+
+            per.sgft = this.textBox3.Text;
+            per.ast = this.textBox6.Text;
+            per.albumin = this.textBox10.Text;
+            per.total_bilirubin = this.textBox65.Text;
+            per.conjugated_bilirubin = this.textBox68.Text;
+            per.scr = this.textBox73.Text;
+            per.blood_urea = this.textBox81.Text;
+            per.blood_k = this.textBox84.Text;
+            per.blood_na = this.textBox87.Text;
+            per.tc = this.textBox13.Text;
+            per.tg = this.textBox16.Text;
+            per.ldl = this.textBox19.Text;
+            per.hdl = this.textBox22.Text;
+
+            if (this.radioButton1.Checked == true) { per.chest_x = this.radioButton1.Tag.ToString(); };
+            if (this.radioButton2.Checked == true)
+            {
+                per.chest_x = this.radioButton2.Tag.ToString();
+                per.chestx_memo = this.textBox25.Text;
+            };
+
+            if (this.radioButton3.Checked == true) { per.ultrasound_abdomen = this.radioButton3.Tag.ToString(); };
+            if (this.radioButton4.Checked == true)
+            {
+                per.ultrasound_abdomen = this.radioButton4.Tag.ToString();
+                per.ultrasound_memo = this.textBox27.Text;
+            };
+
+            if (this.radioButton5.Checked == true) { per.other_b = this.radioButton5.Tag.ToString(); };
+            if (this.radioButton6.Checked == true)
+            {
+                per.other_b = this.radioButton6.Tag.ToString();
+                per.otherb_memo = this.textBox29.Text;
+            };
+
+            if (this.radioButton7.Checked == true) { per.cervical_smear = this.radioButton7.Tag.ToString(); };
+            if (this.radioButton8.Checked == true)
+            {
+                per.cervical_smear = this.radioButton8.Tag.ToString();
+                per.cervical_smear_memo = this.textBox31.Text;
+            };
+            per.other = this.textBox34.Text;
+
+            foreach (Control ctr in this.panel7.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.cerebrovascular_disease += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.cerebrovascular_disease != null && per.cerebrovascular_disease != "")
+            {
+                per.cerebrovascular_disease = per.cerebrovascular_disease.Substring(1);
+                if (this.checkBox6.Checked)
+                {
+                    per.cerebrovascular_disease_other = this.textBox36.Text;
+                }
+            }
+
+            foreach (Control ctr in this.panel8.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.kidney_disease += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.kidney_disease != null && per.kidney_disease != "")
+            {
+                per.kidney_disease = per.kidney_disease.Substring(1);
+                if (this.checkBox12.Checked)
+                {
+                    per.kidney_disease_other = this.textBox38.Text;
+                }
+            }
+
+            foreach (Control ctr in this.panel9.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.heart_disease += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.heart_disease != null && per.heart_disease != "")
+            {
+                per.heart_disease = per.heart_disease.Substring(1);
+                if (this.checkBox19.Checked)
+                {
+                    per.heart_disease_other = this.textBox41.Text;
+                }
+            }
+
+            foreach (Control ctr in this.panel10.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.vascular_disease += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.vascular_disease != null && per.vascular_disease != "")
+            {
+                per.vascular_disease = per.vascular_disease.Substring(1);
+                if (this.checkBox23.Checked)
+                {
+                    per.vascular_disease_other = this.textBox42.Text;
+                }
+            }
+
+            foreach (Control ctr in this.panel11.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.ocular_diseases += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.ocular_diseases != null && per.ocular_diseases != "")
+            {
+                per.ocular_diseases = per.ocular_diseases.Substring(1);
+                if (this.checkBox28.Checked)
+                {
+                    per.ocular_diseases_other = this.textBox44.Text;
+                }
+            }
+
+            if (this.radioButton37.Checked == true) { per.nervous_system_disease = this.radioButton37.Tag.ToString(); };
+            if (this.radioButton38.Checked == true)
+            {
+                per.nervous_system_disease = this.radioButton38.Tag.ToString();
+                per.nervous_disease_memo = this.textBox46.Text;
+            };
+
+            if (this.radioButton39.Checked == true) { per.other_disease = this.radioButton39.Tag.ToString(); };
+            if (this.radioButton40.Checked == true)
+            {
+                per.other_disease = this.radioButton40.Tag.ToString();
+                per.other_disease_memo = this.textBox48.Text;
+            };
+
+            string intime1 = this.dateTimePicker1.Text;
+            string outtime1 = this.dateTimePicker2.Text;
+            //string nowtime=DateTime.Now.ToString("yyyy-MM-dd");
+
+            string intime2 = this.dateTimePicker4.Text;
+            string outtime2 = this.dateTimePicker3.Text;
+
+            string intime11 = this.dateTimePicker8.Text;
+            string outtime11 = this.dateTimePicker7.Text;
+
+            string intime22 = this.dateTimePicker6.Text;
+            string outtime22 = this.dateTimePicker5.Text;
+
+            per.aichive_no = this.textBox106.Text;
+            per.bar_code = this.textBox105.Text;
+            per.id_number = this.textBox107.Text;
+            per.id = this.textBox108.Text;
+            bool isfalse = hcd.addPhysicalExaminationRecord3(per);
+
+            if (isfalse)
+            {
+                hospitalizedRecord hr = null;
+
+                if (this.checkBox29.Checked)
+                {
+                    string text60 = this.textBox60.Text;
+                    string text62 = this.textBox62.Text;
+                    if (text60 == "" || text62 == "") { MessageBox.Show("住院史信息填写不完整!"); return; }
+                    hr = new hospitalizedRecord();
+                    hr.archive_no = this.textBox106.Text;
+                    hr.id_number = this.textBox107.Text;
+                    hr.exam_id = per.id;
+                    hr.hospitalized_type = "1";
+                    hr.in_hospital_time = intime1;
+                    hr.leave_hospital_time = outtime1;
+                    hr.reason = this.textBox60.Text;
+                    hr.hospital_organ = this.textBox62.Text;
+                    hr.case_code = this.textBox89.Text;
+                    hcd.addHospitalizedRecord(hr, "1");
+                }
+
+                if (this.checkBox30.Checked)
+                {
+                    string text61 = this.textBox61.Text;
+                    string text70 = this.textBox70.Text;
+                    if (text61 == "" || text70 == "") { MessageBox.Show("住院史信息填写不完整!"); return; }
+                    hr = new hospitalizedRecord();
+                    hr.archive_no = this.textBox106.Text;
+                    hr.id_number = this.textBox107.Text;
+                    hr.exam_id = per.id;
+                    hr.hospitalized_type = "1";
+                    hr.in_hospital_time = intime2;
+                    hr.leave_hospital_time = outtime2;
+                    hr.reason = this.textBox61.Text;
+                    hr.hospital_organ = this.textBox70.Text;
+                    hr.case_code = this.textBox92.Text;
+                    hcd.addHospitalizedRecord(hr, "0");
+                }
+                if (this.checkBox32.Checked)
+                {
+                    string text98 = this.textBox98.Text;
+                    string text96 = this.textBox96.Text;
+                    if (text98 == "" || text96 == "") { MessageBox.Show("住院史信息填写不完整!"); return; }
+                    hr = new hospitalizedRecord();
+                    hr.archive_no = this.textBox106.Text;
+                    hr.id_number = this.textBox107.Text;
+                    hr.exam_id = per.id;
+                    hr.hospitalized_type = "2";
+                    hr.in_hospital_time = intime11;
+                    hr.leave_hospital_time = outtime11;
+                    hr.reason = this.textBox98.Text;
+                    hr.hospital_organ = this.textBox96.Text;
+                    hr.case_code = this.textBox94.Text;
+                    hcd.addHospitalizedRecord(hr, "2");
+                }
+                if (this.checkBox31.Checked)
+                {
+                    string text97 = this.textBox97.Text;
+                    string text95 = this.textBox95.Text;
+                    if (text97 == "" || text95 == "") { MessageBox.Show("住院史信息填写不完整!"); return; }
+                    hr = new hospitalizedRecord();
+                    hr.exam_id = per.id;
+                    hr.archive_no = this.textBox106.Text;
+                    hr.id_number = this.textBox107.Text;
+                    hr.hospitalized_type = "2";
+                    hr.in_hospital_time = intime22;
+                    hr.leave_hospital_time = outtime22;
+                    hr.reason = this.textBox97.Text;
+                    hr.hospital_organ = this.textBox95.Text;
+                    hr.case_code = this.textBox93.Text;
+                    hcd.addHospitalizedRecord(hr, "0");
+                }
+                this.Close();
+                aUhealthcheckupServices2 auhc2 = new aUhealthcheckupServices2();
+                auhc2.textBox95.Text = this.textBox106.Text;
+                auhc2.textBox96.Text = this.textBox105.Text;
+                auhc2.textBox99.Text = this.textBox107.Text;
+                auhc2.id = per.id;//祖
+                auhc2.textBox100.Text = per.id;
+                auhc2.Show();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            bean.physical_examination_recordBean per = new bean.physical_examination_recordBean();
+
+            per.microalbuminuria = this.textBox77.Text;
+
+            if (this.radioButton48.Checked == true) { per.fob = this.radioButton48.Tag.ToString(); };
+            if (this.radioButton49.Checked == true) { per.fob = this.radioButton49.Tag.ToString(); };
+            per.glycosylated_hemoglobin = this.textBox90.Text;
+
+            if (this.radioButton46.Checked == true) { per.hb = this.radioButton46.Tag.ToString(); };
+            if (this.radioButton47.Checked == true) { per.hb = this.radioButton47.Tag.ToString(); };
+
+            per.sgft = this.textBox3.Text;
+            per.ast = this.textBox6.Text;
+            per.albumin = this.textBox10.Text;
+            per.total_bilirubin = this.textBox65.Text;
+            per.conjugated_bilirubin = this.textBox68.Text;
+            per.scr = this.textBox73.Text;
+            per.blood_urea = this.textBox81.Text;
+            per.blood_k = this.textBox84.Text;
+            per.blood_na = this.textBox87.Text;
+            per.tc = this.textBox13.Text;
+            per.tg = this.textBox16.Text;
+            per.ldl = this.textBox19.Text;
+            per.hdl = this.textBox22.Text;
+
+            if (this.radioButton1.Checked == true) { per.chest_x = this.radioButton1.Tag.ToString(); };
+            if (this.radioButton2.Checked == true)
+            {
+                per.chest_x = this.radioButton2.Tag.ToString();
+                per.chestx_memo = this.textBox25.Text;
+            };
+
+            if (this.radioButton3.Checked == true) { per.ultrasound_abdomen = this.radioButton3.Tag.ToString(); };
+            if (this.radioButton4.Checked == true)
+            {
+                per.ultrasound_abdomen = this.radioButton4.Tag.ToString();
+                per.ultrasound_memo = this.textBox27.Text;
+            };
+
+            if (this.radioButton5.Checked == true) { per.other_b = this.radioButton5.Tag.ToString(); };
+            if (this.radioButton6.Checked == true)
+            {
+                per.other_b = this.radioButton6.Tag.ToString();
+                per.otherb_memo = this.textBox29.Text;
+            };
+
+            if (this.radioButton7.Checked == true) { per.cervical_smear = this.radioButton7.Tag.ToString(); };
+            if (this.radioButton8.Checked == true)
+            {
+                per.cervical_smear = this.radioButton8.Tag.ToString();
+                per.cervical_smear_memo = this.textBox31.Text;
+            };
+            per.other = this.textBox34.Text;
+
+            foreach (Control ctr in this.panel7.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.cerebrovascular_disease += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.cerebrovascular_disease != null && per.cerebrovascular_disease != "")
+            {
+                per.cerebrovascular_disease = per.cerebrovascular_disease.Substring(1);
+                if (this.checkBox6.Checked)
+                {
+                    per.cerebrovascular_disease_other = this.textBox36.Text;
+                }
+            }
+
+            foreach (Control ctr in this.panel8.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.kidney_disease += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.kidney_disease != null && per.kidney_disease != "")
+            {
+                per.kidney_disease = per.kidney_disease.Substring(1);
+                if (this.checkBox12.Checked)
+                {
+                    per.kidney_disease_other = this.textBox38.Text;
+                }
+            }
+
+            foreach (Control ctr in this.panel9.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.heart_disease += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.heart_disease != null && per.heart_disease != "")
+            {
+                per.heart_disease = per.heart_disease.Substring(1);
+                if (this.checkBox19.Checked)
+                {
+                    per.heart_disease_other = this.textBox41.Text;
+                }
+            }
+
+            foreach (Control ctr in this.panel10.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.vascular_disease += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.vascular_disease != null && per.vascular_disease != "")
+            {
+                per.vascular_disease = per.vascular_disease.Substring(1);
+                if (this.checkBox23.Checked)
+                {
+                    per.vascular_disease_other = this.textBox42.Text;
+                }
+            }
+
+            foreach (Control ctr in this.panel11.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is CheckBox)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    CheckBox ck = ctr as CheckBox;
+                    if (ck.Checked)
+                    {
+                        per.ocular_diseases += "," + ck.Tag.ToString();
+                    }
+                }
+            }
+            if (per.ocular_diseases != null && per.ocular_diseases != "")
+            {
+                per.ocular_diseases = per.ocular_diseases.Substring(1);
+                if (this.checkBox28.Checked)
+                {
+                    per.ocular_diseases_other = this.textBox44.Text;
+                }
+            }
+
+            if (this.radioButton37.Checked == true) { per.nervous_system_disease = this.radioButton37.Tag.ToString(); };
+            if (this.radioButton38.Checked == true)
+            {
+                per.nervous_system_disease = this.radioButton38.Tag.ToString();
+                per.nervous_disease_memo = this.textBox46.Text;
+            };
+
+            if (this.radioButton39.Checked == true) { per.other_disease = this.radioButton39.Tag.ToString(); };
+            if (this.radioButton40.Checked == true)
+            {
+                per.other_disease = this.radioButton40.Tag.ToString();
+                per.other_disease_memo = this.textBox48.Text;
+            };
+
+            string intime1 = this.dateTimePicker1.Text;
+            string outtime1 = this.dateTimePicker2.Text;
+            //string nowtime=DateTime.Now.ToString("yyyy-MM-dd");
+
+            string intime2 = this.dateTimePicker4.Text;
+            string outtime2 = this.dateTimePicker3.Text;
+
+            string intime11 = this.dateTimePicker8.Text;
+            string outtime11 = this.dateTimePicker7.Text;
+
+            string intime22 = this.dateTimePicker6.Text;
+            string outtime22 = this.dateTimePicker5.Text;
+
+            per.aichive_no = this.textBox106.Text;
+            per.bar_code = this.textBox105.Text;
+            per.id_number = this.textBox107.Text;
+            per.id = this.textBox108.Text;
+            bool isfalse = hcd.addPhysicalExaminationRecord3(per);
+
+            if (isfalse)
+            {
+                hospitalizedRecord hr = null;
+
+                if (this.checkBox29.Checked)
+                {
+                    string text60 = this.textBox60.Text;
+                    string text62 = this.textBox62.Text;
+                    if (text60 == "" || text62 == "") { MessageBox.Show("住院史信息填写不完整!"); return; }
+                    hr = new hospitalizedRecord();
+                    hr.archive_no = this.textBox106.Text;
+                    hr.id_number = this.textBox107.Text;
+                    hr.exam_id = per.id;
+                    hr.hospitalized_type = "1";
+                    hr.in_hospital_time = intime1;
+                    hr.leave_hospital_time = outtime1;
+                    hr.reason = this.textBox60.Text;
+                    hr.hospital_organ = this.textBox62.Text;
+                    hr.case_code = this.textBox89.Text;
+                    hcd.addHospitalizedRecord(hr, "1");
+                }
+
+                if (this.checkBox30.Checked)
+                {
+                    string text61 = this.textBox61.Text;
+                    string text70 = this.textBox70.Text;
+                    if (text61 == "" || text70 == "") { MessageBox.Show("住院史信息填写不完整!"); return; }
+                    hr = new hospitalizedRecord();
+                    hr.archive_no = this.textBox106.Text;
+                    hr.id_number = this.textBox107.Text;
+                    hr.exam_id = per.id;
+                    hr.hospitalized_type = "1";
+                    hr.in_hospital_time = intime2;
+                    hr.leave_hospital_time = outtime2;
+                    hr.reason = this.textBox61.Text;
+                    hr.hospital_organ = this.textBox70.Text;
+                    hr.case_code = this.textBox92.Text;
+                    hcd.addHospitalizedRecord(hr, "0");
+                }
+                if (this.checkBox32.Checked)
+                {
+                    string text98 = this.textBox98.Text;
+                    string text96 = this.textBox96.Text;
+                    if (text98 == "" || text96 == "") { MessageBox.Show("住院史信息填写不完整!"); return; }
+                    hr = new hospitalizedRecord();
+                    hr.archive_no = this.textBox106.Text;
+                    hr.id_number = this.textBox107.Text;
+                    hr.exam_id = per.id;
+                    hr.hospitalized_type = "2";
+                    hr.in_hospital_time = intime11;
+                    hr.leave_hospital_time = outtime11;
+                    hr.reason = this.textBox98.Text;
+                    hr.hospital_organ = this.textBox96.Text;
+                    hr.case_code = this.textBox94.Text;
+                    hcd.addHospitalizedRecord(hr, "2");
+                }
+                if (this.checkBox31.Checked)
+                {
+                    string text97 = this.textBox97.Text;
+                    string text95 = this.textBox95.Text;
+                    if (text97 == "" || text95 == "") { MessageBox.Show("住院史信息填写不完整!"); return; }
+                    hr = new hospitalizedRecord();
+                    hr.exam_id = per.id;
+                    hr.archive_no = this.textBox106.Text;
+                    hr.id_number = this.textBox107.Text;
+                    hr.hospitalized_type = "2";
+                    hr.in_hospital_time = intime22;
+                    hr.leave_hospital_time = outtime22;
+                    hr.reason = this.textBox97.Text;
+                    hr.hospital_organ = this.textBox95.Text;
+                    hr.case_code = this.textBox93.Text;
+                    hcd.addHospitalizedRecord(hr, "0");
+                }
+                this.Close();
+                aUhealthcheckupServices1 auhc1 = new aUhealthcheckupServices1();
+                auhc1.textBox2.Text = this.textBox106.Text;
+                auhc1.textBox118.Text = this.textBox105.Text;
+                auhc1.textBox120.Text = per.id;
+                auhc1.id = per.id;//祖
+                auhc1.textBox119.Text = this.textBox107.Text;
+                auhc1.Show();
+            }
+        }
+
+        private void radioButton38_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButton38.Checked)
+            {
+                this.textBox46.Enabled = true;
+            }
+            else
+            {
+                this.textBox46.Enabled = false;
+            }
+        }
+
+        private void checkBox2_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox2.Checked) {
+                this.checkBox1.Checked = false;
+            }
+        }
+
+        private void checkBox3_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox3.Checked)
+            {
+                this.checkBox1.Checked = false;
+            }
+        }
+
+        private void checkBox4_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox4.Checked)
+            {
+                this.checkBox1.Checked = false;
+            }
+        }
+
+        private void checkBox5_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox5.Checked)
+            {
+                this.checkBox1.Checked = false;
+            }
+        }
+
+        private void checkBox8_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox8.Checked)
+            {
+                this.checkBox7.Checked = false;
+            }
+        }
+
+        private void checkBox9_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox9.Checked)
+            {
+                this.checkBox7.Checked = false;
+            }
+        }
+
+        private void checkBox10_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox10.Checked)
+            {
+                this.checkBox7.Checked = false;
+            }
+        }
+
+        private void checkBox11_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox11.Checked)
+            {
+                this.checkBox7.Checked = false;
+            }
+        }
+
+        private void checkBox14_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox14.Checked)
+            {
+                this.checkBox13.Checked = false;
+            }
+        }
+
+        private void checkBox15_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox15.Checked)
+            {
+                this.checkBox13.Checked = false;
+            }
+        }
+
+        private void checkBox16_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox16.Checked)
+            {
+                this.checkBox13.Checked = false;
+            }
+        }
+
+        private void checkBox17_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox17.Checked)
+            {
+                this.checkBox13.Checked = false;
+            }
+        }
+
+        private void checkBox18_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox18.Checked)
+            {
+                this.checkBox13.Checked = false;
+            }
+        }
+
+        private void checkBox21_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox21.Checked)
+            {
+                this.checkBox20.Checked = false;
+            }
+        }
+
+        private void checkBox22_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox22.Checked)
+            {
+                this.checkBox20.Checked = false;
+            }
+        }
+
+        private void checkBox25_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox25.Checked)
+            {
+                this.checkBox24.Checked = false;
+            }
+        }
+
+        private void checkBox26_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox26.Checked)
+            {
+                this.checkBox24.Checked = false;
+            }
+        }
+
+        private void checkBox27_Click(object sender, EventArgs e)
+        {
+            if (this.checkBox27.Checked)
+            {
+                this.checkBox24.Checked = false;
             }
         }
     }

@@ -83,20 +83,19 @@ namespace zkhwClient.view.updateTjResult
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            if (flag) {
+            //if (flag) {
                 string SBP = this.textBox5.Text;
                 string DBP =  this.textBox6.Text;
                 string Pulse = this.textBox7.Text;
-                bool istrue= tjdao.updateXueyaInfo(aichive_no, bar_code, DBP, SBP, Pulse);
+                bool istrue= tjdao.updateXueyaInfo(aichive_no, id_number, bar_code, DBP, SBP, Pulse);
                 if (istrue)
-                {
+                {   
                     MessageBox.Show("数据保存成功!");
                 }
                 else {
-                    MessageBox.Show("数据保存失败!");
-                }
+                MessageBox.Show("数据保存失败!");
             }
+            //}
         }
-
     }
 }

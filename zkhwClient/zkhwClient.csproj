@@ -147,6 +147,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -165,6 +166,8 @@
     <Compile Include="bean\fuv_hypertensionBean.cs" />
     <Compile Include="bean\grjdxxBean.cs" />
     <Compile Include="bean\hospitalizedRecord.cs" />
+    <Compile Include="bean\healthPoor.cs" />
+    <Compile Include="bean\ispoor.cs" />
     <Compile Include="bean\jkBean.cs" />
     <Compile Include="bean\loginLogBean.cs" />
     <Compile Include="bean\ltdOrganization.cs" />
@@ -191,6 +194,7 @@
     <Compile Include="dao\PublicHealthDao\personalBasicInfoDao.cs" />
     <Compile Include="dao\PublicHealthDao\psychiatricPatientServicesDao.cs" />
     <Compile Include="dao\PublicHealthDao\psychiatricPatientServicesDaoS.cs" />
+    <Compile Include="dao\PublicHealthDao\healthPoorServicesDao.cs" />
     <Compile Include="dao\SystemSettingsDao\areaConfigDao.cs" />
     <Compile Include="dao\SystemSettingsDao\jkInfoDao.cs" />
     <Compile Include="dao\SystemSettingsDao\basicSettingDao.cs" />
@@ -228,9 +232,22 @@
     <Compile Include="utils\CVRSDK.cs" />
     <Compile Include="utils\FileDataAddSql.cs" />
     <Compile Include="utils\FileWatcher.cs" />
+    <Compile Include="utils\httpJk.cs" />
     <Compile Include="utils\IntPtrFindWindow.cs" />
     <Compile Include="utils\Md5.cs" />
     <Compile Include="utils\FSWControl.cs" />
+    <Compile Include="view\HomeDoctorSigningView\FormJY.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\HomeDoctorSigningView\FormJY.Designer.cs">
+      <DependentUpon>FormJY.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\HomeDoctorSigningView\HomeDoctorLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\HomeDoctorSigningView\HomeDoctorLogin.Designer.cs">
+      <DependentUpon>HomeDoctorLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\PublicHealthView\addchildHealthServices.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -284,6 +301,12 @@
     </Compile>
     <Compile Include="view\PublicHealthView\aUhealthcheckTooth.Designer.cs">
       <DependentUpon>aUhealthcheckTooth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\aUhealthPoorServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\aUhealthPoorServices.Designer.cs">
+      <DependentUpon>aUhealthPoorServices.cs</DependentUpon>
     </Compile>
     <Compile Include="view\PublicHealthView\aUpsychiatricPatientServices.cs">
       <SubType>Form</SubType>
@@ -374,6 +397,12 @@
     </Compile>
     <Compile Include="view\PublicHealthView\aUolderHelthService.Designer.cs">
       <DependentUpon>aUolderHelthService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PublicHealthView\healthPoorServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\healthPoorServices.Designer.cs">
+      <DependentUpon>healthPoorServices.cs</DependentUpon>
     </Compile>
     <Compile Include="view\PublicHealthView\psychiatricPatientServices.cs">
       <SubType>Form</SubType>
@@ -799,6 +828,12 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\HomeDoctorSigningView\FormJY.resx">
+      <DependentUpon>FormJY.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\HomeDoctorSigningView\HomeDoctorLogin.resx">
+      <DependentUpon>HomeDoctorLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\HomeDoctorSigningView\onSiteSigning.resx">
       <DependentUpon>onSiteSigning.cs</DependentUpon>
     </EmbeddedResource>
@@ -834,6 +869,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\aUhealthcheckTooth.resx">
       <DependentUpon>aUhealthcheckTooth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\aUhealthPoorServices.resx">
+      <DependentUpon>aUhealthPoorServices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\aUpsychiatricPatientServices.resx">
       <DependentUpon>aUpsychiatricPatientServices.cs</DependentUpon>
@@ -903,6 +941,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\healthCheckup.resx">
       <DependentUpon>healthCheckup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\healthPoorServices.resx">
+      <DependentUpon>healthPoorServices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\hypertensionPatientServices.resx">
       <DependentUpon>hypertensionPatientServices.cs</DependentUpon>

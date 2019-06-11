@@ -13,7 +13,6 @@ namespace zkhwClient.view.PublicHealthView
 {
     public partial class tcmHealthServices : Form
     {
-
         service.tcmHealthService tcmHealthService = new service.tcmHealthService();
         //高血压随访记录历史表  关联传参调查询的方法
         //public string name = "";
@@ -22,7 +21,7 @@ namespace zkhwClient.view.PublicHealthView
         public string pCa = "";
         public string time1 = null;
         public string time2 = null;
-        public string cun = null;
+        public string cun = "";
         public tcmHealthServices()
         {
             InitializeComponent();
@@ -30,7 +29,7 @@ namespace zkhwClient.view.PublicHealthView
         private void tcmHealthServices_Load(object sender, EventArgs e)
         {
             //让默认的日期时间减一天
-            this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1);
+            this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
             this.label4.Text = "中医体质辨识记录表";
             this.label4.ForeColor = Color.SkyBlue;
             label4.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
@@ -57,23 +56,19 @@ namespace zkhwClient.view.PublicHealthView
                 this.label2.Text = "";
             }
             else { this.label2.Text = "---姓名/身份证号/档案号---"; }
-            //time1 = this.dateTimePicker1.Text.ToString();//开始时间
-            //time2 = this.dateTimePicker2.Text.ToString();//结束时间
-            string cun = comboBox5.SelectedValue?.ToString();
+            cun = comboBox5.SelectedValue?.ToString();
             querytcmHealthServices();
 
         }
         private void querytcmHealthServices()
         {
             this.dataGridView1.DataSource = null;
-            //this.dataGridView1.DataSource = GetData();
             time1 = this.dateTimePicker1.Text.ToString();//开始时间
             time2 = this.dateTimePicker2.Text.ToString();//结束时间
             string sql = "SELECT bb.name,bb.archive_no,bb.id_number,aa.test_date,aa.test_doctor,aa.id FROM (select b.name, b.archive_no, b.id_number from resident_base_info b where 1=1 and age >= '65'";
-            if (cun != "") { sql += " AND b.village_code='" + cun + "'"; }
+            if (cun != null&&!"".Equals(cun)) { sql += " AND b.village_code='" + cun + "'"; }
             if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
             sql += ") bb LEFT JOIN(select id,aichive_no,test_date,test_doctor from elderly_tcm_record where test_date >= '" + time1 + "' and test_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
-            
             DataSet dataSet = DbHelperMySQL.Query(sql);
             if (dataSet.Tables.Count < 1) { MessageBox.Show("未查询出数据，请重新查询!"); return; }
             DataTable dt = dataSet.Tables[0];
@@ -105,10 +100,11 @@ namespace zkhwClient.view.PublicHealthView
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             int row = dataGridView1.CurrentRow.Index;
-            string code=dataGridView1["archive_no", row].Value.ToString();
-            DataTable dtcode= tcmHealthService.checkTcmHealthServicesByno(code);
+            string code = dataGridView1["archive_no", row].Value.ToString();
+            string idnum=dataGridView1["id_number", row].Value.ToString();
+            DataTable dtcode= tcmHealthService.checkTcmHealthServicesByno(code, idnum);
             if (dtcode.Rows.Count>0) {
-                MessageBox.Show("此患者已参见过中医体质服务了,请重新选择!");
+                MessageBox.Show("此患者已参加过中医体质服务了,请重新选择!");
                 return;
             }
             addtcmHealthServices addtcm = new addtcmHealthServices(1, dataGridView1["name", row].Value.ToString(), dataGridView1["archive_no", row].Value.ToString(), dataGridView1["id_number", row].Value.ToString());

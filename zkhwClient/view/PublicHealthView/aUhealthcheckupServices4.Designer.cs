@@ -29,7 +29,12 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -77,8 +82,6 @@
             this.label51 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -93,14 +96,56 @@
             // 
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button9);
+            this.panel1.Controls.Add(this.button8);
+            this.panel1.Controls.Add(this.button7);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Location = new System.Drawing.Point(5, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1316, 894);
+            this.panel1.Size = new System.Drawing.Size(1320, 700);
             this.panel1.TabIndex = 6;
+            // 
+            // button9
+            // 
+            this.button9.BackColor = System.Drawing.Color.LimeGreen;
+            this.button9.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button9.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button9.Location = new System.Drawing.Point(474, 848);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(201, 38);
+            this.button9.TabIndex = 64;
+            this.button9.Text = "返回到第二页";
+            this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button8
+            // 
+            this.button8.BackColor = System.Drawing.Color.LimeGreen;
+            this.button8.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button8.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button8.Location = new System.Drawing.Point(230, 848);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(201, 38);
+            this.button8.TabIndex = 63;
+            this.button8.Text = "返回到首页";
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.Color.LimeGreen;
+            this.button7.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button7.Location = new System.Drawing.Point(712, 848);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(201, 38);
+            this.button7.TabIndex = 62;
+            this.button7.Text = "返回到第三页";
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // groupBox2
             // 
@@ -125,10 +170,30 @@
             this.groupBox2.Controls.Add(this.textBox50);
             this.groupBox2.Location = new System.Drawing.Point(2, 43);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1302, 801);
+            this.groupBox2.Size = new System.Drawing.Size(1336, 801);
             this.groupBox2.TabIndex = 61;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = " ";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(100, 721);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(1196, 74);
+            this.richTextBox1.TabIndex = 344;
+            this.richTextBox1.Text = "";
+            // 
+            // textBox5
+            // 
+            this.textBox5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox5.Location = new System.Drawing.Point(6, 721);
+            this.textBox5.Multiline = true;
+            this.textBox5.Name = "textBox5";
+            this.textBox5.ReadOnly = true;
+            this.textBox5.Size = new System.Drawing.Size(91, 74);
+            this.textBox5.TabIndex = 343;
+            this.textBox5.Text = "健康建议";
+            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox4
             // 
@@ -356,7 +421,6 @@
             this.textBox40.Name = "textBox40";
             this.textBox40.Size = new System.Drawing.Size(384, 30);
             this.textBox40.TabIndex = 322;
-            this.textBox40.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox39
             // 
@@ -365,7 +429,6 @@
             this.textBox39.Name = "textBox39";
             this.textBox39.Size = new System.Drawing.Size(294, 30);
             this.textBox39.TabIndex = 320;
-            this.textBox39.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox38
             // 
@@ -384,7 +447,6 @@
             this.textBox37.Name = "textBox37";
             this.textBox37.Size = new System.Drawing.Size(121, 30);
             this.textBox37.TabIndex = 317;
-            this.textBox37.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox36
             // 
@@ -511,9 +573,8 @@
             this.textBox33.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox33.Location = new System.Drawing.Point(126, 170);
             this.textBox33.Name = "textBox33";
-            this.textBox33.Size = new System.Drawing.Size(572, 30);
+            this.textBox33.Size = new System.Drawing.Size(1064, 30);
             this.textBox33.TabIndex = 268;
-            this.textBox33.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox31
             // 
@@ -521,9 +582,8 @@
             this.textBox31.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox31.Location = new System.Drawing.Point(126, 134);
             this.textBox31.Name = "textBox31";
-            this.textBox31.Size = new System.Drawing.Size(572, 30);
+            this.textBox31.Size = new System.Drawing.Size(1064, 30);
             this.textBox31.TabIndex = 270;
-            this.textBox31.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox28
             // 
@@ -542,9 +602,8 @@
             this.textBox29.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox29.Location = new System.Drawing.Point(126, 98);
             this.textBox29.Name = "textBox29";
-            this.textBox29.Size = new System.Drawing.Size(572, 30);
+            this.textBox29.Size = new System.Drawing.Size(1064, 30);
             this.textBox29.TabIndex = 268;
-            this.textBox29.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox27
             // 
@@ -563,9 +622,8 @@
             this.textBox48.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox48.Location = new System.Drawing.Point(126, 62);
             this.textBox48.Name = "textBox48";
-            this.textBox48.Size = new System.Drawing.Size(572, 30);
+            this.textBox48.Size = new System.Drawing.Size(1064, 30);
             this.textBox48.TabIndex = 227;
-            this.textBox48.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // radioButton39
             // 
@@ -653,7 +711,7 @@
             this.button5.BackColor = System.Drawing.Color.Red;
             this.button5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button5.Location = new System.Drawing.Point(1166, 849);
+            this.button5.Location = new System.Drawing.Point(1127, 849);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(118, 38);
             this.button5.TabIndex = 42;
@@ -666,7 +724,7 @@
             this.button4.BackColor = System.Drawing.Color.LimeGreen;
             this.button4.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button4.Location = new System.Drawing.Point(996, 849);
+            this.button4.Location = new System.Drawing.Point(957, 849);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(124, 38);
             this.button4.TabIndex = 41;
@@ -674,35 +732,14 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // textBox5
-            // 
-            this.textBox5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox5.Location = new System.Drawing.Point(6, 721);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(91, 74);
-            this.textBox5.TabIndex = 343;
-            this.textBox5.Text = "健康建议";
-            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(100, 721);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1196, 74);
-            this.richTextBox1.TabIndex = 344;
-            this.richTextBox1.Text = "";
-            // 
             // aUhealthcheckupServices4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1367, 750);
+            this.ClientSize = new System.Drawing.Size(1327, 750);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "aUhealthcheckupServices4";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "健康体检表";
@@ -776,5 +813,8 @@
         public System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
     }
 }

@@ -41,18 +41,16 @@
             this.个人基本信息建档ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.健康体检表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.老年人健康服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.中医健康服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.高血压患者服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.型糖尿病患者服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.中医健康服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.严重精神病障碍患者服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.肺结核患者服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.孕产妇ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.岁ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.儿童中医健康服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.家医ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.现场签约ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.团队成员ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.签约统计ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.家医签约登录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.数据分析ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.使用情况统计ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -96,6 +94,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.健康扶贫服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -157,6 +156,7 @@
             this.健康体检表ToolStripMenuItem,
             this.老年人健康服务ToolStripMenuItem,
             this.中医健康服务ToolStripMenuItem,
+            this.健康扶贫服务ToolStripMenuItem,
             this.高血压患者服务ToolStripMenuItem,
             this.型糖尿病患者服务ToolStripMenuItem,
             this.严重精神病障碍患者服务ToolStripMenuItem,
@@ -205,6 +205,12 @@
             this.老年人健康服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.老年人健康服务ToolStripMenuItem.Text = "老年人生活自理能力评估";
             // 
+            // 中医健康服务ToolStripMenuItem
+            // 
+            this.中医健康服务ToolStripMenuItem.Name = "中医健康服务ToolStripMenuItem";
+            this.中医健康服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.中医健康服务ToolStripMenuItem.Text = "老年人中医体质辨识";
+            // 
             // 高血压患者服务ToolStripMenuItem
             // 
             this.高血压患者服务ToolStripMenuItem.Name = "高血压患者服务ToolStripMenuItem";
@@ -216,12 +222,6 @@
             this.型糖尿病患者服务ToolStripMenuItem.Name = "型糖尿病患者服务ToolStripMenuItem";
             this.型糖尿病患者服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.型糖尿病患者服务ToolStripMenuItem.Text = "2型糖尿病患者服务";
-            // 
-            // 中医健康服务ToolStripMenuItem
-            // 
-            this.中医健康服务ToolStripMenuItem.Name = "中医健康服务ToolStripMenuItem";
-            this.中医健康服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.中医健康服务ToolStripMenuItem.Text = "老年人中医体质辨识";
             // 
             // 严重精神病障碍患者服务ToolStripMenuItem
             // 
@@ -257,32 +257,17 @@
             // 家医ToolStripMenuItem
             // 
             this.家医ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.现场签约ToolStripMenuItem,
-            this.团队成员ToolStripMenuItem,
-            this.签约统计ToolStripMenuItem});
+            this.家医签约登录ToolStripMenuItem});
             this.家医ToolStripMenuItem.Name = "家医ToolStripMenuItem";
             this.家医ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.家医ToolStripMenuItem.Text = "家医签约";
-            this.家医ToolStripMenuItem.Visible = false;
             this.家医ToolStripMenuItem.Click += new System.EventHandler(this.家医ToolStripMenuItem_Click);
             // 
-            // 现场签约ToolStripMenuItem
+            // 家医签约登录ToolStripMenuItem
             // 
-            this.现场签约ToolStripMenuItem.Name = "现场签约ToolStripMenuItem";
-            this.现场签约ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.现场签约ToolStripMenuItem.Text = "现场签约";
-            // 
-            // 团队成员ToolStripMenuItem
-            // 
-            this.团队成员ToolStripMenuItem.Name = "团队成员ToolStripMenuItem";
-            this.团队成员ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.团队成员ToolStripMenuItem.Text = "团队成员";
-            // 
-            // 签约统计ToolStripMenuItem
-            // 
-            this.签约统计ToolStripMenuItem.Name = "签约统计ToolStripMenuItem";
-            this.签约统计ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.签约统计ToolStripMenuItem.Text = "签约统计";
+            this.家医签约登录ToolStripMenuItem.Name = "家医签约登录ToolStripMenuItem";
+            this.家医签约登录ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.家医签约登录ToolStripMenuItem.Text = "家医签约登录";
             // 
             // 数据分析ToolStripMenuItem
             // 
@@ -548,6 +533,7 @@
             // 
             this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 28);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -687,6 +673,13 @@
             this.timer3.Interval = 60000;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
+            // 健康扶贫服务ToolStripMenuItem
+            // 
+            this.健康扶贫服务ToolStripMenuItem.Name = "健康扶贫服务ToolStripMenuItem";
+            this.健康扶贫服务ToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.健康扶贫服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.健康扶贫服务ToolStripMenuItem.Text = "健康扶贫服务";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -756,9 +749,6 @@
         private System.Windows.Forms.ToolStripMenuItem 孕产妇ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 岁ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 儿童中医健康服务ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 现场签约ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 团队成员ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 签约统计ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 使用情况统计ToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
@@ -791,6 +781,8 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Timer timer3;
         private System.Windows.Forms.ToolStripMenuItem 体检设备说明书ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 家医签约登录ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 健康扶贫服务ToolStripMenuItem;
     }
 }
 

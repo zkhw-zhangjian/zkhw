@@ -104,6 +104,8 @@ namespace zkhwClient.bean
         public string photo_code { get; set; }
         //建档机构
         public string aichive_org { get; set; }
+        //责任医生id
+        public string doctor_id { get; set; }
         //责任医生
         public string doctor_name { get; set; }
         //是否签约

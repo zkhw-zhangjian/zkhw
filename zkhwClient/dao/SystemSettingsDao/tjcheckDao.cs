@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Windows.Forms;
 
 namespace zkhwClient.dao
 {
@@ -14,13 +15,27 @@ namespace zkhwClient.dao
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
-
+        public bool updateShenghuaInfo(shenghuaBean sh)
+        {
+            int rt = 0;
+            String sql = "update zkhw_tj_sh set ALB='" + sh.ALB + "',ALP='" + sh.ALP + "',ALT='" + sh.ALT + "',AST='" + sh.AST + "',CHO='" + sh.CHO + "',Crea='" + sh.Crea + "',DBIL='" + sh.DBIL + "',GGT='" + sh.GGT + "',GLU='" + sh.GLU + "',HDLC='" + sh.HDL_C + "',LDLC='" + sh.LDL_C + "',TBIL='" + sh.TBIL + "',TG='" + sh.TG + "',TP='" + sh.TP + "',UA='" + sh.UA + "',UREA='" + sh.UREA + "' where aichive_no = '" + sh.aichive_no + "' and bar_code='" + sh.bar_code + "'";
+            rt = DbHelperMySQL.ExecuteSql(sql);
+            return rt == 0 ? false : true;
+        }
         public bool insertXuechangguiInfo(xuechangguiBean xcg)
         {
             int rt = 0;
             string id = Result.GetNewId();
             string timeCodeUnique = xcg.bar_code + "_" + xcg.createTime;
             String sql = "insert into zkhw_tj_xcg(ID,aichive_no,id_number,bar_code,HCT,HGB,LYM,LYMP,MCH,MCHC,MCV,MPV,MXD,MXDP,NEUT,NEUTP,PCT,PDW,PLT,RBC,RDWCV,RDWSD,WBC,MONO,MONOP,GRAN,GRANP,PLCR,createtime,timeCodeUnique) values('" + id + "','" + xcg.aichive_no + "','" + xcg.id_number + "','" + xcg.bar_code + "','" + xcg.HCT + "','" + xcg.HGB + "','" + xcg.LYM + "','" + xcg.LYMP + "','" + xcg.MCH + "','" + xcg.MCHC + "','" + xcg.MCV + "','" + xcg.MPV + "','" + xcg.MXD + "','" + xcg.MXDP + "','" + xcg.NEUT + "','" + xcg.NEUTP + "','" + xcg.PCT + "','" + xcg.PDW + "','" + xcg.PLT + "','" + xcg.RBC + "','" + xcg.RDW_CV + "','" + xcg.RDW_SD + "','" + xcg.WBC + "','" + xcg.MONO + "','" + xcg.MONOP + "','" + xcg.GRAN + "','" + xcg.GRANP + "','" + xcg.PLCR + "','" + xcg.createTime + "','" + timeCodeUnique + "')";
+            rt = DbHelperMySQL.ExecuteSql(sql);
+            return rt == 0 ? false : true;
+        }
+
+        public bool updateXuechangguiInfo(xuechangguiBean xcg)
+        {
+            int rt = 0;
+            String sql = "update zkhw_tj_xcg set HCT='" + xcg.HCT + "',HGB='" + xcg.HGB + "',LYM='" + xcg.LYM + "',LYMP='" + xcg.LYMP + "',MCH='" + xcg.MCH + "',MCHC='" + xcg.MCHC + "',MCV='" + xcg.MCV + "',MPV='" + xcg.MPV + "',MXD='" + xcg.MXD + "',MXDP='" + xcg.MXDP + "',NEUT='" + xcg.NEUT + "',NEUTP='" + xcg.NEUTP + "',PCT='" + xcg.PCT + "',PDW='" + xcg.PDW + "',PLT='" + xcg.PLT + "',RBC='" + xcg.RBC + "',RDWCV='" + xcg.RDW_CV + "',RDWSD='" + xcg.RDW_SD + "',WBC='" + xcg.WBC + "',MONO='" + xcg.MONO + "',MONOP='" + xcg.MONOP + "',GRAN='" + xcg.GRAN + "',GRANP='" + xcg.GRANP + "',PLCR='" + xcg.PLCR + "' where aichive_no = '" + xcg.aichive_no + "' and bar_code='" + xcg.bar_code + "'";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
@@ -65,11 +80,19 @@ namespace zkhwClient.dao
             return ds.Tables[0];
         }
         //修改生化检查信息根据档案号和条码号
-        public bool updateShenghuaInfo(string aichive_no, string barcode, string ALT, string AST, string TBIL, string DBIL, string CREA,string UREA, string GLU, string TG, string CHO, string HDLC, string LDLC, string ALB, string UA, string HCY, string AFP, string CEA, string Ka, string Na, string TP, string ALP, string GGT, string CHE, string TBA, string APOA1, string APOB, string CK, string CKMB, string LDHL, string HBDH, string aAMY)
+        public bool updateShenghuaInfo(string aichive_no, string id_number,string barcode, string ALT, string AST, string TBIL, string DBIL, string CREA,string UREA, string GLU, string TG, string CHO, string HDLC, string LDLC, string ALB, string UA, string HCY, string AFP, string CEA, string Ka, string Na, string TP, string ALP, string GGT, string CHE, string TBA, string APOA1, string APOB, string CK, string CKMB, string LDHL, string HBDH, string aAMY)
         {
             int ret = 0;
             String sql = "update zkhw_tj_sh set ALT='" + ALT + "',AST='" + AST + "',TBIL='" + TBIL + "',DBIL='" + DBIL + "',CREA='" + CREA + "',UREA='" + UREA + "',GLU='" + GLU + "',TG='" + TG + "',CHO='" + CHO + "',HDLC='" + HDLC + "',LDLC='" + LDLC + "',ALB='" + ALB + "',UA='" + UA + "',HCY='" + HCY + "',AFP='" + AFP + "',CEA='" + CEA + "',Ka='" + Ka + "',Na='" + Na + "',TP='" + TP + "',ALP='" + ALP + "',GGT='" + GGT + "',CHE='" + CHE + "',TBA='" + TBA + "',APOA1='" + APOA1 + "',APOB='" + APOB + "',CK='" + CK + "',CKMB='" + CKMB + "',LDHL='" + LDHL + "',HBDH='" + HBDH + "',aAMY='" + aAMY + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
+            if (ret == 0)
+            {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                   String sql1 = "insert into zkhw_tj_sh(ID,aichive_no,id_number,bar_code,ALT,AST,TBIL,DBIL,CREA,UREA,GLU,TG,CHO,HDLC,LDLC,ALB,UA,HCY,AFP,CEA,Ka,Na,TP,ALP,GGT,CHE,TBA,APOA1,APOB,CK,CKMB,LDHL,HBDH,aAMY,createtime,upload_status) values ('" + Result.GetNewId() + "','" + aichive_no + "','" + id_number + "','" + barcode + "','" + ALT + "','" + AST + "','" + TBIL + "','" + DBIL + "','" + CREA + "','" + UREA + "','" + GLU + "','" + TG + "','" + CHO + "','" + HDLC + "','" + LDLC + "','" + ALB + "','" + UA + "','" + HCY + "','" + AFP + "','" + CEA + "','" + Ka + "','" + Na + "','" + TP + "','" + ALP + "','" + GGT + "','" + CHE + "','" + TBA + "','" + APOA1 + "','" + APOB + "','" + CK + "','" + CKMB + "','" + LDHL + "','" + HBDH + "','" + aAMY + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "','0')";
+                ret = DbHelperMySQL.ExecuteSql(sql1);
+                String sql2 = "update zkhw_tj_bgdc set ShengHua='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                DbHelperMySQL.ExecuteSql(sql2);
+            }
             return ret == 0 ? false : true;
         }
         //查询血常规检查信息根据档案号和条码号
@@ -113,11 +136,17 @@ namespace zkhwClient.dao
             return ds.Tables[0];
         }
         //修改血压检查信息根据档案号和条码号
-        public bool updateXueyaInfo(string aichive_no, string barcode, string DBP, string SBP, string Pulse)
+        public bool updateXueyaInfo(string aichive_no,string id_number, string barcode, string DBP, string SBP, string Pulse)
         {
             int ret = 0;
             String sql = "update zkhw_tj_xy set DBP='" + DBP + "',SBP='" + SBP + "',Pulse='" + Pulse + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
+            if (ret ==0) {
+                String sql1 = "insert into zkhw_tj_xy(ID,aichive_no,id_number,bar_code,DBP,SBP,Pulse,createtime,upload_status) values ('" + Result.GetNewId() + "','" + aichive_no + "','" + id_number + "','" + barcode + "','" + DBP + "','" + SBP + "','" + Pulse + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "','0')";
+                ret = DbHelperMySQL.ExecuteSql(sql1);
+                String sql2 = "update zkhw_tj_bgdc set XueYa='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                DbHelperMySQL.ExecuteSql(sql2);
+            }
             return ret == 0 ? false : true;
         }
         //查询身高体重检查信息根据档案号和条码号
@@ -363,10 +392,10 @@ namespace zkhwClient.dao
             return ret == 0 ? false : true;
         }
         //根据生化检查结果修改健康体检表对应信息
-        public bool updatePEShInfo(string aichive_no, string barcode, string tc, string tg, string ldl,string hdl)
+        public bool updatePEShInfo(string aichive_no, string barcode, string tc, string tg, string ldl,string hdl,string glu, string sgft, string ast, string albumin, string total_bilirubin, string conjugated_bilirubin, string scr, string blood_urea)
         {
             int ret = 0;
-            String sql = "update physical_examination_record set tc='" + tc + "',tg='" + tg + "',ldl='" + ldl + "',hdl='" + hdl + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            String sql = "update physical_examination_record set sgft='" + sgft + "', ast='" + ast + "', albumin='" + albumin + "', total_bilirubin='" + total_bilirubin + "', conjugated_bilirubin='" + conjugated_bilirubin + "', scr='" + scr + "', blood_urea='" + blood_urea + "', tc='" + tc + "',tg='" + tg + "',ldl='" + ldl + "',hdl='" + hdl + "',blood_glucose_mmol='" + glu + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }

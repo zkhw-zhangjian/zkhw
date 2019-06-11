@@ -41,9 +41,9 @@ namespace zkhwClient.dao
         {
             DataSet ds = new DataSet();
             string sql = "SELECT bb.name,bb.archive_no,bb.id_number,aa.bar_code,aa.check_date,aa.doctor_name,aa.id FROM (select b.name, b.archive_no, b.id_number from resident_base_info b where 1=1";
-            if (code != "") { sql += " AND b.village_code='" + code + "'"; }
+            //if (code != "") { sql += " AND b.village_code='" + code + "'"; }
             if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
-            sql += ") bb LEFT JOIN(select a.id,a.aichive_no,a.bar_code,a.check_date,a.doctor_name from physical_examination_record a where a.check_date >= '" + time1 + "' and a.check_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
+            sql += ") bb JOIN (select a.id,a.aichive_no,a.id_number,a.bar_code,a.check_date,a.doctor_name from physical_examination_record a where a.check_date >= '" + time1 + "' and a.check_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no and bb.id_number=aa.id_number";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -95,6 +95,10 @@ namespace zkhwClient.dao
                 + "',lifeway_chemical_preventive='" + per.lifeway_chemical_preventive + "',lifeway_hazardous_other='" + per.lifeway_hazardous_other + "',lifeway_other_preventive='" + per.lifeway_other_preventive
                 + "',lifeway_doctor='" + per.lifeway_doctor + "' where id = '" + per.id + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
+            using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
+            {
+                sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "\r\n" + sql);
+            }
             return ret == 0 ? false : true;
         }
         //添加健康体检表  第二页
@@ -155,7 +159,7 @@ namespace zkhwClient.dao
             DbHelperMySQL.ExecuteSql(sql1);
             string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string id = Result.GetNewId();
-            string sql = @"insert into hospitalized_record (id,exam_id,archive_no,id_number,hospitalized_type,in_hospital_time,leave_hospital_time,reason,hospital_organ,case_code,create_name,create_time) values ('" +id + "','" + hr.exam_id + "','" + hr.archive_no + "', '"+hr.id_number+"', '"+hr.hospitalized_type + "', '" + hr.in_hospital_time + "', '" + hr.leave_hospital_time + "', '" + hr.reason + "', '" + hr.hospital_organ + "', '" + hr.case_code + "', '" + frmLogin.name + "', '" + time + "')";
+            string sql = @"insert into hospitalized_record (id,exam_id,archive_no,id_number,hospitalized_type,in_hospital_time,leave_hospital_time,reason,hospital_organ,case_code,create_org,create_name,create_time) values ('" +id + "','" + hr.exam_id + "','" + hr.archive_no + "', '"+hr.id_number+"', '"+hr.hospitalized_type + "', '" + hr.in_hospital_time + "', '" + hr.leave_hospital_time + "', '" + hr.reason + "', '" + hr.hospital_organ + "', '" + hr.case_code + "', '" + frmLogin.userCode + "', '" + frmLogin.name + "', '" + time + "')";
             int ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }
@@ -202,12 +206,12 @@ namespace zkhwClient.dao
                     {
                         if (i == 0)
                         {
-                            sql0 += "insert into take_medicine_record(id,exam_id,archive_no,id_number,medicine_name,medicine_usage,medicine_dosage,medicine_time,medicine_compliance,create_name,create_time) values ('" + Result.GetNewId() + "','" + per.id + "','" + per.aichive_no + "','" + per.id_number + "','" + goodsList.Rows[i]["drug_name"] + "','" + goodsList.Rows[i]["drug_usage"] + "','" + goodsList.Rows[i]["drug_use"] + "','" + goodsList.Rows[i]["drug_time"] + "','" + goodsList.Rows[i]["drug_type"] + "','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+                            sql0 += "insert into take_medicine_record(id,exam_id,archive_no,id_number,medicine_name,medicine_usage,medicine_dosage,medicine_time,medicine_compliance,create_org,create_name,create_time) values ('" + Result.GetNewId() + "','" + per.id + "','" + per.aichive_no + "','" + per.id_number + "','" + goodsList.Rows[i]["drug_name"] + "','" + goodsList.Rows[i]["drug_usage"] + "','" + goodsList.Rows[i]["drug_use"] + "','" + goodsList.Rows[i]["drug_time"] + "','" + goodsList.Rows[i]["drug_type"] + "','" + frmLogin.userCode + "','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
                         }
                         else
                         {
-                            sql0 += ",('" + Result.GetNewId() + "','" + per.id + "','" + per.aichive_no + "','" + per.id_number + "','" + goodsList.Rows[i]["drug_name"] + "','" + goodsList.Rows[i]["drug_usage"] + "','" + goodsList.Rows[i]["drug_use"] + "','" + goodsList.Rows[i]["drug_time"] + "','" + goodsList.Rows[i]["drug_type"] + "','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+                            sql0 += ",('" + Result.GetNewId() + "','" + per.id + "','" + per.aichive_no + "','" + per.id_number + "','" + goodsList.Rows[i]["drug_name"] + "','" + goodsList.Rows[i]["drug_usage"] + "','" + goodsList.Rows[i]["drug_use"] + "','" + goodsList.Rows[i]["drug_time"] + "','" + goodsList.Rows[i]["drug_type"] + "','" + frmLogin.userCode + "','" + frmLogin.name + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
                         }
                     }

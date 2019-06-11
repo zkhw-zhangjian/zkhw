@@ -57,6 +57,7 @@ namespace zkhwClient.bean
         public string medical_code { get; set; }
         public string photo_code { get; set; }
         public string aichive_org { get; set; }
+        public string doctor_id { get; set; }
         public string doctor_name { get; set; }
         public string create_archives_name { get; set; }
         public string is_signing { get; set; }
