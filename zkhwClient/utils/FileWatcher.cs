@@ -260,7 +260,7 @@ namespace zkhwClient
                         string aichive_no = data.Rows[0]["aichive_no"].ToString();
                         string barcode = data.Rows[0]["bar_code"].ToString();
                         DataTable dtnum = jkInfoDao.queryChongfuXdtData(aichive_no, barcode);
-                        advicetexts = advicetexts.Replace("在不知道病人的性别/年龄情况下做的诊断结论", "").Replace("---", "").Replace("***","");
+                        advicetexts = advicetexts.Replace("在不知道病人的性别/年龄情况下做的诊断结论", "").Replace("---", "").Replace("***","").Replace("~", "");
                         string issql = "";
                         MySqlParameter[] args = null;
                         if (dtnum.Rows.Count < 1)

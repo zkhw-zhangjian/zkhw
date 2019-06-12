@@ -75,27 +75,40 @@ namespace zkhwClient.view.PublicHealthView
                         this.textBox33.Text = dtz.Rows[0]["abnormal4"].ToString();
                     }
                     else
-                    {
+                    {//异常1
                         string temperature = dtz.Rows[0]["base_temperature"].ToString();
                         if (temperature != null && !"".Equals(temperature))
                         {
                             double temdouble = Convert.ToDouble(temperature);
                             if (temdouble >= 37)
                             {
-                                this.textBox48.Text += "体温偏高 ";
+                                this.textBox48.Text += "体温升高 ";
                             }
                         }
                         string base_bmi = dtz.Rows[0]["base_bmi"].ToString();
                         if (base_bmi != null && !"".Equals(base_bmi))
                         {
                             double bmidouble = Convert.ToDouble(base_bmi);
-                            if (bmidouble >= 28)
+                            if (bmidouble > 28)
                             {
-                                this.textBox48.Text += "体质偏胖 ";
+                                this.textBox48.Text += "肥胖 ";
                             }
-                            else if (bmidouble <= 16)
+                            else if (bmidouble >= 24&&bmidouble < 28)
                             {
-                                this.textBox48.Text += "体质偏瘦 ";
+                                this.textBox48.Text += "体重超标 ";
+                            }
+                        }
+                        string base_waist = dtz.Rows[0]["base_waist"].ToString();
+                        if (base_waist != null && !"".Equals(base_waist))
+                        {
+                            string sexw= this.textBox3.Text.Substring(16,1);
+                            int waistint = Int32.Parse(base_waist);
+                            if (sexw=="1"&& waistint >95)
+                            {
+                                this.textBox48.Text += "中心型肥胖 ";
+                            }else if (sexw == "2" && waistint > 85)
+                            {
+                                this.textBox48.Text += "中心型肥胖 ";
                             }
                         }
                         if (!string.IsNullOrWhiteSpace(dtz.Rows[0]["base_blood_pressure_right_high"].ToString()) || !string.IsNullOrWhiteSpace(dtz.Rows[0]["base_blood_pressure_right_low"].ToString()))
@@ -109,7 +122,43 @@ namespace zkhwClient.view.PublicHealthView
                                 this.textBox48.Text += "血压偏低 ";
                             }
                         }
-
+                        string estimate = dtz.Rows[0]["base_selfcare_estimate"].ToString();
+                        if (estimate != null && !"".Equals(estimate))
+                        {
+                            int estimateint = Int32.Parse(estimate);
+                            if (estimateint == 3|| estimateint == 4)
+                            {
+                                this.textBox48.Text += "生活不能自理 ";
+                            }
+                        }
+                        string frequency = dtz.Rows[0]["lifeway_exercise_frequency"].ToString();
+                        if (frequency != null && !"".Equals(frequency))
+                        {
+                            int frequencyint = Int32.Parse(frequency);
+                            if (frequencyint == 3 || frequencyint == 4)
+                            {
+                                this.textBox48.Text += "缺乏规律锻炼 ";
+                            }
+                        }
+                        string smoke = dtz.Rows[0]["lifeway_smoke_status"].ToString();
+                        if (smoke != null && !"".Equals(smoke))
+                        {
+                            int smokeint = Int32.Parse(smoke);
+                            if (smokeint == 3)
+                            {
+                                this.textBox48.Text += "吸烟 ";
+                            }
+                        }
+                        string drink = dtz.Rows[0]["lifeway_drink_status"].ToString();
+                        if (drink != null && !"".Equals(drink))
+                        {
+                            int drinkint = Int32.Parse(drink);
+                            if (drinkint == 3|| drinkint == 4)
+                            {
+                                this.textBox48.Text += "过量饮酒 ";
+                            }
+                        }
+                        //异常2
                         string organ_lips = dtz.Rows[0]["organ_lips"].ToString();
                         if (organ_lips != null && !"".Equals(organ_lips))
                         {
@@ -139,13 +188,31 @@ namespace zkhwClient.view.PublicHealthView
                                 this.textBox29.Text += "咽部异常 ";
                             }
                         }
+                        string organ_vision_left = dtz.Rows[0]["organ_vision_left"].ToString();
+                        if (organ_vision_left != null && !"".Equals(organ_vision_left))
+                        {
+                            Double visionleft = Convert.ToDouble(organ_vision_left);
+                            if (visionleft < 4.0)
+                            {
+                                this.textBox29.Text += "左视力异常 ";
+                            }
+                        }
+                        string organ_vision_right = dtz.Rows[0]["organ_vision_right"].ToString();
+                        if (organ_vision_right != null && !"".Equals(organ_vision_right))
+                        {
+                            Double visionright = Convert.ToDouble(organ_vision_right);
+                            if (visionright < 4.0)
+                            {
+                                this.textBox29.Text += "右视力异常 ";
+                            }
+                        }
                         string organ_hearing = dtz.Rows[0]["organ_hearing"].ToString();
                         if (organ_hearing != null && !"".Equals(organ_hearing))
                         {
                             int hearingdouble = Convert.ToInt32(organ_hearing);
                             if (hearingdouble > 1)
                             {
-                                this.textBox29.Text += "听力听不清 ";
+                                this.textBox29.Text += "听力异常 ";
                             }
                         }
                         string organ_movement = dtz.Rows[0]["organ_movement"].ToString();
@@ -296,6 +363,7 @@ namespace zkhwClient.view.PublicHealthView
                                 this.textBox29.Text += "下肢有水肿 ";
                             }
                         }
+                        //异常3
                         bool xcgflag = false;
                         string blood_hemoglobin = dtz.Rows[0]["blood_hemoglobin"].ToString();
                         if (blood_hemoglobin != null && !"".Equals(blood_hemoglobin))
@@ -354,9 +422,9 @@ namespace zkhwClient.view.PublicHealthView
                         string cardiogram = dtz.Rows[0]["cardiogram"].ToString();
                         if (cardiogram=="2")
                         {
-                            this.textBox31.Text += "心电图:"+ dtz.Rows[0]["cardiogram_memo"].ToString()+" "; 
+                            this.textBox31.Text += "心电图异常 "; 
                         }
-
+                        
                         bool shflag = false;
                         string sgft = dtz.Rows[0]["sgft"].ToString();
                         if (sgft != null && !"".Equals(sgft))
@@ -403,10 +471,79 @@ namespace zkhwClient.view.PublicHealthView
                         {
                             if (Convert.ToDouble(tg) > 1.7) { shflag = true; }
                         }
+                        string ldl = dtz.Rows[0]["ldl"].ToString();
+                        if (ldl != null && !"".Equals(ldl))
+                        {
+                            if (Convert.ToDouble(ldl) > 3.9|| Convert.ToDouble(ldl)<1.5) { shflag = true; }
+                        }
+                        string hdl = dtz.Rows[0]["hdl"].ToString();
+                        if (hdl != null && !"".Equals(hdl))
+                        {
+                            if (Convert.ToDouble(hdl) > 1.9 || Convert.ToDouble(hdl) < 0.9) { shflag = true; }
+                        }
                         if (shflag) this.textBox31.Text += "生化有异常 ";
                         if (dtz.Rows[0]["ultrasound_abdomen"].ToString() == "2")
                         {
-                            this.textBox31.Text +="B超:"+ dtz.Rows[0]["ultrasound_memo"].ToString();
+                            this.textBox31.Text +="B超异常 ";
+                        }
+                        //异常4
+                        string cerebrovascular = dtz.Rows[0]["cerebrovascular_disease"].ToString();
+                        if (cerebrovascular != null && !"".Equals(cerebrovascular))
+                        {
+                            if (cerebrovascular.IndexOf("2")>-1|| cerebrovascular.IndexOf("3") > -1|| cerebrovascular.IndexOf("4") > -1|| cerebrovascular.IndexOf("5") > -1|| cerebrovascular.IndexOf("6") > -1)
+                            {
+                                this.textBox33.Text += "脑血管疾病 ";
+                            }
+                        }
+                        string kidney_disease = dtz.Rows[0]["kidney_disease"].ToString();
+                        if (kidney_disease != null && !"".Equals(kidney_disease))
+                        {
+                            if (kidney_disease.IndexOf("2") > -1 || kidney_disease.IndexOf("3") > -1 || kidney_disease.IndexOf("4") > -1 || kidney_disease.IndexOf("5") > -1 || kidney_disease.IndexOf("6") > -1)
+                            {
+                                this.textBox33.Text += "肾脏疾病 ";
+                            }
+                        }
+                        string heart_disease = dtz.Rows[0]["heart_disease"].ToString();
+                        if (heart_disease != null && !"".Equals(heart_disease))
+                        {
+                            if (heart_disease.IndexOf("2") > -1 || heart_disease.IndexOf("3") > -1 || heart_disease.IndexOf("4") > -1 || heart_disease.IndexOf("5") > -1 || heart_disease.IndexOf("6") > -1 || heart_disease.IndexOf("7") > -1)
+                            {
+                                this.textBox33.Text += "心脏疾病 ";
+                            }
+                        }
+                        string vascular_disease = dtz.Rows[0]["vascular_disease"].ToString();
+                        if (vascular_disease != null && !"".Equals(vascular_disease))
+                        {
+                            if (vascular_disease.IndexOf("2") > -1 || vascular_disease.IndexOf("3") > -1 || vascular_disease.IndexOf("4") > -1)
+                            {
+                                this.textBox33.Text += "血管疾病 ";
+                            }
+                        }
+                        string ocular_diseases = dtz.Rows[0]["ocular_diseases"].ToString();
+                        if (ocular_diseases != null && !"".Equals(ocular_diseases))
+                        {
+                            if (ocular_diseases.IndexOf("2") > -1 || ocular_diseases.IndexOf("3") > -1 || ocular_diseases.IndexOf("4") > -1 || ocular_diseases.IndexOf("5") > -1)
+                            {
+                                this.textBox33.Text += "眼部疾病 ";
+                            }
+                        }
+                        string nervous = dtz.Rows[0]["nervous_system_disease"].ToString();
+                        if (nervous != null && !"".Equals(nervous))
+                        {
+                            int nervousint = Int32.Parse(nervous);
+                            if (nervousint == 2)
+                            {
+                                this.textBox33.Text += "神经系统疾病 ";
+                            }
+                        }
+                        string other_disease = dtz.Rows[0]["other_disease"].ToString();
+                        if (other_disease != null && !"".Equals(other_disease))
+                        {
+                            int otherint = Int32.Parse(other_disease);
+                            if (otherint == 2)
+                            {
+                                this.textBox33.Text += "其他系统疾病 ";
+                            }
                         }
                     }
 

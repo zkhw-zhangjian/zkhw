@@ -1075,10 +1075,10 @@
             this.radioButton137.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton137.Location = new System.Drawing.Point(676, 14);
             this.radioButton137.Name = "radioButton137";
-            this.radioButton137.Size = new System.Drawing.Size(119, 28);
+            this.radioButton137.Size = new System.Drawing.Size(125, 28);
             this.radioButton137.TabIndex = 3;
             this.radioButton137.Tag = "28.4";
-            this.radioButton137.Text = "4(腹围 1-105cm，\r\n2.71-3.15 尺) ";
+            this.radioButton137.Text = "4(腹围 91-105cm，\r\n2.71-3.15 尺) ";
             this.radioButton137.UseVisualStyleBackColor = true;
             // 
             // radioButton138

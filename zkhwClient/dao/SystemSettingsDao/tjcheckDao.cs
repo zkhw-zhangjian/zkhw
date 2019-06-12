@@ -149,6 +149,22 @@ namespace zkhwClient.dao
             }
             return ret == 0 ? false : true;
         }
+        //根据血压检查结果修改健康体检表对应信息
+        public bool updatePEXyInfo(string aichive_no, string barcode, string base_heartbeat, string right_high, string right_low, string left_high, string left_low, string base_respiratory)
+        {
+            int ret = 0;
+            String sql = "update physical_examination_record set base_heartbeat='" + base_heartbeat + "',base_blood_pressure_right_high='" + right_high + "',base_blood_pressure_right_low='" + right_low + "',base_blood_pressure_left_high='" + left_high + "',base_blood_pressure_left_low='" + left_low + "',base_respiratory='" + base_respiratory + "',examination_heart_rate='" + base_heartbeat + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
+        //更新体检进度tj_bgdc--血压
+        public bool updateTJbgdcXueya(string aichive_no, string barcode)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_bgdc set XueYa='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
         //查询身高体重检查信息根据档案号和条码号
         public DataTable selectSgtzInfo(string aichive_no, string barcode)
         {
@@ -162,6 +178,22 @@ namespace zkhwClient.dao
         {
             int ret = 0;
             String sql = "update zkhw_tj_sgtz set Height='" + Height + "',Weight='" + Weight + "',BMI='" + BMI + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
+        //根据身高体重检查结果修改健康体检表对应信息
+        public bool updatePESgtzInfo(string aichive_no, string barcode, string base_height, string base_weight, string base_bmi)
+        {
+            int ret = 0;
+            String sql = "update physical_examination_record set base_height='" + base_height + "',base_weight='" + base_weight + "',base_bmi='" + base_bmi + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
+        //更新体检进度tj_bgdc--身高体重
+        public bool updateTJbgdcSgtz(string aichive_no, string barcode)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_bgdc set Shengaotizhong='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }

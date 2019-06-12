@@ -1061,7 +1061,7 @@ where 1=1";
                     if (hyxdts != null && hyxdts.Tables.Count > 0 && hyxdts.Tables[0].Rows.Count > 0)
                     {
                         DataTable da = hyxdts.Tables[0];
-                        string XdtDesc = da.Rows[0]["XdtDesc"].ToString().Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", "").Replace("***", "");
+                        string XdtDesc = da.Rows[0]["XdtDesc"].ToString().Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", "").Replace("***", "").Replace("~", "");
                         hy.Add("心电图", XdtDesc);
                     }
                     DataSet bcs = DbHelperMySQL.Query($"select * from zkhw_tj_bc where id_number='{data["id_number"].ToString()}' order by createtime desc LIMIT 1");
@@ -2199,6 +2199,7 @@ where 1=1";
                         for (int j = 0; j < jkdata.Rows.Count; j++)
                         {
                             string sm = string.Empty;
+                            int flagxcg = 0;
                             //jktj.Add("血红蛋白", 
                             string blood_hemoglobin = jkdata.Rows[j]["blood_hemoglobin"].ToString();
                             if (!string.IsNullOrWhiteSpace(blood_hemoglobin))
@@ -2206,10 +2207,12 @@ where 1=1";
                                 if (Convert.ToDouble(blood_hemoglobin) < 110)
                                 {
                                     sm += "血红蛋白值偏低：" + blood_hemoglobin + " g/L   ";
+                                    flagxcg = 1;
                                 }
                                 else if (Convert.ToDouble(blood_hemoglobin) > 160)
                                 {
                                     sm += "血红蛋白偏高：" + blood_hemoglobin + " g/L   ";
+                                    flagxcg = 1;
                                 }
                             }
                             //jktj.Add("血小板", 
@@ -2219,10 +2222,12 @@ where 1=1";
                                 if (Convert.ToDouble(blood_platelet) < 100)
                                 {
                                     sm += "血小板值偏低：" + blood_platelet + " mmol/L   ";
+                                    flagxcg = 1;
                                 }
                                 else if (Convert.ToDouble(blood_platelet) > 300)
                                 {
                                     sm += "血小板偏高：" + blood_platelet + " mmol/L   ";
+                                    flagxcg = 1;
                                 }
                             }
                             //jktj.Add("白细胞", 
@@ -2232,9 +2237,11 @@ where 1=1";
                                 if (Convert.ToDouble(blood_leukocyte) > 10)
                                 {
                                     sm += "白细胞偏高：" + blood_leukocyte + " CELL/μL   ";
+                                    flagxcg = 1;
                                 }
                             }                            
-                            sm += "\r\n";
+                            if(flagxcg == 1) sm += "\r\n";
+                            int flagncg = 0;
                             //jktj.Add("尿蛋白", 
                             string urine_protein = jkdata.Rows[j]["urine_protein"].ToString();
                             if (!string.IsNullOrWhiteSpace(urine_protein))
@@ -2242,6 +2249,7 @@ where 1=1";
                                 if (urine_protein != "-")
                                 {
                                     sm += @"尿蛋白：" + urine_protein+"   ";
+                                    flagncg = 1;
                                 }
                             }
                             //jktj.Add("尿糖", 
@@ -2251,6 +2259,7 @@ where 1=1";
                                 if (glycosuria != "-")
                                 {
                                     sm += @"尿糖：" + glycosuria + "   ";
+                                    flagncg = 1;
                                 }
                             }
                             //jktj.Add("尿酮体", 
@@ -2260,6 +2269,7 @@ where 1=1";
                                 if (urine_acetone_bodies != "-")
                                 {
                                     sm += @"尿酮体：" + urine_acetone_bodies + "   ";
+                                    flagncg = 1;
                                 }
                             }
                             //jktj.Add("尿潜血", 
@@ -2269,9 +2279,11 @@ where 1=1";
                                 if (bld != "-")
                                 {
                                     sm += @"尿潜血：" + bld + "   ";
+                                    flagncg = 1;
                                 }
                             }
-                            sm += "\r\n";
+                           if(flagncg ==1) sm += "\r\n";
+                            int flagsh = 0;
                             //jktj.Add("空腹血糖1", 
                             int bgm = 0;
                             string blood_glucose_mmol = jkdata.Rows[j]["blood_glucose_mmol"].ToString();
@@ -2281,6 +2293,7 @@ where 1=1";
                                 {
                                     sm += @"血糖值偏高：" + blood_glucose_mmol + "mmol/L   ";
                                     bgm = 1;
+                                    flagsh = 1;
                                 }
                             }
                             //jktj.Add("血清谷丙转氨酶", 
@@ -2290,6 +2303,7 @@ where 1=1";
                                 if (Convert.ToDouble(sgft) > 40)
                                 {
                                     sm += @"血清谷丙转氨酶值偏高：" + sgft + "u/l   ";
+                                    flagsh = 1;
                                 }
                             }
                             //jktj.Add("血清谷草转氨酶",
@@ -2299,6 +2313,7 @@ where 1=1";
                                 if (Convert.ToDouble(ast) > 40)
                                 {
                                     sm += @"血清谷草转氨酶值偏高：" + ast + "u/l   ";
+                                    flagsh = 1;
                                 }
                             }
                             //jktj.Add("白蛋白",
@@ -2308,10 +2323,12 @@ where 1=1";
                                 if (Convert.ToDouble(albumin) > 54)
                                 {
                                     sm += @"白蛋白值偏高：" + albumin + "g/l   ";
+                                    flagsh = 1;
                                 }
                                 else if(Convert.ToDouble(albumin) < 34)
                                 {
                                     sm += @"白蛋白值偏低：" + albumin + "g/l   ";
+                                    flagsh = 1;
                                 }
                             }
                             //jktj.Add("总胆红素", 
@@ -2321,10 +2338,12 @@ where 1=1";
                                 if (Convert.ToDouble(total_bilirubin) > 20)
                                 {
                                     sm += @"总胆红素值偏高：" + total_bilirubin + "umol/l   ";
+                                    flagsh = 1;
                                 }
                                 else if(Convert.ToDouble(total_bilirubin) < 2)
                                 {
                                     sm += @"总胆红素值偏低：" + total_bilirubin + "umol/l   ";
+                                    flagsh = 1;
                                 }
                             }
                             //jktj.Add("直接胆红素", 
@@ -2334,10 +2353,12 @@ where 1=1";
                                 if (Convert.ToDouble(conjugated_bilirubin) > 6.8)
                                 {
                                     sm += @"直接胆红素值偏高：" + conjugated_bilirubin + "umol/l   ";
+                                    flagsh = 1;
                                 }
                                 else if(Convert.ToDouble(conjugated_bilirubin) < 1.7)
                                 {
                                     sm += @"直接红素值偏低：" + conjugated_bilirubin + "umol/l   ";
+                                    flagsh = 1;
                                 }
                             }
                             
@@ -2348,6 +2369,7 @@ where 1=1";
                                 if (Convert.ToDouble(scr) > 115)
                                 {
                                     sm += @"肌酐值偏高：" + scr + "umol/l   ";
+                                    flagsh = 1;
                                 }
                             }
                             //jktj.Add("尿素", 
@@ -2357,10 +2379,12 @@ where 1=1";
                                 if (Convert.ToDouble(blood_urea) > 8.2)
                                 {
                                     sm += @"尿素值偏高：" + scr + "umol/l   ";
+                                    flagsh = 1;
                                 }
                                 else if(Convert.ToDouble(blood_urea) < 1.7)
                                 {
                                     sm += @"尿素值偏低：" + blood_urea + "umol/l   ";
+                                    flagsh = 1;
                                 }
                             }
                             //jktj.Add("总胆固醇", 
@@ -2374,6 +2398,7 @@ where 1=1";
                                 {
                                     flg = 1;
                                     sm += "胆固醇值偏高:" + tc + " " + "mmol/l";
+                                    flagsh = 1;
                                 }
                             }
                             if (!string.IsNullOrWhiteSpace(tg))
@@ -2382,9 +2407,10 @@ where 1=1";
                                 {
                                     flg = 1;
                                     sm += "甘油三酯值偏高:" + tg + " " + "mmol/l";
+                                    flagsh = 1;
                                 }
                             }
-                            sm += "\r\n";
+                            if(flagsh == 1)sm += "\r\n";
                             
                             int gyyfiag =0;
                             //string bbplh = jkdata.Rows[j]["base_blood_pressure_left_high"].ToString();
@@ -2403,62 +2429,78 @@ where 1=1";
                                 {
                                     sm += "血压值偏高：" + Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_high"]) + "/" + Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_low"]);
                                     gyyfiag = 1;
+                                    sm += "\r\n";
                                 }
                                 else if(Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_high"]) < 90 || Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_low"]) < 60)
                                 {
                                     sm += "血压值偏低：" + Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_high"]) + "/" + Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_low"]);
                                     gyyfiag = 2;
+                                    sm += "\r\n";
                                 }
                             }
                             
                             int xdtfiag = 0;
                             if (jkdata.Rows[j]["cardiogram"].ToString() == "2")
                             {
-                                sm += @"不正常心电图："+ jkdata.Rows[j]["cardiogram_memo"].ToString();
+                                sm += @"不正常心电图："+ jkdata.Rows[j]["cardiogram_memo"].ToString().Replace("~", "");
                                 xdtfiag = 1;
+                                sm += "\r\n";
                             }
-                            sm += "\r\n";
+
                             int bcfiag = 0;
                             if (jkdata.Rows[j]["ultrasound_abdomen"].ToString() == "2")
                             {
                                 sm += jkdata.Rows[j]["ultrasound_memo"].ToString();
                                 bcfiag = 1;
+                                sm += "\r\n";
                             }
-                            sm += "\r\n";
-                            sm += "健康建议：建议复查,医院就诊,明确诊断";
-                            sm += "\r\n";
+
                             string health_evaluation = jkdata.Rows[j]["health_evaluation"].ToString();
                             if (health_evaluation == "2")
                             {
-                                sm += "健康评价：1." + jkdata.Rows[j]["abnormal1"].ToString() + "   " + jkdata.Rows[j]["abnormal2"].ToString() + "   " + jkdata.Rows[j]["abnormal3"].ToString() + "   " + jkdata.Rows[j]["abnormal4"].ToString();
+                                sm += "健康评价：\r\n";
+                                sm += "异常1：" + jkdata.Rows[j]["abnormal1"].ToString() + "\r\n";
+                                sm += "异常2：" + jkdata.Rows[j]["abnormal2"].ToString() + "\r\n";
+                                sm += "异常3：" + jkdata.Rows[j]["abnormal3"].ToString() + "\r\n";
+                                sm += "异常4：" + jkdata.Rows[j]["abnormal4"].ToString() + "\r\n";
                             }
-
+                            sm += "健康建议：建议复查,医院就诊,明确诊断。";
+                            sm += "\r\n";
                             if (gyyfiag == 1)
                             {
-                                sm += @"高血压是指以体循环动脉血压（收缩压和/或舒张压）增高为主要特征（收缩压≥140毫米汞柱，舒张压≥90毫米汞柱），可伴有心、脑、肾等器官的功能或器质性损害的临床综合征。高血压是最常见的慢性病，也是心脑血管病最主要的危险因素。
-1、改善生活行为：减轻并控制体重、少盐少脂，增加运动、戒烟限酒、减轻精神压力、保持心理平衡。
-2、高血压患者应用药物控制血压。应定期随访和测量血压，预防心脑肾并发症的发生，降低心脑血管事件的发生率。";
+                                sm += "高血压健康指导：\r\n";
+                                //sm += @"    高血压是指以体循环动脉血压（收缩压和/或舒张压）增高为主要特征（收缩压≥140毫米汞柱，舒张压≥90毫米汞柱），可伴有心、脑、肾等器官的功能或器质性损害的临床综合征。高血压是最常见的慢性病，也是心脑血管病最主要的危险因素。";
+                                //sm += "\r\n健康指导：\r\n";
+                                sm += @"    改善生活行为，减轻并控制体重、少盐少脂，增加运动、戒烟限酒、减轻精神压力、保持心理平衡。高血压患者应用药物控制血压。应定期随访和测量血压，预防心脑肾并发症的发生，降低心脑血管事件的发生率。";
+                                sm += "\r\n";
                             }
-                            else if (gyyfiag == 2)
-                            {
-                                sm += @"低血压是指以体循环动脉血压（收缩压和/或舒张压）降低为主要特征（收缩压≤90毫米汞柱，舒张压≤60毫米汞柱），可伴有心、脑、肾等器官的功能或器质性损害的临床综合征。
-1、改善生活行为：减轻并控制体重、少盐少脂，增加运动、戒烟限酒、减轻精神压力、保持心理平衡。
-2、低血压患者应生活要有规律，防止过度疲劳，因为极度疲劳会使血压降得更低，要保持良好的精神状态。";
-                            }
+//                            else if (gyyfiag == 2)
+//                            {
+//                                sm += "低血压：\r\n";
+//                                sm += @"    低血压是指以体循环动脉血压（收缩压和/或舒张压）降低为主要特征（收缩压≤90毫米汞柱，舒张压≤60毫米汞柱），可伴有心、脑、肾等器官的功能或器质性损害的临床综合征。
+//健康指导：改善生活行为：减轻并控制体重、少盐少脂，增加运动、戒烟限酒、减轻精神压力、保持心理平衡。低血压患者应生活要有规律，防止过度疲劳，因为过度疲劳会使血压下降，并且要保持良好的精神状态。";
+//                                sm += "\r\n";
+//                            }
+                            
                             if (flg == 1)
                             {
-                                sm += @"高血脂是体内脂类代谢紊乱，导致血脂水平增高，并由此引发一系列临床病理表现的病症。高脂血症可引发许多疾病，是形成冠心病的主要因素之一。
-健康指导：
-1、高血脂症注意清淡膳食，粗细搭配。常吃蔬菜、豆类及其制品，适量吃鱼、禽、瘦肉，减少脂肪和盐摄入，戒烟限酒，合理增加运动。
-2、血脂高的人群最好每年常规化验一次血脂。及时应用药物进行系统治疗。";
+                                sm += "高血脂健康指导：\r\n";
+                                //sm += @"    高血脂是体内脂类代谢紊乱，导致血脂水平增高，并由此引发一系列临床病理表现的病症。高脂血症可引发许多疾病，是形成冠心病的主要因素之一。";
+                                //sm += "\r\n健康指导：\r\n";
+                                sm += @"     高血脂症注意清淡膳食，粗细搭配。常吃蔬菜、豆类及其制品，适量吃鱼、禽、瘦肉，减少脂肪和盐摄入，戒烟限酒，合理增加运动。血脂高的人群最好每年常规化验一次血脂，及时应用药物进行系统治疗。";
+                                sm += "\r\n";
                             }
-                            if (xdtfiag==1) {
-                                sm += "健康指导：注意锻炼身体，保持良好的生活习惯，注意饮食，不吸烟避免饮酒及高脂饮食。";
-                            }
+                            //if (xdtfiag==1) {
+                            //    sm += "健康指导：注意锻炼身体，保持良好的生活习惯，注意饮食，不吸烟避免饮酒及高脂饮食。";
+                            //    sm += "\r\n";
+                            //}
                             if (bgm==1) {
-                                sm += "健康指导：糖尿病患者要在医生的指导下，增强控制好血糖的信心。定期监测血糖指标，改变生活习惯和方式，药物治疗和锻炼相结合，适当增加运动锻炼，循序渐进。戒烟戒酒，控制饮食（低热量），低盐低脂，优质蛋白，控制碳水化合物，补足维生素，保持情绪稳定。";
+                                sm += "糖尿病健康指导：\r\n";
+                                //sm += "    糖尿病是一种常见的代谢障碍疾病，即血糖（葡萄糖）升高，接着从尿液中流走，所以尿里有糖。具体讲，与过多摄入总热能、脂肪、碳水化合物，少运动，营养过剩有关，故被谑称为“富贵病”。若病势控制不好，日后就会引起并发症，如心脏病、冠心病、脑血管病、视网膜血管病，肾动脉硬化、肢体动脉硬化等。";
+                                //sm += "\r\n健康指导：\r\n";
+                                sm += "    糖尿病患者要在医生的指导下，增强控制好血糖的信心。定期监测血糖指标，改变生活习惯和方式，药物治疗和锻炼相结合，适当增加运动锻炼，循序渐进。戒烟戒酒，控制饮食（低热量），低盐低脂，优质蛋白，控制碳水化合物，补足维生素，保持情绪稳定。";
+                                sm += "\r\n";
                             }
-                            sm += "\r\n";
                             sm += "健康建议："+jkdata.Rows[j]["healthAdvice"].ToString();
                             jg.Add("结果", sm);
                         }

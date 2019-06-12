@@ -54,15 +54,15 @@ namespace zkhwClient
         {
             basicInfoSettings basicSet = new basicInfoSettings();
             basicSet.Show();
-            basicSet.Hide();
+            //basicSet.Hide();
             dttv = grjddao.checkThresholdValues();//获取阈值信息
             this.timer1.Start();//时间控件定时器
 
-            //this.timer2.Interval = Int32.Parse(Properties.Settings.Default.timeInterval);
-            //this.timer2.Start();//定时获取生化和血球的数据
+            this.timer2.Interval = Int32.Parse(Properties.Settings.Default.timeInterval);
+            this.timer2.Start();//定时获取生化和血球的数据
 
-            //this.timer3.Interval = Int32.Parse(Properties.Settings.Default.timer3Interval);
-            //this.timer3.Start();//1分钟定时刷新设备状态
+            this.timer3.Interval = Int32.Parse(Properties.Settings.Default.timer3Interval);
+            this.timer3.Start();//1分钟定时刷新设备状态
 
             this.label1.Text = "一体化查体车  中科弘卫";
             this.label1.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
@@ -141,23 +141,23 @@ namespace zkhwClient
             }
             //socketTcp();
             //http
-            //proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
-            //proHttp.StartInfo.CreateNoWindow = true;
-            //proHttp.StartInfo.UseShellExecute = false;
-            //proHttp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            //proHttp.StartInfo.ErrorDialog = false;
-            //proHttp.StartInfo.UseShellExecute = false;
-            //proHttp.Start();
+            proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
+            proHttp.StartInfo.CreateNoWindow = true;
+            proHttp.StartInfo.UseShellExecute = false;
+            proHttp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            proHttp.StartInfo.ErrorDialog = false;
+            proHttp.StartInfo.UseShellExecute = false;
+            proHttp.Start();
             //AsNetWork  B超
-            //proAsNet.StartInfo.FileName = Application.StartupPath + "\\AsNetWork\\ASNetWks.exe";
-            //proAsNet.StartInfo.WorkingDirectory = Application.StartupPath + "\\AsNetWork";
-            //proAsNet.StartInfo.CreateNoWindow = true;
-            //proAsNet.StartInfo.ErrorDialog = false;
-            //proAsNet.StartInfo.UseShellExecute = true;
-            //proAsNet.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            //proAsNet.Start();
-            //Thread.Sleep(300);
-            //IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
+            proAsNet.StartInfo.FileName = Application.StartupPath + "\\AsNetWork\\ASNetWks.exe";
+            proAsNet.StartInfo.WorkingDirectory = Application.StartupPath + "\\AsNetWork";
+            proAsNet.StartInfo.CreateNoWindow = true;
+            proAsNet.StartInfo.ErrorDialog = false;
+            proAsNet.StartInfo.UseShellExecute = true;
+            proAsNet.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            proAsNet.Start();
+            Thread.Sleep(300);
+            IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
             //ftp                 
             //proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.05\\ftpservice.exe";
             //proFtp.StartInfo.CreateNoWindow = true;
@@ -186,14 +186,14 @@ namespace zkhwClient
             DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                //if (!proHttp.HasExited)
-                //{
-                //    proHttp.Kill();
-                //}
-                //if (!proAsNet.HasExited)
-                //{
-                //    proAsNet.Kill();
-                //}
+                if (!proHttp.HasExited)
+                {
+                    proHttp.Kill();
+                }
+                if (!proAsNet.HasExited)
+                {
+                    proAsNet.Kill();
+                }
                 //if (!proFtp.HasExited)
                 //{
                 //    proFtp.Kill();
@@ -857,14 +857,14 @@ namespace zkhwClient
             DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                //if (!proHttp.HasExited)
-                //{
-                //    proHttp.Kill();
-                //}
-                //if (!proAsNet.HasExited)
-                //{
-                //    proAsNet.Kill();
-                //}
+                if (!proHttp.HasExited)
+                {
+                    proHttp.Kill();
+                }
+                if (!proAsNet.HasExited)
+                {
+                    proAsNet.Kill();
+                }
                 //if (!proFtp.HasExited)
                 //{
                 //    proFtp.Kill();

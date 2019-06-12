@@ -95,6 +95,7 @@ namespace zkhwClient.view.PublicHealthView
                     this.textBox11.Text = dt.Rows[0]["symptom_other"].ToString();
 
                     this.numericUpDown1.Text = dt.Rows[0]["base_temperature"].ToString();
+
                     this.textBox66.Text = dt.Rows[0]["base_heartbeat"].ToString();
                     this.textBox53.Text = dt.Rows[0]["base_respiratory"].ToString();
                     this.textBox14.Text = dt.Rows[0]["base_blood_pressure_left_high"].ToString();
