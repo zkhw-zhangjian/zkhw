@@ -1053,8 +1053,8 @@ where 1=1";
                     hy.Add("生日1", data["birthday"].ToString());
                     hy.Add("身份证号", data["id_number"].ToString());
                     hy.Add("身份证号1", data["id_number"].ToString());
-                    hy.Add("检验", basicInfoSettings.sh);
-                    hy.Add("检验1", basicInfoSettings.ncg);
+                    //hy.Add("检验", basicInfoSettings.sh);
+                    //hy.Add("检验1", basicInfoSettings.ncg);
                     //hy.Add("地址", data["address"].ToString());
                     //hy.Add("地址1", data["address"].ToString());
                     DataSet hyxdts = DbHelperMySQL.Query($"select * from zkhw_tj_xdt where id_number='{data["id_number"].ToString()}' order by createtime desc LIMIT 1");
@@ -1103,6 +1103,7 @@ where 1=1";
                     if (sh != null && sh.Tables.Count > 0 && sh.Tables[0].Rows.Count > 0)
                     {
                         DataTable da = sh.Tables[0];
+                        hy.Add("检验", da.Rows[0]["ZrysSH"].ToString());
                         for (int j = 0; j < da.Rows.Count; j++)
                         {
                             string alb = da.Rows[j]["ALB"].ToString();
@@ -1679,6 +1680,7 @@ where 1=1";
                         }
                         hy.Add("酸碱度结果", da.Rows[0]["PH"].ToString());
                         hy.Add("维生素C结果", da.Rows[0]["Vc"].ToString());
+                        hy.Add("检验1", da.Rows[0]["ZrysNCG"].ToString());
                         hy.Add("送检日期1", Convert.ToDateTime(da.Rows[0]["createtime"].ToString()).ToString("yyyy-MM-dd"));
                     }
 

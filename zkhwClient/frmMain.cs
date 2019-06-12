@@ -928,6 +928,7 @@ namespace zkhwClient
                         if (arr_dt2.Rows.Count > 0)
                         {
                             shenghuaBean sh = new shenghuaBean();
+                            sh.ZrysSH = basicInfoSettings.sh;
                             sh.bar_code = arr_dt1.Rows[j]["patient_id"].ToString();
                             sh.createTime = Convert.ToDateTime(arr_dt1.Rows[j]["send_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss");
                             DataTable dtjkinfo = jkdao.selectjkInfoBybarcode(sh.bar_code);
@@ -1423,6 +1424,7 @@ namespace zkhwClient
                         if (arr_dt2.Rows.Count > 0)
                         {
                             xuechangguiBean xcg = new xuechangguiBean();
+                            xcg.ZrysXCG = basicInfoSettings.xcg;
                             xcg.bar_code = arr_dt1.Rows[j]["patient_id"].ToString();
                             DataTable dtjkinfo = jkdao.selectjkInfoBybarcode(xcg.bar_code);
                             if (dtjkinfo != null && dtjkinfo.Rows.Count > 0)

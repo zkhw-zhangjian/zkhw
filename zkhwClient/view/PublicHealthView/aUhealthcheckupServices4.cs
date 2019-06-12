@@ -85,6 +85,7 @@ namespace zkhwClient.view.PublicHealthView
                                 this.textBox48.Text += "体温升高 ";
                             }
                         }
+
                         string base_bmi = dtz.Rows[0]["base_bmi"].ToString();
                         if (base_bmi != null && !"".Equals(base_bmi))
                         {
@@ -417,7 +418,7 @@ namespace zkhwClient.view.PublicHealthView
                         string blood_glucose_mmol = dtz.Rows[0]["blood_glucose_mmol"].ToString();
                         if (blood_glucose_mmol != null && !"".Equals(blood_glucose_mmol))
                         {
-                            if (Convert.ToDouble(blood_platelet)>7) { this.textBox31.Text += "空腹血糖值偏高 "; }
+                            if (Convert.ToDouble(blood_glucose_mmol) >7) { this.textBox31.Text += "空腹血糖值偏高 "; }
                         }
                         string cardiogram = dtz.Rows[0]["cardiogram"].ToString();
                         if (cardiogram=="2")

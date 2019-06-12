@@ -61,5 +61,7 @@ namespace zkhwClient
         public string createTime { get; set; }
 
         public string bar_code { get; set; }
+
+        public string ZrysXCG { get; set; }
     }
 }
