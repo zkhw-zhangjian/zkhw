@@ -47,6 +47,18 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
+
+        public DataTable queryhealthCheckupUploadstatus(string pCa, string time1, string time2, string code)
+        {
+            DataSet ds = new DataSet();
+            string sql = "SELECT bb.name,bb.archive_no,bb.id_number,aa.bar_code,aa.check_date,aa.doctor_name,aa.id,(case aa.upload_status when '1' then '是' ELSE '否' END) cstatus FROM (select b.name, b.archive_no, b.id_number from resident_base_info b where 1=1";
+            //if (code != "") { sql += " AND b.village_code='" + code + "'"; }
+            if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
+            sql += ") bb JOIN (select a.id,a.aichive_no,a.id_number,a.bar_code,a.check_date,a.doctor_name,a.upload_status from physical_examination_record a where a.check_date >= '" + time1 + "' and a.check_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no and bb.id_number=aa.id_number";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+
         //祖
         public DataTable queryhealthCheckup(string id)
         {

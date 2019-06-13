@@ -65,10 +65,10 @@ namespace zkhwClient.view.PublicHealthView
             this.dataGridView1.DataSource = null;
             time1 = this.dateTimePicker1.Text.ToString();//开始时间
             time2 = this.dateTimePicker2.Text.ToString();//结束时间
-            string sql = "SELECT bb.name,bb.archive_no,bb.id_number,aa.test_date,aa.test_doctor,aa.id FROM (select b.name, b.archive_no, b.id_number from resident_base_info b where 1=1 and age >= '65'";
+            string sql = "SELECT bb.name,bb.archive_no,bb.id_number,aa.test_date,aa.test_doctor,aa.id,(case aa.upload_status when '1' then '是' ELSE '否' END) cstatus FROM (select b.name, b.archive_no, b.id_number from resident_base_info b where 1=1 and age >= '65'";
             if (cun != null&&!"".Equals(cun)) { sql += " AND b.village_code='" + cun + "'"; }
             if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
-            sql += ") bb LEFT JOIN(select id,aichive_no,test_date,test_doctor from elderly_tcm_record where test_date >= '" + time1 + "' and test_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
+            sql += ") bb LEFT JOIN(select id,aichive_no,test_date,test_doctor,upload_status from elderly_tcm_record where test_date >= '" + time1 + "' and test_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
             DataSet dataSet = DbHelperMySQL.Query(sql);
             if (dataSet.Tables.Count < 1) { MessageBox.Show("未查询出数据，请重新查询!"); return; }
             DataTable dt = dataSet.Tables[0];
@@ -79,6 +79,7 @@ namespace zkhwClient.view.PublicHealthView
             this.dataGridView1.Columns[3].HeaderCell.Value = "填表日期";
             this.dataGridView1.Columns[4].HeaderCell.Value = "签字医生";
             this.dataGridView1.Columns[5].Visible = false;
+            this.dataGridView1.Columns[6].HeaderCell.Value = "是否上传";
 
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
@@ -102,9 +103,13 @@ namespace zkhwClient.view.PublicHealthView
             int row = dataGridView1.CurrentRow.Index;
             string code = dataGridView1["archive_no", row].Value.ToString();
             string idnum=dataGridView1["id_number", row].Value.ToString();
-            DataTable dtcode= tcmHealthService.checkTcmHealthServicesByno(code, idnum);
-            if (dtcode.Rows.Count>0) {
-                MessageBox.Show("此患者已参加过中医体质服务了,请重新选择!");
+            DataTable dtcode= tcmHealthService.checkTcmHealthServicesByno1(code, idnum);
+            if (dtcode.Rows.Count>0)
+            {
+
+                string _testdate = dtcode.Rows[0]["test_date"].ToString();
+                string _strDisplay = string.Format("此患者已参加过中医体质服务了,日期为{0} !", _testdate);
+                MessageBox.Show(_strDisplay); 
                 return;
             }
             addtcmHealthServices addtcm = new addtcmHealthServices(1, dataGridView1["name", row].Value.ToString(), dataGridView1["archive_no", row].Value.ToString(), dataGridView1["id_number", row].Value.ToString());
@@ -229,6 +234,86 @@ namespace zkhwClient.view.PublicHealthView
         {
             comboBoxBin(comboBox4, comboBox5);
         }
+        #endregion
+
+        #region 上传 2019-6-12
+        private void btnUpload_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            int row = dataGridView1.CurrentRow.Index;
+            string _archiveno = dataGridView1["archive_no", row].Value.ToString();
+            string _idnumber = dataGridView1["id_number", row].Value.ToString();
+            string sql = "";
+            if (_archiveno != "")
+            {
+                sql = string.Format("select * from elderly_tcm_record Where aichive_no='{0}'", _archiveno);
+            }
+            else
+            {
+                sql = string.Format("select * from elderly_tcm_record Where id_number='{0}'", _idnumber);
+            }
+            DataSet estimate = DbHelperMySQL.Query(sql);
+            if (estimate != null && estimate.Tables[0].Rows.Count > 0)
+            {
+                //判断是否上传
+                DataTable data = estimate.Tables[0];
+                string _uploadstatus = data.Rows[0]["upload_status"].ToString();
+                if (_uploadstatus == "1")
+                {
+                    string _testdate = data.Rows[0]["test_date"].ToString();
+                    string _strDisplay = string.Format("已经上传,问询日期为{0} !", _testdate);
+                    MessageBox.Show(_strDisplay);
+                    return;
+                }
+
+                string _answerresult= data.Rows[0]["answer_result"].ToString();
+                if (_answerresult == "") { MessageBox.Show("还未参加体质服务不能上传！"); return; }
+                List<string> sqllist = new List<string>();
+
+                string _id = data.Rows[0]["id"].ToString();
+                sqllist.Add($@"delete from elderly_tcm_record where id={Ifnull(data.Rows[0]["id"])};");
+                sqllist.Add($@"insert into elderly_tcm_record (id,name,archive_no,id_number,test_date,answer_result,qixuzhi_score,qixuzhi_result,yangxuzhi_score,yangxuzhi_result,yinxuzhi_score,yinxuzhi_result,tanshizhi_score,tanshizhi_result,shirezhi_score,shirezhi_result,xueyuzhi_score,xueyuzhi_result,qiyuzhi_score,qiyuzhi_result,tebingzhi_sorce,tebingzhi_result,pinghezhi_sorce,pinghezhi_result,test_doctor,tcm_guidance,create_user,create_name,create_org,create_org_name,create_time,upload_status) 
+                            values({Ifnull(data.Rows[0]["id"])},{Ifnull(data.Rows[0]["name"])},{Ifnull(data.Rows[0]["aichive_no"])},{Ifnull(data.Rows[0]["id_number"])},{Ifnull(data.Rows[0]["test_date"])},{Ifnull(data.Rows[0]["answer_result"])},{Ifnull(data.Rows[0]["qixuzhi_score"])},{Ifnull(data.Rows[0]["qixuzhi_result"])},{Ifnull(data.Rows[0]["yangxuzhi_score"])},
+                            {Ifnull(data.Rows[0]["yangxuzhi_result"])},{Ifnull(data.Rows[0]["yinxuzhi_score"])},{Ifnull(data.Rows[0]["yinxuzhi_result"])},{Ifnull(data.Rows[0]["tanshizhi_score"])},{Ifnull(data.Rows[0]["tanshizhi_result"])},{Ifnull(data.Rows[0]["shirezhi_score"])},{Ifnull(data.Rows[0]["shirezhi_result"])},{Ifnull(data.Rows[0]["xueyuzhi_score"])},{Ifnull(data.Rows[0]["xueyuzhi_result"])},{Ifnull(data.Rows[0]["qiyuzhi_score"])},{Ifnull(data.Rows[0]["qiyuzhi_result"])},{Ifnull(data.Rows[0]["tebingzhi_sorce"])},{Ifnull(data.Rows[0]["tebingzhi_result"])},{Ifnull(data.Rows[0]["pinghezhi_sorce"])},{Ifnull(data.Rows[0]["pinghezhi_result"])},{Ifnull(data.Rows[0]["test_doctor"])},{Ifnull(data.Rows[0]["tcm_guidance"])},
+                            {Ifnull(data.Rows[0]["create_user"])},{Ifnull(data.Rows[0]["create_name"])},{Ifnull(data.Rows[0]["create_org"])},{Ifnull(data.Rows[0]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[0]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[0]["upload_status"])}
+                            );");
+                int ret = DbHelperMySQL.ExecuteSqlTranYpt(sqllist);
+                if (ret > 0)
+                {
+                    MessageBox.Show("上传成功！");
+                    //更新本地表中的状态为 1
+                    sql = string.Format("update elderly_tcm_record set  upload_status=1 where  id='{0}'", _id);
+                    ret = 0;
+                    ret = DbHelperMySQL.ExecuteSql(sql); 
+                    dataGridView1.SelectedRows[0].Cells[6].Value = "是";
+                    dataGridView1.Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("上传失败！");
+                }
+            }
+        }
+
+        private string Ifnull(object dataRow)
+        {
+            if (Convert.IsDBNull(dataRow))
+            {
+                return "NULL";
+            }
+            else
+            {
+                if (!string.IsNullOrWhiteSpace(dataRow.ToString()))
+                {
+                    return "'" + dataRow.ToString() + "'";
+                }
+                else
+                {
+                    return "NULL";
+                }
+            }
+        }
+        
         #endregion
     }
 }

@@ -48,7 +48,11 @@ namespace zkhwClient
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
-            loginname=this.comboBox1.Text;
+            LoginSys();
+        }
+        private void LoginSys()
+        {
+            loginname = this.comboBox1.Text;
             passw = this.txtPassword.Text;
             string md5passw = Md5.HashString(passw);
             //用户登录 获取用户的账号和密码并判断          
@@ -81,8 +85,8 @@ namespace zkhwClient
             {
                 MessageBox.Show("用户名或密码错误！");
             }
-        }
 
+        }
         private void button2_Click_1(object sender, EventArgs e)
         {
             System.Environment.Exit(0);
@@ -142,6 +146,22 @@ namespace zkhwClient
         {
             foreach (FileInfo file in directory.GetFiles()) file.Delete();
             foreach (System.IO.DirectoryInfo subDirectory in directory.GetDirectories()) subDirectory.Delete(true);
+        }
+
+        private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar==13)
+            {
+                txtPassword.Focus();
+            }
+        }
+
+        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar==13)
+            {
+                LoginSys();
+            }
         }
     }
 }

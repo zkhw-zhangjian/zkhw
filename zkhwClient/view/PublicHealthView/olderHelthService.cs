@@ -32,6 +32,7 @@ namespace zkhwClient.PublicHealth
 
         private void examinatProgress_Load(object sender, EventArgs e)
         {
+            btnLoad.Visible = false;
             //让默认的日期时间减一天
             this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
             string str = Application.StartupPath;//项目路径
@@ -61,7 +62,9 @@ namespace zkhwClient.PublicHealth
             time1 = this.dateTimePicker1.Text.ToString();//开始时间
             time2 = this.dateTimePicker2.Text.ToString();//结束时间
 
-            DataTable dt = olderHelthS.queryOlderHelthService(pCa, time1, time2, xcuncode);
+            DataTable dt = olderHelthS.queryOlderHelthService(pCa, time1, time2, xcuncode); 
+
+           // DataTable dt = olderHelthS.queryOlderHelthService1(pCa, time1, time2, xcuncode);
             if (dt.Rows.Count < 1) { MessageBox.Show("未查询出数据!"); return; }
             this.dataGridView1.DataSource = dt;
             this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
@@ -69,9 +72,12 @@ namespace zkhwClient.PublicHealth
             this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
             this.dataGridView1.Columns[3].HeaderCell.Value = "总分";
             this.dataGridView1.Columns[4].HeaderCell.Value = "评判结果";
-            this.dataGridView1.Columns[5].HeaderCell.Value = "测试日期";
-            this.dataGridView1.Columns[6].HeaderCell.Value = "测试医生";
+            this.dataGridView1.Columns[5].HeaderCell.Value = "问询日期";
+            this.dataGridView1.Columns[6].HeaderCell.Value = "问询医生";
             this.dataGridView1.Columns[7].Visible = false;
+            //this.dataGridView1.Columns[8].Visible = false;
+            //this.dataGridView1.Columns[9].HeaderCell.Value = "是否上传";   //为了显示是否上传
+
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
             this.dataGridView1.AllowUserToAddRows = false;
@@ -134,7 +140,9 @@ namespace zkhwClient.PublicHealth
             DataTable dt = olderHelthS.query(archiveno);
             if (dt.Rows.Count > 0)
             {
-                MessageBox.Show("此身份信息号已参加过评估了!");
+                string _testdate = dt.Rows[0]["test_date"].ToString();
+                string _strDisplay = string.Format("此身份信息号已参加过评估了,问询日期为{0} !", _testdate);
+                MessageBox.Show(_strDisplay);
                 return;
             }
             aUolderHelthService hm = new aUolderHelthService();
@@ -183,8 +191,9 @@ namespace zkhwClient.PublicHealth
             }
             if (hm.ShowDialog() == DialogResult.OK)
             {
-                    //刷新页面
-                 queryOlderHelthService();
+                xcuncode = basicInfoSettings.xcuncode;
+                //刷新页面
+                queryOlderHelthService();
                 MessageBox.Show("修改成功！");
             }
         }
@@ -232,5 +241,86 @@ namespace zkhwClient.PublicHealth
             xcuncode = this.comboBox5.SelectedValue.ToString();
         }
 
+        #region 上传 li 2019-6-12
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            string archiveno = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+            string idnumber = dataGridView1.SelectedRows[0].Cells[2].Value.ToString(); 
+            string sql = "";
+            if (archiveno != "")
+            {
+                sql = string.Format("select * from elderly_selfcare_estimate Where aichive_no='{0}'", archiveno);
+            }
+            else
+            {
+                sql = string.Format("select * from elderly_selfcare_estimate Where id_number='{0}'", idnumber);
+            }
+            DataSet estimate = DbHelperMySQL.Query(sql);
+            
+            if (estimate != null  && estimate.Tables[0].Rows.Count > 0)
+            {
+                //判断是否上传
+                DataTable data = estimate.Tables[0];
+                string upload_status = data.Rows[0]["upload_status"].ToString();
+                if (upload_status == "1")
+                {
+                    string _testdate = data.Rows[0]["test_date"].ToString();
+                    string _strDisplay = string.Format("已经上传,问询日期为{0} !", _testdate);
+                    MessageBox.Show(_strDisplay);
+                    return;
+                }
+
+                string _totalscore= data.Rows[0]["total_score"].ToString();
+                string _judgementresult = data.Rows[0]["judgement_result"].ToString();
+                if (_judgementresult == "") { MessageBox.Show("还未测评不能上传！"); return; }
+                List<string> sqllist = new List<string>(); 
+                string _id = data.Rows[0]["id"].ToString();
+                sqllist.Add($@"delete from elderly_selfcare_estimate where id={Ifnull(data.Rows[0]["id"])};");
+                sqllist.Add( $@"insert into elderly_selfcare_estimate (id,name,archive_no,id_number,test_date,answer_result,total_score,judgement_result,test_doctor,create_user,create_name,create_org,create_org_name,create_time
+                ) values({Ifnull(data.Rows[0]["id"])},{Ifnull(data.Rows[0]["name"])},{Ifnull(data.Rows[0]["aichive_no"])},{Ifnull(data.Rows[0]["id_number"])},{Ifnull(data.Rows[0]["test_date"])},{Ifnull(data.Rows[0]["answer_result"])},{Ifnull(data.Rows[0]["total_score"])},{Ifnull(data.Rows[0]["judgement_result"])},{Ifnull(data.Rows[0]["test_doctor"])},{Ifnull(data.Rows[0]["create_user"])},{Ifnull(data.Rows[0]["create_name"])},{Ifnull(data.Rows[0]["create_org"])},{Ifnull(data.Rows[0]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[0]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))})");
+                int ret = DbHelperMySQL.ExecuteSqlTranYpt(sqllist);
+                
+                if (ret>0)
+                {
+                    MessageBox.Show("上传成功！");
+                    //更新本地表中的状态为 1
+                    sql = string.Format("update elderly_selfcare_estimate set  upload_status=1 where  id='{0}'", _id);
+                    ret = 0;
+                    ret = DbHelperMySQL.ExecuteSql(sql);
+                    dataGridView1.SelectedRows[0].Cells[8].Value = 1;
+                    dataGridView1.SelectedRows[0].Cells[9].Value = "是";
+                    dataGridView1.Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("上传失败！");
+                }
+            }
+        }
+
+        private string Ifnull(object dataRow)
+        {
+            if (Convert.IsDBNull(dataRow))
+            {
+                return "NULL";
+            }
+            else
+            {
+                if (!string.IsNullOrWhiteSpace(dataRow.ToString()))
+                {
+                    return "'" + dataRow.ToString() + "'";
+                }
+                else
+                {
+                    return "NULL";
+                }
+            }
+        }
+        
+
+        
+
+        #endregion
     }
 }
