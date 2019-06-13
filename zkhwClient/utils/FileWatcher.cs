@@ -293,7 +293,7 @@ namespace zkhwClient
                         }
                         else {
                             string imgurl=data.Rows[0]["aichive_no"].ToString() + "_" + ids + ".jpg";
-                            string issql1 = "update zkhw_tj_xdt set XdtResult='"+ diagnosiss + "',XdtDesc='" + advicetexts + "',PR='" + qrs + "',QRS='" + qrss + "',QT='" + qt_s + "',QTc='" + qtcs + "',hr='" + hrs + "',p='" + p_s + "',pqrs='" + qrs_s + "',t='" + ts + "',rv5='" + rv5s + "',sv1='" + sv1s + "',baseline_drift='" + baseline_drifts + "',myoelectricity='" + myoelectricitys + "',frequency='" + frequencys + "',createtime='" + time + "',imageUrl='" + imgurl + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                            string issql1 = "update zkhw_tj_xdt set XdtResult='"+ diagnosiss + "',XdtDesc='" + advicetexts + "',PR='" + prs + "',QRS='" + qrss + "',QT='" + qt_s + "',QTc='" + qtcs + "',hr='" + hrs + "',p='" + p_s + "',pqrs='" + qrs_s + "',t='" + ts + "',rv5='" + rv5s + "',sv1='" + sv1s + "',baseline_drift='" + baseline_drifts + "',myoelectricity='" + myoelectricitys + "',frequency='" + frequencys + "',createtime='" + time + "',imageUrl='" + imgurl + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
                             DbHelperMySQL.ExecuteSql(issql1);
                         }
                         string pName = e.FullPath.Replace("xml", "jpg");
