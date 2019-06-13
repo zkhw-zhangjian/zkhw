@@ -209,7 +209,7 @@ namespace zkhwClient.view.updateTjResult
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            if (flag) {
+            //if (flag) {
                 string WBC = this.textBox5.Text;
                 string LEU = this.textBox6.Text;
                 string NIT = this.textBox8.Text;
@@ -229,12 +229,14 @@ namespace zkhwClient.view.updateTjResult
                 bool istrue= tjdao.updateNiaochangguiInfo(aichive_no, bar_code, WBC, LEU, NIT, URO, PRO, PH, BLD, SG, KET, BIL, GLU, Vc, MA, ACR, Ca, CR);
                 if (istrue)
                 {
+                    tjdao.updateTJbgdcNiaochanggui(aichive_no, bar_code, 1);
+                    tjdao.updatePENcgInfo(aichive_no, bar_code, PRO, GLU, KET, BLD);
                     MessageBox.Show("数据保存成功!");
                 }
                 else {
                     MessageBox.Show("数据保存失败!");
                 }
-            }
+            //}
         }
 
     }

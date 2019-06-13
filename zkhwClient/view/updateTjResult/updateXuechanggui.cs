@@ -435,7 +435,7 @@ namespace zkhwClient.view.updateTjResult
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            if (flag) {
+            //if (flag) {
                 string WBC= this.textBox5.Text;
                 string RBC =  this.textBox6.Text;
                 string PCT = this.textBox8.Text;
@@ -468,12 +468,14 @@ namespace zkhwClient.view.updateTjResult
                 bool istrue= tjdao.updateXuechangguiInfo(aichive_no, bar_code, WBC, RBC, PCT, PLT, HGB, HCT, MCV, MCH, MCHC, RDWCV, RDWSD, MONO, MONOP, GRAN, GRANP, NEUT, NEUTP, EO, EOP, BASO, BASOP, LYM, LYMP, MPV, PDW, MXD, MXDP, PLCR, OTHERS);
                 if (istrue)
                 {
+                    tjdao.updateTJbgdcXuechanggui(aichive_no, bar_code, 1);
+                    tjdao.updatePEXcgInfo(aichive_no, bar_code, HGB, WBC, PLT);
                     MessageBox.Show("数据保存成功!");
                 }
                 else {
                     MessageBox.Show("数据保存失败!");
                 }
-            }
+            //}
         }
 
     }

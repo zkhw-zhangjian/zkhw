@@ -89,7 +89,10 @@ namespace zkhwClient.view.updateTjResult
                 string Pulse = this.textBox7.Text;
                 bool istrue= tjdao.updateXueyaInfo(aichive_no, id_number, bar_code, DBP, SBP, Pulse);
                 if (istrue)
-                {   
+                {
+                    tjdao.updateTJbgdcXueya(aichive_no, bar_code);
+                    string base_respiratory = (Int32.Parse(Pulse) / 4).ToString();
+                    tjdao.updatePEXyInfo(aichive_no, bar_code, Pulse, SBP, DBP, (Int32.Parse(SBP) - 2).ToString(), (Int32.Parse(DBP) -3).ToString(),base_respiratory);
                     MessageBox.Show("数据保存成功!");
                 }
                 else {

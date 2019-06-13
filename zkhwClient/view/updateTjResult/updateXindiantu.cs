@@ -55,7 +55,7 @@ namespace zkhwClient.view.updateTjResult
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            if (flag) {
+            //if (flag) {
                 string XdtResult= this.textBox5.Text;
                 string XdtDesc = this.textBox6.Text;
                 string Ventrate = this.textBox17.Text;
@@ -89,7 +89,7 @@ namespace zkhwClient.view.updateTjResult
                 else {
                     MessageBox.Show("数据保存失败!");
                 }
-            }
+           // }
         }
 
     }

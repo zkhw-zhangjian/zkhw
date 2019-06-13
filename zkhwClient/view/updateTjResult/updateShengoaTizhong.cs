@@ -83,19 +83,21 @@ namespace zkhwClient.view.updateTjResult
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            if (flag) {
+            //if (flag) {
                 string Height = this.textBox5.Text;
                 string Weight =  this.textBox6.Text;
                 string BMI = this.textBox7.Text;
                 bool istrue= tjdao.updateSgtzInfo(aichive_no, bar_code, Height, Weight, BMI);
                 if (istrue)
                 {
+                    tjdao.updateTJbgdcSgtz(aichive_no, bar_code);
+                    tjdao.updatePESgtzInfo(aichive_no, bar_code, Height, Weight, BMI);
                     MessageBox.Show("数据保存成功!");
                 }
                 else {
                     MessageBox.Show("数据保存失败!");
                 }
-            }
+            //}
         }
 
     }
