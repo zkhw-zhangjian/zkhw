@@ -289,6 +289,8 @@ namespace zkhwClient.view.updateTjResult
                 bool istrue= tjdao.updateShenghuaInfo(aichive_no, id_number,bar_code, ALT, AST, TBIL, DBIL, CREA, UREA, GLU, TG, CHO, HDLC, LDLC, ALB, UA, HCY, AFP, CEA, Ka, Na, TP, ALP, GGT, CHE, TBA, APOA1, APOB, CK, CKMB, LDHL, HBDH, aAMY);
                 if (istrue)
                 {
+                    tjdao.updateTJbgdcShenghua(aichive_no, bar_code, 1);
+                    tjdao.updatePEShInfo(aichive_no, bar_code, CHO, TG, LDLC, HDLC, GLU, ALT, AST, ALB, TBIL, DBIL, CREA, UREA);
                     MessageBox.Show("数据保存成功!");
                 }
                 else {

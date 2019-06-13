@@ -127,6 +127,22 @@ namespace zkhwClient.dao
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }
+        //更新体检进度tj_bgdc--尿常规
+        public bool updateTJbgdcNiaochanggui(string aichive_no, string barcode, int flag)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_bgdc set NiaoChangGui='" + flag + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
+        //根据尿常规检查结果修改健康体检表对应信息
+        public bool updatePENcgInfo(string aichive_no, string barcode, string urine_protein, string glycosuria, string urine_acetone_bodies, string bld)
+        {
+            int ret = 0;
+            String sql = "update physical_examination_record set urine_protein='" + urine_protein + "',glycosuria='" + glycosuria + "',urine_acetone_bodies='" + urine_acetone_bodies + "',bld='" + bld + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
         //查询血压检查信息根据档案号和条码号
         public DataTable selectXueyaInfo(string aichive_no, string barcode)
         {
