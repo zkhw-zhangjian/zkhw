@@ -317,8 +317,8 @@ namespace zkhwClient
                             string issqdgbc = "update zkhw_tj_bgdc set XinDian='3' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
                             DbHelperMySQL.ExecuteSql(issqdgbc);
                         }
-                        
-                        int rue = DbHelperMySQL.ExecuteSql(issql, args);
+
+                        if (issql != "") { int rue = DbHelperMySQL.ExecuteSql(issql, args); }
                     }
                         #endregion
                     }
@@ -469,7 +469,7 @@ namespace zkhwClient
                         string issqdgbc = "update zkhw_tj_bgdc set BChao='3' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
                         DbHelperMySQL.ExecuteSql(issqdgbc);
                     }
-                    int rue = DbHelperMySQL.ExecuteSql(issql, args);
+                    if (issql!="") { int rue = DbHelperMySQL.ExecuteSql(issql, args); }
                     string filepath = e.FullPath.Substring(0, innum);
                     DeleteDir(filepath);
                     //插入数据库

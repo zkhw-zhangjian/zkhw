@@ -768,7 +768,7 @@ where 1=1";
                     dic.Add("户籍地址", data["address"].ToString());
                     dic.Add("联系电话", data["phone"].ToString());
                     dic.Add("乡镇名称", data["towns_name"].ToString());
-                    dic.Add("村委会名称", data["village_name"].ToString() + "村委会");
+                    dic.Add("村委会名称", data["village_name"].ToString());
                     dic.Add("建档单位", data["aichive_org"].ToString());
                     dic.Add("建档人", data["create_archives_name"].ToString());
                     dic.Add("责任医生", data["doctor_name"].ToString());
