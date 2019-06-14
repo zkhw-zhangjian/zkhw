@@ -115,7 +115,7 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(420, 3);
+            this.label1.Location = new System.Drawing.Point(331, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 14);
             this.label1.TabIndex = 0;
@@ -129,7 +129,7 @@
             this.panel1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.panel1.Location = new System.Drawing.Point(0, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(887, 45);
+            this.panel1.Size = new System.Drawing.Size(709, 45);
             this.panel1.TabIndex = 1;
             // 
             // panel2
@@ -142,7 +142,7 @@
             this.panel2.Controls.Add(this.panel1);
             this.panel2.Location = new System.Drawing.Point(2, 1);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(892, 586);
+            this.panel2.Size = new System.Drawing.Size(714, 586);
             this.panel2.TabIndex = 2;
             // 
             // groupBox1
@@ -184,7 +184,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(4, 54);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(883, 527);
+            this.groupBox1.Size = new System.Drawing.Size(705, 527);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
@@ -536,9 +536,9 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.groupBox2);
             this.panel3.Controls.Add(this.panel4);
-            this.panel3.Location = new System.Drawing.Point(900, 1);
+            this.panel3.Location = new System.Drawing.Point(718, 1);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(459, 586);
+            this.panel3.Size = new System.Drawing.Size(310, 586);
             this.panel3.TabIndex = 3;
             // 
             // groupBox2
@@ -578,7 +578,7 @@
             this.groupBox2.Controls.Add(this.textBox7);
             this.groupBox2.Location = new System.Drawing.Point(3, 54);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(455, 527);
+            this.groupBox2.Size = new System.Drawing.Size(302, 527);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
@@ -592,7 +592,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(455, 229);
+            this.dataGridView1.Size = new System.Drawing.Size(302, 229);
             this.dataGridView1.TabIndex = 30;
             // 
             // label40
@@ -893,7 +893,7 @@
             this.panel4.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(451, 45);
+            this.panel4.Size = new System.Drawing.Size(302, 45);
             this.panel4.TabIndex = 0;
             // 
             // label13
@@ -901,7 +901,7 @@
             this.label13.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label13.Location = new System.Drawing.Point(232, 4);
+            this.label13.Location = new System.Drawing.Point(158, 4);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(63, 14);
             this.label13.TabIndex = 0;
