@@ -677,7 +677,7 @@ namespace zkhwClient.view.PublicHealthView
 
         private void GetData()
         {
-            string sql = $@"select * from elderly_tcm_record where name='{Names}' and aichive_no='{aichive_no}' and id_number='{id_number}' order by create_time desc LIMIT 1";
+            string sql = $@"select * from elderly_tcm_record where id_number='{id_number}' order by create_time desc LIMIT 1";
             DataSet jb = DbHelperMySQL.Query(sql);
             if (jb != null && jb.Tables.Count > 0 && jb.Tables[0].Rows.Count > 0)
             {
@@ -874,7 +874,7 @@ namespace zkhwClient.view.PublicHealthView
         /// <returns></returns>
         private bool GetUpdate()
         {
-            DataSet data = DbHelperMySQL.Query($@"select * from elderly_tcm_record where name='{Names}' and aichive_no='{aichive_no}' and id_number='{id_number}'");
+            DataSet data = DbHelperMySQL.Query($@"select * from elderly_tcm_record where id_number='{id_number}'");
             if (data != null && data.Tables[0] != null && data.Tables[0].Rows.Count > 0)
             {
                 return true;
@@ -886,7 +886,59 @@ namespace zkhwClient.view.PublicHealthView
         }
         private void addtcmHealthServices_Load(object sender, EventArgs e)
         {
-
+            healthCheckupDao hcd = new healthCheckupDao();
+            DataTable dt = hcd.queryhealthCheckupByid(id_number);
+            if (dt!=null&&dt.Rows.Count>0) {
+               string baseWaist= dt.Rows[0]["base_waist"].ToString();
+               string baseBmi = dt.Rows[0]["base_bmi"].ToString();
+                if (baseBmi != null && !"".Equals(baseBmi))
+                {
+                    double baseBmidouble = Convert.ToDouble(baseBmi);
+                    if (baseBmidouble < 24)
+                    {
+                        this.radioButton45.Checked = true;
+                    }
+                    else if (baseBmidouble==24)
+                    {
+                        this.radioButton44.Checked = true;
+                    }
+                    else if (baseBmidouble == 25)
+                    {
+                        this.radioButton43.Checked = true;
+                    }
+                    else if (baseBmidouble == 26 || baseBmidouble == 27)
+                    {
+                        this.radioButton42.Checked = true;
+                    }
+                    else if (baseBmidouble >= 28)
+                    {
+                        this.radioButton41.Checked = true;
+                    }
+                }
+                if (baseWaist != null && !"".Equals(baseWaist))
+                {
+                    double baseWaistdouble = Convert.ToDouble(baseWaist);
+                    if (baseWaistdouble < 80)
+                    {
+                        this.radioButton140.Checked = true;
+                    } else if (baseWaistdouble >=80 && baseWaistdouble <= 85)
+                    {
+                        this.radioButton139.Checked = true;
+                    }
+                    else if (baseWaistdouble >= 86 && baseWaistdouble <= 90)
+                    {
+                        this.radioButton138.Checked = true;
+                    }
+                    else if (baseWaistdouble >= 91 && baseWaistdouble <= 105)
+                    {
+                        this.radioButton137.Checked = true;
+                    }
+                    else if (baseWaistdouble > 105)
+                    {
+                        this.radioButton136.Checked = true;
+                    }
+                }
+            }
         }
     }
 }

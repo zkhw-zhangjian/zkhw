@@ -2396,7 +2396,7 @@ where 1=1";
                             int flg = 0;
                             if (!string.IsNullOrWhiteSpace(tc))
                             {
-                                if (Convert.ToDouble(tc) > 5.72)
+                                if (Convert.ToDouble(tc) > 5.2)
                                 {
                                     flg = 1;
                                     sm += "胆固醇值偏高:" + tc + " " + "mmol/l";

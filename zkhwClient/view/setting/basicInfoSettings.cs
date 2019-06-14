@@ -64,10 +64,29 @@ namespace zkhwClient.view.setting
                 input_name = dtbasic.Rows[0]["input_name"].ToString();
                 createtime = dtbasic.Rows[0]["create_time"].ToString();
                 xcuncode = dtbasic.Rows[0]["cun_code"].ToString();
-                xzcode = dtbasic.Rows[0]["xz_code"].ToString();
                 shengcode = dtbasic.Rows[0]["sheng_code"].ToString();
+
+                this.comboBox2.DataSource = areadao.shiInfo(shengcode);//绑定数据源
+                this.comboBox2.DisplayMember = "name";//显示给用户的数据集表项
+                this.comboBox2.ValueMember = "code";//操作时获取的值
+
                 shicode = dtbasic.Rows[0]["shi_code"].ToString();
+
+                this.comboBox3.DataSource = areadao.quxianInfo(shicode);//绑定数据源
+                this.comboBox3.DisplayMember = "name";//显示给用户的数据集表项
+                this.comboBox3.ValueMember = "code";//操作时获取的值 
+
                 qxcode = dtbasic.Rows[0]["qx_code"].ToString();
+
+                this.comboBox4.DataSource = areadao.zhenInfo(qxcode);//绑定数据源
+                this.comboBox4.DisplayMember = "name";//显示给用户的数据集表项
+                this.comboBox4.ValueMember = "code";//操作时获取的值
+
+                xzcode = dtbasic.Rows[0]["xz_code"].ToString();
+                this.comboBox5.DataSource = areadao.cunInfo(xzcode);//绑定数据源
+                this.comboBox5.DisplayMember = "name";//显示给用户的数据集表项
+                this.comboBox5.ValueMember = "code";//操作时获取的值
+
                 allareaname = dtbasic.Rows[0]["allFullName"].ToString();
                 bc = dtbasic.Rows[0]["bc"].ToString();
                 xcg = dtbasic.Rows[0]["xcg"].ToString();

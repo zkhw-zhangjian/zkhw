@@ -1159,7 +1159,6 @@
             this.panel8.Controls.Add(this.textBox76);
             this.panel8.Controls.Add(this.radioButton19);
             this.panel8.Controls.Add(this.radioButton20);
-            this.panel8.Enabled = false;
             this.panel8.Location = new System.Drawing.Point(795, 198);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(502, 30);
@@ -1188,13 +1187,11 @@
             // radioButton19
             // 
             this.radioButton19.AutoSize = true;
-            this.radioButton19.Checked = true;
             this.radioButton19.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton19.Location = new System.Drawing.Point(10, 2);
             this.radioButton19.Name = "radioButton19";
             this.radioButton19.Size = new System.Drawing.Size(101, 24);
             this.radioButton19.TabIndex = 30;
-            this.radioButton19.TabStop = true;
             this.radioButton19.Tag = "1";
             this.radioButton19.Text = "1未戒酒";
             this.radioButton19.UseVisualStyleBackColor = true;
@@ -2311,7 +2308,9 @@
             // 
             // textBox68
             // 
+            this.textBox68.BackColor = System.Drawing.SystemColors.Control;
             this.textBox68.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox68.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBox68.Location = new System.Drawing.Point(410, 73);
             this.textBox68.Name = "textBox68";
             this.textBox68.ReadOnly = true;
@@ -2614,7 +2613,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 123);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1301, 108);
+            this.groupBox3.Size = new System.Drawing.Size(1287, 108);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 

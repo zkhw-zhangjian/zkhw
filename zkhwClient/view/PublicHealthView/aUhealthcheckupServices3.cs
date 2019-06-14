@@ -41,52 +41,52 @@ namespace zkhwClient.view.PublicHealthView
                     this.textBox77.Text = dt.Rows[0]["microalbuminuria"].ToString();
 
                     if (this.radioButton48.Tag.ToString() == dt.Rows[0]["fob"].ToString()) { this.radioButton48.Checked = true; };
-                    if (this.radioButton49.Tag.ToString() == dt.Rows[0]["fob"].ToString()) { this.radioButton49.Checked = true; this.textBox75.ForeColor = Color.Red; };
+                    if (this.radioButton49.Tag.ToString() == dt.Rows[0]["fob"].ToString()) { this.radioButton49.Checked = true; this.textBox75.ForeColor = Color.Salmon; };
                     this.textBox90.Text = dt.Rows[0]["glycosylated_hemoglobin"].ToString();
 
                     if (this.radioButton46.Tag.ToString() == dt.Rows[0]["hb"].ToString()) { this.radioButton46.Checked = true; };
-                    if (this.radioButton47.Tag.ToString() == dt.Rows[0]["hb"].ToString()) { this.radioButton47.Checked = true; this.textBox63.ForeColor = Color.Red; };
+                    if (this.radioButton47.Tag.ToString() == dt.Rows[0]["hb"].ToString()) { this.radioButton47.Checked = true; this.textBox63.ForeColor = Color.Salmon; };
                     this.textBox3.Text = dt.Rows[0]["sgft"].ToString();
                     string sgft = dt.Rows[0]["sgft"].ToString();
                     if (sgft != null && !"".Equals(sgft))
                     {
-                        if (Convert.ToDouble(sgft) > 40) { this.textBox4.ForeColor = Color.Red; }
+                        if (Convert.ToDouble(sgft) > 40) { this.textBox4.ForeColor = Color.Salmon; }
                     }
                     this.textBox6.Text = dt.Rows[0]["ast"].ToString();
                     string ast = dt.Rows[0]["ast"].ToString();
                     if (ast != null && !"".Equals(ast))
                     {
-                        if (Convert.ToDouble(ast) > 40) { this.textBox8.ForeColor = Color.Red; }
+                        if (Convert.ToDouble(ast) > 40) { this.textBox8.ForeColor = Color.Salmon; }
                     }
                     this.textBox10.Text = dt.Rows[0]["albumin"].ToString();
                     string albumin = dt.Rows[0]["albumin"].ToString();
                     if (albumin != null && !"".Equals(albumin))
                     {
-                        if (Convert.ToDouble(albumin) > 54 || Convert.ToDouble(albumin) < 34) { this.textBox11.ForeColor = Color.Red; }
+                        if (Convert.ToDouble(albumin) > 54 || Convert.ToDouble(albumin) < 34) { this.textBox11.ForeColor = Color.Salmon; }
                     }
                     this.textBox65.Text = dt.Rows[0]["total_bilirubin"].ToString();
                     string total_bilirubin = dt.Rows[0]["total_bilirubin"].ToString();
                     if (total_bilirubin != null && !"".Equals(total_bilirubin))
                     {
-                        if (Convert.ToDouble(total_bilirubin) > 20 || Convert.ToDouble(total_bilirubin) < 2) { this.textBox66.ForeColor = Color.Red; }
+                        if (Convert.ToDouble(total_bilirubin) > 20 || Convert.ToDouble(total_bilirubin) < 2) { this.textBox66.ForeColor = Color.Salmon; }
                     }
                     this.textBox68.Text = dt.Rows[0]["conjugated_bilirubin"].ToString();
                     string conjugated_bilirubin = dt.Rows[0]["conjugated_bilirubin"].ToString();
                     if (conjugated_bilirubin != null && !"".Equals(conjugated_bilirubin))
                     {
-                        if (Convert.ToDouble(conjugated_bilirubin) > 6.8 || Convert.ToDouble(conjugated_bilirubin) < 1.7) { this.textBox69.ForeColor = Color.Red; }
+                        if (Convert.ToDouble(conjugated_bilirubin) > 6.8 || Convert.ToDouble(conjugated_bilirubin) < 1.7) { this.textBox69.ForeColor = Color.Salmon; }
                     }
                     this.textBox73.Text = dt.Rows[0]["scr"].ToString();
                     string scr = dt.Rows[0]["scr"].ToString();
                     if (scr != null && !"".Equals(scr))
                     {
-                        if (Convert.ToDouble(scr) > 115 || Convert.ToDouble(scr) < 44) { this.textBox74.ForeColor = Color.Red; }
+                        if (Convert.ToDouble(scr) > 115 || Convert.ToDouble(scr) < 44) { this.textBox74.ForeColor = Color.Salmon; }
                     }
                     this.textBox81.Text = dt.Rows[0]["blood_urea"].ToString();
                     string blood_urea = dt.Rows[0]["blood_urea"].ToString();
                     if (blood_urea != null && !"".Equals(blood_urea))
                     {
-                        if (Convert.ToDouble(blood_urea) > 8.2 || Convert.ToDouble(blood_urea) < 1.7) { this.textBox82.ForeColor = Color.Red; }
+                        if (Convert.ToDouble(blood_urea) > 8.2 || Convert.ToDouble(blood_urea) < 1.7) { this.textBox82.ForeColor = Color.Salmon; }
                     }
                     this.textBox84.Text = dt.Rows[0]["blood_k"].ToString();
                     this.textBox87.Text = dt.Rows[0]["blood_na"].ToString();
@@ -94,25 +94,25 @@ namespace zkhwClient.view.PublicHealthView
                     string tc = dt.Rows[0]["tc"].ToString();
                     if (tc != null && !"".Equals(tc))
                     {
-                        if (Convert.ToDouble(tc) > 5.2) { this.textBox14.ForeColor = Color.Red; }
+                        if (Convert.ToDouble(tc) > 5.2) { this.textBox14.ForeColor = Color.Salmon; }
                     }
                     this.textBox16.Text = dt.Rows[0]["tg"].ToString();
                     string tg = dt.Rows[0]["tg"].ToString();
                     if (tg != null && !"".Equals(tg))
                     {
-                        if (Convert.ToDouble(tg) > 1.7) { this.textBox17.ForeColor = Color.Red; }
+                        if (Convert.ToDouble(tg) > 1.7) { this.textBox17.ForeColor = Color.Salmon; }
                     }
                     this.textBox19.Text = dt.Rows[0]["ldl"].ToString();
                     string ldl = dt.Rows[0]["ldl"].ToString();
                     if (ldl != null && !"".Equals(ldl))
                     {
-                        if (Convert.ToDouble(ldl) > 3.9 || Convert.ToDouble(ldl) < 1.5) { this.textBox20.ForeColor = Color.Red; }
+                        if (Convert.ToDouble(ldl) > 3.9 || Convert.ToDouble(ldl) < 1.5) { this.textBox20.ForeColor = Color.Salmon; }
                     }
                     this.textBox22.Text = dt.Rows[0]["hdl"].ToString();
                     string hdl = dt.Rows[0]["hdl"].ToString();
                     if (hdl != null && !"".Equals(hdl))
                     {
-                        if (Convert.ToDouble(hdl) > 1.9 || Convert.ToDouble(hdl) < 0.9) { this.textBox23.ForeColor = Color.Red; }
+                        if (Convert.ToDouble(hdl) > 1.9 || Convert.ToDouble(hdl) < 0.9) { this.textBox23.ForeColor = Color.Salmon; }
                     }
                     if (this.radioButton1.Tag.ToString() == dt.Rows[0]["chest_x"].ToString()) { this.radioButton1.Checked = true; };
                     if (this.radioButton2.Tag.ToString() == dt.Rows[0]["chest_x"].ToString())
@@ -126,7 +126,7 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         this.radioButton4.Checked = true;
                         this.textBox27.Text = dt.Rows[0]["ultrasound_memo"].ToString();
-                        this.textBox28.ForeColor = Color.Red;
+                        this.textBox28.ForeColor = Color.Salmon;
 
                     };
 
@@ -156,7 +156,7 @@ namespace zkhwClient.view.PublicHealthView
                             {
                                 ck.Checked = true;
                                 if ("23456".IndexOf(ck.Tag.ToString()) > -1) {
-                                    this.textBox37.ForeColor = Color.Red;
+                                    this.textBox37.ForeColor = Color.Salmon;
                                 }
                             }
                         }
@@ -175,7 +175,7 @@ namespace zkhwClient.view.PublicHealthView
                                 ck.Checked = true;
                                 if ("23456".IndexOf(ck.Tag.ToString()) > -1)
                                 {
-                                    this.textBox39.ForeColor = Color.Red;
+                                    this.textBox39.ForeColor = Color.Salmon;
                                 }
                             }
                         }
@@ -194,7 +194,7 @@ namespace zkhwClient.view.PublicHealthView
                                 ck.Checked = true;
                                 if ("234567".IndexOf(ck.Tag.ToString()) > -1)
                                 {
-                                    this.textBox40.ForeColor = Color.Red;
+                                    this.textBox40.ForeColor = Color.Salmon;
                                 }
                             }
                         }
@@ -213,7 +213,7 @@ namespace zkhwClient.view.PublicHealthView
                                 ck.Checked = true;
                                 if ("234".IndexOf(ck.Tag.ToString()) > -1)
                                 {
-                                    this.textBox43.ForeColor = Color.Red;
+                                    this.textBox43.ForeColor = Color.Salmon;
                                 }
                             }
                         }
@@ -232,7 +232,7 @@ namespace zkhwClient.view.PublicHealthView
                                 ck.Checked = true;
                                 if ("2345".IndexOf(ck.Tag.ToString()) > -1)
                                 {
-                                    this.textBox45.ForeColor = Color.Red;
+                                    this.textBox45.ForeColor = Color.Salmon;
                                 }
                             }
                         }
@@ -244,7 +244,7 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         this.radioButton38.Checked = true;
                         this.textBox46.Text = dt.Rows[0]["nervous_disease_memo"].ToString();
-                        this.textBox47.ForeColor = Color.Red;
+                        this.textBox47.ForeColor = Color.Salmon;
                     };
 
                     if (this.radioButton39.Tag.ToString() == dt.Rows[0]["other_disease"].ToString()) { this.radioButton39.Checked = true; };
@@ -252,7 +252,7 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         this.radioButton40.Checked = true;
                         this.textBox48.Text = dt.Rows[0]["other_disease_memo"].ToString();
-                        this.textBox49.ForeColor = Color.Red;
+                        this.textBox49.ForeColor = Color.Salmon;
                     };
                 }
                 //加载子表

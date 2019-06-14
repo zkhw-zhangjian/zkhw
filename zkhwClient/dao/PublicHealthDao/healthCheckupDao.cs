@@ -67,6 +67,13 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
+        public DataTable queryhealthCheckupByid(string idnumber)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select base_waist,base_bmi from physical_examination_record where id_number = '" + idnumber + "' order by create_time desc limit 1";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
         //根据档案号查询老年人生活自理能力评估的分数
         public DataTable queryelderlySelfcareEstimate(string id)
         {
