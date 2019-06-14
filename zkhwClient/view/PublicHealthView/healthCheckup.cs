@@ -340,7 +340,10 @@ namespace zkhwClient.view.PublicHealthView
                         MessageBox.Show("上传失败！");
                     }
                 }
-
+                else
+                {
+                    MessageBox.Show("无信息不能上传！");
+                }
             }
         }
 
@@ -363,5 +366,20 @@ namespace zkhwClient.view.PublicHealthView
             }
         }
         #endregion
+
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            for (int i = 0; i < e.RowCount; i++)
+            {
+                dataGridView1.Rows[e.RowIndex + i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridView1.Rows[e.RowIndex + i].HeaderCell.Value = (e.RowIndex + i + 1).ToString();
+            }
+
+            for (int i = e.RowIndex + e.RowCount; i < this.dataGridView1.Rows.Count; i++)
+            {
+                dataGridView1.Rows[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridView1.Rows[i].HeaderCell.Value = (i + 1).ToString();
+            }
+        }
     }
 }

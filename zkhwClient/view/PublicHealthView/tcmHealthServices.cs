@@ -57,8 +57,7 @@ namespace zkhwClient.view.PublicHealthView
             }
             else { this.label2.Text = "---姓名/身份证号/档案号---"; }
             cun = comboBox5.SelectedValue?.ToString();
-            querytcmHealthServices();
-
+            querytcmHealthServices(); 
         }
         private void querytcmHealthServices()
         {
@@ -78,7 +77,9 @@ namespace zkhwClient.view.PublicHealthView
             }
             else
             {
-                sql = "SELECT bb.name,bb.archive_no,bb.id_number,aa.test_date,aa.test_doctor,aa.id,(case aa.upload_status when '1' then '是' ELSE '否' END) cstatus FROM (select b.name, b.archive_no, b.id_number from resident_base_info b where 1=1 and age >= '65'";
+                sql = @"SELECT bb.name,bb.archive_no,bb.id_number,aa.test_date,aa.test_doctor,aa.id,(case aa.upload_status when '1' then '是' ELSE '否' END) cstatus 
+                     FROM (select b.name, b.archive_no, b.id_number from resident_base_info b inner join zkhw_tj_jk z on b.id_number=z.id_number 
+                    where 1=1 and z.createtime>='"+ time1 + "' and b.age >= '65' ";
                 if (cun != null && !"".Equals(cun)) { sql += " AND b.village_code='" + cun + "'"; }
                 if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
                 sql += ") bb LEFT JOIN(select id,aichive_no,test_date,test_doctor,upload_status from elderly_tcm_record where test_date >= '" + time1 + "' and test_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
@@ -279,7 +280,7 @@ namespace zkhwClient.view.PublicHealthView
                 if (_uploadstatus == "1")
                 {
                     string _testdate = data.Rows[0]["test_date"].ToString();
-                    string _strDisplay = string.Format("已经上传,问询日期为{0} !", _testdate);
+                    string _strDisplay = string.Format("已经上传,日期为{0} !", _testdate);
                     MessageBox.Show(_strDisplay);
                     return;
                 }
@@ -311,6 +312,10 @@ namespace zkhwClient.view.PublicHealthView
                     MessageBox.Show("上传失败！");
                 }
             }
+            else
+            {
+                MessageBox.Show("无信息不能上传！");
+            }
         }
 
         private string Ifnull(object dataRow)
@@ -331,7 +336,23 @@ namespace zkhwClient.view.PublicHealthView
                 }
             }
         }
-        
+
         #endregion
+
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            for (int i = 0; i < e.RowCount; i++)
+            {
+                dataGridView1.Rows[e.RowIndex + i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridView1.Rows[e.RowIndex + i].HeaderCell.Value = (e.RowIndex + i + 1).ToString();
+            }
+
+            for (int i = e.RowIndex + e.RowCount; i < this.dataGridView1.Rows.Count; i++)
+            {
+                dataGridView1.Rows[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridView1.Rows[i].HeaderCell.Value = (i + 1).ToString();
+            }
+        }
+         
     }
 }

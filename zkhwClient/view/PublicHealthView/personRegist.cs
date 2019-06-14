@@ -1,5 +1,6 @@
 ﻿using AForge.Video.DirectShow;
 using System;
+using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
@@ -149,6 +150,8 @@ namespace zkhwClient.view.PublicHealthView
                 logservice.addCheckLog(lb);
                 jkjcheckdao.updateShDevice(-1, 0, -1, -1, -1, -1, -1, -1, -1, -1);
             }
+            ////读取默认的打印条数
+            //ReadPrintBarCodeNumber();
         }
         //读取身份证
         private void button3_Click(object sender, EventArgs e)
@@ -714,6 +717,30 @@ namespace zkhwClient.view.PublicHealthView
                 MessageBox.Show("此居民在一周内已经登记体检过一次,如需继续上次体检,请点击补打条码按钮!");
             }
         }
+        /// <summary>
+        /// 双击截取身份证的信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBox3_DoubleClick(object sender, EventArgs e)
+        {
+            if (textBox3.Text == "") return;
+            if (textBox3.Text.Length < 18) return;
+            //开始验证
+            string _sYear = textBox3.Text.Substring(6, 4);
+            string _sMonth = textBox3.Text.Substring(10, 2);
+            string _sDay = textBox3.Text.Substring(12, 2);
+            textBox8.Text = _sYear + "-" + _sMonth + "-" + _sDay;
+            int _xb = int.Parse(textBox3.Text.Substring(16, 1));
+            if(_xb%2==0)
+            {
+                comboBox1.Text = "女";
+            }
+            else
+            {
+                comboBox1.Text = "男";
+            }
+        }
 
         //体检人数统计
         public void registrationRecordCheck()
@@ -788,5 +815,31 @@ namespace zkhwClient.view.PublicHealthView
             label37.Text = num37.ToString(); //75岁以上 男
             label39.Text = num39.ToString(); //75岁以上 女
         }
+
+        
+
+        #region 打印条码个数
+        private void ReadPrintBarCodeNumber()
+        { 
+            xmlDoc.Load(path);
+            node = xmlDoc.SelectSingleNode("config/printBarCodeNumber");
+            string _printBarCodeNumber = node.InnerText; 
+            if (_printBarCodeNumber == "") _printBarCodeNumber = "4";
+            numericUpDown1.Value = int.Parse(_printBarCodeNumber);
+        }
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            //if (numericUpDown1.Value == 0) numericUpDown1.Value = 4;
+            //WritePrintBarCodeNumber();
+        }
+        private void WritePrintBarCodeNumber()
+        {
+            xmlDoc.Load(path);
+            XmlNode node;
+            node = xmlDoc.SelectSingleNode("config/printBarCodeNumber");
+            node.InnerText = numericUpDown1.Value.ToString();
+            xmlDoc.Save(path); 
+        }
+        #endregion
     }
 }

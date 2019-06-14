@@ -63,10 +63,10 @@ namespace zkhwClient.dao
 
             return ret == 0 ? false : true;
         }
-        //基本设置中，获取乡镇卫生院的医护人员信息
+        //基本设置中，获取乡镇卫生院的医护人员信息   2019-6-13按照人名排序同时过滤重复
         public DataTable listUserbyOrganCode(String code)
         {
-            String sql = "select user_code ucode,user_name uname from zkhw_user_info where username !='admin'";// and organ_code = '" + code + "'";
+            String sql = "select DISTINCT  user_code ucode,user_name uname from zkhw_user_info where username !='admin' ORDER BY convert(uname using gbk) ASC ";// and organ_code = '" + code + "'";
             DataSet ds = new DataSet();
             ds.Clear();
             ds = DbHelperMySQL.Query(sql);
