@@ -230,12 +230,12 @@ where 1=1";
                 this.dataGridView1.AllowUserToAddRows = false;
                 this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
                 this.dataGridView1.ReadOnly = true;
-                int rows = this.dataGridView1.Rows.Count - 1 <= 0 ? 0 : this.dataGridView1.Rows.Count - 1;
-                if(rows>0)
-                for (int x = 0; x <= rows; x++)
-                {
-                    this.dataGridView1.Rows[x].HeaderCell.Value = String.Format("{0}", x + 1);
-                }
+                //int rows = this.dataGridView1.Rows.Count - 1 <= 0 ? 0 : this.dataGridView1.Rows.Count - 1;
+                //if(rows>0)
+                //for (int x = 0; x <= rows; x++)
+                //{
+                //    this.dataGridView1.Rows[x].HeaderCell.Value = String.Format("{0}", x + 1);
+                //}
                 }
             }
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -2478,10 +2478,22 @@ where 1=1";
                             if (health_evaluation == "2")
                             {
                                 sm += "健康评价：\r\n";
-                                sm += "异常1：" + jkdata.Rows[j]["abnormal1"].ToString() + "\r\n";
-                                sm += "异常2：" + jkdata.Rows[j]["abnormal2"].ToString() + "\r\n";
-                                sm += "异常3：" + jkdata.Rows[j]["abnormal3"].ToString() + "\r\n";
-                                sm += "异常4：" + jkdata.Rows[j]["abnormal4"].ToString() + "\r\n";
+                                if (!string.IsNullOrWhiteSpace(jkdata.Rows[j]["abnormal1"].ToString()))
+                                {
+                                    sm += "异常1：" + jkdata.Rows[j]["abnormal1"].ToString() + "\r\n";
+                                }
+                                if (!string.IsNullOrWhiteSpace(jkdata.Rows[j]["abnormal2"].ToString()))
+                                {
+                                    sm += "异常2：" + jkdata.Rows[j]["abnormal2"].ToString() + "\r\n";
+                                }
+                                if (!string.IsNullOrWhiteSpace(jkdata.Rows[j]["abnormal3"].ToString()))
+                                {
+                                    sm += "异常3：" + jkdata.Rows[j]["abnormal3"].ToString() + "\r\n";
+                                }
+                                if (!string.IsNullOrWhiteSpace(jkdata.Rows[j]["abnormal4"].ToString()))
+                                {
+                                    sm += "异常4：" + jkdata.Rows[j]["abnormal4"].ToString() + "\r\n";
+                                }
                             }
                             sm += "健康建议：建议复查,医院就诊,明确诊断。";
                             sm += "\r\n";
@@ -2591,9 +2603,10 @@ where 1=1";
                         for (int j = 0; j < da.Rows.Count; j++)
                         {
                             string[] zz = da.Rows[j]["answer_result"].ToString().Split('|');
-                            for (int i = 0; i < zz.Length; i++)
+                            for (int i = 0; i< zz.Length; i++)
                             {
-                                zytz.Add("a" + i + zz[i].Split(':')[1], "√");
+                                int aa= Int32.Parse(zz[i].Split(':')[0])-1;
+                                zytz.Add("a" + aa + zz[i].Split(':')[1], "√");
                             }
                             int qz = 0;
                             qz = Convert.ToInt32(da.Rows[j]["qixuzhi_score"]);
@@ -3673,6 +3686,21 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             Form2 f2 = new Form2();
             f2.url = newurl;
             f2.ShowDialog();
+        }
+
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            for (int i = 0; i < e.RowCount; i++)
+            {
+                dataGridView1.Rows[e.RowIndex + i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                dataGridView1.Rows[e.RowIndex + i].HeaderCell.Value = (e.RowIndex + i + 1).ToString();
+            }
+
+            for (int i = e.RowIndex + e.RowCount; i < this.dataGridView1.Rows.Count; i++)
+            {
+                dataGridView1.Rows[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                dataGridView1.Rows[i].HeaderCell.Value = (i + 1).ToString();
+            }
         }
     }
 

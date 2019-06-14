@@ -247,7 +247,7 @@
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.dateTimePicker2.CustomFormat = "yyyy-MM-dd";
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker2.Location = new System.Drawing.Point(256, 25);
             this.dateTimePicker2.Name = "dateTimePicker2";
@@ -265,7 +265,7 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Location = new System.Drawing.Point(65, 25);
             this.dateTimePicker1.Name = "dateTimePicker1";
@@ -875,7 +875,7 @@
             // 
             // dateTimePicker4
             // 
-            this.dateTimePicker4.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.dateTimePicker4.CustomFormat = "yyyy-MM-dd";
             this.dateTimePicker4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker4.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker4.Location = new System.Drawing.Point(53, 80);
@@ -895,7 +895,7 @@
             // 
             // dateTimePicker3
             // 
-            this.dateTimePicker3.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.dateTimePicker3.CustomFormat = "yyyy-MM-dd";
             this.dateTimePicker3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker3.Location = new System.Drawing.Point(53, 48);
@@ -1243,6 +1243,7 @@
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1025, 250);
@@ -1250,6 +1251,7 @@
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);
+            this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
             // 
             // pagerControl1
             // 
