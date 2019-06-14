@@ -65,7 +65,12 @@ namespace zkhwClient.PublicHealth
             DataTable dt = olderHelthS.queryOlderHelthService(pCa, time1, time2, xcuncode); 
 
            // DataTable dt = olderHelthS.queryOlderHelthService1(pCa, time1, time2, xcuncode);
-            if (dt.Rows.Count < 1) { MessageBox.Show("未查询出数据!"); return; }
+            if (dt.Rows.Count < 1)
+            {
+                MessageBox.Show("未查询出数据!");
+                xcuncode = "";
+                return;
+            }
             this.dataGridView1.DataSource = dt;
             this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
             this.dataGridView1.Columns[1].HeaderCell.Value = "档案编号";
@@ -337,13 +342,13 @@ namespace zkhwClient.PublicHealth
         {
             for (int i = 0; i < e.RowCount; i++)
             {
-                dataGridView1.Rows[e.RowIndex + i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridView1.Rows[e.RowIndex + i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
                 dataGridView1.Rows[e.RowIndex + i].HeaderCell.Value = (e.RowIndex + i + 1).ToString();
             }
 
             for (int i = e.RowIndex + e.RowCount; i < this.dataGridView1.Rows.Count; i++)
             {
-                dataGridView1.Rows[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridView1.Rows[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
                 dataGridView1.Rows[i].HeaderCell.Value = (i + 1).ToString();
             }
         }

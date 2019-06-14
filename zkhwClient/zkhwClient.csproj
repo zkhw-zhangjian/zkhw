@@ -203,6 +203,7 @@
     <Compile Include="dao\SystemSettingsDao\loginLogDao.cs" />
     <Compile Include="dao\SystemSettingsDao\UserDao.cs" />
     <Compile Include="dao\PublicHealthDao\tcmHealthServicesDao.cs" />
+    <Compile Include="DatagridViewCheckBoxHeaderCell.cs" />
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>

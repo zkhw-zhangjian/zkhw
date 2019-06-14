@@ -173,6 +173,13 @@ where 1=1";
         //声明静态类变量
         private static DataGridViewCheckBoxColumn checkColumn = null;
         private static DataGridViewButtonColumn buttonColumn = null;
+
+        private void cbHeader_OnCheckBoxClicked(bool state)
+        {
+            //这一句很重要结束编辑状态
+            dataGridView1.EndEdit();
+            dataGridView1.Rows.OfType<DataGridViewRow>().ToList().ForEach(t => t.Cells[0].Value = state);
+        }
         /// <summary>
         /// 数据绑定
         /// </summary>
@@ -203,12 +210,22 @@ where 1=1";
                     dataGridView1.Columns.Add(buttonColumn);
                 }
                 checkColumn = new DataGridViewCheckBoxColumn(); //插入第0列 
+                DatagridViewCheckBoxHeaderCell cbHeader = new DatagridViewCheckBoxHeaderCell();
+                cbHeader.OnCheckBoxClicked += new CheckBoxClickedHandler(cbHeader_OnCheckBoxClicked);
+                checkColumn.HeaderCell = cbHeader;
                 checkColumn.HeaderText = "选择";
                 checkColumn.Name = "cb_check";
                 checkColumn.TrueValue = true;
                 checkColumn.FalseValue = false;
                 checkColumn.DataPropertyName = "IsChecked";
                 dataGridView1.Columns.Insert(0, checkColumn);    //添加的checkbox在第一列
+                
+                
+                
+                
+                
+
+
                 this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
                 this.dataGridView1.AllowUserToAddRows = false;
                 this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -3642,6 +3659,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) return;
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             string idnum = dataGridView1["身份证号", e.RowIndex].Value.ToString();
             DataTable dtgrgd = grjdDao.selectResdentDoctorId(idnum);
