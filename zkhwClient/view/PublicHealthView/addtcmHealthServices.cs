@@ -898,15 +898,15 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         this.radioButton45.Checked = true;
                     }
-                    else if (baseBmidouble==24)
+                    else if (baseBmidouble>=24&& baseBmidouble <25)
                     {
                         this.radioButton44.Checked = true;
                     }
-                    else if (baseBmidouble == 25)
+                    else if (baseBmidouble >= 25 && baseBmidouble < 26)
                     {
                         this.radioButton43.Checked = true;
                     }
-                    else if (baseBmidouble == 26 || baseBmidouble == 27)
+                    else if (baseBmidouble >= 26 && baseBmidouble <= 27)
                     {
                         this.radioButton42.Checked = true;
                     }
