@@ -65,7 +65,12 @@ namespace zkhwClient.PublicHealth
             DataTable dt = olderHelthS.queryOlderHelthService(pCa, time1, time2, xcuncode); 
 
            // DataTable dt = olderHelthS.queryOlderHelthService1(pCa, time1, time2, xcuncode);
-            if (dt.Rows.Count < 1) { MessageBox.Show("未查询出数据!"); return; }
+            if (dt.Rows.Count < 1)
+            {
+                MessageBox.Show("未查询出数据!");
+                xcuncode = "";
+                return;
+            }
             this.dataGridView1.DataSource = dt;
             this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
             this.dataGridView1.Columns[1].HeaderCell.Value = "档案编号";

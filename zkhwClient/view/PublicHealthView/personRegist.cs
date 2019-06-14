@@ -832,6 +832,12 @@ namespace zkhwClient.view.PublicHealthView
             //if (numericUpDown1.Value == 0) numericUpDown1.Value = 4;
             //WritePrintBarCodeNumber();
         }
+
+        private void label44_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void WritePrintBarCodeNumber()
         {
             xmlDoc.Load(path);
