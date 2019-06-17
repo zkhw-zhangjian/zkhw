@@ -87,16 +87,29 @@ namespace zkhwClient.view.PublicHealthView
                         }
 
                         string base_bmi = dtz.Rows[0]["base_bmi"].ToString();
+                        string base_height = dtz.Rows[0]["base_height"].ToString();
                         if (base_bmi != null && !"".Equals(base_bmi))
                         {
                             double bmidouble = Convert.ToDouble(base_bmi);
                             if (bmidouble > 28)
                             {
                                 this.textBox48.Text += "肥胖 ";
+                                this.checkBox8.Checked = true;
+                                if (base_height != null && !"".Equals(base_height))
+                                {
+                                    double heightdouble = Convert.ToDouble(base_height);
+                                    this.textBox37.Text = (24 * (heightdouble / 100) * (heightdouble / 100)).ToString();
+                                }
                             }
                             else if (bmidouble >= 24&&bmidouble < 28)
                             {
                                 this.textBox48.Text += "体重超标 ";
+                                this.checkBox8.Checked = true;
+                                if (base_height != null && !"".Equals(base_height))
+                                {
+                                    double heightdouble = Convert.ToDouble(base_height);
+                                    this.textBox37.Text = (24 * (heightdouble / 100) * (heightdouble / 100)).ToString();
+                                }
                             }
                         }
                         string base_waist = dtz.Rows[0]["base_waist"].ToString();
@@ -117,6 +130,8 @@ namespace zkhwClient.view.PublicHealthView
                             if (Convert.ToInt32(dtz.Rows[0]["base_blood_pressure_right_high"]) > 140 || Convert.ToInt32(dtz.Rows[0]["base_blood_pressure_right_low"]) > 90)
                             {
                                 this.textBox48.Text += "血压偏高 ";
+                                this.checkBox1.Checked = true;
+                                this.checkBox2.Checked = true;
                             }
                             else if (Convert.ToInt32(dtz.Rows[0]["base_blood_pressure_right_high"]) < 90 || Convert.ToInt32(dtz.Rows[0]["base_blood_pressure_right_low"]) < 60)
                             {
@@ -139,6 +154,7 @@ namespace zkhwClient.view.PublicHealthView
                             if (frequencyint == 3 || frequencyint == 4)
                             {
                                 this.textBox48.Text += "缺乏规律锻炼 ";
+                                this.checkBox7.Checked = true;
                             }
                         }
                         string smoke = dtz.Rows[0]["lifeway_smoke_status"].ToString();
@@ -148,6 +164,7 @@ namespace zkhwClient.view.PublicHealthView
                             if (smokeint == 3)
                             {
                                 this.textBox48.Text += "吸烟 ";
+                                this.checkBox4.Checked = true;
                             }
                         }
                         string drink = dtz.Rows[0]["lifeway_drink_status"].ToString();
@@ -157,6 +174,7 @@ namespace zkhwClient.view.PublicHealthView
                             if (drinkint == 3|| drinkint == 4)
                             {
                                 this.textBox48.Text += "过量饮酒 ";
+                                this.checkBox5.Checked = true;
                             }
                         }
                         //异常2
@@ -418,7 +436,7 @@ namespace zkhwClient.view.PublicHealthView
                         string blood_glucose_mmol = dtz.Rows[0]["blood_glucose_mmol"].ToString();
                         if (blood_glucose_mmol != null && !"".Equals(blood_glucose_mmol))
                         {
-                            if (Convert.ToDouble(blood_glucose_mmol) >7) { this.textBox31.Text += "空腹血糖值偏高 "; }
+                            if (Convert.ToDouble(blood_glucose_mmol) >7) { this.textBox31.Text += "空腹血糖值偏高 "; this.checkBox1.Checked = true; }
                         }
                         string cardiogram = dtz.Rows[0]["cardiogram"].ToString();
                         if (cardiogram=="2")
@@ -486,6 +504,9 @@ namespace zkhwClient.view.PublicHealthView
                         if (dtz.Rows[0]["ultrasound_abdomen"].ToString() == "2")
                         {
                             this.textBox31.Text +="B超异常 ";
+                        }
+                        if (xcgflag||ncgflag||shflag|| cardiogram == "2"|| dtz.Rows[0]["ultrasound_abdomen"].ToString() == "2") {
+                            this.checkBox2.Checked = true;
                         }
                         //异常4
                         string cerebrovascular = dtz.Rows[0]["cerebrovascular_disease"].ToString();
@@ -1042,6 +1063,15 @@ namespace zkhwClient.view.PublicHealthView
             auhc2.id = id;//祖
             auhc2.textBox99.Text = this.textBox3.Text;
             auhc2.Show();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string jkjy = this.comboBox1.Text;
+            if (jkjy.IndexOf("--") == -1)
+            {
+                this.richTextBox1.Text += jkjy;
+            }
         }
     }
 }

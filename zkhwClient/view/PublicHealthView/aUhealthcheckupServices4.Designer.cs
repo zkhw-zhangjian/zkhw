@@ -82,6 +82,7 @@
             this.label51 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -149,6 +150,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.comboBox1);
             this.groupBox2.Controls.Add(this.richTextBox1);
             this.groupBox2.Controls.Add(this.textBox5);
             this.groupBox2.Controls.Add(this.textBox4);
@@ -177,9 +179,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(100, 721);
+            this.richTextBox1.Location = new System.Drawing.Point(100, 744);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1196, 74);
+            this.richTextBox1.Size = new System.Drawing.Size(1196, 51);
             this.richTextBox1.TabIndex = 344;
             this.richTextBox1.Text = "";
             // 
@@ -732,6 +734,22 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "1、饮食要合理，应注意低盐、低糖、低脂、高蛋白的原则 ",
+            "2、运动要适量，睡眠要充足",
+            "3、精神要愉快、情绪要稳定 ",
+            "4、服饰穿戴要宽松",
+            "5、坚持服药，不得自行停药"});
+            this.comboBox1.Location = new System.Drawing.Point(100, 721);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(408, 20);
+            this.comboBox1.TabIndex = 345;
+            this.comboBox1.Text = "--请选择健康建议--";
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // aUhealthcheckupServices4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -816,5 +834,6 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

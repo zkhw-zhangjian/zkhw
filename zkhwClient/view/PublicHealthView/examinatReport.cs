@@ -641,7 +641,7 @@ where 1=1";
                                 re.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
                             }
                         }
-                        string urls = @str + $"/up/result/{item.Name + item.ID}.pdf";
+                        string urls = @str + $"/up/result/{item.Name + item.ID.Replace("'","")}.pdf";
                         DeteleFile(urls);
                         re.Doc.Save(urls, SaveFormat.Pdf);
                     }
@@ -655,7 +655,7 @@ where 1=1";
                                 re.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
                             }
                         }
-                        string urls = @str + $"/up/result/{item.Name + item.ID}.pdf";
+                        string urls = @str + $"/up/result/{item.Name + item.ID.Replace("'", "")}.pdf";
                         DeteleFile(urls);
                         re.Doc.Save(urls, SaveFormat.Pdf);
                     }
@@ -669,7 +669,7 @@ where 1=1";
                                 res.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
                             }
                         }
-                        string urls = @str + $"/up/result/{item.Name + item.ID}.pdf";
+                        string urls = @str + $"/up/result/{item.Name + item.ID.Replace("'", "")}.pdf";
                         DeteleFile(urls);
                         res.Doc.Save(urls, SaveFormat.Pdf);
                     }
@@ -684,7 +684,7 @@ where 1=1";
                                 rp.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
                             }
                         }
-                        string urls = @str + $"/up/result/{item.Name + item.ID}.pdf";
+                        string urls = @str + $"/up/result/{item.Name + item.ID.Replace("'", "")}.pdf";
                         DeteleFile(urls);
                         rp.Doc.Save(urls, SaveFormat.Pdf);
                     }
@@ -731,7 +731,7 @@ where 1=1";
                         {
                             re.Doc.AppendDocument(item.Doc, ImportFormatMode.KeepSourceFormatting);
                         }
-                        string urls = @str + $"/up/result/{data["name"].ToString() + data["id_number"].ToString()}.pdf";
+                        string urls = @str + $"/up/result/{"综合报告单-"+data["name"].ToString() + data["id_number"].ToString()}.pdf";
                         DeteleFile(urls);
                         re.Doc.Save(urls, SaveFormat.Pdf);
                     }
@@ -742,7 +742,7 @@ where 1=1";
                     {
                         DataRow data = dataSet.Tables["个人"].Rows[i];
                         doc = PdfProcessing(list[0], data);
-                        string urls = @str + $"/up/result/{data["name"].ToString() + data["id_number"].ToString()}.pdf";
+                        string urls = @str + $"/up/result/{list[0]+"-"+data["name"].ToString() + data["id_number"].ToString()}.pdf";
                         DeteleFile(urls);
                         doc.Save(urls, SaveFormat.Pdf);
                     }
@@ -2429,7 +2429,37 @@ where 1=1";
                                     flagsh = 1;
                                 }
                             }
-                            if(flagsh == 1)sm += "\r\n";
+                            //jktj.Add("低密度脂蛋白", 
+                            string ldl = jkdata.Rows[j]["ldl"].ToString();
+                            if (!string.IsNullOrWhiteSpace(ldl))
+                            {
+                                if (Convert.ToDouble(ldl) > 3.9)
+                                {
+                                    sm += @"低密度脂蛋白值偏高：" + ldl + "mmol/l   ";
+                                    flagsh = 1;
+                                }
+                                else if (Convert.ToDouble(ldl) < 1.5)
+                                {
+                                    sm += @"低密度脂蛋白值偏低：" + ldl + "mmol/l   ";
+                                    flagsh = 1;
+                                }
+                            }
+                            //jktj.Add("低密度脂蛋白", 
+                            string hdl = jkdata.Rows[j]["hdl"].ToString();
+                            if (!string.IsNullOrWhiteSpace(hdl))
+                            {
+                                if (Convert.ToDouble(hdl) > 1.9)
+                                {
+                                    sm += @"低密度脂蛋白值偏高：" + hdl + "mmol/l   ";
+                                    flagsh = 1;
+                                }
+                                else if (Convert.ToDouble(hdl) < 0.9)
+                                {
+                                    sm += @"低密度脂蛋白值偏低：" + hdl + "mmol/l   ";
+                                    flagsh = 1;
+                                }
+                            }
+                            if (flagsh == 1)sm += "\r\n";
                             
                             int gyyfiag =0;
                             //string bbplh = jkdata.Rows[j]["base_blood_pressure_left_high"].ToString();
@@ -2458,19 +2488,15 @@ where 1=1";
                                 }
                             }
                             
-                            int xdtfiag = 0;
                             if (jkdata.Rows[j]["cardiogram"].ToString() == "2")
                             {
                                 sm += @"不正常心电图："+ jkdata.Rows[j]["cardiogram_memo"].ToString().Replace("~", "");
-                                xdtfiag = 1;
                                 sm += "\r\n";
                             }
 
-                            int bcfiag = 0;
                             if (jkdata.Rows[j]["ultrasound_abdomen"].ToString() == "2")
                             {
                                 sm += jkdata.Rows[j]["ultrasound_memo"].ToString();
-                                bcfiag = 1;
                                 sm += "\r\n";
                             }
 
