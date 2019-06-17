@@ -30,8 +30,9 @@ namespace zkhwClient.view.PublicHealthView
         string qxcode = null;
         string shicode = null;
         string shengcode = null;
-        string xcuncode = null;
+        string xcuncode = null; 
         string jmxx = null;
+        bool isfirst = true;
         string str = Application.StartupPath;//项目路径
         DataTable dttv = null;
         public examinatProgress()
@@ -49,7 +50,9 @@ namespace zkhwClient.view.PublicHealthView
             this.comboBox1.ValueMember = "code";//操作时获取的值 
 
             dttv=grjddao.checkThresholdValues();//获取阈值信息
+            isfirst = true;
             registrationRecordCheck();//体检人数统计
+            isfirst = false;
         }
         public void queryExaminatProgress()
         {
@@ -321,18 +324,28 @@ namespace zkhwClient.view.PublicHealthView
         private void comboBox5_SelectionChangeCommitted(object sender, EventArgs e)
         {
             xcuncode = this.comboBox5.SelectedValue.ToString();
+            
         }
 
-        //体检人数统计
+        //体检人数统计  原来参数使用到basicInfoSettings.xcuncode 变更到xcuncode
         public void registrationRecordCheck()
         {
-            DataTable dt16num = grjddao.residentNum(basicInfoSettings.xcuncode);
+            if(xcuncode == "" || xcuncode == null) xcuncode = basicInfoSettings.xcuncode;
+            DataTable dt16num = grjddao.residentNum(xcuncode);
             if (dt16num != null && dt16num.Rows.Count > 0)
             {
                 label9.Text = dt16num.Rows[0][0].ToString();//计划体检人数
             }
-
-            DataTable dt19num = grjddao.jkAllNum(basicInfoSettings.xcuncode, basicInfoSettings.createtime);
+            
+            if(isfirst==true)
+            {
+                time1 = basicInfoSettings.createtime;
+            }
+            else
+            {
+                time1 = this.dateTimePicker1.Text.ToString();//开始时间
+            }
+            DataTable dt19num = grjddao.jkAllNum(xcuncode, time1);
             if (dt19num != null && dt19num.Rows.Count > 0)
             {
                 //DataRow[] rownan = dt19num.Select("sex='男'");
@@ -342,7 +355,7 @@ namespace zkhwClient.view.PublicHealthView
                 label11.Text = dt19num.Rows[0][0].ToString();//登记人数
             }
 
-            DataTable dt20num = jkdao.querytjjdTopdf(basicInfoSettings.xcuncode, basicInfoSettings.createtime);
+            DataTable dt20num = jkdao.querytjjdTopdf(xcuncode, time1);
             if (dt20num != null && dt20num.Rows.Count > 0)
             {
                 DataRow[] row =dt20num.Select("type='未完成'");
@@ -448,10 +461,13 @@ namespace zkhwClient.view.PublicHealthView
                 usgtz.Show();
             }
         }
-        //生成PDF
+        //生成PDF xcuncode
         private void label6_Click(object sender, EventArgs e)
         {
-            DataTable dts = jkdao.querytjjdTopdf(basicInfoSettings.xcuncode, basicInfoSettings.createtime);
+            //DataTable dts = jkdao.querytjjdTopdf(basicInfoSettings.xcuncode, basicInfoSettings.createtime);  //2019-6-17改成下面的方式
+            if (xcuncode == "" || xcuncode==null) xcuncode = basicInfoSettings.xcuncode;
+            time1 = this.dateTimePicker1.Text.ToString();//开始时间
+            DataTable dts = jkdao.querytjjdTopdf(xcuncode, time1);
             if (dts != null && dts.Rows.Count > 0)
             {
                 string localFilePath = String.Empty;
@@ -460,9 +476,13 @@ namespace zkhwClient.view.PublicHealthView
                 fileDialog.InitialDirectory = "C://";
 
                 fileDialog.Filter = "All files (*.*)|*.*";
-
+                string xcunName = basicInfoSettings.xcName;
                 //设置文件名称：
-                fileDialog.FileName = DateTime.Now.ToString("yyyyMMdd") + basicInfoSettings.xcName + "花名册.pdf";
+                if (this.comboBox5.Text.Trim() !="")
+                {
+                    xcunName = this.comboBox5.Text;
+                } 
+                fileDialog.FileName = DateTime.Now.ToString("yyyyMMdd") + xcunName + "花名册.pdf";
 
                 fileDialog.FilterIndex = 2;
 
@@ -530,14 +550,37 @@ namespace zkhwClient.view.PublicHealthView
                 doc.Add(null9);
 
                 PdfPTable table1 = new PdfPTable(1);
-                table1.WidthPercentage = 100;//table占宽度百分比 100%
-                table1.SetWidths(new int[] { 100 });
-                table1.AddCell(new Phrase("应到人数：" + label9.Text, fontID));
-                table1.AddCell(new Phrase("登记人数：" + label11.Text, fontID));//+"    其中男性："+ label16.Text+"    女性："+ label17.Text
-                table1.AddCell(new Phrase("未到人数：" + label15.Text, fontID));
-                table1.AddCell(new Phrase("建档单位：" + basicInfoSettings.organ_name, fontID));
-                table1.AddCell(new Phrase("", fontID));
+
+                //table1.WidthPercentage = 100;//table占宽度百分比 100% 
+                //table1.SetWidths(new int[] { 100 });
+                //table1.AddCell(new Phrase("应到人数：" + label9.Text, fontID));
+                //table1.AddCell(new Phrase("登记人数：" + label11.Text, fontID));//+"    其中男性："+ label16.Text+"    女性："+ label17.Text
+                //table1.AddCell(new Phrase("未到人数：" + label15.Text, fontID));
+                //table1.AddCell(new Phrase("建档单位：" + basicInfoSettings.organ_name, fontID));
+                //table1.AddCell(new Phrase("", fontID));
+                //doc.Add(table1);
+                #region 导出时 人员统计 信息
+                PdfPCell cellTop0 = new PdfPCell(new Phrase("应到人数：" + label9.Text, fontID));
+                cellTop0.DisableBorderSide(15);  //去掉边框
+                table1.AddCell(cellTop0);
+
+                PdfPCell cellTop1 = new PdfPCell(new Phrase("登记人数：" + label11.Text, fontID));
+                cellTop1.DisableBorderSide(15);
+                table1.AddCell(cellTop1);
+
+                PdfPCell cellTop2 = new PdfPCell(new Phrase("未到人数：" + label15.Text, fontID));
+                cellTop2.DisableBorderSide(15);
+                table1.AddCell(cellTop2);
+
+                PdfPCell cellTop3 = new PdfPCell(new Phrase("建档单位：" + basicInfoSettings.organ_name, fontID));
+                cellTop3.DisableBorderSide(15);
+                table1.AddCell(cellTop3);
+
+                PdfPCell cellTop4 = new PdfPCell(new Phrase("", fontID));
+                cellTop4.DisableBorderSide(15);
+                table1.AddCell(cellTop4); 
                 doc.Add(table1);
+                #endregion
 
                 Paragraph null7 = new Paragraph("  ", fontID);
                 null7.Leading = 20;
@@ -554,10 +597,10 @@ namespace zkhwClient.view.PublicHealthView
                 //dts.Columns["devtime"].SetOrdinal(0);
                 //dts.Columns.Remove("编号");
 
-                PdfPTable table = new PdfPTable(5);
+                PdfPTable table = new PdfPTable(6);
                 table.WidthPercentage = 100;//table占宽度百分比 100%
-                table.SetWidths(new int[] { 15, 25, 20, 20, 20 });
-                string[] columnsnames = { "编号", "姓名", "性别", "出生日期", "状态" };
+                table.SetWidths(new int[] { 7, 15, 6, 15, 10, 47});
+                string[] columnsnames = { "编号", "姓名", "性别", "出生日期", "状态", "未完成项" };
                 PdfPCell cell;
 
                 for (int i = 0; i < columnsnames.Length; i++)
@@ -570,7 +613,64 @@ namespace zkhwClient.view.PublicHealthView
                     table.AddCell(new Phrase((rowNum + 1).ToString(), font));
                     for (int columNum = 0; columNum != dts.Columns.Count; columNum++)
                     {
-                        table.AddCell(new Phrase(dts.Rows[rowNum][columNum].ToString(), font));
+                        if(columNum<=3)
+                        {
+                            table.AddCell(new Phrase(dts.Rows[rowNum][columNum].ToString(), font));
+                        }
+                        else if(columNum==4)
+                        {
+                            string columlastname = "";
+                            
+                            #region 特殊处理
+                            for(int j= columNum; j< dts.Columns.Count;j++)
+                            {
+                                string cd = dts.Rows[rowNum][j].ToString();
+                                if(cd=="1" || cd=="2" || cd=="3")
+                                {
+
+                                }
+                                else
+                                {
+                                    string tmp = "";
+                                    switch (j)
+                                    {
+                                        case 4:
+                                            tmp = "B超";
+                                            break;
+                                        case 5:
+                                            tmp = "心电图";
+                                            break;
+                                        case 6:
+                                            tmp = "生化";
+                                            break;
+                                        case 7:
+                                            tmp = "血常规";
+                                            break;
+                                        case 8:
+                                            tmp = "尿常规";
+                                            break;
+                                        case 9:
+                                            tmp = "血压";
+                                            break;
+                                        case 10:
+                                            tmp = "身高体重";
+                                            break;
+                                    }
+                                    if(columlastname=="")
+                                    {
+                                        columlastname = tmp;
+                                    }
+                                    else
+                                    {
+                                        columlastname = columlastname + "、"+tmp;
+                                    }
+                                }
+                            }
+                            #endregion
+
+                            table.AddCell(new Phrase(columlastname, font));
+                            break;
+                        }
                     }
                 }
 

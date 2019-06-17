@@ -258,8 +258,8 @@ namespace zkhwClient.view.updateTjResult
             //if (flag) {
                 string ALT= this.textBox5.Text;
                 string AST = this.textBox6.Text;
-                string TBIL = this.textBox7.Text;
-                string DBIL = this.textBox8.Text;
+                string TBIL = this.textBox8.Text;
+                string DBIL = this.textBox7.Text;
                 string CREA = this.textBox11.Text;
                 string UREA = this.textBox10.Text;
                 string GLU = this.textBox13.Text;

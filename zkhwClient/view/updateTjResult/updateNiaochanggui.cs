@@ -20,13 +20,22 @@ namespace zkhwClient.view.updateTjResult
         bool flag = false;
         tjcheckDao tjdao = new tjcheckDao();
         public DataTable dttv = null;
+        private DataTable _thresholddt = null;
         public updateNiaochanggui()
         {
             InitializeComponent();
         }
+        private void GetThresholdValuesList()
+        {
+            grjdDao grjddao = new grjdDao();
+            _thresholddt = grjddao.checkThresholdValues(); 
+        }
         
         private void updateBichao_Load(object sender, EventArgs e)
         {
+            //这里获取尿常规数值
+            GetThresholdValuesList();
+
             this.textBox1.Text = name;
             this.textBox3.Text = time;
             this.textBox9.Text = aichive_no;
@@ -95,7 +104,19 @@ namespace zkhwClient.view.updateTjResult
                 string ph = dtbichao.Rows[0]["PH"].ToString();
                 if (ph != "")
                 {
+
                     double phdouble = double.Parse(ph);
+                    //现在的方法，从阈值中得到大小
+                    DataRow[] dr = _thresholddt.Select("class_type='尿常规' and type='PH'");
+                    //以前的方法
+                    if (dr == null || dr.Length < 6)
+                    { }
+                    else
+                    {
+                        //double _warningmin = 0;
+                        //double _warningmax = 0;
+                        //double 
+                    }
                     if (phdouble==5.0 || phdouble == 5.5 || phdouble == 6.0 || phdouble == 6.5 || phdouble == 7.0 || phdouble == 7.5 || phdouble == 8.0 || phdouble == 8.5 || phdouble == 9.0)
                     {
                         if (phdouble > 8.0 && phdouble <= 9.0)
@@ -127,8 +148,8 @@ namespace zkhwClient.view.updateTjResult
                 if (sg != "")
                 {
                     double sgdouble = double.Parse(sg);
-                    if (sgdouble == 1.005 || sgdouble == 1.01 || sgdouble == 1.015 || sgdouble == 1.02 || sgdouble == 1.025 || sgdouble == 1.03)
-                    {
+                    //if (sgdouble == 1.005 || sgdouble == 1.01 || sgdouble == 1.015 || sgdouble == 1.02 || sgdouble == 1.025 || sgdouble == 1.03)
+                    //{
                         if (sgdouble > 1.025 || sgdouble < 1.015)
                         {
                             this.textBox12.ForeColor = Color.Blue;
@@ -137,7 +158,7 @@ namespace zkhwClient.view.updateTjResult
                         {
                             this.textBox12.ForeColor = Color.Red;
                         }
-                    }
+                    //}
                 }   
                 this.textBox12.Text = sg;
 

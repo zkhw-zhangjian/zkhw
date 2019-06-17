@@ -51,7 +51,10 @@ namespace zkhwClient.dao
         public DataTable querytjjdTopdf(string xcuncode, string time)
         {
             DataSet ds = new DataSet();
-            string sql = "select name,(case sex when '1' then '男' when '2' then '女' ELSE ''END) sex,birthday,(case when BChao>='1' and XinDian>='1' and ShengHua>='1' and XueChangGui>='1' and NiaoChangGui>='1' and XueYa>='1' and Shengaotizhong>='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
+            string sql = @"select name,(case sex when '1' then '男' when '2' then '女' ELSE ''END) sex,birthday,
+                     (case when BChao>='1' and XinDian>='1' and ShengHua>='1' and XueChangGui>='1' 
+                     and NiaoChangGui>='1' and XueYa>='1' and Shengaotizhong>='1' then '完成' else '未完成' end) as type
+                     ,BChao,XinDian,ShengHua,XueChangGui,NiaoChangGui,XueYa,Shengaotizhong from zkhw_tj_bgdc where 1=1";
             if (xcuncode != null && !"".Equals(xcuncode))
             {
                 sql += " and area_duns='" + xcuncode + "'";
@@ -59,6 +62,10 @@ namespace zkhwClient.dao
             if (time != null && !"".Equals(time))
             {
                 sql += " and createtime >='" + time + "'";
+            }
+            if(sql !="")
+            {
+                sql += " order by convert(type using GBK) DESC,convert(name using GBK) ASC ";
             }
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
