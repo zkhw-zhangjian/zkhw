@@ -47,6 +47,12 @@ namespace zkhwClient.view.updateTjResult
                 this.textBox14.Text = dtbichao.Rows[0]["Age"].ToString();
                 this.textBox15.Text = dtbichao.Rows[0]["Gen"].ToString();
                 this.textBox16.Text = dtbichao.Rows[0]["Dep"].ToString();
+                string path= "xdtImg//"+ dtbichao.Rows[0]["imageUrl"].ToString();
+                if (System.IO.File.Exists(path))
+                {
+                    pictureBox1.Image = Image.FromFile(path, false);
+                }
+                    
             }
             else {
                 flag = false;
