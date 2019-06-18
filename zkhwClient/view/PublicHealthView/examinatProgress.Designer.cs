@@ -60,6 +60,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.btnDel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -69,6 +70,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btnDel);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.radioButton3);
@@ -102,7 +104,7 @@
             this.label6.Location = new System.Drawing.Point(985, 61);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(114, 20);
-            this.label6.TabIndex = 17;
+            this.label6.TabIndex = 14;
             this.label6.Text = "下载花名册";
             this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
@@ -115,7 +117,7 @@
             this.label5.Location = new System.Drawing.Point(872, 61);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(114, 20);
-            this.label5.TabIndex = 16;
+            this.label5.TabIndex = 13;
             this.label5.Text = "导出花名册";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
@@ -126,7 +128,7 @@
             this.radioButton3.Location = new System.Drawing.Point(286, 53);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(47, 16);
-            this.radioButton3.TabIndex = 15;
+            this.radioButton3.TabIndex = 8;
             this.radioButton3.TabStop = true;
             this.radioButton3.Tag = "3";
             this.radioButton3.Text = "全部";
@@ -138,7 +140,7 @@
             this.radioButton2.Location = new System.Drawing.Point(437, 53);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(59, 16);
-            this.radioButton2.TabIndex = 14;
+            this.radioButton2.TabIndex = 10;
             this.radioButton2.Tag = "2";
             this.radioButton2.Text = "已检验";
             this.radioButton2.UseVisualStyleBackColor = true;
@@ -149,7 +151,7 @@
             this.radioButton1.Location = new System.Drawing.Point(354, 53);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(59, 16);
-            this.radioButton1.TabIndex = 13;
+            this.radioButton1.TabIndex = 9;
             this.radioButton1.Tag = "1";
             this.radioButton1.Text = "未检验";
             this.radioButton1.UseVisualStyleBackColor = true;
@@ -159,7 +161,7 @@
             this.textBox1.Location = new System.Drawing.Point(88, 52);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(172, 21);
-            this.textBox1.TabIndex = 12;
+            this.textBox1.TabIndex = 7;
             // 
             // label4
             // 
@@ -176,7 +178,7 @@
             this.comboBox5.Location = new System.Drawing.Point(943, 18);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(114, 20);
-            this.comboBox5.TabIndex = 10;
+            this.comboBox5.TabIndex = 6;
             this.comboBox5.SelectionChangeCommitted += new System.EventHandler(this.comboBox5_SelectionChangeCommitted);
             // 
             // comboBox4
@@ -185,7 +187,7 @@
             this.comboBox4.Location = new System.Drawing.Point(829, 18);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(108, 20);
-            this.comboBox4.TabIndex = 9;
+            this.comboBox4.TabIndex = 5;
             this.comboBox4.SelectionChangeCommitted += new System.EventHandler(this.comboBox4_SelectionChangeCommitted);
             // 
             // comboBox3
@@ -194,7 +196,7 @@
             this.comboBox3.Location = new System.Drawing.Point(714, 18);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(109, 20);
-            this.comboBox3.TabIndex = 8;
+            this.comboBox3.TabIndex = 4;
             this.comboBox3.SelectionChangeCommitted += new System.EventHandler(this.comboBox3_SelectionChangeCommitted);
             // 
             // comboBox2
@@ -203,7 +205,7 @@
             this.comboBox2.Location = new System.Drawing.Point(614, 18);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(94, 20);
-            this.comboBox2.TabIndex = 7;
+            this.comboBox2.TabIndex = 3;
             this.comboBox2.SelectionChangeCommitted += new System.EventHandler(this.comboBox2_SelectionChangeCommitted);
             // 
             // comboBox1
@@ -212,7 +214,7 @@
             this.comboBox1.Location = new System.Drawing.Point(502, 18);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(106, 20);
-            this.comboBox1.TabIndex = 6;
+            this.comboBox1.TabIndex = 2;
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
             // 
             // label3
@@ -229,7 +231,7 @@
             this.button1.Location = new System.Drawing.Point(614, 48);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 25);
-            this.button1.TabIndex = 4;
+            this.button1.TabIndex = 11;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -240,7 +242,7 @@
             this.dateTimePicker2.Location = new System.Drawing.Point(256, 15);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(168, 21);
-            this.dateTimePicker2.TabIndex = 3;
+            this.dateTimePicker2.TabIndex = 1;
             // 
             // label2
             // 
@@ -258,7 +260,7 @@
             this.dateTimePicker1.Location = new System.Drawing.Point(65, 15);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(159, 21);
-            this.dateTimePicker1.TabIndex = 1;
+            this.dateTimePicker1.TabIndex = 0;
             // 
             // label1
             // 
@@ -281,6 +283,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1099, 455);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
@@ -425,6 +428,15 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "体检进度";
             // 
+            // btnDel
+            // 
+            this.btnDel.Location = new System.Drawing.Point(714, 48);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(75, 25);
+            this.btnDel.TabIndex = 12;
+            this.btnDel.UseVisualStyleBackColor = true;
+            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
+            // 
             // examinatProgress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -480,5 +492,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button btnDel;
     }
 }

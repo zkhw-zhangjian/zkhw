@@ -31,8 +31,7 @@ namespace zkhwClient.view.PublicHealthView
         string shicode = null;
         string shengcode = null;
         string xcuncode = null; 
-        string jmxx = null;
-        bool isfirst = true;
+        string jmxx = null; 
         string str = Application.StartupPath;//项目路径
         DataTable dttv = null;
         public examinatProgress()
@@ -44,15 +43,17 @@ namespace zkhwClient.view.PublicHealthView
             //让默认的日期时间减一天
             this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
             this.button1.BackgroundImage = System.Drawing.Image.FromFile(@str + "/images/check.png");
+            this.btnDel.BackgroundImage = System.Drawing.Image.FromFile(@str + "/images/delete.png");
+
 
             this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源
             this.comboBox1.DisplayMember = "name";//显示给用户的数据集表项
             this.comboBox1.ValueMember = "code";//操作时获取的值 
 
             dttv=grjddao.checkThresholdValues();//获取阈值信息
-            isfirst = true;
+            
             registrationRecordCheck();//体检人数统计
-            isfirst = false;
+            
         }
         public void queryExaminatProgress()
         {
@@ -339,16 +340,8 @@ namespace zkhwClient.view.PublicHealthView
             {
                 label9.Text = dt16num.Rows[0][0].ToString();//计划体检人数
             }
-            
-            if(isfirst==true)
-            {
-                time1 = basicInfoSettings.createtime;
-            }
-            else
-            {
-                time1 = this.dateTimePicker1.Text.ToString();//开始时间
-            }
-            DataTable dt19num = grjddao.jkAllNum(xcuncode, time1);
+             
+            DataTable dt19num = grjddao.jkAllNum(xcuncode, basicInfoSettings.createtime);
             if (dt19num != null && dt19num.Rows.Count > 0)
             {
                 //DataRow[] rownan = dt19num.Select("sex='男'");
@@ -358,7 +351,7 @@ namespace zkhwClient.view.PublicHealthView
                 label11.Text = dt19num.Rows[0][0].ToString();//登记人数
             }
 
-            DataTable dt20num = jkdao.querytjjdTopdf(xcuncode, time1);
+            DataTable dt20num = jkdao.querytjjdTopdf(xcuncode, basicInfoSettings.createtime);
             if (dt20num != null && dt20num.Rows.Count > 0)
             {
                 DataRow[] row =dt20num.Select("type='未完成'");
@@ -602,7 +595,7 @@ namespace zkhwClient.view.PublicHealthView
 
                 PdfPTable table = new PdfPTable(6);
                 table.WidthPercentage = 100;//table占宽度百分比 100%
-                table.SetWidths(new int[] { 7, 15, 6, 15, 10, 47});
+                table.SetWidths(new int[] { 7, 14, 6, 14, 10, 49});
                 string[] columnsnames = { "编号", "姓名", "性别", "出生日期", "状态", "未完成项" };
                 PdfPCell cell;
 
@@ -716,6 +709,65 @@ namespace zkhwClient.view.PublicHealthView
             {
                 dataGridView1.Rows[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
                 dataGridView1.Rows[i].HeaderCell.Value = (i + 1).ToString();
+            }
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            string archive_no = this.dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+
+            DialogResult rr = MessageBox.Show("确认删除？", "确认删除提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+            int tt = (int)rr;
+            if (tt == 1)
+            {
+                #region 整理记录
+                List<string> _lst = new List<string>();
+                //string sql = string.Format(" Delete From resident_base_info where archive_no='{0}'", archive_no);
+                //_lst.Add(sql);
+                string sql = string.Format(" Delete From zkhw_tj_jk where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+
+                sql = string.Format(" Delete From zkhw_tj_bgdc where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+
+                sql = string.Format(" Delete From physical_examination_record where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+
+                sql = string.Format(" Delete From zkhw_tj_bc where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+
+                sql = string.Format(" Delete From zkhw_tj_ncg where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+
+                sql = string.Format(" Delete From zkhw_tj_sgtz where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+
+                sql = string.Format(" Delete From zkhw_tj_sh where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+
+                sql = string.Format(" Delete From zkhw_tj_xcg where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+
+                sql = string.Format(" Delete From zkhw_tj_xdt where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+
+                sql = string.Format(" Delete From zkhw_tj_xy where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+                #endregion
+
+                int ret=DbHelperMySQL.ExecuteSqlTran(_lst);
+                if(ret>0)
+                {
+                    MessageBox.Show("删除成功！");
+
+                    queryExaminatProgress();
+                    registrationRecordCheck();//体检人数统计
+                }
+                else
+                {
+                    MessageBox.Show("删除失败！");
+                }
             }
         }
     }

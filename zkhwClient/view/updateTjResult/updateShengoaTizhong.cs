@@ -74,7 +74,22 @@ namespace zkhwClient.view.updateTjResult
                     }
                 }
                 this.textBox6.Text = weight;
-                this.textBox7.Text = dtbichao.Rows[0]["BMI"].ToString();
+
+                string _bmi= dtbichao.Rows[0]["BMI"].ToString();
+                if(_bmi !="")
+                {
+                    double _dbBmi = double.Parse(_bmi);
+                    if (_dbBmi >= 24 && _dbBmi <= 28)
+                    {
+                        this.textBox7.ForeColor = Color.Blue;
+                    }
+                    else if (_dbBmi > 28)
+                    {
+                        this.textBox6.ForeColor = Color.Red;
+                    }
+
+                }
+                this.textBox7.Text = _bmi;
             }
             else {
                 flag = false;
