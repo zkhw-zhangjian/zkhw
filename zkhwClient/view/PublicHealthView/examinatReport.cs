@@ -20,23 +20,26 @@ namespace zkhwClient.view.PublicHealthView
     {
         string str = Application.StartupPath;//项目路径
         service.loginLogService lls = new service.loginLogService();
+        bool isfirst = false;
         #region 初始化数据
         public examinatReport()
         {
             InitializeComponent();
-            BinData();
+           
         }
-
-        /// <summary>
-        /// 初始化数据
-        /// </summary>
-        private void BinData()
+        private void GetAllPersonInfo()
         {
+            string time1 = dateTimePicker3.Value.ToString("yyyy-MM-dd");
+            string time2 = dateTimePicker4.Value.ToString("yyyy-MM-dd");
+            string sql = $@"SELECT count(sex) sun,sex from zkhw_tj_bgdc where area_duns 
+         like '%{basicInfoSettings.xcuncode}%' and  date_format(createtime,'%Y-%m-%d') between '{time1}' and '{time2}' GROUP BY sex ";
+            if (isfirst==true)
+            {
+                time1 = DateTime.Parse(basicInfoSettings.createtime).ToString("yyyy-MM-dd");
+                sql = $@"SELECT count(sex) sun,sex from zkhw_tj_bgdc where area_duns like '%{basicInfoSettings.xcuncode}%' and date_format(createtime,'%Y-%m-%d')>='{time1}' GROUP BY sex ";
+            }
             #region 报告统计数据绑定
-            string sql = $@"SELECT count(sex) sun,sex
-from zkhw_tj_bgdc where area_duns like '%{basicInfoSettings.xcuncode}%' and createtime>='{basicInfoSettings.createtime}'
-GROUP BY sex
-";
+            
             DataSet dataSet = DbHelperMySQL.Query(sql);
             DataTable data = dataSet.Tables[0];
             if (data != null && data.Rows.Count > 0)
@@ -54,7 +57,13 @@ GROUP BY sex
                 总数.Text = data.Compute("sum(sun)", "true").ToString();
             }
             #endregion
-
+        }
+        /// <summary>
+        /// 初始化数据
+        /// </summary>
+        private void BinData()
+        {
+            GetAllPersonInfo();
             #region 报告查询 区域数据绑定
             string sql1 = "select code as ID,name as Name from code_area_config where parent_code='-1';";
             DataSet datas = DbHelperMySQL.Query(sql1);
@@ -75,6 +84,9 @@ GROUP BY sex
             this.button1.BackgroundImage = Image.FromFile(@str + "/images/check.png");
             this.统计查询.BackgroundImage = Image.FromFile(@str + "/images/check.png");
 
+            isfirst = true;
+            BinData();
+            isfirst = false;
             pagerControl1.OnPageChanged += new EventHandler(pagerControl1_OnPageChanged);
             int count = 0;
             queryExaminatProgress(GetData(pagerControl1.PageIndex, pagerControl1.PageSize, out count));
@@ -285,6 +297,7 @@ where 1=1";
 
         private void 统计查询_Click(object sender, EventArgs e)
         {
+            GetAllPersonInfo();   //同步处理下
             string stan = dateTimePicker3.Value.ToString("yyyy-MM-dd");
             string end = dateTimePicker4.Value.ToString("yyyy-MM-dd");
             string sql = $@"SELECT sex,'64',COUNT(sex) 人数,
