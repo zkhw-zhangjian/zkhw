@@ -60,6 +60,9 @@ namespace zkhwClient.view.PublicHealthView
             time1 = this.dateTimePicker1.Text.ToString();//开始时间
             time2 = this.dateTimePicker2.Text.ToString();//结束时间
             jmxx = this.textBox1.Text;
+            if (this.comboBox5.Text == ""|| this.comboBox5.Text == null) {
+                xcuncode = null;
+            }
             string ytj = "1";
             if (time1 != null && !"".Equals(time1) && time2 != null && !"".Equals(time2))
             {
