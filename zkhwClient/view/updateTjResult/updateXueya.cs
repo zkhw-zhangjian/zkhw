@@ -74,7 +74,17 @@ namespace zkhwClient.view.updateTjResult
                     }
                 }
                 this.textBox6.Text = dbp;
-                this.textBox7.Text = dtbichao.Rows[0]["Pulse"].ToString();
+                
+                string _pulsestr= dtbichao.Rows[0]["Pulse"].ToString();
+                if(_pulsestr !="")
+                {
+                    double _dbpulse = double.Parse(_pulsestr);
+                    if(_dbpulse>100 || _dbpulse<60)
+                    {
+                        this.textBox7.ForeColor = Color.Red;
+                    } 
+                }
+                this.textBox7.Text = _pulsestr;
             }
             else {
                 flag = false;

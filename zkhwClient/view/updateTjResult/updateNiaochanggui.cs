@@ -19,22 +19,37 @@ namespace zkhwClient.view.updateTjResult
         public string bar_code = "";
         bool flag = false;
         tjcheckDao tjdao = new tjcheckDao();
-        public DataTable dttv = null;
-        private DataTable _thresholddt = null;
+        public DataTable dttv = null; 
         public updateNiaochanggui()
         {
             InitializeComponent();
         }
-        private void GetThresholdValuesList()
-        {
-            grjdDao grjddao = new grjdDao();
-            _thresholddt = grjddao.checkThresholdValues(); 
-        }
         
-        private void updateBichao_Load(object sender, EventArgs e)
+        
+        private void GetMinMax(string _sType,out double _warningmin, out double _warningmax, out double _thresholdmin, out double _thresholdmax,out bool _ishave)
         {
-            //这里获取尿常规数值
-            GetThresholdValuesList();
+            _warningmin = 0;
+            _warningmax = 0;
+            _thresholdmin = 0;
+            _thresholdmax = 0;
+            _ishave = false;
+            DataRow[] dr = dttv.Select("class_type='尿常规' and type='"+ _sType + "'");
+            //以前的方法
+            if (dr == null || dr.Length == 0)
+            {
+                _ishave = false;
+            }
+            else
+            {
+                _ishave = true;
+                _warningmin = double.Parse(dr[0]["warning_min"].ToString());
+                _warningmax = double.Parse(dr[0]["warning_max"].ToString());
+                _thresholdmin = double.Parse(dr[0]["threshold_min"].ToString());
+                _thresholdmax = double.Parse(dr[0]["threshold_max"].ToString()); 
+            }
+        }
+        private void updateBichao_Load(object sender, EventArgs e)
+        { 
 
             this.textBox1.Text = name;
             this.textBox3.Text = time;
@@ -106,27 +121,36 @@ namespace zkhwClient.view.updateTjResult
                 {
 
                     double phdouble = double.Parse(ph);
-                    //现在的方法，从阈值中得到大小
-                    DataRow[] dr = _thresholddt.Select("class_type='尿常规' and type='PH'");
-                    //以前的方法
-                    if (dr == null || dr.Length < 6)
-                    { }
-                    else
-                    {
-                        //double _warningmin = 0;
-                        //double _warningmax = 0;
-                        //double 
-                    }
-                    if (phdouble==5.0 || phdouble == 5.5 || phdouble == 6.0 || phdouble == 6.5 || phdouble == 7.0 || phdouble == 7.5 || phdouble == 8.0 || phdouble == 8.5 || phdouble == 9.0)
-                    {
-                        if (phdouble > 8.0 && phdouble <= 9.0)
-                        {
-                            this.textBox10.ForeColor = Color.Blue;
-                        }else if(phdouble > 9.0 || phdouble < 5.0)
+                    double _warningmin = 0;
+                    double _warningmax = 0;
+                    double _thresholdmin = 0;
+                    double _thresholdmax = 0;
+                    bool _ishave = false;
+                    GetMinMax("PH", out _warningmin, out _warningmax, out _thresholdmin, out _thresholdmax, out _ishave);
+                     
+                    if (_ishave==true)
+                    {   
+                        if (phdouble < _thresholdmin || phdouble > _thresholdmax)
                         {
                             this.textBox10.ForeColor = Color.Red;
                         }
+                        else if (phdouble>= _warningmin && phdouble<= _warningmax)
+                        {}
+                        else
+                        {
+                            this.textBox10.ForeColor = Color.Blue;
+                        }
                     }
+                    //if (phdouble==5.0 || phdouble == 5.5 || phdouble == 6.0 || phdouble == 6.5 || phdouble == 7.0 || phdouble == 7.5 || phdouble == 8.0 || phdouble == 8.5 || phdouble == 9.0)
+                    //{
+                    //    if (phdouble > 8.0 && phdouble <= 9.0)
+                    //    {
+                    //        this.textBox10.ForeColor = Color.Blue;
+                    //    }else if(phdouble > 9.0 || phdouble < 5.0)
+                    //    {
+                    //        this.textBox10.ForeColor = Color.Red;
+                    //    }
+                    //}
                 }
                 this.textBox10.Text = ph;
 
@@ -148,18 +172,37 @@ namespace zkhwClient.view.updateTjResult
                 if (sg != "")
                 {
                     double sgdouble = double.Parse(sg);
-                    //if (sgdouble == 1.005 || sgdouble == 1.01 || sgdouble == 1.015 || sgdouble == 1.02 || sgdouble == 1.025 || sgdouble == 1.03)
-                    //{
-                        if (sgdouble > 1.025 || sgdouble < 1.015)
-                        {
-                            this.textBox12.ForeColor = Color.Blue;
-                        }
-                        else if (sgdouble < 1.005 || sgdouble > 1.03)
+                    double _warningmin = 0;
+                    double _warningmax = 0;
+                    double _thresholdmin = 0;
+                    double _thresholdmax = 0;
+                    bool _ishave = false;
+                    GetMinMax("SG", out _warningmin, out _warningmax, out _thresholdmin, out _thresholdmax, out _ishave);
+                    if(_ishave==true)
+                    {
+                        if (sgdouble > _thresholdmax || sgdouble < _thresholdmin)
                         {
                             this.textBox12.ForeColor = Color.Red;
                         }
-                    //}
-                }   
+                        else if (sgdouble>= _warningmin && sgdouble<= _warningmax)
+                        { }
+                        else
+                        {
+                            this.textBox12.ForeColor = Color.Blue;
+                        }
+                    }
+                    ////if (sgdouble == 1.005 || sgdouble == 1.01 || sgdouble == 1.015 || sgdouble == 1.02 || sgdouble == 1.025 || sgdouble == 1.03)
+                    ////{
+                    //    if (sgdouble > 1.025 || sgdouble < 1.015)
+                    //    {
+                    //        this.textBox12.ForeColor = Color.Blue;
+                    //    }
+                    //    else if (sgdouble < 1.005 || sgdouble > 1.03)
+                    //    {
+                    //        this.textBox12.ForeColor = Color.Red;
+                    //    }
+                    ////}
+                }
                 this.textBox12.Text = sg;
 
                 string ket = dtbichao.Rows[0]["KET"].ToString();
@@ -218,7 +261,32 @@ namespace zkhwClient.view.updateTjResult
                 }
                 this.textBox16.Text = dtbichao.Rows[0]["Vc"].ToString();
 
+                string strma=dtbichao.Rows[0]["MA"].ToString();
+                if (strma != "")
+                {
+                    double madouble = double.Parse(strma);
+                    double _warningmin = 0;
+                    double _warningmax = 0;
+                    double _thresholdmin = 0;
+                    double _thresholdmax = 0;
+                    bool _ishave = false;
+                    GetMinMax("MA", out _warningmin, out _warningmax, out _thresholdmin, out _thresholdmax, out _ishave);
+                    if (_ishave == true)
+                    {
+                        if (madouble > _thresholdmax || madouble < _thresholdmin)
+                        {
+                            this.textBox19.ForeColor = Color.Red;
+                        }
+                        else if (madouble >= _warningmin && madouble <= _warningmax)
+                        { }
+                        else
+                        {
+                            this.textBox19.ForeColor = Color.Blue;
+                        }
+                    } 
+                } 
                 this.textBox19.Text = dtbichao.Rows[0]["MA"].ToString();
+
                 this.textBox18.Text = dtbichao.Rows[0]["ACR"].ToString();
                 this.textBox21.Text = dtbichao.Rows[0]["Ca"].ToString();
                 this.textBox20.Text = dtbichao.Rows[0]["CR"].ToString();
