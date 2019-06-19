@@ -2434,7 +2434,7 @@ namespace zkhwClient
                 if (effective == 0)
                 {
                     break;
-                }
+                } 
                 string sendHL7new = "";
                 string sendHL7 = "MSH|^~\\&|||Rayto||1||ACK^R01|1|P|2.3.1||||S||UNICODE|||MSA|AA|1|||||";
                 string []sendArray= sendHL7.Split('|');
@@ -2443,9 +2443,9 @@ namespace zkhwClient
                 using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
                 {
                     sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "\n"+sHL7);
-                }
+                }          
                 if (sHL7.IndexOf("CHEMRAY420") > 0)
-                {//解析生化协议报文数据
+                {//解析生化协议报文数据                   
                     shenghuaBean sh = new shenghuaBean();
                     sh.ZrysSH = basicInfoSettings.sh;
                     string[] sHL7Pids = Regex.Split(sHL7, "PID", RegexOptions.IgnoreCase);
@@ -2456,15 +2456,16 @@ namespace zkhwClient
                     sendArray[17] = "ASCII";
                     sendArray[22] = MSHArray[9];
                     string[] sHL7PArray = sHL7Pids[1].Split('|');
-                    sh.bar_code = sHL7PArray[33];
+                    sh.bar_code = sHL7PArray[34];  
                     DataTable dtjkinfo = jkdao.selectjkInfoBybarcode(sh.bar_code);
                     if (dtjkinfo != null && dtjkinfo.Rows.Count > 0)
-                    {
+                    { 
                         sh.aichive_no = dtjkinfo.Rows[0]["aichive_no"].ToString();
                         sh.id_number = dtjkinfo.Rows[0]["id_number"].ToString();
                     }
                     else
                     {
+                         
                         return;
                     }
                     //把HL7分成段
@@ -2943,7 +2944,7 @@ namespace zkhwClient
                         sendArray[9] = MSHArray[9];
                         sendArray[22] = MSHArray[9];
                         string[] sHL7PArray = sHL7Pids[1].Split('|');
-                        xcg.bar_code = sHL7PArray[2];
+                        xcg.bar_code = sHL7PArray[2]; 
                         DataTable dtjkinfo = jkdao.selectjkInfoBybarcode(xcg.bar_code);
                         if (dtjkinfo != null && dtjkinfo.Rows.Count > 0)
                         {

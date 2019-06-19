@@ -34,8 +34,16 @@ namespace zkhwClient.view.PublicHealthView
             string sql = $@"SELECT count(sex) sun,sex from zkhw_tj_bgdc where area_duns 
          like '%{basicInfoSettings.xcuncode}%' and  date_format(createtime,'%Y-%m-%d') between '{time1}' and '{time2}' GROUP BY sex ";
             if (isfirst==true)
-            {
-                time1 = DateTime.Parse(basicInfoSettings.createtime).ToString("yyyy-MM-dd");
+            { 
+                if(basicInfoSettings.createtime==null || basicInfoSettings.createtime=="")
+                {
+                    time1 = DateTime.Now.ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    time1 = DateTime.Parse(basicInfoSettings.createtime).ToString("yyyy-MM-dd");
+                }
+                
                 sql = $@"SELECT count(sex) sun,sex from zkhw_tj_bgdc where area_duns like '%{basicInfoSettings.xcuncode}%' and date_format(createtime,'%Y-%m-%d')>='{time1}' GROUP BY sex ";
             }
             #region 报告统计数据绑定
