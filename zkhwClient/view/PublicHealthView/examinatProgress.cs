@@ -391,6 +391,8 @@ namespace zkhwClient.view.PublicHealthView
                 ubichao.aichive_no = str2;
                 ubichao.id_number = str3;
                 ubichao.bar_code = str4;
+                ubichao.rowIndex = e.RowIndex;
+                ubichao.testFunDelegate = DealGridColour;
                 ubichao.Show();
             } else if (columnIndex == 6) {
                 updateXindiantu uxindt = new updateXindiantu();
@@ -399,6 +401,8 @@ namespace zkhwClient.view.PublicHealthView
                 uxindt.aichive_no = str2;
                 uxindt.id_number = str3;
                 uxindt.bar_code = str4;
+                uxindt.rowIndex = e.RowIndex;
+                uxindt.testFunDelegate = DealGridColour;
                 uxindt.Show();
             }
             else if (columnIndex == 7)
@@ -410,6 +414,8 @@ namespace zkhwClient.view.PublicHealthView
                 ush.id_number = str3;
                 ush.bar_code = str4;
                 ush.dttv = dttv;
+                ush.rowIndex = e.RowIndex;
+                ush.testFunDelegate = DealGridColour;
                 ush.Show();
             }
             else if (columnIndex == 8)
@@ -432,6 +438,8 @@ namespace zkhwClient.view.PublicHealthView
                 uncg.id_number = str3;
                 uncg.bar_code = str4;
                 uncg.dttv = dttv;
+                uncg.rowIndex = e.RowIndex;
+                uncg.testFunDelegate = DealGridColour;
                 uncg.Show();
             }
             else if (columnIndex == 10)
@@ -443,10 +451,12 @@ namespace zkhwClient.view.PublicHealthView
                 uxy.id_number = str3;
                 uxy.bar_code = str4;
                 uxy.dttv = dttv;
+                uxy.rowIndex = e.RowIndex;
+                uxy.testFunDelegate = DealGridColour;
                 uxy.Show();
             }
             else if (columnIndex == 11)
-            {
+            { 
                 updateShengoaTizhong usgtz = new updateShengoaTizhong();
                 usgtz.time = str0;
                 usgtz.name = str1;
@@ -454,8 +464,36 @@ namespace zkhwClient.view.PublicHealthView
                 usgtz.id_number = str3;
                 usgtz.bar_code = str4;
                 usgtz.dttv = dttv;
-                usgtz.Show();
+                usgtz.rowIndex = e.RowIndex;
+                usgtz.testFunDelegate = DealGridColour;
+                usgtz.Show(); 
             }
+        }
+
+        public void DealGridColour(int _result,int _colIndex,int _rowIndex)
+        {
+            if (_rowIndex <= -1) return;
+            try
+            {
+                dataGridView1.Rows[_rowIndex].Cells[_colIndex].Value = "已经完成";
+                if (_result == 1)
+                {
+                    dataGridView1.Rows[_rowIndex].Cells[_colIndex].Style.ForeColor = Color.Green;
+                }
+                else if (_result == 2)
+                {
+                    dataGridView1.Rows[_rowIndex].Cells[_colIndex].Style.ForeColor = Color.Blue;
+                }
+                else if (_result == 3)
+                {
+                    dataGridView1.Rows[_rowIndex].Cells[_colIndex].Style.ForeColor = Color.Red;
+                }
+            }
+            catch
+            {
+
+            }
+            
         }
         //生成PDF xcuncode
         private void label6_Click(object sender, EventArgs e)

@@ -54,7 +54,7 @@
             this.textBox9.Name = "textBox9";
             this.textBox9.ReadOnly = true;
             this.textBox9.Size = new System.Drawing.Size(229, 30);
-            this.textBox9.TabIndex = 42;
+            this.textBox9.TabIndex = 5;
             // 
             // textBox2
             // 
@@ -63,7 +63,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(229, 30);
-            this.textBox2.TabIndex = 41;
+            this.textBox2.TabIndex = 7;
             // 
             // label4
             // 
@@ -94,7 +94,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(229, 30);
-            this.textBox1.TabIndex = 38;
+            this.textBox1.TabIndex = 3;
             // 
             // label2
             // 
@@ -110,18 +110,18 @@
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox3.Location = new System.Drawing.Point(479, 16);
+            this.textBox3.Location = new System.Drawing.Point(482, 17);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(229, 30);
-            this.textBox3.TabIndex = 44;
+            this.textBox3.TabIndex = 4;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.SkyBlue;
-            this.label1.Location = new System.Drawing.Point(351, 20);
+            this.label1.Location = new System.Drawing.Point(351, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(125, 20);
             this.label1.TabIndex = 43;
@@ -141,11 +141,11 @@
             // textBox4
             // 
             this.textBox4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox4.Location = new System.Drawing.Point(479, 63);
+            this.textBox4.Location = new System.Drawing.Point(482, 63);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(229, 30);
-            this.textBox4.TabIndex = 48;
+            this.textBox4.TabIndex = 6;
             // 
             // label5
             // 
@@ -163,7 +163,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label7.ForeColor = System.Drawing.Color.SkyBlue;
-            this.label7.Location = new System.Drawing.Point(393, 164);
+            this.label7.Location = new System.Drawing.Point(390, 164);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(83, 20);
             this.label7.TabIndex = 49;
@@ -175,7 +175,9 @@
             this.textBox5.Location = new System.Drawing.Point(116, 161);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(229, 30);
-            this.textBox5.TabIndex = 52;
+            this.textBox5.TabIndex = 0;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
             // 
             // label8
             // 
@@ -196,7 +198,7 @@
             this.button5.Location = new System.Drawing.Point(615, 259);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(93, 30);
-            this.button5.TabIndex = 53;
+            this.button5.TabIndex = 2;
             this.button5.Text = "保存";
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
@@ -204,10 +206,12 @@
             // textBox6
             // 
             this.textBox6.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox6.Location = new System.Drawing.Point(479, 160);
+            this.textBox6.Location = new System.Drawing.Point(482, 161);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(229, 30);
-            this.textBox6.TabIndex = 54;
+            this.textBox6.TabIndex = 1;
+            this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
+            this.textBox6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
             // 
             // textBox7
             // 
@@ -215,7 +219,8 @@
             this.textBox7.Location = new System.Drawing.Point(116, 211);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(229, 30);
-            this.textBox7.TabIndex = 55;
+            this.textBox7.TabIndex = 8;
+            this.textBox7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
             // 
             // updateShengoaTizhong
             // 

@@ -182,6 +182,13 @@ namespace zkhwClient.dao
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }
+        public bool updateTJbgdcXueya(string aichive_no, string barcode ,string xueya)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_bgdc set XueYa='"+ xueya + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
         //查询身高体重检查信息根据档案号和条码号
         public DataTable selectSgtzInfo(string aichive_no, string barcode)
         {
@@ -211,6 +218,14 @@ namespace zkhwClient.dao
         {
             int ret = 0;
             String sql = "update zkhw_tj_bgdc set Shengaotizhong='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
+
+        public bool updateTJbgdcSgtz(string aichive_no, string barcode,string result)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_bgdc set Shengaotizhong='"+ result + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }
