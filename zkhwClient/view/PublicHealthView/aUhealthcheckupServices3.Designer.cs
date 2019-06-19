@@ -819,7 +819,7 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(1, 43);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1305, 477);
+            this.groupBox1.Size = new System.Drawing.Size(1288, 477);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             // 
@@ -2485,7 +2485,7 @@
             this.MaximizeBox = false;
             this.Name = "aUhealthcheckupServices3";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "健康体检表";
+            this.Text = "健康体检表第三页";
             this.Load += new System.EventHandler(this.aUdiabetesPatientServices_Load);
             this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

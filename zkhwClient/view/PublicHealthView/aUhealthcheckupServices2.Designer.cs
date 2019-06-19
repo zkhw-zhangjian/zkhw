@@ -3086,7 +3086,7 @@
             this.MinimizeBox = false;
             this.Name = "aUhealthcheckupServices2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "健康体检表";
+            this.Text = "健康体检表第二页";
             this.Load += new System.EventHandler(this.aUdiabetesPatientServices_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
