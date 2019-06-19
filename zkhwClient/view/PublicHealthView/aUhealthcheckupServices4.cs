@@ -1045,7 +1045,7 @@ namespace zkhwClient.view.PublicHealthView
             {
                 per.danger_controlling_other = this.textBox40.Text;
             }
-            per.healthAdvice = this.richTextBox1.Text;
+            per.healthAdvice = this.richTextBox1.Text.Trim().Replace(" ","");
             if (per.healthAdvice == null || "".Equals(per.healthAdvice))
             {
                 MessageBox.Show("健康建议不能为空!"); return;
