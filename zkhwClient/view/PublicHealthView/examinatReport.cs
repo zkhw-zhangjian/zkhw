@@ -230,13 +230,8 @@ where 1=1";
                 checkColumn.TrueValue = true;
                 checkColumn.FalseValue = false;
                 checkColumn.DataPropertyName = "IsChecked";
-                dataGridView1.Columns.Insert(0, checkColumn);    //添加的checkbox在第一列
-                
-                
-                
-                
-                
-
+                dataGridView1.Columns.Insert(0, checkColumn);    //添加的checkbox在第一列 
+                 
 
                 this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
                 this.dataGridView1.AllowUserToAddRows = false;
