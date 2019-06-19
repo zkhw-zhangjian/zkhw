@@ -70,6 +70,8 @@ namespace zkhwClient.view.updateTjResult
             }
             else { 
                 MessageBox.Show("未查询到数据!");
+                btnPre.Visible = false;
+                btnNext.Visible = false;
             }
         }
 

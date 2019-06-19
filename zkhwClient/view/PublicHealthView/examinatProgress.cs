@@ -462,8 +462,9 @@ namespace zkhwClient.view.PublicHealthView
         {
             //DataTable dts = jkdao.querytjjdTopdf(basicInfoSettings.xcuncode, basicInfoSettings.createtime);  //2019-6-17改成下面的方式
             if (xcuncode == "" || xcuncode==null) xcuncode = basicInfoSettings.xcuncode;
-            time1 = this.dateTimePicker1.Text.ToString();//开始时间
-            DataTable dts = jkdao.querytjjdTopdf(xcuncode, time1);
+            time1 = this.dateTimePicker1.Value.ToString("yyyy-MM-dd");//开始时间
+            time2 = this.dateTimePicker2.Value.ToString("yyyy-MM-dd");
+            DataTable dts = jkdao.querytjjdTopdf(xcuncode, time1, time2);
             if (dts != null && dts.Rows.Count > 0)
             {
                 string localFilePath = String.Empty;
@@ -517,9 +518,11 @@ namespace zkhwClient.view.PublicHealthView
                 iTextSharp.text.Font fonttitle2 = new iTextSharp.text.Font(baseFT, 18);
                 iTextSharp.text.Font font = new iTextSharp.text.Font(baseFT, 10);//内容字体
                 iTextSharp.text.Font fontID = new iTextSharp.text.Font(baseFT, 16);//内容字体
-
+                
+                string titletime = this.dateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss");//开始时间
                 //标题  
-                Paragraph pdftitle = new Paragraph(Convert.ToDateTime(basicInfoSettings.createtime).ToString("yyyy-MM-dd HH:mm:ss") + " - "+ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), font);
+                //Paragraph pdftitle = new Paragraph(Convert.ToDateTime(titletime).ToString("yyyy-MM-dd HH:mm:ss") + " - "+ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), font);
+                Paragraph pdftitle = new Paragraph(Convert.ToDateTime(time1).ToString("yyyy-MM-dd HH:mm:ss") + " - " + titletime, font);
                 pdftitle.Alignment = 1;
                 doc.Add(pdftitle);
 
