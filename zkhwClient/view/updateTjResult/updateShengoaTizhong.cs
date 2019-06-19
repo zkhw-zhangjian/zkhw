@@ -85,7 +85,7 @@ namespace zkhwClient.view.updateTjResult
                     }
                     else if (_dbBmi > 28)
                     {
-                        this.textBox6.ForeColor = Color.Red;
+                        this.textBox7.ForeColor = Color.Red;
                     }
 
                 }
