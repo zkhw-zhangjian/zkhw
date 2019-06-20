@@ -785,10 +785,9 @@ namespace zkhwClient.view.PublicHealthView
                         {
                             return;
                         }
-                    }
-                    
+                    } 
 
-                        List<string> sqllist = new List<string>();
+                    List<string> sqllist = new List<string>();
                     //1：住院记录表
                     string sql = string.Format("select * from hospitalized_record where exam_id='{0}';", id);
                     DataSet zyjl = DbHelperMySQL.Query(sql);
