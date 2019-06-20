@@ -139,7 +139,7 @@ namespace zkhwClient
                     };
                 }//屏蔽其它功能菜单下拉选
             }
-            //socketTcp();  
+            //socketTcp();
             //http
             proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
             proHttp.StartInfo.CreateNoWindow = true;
@@ -158,15 +158,15 @@ namespace zkhwClient
             proAsNet.Start();
             Thread.Sleep(300);
             IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
-            ////ftp                 
-            ////proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.05\\ftpservice.exe";
-            ////proFtp.StartInfo.CreateNoWindow = true;
-            ////proFtp.StartInfo.UseShellExecute = false;
-            ////proFtp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            ////proFtp.StartInfo.ErrorDialog = false;
-            ////proFtp.Start();
-            ////Thread.Sleep(1000);
-            ////IntPtrFindWindow.intptrwindows(proFtp.MainWindowHandle);
+            //ftp                 
+            //proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.05\\ftpservice.exe";
+            //proFtp.StartInfo.CreateNoWindow = true;
+            //proFtp.StartInfo.UseShellExecute = false;
+            //proFtp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            //proFtp.StartInfo.ErrorDialog = false;
+            //proFtp.Start();
+            //Thread.Sleep(1000);
+            //IntPtrFindWindow.intptrwindows(proFtp.MainWindowHandle);
         }
 
         private void 用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
