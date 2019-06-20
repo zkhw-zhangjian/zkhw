@@ -68,22 +68,22 @@ namespace zkhwClient.view.PublicHealthView
             DateTime currentdt = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
             DateTime st = DateTime.Parse(time1);
             string sql = "";
-            if (currentdt != st)
-            {
-                sql = "SELECT bb.name,bb.archive_no,bb.id_number,aa.test_date,aa.test_doctor,aa.id,(case aa.upload_status when '1' then '是' ELSE '否' END) cstatus FROM (select b.name, b.archive_no, b.id_number from resident_base_info b where 1=1 and age >= '65'";
-                if (cun != null && !"".Equals(cun)) { sql += " AND b.village_code='" + cun + "'"; }
-                if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
-                sql += ") bb INNER JOIN(select id,aichive_no,test_date,test_doctor,upload_status from elderly_tcm_record where test_date >= '" + time1 + "' and test_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
-            }
-            else
-            {
+            //if (currentdt != st)
+            //{
+            //    sql = "SELECT bb.name,bb.archive_no,bb.id_number,aa.test_date,aa.test_doctor,aa.id,(case aa.upload_status when '1' then '是' ELSE '否' END) cstatus FROM (select b.name, b.archive_no, b.id_number from resident_base_info b where 1=1 and age >= '65'";
+            //    if (cun != null && !"".Equals(cun)) { sql += " AND b.village_code='" + cun + "'"; }
+            //    if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
+            //    sql += ") bb INNER JOIN(select id,aichive_no,test_date,test_doctor,upload_status from elderly_tcm_record where test_date >= '" + time1 + "' and test_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
+            //}
+            //else
+            //{
                 sql = @"SELECT bb.name,bb.archive_no,bb.id_number,aa.test_date,aa.test_doctor,aa.id,(case aa.upload_status when '1' then '是' ELSE '否' END) cstatus 
                      FROM (select b.name, b.archive_no, b.id_number from resident_base_info b inner join zkhw_tj_jk z on b.id_number=z.id_number 
-                    where 1=1 and z.createtime>='"+ time1 + "' and b.age >= '65' ";
+                    where 1=1 and z.createtime>='" + time1 + "' and b.age >= '65' ";
                 if (cun != null && !"".Equals(cun)) { sql += " AND b.village_code='" + cun + "'"; }
                 if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
                 sql += ") bb LEFT JOIN(select id,aichive_no,test_date,test_doctor,upload_status from elderly_tcm_record where test_date >= '" + time1 + "' and test_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
-            }
+            //}
             DataSet dataSet = DbHelperMySQL.Query(sql);
             if (dataSet.Tables.Count < 1) { MessageBox.Show("未查询出数据，请重新查询!"); return; }
             DataTable dt = dataSet.Tables[0];

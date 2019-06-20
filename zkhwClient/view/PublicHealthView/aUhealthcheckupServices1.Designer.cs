@@ -326,7 +326,7 @@
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Location = new System.Drawing.Point(5, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1320, 700);
+            this.panel1.Size = new System.Drawing.Size(1320, 699);
             this.panel1.TabIndex = 6;
             // 
             // button2
@@ -1098,13 +1098,11 @@
             // radioButton21
             // 
             this.radioButton21.AutoSize = true;
-            this.radioButton21.Checked = true;
             this.radioButton21.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton21.Location = new System.Drawing.Point(75, 2);
             this.radioButton21.Name = "radioButton21";
             this.radioButton21.Size = new System.Drawing.Size(59, 24);
             this.radioButton21.TabIndex = 31;
-            this.radioButton21.TabStop = true;
             this.radioButton21.Tag = "2";
             this.radioButton21.Text = "2否";
             this.radioButton21.UseVisualStyleBackColor = true;
@@ -2613,7 +2611,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 123);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1273, 108);
+            this.groupBox3.Size = new System.Drawing.Size(1245, 108);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
@@ -2979,7 +2977,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1333, 750);
+            this.ClientSize = new System.Drawing.Size(1333, 749);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
             this.Name = "aUhealthcheckupServices1";

@@ -709,7 +709,7 @@ where 1=1";
                 return true;
             }
             else
-            {
+            { 
                 if (list == null || list.Count == 0)
                 {
                     MessageBox.Show("请选择你要生成的报告类型！");
