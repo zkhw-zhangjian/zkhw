@@ -988,8 +988,7 @@ namespace zkhwClient
                                         flag = 3;
                                     }
                                 }
-                                if (flag == 1)
-                                {
+                               
                                     string ast = sh.AST;
                                     if (ast != null && ast != "*")
                                     {
@@ -1008,9 +1007,7 @@ namespace zkhwClient
                                             flag = 3;
                                         }
                                     }
-                                }
-                                if (flag == 1)
-                                {
+                                
                                     string tbil = sh.TBIL;
                                     if (tbil != null && tbil != "*")
                                     {
@@ -1028,10 +1025,8 @@ namespace zkhwClient
                                         {
                                             flag = 3;
                                         }
-                                    }
-                                }
-                                if (flag == 1)
-                                {
+                                    }  
+                               
                                     string crea = sh.Crea;
                                     if (crea != null && crea != "*")
                                     {
@@ -1050,9 +1045,7 @@ namespace zkhwClient
                                             flag = 3;
                                         }
                                     }
-                                }
-                                if (flag == 1)
-                                {
+                                
                                     string urea = sh.UREA;
                                     if (urea != null && urea != "*")
                                     {
@@ -1071,9 +1064,7 @@ namespace zkhwClient
                                             flag = 3;
                                         }
                                     }
-                                }
-                                if (flag == 1)
-                                {
+                               
                                     string glu = sh.GLU;
                                     if (glu != null && glu != "*")
                                     {
@@ -1092,9 +1083,7 @@ namespace zkhwClient
                                             flag = 3;
                                         }
                                     }
-                                }
-                                if (flag == 1)
-                                {
+                              
                                     string tg = sh.TG;
                                     if (tg != null && tg != "*")
                                     {
@@ -1113,9 +1102,7 @@ namespace zkhwClient
                                             flag = 3;
                                         }
                                     }
-                                }
-                                if (flag == 1)
-                                {
+                               
                                     string cho = sh.CHO;
                                     if (cho != null && cho != "*")
                                     {
@@ -1134,9 +1121,7 @@ namespace zkhwClient
                                             flag = 3;
                                         }
                                     }
-                                }
-                                if (flag == 1)
-                                {
+                               
                                     string hdlc = sh.HDL_C;
                                     if (hdlc != null && hdlc != "*")
                                     {
@@ -1155,9 +1140,7 @@ namespace zkhwClient
                                             flag = 3;
                                         }
                                     }
-                                }
-                                if (flag == 1)
-                                {
+                              
                                     string ldlc = sh.LDL_C;
                                     if (ldlc != null && ldlc != "*")
                                     {
@@ -1176,7 +1159,7 @@ namespace zkhwClient
                                             flag = 3;
                                         }
                                     }
-                                }
+                                
                                 tjdao.updateTJbgdcShenghua(sh.aichive_no, sh.bar_code, flag);
                                 tjdao.updatePEShInfo(sh.aichive_no, sh.bar_code, sh.CHO, sh.TG, sh.LDL_C, sh.HDL_C, sh.GLU, sh.ALT, sh.AST, sh.ALB, sh.TBIL, sh.DBIL, sh.Crea, sh.UREA);
                                 //xmlDoc.Load(path);
@@ -1207,8 +1190,7 @@ namespace zkhwClient
                                         flag = 3;
                                     }
                                 }
-                                if (flag == 1)
-                                {
+                               
                                     string ast = sh.AST;
                                     if (ast != null && ast != "*")
                                     {
@@ -1227,9 +1209,7 @@ namespace zkhwClient
                                             flag = 3;
                                         }
                                     }
-                                }
-                                if (flag == 1)
-                                {
+                               
                                     string tbil = sh.TBIL;
                                     if (tbil != null && tbil != "*")
                                     {
@@ -1248,9 +1228,7 @@ namespace zkhwClient
                                             flag = 3;
                                         }
                                     }
-                                }
-                                if (flag == 1)
-                                {
+                               
                                     string crea = sh.Crea;
                                     if (crea != null && crea != "*")
                                     {
@@ -1269,9 +1247,7 @@ namespace zkhwClient
                                             flag = 3;
                                         }
                                     }
-                                }
-                                if (flag == 1)
-                                {
+                              
                                     string urea = sh.UREA;
                                     if (urea != null && urea != "*")
                                     {
@@ -1290,9 +1266,7 @@ namespace zkhwClient
                                             flag = 3;
                                         }
                                     }
-                                }
-                                if (flag == 1)
-                                {
+                               
                                     string glu = sh.GLU;
                                     if (glu != null && glu != "*")
                                     {
@@ -1311,9 +1285,7 @@ namespace zkhwClient
                                             flag = 3;
                                         }
                                     }
-                                }
-                                if (flag == 1)
-                                {
+                                
                                     string tg = sh.TG;
                                     if (tg != null && tg != "*")
                                     {
@@ -1332,9 +1304,7 @@ namespace zkhwClient
                                             flag = 3;
                                         }
                                     }
-                                }
-                                if (flag == 1)
-                                {
+                               
                                     string cho = sh.CHO;
                                     if (cho != null && cho != "*")
                                     {
@@ -1353,9 +1323,7 @@ namespace zkhwClient
                                             flag = 3;
                                         }
                                     }
-                                }
-                                if (flag == 1)
-                                {
+                               
                                     string hdlc = sh.HDL_C;
                                     if (hdlc != null && hdlc != "*")
                                     {
@@ -1374,9 +1342,7 @@ namespace zkhwClient
                                             flag = 3;
                                         }
                                     }
-                                }
-                                if (flag == 1)
-                                {
+                               
                                     string ldlc = sh.LDL_C;
                                     if (ldlc != null && ldlc != "*")
                                     {
@@ -1395,7 +1361,7 @@ namespace zkhwClient
                                             flag = 3;
                                         }
                                     }
-                                }
+                                
                                 tjdao.updateTJbgdcShenghua(sh.aichive_no, sh.bar_code, flag);
                                 tjdao.updatePEShInfo(sh.aichive_no, sh.bar_code, sh.CHO, sh.TG, sh.LDL_C, sh.HDL_C, sh.GLU, sh.ALT, sh.AST, sh.ALB, sh.TBIL, sh.DBIL, sh.Crea, sh.UREA);
                             }
@@ -1419,7 +1385,6 @@ namespace zkhwClient
                 {
                     for (int j = 0; j < arr_dt1.Rows.Count; j++)
                     {
-                        //MessageBox.Show(arr_dt1.Rows.Count.ToString()+"*"+arr_dt1.Rows[j]["sample_id"].ToString()+"*"+arr_dt1.Rows[j]["patient_id"].ToString());
                         string sql2 = "select lop.patient_id,lop.send_time,lopr.* from LisOutput lop, LisOutputResult lopr where lop.sample_id=lopr.sample_id and lop.sample_id='" + arr_dt1.Rows[j]["sample_id"].ToString() + "'";
                         DataTable arr_dt2 = getXuechanggui(sql2).Tables[0];
                         if (arr_dt2.Rows.Count > 0)
@@ -1500,7 +1465,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string rbc = xcg.RBC;
-                                if (flag == 1 && rbc != null && rbc != "*")
+                                if (rbc != null && rbc != "*")
                                 {
                                     double rbcdouble = double.Parse(rbc);
                                     DataRow[] drrbc = dttv.Select("type='RBC'");
@@ -1518,7 +1483,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string pct = xcg.PCT;
-                                if (flag == 1 && pct != null && pct != "*")
+                                if (pct != null && pct != "*")
                                 {
                                     double pctdouble = double.Parse(pct);
                                     DataRow[] drpct = dttv.Select("type='PCT'");
@@ -1536,7 +1501,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string plt = xcg.PLT;
-                                if (flag == 1 && plt != null && plt != "*")
+                                if (plt != null && plt != "*")
                                 {
                                     double pltdouble = double.Parse(plt);
                                     DataRow[] drplt = dttv.Select("type='PLT'");
@@ -1554,7 +1519,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string hgb = xcg.HGB;
-                                if (flag == 1 && hgb != null && hgb != "*")
+                                if (hgb != null && hgb != "*")
                                 {
                                     double hgbdouble = double.Parse(hgb);
                                     DataRow[] drhgb = dttv.Select("type='HGB'");
@@ -1572,7 +1537,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string hct = xcg.HCT;
-                                if (flag == 1 && hct != null && hct != "*")
+                                if (hct != null && hct != "*")
                                 {
                                     double hctdouble = double.Parse(hct);
                                     DataRow[] drhct = dttv.Select("type='HCT'");
@@ -1590,7 +1555,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string mcv = xcg.MCV;
-                                if (flag == 1 && mcv != null && mcv != "*")
+                                if (mcv != null && mcv != "*")
                                 {
                                     double mcvdouble = double.Parse(mcv);
                                     DataRow[] drmcv = dttv.Select("type='MCV'");
@@ -1608,7 +1573,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string mch = xcg.MCH;
-                                if (flag == 1 && mch != null && mch != "*")
+                                if (mch != null && mch != "*")
                                 {
                                     double mchdouble = double.Parse(mch);
                                     DataRow[] drmch = dttv.Select("type='MCH'");
@@ -1626,7 +1591,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string mchc = xcg.MCHC;
-                                if (flag == 1 && mchc != null && mchc != "*")
+                                if (mchc != null && mchc != "*")
                                 {
                                     double mchcdouble = double.Parse(mchc);
                                     DataRow[] drmchc = dttv.Select("type='MCHC'");
@@ -1644,7 +1609,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string rdwcv = xcg.RDW_CV;
-                                if (flag == 1 && rdwcv != null && rdwcv != "*")
+                                if (rdwcv != null && rdwcv != "*")
                                 {
                                     double rdwcvdouble = double.Parse(rdwcv);
                                     DataRow[] drrdwcv = dttv.Select("type='RDWCV'");
@@ -1662,7 +1627,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string rdwsd = xcg.RDW_SD;
-                                if (flag == 1 && rdwsd != null && rdwsd != "*")
+                                if (rdwsd != null && rdwsd != "*")
                                 {
                                     double rdwsddouble = double.Parse(rdwsd);
                                     DataRow[] drrdwsd = dttv.Select("type='RDWSD'");
@@ -1680,7 +1645,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string neut = xcg.NEUT;
-                                if (flag == 1 && neut != null && neut != "*")
+                                if (neut != null && neut != "*")
                                 {
                                     double neutdouble = double.Parse(neut);
                                     DataRow[] drneut = dttv.Select("type='NEUT'");
@@ -1698,7 +1663,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string neutp = xcg.NEUTP;
-                                if (flag == 1 && neutp != null && neutp != "*")
+                                if (neutp != null && neutp != "*")
                                 {
                                     double neutpdouble = double.Parse(neutp);
                                     DataRow[] drneutp = dttv.Select("type='NEUTP'");
@@ -1716,7 +1681,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string lym = xcg.LYM;
-                                if (flag == 1 && lym != null && lym != "*")
+                                if (lym != null && lym != "*")
                                 {
                                     double lymdouble = double.Parse(lym);
                                     DataRow[] drlym = dttv.Select("type='LYM'");
@@ -1734,7 +1699,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string lymp = xcg.LYMP;
-                                if (flag == 1 && lymp != null && lymp != "*")
+                                if (lymp != null && lymp != "*")
                                 {
                                     double lympdouble = double.Parse(lymp);
                                     DataRow[] drlymp = dttv.Select("type='LYMP'");
@@ -1752,7 +1717,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string mpv = xcg.MPV;
-                                if (flag == 1 && mpv != null && mpv != "*")
+                                if (mpv != null && mpv != "*")
                                 {
                                     double mpvdouble = double.Parse(mpv);
                                     DataRow[] drmpv = dttv.Select("type='MPV'");
@@ -1770,7 +1735,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string pdw = xcg.PDW;
-                                if (flag == 1 && pdw != null && pdw != "*")
+                                if (pdw != null && pdw != "*")
                                 {
                                     double pdwdouble = double.Parse(pdw);
                                     DataRow[] drpdw = dttv.Select("type='PDW'");
@@ -1788,7 +1753,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string mxd = xcg.MXD;
-                                if (flag == 1 && mxd != null && mxd != "*")
+                                if (mxd != null && mxd != "*")
                                 {
                                     double mxddouble = double.Parse(mxd);
                                     DataRow[] drmxd = dttv.Select("type='MXD'");
@@ -1806,7 +1771,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string mxdp = xcg.MXDP;
-                                if (flag == 1 && mxdp != null && mxdp != "*")
+                                if (mxdp != null && mxdp != "*")
                                 {
                                     double mxdpdouble = double.Parse(mxdp);
                                     DataRow[] drmxdp = dttv.Select("type='MXDP'");
@@ -1851,7 +1816,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string rbc = xcg.RBC;
-                                if (flag == 1 && rbc != null && rbc != "*")
+                                if (rbc != null && rbc != "*")
                                 {
                                     double rbcdouble = double.Parse(rbc);
                                     DataRow[] drrbc = dttv.Select("type='RBC'");
@@ -1869,7 +1834,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string pct = xcg.PCT;
-                                if (flag == 1 && pct != null && pct != "*")
+                                if (pct != null && pct != "*")
                                 {
                                     double pctdouble = double.Parse(pct);
                                     DataRow[] drpct = dttv.Select("type='PCT'");
@@ -1887,7 +1852,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string plt = xcg.PLT;
-                                if (flag == 1 && plt != null && plt != "*")
+                                if (plt != null && plt != "*")
                                 {
                                     double pltdouble = double.Parse(plt);
                                     DataRow[] drplt = dttv.Select("type='PLT'");
@@ -1905,7 +1870,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string hgb = xcg.HGB;
-                                if (flag == 1 && hgb != null && hgb != "*")
+                                if (hgb != null && hgb != "*")
                                 {
                                     double hgbdouble = double.Parse(hgb);
                                     DataRow[] drhgb = dttv.Select("type='HGB'");
@@ -1923,7 +1888,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string hct = xcg.HCT;
-                                if (flag == 1 && hct != null && hct != "*")
+                                if (hct != null && hct != "*")
                                 {
                                     double hctdouble = double.Parse(hct);
                                     DataRow[] drhct = dttv.Select("type='HCT'");
@@ -1941,7 +1906,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string mcv = xcg.MCV;
-                                if (flag == 1 && mcv != null && mcv != "*")
+                                if (mcv != null && mcv != "*")
                                 {
                                     double mcvdouble = double.Parse(mcv);
                                     DataRow[] drmcv = dttv.Select("type='MCV'");
@@ -1959,7 +1924,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string mch = xcg.MCH;
-                                if (flag == 1 && mch != null && mch != "*")
+                                if (mch != null && mch != "*")
                                 {
                                     double mchdouble = double.Parse(mch);
                                     DataRow[] drmch = dttv.Select("type='MCH'");
@@ -1977,7 +1942,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string mchc = xcg.MCHC;
-                                if (flag == 1 && mchc != null && mchc != "*")
+                                if (mchc != null && mchc != "*")
                                 {
                                     double mchcdouble = double.Parse(mchc);
                                     DataRow[] drmchc = dttv.Select("type='MCHC'");
@@ -1995,7 +1960,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string rdwcv = xcg.RDW_CV;
-                                if (flag == 1 && rdwcv != null && rdwcv != "*")
+                                if (rdwcv != null && rdwcv != "*")
                                 {
                                     double rdwcvdouble = double.Parse(rdwcv);
                                     DataRow[] drrdwcv = dttv.Select("type='RDWCV'");
@@ -2013,7 +1978,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string rdwsd = xcg.RDW_SD;
-                                if (flag == 1 && rdwsd != null && rdwsd != "*")
+                                if (rdwsd != null && rdwsd != "*")
                                 {
                                     double rdwsddouble = double.Parse(rdwsd);
                                     DataRow[] drrdwsd = dttv.Select("type='RDWSD'");
@@ -2031,7 +1996,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string neut = xcg.NEUT;
-                                if (flag == 1 && neut != null && neut != "*")
+                                if (neut != null && neut != "*")
                                 {
                                     double neutdouble = double.Parse(neut);
                                     DataRow[] drneut = dttv.Select("type='NEUT'");
@@ -2049,7 +2014,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string neutp = xcg.NEUTP;
-                                if (flag == 1 && neutp != null && neutp != "*")
+                                if (neutp != null && neutp != "*")
                                 {
                                     double neutpdouble = double.Parse(neutp);
                                     DataRow[] drneutp = dttv.Select("type='NEUTP'");
@@ -2067,7 +2032,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string lym = xcg.LYM;
-                                if (flag == 1 && lym != null && lym != "*")
+                                if (lym != null && lym != "*")
                                 {
                                     double lymdouble = double.Parse(lym);
                                     DataRow[] drlym = dttv.Select("type='LYM'");
@@ -2085,7 +2050,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string lymp = xcg.LYMP;
-                                if (flag == 1 && lymp != null && lymp != "*")
+                                if (lymp != null && lymp != "*")
                                 {
                                     double lympdouble = double.Parse(lymp);
                                     DataRow[] drlymp = dttv.Select("type='LYMP'");
@@ -2103,7 +2068,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string mpv = xcg.MPV;
-                                if (flag == 1 && mpv != null && mpv != "*")
+                                if (mpv != null && mpv != "*")
                                 {
                                     double mpvdouble = double.Parse(mpv);
                                     DataRow[] drmpv = dttv.Select("type='MPV'");
@@ -2121,7 +2086,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string pdw = xcg.PDW;
-                                if (flag == 1 && pdw != null && pdw != "*")
+                                if (pdw != null && pdw != "*")
                                 {
                                     double pdwdouble = double.Parse(pdw);
                                     DataRow[] drpdw = dttv.Select("type='PDW'");
@@ -2139,7 +2104,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string mxd = xcg.MXD;
-                                if (flag == 1 && mxd != null && mxd != "*")
+                                if (mxd != null && mxd != "*")
                                 {
                                     double mxddouble = double.Parse(mxd);
                                     DataRow[] drmxd = dttv.Select("type='MXD'");
@@ -2157,7 +2122,7 @@ namespace zkhwClient
                                     }
                                 }
                                 string mxdp = xcg.MXDP;
-                                if (flag == 1 && mxdp != null && mxdp != "*")
+                                if (mxdp != null && mxdp != "*")
                                 {
                                     double mxdpdouble = double.Parse(mxdp);
                                     DataRow[] drmxdp = dttv.Select("type='MXDP'");
@@ -2518,8 +2483,7 @@ namespace zkhwClient
                                 flag = 3;
                             }
                         }
-                        if (flag == 1)
-                        {
+                       
                             string ast = sh.AST;
                             if (ast != null && ast != "*")
                             {
@@ -2538,9 +2502,7 @@ namespace zkhwClient
                                     flag = 3;
                                 }
                             }
-                        }
-                        if (flag == 1)
-                        {
+                       
                             string tbil = sh.TBIL;
                             if (tbil != null && tbil != "*")
                             {
@@ -2559,9 +2521,7 @@ namespace zkhwClient
                                     flag = 3;
                                 }
                             }
-                        }
-                        if (flag == 1)
-                        {
+                      
                             string crea = sh.Crea;
                             if (crea != null && crea != "*")
                             {
@@ -2580,9 +2540,7 @@ namespace zkhwClient
                                     flag = 3;
                                 }
                             }
-                        }
-                        if (flag == 1)
-                        {
+                       
                             string urea = sh.UREA;
                             if (urea != null && urea != "*")
                             {
@@ -2601,9 +2559,7 @@ namespace zkhwClient
                                     flag = 3;
                                 }
                             }
-                        }
-                        if (flag == 1)
-                        {
+                        
                             string glu = sh.GLU;
                             if (glu != null && glu != "*")
                             {
@@ -2622,9 +2578,7 @@ namespace zkhwClient
                                     flag = 3;
                                 }
                             }
-                        }
-                        if (flag == 1)
-                        {
+                       
                             string tg = sh.TG;
                             if (tg != null && tg != "*")
                             {
@@ -2643,9 +2597,7 @@ namespace zkhwClient
                                     flag = 3;
                                 }
                             }
-                        }
-                        if (flag == 1)
-                        {
+                       
                             string cho = sh.CHO;
                             if (cho != null && cho != "*")
                             {
@@ -2664,9 +2616,7 @@ namespace zkhwClient
                                     flag = 3;
                                 }
                             }
-                        }
-                        if (flag == 1)
-                        {
+                      
                             string hdlc = sh.HDL_C;
                             if (hdlc != null && hdlc != "*")
                             {
@@ -2685,9 +2635,7 @@ namespace zkhwClient
                                     flag = 3;
                                 }
                             }
-                        }
-                        if (flag == 1)
-                        {
+                       
                             string ldlc = sh.LDL_C;
                             if (ldlc != null && ldlc != "*")
                             {
@@ -2706,7 +2654,7 @@ namespace zkhwClient
                                     flag = 3;
                                 }
                             }
-                        }
+                        
                         tjdao.updateTJbgdcShenghua(sh.aichive_no, sh.bar_code, flag);
                         tjdao.updatePEShInfo(sh.aichive_no, sh.bar_code, sh.CHO, sh.TG, sh.LDL_C, sh.HDL_C,sh.GLU, sh.ALT, sh.AST, sh.ALB, sh.TBIL, sh.DBIL, sh.Crea, sh.UREA);
                     }
@@ -2733,8 +2681,7 @@ namespace zkhwClient
                                 flag = 3;
                             }
                         }
-                        if (flag == 1)
-                        {
+                       
                             string ast = sh.AST;
                             if (ast != null && ast != "*")
                             {
@@ -2753,9 +2700,7 @@ namespace zkhwClient
                                     flag = 3;
                                 }
                             }
-                        }
-                        if (flag == 1)
-                        {
+                      
                             string tbil = sh.TBIL;
                             if (tbil != null && tbil != "*")
                             {
@@ -2774,9 +2719,7 @@ namespace zkhwClient
                                     flag = 3;
                                 }
                             }
-                        }
-                        if (flag == 1)
-                        {
+                      
                             string crea = sh.Crea;
                             if (crea != null && crea != "*")
                             {
@@ -2795,9 +2738,7 @@ namespace zkhwClient
                                     flag = 3;
                                 }
                             }
-                        }
-                        if (flag == 1)
-                        {
+                       
                             string urea = sh.UREA;
                             if (urea != null && urea != "*")
                             {
@@ -2816,9 +2757,7 @@ namespace zkhwClient
                                     flag = 3;
                                 }
                             }
-                        }
-                        if (flag == 1)
-                        {
+                       
                             string glu = sh.GLU;
                             if (glu != null && glu != "*")
                             {
@@ -2837,9 +2776,7 @@ namespace zkhwClient
                                     flag = 3;
                                 }
                             }
-                        }
-                        if (flag == 1)
-                        {
+         
                             string tg = sh.TG;
                             if (tg != null && tg != "*")
                             {
@@ -2858,9 +2795,7 @@ namespace zkhwClient
                                     flag = 3;
                                 }
                             }
-                        }
-                        if (flag == 1)
-                        {
+                      
                             string cho = sh.CHO;
                             if (cho != null && cho != "*")
                             {
@@ -2879,9 +2814,7 @@ namespace zkhwClient
                                     flag = 3;
                                 }
                             }
-                        }
-                        if (flag == 1)
-                        {
+                    
                             string hdlc = sh.HDL_C;
                             if (hdlc != null && hdlc != "*")
                             {
@@ -2900,9 +2833,7 @@ namespace zkhwClient
                                     flag = 3;
                                 }
                             }
-                        }
-                        if (flag == 1)
-                        {
+                        
                             string ldlc = sh.LDL_C;
                             if (ldlc != null && ldlc != "*")
                             {
@@ -2920,8 +2851,7 @@ namespace zkhwClient
                                 {
                                     flag = 3;
                                 }
-                            }
-                        }
+                            }  
                         tjdao.updateTJbgdcShenghua(sh.aichive_no, sh.bar_code, flag);
                         tjdao.updatePEShInfo(sh.aichive_no, sh.bar_code, sh.CHO, sh.TG, sh.LDL_C, sh.HDL_C, sh.GLU, sh.ALT, sh.AST, sh.ALB, sh.TBIL, sh.DBIL, sh.Crea, sh.UREA);
                     }
@@ -3014,7 +2944,7 @@ namespace zkhwClient
                                 }
                             }
                             string rbc = xcg.RBC;
-                            if (flag == 1 && rbc != null && rbc != "*")
+                            if (rbc != null && rbc != "*")
                             {
                                 double rbcdouble = double.Parse(rbc);
                                 DataRow[] drrbc = dttv.Select("type='RBC'");
@@ -3032,7 +2962,7 @@ namespace zkhwClient
                                 }
                             }
                             string pct = xcg.PCT;
-                            if (flag == 1 && pct != null && pct != "*")
+                            if (pct != null && pct != "*")
                             {
                                 double pctdouble = double.Parse(pct);
                                 DataRow[] drpct = dttv.Select("type='PCT'");
@@ -3050,7 +2980,7 @@ namespace zkhwClient
                                 }
                             }
                             string plt = xcg.PLT;
-                            if (flag == 1 && plt != null && plt != "*")
+                            if (plt != null && plt != "*")
                             {
                                 double pltdouble = double.Parse(plt);
                                 DataRow[] drplt = dttv.Select("type='PLT'");
@@ -3068,7 +2998,7 @@ namespace zkhwClient
                                 }
                             }
                             string hgb = xcg.HGB;
-                            if (flag == 1 && hgb != null && hgb != "*")
+                            if (hgb != null && hgb != "*")
                             {
                                 double hgbdouble = double.Parse(hgb);
                                 DataRow[] drhgb = dttv.Select("type='HGB'");
@@ -3086,7 +3016,7 @@ namespace zkhwClient
                                 }
                             }
                             string hct = xcg.HCT;
-                            if (flag == 1 && hct != null && hct != "*")
+                            if (hct != null && hct != "*")
                             {
                                 double hctdouble = double.Parse(hct);
                                 DataRow[] drhct = dttv.Select("type='HCT'");
@@ -3104,7 +3034,7 @@ namespace zkhwClient
                                 }
                             }
                             string mcv = xcg.MCV;
-                            if (flag == 1 && mcv != null && mcv != "*")
+                            if (mcv != null && mcv != "*")
                             {
                                 double mcvdouble = double.Parse(mcv);
                                 DataRow[] drmcv = dttv.Select("type='MCV'");
@@ -3122,7 +3052,7 @@ namespace zkhwClient
                                 }
                             }
                             string mch = xcg.MCH;
-                            if (flag == 1 && mch != null && mch != "*")
+                            if (mch != null && mch != "*")
                             {
                                 double mchdouble = double.Parse(mch);
                                 DataRow[] drmch = dttv.Select("type='MCH'");
@@ -3140,7 +3070,7 @@ namespace zkhwClient
                                 }
                             }
                             string mchc = xcg.MCHC;
-                            if (flag == 1 && mchc != null && mchc != "*")
+                            if (mchc != null && mchc != "*")
                             {
                                 double mchcdouble = double.Parse(mchc);
                                 DataRow[] drmchc = dttv.Select("type='MCHC'");
@@ -3158,7 +3088,7 @@ namespace zkhwClient
                                 }
                             }
                             string rdwcv = xcg.RDW_CV;
-                            if (flag == 1 && rdwcv != null && rdwcv != "*")
+                            if (rdwcv != null && rdwcv != "*")
                             {
                                 double rdwcvdouble = double.Parse(rdwcv);
                                 DataRow[] drrdwcv = dttv.Select("type='RDWCV'");
@@ -3176,7 +3106,7 @@ namespace zkhwClient
                                 }
                             }
                             string rdwsd = xcg.RDW_SD;
-                            if (flag == 1 && rdwsd != null && rdwsd != "*")
+                            if (rdwsd != null && rdwsd != "*")
                             {
                                 double rdwsddouble = double.Parse(rdwsd);
                                 DataRow[] drrdwsd = dttv.Select("type='RDWSD'");
@@ -3194,7 +3124,7 @@ namespace zkhwClient
                                 }
                             }
                             string neut = xcg.NEUT;
-                            if (flag == 1 && neut != null && neut != "*")
+                            if (neut != null && neut != "*")
                             {
                                 double neutdouble = double.Parse(neut);
                                 DataRow[] drneut = dttv.Select("type='NEUT'");
@@ -3212,7 +3142,7 @@ namespace zkhwClient
                                 }
                             }
                             string neutp = xcg.NEUTP;
-                            if (flag == 1 && neutp != null && neutp != "*")
+                            if (neutp != null && neutp != "*")
                             {
                                 double neutpdouble = double.Parse(neutp);
                                 DataRow[] drneutp = dttv.Select("type='NEUTP'");
@@ -3230,7 +3160,7 @@ namespace zkhwClient
                                 }
                             }
                             string lym = xcg.LYM;
-                            if (flag == 1 && lym != null && lym != "*")
+                            if (lym != null && lym != "*")
                             {
                                 double lymdouble = double.Parse(lym);
                                 DataRow[] drlym = dttv.Select("type='LYM'");
@@ -3248,7 +3178,7 @@ namespace zkhwClient
                                 }
                             }
                             string lymp = xcg.LYMP;
-                            if (flag == 1 && lymp != null && lymp != "*")
+                            if (lymp != null && lymp != "*")
                             {
                                 double lympdouble = double.Parse(lymp);
                                 DataRow[] drlymp = dttv.Select("type='LYMP'");
@@ -3266,7 +3196,7 @@ namespace zkhwClient
                                 }
                             }
                             string mpv = xcg.MPV;
-                            if (flag == 1 && mpv != null && mpv != "*")
+                            if (mpv != null && mpv != "*")
                             {
                                 double mpvdouble = double.Parse(mpv);
                                 DataRow[] drmpv = dttv.Select("type='MPV'");
@@ -3284,7 +3214,7 @@ namespace zkhwClient
                                 }
                             }
                             string pdw = xcg.PDW;
-                            if (flag == 1 && pdw != null && pdw != "*")
+                            if (pdw != null && pdw != "*")
                             {
                                 double pdwdouble = double.Parse(pdw);
                                 DataRow[] drpdw = dttv.Select("type='PDW'");
@@ -3302,7 +3232,7 @@ namespace zkhwClient
                                 }
                             }
                             string mxd = xcg.MXD;
-                            if (flag == 1 && mxd != null && mxd != "*")
+                            if (mxd != null && mxd != "*")
                             {
                                 double mxddouble = double.Parse(mxd);
                                 DataRow[] drmxd = dttv.Select("type='MXD'");
@@ -3320,7 +3250,7 @@ namespace zkhwClient
                                 }
                             }
                             string mxdp = xcg.MXDP;
-                            if (flag == 1 && mxdp != null && mxdp != "*")
+                            if (mxdp != null && mxdp != "*")
                             {
                                 double mxdpdouble = double.Parse(mxdp);
                                 DataRow[] drmxdp = dttv.Select("type='MXDP'");
@@ -3367,7 +3297,7 @@ namespace zkhwClient
                                 }
                             }
                             string rbc = xcg.RBC;
-                            if (flag == 1 && rbc != null && rbc != "*")
+                            if (rbc != null && rbc != "*")
                             {
                                 double rbcdouble = double.Parse(rbc);
                                 DataRow[] drrbc = dttv.Select("type='RBC'");
@@ -3385,7 +3315,7 @@ namespace zkhwClient
                                 }
                             }
                             string pct = xcg.PCT;
-                            if (flag == 1 && pct != null && pct != "*")
+                            if (pct != null && pct != "*")
                             {
                                 double pctdouble = double.Parse(pct);
                                 DataRow[] drpct = dttv.Select("type='PCT'");
@@ -3403,7 +3333,7 @@ namespace zkhwClient
                                 }
                             }
                             string plt = xcg.PLT;
-                            if (flag == 1 && plt != null && plt != "*")
+                            if (plt != null && plt != "*")
                             {
                                 double pltdouble = double.Parse(plt);
                                 DataRow[] drplt = dttv.Select("type='PLT'");
@@ -3421,7 +3351,7 @@ namespace zkhwClient
                                 }
                             }
                             string hgb = xcg.HGB;
-                            if (flag == 1 && hgb != null && hgb != "*")
+                            if (hgb != null && hgb != "*")
                             {
                                 double hgbdouble = double.Parse(hgb);
                                 DataRow[] drhgb = dttv.Select("type='HGB'");
@@ -3439,7 +3369,7 @@ namespace zkhwClient
                                 }
                             }
                             string hct = xcg.HCT;
-                            if (flag == 1 && hct != null && hct != "*")
+                            if (hct != null && hct != "*")
                             {
                                 double hctdouble = double.Parse(hct);
                                 DataRow[] drhct = dttv.Select("type='HCT'");
@@ -3457,7 +3387,7 @@ namespace zkhwClient
                                 }
                             }
                             string mcv = xcg.MCV;
-                            if (flag == 1 && mcv != null && mcv != "*")
+                            if (mcv != null && mcv != "*")
                             {
                                 double mcvdouble = double.Parse(mcv);
                                 DataRow[] drmcv = dttv.Select("type='MCV'");
@@ -3475,7 +3405,7 @@ namespace zkhwClient
                                 }
                             }
                             string mch = xcg.MCH;
-                            if (flag == 1 && mch != null && mch != "*")
+                            if (mch != null && mch != "*")
                             {
                                 double mchdouble = double.Parse(mch);
                                 DataRow[] drmch = dttv.Select("type='MCH'");
@@ -3493,7 +3423,7 @@ namespace zkhwClient
                                 }
                             }
                             string mchc = xcg.MCHC;
-                            if (flag == 1 && mchc != null && mchc != "*")
+                            if (mchc != null && mchc != "*")
                             {
                                 double mchcdouble = double.Parse(mchc);
                                 DataRow[] drmchc = dttv.Select("type='MCHC'");
@@ -3511,7 +3441,7 @@ namespace zkhwClient
                                 }
                             }
                             string rdwcv = xcg.RDW_CV;
-                            if (flag == 1 && rdwcv != null && rdwcv != "*")
+                            if (rdwcv != null && rdwcv != "*")
                             {
                                 double rdwcvdouble = double.Parse(rdwcv);
                                 DataRow[] drrdwcv = dttv.Select("type='RDWCV'");
@@ -3529,7 +3459,7 @@ namespace zkhwClient
                                 }
                             }
                             string rdwsd = xcg.RDW_SD;
-                            if (flag == 1 && rdwsd != null && rdwsd != "*")
+                            if (rdwsd != null && rdwsd != "*")
                             {
                                 double rdwsddouble = double.Parse(rdwsd);
                                 DataRow[] drrdwsd = dttv.Select("type='RDWSD'");
@@ -3547,7 +3477,7 @@ namespace zkhwClient
                                 }
                             }
                             string neut = xcg.NEUT;
-                            if (flag == 1 && neut != null && neut != "*")
+                            if (neut != null && neut != "*")
                             {
                                 double neutdouble = double.Parse(neut);
                                 DataRow[] drneut = dttv.Select("type='NEUT'");
@@ -3565,7 +3495,7 @@ namespace zkhwClient
                                 }
                             }
                             string neutp = xcg.NEUTP;
-                            if (flag == 1 && neutp != null && neutp != "*")
+                            if (neutp != null && neutp != "*")
                             {
                                 double neutpdouble = double.Parse(neutp);
                                 DataRow[] drneutp = dttv.Select("type='NEUTP'");
@@ -3583,7 +3513,7 @@ namespace zkhwClient
                                 }
                             }
                             string lym = xcg.LYM;
-                            if (flag == 1 && lym != null && lym != "*")
+                            if (lym != null && lym != "*")
                             {
                                 double lymdouble = double.Parse(lym);
                                 DataRow[] drlym = dttv.Select("type='LYM'");
@@ -3601,7 +3531,7 @@ namespace zkhwClient
                                 }
                             }
                             string lymp = xcg.LYMP;
-                            if (flag == 1 && lymp != null && lymp != "*")
+                            if (lymp != null && lymp != "*")
                             {
                                 double lympdouble = double.Parse(lymp);
                                 DataRow[] drlymp = dttv.Select("type='LYMP'");
@@ -3619,7 +3549,7 @@ namespace zkhwClient
                                 }
                             }
                             string mpv = xcg.MPV;
-                            if (flag == 1 && mpv != null && mpv != "*")
+                            if (mpv != null && mpv != "*")
                             {
                                 double mpvdouble = double.Parse(mpv);
                                 DataRow[] drmpv = dttv.Select("type='MPV'");
@@ -3637,7 +3567,7 @@ namespace zkhwClient
                                 }
                             }
                             string pdw = xcg.PDW;
-                            if (flag == 1 && pdw != null && pdw != "*")
+                            if (pdw != null && pdw != "*")
                             {
                                 double pdwdouble = double.Parse(pdw);
                                 DataRow[] drpdw = dttv.Select("type='PDW'");
@@ -3655,7 +3585,7 @@ namespace zkhwClient
                                 }
                             }
                             string mxd = xcg.MXD;
-                            if (flag == 1 && mxd != null && mxd != "*")
+                            if (mxd != null && mxd != "*")
                             {
                                 double mxddouble = double.Parse(mxd);
                                 DataRow[] drmxd = dttv.Select("type='MXD'");
@@ -3673,7 +3603,7 @@ namespace zkhwClient
                                 }
                             }
                             string mxdp = xcg.MXDP;
-                            if (flag == 1 && mxdp != null && mxdp != "*")
+                            if (mxdp != null && mxdp != "*")
                             {
                                 double mxdpdouble = double.Parse(mxdp);
                                 DataRow[] drmxdp = dttv.Select("type='MXDP'");
