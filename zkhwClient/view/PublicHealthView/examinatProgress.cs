@@ -427,6 +427,8 @@ namespace zkhwClient.view.PublicHealthView
                 uxcg.id_number = str3;
                 uxcg.bar_code = str4;
                 uxcg.dttv = dttv;
+                uxcg.rowIndex = e.RowIndex;
+                uxcg.testFunDelegate = DealGridColour;
                 uxcg.Show();
             }
             else if (columnIndex == 9)

@@ -341,11 +341,11 @@ namespace zkhwClient.view.updateTjResult
                 this.textBox8.Text = tbil;
 
                 string dbil= dtbichao.Rows[0]["DBIL"].ToString();
-                if (dbil != "" && dbil != "*")
-                {
-                    double dbildouble = double.Parse(dbil);
-                    GetJudgeResultForDBIL(dbildouble);
-                }
+                //if (dbil != "" && dbil != "*")
+                //{
+                //    double dbildouble = double.Parse(dbil);
+                //    GetJudgeResultForDBIL(dbildouble);
+                //}
                 this.textBox7.Text = dbil; 
 
                 string crea = dtbichao.Rows[0]["CREA"].ToString();
@@ -482,10 +482,10 @@ namespace zkhwClient.view.updateTjResult
                 }
 
                 int r3 = 1;
-                if (DBIL != "" && DBIL != "*")
-                {
-                    r3 = GetJudgeResultForDBIL(double.Parse(DBIL));
-                }
+                //if (DBIL != "" && DBIL != "*")
+                //{
+                //    r3 = GetJudgeResultForDBIL(double.Parse(DBIL));
+                //}
 
                 int r4 = 1;
                 if (CREA != "" && CREA != "*")
