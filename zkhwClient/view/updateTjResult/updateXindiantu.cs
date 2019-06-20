@@ -12,6 +12,9 @@ namespace zkhwClient.view.updateTjResult
 {
     public partial class updateXindiantu : Form
     {
+        public int rowIndex = 0;
+        public delegate void TestFunDelegate(int _result, int _colIndex, int _rowIndex);
+        public TestFunDelegate testFunDelegate;
         public string time = "";
         public string name = "";
         public string aichive_no = "";
@@ -52,7 +55,15 @@ namespace zkhwClient.view.updateTjResult
                 {
                     pictureBox1.Image = Image.FromFile(path, false);
                 }
-                    
+                string XdtDesc= dtbichao.Rows[0]["XdtDesc"].ToString();
+                if (XdtDesc.IndexOf("正常") > -1)
+                {
+                    this.textBox6.ForeColor = Color.Black;
+                }
+                else
+                {
+                    this.textBox6.ForeColor = Color.Red;
+                }
             }
             else {
                 flag = false;
@@ -60,42 +71,44 @@ namespace zkhwClient.view.updateTjResult
             }
         }
         private void button5_Click(object sender, EventArgs e)
-        {
-            //if (flag) {
-                string XdtResult= this.textBox5.Text;
-                string XdtDesc = this.textBox6.Text;
-                string Ventrate = this.textBox17.Text;
-                string PR = this.textBox7.Text;
-                string QRS = this.textBox12.Text;
-                string QT = this.textBox8.Text;
-                string QTc = this.textBox10.Text;
-                string P_R_T = this.textBox11.Text;
-                string DOB = this.textBox13.Text;
-                string Age = this.textBox14.Text;
-                string Gen = this.textBox15.Text;
-                string Dep = this.textBox16.Text;
-                string barcode=this.textBox2.Text;
-                bool istrue= tjdao.updateXindiantuInfo(aichive_no, bar_code, XdtResult, XdtDesc, Ventrate, PR, QRS, QT, QTc, P_R_T, DOB, Age, Gen, Dep);
-                if (istrue)
+        { 
+            string XdtResult= this.textBox5.Text;
+            string XdtDesc = this.textBox6.Text;
+            string Ventrate = this.textBox17.Text;
+            string PR = this.textBox7.Text;
+            string QRS = this.textBox12.Text;
+            string QT = this.textBox8.Text;
+            string QTc = this.textBox10.Text;
+            string P_R_T = this.textBox11.Text;
+            string DOB = this.textBox13.Text;
+            string Age = this.textBox14.Text;
+            string Gen = this.textBox15.Text;
+            string Dep = this.textBox16.Text;
+            string barcode=this.textBox2.Text;
+            bool istrue= tjdao.updateXindiantuInfo(aichive_no, bar_code, XdtResult, XdtDesc, Ventrate, PR, QRS, QT, QTc, P_R_T, DOB, Age, Gen, Dep);
+            if (istrue)
+            {
+                if (XdtDesc.IndexOf("正常") > -1)
                 {
-                    if (XdtDesc.IndexOf("正常") > -1)
-                    {
-                        DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='1' where aichive_no='"+ aichive_no + "'and bar_code= '"+ barcode + "'");
-                        string istruedgbc = "update zkhw_tj_bgdc set XinDian='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
-                        DbHelperMySQL.ExecuteSql(istruedgbc);
-                    }
-                    else
-                    {
-                        DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='2',cardiogram_memo='"+XdtDesc+"' where aichive_no='"+ aichive_no + "'and bar_code= '"+ barcode + "'");
-                        string issqdgbc = "update zkhw_tj_bgdc set XinDian='3' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
-                        DbHelperMySQL.ExecuteSql(issqdgbc);
-                    }
-                    MessageBox.Show("数据保存成功!");
+                    DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='1' where aichive_no='"+ aichive_no + "'and bar_code= '"+ barcode + "'");
+                    string istruedgbc = "update zkhw_tj_bgdc set XinDian='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                    DbHelperMySQL.ExecuteSql(istruedgbc);
+                    this.textBox6.ForeColor = Color.Black;
+                    testFunDelegate(1, 6, rowIndex);
                 }
-                else {
-                    MessageBox.Show("数据保存失败!");
+                else
+                {
+                    DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='2',cardiogram_memo='"+XdtDesc+"' where aichive_no='"+ aichive_no + "'and bar_code= '"+ barcode + "'");
+                    string issqdgbc = "update zkhw_tj_bgdc set XinDian='3' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                    DbHelperMySQL.ExecuteSql(issqdgbc);
+                    this.textBox6.ForeColor = Color.Red;
+                    testFunDelegate(3, 6, rowIndex);
                 }
-           // }
+                MessageBox.Show("数据保存成功!");
+            }
+            else {
+                MessageBox.Show("数据保存失败!");
+            } 
         }
 
     }

@@ -9,6 +9,9 @@ namespace zkhwClient.view.updateTjResult
 {
     public partial class updateBichao : Form
     {
+        public int rowIndex = 0;
+        public delegate void TestFunDelegate(int _result, int _colIndex, int _rowIndex);
+        public TestFunDelegate testFunDelegate;
         public string time = "";
         public string name = "";
         public string aichive_no = "";
@@ -67,6 +70,15 @@ namespace zkhwClient.view.updateTjResult
                     btnNext.Visible = false;
                 }
                 DisplayPic(0);
+                string FubuResult=dtbichao.Rows[0]["FubuResult"].ToString();
+                if (FubuResult.IndexOf("未见异常") > -1 || FubuResult.IndexOf("未见明显异常") > -1)
+                {
+                    this.textBox6.ForeColor = Color.Black;
+                }
+                else
+                {
+                    this.textBox6.ForeColor = Color.Red;
+                }
             }
             else { 
                 MessageBox.Show("未查询到数据!");
@@ -92,33 +104,37 @@ namespace zkhwClient.view.updateTjResult
         }
         private void button5_Click(object sender, EventArgs e)
         { 
-                string FubuBC = this.textBox5.Text;
-                string FubuResult =this.textBox6.Text;
-                string FubuDesc = this.textBox7.Text;
-                string QitaBC = this.textBox11.Text;
-                string QitaResult = this.textBox10.Text;
-                string QitaDesc = this.textBox8.Text;
-                string barcode = this.textBox2.Text;
-                bool istrue= tjdao.updateBichaoInfo(aichive_no, bar_code, FubuBC, FubuResult, FubuDesc, QitaBC, QitaResult, QitaDesc);
-                if (istrue)
-                {
-                    if (FubuResult.IndexOf("未见异常") > -1 || FubuResult.IndexOf("未见明显异常") > -1)
-                    {
-                        DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='1' where aichive_no='"+ aichive_no + "' and bar_code='" + barcode + "'");
-                        string issqdgbc = "update zkhw_tj_bgdc set BChao='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
-                        DbHelperMySQL.ExecuteSql(issqdgbc);
-                    }
-                    else
-                    {
-                        DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='2',ultrasound_memo='"+ FubuResult + "' where aichive_no='"+ aichive_no + "' and bar_code='" + barcode + "'");
-                        string issqdgbc = "update zkhw_tj_bgdc set BChao='3' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
-                        DbHelperMySQL.ExecuteSql(issqdgbc);
-                    }
-                    MessageBox.Show("数据保存成功!");
+            string FubuBC = this.textBox5.Text;
+            string FubuResult =this.textBox6.Text;
+            string FubuDesc = this.textBox7.Text;
+            string QitaBC = this.textBox11.Text;
+            string QitaResult = this.textBox10.Text;
+            string QitaDesc = this.textBox8.Text;
+            string barcode = this.textBox2.Text;
+            bool istrue= tjdao.updateBichaoInfo(aichive_no, bar_code, FubuBC, FubuResult, FubuDesc, QitaBC, QitaResult, QitaDesc);
+            if (istrue)
+            {
+                if (FubuResult.IndexOf("未见异常") > -1 || FubuResult.IndexOf("未见明显异常") > -1)
+                { 
+                    DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='1' where aichive_no='"+ aichive_no + "' and bar_code='" + barcode + "'");
+                    string issqdgbc = "update zkhw_tj_bgdc set BChao='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                    DbHelperMySQL.ExecuteSql(issqdgbc);
+                    this.textBox6.ForeColor = Color.Black;
+                    testFunDelegate(1, 5, rowIndex);
                 }
-                else {
-                    MessageBox.Show("数据保存失败!");
-                } 
+                else
+                {
+                    DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='2',ultrasound_memo='"+ FubuResult + "' where aichive_no='"+ aichive_no + "' and bar_code='" + barcode + "'");
+                    string issqdgbc = "update zkhw_tj_bgdc set BChao='3' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                    DbHelperMySQL.ExecuteSql(issqdgbc);
+                    this.textBox6.ForeColor = Color.Red;
+                    testFunDelegate(3, 5, rowIndex);
+                }
+                MessageBox.Show("数据保存成功!");
+            }
+            else {
+                MessageBox.Show("数据保存失败!");
+            } 
         }
         private int _indexPic = 0;
         private void btnNext_Click(object sender, EventArgs e)

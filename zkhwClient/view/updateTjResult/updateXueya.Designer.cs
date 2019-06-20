@@ -110,7 +110,7 @@
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox3.Location = new System.Drawing.Point(479, 16);
+            this.textBox3.Location = new System.Drawing.Point(479, 17);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(229, 30);
@@ -176,6 +176,7 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(170, 30);
             this.textBox5.TabIndex = 52;
+            this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
             // 
             // label8
             // 
@@ -204,10 +205,11 @@
             // textBox6
             // 
             this.textBox6.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox6.Location = new System.Drawing.Point(535, 160);
+            this.textBox6.Location = new System.Drawing.Point(535, 161);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(173, 30);
             this.textBox6.TabIndex = 54;
+            this.textBox6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
             // 
             // textBox7
             // 
@@ -216,6 +218,7 @@
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(170, 30);
             this.textBox7.TabIndex = 55;
+            this.textBox7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
             // 
             // updateXueya
             // 
