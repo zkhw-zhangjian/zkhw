@@ -222,6 +222,13 @@
     <Compile Include="frmMain1.Designer.cs">
       <DependentUpon>frmMain1.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoaderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoaderForm.Designer.cs">
+      <DependentUpon>LoaderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadingHelper.cs" />
     <Compile Include="MyEncrypt.cs" />
     <Compile Include="service\PublicHealthService\olderHelthServices.cs" />
     <Compile Include="service\PublicHealthService\diabetesPatientService.cs" />
@@ -828,6 +835,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoaderForm.resx">
+      <DependentUpon>LoaderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\HomeDoctorSigningView\FormJY.resx">
       <DependentUpon>FormJY.cs</DependentUpon>

@@ -213,7 +213,12 @@ namespace zkhwClient
                 {
                     p.Kill();
                 }
-                Environment.Exit(0);
+                try
+                {
+                    Environment.Exit(0);
+                }
+                catch
+                { } 
             }
             
         }
@@ -886,7 +891,12 @@ namespace zkhwClient
                     p.Kill();
                 }
             }
-            Environment.Exit(0);
+            try
+            {
+                Environment.Exit(0);
+            }
+            catch
+            { }
         }
         //定时任务获取生化和血球的数据
         private void timer2_Tick(object sender, EventArgs e)

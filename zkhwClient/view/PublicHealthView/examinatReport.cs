@@ -628,10 +628,20 @@ where 1=1";
         }
 
         private bool PDF(List<string> list, DataSet dataSet, List<ComboBoxData> ide)
-        {
+        { 
             Document doc = null;
+
             if (list.Count > 1)
             {
+                LoadingHelper.myCaption = "正在导出...";
+                LoadingHelper.myLabel = "正在导出第1份";
+                LoadingHelper.ShowLoadingScreen();
+                
+                if (LoadingHelper.loadingForm != null)
+                {
+                    LoadingHelper.loadingForm.mystr = "正在导出第 1 份";
+                }
+                int intNum = 0;
                 foreach (var item in ide)
                 {
                     List<Report> reports = new List<Report>();
@@ -704,8 +714,13 @@ where 1=1";
                         DeteleFile(urls);
                         rp.Doc.Save(urls, SaveFormat.Pdf);
                     }
-
+                    intNum = intNum + 1;
+                    if (LoadingHelper.loadingForm != null)
+                    {
+                        LoadingHelper.loadingForm.mystr = string.Format("已导出 {0} 份共 {1} 份", intNum, list.Count);
+                    }
                 }
+                LoadingHelper.CloseForm();
                 return true;
             }
             else
@@ -715,8 +730,16 @@ where 1=1";
                     MessageBox.Show("请选择你要生成的报告类型！");
                     return false;
                 }
+                LoadingHelper.myCaption = "正在导出...";
+                LoadingHelper.myLabel = "正在导出第 1 份";
+                LoadingHelper.ShowLoadingScreen(); 
+                if (LoadingHelper.loadingForm !=null)
+                {
+                    LoadingHelper.loadingForm.mystr = "正在导出第 1 份";
+                }
                 if (list[0] == "综合报告单")
                 {
+                    int intNum = 0;
                     List<string> vs = new List<string>();
                     vs.Add("封面");
                     //vs.Add("个人信息");
@@ -750,10 +773,17 @@ where 1=1";
                         string urls = @str + $"/up/result/{"综合报告单-"+data["name"].ToString() + data["id_number"].ToString()}.pdf";
                         DeteleFile(urls);
                         re.Doc.Save(urls, SaveFormat.Pdf);
+
+                        intNum = intNum + 1;
+                        if (LoadingHelper.loadingForm != null)
+                        {
+                            LoadingHelper.loadingForm.mystr = string.Format("已导出 {0} 份共 {1} 份", intNum, dataSet.Tables["个人"].Rows.Count);
+                        }
                     }
                 }
                 else
                 {
+                    int intNum = 0;
                     for (int i = 0; i < dataSet.Tables["个人"].Rows.Count; i++)
                     {
                         DataRow data = dataSet.Tables["个人"].Rows[i];
@@ -761,8 +791,15 @@ where 1=1";
                         string urls = @str + $"/up/result/{list[0]+"-"+data["name"].ToString() + data["id_number"].ToString()}.pdf";
                         DeteleFile(urls);
                         doc.Save(urls, SaveFormat.Pdf);
+                        intNum = intNum + 1;
+                        if (LoadingHelper.loadingForm != null)
+                        {
+                            LoadingHelper.loadingForm.mystr = string.Format("已导出 {0} 份共 {1} 份", intNum, dataSet.Tables["个人"].Rows.Count);
+                        }
                     }
                 }
+                
+                LoadingHelper.CloseForm();
                 return true;
             }
         }
@@ -2999,6 +3036,10 @@ where 1=1";
         /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
+            LoadingHelper.myCaption = "正在上传...";
+            LoadingHelper.myLabel = "正在上传数据";
+            LoadingHelper.ShowLoadingScreen();
+             
             try
             {
                 List<ComboBoxData> ide = new List<ComboBoxData>();
@@ -3017,6 +3058,7 @@ where 1=1";
                 }
                 if (ide.Count < 1)
                 {
+                    LoadingHelper.CloseForm();
                     MessageBox.Show("请选择要数据上传的人员!"); return;
                 }
                 List<string> sqllist = new List<string>();
@@ -3535,7 +3577,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                     }
                 }
 
-                if (sqllist.Count < 1) { MessageBox.Show("没有需要上传的数据,请稍后再试！"); return; }
+                if (sqllist.Count < 1) { LoadingHelper.CloseForm(); MessageBox.Show("没有需要上传的数据,请稍后再试！"); return; }
                 int run = DbHelperMySQL.ExecuteSqlTranYpt(sqllist);
                 if (run > 0)
                 {
@@ -3639,6 +3681,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                     int reu1 = DbHelperMySQL.ExecuteSqlTran(sqllistz);
                     if (reu1 > 0)
                     {
+                        LoadingHelper.CloseForm();
                         bean.loginLogBean lb = new bean.loginLogBean();
                         lb.name = frmLogin.name;
                         lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -3650,11 +3693,13 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                     }
                     else
                     {
+                        LoadingHelper.CloseForm();
                         MessageBox.Show("数据状态修改异常,请联系运维人员!");
                     }
                 }
                 else
                 {
+                    LoadingHelper.CloseForm();
                     bean.loginLogBean lb = new bean.loginLogBean();
                     lb.name = frmLogin.name;
                     lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -3667,6 +3712,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             }
             catch (Exception ex)
             {
+                LoadingHelper.CloseForm();
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = frmLogin.name;
                 lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");

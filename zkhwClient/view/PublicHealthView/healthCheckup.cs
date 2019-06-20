@@ -257,13 +257,13 @@ namespace zkhwClient.view.PublicHealthView
                 DataTable dtup = hcd.queryhealthCheckup(id);
                 if(dtup !=null && dtup.Rows.Count>0)
                 {
-                    //string _healthAdvice = dtup.Rows[0]["healthAdvice"].ToString();
-                    //string _checkdate = dtup.Rows[0]["check_date"].ToString();
-                    //if(_healthAdvice=="" || _checkdate=="")
-                    //{
-                    //    MessageBox.Show("还未检查完成不能上传！");
-                    //    return;
-                    //}
+                    string _healthAdvice = dtup.Rows[0]["healthAdvice"].ToString();
+                    string _checkdate = dtup.Rows[0]["check_date"].ToString();
+                    if (_healthAdvice == "" || _checkdate == "")
+                    {
+                        MessageBox.Show("还未检查完成不能上传！");
+                        return;
+                    }
                     List<string> sqllist = new List<string>();
                     //1：住院记录表
                     string sql = string.Format("select * from hospitalized_record where exam_id='{0}';", id);
