@@ -58,8 +58,8 @@ namespace zkhwClient
             dttv = grjddao.checkThresholdValues();//获取阈值信息
             this.timer1.Start();//时间控件定时器
 
-            //this.timer2.Interval = Int32.Parse(Properties.Settings.Default.timeInterval);
-            //this.timer2.Start();//定时获取生化和血球的数据
+            this.timer2.Interval = Int32.Parse(Properties.Settings.Default.timeInterval);
+            this.timer2.Start();//定时获取生化和血球的数据
 
             this.timer3.Interval = Int32.Parse(Properties.Settings.Default.timer3Interval);
             this.timer3.Start();//1分钟定时刷新设备状态
@@ -139,7 +139,7 @@ namespace zkhwClient
                     };
                 }//屏蔽其它功能菜单下拉选
             }
-            socketTcp();
+            //socketTcp();
             //http
             proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
             proHttp.StartInfo.CreateNoWindow = true;
@@ -158,15 +158,15 @@ namespace zkhwClient
             proAsNet.Start();
             Thread.Sleep(300);
             IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
-            ////ftp                 
-            ////proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.05\\ftpservice.exe";
-            ////proFtp.StartInfo.CreateNoWindow = true;
-            ////proFtp.StartInfo.UseShellExecute = false;
-            ////proFtp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            ////proFtp.StartInfo.ErrorDialog = false;
-            ////proFtp.Start();
-            ////Thread.Sleep(1000);
-            ////IntPtrFindWindow.intptrwindows(proFtp.MainWindowHandle);
+            //ftp                 
+            //proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.05\\ftpservice.exe";
+            //proFtp.StartInfo.CreateNoWindow = true;
+            //proFtp.StartInfo.UseShellExecute = false;
+            //proFtp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            //proFtp.StartInfo.ErrorDialog = false;
+            //proFtp.Start();
+            //Thread.Sleep(1000);
+            //IntPtrFindWindow.intptrwindows(proFtp.MainWindowHandle);
         }
 
         private void 用户管理ToolStripMenuItem_Click(object sender, EventArgs e)

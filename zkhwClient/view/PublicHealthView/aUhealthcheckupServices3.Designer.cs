@@ -819,7 +819,7 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(1, 43);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1288, 477);
+            this.groupBox1.Size = new System.Drawing.Size(1254, 477);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             // 
@@ -981,7 +981,6 @@
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(80, 24);
             this.radioButton6.TabIndex = 32;
-            this.radioButton6.TabStop = true;
             this.radioButton6.Tag = "2";
             this.radioButton6.Text = "2异常";
             this.radioButton6.UseVisualStyleBackColor = true;
