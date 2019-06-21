@@ -688,6 +688,10 @@ namespace zkhwClient.view.PublicHealthView
             bool isfalse = hcd.addPhysicalExaminationRecord4(per, goodsList, goodsListym);
             if (isfalse)
             {
+                //更新
+                tjcheckDao tjdao = new tjcheckDao();
+                tjdao.updateTJbgdcjktjb(per.id_number, per.bar_code, "1");
+
                 MessageBox.Show("数据保存成功!");
                 if (per.id_number!=""&& per.id_number.Length==18) {
                   string yl = per.id_number.Substring(6, 4) + "-" + per.id_number.Substring(10, 2) + "-" + per.id_number.Substring(12, 2);

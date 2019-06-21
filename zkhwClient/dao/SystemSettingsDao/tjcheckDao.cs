@@ -247,6 +247,30 @@ namespace zkhwClient.dao
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }
+        //更新老年人自理能力评估
+        public bool updateTJbgdclnrzlnlpg(string aichive_no, string id_number, string result)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_bgdc set lnrzlnlpg='" + result + "' where aichive_no = '" + aichive_no + "' and id_number='" + id_number + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
+        //更新健康体检表
+        public bool updateTJbgdcjktjb(string id_number,string barcode, string result)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_bgdc set jktjb='" + result + "' where id_number = '" + id_number + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
+        //更新老年人中医体质辨识
+        public bool updateTJbgdclnrzytzbs(string aichive_no, string id_number, string result)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_bgdc set lnrzytzbs='" + result + "' where aichive_no = '" + aichive_no + "' and id_number='" + id_number + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
 
         //查询B超体检信息
         public DataTable checkBichaoInfo(string time1, string time2, string xcuncode)

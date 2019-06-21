@@ -61,7 +61,11 @@ namespace zkhwClient.view.PublicHealthView
         {
             if ((IS == 1 ? Insert() : Update()) > 0)
             {
-                MessageBox.Show("成功！");
+                //更新
+                tjcheckDao tjdao = new tjcheckDao();
+                tjdao.updateTJbgdclnrzytzbs(aichive_no, id_number, "1");
+
+                MessageBox.Show("成功！"); 
                 this.DialogResult = DialogResult.OK;
             }
             else
