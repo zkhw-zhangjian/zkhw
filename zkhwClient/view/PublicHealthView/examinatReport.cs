@@ -769,9 +769,11 @@ where 1=1";
                         foreach (var item in reports)
                         {
                             re.Doc.AppendDocument(item.Doc, ImportFormatMode.KeepSourceFormatting);
+                            
                         }
                         string urls = @str + $"/up/result/{"综合报告单-"+data["name"].ToString() + data["id_number"].ToString()}.pdf";
                         DeteleFile(urls);
+                        
                         re.Doc.Save(urls, SaveFormat.Pdf);
 
                         intNum = intNum + 1;
@@ -2891,7 +2893,7 @@ where 1=1";
                     break;
             }
             string sql = $@"UPDATE zkhw_tj_bgdc set BaoGaoShengChan='{DateTime.Now.ToString("yyyy-MM-dd")}' where id_number='{data["id_number"].ToString()}'";
-            int rue = DbHelperMySQL.ExecuteSql(sql);
+            int rue = DbHelperMySQL.ExecuteSql(sql); 
             return doc;
         }
         private string Sex(string sex)
