@@ -36,7 +36,9 @@ namespace zkhwClient.dao
         public DataTable querytjjd(string time1, string time2,string xcuncode, string jmxx)
         {
             DataSet ds = new DataSet();
-            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,BChao,XinDian,ShengHua,XueChangGui,NiaoChangGui,XueYa,Shengaotizhong from zkhw_tj_bgdc where createtime >= '" + time1 + "' and createtime <= '" + time2 + "'";
+            string sql = @"select healthchecktime,name,aichive_no,id_number,bar_code,BChao,XinDian,ShengHua,
+                       XueChangGui,NiaoChangGui,XueYa,Shengaotizhong,jktjb,lnrzlnlpg,lnrzytzbs,age  
+                       from zkhw_tj_bgdc where createtime >= '" + time1 + "' and createtime <= '" + time2 + "'";
             if (xcuncode!=null&&!"".Equals(xcuncode)) {
                 sql += " and area_duns='" + xcuncode + "'";
             }
