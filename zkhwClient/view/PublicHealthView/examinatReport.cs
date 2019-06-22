@@ -3766,7 +3766,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;
+            if (e.RowIndex > 0) return;
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             string idnum = dataGridView1["身份证号", e.RowIndex].Value.ToString();
             DataTable dtgrgd = grjdDao.selectResdentDoctorId(idnum);
