@@ -44,7 +44,7 @@ namespace zkhwClient.dao
         public DataTable selectBichaoInfo(string aichive_no, string barcode)
         {
             DataSet ds = new DataSet();
-            string sql = "select FubuBC,FubuResult,FubuDesc,QitaBC,QitaResult,QitaDesc from zkhw_tj_bc a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "' order by createtime desc limit 1";
+            string sql = "select FubuBC,FubuResult,FubuDesc,QitaBC,QitaResult,QitaDesc,BuPic01,BuPic02,BuPic03,BuPic04 from zkhw_tj_bc a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "' order by createtime desc limit 1";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -60,7 +60,7 @@ namespace zkhwClient.dao
         public DataTable selectXindiantuInfo(string aichive_no, string barcode)
         {
             DataSet ds = new DataSet();
-            string sql = "select XdtResult,XdtDesc,Ventrate,PR,QRS,QT,QTc,P_R_T,DOB,Age,Gen,Dep from zkhw_tj_xdt a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "' order by createtime desc limit 1";
+            string sql = "select XdtResult,XdtDesc,Ventrate,PR,QRS,QT,QTc,P_R_T,DOB,Age,Gen,Dep,imageUrl from zkhw_tj_xdt a where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "' order by createtime desc limit 1";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -182,6 +182,13 @@ namespace zkhwClient.dao
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }
+        public bool updateTJbgdcXueya(string aichive_no, string barcode ,string xueya)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_bgdc set XueYa='"+ xueya + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
         //查询身高体重检查信息根据档案号和条码号
         public DataTable selectSgtzInfo(string aichive_no, string barcode)
         {
@@ -215,6 +222,14 @@ namespace zkhwClient.dao
             return ret == 0 ? false : true;
         }
 
+        public bool updateTJbgdcSgtz(string aichive_no, string barcode,string result)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_bgdc set Shengaotizhong='"+ result + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
+
         //更新体检进度tj_bgdc--血常规
         public bool updateTJbgdcXuechanggui(string aichive_no, string barcode, int flag)
         {
@@ -229,6 +244,30 @@ namespace zkhwClient.dao
         {
             int ret = 0;
             String sql = "update zkhw_tj_bgdc set ShengHua='" + flag + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
+        //更新老年人自理能力评估
+        public bool updateTJbgdclnrzlnlpg(string aichive_no, string id_number, string result)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_bgdc set lnrzlnlpg='" + result + "' where aichive_no = '" + aichive_no + "' and id_number='" + id_number + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
+        //更新健康体检表
+        public bool updateTJbgdcjktjb(string id_number,string barcode, string result)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_bgdc set jktjb='" + result + "' where id_number = '" + id_number + "' and bar_code='" + barcode + "'";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
+        //更新老年人中医体质辨识
+        public bool updateTJbgdclnrzytzbs(string aichive_no, string id_number, string result)
+        {
+            int ret = 0;
+            String sql = "update zkhw_tj_bgdc set lnrzytzbs='" + result + "' where aichive_no = '" + aichive_no + "' and id_number='" + id_number + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }

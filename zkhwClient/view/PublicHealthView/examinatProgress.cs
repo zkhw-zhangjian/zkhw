@@ -31,8 +31,7 @@ namespace zkhwClient.view.PublicHealthView
         string shicode = null;
         string shengcode = null;
         string xcuncode = null; 
-        string jmxx = null;
-        bool isfirst = true;
+        string jmxx = null; 
         string str = Application.StartupPath;//项目路径
         DataTable dttv = null;
         public examinatProgress()
@@ -44,15 +43,17 @@ namespace zkhwClient.view.PublicHealthView
             //让默认的日期时间减一天
             this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
             this.button1.BackgroundImage = System.Drawing.Image.FromFile(@str + "/images/check.png");
+            this.btnDel.BackgroundImage = System.Drawing.Image.FromFile(@str + "/images/delete.png");
+
 
             this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源
             this.comboBox1.DisplayMember = "name";//显示给用户的数据集表项
             this.comboBox1.ValueMember = "code";//操作时获取的值 
 
             dttv=grjddao.checkThresholdValues();//获取阈值信息
-            isfirst = true;
+            
             registrationRecordCheck();//体检人数统计
-            isfirst = false;
+            
         }
         public void queryExaminatProgress()
         {
@@ -115,6 +116,10 @@ namespace zkhwClient.view.PublicHealthView
                 this.dataGridView1.Columns[9].HeaderCell.Value = "尿常规";
                 this.dataGridView1.Columns[10].HeaderCell.Value = "血压";
                 this.dataGridView1.Columns[11].HeaderCell.Value = "身高体重";
+                this.dataGridView1.Columns[12].HeaderCell.Value = "健康体检表";
+                this.dataGridView1.Columns[13].HeaderCell.Value = "老年人生活自理能力评估";
+                this.dataGridView1.Columns[14].HeaderCell.Value = "老年人中医体质辨识";
+                this.dataGridView1.Columns[15].HeaderCell.Value = "年龄";
                 this.dataGridView1.Columns[0].Width = 120;
                 this.dataGridView1.Columns[1].Width = 150;
                 this.dataGridView1.Columns[2].Width = 190;
@@ -126,6 +131,7 @@ namespace zkhwClient.view.PublicHealthView
                 this.dataGridView1.Columns[8].Width = 125;
                 this.dataGridView1.Columns[9].Width = 125;
                 this.dataGridView1.Columns[10].Width = 125;
+                this.dataGridView1.Columns[15].Visible = false;
                 this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
                 this.dataGridView1.AllowUserToAddRows = false;
                 int rows = this.dataGridView1.Rows.Count - 1 <= 0 ? 0 : this.dataGridView1.Rows.Count - 1;
@@ -272,6 +278,50 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         this.dataGridView1.Rows[x].Cells[11].Value = "--";
                     }
+
+                    if (this.dataGridView1.Rows[x].Cells[12].Value.ToString() == "1")
+                    {
+                        dataGridView1.Rows[x].Cells[12].Value = "已经完成";
+                        dataGridView1.Rows[x].Cells[12].Style.ForeColor = Color.Green;
+                    }
+                    else
+                    {
+                        this.dataGridView1.Rows[x].Cells[12].Value = "--";
+                    }
+                    double age = 0;
+                    string tmp = this.dataGridView1.Rows[x].Cells[15].Value.ToString(); 
+                    double.TryParse(tmp, out age);
+
+                    if (age < 65)
+                    {
+                        dataGridView1.Rows[x].Cells[13].Value = "年龄不符";
+                        dataGridView1.Rows[x].Cells[13].Style.ForeColor = Color.Green;
+
+                        dataGridView1.Rows[x].Cells[14].Value = "年龄不符";
+                        dataGridView1.Rows[x].Cells[14].Style.ForeColor = Color.Green;
+                    }
+                    else
+                    {
+                        if (this.dataGridView1.Rows[x].Cells[13].Value.ToString() == "1")
+                        {
+                            dataGridView1.Rows[x].Cells[13].Value = "已经完成";
+                            dataGridView1.Rows[x].Cells[13].Style.ForeColor = Color.Green;
+                        }
+                        else
+                        {
+                            this.dataGridView1.Rows[x].Cells[13].Value = "--";
+                        }
+
+                        if (this.dataGridView1.Rows[x].Cells[14].Value.ToString() == "1")
+                        {
+                            dataGridView1.Rows[x].Cells[14].Value = "已经完成";
+                            dataGridView1.Rows[x].Cells[14].Style.ForeColor = Color.Green;
+                        }
+                        else
+                        {
+                            this.dataGridView1.Rows[x].Cells[14].Value = "--";
+                        }
+                    } 
                 }
             }
             else {
@@ -339,16 +389,8 @@ namespace zkhwClient.view.PublicHealthView
             {
                 label9.Text = dt16num.Rows[0][0].ToString();//计划体检人数
             }
-            
-            if(isfirst==true)
-            {
-                time1 = basicInfoSettings.createtime;
-            }
-            else
-            {
-                time1 = this.dateTimePicker1.Text.ToString();//开始时间
-            }
-            DataTable dt19num = grjddao.jkAllNum(xcuncode, time1);
+             
+            DataTable dt19num = grjddao.jkAllNum(xcuncode, basicInfoSettings.createtime);
             if (dt19num != null && dt19num.Rows.Count > 0)
             {
                 //DataRow[] rownan = dt19num.Select("sex='男'");
@@ -358,7 +400,7 @@ namespace zkhwClient.view.PublicHealthView
                 label11.Text = dt19num.Rows[0][0].ToString();//登记人数
             }
 
-            DataTable dt20num = jkdao.querytjjdTopdf(xcuncode, time1);
+            DataTable dt20num = jkdao.querytjjdTopdf(xcuncode, basicInfoSettings.createtime);
             if (dt20num != null && dt20num.Rows.Count > 0)
             {
                 DataRow[] row =dt20num.Select("type='未完成'");
@@ -398,6 +440,8 @@ namespace zkhwClient.view.PublicHealthView
                 ubichao.aichive_no = str2;
                 ubichao.id_number = str3;
                 ubichao.bar_code = str4;
+                ubichao.rowIndex = e.RowIndex;
+                ubichao.testFunDelegate = DealGridColour;
                 ubichao.Show();
             } else if (columnIndex == 6) {
                 updateXindiantu uxindt = new updateXindiantu();
@@ -406,6 +450,8 @@ namespace zkhwClient.view.PublicHealthView
                 uxindt.aichive_no = str2;
                 uxindt.id_number = str3;
                 uxindt.bar_code = str4;
+                uxindt.rowIndex = e.RowIndex;
+                uxindt.testFunDelegate = DealGridColour;
                 uxindt.Show();
             }
             else if (columnIndex == 7)
@@ -417,6 +463,8 @@ namespace zkhwClient.view.PublicHealthView
                 ush.id_number = str3;
                 ush.bar_code = str4;
                 ush.dttv = dttv;
+                ush.rowIndex = e.RowIndex;
+                ush.testFunDelegate = DealGridColour;
                 ush.Show();
             }
             else if (columnIndex == 8)
@@ -428,6 +476,8 @@ namespace zkhwClient.view.PublicHealthView
                 uxcg.id_number = str3;
                 uxcg.bar_code = str4;
                 uxcg.dttv = dttv;
+                uxcg.rowIndex = e.RowIndex;
+                uxcg.testFunDelegate = DealGridColour;
                 uxcg.Show();
             }
             else if (columnIndex == 9)
@@ -439,6 +489,8 @@ namespace zkhwClient.view.PublicHealthView
                 uncg.id_number = str3;
                 uncg.bar_code = str4;
                 uncg.dttv = dttv;
+                uncg.rowIndex = e.RowIndex;
+                uncg.testFunDelegate = DealGridColour;
                 uncg.Show();
             }
             else if (columnIndex == 10)
@@ -450,10 +502,12 @@ namespace zkhwClient.view.PublicHealthView
                 uxy.id_number = str3;
                 uxy.bar_code = str4;
                 uxy.dttv = dttv;
+                uxy.rowIndex = e.RowIndex;
+                uxy.testFunDelegate = DealGridColour;
                 uxy.Show();
             }
             else if (columnIndex == 11)
-            {
+            { 
                 updateShengoaTizhong usgtz = new updateShengoaTizhong();
                 usgtz.time = str0;
                 usgtz.name = str1;
@@ -461,16 +515,45 @@ namespace zkhwClient.view.PublicHealthView
                 usgtz.id_number = str3;
                 usgtz.bar_code = str4;
                 usgtz.dttv = dttv;
-                usgtz.Show();
+                usgtz.rowIndex = e.RowIndex;
+                usgtz.testFunDelegate = DealGridColour;
+                usgtz.Show(); 
             }
+        }
+
+        public void DealGridColour(int _result,int _colIndex,int _rowIndex)
+        {
+            if (_rowIndex <= -1) return;
+            try
+            {
+                dataGridView1.Rows[_rowIndex].Cells[_colIndex].Value = "已经完成";
+                if (_result == 1)
+                {
+                    dataGridView1.Rows[_rowIndex].Cells[_colIndex].Style.ForeColor = Color.Green;
+                }
+                else if (_result == 2)
+                {
+                    dataGridView1.Rows[_rowIndex].Cells[_colIndex].Style.ForeColor = Color.Blue;
+                }
+                else if (_result == 3)
+                {
+                    dataGridView1.Rows[_rowIndex].Cells[_colIndex].Style.ForeColor = Color.Red;
+                }
+            }
+            catch
+            {
+
+            }
+            
         }
         //生成PDF xcuncode
         private void label6_Click(object sender, EventArgs e)
         {
             //DataTable dts = jkdao.querytjjdTopdf(basicInfoSettings.xcuncode, basicInfoSettings.createtime);  //2019-6-17改成下面的方式
             if (xcuncode == "" || xcuncode==null) xcuncode = basicInfoSettings.xcuncode;
-            time1 = this.dateTimePicker1.Text.ToString();//开始时间
-            DataTable dts = jkdao.querytjjdTopdf(xcuncode, time1);
+            time1 = this.dateTimePicker1.Value.ToString("yyyy-MM-dd");//开始时间
+            time2 = this.dateTimePicker2.Value.ToString("yyyy-MM-dd");
+            DataTable dts = jkdao.querytjjdTopdf(xcuncode, time1, time2);
             if (dts != null && dts.Rows.Count > 0)
             {
                 string localFilePath = String.Empty;
@@ -524,9 +607,11 @@ namespace zkhwClient.view.PublicHealthView
                 iTextSharp.text.Font fonttitle2 = new iTextSharp.text.Font(baseFT, 18);
                 iTextSharp.text.Font font = new iTextSharp.text.Font(baseFT, 10);//内容字体
                 iTextSharp.text.Font fontID = new iTextSharp.text.Font(baseFT, 16);//内容字体
-
+                
+                string titletime = this.dateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss");//开始时间
                 //标题  
-                Paragraph pdftitle = new Paragraph(Convert.ToDateTime(basicInfoSettings.createtime).ToString("yyyy-MM-dd HH:mm:ss") + " - "+ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), font);
+                //Paragraph pdftitle = new Paragraph(Convert.ToDateTime(titletime).ToString("yyyy-MM-dd HH:mm:ss") + " - "+ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), font);
+                Paragraph pdftitle = new Paragraph(Convert.ToDateTime(time1).ToString("yyyy-MM-dd HH:mm:ss") + " - " + titletime, font);
                 pdftitle.Alignment = 1;
                 doc.Add(pdftitle);
 
@@ -602,7 +687,7 @@ namespace zkhwClient.view.PublicHealthView
 
                 PdfPTable table = new PdfPTable(6);
                 table.WidthPercentage = 100;//table占宽度百分比 100%
-                table.SetWidths(new int[] { 7, 15, 6, 15, 10, 47});
+                table.SetWidths(new int[] { 7, 14, 6, 14, 10, 49});
                 string[] columnsnames = { "编号", "姓名", "性别", "出生日期", "状态", "未完成项" };
                 PdfPCell cell;
 
@@ -716,6 +801,65 @@ namespace zkhwClient.view.PublicHealthView
             {
                 dataGridView1.Rows[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
                 dataGridView1.Rows[i].HeaderCell.Value = (i + 1).ToString();
+            }
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
+            string archive_no = this.dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+
+            DialogResult rr = MessageBox.Show("确认删除？", "确认删除提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+            int tt = (int)rr;
+            if (tt == 1)
+            {
+                #region 整理记录
+                List<string> _lst = new List<string>();
+                //string sql = string.Format(" Delete From resident_base_info where archive_no='{0}'", archive_no);
+                //_lst.Add(sql);
+                string sql = string.Format(" Delete From zkhw_tj_jk where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+
+                sql = string.Format(" Delete From zkhw_tj_bgdc where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+
+                sql = string.Format(" Delete From physical_examination_record where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+
+                sql = string.Format(" Delete From zkhw_tj_bc where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+
+                sql = string.Format(" Delete From zkhw_tj_ncg where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+
+                sql = string.Format(" Delete From zkhw_tj_sgtz where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+
+                sql = string.Format(" Delete From zkhw_tj_sh where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+
+                sql = string.Format(" Delete From zkhw_tj_xcg where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+
+                sql = string.Format(" Delete From zkhw_tj_xdt where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+
+                sql = string.Format(" Delete From zkhw_tj_xy where aichive_no='{0}'", archive_no);
+                _lst.Add(sql);
+                #endregion
+
+                int ret=DbHelperMySQL.ExecuteSqlTran(_lst);
+                if(ret>0)
+                {
+                    MessageBox.Show("删除成功！");
+
+                    queryExaminatProgress();
+                    registrationRecordCheck();//体检人数统计
+                }
+                else
+                {
+                    MessageBox.Show("删除失败！");
+                }
             }
         }
     }

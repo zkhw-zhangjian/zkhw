@@ -183,6 +183,7 @@
             this.label7.Size = new System.Drawing.Size(74, 20);
             this.label7.TabIndex = 49;
             this.label7.Text = "LEU ：";
+            this.label7.Visible = false;
             // 
             // textBox5
             // 
@@ -208,7 +209,7 @@
             this.button5.BackColor = System.Drawing.Color.SkyBlue;
             this.button5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button5.Location = new System.Drawing.Point(615, 566);
+            this.button5.Location = new System.Drawing.Point(543, 455);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(93, 30);
             this.button5.TabIndex = 53;
@@ -223,6 +224,7 @@
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(224, 30);
             this.textBox6.TabIndex = 54;
+            this.textBox6.Visible = false;
             // 
             // textBox7
             // 
@@ -421,6 +423,7 @@
             this.textBox18.Name = "textBox18";
             this.textBox18.Size = new System.Drawing.Size(224, 30);
             this.textBox18.TabIndex = 78;
+            this.textBox18.Visible = false;
             // 
             // textBox19
             // 
@@ -429,6 +432,7 @@
             this.textBox19.Name = "textBox19";
             this.textBox19.Size = new System.Drawing.Size(229, 30);
             this.textBox19.TabIndex = 77;
+            this.textBox19.Visible = false;
             // 
             // label18
             // 
@@ -440,6 +444,7 @@
             this.label18.Size = new System.Drawing.Size(63, 20);
             this.label18.TabIndex = 76;
             this.label18.Text = "MA ：";
+            this.label18.Visible = false;
             // 
             // label19
             // 
@@ -451,6 +456,7 @@
             this.label19.Size = new System.Drawing.Size(74, 20);
             this.label19.TabIndex = 75;
             this.label19.Text = "ACR ：";
+            this.label19.Visible = false;
             // 
             // textBox20
             // 
@@ -459,6 +465,7 @@
             this.textBox20.Name = "textBox20";
             this.textBox20.Size = new System.Drawing.Size(224, 30);
             this.textBox20.TabIndex = 82;
+            this.textBox20.Visible = false;
             // 
             // textBox21
             // 
@@ -467,6 +474,7 @@
             this.textBox21.Name = "textBox21";
             this.textBox21.Size = new System.Drawing.Size(229, 30);
             this.textBox21.TabIndex = 81;
+            this.textBox21.Visible = false;
             // 
             // label20
             // 
@@ -478,6 +486,7 @@
             this.label20.Size = new System.Drawing.Size(63, 20);
             this.label20.TabIndex = 80;
             this.label20.Text = "Ca ：";
+            this.label20.Visible = false;
             // 
             // label21
             // 
@@ -489,12 +498,14 @@
             this.label21.Size = new System.Drawing.Size(63, 20);
             this.label21.TabIndex = 79;
             this.label21.Text = "CR ：";
+            this.label21.Visible = false;
             // 
             // updateNiaochanggui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 627);
+            this.ClientSize = new System.Drawing.Size(737, 504);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.textBox20);
             this.Controls.Add(this.textBox21);
             this.Controls.Add(this.label20);
@@ -524,7 +535,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);

@@ -36,7 +36,9 @@ namespace zkhwClient.dao
         public DataTable querytjjd(string time1, string time2,string xcuncode, string jmxx)
         {
             DataSet ds = new DataSet();
-            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,BChao,XinDian,ShengHua,XueChangGui,NiaoChangGui,XueYa,Shengaotizhong from zkhw_tj_bgdc where createtime >= '" + time1 + "' and createtime <= '" + time2 + "'";
+            string sql = @"select healthchecktime,name,aichive_no,id_number,bar_code,BChao,XinDian,ShengHua,
+                       XueChangGui,NiaoChangGui,XueYa,Shengaotizhong,jktjb,lnrzlnlpg,lnrzytzbs,age  
+                       from zkhw_tj_bgdc where createtime >= '" + time1 + "' and createtime <= '" + time2 + "'";
             if (xcuncode!=null&&!"".Equals(xcuncode)) {
                 sql += " and area_duns='" + xcuncode + "'";
             }
@@ -70,6 +72,34 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
+
+        public DataTable querytjjdTopdf(string xcuncode, string time1,string time2)
+        {
+            DataSet ds = new DataSet();
+            string sql = @"select name,(case sex when '1' then '男' when '2' then '女' ELSE ''END) sex,birthday,
+                     (case when BChao>='1' and XinDian>='1' and ShengHua>='1' and XueChangGui>='1' 
+                     and NiaoChangGui>='1' and XueYa>='1' and Shengaotizhong>='1' then '完成' else '未完成' end) as type
+                     ,BChao,XinDian,ShengHua,XueChangGui,NiaoChangGui,XueYa,Shengaotizhong from zkhw_tj_bgdc where 1=1";
+            if (xcuncode != null && !"".Equals(xcuncode))
+            {
+                sql += " and area_duns='" + xcuncode + "'";
+            }
+            if (time1 != null && !"".Equals(time1))
+            {
+                sql += " and date_format(createtime,'%Y-%m-%d') >='" + time1 + "'";
+            }
+            if (time2 != null && !"".Equals(time2))
+            {
+                sql += " and date_format(createtime,'%Y-%m-%d') <='" + time2 + "'";
+            }
+            if (sql != "")
+            {
+                sql += " order by convert(type using GBK) DESC,convert(name using GBK) ASC ";
+            }
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+
         //判断心电图是否有重复数据
         public DataTable queryChongfuXdtData(string aichive_no, string bar_code)
         {

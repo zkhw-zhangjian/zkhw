@@ -23,22 +23,22 @@ namespace zkhwClient.dao
             //这里判断起始日期如果不等于当前日期那么就调用内连接 2019-6-13
             DateTime dt = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
             DateTime st = DateTime.Parse(time1);
-            if(dt !=st)
-            {
-                sql = "SELECT bb.name,bb.archive_no,bb.id_number,aa.total_score,aa.judgement_result,aa.test_date,aa.test_doctor,bb.sex FROM (select b.name, b.archive_no, b.id_number,b.sex from resident_base_info b where 1=1 and age >= '65'";
-                if (code != null && !"".Equals(code)) { sql += " AND b.village_code='" + code + "'"; }
-                if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
-                sql += ") bb INNER JOIN(select a.aichive_no, a.total_score, a.judgement_result, a.test_date, a.test_doctor from elderly_selfcare_estimate a where a.test_date >= '" + time1 + "' and a.test_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
-            }
-            else
-            {
+            //if (dt != st)
+            //{
+            //    sql = "SELECT bb.name,bb.archive_no,bb.id_number,aa.total_score,aa.judgement_result,aa.test_date,aa.test_doctor,bb.sex FROM (select b.name, b.archive_no, b.id_number,b.sex from resident_base_info b where 1=1 and age >= '65'";
+            //    if (code != null && !"".Equals(code)) { sql += " AND b.village_code='" + code + "'"; }
+            //    if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
+            //    sql += ") bb INNER JOIN(select a.aichive_no, a.total_score, a.judgement_result, a.test_date, a.test_doctor from elderly_selfcare_estimate a where a.test_date >= '" + time1 + "' and a.test_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
+            //}
+            //else
+            //{
                 sql = @"SELECT bb.name,bb.archive_no,bb.id_number,aa.total_score,aa.judgement_result,aa.test_date,aa.test_doctor,bb.sex 
                 FROM (select b.name, b.archive_no, b.id_number,b.sex from resident_base_info b 
                  inner join zkhw_tj_jk z on b.id_number=z.id_number where 1=1 and z.createtime>='" + time1 + "' and b.age >= '65'";
                 if (code != null && !"".Equals(code)) { sql += " AND b.village_code='" + code + "'"; }
                 if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
                 sql += ") bb LEFT JOIN(select a.aichive_no, a.total_score, a.judgement_result, a.test_date, a.test_doctor from elderly_selfcare_estimate a where a.test_date >= '" + time1 + "' and a.test_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
-            }
+            //}
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }

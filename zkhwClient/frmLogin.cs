@@ -65,7 +65,12 @@ namespace zkhwClient
                 {
                     organCode = ret.Rows[0]["organ_code"].ToString();
 
-                    organName = udao.checkOrganNameBycode(organCode).Rows[0]["organ_name"].ToString();
+                    if (udao.checkOrganNameBycode(organCode) == null || udao.checkOrganNameBycode(organCode).Rows.Count <= 0)
+                    { }
+                    else {
+                        organName = udao.checkOrganNameBycode(organCode).Rows[0]["organ_name"].ToString();
+                    } 
+                    
                 }
                 name = ret.Rows[0]["user_name"].ToString();
                 bean.loginLogBean lb = new bean.loginLogBean();

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using zkhwClient.dao;
 using zkhwClient.view.setting;
 
 namespace zkhwClient.view.PublicHealthView
@@ -272,6 +273,11 @@ namespace zkhwClient.view.PublicHealthView
             bool isfalse = olderHelthServices.aUelderly_selfcare_estimate(elderly_selfcare_estimateBean, archiveno);
             if (isfalse)
             {
+                //这里就要更新对应的
+                string id_number = textBox12.Text;
+                string aichive_no = textBox2.Text;
+                tjcheckDao tjdao = new tjcheckDao();
+                tjdao.updateTJbgdclnrzlnlpg(aichive_no, id_number, "1");
                 this.DialogResult = DialogResult.OK;
             }
         }

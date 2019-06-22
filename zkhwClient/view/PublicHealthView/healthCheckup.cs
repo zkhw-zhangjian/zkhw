@@ -257,13 +257,536 @@ namespace zkhwClient.view.PublicHealthView
                 DataTable dtup = hcd.queryhealthCheckup(id);
                 if(dtup !=null && dtup.Rows.Count>0)
                 {
+                    #region 以前的判断方式
                     //string _healthAdvice = dtup.Rows[0]["healthAdvice"].ToString();
                     //string _checkdate = dtup.Rows[0]["check_date"].ToString();
-                    //if(_healthAdvice=="" || _checkdate=="")
+                    //if (_healthAdvice == "" || _checkdate == "")
                     //{
                     //    MessageBox.Show("还未检查完成不能上传！");
                     //    return;
                     //}
+                    #endregion
+                    #region 现在判断方式
+                    string strempty = "";
+                    string _id= dtup.Rows[0]["id"].ToString(); 
+                    string _checkdate = dtup.Rows[0]["check_date"].ToString(); 
+                    string _dutydoctor = dtup.Rows[0]["dutydoctor"].ToString();
+                    if (id == "" || _checkdate == "" || _dutydoctor == "")
+                    {
+                        MessageBox.Show("还未完成问询不能上传！");
+                        return;
+                    }
+                     
+                    string _symptom = dtup.Rows[0]["symptom"].ToString();
+                    if(_symptom=="")
+                    {
+                         strempty = "症状"; 
+                    }
+                    string _basetemperature = dtup.Rows[0]["base_temperature"].ToString();
+                    if (_basetemperature == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "体温";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、体温";
+                        }
+                    }
+                    string _baseheartbeat = dtup.Rows[0]["base_heartbeat"].ToString();
+                    if (_baseheartbeat == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "脉率";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、脉率";
+                        }
+                    }
+                    string _baserespiratory = dtup.Rows[0]["base_respiratory"].ToString();
+                    if (_baserespiratory == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "呼吸频率";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、呼吸频率";
+                        }
+                    }
+                    string _basebloodpressureleftlow = dtup.Rows[0]["base_blood_pressure_left_low"].ToString();
+                    if (_basebloodpressureleftlow == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "左侧舒张压";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、左侧舒张压";
+                        }
+                    }
+                    string _basebloodpressurelefthigh = dtup.Rows[0]["base_blood_pressure_left_high"].ToString();
+                    if (_basebloodpressurelefthigh == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "左侧收缩压";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、左侧收缩压";
+                        }
+                    }
+                    string _basebloodpressurerightlow = dtup.Rows[0]["base_blood_pressure_right_low"].ToString();
+                    if (_basebloodpressurerightlow == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "右侧舒张压";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、右侧舒张压";
+                        }
+                    }
+                    string _basebloodpressurerighthigh = dtup.Rows[0]["base_blood_pressure_right_high"].ToString();
+                    if (_basebloodpressurerighthigh == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "右侧收缩压";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、右侧收缩压";
+                        }
+                    }
+                    string _baseheight = dtup.Rows[0]["base_height"].ToString();
+                    if (_baseheight == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "身高";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、身高";
+                        }
+                    }
+                    string _baseweight = dtup.Rows[0]["base_weight"].ToString();
+                    if (_baseweight == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "体重";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、体重";
+                        }
+                    }
+                    string _basewaist = dtup.Rows[0]["base_waist"].ToString();
+                    if (_basewaist == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "腰围";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、腰围";
+                        }
+                    }
+                    string _basebmi = dtup.Rows[0]["base_bmi"].ToString();
+                    if (_basebmi == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "体质指数";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、体质指数";
+                        }
+                    }
+                    string _lifewayexercisfrequency = dtup.Rows[0]["lifeway_exercise_frequency"].ToString();
+                    if (_lifewayexercisfrequency == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "锻炼频率";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、锻炼频率";
+                        }
+                    }
+                    string _lifewaydiet = dtup.Rows[0]["lifeway_diet"].ToString();
+                    if (_lifewaydiet == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "饮食习惯";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、饮食习惯";
+                        }
+                    }
+                    string _lifewaysmokestatus = dtup.Rows[0]["lifeway_smoke_status"].ToString();
+                    if (_lifewaysmokestatus == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "吸烟状况";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、吸烟状况";
+                        }
+                    }
+                    string _lifewaydrinkstatus = dtup.Rows[0]["lifeway_drink_status"].ToString();
+                    if (_lifewaydrinkstatus == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "饮酒频率";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、饮酒频率";
+                        }
+                    }
+                    string _lifewayoccupationaldisease = dtup.Rows[0]["lifeway_occupational_disease"].ToString();
+                    if (_lifewayoccupationaldisease == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "有无职业暴露";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、有无职业暴露";
+                        }
+                    }
+                    string _organlips = dtup.Rows[0]["organ_lips"].ToString();
+                    if (_organlips == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "口唇";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、口唇";
+                        }
+                    }
+                    string _organtooth = dtup.Rows[0]["organ_tooth"].ToString();
+                    if (_organtooth == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "齿列";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、齿列";
+                        }
+                    }
+                    string _organguttur = dtup.Rows[0]["organ_guttur"].ToString();
+                    if (_organguttur == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "咽部";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、咽部";
+                        }
+                    }
+                    string _organvisionleft = dtup.Rows[0]["organ_vision_left"].ToString();
+                    if (_organvisionleft == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "左眼视力";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、左眼视力";
+                        }
+                    }
+                    string _organvisionright = dtup.Rows[0]["organ_vision_right"].ToString();
+                    if (_organvisionright == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "右眼视力";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、右眼视力";
+                        }
+                    }
+                    string _organhearing = dtup.Rows[0]["organ_hearing"].ToString();
+                    if (_organhearing == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "听力";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、听力";
+                        }
+                    }
+                    string _organmovement = dtup.Rows[0]["organ_movement"].ToString();
+                    if (_organmovement == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "运动功能";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、运动功能";
+                        }
+                    }
+                    string _examinationskin = dtup.Rows[0]["examination_skin"].ToString();
+                    if (_examinationskin == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "皮肤";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、皮肤";
+                        }
+                    }
+                    string _examinationsclera = dtup.Rows[0]["examination_sclera"].ToString();
+                    if (_examinationsclera == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "巩膜";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、巩膜";
+                        }
+                    }
+                    string _examinationlymph = dtup.Rows[0]["examination_lymph"].ToString();
+                    if (_examinationlymph == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "淋巴结";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、淋巴结";
+                        }
+                    }
+                    string _examinationbarrelchest = dtup.Rows[0]["examination_barrel_chest"].ToString();
+                    if (_examinationbarrelchest == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "桶状胸";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、桶状胸";
+                        }
+                    }
+                    string _examinationbreathsounds = dtup.Rows[0]["examination_breath_sounds"].ToString();
+                    if (_examinationbreathsounds == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "呼吸音";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、呼吸音";
+                        }
+                    }
+                    string _examinationrale = dtup.Rows[0]["examination_rale"].ToString();
+                    if (_examinationrale == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "罗音";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、罗音";
+                        }
+                    }
+                    string _examinationheartrate = dtup.Rows[0]["examination_heart_rate"].ToString();
+                    if (_examinationheartrate == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "心率";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、心率";
+                        }
+                    }
+                    string _examinationheartrhythm = dtup.Rows[0]["examination_heart_rhythm"].ToString();
+                    if (_examinationheartrhythm == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "心律";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、心律";
+                        }
+                    }
+                    string _examinationheartnoise = dtup.Rows[0]["examination_heart_noise"].ToString();
+                    if (_examinationheartnoise == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "杂音";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、杂音";
+                        }
+                    }
+                    string _examinationabdomentenderness = dtup.Rows[0]["examination_abdomen_tenderness"].ToString();
+                    if (_examinationabdomentenderness == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "压痛";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、压痛";
+                        }
+                    }
+                    string _examinationabdomenmass = dtup.Rows[0]["examination_abdomen_mass"].ToString();
+                    if (_examinationabdomenmass == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "包块";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、包块";
+                        }
+                    }
+                    string _examinationabdomenhepatomegaly = dtup.Rows[0]["examination_abdomen_hepatomegaly"].ToString();
+                    if (_examinationabdomenhepatomegaly == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "肝大";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、肝大";
+                        }
+                    }
+                    string _examinationabdomensplenomegaly = dtup.Rows[0]["examination_abdomen_splenomegaly"].ToString();
+                    if (_examinationabdomensplenomegaly == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "脾大";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、脾大";
+                        }
+                    }
+                    string _examinationabdomenshiftingdullness = dtup.Rows[0]["examination_abdomen_shiftingdullness"].ToString();
+                    if (_examinationabdomenshiftingdullness == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "移动性浊音";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、移动性浊音";
+                        }
+                    }
+                    string _examinationlowerextremityedema = dtup.Rows[0]["examination_lowerextremity_edema"].ToString();
+                    if (_examinationlowerextremityedema == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "下肢水肿";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、下肢水肿";
+                        }
+                    }
+                    string _examinationdorsalartery = dtup.Rows[0]["examination_dorsal_artery"].ToString();
+                    if (_examinationdorsalartery == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "足背动脉搏动";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、足背动脉搏动";
+                        }
+                    }
+                    string _healthevaluation = dtup.Rows[0]["health_evaluation"].ToString();
+                    if (_healthevaluation == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "健康评价";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、健康评价";
+                        }
+                    }
+                    string _healthAdvice = dtup.Rows[0]["healthAdvice"].ToString();
+                    if (_healthAdvice == "")
+                    {
+                        if (strempty == "")
+                        {
+                            strempty = "健康建议";
+                        }
+                        else
+                        {
+                            strempty = strempty + "、健康建议";
+                        }
+                    }
+
+                    #endregion
+                    if(strempty!="")
+                    {
+                        string s = "以下字段未填：" + strempty + " 是否继续？";
+                        DialogResult rr = MessageBox.Show(s, "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                        int tt = (int)rr;
+                        if (tt!=1)
+                        {
+                            return;
+                        }
+                    } 
+
                     List<string> sqllist = new List<string>();
                     //1：住院记录表
                     string sql = string.Format("select * from hospitalized_record where exam_id='{0}';", id);
@@ -379,6 +902,42 @@ namespace zkhwClient.view.PublicHealthView
             {
                 dataGridView1.Rows[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
                 dataGridView1.Rows[i].HeaderCell.Value = (i + 1).ToString();
+            }
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dataGridView1.SelectedRows.Count > 0)
+            {
+                string name = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+                string aichive_no = this.dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+                string id_number = this.dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+                string bar_code = this.dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
+                string check_date = this.dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
+                string doctor_name = this.dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
+                string id = this.dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
+                if (id == null || "".Equals(id)) { MessageBox.Show("未查询到此人的健康体检信息,请调整时间间隔，再点击查询！"); return; }
+                if (aichive_no != null && !"".Equals(aichive_no))
+                {
+                    aUhealthcheckupServices1 auhcs = new aUhealthcheckupServices1();
+                    auhcs.textBox1.Text = name;
+                    auhcs.textBox118.Text = bar_code;
+                    auhcs.textBox119.Text = id_number;
+                    auhcs.textBox120.Text = id;
+                    auhcs.textBox2.Text = aichive_no;
+                    if (check_date != "")
+                    {
+                        auhcs.dateTimePicker1.Value = DateTime.ParseExact(check_date, TarStr, format);
+                    }
+                    auhcs.textBox51.Text = doctor_name;
+
+                    auhcs.id = id;//祖
+                    auhcs.Show(); 
+                }
+            }
+            else
+            {
+                MessageBox.Show("请选择一行！");
             }
         }
     }

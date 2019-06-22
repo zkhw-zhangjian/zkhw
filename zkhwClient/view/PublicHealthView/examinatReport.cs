@@ -20,23 +20,34 @@ namespace zkhwClient.view.PublicHealthView
     {
         string str = Application.StartupPath;//项目路径
         service.loginLogService lls = new service.loginLogService();
+        bool isfirst = false;
         #region 初始化数据
         public examinatReport()
         {
             InitializeComponent();
-            BinData();
+           
         }
-
-        /// <summary>
-        /// 初始化数据
-        /// </summary>
-        private void BinData()
+        private void GetAllPersonInfo()
         {
+            string time1 = dateTimePicker3.Value.ToString("yyyy-MM-dd");
+            string time2 = dateTimePicker4.Value.ToString("yyyy-MM-dd");
+            string sql = $@"SELECT count(sex) sun,sex from zkhw_tj_bgdc where area_duns 
+         like '%{basicInfoSettings.xcuncode}%' and  date_format(createtime,'%Y-%m-%d') between '{time1}' and '{time2}' GROUP BY sex ";
+            if (isfirst==true)
+            { 
+                if(basicInfoSettings.createtime==null || basicInfoSettings.createtime=="")
+                {
+                    time1 = DateTime.Now.ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    time1 = DateTime.Parse(basicInfoSettings.createtime).ToString("yyyy-MM-dd");
+                }
+                
+                sql = $@"SELECT count(sex) sun,sex from zkhw_tj_bgdc where area_duns like '%{basicInfoSettings.xcuncode}%' and date_format(createtime,'%Y-%m-%d')>='{time1}' GROUP BY sex ";
+            }
             #region 报告统计数据绑定
-            string sql = $@"SELECT count(sex) sun,sex
-from zkhw_tj_bgdc where area_duns like '%{basicInfoSettings.xcuncode}%' and createtime>='{basicInfoSettings.createtime}'
-GROUP BY sex
-";
+            
             DataSet dataSet = DbHelperMySQL.Query(sql);
             DataTable data = dataSet.Tables[0];
             if (data != null && data.Rows.Count > 0)
@@ -54,7 +65,13 @@ GROUP BY sex
                 总数.Text = data.Compute("sum(sun)", "true").ToString();
             }
             #endregion
-
+        }
+        /// <summary>
+        /// 初始化数据
+        /// </summary>
+        private void BinData()
+        {
+            GetAllPersonInfo();
             #region 报告查询 区域数据绑定
             string sql1 = "select code as ID,name as Name from code_area_config where parent_code='-1';";
             DataSet datas = DbHelperMySQL.Query(sql1);
@@ -75,6 +92,9 @@ GROUP BY sex
             this.button1.BackgroundImage = Image.FromFile(@str + "/images/check.png");
             this.统计查询.BackgroundImage = Image.FromFile(@str + "/images/check.png");
 
+            isfirst = true;
+            BinData();
+            isfirst = false;
             pagerControl1.OnPageChanged += new EventHandler(pagerControl1_OnPageChanged);
             int count = 0;
             queryExaminatProgress(GetData(pagerControl1.PageIndex, pagerControl1.PageSize, out count));
@@ -218,13 +238,8 @@ where 1=1";
                 checkColumn.TrueValue = true;
                 checkColumn.FalseValue = false;
                 checkColumn.DataPropertyName = "IsChecked";
-                dataGridView1.Columns.Insert(0, checkColumn);    //添加的checkbox在第一列
-                
-                
-                
-                
-                
-
+                dataGridView1.Columns.Insert(0, checkColumn);    //添加的checkbox在第一列 
+                 
 
                 this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
                 this.dataGridView1.AllowUserToAddRows = false;
@@ -285,6 +300,7 @@ where 1=1";
 
         private void 统计查询_Click(object sender, EventArgs e)
         {
+            GetAllPersonInfo();   //同步处理下
             string stan = dateTimePicker3.Value.ToString("yyyy-MM-dd");
             string end = dateTimePicker4.Value.ToString("yyyy-MM-dd");
             string sql = $@"SELECT sex,'64',COUNT(sex) 人数,
@@ -612,10 +628,20 @@ where 1=1";
         }
 
         private bool PDF(List<string> list, DataSet dataSet, List<ComboBoxData> ide)
-        {
+        { 
             Document doc = null;
+
             if (list.Count > 1)
             {
+                LoadingHelper.myCaption = "正在导出...";
+                LoadingHelper.myLabel = "正在导出第1份";
+                LoadingHelper.ShowLoadingScreen();
+                
+                if (LoadingHelper.loadingForm != null)
+                {
+                    LoadingHelper.loadingForm.mystr = "正在导出第 1 份";
+                }
+                int intNum = 0;
                 foreach (var item in ide)
                 {
                     List<Report> reports = new List<Report>();
@@ -688,19 +714,32 @@ where 1=1";
                         DeteleFile(urls);
                         rp.Doc.Save(urls, SaveFormat.Pdf);
                     }
-
+                    intNum = intNum + 1;
+                    if (LoadingHelper.loadingForm != null)
+                    {
+                        LoadingHelper.loadingForm.mystr = string.Format("已导出 {0} 份共 {1} 份", intNum, list.Count);
+                    }
                 }
+                LoadingHelper.CloseForm();
                 return true;
             }
             else
-            {
+            { 
                 if (list == null || list.Count == 0)
                 {
                     MessageBox.Show("请选择你要生成的报告类型！");
                     return false;
                 }
+                LoadingHelper.myCaption = "正在导出...";
+                LoadingHelper.myLabel = "正在导出第 1 份";
+                LoadingHelper.ShowLoadingScreen(); 
+                if (LoadingHelper.loadingForm !=null)
+                {
+                    LoadingHelper.loadingForm.mystr = "正在导出第 1 份";
+                }
                 if (list[0] == "综合报告单")
                 {
+                    int intNum = 0;
                     List<string> vs = new List<string>();
                     vs.Add("封面");
                     //vs.Add("个人信息");
@@ -730,14 +769,23 @@ where 1=1";
                         foreach (var item in reports)
                         {
                             re.Doc.AppendDocument(item.Doc, ImportFormatMode.KeepSourceFormatting);
+                            
                         }
                         string urls = @str + $"/up/result/{"综合报告单-"+data["name"].ToString() + data["id_number"].ToString()}.pdf";
                         DeteleFile(urls);
+                        
                         re.Doc.Save(urls, SaveFormat.Pdf);
+
+                        intNum = intNum + 1;
+                        if (LoadingHelper.loadingForm != null)
+                        {
+                            LoadingHelper.loadingForm.mystr = string.Format("已导出 {0} 份共 {1} 份", intNum, dataSet.Tables["个人"].Rows.Count);
+                        }
                     }
                 }
                 else
                 {
+                    int intNum = 0;
                     for (int i = 0; i < dataSet.Tables["个人"].Rows.Count; i++)
                     {
                         DataRow data = dataSet.Tables["个人"].Rows[i];
@@ -745,8 +793,15 @@ where 1=1";
                         string urls = @str + $"/up/result/{list[0]+"-"+data["name"].ToString() + data["id_number"].ToString()}.pdf";
                         DeteleFile(urls);
                         doc.Save(urls, SaveFormat.Pdf);
+                        intNum = intNum + 1;
+                        if (LoadingHelper.loadingForm != null)
+                        {
+                            LoadingHelper.loadingForm.mystr = string.Format("已导出 {0} 份共 {1} 份", intNum, dataSet.Tables["个人"].Rows.Count);
+                        }
                     }
                 }
+                
+                LoadingHelper.CloseForm();
                 return true;
             }
         }
@@ -2838,7 +2893,7 @@ where 1=1";
                     break;
             }
             string sql = $@"UPDATE zkhw_tj_bgdc set BaoGaoShengChan='{DateTime.Now.ToString("yyyy-MM-dd")}' where id_number='{data["id_number"].ToString()}'";
-            int rue = DbHelperMySQL.ExecuteSql(sql);
+            int rue = DbHelperMySQL.ExecuteSql(sql); 
             return doc;
         }
         private string Sex(string sex)
@@ -2983,6 +3038,10 @@ where 1=1";
         /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
+            LoadingHelper.myCaption = "正在上传...";
+            LoadingHelper.myLabel = "正在上传数据";
+            LoadingHelper.ShowLoadingScreen();
+             
             try
             {
                 List<ComboBoxData> ide = new List<ComboBoxData>();
@@ -3001,6 +3060,7 @@ where 1=1";
                 }
                 if (ide.Count < 1)
                 {
+                    LoadingHelper.CloseForm();
                     MessageBox.Show("请选择要数据上传的人员!"); return;
                 }
                 List<string> sqllist = new List<string>();
@@ -3519,7 +3579,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                     }
                 }
 
-                if (sqllist.Count < 1) { MessageBox.Show("没有需要上传的数据,请稍后再试！"); return; }
+                if (sqllist.Count < 1) { LoadingHelper.CloseForm(); MessageBox.Show("没有需要上传的数据,请稍后再试！"); return; }
                 int run = DbHelperMySQL.ExecuteSqlTranYpt(sqllist);
                 if (run > 0)
                 {
@@ -3623,6 +3683,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                     int reu1 = DbHelperMySQL.ExecuteSqlTran(sqllistz);
                     if (reu1 > 0)
                     {
+                        LoadingHelper.CloseForm();
                         bean.loginLogBean lb = new bean.loginLogBean();
                         lb.name = frmLogin.name;
                         lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -3634,11 +3695,13 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                     }
                     else
                     {
+                        LoadingHelper.CloseForm();
                         MessageBox.Show("数据状态修改异常,请联系运维人员!");
                     }
                 }
                 else
                 {
+                    LoadingHelper.CloseForm();
                     bean.loginLogBean lb = new bean.loginLogBean();
                     lb.name = frmLogin.name;
                     lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -3651,6 +3714,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             }
             catch (Exception ex)
             {
+                LoadingHelper.CloseForm();
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = frmLogin.name;
                 lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");

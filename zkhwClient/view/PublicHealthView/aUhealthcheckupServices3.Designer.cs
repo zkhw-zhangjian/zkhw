@@ -251,7 +251,7 @@
             this.panel1.Controls.Add(this.button4);
             this.panel1.Location = new System.Drawing.Point(5, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1328, 700);
+            this.panel1.Size = new System.Drawing.Size(1328, 699);
             this.panel1.TabIndex = 6;
             // 
             // button2
@@ -819,7 +819,7 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(1, 43);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1305, 477);
+            this.groupBox1.Size = new System.Drawing.Size(1271, 477);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             // 
@@ -962,13 +962,11 @@
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
-            this.radioButton5.Checked = true;
             this.radioButton5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton5.Location = new System.Drawing.Point(10, 2);
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(80, 24);
             this.radioButton5.TabIndex = 30;
-            this.radioButton5.TabStop = true;
             this.radioButton5.Tag = "1";
             this.radioButton5.Text = "1正常";
             this.radioButton5.UseVisualStyleBackColor = true;
@@ -981,7 +979,6 @@
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(80, 24);
             this.radioButton6.TabIndex = 32;
-            this.radioButton6.TabStop = true;
             this.radioButton6.Tag = "2";
             this.radioButton6.Text = "2异常";
             this.radioButton6.UseVisualStyleBackColor = true;
@@ -2480,12 +2477,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1333, 750);
+            this.ClientSize = new System.Drawing.Size(1333, 749);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
             this.Name = "aUhealthcheckupServices3";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "健康体检表";
+            this.Text = "健康体检表第三页";
             this.Load += new System.EventHandler(this.aUdiabetesPatientServices_Load);
             this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

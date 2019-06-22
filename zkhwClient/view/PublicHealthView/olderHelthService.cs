@@ -52,7 +52,7 @@ namespace zkhwClient.PublicHealth
                 this.label18.Text = dt0.Rows[0]["label18"].ToString();
                 this.label21.Text = dt0.Rows[0]["label21"].ToString();
             }
-            xcuncode = basicInfoSettings.xcuncode;
+            //xcuncode = basicInfoSettings.xcuncode;
             queryOlderHelthService();
         }
         private void queryOlderHelthService()
@@ -91,7 +91,7 @@ namespace zkhwClient.PublicHealth
             {
                 this.dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-            xcuncode = "";
+            //xcuncode = "";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -161,7 +161,7 @@ namespace zkhwClient.PublicHealth
             if (hm.ShowDialog() == DialogResult.OK)
             {
                 //刷新页面
-                xcuncode = basicInfoSettings.xcuncode;
+                //xcuncode = basicInfoSettings.xcuncode;
                 queryOlderHelthService();
                 MessageBox.Show("添加成功！");
 
@@ -197,7 +197,7 @@ namespace zkhwClient.PublicHealth
             }
             if (hm.ShowDialog() == DialogResult.OK)
             {
-                xcuncode = basicInfoSettings.xcuncode;
+                //xcuncode = basicInfoSettings.xcuncode;
                 //刷新页面
                 queryOlderHelthService();
                 MessageBox.Show("修改成功！");
