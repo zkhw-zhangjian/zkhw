@@ -2558,7 +2558,11 @@ where 1=1";
                                 sm += "    糖尿病患者要在医生的指导下，增强控制好血糖的信心。定期监测血糖指标，改变生活习惯和方式，药物治疗和锻炼相结合，适当增加运动锻炼，循序渐进。戒烟戒酒，控制饮食（低热量），低盐低脂，优质蛋白，控制碳水化合物，补足维生素，保持情绪稳定。";
                                 sm += "\r\n";
                             }
-                            sm += "健康建议："+jkdata.Rows[j]["healthAdvice"].ToString();
+                            string healthAdvice = jkdata.Rows[j]["healthAdvice"].ToString();
+                            if (!string.IsNullOrWhiteSpace(healthAdvice))
+                            {
+                                sm += "健康建议：" + healthAdvice;
+                            }
                             jg.Add("结果", sm);
                         }
                     }

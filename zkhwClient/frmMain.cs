@@ -54,7 +54,7 @@ namespace zkhwClient
         {
             basicInfoSettings basicSet = new basicInfoSettings();
             basicSet.Show();
-            //basicSet.Hide();
+            basicSet.Hide();
             dttv = grjddao.checkThresholdValues();//获取阈值信息
             this.timer1.Start();//时间控件定时器
 
@@ -141,23 +141,23 @@ namespace zkhwClient
             }
             //socketTcp();
             //http
-            proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
-            proHttp.StartInfo.CreateNoWindow = true;
-            proHttp.StartInfo.UseShellExecute = false;
-            proHttp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            proHttp.StartInfo.ErrorDialog = false;
-            proHttp.StartInfo.UseShellExecute = false;
-            proHttp.Start();
+            //proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
+            //proHttp.StartInfo.CreateNoWindow = true;
+            //proHttp.StartInfo.UseShellExecute = false;
+            //proHttp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            //proHttp.StartInfo.ErrorDialog = false;
+            //proHttp.StartInfo.UseShellExecute = false;
+            //proHttp.Start();
             //AsNetWork  B超
-            proAsNet.StartInfo.FileName = Application.StartupPath + "\\AsNetWork\\ASNetWks.exe";
-            proAsNet.StartInfo.WorkingDirectory = Application.StartupPath + "\\AsNetWork";
-            proAsNet.StartInfo.CreateNoWindow = true;
-            proAsNet.StartInfo.ErrorDialog = false;
-            proAsNet.StartInfo.UseShellExecute = true;
-            proAsNet.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            proAsNet.Start();
-            Thread.Sleep(300);
-            IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
+            //proAsNet.StartInfo.FileName = Application.StartupPath + "\\AsNetWork\\ASNetWks.exe";
+            //proAsNet.StartInfo.WorkingDirectory = Application.StartupPath + "\\AsNetWork";
+            //proAsNet.StartInfo.CreateNoWindow = true;
+            //proAsNet.StartInfo.ErrorDialog = false;
+            //proAsNet.StartInfo.UseShellExecute = true;
+            //proAsNet.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            //proAsNet.Start();
+            //Thread.Sleep(300);
+            //IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
             ////ftp                 
             ////proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.05\\ftpservice.exe";
             ////proFtp.StartInfo.CreateNoWindow = true;
@@ -186,14 +186,14 @@ namespace zkhwClient
             DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                if (!proHttp.HasExited)
-                {
-                    proHttp.Kill();
-                }
-                if (!proAsNet.HasExited)
-                {
-                    proAsNet.Kill();
-                }
+                //if (!proHttp.HasExited)
+                //{
+                //    proHttp.Kill();
+                //}
+                //if (!proAsNet.HasExited)
+                //{
+                //    proAsNet.Kill();
+                //}
                 //if (!proFtp.HasExited)
                 //{
                 //    proFtp.Kill();
@@ -858,14 +858,14 @@ namespace zkhwClient
             DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                if (!proHttp.HasExited)
-                {
-                    proHttp.Kill();
-                }
-                if (!proAsNet.HasExited)
-                {
-                    proAsNet.Kill();
-                }
+                //if (!proHttp.HasExited)
+                //{
+                //    proHttp.Kill();
+                //}
+                //if (!proAsNet.HasExited)
+                //{
+                //    proAsNet.Kill();
+                //}
                 //if (!proFtp.HasExited)
                 //{
                 //    proFtp.Kill();

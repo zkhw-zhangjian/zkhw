@@ -109,11 +109,11 @@ namespace zkhwClient
             this.comboBox1.DisplayMember = "username";//显示给用户的数据集表项
             this.comboBox1.ValueMember = "username";//操作时获取的值
             //删除文件夹
-            DeleteDir1(@"E:\Examine\xdt");
-            DeleteDir1(@"E:\Examine\bc");
-            //监听心电图和B超
-            FSWControl.WatcherStrat(@"E:\Examine\xdt", "*.xml", true, true);
-            FSWControl.WatcherStratBchao(@"E:\Examine\bc", "*.xml", true, true);
+            //DeleteDir1(@"E:\Examine\xdt");
+            //DeleteDir1(@"E:\Examine\bc");
+            ////监听心电图和B超
+            //FSWControl.WatcherStrat(@"E:\Examine\xdt", "*.xml", true, true);
+            //FSWControl.WatcherStratBchao(@"E:\Examine\bc", "*.xml", true, true);
         }
        
         /// 删除文件夹及其内容
