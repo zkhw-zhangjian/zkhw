@@ -467,7 +467,7 @@
             this.button2.BackColor = System.Drawing.Color.SkyBlue;
             this.button2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(284, 457);
+            this.button2.Location = new System.Drawing.Point(405, 457);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(84, 32);
             this.button2.TabIndex = 4;
@@ -481,7 +481,7 @@
             this.button3.BackColor = System.Drawing.Color.SkyBlue;
             this.button3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button3.Location = new System.Drawing.Point(504, 457);
+            this.button3.Location = new System.Drawing.Point(625, 457);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(89, 32);
             this.button3.TabIndex = 5;
@@ -501,6 +501,7 @@
             this.button4.TabIndex = 6;
             this.button4.Text = "删除";
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Visible = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5

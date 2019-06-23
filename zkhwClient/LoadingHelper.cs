@@ -72,6 +72,7 @@ namespace zkhwClient
                 Thread.Sleep(50); //可能到这里线程还未起来，所以进行延时，可以确保线程起来，彻底关闭窗口
                 if (loadingForm != null)
                 {
+                    loadingForm.isclose = false;
                     lock (syncLock)
                     {
                         Thread.Sleep(50);
