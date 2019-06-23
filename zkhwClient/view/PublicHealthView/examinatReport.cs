@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 using zkhwClient.dao;
 using zkhwClient.view.setting;
@@ -630,179 +631,195 @@ where 1=1";
         private bool PDF(List<string> list, DataSet dataSet, List<ComboBoxData> ide)
         { 
             Document doc = null;
-
-            if (list.Count > 1)
+            LoadingHelper.myCaption = "正在导出...";
+            LoadingHelper.myLabel = "正在导出第1份";
+            LoadingHelper.ShowLoadingScreen();
+            Thread.Sleep(50);
+            if (LoadingHelper.loadingForm != null)
             {
-                LoadingHelper.myCaption = "正在导出...";
-                LoadingHelper.myLabel = "正在导出第1份";
-                LoadingHelper.ShowLoadingScreen();
-                
-                if (LoadingHelper.loadingForm != null)
+                LoadingHelper.loadingForm.mystr = "正在导出第 1 份";
+            }
+            try
+            {
+                if (list.Count > 1)
                 {
-                    LoadingHelper.loadingForm.mystr = "正在导出第 1 份";
-                }
-                int intNum = 0;
-                foreach (var item in ide)
-                {
-                    List<Report> reports = new List<Report>();
-                    foreach (var items in list)
+                    #region 多个
+                    
+                    int intNum = 0;
+                    foreach (var item in ide)
                     {
-                        Report report = new Report();
-                        DataRow data = dataSet.Tables["个人"].Select($"id_number={item.ID}")[0];
-                        report.Name = items;
-                        report.Doc = PdfProcessing(items, data);
-                        reports.Add(report);
-                    }
-                    Report re = reports.Where(m => m.Name == "封面").FirstOrDefault();
-                    Report res = reports.Where(m => m.Name == "个人信息").FirstOrDefault();
-                    if (re != null && res != null)
-                    {
-                        re.Doc.AppendDocument(res.Doc, ImportFormatMode.KeepSourceFormatting);
-                        reports.Remove(re);
-                        reports.Remove(res);
-                        if (reports != null && reports.Count > 0)
+                        List<Report> reports = new List<Report>();
+                        foreach (var items in list)
                         {
-                            foreach (var rs in reports)
-                            {
-                                re.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
-                            }
+                            Report report = new Report();
+                            DataRow data = dataSet.Tables["个人"].Select($"id_number={item.ID}")[0];
+                            report.Name = items;
+                            report.Doc = PdfProcessing(items, data);
+                            reports.Add(report);
                         }
-                        string urls = @str + $"/up/result/{item.Name + item.ID.Replace("'","")}.pdf";
-                        DeteleFile(urls);
-                        re.Doc.Save(urls, SaveFormat.Pdf);
-                    }
-                    else if (re != null)
-                    {
-                        reports.Remove(re);
-                        if (reports != null && reports.Count > 0)
+                        Report re = reports.Where(m => m.Name == "封面").FirstOrDefault();
+                        Report res = reports.Where(m => m.Name == "个人信息").FirstOrDefault();
+                        if (re != null && res != null)
                         {
-                            foreach (var rs in reports)
+                            re.Doc.AppendDocument(res.Doc, ImportFormatMode.KeepSourceFormatting);
+                            reports.Remove(re);
+                            reports.Remove(res);
+                            if (reports != null && reports.Count > 0)
                             {
-                                re.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
+                                foreach (var rs in reports)
+                                {
+                                    re.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
+                                }
                             }
+                            string urls = @str + $"/up/result/{item.Name + item.ID.Replace("'", "")}.pdf";
+                            DeteleFile(urls);
+                            re.Doc.Save(urls, SaveFormat.Pdf);
                         }
-                        string urls = @str + $"/up/result/{item.Name + item.ID.Replace("'", "")}.pdf";
-                        DeteleFile(urls);
-                        re.Doc.Save(urls, SaveFormat.Pdf);
-                    }
-                    else if (res != null)
-                    {
-                        reports.Remove(res);
-                        if (reports != null && reports.Count > 0)
+                        else if (re != null)
                         {
-                            foreach (var rs in reports)
+                            reports.Remove(re);
+                            if (reports != null && reports.Count > 0)
                             {
-                                res.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
+                                foreach (var rs in reports)
+                                {
+                                    re.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
+                                }
                             }
+                            string urls = @str + $"/up/result/{item.Name + item.ID.Replace("'", "")}.pdf";
+                            DeteleFile(urls);
+                            re.Doc.Save(urls, SaveFormat.Pdf);
                         }
-                        string urls = @str + $"/up/result/{item.Name + item.ID.Replace("'", "")}.pdf";
-                        DeteleFile(urls);
-                        res.Doc.Save(urls, SaveFormat.Pdf);
-                    }
-                    else
-                    {
-                        Report rp = reports.Select(m => m).FirstOrDefault();
-                        reports.Remove(rp);
-                        if (reports != null && reports.Count > 0)
+                        else if (res != null)
                         {
-                            foreach (var rs in reports)
+                            reports.Remove(res);
+                            if (reports != null && reports.Count > 0)
                             {
-                                rp.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
+                                foreach (var rs in reports)
+                                {
+                                    res.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
+                                }
                             }
+                            string urls = @str + $"/up/result/{item.Name + item.ID.Replace("'", "")}.pdf";
+                            DeteleFile(urls);
+                            res.Doc.Save(urls, SaveFormat.Pdf);
                         }
-                        string urls = @str + $"/up/result/{item.Name + item.ID.Replace("'", "")}.pdf";
-                        DeteleFile(urls);
-                        rp.Doc.Save(urls, SaveFormat.Pdf);
-                    }
-                    intNum = intNum + 1;
+                        else
+                        {
+                            Report rp = reports.Select(m => m).FirstOrDefault();
+                            reports.Remove(rp);
+                            if (reports != null && reports.Count > 0)
+                            {
+                                foreach (var rs in reports)
+                                {
+                                    rp.Doc.AppendDocument(rs.Doc, ImportFormatMode.KeepSourceFormatting);
+                                }
+                            }
+                            string urls = @str + $"/up/result/{item.Name + item.ID.Replace("'", "")}.pdf";
+                            DeteleFile(urls);
+                            rp.Doc.Save(urls, SaveFormat.Pdf);
+                        }
+                        intNum = intNum + 1;
                     if (LoadingHelper.loadingForm != null)
                     {
                         LoadingHelper.loadingForm.mystr = string.Format("已导出 {0} 份共 {1} 份", intNum, list.Count);
                     }
-                }
-                LoadingHelper.CloseForm();
-                return true;
-            }
-            else
-            { 
-                if (list == null || list.Count == 0)
-                {
-                    MessageBox.Show("请选择你要生成的报告类型！");
-                    return false;
-                }
-                LoadingHelper.myCaption = "正在导出...";
-                LoadingHelper.myLabel = "正在导出第 1 份";
-                LoadingHelper.ShowLoadingScreen(); 
-                if (LoadingHelper.loadingForm !=null)
-                {
-                    LoadingHelper.loadingForm.mystr = "正在导出第 1 份";
-                }
-                if (list[0] == "综合报告单")
-                {
-                    int intNum = 0;
-                    List<string> vs = new List<string>();
-                    vs.Add("封面");
-                    //vs.Add("个人信息");
-                    vs.Add("化验报告单");
-                    vs.Add("健康体检表");
-                    vs.Add("心电图");
-                    vs.Add("B超");
-                    vs.Add("老年人生活自理能力评估");
-                    vs.Add("中医体质");
-                    vs.Add("结果");
-                    for (int i = 0; i < dataSet.Tables["个人"].Rows.Count; i++)
-                    {
-                        List<Report> reports = new List<Report>();
-                        DataRow data = dataSet.Tables["个人"].Rows[i];
-                        foreach (var item in vs)
-                        {
-                            Report report = new Report();
-                            report.Doc = PdfProcessing(item, data);
-                            report.Name = item;
-                            reports.Add(report);
-                        }
-                        Report re = reports.Where(m => m.Name == "封面").FirstOrDefault();
-                        //Report res = reports.Where(m => m.Name == "个人信息").FirstOrDefault();
-                        //re.Doc.AppendDocument(res.Doc, ImportFormatMode.KeepSourceFormatting);
-                        reports.Remove(re);
-                        //reports.Remove(res);
-                        foreach (var item in reports)
-                        {
-                            re.Doc.AppendDocument(item.Doc, ImportFormatMode.KeepSourceFormatting);
-                            
-                        }
-                        string urls = @str + $"/up/result/{"综合报告单-"+data["name"].ToString() + data["id_number"].ToString()}.pdf";
-                        DeteleFile(urls);
-                        
-                        re.Doc.Save(urls, SaveFormat.Pdf);
-
-                        intNum = intNum + 1;
-                        if (LoadingHelper.loadingForm != null)
-                        {
-                            LoadingHelper.loadingForm.mystr = string.Format("已导出 {0} 份共 {1} 份", intNum, dataSet.Tables["个人"].Rows.Count);
-                        }
                     }
+                    LoadingHelper.CloseForm();
+                    return true;
+                    #endregion
                 }
                 else
                 {
-                    int intNum = 0;
-                    for (int i = 0; i < dataSet.Tables["个人"].Rows.Count; i++)
+                    #region 单个
+                    if (list == null || list.Count == 0)
                     {
-                        DataRow data = dataSet.Tables["个人"].Rows[i];
-                        doc = PdfProcessing(list[0], data);
-                        string urls = @str + $"/up/result/{list[0]+"-"+data["name"].ToString() + data["id_number"].ToString()}.pdf";
-                        DeteleFile(urls);
-                        doc.Save(urls, SaveFormat.Pdf);
-                        intNum = intNum + 1;
+                        LoadingHelper.CloseForm();
+                        MessageBox.Show("请选择你要生成的报告类型！");
+
+                        return false;
+                    }
+                    if (list[0] == "综合报告单")
+                    {
+                        int intNum = 0;
+                        List<string> vs = new List<string>();
+                        vs.Add("封面");
+                        //vs.Add("个人信息");
+                        vs.Add("化验报告单");
+                        vs.Add("健康体检表");
+                        vs.Add("心电图");
+                        vs.Add("B超");
+                        vs.Add("老年人生活自理能力评估");
+                        vs.Add("中医体质");
+                        vs.Add("结果");
+                        for (int i = 0; i < dataSet.Tables["个人"].Rows.Count; i++)
+                        {
+                            List<Report> reports = new List<Report>();
+                            DataRow data = dataSet.Tables["个人"].Rows[i];
+                            foreach (var item in vs)
+                            {
+                                Report report = new Report();
+                                report.Doc = PdfProcessing(item, data);
+                                report.Name = item;
+                                reports.Add(report);
+                            }
+                            Report re = reports.Where(m => m.Name == "封面").FirstOrDefault();
+                            //Report res = reports.Where(m => m.Name == "个人信息").FirstOrDefault();
+                            //re.Doc.AppendDocument(res.Doc, ImportFormatMode.KeepSourceFormatting);
+                            reports.Remove(re);
+                            //reports.Remove(res);
+                            foreach (var item in reports)
+                            {
+                                re.Doc.AppendDocument(item.Doc, ImportFormatMode.KeepSourceFormatting);
+
+                            }
+                            string urls = @str + $"/up/result/{"综合报告单-" + data["name"].ToString() + data["id_number"].ToString()}.pdf";
+                            DeteleFile(urls);
+
+                            re.Doc.Save(urls, SaveFormat.Pdf);
+
+                            intNum = intNum + 1;
+                            if (LoadingHelper.loadingForm != null)
+                            {
+                                LoadingHelper.loadingForm.mystr = string.Format("已导出 {0} 份共 {1} 份", intNum, dataSet.Tables["个人"].Rows.Count);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        int intNum = 0;
+                        for (int i = 0; i < dataSet.Tables["个人"].Rows.Count; i++)
+                        {
+                            DataRow data = dataSet.Tables["个人"].Rows[i];
+                            doc = PdfProcessing(list[0], data);
+                            string urls = @str + $"/up/result/{list[0] + "-" + data["name"].ToString() + data["id_number"].ToString()}.pdf";
+                            DeteleFile(urls);
+                            doc.Save(urls, SaveFormat.Pdf);
+                            intNum = intNum + 1;
                         if (LoadingHelper.loadingForm != null)
                         {
                             LoadingHelper.loadingForm.mystr = string.Format("已导出 {0} 份共 {1} 份", intNum, dataSet.Tables["个人"].Rows.Count);
                         }
                     }
-                }
-                
+                    }
                 LoadingHelper.CloseForm();
                 return true;
+                    #endregion
+                }
+            }
+            catch (Exception ex)
+            {
+                if (LoadingHelper.loadingForm != null)
+                {
+                    LoadingHelper.CloseForm();
+                }
+                bean.loginLogBean lb = new bean.loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "报告导出异常！" + ex.Message;
+                lb.type = "2";
+                lls.addCheckLog(lb);
+                MessageBox.Show("报告导出异常，请联系管理员！" + ex.Message + "/r/n" + ex.StackTrace);
+                return false;
             }
         }
 
