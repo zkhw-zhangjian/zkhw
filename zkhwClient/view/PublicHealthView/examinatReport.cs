@@ -822,7 +822,11 @@ where 1=1";
                 return false;
             }
         }
-
+        private bool isDouble(string a,out double b )
+        {
+            bool t = double.TryParse(a, out b);
+            return t;
+        }
         private Document PdfProcessing(string lx, DataRow data)
         {
             DateTime date = DateTime.Now;
@@ -1198,168 +1202,219 @@ where 1=1";
                             string alb = da.Rows[j]["ALB"].ToString();
                             if (alb != null && !"".Equals(alb))
                             {
-                                double albdouble=Convert.ToDouble(alb);
-                                if (albdouble>54) {
-                                    hy.Add("白蛋白箭头", "↑");
-                                } else if (albdouble < 34) {
-                                    hy.Add("白蛋白箭头", "↓");
-                                }
-                                hy.Add("白蛋白结果", alb);
+                                
+                                double albdouble=0;
+                                if(isDouble(alb,out albdouble))
+                                {
+                                    if (albdouble > 54)
+                                    {
+                                        hy.Add("白蛋白箭头", "↑");
+                                    }
+                                    else if (albdouble < 34)
+                                    {
+                                        hy.Add("白蛋白箭头", "↓");
+                                    }
+                                    hy.Add("白蛋白结果", alb);
+                                } 
                             }
                             string alp = da.Rows[j]["ALP"].ToString();
                             if (alp != null && !"".Equals(alp))
                             {
-                                double alpdouble = Convert.ToDouble(alp);
-                                if (alpdouble > 150)
+                                double alpdouble = 0;
+                                if (isDouble(alp, out alpdouble))
                                 {
-                                    hy.Add("碱性磷酸酶箭头", "↑");
-                                }
-                                else if (alpdouble < 40)
-                                {
-                                    hy.Add("碱性磷酸酶箭头", "↓");
-                                }
-                                hy.Add("碱性磷酸酶结果", alp);
+                                    if (alpdouble > 150)
+                                    {
+                                        hy.Add("碱性磷酸酶箭头", "↑");
+                                    }
+                                    else if (alpdouble < 40)
+                                    {
+                                        hy.Add("碱性磷酸酶箭头", "↓");
+                                    }
+                                    hy.Add("碱性磷酸酶结果", alp);
+                                } 
                             }
                             string alt = da.Rows[j]["ALT"].ToString();
-                            if (alt != null && !"".Equals(alt))
+                            if (alt != null && !"".Equals(alt) && alt !="N/A")
                             {
-                                double altdouble = Convert.ToDouble(alt);
-                                if (altdouble > 40)
+                                double altdouble = 0;
+                                if (isDouble(alt, out altdouble))
                                 {
-                                    hy.Add("谷丙转氨酶箭头", "↑");
-                                }
-                                else if (altdouble <= 0)
-                                {
-                                    hy.Add("谷丙转氨酶箭头", "↓");
-                                }
-                                hy.Add("谷丙转氨酶结果", alt);
+                                    if (altdouble > 40)
+                                    {
+                                        hy.Add("谷丙转氨酶箭头", "↑");
+                                    }
+                                    else if (altdouble <= 0)
+                                    {
+                                        hy.Add("谷丙转氨酶箭头", "↓");
+                                    }
+                                    hy.Add("谷丙转氨酶结果", alt);
+                                }  
                             }
                             string ast = da.Rows[j]["AST"].ToString();
                             if (ast != null && !"".Equals(ast))
                             {
-                                double astdouble = Convert.ToDouble(ast);
-                                if (astdouble > 40)
+                                double astdouble = 0;
+                                if (isDouble(ast, out astdouble))
                                 {
-                                    hy.Add("谷草转氨酶箭头", "↑");
-                                }
-                                else if (astdouble <= 0)
-                                {
-                                    hy.Add("谷草转氨酶箭头", "↓");
-                                }
-                                hy.Add("谷草转氨酶结果", ast);
+                                    if (astdouble > 40)
+                                    {
+                                        hy.Add("谷草转氨酶箭头", "↑");
+                                    }
+                                    else if (astdouble <= 0)
+                                    {
+                                        hy.Add("谷草转氨酶箭头", "↓");
+                                    }
+                                    hy.Add("谷草转氨酶结果", ast);
+                                } 
                             }
                             string cho = da.Rows[j]["CHO"].ToString();
                             if (cho != null && !"".Equals(cho))
                             {
-                                double chodouble = Convert.ToDouble(cho);
-                                if (chodouble > 5.2)
+                                double chodouble = 0;
+                                if (isDouble(cho, out chodouble))
                                 {
-                                    hy.Add("胆固醇箭头", "↑");
+                                    if (chodouble > 5.2)
+                                    {
+                                        hy.Add("胆固醇箭头", "↑");
+                                    }
+                                    else if (chodouble <= 0)
+                                    {
+                                        hy.Add("胆固醇箭头", "↓");
+                                    }
+                                    hy.Add("胆固醇结果", cho);
                                 }
-                                else if (chodouble <= 0)
-                                {
-                                    hy.Add("胆固醇箭头", "↓");
-                                }
-                                hy.Add("胆固醇结果", cho);
+                                
                             }
                             string crea = da.Rows[j]["CREA"].ToString();
                             if (crea != null && !"".Equals(crea))
                             {
-                                double creadouble = Convert.ToDouble(crea);
-                                if (creadouble > 115)
+                                double creadouble = 0;
+                                if (isDouble(crea, out creadouble))
                                 {
-                                    hy.Add("肌酐箭头", "↑");
-                                }
-                                else if (creadouble < 44)
-                                {
-                                    hy.Add("肌酐箭头", "↓");
-                                }
-                                hy.Add("肌酐结果", crea);
+                                    if (creadouble > 115)
+                                    {
+                                        hy.Add("肌酐箭头", "↑");
+                                    }
+                                    else if (creadouble < 44)
+                                    {
+                                        hy.Add("肌酐箭头", "↓");
+                                    }
+                                    hy.Add("肌酐结果", crea);
+                                }  
                             }
 
                             string dbil = da.Rows[j]["DBIL"].ToString();
                             if (dbil != null && !"".Equals(dbil))
                             {
-                                double dbildouble = Convert.ToDouble(dbil);
-                                if (dbildouble > 6.8)
+                                double dbildouble = 0;
+                                if (isDouble(dbil, out dbildouble))
                                 {
-                                    hy.Add("直接胆红素箭头", "↑");
-                                }
-                                else if (dbildouble < 1.7)
-                                {
-                                    hy.Add("直接胆红素箭头", "↓");
-                                }
-                                hy.Add("直接胆红素结果", dbil);
+                                    if (dbildouble > 6.8)
+                                    {
+                                        hy.Add("直接胆红素箭头", "↑");
+                                    }
+                                    else if (dbildouble < 1.7)
+                                    {
+                                        hy.Add("直接胆红素箭头", "↓");
+                                    }
+                                    hy.Add("直接胆红素结果", dbil);
+                                } 
                             }
                             string ggt = da.Rows[j]["GGT"].ToString();
                             if (ggt != null && !"".Equals(ggt))
                             {
-                                double ggtdouble = Convert.ToDouble(ggt);
-                                if (ggtdouble > 50)
+                                double ggtdouble = 0;
+                                if (isDouble(ggt, out ggtdouble))
                                 {
-                                    hy.Add("谷氨酰氨基箭头", "↑");
-                                }
-                                else if (ggtdouble < 7)
-                                {
-                                    hy.Add("谷氨酰氨基箭头", "↓");
-                                }
-                                hy.Add("谷氨酰氨基结果", ggt);
+                                    if (ggtdouble > 50)
+                                    {
+                                        hy.Add("谷氨酰氨基箭头", "↑");
+                                    }
+                                    else if (ggtdouble < 7)
+                                    {
+                                        hy.Add("谷氨酰氨基箭头", "↓");
+                                    }
+                                    hy.Add("谷氨酰氨基结果", ggt);
+                                } 
                             }
                             string glu=da.Rows[j]["GLU"].ToString();
                             if (glu != null && !"".Equals(glu))
                             {
-                                double gludouble = Convert.ToDouble(glu);
-                                if (gludouble > 6.1)
+                                double gludouble = 0;
+                                if (isDouble(glu, out gludouble))
                                 {
-                                    hy.Add("葡萄糖箭头", "↑");
+                                    if (gludouble > 6.1)
+                                    {
+                                        hy.Add("葡萄糖箭头", "↑");
+                                    }
+                                    else if (gludouble < 3.9)
+                                    {
+                                        hy.Add("葡萄糖箭头", "↓");
+                                    }
+                                    hy.Add("葡萄糖结果", glu);
                                 }
-                                else if (gludouble < 3.9)
-                                {
-                                    hy.Add("葡萄糖箭头", "↓");
-                                }
-                                hy.Add("葡萄糖结果", glu);
+                                
                             }
                             string hdlc = da.Rows[j]["HDLC"].ToString();
                             if (hdlc != null && !"".Equals(hdlc))
                             {
-                                double hdlcdouble = Convert.ToDouble(hdlc);
-                                if (hdlcdouble > 1.9)
+                                double hdlcdouble = 0;
+
+                                if (isDouble(hdlc, out hdlcdouble))
                                 {
-                                    hy.Add("高密度脂蛋白箭头", "↑");
+                                    if (hdlcdouble > 1.9)
+                                    {
+                                        hy.Add("高密度脂蛋白箭头", "↑");
+                                    }
+                                    else if (hdlcdouble < 0.9)
+                                    {
+                                        hy.Add("高密度脂蛋白箭头", "↓");
+                                    }
+                                    hy.Add("高密度脂蛋白结果", hdlc);
                                 }
-                                else if (hdlcdouble < 0.9)
-                                {
-                                    hy.Add("高密度脂蛋白箭头", "↓");
-                                }
-                                hy.Add("高密度脂蛋白结果", hdlc);
+
+                                
                             }
                             string ldlc = da.Rows[j]["LDLC"].ToString();
                             if (ldlc != null && !"".Equals(ldlc))
                             {
-                                double ldlcdouble = Convert.ToDouble(ldlc);
-                                if (ldlcdouble > 3.9)
+                                double ldlcdouble =0;
+
+                                if (isDouble(ldlc, out ldlcdouble))
                                 {
-                                    hy.Add("低密度脂蛋白箭头", "↑");
+                                    if (ldlcdouble > 3.9)
+                                    {
+                                        hy.Add("低密度脂蛋白箭头", "↑");
+                                    }
+                                    else if (ldlcdouble < 1.5)
+                                    {
+                                        hy.Add("低密度脂蛋白箭头", "↓");
+                                    }
+                                    hy.Add("低密度脂蛋白结果", ldlc);
                                 }
-                                else if (ldlcdouble < 1.5)
-                                {
-                                    hy.Add("低密度脂蛋白箭头", "↓");
-                                }
-                                hy.Add("低密度脂蛋白结果", ldlc);
+
+                                
                             }
                             string tbil = da.Rows[j]["TBIL"].ToString();
                             if (tbil != null && !"".Equals(tbil))
                             {
-                                double tbildouble = Convert.ToDouble(tbil);
-                                if (tbildouble > 20)
+                                double tbildouble = 0;
+
+                                if (isDouble(tbil, out tbildouble))
                                 {
-                                    hy.Add("总胆红素箭头", "↑");
+                                    if (tbildouble > 20)
+                                    {
+                                        hy.Add("总胆红素箭头", "↑");
+                                    }
+                                    else if (tbildouble < 2)
+                                    {
+                                        hy.Add("总胆红素箭头", "↓");
+                                    }
+                                    hy.Add("总胆红素结果", tbil);
                                 }
-                                else if (tbildouble < 2)
-                                {
-                                    hy.Add("总胆红素箭头", "↓");
-                                }
-                                hy.Add("总胆红素结果", tbil);
+
+                                
                             }
 
                             string tg = da.Rows[j]["TG"].ToString();
