@@ -298,12 +298,22 @@ namespace zkhwClient
                         }
                         string pName = e.FullPath.Replace("xml", "jpg");
                         FileInfo inf = new FileInfo(pName);
-                        if (File.Exists(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString() + "_" + ids + ".jpg"))
+                        try
                         {
-                            File.Delete(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString() + "_" + ids + ".jpg");
+                            if (File.Exists(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString() + "_" + ids + ".jpg"))
+                            {
+                                File.Delete(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString() + "_" + ids + ".jpg");
+                                GC.Collect();
+                            }
                         }
-                        //inf.MoveTo(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString()+"_" + ids + ".jpg");
-                        inf.CopyTo(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString() + "_" + ids + ".jpg");
+                        catch {
+                            using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
+                            {
+                                sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "\r\n" + "心电2次上传删除报错："+ data.Rows[0]["aichive_no"].ToString() + "_" + ids + ".jpg");
+                            }
+                        }
+                        inf.MoveTo(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString()+"_" + ids + ".jpg");
+                        //inf.CopyTo(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString() + "_" + ids + ".jpg");
                         string hxpl = (Int32.Parse(hrs) / 4).ToString();//计算呼吸频率
                         if (advicetexts.IndexOf("正常") > -1)
                         {
@@ -424,6 +434,7 @@ namespace zkhwClient
                         }
                     }
                     }
+                    GC.Collect();
                     jkInfoDao jkInfoDao = new jkInfoDao();
                     DataTable data = jkInfoDao.selectjkInfoBybarcode(id);
                 if (data != null && data.Rows.Count > 0)
