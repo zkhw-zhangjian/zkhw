@@ -30,10 +30,16 @@ namespace zkhwClient.view.PublicHealthView
         }
         private void GetAllPersonInfo()
         {
+            string _xuncode = basicInfoSettings.xcuncode;
+             
             string time1 = dateTimePicker3.Value.ToString("yyyy-MM-dd");
             string time2 = dateTimePicker4.Value.ToString("yyyy-MM-dd");
+            if(DateTime.Parse(time1) != DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd")))
+            {
+                _xuncode = "";
+            }
             string sql = $@"SELECT count(sex) sun,sex from zkhw_tj_bgdc where area_duns 
-         like '%{basicInfoSettings.xcuncode}%' and  date_format(createtime,'%Y-%m-%d') between '{time1}' and '{time2}' GROUP BY sex ";
+         like '%{_xuncode}%' and  date_format(createtime,'%Y-%m-%d') between '{time1}' and '{time2}' GROUP BY sex ";
             if (isfirst==true)
             { 
                 if(basicInfoSettings.createtime==null || basicInfoSettings.createtime=="")
@@ -45,8 +51,9 @@ namespace zkhwClient.view.PublicHealthView
                     time1 = DateTime.Parse(basicInfoSettings.createtime).ToString("yyyy-MM-dd");
                 }
                 
-                sql = $@"SELECT count(sex) sun,sex from zkhw_tj_bgdc where area_duns like '%{basicInfoSettings.xcuncode}%' and date_format(createtime,'%Y-%m-%d')>='{time1}' GROUP BY sex ";
+                sql = $@"SELECT count(sex) sun,sex from zkhw_tj_bgdc where area_duns like '%{_xuncode}%' and date_format(createtime,'%Y-%m-%d')>='{time1}' GROUP BY sex ";
             }
+
             #region 报告统计数据绑定
             
             DataSet dataSet = DbHelperMySQL.Query(sql);
@@ -308,120 +315,243 @@ where 1=1";
             GetAllPersonInfo();   //同步处理下
             string stan = dateTimePicker3.Value.ToString("yyyy-MM-dd");
             string end = dateTimePicker4.Value.ToString("yyyy-MM-dd");
-            string sql = $@"SELECT sex,'64',COUNT(sex) 人数,
-            COUNT(CASE
-                WHEN(BChao = '2' or BChao = '3') THEN '1'
-            END
-            ) as B超异常,
-            COUNT(CASE
-                WHEN(XinDian = '2' or XinDian = '3') THEN
-                    '1'
-            END
-            ) as 心电异常,
-            COUNT(CASE
-                WHEN(NiaoChangGui = '2' or NiaoChangGui = '3') THEN
-                    '1'
-            END
-            ) as 尿常规异常,
-            COUNT(CASE
-                WHEN(XueYa = '2' or XueYa = '3') THEN
-                    '1'
-            END
-            ) as 血压异常,
-            COUNT(CASE
-                WHEN(ShengHua = '2' or ShengHua = '3') THEN
-                    '1'
-            END
-            ) as 生化异常
-            from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and age >= '0' and age<= '64' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
-            GROUP BY sex;
+             
+            string sql = "";
+            if (DateTime.Parse(stan) != DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd")))
+            {
+                sql = $@"SELECT sex,'64',COUNT(sex) 人数,
+                COUNT(CASE
+                    WHEN(BChao = '2' or BChao = '3') THEN '1'
+                END
+                ) as B超异常,
+                COUNT(CASE
+                    WHEN(XinDian = '2' or XinDian = '3') THEN
+                        '1'
+                END
+                ) as 心电异常,
+                COUNT(CASE
+                    WHEN(NiaoChangGui = '2' or NiaoChangGui = '3') THEN
+                        '1'
+                END
+                ) as 尿常规异常,
+                COUNT(CASE
+                    WHEN(XueYa = '2' or XueYa = '3') THEN
+                        '1'
+                END
+                ) as 血压异常,
+                COUNT(CASE
+                    WHEN(ShengHua = '2' or ShengHua = '3') THEN
+                        '1'
+                END
+                ) as 生化异常
+                from zkhw_tj_bgdc where age >= '0' and age<= '64' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+                GROUP BY sex;
 
-            SELECT sex,'70',COUNT(sex) 人数,
-            COUNT(CASE
-                WHEN(BChao = '2' or BChao = '3') THEN
-                    '1'
-            END
-            ) as B超异常,
-            COUNT(CASE
-                WHEN(XinDian = '2' or XinDian = '3') THEN
-                    '1'
-            END
-            ) as 心电异常,
-            COUNT(CASE
-                WHEN(NiaoChangGui = '2' or NiaoChangGui = '3') THEN
-                    '1'
-            END
-            ) as 尿常规异常,
-            COUNT(CASE
-                WHEN(XueYa = '2' or XueYa = '3') THEN
-                    '1'
-            END
-            ) as 血压异常,
-            COUNT(CASE
-                WHEN(ShengHua = '2' or ShengHua = '3') THEN
-                    '1'
-            END
-            ) as 生化异常
-            from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and age >= '65' and age<= '70' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
-            GROUP BY sex;
+                SELECT sex,'70',COUNT(sex) 人数,
+                COUNT(CASE
+                    WHEN(BChao = '2' or BChao = '3') THEN
+                        '1'
+                END
+                ) as B超异常,
+                COUNT(CASE
+                    WHEN(XinDian = '2' or XinDian = '3') THEN
+                        '1'
+                END
+                ) as 心电异常,
+                COUNT(CASE
+                    WHEN(NiaoChangGui = '2' or NiaoChangGui = '3') THEN
+                        '1'
+                END
+                ) as 尿常规异常,
+                COUNT(CASE
+                    WHEN(XueYa = '2' or XueYa = '3') THEN
+                        '1'
+                END
+                ) as 血压异常,
+                COUNT(CASE
+                    WHEN(ShengHua = '2' or ShengHua = '3') THEN
+                        '1'
+                END
+                ) as 生化异常
+                from zkhw_tj_bgdc where  age >= '65' and age<= '70' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+                GROUP BY sex;
 
-            SELECT sex,'75',COUNT(sex) 人数,
-            COUNT(CASE
-                WHEN(BChao = '2' or BChao = '3') THEN
-                    '1'
-            END
-            ) as B超异常,
-            COUNT(CASE
-                WHEN(XinDian = '2' or XinDian = '3') THEN
-                    '1'
-            END
-            ) as 心电异常,
-            COUNT(CASE
-                WHEN(NiaoChangGui = '2' or NiaoChangGui = '3') THEN
-                    '1'
-            END
-            ) as 尿常规异常,
-            COUNT(CASE
-                WHEN(XueYa = '2' or XueYa = '3') THEN
-                    '1'
-            END
-            ) as 血压异常,
-            COUNT(CASE
-                WHEN(ShengHua = '2' or ShengHua = '3') THEN
-                    '1'
-            END
-            ) as 生化异常
-            from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and age > '70' and age<= '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
-            GROUP BY sex;
+                SELECT sex,'75',COUNT(sex) 人数,
+                COUNT(CASE
+                    WHEN(BChao = '2' or BChao = '3') THEN
+                        '1'
+                END
+                ) as B超异常,
+                COUNT(CASE
+                    WHEN(XinDian = '2' or XinDian = '3') THEN
+                        '1'
+                END
+                ) as 心电异常,
+                COUNT(CASE
+                    WHEN(NiaoChangGui = '2' or NiaoChangGui = '3') THEN
+                        '1'
+                END
+                ) as 尿常规异常,
+                COUNT(CASE
+                    WHEN(XueYa = '2' or XueYa = '3') THEN
+                        '1'
+                END
+                ) as 血压异常,
+                COUNT(CASE
+                    WHEN(ShengHua = '2' or ShengHua = '3') THEN
+                        '1'
+                END
+                ) as 生化异常
+                from zkhw_tj_bgdc where  age > '70' and age<= '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+                GROUP BY sex;
 
-            SELECT sex,'76',COUNT(sex) 人数,
-            COUNT(CASE
-                WHEN(BChao = '2' or BChao = '3') THEN
-                    '1'
-            END
-            ) as B超异常,
-            COUNT(CASE
-                WHEN(XinDian = '2' or XinDian = '3') THEN
-                    '1'
-            END
-            ) as 心电异常,
-            COUNT(CASE
-                WHEN(NiaoChangGui = '2' or NiaoChangGui = '3') THEN
-                    '1'
-            END
-            ) as 尿常规异常,
-            COUNT(CASE
-                WHEN(XueYa = '2' or XueYa = '3') THEN
-                    '1'
-            END
-            ) as 血压异常,
-            COUNT(CASE
-                WHEN(ShengHua = '2' or ShengHua = '3') THEN
-                    '1'
-            END
-            ) as 生化异常
-            from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and age > '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
-            GROUP BY sex";
+                SELECT sex,'76',COUNT(sex) 人数,
+                COUNT(CASE
+                    WHEN(BChao = '2' or BChao = '3') THEN
+                        '1'
+                END
+                ) as B超异常,
+                COUNT(CASE
+                    WHEN(XinDian = '2' or XinDian = '3') THEN
+                        '1'
+                END
+                ) as 心电异常,
+                COUNT(CASE
+                    WHEN(NiaoChangGui = '2' or NiaoChangGui = '3') THEN
+                        '1'
+                END
+                ) as 尿常规异常,
+                COUNT(CASE
+                    WHEN(XueYa = '2' or XueYa = '3') THEN
+                        '1'
+                END
+                ) as 血压异常,
+                COUNT(CASE
+                    WHEN(ShengHua = '2' or ShengHua = '3') THEN
+                        '1'
+                END
+                ) as 生化异常
+                from zkhw_tj_bgdc where  age > '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+                GROUP BY sex";
+            }
+            else
+            {
+               sql =  $@"SELECT sex,'64',COUNT(sex) 人数,
+                COUNT(CASE
+                    WHEN(BChao = '2' or BChao = '3') THEN '1'
+                END
+                ) as B超异常,
+                COUNT(CASE
+                    WHEN(XinDian = '2' or XinDian = '3') THEN
+                        '1'
+                END
+                ) as 心电异常,
+                COUNT(CASE
+                    WHEN(NiaoChangGui = '2' or NiaoChangGui = '3') THEN
+                        '1'
+                END
+                ) as 尿常规异常,
+                COUNT(CASE
+                    WHEN(XueYa = '2' or XueYa = '3') THEN
+                        '1'
+                END
+                ) as 血压异常,
+                COUNT(CASE
+                    WHEN(ShengHua = '2' or ShengHua = '3') THEN
+                        '1'
+                END
+                ) as 生化异常
+                from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and age >= '0' and age<= '64' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+                GROUP BY sex;
+
+                SELECT sex,'70',COUNT(sex) 人数,
+                COUNT(CASE
+                    WHEN(BChao = '2' or BChao = '3') THEN
+                        '1'
+                END
+                ) as B超异常,
+                COUNT(CASE
+                    WHEN(XinDian = '2' or XinDian = '3') THEN
+                        '1'
+                END
+                ) as 心电异常,
+                COUNT(CASE
+                    WHEN(NiaoChangGui = '2' or NiaoChangGui = '3') THEN
+                        '1'
+                END
+                ) as 尿常规异常,
+                COUNT(CASE
+                    WHEN(XueYa = '2' or XueYa = '3') THEN
+                        '1'
+                END
+                ) as 血压异常,
+                COUNT(CASE
+                    WHEN(ShengHua = '2' or ShengHua = '3') THEN
+                        '1'
+                END
+                ) as 生化异常
+                from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and age >= '65' and age<= '70' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+                GROUP BY sex;
+
+                SELECT sex,'75',COUNT(sex) 人数,
+                COUNT(CASE
+                    WHEN(BChao = '2' or BChao = '3') THEN
+                        '1'
+                END
+                ) as B超异常,
+                COUNT(CASE
+                    WHEN(XinDian = '2' or XinDian = '3') THEN
+                        '1'
+                END
+                ) as 心电异常,
+                COUNT(CASE
+                    WHEN(NiaoChangGui = '2' or NiaoChangGui = '3') THEN
+                        '1'
+                END
+                ) as 尿常规异常,
+                COUNT(CASE
+                    WHEN(XueYa = '2' or XueYa = '3') THEN
+                        '1'
+                END
+                ) as 血压异常,
+                COUNT(CASE
+                    WHEN(ShengHua = '2' or ShengHua = '3') THEN
+                        '1'
+                END
+                ) as 生化异常
+                from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and age > '70' and age<= '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+                GROUP BY sex;
+
+                SELECT sex,'76',COUNT(sex) 人数,
+                COUNT(CASE
+                    WHEN(BChao = '2' or BChao = '3') THEN
+                        '1'
+                END
+                ) as B超异常,
+                COUNT(CASE
+                    WHEN(XinDian = '2' or XinDian = '3') THEN
+                        '1'
+                END
+                ) as 心电异常,
+                COUNT(CASE
+                    WHEN(NiaoChangGui = '2' or NiaoChangGui = '3') THEN
+                        '1'
+                END
+                ) as 尿常规异常,
+                COUNT(CASE
+                    WHEN(XueYa = '2' or XueYa = '3') THEN
+                        '1'
+                END
+                ) as 血压异常,
+                COUNT(CASE
+                    WHEN(ShengHua = '2' or ShengHua = '3') THEN
+                        '1'
+                END
+                ) as 生化异常
+                from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and age > '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
+                GROUP BY sex";
+            }
+            
             DataSet dataSet = DbHelperMySQL.Query(sql);
             if (dataSet != null && dataSet.Tables.Count > 0)
             {
@@ -895,6 +1025,12 @@ where 1=1";
                         builder.MoveToBookmark(key);
                         builder.Write(dic[key]);
                     }
+                    /*页码*/
+                    builder.MoveToHeaderFooter(HeaderFooterType.FooterPrimary); 
+                    builder.InsertField("PAGE", ""); 
+                    builder.Write(" / "); 
+                    builder.InsertField("NUMPAGES", ""); 
+                    /*end*/
                     break;
                 #endregion
 
@@ -1430,66 +1566,77 @@ where 1=1";
                                         hy.Add("总胆红素箭头", "↓");
                                     }
                                     hy.Add("总胆红素结果", tbil);
-                                }
-
-                                
+                                } 
                             }
 
                             string tg = da.Rows[j]["TG"].ToString();
                             if (tg != "") {
-                                double tgdouble = Convert.ToDouble(tg);
-                                if (tgdouble > 1.7)
+                                double tgdouble = 0;
+                                if (isDouble(tg, out tgdouble))
                                 {
-                                    hy.Add("甘油三酯箭头", "↑");
-                                }
-                                else if (tgdouble <=0)
-                                {
-                                    hy.Add("甘油三酯箭头", "↓");
-                                }
-                                hy.Add("甘油三酯结果", tg);
+                                    if (tgdouble > 1.7)
+                                    {
+                                        hy.Add("甘油三酯箭头", "↑");
+                                    }
+                                    else if (tgdouble <= 0)
+                                    {
+                                        hy.Add("甘油三酯箭头", "↓");
+                                    }
+                                    hy.Add("甘油三酯结果", tg);
+                                } 
                             }
                             
                             string tp = da.Rows[j]["TP"].ToString();
                             if (tp != null && !"".Equals(tp))
                             {
-                                double tpdouble = Convert.ToDouble(tp);
-                                if (tpdouble > 83)
+                                double tpdouble = 0; 
+                                if (isDouble(tp, out tpdouble))
                                 {
-                                    hy.Add("总蛋白箭头", "↑");
-                                }
-                                else if (tpdouble < 60)
-                                {
-                                    hy.Add("总蛋白箭头", "↓");
-                                }
-                                hy.Add("总蛋白结果", tp);
+                                    if (tpdouble > 83)
+                                    {
+                                        hy.Add("总蛋白箭头", "↑");
+                                    }
+                                    else if (tpdouble < 60)
+                                    {
+                                        hy.Add("总蛋白箭头", "↓");
+                                    }
+                                    hy.Add("总蛋白结果", tp);
+                                } 
                             }
                             string ua = da.Rows[j]["UA"].ToString();
                             if (ua != null && !"".Equals(ua))
                             {
-                                double uadouble = Convert.ToDouble(ua);
-                                if (uadouble > 428)
+                                double uadouble =0;
+                                if (isDouble(ua, out uadouble))
                                 {
-                                    hy.Add("尿酸箭头", "↑");
-                                }
-                                else if (uadouble < 90)
-                                {
-                                    hy.Add("尿酸箭头", "↓");
-                                }
-                                hy.Add("尿酸结果", ua);
+                                    if (uadouble > 428)
+                                    {
+                                        hy.Add("尿酸箭头", "↑");
+                                    }
+                                    else if (uadouble < 90)
+                                    {
+                                        hy.Add("尿酸箭头", "↓");
+                                    }
+                                    hy.Add("尿酸结果", ua);
+                                } 
                             }
                             string urea = da.Rows[j]["UREA"].ToString();
                             if (urea != null && !"".Equals(urea))
                             {
-                                double ureadouble = Convert.ToDouble(urea);
-                                if (ureadouble > 8.2)
+                                double ureadouble = 0;
+                                if (isDouble(urea, out ureadouble))
                                 {
-                                    hy.Add("尿素箭头", "↑");
+                                    if (ureadouble > 8.2)
+                                    {
+                                        hy.Add("尿素箭头", "↑");
+                                    }
+                                    else if (ureadouble < 1.7)
+                                    {
+                                        hy.Add("尿素箭头", "↓");
+                                    }
+                                    hy.Add("尿素结果", urea);
                                 }
-                                else if (ureadouble < 1.7)
-                                {
-                                    hy.Add("尿素箭头", "↓");
-                                }
-                                hy.Add("尿素结果", urea);
+                                
                             }
                         }
                     }
@@ -1505,15 +1652,18 @@ where 1=1";
                             {
                                 if (hct != "*")
                                 {
-                                    double hctdouble = Convert.ToDouble(hct);
-                                    if (hctdouble > 50)
+                                    double hctdouble =0;
+                                    if (isDouble(hct, out hctdouble))
                                     {
-                                        hy.Add("红细胞压积箭头", "↑");
-                                    }
-                                    else if (hctdouble < 37)
-                                    {
-                                        hy.Add("红细胞压积箭头", "↓");
-                                    }
+                                        if (hctdouble > 50)
+                                        {
+                                            hy.Add("红细胞压积箭头", "↑");
+                                        }
+                                        else if (hctdouble < 37)
+                                        {
+                                            hy.Add("红细胞压积箭头", "↓");
+                                        } 
+                                    } 
                                 }
                                 hy.Add("红细胞压积结果", hct);
                             }
@@ -1521,30 +1671,36 @@ where 1=1";
                             if (hgb != null && !"".Equals(hgb))
                             {
                                 double hgbdouble = Convert.ToDouble(hgb);
-                                if (hgbdouble > 160)
+                                if (isDouble(hgb, out hgbdouble))
                                 {
-                                    hy.Add("血红蛋白箭头", "↑");
-                                }
-                                else if (hgbdouble < 110)
-                                {
-                                    hy.Add("血红蛋白箭头", "↓");
-                                }
-                                hy.Add("血红蛋白结果", hgb);
+                                    if (hgbdouble > 160)
+                                    {
+                                        hy.Add("血红蛋白箭头", "↑");
+                                    }
+                                    else if (hgbdouble < 110)
+                                    {
+                                        hy.Add("血红蛋白箭头", "↓");
+                                    }
+                                    hy.Add("血红蛋白结果", hgb);
+                                } 
                             }
                             string lym = da.Rows[j]["LYM"].ToString();
                             if (lym != null && !"".Equals(lym))
                             {
                                 if (lym != "*")
                                 {
-                                    double lymdouble = Convert.ToDouble(lym);
-                                    if (lymdouble > 4)
+                                    double lymdouble = 0;
+                                    if (isDouble(lym, out lymdouble))
                                     {
-                                        hy.Add("淋巴细胞数目箭头", "↑");
-                                    }
-                                    else if (lymdouble < 0.8)
-                                    {
-                                        hy.Add("淋巴细胞数目箭头", "↓");
-                                    }
+                                        if (lymdouble > 4)
+                                        {
+                                            hy.Add("淋巴细胞数目箭头", "↑");
+                                        }
+                                        else if (lymdouble < 0.8)
+                                        {
+                                            hy.Add("淋巴细胞数目箭头", "↓");
+                                        }
+                                    } 
                                 }
                                 hy.Add("淋巴细胞数目结果", lym);
                             }
@@ -1553,15 +1709,18 @@ where 1=1";
                             {
                                 if (lymp != "*")
                                 {
-                                    double lympdouble = Convert.ToDouble(lymp);
-                                    if (lympdouble > 40)
+                                    double lympdouble = 0;
+                                    if (isDouble(lymp, out lympdouble))
                                     {
-                                        hy.Add("淋巴细胞百分比箭头", "↑");
-                                    }
-                                    else if (lympdouble < 20)
-                                    {
-                                        hy.Add("淋巴细胞百分比箭头", "↓");
-                                    }
+                                        if (lympdouble > 40)
+                                        {
+                                            hy.Add("淋巴细胞百分比箭头", "↑");
+                                        }
+                                        else if (lympdouble < 20)
+                                        {
+                                            hy.Add("淋巴细胞百分比箭头", "↓");
+                                        }
+                                    } 
                                 }
                                 hy.Add("淋巴细胞百分比结果", lymp);
                             }
@@ -1570,15 +1729,18 @@ where 1=1";
                             {
                                 if (mch != "*")
                                 {
-                                    double mchdouble = Convert.ToDouble(mch);
-                                    if (mchdouble > 40)
+                                    double mchdouble = 0;
+                                    if (isDouble(mch, out mchdouble))
                                     {
-                                        hy.Add("平均血红蛋白含量箭头", "↑");
-                                    }
-                                    else if (mchdouble < 27)
-                                    {
-                                        hy.Add("平均血红蛋白含量箭头", "↓");
-                                    }
+                                        if (mchdouble > 40)
+                                        {
+                                            hy.Add("平均血红蛋白含量箭头", "↑");
+                                        }
+                                        else if (mchdouble < 27)
+                                        {
+                                            hy.Add("平均血红蛋白含量箭头", "↓");
+                                        }
+                                    } 
                                 }
                                 hy.Add("平均血红蛋白含量结果", mch);
                             }
@@ -1587,15 +1749,18 @@ where 1=1";
                             {
                                 if (mchc != "*")
                                 {
-                                    double mchcdouble = Convert.ToDouble(mchc);
-                                    if (mchcdouble > 360)
+                                    double mchcdouble = 0;
+                                    if (isDouble(mchc, out mchcdouble))
                                     {
-                                        hy.Add("平均血红蛋白浓度箭头", "↑");
-                                    }
-                                    else if (mchcdouble < 320)
-                                    {
-                                        hy.Add("平均血红蛋白浓度箭头", "↓");
-                                    }
+                                        if (mchcdouble > 360)
+                                        {
+                                            hy.Add("平均血红蛋白浓度箭头", "↑");
+                                        }
+                                        else if (mchcdouble < 320)
+                                        {
+                                            hy.Add("平均血红蛋白浓度箭头", "↓");
+                                        }
+                                    } 
                                 }
                                 hy.Add("平均血红蛋白浓度结果", mchc);
                             }
@@ -1604,15 +1769,18 @@ where 1=1";
                             {
                                 if (mcv != "*")
                                 {
-                                    double mcvdouble = Convert.ToDouble(mcv);
-                                    if (mcvdouble > 95)
+                                    double mcvdouble = 0;
+                                    if (isDouble(mcv, out mcvdouble))
                                     {
-                                        hy.Add("平均红细胞体积箭头", "↑");
-                                    }
-                                    else if (mcvdouble < 82)
-                                    {
-                                        hy.Add("平均红细胞体积箭头", "↓");
-                                    }
+                                        if (mcvdouble > 95)
+                                        {
+                                            hy.Add("平均红细胞体积箭头", "↑");
+                                        }
+                                        else if (mcvdouble < 82)
+                                        {
+                                            hy.Add("平均红细胞体积箭头", "↓");
+                                        }
+                                    } 
                                 }
                                 hy.Add("平均红细胞体积结果", mcv);
                             }
@@ -1621,15 +1789,18 @@ where 1=1";
                             {
                                 if (mpv != "*")
                                 {
-                                    double mpvdouble = Convert.ToDouble(mpv);
-                                    if (mpvdouble > 11)
+                                    double mpvdouble = 0;
+                                    if (isDouble(mpv, out mpvdouble))
                                     {
-                                        hy.Add("平均血小板体积箭头", "↑");
-                                    }
-                                    else if (mpvdouble < 7)
-                                    {
-                                        hy.Add("平均血小板体积箭头", "↓");
-                                    }
+                                        if (mpvdouble > 11)
+                                        {
+                                            hy.Add("平均血小板体积箭头", "↑");
+                                        }
+                                        else if (mpvdouble < 7)
+                                        {
+                                            hy.Add("平均血小板体积箭头", "↓");
+                                        }
+                                    } 
                                 }
                                 hy.Add("平均血小板体积结果", mpv);
                             }
