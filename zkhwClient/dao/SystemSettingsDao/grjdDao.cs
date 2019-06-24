@@ -65,7 +65,14 @@ namespace zkhwClient.dao
             string id = Result.GetNewId();
             string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string time1 = DateTime.Now.ToString("yyyy-MM-dd");
-            String sql = "insert into zkhw_tj_bgdc (ID,aichive_no,id_number,bar_code,name,sex,birthday,age,healthchecktime,createtime,area_duns) value('" + id + "','" + grjbxx.archive_no + "','" + grjbxx.Cardcode + "', '" + barcode + "', '" + grjbxx.name + "', '" + grjbxx.Sex + "', '" + grjbxx.Birthday + "', '" + grjbxx.age + "', '" + time1 + "', '" + time + "', '" + xcuncode + "')";
+            String sql = "";
+            if (grjbxx.age < 65)
+            {
+                sql = "insert into zkhw_tj_bgdc (ID,aichive_no,id_number,bar_code,name,sex,birthday,age,healthchecktime,createtime,area_duns,lnrzlnlpg,lnrzytzbs) value('" + id + "','" + grjbxx.archive_no + "','" + grjbxx.Cardcode + "', '" + barcode + "', '" + grjbxx.name + "', '" + grjbxx.Sex + "', '" + grjbxx.Birthday + "', '" + grjbxx.age + "', '" + time1 + "', '" + time + "', '" + xcuncode + "', '1', '1')";
+            }
+            else {
+                sql = "insert into zkhw_tj_bgdc (ID,aichive_no,id_number,bar_code,name,sex,birthday,age,healthchecktime,createtime,area_duns) value('" + id + "','" + grjbxx.archive_no + "','" + grjbxx.Cardcode + "', '" + barcode + "', '" + grjbxx.name + "', '" + grjbxx.Sex + "', '" + grjbxx.Birthday + "', '" + grjbxx.age + "', '" + time1 + "', '" + time + "', '" + xcuncode + "')";
+            }
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }

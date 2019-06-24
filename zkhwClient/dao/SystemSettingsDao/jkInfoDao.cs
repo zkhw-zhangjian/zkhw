@@ -55,8 +55,8 @@ namespace zkhwClient.dao
             DataSet ds = new DataSet();
             string sql = @"select name,(case sex when '1' then '男' when '2' then '女' ELSE ''END) sex,birthday,
                      (case when BChao>='1' and XinDian>='1' and ShengHua>='1' and XueChangGui>='1' 
-                     and NiaoChangGui>='1' and XueYa>='1' and Shengaotizhong>='1' then '完成' else '未完成' end) as type
-                     ,BChao,XinDian,ShengHua,XueChangGui,NiaoChangGui,XueYa,Shengaotizhong from zkhw_tj_bgdc where 1=1";
+                     and NiaoChangGui>='1' and XueYa>='1' and Shengaotizhong>='1' and jktjb>='1' and lnrzlnlpg>='1' and lnrzytzbs>='1' then '完成' else '未完成' end) as type
+                     ,BChao,XinDian,ShengHua,XueChangGui,NiaoChangGui,XueYa,Shengaotizhong,jktjb,lnrzlnlpg,lnrzytzbs from zkhw_tj_bgdc where 1=1";
             if (xcuncode != null && !"".Equals(xcuncode))
             {
                 sql += " and area_duns='" + xcuncode + "'";
@@ -78,8 +78,8 @@ namespace zkhwClient.dao
             DataSet ds = new DataSet();
             string sql = @"select name,(case sex when '1' then '男' when '2' then '女' ELSE ''END) sex,birthday,
                      (case when BChao>='1' and XinDian>='1' and ShengHua>='1' and XueChangGui>='1' 
-                     and NiaoChangGui>='1' and XueYa>='1' and Shengaotizhong>='1' then '完成' else '未完成' end) as type
-                     ,BChao,XinDian,ShengHua,XueChangGui,NiaoChangGui,XueYa,Shengaotizhong from zkhw_tj_bgdc where 1=1";
+                     and NiaoChangGui>='1' and XueYa>='1' and Shengaotizhong>='1' and jktjb>='1' and lnrzlnlpg>='1' and lnrzytzbs>='1' then '完成' else '未完成' end) as type
+                     ,BChao,XinDian,ShengHua,XueChangGui,NiaoChangGui,XueYa,Shengaotizhong,jktjb,lnrzlnlpg,lnrzytzbs from zkhw_tj_bgdc where 1=1";
             if (xcuncode != null && !"".Equals(xcuncode))
             {
                 sql += " and area_duns='" + xcuncode + "'";
