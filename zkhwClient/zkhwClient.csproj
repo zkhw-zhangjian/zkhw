@@ -406,6 +406,12 @@
     <Compile Include="view\PublicHealthView\aUolderHelthService.Designer.cs">
       <DependentUpon>aUolderHelthService.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\PublicHealthView\fileManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\fileManagement.Designer.cs">
+      <DependentUpon>fileManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\PublicHealthView\healthPoorServices.cs">
       <SubType>Form</SubType>
     </Compile>

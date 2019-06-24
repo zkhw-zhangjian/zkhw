@@ -441,6 +441,16 @@ namespace zkhwClient
                 this.panel1.Controls.Add(pR);
                 pR.Show();
             }
+            else if (tag == "个人档案管理")
+            {
+                fileManagement pR = new fileManagement();
+                pR.TopLevel = false;
+                pR.Dock = DockStyle.Fill;
+                pR.FormBorderStyle = FormBorderStyle.None;
+                this.panel1.Controls.Clear();
+                this.panel1.Controls.Add(pR);
+                pR.Show();
+            }      
             else if (tag == "2型糖尿病患者服务")
             {
                 diabetesPatientServices pR = new diabetesPatientServices();

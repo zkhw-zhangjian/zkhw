@@ -759,6 +759,8 @@ where 1=1";
                         {
                             List<Report> reports = new List<Report>();
                             DataRow data = dataSet.Tables["个人"].Rows[i];
+                            string age = data["age"].ToString();
+                            
                             foreach (var item in vs)
                             {
                                 Report report = new Report();
