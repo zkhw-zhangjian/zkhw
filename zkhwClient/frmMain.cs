@@ -194,10 +194,10 @@ namespace zkhwClient
                 {
                     proAsNet.Kill();
                 }
-                //if (!proFtp.HasExited)
-                //{
-                //    proFtp.Kill();
-                //}
+                ////if (!proFtp.HasExited)
+                ////{
+                ////    proFtp.Kill();
+                ////}
                 service.loginLogService llse = new service.loginLogService();
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = frmLogin.name;
@@ -881,10 +881,10 @@ namespace zkhwClient
                 {
                     proAsNet.Kill();
                 }
-                //if (!proFtp.HasExited)
-                //{
-                //    proFtp.Kill();
-                //}
+                ////if (!proFtp.HasExited)
+                ////{
+                ////    proFtp.Kill();
+                ////}
                 service.loginLogService llse = new service.loginLogService();
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = frmLogin.name;

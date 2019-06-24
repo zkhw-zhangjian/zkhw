@@ -4015,6 +4015,9 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             }
         }
         #endregion
+
+        
+
         /// <summary>
         /// 查看报告
         /// </summary>
@@ -4025,11 +4028,26 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             //点击button按钮事件
             if (dataGridView1.Columns[e.ColumnIndex].Name == "btnModify" && e.RowIndex >= 0)
             {
+                //得到最新的文件
+                
                 //说明点击的列是DataGridViewButtonColumn列
                 DataGridViewColumn column = dataGridView1.Columns[e.ColumnIndex];
                 string id = dataGridView1["编码", e.RowIndex].Value.ToString();
                 string name = dataGridView1["姓名", e.RowIndex].Value.ToString();
-                OpenPdf(@str + $"/up/result/{name + id}.pdf");
+                string nameidstr = name + id;
+                List<FileTimeInfo> list = new List<FileTimeInfo>();
+                string dir = @str + $"/up/result";
+                list = Common.GetLatestFileTimeInfo(dir, nameidstr);
+                if(list.Count>0)
+                {
+                    OpenPdf(list[0].FileName);
+                    //OpenPdf(@str + $"/up/result/{name + id}.pdf");
+                }
+                else
+                {
+                    MessageBox.Show("找不到文件！");
+                }
+                
             }
         }
 

@@ -71,7 +71,7 @@
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1023, 492);
+            this.dataGridView1.Size = new System.Drawing.Size(1169, 492);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
             // 
@@ -81,7 +81,7 @@
             this.button4.BackColor = System.Drawing.Color.Red;
             this.button4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button4.Location = new System.Drawing.Point(923, 710);
+            this.button4.Location = new System.Drawing.Point(996, 710);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(93, 33);
             this.button4.TabIndex = 4;
@@ -97,14 +97,14 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1023, 71);
+            this.panel1.Size = new System.Drawing.Size(1169, 71);
             this.panel1.TabIndex = 6;
             // 
             // label4
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(452, 23);
+            this.label4.Location = new System.Drawing.Point(525, 23);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 12);
             this.label4.TabIndex = 0;
@@ -126,7 +126,7 @@
             this.panel2.Controls.Add(this.dataGridView1);
             this.panel2.Location = new System.Drawing.Point(1, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1023, 747);
+            this.panel2.Size = new System.Drawing.Size(1169, 747);
             this.panel2.TabIndex = 8;
             // 
             // btnUpload
@@ -135,7 +135,7 @@
             this.btnUpload.BackColor = System.Drawing.Color.SkyBlue;
             this.btnUpload.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnUpload.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnUpload.Location = new System.Drawing.Point(713, 709);
+            this.btnUpload.Location = new System.Drawing.Point(786, 709);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(130, 33);
             this.btnUpload.TabIndex = 8;
@@ -163,7 +163,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(3, 80);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1020, 125);
+            this.groupBox1.Size = new System.Drawing.Size(1166, 125);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
@@ -317,7 +317,7 @@
             this.button3.BackColor = System.Drawing.Color.SkyBlue;
             this.button3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button3.Location = new System.Drawing.Point(790, 709);
+            this.button3.Location = new System.Drawing.Point(863, 709);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(90, 33);
             this.button3.TabIndex = 3;
@@ -332,7 +332,7 @@
             this.button2.BackColor = System.Drawing.Color.SkyBlue;
             this.button2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(538, 709);
+            this.button2.Location = new System.Drawing.Point(611, 709);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(84, 33);
             this.button2.TabIndex = 2;
@@ -346,7 +346,7 @@
             this.button1.BackColor = System.Drawing.Color.SkyBlue;
             this.button1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(336, 709);
+            this.button1.Location = new System.Drawing.Point(409, 709);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(82, 33);
             this.button1.TabIndex = 1;
@@ -361,7 +361,7 @@
             this.panel3.AutoScroll = true;
             this.panel3.Location = new System.Drawing.Point(1, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1128, 10);
+            this.panel3.Size = new System.Drawing.Size(1274, 10);
             this.panel3.TabIndex = 9;
             this.panel3.Visible = false;
             // 
@@ -369,7 +369,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1028, 749);
+            this.ClientSize = new System.Drawing.Size(1174, 749);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Name = "tcmHealthServices";

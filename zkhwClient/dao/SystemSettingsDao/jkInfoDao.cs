@@ -116,5 +116,17 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
+
+        public DataTable queryGeRenArchivesInfo(string s)
+        {
+            DataSet ds = new DataSet();
+            string sql = string.Format(@"select r.id,r.archive_no,r.name,r.sex,r.birthday,
+                         r.age,r.id_number,z.bar_code,z.BChao,z.XinDian,z.XueChangGui,
+                         z.NiaoChangGui,z.Shengaotizhong,z.XueYa,z.ShengHua,z.jktjb,z.lnrzlnlpg,
+                         z.lnrzytzbs,z.healthchecktime from resident_base_info r left join zkhw_tj_bgdc z 
+                        on r.id_number= z.id_number {0} order by CONVERT(r.name using  gbk) ASC", s);
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
     }
 }

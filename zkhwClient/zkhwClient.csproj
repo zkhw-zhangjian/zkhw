@@ -181,6 +181,7 @@
     <Compile Include="bean\thresholdValueBean.cs" />
     <Compile Include="bean\UserInfo.cs" />
     <Compile Include="bean\xuechangguiBean.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="control\PagerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -955,6 +956,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\examinatReport.resx">
       <DependentUpon>examinatReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\fileManagement.resx">
+      <DependentUpon>fileManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\healthCheckup.resx">
       <DependentUpon>healthCheckup.cs</DependentUpon>
