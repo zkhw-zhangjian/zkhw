@@ -976,6 +976,16 @@ namespace zkhwClient
                                     default: break;
                                 }
                             }
+                            if (sh.ALT == "N/A") { sh.ALT = "0"; };
+                            if (sh.AST == "N/A") { sh.AST = "0"; };
+                            if (sh.TBIL == "N/A") { sh.TBIL = "0"; };
+                            if (sh.Crea == "N/A") { sh.Crea = "0"; };
+                            if (sh.UREA == "N/A") { sh.UREA = "0"; };
+                            if (sh.GLU == "N/A") { sh.GLU = "0"; };
+                            if (sh.TG == "N/A") { sh.TG = "0"; };
+                            if (sh.CHO == "N/A") { sh.CHO = "0"; };
+                            if (sh.HDL_C == "N/A") { sh.HDL_C = "0"; };
+                            if (sh.LDL_C == "N/A") { sh.LDL_C = "0"; };
                             bool istrue= tjdao.insertShenghuaInfo(sh);
                             if (istrue)
                             {

@@ -103,7 +103,7 @@ namespace zkhwClient.view.PublicHealthView
             isfirst = true;
             BinData();
             isfirst = false;
-            pagerControl1.OnPageChanged += new EventHandler(pagerControl1_OnPageChanged);
+            //pagerControl1.OnPageChanged += new EventHandler(pagerControl1_OnPageChanged);
             int count = 0;
             queryExaminatProgress(GetData(pagerControl1.PageIndex, pagerControl1.PageSize, out count));
             pagerControl1.DrawControl(count);
@@ -214,16 +214,16 @@ where 1=1";
         /// <param name="data"></param>
         private void queryExaminatProgress(DataTable data)
         {
-            //if (dataGridView1.DataSource != null)
-            //{
-            //    DataTable dts = (DataTable)dataGridView1.DataSource;
-            //    dts.Rows.Clear();
-            //    dataGridView1.DataSource = dts;
-            //}
-            //else
-            //{
-            //    dataGridView1.Rows.Clear();
-            //}
+            if (dataGridView1.DataSource != null)
+            {
+                DataTable dts = (DataTable)dataGridView1.DataSource;
+                dts.Rows.Clear();
+                dataGridView1.DataSource = dts;
+            }
+            else
+            {
+                dataGridView1.Rows.Clear();
+            }
 
             if (data != null)
             {
@@ -236,6 +236,10 @@ where 1=1";
                     buttonColumn.HeaderText = "";
                     buttonColumn.DefaultCellStyle.NullValue = "查看报告";
                     dataGridView1.Columns.Add(buttonColumn);
+                }
+                else {
+                    buttonColumn.Dispose();
+                    buttonColumn = null;
                 }
                 checkColumn = new DataGridViewCheckBoxColumn(); //插入第0列 
                 DatagridViewCheckBoxHeaderCell cbHeader = new DatagridViewCheckBoxHeaderCell();
@@ -2754,18 +2758,18 @@ where 1=1";
                                     flagsh = 1;
                                 }
                             }
-                            //jktj.Add("低密度脂蛋白", 
+                            //jktj.Add("高密度脂蛋白", 
                             string hdl = jkdata.Rows[j]["hdl"].ToString();
                             if (!string.IsNullOrWhiteSpace(hdl))
                             {
                                 if (Convert.ToDouble(hdl) > 1.9)
                                 {
-                                    sm += @"低密度脂蛋白值偏高：" + hdl + "mmol/l   ";
+                                    sm += @"高密度脂蛋白值偏高：" + hdl + "mmol/l   ";
                                     flagsh = 1;
                                 }
                                 else if (Convert.ToDouble(hdl) < 0.9)
                                 {
-                                    sm += @"低密度脂蛋白值偏低：" + hdl + "mmol/l   ";
+                                    sm += @"高密度脂蛋白值偏低：" + hdl + "mmol/l   ";
                                     flagsh = 1;
                                 }
                             }
