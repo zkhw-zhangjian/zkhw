@@ -878,8 +878,8 @@ where 1=1";
                         List<string> vs = new List<string>();
                         vs.Add("封面");
                         //vs.Add("个人信息");
-                        vs.Add("化验报告单");
                         vs.Add("健康体检表");
+                        vs.Add("化验报告单");
                         vs.Add("心电图");
                         vs.Add("B超");
                         vs.Add("老年人生活自理能力评估");
@@ -890,9 +890,16 @@ where 1=1";
                             List<Report> reports = new List<Report>();
                             DataRow data = dataSet.Tables["个人"].Rows[i];
                             string age = data["age"].ToString();
-                            
                             foreach (var item in vs)
                             {
+                                if (age.Length>0) {
+                                    int ageint = Int32.Parse(age);
+                                    if (ageint<65) {
+                                        if (item== "中医体质" || item== "老年人生活自理能力评估") {
+                                            continue;
+                                        }
+                                    }
+                                }
                                 Report report = new Report();
                                 report.Doc = PdfProcessing(item, data);
                                 report.Name = item;
@@ -1029,7 +1036,8 @@ where 1=1";
                     builder.MoveToHeaderFooter(HeaderFooterType.FooterPrimary); 
                     builder.InsertField("PAGE", ""); 
                     builder.Write(" / "); 
-                    builder.InsertField("NUMPAGES", ""); 
+                    builder.InsertField("NUMPAGES", "");
+                    builder.Write("页");
                     /*end*/
                     break;
                 #endregion
