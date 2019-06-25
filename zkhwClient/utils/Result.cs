@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace zkhwClient.dao
@@ -334,6 +335,16 @@ namespace zkhwClient.dao
             dtno.Rows.Add(newRow);
             DataRow [] dr= dtno.Select("id='"+id+"'");
             return dr[0]["name"].ToString();
+        }
+
+        public static bool Validate(string str, string regexStr)
+        {
+            Regex regex = new Regex(regexStr);
+            Match match = regex.Match(str);
+            if (match.Success)
+                return true;
+            else
+                return false;
         }
     }
 

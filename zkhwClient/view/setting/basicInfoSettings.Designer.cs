@@ -104,7 +104,6 @@
             // 
             // comboBox7
             // 
-            this.comboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox7.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox7.FormattingEnabled = true;
             this.comboBox7.Location = new System.Drawing.Point(784, 68);

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using zkhwClient.dao;
 
@@ -366,10 +362,25 @@ namespace zkhwClient.view.PublicHealthView
 
             per.base_temperature = this.numericUpDown1.Text;
             per.base_heartbeat = this.textBox66.Text.Replace(" ", "");
+            if (per.base_heartbeat!=""&&!Result.Validate(per.base_heartbeat.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("脉率应填写数字!");
+                return;
+            }
             per.base_respiratory = this.textBox53.Text.Replace(" ", "");
+            if (per.base_respiratory != "" && !Result.Validate(per.base_respiratory.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("呼吸应填写数字!");
+                return;
+            }
             if (this.textBox14.Text.Replace(" ", "") != "" && !"".Equals(this.textBox14.Text.Replace(" ", "")))
             {
                 per.base_blood_pressure_left_high = this.textBox14.Text.Replace(" ", "");
+                if (!Result.Validate(per.base_blood_pressure_left_high.Trim(), @"^(-?\d+)(\.\d+)?$"))
+                {
+                    MessageBox.Show("左侧高压应填写数字!");
+                    return;
+                }
             }
             else {
                 per.base_blood_pressure_left_high = "0";
@@ -377,6 +388,11 @@ namespace zkhwClient.view.PublicHealthView
             if (this.textBox58.Text.Replace(" ", "") != "" && !"".Equals(this.textBox58.Text.Replace(" ", "")))
             {
                 per.base_blood_pressure_left_low = this.textBox58.Text.Replace(" ", "");
+                if (!Result.Validate(per.base_blood_pressure_left_low.Trim(), @"^(-?\d+)(\.\d+)?$"))
+                {
+                    MessageBox.Show("左侧低压应填写数字!");
+                    return;
+                }
             }
             else
             {
@@ -385,6 +401,11 @@ namespace zkhwClient.view.PublicHealthView
             if (this.textBox63.Text.Replace(" ", "") != "" && !"".Equals(this.textBox63.Text.Replace(" ", "")))
             {
                 per.base_blood_pressure_right_high = this.textBox63.Text.Replace(" ", "");
+                if (!Result.Validate(per.base_blood_pressure_right_high.Trim(), @"^(-?\d+)(\.\d+)?$"))
+                {
+                    MessageBox.Show("右侧高压应填写数字!");
+                    return;
+                }
             }
             else
             {
@@ -393,20 +414,44 @@ namespace zkhwClient.view.PublicHealthView
             if (this.textBox61.Text.Replace(" ", "") != "" && !"".Equals(this.textBox61.Text.Replace(" ", "")))
             {
                 per.base_blood_pressure_right_low = this.textBox61.Text.Replace(" ", "");
+                if (!Result.Validate(per.base_blood_pressure_right_low.Trim(), @"^(-?\d+)(\.\d+)?$"))
+                {
+                    MessageBox.Show("右侧低压应填写数字!");
+                    return;
+                }
             }
             else
             {
                 per.base_blood_pressure_right_low = "0";
             }
             per.base_height= this.textBox56.Text.Replace(" ", "");
+            if (per.base_height != "" && !Result.Validate(per.base_height.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("身高应填写数字!");
+                return;
+            }
             per.base_weight= this.textBox45.Text.Replace(" ", "");
-            per.base_waist= this.textBox42.Text.Replace(" ", "");
+            if (per.base_weight != "" && !Result.Validate(per.base_weight.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("体重应填写数字!");
+                return;
+            }
+            per.base_waist = this.textBox42.Text.Replace(" ", "");
             if (per.base_waist == "")
             {
                 MessageBox.Show("腰围不能为空!");return;
             }
+            if (per.base_waist != "" && !Result.Validate(per.base_waist.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("腰围应填写数字!");
+                return;
+            }
             per.base_bmi= this.textBox67.Text.Replace(" ", "");
-            
+            if (per.base_bmi != "" && !Result.Validate(per.base_bmi.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("体质BMI应填写数字!");
+                return;
+            }
             if (this.radioButton1.Checked == true) { per.base_health_estimate = this.radioButton1.Tag.ToString(); };
             if (this.radioButton2.Checked == true) { per.base_health_estimate = this.radioButton2.Tag.ToString(); };
             if (this.radioButton3.Checked == true) { per.base_health_estimate = this.radioButton3.Tag.ToString(); };
@@ -422,12 +467,22 @@ namespace zkhwClient.view.PublicHealthView
             if (this.radioButton18.Checked == true) {
                 per.base_cognition_estimate = this.radioButton18.Tag.ToString();
                 per.base_cognition_score= this.textBox72.Text.Replace(" ", "");
+                if (!Result.Validate(per.base_cognition_score.Trim(), @"^(-?\d+)(\.\d+)?$"))
+                {
+                    MessageBox.Show("老年人认知功能-简易智力状态检查分数应填写数字!");
+                    return;
+                }
             };
 
             if (this.radioButton6.Checked == true) { per.base_feeling_estimate = this.radioButton6.Tag.ToString(); };
             if (this.radioButton10.Checked == true) {
                 per.base_feeling_estimate = this.radioButton10.Tag.ToString();
                 per.base_feeling_score = this.textBox20.Text.Replace(" ", "");
+                if (!Result.Validate(per.base_feeling_score.Trim(), @"^(-?\d+)(\.\d+)?$"))
+                {
+                    MessageBox.Show("老年人情感状态-抑郁评分检查分数应填写数字!");
+                    return;
+                }
             };
 
             if (this.radioButton24.Checked == true) { per.lifeway_exercise_frequency = this.radioButton24.Tag.ToString(); };
@@ -776,10 +831,25 @@ namespace zkhwClient.view.PublicHealthView
 
             per.base_temperature = this.numericUpDown1.Text;
             per.base_heartbeat = this.textBox66.Text.Replace(" ", "");
+            if (per.base_heartbeat != "" && !Result.Validate(per.base_heartbeat.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("脉率应填写数字!");
+                return;
+            }
             per.base_respiratory = this.textBox53.Text.Replace(" ", "");
+            if (per.base_respiratory != "" && !Result.Validate(per.base_respiratory.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("呼吸应填写数字!");
+                return;
+            }
             if (this.textBox14.Text.Replace(" ", "") != "" && !"".Equals(this.textBox14.Text.Replace(" ", "")))
             {
                 per.base_blood_pressure_left_high = this.textBox14.Text.Replace(" ", "");
+                if (!Result.Validate(per.base_blood_pressure_left_high.Trim(), @"^(-?\d+)(\.\d+)?$"))
+                {
+                    MessageBox.Show("左侧高压应填写数字!");
+                    return;
+                }
             }
             else
             {
@@ -788,6 +858,11 @@ namespace zkhwClient.view.PublicHealthView
             if (this.textBox58.Text.Replace(" ", "") != "" && !"".Equals(this.textBox58.Text.Replace(" ", "")))
             {
                 per.base_blood_pressure_left_low = this.textBox58.Text.Replace(" ", "");
+                if (!Result.Validate(per.base_blood_pressure_left_low.Trim(), @"^(-?\d+)(\.\d+)?$"))
+                {
+                    MessageBox.Show("左侧低压应填写数字!");
+                    return;
+                }
             }
             else
             {
@@ -796,6 +871,11 @@ namespace zkhwClient.view.PublicHealthView
             if (this.textBox63.Text.Replace(" ", "") != "" && !"".Equals(this.textBox63.Text.Replace(" ", "")))
             {
                 per.base_blood_pressure_right_high = this.textBox63.Text.Replace(" ", "");
+                if (!Result.Validate(per.base_blood_pressure_right_high.Trim(), @"^(-?\d+)(\.\d+)?$"))
+                {
+                    MessageBox.Show("右侧高压应填写数字!");
+                    return;
+                }
             }
             else
             {
@@ -804,20 +884,44 @@ namespace zkhwClient.view.PublicHealthView
             if (this.textBox61.Text.Replace(" ", "") != "" && !"".Equals(this.textBox61.Text.Replace(" ", "")))
             {
                 per.base_blood_pressure_right_low = this.textBox61.Text.Replace(" ", "");
+                if (!Result.Validate(per.base_blood_pressure_right_low.Trim(), @"^(-?\d+)(\.\d+)?$"))
+                {
+                    MessageBox.Show("右侧低压应填写数字!");
+                    return;
+                }
             }
             else
             {
                 per.base_blood_pressure_right_low = "0";
             }
             per.base_height = this.textBox56.Text.Replace(" ", "");
+            if (per.base_height != "" && !Result.Validate(per.base_height.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("身高应填写数字!");
+                return;
+            }
             per.base_weight = this.textBox45.Text.Replace(" ", "");
+            if (per.base_weight != "" && !Result.Validate(per.base_weight.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("体重应填写数字!");
+                return;
+            }
             per.base_waist = this.textBox42.Text.Replace(" ", "");
             if (per.base_waist == "")
             {
                 MessageBox.Show("腰围不能为空!"); return;
             }
+            if (per.base_waist != "" && !Result.Validate(per.base_waist.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("腰围应填写数字!");
+                return;
+            }
             per.base_bmi = this.textBox67.Text.Replace(" ", "");
-
+            if (per.base_bmi != "" && !Result.Validate(per.base_bmi.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("体质BMI应填写数字!");
+                return;
+            }
             if (this.radioButton1.Checked == true) { per.base_health_estimate = this.radioButton1.Tag.ToString(); };
             if (this.radioButton2.Checked == true) { per.base_health_estimate = this.radioButton2.Tag.ToString(); };
             if (this.radioButton3.Checked == true) { per.base_health_estimate = this.radioButton3.Tag.ToString(); };
@@ -834,6 +938,11 @@ namespace zkhwClient.view.PublicHealthView
             {
                 per.base_cognition_estimate = this.radioButton18.Tag.ToString();
                 per.base_cognition_score = this.textBox72.Text.Replace(" ", "");
+                if (!Result.Validate(per.base_cognition_score.Trim(), @"^(-?\d+)(\.\d+)?$"))
+                {
+                    MessageBox.Show("老年人认知功能-简易智力状态检查分数应填写数字!");
+                    return;
+                }
             };
 
             if (this.radioButton6.Checked == true) { per.base_feeling_estimate = this.radioButton6.Tag.ToString(); };
@@ -841,6 +950,11 @@ namespace zkhwClient.view.PublicHealthView
             {
                 per.base_feeling_estimate = this.radioButton10.Tag.ToString();
                 per.base_feeling_score = this.textBox20.Text.Replace(" ", "");
+                if (!Result.Validate(per.base_feeling_score.Trim(), @"^(-?\d+)(\.\d+)?$"))
+                {
+                    MessageBox.Show("老年人情感状态-抑郁评分检查分数应填写数字!");
+                    return;
+                }
             };
 
             if (this.radioButton24.Checked == true) { per.lifeway_exercise_frequency = this.radioButton24.Tag.ToString(); };
@@ -1035,10 +1149,25 @@ namespace zkhwClient.view.PublicHealthView
 
             per.base_temperature = this.numericUpDown1.Text;
             per.base_heartbeat = this.textBox66.Text.Replace(" ", "");
+            if (per.base_heartbeat != "" && !Result.Validate(per.base_heartbeat.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("脉率应填写数字!");
+                return;
+            }
             per.base_respiratory = this.textBox53.Text.Replace(" ", "");
+            if (per.base_respiratory != "" && !Result.Validate(per.base_respiratory.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("呼吸应填写数字!");
+                return;
+            }
             if (this.textBox14.Text.Replace(" ", "") != "" && !"".Equals(this.textBox14.Text.Replace(" ", "")))
             {
                 per.base_blood_pressure_left_high = this.textBox14.Text.Replace(" ", "");
+                if (!Result.Validate(per.base_blood_pressure_left_high.Trim(), @"^(-?\d+)(\.\d+)?$"))
+                {
+                    MessageBox.Show("左侧高压应填写数字!");
+                    return;
+                }
             }
             else
             {
@@ -1047,6 +1176,11 @@ namespace zkhwClient.view.PublicHealthView
             if (this.textBox58.Text.Replace(" ", "") != "" && !"".Equals(this.textBox58.Text.Replace(" ", "")))
             {
                 per.base_blood_pressure_left_low = this.textBox58.Text.Replace(" ", "");
+                if (!Result.Validate(per.base_blood_pressure_left_low.Trim(), @"^(-?\d+)(\.\d+)?$"))
+                {
+                    MessageBox.Show("左侧低压应填写数字!");
+                    return;
+                }
             }
             else
             {
@@ -1055,6 +1189,11 @@ namespace zkhwClient.view.PublicHealthView
             if (this.textBox63.Text.Replace(" ", "") != "" && !"".Equals(this.textBox63.Text.Replace(" ", "")))
             {
                 per.base_blood_pressure_right_high = this.textBox63.Text.Replace(" ", "");
+                if (!Result.Validate(per.base_blood_pressure_right_high.Trim(), @"^(-?\d+)(\.\d+)?$"))
+                {
+                    MessageBox.Show("右侧高压应填写数字!");
+                    return;
+                }
             }
             else
             {
@@ -1063,20 +1202,44 @@ namespace zkhwClient.view.PublicHealthView
             if (this.textBox61.Text.Replace(" ", "") != "" && !"".Equals(this.textBox61.Text.Replace(" ", "")))
             {
                 per.base_blood_pressure_right_low = this.textBox61.Text.Replace(" ", "");
+                if (!Result.Validate(per.base_blood_pressure_right_low.Trim(), @"^(-?\d+)(\.\d+)?$"))
+                {
+                    MessageBox.Show("右侧低压应填写数字!");
+                    return;
+                }
             }
             else
             {
                 per.base_blood_pressure_right_low = "0";
             }
             per.base_height = this.textBox56.Text.Replace(" ", "");
+            if (per.base_height != "" && !Result.Validate(per.base_height.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("身高应填写数字!");
+                return;
+            }
             per.base_weight = this.textBox45.Text.Replace(" ", "");
+            if (per.base_weight != "" && !Result.Validate(per.base_weight.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("体重应填写数字!");
+                return;
+            }
             per.base_waist = this.textBox42.Text.Replace(" ", "");
             if (per.base_waist == "")
             {
                 MessageBox.Show("腰围不能为空!"); return;
             }
+            if (per.base_waist != "" && !Result.Validate(per.base_waist.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("腰围应填写数字!");
+                return;
+            }
             per.base_bmi = this.textBox67.Text.Replace(" ", "");
-
+            if (per.base_bmi != "" && !Result.Validate(per.base_bmi.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("体质BMI应填写数字!");
+                return;
+            }
             if (this.radioButton1.Checked == true) { per.base_health_estimate = this.radioButton1.Tag.ToString(); };
             if (this.radioButton2.Checked == true) { per.base_health_estimate = this.radioButton2.Tag.ToString(); };
             if (this.radioButton3.Checked == true) { per.base_health_estimate = this.radioButton3.Tag.ToString(); };
@@ -1093,6 +1256,11 @@ namespace zkhwClient.view.PublicHealthView
             {
                 per.base_cognition_estimate = this.radioButton18.Tag.ToString();
                 per.base_cognition_score = this.textBox72.Text.Replace(" ", "");
+                if (!Result.Validate(per.base_cognition_score.Trim(), @"^(-?\d+)(\.\d+)?$"))
+                {
+                    MessageBox.Show("老年人认知功能-简易智力状态检查分数应填写数字!");
+                    return;
+                }
             };
 
             if (this.radioButton6.Checked == true) { per.base_feeling_estimate = this.radioButton6.Tag.ToString(); };
@@ -1100,6 +1268,11 @@ namespace zkhwClient.view.PublicHealthView
             {
                 per.base_feeling_estimate = this.radioButton10.Tag.ToString();
                 per.base_feeling_score = this.textBox20.Text.Replace(" ", "");
+                if (!Result.Validate(per.base_feeling_score.Trim(), @"^(-?\d+)(\.\d+)?$"))
+                {
+                    MessageBox.Show("老年人情感状态-抑郁评分检查分数应填写数字!");
+                    return;
+                }
             };
 
             if (this.radioButton24.Checked == true) { per.lifeway_exercise_frequency = this.radioButton24.Tag.ToString(); };

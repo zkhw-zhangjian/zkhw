@@ -131,7 +131,10 @@ namespace zkhwClient.view.setting
 
                 this.textBox2.Text = wx;
                 this.textBox3.Text = other;
-            }    
+            }
+            if (shengName=="陕西") {
+                this.comboBox7.DropDownStyle = ComboBoxStyle.DropDownList;
+            }
         }
 
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
@@ -143,7 +146,14 @@ namespace zkhwClient.view.setting
             this.comboBox3.DataSource = null;
             this.comboBox4.DataSource = null;
             this.comboBox5.DataSource = null;
-        }
+            if (this.comboBox1.Text == "陕西")
+            {
+                this.comboBox7.DropDownStyle = ComboBoxStyle.DropDownList;
+            }
+            else {
+                this.comboBox7.DropDownStyle = ComboBoxStyle.DropDown;
+            }
+         }
 
         private void comboBox2_SelectionChangeCommitted(object sender, EventArgs e)
         {
@@ -167,7 +177,14 @@ namespace zkhwClient.view.setting
         private void comboBox4_SelectionChangeCommitted(object sender, EventArgs e)
         {
             xzcode = this.comboBox4.SelectedValue.ToString();
-            this.comboBox5.DataSource = areadao.cunInfo(xzcode);//绑定数据源
+            DataTable dtxz= areadao.cunInfo(xzcode);
+            if (qxcode == "440983") {
+                DataRow dr = dtxz.NewRow();
+                dr["code"] = "0";
+                dr["name"] = "请选择";
+                dtxz.Rows.InsertAt(dr, 0);
+            }
+            this.comboBox5.DataSource = dtxz;//绑定数据源
             this.comboBox5.DisplayMember = "name";//显示给用户的数据集表项
             this.comboBox5.ValueMember = "code";//操作时获取的值 
         }
@@ -178,8 +195,12 @@ namespace zkhwClient.view.setting
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            if (xcuncode==null||"".Equals(xcuncode)) {
-                MessageBox.Show("信息不完整!");return;
+            if (xcuncode == null || "".Equals(xcuncode)) {
+                MessageBox.Show("信息不完整!"); return;
+            } else if (this.comboBox5.Text=="请选择") {
+                DataTable dtxzs = areadao.cunInfo(xzcode);
+                this.comboBox5.Text = dtxzs.Rows[0]["name"].ToString();
+                xcuncode = dtxzs.Rows[0]["code"].ToString();
             }
             shengName= this.comboBox1.Text;
             shiName = this.comboBox2.Text;
@@ -191,7 +212,10 @@ namespace zkhwClient.view.setting
             organ_name = textBox1.Text;
             input_name = this.comboBox6.Text;
             zeren_doctor = this.comboBox7.Text;
-            zeren_doctorId = this.comboBox7.SelectedValue.ToString();
+            if (shengName == "陕西")
+            {
+                zeren_doctorId = this.comboBox7.SelectedValue.ToString();
+            }
             bc = this.comboBox8.Text;
             xcg = this.comboBox9.Text;
             sh = this.comboBox10.Text;

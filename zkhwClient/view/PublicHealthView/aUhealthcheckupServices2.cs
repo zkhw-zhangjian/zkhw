@@ -486,6 +486,7 @@ namespace zkhwClient.view.PublicHealthView
 
             per.organ_vision_left = this.textBox9.Text;
             per.organ_vision_right = this.textBox8.Text;
+
             per.organ_correctedvision_left = this.textBox4.Text;
             per.organ_correctedvision_right = this.textBox51.Text;
 
