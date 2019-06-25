@@ -76,9 +76,7 @@ namespace zkhwClient.dao
         public DataTable querytjjdTopdf(string xcuncode, string time1,string time2)
         {
             DataSet ds = new DataSet();
-            string sql = @"select name,(case sex when '1' then '男' when '2' then '女' ELSE ''END) sex,birthday,
-                     (case when BChao>='1' and XinDian>='1' and ShengHua>='1' and XueChangGui>='1' 
-                     and NiaoChangGui>='1' and XueYa>='1' and Shengaotizhong>='1' and jktjb>='1' and lnrzlnlpg>='1' and lnrzytzbs>='1' then '完成' else '未完成' end) as type
+            string sql = @"select name,(case sex when '1' then '男' when '2' then '女' ELSE ''END) sex,birthday,age
                      ,BChao,XinDian,ShengHua,XueChangGui,NiaoChangGui,XueYa,Shengaotizhong,jktjb,lnrzlnlpg,lnrzytzbs from zkhw_tj_bgdc where 1=1";
             if (xcuncode != null && !"".Equals(xcuncode))
             {
@@ -94,7 +92,7 @@ namespace zkhwClient.dao
             }
             if (sql != "")
             {
-                sql += " order by convert(type using GBK) DESC,convert(name using GBK) ASC ";
+                sql += " order by convert(name using GBK) ASC ";
             }
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
@@ -113,6 +111,20 @@ namespace zkhwClient.dao
         {
             DataSet ds = new DataSet();
             string sql = "select id from zkhw_tj_bc where aichive_no = '" + aichive_no + "' and bar_code = '" + bar_code + "'";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+
+        public DataTable queryGeRenArchivesInfo(string s)
+        {
+            DataSet ds = new DataSet();
+            string sql = string.Format(@"select r.id,r.archive_no,r.name,
+                         (case r.sex when '1'then '男' when '2' then '女' when '9' then '未说明的性别' when '0' then '未知的性别' ELSE ''
+                         END)  sex    ,r.birthday,
+                         r.age,r.id_number,z.bar_code,z.BChao,z.XinDian,z.XueChangGui,
+                         z.NiaoChangGui,z.Shengaotizhong,z.XueYa,z.ShengHua,z.jktjb,z.lnrzlnlpg,
+                         z.lnrzytzbs,z.healthchecktime from resident_base_info r left join zkhw_tj_bgdc z 
+                        on r.id_number= z.id_number {0} order by CONVERT(r.name using  gbk) ASC", s);
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }

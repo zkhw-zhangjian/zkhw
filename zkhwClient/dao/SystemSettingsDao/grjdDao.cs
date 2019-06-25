@@ -98,8 +98,8 @@ namespace zkhwClient.dao
         //获取已登记的总人数
         public DataTable jkAllNum(string areacode, string time)
         {
-            DataSet ds = new DataSet();
-            string sql = "select count(1) from zkhw_tj_jk a where a.village_code = '" + areacode + "' and a.createtime >= '" + time + "'";
+            DataSet ds = new DataSet(); 
+            string sql = "select count(1) from zkhw_tj_jk a where a.village_code = '" + areacode + "' and  a.createtime >= '" + time + "'";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }

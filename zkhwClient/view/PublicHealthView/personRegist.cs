@@ -749,8 +749,8 @@ namespace zkhwClient.view.PublicHealthView
             if (dt16num != null&& dt16num.Rows.Count>0) {
                 label16.Text = dt16num.Rows[0][0].ToString();//计划体检人数
             }
-
-            DataTable dt19num = grjddao.jkAllNum(basicInfoSettings.xcuncode, basicInfoSettings.createtime);
+            string time = DateTime.Parse(basicInfoSettings.createtime).ToString("yyyy-MM-dd");
+            DataTable dt19num = grjddao.jkAllNum(basicInfoSettings.xcuncode, time);
             if (dt19num != null && dt19num.Rows.Count > 0)
             {
                 label19.Text = dt19num.Rows[0][0].ToString();//登记人数
@@ -764,7 +764,7 @@ namespace zkhwClient.view.PublicHealthView
             int num34 = 0;
             int num37 = 0;
             int num39 = 0;
-            DataTable dtjkifo =jkinfodao.selectjktjInfo(basicInfoSettings.xcuncode, basicInfoSettings.createtime);
+            DataTable dtjkifo =jkinfodao.selectjktjInfo(basicInfoSettings.xcuncode, time);
             if (dtjkifo != null && dtjkifo.Rows.Count > 0)
             { 
                 for (int i=0;i< dtjkifo.Rows.Count;i++) {

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using zkhwClient.dao;
 using zkhwClient.view.setting;
@@ -63,23 +64,36 @@ namespace zkhwClient.view.PublicHealthView
             time1 = this.dateTimePicker1.Text.ToString() +" 00:00:00";//开始时间
             time2 = this.dateTimePicker2.Text.ToString() + " 23:59:59";//结束时间
             this.dataGridView1.DataSource = null;
-            DataTable dt = pBasicInfo.queryPersonalBasicInfo(pCa, time1, time2,code);
-            this.dataGridView1.DataSource = dt;
-            this.dataGridView1.Columns[0].Visible = false;
-            this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";
-            this.dataGridView1.Columns[2].HeaderCell.Value = "档案编号";
-            this.dataGridView1.Columns[3].HeaderCell.Value = "身份证号";
-            this.dataGridView1.Columns[4].HeaderCell.Value = "创建人";
-            this.dataGridView1.Columns[5].HeaderCell.Value = "创建时间";
-            this.dataGridView1.Columns[6].HeaderCell.Value = "责任医生";
-
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            for (int i = 0; i < this.dataGridView1.Columns.Count; i++)
+            LoadingHelper.myCaption = "正在查询...";
+            LoadingHelper.myLabel = "正在查询数据...";
+            LoadingHelper.ShowLoadingScreen();
+            Thread.Sleep(50);
+            try
             {
-                this.dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                DataTable dt = pBasicInfo.queryPersonalBasicInfo(pCa, time1, time2, code);
+                this.dataGridView1.DataSource = dt;
+                this.dataGridView1.Columns[0].Visible = false;
+                this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";
+                this.dataGridView1.Columns[2].HeaderCell.Value = "档案编号";
+                this.dataGridView1.Columns[3].HeaderCell.Value = "身份证号";
+                this.dataGridView1.Columns[4].HeaderCell.Value = "创建人";
+                this.dataGridView1.Columns[5].HeaderCell.Value = "创建时间";
+                this.dataGridView1.Columns[6].HeaderCell.Value = "责任医生";
+
+                this.dataGridView1.ReadOnly = true;
+                this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
+                this.dataGridView1.AllowUserToAddRows = false;
+                this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+                for (int i = 0; i < this.dataGridView1.Columns.Count; i++)
+                {
+                    this.dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+                LoadingHelper.CloseForm();
+            }
+            catch (Exception ex)
+            {
+                LoadingHelper.CloseForm();
+                MessageBox.Show("出错,请联系请联系管理员！" + ex.Message + "/r/n" + ex.StackTrace);
             }
 
         }
@@ -378,6 +392,21 @@ namespace zkhwClient.view.PublicHealthView
         private void comboBox5_SelectionChangeCommitted(object sender, EventArgs e)
         {
             xcuncode = this.comboBox5.SelectedValue.ToString();
+        }
+
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            for (int i = 0; i < e.RowCount; i++)
+            {
+                dataGridView1.Rows[e.RowIndex + i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                dataGridView1.Rows[e.RowIndex + i].HeaderCell.Value = (e.RowIndex + i + 1).ToString();
+            }
+
+            for (int i = e.RowIndex + e.RowCount; i < this.dataGridView1.Rows.Count; i++)
+            {
+                dataGridView1.Rows[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                dataGridView1.Rows[i].HeaderCell.Value = (i + 1).ToString();
+            }
         }
     }
 }

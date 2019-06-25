@@ -8,7 +8,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Linq;
+using System.Linq;  
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -18,6 +18,7 @@ using zkhwClient.view.updateTjResult;
 
 namespace zkhwClient.view.PublicHealthView
 {
+   
     public partial class examinatProgress : Form 
     { 
         public string time1 = null; 
@@ -373,13 +374,14 @@ namespace zkhwClient.view.PublicHealthView
             {
                 label9.Text = dt16num.Rows[0][0].ToString();//计划体检人数
             }
-            DataTable dt19num = grjddao.jkAllNum(xcuncode, basicInfoSettings.createtime);
+            string createTime = DateTime.Parse(basicInfoSettings.createtime).ToString("yyyy-MM-dd");
+            DataTable dt19num = grjddao.jkAllNum(xcuncode, createTime);
             if (dt19num != null && dt19num.Rows.Count > 0)
             {
                 label11.Text = dt19num.Rows[0][0].ToString();//登记人数
 
             }
-            DataTable dt20num = jkdao.querytjjdTopdf(xcuncode, basicInfoSettings.createtime);
+            DataTable dt20num = jkdao.querytjjdTopdf(xcuncode, createTime);
             if (dt20num != null && dt20num.Rows.Count > 0)
             {
                 DataRow[] row = dt20num.Select("type='未完成'");
@@ -561,6 +563,7 @@ namespace zkhwClient.view.PublicHealthView
                 MessageBox.Show("无历史数据，请先查询历史数据后再生成PDF文件!");
             }
         }
+
         private void CreateTable(DataTable dts, string path)
         {
             registrationRecordCheck();
@@ -568,6 +571,7 @@ namespace zkhwClient.view.PublicHealthView
             Document doc = new Document(PageSize.A4);
             try
             {
+                List<PersonExport> _lst = new List<PersonExport>();
                 String timejg = this.comboBox1.Text;
                 //写实例 
                 PdfWriter.GetInstance(doc, new FileStream(path, FileMode.Create));
@@ -652,17 +656,33 @@ namespace zkhwClient.view.PublicHealthView
                     cell = new PdfPCell(new Phrase(columnsnames[i], font));
                     table.AddCell(cell);
                 }
+                PersonExport obj = new PersonExport();
+                #region 整理list
                 for (int rowNum = 0; rowNum != dts.Rows.Count; rowNum++)
                 {
-                   table.AddCell(new Phrase((rowNum + 1).ToString(), font));
+                    obj = new PersonExport();
+                    obj.ID = (rowNum + 1).ToString();
+                   //table.AddCell(new Phrase((rowNum + 1).ToString(), font));
                     for (int columNum = 0; columNum != dts.Columns.Count; columNum++)
                     {
-                        if (columNum <= 3)
+                        string colstr= dts.Rows[rowNum][columNum].ToString();
+                        if (columNum==0)
                         {
-                            table.AddCell(new Phrase(dts.Rows[rowNum][columNum].ToString(), font));
+                            obj.Name = colstr;
                         }
-                        else if (columNum == 4)
+                        else if (columNum == 1)
                         {
+                            obj.Sex = colstr;
+                        }
+                        else if (columNum == 2)
+                        {
+                            obj.RiQi = colstr;
+                        }
+                        else if(columNum == 4)
+                        {
+                            string tage = dts.Rows[rowNum][3].ToString();
+                            if (tage == "") tage = "0";
+                            int age = int.Parse(tage);
                             string columlastname = "";
                             #region 特殊处理
                             for (int j = columNum; j < dts.Columns.Count; j++)
@@ -697,22 +717,59 @@ namespace zkhwClient.view.PublicHealthView
                                         case 10:
                                             tmp = "身高体重";
                                             break;
+                                        case 11:
+                                            tmp = "体检健康表";
+                                            break;
                                     }
-                                    if (columlastname == "")
+                                    if (age >= 65)
                                     {
-                                        columlastname = tmp;
+                                        switch (j)
+                                        {
+                                            case 12:
+                                                tmp = "老年人生活自理能力评估";
+                                                break;
+                                            case 13:
+                                                tmp = "老年人中医体质辨识";
+                                                break;
+                                        }
+
                                     }
-                                    else
+                                    if (tmp != "")
                                     {
-                                        columlastname = columlastname + "、" + tmp;
+                                        if (columlastname == "")
+                                        {
+                                            columlastname = tmp;
+                                        }
+                                        else
+                                        {
+                                            columlastname = columlastname + "、" + tmp;
+                                        }
                                     }
                                 }
-                           }
+                            }
                             #endregion
-                            table.AddCell(new Phrase(columlastname, font));
-                            break;
-                        }
+
+                            string sType = "未完成";
+                            if (columlastname == "")
+                            {
+                                sType = "已完成";
+                            }
+                            obj.ZhuangTai = sType;
+                            obj.Memo = columlastname;
+                            _lst.Add(obj);
+                        } 
                     }
+                }
+                #endregion
+                var q = (from l in _lst orderby l.ZhuangTai ascending select l).ToList();
+                for(int i=0;i< q.Count ;i++)
+                {
+                    table.AddCell(new Phrase(q[i].ID, font));
+                    table.AddCell(new Phrase(q[i].Name, font));
+                    table.AddCell(new Phrase(q[i].Sex, font));
+                    table.AddCell(new Phrase(q[i].RiQi, font));
+                    table.AddCell(new Phrase(q[i].ZhuangTai, font));
+                    table.AddCell(new Phrase(q[i].Memo, font));
                 }
                 doc.Add(table);
                 //关闭document 
