@@ -95,7 +95,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -163,7 +162,6 @@
             this.健康体检表ToolStripMenuItem,
             this.老年人健康服务ToolStripMenuItem,
             this.中医健康服务ToolStripMenuItem,
-            this.toolStripMenuItem1,
             this.健康扶贫服务ToolStripMenuItem,
             this.高血压患者服务ToolStripMenuItem,
             this.型糖尿病患者服务ToolStripMenuItem,
@@ -688,12 +686,6 @@
             this.timer3.Interval = 60000;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(208, 22);
-            this.toolStripMenuItem1.Text = "个人档案管理";
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -797,7 +789,6 @@
         private System.Windows.Forms.ToolStripMenuItem 体检设备说明书ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 家医签约登录ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 健康扶贫服务ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }
 

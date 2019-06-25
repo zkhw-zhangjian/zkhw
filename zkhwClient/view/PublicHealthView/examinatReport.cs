@@ -65,10 +65,18 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     女.Text = rows[0]["sun"].ToString();
                 }
+                else
+                {
+                    女.Text = "0";
+                }
                 DataRow[] rowsn = data.Select("sex='1'");
                 if (rowsn.Length > 0)
                 {
                     男.Text = rowsn[0]["sun"].ToString();
+                }
+                else
+                {
+                    男.Text = "0";
                 }
                 总数.Text = data.Compute("sum(sun)", "true").ToString();
             }
@@ -214,33 +222,35 @@ where 1=1";
         /// <param name="data"></param>
         private void queryExaminatProgress(DataTable data)
         {
-            if (dataGridView1.DataSource != null)
+            //if (dataGridView1.DataSource != null)
+            //{ 
+            //    DataTable dts = (DataTable)dataGridView1.DataSource;
+            //    dts.Rows.Clear();
+            //    dataGridView1.DataSource = dts;
+            //}
+            //else
+            //{
+            //    dataGridView1.Rows.Clear();
+            //} 
+            if(dataGridView1.ColumnCount>0)
             {
-                DataTable dts = (DataTable)dataGridView1.DataSource;
-                dts.Rows.Clear();
-                dataGridView1.DataSource = dts;
+                dataGridView1.Columns.Clear();
             }
-            else
-            {
-                dataGridView1.Rows.Clear();
-            }
-
             if (data != null)
             {
-                this.dataGridView1.DataSource = data;
-                this.dataGridView1.Columns[0].Visible = false;
-                if (buttonColumn == null)
-                {
+                this.dataGridView1.DataSource = data; 
+                //if (buttonColumn == null)
+                //{
                     buttonColumn = new DataGridViewButtonColumn();
                     buttonColumn.Name = "btnModify";
                     buttonColumn.HeaderText = "";
                     buttonColumn.DefaultCellStyle.NullValue = "查看报告";
                     dataGridView1.Columns.Add(buttonColumn);
-                }
-                else {
-                    buttonColumn.Dispose();
-                    buttonColumn = null;
-                }
+                //}
+                //else {
+                //    buttonColumn.Dispose();
+                //    buttonColumn = null;
+                //}
                 checkColumn = new DataGridViewCheckBoxColumn(); //插入第0列 
                 DatagridViewCheckBoxHeaderCell cbHeader = new DatagridViewCheckBoxHeaderCell();
                 cbHeader.OnCheckBoxClicked += new CheckBoxClickedHandler(cbHeader_OnCheckBoxClicked);
@@ -569,10 +579,18 @@ where 1=1";
                                 {
                                     女064.Text = rows[0]["人数"].ToString();
                                 }
+                                else
+                                {
+                                    女064.Text = "0";
+                                }
                                 DataRow[] rowss = data.Select("sex='1'");
                                 if (rowss != null && rowss.Length > 0)
                                 {
                                     男064.Text = rowss[0]["人数"].ToString();
+                                }
+                                else
+                                {
+                                    男064.Text = "0";
                                 }
                                 B超064.Text = data.Compute("sum(B超异常)", "true").ToString();
                                 心电064.Text = data.Compute("sum(心电异常)", "true").ToString();
@@ -588,10 +606,18 @@ where 1=1";
                                 {
                                     女6570.Text = nv6570[0]["人数"].ToString();
                                 }
+                                else
+                                {
+                                    女6570.Text = "0";
+                                }
                                 DataRow[] nan6570 = data.Select("sex='1'");
                                 if (nan6570 != null && nan6570.Length > 0)
                                 {
                                     男6570.Text = nan6570[0]["人数"].ToString();
+                                }
+                                else
+                                {
+                                    男6570.Text = "0";
                                 }
                                 B超6570.Text = data.Compute("sum(B超异常)", "true").ToString();
                                 心电6570.Text = data.Compute("sum(心电异常)", "true").ToString();
@@ -607,10 +633,18 @@ where 1=1";
                                 {
                                     女7075.Text = nv7075[0]["人数"].ToString();
                                 }
+                                else
+                                {
+                                    女7075.Text = "0";
+                                }
                                 DataRow[] nan7075 = data.Select("sex='1'");
                                 if (nan7075 != null && nan7075.Length > 0)
                                 {
                                     男7075.Text = nan7075[0]["人数"].ToString();
+                                }
+                                else
+                                {
+                                    男7075.Text = "0";
                                 }
                                 B超7075.Text = data.Compute("sum(B超异常)", "true").ToString();
                                 心电7075.Text = data.Compute("sum(心电异常)", "true").ToString();
@@ -626,10 +660,18 @@ where 1=1";
                                 {
                                     女75.Text = nv75[0]["人数"].ToString();
                                 }
+                                else
+                                {
+                                    女75.Text = "0";
+                                }
                                 DataRow[] nan75 = data.Select("sex='1'");
                                 if (nan75 != null && nan75.Length > 0)
                                 {
                                     男75.Text = nan75[0]["人数"].ToString();
+                                }
+                                else
+                                {
+                                    男75.Text = "0";
                                 }
                                 B超75.Text = data.Compute("sum(B超异常)", "true").ToString();
                                 心电75.Text = data.Compute("sum(心电异常)", "true").ToString();

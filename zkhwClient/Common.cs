@@ -6,6 +6,15 @@ using System.Text;
 
 namespace zkhwClient
 {
+    public class PersonExport
+    {
+        public string ID { get; set; }
+        public string Name { get; set; }
+        public string Sex { get; set; }
+        public string RiQi { get; set; }
+        public string ZhuangTai { get; set; }
+        public string Memo { get; set; }
+    }
     public class FileTimeInfo
     {
         public string FileName;  //文件名

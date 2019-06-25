@@ -34,6 +34,15 @@ namespace zkhwClient.view.PublicHealthView
                 Result.Bind(comboBox1, ts, "Name", "ID", "--请选择--");
             }
             #endregion
+
+            SetPageControl();
+        }
+
+        private void SetPageControl()
+        {
+            pagerControl1.PageIndex = 1;
+            pagerControl1.PageSize = 20; 
+            pagerControl1.DrawControl(100);
         }
         private void comboBoxBin(ComboBox combo, ComboBox box)
         {
