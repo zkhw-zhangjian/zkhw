@@ -31,7 +31,25 @@ namespace zkhwClient
             {
                 string fname=Path.GetFileNameWithoutExtension(fi.FullName);
                 string[] a = fname.Split('-');
-                if (a[1].ToString() == filename)
+                string _namefile = "";
+                bool isret = false;
+                if(a.Length<=1)
+                {
+                    _namefile = fname;
+                    if(fname.IndexOf(_namefile) > -1)
+                    {
+                        isret = true;
+                    }
+                }
+                else
+                {
+                    _namefile = a[1].ToString();
+                    if(_namefile==filename)
+                    {
+                        isret = true;
+                    }
+                }
+                if (isret==true)
                 {
                     if(fi.CreationTime>dt)
                     {
