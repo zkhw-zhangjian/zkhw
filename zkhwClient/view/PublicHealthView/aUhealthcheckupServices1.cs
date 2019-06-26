@@ -1644,5 +1644,77 @@ namespace zkhwClient.view.PublicHealthView
                 this.checkBox21.Checked = false;
             }
         }
+
+        private void textBox70_DoubleClick(object sender, EventArgs e)
+        {
+            this.textBox70.BackColor = Color.FromArgb(240, 240, 240);
+            foreach (Control ctr in this.panel2.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is RadioButton)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    RadioButton ck = ctr as RadioButton;
+                    if (ck.Checked)
+                    {
+                        ck.Checked = false;
+                    }
+                }
+            }
+        }
+
+        private void textBox71_DoubleClick(object sender, EventArgs e)
+        {
+            this.textBox71.BackColor = Color.FromArgb(240, 240, 240);
+            foreach (Control ctr in this.panel3.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is RadioButton)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    RadioButton ck = ctr as RadioButton;
+                    if (ck.Checked)
+                    {
+                        ck.Checked = false;
+                    }
+                }
+            }
+        }
+
+        private void textBox69_DoubleClick(object sender, EventArgs e)
+        {
+            this.textBox69.BackColor = Color.FromArgb(240, 240, 240);
+            foreach (Control ctr in this.panel4.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is RadioButton)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    RadioButton ck = ctr as RadioButton;
+                    if (ck.Checked)
+                    {
+                        ck.Checked = false;
+                    }
+                }
+            }
+        }
+
+        private void textBox21_DoubleClick(object sender, EventArgs e)
+        {
+            this.textBox21.BackColor = Color.FromArgb(240, 240, 240);
+            foreach (Control ctr in this.panel6.Controls)
+            {
+                //判断该控件是不是CheckBox
+                if (ctr is RadioButton)
+                {
+                    //将ctr转换成CheckBox并赋值给ck
+                    RadioButton ck = ctr as RadioButton;
+                    if (ck.Checked)
+                    {
+                        ck.Checked = false;
+                    }
+                }
+            }
+        }
     }
 }

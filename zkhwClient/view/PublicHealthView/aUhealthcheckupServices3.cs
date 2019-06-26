@@ -343,19 +343,73 @@ namespace zkhwClient.view.PublicHealthView
             if (this.radioButton47.Checked == true) { per.hb = this.radioButton47.Tag.ToString(); };
 
             per.sgft = this.textBox3.Text;
+            if (per.sgft != "" && !Result.Validate(per.sgft.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血清谷丙转氨酶应填写数字!");
+                return;
+            }
             per.ast = this.textBox6.Text;
+            if (per.ast != "" && !Result.Validate(per.ast.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血清谷草转氨酶应填写数字!");
+                return;
+            }
             per.albumin = this.textBox10.Text;
+            if (per.albumin != "" && !Result.Validate(per.albumin.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("白蛋白应填写数字!");
+                return;
+            }
             per.total_bilirubin = this.textBox65.Text;
+            if (per.total_bilirubin != "" && !Result.Validate(per.total_bilirubin.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("总胆红素应填写数字!");
+                return;
+            }
             per.conjugated_bilirubin = this.textBox68.Text;
+            if (per.conjugated_bilirubin != "" && !Result.Validate(per.conjugated_bilirubin.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("结合胆红素应填写数字!");
+                return;
+            }
             per.scr = this.textBox73.Text;
+            if (per.scr != "" && !Result.Validate(per.scr.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血清肌酐应填写数字!");
+                return;
+            }
             per.blood_urea = this.textBox81.Text;
+            if (per.blood_urea != "" && !Result.Validate(per.blood_urea.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血尿素应填写数字!");
+                return;
+            }
             per.blood_k = this.textBox84.Text;
             per.blood_na = this.textBox87.Text;
             per.tc = this.textBox13.Text;
+            if (per.tc != "" && !Result.Validate(per.tc.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("总胆固醇应填写数字!");
+                return;
+            }
             per.tg = this.textBox16.Text;
+            if (per.tg != "" && !Result.Validate(per.tg.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("甘油三酯应填写数字!");
+                return;
+            }
             per.ldl = this.textBox19.Text;
+            if (per.ldl != "" && !Result.Validate(per.ldl.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血清低密度脂蛋白胆固醇应填写数字!");
+                return;
+            }
             per.hdl = this.textBox22.Text;
-
+            if (per.hdl != "" && !Result.Validate(per.hdl.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血清高密度脂蛋白胆固醇应填写数字!");
+                return;
+            }
             if (this.radioButton1.Checked == true) { per.chest_x = this.radioButton1.Tag.ToString(); };
             if (this.radioButton2.Checked == true)
             {
@@ -894,18 +948,73 @@ namespace zkhwClient.view.PublicHealthView
             if (this.radioButton47.Checked == true) { per.hb = this.radioButton47.Tag.ToString(); };
 
             per.sgft = this.textBox3.Text;
+            if (per.sgft != "" && !Result.Validate(per.sgft.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血清谷丙转氨酶应填写数字!");
+                return;
+            }
             per.ast = this.textBox6.Text;
+            if (per.ast != "" && !Result.Validate(per.ast.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血清谷草转氨酶应填写数字!");
+                return;
+            }
             per.albumin = this.textBox10.Text;
+            if (per.albumin != "" && !Result.Validate(per.albumin.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("白蛋白应填写数字!");
+                return;
+            }
             per.total_bilirubin = this.textBox65.Text;
+            if (per.total_bilirubin != "" && !Result.Validate(per.total_bilirubin.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("总胆红素应填写数字!");
+                return;
+            }
             per.conjugated_bilirubin = this.textBox68.Text;
+            if (per.conjugated_bilirubin != "" && !Result.Validate(per.conjugated_bilirubin.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("结合胆红素应填写数字!");
+                return;
+            }
             per.scr = this.textBox73.Text;
+            if (per.scr != "" && !Result.Validate(per.scr.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血清肌酐应填写数字!");
+                return;
+            }
             per.blood_urea = this.textBox81.Text;
+            if (per.blood_urea != "" && !Result.Validate(per.blood_urea.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血尿素应填写数字!");
+                return;
+            }
             per.blood_k = this.textBox84.Text;
             per.blood_na = this.textBox87.Text;
             per.tc = this.textBox13.Text;
+            if (per.tc != "" && !Result.Validate(per.tc.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("总胆固醇应填写数字!");
+                return;
+            }
             per.tg = this.textBox16.Text;
+            if (per.tg != "" && !Result.Validate(per.tg.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("甘油三酯应填写数字!");
+                return;
+            }
             per.ldl = this.textBox19.Text;
+            if (per.ldl != "" && !Result.Validate(per.ldl.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血清低密度脂蛋白胆固醇应填写数字!");
+                return;
+            }
             per.hdl = this.textBox22.Text;
+            if (per.hdl != "" && !Result.Validate(per.hdl.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血清高密度脂蛋白胆固醇应填写数字!");
+                return;
+            }
 
             if (this.radioButton1.Checked == true) { per.chest_x = this.radioButton1.Tag.ToString(); };
             if (this.radioButton2.Checked == true)
@@ -1177,18 +1286,73 @@ namespace zkhwClient.view.PublicHealthView
             if (this.radioButton47.Checked == true) { per.hb = this.radioButton47.Tag.ToString(); };
 
             per.sgft = this.textBox3.Text;
+            if (per.sgft != "" && !Result.Validate(per.sgft.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血清谷丙转氨酶应填写数字!");
+                return;
+            }
             per.ast = this.textBox6.Text;
+            if (per.ast != "" && !Result.Validate(per.ast.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血清谷草转氨酶应填写数字!");
+                return;
+            }
             per.albumin = this.textBox10.Text;
+            if (per.albumin != "" && !Result.Validate(per.albumin.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("白蛋白应填写数字!");
+                return;
+            }
             per.total_bilirubin = this.textBox65.Text;
+            if (per.total_bilirubin != "" && !Result.Validate(per.total_bilirubin.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("总胆红素应填写数字!");
+                return;
+            }
             per.conjugated_bilirubin = this.textBox68.Text;
+            if (per.conjugated_bilirubin != "" && !Result.Validate(per.conjugated_bilirubin.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("结合胆红素应填写数字!");
+                return;
+            }
             per.scr = this.textBox73.Text;
+            if (per.scr != "" && !Result.Validate(per.scr.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血清肌酐应填写数字!");
+                return;
+            }
             per.blood_urea = this.textBox81.Text;
+            if (per.blood_urea != "" && !Result.Validate(per.blood_urea.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血尿素应填写数字!");
+                return;
+            }
             per.blood_k = this.textBox84.Text;
             per.blood_na = this.textBox87.Text;
             per.tc = this.textBox13.Text;
+            if (per.tc != "" && !Result.Validate(per.tc.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("总胆固醇应填写数字!");
+                return;
+            }
             per.tg = this.textBox16.Text;
+            if (per.tg != "" && !Result.Validate(per.tg.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("甘油三酯应填写数字!");
+                return;
+            }
             per.ldl = this.textBox19.Text;
+            if (per.ldl != "" && !Result.Validate(per.ldl.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血清低密度脂蛋白胆固醇应填写数字!");
+                return;
+            }
             per.hdl = this.textBox22.Text;
+            if (per.hdl != "" && !Result.Validate(per.hdl.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血清高密度脂蛋白胆固醇应填写数字!");
+                return;
+            }
 
             if (this.radioButton1.Checked == true) { per.chest_x = this.radioButton1.Tag.ToString(); };
             if (this.radioButton2.Checked == true)

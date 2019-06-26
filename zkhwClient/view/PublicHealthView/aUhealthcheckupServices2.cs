@@ -486,15 +486,17 @@ namespace zkhwClient.view.PublicHealthView
 
             per.organ_vision_left = this.textBox9.Text;
             per.organ_vision_right = this.textBox8.Text;
-
             per.organ_correctedvision_left = this.textBox4.Text;
             per.organ_correctedvision_right = this.textBox51.Text;
-
             if (per.organ_vision_left == "" || per.organ_vision_right == "")
             {
                 MessageBox.Show("左眼和右眼视力2项不能为空!"); return;
             }
-
+            if (!Result.Validate(per.organ_vision_left.Trim(), @"^(-?\d+)(\.\d+)?$") || !Result.Validate(per.organ_vision_right.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("左右眼视力应填写数字!");
+                return;
+            }
             if (this.radioButton52.Checked == true) { per.organ_hearing = this.radioButton52.Tag.ToString(); };
             if (this.radioButton58.Checked == true) { per.organ_hearing = this.radioButton58.Tag.ToString(); };
 
@@ -553,6 +555,11 @@ namespace zkhwClient.view.PublicHealthView
             per.examination_heart_rate = this.textBox47.Text;
             if (per.examination_heart_rate=="") {
                 MessageBox.Show("心率不能为空!");return;
+            }
+            if (!Result.Validate(per.examination_heart_rate.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("心率应填写数字!");
+                return;
             }
             if (this.radioButton16.Checked == true) { per.examination_heart_rhythm = this.radioButton16.Tag.ToString(); };
             if (this.radioButton17.Checked == true) { per.examination_heart_rhythm = this.radioButton17.Tag.ToString(); };
@@ -677,8 +684,23 @@ namespace zkhwClient.view.PublicHealthView
             per.examination_other = this.textBox50.Text;
 
             per.blood_hemoglobin = this.textBox77.Text;
+            if (per.blood_hemoglobin != "" && !Result.Validate(per.blood_hemoglobin.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血红蛋白应填写数字!");
+                return;
+            }
             per.blood_leukocyte = this.textBox82.Text;
+            if (per.blood_leukocyte != "" && !Result.Validate(per.blood_leukocyte.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("白细胞应填写数字!");
+                return;
+            }
             per.blood_platelet = this.textBox85.Text;
+            if (per.blood_platelet != "" && !Result.Validate(per.blood_platelet.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血小板应填写数字!");
+                return;
+            }
             per.blood_other = this.textBox88.Text;
             per.urine_protein = this.textBox72.Text;
             per.glycosuria = this.textBox71.Text;
@@ -690,6 +712,11 @@ namespace zkhwClient.view.PublicHealthView
             //}
             per.urine_other = this.textBox89.Text;
             per.blood_glucose_mmol = this.textBox90.Text;
+            if (per.blood_glucose_mmol != "" && !Result.Validate(per.blood_glucose_mmol.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("空腹血糖左应填写数字!");
+                return;
+            }
             per.blood_glucose_mg = this.textBox92.Text;
             
 
@@ -1090,7 +1117,11 @@ namespace zkhwClient.view.PublicHealthView
             {
                 MessageBox.Show("左眼和右眼视力2项不能为空!"); return;
             }
-
+            if (!Result.Validate(per.organ_vision_left.Trim(), @"^(-?\d+)(\.\d+)?$") || !Result.Validate(per.organ_vision_right.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("左右眼视力应填写数字!");
+                return;
+            }
             if (this.radioButton52.Checked == true) { per.organ_hearing = this.radioButton52.Tag.ToString(); };
             if (this.radioButton58.Checked == true) { per.organ_hearing = this.radioButton58.Tag.ToString(); };
 
@@ -1156,6 +1187,11 @@ namespace zkhwClient.view.PublicHealthView
             if (per.examination_heart_rate == "")
             {
                 MessageBox.Show("心率不能为空!"); return;
+            }
+            if (!Result.Validate(per.examination_heart_rate.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("心率应填写数字!");
+                return;
             }
             if (this.radioButton16.Checked == true) { per.examination_heart_rhythm = this.radioButton16.Tag.ToString(); };
             if (this.radioButton17.Checked == true) { per.examination_heart_rhythm = this.radioButton17.Tag.ToString(); };
@@ -1282,8 +1318,23 @@ namespace zkhwClient.view.PublicHealthView
             per.examination_other = this.textBox50.Text;
 
             per.blood_hemoglobin = this.textBox77.Text;
+            if (per.blood_hemoglobin != "" && !Result.Validate(per.blood_hemoglobin.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血红蛋白应填写数字!");
+                return;
+            }
             per.blood_leukocyte = this.textBox82.Text;
+            if (per.blood_leukocyte != "" && !Result.Validate(per.blood_leukocyte.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("白细胞应填写数字!");
+                return;
+            }
             per.blood_platelet = this.textBox85.Text;
+            if (per.blood_platelet != "" && !Result.Validate(per.blood_platelet.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血小板应填写数字!");
+                return;
+            }
             per.blood_other = this.textBox88.Text;
             per.urine_protein = this.textBox72.Text;
             per.glycosuria = this.textBox71.Text;
@@ -1295,6 +1346,11 @@ namespace zkhwClient.view.PublicHealthView
             //}
             per.urine_other = this.textBox89.Text;
             per.blood_glucose_mmol = this.textBox90.Text;
+            if (per.blood_glucose_mmol != "" && !Result.Validate(per.blood_glucose_mmol.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("空腹血糖左应填写数字!");
+                return;
+            }
             per.blood_glucose_mg = this.textBox92.Text;
 
 
@@ -1392,7 +1448,11 @@ namespace zkhwClient.view.PublicHealthView
             {
                 MessageBox.Show("左眼和右眼视力2项不能为空!"); return;
             }
-
+            if (!Result.Validate(per.organ_vision_left.Trim(), @"^(-?\d+)(\.\d+)?$") || !Result.Validate(per.organ_vision_right.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("左右眼视力应填写数字!");
+                return;
+            }
             if (this.radioButton52.Checked == true) { per.organ_hearing = this.radioButton52.Tag.ToString(); };
             if (this.radioButton58.Checked == true) { per.organ_hearing = this.radioButton58.Tag.ToString(); };
 
@@ -1458,6 +1518,11 @@ namespace zkhwClient.view.PublicHealthView
             if (per.examination_heart_rate == "")
             {
                 MessageBox.Show("心率不能为空!"); return;
+            }
+            if (!Result.Validate(per.examination_heart_rate.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("心率应填写数字!");
+                return;
             }
             if (this.radioButton16.Checked == true) { per.examination_heart_rhythm = this.radioButton16.Tag.ToString(); };
             if (this.radioButton17.Checked == true) { per.examination_heart_rhythm = this.radioButton17.Tag.ToString(); };
@@ -1584,8 +1649,23 @@ namespace zkhwClient.view.PublicHealthView
             per.examination_other = this.textBox50.Text;
 
             per.blood_hemoglobin = this.textBox77.Text;
+            if (per.blood_hemoglobin != "" && !Result.Validate(per.blood_hemoglobin.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血红蛋白应填写数字!");
+                return;
+            }
             per.blood_leukocyte = this.textBox82.Text;
+            if (per.blood_leukocyte != "" && !Result.Validate(per.blood_leukocyte.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("白细胞应填写数字!");
+                return;
+            }
             per.blood_platelet = this.textBox85.Text;
+            if (per.blood_platelet != "" && !Result.Validate(per.blood_platelet.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("血小板应填写数字!");
+                return;
+            }
             per.blood_other = this.textBox88.Text;
             per.urine_protein = this.textBox72.Text;
             per.glycosuria = this.textBox71.Text;
@@ -1597,6 +1677,11 @@ namespace zkhwClient.view.PublicHealthView
             //}
             per.urine_other = this.textBox89.Text;
             per.blood_glucose_mmol = this.textBox90.Text;
+            if (per.blood_glucose_mmol != "" && !Result.Validate(per.blood_glucose_mmol.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            {
+                MessageBox.Show("空腹血糖左应填写数字!");
+                return;
+            }
             per.blood_glucose_mg = this.textBox92.Text;
 
 

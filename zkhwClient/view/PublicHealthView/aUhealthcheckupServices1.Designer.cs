@@ -2105,6 +2105,7 @@
             this.textBox21.TabIndex = 90;
             this.textBox21.Text = "老年人情感状态*";
             this.textBox21.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox21.DoubleClick += new System.EventHandler(this.textBox21_DoubleClick);
             // 
             // panel4
             // 
@@ -2165,6 +2166,7 @@
             this.textBox69.TabIndex = 88;
             this.textBox69.Text = "老年人认知功能*";
             this.textBox69.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox69.DoubleClick += new System.EventHandler(this.textBox69_DoubleClick);
             // 
             // textBox54
             // 
@@ -2262,6 +2264,7 @@
             this.textBox71.TabIndex = 85;
             this.textBox71.Text = "老年人生活自理\r\n能力自我评估*";
             this.textBox71.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox71.DoubleClick += new System.EventHandler(this.textBox71_DoubleClick);
             // 
             // textBox53
             // 
@@ -2274,6 +2277,7 @@
             // 
             // textBox70
             // 
+            this.textBox70.BackColor = System.Drawing.SystemColors.Control;
             this.textBox70.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox70.Location = new System.Drawing.Point(139, 105);
             this.textBox70.Multiline = true;
@@ -2283,6 +2287,7 @@
             this.textBox70.TabIndex = 86;
             this.textBox70.Text = "老年人健康状态\r\n自我评估*";
             this.textBox70.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox70.DoubleClick += new System.EventHandler(this.textBox70_DoubleClick);
             // 
             // textBox47
             // 
@@ -2611,7 +2616,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 123);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1287, 108);
+            this.groupBox3.Size = new System.Drawing.Size(1273, 108);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
