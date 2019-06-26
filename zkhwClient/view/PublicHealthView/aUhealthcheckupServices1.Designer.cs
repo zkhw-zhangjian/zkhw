@@ -2611,7 +2611,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 123);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1245, 108);
+            this.groupBox3.Size = new System.Drawing.Size(1287, 108);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
@@ -2646,6 +2646,7 @@
             this.checkBox28.Tag = "25";
             this.checkBox28.Text = "25其他";
             this.checkBox28.UseVisualStyleBackColor = true;
+            this.checkBox28.CheckedChanged += new System.EventHandler(this.checkBox28_CheckedChanged);
             this.checkBox28.Click += new System.EventHandler(this.checkBox28_Click);
             // 
             // checkBox27
@@ -2659,6 +2660,7 @@
             this.checkBox27.Tag = "24";
             this.checkBox27.Text = "24乳房胀痛";
             this.checkBox27.UseVisualStyleBackColor = true;
+            this.checkBox27.CheckedChanged += new System.EventHandler(this.checkBox27_CheckedChanged);
             // 
             // checkBox26
             // 
@@ -2671,6 +2673,7 @@
             this.checkBox26.Tag = "23";
             this.checkBox26.Text = "23耳鸣";
             this.checkBox26.UseVisualStyleBackColor = true;
+            this.checkBox26.CheckedChanged += new System.EventHandler(this.checkBox26_CheckedChanged);
             // 
             // checkBox25
             // 
@@ -2683,6 +2686,7 @@
             this.checkBox25.Tag = "22";
             this.checkBox25.Text = "22眼花";
             this.checkBox25.UseVisualStyleBackColor = true;
+            this.checkBox25.CheckedChanged += new System.EventHandler(this.checkBox25_CheckedChanged);
             // 
             // checkBox24
             // 
@@ -2695,6 +2699,7 @@
             this.checkBox24.Tag = "21";
             this.checkBox24.Text = "21恶心呕吐";
             this.checkBox24.UseVisualStyleBackColor = true;
+            this.checkBox24.CheckedChanged += new System.EventHandler(this.checkBox24_CheckedChanged);
             // 
             // checkBox23
             // 
@@ -2707,6 +2712,7 @@
             this.checkBox23.Tag = "20";
             this.checkBox23.Text = "20腹泻";
             this.checkBox23.UseVisualStyleBackColor = true;
+            this.checkBox23.CheckedChanged += new System.EventHandler(this.checkBox23_CheckedChanged);
             // 
             // checkBox22
             // 
@@ -2719,6 +2725,7 @@
             this.checkBox22.Tag = "19";
             this.checkBox22.Text = "19便秘";
             this.checkBox22.UseVisualStyleBackColor = true;
+            this.checkBox22.CheckedChanged += new System.EventHandler(this.checkBox22_CheckedChanged);
             // 
             // checkBox9
             // 
@@ -2731,6 +2738,7 @@
             this.checkBox9.Tag = "18";
             this.checkBox9.Text = "18尿痛";
             this.checkBox9.UseVisualStyleBackColor = true;
+            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
             // 
             // checkBox8
             // 
@@ -2743,6 +2751,7 @@
             this.checkBox8.Tag = "17";
             this.checkBox8.Text = "17尿急";
             this.checkBox8.UseVisualStyleBackColor = true;
+            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
             // 
             // checkBox7
             // 
@@ -2755,6 +2764,7 @@
             this.checkBox7.Tag = "16";
             this.checkBox7.Text = "16手脚麻木";
             this.checkBox7.UseVisualStyleBackColor = true;
+            this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox7_CheckedChanged);
             // 
             // checkBox6
             // 
@@ -2767,6 +2777,7 @@
             this.checkBox6.Tag = "15";
             this.checkBox6.Text = "15视力模糊";
             this.checkBox6.UseVisualStyleBackColor = true;
+            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
             // 
             // checkBox5
             // 
@@ -2779,6 +2790,7 @@
             this.checkBox5.Tag = "14";
             this.checkBox5.Text = "14关节肿痛";
             this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
             // 
             // checkBox4
             // 
@@ -2791,6 +2803,7 @@
             this.checkBox4.Tag = "13";
             this.checkBox4.Text = "13乏力";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // checkBox3
             // 
@@ -2803,6 +2816,7 @@
             this.checkBox3.Tag = "12";
             this.checkBox3.Text = "12体重下降";
             this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
             // checkBox2
             // 
@@ -2815,6 +2829,7 @@
             this.checkBox2.Tag = "11";
             this.checkBox2.Text = "11多尿";
             this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // checkBox1
             // 
@@ -2827,6 +2842,7 @@
             this.checkBox1.Tag = "10";
             this.checkBox1.Text = "10多饮";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // checkBox13
             // 
@@ -2839,6 +2855,7 @@
             this.checkBox13.Tag = "8";
             this.checkBox13.Text = "8咳痰";
             this.checkBox13.UseVisualStyleBackColor = true;
+            this.checkBox13.CheckedChanged += new System.EventHandler(this.checkBox13_CheckedChanged);
             // 
             // checkBox14
             // 
@@ -2851,6 +2868,7 @@
             this.checkBox14.Tag = "9";
             this.checkBox14.Text = "9呼吸困难";
             this.checkBox14.UseVisualStyleBackColor = true;
+            this.checkBox14.CheckedChanged += new System.EventHandler(this.checkBox14_CheckedChanged);
             // 
             // checkBox15
             // 
@@ -2863,6 +2881,7 @@
             this.checkBox15.Tag = "7";
             this.checkBox15.Text = "7慢性咳嗽";
             this.checkBox15.UseVisualStyleBackColor = true;
+            this.checkBox15.CheckedChanged += new System.EventHandler(this.checkBox15_CheckedChanged);
             // 
             // checkBox16
             // 
@@ -2875,6 +2894,7 @@
             this.checkBox16.Tag = "6";
             this.checkBox16.Text = "6胸痛";
             this.checkBox16.UseVisualStyleBackColor = true;
+            this.checkBox16.CheckedChanged += new System.EventHandler(this.checkBox16_CheckedChanged);
             // 
             // checkBox17
             // 
@@ -2887,6 +2907,7 @@
             this.checkBox17.Tag = "5";
             this.checkBox17.Text = "5胸闷";
             this.checkBox17.UseVisualStyleBackColor = true;
+            this.checkBox17.CheckedChanged += new System.EventHandler(this.checkBox17_CheckedChanged);
             // 
             // checkBox18
             // 
@@ -2899,6 +2920,7 @@
             this.checkBox18.Tag = "4";
             this.checkBox18.Text = "4心悸";
             this.checkBox18.UseVisualStyleBackColor = true;
+            this.checkBox18.CheckedChanged += new System.EventHandler(this.checkBox18_CheckedChanged);
             // 
             // checkBox19
             // 
@@ -2911,6 +2933,7 @@
             this.checkBox19.Tag = "3";
             this.checkBox19.Text = "3头晕";
             this.checkBox19.UseVisualStyleBackColor = true;
+            this.checkBox19.CheckedChanged += new System.EventHandler(this.checkBox19_CheckedChanged);
             // 
             // checkBox20
             // 
@@ -2923,6 +2946,7 @@
             this.checkBox20.Tag = "2";
             this.checkBox20.Text = "2头痛";
             this.checkBox20.UseVisualStyleBackColor = true;
+            this.checkBox20.CheckedChanged += new System.EventHandler(this.checkBox20_CheckedChanged);
             // 
             // checkBox21
             // 
@@ -2935,6 +2959,7 @@
             this.checkBox21.Tag = "1";
             this.checkBox21.Text = "1无症状";
             this.checkBox21.UseVisualStyleBackColor = true;
+            this.checkBox21.CheckedChanged += new System.EventHandler(this.checkBox21_CheckedChanged);
             // 
             // button5
             // 

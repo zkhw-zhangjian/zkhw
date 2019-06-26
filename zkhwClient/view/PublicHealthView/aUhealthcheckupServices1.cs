@@ -1431,5 +1431,218 @@ namespace zkhwClient.view.PublicHealthView
                 MessageBox.Show("保存不成功!");
             }
         }
+
+        private void checkBox21_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox21.Checked) {
+                this.textBox11.Text = "";
+                foreach (Control ctr in this.groupBox3.Controls)
+                {
+                    //判断该控件是不是CheckBox
+                    if (ctr is CheckBox)
+                    {
+                        //将ctr转换成CheckBox并赋值给ck
+                        CheckBox ck = ctr as CheckBox;
+                        if (ck.Checked && !"1".Equals(ck.Tag))
+                        {
+                            ck.Checked = false;
+                        }
+
+                    }
+                }
+            }
+        }
+
+        private void checkBox20_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox20.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox19_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox19.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox18_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox18.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox17_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox17.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox16_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox16.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox15_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox15.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox13_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox13.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox14_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox14.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox1.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox2.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox23_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox23.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox22_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox22.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox9_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox9.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox8.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox7.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox6.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox5.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox4.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox3.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox24_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox24.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox25_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox25.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox26_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox26.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox27_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox27.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
+
+        private void checkBox28_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox28.Checked)
+            {
+                this.checkBox21.Checked = false;
+            }
+        }
     }
 }

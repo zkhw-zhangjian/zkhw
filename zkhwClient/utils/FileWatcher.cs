@@ -469,7 +469,7 @@ namespace zkhwClient
                     {
                         tup = 1;
                     }
-                    if (cs.IndexOf("未见异常") > -1|| cs.IndexOf("未见明显异常") > -1)
+                    if (cs.IndexOf("肝,胆,胰,脾未见异常") > -1|| cs.IndexOf("未见明显异常") > -1)
                     {
                         int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='1',abdomenB_img='{tup}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'");
                         string issqdgbc = "update zkhw_tj_bgdc set BChao='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
