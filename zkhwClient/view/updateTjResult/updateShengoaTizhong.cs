@@ -157,15 +157,15 @@ namespace zkhwClient.view.updateTjResult
                 int r0 = 1;
                 int r1 = 1;
                 int r2 = 1;
-                if (Height !="")
+                if (Height != "")
                 {
                     double a = double.Parse(Height);
-                    r0 = GetJudgeResultForHeight(a); 
+                    r0 = GetJudgeResultForHeight(a);
                 }
                 if (Weight != "")
                 {
                     double a = double.Parse(Weight);
-                    r1 = GetJudgeResultForWeight(a); 
+                    r1 = GetJudgeResultForWeight(a);
                 }
                 if (BMI != "")
                 {
@@ -173,17 +173,17 @@ namespace zkhwClient.view.updateTjResult
                     r2 = GetJudgeResultForBMI(a);
                 }
                 int r = r0;
-                if(r<r1)
+                if (r < r1)
                 {
                     r = r1;
                 }
-                if(r<r2)
+                if (r < r2)
                 {
                     r = r2;
-                } 
-                tjdao.updateTJbgdcSgtz(aichive_no, bar_code,r.ToString());
+                }
+                tjdao.updateTJbgdcSgtz(aichive_no, bar_code, r.ToString());
                 tjdao.updatePESgtzInfo(aichive_no, bar_code, Height, Weight, BMI);
-                testFunDelegate(r,11, rowIndex);
+                testFunDelegate(r, 11, rowIndex);
                 MessageBox.Show("数据保存成功!");
             }
             else {
@@ -214,7 +214,7 @@ namespace zkhwClient.view.updateTjResult
             double a = _height / 100.0;
             double b = Math.Pow(a, 2);
             double c = _weight / b;
-            return c.ToString("#0.00");
+            return c.ToString("#0.0");
         }
 
         private void textBox5_KeyPress(object sender, KeyPressEventArgs e)

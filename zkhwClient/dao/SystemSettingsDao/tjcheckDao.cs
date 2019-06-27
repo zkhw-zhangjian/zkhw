@@ -161,8 +161,6 @@ namespace zkhwClient.dao
             if (ret == 0) {
                 String sql1 = "insert into zkhw_tj_xy(ID,aichive_no,id_number,bar_code,DBP,SBP,Pulse,createtime,upload_status) values ('" + Result.GetNewId() + "','" + aichive_no + "','" + id_number + "','" + barcode + "','" + DBP + "','" + SBP + "','" + Pulse + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "','0')";
                 ret = DbHelperMySQL.ExecuteSql(sql1);
-                String sql2 = "update zkhw_tj_bgdc set XueYa='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
-                DbHelperMySQL.ExecuteSql(sql2);
             }
             return ret == 0 ? false : true;
         }
@@ -203,6 +201,11 @@ namespace zkhwClient.dao
             int ret = 0;
             String sql = "update zkhw_tj_sgtz set Height='" + Height + "',Weight='" + Weight + "',BMI='" + BMI + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
+            if (ret == 0)
+            {
+                String sql1 = "insert into zkhw_tj_sgtz(ID,aichive_no,id_number,bar_code,BMI,Height,Weight,createtime,upload_status) values ('" + Result.GetNewId() + "','" + aichive_no + "','" + aichive_no + "','" + barcode + "','" + BMI + "','" + Height + "','" + Weight + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "','0')";
+                ret = DbHelperMySQL.ExecuteSql(sql1);
+            }
             return ret == 0 ? false : true;
         }
         //根据身高体重检查结果修改健康体检表对应信息
