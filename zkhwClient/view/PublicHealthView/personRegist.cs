@@ -459,11 +459,11 @@ namespace zkhwClient.view.PublicHealthView
                 MessageBox.Show("身份证号不能为空,如未带身份证，请手动填写身份证号!");
                 return;
             }
-            string time1 = DateTime.Now.ToString("yyyy-MM-dd")+" 00:00:00";
+            string time1 = DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd")+" 00:00:00";
             DataTable dttjjk = grjddao.selectTjjk(number, time1);
             if (dttjjk != null && dttjjk.Rows.Count > 0)
             {
-                MessageBox.Show("此居民在今天内已经登记过,不能再次登记,如需补打条码，请点击补打条码按钮!");
+                MessageBox.Show("此居民身份证号在7天内已经登记过,不能再次登记,如需补打条码,请点击补打条码按钮!");
                 return;
             }
             if (name != null && !"".Equals(name) && birthday != null && !"".Equals(birthday))
