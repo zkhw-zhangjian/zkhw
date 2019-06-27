@@ -58,6 +58,19 @@ namespace zkhwClient.view.PublicHealthView
             
             querypBasicInfo();
         }
+        private DataTable CreateDataTable()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("id", typeof(String));
+            dt.Columns.Add("name", typeof(String));
+            dt.Columns.Add("archive_no", typeof(String));
+            dt.Columns.Add("id_number", typeof(String));
+            dt.Columns.Add("BiaoQian", typeof(String));
+            dt.Columns.Add("create_name", typeof(String));
+            dt.Columns.Add("create_time", typeof(String));
+            dt.Columns.Add("doctor_name", typeof(String));
+            return dt;
+        }
         //个人基本建档记录历史表  关联传参调查询的方法
         private void querypBasicInfo()
         {
@@ -71,14 +84,75 @@ namespace zkhwClient.view.PublicHealthView
             try
             {
                 DataTable dt = pBasicInfo.queryPersonalBasicInfo(pCa, time1, time2, code);
-                this.dataGridView1.DataSource = dt;
+                //这里处理下对应的记录
+                DataTable dtfinished = CreateDataTable();
+                for(int i=0;i<dt.Rows.Count;i++)
+                {
+                    DataRow dr = dtfinished.NewRow();
+                    dr[0] = dt.Rows[i][0].ToString();
+                    dr[1] = dt.Rows[i][1].ToString();
+                    dr[2] = dt.Rows[i][2].ToString();
+                    dr[3] = dt.Rows[i][3].ToString();
+                     
+                    #region 处理特殊标签
+                    String _teshubiaoqian = "";
+                    String _tmp= dt.Rows[i]["age"].ToString();
+                    if (_tmp == "") _tmp = "0";
+                    if(int.Parse(_tmp)>=65)
+                    {
+                        _teshubiaoqian = "老";
+                    }
+                    _tmp = dt.Rows[i]["is_hypertension"].ToString();
+                    if (_tmp == "") _tmp = "0";
+                    if(int.Parse(_tmp) !=0)
+                    {
+                        _teshubiaoqian = _teshubiaoqian+" 高"; 
+                    }
+
+                    _tmp = dt.Rows[i]["is_diabetes"].ToString();
+                    if (_tmp == "") _tmp = "0";
+                    if (int.Parse(_tmp) != 0)
+                    {
+                        _teshubiaoqian = _teshubiaoqian + " 糖"; 
+                    }
+
+                    _tmp = dt.Rows[i]["is_psychosis"].ToString();
+                    if (_tmp == "") _tmp = "0";
+                    if (int.Parse(_tmp) != 0)
+                    {
+                        _teshubiaoqian = _teshubiaoqian + " 精";
+                    }
+
+                    _tmp = dt.Rows[i]["is_tuberculosis"].ToString();
+                    if (_tmp == "") _tmp = "0";
+                    if (int.Parse(_tmp) != 0)
+                    {
+                        _teshubiaoqian = _teshubiaoqian + " 结";
+                    }
+
+                    _tmp = dt.Rows[i]["is_poor"].ToString();
+                    if (_tmp == "") _tmp = "0";
+                    if (int.Parse(_tmp) != 0)
+                    {
+                        _teshubiaoqian = _teshubiaoqian + " 贫";
+                    }
+                    #endregion
+
+                    dr[4] = _teshubiaoqian.Trim();
+                    dr[5] = dt.Rows[i][4].ToString();
+                    dr[6] = dt.Rows[i][5].ToString();
+                    dr[7] = dt.Rows[i][6].ToString();
+                    dtfinished.Rows.Add(dr);
+                }
+                this.dataGridView1.DataSource = dtfinished;
                 this.dataGridView1.Columns[0].Visible = false;
                 this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";
                 this.dataGridView1.Columns[2].HeaderCell.Value = "档案编号";
                 this.dataGridView1.Columns[3].HeaderCell.Value = "身份证号";
-                this.dataGridView1.Columns[4].HeaderCell.Value = "创建人";
-                this.dataGridView1.Columns[5].HeaderCell.Value = "创建时间";
-                this.dataGridView1.Columns[6].HeaderCell.Value = "责任医生";
+                this.dataGridView1.Columns[4].HeaderCell.Value = "重点人群标签";
+                this.dataGridView1.Columns[5].HeaderCell.Value = "创建人";
+                this.dataGridView1.Columns[6].HeaderCell.Value = "创建时间";
+                this.dataGridView1.Columns[7].HeaderCell.Value = "责任医生";
 
                 this.dataGridView1.ReadOnly = true;
                 this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
@@ -121,8 +195,7 @@ namespace zkhwClient.view.PublicHealthView
                 MessageBox.Show("添加成功！");
             }
         }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void OpenWindow()
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             aUPersonalBasicInfo hm = new aUPersonalBasicInfo();
@@ -135,12 +208,12 @@ namespace zkhwClient.view.PublicHealthView
             {
                 hm.textBox1.Text = dt.Rows[0]["name"].ToString();
                 hm.textBox2.Text = dt.Rows[0]["archive_no"].ToString();
-                if (dt.Rows[0]["sex"].ToString() == hm.radioButton1.Tag.ToString()) {  hm.radioButton1.Checked = true; };
+                if (dt.Rows[0]["sex"].ToString() == hm.radioButton1.Tag.ToString()) { hm.radioButton1.Checked = true; };
                 if (dt.Rows[0]["sex"].ToString() == hm.radioButton2.Tag.ToString()) { hm.radioButton2.Checked = true; };
                 if (dt.Rows[0]["sex"].ToString() == hm.radioButton3.Tag.ToString()) { hm.radioButton3.Checked = true; };
                 if (dt.Rows[0]["sex"].ToString() == hm.radioButton25.Tag.ToString()) { hm.radioButton25.Checked = true; };
-                if(dt.Rows[0]["birthday"].ToString()!="")
-                hm.dateTimePicker1.Value = DateTime.Parse(dt.Rows[0]["birthday"].ToString());
+                if (dt.Rows[0]["birthday"].ToString() != "")
+                    hm.dateTimePicker1.Value = DateTime.Parse(dt.Rows[0]["birthday"].ToString());
                 hm.textBox12.Text = dt.Rows[0]["id_number"].ToString();
                 hm.textBox14.Text = dt.Rows[0]["company"].ToString();
                 hm.textBox16.Text = dt.Rows[0]["phone"].ToString();
@@ -148,11 +221,14 @@ namespace zkhwClient.view.PublicHealthView
                 hm.textBox20.Text = dt.Rows[0]["link_phone"].ToString();
                 if (dt.Rows[0]["resident_type"].ToString() == hm.radioButton4.Tag.ToString()) { hm.radioButton4.Checked = true; };
                 if (dt.Rows[0]["resident_type"].ToString() == hm.radioButton5.Tag.ToString()) { hm.radioButton5.Checked = true; };
-               string nation =dt.Rows[0]["nation"].ToString();
-                if (nation != null&&!"".Equals(nation)) {
-                    if (nation == hm.radioButton6.Tag.ToString()) {
+                string nation = dt.Rows[0]["nation"].ToString();
+                if (nation != null && !"".Equals(nation))
+                {
+                    if (nation == hm.radioButton6.Tag.ToString())
+                    {
                         hm.radioButton6.Checked = true;
-                    } else { hm.radioButton7.Checked = true; hm.comboBox1.Visible = true; hm.mzid = nation; };
+                    }
+                    else { hm.radioButton7.Checked = true; hm.comboBox1.Visible = true; hm.mzid = nation; };
                 }
                 if (dt.Rows[0]["blood_group"].ToString() == hm.radioButton8.Tag.ToString()) { hm.radioButton8.Checked = true; };
                 if (dt.Rows[0]["blood_group"].ToString() == hm.radioButton9.Tag.ToString()) { hm.radioButton9.Checked = true; };
@@ -190,13 +266,15 @@ namespace zkhwClient.view.PublicHealthView
                 if (dt.Rows[0]["marital_status"].ToString() == hm.radioButton44.Tag.ToString()) { hm.radioButton44.Checked = true; };
                 if (dt.Rows[0]["marital_status"].ToString() == hm.radioButton45.Tag.ToString()) { hm.radioButton45.Checked = true; };
                 if (dt.Rows[0]["marital_status"].ToString() == hm.radioButton46.Tag.ToString()) { hm.radioButton46.Checked = true; };
-               
-                if (dt.Rows[0]["is_heredity"].ToString() == hm.radioButton48.Tag.ToString()) {
+
+                if (dt.Rows[0]["is_heredity"].ToString() == hm.radioButton48.Tag.ToString())
+                {
                     hm.radioButton48.Checked = true;
-                }else if (dt.Rows[0]["is_heredity"].ToString() == hm.radioButton47.Tag.ToString())
+                }
+                else if (dt.Rows[0]["is_heredity"].ToString() == hm.radioButton47.Tag.ToString())
                 {
                     hm.radioButton47.Checked = true;
-                    hm.textBox36.Text=dt.Rows[0]["heredity_name"].ToString();
+                    hm.textBox36.Text = dt.Rows[0]["heredity_name"].ToString();
                 };
 
                 foreach (Control ctr in hm.panel12.Controls)
@@ -262,7 +340,7 @@ namespace zkhwClient.view.PublicHealthView
                         }
                     }
                 }
-                
+
                 foreach (Control ctr in hm.panel20.Controls)
                 {
                     //判断该控件是不是CheckBox
@@ -275,7 +353,8 @@ namespace zkhwClient.view.PublicHealthView
                         {
                             if (ck2[i].ToString() == ck.Tag.ToString())
                             {
-                                if (ck2[i].ToString()=="8") {
+                                if (ck2[i].ToString() == "8")
+                                {
                                     hm.textBox37.Text = dt.Rows[0]["deformity_name"].ToString();
                                 }
                                 ck.Checked = true;
@@ -313,10 +392,20 @@ namespace zkhwClient.view.PublicHealthView
                 if (dt.Rows[0]["poultry"].ToString() == hm.radioButton88.Tag.ToString()) { hm.radioButton88.Checked = true; };
                 if (dt.Rows[0]["poultry"].ToString() == hm.radioButton89.Tag.ToString()) { hm.radioButton89.Checked = true; };
                 if (dt.Rows[0]["poultry"].ToString() == hm.radioButton90.Tag.ToString()) { hm.radioButton90.Checked = true; };
+
+                //是否贫困户
+                string _poor= dt.Rows[0]["is_poor"].ToString();
+                if (_poor == "") _poor = "0";
+                if(int.Parse(_poor)==0)
+                {
+                    hm.radpinkun0.Checked = true;
+                }
+                else
+                {
+                    hm.radpinkun1.Checked = true;
+                }
             }
-            else { }
-
-
+            else { } 
 
             if (hm.ShowDialog() == DialogResult.OK)
             {
@@ -325,6 +414,10 @@ namespace zkhwClient.view.PublicHealthView
                 MessageBox.Show("修改成功！");
 
             }
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            OpenWindow();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -407,6 +500,19 @@ namespace zkhwClient.view.PublicHealthView
                 dataGridView1.Rows[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
                 dataGridView1.Rows[i].HeaderCell.Value = (i + 1).ToString();
             }
+        }
+
+        private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (dataGridView1.Rows[e.RowIndex].Cells["BiaoQian"].Value.ToString() !="")
+            {
+                dataGridView1.Rows[e.RowIndex].Cells["BiaoQian"].Style.ForeColor = Color.Red;
+            }
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            OpenWindow();
         }
     }
 }

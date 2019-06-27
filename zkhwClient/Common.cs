@@ -22,6 +22,17 @@ namespace zkhwClient
     }
     public class Common
     {
+        public static string GetCreateTime(string s)
+        {
+            if(s=="" || s==null)
+            {
+                return DateTime.Now.ToString("yyyy-MM-dd");
+            }
+            else
+            {
+                return DateTime.Parse(s).ToString("yyyy-MM-dd");
+            }
+        }
         public static List<FileTimeInfo> GetLatestFileTimeInfo(string dir, string filename)
         {
             List<FileTimeInfo> list = new List<FileTimeInfo>();
@@ -36,7 +47,7 @@ namespace zkhwClient
                 if(a.Length<=1)
                 {
                     _namefile = fname;
-                    if(fname.IndexOf(_namefile) > -1)
+                    if(fname.IndexOf(filename) > -1)
                     {
                         isret = true;
                     }

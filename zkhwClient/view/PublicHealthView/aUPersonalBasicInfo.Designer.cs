@@ -210,6 +210,10 @@
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.textBox40 = new System.Windows.Forms.TextBox();
+            this.panel26 = new System.Windows.Forms.Panel();
+            this.radpinkun1 = new System.Windows.Forms.RadioButton();
+            this.radpinkun0 = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.panel19.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -241,6 +245,7 @@
             this.panel11.SuspendLayout();
             this.panel10.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel26.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -268,6 +273,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.panel26);
+            this.panel1.Controls.Add(this.textBox40);
             this.panel1.Controls.Add(this.panel19);
             this.panel1.Controls.Add(this.button12);
             this.panel1.Controls.Add(this.button11);
@@ -345,7 +352,7 @@
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Location = new System.Drawing.Point(12, 30);
+            this.panel1.Location = new System.Drawing.Point(12, 10);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1331, 687);
             this.panel1.TabIndex = 6;
@@ -1264,7 +1271,7 @@
             this.panel14.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.panel14.Location = new System.Drawing.Point(133, 522);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(1142, 30);
+            this.panel14.Size = new System.Drawing.Size(512, 30);
             this.panel14.TabIndex = 94;
             // 
             // checkBox17
@@ -2460,6 +2467,56 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // textBox40
+            // 
+            this.textBox40.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox40.Location = new System.Drawing.Point(646, 522);
+            this.textBox40.Multiline = true;
+            this.textBox40.Name = "textBox40";
+            this.textBox40.ReadOnly = true;
+            this.textBox40.Size = new System.Drawing.Size(106, 30);
+            this.textBox40.TabIndex = 136;
+            this.textBox40.Text = "是否贫困";
+            this.textBox40.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // panel26
+            // 
+            this.panel26.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel26.Controls.Add(this.radpinkun1);
+            this.panel26.Controls.Add(this.radpinkun0);
+            this.panel26.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.panel26.Location = new System.Drawing.Point(755, 522);
+            this.panel26.Name = "panel26";
+            this.panel26.Size = new System.Drawing.Size(520, 30);
+            this.panel26.TabIndex = 95;
+            // 
+            // radpinkun1
+            // 
+            this.radpinkun1.AutoSize = true;
+            this.radpinkun1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radpinkun1.Location = new System.Drawing.Point(135, 2);
+            this.radpinkun1.Name = "radpinkun1";
+            this.radpinkun1.Size = new System.Drawing.Size(48, 24);
+            this.radpinkun1.TabIndex = 3;
+            this.radpinkun1.TabStop = true;
+            this.radpinkun1.Tag = "2";
+            this.radpinkun1.Text = "是";
+            this.radpinkun1.UseVisualStyleBackColor = true;
+            // 
+            // radpinkun0
+            // 
+            this.radpinkun0.AutoSize = true;
+            this.radpinkun0.Checked = true;
+            this.radpinkun0.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radpinkun0.Location = new System.Drawing.Point(10, 2);
+            this.radpinkun0.Name = "radpinkun0";
+            this.radpinkun0.Size = new System.Drawing.Size(48, 24);
+            this.radpinkun0.TabIndex = 2;
+            this.radpinkun0.TabStop = true;
+            this.radpinkun0.Tag = "1";
+            this.radpinkun0.Text = "否";
+            this.radpinkun0.UseVisualStyleBackColor = true;
+            // 
             // aUPersonalBasicInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2524,6 +2581,8 @@
             this.panel10.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel26.ResumeLayout(false);
+            this.panel26.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2711,5 +2770,9 @@
         public System.Windows.Forms.ComboBox comboBox1;
         public System.Windows.Forms.TextBox textBox38;
         public System.Windows.Forms.TextBox textBox39;
+        public System.Windows.Forms.Panel panel26;
+        private System.Windows.Forms.TextBox textBox40;
+        public System.Windows.Forms.RadioButton radpinkun1;
+        public System.Windows.Forms.RadioButton radpinkun0;
     }
 }

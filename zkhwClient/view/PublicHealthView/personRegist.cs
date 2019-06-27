@@ -748,8 +748,8 @@ namespace zkhwClient.view.PublicHealthView
             DataTable dt16num= grjddao.residentNum(basicInfoSettings.xcuncode);
             if (dt16num != null&& dt16num.Rows.Count>0) {
                 label16.Text = dt16num.Rows[0][0].ToString();//计划体检人数
-            }
-            string time = DateTime.Parse(basicInfoSettings.createtime).ToString("yyyy-MM-dd");
+            } 
+            string time = Common.GetCreateTime(basicInfoSettings.createtime);
             DataTable dt19num = grjddao.jkAllNum(basicInfoSettings.xcuncode, time);
             if (dt19num != null && dt19num.Rows.Count > 0)
             {

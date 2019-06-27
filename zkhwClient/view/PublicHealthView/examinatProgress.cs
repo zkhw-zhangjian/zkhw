@@ -1,4 +1,9 @@
-﻿using iTextSharp.text;
+﻿/*
+ * 
+ * 如果村代码为空那么就默认最后一个村的机构，否则按照选择的村的机构选择
+ * 
+ */
+using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
@@ -64,7 +69,7 @@ namespace zkhwClient.view.PublicHealthView
             }
             string ytj = "1";
             if (time1 != null && !"".Equals(time1) && time2 != null && !"".Equals(time2))
-            {
+            { 
                 dt = jkdao.querytjjd(time1, time2, xcuncode, jmxx);
             } 
             else { this.dataGridView1.DataSource = null; MessageBox.Show("时间段不能为空!"); return; };
@@ -374,7 +379,8 @@ namespace zkhwClient.view.PublicHealthView
             {
                 label9.Text = dt16num.Rows[0][0].ToString();//计划体检人数
             }
-            string createTime = DateTime.Parse(basicInfoSettings.createtime).ToString("yyyy-MM-dd");
+             
+            string createTime = Common.GetCreateTime(basicInfoSettings.createtime);
             DataTable dt19num = grjddao.jkAllNum(xcuncode, createTime);
             if (dt19num != null && dt19num.Rows.Count > 0)
             {
@@ -528,13 +534,13 @@ namespace zkhwClient.view.PublicHealthView
             {
             }
         }
-        //生成PDF xcuncode
+        //生成PDF xcuncode   
         private void label6_Click(object sender, EventArgs e)
         {
             //DataTable dts = jkdao.querytjjdTopdf(basicInfoSettings.xcuncode, basicInfoSettings.createtime);  //2019-6-17改成下面的方式
             if (xcuncode == "" || xcuncode == null) xcuncode = basicInfoSettings.xcuncode;
-            time1 = this.dateTimePicker1.Value.ToString("yyyy-MM-dd");//开始时间
-            time2 = this.dateTimePicker2.Value.ToString("yyyy-MM-dd");
+            time1 = this.dateTimePicker1.Value.ToString("yyyy-MM-dd"); 
+            time2 = this.dateTimePicker2.Value.ToString("yyyy-MM-dd"); 
             DataTable dts = jkdao.querytjjdTopdf(xcuncode, time1, time2);
             if (dts != null && dts.Rows.Count > 0)
             {
@@ -794,7 +800,7 @@ namespace zkhwClient.view.PublicHealthView
         }
 
         private void label5_Click(object sender, EventArgs e)
-        {
+        { 
             label6_Click(null, null);
         }
         private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)

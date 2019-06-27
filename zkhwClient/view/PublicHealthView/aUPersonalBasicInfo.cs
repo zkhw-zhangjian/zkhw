@@ -817,12 +817,41 @@ namespace zkhwClient.view.PublicHealthView
             resident_base_infoBean.update_name = frmLogin.name;
             resident_base_infoBean.create_name = frmLogin.name;
             resident_base_infoBean.create_user = frmLogin.userCode;
-            resident_base_infoBean.is_hypertension = "0";
-            resident_base_infoBean.is_diabetes = "0";
-            resident_base_infoBean.is_psychosis = "0";
-            resident_base_infoBean.is_tuberculosis = "0";
-            //resident_base_infoBean.is_deformity = "0";
-            resident_base_infoBean.is_poor = "0";
+            resident_base_infoBean.is_hypertension = "0";   //是否高血压
+            resident_base_infoBean.is_diabetes = "0";       //是否糖尿病    
+            resident_base_infoBean.is_psychosis = "0";      //是否精神病 
+            resident_base_infoBean.is_tuberculosis = "0";   //是否结核病
+            ////resident_base_infoBean.is_deformity = "0";
+            #region  高 糖 精 结 新的判断方法 
+            for (int i=0;i< goodsList.Rows.Count;i++)
+            {
+                string tmp = goodsList.Rows[i]["disease_type"].ToString();
+                switch (tmp)
+                {
+                    case "2":
+                        resident_base_infoBean.is_hypertension = "1";
+                        break;
+                    case "3":
+                        resident_base_infoBean.is_diabetes = "1";
+                        break;
+                    case "8":
+                        resident_base_infoBean.is_psychosis = "1";
+                        break;
+                    case "9":
+                        resident_base_infoBean.is_tuberculosis = "1";
+                        break;
+                }
+            }
+            #endregion 
+            //贫困户处理
+            if (radpinkun0.Checked==true)
+            {
+                resident_base_infoBean.is_poor = "0";
+            }
+            if(radpinkun1.Checked == true)
+            {
+                resident_base_infoBean.is_poor = "1";
+            }
             resident_base_infoBean.is_signing = "0";
 
             bool isfalse = personalBasicInfoService.aUpersonalBasicInfo(resident_base_infoBean, id, goodsList, goodsList0, goodsList1, goodsList2, goodsList3);
