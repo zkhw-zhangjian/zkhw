@@ -210,6 +210,10 @@ namespace zkhwClient.view.setting
             allareaname = this.comboBox1.Text + this.comboBox2.Text + this.comboBox3.Text + xzName + xcName;
             string organ_code = null;
             organ_name = textBox1.Text;
+            if (organ_name==""|| organ_name.Length<1) {
+                MessageBox.Show("建档单位不能为空!");
+                return;
+            }
             input_name = this.comboBox6.Text;
             zeren_doctor = this.comboBox7.Text;
             if (shengName == "陕西")
