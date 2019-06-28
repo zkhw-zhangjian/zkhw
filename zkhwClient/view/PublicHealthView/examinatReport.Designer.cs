@@ -135,6 +135,8 @@
             this.版式 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.pagerControl1 = new zkhwClient.control.PagerControl();
+            this.lblShangChuan = new System.Windows.Forms.Label();
+            this.lblWeiShangChuan = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -147,6 +149,8 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.lblWeiShangChuan);
+            this.groupBox1.Controls.Add(this.lblShangChuan);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.comboBox5);
@@ -169,7 +173,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(88, 62);
+            this.textBox1.Location = new System.Drawing.Point(88, 64);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(172, 21);
             this.textBox1.TabIndex = 12;
@@ -177,7 +181,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 65);
+            this.label4.Location = new System.Drawing.Point(11, 67);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 12);
             this.label4.TabIndex = 11;
@@ -1267,6 +1271,24 @@
             this.pagerControl1.Size = new System.Drawing.Size(1158, 29);
             this.pagerControl1.TabIndex = 4;
             // 
+            // lblShangChuan
+            // 
+            this.lblShangChuan.AutoSize = true;
+            this.lblShangChuan.Location = new System.Drawing.Point(481, 70);
+            this.lblShangChuan.Name = "lblShangChuan";
+            this.lblShangChuan.Size = new System.Drawing.Size(41, 12);
+            this.lblShangChuan.TabIndex = 27;
+            this.lblShangChuan.Text = "已上传";
+            // 
+            // lblWeiShangChuan
+            // 
+            this.lblWeiShangChuan.AutoSize = true;
+            this.lblWeiShangChuan.Location = new System.Drawing.Point(596, 70);
+            this.lblWeiShangChuan.Name = "lblWeiShangChuan";
+            this.lblWeiShangChuan.Size = new System.Drawing.Size(41, 12);
+            this.lblWeiShangChuan.TabIndex = 28;
+            this.lblWeiShangChuan.Text = "未上传";
+            // 
             // examinatReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1405,5 +1427,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label lblWeiShangChuan;
+        private System.Windows.Forms.Label lblShangChuan;
     }
 }

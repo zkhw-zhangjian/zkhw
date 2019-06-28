@@ -16,6 +16,7 @@ namespace zkhwClient.view.updateTjResult
         public delegate void TestFunDelegate(int _result, int _colIndex, int _rowIndex);
         public TestFunDelegate testFunDelegate;
 
+        private bool _isHaveData = false;
         public string time = "";
         public string name = "";
         public string aichive_no = "";
@@ -513,8 +514,10 @@ namespace zkhwClient.view.updateTjResult
             this.textBox4.Text = id_number;
             this.textBox2.Text = bar_code;
             DataTable dtbichao = tjdao.selectXuechangguiInfo(aichive_no, bar_code);
+            _isHaveData = false;
             if (dtbichao != null && dtbichao.Rows.Count > 0)
-            { 
+            {
+                _isHaveData = true;
                 string wbc = dtbichao.Rows[0]["WBC"].ToString();
                 if (wbc != "" && wbc != "*")
                 {
@@ -715,7 +718,48 @@ namespace zkhwClient.view.updateTjResult
             string MXDP = this.textBox35.Text;
             string PLCR = this.textBox34.Text;
             string OTHERS = this.textBox36.Text;
-            bool istrue= tjdao.updateXuechangguiInfo(aichive_no, bar_code, WBC, RBC, PCT, PLT, HGB, HCT, MCV, MCH, MCHC, RDWCV, RDWSD, MONO, MONOP, GRAN, GRANP, NEUT, NEUTP, EO, EOP, BASO, BASOP, LYM, LYMP, MPV, PDW, MXD, MXDP, PLCR, OTHERS);
+            //1：判断有没有，有就更新 否则就插入 DataTable selectXuechangguiInfo
+            bool istrue = false;
+            if (_isHaveData==true)
+            {
+                istrue = tjdao.updateXuechangguiInfo(aichive_no, bar_code, WBC, RBC, PCT, PLT, HGB, HCT, MCV, MCH, MCHC, RDWCV, RDWSD, MONO, MONOP, GRAN, GRANP, NEUT, NEUTP, EO, EOP, BASO, BASOP, LYM, LYMP, MPV, PDW, MXD, MXDP, PLCR, OTHERS);
+            }
+            else
+            {
+                xuechangguiBean obj = new xuechangguiBean();
+                obj.aichive_no = aichive_no;
+                obj.bar_code = bar_code;
+                obj.id_number = textBox4.Text;
+                obj.HCT = HCT;
+                obj.HGB = HGB;
+                obj.LYM = LYM;
+                obj.LYMP = LYMP;
+                obj.MCH = MCH;
+                obj.MCHC = MCHC;
+                obj.MCV = MCV;
+                obj.MPV = MPV;
+                obj.MXD = MXD;
+                obj.MXDP = MXDP;
+                obj.NEUT = NEUT;
+                obj.NEUTP= NEUTP;
+                obj.PCT = PCT;
+                obj.PDW = PDW;
+                obj.PLT = PLT;
+                obj.RBC = RBC;
+                obj.RDWCV = RDWCV;
+                obj.RDWSD = RDWSD;
+                obj.WBC = WBC;
+                obj.MONO = MONO;
+                obj.MONOP = MONOP;
+                obj.GRAN = GRAN;
+                obj.GRANP = GRANP;
+                obj.PLCR = PLCR;
+                obj.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                obj.ZrysXCG = "";
+                //obj.timeCodeUnique = obj.bar_code + "_" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                istrue = tjdao.insertXuechangguiInfo(obj);
+            }
+            
             if (istrue)
             {
                 #region 处理下数据判断

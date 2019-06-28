@@ -41,16 +41,8 @@ namespace zkhwClient.view.PublicHealthView
             string sql = $@"SELECT count(sex) sun,sex from zkhw_tj_bgdc where area_duns 
          like '%{_xuncode}%' and  date_format(createtime,'%Y-%m-%d') between '{time1}' and '{time2}' GROUP BY sex ";
             if (isfirst==true)
-            { 
-                if(basicInfoSettings.createtime==null || basicInfoSettings.createtime=="")
-                {
-                    time1 = DateTime.Now.ToString("yyyy-MM-dd");
-                }
-                else
-                {
-                    time1 = DateTime.Parse(basicInfoSettings.createtime).ToString("yyyy-MM-dd");
-                }
-                
+            {  
+                time1=Common.GetCreateTime(basicInfoSettings.createtime);
                 sql = $@"SELECT count(sex) sun,sex from zkhw_tj_bgdc where area_duns like '%{_xuncode}%' and date_format(createtime,'%Y-%m-%d')>='{time1}' GROUP BY sex ";
             }
 
@@ -221,17 +213,7 @@ where 1=1";
         /// </summary>
         /// <param name="data"></param>
         private void queryExaminatProgress(DataTable data)
-        {
-            //if (dataGridView1.DataSource != null)
-            //{ 
-            //    DataTable dts = (DataTable)dataGridView1.DataSource;
-            //    dts.Rows.Clear();
-            //    dataGridView1.DataSource = dts;
-            //}
-            //else
-            //{
-            //    dataGridView1.Rows.Clear();
-            //} 
+        { 
             if(dataGridView1.ColumnCount>0)
             {
                 dataGridView1.Columns.Clear();
@@ -272,9 +254,41 @@ where 1=1";
                 //for (int x = 0; x <= rows; x++)
                 //{
                 //    this.dataGridView1.Rows[x].HeaderCell.Value = String.Format("{0}", x + 1);
-                //}
-                }
+                //} 
             }
+            DisplayShangChuanInfo(data);
+        }
+
+        private void DisplayShangChuanInfo(DataTable dt)
+        {
+            if(dt ==null || dt.Rows.Count<=0)
+            {
+                lblShangChuan.Text = "已上传:0";
+                lblWeiShangChuan.Text = "未上传:0";
+            }
+            else
+            {
+                DataRow[] dr = dt.Select("是否上传数据 = '否'");
+                if(dr.Length>0)
+                {  
+                    lblWeiShangChuan.Text = "未上传:"+ dr.Length.ToString();
+                }
+                else
+                {
+                    lblWeiShangChuan.Text = "未上传:0" ;
+                }
+
+                DataRow[] dr1 = dt.Select("是否上传数据 = '是'");
+                if (dr1.Length > 0)
+                {
+                    lblShangChuan.Text = "已上传:" + dr1.Length.ToString();
+                }
+                else
+                {
+                    lblShangChuan.Text = "已上传:0";
+                }
+            } 
+        }
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             //自动编号，与数据无关
@@ -316,7 +330,7 @@ where 1=1";
         {
             int count = 0;
             queryExaminatProgress(GetData(pagerControl1.PageIndex, pagerControl1.PageSize, out count));
-            pagerControl1.DrawControl(count);
+            pagerControl1.DrawControl(count); 
         }
         #endregion
 
@@ -4074,7 +4088,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 
                 //说明点击的列是DataGridViewButtonColumn列
                 DataGridViewColumn column = dataGridView1.Columns[e.ColumnIndex];
-                string id = dataGridView1["编码", e.RowIndex].Value.ToString();
+                string id = dataGridView1["身份证号", e.RowIndex].Value.ToString();
                 string name = dataGridView1["姓名", e.RowIndex].Value.ToString();
                 string nameidstr = name + id;
                 List<FileTimeInfo> list = new List<FileTimeInfo>();

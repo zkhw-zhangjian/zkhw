@@ -63,5 +63,9 @@ namespace zkhwClient
         public string bar_code { get; set; }
 
         public string ZrysXCG { get; set; }
+
+        public string RDWCV { get; set; }
+        public string RDWSD { get; set; } 
+        public string timeCodeUnique { get; set; }
     }
 }
