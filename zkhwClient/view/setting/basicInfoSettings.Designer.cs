@@ -72,6 +72,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -227,6 +228,7 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.label18);
             this.groupBox2.Controls.Add(this.textBox3);
             this.groupBox2.Controls.Add(this.label13);
             this.groupBox2.Controls.Add(this.textBox2);
@@ -256,27 +258,27 @@
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox3.Location = new System.Drawing.Point(520, 120);
+            this.textBox3.Location = new System.Drawing.Point(679, 120);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(385, 30);
+            this.textBox3.Size = new System.Drawing.Size(226, 30);
             this.textBox3.TabIndex = 17;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label13.Location = new System.Drawing.Point(464, 123);
+            this.label13.Location = new System.Drawing.Point(580, 124);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(51, 20);
+            this.label13.Size = new System.Drawing.Size(93, 20);
             this.label13.TabIndex = 16;
-            this.label13.Text = "问询";
+            this.label13.Text = "问询人员";
             // 
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox2.Location = new System.Drawing.Point(153, 120);
+            this.textBox2.Location = new System.Drawing.Point(139, 120);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(284, 30);
+            this.textBox2.Size = new System.Drawing.Size(248, 30);
             this.textBox2.TabIndex = 15;
             // 
             // label12
@@ -557,6 +559,18 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.BackColor = System.Drawing.SystemColors.Control;
+            this.label18.Font = new System.Drawing.Font("宋体", 14F);
+            this.label18.ForeColor = System.Drawing.Color.Red;
+            this.label18.Location = new System.Drawing.Point(391, 125);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(171, 19);
+            this.label18.TabIndex = 18;
+            this.label18.Text = "备注:医生、护士等";
+            // 
             // basicInfoSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -631,5 +645,6 @@
         private System.Windows.Forms.ComboBox comboBox17;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label18;
     }
 }

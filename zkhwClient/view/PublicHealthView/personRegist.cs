@@ -494,7 +494,7 @@ namespace zkhwClient.view.PublicHealthView
                 grjdxx.towns_code = basicInfoSettings.xzcode;
                 grjdxx.towns_name = basicInfoSettings.xzName;
                 grjdxx.village_code = basicInfoSettings.xcuncode;
-                grjdxx.village_name = basicInfoSettings.xcName; 
+                grjdxx.village_name = basicInfoSettings.xcName;
             }
             else
             {
@@ -516,15 +516,6 @@ namespace zkhwClient.view.PublicHealthView
             if (carcode == null || carcode.Length != 4) { MessageBox.Show("车编号不正确，请确认系统设置中的车编号！"); return; };
 
             string nameCode = textBox1.Text + " " + Regex.Replace(textBox3.Text, "(\\d{6})\\d{10}(\\d{2})", "$1**********$2");
-
-            if (nameCode.IndexOf('*') > -1)
-            { }
-            else
-            {
-                string a = textBox3.Text.Substring(0, 6) + "**********" + textBox3.Text.Substring(16, 2);
-                nameCode = textBox1.Text + " " + a;
-            }
-
             OnPrintSampleBarcode(carcode + barnumCode, Int32.Parse(this.numericUpDown1.Value.ToString()), nameCode);
          
             node = xmlDoc.SelectSingleNode("config/barnumCode");
@@ -534,8 +525,6 @@ namespace zkhwClient.view.PublicHealthView
             }
             node.InnerText = fnum.ToString();
             xmlDoc.Save(path);
-
-            registrationRecordCheck();//右侧统计信息
         }
         //打印条码
         public void OnPrintSampleBarcode(string barcode, int pageCount, string nameCode)
@@ -681,16 +670,8 @@ namespace zkhwClient.view.PublicHealthView
             if (idnumber != null && idnumber.Length == 18)
             {
                 string nameCodenew = textBox1.Text + " " + Regex.Replace(textBox3.Text, "(\\d{6})\\d{10}(\\d{2})", "$1**********$2");
-                if(nameCodenew.IndexOf('*')>-1)
-                { }
-                else
-                {
-                    string a = idnumber.Substring(0, 6) + "**********" + idnumber.Substring(16, 2);
-                    nameCodenew = textBox1.Text + " " + a;
-                }
                 string codenew = "";
                 int fnum = Int32.Parse(this.numericUpDown1.Value.ToString());
-            
                 DataTable dttjjk = grjddao.selectTjjk(idnumber);
                 if (dttjjk != null && dttjjk.Rows.Count > 0)
                 {
@@ -765,8 +746,8 @@ namespace zkhwClient.view.PublicHealthView
             DataTable dt16num= grjddao.residentNum(basicInfoSettings.xcuncode);
             if (dt16num != null&& dt16num.Rows.Count>0) {
                 label16.Text = dt16num.Rows[0][0].ToString();//计划体检人数
-            }
-            string time = Common.GetCreateTime(basicInfoSettings.createtime); 
+            } 
+            string time = Common.GetCreateTime(basicInfoSettings.createtime);
             DataTable dt19num = grjddao.jkAllNum(basicInfoSettings.xcuncode, time);
             if (dt19num != null && dt19num.Rows.Count > 0)
             {
