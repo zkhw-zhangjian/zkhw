@@ -39,5 +39,13 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
+
+        public DataTable checkTcmHealthServicesByExamID(string examid)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select * from elderly_tcm_record where exam_id = '" + examid + "'";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
     }
 }

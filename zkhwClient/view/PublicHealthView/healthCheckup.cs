@@ -218,13 +218,7 @@ namespace zkhwClient.view.PublicHealthView
                     auhcs.textBox51.Text = doctor_name;
 
                     auhcs.id = id;//祖
-                    auhcs.Show();
-                    //aUhealthcheckupServices3 auhcs = new aUhealthcheckupServices3();
-                    //auhcs.textBox107.Text = id_number;
-                    //auhcs.textBox106.Text = aichive_no;
-                    //auhcs.textBox105.Text = bar_code;
-                    //auhcs.textBox108.Text = id;
-                    //auhcs.Show();
+                    auhcs.Show(); 
                 }
             }
             else

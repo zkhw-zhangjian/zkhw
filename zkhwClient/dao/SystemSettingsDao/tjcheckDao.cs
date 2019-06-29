@@ -7,6 +7,19 @@ namespace zkhwClient.dao
 {
     class tjcheckDao
     {
+        public int UpdateOldestimateTran(string r,string barcode,string idnumber,string examid, string stag)
+        {
+            int ret = 0;
+            List<string> _lst = new List<string>();
+            String sql =string.Format(@"update zkhw_tj_bgdc set lnrzlnlpg='{0}' 
+                              where bar_code = '{1}' and id_number='{2}'", r, barcode, idnumber);
+            _lst.Add(sql);
+            sql = string.Format(@"update physical_examination_record set base_selfcare_estimate='{0}' 
+                                where id='{1}'", stag, examid);
+            _lst.Add(sql);
+            ret=DbHelperMySQL.ExecuteSqlTran(_lst);
+            return ret;
+        }
         public bool insertShenghuaInfo(shenghuaBean sh)
         {
             int rt = 0;
@@ -268,10 +281,10 @@ namespace zkhwClient.dao
             return ret == 0 ? false : true;
         }
         //更新老年人中医体质辨识
-        public bool updateTJbgdclnrzytzbs(string aichive_no, string id_number, string result)
+        public bool updateTJbgdclnrzytzbs(string aichive_no, string id_number, string result,string bar_code)
         {
             int ret = 0;
-            String sql = "update zkhw_tj_bgdc set lnrzytzbs='" + result + "' where aichive_no = '" + aichive_no + "' and id_number='" + id_number + "'";
+            String sql = "update zkhw_tj_bgdc set lnrzytzbs='" + result + "' where aichive_no = '" + aichive_no + "' and id_number='" + id_number + "' and bar_code='"+ bar_code + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }

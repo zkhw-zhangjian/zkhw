@@ -18,6 +18,8 @@ namespace zkhwClient.view.PublicHealthView
         public string archiveno = "";
         public string sex = "";
         public int flag = 0;
+        public string _examid = "";
+        public string _barCode = ""; 
         public aUolderHelthService()
         {
             InitializeComponent();
@@ -236,6 +238,7 @@ namespace zkhwClient.view.PublicHealthView
 
         private void button4_Click(object sender, EventArgs e)
         {
+            string _stag = "1";
             bean.elderly_selfcare_estimateBean elderly_selfcare_estimateBean = new bean.elderly_selfcare_estimateBean();
             elderly_selfcare_estimateBean.sex = sex;
             elderly_selfcare_estimateBean.name = this.textBox1.Text.Replace(" ", "");
@@ -249,19 +252,24 @@ namespace zkhwClient.view.PublicHealthView
             elderly_selfcare_estimateBean.answer_result += "," + this.numericUpDown5.Value.ToString();
             elderly_selfcare_estimateBean.answer_result = elderly_selfcare_estimateBean.answer_result.Substring(1);
             elderly_selfcare_estimateBean.total_score = this.numericUpDown6.Value.ToString();
+
             if (this.numericUpDown6.Value >=0 && this.numericUpDown6.Value <= 3) {
                 elderly_selfcare_estimateBean.judgement_result = "可自理";
+                _stag = "1";
             }
             else if (this.numericUpDown6.Value >= 4 && this.numericUpDown6.Value <= 8)
             {
                 elderly_selfcare_estimateBean.judgement_result = "轻度依赖";
+                _stag = "2";
             }
             else if (this.numericUpDown6.Value >= 9 && this.numericUpDown6.Value <= 18) {
                 elderly_selfcare_estimateBean.judgement_result = "中度依赖";
+                _stag = "3";
             } else if (this.numericUpDown6.Value >= 19) {
                 elderly_selfcare_estimateBean.judgement_result = "不能自理";
+                _stag = "4";
             }
-            else { }
+            else { } 
             //////以下页面未用 数据库字段格式要求
             elderly_selfcare_estimateBean.upload_time = DateTime.Now.ToString("yyyy-MM-dd");
             elderly_selfcare_estimateBean.create_time = DateTime.Now.ToString("yyyy-MM-dd");
@@ -270,14 +278,22 @@ namespace zkhwClient.view.PublicHealthView
             elderly_selfcare_estimateBean.test_date = DateTime.Now.ToString("yyyy-MM-dd");
             elderly_selfcare_estimateBean.create_name = frmLogin.name;
             elderly_selfcare_estimateBean.test_doctor= basicInfoSettings.zeren_doctor;
-            bool isfalse = olderHelthServices.aUelderly_selfcare_estimate(elderly_selfcare_estimateBean, archiveno);
+            elderly_selfcare_estimateBean.exam_id = _examid;
+            string _id = "";
+            if(flag==1)
+            {
+                _id = _examid;
+            }
+            bool isfalse = olderHelthServices.aUelderly_selfcare_estimateForExamID(elderly_selfcare_estimateBean, _id);
+            //bool isfalse = olderHelthServices.aUelderly_selfcare_estimate(elderly_selfcare_estimateBean, archiveno);
             if (isfalse)
             {
-                //这里就要更新对应的
+                //这里就要更新对应的 zkhw_tj_bgdc-->lnrzlnlpg、physical_examination_record-->base_selfcare_estimate
                 string id_number = textBox12.Text;
                 string aichive_no = textBox2.Text;
-                tjcheckDao tjdao = new tjcheckDao();
-                tjdao.updateTJbgdclnrzlnlpg(aichive_no, id_number, "1");
+                tjcheckDao tjdao = new tjcheckDao(); 
+                //用事务更新
+                tjdao.UpdateOldestimateTran("1", _barCode, id_number, _examid, _stag); 
                 this.DialogResult = DialogResult.OK;
             }
         }

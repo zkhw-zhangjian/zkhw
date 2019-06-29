@@ -8,11 +8,32 @@ namespace zkhwClient.view.PublicHealthView
 {
     public partial class aUhealthcheckupServices1 : Form
     {
+        private string _laonianrenshenghuozili = "n";
+        private string _barCode = "";
         public string id = "";
         healthCheckupDao hcd = new healthCheckupDao();
         public aUhealthcheckupServices1()
         {
             InitializeComponent();
+        }
+        private void SetelderlySelfcareEstimate(int score)
+        {
+            if (score >= 0 && score <= 3)
+            {
+                this.radioButton8.Checked = true;
+            }
+            else if (score >= 4 && score <= 8)
+            {
+                this.radioButton9.Checked = true;
+            }
+            else if (score >= 9 && score <= 18)
+            {
+                this.radioButton16.Checked = true;
+            }
+            else if (score >= 19)
+            {
+                this.radioButton7.Checked = true;
+            }
         }
         private void aUdiabetesPatientServices_Load(object sender, EventArgs e)
         {
@@ -22,21 +43,16 @@ namespace zkhwClient.view.PublicHealthView
             label51.Left = (this.panel1.Width - this.label51.Width) / 2;
             label51.BringToFront();
 
-            DataTable dtese= hcd.queryelderlySelfcareEstimate(this.textBox2.Text);
+            //DataTable dtese= hcd.queryelderlySelfcareEstimate(this.textBox2.Text); queryelderlySelfcareEstimateForExamID
+            DataTable dtese = hcd.queryelderlySelfcareEstimateForExamID(id); 
             if (dtese.Rows.Count>0) {
+                _laonianrenshenghuozili = "y";
                 int score = Int32.Parse( dtese.Rows[0]["total_score"].ToString());
-                if (score >= 0 && score <= 3) {
-                    this.radioButton8.Checked = true;
-                }else if (score >= 4 && score <= 8)
-                {
-                    this.radioButton9.Checked = true;
-                }else if (score >= 9 && score <= 18)
-                {
-                    this.radioButton16.Checked = true;
-                }else if (score >=19)
-                {
-                    this.radioButton7.Checked = true;
-                }
+                SetelderlySelfcareEstimate(score);
+            } 
+            else
+            {
+                _laonianrenshenghuozili = "n";
             }
             //查询赋值
             if (id != "")
@@ -52,7 +68,9 @@ namespace zkhwClient.view.PublicHealthView
                     this.textBox51.Text = dt.Rows[0]["doctor_name"].ToString();
                     this.textBox120.Text = dt.Rows[0]["id"].ToString();
                     this.checkBox21.Checked = false;
-                    
+
+                    _barCode= dt.Rows[0]["bar_code"].ToString();
+
                     //将ctr转换成CheckBox并赋值给ck
                     string symptom=dt.Rows[0]["symptom"].ToString();
                     if (symptom != "" && symptom.IndexOf(',') > -1)
@@ -1713,6 +1731,81 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         ck.Checked = false;
                     }
+                }
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //1:判断是不是已经参加过评估了
+            string archive_no = textBox2.Text.Trim();
+            if (archive_no == "") return; 
+            if (_laonianrenshenghuozili=="n")
+            {
+                //添加
+                aUolderHelthService hm = new aUolderHelthService();
+                hm.label47.Text = "老年人生活自理能力评估表";
+                hm.Text = "老年人生活自理能力评估表";
+                hm.textBox1.Text = textBox1.Text.Trim();
+                hm.textBox2.Text = archive_no;
+                hm.textBox12.Text = textBox119.Text.Trim();
+                int _xb = int.Parse(textBox119.Text.Substring(16, 1));
+                if (_xb % 2 == 0)
+                {
+                    hm.sex  = "女";
+                }
+                else
+                {
+                    hm.sex  = "男";
+                } 
+                hm.flag = 0;
+                hm._barCode = _barCode;
+                hm._examid = id;
+                if (hm.ShowDialog() == DialogResult.OK)
+                {
+                    //成功了自动给分数处理
+                    int score = (int)hm.numericUpDown6.Value;
+                    SetelderlySelfcareEstimate(score); 
+                }
+            }
+            else
+            {
+                service.olderHelthServices olderHelthS = new service.olderHelthServices();
+                DataTable dt = olderHelthS.queryOlderHelthServiceForExamID(id);
+                //修改
+                aUolderHelthService hm = new aUolderHelthService();
+                string name = textBox1.Text.Trim(); 
+                string idnumber = textBox119.Text.Trim();
+                int _xb = int.Parse(idnumber.Substring(16, 1));
+                if (_xb % 2 == 0)
+                {
+                    hm.sex = "女";
+                }
+                else
+                {
+                    hm.sex = "男";
+                }
+                hm._barCode = _barCode;
+                hm._examid = id;
+                hm.label47.Text = "老年人生活自理能力评估表";
+                hm.Text = "老年人生活自理能力评估表";
+                hm.flag = 1; 
+                hm.archiveno = archive_no; 
+                hm.textBox1.Text = name;
+                hm.textBox2.Text = archive_no;
+                hm.textBox12.Text = idnumber;
+                string[] ck2 = dt.Rows[0]["answer_result"].ToString().Split(',');
+                hm.numericUpDown1.Value = Decimal.Parse(ck2[0]);
+                hm.numericUpDown2.Value = Decimal.Parse(ck2[1]);
+                hm.numericUpDown3.Value = Decimal.Parse(ck2[2]);
+                hm.numericUpDown4.Value = Decimal.Parse(ck2[3]);
+                hm.numericUpDown5.Value = Decimal.Parse(ck2[4]);
+                hm.numericUpDown6.Value = Decimal.Parse(dt.Rows[0]["total_score"].ToString());
+                if (hm.ShowDialog() == DialogResult.OK)
+                {
+                    //成功了自动给分数处理
+                    int score = (int)hm.numericUpDown6.Value;
+                    SetelderlySelfcareEstimate(score);
                 }
             }
         }

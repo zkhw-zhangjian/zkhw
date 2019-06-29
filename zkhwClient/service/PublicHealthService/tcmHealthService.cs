@@ -27,5 +27,10 @@ namespace zkhwClient.service
         {
             return hPD.checkTcmHealthServicesByno1(code, idnum);
         }
+
+        public DataTable checkTcmHealthServicesByExamID(string examid)
+        {
+            return hPD.checkTcmHealthServicesByExamID(examid);
+        }
     }
 }

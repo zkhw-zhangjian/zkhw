@@ -77,12 +77,12 @@ namespace zkhwClient.view.PublicHealthView
             //}
             //else
             //{
-                sql = @"SELECT bb.name,bb.archive_no,bb.id_number,aa.test_date,aa.test_doctor,aa.id,(case aa.upload_status when '1' then '是' ELSE '否' END) cstatus 
-                     FROM (select b.name, b.archive_no, b.id_number from resident_base_info b inner join zkhw_tj_jk z on b.id_number=z.id_number 
+                sql = @"SELECT bb.name,bb.archive_no,bb.id_number,aa.test_date,aa.test_doctor,aa.id,(case aa.upload_status when '1' then '是' ELSE '否' END) cstatus,aa.exam_id ,bb.bar_code
+                     FROM (select b.name, b.archive_no, b.id_number,z.bar_code from resident_base_info b inner join zkhw_tj_jk z on b.id_number=z.id_number 
                     where 1=1 and z.createtime>='" + time1 + "' and b.age >= '65' ";
                 if (cun != null && !"".Equals(cun)) { sql += " AND b.village_code='" + cun + "'"; }
                 if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
-                sql += ") bb LEFT JOIN(select id,aichive_no,test_date,test_doctor,upload_status from elderly_tcm_record where test_date >= '" + time1 + "' and test_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
+                sql += ") bb LEFT JOIN(select id,aichive_no,test_date,test_doctor,upload_status,exam_id from elderly_tcm_record where test_date >= '" + time1 + "' and test_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
             //}
             DataSet dataSet = DbHelperMySQL.Query(sql);
             if (dataSet.Tables.Count < 1) { MessageBox.Show("未查询出数据，请重新查询!"); return; }
@@ -95,6 +95,8 @@ namespace zkhwClient.view.PublicHealthView
             this.dataGridView1.Columns[4].HeaderCell.Value = "签字医生";
             this.dataGridView1.Columns[5].Visible = false;
             this.dataGridView1.Columns[6].HeaderCell.Value = "是否上传";
+            this.dataGridView1.Columns[7].Visible = false;
+            this.dataGridView1.Columns[8].Visible = false;
 
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
@@ -110,7 +112,11 @@ namespace zkhwClient.view.PublicHealthView
         {
             this.Close();
         }
-
+        private bool IsHaveExamID(string _archiveno,string _idnumber,string _barcode)
+        {
+            bool ret = false;
+            return ret;
+        }
         //添加 修改 高血压随访记录历史表 调此方法
         private void button1_Click(object sender, EventArgs e)
         {
@@ -118,7 +124,25 @@ namespace zkhwClient.view.PublicHealthView
             int row = dataGridView1.CurrentRow.Index;
             string code = dataGridView1["archive_no", row].Value.ToString();
             string idnum=dataGridView1["id_number", row].Value.ToString();
-            DataTable dtcode= tcmHealthService.checkTcmHealthServicesByno1(code, idnum);
+            string examid= dataGridView1["exam_id", row].Value.ToString();
+            string barcode= dataGridView1["bar_code", row].Value.ToString();
+            
+            //判断有没有exam_id
+            if(examid=="")
+            {
+                healthCheckupDao hd = new healthCheckupDao();  //获取exam_id
+                examid = hd.GetExaminationRecord(code, idnum, barcode); 
+            }
+            DataTable dtcode = null;
+            if (examid=="")
+            {
+                dtcode = tcmHealthService.checkTcmHealthServicesByno1(code, idnum);
+            }
+            else
+            {
+                dtcode = tcmHealthService.checkTcmHealthServicesByExamID(examid);
+            }
+             
             if (dtcode.Rows.Count>0)
             {
 
@@ -128,6 +152,8 @@ namespace zkhwClient.view.PublicHealthView
                 return;
             }
             addtcmHealthServices addtcm = new addtcmHealthServices(1, dataGridView1["name", row].Value.ToString(), dataGridView1["archive_no", row].Value.ToString(), dataGridView1["id_number", row].Value.ToString());
+            addtcm.bar_code = barcode;
+            addtcm.exam_id = examid;
             addtcm.StartPosition = FormStartPosition.CenterScreen;
             if (addtcm.ShowDialog()==DialogResult.OK) {
                 querytcmHealthServices();
@@ -143,17 +169,32 @@ namespace zkhwClient.view.PublicHealthView
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             int row = dataGridView1.CurrentRow.Index;
-            addtcmHealthServices addtcm = new addtcmHealthServices(0, dataGridView1["name", row].Value.ToString(), dataGridView1["archive_no", row].Value.ToString(), dataGridView1["id_number", row].Value.ToString());
-            if (addtcm.show)
+            string code = dataGridView1["archive_no", row].Value.ToString();
+            string idnum = dataGridView1["id_number", row].Value.ToString();
+            string examid = dataGridView1["exam_id", row].Value.ToString();
+            string barcode = dataGridView1["bar_code", row].Value.ToString();
+            DataTable dtcode = null;
+            if (examid == "")
             {
+                dtcode = tcmHealthService.checkTcmHealthServicesByno1(code, idnum);
+            }
+            else
+            {
+                dtcode = tcmHealthService.checkTcmHealthServicesByExamID(examid);
+            }
+            if (dtcode.Rows.Count > 0)
+            {
+                addtcmHealthServices addtcm = new addtcmHealthServices(0, dataGridView1["name", row].Value.ToString(), dataGridView1["archive_no", row].Value.ToString(), dataGridView1["id_number", row].Value.ToString());
+                addtcm.bar_code = barcode;
+                addtcm.exam_id = examid;
                 addtcm.StartPosition = FormStartPosition.CenterScreen;
                 addtcm.ShowDialog();
                 querytcmHealthServices();
             }
             else
             {
-                MessageBox.Show(addtcm.mag);
-            }
+                MessageBox.Show("没有修改数据！"); 
+            } 
         }
 
         /// <summary>

@@ -541,8 +541,8 @@
             this.textBox45.ReadOnly = true;
             this.textBox45.Size = new System.Drawing.Size(1041, 30);
             this.textBox45.TabIndex = 107;
-            this.textBox45.Text = "总得分";
-            this.textBox45.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox45.Text = "总得分：";
+            this.textBox45.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox44
             // 

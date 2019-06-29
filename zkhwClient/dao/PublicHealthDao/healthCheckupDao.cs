@@ -7,6 +7,21 @@ namespace zkhwClient.dao
 {
     class healthCheckupDao
     {
+        public string GetExaminationRecord(string _archiveno, string _idnumber, string _barcode)
+        {
+            string id = "";
+            string sql = string.Format(@"select id from physical_examination_record 
+                      where aichive_no='{0}' and id_number='{1}' and bar_code='{2}' LIMIT 1  ", 
+                      _archiveno, _idnumber, _barcode);
+            object o = DbHelperMySQL.GetSingle(sql);
+            if(o!=null)
+            {
+                id = o.ToString();
+            }
+
+            return id; 
+        }
+
         public bool deletePhysical_examination_record(string id)
         {
             int rt = 0;
@@ -83,6 +98,13 @@ namespace zkhwClient.dao
             return ds.Tables[0];
         }
 
+        public DataTable queryelderlySelfcareEstimateForExamID(string id)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select id,total_score from elderly_selfcare_estimate where exam_id = '" + id + "' order by create_time desc limit 1";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
         public DataTable queryOlderHelthService0()
         {
             DataSet ds = new DataSet();

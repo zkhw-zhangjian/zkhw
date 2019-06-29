@@ -35,6 +35,9 @@ namespace zkhwClient.view.PublicHealthView
         public string id_number { get; set; }
         public bool show { get; set; } = true;
         public string mag { get; set; }
+
+        public string bar_code = "";
+        public string exam_id = "";
         public addtcmHealthServices(int s, string name, string no, string id)
         {
             InitializeComponent();
@@ -61,9 +64,10 @@ namespace zkhwClient.view.PublicHealthView
         {
             if ((IS == 1 ? Insert() : Update()) > 0)
             {
-                //更新
+                //更新bar_code 添加这个
                 tjcheckDao tjdao = new tjcheckDao();
-                tjdao.updateTJbgdclnrzytzbs(aichive_no, id_number, "1");
+                
+                tjdao.updateTJbgdclnrzytzbs(aichive_no, id_number, "1", bar_code);
 
                 MessageBox.Show("成功！"); 
                 this.DialogResult = DialogResult.OK;
@@ -603,7 +607,14 @@ namespace zkhwClient.view.PublicHealthView
             DateTime time = DateTime.Now;
             var tz = TZ();
             string bj = BJ();
-            string issql = @"insert into elderly_tcm_record(id,name,aichive_no,id_number,test_date,answer_result,qixuzhi_score,qixuzhi_result,yangxuzhi_score,yangxuzhi_result,yinxuzhi_score,yinxuzhi_result,tanshizhi_score,tanshizhi_result,shirezhi_score,shirezhi_result,xueyuzhi_score,xueyuzhi_result,qiyuzhi_score,qiyuzhi_result,tebingzhi_sorce,tebingzhi_result,pinghezhi_sorce,pinghezhi_result,tcm_guidance,test_doctor,create_user,create_name,create_org,create_org_name,create_time,upload_status) values(@id,@name,@aichive_no,@id_number,@test_date,@answer_result,@qixuzhi_score,@qixuzhi_result,@yangxuzhi_score,@yangxuzhi_result,@yinxuzhi_score,@yinxuzhi_result,@tanshizhi_score,@tanshizhi_result,@shirezhi_score,@shirezhi_result,@xueyuzhi_score,@xueyuzhi_result,@qiyuzhi_score,@qiyuzhi_result,@tebingzhi_sorce,@tebingzhi_result,@pinghezhi_sorce,@pinghezhi_result,@tcm_guidance,@test_doctor,@create_user,@create_name,@create_org,@create_org_name,@create_time,@upload_status)";
+            string issql = @"insert into elderly_tcm_record(id,name,aichive_no,id_number,test_date,answer_result,qixuzhi_score,qixuzhi_result,yangxuzhi_score,yangxuzhi_result,yinxuzhi_score,yinxuzhi_result,tanshizhi_score,tanshizhi_result,shirezhi_score,shirezhi_result,xueyuzhi_score,xueyuzhi_result,qiyuzhi_score,qiyuzhi_result,tebingzhi_sorce,
+                        tebingzhi_result,pinghezhi_sorce,pinghezhi_result,tcm_guidance,test_doctor,create_user,
+                         create_name,create_org,create_org_name,create_time,upload_status,exam_id) 
+                    values(@id,@name,@aichive_no,@id_number,@test_date,@answer_result,@qixuzhi_score,@qixuzhi_result,
+                    @yangxuzhi_score,@yangxuzhi_result,@yinxuzhi_score,@yinxuzhi_result,@tanshizhi_score,@tanshizhi_result,
+                    @shirezhi_score,@shirezhi_result,@xueyuzhi_score,@xueyuzhi_result,@qiyuzhi_score,@qiyuzhi_result,
+                        @tebingzhi_sorce,@tebingzhi_result,@pinghezhi_sorce,@pinghezhi_result,@tcm_guidance,@test_doctor,
+                    @create_user,@create_name,@create_org,@create_org_name,@create_time,@upload_status,@exam_id)";
             MySqlParameter[] args = new MySqlParameter[] {
                     new MySqlParameter("@id",Result.GetNewId()),
                     new MySqlParameter("@name", Names),
@@ -637,19 +648,23 @@ namespace zkhwClient.view.PublicHealthView
                     new MySqlParameter("@create_org", frmLogin.organCode),
                     new MySqlParameter("@create_org_name", frmLogin.organName),
                     new MySqlParameter("@create_time", time),
-                    new MySqlParameter("@upload_status","0")
+                    new MySqlParameter("@upload_status","0"),
+                    new MySqlParameter("@exam_id", exam_id)
                     };
             return DbHelperMySQL.ExecuteSql(issql, args);
         }
 
         private int Update()
         {
-            string res = GetFen();
-            DateTime time = DateTime.Now;
-            var tz = TZ();
-            string bj = BJ();
-            string issql = @"update elderly_tcm_record set test_date=@test_date,answer_result=@answer_result,qixuzhi_score=@qixuzhi_score,qixuzhi_result=@qixuzhi_result,yangxuzhi_score=@yangxuzhi_score,yangxuzhi_result=@yangxuzhi_result,yinxuzhi_score=@yinxuzhi_score,yinxuzhi_result=@yinxuzhi_result,tanshizhi_score=@tanshizhi_score,tanshizhi_result=@tanshizhi_result,shirezhi_score=@shirezhi_score,shirezhi_result=@shirezhi_result,xueyuzhi_score=@xueyuzhi_score,xueyuzhi_result=@xueyuzhi_result,qiyuzhi_score=@qiyuzhi_score,qiyuzhi_result=@qiyuzhi_result,tebingzhi_sorce=@tebingzhi_sorce,tebingzhi_result=@tebingzhi_result,pinghezhi_sorce=@pinghezhi_sorce,pinghezhi_result=@pinghezhi_result,tcm_guidance=@tcm_guidance,update_user=@update_user,update_name=@update_name,update_time=@update_time where name=@name and aichive_no=@aichive_no and id_number=@id_number";
-            MySqlParameter[] args = new MySqlParameter[] {
+            if(exam_id=="")   
+            {
+                #region 为空操作 保险操作
+                string res = GetFen();
+                DateTime time = DateTime.Now;
+                var tz = TZ();
+                string bj = BJ();
+                string issql = @"update elderly_tcm_record set test_date=@test_date,answer_result=@answer_result,qixuzhi_score=@qixuzhi_score,qixuzhi_result=@qixuzhi_result,yangxuzhi_score=@yangxuzhi_score,yangxuzhi_result=@yangxuzhi_result,yinxuzhi_score=@yinxuzhi_score,yinxuzhi_result=@yinxuzhi_result,tanshizhi_score=@tanshizhi_score,tanshizhi_result=@tanshizhi_result,shirezhi_score=@shirezhi_score,shirezhi_result=@shirezhi_result,xueyuzhi_score=@xueyuzhi_score,xueyuzhi_result=@xueyuzhi_result,qiyuzhi_score=@qiyuzhi_score,qiyuzhi_result=@qiyuzhi_result,tebingzhi_sorce=@tebingzhi_sorce,tebingzhi_result=@tebingzhi_result,pinghezhi_sorce=@pinghezhi_sorce,pinghezhi_result=@pinghezhi_result,tcm_guidance=@tcm_guidance,update_user=@update_user,update_name=@update_name,update_time=@update_time where name=@name and aichive_no=@aichive_no and id_number=@id_number";
+                MySqlParameter[] args = new MySqlParameter[] {
                     new MySqlParameter("@name", Names),
                     new MySqlParameter("@aichive_no", aichive_no),
                     new MySqlParameter("@id_number", id_number),
@@ -679,7 +694,48 @@ namespace zkhwClient.view.PublicHealthView
                     new MySqlParameter("@update_name", frmLogin.name),
                     new MySqlParameter("@update_time", time)
                     };
-            return DbHelperMySQL.ExecuteSql(issql, args);
+                return DbHelperMySQL.ExecuteSql(issql, args);
+                #endregion
+            }
+            else
+            {
+                #region 不为空
+                string res = GetFen();
+                DateTime time = DateTime.Now;
+                var tz = TZ();
+                string bj = BJ();
+                string issql = @"update elderly_tcm_record set test_date=@test_date,answer_result=@answer_result,qixuzhi_score=@qixuzhi_score,qixuzhi_result=@qixuzhi_result,yangxuzhi_score=@yangxuzhi_score,yangxuzhi_result=@yangxuzhi_result,yinxuzhi_score=@yinxuzhi_score,yinxuzhi_result=@yinxuzhi_result,tanshizhi_score=@tanshizhi_score,tanshizhi_result=@tanshizhi_result,shirezhi_score=@shirezhi_score,shirezhi_result=@shirezhi_result,xueyuzhi_score=@xueyuzhi_score,xueyuzhi_result=@xueyuzhi_result,qiyuzhi_score=@qiyuzhi_score,qiyuzhi_result=@qiyuzhi_result,tebingzhi_sorce=@tebingzhi_sorce,tebingzhi_result=@tebingzhi_result,pinghezhi_sorce=@pinghezhi_sorce,pinghezhi_result=@pinghezhi_result,tcm_guidance=@tcm_guidance,update_user=@update_user,update_name=@update_name,update_time=@update_time where exam_id=@exam_id";
+                MySqlParameter[] args = new MySqlParameter[] {
+                    new MySqlParameter("@exam_id", exam_id), 
+                    new MySqlParameter("@test_date", time.ToString("yyyy-MM-dd")),
+                    new MySqlParameter("@answer_result", res),
+                    new MySqlParameter("@qixuzhi_score", tz["气虚质体质"]),
+                    new MySqlParameter("@qixuzhi_result", tz["气虚质体质"]>=11?1:0),
+                    new MySqlParameter("@yangxuzhi_score", tz["阳虚质体质"]),
+                    new MySqlParameter("@yangxuzhi_result", tz["阳虚质体质"]>=11?1:0),
+                    new MySqlParameter("@yinxuzhi_score", tz["阴虚质体质"]),
+                    new MySqlParameter("@yinxuzhi_result", tz["阴虚质体质"]>=11?1:0),
+                    new MySqlParameter("@tanshizhi_score", tz["痰湿质体质"]),
+                    new MySqlParameter("@tanshizhi_result", tz["痰湿质体质"]>=11?1:0),
+                    new MySqlParameter("@shirezhi_score", tz["湿热质体质"]),
+                    new MySqlParameter("@shirezhi_result", tz["湿热质体质"]>=11?1:0),
+                    new MySqlParameter("@xueyuzhi_score", tz["血瘀质体质"]),
+                    new MySqlParameter("@xueyuzhi_result",tz["血瘀质体质"]>=11?1:0),
+                    new MySqlParameter("@qiyuzhi_score", tz["气郁质体质"]),
+                    new MySqlParameter("@qiyuzhi_result", tz["气郁质体质"]>=11?1:0),
+                    new MySqlParameter("@tebingzhi_sorce", tz["特禀质体质"]),
+                    new MySqlParameter("@tebingzhi_result",tz["特禀质体质"]>=11?1:0),
+                    new MySqlParameter("@pinghezhi_sorce", tz["平和质体质"]),
+                    //new MySqlParameter("@pinghezhi_result", (tz["平和质体质"]>=17&&tz["气虚质体质"]<=8&&tz["阳虚质体质"]<=8&&tz["阴虚质体质"]<=8&&tz["痰湿质体质"]<=8&&tz["湿热质体质"]<=8&&tz["血瘀质体质"]<=8&&tz["气郁质体质"]<=8&&tz["特禀质体质"]<=8)?1:0),
+                    new MySqlParameter("@pinghezhi_result", (tz["平和质体质"]>=1)?1:0),
+                    new MySqlParameter("@tcm_guidance", bj),
+                    new MySqlParameter("@update_user", frmLogin.userCode),
+                    new MySqlParameter("@update_name", frmLogin.name),
+                    new MySqlParameter("@update_time", time)
+                    };
+                return DbHelperMySQL.ExecuteSql(issql, args);
+                #endregion
+            }
         }
 
         private string FX(string zi)

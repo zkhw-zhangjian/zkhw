@@ -698,7 +698,29 @@ namespace zkhwClient.view.PublicHealthView
                   int year1 = DateTime.Parse(yl).Year;
                   int year2 = DateTime.Now.Year;
                     if (year2-year1>=65) {
-                        MessageBox.Show("此患者已满65周岁,还需要填写老年人生活自理能力评估表，和老年人中医体质表!");
+                        //MessageBox.Show("此患者已满65周岁,还需要填写老年人生活自理能力评估表，和老年人中医体质表!");
+                        DialogResult rr = MessageBox.Show("是否要做老年人中医体质辨识？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                        int tt = (int)rr;
+                        if(tt==1)
+                        { 
+                            MessageBox.Show("老年人中医体质辨识"+ per.id);
+                            int ret = 0;
+                            service.tcmHealthService tcmHealthService = new service.tcmHealthService();
+                            DataTable dtcode = tcmHealthService.checkTcmHealthServicesByExamID(per.id);
+                            if (dtcode.Rows.Count > 0)
+                            {
+                                ret = 0;
+                            }
+                            else
+                            {
+                                ret = 1;
+                            }
+                            addtcmHealthServices addtcm = new addtcmHealthServices(ret, per.name, per.aichive_no, per.id_number);
+                            addtcm.bar_code = per.bar_code;
+                            addtcm.exam_id = per.id;
+                            addtcm.StartPosition = FormStartPosition.CenterScreen;
+                            addtcm.ShowDialog();
+                        }
                     }
                 }
             }

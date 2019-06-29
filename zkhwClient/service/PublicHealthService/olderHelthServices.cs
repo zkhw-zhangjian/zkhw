@@ -29,11 +29,18 @@ namespace zkhwClient.service
         {
             return hPD.aUelderly_selfcare_estimate(hm, id);
         }
+        public bool aUelderly_selfcare_estimateForExamID(bean.elderly_selfcare_estimateBean hm, string id)
+        {
+            return hPD.aUelderly_selfcare_estimateForExamID(hm, id);
+        }
         public DataTable queryOlderHelthService(string id)
         {
             return hPD.queryOlderHelthService(id);
         }
-
+        public DataTable queryOlderHelthServiceForExamID(string id)
+        {
+            return hPD.queryOlderHelthServiceForExamID(id);
+        }
         public DataTable queryOlderHelthService1(string pCa, string time1, string time2, string code)
         {
             return hPD.queryOlderHelthService1(pCa, time1, time2, code);

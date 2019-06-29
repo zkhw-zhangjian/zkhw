@@ -179,91 +179,117 @@
             // 
             this.人员登记ToolStripMenuItem.Name = "人员登记ToolStripMenuItem";
             this.人员登记ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.人员登记ToolStripMenuItem.Tag = "1";
             this.人员登记ToolStripMenuItem.Text = "人员登记";
             // 
             // 体检进度ToolStripMenuItem
             // 
             this.体检进度ToolStripMenuItem.Name = "体检进度ToolStripMenuItem";
             this.体检进度ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.体检进度ToolStripMenuItem.Tag = "1";
             this.体检进度ToolStripMenuItem.Text = "体检进度";
             // 
             // 体检报告ToolStripMenuItem
             // 
             this.体检报告ToolStripMenuItem.Name = "体检报告ToolStripMenuItem";
             this.体检报告ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.体检报告ToolStripMenuItem.Tag = "1";
             this.体检报告ToolStripMenuItem.Text = "体检报告";
             // 
             // 个人基本信息建档ToolStripMenuItem
             // 
             this.个人基本信息建档ToolStripMenuItem.Name = "个人基本信息建档ToolStripMenuItem";
             this.个人基本信息建档ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.个人基本信息建档ToolStripMenuItem.Tag = "0";
             this.个人基本信息建档ToolStripMenuItem.Text = "个人基本信息建档";
+            this.个人基本信息建档ToolStripMenuItem.Visible = false;
             // 
             // 健康体检表ToolStripMenuItem
             // 
             this.健康体检表ToolStripMenuItem.Name = "健康体检表ToolStripMenuItem";
             this.健康体检表ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.健康体检表ToolStripMenuItem.Tag = "0";
             this.健康体检表ToolStripMenuItem.Text = "健康体检表";
+            this.健康体检表ToolStripMenuItem.Visible = false;
             // 
             // 老年人健康服务ToolStripMenuItem
             // 
             this.老年人健康服务ToolStripMenuItem.Name = "老年人健康服务ToolStripMenuItem";
             this.老年人健康服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.老年人健康服务ToolStripMenuItem.Tag = "0";
             this.老年人健康服务ToolStripMenuItem.Text = "老年人生活自理能力评估";
+            this.老年人健康服务ToolStripMenuItem.Visible = false;
             // 
             // 中医健康服务ToolStripMenuItem
             // 
             this.中医健康服务ToolStripMenuItem.Name = "中医健康服务ToolStripMenuItem";
             this.中医健康服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.中医健康服务ToolStripMenuItem.Tag = "0";
             this.中医健康服务ToolStripMenuItem.Text = "老年人中医体质辨识";
+            this.中医健康服务ToolStripMenuItem.Visible = false;
             // 
             // 健康扶贫服务ToolStripMenuItem
             // 
             this.健康扶贫服务ToolStripMenuItem.Name = "健康扶贫服务ToolStripMenuItem";
             this.健康扶贫服务ToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.健康扶贫服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.健康扶贫服务ToolStripMenuItem.Tag = "0";
             this.健康扶贫服务ToolStripMenuItem.Text = "健康扶贫服务";
+            this.健康扶贫服务ToolStripMenuItem.Visible = false;
             // 
             // 高血压患者服务ToolStripMenuItem
             // 
             this.高血压患者服务ToolStripMenuItem.Name = "高血压患者服务ToolStripMenuItem";
             this.高血压患者服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.高血压患者服务ToolStripMenuItem.Tag = "0";
             this.高血压患者服务ToolStripMenuItem.Text = "高血压患者服务";
+            this.高血压患者服务ToolStripMenuItem.Visible = false;
             // 
             // 型糖尿病患者服务ToolStripMenuItem
             // 
             this.型糖尿病患者服务ToolStripMenuItem.Name = "型糖尿病患者服务ToolStripMenuItem";
             this.型糖尿病患者服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.型糖尿病患者服务ToolStripMenuItem.Tag = "0";
             this.型糖尿病患者服务ToolStripMenuItem.Text = "2型糖尿病患者服务";
+            this.型糖尿病患者服务ToolStripMenuItem.Visible = false;
             // 
             // 严重精神病障碍患者服务ToolStripMenuItem
             // 
             this.严重精神病障碍患者服务ToolStripMenuItem.Name = "严重精神病障碍患者服务ToolStripMenuItem";
             this.严重精神病障碍患者服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.严重精神病障碍患者服务ToolStripMenuItem.Tag = "0";
             this.严重精神病障碍患者服务ToolStripMenuItem.Text = "严重精神病障碍患者服务";
+            this.严重精神病障碍患者服务ToolStripMenuItem.Visible = false;
             // 
             // 肺结核患者服务ToolStripMenuItem
             // 
             this.肺结核患者服务ToolStripMenuItem.Name = "肺结核患者服务ToolStripMenuItem";
             this.肺结核患者服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.肺结核患者服务ToolStripMenuItem.Tag = "0";
             this.肺结核患者服务ToolStripMenuItem.Text = "肺结核患者服务";
+            this.肺结核患者服务ToolStripMenuItem.Visible = false;
             // 
             // 孕产妇ToolStripMenuItem
             // 
             this.孕产妇ToolStripMenuItem.Name = "孕产妇ToolStripMenuItem";
             this.孕产妇ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.孕产妇ToolStripMenuItem.Tag = "0";
             this.孕产妇ToolStripMenuItem.Text = "孕产妇健康服务";
+            this.孕产妇ToolStripMenuItem.Visible = false;
             // 
             // 岁ToolStripMenuItem
             // 
             this.岁ToolStripMenuItem.Name = "岁ToolStripMenuItem";
             this.岁ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.岁ToolStripMenuItem.Tag = "0";
             this.岁ToolStripMenuItem.Text = "0—6岁儿童健康服务";
+            this.岁ToolStripMenuItem.Visible = false;
             // 
             // 儿童中医健康服务ToolStripMenuItem
             // 
             this.儿童中医健康服务ToolStripMenuItem.Name = "儿童中医健康服务ToolStripMenuItem";
             this.儿童中医健康服务ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.儿童中医健康服务ToolStripMenuItem.Tag = "0";
             this.儿童中医健康服务ToolStripMenuItem.Text = "儿童中医健康服务";
             this.儿童中医健康服务ToolStripMenuItem.Visible = false;
             // 

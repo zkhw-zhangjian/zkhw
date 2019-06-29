@@ -65,12 +65,31 @@ namespace zkhwClient.dao
             if (id == "")
             {
                 id = Result.GetNewId();
-                sql = @"insert into elderly_selfcare_estimate (id,name,aichive_no,id_number,sex,test_date,answer_result,total_score,judgement_result,test_doctor,create_user,create_name,create_org,create_org_name,create_time,upload_status) values ";
-                sql += @" ('" + id + "','" + hm.name + "', '" + hm.aichive_no + "', '" + hm.id_number + "', '" + hm.sex + "', '" + hm.test_date + "', '" + hm.answer_result + "', '" + hm.total_score + "', '" + hm.judgement_result + "', '" + hm.test_doctor + "','" + frmLogin.userCode + "','" + frmLogin.name + "', '" + frmLogin.organCode + "', '" + frmLogin.organName + "', '" + hm.create_time + "', '" + hm.upload_status + "')";
+                sql = @"insert into elderly_selfcare_estimate (id,name,aichive_no,id_number,sex,test_date,answer_result,total_score,judgement_result,test_doctor,create_user,create_name,create_org,create_org_name,create_time,upload_status,exam_id) values ";
+                sql += @" ('" + id + "','" + hm.name + "', '" + hm.aichive_no + "', '" + hm.id_number + "', '" + hm.sex + "', '" + hm.test_date + "', '" + hm.answer_result + "', '" + hm.total_score + "', '" + hm.judgement_result + "', '" + hm.test_doctor + "','" + frmLogin.userCode + "','" + frmLogin.name + "', '" + frmLogin.organCode + "', '" + frmLogin.organName + "', '" + hm.create_time + "', '" + hm.upload_status + "','"+hm.exam_id+"')";
             }
             else
             {
-                sql = @"update elderly_selfcare_estimate set test_date='" + hm.test_date + "',answer_result='" + hm.answer_result + "',total_score='" + hm.total_score + "',judgement_result='" + hm.judgement_result + "',test_doctor= '" + hm.test_doctor + "',update_user= '" + frmLogin.userCode + "',update_name= '" + frmLogin.name + "',update_time='" + hm.update_time + "',upload_status= '" + hm.upload_status + "' where aichive_no = '" + id + "'";
+                sql = @"update elderly_selfcare_estimate set test_date='" + hm.test_date + "',answer_result='" + hm.answer_result + "',total_score='" + hm.total_score + "',judgement_result='" + hm.judgement_result + "',test_doctor= '" + hm.test_doctor + "',update_user= '" + frmLogin.userCode + "',update_name= '" + frmLogin.name + "',update_time='" + hm.update_time + "',upload_status= '" + hm.upload_status + "',exam_id='"+ hm.exam_id + "' where aichive_no = '" + id + "'";
+            }
+            ret = DbHelperMySQL.ExecuteSql(sql);
+
+            return ret == 0 ? false : true;
+        }
+
+        public bool aUelderly_selfcare_estimateForExamID(bean.elderly_selfcare_estimateBean hm, string id)
+        {
+            int ret = 0;
+            String sql = "";
+            if (id == "")
+            {
+                id = Result.GetNewId();
+                sql = @"insert into elderly_selfcare_estimate (id,name,aichive_no,id_number,sex,test_date,answer_result,total_score,judgement_result,test_doctor,create_user,create_name,create_org,create_org_name,create_time,upload_status,exam_id) values ";
+                sql += @" ('" + id + "','" + hm.name + "', '" + hm.aichive_no + "', '" + hm.id_number + "', '" + hm.sex + "', '" + hm.test_date + "', '" + hm.answer_result + "', '" + hm.total_score + "', '" + hm.judgement_result + "', '" + hm.test_doctor + "','" + frmLogin.userCode + "','" + frmLogin.name + "', '" + frmLogin.organCode + "', '" + frmLogin.organName + "', '" + hm.create_time + "', '" + hm.upload_status + "','" + hm.exam_id + "')";
+            }
+            else
+            {
+                sql = @"update elderly_selfcare_estimate set aichive_no='"+ hm.aichive_no + "',test_date='" + hm.test_date + "',answer_result='" + hm.answer_result + "',total_score='" + hm.total_score + "',judgement_result='" + hm.judgement_result + "',test_doctor= '" + hm.test_doctor + "',update_user= '" + frmLogin.userCode + "',update_name= '" + frmLogin.name + "',update_time='" + hm.update_time + "',upload_status= '" + hm.upload_status + "',exam_id='" + hm.exam_id + "' where exam_id = '" + id + "'";
             }
             ret = DbHelperMySQL.ExecuteSql(sql);
 
@@ -84,6 +103,13 @@ namespace zkhwClient.dao
             return ds.Tables[0];
         }
 
+        public DataTable queryOlderHelthServiceForExamID(string _examid)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select * from elderly_selfcare_estimate where exam_id  = '" + _examid + "' order by create_time desc limit 1";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
 
         #region 为了上传重新编写 2019-6-12
         public DataTable queryOlderHelthService1(string pCa, string time1, string time2, string code)

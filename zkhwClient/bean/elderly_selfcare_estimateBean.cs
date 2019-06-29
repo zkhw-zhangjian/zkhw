@@ -49,6 +49,8 @@ namespace zkhwClient.bean
         public string upload_time { get; set; }
         //upload_result
         public string upload_result { get; set; }
+
+        public string exam_id { get; set; }
     }
 }
 //id,name,aichive_no,id_number,sex,test_date,answer_result,total_score,judgement_result,test_doctor,create_user,create_name,create_org,create_org_name,create_time,update_user,update_name,update_time,upload_status,upload_time,upload_result
