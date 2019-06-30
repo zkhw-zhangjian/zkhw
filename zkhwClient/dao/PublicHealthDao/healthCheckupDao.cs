@@ -7,6 +7,15 @@ namespace zkhwClient.dao
 {
     class healthCheckupDao
     {
+        public DataTable GetExaminationRecordList(string _archiveno, string _idnumber, string _barcode)
+        {
+            DataSet ds = new DataSet();
+            string sql = string.Format(@"select * from physical_examination_record 
+                      where aichive_no='{0}' and id_number='{1}' and bar_code='{2}' LIMIT 1  ",
+                     _archiveno, _idnumber, _barcode);
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
         public string GetExaminationRecord(string _archiveno, string _idnumber, string _barcode)
         {
             string id = "";

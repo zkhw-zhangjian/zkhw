@@ -50,8 +50,21 @@ namespace zkhwClient
         {
             InitializeComponent();
         }
+        private void PanDuanNewZiDuan()
+        {
+            string sql = "select count(*) from information_schema.columns where table_name = 'elderly_selfcare_estimate' and column_name = 'exam_id' ";
+            object o=DbHelperMySQL.GetSingle(sql);
+            if(o ==null || o.ToString()=="0")
+            {
+                sql = "alter table elderly_selfcare_estimate add exam_id varchar(40);";
+                DbHelperMySQL.ExecuteSql(sql);
+            }
+
+        }
         private void frmMain_Load(object sender, EventArgs e)
         {
+            PanDuanNewZiDuan();
+
             basicInfoSettings basicSet = new basicInfoSettings();
             basicSet.Show();
             //basicSet.Hide();
@@ -115,14 +128,14 @@ namespace zkhwClient
                         picb[_index].BorderStyle = BorderStyle.None;
                         if (_index == 0)//默认首项选中
                         {
-                            //picb[_index].BackColor = Color.Blue;
-                            //pR = new personRegist();
-                            //pR.TopLevel = false;
-                            //pR.Dock = DockStyle.Fill;
-                            //pR.FormBorderStyle = FormBorderStyle.None;
-                            //this.panel1.Controls.Clear();
-                            //this.panel1.Controls.Add(pR);
-                            //pR.Show();
+                            picb[_index].BackColor = Color.Blue;
+                            pR = new personRegist();
+                            pR.TopLevel = false;
+                            pR.Dock = DockStyle.Fill;
+                            pR.FormBorderStyle = FormBorderStyle.None;
+                            this.panel1.Controls.Clear();
+                            this.panel1.Controls.Add(pR);
+                            pR.Show();
                         }
                         picb[_index].Size = new Size(216, 40);//大   小
                         picb[_index].Click += new EventHandler(picb_DouClick);
@@ -270,23 +283,23 @@ namespace zkhwClient
                         }
                     }
                     PictureBox[] picb = new PictureBox[numcount];
-
+                    int _index = 0;
                     for (int i = 0; i < item.DropDownItems.Count; i++)
                     {
                         string stag = item.DropDownItems[i].Tag.ToString();
                         if (stag == "") stag = "0";
                         if (int.Parse(stag) == 0) continue;
 
-                        picb[i] = new PictureBox();
-                        picb[i].SizeMode = PictureBoxSizeMode.StretchImage;
-                        picb[i].BorderStyle = BorderStyle.None;
-                        if (i == 0)//默认首项选中
+                        picb[_index] = new PictureBox();
+                        picb[_index].SizeMode = PictureBoxSizeMode.StretchImage;
+                        picb[_index].BorderStyle = BorderStyle.None;
+                        if (_index == 0)//默认首项选中
                         {
                             if (pR!=null) {
                                 pR.btnClose_Click();
                                 pR = null;
                             }
-                            picb[i].BackColor = Color.Blue;
+                            picb[_index].BackColor = Color.Blue;
                             pR = new personRegist();
                             pR.TopLevel = false;
                             pR.Dock = DockStyle.Fill;
@@ -295,9 +308,9 @@ namespace zkhwClient
                             this.panel1.Controls.Add(pR);
                             pR.Show();
                         }
-                        picb[i].Size = new Size(216, 40);//大   小
-                        picb[i].Click += new EventHandler(picb_DouClick);
-                        picb[i].Tag = item.DropDownItems[i].Text;
+                        picb[_index].Size = new Size(216, 40);//大   小
+                        picb[_index].Click += new EventHandler(picb_DouClick);
+                        picb[_index].Tag = item.DropDownItems[i].Text;
 
                         TextBox rt = new TextBox();
                         rt.Width = 200;
@@ -305,9 +318,11 @@ namespace zkhwClient
                         rt.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
                         rt.Enabled = false;
                         rt.Text = item.DropDownItems[i].Text;
-                        rt.Parent = picb[i];//指定父级
+                        rt.Parent = picb[_index];//指定父级
                         this.flowLayoutPanel1.Controls.Add(picb[i]);
                         item.DropDownItems[i].Visible = false; //看不见
+
+                        _index = _index + 1;
                     };
                 }
                 else
@@ -405,7 +420,7 @@ namespace zkhwClient
                 this.panel1.Controls.Add(pR);
                 pR.Show();
             }
-            else if (tag == "体检进度")
+            else if (tag == "数据审核")
             {
                 examinatProgress pR = new examinatProgress();
                 pR.TopLevel = false;

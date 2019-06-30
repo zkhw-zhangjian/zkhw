@@ -61,7 +61,7 @@ namespace zkhwClient.view.PublicHealthView
                     this.textBox1.Text = dtz.Rows[0]["aichive_no"].ToString();
                     this.textBox2.Text = dtz.Rows[0]["bar_code"].ToString();
                     this.textBox3.Text = dtz.Rows[0]["id_number"].ToString();
-
+                    textBox6.Text= dtz.Rows[0]["name"].ToString();
                     if (this.radioButton39.Tag.ToString() == dtz.Rows[0]["health_evaluation"].ToString())
                     {
                         this.radioButton39.Checked = true;
@@ -685,6 +685,7 @@ namespace zkhwClient.view.PublicHealthView
             per.bar_code = this.textBox2.Text;
             per.id_number = this.textBox3.Text;
             per.id = this.textBox4.Text;
+            per.name = textBox6.Text;
             bool isfalse = hcd.addPhysicalExaminationRecord4(per, goodsList, goodsListym);
             if (isfalse)
             {
@@ -703,7 +704,7 @@ namespace zkhwClient.view.PublicHealthView
                         int tt = (int)rr;
                         if(tt==1)
                         { 
-                            MessageBox.Show("老年人中医体质辨识"+ per.id);
+                            //MessageBox.Show("老年人中医体质辨识"+ per.id);
                             int ret = 0;
                             service.tcmHealthService tcmHealthService = new service.tcmHealthService();
                             DataTable dtcode = tcmHealthService.checkTcmHealthServicesByExamID(per.id);

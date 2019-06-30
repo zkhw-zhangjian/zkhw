@@ -115,6 +115,7 @@
             this.label6.Size = new System.Drawing.Size(114, 20);
             this.label6.TabIndex = 14;
             this.label6.Text = "下载花名册";
+            this.label6.Visible = false;
             this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label5

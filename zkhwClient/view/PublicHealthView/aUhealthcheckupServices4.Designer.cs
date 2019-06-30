@@ -83,6 +83,7 @@
             this.label51 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.textBox6 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -150,6 +151,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.textBox6);
             this.groupBox2.Controls.Add(this.comboBox1);
             this.groupBox2.Controls.Add(this.richTextBox1);
             this.groupBox2.Controls.Add(this.textBox5);
@@ -750,12 +752,22 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // textBox6
+            // 
+            this.textBox6.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox6.Location = new System.Drawing.Point(4, 187);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(93, 30);
+            this.textBox6.TabIndex = 346;
+            this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox6.Visible = false;
+            // 
             // aUhealthcheckupServices4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1327, 750);
+            this.ClientSize = new System.Drawing.Size(1327, 749);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
             this.Name = "aUhealthcheckupServices4";
@@ -835,5 +847,6 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.ComboBox comboBox1;
+        public System.Windows.Forms.TextBox textBox6;
     }
 }

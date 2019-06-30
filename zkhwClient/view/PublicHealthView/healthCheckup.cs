@@ -204,7 +204,7 @@ namespace zkhwClient.view.PublicHealthView
                 string id = this.dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
                 if (id == null || "".Equals(id)) { MessageBox.Show("未查询到此人的健康体检信息,请调整时间间隔，再点击查询！"); return; }
                 if (aichive_no != null && !"".Equals(aichive_no))
-                {
+                { 
                     aUhealthcheckupServices1 auhcs = new aUhealthcheckupServices1();
                     auhcs.textBox1.Text = name;
                     auhcs.textBox118.Text = bar_code;

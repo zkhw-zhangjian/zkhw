@@ -281,7 +281,7 @@ namespace zkhwClient.view.PublicHealthView
                     }
                     else
                     {
-                        this.dataGridView1.Rows[x].Cells[12].Value = "未完成";
+                        this.dataGridView1.Rows[x].Cells[12].Value = "--";
                         dataGridView1.Rows[x].Cells[12].Style.ForeColor = Color.Red;
                     }
                     double age = 0;
@@ -303,7 +303,7 @@ namespace zkhwClient.view.PublicHealthView
                         }
                         else
                         { 
-                            this.dataGridView1.Rows[x].Cells[13].Value = "未完成";
+                            this.dataGridView1.Rows[x].Cells[13].Value = "--";
                             dataGridView1.Rows[x].Cells[13].Style.ForeColor = Color.Red;
                         }
                         if (this.dataGridView1.Rows[x].Cells[14].Value.ToString() == "1") 
@@ -313,7 +313,7 @@ namespace zkhwClient.view.PublicHealthView
                         } 
                         else 
                         { 
-                            this.dataGridView1.Rows[x].Cells[14].Value = "未完成";
+                            this.dataGridView1.Rows[x].Cells[14].Value = "--";
                             dataGridView1.Rows[x].Cells[14].Style.ForeColor = Color.Red;
                         } 
                     } 
@@ -509,8 +509,39 @@ namespace zkhwClient.view.PublicHealthView
                 usgtz.testFunDelegate = DealGridColour;
                 usgtz.Show();
             }
+            else if(columnIndex == 12)
+            {
+                //弹出健康信息表 
+                string _id = "";
+                string check_date = "";
+                string doctor_name = "";
+                //这里通过aichive_no、id_number 、bar_code找到对应的 physical_examination_record表的id 
+                healthCheckupDao hcd = new healthCheckupDao();
+                DataTable dt = hcd.GetExaminationRecordList(str2, str3, str4);
+                if(dt !=null || dt.Rows.Count>0)
+                {
+                    _id = dt.Rows[0]["id"].ToString();
+                    check_date = dt.Rows[0]["check_date"].ToString();
+                    doctor_name= dt.Rows[0]["doctor_name"].ToString();
+                } 
+                aUhealthcheckupServices1 auhcs = new aUhealthcheckupServices1();
+                auhcs.textBox1.Text = str1;
+                auhcs.textBox118.Text = str4;
+                auhcs.textBox119.Text = str3;
+                auhcs.textBox120.Text = _id;
+                auhcs.textBox2.Text = str2;
+                if (check_date != "")
+                {
+                    string TarStr = "yyyy-MM-dd";
+                    IFormatProvider format = new System.Globalization.CultureInfo("zh-CN");
+                    auhcs.dateTimePicker1.Value = DateTime.ParseExact(check_date, TarStr, format);
+                }
+                auhcs.textBox51.Text = doctor_name; 
+                auhcs.id = _id; 
+                auhcs.Show(); 
+            }
         }
-
+        
         public void DealGridColour(int _result, int _colIndex, int _rowIndex)
         {
             if (_rowIndex <= -1) return;

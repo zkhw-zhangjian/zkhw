@@ -21,7 +21,7 @@ namespace zkhwClient
         public DateTime FileCreateTime; //创建时间
     }
     public class Common
-    {
+    { 
         public static string GetCreateTime(string s)
         {
             if(s=="" || s==null)

@@ -187,7 +187,7 @@
             this.体检进度ToolStripMenuItem.Name = "体检进度ToolStripMenuItem";
             this.体检进度ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.体检进度ToolStripMenuItem.Tag = "1";
-            this.体检进度ToolStripMenuItem.Text = "体检进度";
+            this.体检进度ToolStripMenuItem.Text = "数据审核";
             // 
             // 体检报告ToolStripMenuItem
             // 
