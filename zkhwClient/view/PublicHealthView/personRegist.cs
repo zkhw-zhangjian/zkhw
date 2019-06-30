@@ -528,6 +528,8 @@ namespace zkhwClient.view.PublicHealthView
             }
             node.InnerText = fnum.ToString();
             xmlDoc.Save(path);
+
+            registrationRecordCheck();//右侧统计信息
         }
         //打印条码
         public void OnPrintSampleBarcode(string barcode, int pageCount, string nameCode)
