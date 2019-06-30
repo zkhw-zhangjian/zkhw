@@ -516,6 +516,9 @@ namespace zkhwClient.view.PublicHealthView
             if (carcode == null || carcode.Length != 4) { MessageBox.Show("车编号不正确，请确认系统设置中的车编号！"); return; };
 
             string nameCode = textBox1.Text + " " + Regex.Replace(textBox3.Text, "(\\d{6})\\d{10}(\\d{2})", "$1**********$2");
+            if (nameCode.IndexOf('*') < 0) { 
+                nameCode = textBox1.Text + " " + textBox3.Text.Substring(0, 6) + "**********" + textBox3.Text.Substring(16, 2);
+            }
             OnPrintSampleBarcode(carcode + barnumCode, Int32.Parse(this.numericUpDown1.Value.ToString()), nameCode);
          
             node = xmlDoc.SelectSingleNode("config/barnumCode");
@@ -670,6 +673,10 @@ namespace zkhwClient.view.PublicHealthView
             if (idnumber != null && idnumber.Length == 18)
             {
                 string nameCodenew = textBox1.Text + " " + Regex.Replace(textBox3.Text, "(\\d{6})\\d{10}(\\d{2})", "$1**********$2");
+                if (nameCodenew.IndexOf('*') < 0)
+                {
+                    nameCodenew = textBox1.Text + " " + textBox3.Text.Substring(0, 6) + "**********" + textBox3.Text.Substring(16, 2);
+                }
                 string codenew = "";
                 int fnum = Int32.Parse(this.numericUpDown1.Value.ToString());
                 DataTable dttjjk = grjddao.selectTjjk(idnumber);
