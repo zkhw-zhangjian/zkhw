@@ -2544,6 +2544,7 @@ namespace zkhwClient
                     bool istrue = tjdao.insertShenghuaInfo(sh);
                     if (istrue)
                     {
+                        #region 生化
                         int flag = 1;
                         string alt = sh.ALT;
                         if (alt != null && alt != "*")
@@ -2601,8 +2602,27 @@ namespace zkhwClient
                                     flag = 3;
                                 }
                             }
-                      
-                            string crea = sh.Crea;
+
+                        string dbil = sh.DBIL;
+                        if (dbil != null && dbil != "*")
+                        {
+                            double dbildouble = double.Parse(dbil);
+                            DataRow[] drtbil = dttv.Select("type='DBIL'");
+                            double dbilwmin = double.Parse(drtbil[0]["warning_min"].ToString());
+                            double dbilwmax = double.Parse(drtbil[0]["warning_max"].ToString());
+                            if (dbildouble > dbilwmax || dbildouble < dbilwmin)
+                            {
+                                flag = 2;
+                            }
+                            double dbiltmin = double.Parse(drtbil[0]["threshold_min"].ToString());
+                            double dbiltmax = double.Parse(drtbil[0]["threshold_max"].ToString());
+                            if (dbildouble > dbiltmax || dbildouble < dbiltmin)
+                            {
+                                flag = 3;
+                            }
+                        }
+
+                        string crea = sh.Crea;
                             if (crea != null && crea != "*")
                             {
                                 double creadouble = double.Parse(crea);
@@ -2737,11 +2757,13 @@ namespace zkhwClient
                         
                         tjdao.updateTJbgdcShenghua(sh.aichive_no, sh.bar_code, flag);
                         tjdao.updatePEShInfo(sh.aichive_no, sh.bar_code, sh.CHO, sh.TG, sh.LDL_C, sh.HDL_C,sh.GLU, sh.ALT, sh.AST, sh.ALB, sh.TBIL, sh.DBIL, sh.Crea, sh.UREA);
+                        #endregion
                     }
                     else
                     {
                         bool istree = tjdao.updateShenghuaInfo(sh);
                         if (!istree) return;
+                        #region 生化
                         int flag = 1;
                         string alt = sh.ALT;
                         if (alt != null && alt != "*")
@@ -2799,8 +2821,25 @@ namespace zkhwClient
                                     flag = 3;
                                 }
                             }
-                      
-                            string crea = sh.Crea;
+                        string dbil = sh.DBIL;
+                        if (dbil != null && dbil != "*")
+                        {
+                            double dbildouble = double.Parse(dbil);
+                            DataRow[] drtbil = dttv.Select("type='DBIL'");
+                            double dbilwmin = double.Parse(drtbil[0]["warning_min"].ToString());
+                            double dbilwmax = double.Parse(drtbil[0]["warning_max"].ToString());
+                            if (dbildouble > dbilwmax || dbildouble < dbilwmin)
+                            {
+                                flag = 2;
+                            }
+                            double dbiltmin = double.Parse(drtbil[0]["threshold_min"].ToString());
+                            double dbiltmax = double.Parse(drtbil[0]["threshold_max"].ToString());
+                            if (dbildouble > dbiltmax || dbildouble < dbiltmin)
+                            {
+                                flag = 3;
+                            }
+                        }
+                        string crea = sh.Crea;
                             if (crea != null && crea != "*")
                             {
                                 double creadouble = double.Parse(crea);
@@ -2934,6 +2973,7 @@ namespace zkhwClient
                             }  
                         tjdao.updateTJbgdcShenghua(sh.aichive_no, sh.bar_code, flag);
                         tjdao.updatePEShInfo(sh.aichive_no, sh.bar_code, sh.CHO, sh.TG, sh.LDL_C, sh.HDL_C, sh.GLU, sh.ALT, sh.AST, sh.ALB, sh.TBIL, sh.DBIL, sh.Crea, sh.UREA);
+                        #endregion
                     }
                     //返回生化的确认数据报文
                     for (int j = 0; j < sendArray.Length; j++) {
