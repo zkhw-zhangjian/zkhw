@@ -323,25 +323,25 @@
             // 基本信息设置ToolStripMenuItem
             // 
             this.基本信息设置ToolStripMenuItem.Name = "基本信息设置ToolStripMenuItem";
-            this.基本信息设置ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.基本信息设置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.基本信息设置ToolStripMenuItem.Text = "基本信息设置";
             // 
             // 设备管理ToolStripMenuItem
             // 
             this.设备管理ToolStripMenuItem.Name = "设备管理ToolStripMenuItem";
-            this.设备管理ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.设备管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.设备管理ToolStripMenuItem.Text = "设备管理";
             // 
             // 系统日志ToolStripMenuItem
             // 
             this.系统日志ToolStripMenuItem.Name = "系统日志ToolStripMenuItem";
-            this.系统日志ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.系统日志ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.系统日志ToolStripMenuItem.Text = "系统日志";
             // 
             // 中间库位置设置ToolStripMenuItem
             // 
             this.中间库位置设置ToolStripMenuItem.Name = "中间库位置设置ToolStripMenuItem";
-            this.中间库位置设置ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.中间库位置设置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.中间库位置设置ToolStripMenuItem.Text = "参数设置";
             // 
             // 数据分析ToolStripMenuItem
@@ -798,7 +798,6 @@
         private System.Windows.Forms.ToolStripMenuItem 心电图ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 血压ToolStripMenuItem;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
@@ -815,6 +814,7 @@
         private System.Windows.Forms.ToolStripMenuItem 体检设备说明书ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 家医签约登录ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 健康扶贫服务ToolStripMenuItem;
+        private System.Windows.Forms.Label label3;
     }
 }
 

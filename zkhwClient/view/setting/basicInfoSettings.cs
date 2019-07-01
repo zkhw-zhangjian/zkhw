@@ -15,6 +15,8 @@ namespace zkhwClient.view.setting
 {
     public partial class basicInfoSettings : Form
     {
+        public delegate void SetFunDelegate(string a,string b,string c);
+        public SetFunDelegate setFunDelegate;
         areaConfigDao areadao = new areaConfigDao();
         basicSettingDao bsdao = new basicSettingDao();
         UserDao userdao = new UserDao();
@@ -246,6 +248,17 @@ namespace zkhwClient.view.setting
                     //node = xmlDoc.SelectSingleNode("config/barnumCode");
                     //node.InnerText = "10001";
                     //xmlDoc.Save(path);
+                    //处理别的窗体的信息 
+
+                    if (setFunDelegate == null)
+                    {
+                        frmMain frm =(frmMain)this.Parent.Parent;
+                        frm.SetJianDangInfo(textBox1.Text.Trim(), comboBox6.Text, comboBox7.Text);
+                    }
+                    else
+                    {  
+                        setFunDelegate(textBox1.Text.Trim(), comboBox6.Text, comboBox7.Text);
+                    } 
                     MessageBox.Show("数据保存成功！");
                 }
             }
