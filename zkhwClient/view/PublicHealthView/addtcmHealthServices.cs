@@ -656,14 +656,19 @@ namespace zkhwClient.view.PublicHealthView
 
         private int Update()
         {
-            if(exam_id=="")   
+            if (exam_id == "")
             {
+
+                //这里对应找到examid
+                healthCheckupDao hcd = new healthCheckupDao();
+                string examid = hcd.GetExaminationRecord(aichive_no, id_number, bar_code);
+
                 #region 为空操作 保险操作
                 string res = GetFen();
                 DateTime time = DateTime.Now;
                 var tz = TZ();
                 string bj = BJ();
-                string issql = @"update elderly_tcm_record set test_date=@test_date,answer_result=@answer_result,qixuzhi_score=@qixuzhi_score,qixuzhi_result=@qixuzhi_result,yangxuzhi_score=@yangxuzhi_score,yangxuzhi_result=@yangxuzhi_result,yinxuzhi_score=@yinxuzhi_score,yinxuzhi_result=@yinxuzhi_result,tanshizhi_score=@tanshizhi_score,tanshizhi_result=@tanshizhi_result,shirezhi_score=@shirezhi_score,shirezhi_result=@shirezhi_result,xueyuzhi_score=@xueyuzhi_score,xueyuzhi_result=@xueyuzhi_result,qiyuzhi_score=@qiyuzhi_score,qiyuzhi_result=@qiyuzhi_result,tebingzhi_sorce=@tebingzhi_sorce,tebingzhi_result=@tebingzhi_result,pinghezhi_sorce=@pinghezhi_sorce,pinghezhi_result=@pinghezhi_result,tcm_guidance=@tcm_guidance,update_user=@update_user,update_name=@update_name,update_time=@update_time where name=@name and aichive_no=@aichive_no and id_number=@id_number";
+                string issql = @"update elderly_tcm_record set test_date=@test_date,answer_result=@answer_result,qixuzhi_score=@qixuzhi_score,qixuzhi_result=@qixuzhi_result,yangxuzhi_score=@yangxuzhi_score,yangxuzhi_result=@yangxuzhi_result,yinxuzhi_score=@yinxuzhi_score,yinxuzhi_result=@yinxuzhi_result,tanshizhi_score=@tanshizhi_score,tanshizhi_result=@tanshizhi_result,shirezhi_score=@shirezhi_score,shirezhi_result=@shirezhi_result,xueyuzhi_score=@xueyuzhi_score,xueyuzhi_result=@xueyuzhi_result,qiyuzhi_score=@qiyuzhi_score,qiyuzhi_result=@qiyuzhi_result,tebingzhi_sorce=@tebingzhi_sorce,tebingzhi_result=@tebingzhi_result,pinghezhi_sorce=@pinghezhi_sorce,pinghezhi_result=@pinghezhi_result,tcm_guidance=@tcm_guidance,update_user=@update_user,update_name=@update_name,update_time=@update_time,exam_id=@exam_id where name=@name and aichive_no=@aichive_no and id_number=@id_number";
                 MySqlParameter[] args = new MySqlParameter[] {
                     new MySqlParameter("@name", Names),
                     new MySqlParameter("@aichive_no", aichive_no),
@@ -692,7 +697,8 @@ namespace zkhwClient.view.PublicHealthView
                     new MySqlParameter("@tcm_guidance", bj),
                     new MySqlParameter("@update_user", frmLogin.userCode),
                     new MySqlParameter("@update_name", frmLogin.name),
-                    new MySqlParameter("@update_time", time)
+                    new MySqlParameter("@update_time", time),
+                    new MySqlParameter("@exam_id", examid)
                     };
                 return DbHelperMySQL.ExecuteSql(issql, args);
                 #endregion

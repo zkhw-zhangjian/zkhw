@@ -25,6 +25,10 @@ namespace zkhwClient.service
         {
             return hPD.query(archive_no);
         }
+        public DataTable queryForExamID(string examid)
+        {
+            return hPD.queryForExamID(examid);
+        }
         public bool aUelderly_selfcare_estimate(bean.elderly_selfcare_estimateBean hm, string id)
         {
             return hPD.aUelderly_selfcare_estimate(hm, id);

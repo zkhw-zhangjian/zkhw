@@ -278,6 +278,11 @@ namespace zkhwClient.view.PublicHealthView
             elderly_selfcare_estimateBean.test_date = DateTime.Now.ToString("yyyy-MM-dd");
             elderly_selfcare_estimateBean.create_name = frmLogin.name;
             elderly_selfcare_estimateBean.test_doctor= basicInfoSettings.zeren_doctor;
+            if(_examid=="")
+            {
+                healthCheckupDao hcd = new healthCheckupDao();
+                _examid = hcd.GetExaminationRecord(elderly_selfcare_estimateBean.aichive_no, elderly_selfcare_estimateBean.id_number, _barCode);
+            }
             elderly_selfcare_estimateBean.exam_id = _examid;
             string _id = "";
             if(flag==1)

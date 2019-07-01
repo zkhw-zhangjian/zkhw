@@ -126,17 +126,16 @@ namespace zkhwClient.view.PublicHealthView
             string idnum=dataGridView1["id_number", row].Value.ToString();
             string examid= dataGridView1["exam_id", row].Value.ToString();
             string barcode= dataGridView1["bar_code", row].Value.ToString();
-            
-            //判断有没有exam_id
-            if(examid=="")
-            {
-                healthCheckupDao hd = new healthCheckupDao();  //获取exam_id
-                examid = hd.GetExaminationRecord(code, idnum, barcode); 
-            }
+             
             DataTable dtcode = null;
             if (examid=="")
             {
                 dtcode = tcmHealthService.checkTcmHealthServicesByno1(code, idnum);
+                if (examid == "")
+                {
+                    healthCheckupDao hd = new healthCheckupDao();  //获取exam_id
+                    examid = hd.GetExaminationRecord(code, idnum, barcode);
+                }
             }
             else
             {

@@ -52,14 +52,26 @@ namespace zkhwClient
         }
         private void PanDuanNewZiDuan()
         {
-            string sql = "select count(*) from information_schema.columns where table_name = 'elderly_selfcare_estimate' and column_name = 'exam_id' ";
-            object o=DbHelperMySQL.GetSingle(sql);
-            if(o ==null || o.ToString()=="0")
+            //string sql = "select count(*) from information_schema.columns where table_name = 'elderly_selfcare_estimate' and column_name = 'exam_id' ";
+            try
             {
-                sql = "alter table elderly_selfcare_estimate add exam_id varchar(40);";
-                DbHelperMySQL.ExecuteSql(sql);
+                string sql = "select count(exam_id) from elderly_selfcare_estimate  ";
+                object o = DbHelperMySQL.GetSingle(sql);
+                if (o == null || o.ToString() == "0")
+                {
+                    sql = "alter table elderly_selfcare_estimate add exam_id varchar(40);";
+                    DbHelperMySQL.ExecuteSql(sql);
+                }
             }
-
+            catch (Exception d)
+            {
+                if (d.Message == "Unknown column 'exam_id' in 'field list'")
+                {
+                    string sql = "alter table elderly_selfcare_estimate add exam_id varchar(40);";
+                    DbHelperMySQL.ExecuteSql(sql);
+                }
+                //MessageBox.Show(d.Message);
+            }
         }
         private void frmMain_Load(object sender, EventArgs e)
         {

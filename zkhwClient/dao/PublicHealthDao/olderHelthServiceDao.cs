@@ -32,12 +32,12 @@ namespace zkhwClient.dao
             //}
             //else
             //{
-                sql = @"SELECT bb.name,bb.archive_no,bb.id_number,aa.total_score,aa.judgement_result,aa.test_date,aa.test_doctor,bb.sex 
-                FROM (select b.name, b.archive_no, b.id_number,b.sex from resident_base_info b 
+                sql = @"SELECT bb.name,bb.archive_no,bb.id_number,aa.total_score,aa.judgement_result,aa.test_date,aa.test_doctor,bb.sex ,bb.bar_code,aa.exam_id
+                FROM (select b.name, b.archive_no, b.id_number,b.sex,z.bar_code from resident_base_info b 
                  inner join zkhw_tj_jk z on b.id_number=z.id_number where 1=1 and z.createtime>='" + time1 + "' and b.age >= '65'";
                 if (code != null && !"".Equals(code)) { sql += " AND b.village_code='" + code + "'"; }
                 if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
-                sql += ") bb LEFT JOIN(select a.aichive_no, a.total_score, a.judgement_result, a.test_date, a.test_doctor from elderly_selfcare_estimate a where a.test_date >= '" + time1 + "' and a.test_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
+                sql += ") bb LEFT JOIN(select a.aichive_no, a.total_score, a.judgement_result, a.test_date, a.test_doctor,a.exam_id from elderly_selfcare_estimate a where a.test_date >= '" + time1 + "' and a.test_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
             //}
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
@@ -57,7 +57,13 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
-
+        public DataTable queryForExamID(string examid)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select * from elderly_selfcare_estimate where exam_id  = '" + examid + "'";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
         public bool aUelderly_selfcare_estimate(bean.elderly_selfcare_estimateBean hm, string id)
         {
             int ret = 0;

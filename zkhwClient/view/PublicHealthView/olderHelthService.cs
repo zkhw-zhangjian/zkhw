@@ -80,8 +80,8 @@ namespace zkhwClient.PublicHealth
             this.dataGridView1.Columns[5].HeaderCell.Value = "问询日期";
             this.dataGridView1.Columns[6].HeaderCell.Value = "问询医生";
             this.dataGridView1.Columns[7].Visible = false;
-            //this.dataGridView1.Columns[8].Visible = false;
-            //this.dataGridView1.Columns[9].HeaderCell.Value = "是否上传";   //为了显示是否上传
+            this.dataGridView1.Columns[8].Visible = false;
+            this.dataGridView1.Columns[9].Visible = false;
 
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
@@ -142,7 +142,21 @@ namespace zkhwClient.PublicHealth
             string archiveno = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
             string idnumber = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
             string sex = dataGridView1.SelectedRows[0].Cells[7].Value.ToString();
-            DataTable dt = olderHelthS.query(archiveno);
+            string barcode= dataGridView1.SelectedRows[0].Cells["bar_code"].Value.ToString();
+            string examid= dataGridView1.SelectedRows[0].Cells["exam_id"].Value.ToString();
+            DataTable dt = null;
+            if (examid=="")
+            {
+                dt = olderHelthS.query(archiveno);
+                //查找对应的ID
+                healthCheckupDao hcd = new healthCheckupDao();
+                examid = hcd.GetExaminationRecord(archiveno, idnumber, barcode);
+            }
+            else
+            {
+                dt = olderHelthS.queryForExamID(examid);
+            }
+            
             if (dt.Rows.Count > 0)
             {
                 string _testdate = dt.Rows[0]["test_date"].ToString();
@@ -158,6 +172,8 @@ namespace zkhwClient.PublicHealth
             hm.textBox12.Text = idnumber;
             hm.sex = sex;
             hm.flag = 0;
+            hm._barCode = barcode;
+            hm._examid = examid;
             if (hm.ShowDialog() == DialogResult.OK)
             {
                 //刷新页面
@@ -175,12 +191,27 @@ namespace zkhwClient.PublicHealth
             string archiveno = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
             string idnumber = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
             string sex = dataGridView1.SelectedRows[0].Cells[7].Value.ToString();
+            string barcode = dataGridView1.SelectedRows[0].Cells["bar_code"].Value.ToString();
+            string examid = dataGridView1.SelectedRows[0].Cells["exam_id"].Value.ToString();
             hm.label47.Text = "修改老年人生活自理能力评估表";
             hm.Text = "修改老年人生活自理能力评估表";
             hm.flag = 1;
             hm.sex = sex;
             hm.archiveno = archiveno;
-            DataTable dt = olderHelthS.queryOlderHelthService(archiveno);
+            hm._barCode = barcode;
+            hm._examid = examid;
+            DataTable dt = null;
+            if (examid == "")
+            {
+                dt = olderHelthS.query(archiveno);
+                //查找对应的ID
+                healthCheckupDao hcd = new healthCheckupDao();
+                examid = hcd.GetExaminationRecord(archiveno, idnumber, barcode);
+            }
+            else
+            {
+                dt = olderHelthS.queryForExamID(examid);
+            } 
             if (dt == null|| dt.Rows.Count<1) {MessageBox.Show("此人未参加自理能力评估,请先添加!"); return; }
             if (dt != null && dt.Rows.Count > 0)
             {
