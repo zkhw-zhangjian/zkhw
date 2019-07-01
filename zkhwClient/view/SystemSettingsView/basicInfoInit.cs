@@ -343,6 +343,7 @@ namespace zkhwClient.view.setting
                     }
                 }
                 this.progressBar1.Value = 100;
+                this.DialogResult = DialogResult.OK;
                 MessageBox.Show("数据同步已完成");
             }
             else

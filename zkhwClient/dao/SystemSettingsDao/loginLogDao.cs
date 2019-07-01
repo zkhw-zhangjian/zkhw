@@ -179,7 +179,7 @@ namespace zkhwClient.dao
         public bool deleteUsersBycode(string areacode)
         {
             int rt = 0;
-            String sql = "delete from zkhw_user_info where 1=1";
+            String sql = "delete from zkhw_user_info where 1=1 and username!='admin'";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }

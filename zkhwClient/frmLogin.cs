@@ -5,10 +5,13 @@ using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
 using System.IO;
+using System.Net;
+using System.Net.Sockets;
 using System.Windows.Forms;
 using System.Xml;
 using zkhwClient.dao;
 using zkhwClient.utils;
+using zkhwClient.view.setting;
 
 namespace zkhwClient
 {
@@ -53,6 +56,18 @@ namespace zkhwClient
         private void LoginSys()
         {
             loginname = this.comboBox1.Text;
+            if (loginname=="admin") {
+                this.button3.Visible = true;
+                DataTable sumret = service.UserService.sumUser();
+                if (sumret.Rows.Count>=1) {
+                    DialogResult rr = MessageBox.Show("未初始化数据，是否继续?", "操作提示", MessageBoxButtons.YesNo);
+                    int tt = (int)rr;
+                    if (tt == 7)
+                    {
+                        return;
+                    }
+                }
+            }
             passw = this.txtPassword.Text;
             string md5passw = Md5.HashString(passw);
             //用户登录 获取用户的账号和密码并判断          
@@ -107,7 +122,7 @@ namespace zkhwClient
             string str = Application.StartupPath;//项目路径   
             this.button1.BackgroundImage = Image.FromFile(@str + "/images/login1.png");
             this.button2.BackgroundImage = Image.FromFile(@str + "/images/tuichu.png");
-
+            this.button3.BackgroundImage = Image.FromFile(@str + "/images/csh.png");
             this.pictureBox1.Image = Image.FromFile(@str + "/images/logo.png");
             DataTable dd = us.listUser();
             this.comboBox1.DataSource = dd;//绑定数据源
@@ -166,6 +181,38 @@ namespace zkhwClient
             if(e.KeyChar==13)
             {
                 LoginSys();
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (IsInternetAvailable())
+            {
+                basicInfoInit baseinfo = new basicInfoInit();
+                if (baseinfo.ShowDialog() == DialogResult.OK) {
+                    this.comboBox1.DataSource = null;
+                    DataTable dd = us.listUser();
+                    this.comboBox1.DataSource = dd;//绑定数据源
+                    this.comboBox1.DisplayMember = "username";//显示给用户的数据集表项
+                    this.comboBox1.ValueMember = "username";//操作时获取的值
+                }
+            }
+            else
+            {
+                MessageBox.Show("电脑未连接外网,请检查网络!");
+            }
+        }
+        //判断是否连接 外网
+        private bool IsInternetAvailable()
+        {
+            try
+            {
+                Dns.GetHostEntry("www.baidu.com"); //using System.Net;
+                return true;
+            }
+            catch (SocketException ex)
+            {
+                return false;
             }
         }
     }
