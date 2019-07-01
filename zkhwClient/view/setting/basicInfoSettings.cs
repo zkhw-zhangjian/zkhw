@@ -211,7 +211,7 @@ namespace zkhwClient.view.setting
             allareaname = this.comboBox1.Text + this.comboBox2.Text + this.comboBox3.Text + xzName + xcName;
             string organ_code = null;
             organ_name = textBox1.Text;
-            if (organ_name==""|| organ_name.Length<1) {
+            if (organ_name=="" || organ_name.Length<1) {
                 MessageBox.Show("建档单位不能为空!");
                 return;
             }

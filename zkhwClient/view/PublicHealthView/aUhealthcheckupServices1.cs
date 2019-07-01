@@ -116,7 +116,7 @@ namespace zkhwClient.view.PublicHealthView
                     if (temperature != null && !"".Equals(temperature))
                     {
                         double temdouble = Convert.ToDouble(temperature);
-                        if (temdouble >= 37)
+                        if (temdouble<36||temdouble > 37.5)
                         {
                             this.textBox12.BackColor = Color.Salmon;
                         }
