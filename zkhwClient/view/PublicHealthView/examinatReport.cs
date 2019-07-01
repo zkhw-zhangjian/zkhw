@@ -30,6 +30,7 @@ namespace zkhwClient.view.PublicHealthView
         }
         private void GetAllPersonInfo()
         {
+            #region 报告统计数据绑定
             string _xuncode = basicInfoSettings.xcuncode;
              
             string time1 = dateTimePicker3.Value.ToString("yyyy-MM-dd");
@@ -39,14 +40,12 @@ namespace zkhwClient.view.PublicHealthView
                 _xuncode = "";
             }
             string sql = $@"SELECT count(sex) sun,sex from zkhw_tj_bgdc where area_duns 
-         like '%{_xuncode}%' and  date_format(createtime,'%Y-%m-%d') between '{time1}' and '{time2}' GROUP BY sex ";
+                    like '%{_xuncode}%' and  date_format(createtime,'%Y-%m-%d') between '{time1}' and '{time2}' GROUP BY sex ";
             if (isfirst==true)
             {  
                 time1=Common.GetCreateTime(basicInfoSettings.createtime);
                 sql = $@"SELECT count(sex) sun,sex from zkhw_tj_bgdc where area_duns like '%{_xuncode}%' and date_format(createtime,'%Y-%m-%d')>='{time1}' GROUP BY sex ";
-            }
-
-            #region 报告统计数据绑定
+            } 
             
             DataSet dataSet = DbHelperMySQL.Query(sql);
             DataTable data = dataSet.Tables[0];
@@ -79,7 +78,7 @@ namespace zkhwClient.view.PublicHealthView
         /// </summary>
         private void BinData()
         {
-            GetAllPersonInfo();
+           
             #region 报告查询 区域数据绑定
             string sql1 = "select code as ID,name as Name from code_area_config where parent_code='-1';";
             DataSet datas = DbHelperMySQL.Query(sql1);
@@ -101,6 +100,7 @@ namespace zkhwClient.view.PublicHealthView
             this.统计查询.BackgroundImage = Image.FromFile(@str + "/images/check.png");
 
             isfirst = true;
+            QueryTongJi();
             BinData();
             isfirst = false;
             //pagerControl1.OnPageChanged += new EventHandler(pagerControl1_OnPageChanged);
@@ -333,13 +333,12 @@ where 1=1";
             pagerControl1.DrawControl(count); 
         }
         #endregion
-
-        private void 统计查询_Click(object sender, EventArgs e)
+        private void QueryTongJi()
         {
             GetAllPersonInfo();   //同步处理下
             string stan = dateTimePicker3.Value.ToString("yyyy-MM-dd");
             string end = dateTimePicker4.Value.ToString("yyyy-MM-dd");
-             
+
             string sql = "";
             if (DateTime.Parse(stan) != DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd")))
             {
@@ -460,7 +459,7 @@ where 1=1";
             }
             else
             {
-               sql =  $@"SELECT sex,'64',COUNT(sex) 人数,
+                sql = $@"SELECT sex,'64',COUNT(sex) 人数,
                 COUNT(CASE
                     WHEN(BChao = '2' or BChao = '3') THEN '1'
                 END
@@ -575,7 +574,7 @@ where 1=1";
                 from zkhw_tj_bgdc where area_duns='{basicInfoSettings.xcuncode}' and age > '75' and date_format(healthchecktime,'%Y-%m-%d') between '{stan}' and '{end}'
                 GROUP BY sex";
             }
-            
+
             DataSet dataSet = DbHelperMySQL.Query(sql);
             if (dataSet != null && dataSet.Tables.Count > 0)
             {
@@ -698,6 +697,10 @@ where 1=1";
                     }
                 }
             }
+        }
+        private void 统计查询_Click(object sender, EventArgs e)
+        {
+            QueryTongJi();
         }
 
         #region 下拉框绑定

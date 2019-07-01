@@ -74,12 +74,18 @@ namespace zkhwClient
             }
         }
 
-        
+        public void SetJianDangInfo(string a,string b,string c)
+        {
+            label3.Text = a; //建档单位
+            label7.Text = b;//建档人
+            label9.Text = c;//责任医生
+        }
         private void frmMain_Load(object sender, EventArgs e)
         {
             PanDuanNewZiDuan();
 
             basicInfoSettings basicSet = new basicInfoSettings();
+            basicSet.setFunDelegate = SetJianDangInfo;
             basicSet.Show();
             //basicSet.Hide();
             dttv = grjddao.checkThresholdValues();//获取阈值信息
@@ -110,6 +116,12 @@ namespace zkhwClient
                 label7.Text = dts.Rows[0]["input_name"].ToString();
                 label9.Text = dts.Rows[0]["zeren_doctor"].ToString();
             } 
+            else
+            {
+                label3.Text = "";
+                label7.Text = "";
+                label9.Text = "";
+            }
             //默认主页面显示
             foreach (ToolStripMenuItem item in this.menuStrip1.Items)
             {
@@ -637,7 +649,7 @@ namespace zkhwClient
             }
             else if (tag == "使用情况统计")
             {     //数据分析模块模块  
-                usageStatistics pR = new usageStatistics();
+                usageStatistics pR = new usageStatistics(); 
                 pR.TopLevel = false;
                 pR.Dock = DockStyle.Fill;
                 pR.FormBorderStyle = FormBorderStyle.None;
@@ -648,7 +660,7 @@ namespace zkhwClient
             }
             else if (tag == "基本信息设置")
             {     //设置模块 
-                basicInfoSettings pR = new basicInfoSettings();
+                basicInfoSettings pR = new basicInfoSettings(); 
                 pR.TopLevel = false;
                 pR.Dock = DockStyle.Fill;
                 pR.FormBorderStyle = FormBorderStyle.None;
