@@ -73,6 +73,8 @@ namespace zkhwClient
                 //MessageBox.Show(d.Message);
             }
         }
+
+        
         private void frmMain_Load(object sender, EventArgs e)
         {
             PanDuanNewZiDuan();

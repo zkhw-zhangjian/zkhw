@@ -15,6 +15,7 @@ namespace zkhwClient.view.setting
 {
     public partial class basicInfoSettings : Form
     {
+        
         areaConfigDao areadao = new areaConfigDao();
         basicSettingDao bsdao = new basicSettingDao();
         UserDao userdao = new UserDao();
@@ -246,6 +247,7 @@ namespace zkhwClient.view.setting
                     //node = xmlDoc.SelectSingleNode("config/barnumCode");
                     //node.InnerText = "10001";
                     //xmlDoc.Save(path);
+                     
                     MessageBox.Show("数据保存成功！");
                 }
             }

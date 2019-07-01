@@ -282,7 +282,7 @@ namespace zkhwClient.view.PublicHealthView
                     else
                     {
                         this.dataGridView1.Rows[x].Cells[12].Value = "--";
-                        dataGridView1.Rows[x].Cells[12].Style.ForeColor = Color.Red;
+                        //dataGridView1.Rows[x].Cells[12].Style.ForeColor = Color.Red;
                     }
                     double age = 0;
                     string tmp = this.dataGridView1.Rows[x].Cells[15].Value.ToString();
@@ -304,7 +304,7 @@ namespace zkhwClient.view.PublicHealthView
                         else
                         { 
                             this.dataGridView1.Rows[x].Cells[13].Value = "--";
-                            dataGridView1.Rows[x].Cells[13].Style.ForeColor = Color.Red;
+                            //dataGridView1.Rows[x].Cells[13].Style.ForeColor = Color.Red;
                         }
                         if (this.dataGridView1.Rows[x].Cells[14].Value.ToString() == "1") 
                         { 
@@ -314,7 +314,7 @@ namespace zkhwClient.view.PublicHealthView
                         else 
                         { 
                             this.dataGridView1.Rows[x].Cells[14].Value = "--";
-                            dataGridView1.Rows[x].Cells[14].Style.ForeColor = Color.Red;
+                            //dataGridView1.Rows[x].Cells[14].Style.ForeColor = Color.Red;
                         } 
                     } 
                 } 
