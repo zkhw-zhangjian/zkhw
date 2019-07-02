@@ -1,4 +1,8 @@
-﻿using Aspose.Words;
+﻿/*
+ * 改登记时间为：zkhw_tj_bgdc中的createtime 
+ * 导出 健康体检表 按照 id_number、bar_code、createttime
+ */
+using Aspose.Words;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
