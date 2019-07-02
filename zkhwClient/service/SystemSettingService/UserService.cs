@@ -41,5 +41,9 @@ namespace zkhwClient.service
         {
             return user.deleteUser(id, name);
         }
+        public static DataTable sumUser()
+        {
+            return user.sumUser();
+        }
     }
 }
