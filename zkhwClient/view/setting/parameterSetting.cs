@@ -62,9 +62,9 @@ namespace zkhwClient.view.setting
             node.InnerText = this.textBox4.Text;
             xmlDoc.Save(path);
 
-            if (this.textBox5.Text == "" || !Result.Validate(this.textBox5.Text.Trim(), @"^(-?\d+)(\.\d+)?$"))
+            if (this.textBox5.Text == "" || !Result.Validate(this.textBox5.Text.Trim(), @"^[1-9]\d*$"))
             {
-                MessageBox.Show("条码默认打印数量应填写数字!");
+                MessageBox.Show("条码默认打印数量应填写正整数!");
                 return;
             }
             node = xmlDoc.SelectSingleNode("config/barNum");
