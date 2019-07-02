@@ -95,6 +95,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -143,6 +144,7 @@
             this.设置ToolStripMenuItem,
             this.数据分析ToolStripMenuItem,
             this.使用帮助ToolStripMenuItem,
+            this.toolStripMenuItem1,
             this.挂机ToolStripMenuItem,
             this.系统退出ToolStripMenuItem,
             this.系统ToolStripMenuItem});
@@ -323,25 +325,25 @@
             // 基本信息设置ToolStripMenuItem
             // 
             this.基本信息设置ToolStripMenuItem.Name = "基本信息设置ToolStripMenuItem";
-            this.基本信息设置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.基本信息设置ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.基本信息设置ToolStripMenuItem.Text = "基本信息设置";
             // 
             // 设备管理ToolStripMenuItem
             // 
             this.设备管理ToolStripMenuItem.Name = "设备管理ToolStripMenuItem";
-            this.设备管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.设备管理ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.设备管理ToolStripMenuItem.Text = "设备管理";
             // 
             // 系统日志ToolStripMenuItem
             // 
             this.系统日志ToolStripMenuItem.Name = "系统日志ToolStripMenuItem";
-            this.系统日志ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.系统日志ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.系统日志ToolStripMenuItem.Text = "系统日志";
             // 
             // 中间库位置设置ToolStripMenuItem
             // 
             this.中间库位置设置ToolStripMenuItem.Name = "中间库位置设置ToolStripMenuItem";
-            this.中间库位置设置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.中间库位置设置ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.中间库位置设置ToolStripMenuItem.Text = "参数设置";
             // 
             // 数据分析ToolStripMenuItem
@@ -712,6 +714,12 @@
             this.timer3.Interval = 60000;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(44, 21);
+            this.toolStripMenuItem1.Text = "授权";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -737,6 +745,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "体检系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -815,6 +824,7 @@
         private System.Windows.Forms.ToolStripMenuItem 家医签约登录ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 健康扶贫服务ToolStripMenuItem;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }
 

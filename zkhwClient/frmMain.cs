@@ -946,37 +946,7 @@ namespace zkhwClient
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                if (!proHttp.HasExited)
-                {
-                    proHttp.Kill();
-                }
-                if (!proAsNet.HasExited)
-                {
-                    proAsNet.Kill();
-                }
-                ////if (!proFtp.HasExited)
-                ////{
-                ////    proFtp.Kill();
-                ////}
-                service.loginLogService llse = new service.loginLogService();
-                bean.loginLogBean lb = new bean.loginLogBean();
-                lb.name = frmLogin.name;
-                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                lb.eventInfo = "退出系统！";
-                lb.type = "1";
-                if (lb.name != "admin" && lb.name != "" && lb.name != null)
-                {
-                    llse.addCheckLog(lb);
-                }
-                Process p = Process.GetCurrentProcess();
-                if (p != null)
-                {
-                    p.Kill();
-                }
-            }
+            
             try
             {
                 Environment.Exit(0);
@@ -3785,6 +3755,52 @@ namespace zkhwClient
                     }
                }
            }
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                if (!proHttp.HasExited)
+                {
+                    proHttp.Kill();
+                }
+                if (!proAsNet.HasExited)
+                {
+                    proAsNet.Kill();
+                }
+                ////if (!proFtp.HasExited)
+                ////{
+                ////    proFtp.Kill();
+                ////}
+                service.loginLogService llse = new service.loginLogService();
+                bean.loginLogBean lb = new bean.loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "退出系统！";
+                lb.type = "1";
+                if (lb.name != "admin" && lb.name != "" && lb.name != null)
+                {
+                    llse.addCheckLog(lb);
+                }
+                Process p = Process.GetCurrentProcess();
+                if (p != null)
+                {
+                    p.Kill();
+                }
+
+                try
+                {
+                    Environment.Exit(0);
+                }
+                catch
+                { }
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

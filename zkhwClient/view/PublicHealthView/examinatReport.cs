@@ -150,7 +150,7 @@ namespace zkhwClient.view.PublicHealthView
             pairs.Add("zu", zu);
             pairs.Add("shi", shi);
             string sql = $@"select 
-DATE_FORMAT(base.create_time,'%Y%m%d') 登记时间,
+DATE_FORMAT(bgdc.createtime,'%Y%m%d') 登记时间,
 concat(base.province_name,base.city_name,base.county_name,base.towns_name,base.village_name) 区域,
 base.archive_no 编码,
 base.name 姓名,
@@ -158,7 +158,8 @@ base.name 姓名,
 END)性别,
 base.id_number 身份证号,
 bgdc.BaoGaoShengChan 报告生成时间,
-(case bgdc.ShiFouTongBu when '1' then '是' ELSE '否' END) 是否上传数据
+(case bgdc.ShiFouTongBu when '1' then '是' ELSE '否' END) 是否上传数据,
+bgdc.BChaoImage B超图片,bgdc.XinDianImage 心电图片,bgdc.bar_code 条码号
 from resident_base_info base
 left join 
 (select * from zkhw_tj_bgdc order by createtime desc) bgdc
@@ -241,18 +242,32 @@ where 1=1";
                 DatagridViewCheckBoxHeaderCell cbHeader = new DatagridViewCheckBoxHeaderCell();
                 cbHeader.OnCheckBoxClicked += new CheckBoxClickedHandler(cbHeader_OnCheckBoxClicked);
                 checkColumn.HeaderCell = cbHeader;
-                checkColumn.HeaderText = "选择";
+                checkColumn.HeaderText = "";
                 checkColumn.Name = "cb_check";
                 checkColumn.TrueValue = true;
                 checkColumn.FalseValue = false;
                 checkColumn.DataPropertyName = "IsChecked";
                 dataGridView1.Columns.Insert(0, checkColumn);    //添加的checkbox在第一列 
-                 
 
+                
                 this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
                 this.dataGridView1.AllowUserToAddRows = false;
                 this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
                 this.dataGridView1.ReadOnly = true;
+
+                dataGridView1.Columns[0].Width = 30;
+                dataGridView1.Columns[1].Width = 80;
+                dataGridView1.Columns[4].Width = 80;
+                dataGridView1.Columns[5].Width = 70;
+                dataGridView1.Columns[6].Width = 120;
+                dataGridView1.Columns[7].Width = 100;
+                dataGridView1.Columns[8].Width = 110;
+                dataGridView1.Columns[9].Width = 80;
+                dataGridView1.Columns[10].Width = 80;
+
+                dataGridView1.Columns[9].Visible = false;
+                dataGridView1.Columns[10].Visible = false;
+                dataGridView1.Columns[11].Visible = false;
                 //int rows = this.dataGridView1.Rows.Count - 1 <= 0 ? 0 : this.dataGridView1.Rows.Count - 1;
                 //if(rows>0)
                 //for (int x = 0; x <= rows; x++)
@@ -783,6 +798,7 @@ where 1=1";
                         string id = dataGridView1["身份证号", i].Value.ToString();
                         combo.ID = "'" + id + "'";
                         combo.Name = dataGridView1["姓名", i].Value.ToString();
+                        combo.BarCode= dataGridView1["条码号", i].Value.ToString();
                         ide.Add(combo);
                     }
                 }
@@ -828,14 +844,14 @@ where 1=1";
         private bool PDF(List<string> list, DataSet dataSet, List<ComboBoxData> ide)
         { 
             Document doc = null;
-            LoadingHelper.myCaption = "正在导出...";
-            LoadingHelper.myLabel = "正在导出第1份";
-            LoadingHelper.ShowLoadingScreen();
-            Thread.Sleep(50);
-            if (LoadingHelper.loadingForm != null)
-            {
-                LoadingHelper.loadingForm.mystr = "正在导出第 1 份";
-            }
+            //LoadingHelper.myCaption = "正在导出...";
+            //LoadingHelper.myLabel = "正在导出第1份";
+            //LoadingHelper.ShowLoadingScreen();
+            //Thread.Sleep(50);
+            //if (LoadingHelper.loadingForm != null)
+            //{
+            //    LoadingHelper.loadingForm.mystr = "正在导出第 1 份";
+            //}
             try
             {
                 if (list.Count > 1)
@@ -848,10 +864,12 @@ where 1=1";
                         List<Report> reports = new List<Report>();
                         foreach (var items in list)
                         {
+                             
+
                             Report report = new Report();
                             DataRow data = dataSet.Tables["个人"].Select($"id_number={item.ID}")[0];
                             report.Name = items;
-                            report.Doc = PdfProcessing(items, data);
+                            report.Doc = PdfProcessing(items, data,item.BarCode);
                             reports.Add(report);
                         }
                         Report re = reports.Where(m => m.Name == "封面").FirstOrDefault();
@@ -953,6 +971,14 @@ where 1=1";
                             List<Report> reports = new List<Report>();
                             DataRow data = dataSet.Tables["个人"].Rows[i];
                             string age = data["age"].ToString();
+                            string idnum = data["id_number"].ToString();
+                            string barcode = "";
+                            string aa = "'" + idnum + "'";
+                            var q = (from l in ide where l.ID == aa select l).ToList();
+                            if(q.Count>0)
+                            {
+                                barcode = q[0].BarCode;
+                            }
                             foreach (var item in vs)
                             {
                                 if (age.Length>0) {
@@ -963,8 +989,9 @@ where 1=1";
                                         }
                                     }
                                 }
+
                                 Report report = new Report();
-                                report.Doc = PdfProcessing(item, data);
+                                report.Doc = PdfProcessing(item, data, barcode);
                                 report.Name = item;
                                 reports.Add(report);
                             }
@@ -996,7 +1023,14 @@ where 1=1";
                         for (int i = 0; i < dataSet.Tables["个人"].Rows.Count; i++)
                         {
                             DataRow data = dataSet.Tables["个人"].Rows[i];
-                            doc = PdfProcessing(list[0], data);
+                            string aa = "'" + data["id_number"].ToString() + "'";
+                            var q = (from l in ide where l.ID == aa select l).ToList();
+                            string barcode = "";
+                            if (q.Count > 0)
+                            {
+                                barcode = q[0].BarCode;
+                            }
+                            doc = PdfProcessing(list[0], data, barcode);
                             string urls = @str + $"/up/result/{list[0] + "-" + data["name"].ToString() + data["id_number"].ToString()}.pdf";
                             DeteleFile(urls);
                             doc.Save(urls, SaveFormat.Pdf);
@@ -1033,13 +1067,21 @@ where 1=1";
             bool t = double.TryParse(a, out b);
             return t;
         }
-        private Document PdfProcessing(string lx, DataRow data)
+        private Document PdfProcessing(string lx, DataRow data,string barcode)
         {
             DateTime date = DateTime.Now;
             Document doc = null;
             DocumentBuilder builder = null;
             DataTable jkdata = null;
-            DataSet jk = DbHelperMySQL.Query($"select * from physical_examination_record where id_number='{data["id_number"].ToString()}' order by create_time desc LIMIT 1");
+            DataSet jk = null;
+            if (barcode=="")
+            {
+                jk = DbHelperMySQL.Query($"select * from physical_examination_record where id_number='{data["id_number"].ToString()}' order by create_time desc LIMIT 1");
+            }
+            else
+            {
+                jk = DbHelperMySQL.Query($"select * from physical_examination_record where bar_code='{barcode}' and id_number='{data["id_number"].ToString()}' order by create_time desc LIMIT 1");
+            }
             if (jk != null && jk.Tables.Count > 0 && jk.Tables[0].Rows.Count > 0)
             {
                 jkdata = jk.Tables[0];
@@ -4116,7 +4158,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex > 0) return;
+            if (e.RowIndex < 0) return;
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             string idnum = dataGridView1["身份证号", e.RowIndex].Value.ToString();
             DataTable dtgrgd = grjdDao.selectResdentDoctorId(idnum);
@@ -4145,6 +4187,12 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 dataGridView1.Rows[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
                 dataGridView1.Rows[i].HeaderCell.Value = (i + 1).ToString();
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //找到对应的b超图片
+            //找到对应的心电图图片
         }
     }
 

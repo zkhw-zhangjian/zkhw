@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblWeiShangChuan = new System.Windows.Forms.Label();
+            this.lblShangChuan = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
@@ -113,6 +115,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
@@ -135,8 +138,6 @@
             this.版式 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.pagerControl1 = new zkhwClient.control.PagerControl();
-            this.lblShangChuan = new System.Windows.Forms.Label();
-            this.lblWeiShangChuan = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -170,6 +171,24 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "报告导出-查询条件";
+            // 
+            // lblWeiShangChuan
+            // 
+            this.lblWeiShangChuan.AutoSize = true;
+            this.lblWeiShangChuan.Location = new System.Drawing.Point(596, 70);
+            this.lblWeiShangChuan.Name = "lblWeiShangChuan";
+            this.lblWeiShangChuan.Size = new System.Drawing.Size(41, 12);
+            this.lblWeiShangChuan.TabIndex = 28;
+            this.lblWeiShangChuan.Text = "未上传";
+            // 
+            // lblShangChuan
+            // 
+            this.lblShangChuan.AutoSize = true;
+            this.lblShangChuan.Location = new System.Drawing.Point(481, 70);
+            this.lblShangChuan.Name = "lblShangChuan";
+            this.lblShangChuan.Size = new System.Drawing.Size(41, 12);
+            this.lblShangChuan.TabIndex = 27;
+            this.lblShangChuan.Text = "已上传";
             // 
             // textBox1
             // 
@@ -1008,6 +1027,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button4);
             this.groupBox3.Controls.Add(this.groupBox5);
             this.groupBox3.Controls.Add(this.groupBox4);
             this.groupBox3.Controls.Add(this.radioButton3);
@@ -1021,6 +1041,17 @@
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "报告导出-导出格式";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(827, 82);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(163, 23);
+            this.button4.TabIndex = 20;
+            this.button4.Text = "B超心电图片上传";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Visible = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // groupBox5
             // 
@@ -1191,7 +1222,7 @@
             // 
             this.radioButton3.AutoSize = true;
             this.radioButton3.Checked = true;
-            this.radioButton3.Location = new System.Drawing.Point(923, 28);
+            this.radioButton3.Location = new System.Drawing.Point(902, 27);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(35, 16);
             this.radioButton3.TabIndex = 17;
@@ -1202,7 +1233,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(861, 28);
+            this.label6.Location = new System.Drawing.Point(828, 28);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 12);
             this.label6.TabIndex = 16;
@@ -1210,7 +1241,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(996, 79);
+            this.button3.Location = new System.Drawing.Point(915, 53);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 14;
@@ -1220,7 +1251,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(862, 79);
+            this.button2.Location = new System.Drawing.Point(827, 53);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 13;
@@ -1270,24 +1301,6 @@
             this.pagerControl1.RecordCount = 0;
             this.pagerControl1.Size = new System.Drawing.Size(1158, 29);
             this.pagerControl1.TabIndex = 4;
-            // 
-            // lblShangChuan
-            // 
-            this.lblShangChuan.AutoSize = true;
-            this.lblShangChuan.Location = new System.Drawing.Point(481, 70);
-            this.lblShangChuan.Name = "lblShangChuan";
-            this.lblShangChuan.Size = new System.Drawing.Size(41, 12);
-            this.lblShangChuan.TabIndex = 27;
-            this.lblShangChuan.Text = "已上传";
-            // 
-            // lblWeiShangChuan
-            // 
-            this.lblWeiShangChuan.AutoSize = true;
-            this.lblWeiShangChuan.Location = new System.Drawing.Point(596, 70);
-            this.lblWeiShangChuan.Name = "lblWeiShangChuan";
-            this.lblWeiShangChuan.Size = new System.Drawing.Size(41, 12);
-            this.lblWeiShangChuan.TabIndex = 28;
-            this.lblWeiShangChuan.Text = "未上传";
             // 
             // examinatReport
             // 
@@ -1429,5 +1442,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label lblWeiShangChuan;
         private System.Windows.Forms.Label lblShangChuan;
+        private System.Windows.Forms.Button button4;
     }
 }
