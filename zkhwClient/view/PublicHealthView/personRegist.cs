@@ -150,8 +150,8 @@ namespace zkhwClient.view.PublicHealthView
                 logservice.addCheckLog(lb);
                 jkjcheckdao.updateShDevice(-1, 0, -1, -1, -1, -1, -1, -1, -1, -1);
             }
-            ////读取默认的打印条数
-            //ReadPrintBarCodeNumber();
+            //读取默认的打印条数
+            ReadPrintBarCodeNumber();
         }
         //读取身份证
         private void button3_Click(object sender, EventArgs e)
@@ -829,7 +829,7 @@ namespace zkhwClient.view.PublicHealthView
         private void ReadPrintBarCodeNumber()
         { 
             xmlDoc.Load(path);
-            node = xmlDoc.SelectSingleNode("config/printBarCodeNumber");
+            node = xmlDoc.SelectSingleNode("config/barNum");
             string _printBarCodeNumber = node.InnerText; 
             if (_printBarCodeNumber == "") _printBarCodeNumber = "4";
             numericUpDown1.Value = int.Parse(_printBarCodeNumber);
