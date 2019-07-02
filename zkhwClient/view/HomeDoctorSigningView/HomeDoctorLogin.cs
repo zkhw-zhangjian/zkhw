@@ -22,7 +22,8 @@ namespace zkhwClient.view.HomeDoctorSigningView
             string loginname = this.textBox1.Text;
             if (loginname != null && !"".Equals(loginname))
             {
-                string url = "http://113.142.73.218:8080/qianyue/login.do?username=" + loginname + "&password=FE173FFCD3AF4298A196CDCD63CDA465&type=gw";
+                //string url = "http://113.142.73.218:8080/qianyue/login.do?username=" + loginname + "&password=FE173FFCD3AF4298A196CDCD63CDA465&type=gw";
+                string url = "http://113.142.73.218:8080/qianyue/login.do?username=hj&password=FE173FFCD3AF4298A196CDCD63CDA465&type=gw";
                 FormJY f2 = new FormJY();
                 f2.url = url;
                 f2.ShowDialog();
