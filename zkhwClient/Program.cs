@@ -16,6 +16,7 @@ namespace zkhwClient
         [STAThread]
         static void Main()
         {
+            //if (IsRight() == false) return;
             bool ret;
             System.Threading.Mutex mutex = new System.Threading.Mutex(true, Application.ProductName, out ret);
             if (ret)
@@ -24,8 +25,8 @@ namespace zkhwClient
                 KillProc("httpceshi");
                 Application.EnableVisualStyles();   //这两行实现   XP   可视风格   
                 Application.DoEvents();             //这两行实现   XP   可视风格
-                                                    Application.Run(new frmLogin());
-                                                    //Application.Run(new zkhwClient.view.PublicHealthView.examinatReport());
+                Application.Run(new frmLogin());
+                //Application.Run(new zkhwClient.view.PublicHealthView.examinatReport());
                 //Application.Run(new zkhwClient.view.HomeDoctorSigningView.teamMembers());
                 //Application.Run(new frmLogin());//有数据库
                                                 //Application.Run(new frmMain());//无数据库
@@ -56,6 +57,29 @@ namespace zkhwClient
             {
 
             }
+        }
+
+        private static bool IsRight()
+        {
+            bool flag = false;
+            string fpath = Application.StartupPath + "\\sysstem.ini";
+            int iret = sysstem.JudgeExpirationDate(fpath);
+            switch(iret)
+            {
+                case 0:
+                    flag = true;
+                    break;
+                case 1:
+                    MessageBox.Show("软件授权到期，请联系厂家24小时服务电话：4008150101");
+                    break;
+                case 3:
+                    MessageBox.Show("请校对电脑系统时间！");
+                    break;
+                default:
+                    MessageBox.Show("请联系软件厂家！");
+                    break;
+            } 
+            return flag;
         }
     }
 }

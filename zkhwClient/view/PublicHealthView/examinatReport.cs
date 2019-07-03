@@ -1138,11 +1138,11 @@ where 1=1";
                         builder.Write(dic[key]);
                     }
                     /*页码*/
-                    builder.MoveToHeaderFooter(HeaderFooterType.FooterPrimary); 
-                    builder.InsertField("PAGE", ""); 
-                    builder.Write(" / "); 
-                    builder.InsertField("NUMPAGES", "");
-                    builder.Write("页");
+                    //builder.MoveToHeaderFooter(HeaderFooterType.FooterPrimary); 
+                    //builder.InsertField("PAGE", ""); 
+                    //builder.Write(" / "); 
+                    //builder.InsertField("NUMPAGES", "");
+                    //builder.Write("页");
                     /*end*/
                     break;
                 #endregion
