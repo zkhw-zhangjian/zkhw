@@ -352,5 +352,7 @@ namespace zkhwClient.dao
     {
         public string ID { get; set; }
         public string Name { get; set; }
+
+        public string BarCode { get; set; }
     }
 }
