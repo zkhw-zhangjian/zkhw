@@ -199,7 +199,6 @@
             this.label44.Size = new System.Drawing.Size(264, 16);
             this.label44.TabIndex = 41;
             this.label44.Text = "手动输入后双击文本框自动识别信息";
-            this.label44.Click += new System.EventHandler(this.label44_Click);
             // 
             // button5
             // 

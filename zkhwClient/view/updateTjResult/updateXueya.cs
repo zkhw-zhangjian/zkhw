@@ -122,8 +122,7 @@ namespace zkhwClient.view.updateTjResult
                 if(_pulsestr !="")
                 {
                     double _dbpulse = double.Parse(_pulsestr);
-                    int _result = GetJudgeResultForPulse(_dbpulse);
-                   
+                    int _result = GetJudgeResultForPulse(_dbpulse);               
                 }
                 this.textBox7.Text = _pulsestr;
             }
