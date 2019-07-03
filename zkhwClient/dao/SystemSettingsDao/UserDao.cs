@@ -87,6 +87,7 @@ namespace zkhwClient.dao
             DataSet ds = new DataSet();
             ds.Clear();
             ds = DbHelperMySQL.Query(sql);
+            if (ds.Tables.Count==0) { return null; }
             return ds.Tables[0];
         }
     }

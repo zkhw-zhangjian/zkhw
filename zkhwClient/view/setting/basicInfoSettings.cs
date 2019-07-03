@@ -131,8 +131,8 @@ namespace zkhwClient.view.setting
                 this.comboBox16.Text = czy;
                 this.comboBox17.Text = carname;
 
-                this.textBox2.Text = wx;
-                this.textBox3.Text = other;
+                this.textBox2.Text = other;
+                this.textBox3.Text = wx;
             }
             if (shengName=="陕西") {
                 this.comboBox7.DropDownStyle = ComboBoxStyle.DropDownList;
