@@ -238,6 +238,7 @@
     <Compile Include="service\PublicHealthService\psychiatricPatientService.cs" />
     <Compile Include="service\PublicHealthService\psychiatricPatientServiceS.cs" />
     <Compile Include="service\PublicHealthService\tcmHealthService.cs" />
+    <Compile Include="sysstem.cs" />
     <Compile Include="utils\CVRSDK.cs" />
     <Compile Include="utils\FileDataAddSql.cs" />
     <Compile Include="utils\FileWatcher.cs" />

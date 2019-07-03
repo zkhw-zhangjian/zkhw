@@ -255,15 +255,15 @@ where 1=1";
                 this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
                 this.dataGridView1.ReadOnly = true;
 
-                dataGridView1.Columns[0].Width = 30;
-                dataGridView1.Columns[1].Width = 80;
-                dataGridView1.Columns[4].Width = 80;
-                dataGridView1.Columns[5].Width = 70;
-                dataGridView1.Columns[6].Width = 120;
-                dataGridView1.Columns[7].Width = 100;
-                dataGridView1.Columns[8].Width = 110;
-                dataGridView1.Columns[9].Width = 80;
-                dataGridView1.Columns[10].Width = 80;
+                //dataGridView1.Columns[0].Width = 30;
+                //dataGridView1.Columns[1].Width = 80;
+                //dataGridView1.Columns[4].Width = 80;
+                //dataGridView1.Columns[5].Width = 70;
+                //dataGridView1.Columns[6].Width = 120;
+                //dataGridView1.Columns[7].Width = 100;
+                //dataGridView1.Columns[8].Width = 110;
+                //dataGridView1.Columns[9].Width = 80;
+                //dataGridView1.Columns[10].Width = 80;
 
                 dataGridView1.Columns[9].Visible = false;
                 dataGridView1.Columns[10].Visible = false;
@@ -1138,11 +1138,11 @@ where 1=1";
                         builder.Write(dic[key]);
                     }
                     /*页码*/
-                    builder.MoveToHeaderFooter(HeaderFooterType.FooterPrimary); 
-                    builder.InsertField("PAGE", ""); 
-                    builder.Write(" / "); 
-                    builder.InsertField("NUMPAGES", "");
-                    builder.Write("页");
+                    //builder.MoveToHeaderFooter(HeaderFooterType.FooterPrimary); 
+                    //builder.InsertField("PAGE", ""); 
+                    //builder.Write(" / "); 
+                    //builder.InsertField("NUMPAGES", "");
+                    //builder.Write("页");
                     /*end*/
                     break;
                 #endregion

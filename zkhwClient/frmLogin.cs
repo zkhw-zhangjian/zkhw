@@ -97,6 +97,10 @@ namespace zkhwClient
                 {
                     lls.addCheckLog(lb);
                 }
+                /************/
+                //string fpath = Application.StartupPath + "\\sysstem.ini";
+                //sysstem.UpdateInfo(fpath);
+                /*****end******/
                 this.Hide();
                 frmMain main = new frmMain();
                 main.Show();

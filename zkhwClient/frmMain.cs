@@ -446,7 +446,7 @@ namespace zkhwClient
                 this.panel1.Controls.Add(pR);
                 pR.Show();
             }
-            else if (tag == "数据审核")
+            else if (tag == "体检进度")
             {
                 examinatProgress pR = new examinatProgress();
                 pR.TopLevel = false;
@@ -3842,6 +3842,10 @@ namespace zkhwClient
 
                 try
                 {
+                    /************************/
+                    //string fpath = Application.StartupPath + "\\sysstem.ini";
+                    //sysstem.UpdateInfo(fpath);
+                    /************************/
                     Environment.Exit(0);
                 }
                 catch
