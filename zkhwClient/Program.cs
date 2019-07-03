@@ -70,7 +70,8 @@ namespace zkhwClient
                     flag = true;
                     break;
                 case 1:
-                    MessageBox.Show("软件授权到期，请联系厂家24小时服务电话：4008150101");
+                    string str = "软件授权到期，请联系厂家24小时服务电话：4008150101";
+                    MessageBox.Show(str);
                     break;
                 case 3:
                     MessageBox.Show("请校对电脑系统时间！");
