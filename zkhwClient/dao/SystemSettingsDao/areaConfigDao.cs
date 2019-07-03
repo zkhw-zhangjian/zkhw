@@ -54,6 +54,14 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
-
+        //根据区域编号获取区域全名称
+        public DataTable selectAreaBycode(string code)
+        {
+            DataSet ds = new DataSet();
+            String sql = "select full_name from code_area_config where code='" + code + "' ";
+            ds = DbHelperMySQL.Query(sql);
+            if (ds.Tables.Count == 0) return null;
+            return ds.Tables[0];
+        }
     }
 }

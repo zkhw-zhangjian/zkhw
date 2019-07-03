@@ -55,7 +55,7 @@ namespace zkhwClient
             //string sql = "select count(*) from information_schema.columns where table_name = 'elderly_selfcare_estimate' and column_name = 'exam_id' ";
             try
             {
-                string sql = "select count(exam_id) from elderly_selfcare_estimate  ";
+                string sql = "select count(exam_id) from elderly_selfcare_estimate;";
                 object o = DbHelperMySQL.GetSingle(sql);
                 if (o == null || o.ToString() == "0")
                 {
@@ -94,8 +94,8 @@ namespace zkhwClient
             this.timer2.Interval = Int32.Parse(Properties.Settings.Default.timeInterval);
             this.timer2.Start();//定时获取生化和血球的数据
 
-            this.timer3.Interval = Int32.Parse(Properties.Settings.Default.timer3Interval);
-            this.timer3.Start();//1分钟定时刷新设备状态
+            //this.timer3.Interval = Int32.Parse(Properties.Settings.Default.timer3Interval);
+            //this.timer3.Start();//1分钟定时刷新设备状态
 
             this.label1.Text = "一体化查体车  中科弘卫";
             this.label1.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
@@ -2334,35 +2334,36 @@ namespace zkhwClient
         //首页底部设备状态更新
         private void timer3_Tick(object sender, EventArgs e)
         {
-          DataTable dtDeviceType = tjdao.checkDevice();
+            GetAllLocalMachines();//cmd获取局域网内的所有设备IP和MAC信息
+            DataTable dtDeviceType = tjdao.checkDevice();
             if (dtDeviceType==null|| dtDeviceType.Rows.Count<1) {
                 return;
             }
           string sfz_online = dtDeviceType.Rows[0]["sfz_online"].ToString();
             if (sfz_online == "0" || "0".Equals(sfz_online))
             {
-                this.button1.BackColor = Color.Red;
+                this.button9.BackColor = Color.Red;
             }
             else {
-                this.button1.BackColor = Color.MediumAquamarine;
+                this.button9.BackColor = Color.MediumAquamarine;
             }
             string sxt_online = dtDeviceType.Rows[0]["sxt_online"].ToString();
             if (sxt_online == "0" || "0".Equals(sxt_online))
             {
-                this.button2.BackColor = Color.Red;
+                this.button8.BackColor = Color.Red;
             }
             else
             {
-                this.button2.BackColor = Color.MediumAquamarine;
+                this.button8.BackColor = Color.MediumAquamarine;
             }
             string dyj_online = dtDeviceType.Rows[0]["dyj_online"].ToString();
             if (dyj_online == "0" || "0".Equals(dyj_online))
             {
-                this.button3.BackColor = Color.Red;
+                this.button10.BackColor = Color.Red;
             }
             else
             {
-                this.button3.BackColor = Color.MediumAquamarine;
+                this.button10.BackColor = Color.MediumAquamarine;
             }
             string xcg_online = dtDeviceType.Rows[0]["xcg_online"].ToString();
             if (xcg_online == "0" || "0".Equals(xcg_online))
@@ -2376,14 +2377,23 @@ namespace zkhwClient
             string sh_online = dtDeviceType.Rows[0]["sh_online"].ToString();
             if (sh_online == "0" || "0".Equals(sh_online))
             {
-                this.button5.BackColor = Color.Red;
+                this.button2.BackColor = Color.Red;
             }
             else
             {
-                this.button5.BackColor = Color.MediumAquamarine;
+                this.button2.BackColor = Color.MediumAquamarine;
             }
             string ncg_online = dtDeviceType.Rows[0]["ncg_online"].ToString();
             if (ncg_online == "0" || "0".Equals(ncg_online))
+            {
+                this.button3.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button3.BackColor = Color.MediumAquamarine;
+            }
+            string xdt_online = dtDeviceType.Rows[0]["xdt_online"].ToString();
+            if (xdt_online == "0" || "0".Equals(xdt_online))
             {
                 this.button6.BackColor = Color.Red;
             }
@@ -2391,8 +2401,17 @@ namespace zkhwClient
             {
                 this.button6.BackColor = Color.MediumAquamarine;
             }
-            string xdt_online = dtDeviceType.Rows[0]["xdt_online"].ToString();
-            if (xdt_online == "0" || "0".Equals(xdt_online))
+            string sgtz_online = dtDeviceType.Rows[0]["sgtz_online"].ToString();
+            if (sgtz_online == "0" || "0".Equals(sgtz_online))
+            {
+                this.button5.BackColor = Color.Red;
+            }
+            else
+            {
+                this.button5.BackColor = Color.MediumAquamarine;
+            }
+            string xy_online = dtDeviceType.Rows[0]["xy_online"].ToString();
+            if (xy_online == "0" || "0".Equals(xy_online))
             {
                 this.button7.BackColor = Color.Red;
             }
@@ -2400,32 +2419,63 @@ namespace zkhwClient
             {
                 this.button7.BackColor = Color.MediumAquamarine;
             }
-            string sgtz_online = dtDeviceType.Rows[0]["sgtz_online"].ToString();
-            if (sgtz_online == "0" || "0".Equals(sgtz_online))
-            {
-                this.button8.BackColor = Color.Red;
-            }
-            else
-            {
-                this.button8.BackColor = Color.MediumAquamarine;
-            }
-            string xy_online = dtDeviceType.Rows[0]["xy_online"].ToString();
-            if (xy_online == "0" || "0".Equals(xy_online))
-            {
-                this.button9.BackColor = Color.Red;
-            }
-            else
-            {
-                this.button9.BackColor = Color.MediumAquamarine;
-            }
             string bc_online = dtDeviceType.Rows[0]["bc_online"].ToString();
             if (bc_online == "0" || "0".Equals(bc_online))
             {
-                this.button10.BackColor = Color.Red;
+                this.button1.BackColor = Color.Red;
             }
             else
             {
-                this.button10.BackColor = Color.MediumAquamarine;
+                this.button1.BackColor = Color.MediumAquamarine;
+            }
+        }
+        private void GetAllLocalMachines()
+        {
+            Process p = new Process();
+            p.StartInfo.FileName = "cmd.exe";
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardInput = true;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.CreateNoWindow = true;
+            p.Start();
+            p.StandardInput.WriteLine("arp -a");
+            p.StandardInput.WriteLine("exit");
+            //ArrayList list = new ArrayList();
+            StreamReader reader = p.StandardOutput;
+            string IPHead = Dns.GetHostByName(Dns.GetHostName()).AddressList[0].ToString().Substring(0, 3);
+            for (string line = reader.ReadLine(); line != null; line = reader.ReadLine())
+            {
+                line = line.Trim();
+                if (line.StartsWith(IPHead) && line.Length > 40)
+                {
+                    string IP = line.Substring(0, 15).Trim();
+                    //身高82 血压80 心电81 尿机83 B超84
+                    if (IP=="192.168.1.80") {
+                        String sql = "update zkhw_state_device set xy_online='1',xy_state='1' where ID='1'";
+                        DbHelperMySQL.ExecuteSql(sql);
+                    }
+                    if (IP == "192.168.1.83")
+                    {
+                        String sql = "update zkhw_state_device set ncg_online='1',ncg_state='1' where ID='1'";
+                        DbHelperMySQL.ExecuteSql(sql);
+                    }
+                    if (IP == "192.168.1.82")
+                    {
+                        String sql = "update zkhw_state_device set sgtz_online='1',sgtz_state='1' where ID='1'";
+                        DbHelperMySQL.ExecuteSql(sql);
+                    }
+                    if (IP == "192.168.1.81")
+                    {
+                        String sql = "update zkhw_state_device set xdt_online='1',xdt_state='1' where ID='1'";
+                        DbHelperMySQL.ExecuteSql(sql);
+                    }
+                    if (IP == "192.168.1.84")
+                    {
+                        String sql = "update zkhw_state_device set bc_online='1',bc_state='1' where ID='1'";
+                        DbHelperMySQL.ExecuteSql(sql);
+                    }
+                }                
             }
         }
         private void OpenPdf(string url)

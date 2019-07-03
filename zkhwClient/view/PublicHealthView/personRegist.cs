@@ -44,6 +44,7 @@ namespace zkhwClient.view.PublicHealthView
         tjcheckDao jkjcheckdao = new tjcheckDao();
         grjdxxBean grjdxx = null;
         loginLogService logservice = new loginLogService();
+        areaConfigDao area = new areaConfigDao();
         public personRegist()
         {
             InitializeComponent();
@@ -747,6 +748,12 @@ namespace zkhwClient.view.PublicHealthView
             {
                 comboBox1.Text = "男";
             }
+           string cardCode6 = textBox3.Text.Trim().Substring(0,6);
+           DataTable dtArea = area.selectAreaBycode(cardCode6);
+            if (dtArea!=null&&dtArea.Rows.Count>0) {
+                string fullName = dtArea.Rows[0]["full_name"].ToString().Replace("中国", "").Replace(",", "");
+                this.richTextBox1.Text = fullName;
+            }
         }
 
         //体检人数统计
@@ -823,8 +830,6 @@ namespace zkhwClient.view.PublicHealthView
             label39.Text = num39.ToString(); //75岁以上 女
         }
 
-        
-
         #region 打印条码个数
         private void ReadPrintBarCodeNumber()
         { 
@@ -840,16 +845,11 @@ namespace zkhwClient.view.PublicHealthView
             //WritePrintBarCodeNumber();
         }
 
-        private void label44_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void WritePrintBarCodeNumber()
         {
             xmlDoc.Load(path);
             XmlNode node;
-            node = xmlDoc.SelectSingleNode("config/printBarCodeNumber");
+            node = xmlDoc.SelectSingleNode("config/barNum");
             node.InnerText = numericUpDown1.Value.ToString();
             xmlDoc.Save(path); 
         }
