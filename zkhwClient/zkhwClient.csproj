@@ -618,6 +618,12 @@
     <Compile Include="view\setting\deviceManagement.Designer.cs">
       <DependentUpon>deviceManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\setting\frmEmpower.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\setting\frmEmpower.Designer.cs">
+      <DependentUpon>frmEmpower.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\setting\parameterSetting.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1029,6 +1035,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\setting\deviceManagement.resx">
       <DependentUpon>deviceManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\setting\frmEmpower.resx">
+      <DependentUpon>frmEmpower.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\setting\parameterSetting.resx">
       <DependentUpon>parameterSetting.cs</DependentUpon>

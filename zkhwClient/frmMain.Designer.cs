@@ -57,6 +57,7 @@
             this.设备管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.系统日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.中间库位置设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuRuanJianShouQuan = new System.Windows.Forms.ToolStripMenuItem();
             this.数据分析ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.使用情况统计ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.使用帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,7 +96,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
-            this.menuRuanJianShouQuan = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -333,6 +333,12 @@
             this.中间库位置设置ToolStripMenuItem.Name = "中间库位置设置ToolStripMenuItem";
             this.中间库位置设置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.中间库位置设置ToolStripMenuItem.Text = "参数设置";
+            // 
+            // menuRuanJianShouQuan
+            // 
+            this.menuRuanJianShouQuan.Name = "menuRuanJianShouQuan";
+            this.menuRuanJianShouQuan.Size = new System.Drawing.Size(152, 22);
+            this.menuRuanJianShouQuan.Text = "软件授权";
             // 
             // 数据分析ToolStripMenuItem
             // 
@@ -701,13 +707,6 @@
             // 
             this.timer3.Interval = 60000;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
-            // 
-            // menuRuanJianShouQuan
-            // 
-            this.menuRuanJianShouQuan.Name = "menuRuanJianShouQuan";
-            this.menuRuanJianShouQuan.Size = new System.Drawing.Size(152, 22);
-            this.menuRuanJianShouQuan.Text = "软件授权";
-            this.menuRuanJianShouQuan.Visible = false;
             // 
             // frmMain
             // 

@@ -844,14 +844,14 @@ where 1=1";
         private bool PDF(List<string> list, DataSet dataSet, List<ComboBoxData> ide)
         { 
             Document doc = null;
-            //LoadingHelper.myCaption = "正在导出...";
-            //LoadingHelper.myLabel = "正在导出第1份";
-            //LoadingHelper.ShowLoadingScreen();
-            //Thread.Sleep(50);
-            //if (LoadingHelper.loadingForm != null)
-            //{
-            //    LoadingHelper.loadingForm.mystr = "正在导出第 1 份";
-            //}
+            LoadingHelper.myCaption = "正在导出...";
+            LoadingHelper.myLabel = "正在导出第1份";
+            LoadingHelper.ShowLoadingScreen();
+            Thread.Sleep(50);
+            if (LoadingHelper.loadingForm != null)
+            {
+                LoadingHelper.loadingForm.mystr = "正在导出第 1 份";
+            }
             try
             {
                 if (list.Count > 1)
@@ -1137,12 +1137,13 @@ where 1=1";
                         builder.MoveToBookmark(key);
                         builder.Write(dic[key]);
                     }
-                    /*页码*/
+                    /*页码*/ 
                     //builder.MoveToHeaderFooter(HeaderFooterType.FooterPrimary); 
-                    //builder.InsertField("PAGE", ""); 
-                    //builder.Write(" / "); 
+                    //builder.InsertField("PAGE", "");
+                    //builder.Write(" / ");
                     //builder.InsertField("NUMPAGES", "");
-                    //builder.Write("页");
+                    ////builder.Write("页");
+                    //builder.ParagraphFormat.Alignment = ParagraphAlignment.Right;
                     /*end*/
                     break;
                 #endregion
