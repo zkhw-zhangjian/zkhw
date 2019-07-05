@@ -43,13 +43,20 @@ namespace zkhwClient
 
         private static string Decrypt(string content, string secretKey)
         {
-            byte[] a = Convert.FromBase64String(content);
-            string b = Encoding.UTF8.GetString(a);
-            string str = ProcessHandler(b, secretKey);
-            return str;
+            try
+            {
+                byte[] a = Convert.FromBase64String(content);
+                string b = Encoding.UTF8.GetString(a);
+                string str = ProcessHandler(b, secretKey);
+                return str;
+            }
+            catch
+            {
+                return "";
+            }
         }
 
-        private  static string IniReadValue(string section, string key,string path)
+        private static string IniReadValue(string section, string key,string path)
         {
             StringBuilder temp = new StringBuilder(255);
             int i = GetPrivateProfileString(section, key, "", temp, 255, path);
@@ -61,7 +68,7 @@ namespace zkhwClient
             WritePrivateProfileString(section, key, iValue, path);
         }
         
-        private static bool IsDate(string a,out DateTime b)
+        public  static bool IsDate(string a,out DateTime b)
         {
             b = DateTime.Parse(defaultDt);
             bool flag = false;
@@ -92,51 +99,51 @@ namespace zkhwClient
                 string b0 = IniReadValue("system", "b", fpath);
                 string a = Decrypt(a0, skey);
                 string b = Decrypt(b0, skey);
-                if(a==b)
-                {
-                    if(a=="20000101010101")
-                    {
-                        //证明是刚开始使用的所以就要
-                        string s0 = DateTime.Now.ToString("yyyyMMddHHmmss");
-                        string e0= DateTime.Now.AddMonths(1).ToString("yyyyMMdd")+"235959";
-                        string s = Encrypt(s0,skey);
-                        string e = Encrypt(e0, skey);
-                        IniWriteValue("system", "a", s, fpath);
-                        IniWriteValue("system", "b", e, fpath);
-                        iResult = 0;
-                    }
-                    else
-                    {
-                        iResult = 1;
-                    }
+                string c = b.Substring(4);
+                if(a== "20000101010101")
+                { 
+                    //第一次用软件默认自动给添加一个月
+                    string s0 = DateTime.Now.ToString("yyyyMMddHHmmss");
+                    string e0= "zkhw"+DateTime.Now.AddMonths(1).ToString("yyyyMMdd")+"235959";
+                    string s = Encrypt(s0,skey);
+                    string e = Encrypt(e0, skey);
+                    IniWriteValue("system", "a", s, fpath);
+                    IniWriteValue("system", "b", e, fpath);
+                    iResult = 0; 
                 }
                 else
                 {
                     DateTime s0=DateTime.Parse(defaultDt);
                     DateTime e0 = DateTime.Parse(defaultDt);
                     bool t = IsDate(a, out s0);
-                    bool t1= IsDate(b, out e0);
+                    bool t1= IsDate(c, out e0);
                     if (t == false || t1 == false)
                     {
                         iResult = 2;
                     }
                     else
-                    {
-                        //这里判断下系统时间，如果系统时间小于s0那么就提示退出
+                    { 
                         if (DateTime.Now < s0)
                         {
                             iResult = 3;
                         }
                         else
                         {
-                            if (s0 >= e0)
+                            if(DateTime.Now>e0)  
                             {
                                 iResult = 1;
                             }
                             else
                             {
-                                iResult = 0;
-                            }
+                                if (s0 >= e0)
+                                {
+                                    iResult = 1;
+                                }
+                                else
+                                {
+                                    iResult = 0;
+                                }
+                            } 
                         } 
                     } 
                 }
@@ -149,13 +156,56 @@ namespace zkhwClient
             string s0 = DateTime.Now.ToString("yyyyMMddHHmmss");
             string s = Encrypt(s0, skey);
             IniWriteValue("system", "a", s, fpath); 
-        }
+        } 
 
-        public static void EmpowerInfo(string fpath,string s)
+        public static bool EmpowerInfo(string fpath,string s)
         {
-            IniWriteValue("system", "b", s, fpath);
+            bool flag = false;
+            try
+            {
+                IniWriteValue("system", "b", s, fpath);
+                flag = true;
+            }
+            catch
+            {
+                flag = false;
+            }
+            return flag;
         }
 
+        public static string GetINIInfo(string fpath,int iType)
+        {
+            string str = "";
+            if(iType==0)
+            {
+                string a0 = IniReadValue("system", "a", fpath);
+                str = Decrypt(a0, skey);
+            }
+            else
+            {
+                string b0 = IniReadValue("system", "b", fpath);
+                str = Decrypt(b0, skey);
+            }
+            return str;
+        }
 
+        public static bool EmpowerValid(string a)
+        {
+            bool flag = false;
+            string str = Decrypt(a, skey);
+            if(str.Length>=18)
+            {
+                if(str.Substring(0,4)=="zkhw")
+                {
+                    DateTime s0 = DateTime.Parse(defaultDt);
+                    bool b = IsDate(str.Substring(4), out s0);
+                    if(b==true)
+                    {
+                        flag = true;
+                    }
+                }
+            }
+            return flag;
+        }
     }
 }

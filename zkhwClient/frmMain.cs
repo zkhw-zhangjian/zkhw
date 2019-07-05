@@ -698,6 +698,13 @@ namespace zkhwClient
                 this.panel1.Controls.Add(pR);
                 pR.Show();
             }
+            else if(tag== "软件授权")
+            {
+                //弹出窗体
+                frmEmpower frm = new frmEmpower();
+                frm._EditType = 0;
+                frm.ShowDialog();
+            }
             else if (tag == "体检设备说明书")
             {   //使用帮助模块 
                 OpenPdf(Application.StartupPath+ "\\pdf\\仪器配置说明.docx");
@@ -848,9 +855,11 @@ namespace zkhwClient
                     item.Checked = true;
                     item.BackColor = Color.CadetBlue;
                     this.flowLayoutPanel1.Controls.Clear();
-                    PictureBox[] picb = new PictureBox[item.DropDownItems.Count];
+                    //PictureBox[] picb = new PictureBox[item.DropDownItems.Count];
+                    PictureBox[] picb = new PictureBox[item.DropDownItems.Count-1];
                     for (int i = 0; i < item.DropDownItems.Count; i++)
                     {
+                        if (item.DropDownItems[i].Text == "软件授权") continue;
                         picb[i] = new PictureBox();
                         picb[i].SizeMode = PictureBoxSizeMode.StretchImage;
                         picb[i].BorderStyle = BorderStyle.None;
@@ -3848,8 +3857,11 @@ namespace zkhwClient
                     /************************/
                     Environment.Exit(0);
                 }
-                catch
-                { }
+                catch(Exception tt)
+                {
+                    MessageBox.Show(tt.Message);
+                    Environment.Exit(0);
+                }
             }
             else
             {

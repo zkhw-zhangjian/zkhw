@@ -69,15 +69,23 @@ namespace zkhwClient
                 case 0:
                     flag = true;
                     break;
-                case 1:
-                    string str = "软件授权到期，请联系厂家24小时服务电话：4008150101";
-                    MessageBox.Show(str);
+                case 1: 
+                    view.setting.frmEmpower frm = new view.setting.frmEmpower();
+                    frm._EditType = 1;
+                    if(frm.ShowDialog()==DialogResult.OK)
+                    {
+                        flag = true;
+                    }
+                    else
+                    {
+                        flag = false;
+                    }
                     break;
                 case 3:
                     MessageBox.Show("请校对电脑系统时间！");
                     break;
                 default:
-                    MessageBox.Show("请联系软件厂家！");
+                    MessageBox.Show("系统文件丢失，请联系中科弘卫，24小时服务电话：4008150101");
                     break;
             } 
             return flag;
