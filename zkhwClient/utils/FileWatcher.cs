@@ -21,183 +21,14 @@ namespace zkhwClient
     public static class FileWatcher
     {
         /// <summary>
-        /// 察看监听状态
-        /// </summary>
-        /// <remarks>创建人员(日期):★刘腾飞★(100319 15:09)</remarks>
-        public static event DelegateFileWatch EventFileWatch;
-        /// <summary>
-        /// 察看 AD和 AOD文件监听状态
-        /// </summary>
-        /// <remarks>创建人员(日期):★刘腾飞★(100319 15:09)</remarks>
-        public static event DelegateFileWatchForAod EventFileWatchForAod;
-        /// <summary>
         /// 系统监控文件
         /// </summary>
         private static FileSystemWatcher m_watcherAoup = new FileSystemWatcher();
-        /// <summary>
-        /// 系统监控 AD和 AOD 文件
-        /// </summary>
-        private static FileSystemWatcher m_watcherForAod = new FileSystemWatcher();
-        /// <summary>
-        /// 错误信息
-        /// <remarks>创建人员(日期):★刘腾飞★(100319 14:16)</remarks>
-        /// </summary>
+
         public static String ErrorMsg = String.Empty;
         static String str = Application.StartupPath;
-        #region 方法
-
-        /// <summary>
-        /// 注册跟踪日志
-        /// </summary>
-        /// <param name="msg">信息</param>
-        ///  <remarks>创建人员(日期):★刘腾飞★(100608 14:56)</remarks>
-        private static void RegisterAoupTrackLog(string msg)
-        {
-            try
-            {
-                //AOUP监听成功！
-                if (EventFileWatch != null)
-                    EventFileWatch(msg);
-
-                //WatcherMsgList.RegisterMsg(string.Format("[{0}.{1}] {2}",
-                //    DateTime.Now.ToString("HH:mm:ss"), DateTime.Now.Millisecond, msg));
-            }
-            catch (Exception ex)
-            {
-                // RegisterLog.ExceptionsStack.RegisterError(ex);
-            }
-        }
-        /// <summary>
-        /// 注册跟踪日志
-        /// </summary>
-        /// <param name="msg">信息</param>
-        ///  <remarks>创建人员(日期):★刘腾飞★(100624 11:23)</remarks>
-        private static void RegisterAodTrackLog(string msg)
-        {
-            try
-            {
-                //AOUP监听成功！
-                if (EventFileWatchForAod != null)
-                    EventFileWatchForAod(msg);
-
-                //WatcherMsgList.RegisterMsg(string.Format("[{0}.{1}] {2}",
-                //    DateTime.Now.ToString("HH:mm:ss"), DateTime.Now.Millisecond, msg));
-            }
-            catch (Exception ex)
-            {
-                // RegisterLog.ExceptionsStack.RegisterError(ex);
-            }
-        }
-
-        #endregion
-
-        #region 监听目录
-
-        /// <summary>
-        /// 监听 心电图
-        /// </summary>
-        ///  <remarks>创建人员(日期): ★刘腾飞★(100202 18:16)</remarks>
-        public static void WatcheDirForXinDianTu()
-        {
-            try
-            {
-                string watchPath = @"D:\Examine\xindiantu";//去掉文件夹的只读权限
-
-                m_watcherAoup.Path = watchPath;
-                m_watcherAoup.NotifyFilter = NotifyFilters.Attributes | NotifyFilters.CreationTime |
-                    NotifyFilters.DirectoryName | NotifyFilters.FileName | NotifyFilters.LastAccess |
-                    NotifyFilters.LastWrite | NotifyFilters.Security | NotifyFilters.Size;
-                // Only watch text files.
-
-                m_watcherAoup.Filter = "*.xml";
-
-                m_watcherAoup.Changed += new FileSystemEventHandler(OnChangedForXinDianTu);
-                m_watcherAoup.EnableRaisingEvents = true;
-                //修改txt文件的时间，用于系统启动时监听一次AOUP的修改
-                //File.SetLastWriteTime(watchPath, DateTime.Now);
-
-
-                #region B超
-
-                #endregion
-
-
-                return;
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.StackTrace);
-            }
-        }
-        /// <summary>
-        /// 监听 b 超
-        /// </summary>
-        ///  <remarks>创建人员(日期): ★刘腾飞★(100202 18:16)</remarks>
-        public static void WatcheDirForBChao()
-        {
-            try
-            {
-                string watchPath = @"D:\Examine\bc";//去掉文件夹的只读权限
-
-                m_watcherAoup.Path = watchPath;
-                m_watcherAoup.NotifyFilter = NotifyFilters.Attributes | NotifyFilters.CreationTime |
-                    NotifyFilters.DirectoryName | NotifyFilters.FileName | NotifyFilters.LastAccess |
-                    NotifyFilters.LastWrite | NotifyFilters.Security | NotifyFilters.Size;
-                // Only watch text files.
-
-                m_watcherAoup.Filter = "*.xml";
-
-                m_watcherAoup.Changed += new FileSystemEventHandler(OnChangedForBChao);
-                m_watcherAoup.EnableRaisingEvents = true;
-                //修改txt文件的时间，用于系统启动时监听一次AOUP的修改
-                //File.SetLastWriteTime(watchPath, DateTime.Now);
-
-
-                #region B超
-
-                #endregion
-
-
-                return;
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.StackTrace);
-            }
-        }
-
-
-
-        /// <summary>
-        /// AOD 文件创建时出发
-        /// </summary>
-        ///  <remarks>创建人员(日期):★刘腾飞★(100603 23:34)</remarks>
-        private static void OnCreatedForAod(object source, FileSystemEventArgs e)
-        {
-            if (e.ChangeType == WatcherChangeTypes.Created)
-            {
-                try
-                {
-                    RegisterAodTrackLog("AOD 创建成功，等待 读取 ...");
-                }
-                catch (Exception ex)
-                {
-                    ErrorMsg = ex.Message;
-                }
-                finally
-                {
-                    //如果遇到异常关闭了监听，则重新打开监听
-                    if (!m_watcherForAod.EnableRaisingEvents)
-                        m_watcherForAod.EnableRaisingEvents = true;
-                }
-            }
-        }
-
-
+        static string path = @"config.xml";
+        static string bcJudge = "";
         /// <summary>
         /// 改变时候触发
         /// </summary>
@@ -358,6 +189,7 @@ namespace zkhwClient
                 //List<string> orderIdList = new List<string>();
                 try
                 {
+                    selectXmlBcJudge();//获取B超检查结果是否正常
                     //1.由于客户机器首次读取时乱码，故先修改该文件后再读取内容
                     //m_watcherAoup.EnableRaisingEvents = false;
                     File.SetLastWriteTime(e.FullPath, DateTime.Now);//修改txt文件的时间
@@ -469,16 +301,43 @@ namespace zkhwClient
                     {
                         tup = 1;
                     }
-                    if (cs.IndexOf("肝,胆,胰,脾未见异常") > -1|| cs.IndexOf("未见明显异常") > -1)
-                    {
-                        int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='1',abdomenB_img='{tup}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'");
-                        string issqdgbc = "update zkhw_tj_bgdc set BChao='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
-                        DbHelperMySQL.ExecuteSql(issqdgbc);
+
+                    if (bcJudge != "" && bcJudge.Length >= 10) {
+                       string[] bcJudgeArray= bcJudge.Split('#');
+                        if (bcJudgeArray.Length>0) {
+                            bool istrue = false;
+                            for (int i=0;i< bcJudgeArray.Length;i++) {
+                                if (cs.IndexOf(bcJudgeArray[i]) >-1) {
+                                    istrue = true;
+                                    break;
+                                }
+                            }
+                            if (istrue)
+                            {
+                                int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='1',abdomenB_img='{tup}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'");
+                                string issqdgbc = "update zkhw_tj_bgdc set BChao='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                                DbHelperMySQL.ExecuteSql(issqdgbc);
+                            }
+                            else {
+                                int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='2',ultrasound_memo='{csresult}',abdomenB_img='{tup}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'");
+                                string issqdgbc = "update zkhw_tj_bgdc set BChao='3' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                                DbHelperMySQL.ExecuteSql(issqdgbc);
+                            }
+                        }
                     }
                     else {
-                        int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='2',ultrasound_memo='{csresult}',abdomenB_img='{tup}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'");
-                        string issqdgbc = "update zkhw_tj_bgdc set BChao='3' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
-                        DbHelperMySQL.ExecuteSql(issqdgbc);
+                        if (cs.IndexOf("肝,胆,胰,脾未见异常") > -1 || cs.IndexOf("未见明显异常") > -1)
+                        {
+                            int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='1',abdomenB_img='{tup}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'");
+                            string issqdgbc = "update zkhw_tj_bgdc set BChao='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                            DbHelperMySQL.ExecuteSql(issqdgbc);
+                        }
+                        else
+                        {
+                            int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='2',ultrasound_memo='{csresult}',abdomenB_img='{tup}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'");
+                            string issqdgbc = "update zkhw_tj_bgdc set BChao='3' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                            DbHelperMySQL.ExecuteSql(issqdgbc);
+                        }
                     }
                     if (issql!="") { int rue = DbHelperMySQL.ExecuteSql(issql, args); }
                     string filepath = e.FullPath.Substring(0, innum);
@@ -528,11 +387,22 @@ namespace zkhwClient
                     Directory.Delete(file);
                }
             }
-            catch (Exception ex) // 异常处理
+            catch // 异常处理
             {
-
             }
         }
-        #endregion
-    }
+        public static void selectXmlBcJudge()
+        {
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(path);
+                XmlNode xNode = doc.SelectSingleNode("config/bcJudge");
+                bcJudge = xNode.InnerText;
+            }
+            catch // 异常处理
+            {
+            }
+        }
+   }
 }

@@ -36,7 +36,8 @@ namespace zkhwClient.view.setting
             this.textBox4.Text = node.InnerText;
             node = xmlDoc.SelectSingleNode("config/barNum");
             this.textBox5.Text = node.InnerText;
-
+            node = xmlDoc.SelectSingleNode("config/bcJudge");
+            this.richTextBox1.Text = node.InnerText;
             this.textBox6.Text = @str + "/up/result/";
             this.textBox7.Text = @str + "/xdtImg/";
             this.textBox8.Text = @str + "/bcImg/";
@@ -69,6 +70,10 @@ namespace zkhwClient.view.setting
             }
             node = xmlDoc.SelectSingleNode("config/barNum");
             node.InnerText = this.textBox5.Text;
+            xmlDoc.Save(path);
+
+            node = xmlDoc.SelectSingleNode("config/bcJudge");
+            node.InnerText = this.richTextBox1.Text;
             xmlDoc.Save(path);
             MessageBox.Show("保存成功！");
         }
