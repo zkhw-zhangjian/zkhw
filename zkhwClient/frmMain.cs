@@ -855,11 +855,9 @@ namespace zkhwClient
                     item.Checked = true;
                     item.BackColor = Color.CadetBlue;
                     this.flowLayoutPanel1.Controls.Clear();
-                    //PictureBox[] picb = new PictureBox[item.DropDownItems.Count];
-                    PictureBox[] picb = new PictureBox[item.DropDownItems.Count-1];
+                    PictureBox[] picb = new PictureBox[item.DropDownItems.Count];
                     for (int i = 0; i < item.DropDownItems.Count; i++)
-                    {
-                        if (item.DropDownItems[i].Text == "软件授权") continue;
+                    { 
                         picb[i] = new PictureBox();
                         picb[i].SizeMode = PictureBoxSizeMode.StretchImage;
                         picb[i].BorderStyle = BorderStyle.None;
@@ -3852,8 +3850,8 @@ namespace zkhwClient
                 try
                 {
                     /************************/
-                    //string fpath = Application.StartupPath + "\\sysstem.ini";
-                    //sysstem.UpdateInfo(fpath);
+                    string fpath = Application.StartupPath + "\\sysstem.ini";
+                    sysstem.UpdateInfo(fpath);
                     /************************/
                     Environment.Exit(0);
                 }
