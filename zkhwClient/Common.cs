@@ -62,14 +62,14 @@ namespace zkhwClient
                 }
                 if (isret==true)
                 {
-                    if(fi.CreationTime>dt)
+                    if(fi.LastAccessTime>dt)
                     {
                         list.Clear();
-                        dt = fi.CreationTime;
+                        dt = fi.LastAccessTime;
                         list.Add(new FileTimeInfo()
                         {
                             FileName = fi.FullName,
-                            FileCreateTime = fi.CreationTime
+                            FileCreateTime = fi.LastAccessTime
                         });
                     } 
                 } 
