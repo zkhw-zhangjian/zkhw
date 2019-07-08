@@ -821,6 +821,7 @@ namespace zkhwClient.view.PublicHealthView
             resident_base_infoBean.is_diabetes = "0";       //是否糖尿病    
             resident_base_infoBean.is_psychosis = "0";      //是否精神病 
             resident_base_infoBean.is_tuberculosis = "0";   //是否结核病
+             
             ////resident_base_infoBean.is_deformity = "0";
             #region  高 糖 精 结 新的判断方法 
             for (int i=0;i< goodsList.Rows.Count;i++)
@@ -852,7 +853,15 @@ namespace zkhwClient.view.PublicHealthView
             {
                 resident_base_infoBean.is_poor = "1";
             }
-            resident_base_infoBean.is_signing = "0";
+
+            if(radioButton17.Checked==true)
+            {
+                resident_base_infoBean.is_signing = "0";
+            }
+            if(radioButton16.Checked==true)
+            {
+                resident_base_infoBean.is_signing = "1";
+            }
 
             bool isfalse = personalBasicInfoService.aUpersonalBasicInfo(resident_base_infoBean, id, goodsList, goodsList0, goodsList1, goodsList2, goodsList3);
             if (isfalse)

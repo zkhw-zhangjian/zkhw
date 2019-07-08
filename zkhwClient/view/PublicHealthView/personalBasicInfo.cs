@@ -404,6 +404,16 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     hm.radpinkun1.Checked = true;
                 }
+                string _signing = dt.Rows[0]["is_signing"].ToString();
+                if (_signing == "") _signing = "0";
+                if (int.Parse(_signing) == 0)
+                {
+                    hm.radioButton17.Checked = true;
+                }
+                else
+                {
+                    hm.radioButton16.Checked = true;
+                }
             }
             else { } 
 

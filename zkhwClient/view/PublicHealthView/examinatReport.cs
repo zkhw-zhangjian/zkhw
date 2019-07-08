@@ -159,7 +159,7 @@ END)性别,
 base.id_number 身份证号,
 bgdc.BaoGaoShengChan 报告生成时间,
 (case bgdc.ShiFouTongBu when '1' then '是' ELSE '否' END) 是否上传数据,
-bgdc.BChaoImage B超图片,bgdc.XinDianImage 心电图片,bgdc.bar_code 条码号
+bgdc.BChaoImage B超图片,bgdc.XinDianImage 心电图片,bgdc.bar_code 条码号,base.card_pic
 from resident_base_info base
 left join 
 (select * from zkhw_tj_bgdc order by createtime desc) bgdc
@@ -255,19 +255,17 @@ where 1=1";
                 this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
                 this.dataGridView1.ReadOnly = true;
 
-                //dataGridView1.Columns[0].Width = 30;
-                //dataGridView1.Columns[1].Width = 80;
-                //dataGridView1.Columns[4].Width = 80;
-                //dataGridView1.Columns[5].Width = 70;
-                //dataGridView1.Columns[6].Width = 120;
-                //dataGridView1.Columns[7].Width = 100;
-                //dataGridView1.Columns[8].Width = 110;
-                //dataGridView1.Columns[9].Width = 80;
-                //dataGridView1.Columns[10].Width = 80;
-
-                dataGridView1.Columns[9].Visible = false;
-                dataGridView1.Columns[10].Visible = false;
+                dataGridView1.Columns[0].Width = 30;
+                dataGridView1.Columns[1].Width = 80;
+                dataGridView1.Columns[4].Width = 80;
+                dataGridView1.Columns[5].Width = 70;
+                dataGridView1.Columns[6].Width = 120;
+                dataGridView1.Columns[7].Width = 100;
+                dataGridView1.Columns[8].Width = 110;
+                dataGridView1.Columns[9].Width = 70;
+                dataGridView1.Columns[10].Width = 70; 
                 dataGridView1.Columns[11].Visible = false;
+                dataGridView1.Columns[12].Visible = false;
                 //int rows = this.dataGridView1.Rows.Count - 1 <= 0 ? 0 : this.dataGridView1.Rows.Count - 1;
                 //if(rows>0)
                 //for (int x = 0; x <= rows; x++)
@@ -4191,10 +4189,205 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
         }
 
         private void button4_Click(object sender, EventArgs e)
+        { 
+            //得到选上传图片的人员
+            List<ComboBoxData> _lst = new List<ComboBoxData>();
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                ComboBoxData combo = new ComboBoxData();
+                if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
+                {
+                    string id = dataGridView1["身份证号", i].Value.ToString();
+                    combo.ID = id; 
+                    combo.BarCode = dataGridView1["条码号", i].Value.ToString();
+
+                    combo.Name= dataGridView1["card_pic", i].Value.ToString();
+                    _lst.Add(combo);
+                }
+            }
+            if (_lst.Count <= 0)
+            {
+                MessageBox.Show("请选择要上传的人员！");
+                return;
+            } 
+            LoadingHelper.myCaption = "正在上传...";
+            LoadingHelper.myLabel = "正在上传...";
+            LoadingHelper.ShowLoadingScreen();
+            Thread.Sleep(50); 
+            try
+            {
+                //根据id_number和bar_code找到对应的b超图片
+                string sWhere = "";
+                for (int i = 0; i < _lst.Count; i++)
+                {
+                    string tmp = string.Format(" (id_number='{0}' and bar_code='{1}')", _lst[i].ID, _lst[i].BarCode);
+                    if (sWhere == "")
+                    {
+                        sWhere = tmp;
+                    }
+                    else
+                    {
+                        sWhere = sWhere + " or " + tmp;
+                    }
+                }
+                if (sWhere != "")
+                {
+                    sWhere = " Where " + sWhere;
+                }
+                DownLoadBChaoTuPian(sWhere);
+                //根据id_number和bar_code找到对应的心电图图片 
+                DownLoadXinDianTuPian(sWhere);
+                //发送拍照的图片
+                for(int i=0;i<_lst.Count;i++)
+                {
+                    PushPaiZhaoImg(_lst[i].Name);
+                }
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    ComboBoxData combo = new ComboBoxData();
+                    if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
+                    {
+                        dataGridView1["B超图片", i].Value="1";
+                        dataGridView1["心电图片", i].Value = "1";
+                    }
+                }
+
+                LoadingHelper.CloseForm();
+            }
+            catch
+            {
+                LoadingHelper.CloseForm();
+            } 
+        }
+        private bool PushPaiZhaoImg(string t)
         {
-            //根据id_number和bar_code查找对应的图片
-            //找到对应的b超图片
-            //找到对应的心电图图片 
+            bool flag = false;
+            try
+            {
+                string fileName = Application.StartupPath + "\\cardImg\\" + t;
+                byte[] a = File.ReadAllBytes(fileName);
+                flag = OSSClientHelper.PushImg(a, t, "cardtp2019");
+            }
+            catch
+            {
+
+            }
+            return flag;
+        }
+
+        private void DownLoadBChaoTuPian(string s)
+        {
+            string sql = string.Format("select id_number,bar_code,BuPic01,BuPic02,BuPic03,BuPic04 from zkhw_tj_bc {0} ", s);
+            DataSet dataSet = DbHelperMySQL.Query(sql);
+            DataTable dt = dataSet.Tables[0];
+            for(int i=0;i<dt.Rows.Count;i++)
+            {
+                string t1 = dt.Rows[i]["BuPic01"].ToString();
+                string t2 = dt.Rows[i]["BuPic02"].ToString();
+                string t3 = dt.Rows[i]["BuPic03"].ToString();
+                string t4 = dt.Rows[i]["BuPic04"].ToString();
+                //上传
+                bool flag1= true;
+                bool flag2 = true;
+                bool flag3 = true;
+                bool flag4 = true;
+                if (t1 !="")
+                {
+                    flag1=PushBChaoImg(t1);
+                }
+                
+                if (t2 != "")
+                {
+                    flag2=PushBChaoImg(t2);
+                }
+                if (t3 != "")
+                {
+                    flag3=PushBChaoImg(t3);
+                }
+                if (t4 != "")
+                {
+                    flag4=PushBChaoImg(t4);
+                }
+                if (t1 == "" && t2 == "" && t3 == "" && t4 == "") continue;
+
+                if(flag1==true && flag2 == true && flag3 == true && flag4 == true)
+                {
+                    string id = dt.Rows[i]["id_number"].ToString();
+                    string bcode = dt.Rows[i]["bar_code"].ToString();
+                    sql = string.Format("update zkhw_tj_bgdc set BChaoImage='1' Where id_number='{0}' and bar_code='{1}'", id, bcode);
+                    DbHelperMySQL.ExecuteSql(sql);
+                }
+            }
+        }
+
+        private bool PushBChaoImg(string t)
+        {
+            bool flag = false;
+            try
+            {
+                string fileName = Application.StartupPath + "\\bcImg\\" + t;
+                byte[] a = File.ReadAllBytes(fileName);
+                flag = OSSClientHelper.PushImg(a, t, "bctp2019");
+            }
+            catch
+            {
+
+            }
+            return flag;
+        }
+
+        private void DownLoadXinDianTuPian(string s)
+        {
+            string sql = string.Format("select id_number,bar_code,imageUrl from zkhw_tj_xdt {0} ", s);
+            DataSet dataSet = DbHelperMySQL.Query(sql);
+            DataTable dt = dataSet.Tables[0];
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                string t1 = dt.Rows[i]["imageUrl"].ToString(); 
+                //上传
+                if (t1 != "")
+                {
+                    bool flag=PushXinDianImg(t1);
+                    if(flag ==true)
+                    {
+                        string id= dt.Rows[i]["id_number"].ToString();
+                        string bcode = dt.Rows[i]["bar_code"].ToString();
+                        sql =string.Format( "update zkhw_tj_bgdc set XinDianImage='1' Where id_number='{0}' and bar_code='{1}'",id,bcode);
+                        DbHelperMySQL.ExecuteSql(sql);
+                    }
+                } 
+            }
+        }
+        private bool PushXinDianImg(string t)
+        {
+            bool flag = false;
+            try
+            {
+                string fileName = Application.StartupPath + "\\xdtImg\\" + t;
+                byte[] a = File.ReadAllBytes(fileName);
+                flag = OSSClientHelper.PushImg(a, t, "xdtp2019");
+            }
+            catch
+            {
+
+            }
+            return flag;
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if(e.ColumnIndex==9 || e.ColumnIndex==10 )
+            {
+                string t = e.Value.ToString();
+                if(t=="1")
+                {
+                    e.Value = "是";
+                }
+                else
+                {
+                    e.Value = "否";
+                }
+            }
         }
     }
 
