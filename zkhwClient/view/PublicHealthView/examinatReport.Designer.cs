@@ -1044,13 +1044,12 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(827, 82);
+            this.button4.Location = new System.Drawing.Point(827, 78);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(163, 23);
             this.button4.TabIndex = 20;
             this.button4.Text = "B超心电图片上传";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Visible = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // groupBox5
@@ -1222,7 +1221,7 @@
             // 
             this.radioButton3.AutoSize = true;
             this.radioButton3.Checked = true;
-            this.radioButton3.Location = new System.Drawing.Point(902, 27);
+            this.radioButton3.Location = new System.Drawing.Point(902, 22);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(35, 16);
             this.radioButton3.TabIndex = 17;
@@ -1233,7 +1232,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(828, 28);
+            this.label6.Location = new System.Drawing.Point(828, 23);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 12);
             this.label6.TabIndex = 16;
@@ -1241,7 +1240,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(915, 59);
+            this.button3.Location = new System.Drawing.Point(915, 48);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 14;
@@ -1251,7 +1250,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(827, 59);
+            this.button2.Location = new System.Drawing.Point(827, 48);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 13;

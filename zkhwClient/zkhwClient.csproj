@@ -114,6 +114,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>dll\AForge.Video.DirectShow.dll</HintPath>
     </Reference>
+    <Reference Include="Aliyun.OSS">
+      <HintPath>bin\x86\Debug\dll\Aliyun.OSS.dll</HintPath>
+    </Reference>
     <Reference Include="Aspose.Words">
       <HintPath>dll\Aspose.Words.dll</HintPath>
     </Reference>
@@ -231,6 +234,7 @@
     </Compile>
     <Compile Include="LoadingHelper.cs" />
     <Compile Include="MyEncrypt.cs" />
+    <Compile Include="OSSClientHelper.cs" />
     <Compile Include="service\PublicHealthService\olderHelthServices.cs" />
     <Compile Include="service\PublicHealthService\diabetesPatientService.cs" />
     <Compile Include="service\PublicHealthService\hypertensionPatientService.cs" />

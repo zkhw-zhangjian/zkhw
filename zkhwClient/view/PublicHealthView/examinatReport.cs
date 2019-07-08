@@ -4192,8 +4192,9 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //根据id_number和bar_code查找对应的图片
             //找到对应的b超图片
-            //找到对应的心电图图片
+            //找到对应的心电图图片 
         }
     }
 

@@ -82,7 +82,7 @@ namespace zkhwClient
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
-            PanDuanNewZiDuan();
+            //PanDuanNewZiDuan();
 
             basicInfoSettings basicSet = new basicInfoSettings();
             basicSet.setFunDelegate = SetJianDangInfo;
