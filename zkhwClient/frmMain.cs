@@ -2480,7 +2480,6 @@ namespace zkhwClient
             IPHostEntry localhost = Dns.GetHostByName(hostName);//方法已过期，可以获取IPv4的地址
             IPAddress ip = localhost.AddressList[0];
             Socket serverSocket = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
-            //IPAddress ip = IPAddress.Parse("192.168.2.103");
             IPEndPoint point = new IPEndPoint(ip, 9001);
             //socket绑定监听地址
             serverSocket.Bind(point);
