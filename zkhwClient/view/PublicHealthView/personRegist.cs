@@ -430,9 +430,54 @@ namespace zkhwClient.view.PublicHealthView
             videoSourcePlayer1.WaitForStop();
             this.Close();
         }
+        private void DisplayPersonTeShuInfo(string id_number)
+        {
+            label45.Text = "";
+            service.personalBasicInfoService pBasicInfo = new service.personalBasicInfoService();
+            DataTable dt = pBasicInfo.query(id_number);
+            if (dt == null || dt.Rows.Count <= 0) return;
+            string tmp = dt.Rows[0]["is_hypertension"].ToString();
+            if (tmp == "") tmp = "0";
+            int is_hypertension = int.Parse(tmp);
+
+            tmp = dt.Rows[0]["is_diabetes"].ToString();
+            if (tmp == "") tmp = "0";
+            int is_diabetes = int.Parse(tmp);
+
+            tmp = dt.Rows[0]["is_psychosis"].ToString();
+            if (tmp == "") tmp = "0";
+            int is_psychosis = int.Parse(tmp);
+
+            tmp = dt.Rows[0]["is_tuberculosis"].ToString();
+            if (tmp == "") tmp = "0";
+            int is_tuberculosis = int.Parse(tmp);
+
+            string _teshubiaoqian = "";
+            if (is_hypertension != 0)
+            {
+                _teshubiaoqian = _teshubiaoqian + " 高";
+            } 
+            if (is_diabetes != 0)
+            {
+                _teshubiaoqian = _teshubiaoqian + " 糖";
+            }  
+            if (is_psychosis != 0)
+            {
+                _teshubiaoqian = _teshubiaoqian + " 精";
+            } 
+            if (is_tuberculosis != 0)
+            {
+                _teshubiaoqian = _teshubiaoqian + " 结";
+            }
+            if(_teshubiaoqian !="")
+            {
+                label45.Text = _teshubiaoqian;
+            }
+        }
         //打印条形码
         private void button1_Click(object sender, EventArgs e)
         {
+            label45.Text = "";
             string address = richTextBox1.Text;
             string sexcomboBox = this.comboBox1.Text;
             string sex = "1";
@@ -460,6 +505,7 @@ namespace zkhwClient.view.PublicHealthView
                 MessageBox.Show("身份证号不能为空,如未带身份证，请手动填写身份证号!");
                 return;
             }
+            DisplayPersonTeShuInfo(number);
             string time1 = DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd")+" 00:00:00";
             DataTable dttjjk = grjddao.selectTjjk(number, time1);
             if (dttjjk != null && dttjjk.Rows.Count > 0)
@@ -672,9 +718,12 @@ namespace zkhwClient.view.PublicHealthView
 
         private void button5_Click(object sender, EventArgs e)
         {
+            label45.Text = "";
             string idnumber = this.textBox3.Text;
             if (idnumber != null && idnumber.Length == 18)
             {
+                DisplayPersonTeShuInfo(idnumber);
+
                 string nameCodenew = textBox1.Text + " " + Regex.Replace(textBox3.Text, "(\\d{6})\\d{10}(\\d{2})", "$1**********$2");
                 if (nameCodenew.IndexOf('*') < 0)
                 {
