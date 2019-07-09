@@ -250,7 +250,7 @@ namespace zkhwClient.view.PublicHealthView
                     this.textBox39.Text = dt.Rows[0]["lifeway_smoke_startage"].ToString();
                     this.textBox48.Text = dt.Rows[0]["lifeway_smoke_endage"].ToString();
 
-                    if (this.radioButton12.Tag.ToString() == dt.Rows[0]["lifeway_drink_status"].ToString()) { this.radioButton12.Checked = true; };
+                    if (this.radioButton12.Tag.ToString() == dt.Rows[0]["lifeway_drink_status"].ToString()) { this.radioButton12.Checked = true; this.radioButton19.Checked = false; dt.Rows[0]["lifeway_drink_stop"] = "0"; };
                     if (this.radioButton13.Tag.ToString() == dt.Rows[0]["lifeway_drink_status"].ToString()) { this.radioButton13.Checked = true; };
                     if (this.radioButton14.Tag.ToString() == dt.Rows[0]["lifeway_drink_status"].ToString()) { this.radioButton14.Checked = true; this.textBox22.BackColor = Color.Salmon; };
                     if (this.radioButton11.Tag.ToString() == dt.Rows[0]["lifeway_drink_status"].ToString()) { this.radioButton11.Checked = true; this.textBox22.BackColor = Color.Salmon; };

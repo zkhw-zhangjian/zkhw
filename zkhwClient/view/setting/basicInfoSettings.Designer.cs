@@ -42,6 +42,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -72,7 +73,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.label18 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -222,7 +222,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(93, 20);
             this.label1.TabIndex = 0;
-            this.label1.Text = "机构设置";
+            this.label1.Text = "区域设置";
             // 
             // groupBox2
             // 
@@ -254,6 +254,18 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "人员分工";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.BackColor = System.Drawing.SystemColors.Control;
+            this.label18.Font = new System.Drawing.Font("宋体", 14F);
+            this.label18.ForeColor = System.Drawing.Color.Red;
+            this.label18.Location = new System.Drawing.Point(391, 125);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(171, 19);
+            this.label18.TabIndex = 18;
+            this.label18.Text = "备注:医生、护士等";
             // 
             // textBox3
             // 
@@ -558,18 +570,6 @@
             this.button1.Text = "保存";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.BackColor = System.Drawing.SystemColors.Control;
-            this.label18.Font = new System.Drawing.Font("宋体", 14F);
-            this.label18.ForeColor = System.Drawing.Color.Red;
-            this.label18.Location = new System.Drawing.Point(391, 125);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(171, 19);
-            this.label18.TabIndex = 18;
-            this.label18.Text = "备注:医生、护士等";
             // 
             // basicInfoSettings
             // 
