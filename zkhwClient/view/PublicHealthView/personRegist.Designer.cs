@@ -98,6 +98,7 @@
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -115,7 +116,7 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(331, 3);
+            this.label1.Location = new System.Drawing.Point(332, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 14);
             this.label1.TabIndex = 0;
@@ -129,7 +130,7 @@
             this.panel1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.panel1.Location = new System.Drawing.Point(0, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(709, 45);
+            this.panel1.Size = new System.Drawing.Size(710, 45);
             this.panel1.TabIndex = 1;
             // 
             // panel2
@@ -142,7 +143,7 @@
             this.panel2.Controls.Add(this.panel1);
             this.panel2.Location = new System.Drawing.Point(2, 1);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(714, 586);
+            this.panel2.Size = new System.Drawing.Size(715, 617);
             this.panel2.TabIndex = 2;
             // 
             // groupBox1
@@ -150,6 +151,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.label45);
             this.groupBox1.Controls.Add(this.label44);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.comboBox1);
@@ -184,7 +186,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(4, 54);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(705, 527);
+            this.groupBox1.Size = new System.Drawing.Size(706, 558);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
@@ -535,9 +537,9 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.groupBox2);
             this.panel3.Controls.Add(this.panel4);
-            this.panel3.Location = new System.Drawing.Point(718, 1);
+            this.panel3.Location = new System.Drawing.Point(719, 1);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(310, 586);
+            this.panel3.Size = new System.Drawing.Size(310, 617);
             this.panel3.TabIndex = 3;
             // 
             // groupBox2
@@ -577,7 +579,7 @@
             this.groupBox2.Controls.Add(this.textBox7);
             this.groupBox2.Location = new System.Drawing.Point(3, 54);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(302, 527);
+            this.groupBox2.Size = new System.Drawing.Size(302, 558);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
@@ -591,7 +593,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(302, 229);
+            this.dataGridView1.Size = new System.Drawing.Size(302, 260);
             this.dataGridView1.TabIndex = 30;
             // 
             // label40
@@ -906,11 +908,22 @@
             this.label13.TabIndex = 0;
             this.label13.Text = "label13";
             // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label45.ForeColor = System.Drawing.Color.Red;
+            this.label45.Location = new System.Drawing.Point(527, 494);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(0, 28);
+            this.label45.TabIndex = 0;
+            this.label45.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // personRegist
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1028, 586);
+            this.ClientSize = new System.Drawing.Size(1029, 617);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Name = "personRegist";
@@ -1006,5 +1019,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label45;
     }
 }
