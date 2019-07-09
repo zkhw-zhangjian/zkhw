@@ -82,7 +82,7 @@ namespace zkhwClient
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
-            PanDuanNewZiDuan();
+            //PanDuanNewZiDuan();
 
             basicInfoSettings basicSet = new basicInfoSettings();
             basicSet.setFunDelegate = SetJianDangInfo;
@@ -710,85 +710,93 @@ namespace zkhwClient
             {   //使用帮助模块 
                 OpenPdf(Application.StartupPath+ "\\pdf\\仪器配置说明.docx");
             }
-            else if (tag == "软件系统说明书")
+            else if (tag == "软件系统明书")
             {   //使用帮助模块 
-                softwareSystems pR = new softwareSystems();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
+                //softwareSystems pR = new softwareSystems();
+                //pR.TopLevel = false;
+                //pR.Dock = DockStyle.Fill;
+                //pR.FormBorderStyle = FormBorderStyle.None;
+                //this.panel1.Controls.Clear();
+                //this.panel1.Controls.Add(pR);
+                //pR.Show();
+                OpenPdf(Application.StartupPath + "\\pdf\\软件系统.pdf");
             }
             else if (tag == "B超")
             {
-                bUltrasound pR = new bUltrasound();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
+                OpenPdf(Application.StartupPath + "\\pdf\\B超.pdf");
+                //bUltrasound pR = new bUltrasound();
+                //pR.TopLevel = false;
+                //pR.Dock = DockStyle.Fill;
+                //pR.FormBorderStyle = FormBorderStyle.None;
+                //this.panel1.Controls.Clear();
+                //this.panel1.Controls.Add(pR);
+                //pR.Show();
             }
             else if (tag == "生化")
             {
-                biochemical pR = new biochemical();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
+                OpenPdf(Application.StartupPath + "\\pdf\\生化.pdf");
+                //biochemical pR = new biochemical();
+                //pR.TopLevel = false;
+                //pR.Dock = DockStyle.Fill;
+                //pR.FormBorderStyle = FormBorderStyle.None;
+                //this.panel1.Controls.Clear();
+                //this.panel1.Controls.Add(pR);
+                //pR.Show();
             }
-            else if (tag == "尿液")
+            else if (tag == "尿常规")
             {
-                urinaryFluid pR = new urinaryFluid();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
+                OpenPdf(Application.StartupPath + "\\pdf\\尿常规.pdf");
+                //urinaryFluid pR = new urinaryFluid();
+                //pR.TopLevel = false;
+                //pR.Dock = DockStyle.Fill;
+                //pR.FormBorderStyle = FormBorderStyle.None;
+                //this.panel1.Controls.Clear();
+                //this.panel1.Controls.Add(pR);
+                //pR.Show();
             }
             else if (tag == "血常规")
             {
-                bloodAnalysis pR = new bloodAnalysis();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
+                OpenPdf(Application.StartupPath + "\\pdf\\血常规.pdf");
+                //bloodAnalysis pR = new bloodAnalysis();
+                //pR.TopLevel = false;
+                //pR.Dock = DockStyle.Fill;
+                //pR.FormBorderStyle = FormBorderStyle.None;
+                //this.panel1.Controls.Clear();
+                //this.panel1.Controls.Add(pR);
+                //pR.Show();
             }
             else if (tag == "身高体重")
             {
-                heightAndWeight pR = new heightAndWeight();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
+                OpenPdf(Application.StartupPath + "\\pdf\\身高体重.pdf");
+                //heightAndWeight pR = new heightAndWeight();
+                //pR.TopLevel = false;
+                //pR.Dock = DockStyle.Fill;
+                //pR.FormBorderStyle = FormBorderStyle.None;
+                //this.panel1.Controls.Clear();
+                //this.panel1.Controls.Add(pR);
+                //pR.Show();
             }
             else if (tag == "心电图")
             {
-                electrocarDiogram pR = new electrocarDiogram();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
+                OpenPdf(Application.StartupPath + "\\pdf\\心电图.pdf");
+                //electrocarDiogram pR = new electrocarDiogram();
+                //pR.TopLevel = false;
+                //pR.Dock = DockStyle.Fill;
+                //pR.FormBorderStyle = FormBorderStyle.None;
+                //this.panel1.Controls.Clear();
+                //this.panel1.Controls.Add(pR);
+                //pR.Show();
             }
             else if (tag == "血压")
             {
-                bloodPressure pR = new bloodPressure();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
+                OpenPdf(Application.StartupPath + "\\pdf\\血压.pdf");
+                //bloodPressure pR = new bloodPressure();
+                //pR.TopLevel = false;
+                //pR.Dock = DockStyle.Fill;
+                //pR.FormBorderStyle = FormBorderStyle.None;
+                //this.panel1.Controls.Clear();
+                //this.panel1.Controls.Add(pR);
+                //pR.Show();
 
             }
             else
