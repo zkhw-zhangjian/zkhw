@@ -3934,10 +3934,6 @@ namespace zkhwClient
                     string[] sendArray = sendHL7.Split('|');
                     byte[] buffernew = buffer.Skip(0).Take(effective).ToArray();
                     string sHL7 = Encoding.Default.GetString(buffernew).Trim();
-                    using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
-                    {
-                        sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "\n" + sHL7);
-                    }
                     if (sHL7.IndexOf("ICUBIO") > 0)
                     {//解析生化协议报文数据                   
                         shenghuaBean sh = new shenghuaBean();
@@ -3950,7 +3946,6 @@ namespace zkhwClient
                         sendArray[22] = MSHArray[9];
                         string[] sHL7PArray = sHL7Pids[1].Split('|');
                         sh.bar_code = sHL7PArray[33];
-                        sh.bar_code = "111110042";
                         DataTable dtjkinfo = jkdao.selectjkInfoBybarcode(sh.bar_code);
                         if (dtjkinfo != null && dtjkinfo.Rows.Count > 0)
                         {
@@ -3969,26 +3964,26 @@ namespace zkhwClient
                             string[] sHL7Array = sHL7Lines[i].Split('|');
                             switch (sHL7Array[4])
                             {
-                                case "ALB": sh.ALB = sHL7Array[5]; break;
-                                case "ALP": sh.ALP = sHL7Array[5]; break;
-                                case "ALT": sh.ALT = sHL7Array[5]; break;
-                                case "AST": sh.AST = sHL7Array[5]; break;
-                                case "CHO": sh.CHO = sHL7Array[5]; break;
-                                case "CREA": sh.Crea = sHL7Array[5]; break;
-                                case "DBIL": sh.DBIL = sHL7Array[5]; break;
-                                case "GGT": sh.GGT = sHL7Array[5]; break;
-                                case "GLU": sh.GLU = sHL7Array[5]; break;
-                                case "HDL": sh.HDL_C = sHL7Array[5]; break;
-                                case "LDL": sh.LDL_C = sHL7Array[5]; break;
-                                case "TBIL": sh.TBIL = sHL7Array[5]; break;
-                                case "TG": sh.TG = sHL7Array[5]; break;
-                                case "TP": sh.TP = sHL7Array[5]; break;
-                                case "UA": sh.UA = sHL7Array[5]; break;
-                                case "UREA": sh.UREA = sHL7Array[5]; break;
+                                case "ALB": sh.ALB = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.')+3); break;
+                                case "ALP": sh.ALP = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.') + 3); break;
+                                case "ALT": sh.ALT = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.')); break;
+                                case "AST": sh.AST = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.')); break;
+                                case "CHO": sh.CHO = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.') + 3); break;
+                                case "CREA": sh.Crea = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.') + 2); break;
+                                case "D-BIL": sh.DBIL = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.') + 3); break;
+                                case "GGT": sh.GGT = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.') + 3); break;
+                                case "GLU": sh.GLU = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.') + 3); break;
+                                case "HDL": sh.HDL_C = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.') + 3); break;
+                                case "LDL": sh.LDL_C = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.') + 3); break;
+                                case "T-BIL": sh.TBIL = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.') + 2); break;
+                                case "TG": sh.TG = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.') + 3); break;
+                                case "TP": sh.TP = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.') + 3); break;
+                                case "UA": sh.UA = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.') + 3); break;
+                                case "UREA": sh.UREA = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.') + 3); break;
                                 default: break;
                             }
                         }
-                        sh.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        sh.createTime = DateTime.ParseExact(sHL7PArray[38],"yyyyMMddHHmmss",System.Globalization.CultureInfo.CurrentCulture).ToString("yyyy-MM-dd HH:mm:ss");
                         bool istrue = tjdao.insertShenghuaInfo(sh);
                         if (istrue)
                         {

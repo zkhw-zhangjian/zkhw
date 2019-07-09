@@ -1116,6 +1116,7 @@ where 1=1";
                     if (!string.IsNullOrWhiteSpace(data["aichive_org"].ToString()))
                     {
                         dic.Add("建档单位", data["aichive_org"].ToString());
+                        dic.Add("体检单位", data["aichive_org"].ToString());
                     }
                     if (!string.IsNullOrWhiteSpace(data["create_archives_name"].ToString()))
                     {
@@ -1130,10 +1131,10 @@ where 1=1";
                     dic.Add("月", timecreate.Month.ToString());
                     dic.Add("日", timecreate.Day.ToString());
                     dic.Add("姓名1", data["name"].ToString());
-                    if (!string.IsNullOrWhiteSpace(basicInfoSettings.organ_name))
-                    {
-                        dic.Add("体检单位", basicInfoSettings.organ_name);
-                    }
+                    //if (!string.IsNullOrWhiteSpace(basicInfoSettings.organ_name))
+                    //{
+                    //    dic.Add("体检单位", basicInfoSettings.organ_name);
+                    //}
                     //书签替换
                     foreach (var key in dic.Keys)
                     {
@@ -2741,9 +2742,14 @@ where 1=1";
                             string blood_glucose_mmol = jkdata.Rows[j]["blood_glucose_mmol"].ToString();
                             if (!string.IsNullOrWhiteSpace(blood_glucose_mmol))
                             {
-                                if (Convert.ToDouble(blood_glucose_mmol) > 7.0)
+                                if (Convert.ToDouble(blood_glucose_mmol) > 6.1)
                                 {
                                     sm += @"血糖值偏高：" + blood_glucose_mmol + "mmol/L   ";
+                                    bgm = 1;
+                                    flagsh = 1;
+                                }
+                                else if(Convert.ToDouble(blood_glucose_mmol) < 3.9){
+                                    sm += @"血糖值偏低：" + blood_glucose_mmol + "mmol/L   ";
                                     bgm = 1;
                                     flagsh = 1;
                                 }
