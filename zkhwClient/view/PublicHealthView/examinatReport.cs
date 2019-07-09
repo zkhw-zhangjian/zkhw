@@ -838,7 +838,12 @@ where 1=1";
                 MessageBox.Show("报告导出异常，请联系管理员！" +ex.Message + "/r/n"+ex.StackTrace);
             }
         }
-
+        private void CallbackFunc(IAsyncResult result)
+        {
+            //AddHandler handler = (AddHandler)((AsyncResult)result).AsyncDelegate;
+            //Console.WriteLine(handler.EndInvoke(result));
+            //Console.WriteLine(result.AsyncState);
+        }
         private bool PDF(List<string> list, DataSet dataSet, List<ComboBoxData> ide)
         { 
             Document doc = null;
