@@ -57,7 +57,6 @@ namespace zkhwClient
         {
             loginname = this.comboBox1.Text;
             if (loginname=="admin") {
-                this.button3.Visible = true;
                 DataTable sumret = service.UserService.sumUser();
                 if (sumret!=null&&sumret.Rows.Count>=1) {
                     DialogResult rr = MessageBox.Show("未初始化数据，是否继续?", "操作提示", MessageBoxButtons.YesNo);
