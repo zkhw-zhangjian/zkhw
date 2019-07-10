@@ -147,16 +147,16 @@ namespace zkhwClient
                         }
                         inf.MoveTo(str + "\\xdtImg\\" + imgurl);
                         //inf.CopyTo(str + "\\xdtImg\\" + data.Rows[0]["aichive_no"].ToString() + "_" + ids + ".jpg");
-                        string hxpl = (Int32.Parse(hrs) / 4).ToString();//计算呼吸频率
+                        string hxpl = (Int32.Parse(hrs) / 4).ToString().Trim();//计算呼吸频率
                         if (advicetexts.IndexOf("正常") > -1)
                         {
-                            int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='1',cardiogram_img='{imgurl}',base_heartbeat='{ hrs }',base_respiratory='{ hxpl } ',examination_heart_rate='{ hrs }' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
+                            int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='1',cardiogram_img='{imgurl}',base_heartbeat='{hrs}',base_respiratory='{hxpl} ',examination_heart_rate='{hrs}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
                             string istruedgbc = "update zkhw_tj_bgdc set XinDian='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
                             DbHelperMySQL.ExecuteSql(istruedgbc);
                         }
                         else
                         {
-                            int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='2',cardiogram_memo='{advicetexts}',cardiogram_img='{imgurl}',base_heartbeat='{ hrs }',base_respiratory='{ hxpl } ',examination_heart_rate='{ hrs }' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
+                            int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='2',cardiogram_memo='{advicetexts}',cardiogram_img='{imgurl}',base_heartbeat='{hrs}',base_respiratory='{hxpl} ',examination_heart_rate='{hrs}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
                             string issqdgbc = "update zkhw_tj_bgdc set XinDian='3' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
                             DbHelperMySQL.ExecuteSql(issqdgbc);
                         }
