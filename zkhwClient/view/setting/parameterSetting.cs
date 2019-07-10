@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Xml;
+using System.Xml; 
 using zkhwClient.dao;
 
 namespace zkhwClient.view.setting
@@ -17,7 +17,8 @@ namespace zkhwClient.view.setting
         XmlNode node;
         string path = @"config.xml";
         string str = Application.StartupPath;//项目路径   
-
+        bean.ConfigInfo _bChaoOBJ = null;
+        string _BChao = "安盛B超";
         public parameterSetting()
         {
             InitializeComponent();
@@ -36,11 +37,23 @@ namespace zkhwClient.view.setting
             this.textBox4.Text = node.InnerText;
             node = xmlDoc.SelectSingleNode("config/barNum");
             this.textBox5.Text = node.InnerText;
-            node = xmlDoc.SelectSingleNode("config/bcJudge");
-            this.richTextBox1.Text = node.InnerText;
+             
+            GetBChaoPanDuan();
+
             this.textBox6.Text = @str + "/up/result/";
             this.textBox7.Text = @str + "/xdtImg/";
             this.textBox8.Text = @str + "/bcImg/";
+        }
+
+        private void GetBChaoPanDuan()
+        {
+            string s =string.Format( "Where Name='{0}'", _BChao);
+            ConfigInfoManage cdal = new ConfigInfoManage();
+            _bChaoOBJ = cdal.GetObj(s);
+            if(_bChaoOBJ !=null)
+            {
+                richTextBox1.Text = _bChaoOBJ.Content;
+            } 
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -71,11 +84,33 @@ namespace zkhwClient.view.setting
             node = xmlDoc.SelectSingleNode("config/barNum");
             node.InnerText = this.textBox5.Text;
             xmlDoc.Save(path);
-
-            node = xmlDoc.SelectSingleNode("config/bcJudge");
-            node.InnerText = this.richTextBox1.Text;
+             
             xmlDoc.Save(path);
+
+            //保存数据库
+            SetBChaoPanDuanInfo();
+
             MessageBox.Show("保存成功！");
+        }
+        private void SetBChaoPanDuanInfo()
+        {
+            int type = 1;
+            if (_bChaoOBJ == null)
+            {
+                _bChaoOBJ = new bean.ConfigInfo();
+                type = 0;
+            }
+            _bChaoOBJ.Name =  _BChao ;
+            _bChaoOBJ.Content = richTextBox1.Text;
+            ConfigInfoManage cdal = new ConfigInfoManage();
+           if(type==0)
+            {
+                cdal.Insert(_bChaoOBJ);
+            }
+           else
+            {
+                cdal.Update(_bChaoOBJ);
+            }
         }
         private void OpenPdf(string url)
         {

@@ -163,6 +163,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bean\ConfigInfo.cs" />
     <Compile Include="bean\diabetes_follow_recordBean.cs" />
     <Compile Include="bean\elderly_selfcare_estimateBean.cs" />
     <Compile Include="bean\elderly_tcm_recordBean.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="control\PagerControl.designer.cs">
       <DependentUpon>PagerControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="dao\ConfigInfoManage.cs" />
     <Compile Include="dao\PublicHealthDao\healthCheckupDao.cs" />
     <Compile Include="dao\PublicHealthDao\olderHelthServiceDao.cs" />
     <Compile Include="dao\PublicHealthDao\diabetesPatientDao.cs" />
