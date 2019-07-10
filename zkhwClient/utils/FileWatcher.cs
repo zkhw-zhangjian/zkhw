@@ -401,14 +401,23 @@ namespace zkhwClient
         public static void selectXmlBcJudge()
         {
             try
-            {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(path);
-                XmlNode xNode = doc.SelectSingleNode("config/bcJudge");
-                bcJudge = xNode.InnerText;
+            { 
+                bean.ConfigInfo obj = null;
+                string s = "Where Name='安盛B超'";
+                ConfigInfoManage cdal = new ConfigInfoManage();
+                obj = cdal.GetObj(s);
+                if(obj == null)
+                {
+                    bcJudge = "未见明显异常#肝,胆,胰,脾未见异常";
+                }
+                else
+                {
+                    bcJudge = obj.Content;
+                }
             }
             catch // 异常处理
             {
+                bcJudge = "未见明显异常#肝,胆,胰,脾未见异常";
             }
         }
    }
