@@ -131,8 +131,8 @@ namespace zkhwClient.view.PublicHealthView
                             this.textBox13.BackColor = Color.Salmon;
                         }
                     }
-                    this.textBox53.Text = dt.Rows[0]["base_respiratory"].ToString();
-                    string respiratory = dt.Rows[0]["base_respiratory"].ToString();
+                    this.textBox53.Text = dt.Rows[0]["base_respiratory"].ToString().Trim();
+                    string respiratory = dt.Rows[0]["base_respiratory"].ToString().Trim();
                     if (respiratory != null && !"".Equals(respiratory))
                     {
                         double respiratorydouble = Convert.ToDouble(respiratory);
@@ -385,7 +385,7 @@ namespace zkhwClient.view.PublicHealthView
                 MessageBox.Show("脉率应填写数字!");
                 return;
             }
-            per.base_respiratory = this.textBox53.Text.Replace(" ", "");
+            per.base_respiratory = this.textBox53.Text.Replace(" ", "").Trim();
             if (per.base_respiratory != "" && !Result.Validate(per.base_respiratory.Trim(), @"^(-?\d+)(\.\d+)?$"))
             {
                 MessageBox.Show("呼吸应填写数字!");
@@ -854,7 +854,7 @@ namespace zkhwClient.view.PublicHealthView
                 MessageBox.Show("脉率应填写数字!");
                 return;
             }
-            per.base_respiratory = this.textBox53.Text.Replace(" ", "");
+            per.base_respiratory = this.textBox53.Text.Replace(" ", "").Trim();
             if (per.base_respiratory != "" && !Result.Validate(per.base_respiratory.Trim(), @"^(-?\d+)(\.\d+)?$"))
             {
                 MessageBox.Show("呼吸应填写数字!");
@@ -1172,7 +1172,7 @@ namespace zkhwClient.view.PublicHealthView
                 MessageBox.Show("脉率应填写数字!");
                 return;
             }
-            per.base_respiratory = this.textBox53.Text.Replace(" ", "");
+            per.base_respiratory = this.textBox53.Text.Replace(" ", "").Trim();
             if (per.base_respiratory != "" && !Result.Validate(per.base_respiratory.Trim(), @"^(-?\d+)(\.\d+)?$"))
             {
                 MessageBox.Show("呼吸应填写数字!");

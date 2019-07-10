@@ -31,6 +31,10 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel27 = new System.Windows.Forms.Panel();
+            this.radioButton16 = new System.Windows.Forms.RadioButton();
+            this.radioButton17 = new System.Windows.Forms.RadioButton();
+            this.textBox42 = new System.Windows.Forms.TextBox();
             this.panel26 = new System.Windows.Forms.Panel();
             this.radpinkun1 = new System.Windows.Forms.RadioButton();
             this.radpinkun0 = new System.Windows.Forms.RadioButton();
@@ -214,11 +218,8 @@
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.textBox42 = new System.Windows.Forms.TextBox();
-            this.panel27 = new System.Windows.Forms.Panel();
-            this.radioButton16 = new System.Windows.Forms.RadioButton();
-            this.radioButton17 = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
+            this.panel27.SuspendLayout();
             this.panel26.SuspendLayout();
             this.panel19.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -250,7 +251,6 @@
             this.panel11.SuspendLayout();
             this.panel10.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel27.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -363,6 +363,56 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1331, 687);
             this.panel1.TabIndex = 6;
+            // 
+            // panel27
+            // 
+            this.panel27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel27.Controls.Add(this.radioButton16);
+            this.panel27.Controls.Add(this.radioButton17);
+            this.panel27.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.panel27.Location = new System.Drawing.Point(1110, 522);
+            this.panel27.Name = "panel27";
+            this.panel27.Size = new System.Drawing.Size(165, 30);
+            this.panel27.TabIndex = 138;
+            // 
+            // radioButton16
+            // 
+            this.radioButton16.AutoSize = true;
+            this.radioButton16.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioButton16.Location = new System.Drawing.Point(75, 2);
+            this.radioButton16.Name = "radioButton16";
+            this.radioButton16.Size = new System.Drawing.Size(48, 24);
+            this.radioButton16.TabIndex = 3;
+            this.radioButton16.TabStop = true;
+            this.radioButton16.Tag = "2";
+            this.radioButton16.Text = "是";
+            this.radioButton16.UseVisualStyleBackColor = true;
+            // 
+            // radioButton17
+            // 
+            this.radioButton17.AutoSize = true;
+            this.radioButton17.Checked = true;
+            this.radioButton17.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioButton17.Location = new System.Drawing.Point(10, 2);
+            this.radioButton17.Name = "radioButton17";
+            this.radioButton17.Size = new System.Drawing.Size(48, 24);
+            this.radioButton17.TabIndex = 2;
+            this.radioButton17.TabStop = true;
+            this.radioButton17.Tag = "1";
+            this.radioButton17.Text = "否";
+            this.radioButton17.UseVisualStyleBackColor = true;
+            // 
+            // textBox42
+            // 
+            this.textBox42.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox42.Location = new System.Drawing.Point(990, 522);
+            this.textBox42.Multiline = true;
+            this.textBox42.Name = "textBox42";
+            this.textBox42.ReadOnly = true;
+            this.textBox42.Size = new System.Drawing.Size(118, 30);
+            this.textBox42.TabIndex = 137;
+            this.textBox42.Text = "是否签约";
+            this.textBox42.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // panel26
             // 
@@ -2524,56 +2574,6 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // textBox42
-            // 
-            this.textBox42.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox42.Location = new System.Drawing.Point(990, 522);
-            this.textBox42.Multiline = true;
-            this.textBox42.Name = "textBox42";
-            this.textBox42.ReadOnly = true;
-            this.textBox42.Size = new System.Drawing.Size(118, 30);
-            this.textBox42.TabIndex = 137;
-            this.textBox42.Text = "是否签约";
-            this.textBox42.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // panel27
-            // 
-            this.panel27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel27.Controls.Add(this.radioButton16);
-            this.panel27.Controls.Add(this.radioButton17);
-            this.panel27.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.panel27.Location = new System.Drawing.Point(1110, 522);
-            this.panel27.Name = "panel27";
-            this.panel27.Size = new System.Drawing.Size(165, 30);
-            this.panel27.TabIndex = 138;
-            // 
-            // radioButton16
-            // 
-            this.radioButton16.AutoSize = true;
-            this.radioButton16.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton16.Location = new System.Drawing.Point(75, 2);
-            this.radioButton16.Name = "radioButton16";
-            this.radioButton16.Size = new System.Drawing.Size(48, 24);
-            this.radioButton16.TabIndex = 3;
-            this.radioButton16.TabStop = true;
-            this.radioButton16.Tag = "2";
-            this.radioButton16.Text = "是";
-            this.radioButton16.UseVisualStyleBackColor = true;
-            // 
-            // radioButton17
-            // 
-            this.radioButton17.AutoSize = true;
-            this.radioButton17.Checked = true;
-            this.radioButton17.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton17.Location = new System.Drawing.Point(10, 2);
-            this.radioButton17.Name = "radioButton17";
-            this.radioButton17.Size = new System.Drawing.Size(48, 24);
-            this.radioButton17.TabIndex = 2;
-            this.radioButton17.TabStop = true;
-            this.radioButton17.Tag = "1";
-            this.radioButton17.Text = "否";
-            this.radioButton17.UseVisualStyleBackColor = true;
-            // 
             // aUPersonalBasicInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2589,6 +2589,8 @@
             this.Load += new System.EventHandler(this.aUHypertensionPatientServices_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel27.ResumeLayout(false);
+            this.panel27.PerformLayout();
             this.panel26.ResumeLayout(false);
             this.panel26.PerformLayout();
             this.panel19.ResumeLayout(false);
@@ -2640,8 +2642,6 @@
             this.panel10.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.panel27.ResumeLayout(false);
-            this.panel27.PerformLayout();
             this.ResumeLayout(false);
 
         }

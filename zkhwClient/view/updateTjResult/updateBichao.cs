@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Xml;
 using zkhwClient.dao;
 
 namespace zkhwClient.view.updateTjResult
@@ -19,6 +20,8 @@ namespace zkhwClient.view.updateTjResult
         public string bar_code = "";
         private List<string> _picPath = new List<string>();
         tjcheckDao tjdao = new tjcheckDao();
+        public string pathbc = @"config.xml";
+        public string bcJudge = "";
         public updateBichao()
         {
             InitializeComponent();
@@ -26,6 +29,7 @@ namespace zkhwClient.view.updateTjResult
         
         private void updateBichao_Load(object sender, EventArgs e)
         {
+            selectXmlBcJudge();
             this.textBox1.Text = name;
             this.textBox3.Text = time;
             this.textBox9.Text = aichive_no;
@@ -71,13 +75,29 @@ namespace zkhwClient.view.updateTjResult
                 }
                 DisplayPic(0);
                 string FubuResult=dtbichao.Rows[0]["FubuResult"].ToString();
-                if (FubuResult.IndexOf("未见异常") > -1 || FubuResult.IndexOf("未见明显异常") > -1)
+                if (bcJudge != "" && bcJudge.Length >= 10)
                 {
-                    this.textBox6.ForeColor = Color.Black;
-                }
-                else
-                {
-                    this.textBox6.ForeColor = Color.Red;
+                    string[] bcJudgeArray = bcJudge.Split('#');
+                    if (bcJudgeArray.Length > 0)
+                    {
+                        bool istruebc = false;
+                        for (int i = 0; i < bcJudgeArray.Length; i++)
+                        {
+                            if (FubuResult.IndexOf(bcJudgeArray[i]) > -1)
+                            {
+                                istruebc = true;
+                                break;
+                            }
+                        }
+                        if (istruebc)
+                        {
+                            this.textBox6.ForeColor = Color.Black;
+                        }
+                        else
+                        {
+                            this.textBox6.ForeColor = Color.Red;
+                        }
+                    }
                 }
             }
             else { 
@@ -114,21 +134,37 @@ namespace zkhwClient.view.updateTjResult
             bool istrue= tjdao.updateBichaoInfo(aichive_no, bar_code, FubuBC, FubuResult, FubuDesc, QitaBC, QitaResult, QitaDesc);
             if (istrue)
             {
-                if (FubuResult.IndexOf("未见异常") > -1 || FubuResult.IndexOf("未见明显异常") > -1)
-                { 
-                    DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='1' where aichive_no='"+ aichive_no + "' and bar_code='" + barcode + "'");
-                    string issqdgbc = "update zkhw_tj_bgdc set BChao='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
-                    DbHelperMySQL.ExecuteSql(issqdgbc);
-                    this.textBox6.ForeColor = Color.Black;
-                    testFunDelegate(1, 5, rowIndex);
-                }
-                else
+                if (bcJudge != "" && bcJudge.Length >= 10)
                 {
-                    DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='2',ultrasound_memo='"+ FubuResult + "' where aichive_no='"+ aichive_no + "' and bar_code='" + barcode + "'");
-                    string issqdgbc = "update zkhw_tj_bgdc set BChao='3' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
-                    DbHelperMySQL.ExecuteSql(issqdgbc);
-                    this.textBox6.ForeColor = Color.Red;
-                    testFunDelegate(3, 5, rowIndex);
+                    string[] bcJudgeArray = bcJudge.Split('#');
+                    if (bcJudgeArray.Length > 0)
+                    {
+                        bool istruebc = false;
+                        for (int i = 0; i < bcJudgeArray.Length; i++)
+                        {
+                            if (FubuResult.IndexOf(bcJudgeArray[i]) > -1)
+                            {
+                                istruebc = true;
+                                break;
+                            }
+                        }
+                        if (istruebc)
+                        {
+                            DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='1' where aichive_no='" + aichive_no + "' and bar_code='" + barcode + "'");
+                            string issqdgbc = "update zkhw_tj_bgdc set BChao='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                            DbHelperMySQL.ExecuteSql(issqdgbc);
+                            this.textBox6.ForeColor = Color.Black;
+                            testFunDelegate(1, 5, rowIndex);
+                        }
+                        else
+                        {
+                            DbHelperMySQL.ExecuteSql($"update physical_examination_record set ultrasound_abdomen='2',ultrasound_memo='" + FubuResult + "' where aichive_no='" + aichive_no + "' and bar_code='" + barcode + "'");
+                            string issqdgbc = "update zkhw_tj_bgdc set BChao='3' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+                            DbHelperMySQL.ExecuteSql(issqdgbc);
+                            this.textBox6.ForeColor = Color.Red;
+                            testFunDelegate(3, 5, rowIndex);
+                        }
+                    }
                 }
                 MessageBox.Show("数据保存成功!");
             }
@@ -160,6 +196,19 @@ namespace zkhwClient.view.updateTjResult
             else
             {
                 MessageBox.Show("到头了！");
+            }
+        }
+        public void selectXmlBcJudge()
+        {
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(pathbc);
+                XmlNode xNode = doc.SelectSingleNode("config/bcJudge");
+                bcJudge = xNode.InnerText;
+            }
+            catch // 异常处理
+            {
             }
         }
     }
