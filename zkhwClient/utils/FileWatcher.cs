@@ -156,6 +156,9 @@ namespace zkhwClient
                         }
                         else
                         {
+                            if (advicetexts.Length>=50) {//限制健康体检表心电图检查结果长度50
+                                advicetexts = advicetexts.Replace("异常心电图", "").Replace("窦性心律", "");
+                            }
                             int run = DbHelperMySQL.ExecuteSql($"update physical_examination_record set cardiogram='2',cardiogram_memo='{advicetexts}',cardiogram_img='{imgurl}',base_heartbeat='{hrs}',base_respiratory='{hxpl} ',examination_heart_rate='{hrs}' where aichive_no='{data.Rows[0]["aichive_no"].ToString()}'and bar_code= '{data.Rows[0]["bar_code"].ToString()}'");
                             string issqdgbc = "update zkhw_tj_bgdc set XinDian='3' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
                             DbHelperMySQL.ExecuteSql(issqdgbc);
