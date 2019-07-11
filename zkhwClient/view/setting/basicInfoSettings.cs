@@ -204,7 +204,21 @@ namespace zkhwClient.view.setting
                 this.comboBox5.Text = dtxzs.Rows[0]["name"].ToString();
                 xcuncode = dtxzs.Rows[0]["code"].ToString();
             }
-            shengName= this.comboBox1.Text;
+            
+            if(this.comboBox5.Text=="" || this.comboBox5.Text == "请选择" )
+            {
+                MessageBox.Show("信息不完整!"); return;
+            }
+            try
+            {
+                xcuncode = this.comboBox5.SelectedValue.ToString();
+            }
+            catch
+            {
+                MessageBox.Show("出错!"); return;
+            }
+
+            shengName = this.comboBox1.Text;
             shiName = this.comboBox2.Text;
             qxName = this.comboBox3.Text;
             xzName = this.comboBox4.Text;
