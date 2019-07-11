@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using zkhwClient.dao;
+ 
 
 namespace zkhwClient.view.updateTjResult
 {
@@ -459,7 +460,8 @@ namespace zkhwClient.view.updateTjResult
             string LDHL = this.textBox32.Text;
             string HBDH = this.textBox35.Text;
             string aAMY = this.textBox34.Text;
-            bool istrue= tjdao.updateShenghuaInfo(aichive_no, id_number,bar_code, ALT, AST, TBIL, DBIL, CREA, UREA, GLU, TG, CHO, HDLC, LDLC, ALB, UA, HCY, AFP, CEA, Ka, Na, TP, ALP, GGT, CHE, TBA, APOA1, APOB, CK, CKMB, LDHL, HBDH, aAMY);
+            string shren = setting.basicInfoSettings.sh;
+            bool istrue= tjdao.updateShenghuaInfo(aichive_no, id_number,bar_code, ALT, AST, TBIL, DBIL, CREA, UREA, GLU, TG, CHO, HDLC, LDLC, ALB, UA, HCY, AFP, CEA, Ka, Na, TP, ALP, GGT, CHE, TBA, APOA1, APOB, CK, CKMB, LDHL, HBDH, aAMY, shren);
             if (istrue)
             {
                 #region 判断

@@ -35,13 +35,20 @@ namespace zkhwClient.dao
             if(ds!=null)
             {
                 DataTable dt = ds.Tables[0];
-                string tmp = dt.Rows[0]["ID"].ToString();
-                if (tmp != "")
+                if(dt ==null || dt.Rows.Count<=0 )
                 {
-                    obj = new bean.ConfigInfo();
-                    obj.ID = int.Parse(tmp);
-                    obj.Name = dt.Rows[0]["Name"].ToString();
-                    obj.Content = dt.Rows[0]["Content"].ToString();
+
+                }
+                else
+                {
+                    string tmp = dt.Rows[0]["ID"].ToString();
+                    if (tmp != "")
+                    {
+                        obj = new bean.ConfigInfo();
+                        obj.ID = int.Parse(tmp);
+                        obj.Name = dt.Rows[0]["Name"].ToString();
+                        obj.Content = dt.Rows[0]["Content"].ToString();
+                    }
                 } 
             }
             return obj;

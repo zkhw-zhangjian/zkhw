@@ -608,6 +608,12 @@ namespace zkhwClient.view.PublicHealthView
             Document doc = new Document(PageSize.A4);
             try
             {
+                string xcunName = basicInfoSettings.xcName;
+                if (this.comboBox5.Text.Trim() != "")
+                {
+                    xcunName = this.comboBox5.Text;
+                }
+
                 List<PersonExport> _lst = new List<PersonExport>();
                 String timejg = this.comboBox1.Text;
                 //写实例 
@@ -630,7 +636,7 @@ namespace zkhwClient.view.PublicHealthView
                 Paragraph null4 = new Paragraph("  ", fontID);
                 null4.Leading = 20;
                 doc.Add(null4);
-                Paragraph pdftitlename = new Paragraph(basicInfoSettings.xcName + "花名册", fonttitle);
+                Paragraph pdftitlename = new Paragraph(xcunName + "花名册", fonttitle);
                 pdftitlename.Alignment = 1;
                 pdftitlename.Leading = 20;
                 doc.Add(pdftitlename);

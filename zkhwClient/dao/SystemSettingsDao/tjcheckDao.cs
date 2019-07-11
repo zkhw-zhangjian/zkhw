@@ -94,15 +94,31 @@ namespace zkhwClient.dao
             return ds.Tables[0];
         }
         //修改生化检查信息根据档案号和条码号
-        public bool updateShenghuaInfo(string aichive_no, string id_number, string barcode, string ALT, string AST, string TBIL, string DBIL, string CREA, string UREA, string GLU, string TG, string CHO, string HDLC, string LDLC, string ALB, string UA, string HCY, string AFP, string CEA, string Ka, string Na, string TP, string ALP, string GGT, string CHE, string TBA, string APOA1, string APOB, string CK, string CKMB, string LDHL, string HBDH, string aAMY)
+        public bool updateShenghuaInfo(string aichive_no, string id_number, string barcode, string ALT, string AST, string TBIL, string DBIL, string CREA, string UREA, string GLU, string TG, string CHO, string HDLC, string LDLC, string ALB, string UA, string HCY, string AFP, string CEA, string Ka, string Na, string TP, string ALP, string GGT, string CHE, string TBA, string APOA1, string APOB, string CK, string CKMB, string LDHL, string HBDH, string aAMY,string shren)
         {
             int ret = 0;
-            String sql = "update zkhw_tj_sh set ALT='" + ALT + "',AST='" + AST + "',TBIL='" + TBIL + "',DBIL='" + DBIL + "',CREA='" + CREA + "',UREA='" + UREA + "',GLU='" + GLU + "',TG='" + TG + "',CHO='" + CHO + "',HDLC='" + HDLC + "',LDLC='" + LDLC + "',ALB='" + ALB + "',UA='" + UA + "',HCY='" + HCY + "',AFP='" + AFP + "',CEA='" + CEA + "',Ka='" + Ka + "',Na='" + Na + "',TP='" + TP + "',ALP='" + ALP + "',GGT='" + GGT + "',CHE='" + CHE + "',TBA='" + TBA + "',APOA1='" + APOA1 + "',APOB='" + APOB + "',CK='" + CK + "',CKMB='" + CKMB + "',LDHL='" + LDHL + "',HBDH='" + HBDH + "',aAMY='" + aAMY + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            String sql = @"update zkhw_tj_sh set ALT='" + ALT + "',AST='" + AST + "',TBIL='" + TBIL 
+                + "',DBIL='" + DBIL + "',CREA='" + CREA + "',UREA='" + UREA + "',GLU='" + GLU + 
+                "',TG='" + TG + "',CHO='" + CHO + "',HDLC='" + HDLC + "',LDLC='" + LDLC + 
+                "',ALB='" + ALB + "',UA='" + UA + "',HCY='" + HCY + "',AFP='" + AFP + "',CEA='" + CEA 
+                + "',Ka='" + Ka + "',Na='" + Na + "',TP='" + TP + "',ALP='" + ALP + "',GGT='" 
+                + GGT + "',CHE='" + CHE + "',TBA='" + TBA + "',APOA1='" + APOA1 + "',APOB='" + APOB 
+                + "',CK='" + CK + "',CKMB='" + CKMB + "',LDHL='" + LDHL + "',HBDH='" + HBDH + "',aAMY='" 
+                + aAMY + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             if (ret == 0)
             {
 
-                String sql1 = "insert into zkhw_tj_sh(ID,aichive_no,id_number,bar_code,ALT,AST,TBIL,DBIL,CREA,UREA,GLU,TG,CHO,HDLC,LDLC,ALB,UA,HCY,AFP,CEA,Ka,Na,TP,ALP,GGT,CHE,TBA,APOA1,APOB,CK,CKMB,LDHL,HBDH,aAMY,createtime,upload_status) values ('" + Result.GetNewId() + "','" + aichive_no + "','" + id_number + "','" + barcode + "','" + ALT + "','" + AST + "','" + TBIL + "','" + DBIL + "','" + CREA + "','" + UREA + "','" + GLU + "','" + TG + "','" + CHO + "','" + HDLC + "','" + LDLC + "','" + ALB + "','" + UA + "','" + HCY + "','" + AFP + "','" + CEA + "','" + Ka + "','" + Na + "','" + TP + "','" + ALP + "','" + GGT + "','" + CHE + "','" + TBA + "','" + APOA1 + "','" + APOB + "','" + CK + "','" + CKMB + "','" + LDHL + "','" + HBDH + "','" + aAMY + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "','0')";
+                String sql1 = @"insert into zkhw_tj_sh(ID,aichive_no,id_number,bar_code,ALT,AST,TBIL,
+                       DBIL,CREA,UREA,GLU,TG,CHO,HDLC,LDLC,ALB,UA,HCY,AFP,CEA,Ka,Na,TP,ALP,GGT,CHE,TBA,
+                              APOA1,APOB,CK,CKMB,LDHL,HBDH,aAMY,createtime,upload_status,ZrysSH) values ('" + Result.GetNewId() + "','" + aichive_no + "','" 
+                               + id_number + "','" + barcode + "','" + ALT + "','" + AST + "','" + TBIL 
+                               + "','" + DBIL + "','" + CREA + "','" + UREA + "','" + GLU + "','" + TG + "','" 
+                               + CHO + "','" + HDLC + "','" + LDLC + "','" + ALB + "','" + UA + "','" + HCY 
+                               + "','" + AFP + "','" + CEA + "','" + Ka + "','" + Na + "','" + TP + "','" 
+                               + ALP + "','" + GGT + "','" + CHE + "','" + TBA + "','" + APOA1 + "','" 
+                               + APOB + "','" + CK + "','" + CKMB + "','" + LDHL + "','" + HBDH + "','" 
+                               + aAMY + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "','0','"+shren+"')";
                 ret = DbHelperMySQL.ExecuteSql(sql1);
                 String sql2 = "update zkhw_tj_bgdc set ShengHua='1' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
                 DbHelperMySQL.ExecuteSql(sql2);

@@ -381,8 +381,7 @@ namespace zkhwClient
                 {
                     foreach (string f in Directory.GetFileSystemEntries(file))
                     {
-                        if (File.Exists(f))
-
+                        if (File.Exists(f)) 
                         {
                             //如果有子文件删除文件
                             File.Delete(f);
