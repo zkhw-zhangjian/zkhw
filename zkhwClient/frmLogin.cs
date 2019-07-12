@@ -69,13 +69,24 @@ namespace zkhwClient
             }
             passw = this.txtPassword.Text;
             string md5passw = Md5.HashString(passw);
+            //特殊处理下用户名
+            string username = "";
+            try
+            {
+                DataRowView dv = comboBox1.Items[comboBox1.SelectedIndex] as DataRowView;
+                username = dv.Row["username"].ToString();
+            }
+           catch
+            {
+                username = comboBox1.Text;
+            } 
             //用户登录 获取用户的账号和密码并判断          
             //DataTable ret = service.UserService.UserExists(comboBox1.Text, txtPassword.Text);
-            DataTable ret = service.UserService.UserExists(comboBox1.Text, md5passw);
+            DataTable ret = service.UserService.UserExists(username, md5passw);
             if (ret.Rows.Count > 0)
             {  //获取当前登录用户的机构
                 userCode = ret.Rows[0]["user_code"].ToString();
-                if (!"admin".Equals(this.comboBox1.Text))
+                if (!"admin".Equals(username))
                 {
                     organCode = ret.Rows[0]["organ_code"].ToString();
 
@@ -127,9 +138,9 @@ namespace zkhwClient
             this.button2.BackgroundImage = Image.FromFile(@str + "/images/tuichu.png");
             this.button3.BackgroundImage = Image.FromFile(@str + "/images/csh.png");
             this.pictureBox1.Image = Image.FromFile(@str + "/images/logo.png");
-            DataTable dd = us.listUser();
+            DataTable dd = us.listUserForLogin();
             this.comboBox1.DataSource = dd;//绑定数据源
-            this.comboBox1.DisplayMember = "username";//显示给用户的数据集表项
+            this.comboBox1.DisplayMember = "displayname";//显示给用户的数据集表项
             this.comboBox1.ValueMember = "username";//操作时获取的值
             //删除文件夹
             DeleteDir1(@"E:\Examine\xdt");

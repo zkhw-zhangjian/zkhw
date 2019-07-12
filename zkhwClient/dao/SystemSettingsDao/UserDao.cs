@@ -32,6 +32,17 @@ namespace zkhwClient.dao
             if (ds.Tables.Count==0) { MessageBox.Show("未查询到数据!");return null; }
             return ds.Tables[0];
         }
+
+        public DataTable listUserForLogin()
+        {
+            String sql = "select username,concat_ws('   ',username,user_name) displayname,password from zkhw_user_info where 1=1 and username <> 'admin'  ";
+            DataSet ds = new DataSet();
+            ds.Clear();
+            ds = DbHelperMySQL.Query(sql);
+            if (ds.Tables.Count == 0) { MessageBox.Show("未查询到数据!"); return null; }
+            return ds.Tables[0];
+        }
+
         public bool addUser(bean.UserInfo ui)
         {
             string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");

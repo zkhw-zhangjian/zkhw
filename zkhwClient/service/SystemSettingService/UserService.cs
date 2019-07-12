@@ -29,6 +29,10 @@ namespace zkhwClient.service
         {
             return user.listUser();
         }
+        public DataTable listUserForLogin()
+        {
+            return user.listUserForLogin();
+        }
         public bool addUser(bean.UserInfo ui)
         {
             return user.addUser(ui);
