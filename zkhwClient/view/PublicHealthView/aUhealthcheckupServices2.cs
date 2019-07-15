@@ -497,6 +497,25 @@ namespace zkhwClient.view.PublicHealthView
                 MessageBox.Show("左右眼视力应填写数字!");
                 return;
             }
+
+            if(per.organ_correctedvision_left.Trim() !="")
+            {
+                if(Common.IsNumeric(per.organ_correctedvision_left)==false)
+                {
+                    MessageBox.Show("左眼矫正视力应填写数字!");
+                    return;
+                }
+            }
+
+            if (per.organ_correctedvision_right.Trim() != "")
+            {
+                if (Common.IsNumeric(per.organ_correctedvision_right) == false)
+                {
+                    MessageBox.Show("右眼矫正视力应填写数字!");
+                    return;
+                }
+            }
+
             if (this.radioButton52.Checked == true) { per.organ_hearing = this.radioButton52.Tag.ToString(); };
             if (this.radioButton58.Checked == true) { per.organ_hearing = this.radioButton58.Tag.ToString(); };
 

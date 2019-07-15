@@ -542,6 +542,7 @@ namespace zkhwClient.view.PublicHealthView
                 grjdxx.towns_name = basicInfoSettings.xzName;
                 grjdxx.village_code = basicInfoSettings.xcuncode;
                 grjdxx.village_name = basicInfoSettings.xcName;
+                grjdxx.create_name = frmLogin.user_Name;
             }
             else
             {

@@ -3438,7 +3438,8 @@ where 1=1";
                     ComboBoxData combo = new ComboBoxData();
                     if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
                     {
-                        combo.ID = dataGridView1["身份证号", i].Value.ToString();
+                        string id= dataGridView1["身份证号", i].Value.ToString();
+                        combo.ID = "'" + id + "'"; 
                         ide.Add(combo);
                     }
                 }
@@ -4063,7 +4064,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                     {
                         sqllistz.Add($"update children_tcm_record set upload_status='1' where id in({xsrtid.TrimEnd(',')});");
                     }
-                    sqllistz.Add($"update zkhw_tj_bgdc set ShiFouTongBu='1' where id_number in ('{string.Join("','", ide.Select(m => m.ID).ToList())}');");
+                    sqllistz.Add($"update zkhw_tj_bgdc set ShiFouTongBu='1' where id_number in ({string.Join(",", ide.Select(m => m.ID).ToList())});");
                     int reu1 = DbHelperMySQL.ExecuteSqlTran(sqllistz);
                     if (reu1 > 0)
                     {
@@ -4121,7 +4122,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             {
                 if (!string.IsNullOrWhiteSpace(dataRow.ToString()))
                 {
-                    return "'" + dataRow.ToString() + "'";
+                    return "'" + dataRow.ToString().Trim() + "'";
                 }
                 else
                 {
@@ -4270,6 +4271,8 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 LoadingHelper.CloseForm();
             } 
         }
+       
+        #region 上传图片
         private bool PushPaiZhaoImg(string t)
         {
             bool flag = false;
@@ -4384,6 +4387,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             }
             return flag;
         }
+        #endregion
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {

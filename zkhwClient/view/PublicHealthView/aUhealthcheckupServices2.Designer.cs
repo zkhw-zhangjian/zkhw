@@ -309,7 +309,7 @@
             this.panel1.Controls.Add(this.button4);
             this.panel1.Location = new System.Drawing.Point(5, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1326, 700);
+            this.panel1.Size = new System.Drawing.Size(1326, 699);
             this.panel1.TabIndex = 6;
             // 
             // button2
@@ -3080,7 +3080,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1333, 750);
+            this.ClientSize = new System.Drawing.Size(1333, 749);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

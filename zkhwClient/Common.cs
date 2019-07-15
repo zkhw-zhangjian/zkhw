@@ -22,6 +22,15 @@ namespace zkhwClient
     }
     public class Common
     { 
+        /// <summary>
+        /// 判断是不是数字
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool IsNumeric(string value)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(value, @"^[+-]?\d*[.]?\d*$");
+        }
         public static string GetCreateTime(string s)
         {
             if(s=="" || s==null)
