@@ -379,6 +379,15 @@ namespace zkhwClient.view.PublicHealthView
             per.symptom_other = this.textBox11.Text;
 
             per.base_temperature = this.numericUpDown1.Text;
+            if(this.numericUpDown1.Text !="")
+            {
+                if (Common.IsNumeric(per.base_temperature) == false)
+                {
+                    MessageBox.Show("体温应填写数字!");
+                    return;
+                }
+            }
+            
             per.base_heartbeat = this.textBox66.Text.Replace(" ", "");
             if (per.base_heartbeat!=""&&!Result.Validate(per.base_heartbeat.Trim(), @"^(-?\d+)(\.\d+)?$"))
             {

@@ -25,6 +25,7 @@ namespace zkhwClient
         public static string organCode = null;
         public static string organName = null;
         public static string userCode = null;
+        public static string user_Name = null;
         service.loginLogService lls = new service.loginLogService();
         service.UserService us = new service.UserService();
         UserDao udao = new UserDao();
@@ -98,6 +99,7 @@ namespace zkhwClient
                     
                 }
                 name = ret.Rows[0]["user_name"].ToString();
+                user_Name = name;
                 bean.loginLogBean lb = new bean.loginLogBean();
                 lb.name = name;
                 lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");

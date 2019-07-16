@@ -109,6 +109,7 @@ namespace zkhwClient.dao
                 {
                     try
                     {
+
                         connection.Open();
                         int rows = cmd.ExecuteNonQuery();
                         return rows;
@@ -155,6 +156,7 @@ namespace zkhwClient.dao
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
+                string sql = "";
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conn;
@@ -168,6 +170,7 @@ namespace zkhwClient.dao
                         string strsql = SQLStringList[n];
                         if (strsql.Trim().Length > 1)
                         {
+                            sql = strsql;
                             cmd.CommandText = strsql;
                             count += cmd.ExecuteNonQuery();   
                         }
