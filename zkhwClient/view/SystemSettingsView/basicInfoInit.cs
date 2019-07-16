@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * 
+ * 2019-7-15初始化不删除 resident_base_info（个人信息基本表）
+ * 判断如果有就更新否则添加
+ * 
+ */
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
@@ -80,13 +86,19 @@ namespace zkhwClient.view.setting
         }
         private void button2_Click(object sender, EventArgs e)
         {
+            if (comboBox4.SelectedValue == null)
+            {
+                MessageBox.Show("区域选择不完整！");
+                return;
+            }   
+            xzcode = this.comboBox4.SelectedValue.ToString(); 
             if (xzcode != null && !"".Equals(xzcode))
             {
                 logindao.deleteLtdOrganization(xzcode);
                 logindao.deleteUsersBycode(xzcode);
-                logindao.deleteResidentsBycode(xzcode);
+                //logindao.deleteResidentsBycode(xzcode);
                 logindao.deleteThresholdValue();
-                //同步阈值信息
+                #region  同步阈值信息 
                 DataTable dtThresholdValue = logindao.checkThresholdValue();
                 if (dtThresholdValue.Rows.Count > 0)
                 {
@@ -124,10 +136,12 @@ namespace zkhwClient.view.setting
                         }
                     }
                 }
+                #endregion
 
-                //同步云平台机构信息
+                #region 同步云平台机构信息
                 DataTable dtOrganization = logindao.checkLtdOrganizationBycode(xzcode);
-                if (dtOrganization.Rows.Count>0) {
+                if (dtOrganization.Rows.Count>0)
+                {
                     List<ltdOrganization> listOragn = new List<ltdOrganization>();
                     for (int i = 0; i < dtOrganization.Rows.Count; i++)
                     {
@@ -173,8 +187,9 @@ namespace zkhwClient.view.setting
                         }
                     }
                 }
+                #endregion
 
-                //同步云平台家医团队信息
+                #region 同步云平台家医团队信息
                 //    DataTable dtTeams = logindao.checkTeanInfoBycode(xzcode);
                 //    if (dtTeams.Rows.Count > 0)
                 //    {
@@ -236,8 +251,9 @@ namespace zkhwClient.view.setting
                 //            logindao.addTeanInfos(listed);
                 //            this.progressBar1.Value = 40;
                 //}
+                #endregion
 
-                //同步个人档案信息
+                #region 同步个人档案信息
                 DataTable dtresident = logindao.checkResidentBycode(xzcode);
                 if (dtresident.Rows.Count > 0)
                 {
@@ -333,7 +349,7 @@ namespace zkhwClient.view.setting
                         insert_num += 1;
                         if (insert_num % 1000 == 0 || (i == dtresident.Rows.Count - 1 && listresident.Count > 0))
                         {
-                            bool bl = logindao.addResidents(listresident);
+                            bool bl = logindao.DownResidents(listresident);
                             if (bl)
                             {
                                 listresident.Clear();
@@ -342,6 +358,8 @@ namespace zkhwClient.view.setting
                         }
                     }
                 }
+                #endregion
+
                 this.progressBar1.Value = 100;
                 this.DialogResult = DialogResult.OK;
                 MessageBox.Show("数据同步已完成");

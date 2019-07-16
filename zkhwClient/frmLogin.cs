@@ -98,6 +98,7 @@ namespace zkhwClient
                     } 
                     
                 }
+                loginname= ret.Rows[0]["username"].ToString();
                 name = ret.Rows[0]["user_name"].ToString();
                 user_Name = name;
                 bean.loginLogBean lb = new bean.loginLogBean();

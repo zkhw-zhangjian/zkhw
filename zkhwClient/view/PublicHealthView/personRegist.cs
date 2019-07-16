@@ -560,9 +560,9 @@ namespace zkhwClient.view.PublicHealthView
             carcode = node.InnerText;
             carcode = carcode.Substring(carcode.Length-4, 4);
             node = xmlDoc.SelectSingleNode("config/barnumCode");
-            string barnumCode = node.InnerText;
+            string barnumCode = node.InnerText; 
             if (carcode == null || carcode.Length != 4) { MessageBox.Show("车编号不正确，请确认系统设置中的车编号！"); return; };
-
+            //这里判断barnumcode是否重复
             string nameCode = textBox1.Text + " " + Regex.Replace(textBox3.Text, "(\\d{6})\\d{10}(\\d{2})", "$1**********$2");
             if (nameCode.IndexOf('*') < 0) { 
                 nameCode = textBox1.Text + " " + textBox3.Text.Substring(0, 6) + "**********" + textBox3.Text.Substring(16, 2);

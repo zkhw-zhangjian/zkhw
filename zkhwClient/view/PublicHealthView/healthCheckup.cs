@@ -76,6 +76,10 @@ namespace zkhwClient.view.PublicHealthView
                 this.label5.Text = "";
             }
             else { this.label5.Text = "---姓名/身份证号/档案号---"; }
+            if(this.comboBox5.SelectedValue !=null)
+            {
+                xcuncode = this.comboBox5.SelectedValue.ToString();
+            } 
             queryOlderHelthService();
         }
 
@@ -86,6 +90,7 @@ namespace zkhwClient.view.PublicHealthView
 
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            if (this.comboBox1.SelectedValue == null) return;
             shengcode = this.comboBox1.SelectedValue.ToString();
             this.comboBox2.DataSource = areadao.shiInfo(shengcode);//绑定数据源
             this.comboBox2.DisplayMember = "name";//显示给用户的数据集表项
@@ -97,6 +102,7 @@ namespace zkhwClient.view.PublicHealthView
 
         private void comboBox2_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            if (this.comboBox2.SelectedValue == null) return;
             shicode = this.comboBox2.SelectedValue.ToString();
             this.comboBox3.DataSource = areadao.quxianInfo(shicode);//绑定数据源
             this.comboBox3.DisplayMember = "name";//显示给用户的数据集表项
@@ -107,6 +113,7 @@ namespace zkhwClient.view.PublicHealthView
 
         private void comboBox3_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            if (this.comboBox3.SelectedValue == null) return;
             qxcode = this.comboBox3.SelectedValue.ToString();
             this.comboBox4.DataSource = areadao.zhenInfo(qxcode);//绑定数据源
             this.comboBox4.DisplayMember = "name";//显示给用户的数据集表项
@@ -116,6 +123,7 @@ namespace zkhwClient.view.PublicHealthView
 
         private void comboBox4_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            if (this.comboBox4.SelectedValue == null) return;
             xzcode = this.comboBox4.SelectedValue.ToString();
             this.comboBox5.DataSource = areadao.cunInfo(xzcode);//绑定数据源
             this.comboBox5.DisplayMember = "name";//显示给用户的数据集表项
@@ -124,6 +132,7 @@ namespace zkhwClient.view.PublicHealthView
 
         private void comboBox5_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            if (this.comboBox5.SelectedValue == null) return;
             xcuncode = this.comboBox5.SelectedValue.ToString();
         }
 
