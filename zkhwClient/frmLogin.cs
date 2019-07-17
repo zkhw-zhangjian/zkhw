@@ -98,6 +98,7 @@ namespace zkhwClient
                     } 
                     
                 }
+                loginname= ret.Rows[0]["username"].ToString();
                 name = ret.Rows[0]["user_name"].ToString();
                 user_Name = name;
                 bean.loginLogBean lb = new bean.loginLogBean();
@@ -111,7 +112,9 @@ namespace zkhwClient
                 }
                 /************/
                 string fpath = Application.StartupPath + "\\sysstem.ini";
-                sysstem.UpdateInfo(fpath);
+                sysstem.UpdateInfo(fpath); 
+                //string spath = Application.StartupPath + "/log.txt";
+                //File.WriteAllText(spath, string.Empty);
                 /*****end******/
                 this.Hide();
                 frmMain main = new frmMain();

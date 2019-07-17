@@ -55,7 +55,10 @@ namespace zkhwClient.view.PublicHealthView
                 this.label5.Text = "";
             }
             else { this.label5.Text = "---姓名/身份证号/档案号---"; }
-            
+            if(this.comboBox5.SelectedValue!=null)
+            {
+                xcuncode = this.comboBox5.SelectedValue.ToString();
+            } 
             querypBasicInfo();
         }
         private DataTable CreateDataTable()
@@ -83,7 +86,7 @@ namespace zkhwClient.view.PublicHealthView
             Thread.Sleep(50);
             try
             {
-                DataTable dt = pBasicInfo.queryPersonalBasicInfo(pCa, time1, time2, code);
+                DataTable dt = pBasicInfo.queryPersonalBasicInfo(pCa, time1, time2, xcuncode);
                 //这里处理下对应的记录
                 DataTable dtfinished = CreateDataTable();
                 for(int i=0;i<dt.Rows.Count;i++)
@@ -493,7 +496,7 @@ namespace zkhwClient.view.PublicHealthView
         }
 
         private void comboBox5_SelectionChangeCommitted(object sender, EventArgs e)
-        {
+        { 
             xcuncode = this.comboBox5.SelectedValue.ToString();
         }
 

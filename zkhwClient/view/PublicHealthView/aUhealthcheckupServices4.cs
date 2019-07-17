@@ -1100,5 +1100,10 @@ namespace zkhwClient.view.PublicHealthView
                 this.richTextBox1.Text += jkjy;
             }
         }
+
+        private void textBox37_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Common.txtBox_KeyPress(sender, e);
+        }
     }
 }

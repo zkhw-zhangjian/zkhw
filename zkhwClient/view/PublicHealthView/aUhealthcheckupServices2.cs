@@ -1728,5 +1728,10 @@ namespace zkhwClient.view.PublicHealthView
                 MessageBox.Show("保存不成功!");
             }
         }
+
+        private void textBox9_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Common.txtBox_KeyPress(sender, e);
+        }
     }
 }

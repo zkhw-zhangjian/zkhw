@@ -4279,8 +4279,11 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             try
             {
                 string fileName = Application.StartupPath + "\\cardImg\\" + t;
-                byte[] a = File.ReadAllBytes(fileName);
-                flag = OSSClientHelper.PushImg(a, t, "cardtp2019");
+                if(File.Exists(fileName))
+                {
+                    byte[] a = File.ReadAllBytes(fileName);
+                    flag = OSSClientHelper.PushImg(a, t, "cardtp2019");
+                } 
             }
             catch
             {
@@ -4340,8 +4343,11 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             try
             {
                 string fileName = Application.StartupPath + "\\bcImg\\" + t;
-                byte[] a = File.ReadAllBytes(fileName);
-                flag = OSSClientHelper.PushImg(a, t, "bctp2019");
+                if (File.Exists(fileName))
+                {
+                    byte[] a = File.ReadAllBytes(fileName);
+                    flag = OSSClientHelper.PushImg(a, t, "bctp2019");
+                } 
             }
             catch
             {
@@ -4378,8 +4384,11 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             try
             {
                 string fileName = Application.StartupPath + "\\xdtImg\\" + t;
-                byte[] a = File.ReadAllBytes(fileName);
-                flag = OSSClientHelper.PushImg(a, t, "xdtp2019");
+                if (File.Exists(fileName))
+                {
+                    byte[] a = File.ReadAllBytes(fileName);
+                    flag = OSSClientHelper.PushImg(a, t, "xdtp2019");
+                }
             }
             catch
             {

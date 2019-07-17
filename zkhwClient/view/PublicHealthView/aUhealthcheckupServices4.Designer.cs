@@ -33,6 +33,7 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
@@ -83,7 +84,6 @@
             this.label51 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.textBox6 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -178,6 +178,16 @@
             this.groupBox2.TabIndex = 61;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = " ";
+            // 
+            // textBox6
+            // 
+            this.textBox6.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox6.Location = new System.Drawing.Point(4, 187);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(93, 30);
+            this.textBox6.TabIndex = 346;
+            this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox6.Visible = false;
             // 
             // comboBox1
             // 
@@ -467,6 +477,7 @@
             this.textBox37.Name = "textBox37";
             this.textBox37.Size = new System.Drawing.Size(121, 30);
             this.textBox37.TabIndex = 317;
+            this.textBox37.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox37_KeyPress);
             // 
             // textBox36
             // 
@@ -751,16 +762,6 @@
             this.button4.Text = "保存";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // textBox6
-            // 
-            this.textBox6.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox6.Location = new System.Drawing.Point(4, 187);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(93, 30);
-            this.textBox6.TabIndex = 346;
-            this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox6.Visible = false;
             // 
             // aUhealthcheckupServices4
             // 

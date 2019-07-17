@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace zkhwClient
 {
@@ -21,7 +22,41 @@ namespace zkhwClient
         public DateTime FileCreateTime; //创建时间
     }
     public class Common
-    { 
+    {
+        public static void txtBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                TextBox b = (TextBox)sender;
+                int kc = (int)e.KeyChar;
+                if ((kc < 48 || kc > 57) && kc != 8 && kc != 46)
+                    e.Handled = true;
+                if (kc == 46)                       //小数点
+                {
+                    if (b.Text.Length <= 0)
+                        e.Handled = true;           //小数点不能在第一位
+                    else
+                    {
+                        float f;
+                        float oldf;
+                        bool b1 = false, b2 = false;
+                        b1 = float.TryParse(b.Text, out oldf);
+                        b2 = float.TryParse(b.Text + e.KeyChar.ToString(), out f);
+                        if (b2 == false)
+                        {
+                            if (b1 == true)
+                                e.Handled = true;
+                            else
+                                e.Handled = false;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+
+        }
         /// <summary>
         /// 判断是不是数字
         /// </summary>

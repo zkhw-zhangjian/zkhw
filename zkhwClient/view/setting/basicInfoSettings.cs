@@ -134,9 +134,10 @@ namespace zkhwClient.view.setting
                 this.textBox2.Text = other;
                 this.textBox3.Text = wx;
             }
-            if (shengName=="陕西") {
+            //if (shengName == "陕西")
+            //{
                 this.comboBox7.DropDownStyle = ComboBoxStyle.DropDownList;
-            }
+            //}
         }
 
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
@@ -148,14 +149,15 @@ namespace zkhwClient.view.setting
             this.comboBox3.DataSource = null;
             this.comboBox4.DataSource = null;
             this.comboBox5.DataSource = null;
-            if (this.comboBox1.Text == "陕西")
-            {
-                this.comboBox7.DropDownStyle = ComboBoxStyle.DropDownList;
-            }
-            else {
-                this.comboBox7.DropDownStyle = ComboBoxStyle.DropDown;
-            }
-         }
+            //if (this.comboBox1.Text == "陕西")
+            //{
+            this.comboBox7.DropDownStyle = ComboBoxStyle.DropDownList;
+            //}
+            //else
+            //{
+            //    this.comboBox7.DropDownStyle = ComboBoxStyle.DropDown;
+            //}
+        }
 
         private void comboBox2_SelectionChangeCommitted(object sender, EventArgs e)
         {

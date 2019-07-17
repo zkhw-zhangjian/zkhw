@@ -90,5 +90,10 @@ namespace zkhwClient.view.PublicHealthView
             this.textBox10.Text = denture3;
             this.textBox8.Text = denture4;
         }
+
+        private void textBox9_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Common.txtBox_KeyPress(sender, e);
+        }
     }
 }

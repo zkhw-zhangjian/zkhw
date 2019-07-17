@@ -56,7 +56,10 @@ namespace zkhwClient.view.PublicHealthView
                 this.label2.Text = "";
             }
             else { this.label2.Text = "---姓名/身份证号/档案号---"; }
-            cun = comboBox5.SelectedValue?.ToString();
+            if (comboBox5.SelectedValue !=null)
+            {
+                cun = comboBox5.SelectedValue.ToString();
+            } 
             querytcmHealthServices(); 
         }
         private void querytcmHealthServices()

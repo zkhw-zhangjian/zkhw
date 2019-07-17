@@ -560,9 +560,14 @@ namespace zkhwClient.view.PublicHealthView
             carcode = node.InnerText;
             carcode = carcode.Substring(carcode.Length-4, 4);
             node = xmlDoc.SelectSingleNode("config/barnumCode");
-            string barnumCode = node.InnerText;
+            string barnumCode = node.InnerText; 
             if (carcode == null || carcode.Length != 4) { MessageBox.Show("车编号不正确，请确认系统设置中的车编号！"); return; };
-
+            //为了保险在同一天barcode不能相同否则自动加一
+            if(HaveRepeat(carcode+barnumCode) ==true)
+            {
+                int a=Int32.Parse(barnumCode) + 1;
+                barnumCode = a.ToString();
+            }
             string nameCode = textBox1.Text + " " + Regex.Replace(textBox3.Text, "(\\d{6})\\d{10}(\\d{2})", "$1**********$2");
             if (nameCode.IndexOf('*') < 0) { 
                 nameCode = textBox1.Text + " " + textBox3.Text.Substring(0, 6) + "**********" + textBox3.Text.Substring(16, 2);
@@ -578,6 +583,23 @@ namespace zkhwClient.view.PublicHealthView
             xmlDoc.Save(path);
 
             registrationRecordCheck();//右侧统计信息
+        }
+        private bool HaveRepeat(string barcode)
+        {
+            bool flag = false;
+            string s = DateTime.Now.ToString("yyyy-MM-dd");
+            string sql =string.Format("select count(ID) from zkhw_tj_jk where bar_code='{0}' and createtime>='{1}'", barcode, s);
+            object obj = DbHelperMySQL.GetSingle(sql);
+            if (obj != null)
+            {
+                string tmp = obj.ToString();
+                if (tmp == "") tmp = "0";
+                if (int.Parse(tmp) > 0)
+                {
+                    flag = true;
+                }
+            }
+            return flag;
         }
         //打印条码
         public void OnPrintSampleBarcode(string barcode, int pageCount, string nameCode)
