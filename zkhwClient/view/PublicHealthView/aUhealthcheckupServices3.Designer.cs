@@ -819,7 +819,7 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(1, 43);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1237, 477);
+            this.groupBox1.Size = new System.Drawing.Size(1303, 477);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             // 
@@ -1467,7 +1467,7 @@
             // textBox9
             // 
             this.textBox9.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox9.Location = new System.Drawing.Point(1251, 137);
+            this.textBox9.Location = new System.Drawing.Point(1206, 137);
             this.textBox9.Name = "textBox9";
             this.textBox9.ReadOnly = true;
             this.textBox9.Size = new System.Drawing.Size(45, 30);
@@ -1480,7 +1480,7 @@
             this.textBox10.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox10.Location = new System.Drawing.Point(1098, 137);
             this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(149, 30);
+            this.textBox10.Size = new System.Drawing.Size(105, 30);
             this.textBox10.TabIndex = 194;
             this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBox10.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox77_KeyPress);
@@ -1579,7 +1579,7 @@
             this.panel16.Controls.Add(this.radioButton47);
             this.panel16.Location = new System.Drawing.Point(304, 106);
             this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(999, 30);
+            this.panel16.Size = new System.Drawing.Size(996, 30);
             this.panel16.TabIndex = 185;
             // 
             // radioButton46
@@ -1614,7 +1614,7 @@
             this.panel15.Controls.Add(this.radioButton49);
             this.panel15.Location = new System.Drawing.Point(256, 46);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(1048, 30);
+            this.panel15.Size = new System.Drawing.Size(1045, 30);
             this.panel15.TabIndex = 184;
             // 
             // radioButton48
@@ -2489,7 +2489,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1333, 749);
+            this.ClientSize = new System.Drawing.Size(1339, 749);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
             this.Name = "aUhealthcheckupServices3";

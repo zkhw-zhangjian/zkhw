@@ -112,7 +112,9 @@ namespace zkhwClient
                 }
                 /************/
                 string fpath = Application.StartupPath + "\\sysstem.ini";
-                sysstem.UpdateInfo(fpath);
+                sysstem.UpdateInfo(fpath); 
+                //string spath = Application.StartupPath + "/log.txt";
+                //File.WriteAllText(spath, string.Empty);
                 /*****end******/
                 this.Hide();
                 frmMain main = new frmMain();
