@@ -66,20 +66,26 @@ namespace zkhwClient
             basicSet.setFunDelegate = SetJianDangInfo;
             basicSet.Show();
             //basicSet.Hide();
+
+            xmlDoc.Load(path);
+            XmlNode node;
+            node = xmlDoc.SelectSingleNode("config/shxqAgreement");
+            string shxqAgreement = node.InnerText;//生化血球厂家协议
+            
             dttv = grjddao.checkThresholdValues();//获取阈值信息
             this.timer1.Start();//时间控件定时器
-
-            this.timer2.Interval = Int32.Parse(Properties.Settings.Default.timeInterval);
-            this.timer2.Start();//定时获取生化和血球的数据
-
+            if (shxqAgreement == "英诺华")
+            {
+                this.timer2.Interval = Int32.Parse(Properties.Settings.Default.timeInterval);
+                this.timer2.Start();//定时获取生化和血球的数据-英诺华
+            }
             this.timer3.Interval = Int32.Parse(Properties.Settings.Default.timer3Interval);
             this.timer3.Start();//1分钟定时刷新设备状态
 
             this.label1.Text = "一体化查体车  中科弘卫";
             this.label1.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
 
-            xmlDoc.Load(path);
-            XmlNode node;
+            
             node = xmlDoc.SelectSingleNode("config/shlasttime");
             node.InnerText = DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00";
             xmlDoc.Save(path);
@@ -174,10 +180,18 @@ namespace zkhwClient
                     };
                 }//屏蔽其它功能菜单下拉选
             }
-            //socketTcpKbe();//库贝尔
-            //initPort("COM2");
-            //port.DataReceived += new SerialDataReceivedEventHandler(this.mySerialPort_DataReceived);
-            //socketTcp();//雷杜
+            if (shxqAgreement == "库贝尔")
+            {
+                node = xmlDoc.SelectSingleNode("config/com");
+                string comnum = node.InnerText;
+                socketTcpKbe();//库贝尔
+                initPort(comnum);
+                port.DataReceived += new SerialDataReceivedEventHandler(this.mySerialPort_DataReceived);
+            }
+            if (shxqAgreement == "雷杜")
+            {
+                socketTcp();//雷杜
+            }
             //http
             proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
             proHttp.StartInfo.CreateNoWindow = true;
@@ -4434,9 +4448,15 @@ namespace zkhwClient
                 text = ToHexString(totalByteRead);
                 if (totalByteRead.Length > 1000)
                 {
-                    string beginText = text.Substring(0,8);
-                    string endText = text.Substring(text.Length-9, 9);
-                    if (beginText == "<sample>" && endText == "</sample>") {
+                    string beginText = text.Substring(0,16);
+                    string endText = text.Substring(text.Length-18, 18);
+                    if (beginText == "3C73616D706C653E" && endText == "3C2F73616D706C653E") {
+                        text = Encoding.ASCII.GetString(totalByteRead);
+                        isCRC = true;
+                    }
+                    string endText1 = text.Substring(text.Length - 22, 22);
+                    if (beginText == "3C73616D706C653E" && endText1 == "3C2F73616D706C653E0D0A") {
+                        text = Encoding.ASCII.GetString(totalByteRead);
                         isCRC = true;
                     }
                 }
@@ -4470,7 +4490,7 @@ namespace zkhwClient
             var doc = new XmlDocument();
             doc.LoadXml(xmlStr);
             var rowNoteList = doc.SelectNodes("/sample/smpinfo/p");
-            var fieldNodeID = rowNoteList[1].ChildNodes;
+            var fieldNodeID = rowNoteList[0].ChildNodes;
             string barcode= fieldNodeID[1].InnerText;
             var fieldNodeTime = rowNoteList[2].ChildNodes;
             string timeNow = fieldNodeTime[1].InnerText;

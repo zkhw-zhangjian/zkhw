@@ -37,7 +37,34 @@ namespace zkhwClient.view.setting
             this.textBox4.Text = node.InnerText;
             node = xmlDoc.SelectSingleNode("config/barNum");
             this.textBox5.Text = node.InnerText;
-             
+
+            node = xmlDoc.SelectSingleNode("config/shxqAgreement");
+            this.comboBox1.Text = node.InnerText;
+            if (this.comboBox1.Text == "库贝尔")
+            {
+                this.label14.Visible = true;
+                this.comboBox2.Visible = true;
+                string[] ArryPort = System.IO.Ports.SerialPort.GetPortNames();
+                this.comboBox2.Items.Clear();
+                if (ArryPort.Length > 0)
+                {
+                    for (int i = 0; i < ArryPort.Length; i++)
+                    {
+                        this.comboBox2.Items.Add(ArryPort[i]);
+                    }   
+                }
+                node = xmlDoc.SelectSingleNode("config/com");
+                this.comboBox2.Text = node.InnerText;
+            }
+            else if (this.comboBox1.Text == "英诺华")
+            {
+                this.label1.Visible = true;
+                this.label2.Visible = true;
+                this.label3.Visible = true;
+                this.label5.Visible = true;
+                this.textBox1.Visible = true;
+                this.textBox2.Visible = true;
+            }
             GetBChaoPanDuan();
 
             this.textBox6.Text = @str + "/up/result/";
@@ -60,6 +87,21 @@ namespace zkhwClient.view.setting
         {
             xmlDoc.Load(path);
             XmlNode node;
+
+            if (this.comboBox1.Text == "库贝尔" && this.comboBox2.Text != "")
+            {
+                node = xmlDoc.SelectSingleNode("config/com");
+                node.InnerText = this.comboBox2.Text;
+                xmlDoc.Save(path);
+            }
+            else {
+                MessageBox.Show("库贝尔血球串口号不能为空!");return;
+            }
+            node = xmlDoc.SelectSingleNode("config/shxqAgreement");
+            node.InnerText = this.comboBox1.Text;
+            xmlDoc.Save(path);
+
+            if (this.comboBox1.Text== "英诺华") {
             node = xmlDoc.SelectSingleNode("config/shenghuaPath");
             node.InnerText = this.textBox1.Text;
             xmlDoc.Save(path);
@@ -67,7 +109,7 @@ namespace zkhwClient.view.setting
             node = xmlDoc.SelectSingleNode("config/xuechangguiPath");
             node.InnerText = this.textBox2.Text;
             xmlDoc.Save(path);
-
+             }
             node = xmlDoc.SelectSingleNode("config/chejiahao");
             node.InnerText = this.textBox3.Text;
             xmlDoc.Save(path);
@@ -84,12 +126,9 @@ namespace zkhwClient.view.setting
             node = xmlDoc.SelectSingleNode("config/barNum");
             node.InnerText = this.textBox5.Text;
             xmlDoc.Save(path);
-             
-            xmlDoc.Save(path);
 
             //保存数据库
             SetBChaoPanDuanInfo();
-
             MessageBox.Show("保存成功！");
         }
         private void SetBChaoPanDuanInfo()
@@ -147,6 +186,58 @@ namespace zkhwClient.view.setting
         private void button4_Click(object sender, EventArgs e)
         {
             OpenPdf(this.textBox8.Text);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string shxq = this.comboBox1.Text;
+            if (shxq == "库贝尔")
+            {
+                this.label14.Visible = true;
+                this.comboBox2.Visible = true;
+                string[] ArryPort = System.IO.Ports.SerialPort.GetPortNames();
+                this.comboBox2.Items.Clear();
+                if (ArryPort.Length > 0)
+                {
+                    for (int i = 0; i < ArryPort.Length; i++)
+                    {
+                        this.comboBox2.Items.Add(ArryPort[i]);
+                    }
+                }
+                this.label1.Visible = false;
+                this.label2.Visible = false;
+                this.label3.Visible = false;
+                this.label5.Visible = false;
+                this.textBox1.Visible = false;
+                this.textBox2.Visible = false;
+            }
+            else if (shxq == "英诺华")
+            {
+                this.label14.Visible = false;
+                this.comboBox2.Visible = false;
+                this.label1.Visible = true;
+                this.label2.Visible = true;
+                this.label3.Visible = true;
+                this.label5.Visible = true;
+                this.textBox1.Visible = true;
+                this.textBox2.Visible = true;
+            }
+            else
+            {
+                this.label14.Visible = false;
+                this.comboBox2.Visible = false;
+                this.label1.Visible = false;
+                this.label2.Visible = false;
+                this.label3.Visible = false;
+                this.label5.Visible = false;
+                this.textBox1.Visible = false;
+                this.textBox2.Visible = false;
+            }
         }
     }
 }
