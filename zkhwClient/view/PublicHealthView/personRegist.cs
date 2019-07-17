@@ -562,7 +562,7 @@ namespace zkhwClient.view.PublicHealthView
             node = xmlDoc.SelectSingleNode("config/barnumCode");
             string barnumCode = node.InnerText; 
             if (carcode == null || carcode.Length != 4) { MessageBox.Show("车编号不正确，请确认系统设置中的车编号！"); return; };
-            //这里判断barnumcode是否重复为了保险在同一天barcode不能相同否则自动加一
+            //为了保险在同一天barcode不能相同否则自动加一
             if(HaveRepeat(carcode+barnumCode) ==true)
             {
                 int a=Int32.Parse(barnumCode) + 1;

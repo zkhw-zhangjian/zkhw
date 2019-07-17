@@ -1764,5 +1764,10 @@ namespace zkhwClient.view.PublicHealthView
                 this.checkBox24.Checked = false;
             }
         }
+
+        private void textBox77_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Common.txtBox_KeyPress(sender, e);
+        }
     }
 }

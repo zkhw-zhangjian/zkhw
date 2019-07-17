@@ -91,6 +91,15 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
+
+        public DataTable queryhealthCheckupAndAge(string id)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select p.*,r.age from physical_examination_record p INNER JOIN resident_base_info r on p.id_number=r.id_number  where p.id = '" + id + "'";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+
         public DataTable queryhealthCheckupByid(string idnumber)
         {
             DataSet ds = new DataSet();
