@@ -63,5 +63,13 @@ namespace zkhwClient.dao
             if (ds.Tables.Count == 0) return null;
             return ds.Tables[0];
         }
+        public DataTable GetAreaByCode(string code)
+        {
+            DataSet ds = new DataSet();
+            String sql = "select detail from zkhw_dic_sfz where areacode='" + code + "' ";
+            ds = DbHelperMySQL.Query(sql);
+            if (ds.Tables.Count == 0) return null;
+            return ds.Tables[0];
+        }
     }
 }
