@@ -1,4 +1,7 @@
-﻿using AForge.Video.DirectShow;
+﻿/*
+ * 条码编号 2019-7-18改为：3位车标识+6位数字
+ */
+using AForge.Video.DirectShow;
 using System;
 using System.Configuration;
 using System.Data;
@@ -474,6 +477,29 @@ namespace zkhwClient.view.PublicHealthView
                 label45.Text = _teshubiaoqian;
             }
         }
+        /// <summary>
+        /// 生成barcode
+        /// </summary>
+        /// <param name="a">车标识</param>
+        /// <param name="b">上次的编号</param>
+        /// <returns></returns>
+        private string CreateBarCode(string a,string b)
+        {
+            string finalcode = "";
+            string t = b.PadLeft(6, '0'); 
+            if(int.Parse(t)==1000000)
+            {
+                t = "000001";
+            }
+            finalcode = a + t;
+            if (HaveRepeat(finalcode) == true)
+            {
+                int c = int.Parse(t) + 1;
+                t = c.ToString().PadLeft(6, '0');
+                finalcode = a + t;
+            }
+            return finalcode;
+        }
         //打印条形码
         private void button1_Click(object sender, EventArgs e)
         {
@@ -559,25 +585,27 @@ namespace zkhwClient.view.PublicHealthView
             node = xmlDoc.SelectSingleNode("config/chejiahao");
             carcode = node.InnerText;
             carcode = carcode.Substring(carcode.Length-4, 4);
-            node = xmlDoc.SelectSingleNode("config/barnumCode");
-            string barnumCode = node.InnerText; 
+
+            node = xmlDoc.SelectSingleNode("config/barnumCode");  //获取最后一次的编号
+            string barnumCode = node.InnerText;
+
+            node = xmlDoc.SelectSingleNode("config/chebiaoshi");  //获取车标识
+            string chebiaoshi = node.InnerText;
+            if (chebiaoshi == null || chebiaoshi.Length != 3) { MessageBox.Show("车标识不正确，请确认系统设置中的车标识！"); return; };
+            string finalBarCode=CreateBarCode(chebiaoshi, barnumCode);
+
             if (carcode == null || carcode.Length != 4) { MessageBox.Show("车编号不正确，请确认系统设置中的车编号！"); return; };
-            //为了保险在同一天barcode不能相同否则自动加一
-            if(HaveRepeat(carcode+barnumCode) ==true)
-            {
-                int a=Int32.Parse(barnumCode) + 1;
-                barnumCode = a.ToString();
-            }
+            
             string nameCode = textBox1.Text + " " + Regex.Replace(textBox3.Text, "(\\d{6})\\d{10}(\\d{2})", "$1**********$2");
             if (nameCode.IndexOf('*') < 0) { 
                 nameCode = textBox1.Text + " " + textBox3.Text.Substring(0, 6) + "**********" + textBox3.Text.Substring(16, 2);
             }
-            OnPrintSampleBarcode(carcode + barnumCode, Int32.Parse(this.numericUpDown1.Value.ToString()), nameCode);
+            OnPrintSampleBarcode(finalBarCode, Int32.Parse(this.numericUpDown1.Value.ToString()), nameCode);
          
             node = xmlDoc.SelectSingleNode("config/barnumCode");
             int fnum= Int32.Parse(barnumCode) + 1;
-            if (fnum==100000){
-                fnum = 10001;
+            if (fnum==1000000){
+                fnum = 1;
             }
             node.InnerText = fnum.ToString();
             xmlDoc.Save(path);
@@ -619,13 +647,8 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (!"".Equals(cardcode))
                     {
-                        //grjdxx.archive_no = basicInfoSettings.xcuncode + "0" + grjdxx.Cardcode.Substring(14);
-                        grjdxx.archive_no = cardcode;
-                    }
-                    //else
-                    //{
-                    //    grjdxx.archive_no = basicInfoSettings.xcuncode + barcode.Substring(5, 4);
-                    //}
+                         grjdxx.archive_no = cardcode;
+                    } 
                     grjdxx.doctor_id = basicInfoSettings.zeren_doctorId;
                     grjddao.addgrjdInfo(grjdxx);//添加个人信息档案
                     registrationRecordCheck();//右侧统计
@@ -820,12 +843,14 @@ namespace zkhwClient.view.PublicHealthView
             {
                 comboBox1.Text = "男";
             }
-           string cardCode6 = textBox3.Text.Trim().Substring(0,6);
-           DataTable dtArea = area.GetAreaByCode(cardCode6);
-            if (dtArea!=null&&dtArea.Rows.Count>0) {
-                string fullName = dtArea.Rows[0]["detail"].ToString().Replace(",", "");
-                this.richTextBox1.Text = fullName;
-            }
+            this.richTextBox1.Text = basicInfoSettings.shengName+ basicInfoSettings.shiName+ basicInfoSettings.qxName;
+            //string cardCode6 = textBox3.Text.Trim().Substring(0,6);
+            //DataTable dtArea = area.GetAreaByCode(cardCode6);
+
+            // if (dtArea!=null&&dtArea.Rows.Count>0) {
+            //     string fullName = dtArea.Rows[0]["detail"].ToString().Replace(",", "");
+            //     this.richTextBox1.Text = fullName;
+            // }
         }
 
         //体检人数统计

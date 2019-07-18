@@ -152,6 +152,7 @@
             this.textBox9.Location = new System.Drawing.Point(429, 13);
             this.textBox9.MaxLength = 3;
             this.textBox9.Name = "textBox9";
+            this.textBox9.ReadOnly = true;
             this.textBox9.Size = new System.Drawing.Size(96, 30);
             this.textBox9.TabIndex = 93;
             this.textBox9.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox9_KeyPress);
@@ -372,6 +373,7 @@
             this.textBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox3.Location = new System.Drawing.Point(101, 13);
             this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(224, 30);
             this.textBox3.TabIndex = 72;
             // 
