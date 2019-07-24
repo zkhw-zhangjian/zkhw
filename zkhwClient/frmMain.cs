@@ -704,7 +704,7 @@ namespace zkhwClient
             {   //使用帮助模块 
                 OpenPdf(Application.StartupPath+ "\\pdf\\仪器配置说明.docx");
             }
-            else if (tag == "软件系统明书")
+            else if (tag == "软件系统说明书")
             {   //使用帮助模块 
                 //softwareSystems pR = new softwareSystems();
                 //pR.TopLevel = false;
