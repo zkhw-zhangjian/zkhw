@@ -120,7 +120,7 @@ namespace zkhwClient.dao
         //
         public void updategejdInfo(bean.grjdxxBean grjd)
         {
-           string sql = @"update resident_base_info set phone= '" + grjd.phone + "',address='" + grjd.address + "',photo_code='" + grjd.photo_code + "' where id_number = '" + grjd.Cardcode + "'";
+           string sql = @"update resident_base_info set phone= '" + grjd.phone + "',address='" + grjd.Zhuzhi + "',photo_code='" + grjd.photo_code + "' where id_number = '" + grjd.Cardcode + "'";
            DbHelperMySQL.ExecuteSql(sql);
         }
 
