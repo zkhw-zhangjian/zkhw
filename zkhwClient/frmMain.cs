@@ -206,19 +206,19 @@ namespace zkhwClient
             proAsNet.StartInfo.CreateNoWindow = true;
             proAsNet.StartInfo.ErrorDialog = false;
             proAsNet.StartInfo.UseShellExecute = true;
-            proAsNet.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            proAsNet.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; 
             proAsNet.Start();
             Thread.Sleep(300);
             IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
-            //ftp                 
-            //proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.05\\ftpservice.exe";
-            //proFtp.StartInfo.CreateNoWindow = true;
-            //proFtp.StartInfo.UseShellExecute = false;
-            //proFtp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            //proFtp.StartInfo.ErrorDialog = false;
-            //proFtp.Start();
-            //Thread.Sleep(1000);
-            //IntPtrFindWindow.intptrwindows(proFtp.MainWindowHandle);
+            ////ftp                 
+            ////proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.05\\ftpservice.exe";
+            ////proFtp.StartInfo.CreateNoWindow = true;
+            ////proFtp.StartInfo.UseShellExecute = false;
+            ////proFtp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            ////proFtp.StartInfo.ErrorDialog = false;
+            ////proFtp.Start();
+            ////Thread.Sleep(1000);
+            ////IntPtrFindWindow.intptrwindows(proFtp.MainWindowHandle);
         }
 
         private void 用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3849,15 +3849,23 @@ namespace zkhwClient
 
                 try
                 {
-                    /************************/
-                    string fpath = Application.StartupPath + "\\sysstem.ini";
-                    sysstem.UpdateInfo(fpath);
-                    /************************/
+                    try
+                    {
+                        /************************/
+                        string fpath = Application.StartupPath + "\\sysstem.ini";
+                        sysstem.UpdateInfo(fpath);
+                        /************************/
+                    }
+                    catch (Exception tt1)
+                    {
+                        MessageBox.Show("Err1:" + tt1.Message);
+                    }
+
                     Environment.Exit(0);
                 }
                 catch(Exception tt)
                 {
-                    MessageBox.Show(tt.Message);
+                    MessageBox.Show("Err:"+tt.Message);
                     Environment.Exit(0);
                 }
             }
