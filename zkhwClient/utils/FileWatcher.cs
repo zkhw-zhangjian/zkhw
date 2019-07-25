@@ -191,8 +191,9 @@ namespace zkhwClient
         {
             //if (e.ChangeType == WatcherChangeTypes.Changed)
             //{
-                //List<string> orderIdList = new List<string>();
-                try
+            //List<string> orderIdList = new List<string>();
+            int innum = 0;
+            try
                 {
                     selectXmlBcJudge();//获取B超检查结果是否正常
                     //1.由于客户机器首次读取时乱码，故先修改该文件后再读取内容
@@ -216,7 +217,7 @@ namespace zkhwClient
                     string BuPic02 = string.Empty;
                     string BuPic03 = string.Empty;
                     string BuPic04 = string.Empty;
-                    int innum = 0;
+                    
                     Thread.Sleep(5000);
                     GC.Collect();
                     jkInfoDao jkInfoDao = new jkInfoDao();
@@ -362,6 +363,8 @@ namespace zkhwClient
                     {
                         sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + ex.Message + "\r\n" + ex.StackTrace);
                     }
+                string filepath = e.FullPath.Substring(0, innum);
+                DeleteDir(filepath);
             }
            // }
         }
