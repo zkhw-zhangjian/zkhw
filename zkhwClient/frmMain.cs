@@ -707,7 +707,7 @@ namespace zkhwClient
             {   //使用帮助模块 
                 OpenPdf(Application.StartupPath+ "\\pdf\\仪器配置说明.docx");
             }
-            else if (tag == "软件系统明书")
+            else if (tag == "软件系统说明书")
             {   //使用帮助模块 
                 //softwareSystems pR = new softwareSystems();
                 //pR.TopLevel = false;
@@ -1458,7 +1458,7 @@ namespace zkhwClient
                     }
                 }
             }
-            if (xuechangguipath == "" || !File.Exists(shenghuapath))
+            if (xuechangguipath == "" || !File.Exists(xuechangguipath))
             {
                 MessageBox.Show("未获取到血球中间库地址，请检查是否设置地址！");
                 return;
@@ -1470,7 +1470,7 @@ namespace zkhwClient
                 string sql1 = "select sample_id,patient_id,send_time from LisOutput where send_time > cdate('" + xcglasttime + "') order by send_time asc";
                 if (getXuechanggui(sql1) == null || getXuechanggui(sql1).Tables.Count < 1) { return; }
                 DataTable arr_dt1 = getXuechanggui(sql1).Tables[0];
-                if (arr_dt1 != null&&arr_dt1.Rows.Count > 0)
+                if (arr_dt1 != null && arr_dt1.Rows.Count > 0)
                 {
                     for (int j = 0; j < arr_dt1.Rows.Count; j++)
                     {
@@ -1880,9 +1880,11 @@ namespace zkhwClient
                                 tjdao.updateTJbgdcXuechanggui(xcg.aichive_no, xcg.bar_code, flag);
                                 tjdao.updatePEXcgInfo(xcg.aichive_no, xcg.bar_code, xcg.HGB, xcg.WBC, xcg.PLT);
                             }
-                            else {
-                               bool istrue1 = tjdao.updateXuechangguiInfo(xcg);
-                                if (!istrue1) {
+                            else
+                            {
+                                bool istrue1 = tjdao.updateXuechangguiInfo(xcg);
+                                if (!istrue1)
+                                {
                                     return;
                                 }
                                 int flag = 1;

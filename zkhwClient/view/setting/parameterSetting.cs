@@ -37,6 +37,9 @@ namespace zkhwClient.view.setting
             this.textBox4.Text = node.InnerText;
             node = xmlDoc.SelectSingleNode("config/barNum");
             this.textBox5.Text = node.InnerText;
+            
+            node = xmlDoc.SelectSingleNode("config/chebiaoshi");
+            this.textBox9.Text = node.InnerText;
 
             node = xmlDoc.SelectSingleNode("config/shxqAgreement");
             this.comboBox1.Text = node.InnerText;
@@ -85,18 +88,33 @@ namespace zkhwClient.view.setting
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (textBox9.Text.Trim() == "")
+            {
+                MessageBox.Show("车标识不能为空！");
+                return;
+            }
+            if(textBox9.Text.Trim().Length !=3)
+            {
+                MessageBox.Show("车标识长度不能大于小于3！");
+                return;
+            }
             xmlDoc.Load(path);
             XmlNode node;
 
-            if (this.comboBox1.Text == "库贝尔" && this.comboBox2.Text != "")
+            if (this.comboBox1.Text == "库贝尔")
             {
-                node = xmlDoc.SelectSingleNode("config/com");
-                node.InnerText = this.comboBox2.Text;
-                xmlDoc.Save(path);
+                if (this.comboBox1.Text == "库贝尔" && this.comboBox2.Text != "")
+                {
+                    node = xmlDoc.SelectSingleNode("config/com");
+                    node.InnerText = this.comboBox2.Text;
+                    xmlDoc.Save(path);
+                }
+                else
+                {
+                    MessageBox.Show("库贝尔血球串口号不能为空!"); return;
+                }
             }
-            else {
-                MessageBox.Show("库贝尔血球串口号不能为空!");return;
-            }
+            
             node = xmlDoc.SelectSingleNode("config/shxqAgreement");
             node.InnerText = this.comboBox1.Text;
             xmlDoc.Save(path);
@@ -125,8 +143,12 @@ namespace zkhwClient.view.setting
             }
             node = xmlDoc.SelectSingleNode("config/barNum");
             node.InnerText = this.textBox5.Text;
-            xmlDoc.Save(path);
+            xmlDoc.Save(path); 
 
+            node = xmlDoc.SelectSingleNode("config/chebiaoshi");
+            node.InnerText = this.textBox9.Text;
+            xmlDoc.Save(path);
+             
             //保存数据库
             SetBChaoPanDuanInfo();
             MessageBox.Show("保存成功！");
@@ -237,6 +259,22 @@ namespace zkhwClient.view.setting
                 this.label5.Visible = false;
                 this.textBox1.Visible = false;
                 this.textBox2.Visible = false;
+            }
+        }
+
+        private void textBox9_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
     }

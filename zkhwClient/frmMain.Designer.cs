@@ -377,7 +377,7 @@
             // 
             this.软件系统ToolStripMenuItem.Name = "软件系统ToolStripMenuItem";
             this.软件系统ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.软件系统ToolStripMenuItem.Text = "软件系统明书";
+            this.软件系统ToolStripMenuItem.Text = "软件系统说明书";
             // 
             // 体检设备说明书ToolStripMenuItem
             // 
