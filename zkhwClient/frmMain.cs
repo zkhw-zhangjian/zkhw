@@ -3961,6 +3961,9 @@ namespace zkhwClient
                         for (int i = 1; i < sHL7Lines.Length; i++)
                         {
                             string[] sHL7Array = sHL7Lines[i].Split('|');
+                            if (sHL7Array[5]==""||"".Equals(sHL7Array[5])) {
+                                continue;
+                            }
                             switch (sHL7Array[4])
                             {
                                 case "ALB": sh.ALB = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.')+3); break;
@@ -5332,8 +5335,8 @@ namespace zkhwClient
         /// <param name="o"></param>
         private void ReciveMr(object o)
         {
-            byte[] buffMb = { 0x0B, 0x1C, 0x0D };
             var send = o as Socket;
+            totalByteRead = new Byte[0];
             while (true)
             {
                 //获取发送过来的消息容器
@@ -5351,21 +5354,21 @@ namespace zkhwClient
                 }
                 byte[] buffernew = buffer.Skip(0).Take(effective).ToArray();
                 totalByteRead = totalByteRead.Concat(buffernew).ToArray();
-                if (totalByteRead.Length<5) { continue; }
-                if (totalByteRead[0] != buffMb[0] || totalByteRead[totalByteRead.Length-2] != buffMb[1] || totalByteRead[totalByteRead.Length - 1] != buffMb[2]) {
-                    Thread.Sleep(100);
-                    continue;
-                }
+                if (totalByteRead.Length<100) { continue; }            
                 string sHL7 = Encoding.Default.GetString(totalByteRead).Trim();
                 string sendHL7new = "";
-                string sendHL7 = @"MSH|^~\&|LIS||||20361231235956||ACK^R01|1|P|2.3.1||||||UNICODE
-                                   MSA|AA|1";
+                string sendHL7 = "MSH|^~\\&|LIS||||20361231235956||ACK^R01|1|P|2.3.1||||||UNICODE"
+                                +"MSA|AA|1";
                 string[] sendArray = sendHL7.Split('|');
-                string sendHL7sh = @"MSH|^~\&|||||20120508094823||ACK^R01|1|P|2.3.1||||2||ASCII|||
-                                     MSA|AA|1|Message accepted|||0|";
+                string sendHL7sh = "MSH|^~\\&|||||20120508094823||ACK^R01|1|P|2.3.1||||2||ASCII|||"
+                                  +"MSA|AA|1|Message accepted|||0|";
                 string[] sendArraysh = sendHL7sh.Split('|');
                 if (sHL7.IndexOf("ASCII") > 0)
                 {//解析生化协议报文数据
+                    if (sHL7.Substring(0, 3) != "MSH" || sHL7.Substring(sHL7.Length-1, 1)!="|")
+                    {
+                        continue;
+                    }
                     shenghuaBean sh = new shenghuaBean();
                     sh.ZrysSH = basicInfoSettings.sh;
                     string[] sHL7Pids = Regex.Split(sHL7, "PID", RegexOptions.IgnoreCase);
@@ -5848,20 +5851,24 @@ namespace zkhwClient
                         #endregion
                     }
                     //返回生化的确认数据报文
-                    for (int j = 0; j < sendArray.Length; j++)
+                    for (int j = 0; j < sendArraysh.Length; j++)
                     {
-                        sendHL7new += "|" + sendArray[j];
+                        sendHL7sh += "|" + sendArraysh[j];
                     }
-                    byte[] sendBytes = Encoding.Unicode.GetBytes(sendHL7new.Substring(1));
+                    byte[] sendBytes = Encoding.Unicode.GetBytes(sendHL7sh.Substring(1));
                     byte[] sendBytes1 = { 0x0B };
                     byte[] sendBytes2 = { 0x1C, 0x0D };
                     sendBytes =sendBytes1.Concat(sendBytes).Concat(sendBytes2).ToArray();
                     send.Send(sendBytes);
                 }
-                else if(sHL7.IndexOf("UNICODE") >-1)
+                else if(sHL7.IndexOf("UNICODE") >1)
                 {//解析血球协议报文数据
                     try
                     {
+                        if (sHL7.Substring(0, 3) != "MSH" || sHL7.Substring(sHL7.Length - 1, 1) != "F")
+                        {
+                            continue;
+                        }
                         xuechangguiBean xcg = new xuechangguiBean();
                         xcg.ZrysXCG = basicInfoSettings.xcg;
                         string[] sHL7Pids = Regex.Split(sHL7, "PID", RegexOptions.IgnoreCase);
