@@ -2134,6 +2134,7 @@
             // comboBox1
             // 
             this.comboBox1.DropDownHeight = 200;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.IntegralHeight = false;
             this.comboBox1.Location = new System.Drawing.Point(245, 0);
@@ -2164,7 +2165,7 @@
             this.radioButton6.Size = new System.Drawing.Size(91, 24);
             this.radioButton6.TabIndex = 0;
             this.radioButton6.TabStop = true;
-            this.radioButton6.Tag = "01";
+            this.radioButton6.Tag = "1";
             this.radioButton6.Text = "01汉族";
             this.radioButton6.UseVisualStyleBackColor = true;
             this.radioButton6.Click += new System.EventHandler(this.radioButton6_Click);

@@ -112,9 +112,15 @@ namespace zkhwClient
                 }
                 /************/
                 string fpath = Application.StartupPath + "\\sysstem.ini";
-                sysstem.UpdateInfo(fpath); 
-                //string spath = Application.StartupPath + "/log.txt";
-                //File.WriteAllText(spath, string.Empty);
+                sysstem.UpdateInfo(fpath);
+                
+                string spath = Application.StartupPath + "/log.txt";
+                FileInfo f = new FileInfo(spath); 
+                double fm = f.Length / 1024.0 / 1024.0; 
+                if(fm>=1)   //文件大于1M就删除掉
+                {
+                    File.WriteAllText(spath, string.Empty);
+                } 
                 /*****end******/
                 this.Hide();
                 frmMain main = new frmMain();

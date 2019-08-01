@@ -30,27 +30,27 @@ namespace zkhwClient.view.PublicHealthView
         public examinatReport()
         {
             InitializeComponent();
-           
+
         }
         private void GetAllPersonInfo()
         {
             #region 报告统计数据绑定
             string _xuncode = basicInfoSettings.xcuncode;
-             
+
             string time1 = dateTimePicker3.Value.ToString("yyyy-MM-dd");
             string time2 = dateTimePicker4.Value.ToString("yyyy-MM-dd");
-            if(DateTime.Parse(time1) != DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd")))
+            if (DateTime.Parse(time1) != DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd")))
             {
                 _xuncode = "";
             }
             string sql = $@"SELECT count(sex) sun,sex from zkhw_tj_bgdc where area_duns 
                     like '%{_xuncode}%' and  date_format(createtime,'%Y-%m-%d') between '{time1}' and '{time2}' GROUP BY sex ";
-            if (isfirst==true)
-            {  
-                time1=Common.GetCreateTime(basicInfoSettings.createtime);
+            if (isfirst == true)
+            {
+                time1 = Common.GetCreateTime(basicInfoSettings.createtime);
                 sql = $@"SELECT count(sex) sun,sex from zkhw_tj_bgdc where area_duns like '%{_xuncode}%' and date_format(createtime,'%Y-%m-%d')>='{time1}' GROUP BY sex ";
-            } 
-            
+            }
+
             DataSet dataSet = DbHelperMySQL.Query(sql);
             DataTable data = dataSet.Tables[0];
             if (data != null && data.Rows.Count > 0)
@@ -82,7 +82,7 @@ namespace zkhwClient.view.PublicHealthView
         /// </summary>
         private void BinData()
         {
-           
+
             #region 报告查询 区域数据绑定
             string sql1 = "select code as ID,name as Name from code_area_config where parent_code='-1';";
             DataSet datas = DbHelperMySQL.Query(sql1);
@@ -218,21 +218,21 @@ where 1=1";
         /// </summary>
         /// <param name="data"></param>
         private void queryExaminatProgress(DataTable data)
-        { 
-            if(dataGridView1.ColumnCount>0)
+        {
+            if (dataGridView1.ColumnCount > 0)
             {
                 dataGridView1.Columns.Clear();
             }
             if (data != null)
             {
-                this.dataGridView1.DataSource = data; 
+                this.dataGridView1.DataSource = data;
                 //if (buttonColumn == null)
                 //{
-                    buttonColumn = new DataGridViewButtonColumn();
-                    buttonColumn.Name = "btnModify";
-                    buttonColumn.HeaderText = "";
-                    buttonColumn.DefaultCellStyle.NullValue = "查看报告";
-                    dataGridView1.Columns.Add(buttonColumn);
+                buttonColumn = new DataGridViewButtonColumn();
+                buttonColumn.Name = "btnModify";
+                buttonColumn.HeaderText = "";
+                buttonColumn.DefaultCellStyle.NullValue = "查看报告";
+                dataGridView1.Columns.Add(buttonColumn);
                 //}
                 //else {
                 //    buttonColumn.Dispose();
@@ -249,7 +249,7 @@ where 1=1";
                 checkColumn.DataPropertyName = "IsChecked";
                 dataGridView1.Columns.Insert(0, checkColumn);    //添加的checkbox在第一列 
 
-                
+
                 this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
                 this.dataGridView1.AllowUserToAddRows = false;
                 this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -278,7 +278,7 @@ where 1=1";
 
         private void DisplayShangChuanInfo(DataTable dt)
         {
-            if(dt ==null || dt.Rows.Count<=0)
+            if (dt == null || dt.Rows.Count <= 0)
             {
                 lblShangChuan.Text = "已上传:0";
                 lblWeiShangChuan.Text = "未上传:0";
@@ -286,13 +286,13 @@ where 1=1";
             else
             {
                 DataRow[] dr = dt.Select("是否上传数据 = '否'");
-                if(dr.Length>0)
-                {  
-                    lblWeiShangChuan.Text = "未上传:"+ dr.Length.ToString();
+                if (dr.Length > 0)
+                {
+                    lblWeiShangChuan.Text = "未上传:" + dr.Length.ToString();
                 }
                 else
                 {
-                    lblWeiShangChuan.Text = "未上传:0" ;
+                    lblWeiShangChuan.Text = "未上传:0";
                 }
 
                 DataRow[] dr1 = dt.Select("是否上传数据 = '是'");
@@ -304,7 +304,7 @@ where 1=1";
                 {
                     lblShangChuan.Text = "已上传:0";
                 }
-            } 
+            }
         }
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
@@ -347,7 +347,7 @@ where 1=1";
         {
             int count = 0;
             queryExaminatProgress(GetData(pagerControl1.PageIndex, pagerControl1.PageSize, out count));
-            pagerControl1.DrawControl(count); 
+            pagerControl1.DrawControl(count);
         }
         #endregion
         private void QueryTongJi()
@@ -796,7 +796,7 @@ where 1=1";
                         string id = dataGridView1["身份证号", i].Value.ToString();
                         combo.ID = "'" + id + "'";
                         combo.Name = dataGridView1["姓名", i].Value.ToString();
-                        combo.BarCode= dataGridView1["条码号", i].Value.ToString();
+                        combo.BarCode = dataGridView1["条码号", i].Value.ToString();
                         ide.Add(combo);
                     }
                 }
@@ -835,7 +835,7 @@ where 1=1";
                 lb.eventInfo = "报告导出异常！" + ex.Message;
                 lb.type = "2";
                 lls.addCheckLog(lb);
-                MessageBox.Show("报告导出异常，请联系管理员！" +ex.Message + "/r/n"+ex.StackTrace);
+                MessageBox.Show("报告导出异常，请联系管理员！" + ex.Message + "/r/n" + ex.StackTrace);
             }
         }
         private void CallbackFunc(IAsyncResult result)
@@ -845,7 +845,7 @@ where 1=1";
             //Console.WriteLine(result.AsyncState);
         }
         private bool PDF(List<string> list, DataSet dataSet, List<ComboBoxData> ide)
-        { 
+        {
             Document doc = null;
             LoadingHelper.myCaption = "正在导出...";
             LoadingHelper.myLabel = "正在导出第1份";
@@ -860,19 +860,19 @@ where 1=1";
                 if (list.Count > 1)
                 {
                     #region 多个
-                    
+
                     int intNum = 0;
                     foreach (var item in ide)
                     {
                         List<Report> reports = new List<Report>();
                         foreach (var items in list)
                         {
-                             
+
 
                             Report report = new Report();
                             DataRow data = dataSet.Tables["个人"].Select($"id_number={item.ID}")[0];
                             report.Name = items;
-                            report.Doc = PdfProcessing(items, data,item.BarCode);
+                            report.Doc = PdfProcessing(items, data, item.BarCode);
                             reports.Add(report);
                         }
                         Report re = reports.Where(m => m.Name == "封面").FirstOrDefault();
@@ -937,10 +937,10 @@ where 1=1";
                             rp.Doc.Save(urls, SaveFormat.Pdf);
                         }
                         intNum = intNum + 1;
-                    if (LoadingHelper.loadingForm != null)
-                    {
-                        LoadingHelper.loadingForm.mystr = string.Format("已导出 {0} 份共 {1} 份", intNum, list.Count);
-                    }
+                        if (LoadingHelper.loadingForm != null)
+                        {
+                            LoadingHelper.loadingForm.mystr = string.Format("已导出 {0} 份共 {1} 份", intNum, list.Count);
+                        }
                     }
                     LoadingHelper.CloseForm();
                     return true;
@@ -978,16 +978,19 @@ where 1=1";
                             string barcode = "";
                             string aa = "'" + idnum + "'";
                             var q = (from l in ide where l.ID == aa select l).ToList();
-                            if(q.Count>0)
+                            if (q.Count > 0)
                             {
                                 barcode = q[0].BarCode;
                             }
                             foreach (var item in vs)
                             {
-                                if (age.Length>0) {
+                                if (age.Length > 0)
+                                {
                                     int ageint = Int32.Parse(age);
-                                    if (ageint<65) {
-                                        if (item== "中医体质" || item== "老年人生活自理能力评估") {
+                                    if (ageint < 65)
+                                    {
+                                        if (item == "中医体质" || item == "老年人生活自理能力评估")
+                                        {
                                             continue;
                                         }
                                     }
@@ -1038,14 +1041,14 @@ where 1=1";
                             DeteleFile(urls);
                             doc.Save(urls, SaveFormat.Pdf);
                             intNum = intNum + 1;
-                        if (LoadingHelper.loadingForm != null)
-                        {
-                            LoadingHelper.loadingForm.mystr = string.Format("已导出 {0} 份共 {1} 份", intNum, dataSet.Tables["个人"].Rows.Count);
+                            if (LoadingHelper.loadingForm != null)
+                            {
+                                LoadingHelper.loadingForm.mystr = string.Format("已导出 {0} 份共 {1} 份", intNum, dataSet.Tables["个人"].Rows.Count);
+                            }
                         }
                     }
-                    }
-                LoadingHelper.CloseForm();
-                return true;
+                    LoadingHelper.CloseForm();
+                    return true;
                     #endregion
                 }
             }
@@ -1065,19 +1068,19 @@ where 1=1";
                 return false;
             }
         }
-        private bool isDouble(string a,out double b )
+        private bool isDouble(string a, out double b)
         {
             bool t = double.TryParse(a, out b);
             return t;
         }
-        private Document PdfProcessing(string lx, DataRow data,string barcode)
+        private Document PdfProcessing(string lx, DataRow data, string barcode)
         {
             DateTime date = DateTime.Now;
             Document doc = null;
             DocumentBuilder builder = null;
             DataTable jkdata = null;
             DataSet jk = null;
-            if (barcode=="")
+            if (barcode == "")
             {
                 jk = DbHelperMySQL.Query($"select * from physical_examination_record where id_number='{data["id_number"].ToString()}' order by create_time desc LIMIT 1");
             }
@@ -1108,7 +1111,7 @@ where 1=1";
                         builder.InsertImage(resizeImageFromFile(@str + @"\photoImg\" + photo_pic, 172, 184));
                     }
                     dic.Add("姓名", data["name"].ToString());
-                    dic.Add("现住址", data["county_name"].ToString()+ data["towns_name"].ToString()+ data["village_name"].ToString());
+                    dic.Add("现住址", data["county_name"].ToString() + data["towns_name"].ToString() + data["village_name"].ToString());
                     dic.Add("户籍地址", data["address"].ToString());
                     dic.Add("联系电话", data["phone"].ToString());
                     dic.Add("乡镇名称", data["towns_name"].ToString());
@@ -1141,7 +1144,7 @@ where 1=1";
                         builder.MoveToBookmark(key);
                         builder.Write(dic[key]);
                     }
-                    /*页码*/ 
+                    /*页码*/
                     //builder.MoveToHeaderFooter(HeaderFooterType.FooterPrimary); 
                     //builder.InsertField("PAGE", "");
                     //builder.Write(" / ");
@@ -1158,7 +1161,7 @@ where 1=1";
                     builder = new DocumentBuilder(doc);
                     var dics = new Dictionary<string, string>();
                     string grbh = data["archive_no"].ToString();
-                    if (grbh!=""&&grbh.Length > 9)
+                    if (grbh != "" && grbh.Length > 9)
                     {
                         grbh = grbh.Substring(9, grbh.Length - 9);
                         for (int i = 0; i < grbh.Length; i++)
@@ -1168,7 +1171,7 @@ where 1=1";
                     }
                     dics.Add("姓名", data["name"].ToString());
                     dics.Add("性别", data["sex"].ToString());
-                    string birthday= data["birthday"].ToString();
+                    string birthday = data["birthday"].ToString();
                     if (birthday != "")
                     {
                         string[] sr = birthday.Split('-');
@@ -1179,7 +1182,7 @@ where 1=1";
                         }
                     }
                     dics.Add("身份证号", data["id_number"].ToString());
-                   
+
                     dics.Add("工作单位", data["company"].ToString());
                     dics.Add("本人电话", data["phone"].ToString());
                     dics.Add("联系人姓名", data["link_name"].ToString());
@@ -1433,10 +1436,10 @@ where 1=1";
                     if (bcs != null && bcs.Tables.Count > 0 && bcs.Tables[0].Rows.Count > 0)
                     {
                         DataTable da = bcs.Tables[0];
-                        string FubuResult= da.Rows[0]["FubuResult"].ToString().Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", "");
-                        int intwz= FubuResult.IndexOf("结果");
-                        if (intwz>-1) 
-                        hy.Add("B超诊断", FubuResult.Substring(intwz-2)); 
+                        string FubuResult = da.Rows[0]["FubuResult"].ToString().Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", "");
+                        int intwz = FubuResult.IndexOf("结果");
+                        if (intwz > -1)
+                            hy.Add("B超诊断", FubuResult.Substring(intwz - 2));
                     }
                     if (jkdata != null && jkdata.Rows.Count > 0)
                     {
@@ -1456,7 +1459,7 @@ where 1=1";
                             hy.Add("左侧低压", jkdata.Rows[j]["base_blood_pressure_left_low"].ToString());
                             hy.Add("右侧高压", jkdata.Rows[j]["base_blood_pressure_right_high"].ToString());
                             hy.Add("右侧低压", jkdata.Rows[j]["base_blood_pressure_right_low"].ToString());
-                            hy.Add("送检日期",string.IsNullOrWhiteSpace(jkdata.Rows[j]["create_time"].ToString())?"":Convert.ToDateTime( jkdata.Rows[j]["create_time"]).ToString("yyyy-MM-dd"));
+                            hy.Add("送检日期", string.IsNullOrWhiteSpace(jkdata.Rows[j]["create_time"].ToString()) ? "" : Convert.ToDateTime(jkdata.Rows[j]["create_time"]).ToString("yyyy-MM-dd"));
                             hy.Add("审核", "");
                             hy.Add("审核1", "");
                             hy.Add("报告日期", DateTime.Now.ToString("yyyy-MM-dd"));
@@ -1474,9 +1477,9 @@ where 1=1";
                             string alb = da.Rows[j]["ALB"].ToString();
                             if (alb != null && !"".Equals(alb))
                             {
-                                
-                                double albdouble=0;
-                                if(isDouble(alb,out albdouble))
+
+                                double albdouble = 0;
+                                if (isDouble(alb, out albdouble))
                                 {
                                     if (albdouble > 54)
                                     {
@@ -1487,7 +1490,7 @@ where 1=1";
                                         hy.Add("白蛋白箭头", "↓");
                                     }
                                     hy.Add("白蛋白结果", alb);
-                                } 
+                                }
                             }
                             string alp = da.Rows[j]["ALP"].ToString();
                             if (alp != null && !"".Equals(alp))
@@ -1504,10 +1507,10 @@ where 1=1";
                                         hy.Add("碱性磷酸酶箭头", "↓");
                                     }
                                     hy.Add("碱性磷酸酶结果", alp);
-                                } 
+                                }
                             }
                             string alt = da.Rows[j]["ALT"].ToString();
-                            if (alt != null && !"".Equals(alt) && alt !="N/A")
+                            if (alt != null && !"".Equals(alt) && alt != "N/A")
                             {
                                 double altdouble = 0;
                                 if (isDouble(alt, out altdouble))
@@ -1521,7 +1524,7 @@ where 1=1";
                                         hy.Add("谷丙转氨酶箭头", "↓");
                                     }
                                     hy.Add("谷丙转氨酶结果", alt);
-                                }  
+                                }
                             }
                             string ast = da.Rows[j]["AST"].ToString();
                             if (ast != null && !"".Equals(ast))
@@ -1538,7 +1541,7 @@ where 1=1";
                                         hy.Add("谷草转氨酶箭头", "↓");
                                     }
                                     hy.Add("谷草转氨酶结果", ast);
-                                } 
+                                }
                             }
                             string cho = da.Rows[j]["CHO"].ToString();
                             if (cho != null && !"".Equals(cho))
@@ -1556,7 +1559,7 @@ where 1=1";
                                     }
                                     hy.Add("胆固醇结果", cho);
                                 }
-                                
+
                             }
                             string crea = da.Rows[j]["CREA"].ToString();
                             if (crea != null && !"".Equals(crea))
@@ -1573,7 +1576,7 @@ where 1=1";
                                         hy.Add("肌酐箭头", "↓");
                                     }
                                     hy.Add("肌酐结果", crea);
-                                }  
+                                }
                             }
 
                             string dbil = da.Rows[j]["DBIL"].ToString();
@@ -1591,7 +1594,7 @@ where 1=1";
                                         hy.Add("直接胆红素箭头", "↓");
                                     }
                                     hy.Add("直接胆红素结果", dbil);
-                                } 
+                                }
                             }
                             string ggt = da.Rows[j]["GGT"].ToString();
                             if (ggt != null && !"".Equals(ggt))
@@ -1608,9 +1611,9 @@ where 1=1";
                                         hy.Add("谷氨酰氨基箭头", "↓");
                                     }
                                     hy.Add("谷氨酰氨基结果", ggt);
-                                } 
+                                }
                             }
-                            string glu=da.Rows[j]["GLU"].ToString();
+                            string glu = da.Rows[j]["GLU"].ToString();
                             if (glu != null && !"".Equals(glu))
                             {
                                 double gludouble = 0;
@@ -1626,7 +1629,7 @@ where 1=1";
                                     }
                                     hy.Add("葡萄糖结果", glu);
                                 }
-                                
+
                             }
                             string hdlc = da.Rows[j]["HDLC"].ToString();
                             if (hdlc != null && !"".Equals(hdlc))
@@ -1646,12 +1649,12 @@ where 1=1";
                                     hy.Add("高密度脂蛋白结果", hdlc);
                                 }
 
-                                
+
                             }
                             string ldlc = da.Rows[j]["LDLC"].ToString();
                             if (ldlc != null && !"".Equals(ldlc))
                             {
-                                double ldlcdouble =0;
+                                double ldlcdouble = 0;
 
                                 if (isDouble(ldlc, out ldlcdouble))
                                 {
@@ -1666,7 +1669,7 @@ where 1=1";
                                     hy.Add("低密度脂蛋白结果", ldlc);
                                 }
 
-                                
+
                             }
                             string tbil = da.Rows[j]["TBIL"].ToString();
                             if (tbil != null && !"".Equals(tbil))
@@ -1684,11 +1687,12 @@ where 1=1";
                                         hy.Add("总胆红素箭头", "↓");
                                     }
                                     hy.Add("总胆红素结果", tbil);
-                                } 
+                                }
                             }
 
                             string tg = da.Rows[j]["TG"].ToString();
-                            if (tg != "") {
+                            if (tg != "")
+                            {
                                 double tgdouble = 0;
                                 if (isDouble(tg, out tgdouble))
                                 {
@@ -1701,13 +1705,13 @@ where 1=1";
                                         hy.Add("甘油三酯箭头", "↓");
                                     }
                                     hy.Add("甘油三酯结果", tg);
-                                } 
+                                }
                             }
-                            
+
                             string tp = da.Rows[j]["TP"].ToString();
                             if (tp != null && !"".Equals(tp))
                             {
-                                double tpdouble = 0; 
+                                double tpdouble = 0;
                                 if (isDouble(tp, out tpdouble))
                                 {
                                     if (tpdouble > 83)
@@ -1719,12 +1723,12 @@ where 1=1";
                                         hy.Add("总蛋白箭头", "↓");
                                     }
                                     hy.Add("总蛋白结果", tp);
-                                } 
+                                }
                             }
                             string ua = da.Rows[j]["UA"].ToString();
                             if (ua != null && !"".Equals(ua))
                             {
-                                double uadouble =0;
+                                double uadouble = 0;
                                 if (isDouble(ua, out uadouble))
                                 {
                                     if (uadouble > 428)
@@ -1736,7 +1740,7 @@ where 1=1";
                                         hy.Add("尿酸箭头", "↓");
                                     }
                                     hy.Add("尿酸结果", ua);
-                                } 
+                                }
                             }
                             string urea = da.Rows[j]["UREA"].ToString();
                             if (urea != null && !"".Equals(urea))
@@ -1754,7 +1758,7 @@ where 1=1";
                                     }
                                     hy.Add("尿素结果", urea);
                                 }
-                                
+
                             }
                         }
                     }
@@ -1770,7 +1774,7 @@ where 1=1";
                             {
                                 if (hct != "*")
                                 {
-                                    double hctdouble =0;
+                                    double hctdouble = 0;
                                     if (isDouble(hct, out hctdouble))
                                     {
                                         if (hctdouble > 50)
@@ -1780,8 +1784,8 @@ where 1=1";
                                         else if (hctdouble < 37)
                                         {
                                             hy.Add("红细胞压积箭头", "↓");
-                                        } 
-                                    } 
+                                        }
+                                    }
                                 }
                                 hy.Add("红细胞压积结果", hct);
                             }
@@ -1800,7 +1804,7 @@ where 1=1";
                                         hy.Add("血红蛋白箭头", "↓");
                                     }
                                     hy.Add("血红蛋白结果", hgb);
-                                } 
+                                }
                             }
                             string lym = da.Rows[j]["LYM"].ToString();
                             if (lym != null && !"".Equals(lym))
@@ -1818,7 +1822,7 @@ where 1=1";
                                         {
                                             hy.Add("淋巴细胞数目箭头", "↓");
                                         }
-                                    } 
+                                    }
                                 }
                                 hy.Add("淋巴细胞数目结果", lym);
                             }
@@ -1838,7 +1842,7 @@ where 1=1";
                                         {
                                             hy.Add("淋巴细胞百分比箭头", "↓");
                                         }
-                                    } 
+                                    }
                                 }
                                 hy.Add("淋巴细胞百分比结果", lymp);
                             }
@@ -1858,7 +1862,7 @@ where 1=1";
                                         {
                                             hy.Add("平均血红蛋白含量箭头", "↓");
                                         }
-                                    } 
+                                    }
                                 }
                                 hy.Add("平均血红蛋白含量结果", mch);
                             }
@@ -1878,7 +1882,7 @@ where 1=1";
                                         {
                                             hy.Add("平均血红蛋白浓度箭头", "↓");
                                         }
-                                    } 
+                                    }
                                 }
                                 hy.Add("平均血红蛋白浓度结果", mchc);
                             }
@@ -1898,7 +1902,7 @@ where 1=1";
                                         {
                                             hy.Add("平均红细胞体积箭头", "↓");
                                         }
-                                    } 
+                                    }
                                 }
                                 hy.Add("平均红细胞体积结果", mcv);
                             }
@@ -1918,7 +1922,7 @@ where 1=1";
                                         {
                                             hy.Add("平均血小板体积箭头", "↓");
                                         }
-                                    } 
+                                    }
                                 }
                                 hy.Add("平均血小板体积结果", mpv);
                             }
@@ -2113,16 +2117,20 @@ where 1=1";
                         hy.Add("胆红素结果", da.Rows[0]["BIL"].ToString());
                         hy.Add("蛋白质结果", da.Rows[0]["PRO"].ToString());
                         hy.Add("尿液葡萄糖结果", da.Rows[0]["GLU"].ToString());
-                        double sgdoublee= Convert.ToDouble(da.Rows[0]["SG"].ToString());
-                        if (sgdoublee>1.025) {
-                            hy.Add("尿比重箭头","↑");
-                        } else if (sgdoublee < 1.015) {
-                            hy.Add("尿比重箭头","↓");
+                        double sgdoublee = Convert.ToDouble(da.Rows[0]["SG"].ToString());
+                        if (sgdoublee > 1.025)
+                        {
+                            hy.Add("尿比重箭头", "↑");
+                        }
+                        else if (sgdoublee < 1.015)
+                        {
+                            hy.Add("尿比重箭头", "↓");
                         }
                         hy.Add("尿比重结果", da.Rows[0]["SG"].ToString());
                         hy.Add("隐血结果", da.Rows[0]["BLD"].ToString());
-                        double phdouble= Convert.ToDouble(da.Rows[0]["PH"].ToString());
-                        if (phdouble>8) {
+                        double phdouble = Convert.ToDouble(da.Rows[0]["PH"].ToString());
+                        if (phdouble > 8)
+                        {
                             hy.Add("酸碱度箭头", "↑");
                         }
                         else if (phdouble < 4.6)
@@ -2150,7 +2158,8 @@ where 1=1";
                     builder = new DocumentBuilder(doc);
                     var jktj = new Dictionary<string, string>();
                     string jkbh = data["archive_no"].ToString();
-                    if (jkbh!=""&& jkbh.Length>9) {
+                    if (jkbh != "" && jkbh.Length > 9)
+                    {
                         jkbh = jkbh.Substring(9, jkbh.Length - 9);
                         for (int i = 0; i < jkbh.Length; i++)
                         {
@@ -2350,7 +2359,7 @@ where 1=1";
                             jktj.Add("尿酮体", jkdata.Rows[j]["urine_acetone_bodies"].ToString());
                             jktj.Add("尿潜血", jkdata.Rows[j]["bld"].ToString());
                             jktj.Add("尿常规其它", jkdata.Rows[j]["urine_other"].ToString());
-                            
+
                             jktj.Add("空腹血糖1", jkdata.Rows[j]["blood_glucose_mmol"].ToString());
                             jktj.Add("空腹血糖2", jkdata.Rows[j]["blood_glucose_mg"].ToString());
                             jktj.Add("心电图", jkdata.Rows[j]["cardiogram"].ToString());
@@ -2602,35 +2611,35 @@ where 1=1";
                     if (bcss != null && bcss.Tables.Count > 0 && bcss.Tables[0].Rows.Count > 0)
                     {
                         DataTable da = bcss.Tables[0];
-                            string BuPic01 = da.Rows[0]["BuPic01"].ToString();
-                            if (BuPic01 != null && !"".Equals(BuPic01) && File.Exists(@str + @"\bcImg\" + BuPic01))
-                            {
-                                builder.MoveToBookmark("图1");
-                                builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic01, 400, 650));
-                            }
-                            string BuPic02 = da.Rows[0]["BuPic02"].ToString();
-                            if (BuPic02 != null && !"".Equals(BuPic02) && File.Exists(@str + @"\bcImg\" + BuPic02))
-                            {
-                                builder.MoveToBookmark("图2");
-                                builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic02, 400, 650));
-                            }
-                            //string BuPic03 = da.Rows[j]["BuPic03"].ToString();
-                            //if (BuPic03 != null && !"".Equals(BuPic03) && File.Exists(@str + @"\bcImg\" + BuPic03))
-                            //{
-                            //    builder.MoveToBookmark("图3");
-                            //    builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic03, 400, 650));
-                            //}
-                            //string BuPic04 = da.Rows[j]["BuPic04"].ToString();
-                            //if (BuPic04 != null && !"".Equals(BuPic04) && File.Exists(@str + @"\bcImg\" + BuPic04))
-                            //{
-                            //    builder.MoveToBookmark("图4");
-                            //    builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic04, 400, 650));
-                            //}
-                            bc.Add("条码号", da.Rows[0]["bar_code"].ToString());
-                            bc.Add("诊断医师", da.Rows[0]["ZrysBC"].ToString());
-                            //bc.Add("检查所见", da.Rows[j]["FubuDesc"].ToString());
-                            bc.Add("诊断结果", da.Rows[0]["FubuResult"].ToString().Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", ""));
-                            bc.Add("检查时间", Convert.ToDateTime(da.Rows[0]["createtime"].ToString()).ToString("yyyy-MM-dd"));
+                        string BuPic01 = da.Rows[0]["BuPic01"].ToString();
+                        if (BuPic01 != null && !"".Equals(BuPic01) && File.Exists(@str + @"\bcImg\" + BuPic01))
+                        {
+                            builder.MoveToBookmark("图1");
+                            builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic01, 400, 650));
+                        }
+                        string BuPic02 = da.Rows[0]["BuPic02"].ToString();
+                        if (BuPic02 != null && !"".Equals(BuPic02) && File.Exists(@str + @"\bcImg\" + BuPic02))
+                        {
+                            builder.MoveToBookmark("图2");
+                            builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic02, 400, 650));
+                        }
+                        //string BuPic03 = da.Rows[j]["BuPic03"].ToString();
+                        //if (BuPic03 != null && !"".Equals(BuPic03) && File.Exists(@str + @"\bcImg\" + BuPic03))
+                        //{
+                        //    builder.MoveToBookmark("图3");
+                        //    builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic03, 400, 650));
+                        //}
+                        //string BuPic04 = da.Rows[j]["BuPic04"].ToString();
+                        //if (BuPic04 != null && !"".Equals(BuPic04) && File.Exists(@str + @"\bcImg\" + BuPic04))
+                        //{
+                        //    builder.MoveToBookmark("图4");
+                        //    builder.InsertImage(resizeImageFromFile(@str + @"\bcImg\" + BuPic04, 400, 650));
+                        //}
+                        bc.Add("条码号", da.Rows[0]["bar_code"].ToString());
+                        bc.Add("诊断医师", da.Rows[0]["ZrysBC"].ToString());
+                        //bc.Add("检查所见", da.Rows[j]["FubuDesc"].ToString());
+                        bc.Add("诊断结果", da.Rows[0]["FubuResult"].ToString().Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", ""));
+                        bc.Add("检查时间", Convert.ToDateTime(da.Rows[0]["createtime"].ToString()).ToString("yyyy-MM-dd"));
                     }
                     //书签替换
                     foreach (var key in bc.Keys)
@@ -2692,8 +2701,8 @@ where 1=1";
                                     sm += "白细胞偏高：" + blood_leukocyte + " CELL/μL   ";
                                     flagxcg = 1;
                                 }
-                            }                            
-                            if(flagxcg == 1) sm += "\r\n";
+                            }
+                            if (flagxcg == 1) sm += "\r\n";
                             int flagncg = 0;
                             //jktj.Add("尿蛋白", 
                             string urine_protein = jkdata.Rows[j]["urine_protein"].ToString();
@@ -2701,7 +2710,7 @@ where 1=1";
                             {
                                 if (urine_protein != "-")
                                 {
-                                    sm += @"尿蛋白：" + urine_protein+"   ";
+                                    sm += @"尿蛋白：" + urine_protein + "   ";
                                     flagncg = 1;
                                 }
                             }
@@ -2735,7 +2744,7 @@ where 1=1";
                                     flagncg = 1;
                                 }
                             }
-                           if(flagncg ==1) sm += "\r\n";
+                            if (flagncg == 1) sm += "\r\n";
                             int flagsh = 0;
                             //jktj.Add("空腹血糖1", 
                             int bgm = 0;
@@ -2748,7 +2757,8 @@ where 1=1";
                                     bgm = 1;
                                     flagsh = 1;
                                 }
-                                else if(Convert.ToDouble(blood_glucose_mmol) < 3.9){
+                                else if (Convert.ToDouble(blood_glucose_mmol) < 3.9)
+                                {
                                     sm += @"血糖值偏低：" + blood_glucose_mmol + "mmol/L   ";
                                     bgm = 1;
                                     flagsh = 1;
@@ -2783,7 +2793,7 @@ where 1=1";
                                     sm += @"白蛋白值偏高：" + albumin + "g/l   ";
                                     flagsh = 1;
                                 }
-                                else if(Convert.ToDouble(albumin) < 34)
+                                else if (Convert.ToDouble(albumin) < 34)
                                 {
                                     sm += @"白蛋白值偏低：" + albumin + "g/l   ";
                                     flagsh = 1;
@@ -2798,7 +2808,7 @@ where 1=1";
                                     sm += @"总胆红素值偏高：" + total_bilirubin + "umol/l   ";
                                     flagsh = 1;
                                 }
-                                else if(Convert.ToDouble(total_bilirubin) < 2)
+                                else if (Convert.ToDouble(total_bilirubin) < 2)
                                 {
                                     sm += @"总胆红素值偏低：" + total_bilirubin + "umol/l   ";
                                     flagsh = 1;
@@ -2813,13 +2823,13 @@ where 1=1";
                                     sm += @"直接胆红素值偏高：" + conjugated_bilirubin + "umol/l   ";
                                     flagsh = 1;
                                 }
-                                else if(Convert.ToDouble(conjugated_bilirubin) < 1.7)
+                                else if (Convert.ToDouble(conjugated_bilirubin) < 1.7)
                                 {
                                     sm += @"直接红素值偏低：" + conjugated_bilirubin + "umol/l   ";
                                     flagsh = 1;
                                 }
                             }
-                            
+
                             //jktj.Add("血清肌酐", 
                             string scr = jkdata.Rows[j]["scr"].ToString();
                             if (!string.IsNullOrWhiteSpace(scr))
@@ -2839,7 +2849,7 @@ where 1=1";
                                     sm += @"尿素值偏高：" + scr + "umol/l   ";
                                     flagsh = 1;
                                 }
-                                else if(Convert.ToDouble(blood_urea) < 1.7)
+                                else if (Convert.ToDouble(blood_urea) < 1.7)
                                 {
                                     sm += @"尿素值偏低：" + blood_urea + "umol/l   ";
                                     flagsh = 1;
@@ -2898,9 +2908,9 @@ where 1=1";
                                     flagsh = 1;
                                 }
                             }
-                            if (flagsh == 1)sm += "\r\n";
-                            
-                            int gyyfiag =0;
+                            if (flagsh == 1) sm += "\r\n";
+
+                            int gyyfiag = 0;
                             //string bbplh = jkdata.Rows[j]["base_blood_pressure_left_high"].ToString();
                             //if (!string.IsNullOrWhiteSpace(bbplh) && !string.IsNullOrWhiteSpace(jkdata.Rows[j]["base_blood_pressure_left_low"].ToString()))
                             //{
@@ -2919,17 +2929,17 @@ where 1=1";
                                     gyyfiag = 1;
                                     sm += "\r\n";
                                 }
-                                else if(Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_high"]) < 90 || Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_low"]) < 60)
+                                else if (Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_high"]) < 90 || Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_low"]) < 60)
                                 {
                                     sm += "血压值偏低：" + Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_high"]) + "/" + Convert.ToInt32(jkdata.Rows[j]["base_blood_pressure_right_low"]);
                                     gyyfiag = 2;
                                     sm += "\r\n";
                                 }
                             }
-                            
+
                             if (jkdata.Rows[j]["cardiogram"].ToString() == "2")
                             {
-                                sm += @"不正常心电图："+ jkdata.Rows[j]["cardiogram_memo"].ToString().Replace("~", "");
+                                sm += @"不正常心电图：" + jkdata.Rows[j]["cardiogram_memo"].ToString().Replace("~", "");
                                 sm += "\r\n";
                             }
 
@@ -2970,14 +2980,14 @@ where 1=1";
                                 sm += @"    改善生活行为，减轻并控制体重、少盐少脂，增加运动、戒烟限酒、减轻精神压力、保持心理平衡。高血压患者应用药物控制血压。应定期随访和测量血压，预防心脑肾并发症的发生，降低心脑血管事件的发生率。";
                                 sm += "\r\n";
                             }
-//                            else if (gyyfiag == 2)
-//                            {
-//                                sm += "低血压：\r\n";
-//                                sm += @"    低血压是指以体循环动脉血压（收缩压和/或舒张压）降低为主要特征（收缩压≤90毫米汞柱，舒张压≤60毫米汞柱），可伴有心、脑、肾等器官的功能或器质性损害的临床综合征。
-//健康指导：改善生活行为：减轻并控制体重、少盐少脂，增加运动、戒烟限酒、减轻精神压力、保持心理平衡。低血压患者应生活要有规律，防止过度疲劳，因为过度疲劳会使血压下降，并且要保持良好的精神状态。";
-//                                sm += "\r\n";
-//                            }
-                            
+                            //                            else if (gyyfiag == 2)
+                            //                            {
+                            //                                sm += "低血压：\r\n";
+                            //                                sm += @"    低血压是指以体循环动脉血压（收缩压和/或舒张压）降低为主要特征（收缩压≤90毫米汞柱，舒张压≤60毫米汞柱），可伴有心、脑、肾等器官的功能或器质性损害的临床综合征。
+                            //健康指导：改善生活行为：减轻并控制体重、少盐少脂，增加运动、戒烟限酒、减轻精神压力、保持心理平衡。低血压患者应生活要有规律，防止过度疲劳，因为过度疲劳会使血压下降，并且要保持良好的精神状态。";
+                            //                                sm += "\r\n";
+                            //                            }
+
                             if (flg == 1)
                             {
                                 sm += "高血脂健康指导：\r\n";
@@ -2990,7 +3000,8 @@ where 1=1";
                             //    sm += "健康指导：注意锻炼身体，保持良好的生活习惯，注意饮食，不吸烟避免饮酒及高脂饮食。";
                             //    sm += "\r\n";
                             //}
-                            if (bgm==1) {
+                            if (bgm == 1)
+                            {
                                 sm += "糖尿病健康指导：\r\n";
                                 //sm += "    糖尿病是一种常见的代谢障碍疾病，即血糖（葡萄糖）升高，接着从尿液中流走，所以尿里有糖。具体讲，与过多摄入总热能、脂肪、碳水化合物，少运动，营养过剩有关，故被谑称为“富贵病”。若病势控制不好，日后就会引起并发症，如心脏病、冠心病、脑血管病、视网膜血管病，肾动脉硬化、肢体动脉硬化等。";
                                 //sm += "\r\n健康指导：\r\n";
@@ -3072,9 +3083,9 @@ where 1=1";
                         for (int j = 0; j < da.Rows.Count; j++)
                         {
                             string[] zz = da.Rows[j]["answer_result"].ToString().Split('|');
-                            for (int i = 0; i< zz.Length; i++)
+                            for (int i = 0; i < zz.Length; i++)
                             {
-                                int aa= Int32.Parse(zz[i].Split(':')[0])-1;
+                                int aa = Int32.Parse(zz[i].Split(':')[0]) - 1;
                                 zytz.Add("a" + aa + zz[i].Split(':')[1], "√");
                             }
                             int qz = 0;
@@ -3277,7 +3288,7 @@ where 1=1";
                     break;
             }
             string sql = $@"UPDATE zkhw_tj_bgdc set BaoGaoShengChan='{DateTime.Now.ToString("yyyy-MM-dd")}' where id_number='{data["id_number"].ToString()}'";
-            int rue = DbHelperMySQL.ExecuteSql(sql); 
+            int rue = DbHelperMySQL.ExecuteSql(sql);
             return doc;
         }
         private string Sex(string sex)
@@ -3416,7 +3427,7 @@ where 1=1";
 
         #region 数据上传
         /// <summary>
-        /// 数据上传
+        /// 数据上传  2019-7-30  可以多次上传
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -3425,21 +3436,21 @@ where 1=1";
             LoadingHelper.myCaption = "正在上传...";
             LoadingHelper.myLabel = "正在上传数据";
             LoadingHelper.ShowLoadingScreen();
-             
+
             try
             {
                 List<ComboBoxData> ide = new List<ComboBoxData>();
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
-                    string istb= dataGridView1["是否上传数据", i].Value.ToString();
-                    if (istb=="是") {
-                        continue;
-                    }
+                    //string istb= dataGridView1["是否上传数据", i].Value.ToString();  //上传过的一样能上传
+                    //if (istb=="是") {
+                    //    continue;
+                    //}
                     ComboBoxData combo = new ComboBoxData();
                     if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
                     {
-                        string id= dataGridView1["身份证号", i].Value.ToString();
-                        combo.ID = "'" + id + "'"; 
+                        string id = dataGridView1["身份证号", i].Value.ToString();
+                        combo.ID = "'" + id + "'";
                         ide.Add(combo);
                     }
                 }
@@ -3485,140 +3496,194 @@ where 1=1";
                 string pfrid = string.Empty;
 
                 #region 健康扶贫信息
-                DataSet infopf = DbHelperMySQL.Query($@"select * from poor_follow_record where upload_status ='0' and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
+                DataSet infopf = DbHelperMySQL.Query($@"select * from poor_follow_record where (upload_status =0 or upload_status =2 ) and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
                 if (infopf != null && infopf.Tables.Count > 0 && infopf.Tables[0].Rows.Count > 0)
                 {
                     DataTable datapf = infopf.Tables[0];
                     for (int i = 0; i < datapf.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From poor_follow_record where id={0}", Ifnull(datapf.Rows[i]["id"]));
+                        sqllist.Add(sql);
                         sqllist.Add($@"insert into poor_follow_record(id,name,archive_no,id_number,visit_date,visit_type,sex,birthday,visit_doctor,work_info,advice,create_user,create_name,create_org,create_org_name,create_time) 
-values({Ifnull(datapf.Rows[i]["id"])},{Ifnull(datapf.Rows[i]["name"])},{Ifnull(datapf.Rows[i]["archive_no"])},{Ifnull(datapf.Rows[i]["id_number"])},{Ifnull(datapf.Rows[i]["visit_date"])},{Ifnull(datapf.Rows[i]["visit_type"])},{Ifnull(datapf.Rows[i]["sex"])},{Ifnull(datapf.Rows[i]["birthday"])},{Ifnull(datapf.Rows[i]["visit_doctor"])},{Ifnull(datapf.Rows[i]["work_info"])},{Ifnull(datapf.Rows[i]["advice"])},{Ifnull(datapf.Rows[i]["create_user"])},{Ifnull(datapf.Rows[i]["create_name"])},{Ifnull(datapf.Rows[i]["create_org"])},{Ifnull(datapf.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(datapf.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
+                                    values({Ifnull(datapf.Rows[i]["id"])},{Ifnull(datapf.Rows[i]["name"])},{Ifnull(datapf.Rows[i]["archive_no"])},{Ifnull(datapf.Rows[i]["id_number"])},{Ifnull(datapf.Rows[i]["visit_date"])},{Ifnull(datapf.Rows[i]["visit_type"])},{Ifnull(datapf.Rows[i]["sex"])},{Ifnull(datapf.Rows[i]["birthday"])},{Ifnull(datapf.Rows[i]["visit_doctor"])},{Ifnull(datapf.Rows[i]["work_info"])},{Ifnull(datapf.Rows[i]["advice"])},{Ifnull(datapf.Rows[i]["create_user"])},{Ifnull(datapf.Rows[i]["create_name"])},{Ifnull(datapf.Rows[i]["create_org"])},{Ifnull(datapf.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(datapf.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
+
                         pfrid += $"'{datapf.Rows[i]["id"]}',";
                     }
                 }
                 #endregion
+
                 #region 个人信息
-                DataSet info = DbHelperMySQL.Query($@"select * from resident_base_info where upload_status ='0' and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
+                DataSet info = DbHelperMySQL.Query($@"select * from resident_base_info where (upload_status =0 or upload_status =2) and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
                 if (info != null && info.Tables.Count > 0 && info.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = info.Tables[0];
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
-                        DataSet wsjl = DbHelperMySQL.Query($@"select * from traumatism_record where resident_base_info_id='{data.Rows[i]["id"]}'");
+                        string _residentbaseinfoid = data.Rows[i]["id"].ToString();
+                        string _idnumber = data.Rows[i]["id_number"].ToString();
+                        string _archiveno = data.Rows[i]["archive_no"].ToString();
+
+                        DataSet wsjl = DbHelperMySQL.Query($@"select * from traumatism_record where resident_base_info_id='{_residentbaseinfoid}'");
                         if (wsjl != null && wsjl.Tables.Count > 0 && wsjl.Tables[0].Rows.Count > 0)
                         {
                             DataTable data1 = wsjl.Tables[0];
                             string id = string.Empty;
+                            if (data1.Rows.Count > 0)
+                            {
+                                string sql = string.Format("Delete From traumatism_record where archive_no='{0}'", _archiveno);
+                                sqllist.Add(sql);
+                            }
                             for (int a = 0; a < data1.Rows.Count; a++)
                             {
+                                string  _id= Result.GetNewId();
                                 sqllist.Add($@"insert into traumatism_record (id,archive_no,id_number,traumatism_name,traumatism_time) 
-values({Ifnull(data1.Rows[a]["resident_base_info_id"])},{Ifnull(data1.Rows[a]["archive_no"])},{Ifnull(data1.Rows[a]["id_number"])},{Ifnull(data1.Rows[a]["traumatism_name"])},{Ifnull(Convert.ToDateTime(data1.Rows[a]["traumatism_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
+                                values({Ifnull(_id)},{Ifnull(_archiveno)},{Ifnull(_idnumber)},{Ifnull(data1.Rows[a]["traumatism_name"])},{Ifnull(Convert.ToDateTime(data1.Rows[a]["traumatism_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
 
                             }
                         }
 
-                        DataSet sxzb = DbHelperMySQL.Query($@"select * from metachysis_record where resident_base_info_id='{data.Rows[i]["id"]}'");
+                        DataSet sxzb = DbHelperMySQL.Query($@"select * from metachysis_record where resident_base_info_id='{_residentbaseinfoid}'");
                         if (sxzb != null && sxzb.Tables.Count > 0 && sxzb.Tables[0].Rows.Count > 0)
                         {
                             DataTable data2 = sxzb.Tables[0];
                             string id = string.Empty;
+                            if (data2.Rows.Count > 0)
+                            {
+                                string sql = string.Format("Delete From metachysis_record where archive_no='{0}'", _archiveno);
+                                sqllist.Add(sql);
+                            }
                             for (int b = 0; b < data2.Rows.Count; b++)
                             {
+                                string _id = Result.GetNewId();
                                 sqllist.Add($@"insert into metachysis_record (id,archive_no,id_number,metachysis_reasonn,metachysis_time) 
-values({Ifnull(data2.Rows[b]["resident_base_info_id"])},{Ifnull(data2.Rows[b]["archive_no"])},{Ifnull(data2.Rows[b]["id_number"])},{Ifnull(data2.Rows[b]["metachysis_reasonn"])},{Ifnull(Convert.ToDateTime(data2.Rows[b]["metachysis_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
-
+                                    values({Ifnull(_id)},{Ifnull(_archiveno)},{Ifnull(_idnumber)},{Ifnull(data2.Rows[b]["metachysis_reasonn"])},{Ifnull(Convert.ToDateTime(data2.Rows[b]["metachysis_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
                             }
                         }
 
-                        DataSet ssjl = DbHelperMySQL.Query($@"select * from operation_record where resident_base_info_id='{data.Rows[i]["id"]}'");
+                        DataSet ssjl = DbHelperMySQL.Query($@"select * from operation_record where resident_base_info_id='{_residentbaseinfoid}'");
                         if (ssjl != null && ssjl.Tables.Count > 0 && ssjl.Tables[0].Rows.Count > 0)
                         {
                             DataTable data3 = ssjl.Tables[0];
                             string id = string.Empty;
+                            if (data3.Rows.Count > 0)
+                            {
+                                string sql = string.Format("Delete From operation_record where archive_no='{0}'", _archiveno);
+                                sqllist.Add(sql);
+                            }
                             for (int c = 0; c < data3.Rows.Count; c++)
                             {
+                                string _id = Result.GetNewId();
                                 sqllist.Add($@"insert into operation_record (id,archive_no,id_number,operation_name,operation_time) 
-values({Ifnull(data3.Rows[c]["resident_base_info_id"])},{Ifnull(data3.Rows[c]["archive_no"])},{Ifnull(data3.Rows[c]["id_number"])},{Ifnull(data3.Rows[c]["operation_name"])},{Ifnull(Convert.ToDateTime(data3.Rows[c]["operation_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
-
+                                    values({Ifnull(_id)},{Ifnull(_archiveno)},{Ifnull(_idnumber)},{Ifnull(data3.Rows[c]["operation_name"])},{Ifnull(Convert.ToDateTime(data3.Rows[c]["operation_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
                             }
                         }
 
-                        DataSet jbjl = DbHelperMySQL.Query($@"select * from resident_diseases where resident_base_info_id='{data.Rows[i]["id"]}'");
+                        DataSet jbjl = DbHelperMySQL.Query($@"select * from resident_diseases where resident_base_info_id='{_residentbaseinfoid}'");
                         if (jbjl != null && jbjl.Tables.Count > 0 && jbjl.Tables[0].Rows.Count > 0)
                         {
                             DataTable data4 = jbjl.Tables[0];
                             string id = string.Empty;
+                            if (data4.Rows.Count > 0)
+                            {
+                                string sql = string.Format("Delete From resident_diseases where archive_no='{0}'", _archiveno);
+                                sqllist.Add(sql);
+                            }
                             for (int d = 0; d < data4.Rows.Count; d++)
                             {
+                                string _id = Result.GetNewId();
                                 sqllist.Add($@"insert into resident_diseases (id,archive_no,id_number,disease_type,disease_name,disease_date) 
-values({Ifnull(data4.Rows[d]["resident_base_info_id"])},{Ifnull(data4.Rows[d]["archive_no"])},{Ifnull(data4.Rows[d]["id_number"])},{Ifnull(data4.Rows[d]["disease_type"])},{Ifnull(data4.Rows[d]["disease_name"])},{Ifnull(data4.Rows[d]["disease_date"])});");
-
+                                    values({Ifnull(_id)},{Ifnull(_archiveno)},{Ifnull(_idnumber)},{Ifnull(data4.Rows[d]["disease_type"])},{Ifnull(data4.Rows[d]["disease_name"])},{Ifnull(data4.Rows[d]["disease_date"])});");
                             }
                         }
 
-                        DataSet jtbs = DbHelperMySQL.Query($@"select * from family_record where resident_base_info_id='{data.Rows[i]["id"]}'");
+                        DataSet jtbs = DbHelperMySQL.Query($@"select * from family_record where resident_base_info_id='{_residentbaseinfoid}'");
                         if (jtbs != null && jtbs.Tables.Count > 0 && jtbs.Tables[0].Rows.Count > 0)
                         {
                             DataTable data5 = jtbs.Tables[0];
                             string id = string.Empty;
+                            if (data5.Rows.Count > 0)
+                            {
+                                string sql = string.Format("Delete From family_record where archive_no='{0}'", _archiveno);
+                                sqllist.Add(sql);
+                            }
                             for (int f = 0; f < data5.Rows.Count; f++)
                             {
+                                string _id = Result.GetNewId();
                                 sqllist.Add($@"insert into family_record (id,archive_no,id_number,relation,disease_code,disease_name) 
-values({Ifnull(data5.Rows[f]["resident_base_info_id"])},{Ifnull(data5.Rows[f]["archive_no"])},{Ifnull(data5.Rows[f]["id_number"])},{Ifnull(data5.Rows[f]["relation"])},{Ifnull(data5.Rows[f]["disease_type"])},{Ifnull(data5.Rows[f]["disease_name"])});");
-
+                                    values({Ifnull(_id)},{Ifnull(_archiveno)},{Ifnull(_idnumber)},{Ifnull(data5.Rows[f]["relation"])},{Ifnull(data5.Rows[f]["disease_type"])},{Ifnull(data5.Rows[f]["disease_name"])});");
                             }
                         }
+                        string sql1 = string.Format("Delete From resident_info_temp where id='{0}'", _residentbaseinfoid);
+                        sqllist.Add(sql1);
                         sqllist.Add($@"insert into resident_info_temp (id,archive_no,pb_archive,name,sex,birthday,id_number,card_pic,company,phone,link_name,link_phone,resident_type,register_address,residence_address,nation,blood_group,blood_rh,education,profession,marital_status,pay_type,pay_other,drug_allergy,allergy_other,exposure,disease_other,is_hypertension,is_diabetes,is_psychosis,is_tuberculosis,is_heredity,heredity_name,is_deformity,deformity_name,is_poor,kitchen,fuel,other_fuel,drink,other_drink,toilet,poultry,medical_code,photo_code,aichive_org,doctor_name,province_code,province_name,city_code,city_name,county_code,county_name,towns_code,towns_name,village_code,village_name,status,remark,create_user,create_name,create_time,create_org,create_org_name
-) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["archive_no"])},{Ifnull(data.Rows[i]["pb_archive"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["sex"])},{Ifnull(data.Rows[i]["birthday"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["card_pic"])},{Ifnull(data.Rows[i]["company"])},{Ifnull(data.Rows[i]["phone"])},{Ifnull(data.Rows[i]["link_name"])},{Ifnull(data.Rows[i]["link_phone"])},{Ifnull(data.Rows[i]["resident_type"])},{Ifnull(data.Rows[i]["address"])},{Ifnull(data.Rows[i]["residence_address"])},{Ifnull(data.Rows[i]["nation"])},{Ifnull(data.Rows[i]["blood_group"])},{Ifnull(data.Rows[i]["blood_rh"])},{Ifnull(data.Rows[i]["education"])},{Ifnull(data.Rows[i]["profession"])},{Ifnull(data.Rows[i]["marital_status"])},{Ifnull(data.Rows[i]["pay_type"])},{Ifnull(data.Rows[i]["pay_other"])},{Ifnull(data.Rows[i]["drug_allergy"])},{Ifnull(data.Rows[i]["allergy_other"])},{Ifnull(data.Rows[i]["exposure"])},{Ifnull(data.Rows[i]["disease_other"])},{Ifnull(data.Rows[i]["is_hypertension"])},{Ifnull(data.Rows[i]["is_diabetes"])},{Ifnull(data.Rows[i]["is_psychosis"])},{Ifnull(data.Rows[i]["is_tuberculosis"])},{Ifnull(data.Rows[i]["is_heredity"])},{Ifnull(data.Rows[i]["heredity_name"])},{Ifnull(data.Rows[i]["is_deformity"])},{Ifnull(data.Rows[i]["deformity_name"])},{Ifnull(data.Rows[i]["is_poor"])},{Ifnull(data.Rows[i]["kitchen"])},{Ifnull(data.Rows[i]["fuel"])},{Ifnull(data.Rows[i]["other_fuel"])},{Ifnull(data.Rows[i]["drink"])},{Ifnull(data.Rows[i]["other_drink"])},{Ifnull(data.Rows[i]["toilet"])},{Ifnull(data.Rows[i]["poultry"])},{Ifnull(data.Rows[i]["medical_code"])},{Ifnull(data.Rows[i]["photo_code"])},{Ifnull(data.Rows[i]["aichive_org"])},{Ifnull(data.Rows[i]["doctor_name"])},{Ifnull(data.Rows[i]["province_code"])},{Ifnull(data.Rows[i]["province_name"])},{Ifnull(data.Rows[i]["city_code"])},{Ifnull(data.Rows[i]["city_name"])},{Ifnull(data.Rows[i]["county_code"])},{Ifnull(data.Rows[i]["county_name"])},{Ifnull(data.Rows[i]["towns_code"])},{Ifnull(data.Rows[i]["towns_name"])},{Ifnull(data.Rows[i]["village_code"])},{Ifnull(data.Rows[i]["village_name"])},{Ifnull(data.Rows[i]["status"])},{Ifnull(data.Rows[i]["remark"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])});");
+                            ) values({Ifnull(data.Rows[i]["id"])},{Ifnull(_archiveno)},{Ifnull(data.Rows[i]["pb_archive"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["sex"])},{Ifnull(data.Rows[i]["birthday"])},{Ifnull(_idnumber)},{Ifnull(data.Rows[i]["card_pic"])},{Ifnull(data.Rows[i]["company"])},{Ifnull(data.Rows[i]["phone"])},{Ifnull(data.Rows[i]["link_name"])},{Ifnull(data.Rows[i]["link_phone"])},{Ifnull(data.Rows[i]["resident_type"])},{Ifnull(data.Rows[i]["address"])},{Ifnull(data.Rows[i]["residence_address"])},{Ifnull(data.Rows[i]["nation"])},{Ifnull(data.Rows[i]["blood_group"])},{Ifnull(data.Rows[i]["blood_rh"])},{Ifnull(data.Rows[i]["education"])},{Ifnull(data.Rows[i]["profession"])},{Ifnull(data.Rows[i]["marital_status"])},{Ifnull(data.Rows[i]["pay_type"])},{Ifnull(data.Rows[i]["pay_other"])},{Ifnull(data.Rows[i]["drug_allergy"])},{Ifnull(data.Rows[i]["allergy_other"])},{Ifnull(data.Rows[i]["exposure"])},{Ifnull(data.Rows[i]["disease_other"])},{Ifnull(data.Rows[i]["is_hypertension"])},{Ifnull(data.Rows[i]["is_diabetes"])},{Ifnull(data.Rows[i]["is_psychosis"])},{Ifnull(data.Rows[i]["is_tuberculosis"])},{Ifnull(data.Rows[i]["is_heredity"])},{Ifnull(data.Rows[i]["heredity_name"])},{Ifnull(data.Rows[i]["is_deformity"])},{Ifnull(data.Rows[i]["deformity_name"])},{Ifnull(data.Rows[i]["is_poor"])},{Ifnull(data.Rows[i]["kitchen"])},{Ifnull(data.Rows[i]["fuel"])},{Ifnull(data.Rows[i]["other_fuel"])},{Ifnull(data.Rows[i]["drink"])},{Ifnull(data.Rows[i]["other_drink"])},{Ifnull(data.Rows[i]["toilet"])},{Ifnull(data.Rows[i]["poultry"])},{Ifnull(data.Rows[i]["medical_code"])},{Ifnull(data.Rows[i]["photo_code"])},{Ifnull(data.Rows[i]["aichive_org"])},{Ifnull(data.Rows[i]["doctor_name"])},{Ifnull(data.Rows[i]["province_code"])},{Ifnull(data.Rows[i]["province_name"])},{Ifnull(data.Rows[i]["city_code"])},{Ifnull(data.Rows[i]["city_name"])},{Ifnull(data.Rows[i]["county_code"])},{Ifnull(data.Rows[i]["county_name"])},{Ifnull(data.Rows[i]["towns_code"])},{Ifnull(data.Rows[i]["towns_name"])},{Ifnull(data.Rows[i]["village_code"])},{Ifnull(data.Rows[i]["village_name"])},{Ifnull(data.Rows[i]["status"])},{Ifnull(data.Rows[i]["remark"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])});");
                         infoid += $"'{data.Rows[i]["id"]}',";
                     }
                 }
                 #endregion
 
                 #region 健康体检
-                DataSet record = DbHelperMySQL.Query($@"select * from physical_examination_record where upload_status='0' and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
+                DataSet record = DbHelperMySQL.Query($@"select * from physical_examination_record where (upload_status=0 or upload_status=2) and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
                 if (record != null && record.Tables.Count > 0 && record.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = record.Tables[0];
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
-                        DataSet zyjl = DbHelperMySQL.Query($@"select * from hospitalized_record where exam_id='{data.Rows[i]["id"]}'");
+                        string exam_id = data.Rows[i]["id"].ToString();
+                        DataSet zyjl = DbHelperMySQL.Query($@"select * from hospitalized_record where exam_id='{exam_id}'");
                         if (zyjl != null && zyjl.Tables.Count > 0 && zyjl.Tables[0].Rows.Count > 0)
                         {
                             DataTable data1 = zyjl.Tables[0];
                             string id = string.Empty;
+                            if (data1.Rows.Count > 0)
+                            {
+                                string sql = string.Format("Delete From hospitalized_record where exam_id='{0}'", exam_id);
+                                sqllist.Add(sql);
+                            }
                             for (int j = 0; j < data1.Rows.Count; j++)
                             {
                                 sqllist.Add($@"insert into hospitalized_record (id,exam_id,archive_no,id_number,service_name,hospitalized_type,in_hospital_time,leave_hospital_time,reason,hospital_organ,case_code,remark,create_org,create_name,create_time) 
-                values({Ifnull(data1.Rows[j]["id"])},{Ifnull(data1.Rows[j]["exam_id"])},{Ifnull(data1.Rows[j]["archive_no"])},{Ifnull(data1.Rows[j]["id_number"])},{Ifnull(data1.Rows[j]["service_name"])},{Ifnull(data1.Rows[j]["hospitalized_type"])},{Ifnull(data1.Rows[j]["in_hospital_time"])},{Ifnull(data1.Rows[j]["leave_hospital_time"])},{Ifnull(data1.Rows[j]["reason"])},{Ifnull(data1.Rows[j]["hospital_organ"])},{Ifnull(data1.Rows[j]["case_code"])},{Ifnull(data1.Rows[j]["remark"])},{Ifnull(data1.Rows[j]["create_org"])},{Ifnull(data1.Rows[j]["create_name"])},{Ifnull(Convert.ToDateTime(data1.Rows[j]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
+                                    values({Ifnull(data1.Rows[j]["id"])},{Ifnull(data1.Rows[j]["exam_id"])},{Ifnull(data1.Rows[j]["archive_no"])},{Ifnull(data1.Rows[j]["id_number"])},{Ifnull(data1.Rows[j]["service_name"])},{Ifnull(data1.Rows[j]["hospitalized_type"])},{Ifnull(data1.Rows[j]["in_hospital_time"])},{Ifnull(data1.Rows[j]["leave_hospital_time"])},{Ifnull(data1.Rows[j]["reason"])},{Ifnull(data1.Rows[j]["hospital_organ"])},{Ifnull(data1.Rows[j]["case_code"])},{Ifnull(data1.Rows[j]["remark"])},{Ifnull(data1.Rows[j]["create_org"])},{Ifnull(data1.Rows[j]["create_name"])},{Ifnull(Convert.ToDateTime(data1.Rows[j]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
                                 zyjlid += $"'{data1.Rows[j]["id"]}',";
-
                             }
                         }
-                        DataSet yyjl = DbHelperMySQL.Query($@"select * from take_medicine_record where exam_id='{data.Rows[i]["id"]}'");
+                        DataSet yyjl = DbHelperMySQL.Query($@"select * from take_medicine_record where exam_id='{exam_id}'");
                         if (yyjl != null && yyjl.Tables.Count > 0 && yyjl.Tables[0].Rows.Count > 0)
                         {
                             DataTable data2 = yyjl.Tables[0];
                             string id = string.Empty;
+                            if (data2.Rows.Count > 0)
+                            {
+                                string sql = string.Format("Delete From take_medicine_record where exam_id='{0}'", exam_id);
+                                sqllist.Add(sql);
+                            }
                             for (int k = 0; k < data2.Rows.Count; k++)
                             {
                                 sqllist.Add($@"insert into take_medicine_record (id,exam_id,archive_no,id_number,service_name,medicine_type,medicine_name,medicine_usage,frequency,medicine_dosage,unit,medicine_time,medicine_time_unit,medicine_compliance,other,create_org,create_name,create_time) 
-                values({Ifnull(data2.Rows[k]["id"])},{Ifnull(data2.Rows[k]["exam_id"])},{Ifnull(data2.Rows[k]["archive_no"])},{Ifnull(data2.Rows[k]["id_number"])},{Ifnull(data2.Rows[k]["service_name"])},{Ifnull(data2.Rows[k]["medicine_type"])},{Ifnull(data2.Rows[k]["medicine_name"])},{Ifnull(data2.Rows[k]["medicine_usage"])},{Ifnull(data2.Rows[k]["frequency"])},{Ifnull(data2.Rows[k]["medicine_dosage"])},{Ifnull(data2.Rows[k]["unit"])},{Ifnull(data2.Rows[k]["medicine_time"])},{Ifnull(data2.Rows[k]["medicine_time_unit"])},{Ifnull(data2.Rows[k]["medicine_compliance"])},{Ifnull(data2.Rows[k]["other"])},{Ifnull(data2.Rows[k]["create_org"])},{Ifnull(data2.Rows[k]["create_name"])},{Ifnull(Convert.ToDateTime(data2.Rows[k]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
+                                    values({Ifnull(data2.Rows[k]["id"])},{Ifnull(data2.Rows[k]["exam_id"])},{Ifnull(data2.Rows[k]["archive_no"])},{Ifnull(data2.Rows[k]["id_number"])},{Ifnull(data2.Rows[k]["service_name"])},{Ifnull(data2.Rows[k]["medicine_type"])},{Ifnull(data2.Rows[k]["medicine_name"])},{Ifnull(data2.Rows[k]["medicine_usage"])},{Ifnull(data2.Rows[k]["frequency"])},{Ifnull(data2.Rows[k]["medicine_dosage"])},{Ifnull(data2.Rows[k]["unit"])},{Ifnull(data2.Rows[k]["medicine_time"])},{Ifnull(data2.Rows[k]["medicine_time_unit"])},{Ifnull(data2.Rows[k]["medicine_compliance"])},{Ifnull(data2.Rows[k]["other"])},{Ifnull(data2.Rows[k]["create_org"])},{Ifnull(data2.Rows[k]["create_name"])},{Ifnull(Convert.ToDateTime(data2.Rows[k]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
                                 yyjlid += $"'{data2.Rows[k]["id"]}',";
                             }
                         }
-                        DataSet ymjl = DbHelperMySQL.Query($@"select * from vaccination_record where exam_id='{data.Rows[i]["id"]}'");
+                        DataSet ymjl = DbHelperMySQL.Query($@"select * from vaccination_record where exam_id='{exam_id}'");
                         if (ymjl != null && ymjl.Tables.Count > 0 && ymjl.Tables[0].Rows.Count > 0)
                         {
                             DataTable data3 = ymjl.Tables[0];
                             string id = string.Empty;
+                            if (data3.Rows.Count > 0)
+                            {
+                                string sql = string.Format("Delete From vaccination_record where exam_id='{0}'", exam_id);
+                                sqllist.Add(sql);
+                            }
                             for (int a = 0; a < data3.Rows.Count; a++)
                             {
                                 sqllist.Add($@"insert into vaccination_record (id,exam_id,archive_no,id_number,service_name,card_id,vaccination_type,vaccination_id,vaccination_name,acuscount,dose,descnption,inocu_state,sinocu_date,vaccination_time,inocu_doctor,register_person,dzjgm,batch_number,county,inoculation_site,inoculation_way,vaccination_organ,vaccination_organ_name,remark,validdate,manufacturer,manufact_code,create_name,create_time) 
-                values({Ifnull(data3.Rows[a]["id"])},{Ifnull(data3.Rows[a]["exam_id"])},{Ifnull(data3.Rows[a]["archive_no"])},{Ifnull(data3.Rows[a]["id_number"])},{Ifnull(data3.Rows[a]["service_name"])},{Ifnull(data3.Rows[a]["card_id"])},{Ifnull(data3.Rows[a]["vaccination_type"])},{Ifnull(data3.Rows[a]["vaccination_id"])},{Ifnull(data3.Rows[a]["vaccination_name"])},{Ifnull(data3.Rows[a]["acuscount"])},{Ifnull(data3.Rows[a]["dose"])},{Ifnull(data3.Rows[a]["descnption"])},{Ifnull(data3.Rows[a]["inocu_state"])},{Ifnull(data3.Rows[a]["sinocu_date"])},{Ifnull(data3.Rows[a]["vaccination_time"])},{Ifnull(data3.Rows[a]["inocu_doctor"])},{Ifnull(data3.Rows[a]["register_person"])},{Ifnull(data3.Rows[a]["dzjgm"])},{Ifnull(data3.Rows[a]["batch_number"])},{Ifnull(data3.Rows[a]["county"])},{Ifnull(data3.Rows[a]["inoculation_site"])},{Ifnull(data3.Rows[a]["inoculation_way"])},{Ifnull(data3.Rows[a]["vaccination_organ"])},{Ifnull(data3.Rows[a]["vaccination_organ_name"])},{Ifnull(data3.Rows[a]["remark"])},{Ifnull(data3.Rows[a]["validdate"])},{Ifnull(data3.Rows[a]["manufacturer"])},{Ifnull(data3.Rows[a]["manufact_code"])},{Ifnull(data3.Rows[a]["create_name"])},{Ifnull(Convert.ToDateTime(data3.Rows[a]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
+                                    values({Ifnull(data3.Rows[a]["id"])},{Ifnull(data3.Rows[a]["exam_id"])},{Ifnull(data3.Rows[a]["archive_no"])},{Ifnull(data3.Rows[a]["id_number"])},{Ifnull(data3.Rows[a]["service_name"])},{Ifnull(data3.Rows[a]["card_id"])},{Ifnull(data3.Rows[a]["vaccination_type"])},{Ifnull(data3.Rows[a]["vaccination_id"])},{Ifnull(data3.Rows[a]["vaccination_name"])},{Ifnull(data3.Rows[a]["acuscount"])},{Ifnull(data3.Rows[a]["dose"])},{Ifnull(data3.Rows[a]["descnption"])},{Ifnull(data3.Rows[a]["inocu_state"])},{Ifnull(data3.Rows[a]["sinocu_date"])},{Ifnull(data3.Rows[a]["vaccination_time"])},{Ifnull(data3.Rows[a]["inocu_doctor"])},{Ifnull(data3.Rows[a]["register_person"])},{Ifnull(data3.Rows[a]["dzjgm"])},{Ifnull(data3.Rows[a]["batch_number"])},{Ifnull(data3.Rows[a]["county"])},{Ifnull(data3.Rows[a]["inoculation_site"])},{Ifnull(data3.Rows[a]["inoculation_way"])},{Ifnull(data3.Rows[a]["vaccination_organ"])},{Ifnull(data3.Rows[a]["vaccination_organ_name"])},{Ifnull(data3.Rows[a]["remark"])},{Ifnull(data3.Rows[a]["validdate"])},{Ifnull(data3.Rows[a]["manufacturer"])},{Ifnull(data3.Rows[a]["manufact_code"])},{Ifnull(data3.Rows[a]["create_name"])},{Ifnull(Convert.ToDateTime(data3.Rows[a]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
                                 ymjlid += $"'{data3.Rows[a]["id"]}',";
                             }
                         }
+
+                        string sql1 = string.Format("Delete From physical_examination_record where id='{0}'", exam_id);
+                        sqllist.Add(sql1);
                         sqllist.Add($@"insert into physical_examination_record (id,name,archive_no,id_number,batch_no,bar_code,dutydoctor,symptom,symptom_other,check_date,base_temperature,base_heartbeat,base_respiratory,base_blood_pressure_left_high,base_blood_pressure_left_low,base_blood_pressure_right_high,base_blood_pressure_right_low,base_height,base_weight,base_waist,base_bmi,base_health_estimate,base_selfcare_estimate,base_cognition_estimate,base_cognition_score,base_feeling_estimate,base_feeling_score,base_doctor,lifeway_exercise_frequency,lifeway_exercise_time,lifeway_exercise_year,lifeway_exercise_type,lifeway_diet,lifeway_smoke_status,lifeway_smoke_number,lifeway_smoke_startage,lifeway_smoke_endage,lifeway_drink_status,lifeway_drink_number,lifeway_drink_stop,lifeway_drink_stopage,lifeway_drink_startage,lifeway_drink_oneyear,lifeway_drink_type,lifeway_drink_other,lifeway_occupational_disease,lifeway_job,lifeway_job_period,lifeway_hazardous_dust,lifeway_dust_preventive,lifeway_hazardous_radiation,lifeway_radiation_preventive,lifeway_hazardous_physical,lifeway_physical_preventive,lifeway_hazardous_chemical,lifeway_chemical_preventive,lifeway_hazardous_other,lifeway_other_preventive,lifeway_doctor,organ_lips,organ_tooth,organ_hypodontia,organ_hypodontia_topleft,organ_hypodontia_topright,organ_hypodontia_bottomleft,organ_hypodontia_bottomright,organ_caries,organ_caries_topleft,organ_caries_topright,organ_caries_bottomleft,organ_caries_bottomright,organ_denture,organ_denture_topleft,organ_denture_topright,organ_denture_bottomleft,organ_denture_bottomright,organ_guttur,organ_vision_left,organ_vision_right,organ_correctedvision_left,organ_correctedvision_right,organ_hearing,organ_movement,organ_doctor,examination_eye,examination_eye_other,examination_skin,examination_skin_other,examination_sclera,examination_sclera_other,examination_lymph,examination_lymph_other,examination_barrel_chest,examination_breath_sounds,examination_breath_other,examination_rale,examination_rale_other,examination_heart_rate,examination_heart_rhythm,examination_heart_noise,examination_noise_other,examination_abdomen_tenderness,examination_tenderness_memo,examination_abdomen_mass,examination_mass_memo,examination_abdomen_hepatomegaly,examination_hepatomegaly_memo,examination_abdomen_splenomegaly,examination_splenomegaly_memo,examination_abdomen_shiftingdullness,examination_shiftingdullness_memo,examination_lowerextremity_edema,examination_dorsal_artery,examination_anus,examination_anus_other,examination_breast,examination_breast_other,examination_doctor,examination_woman_vulva,examination_vulva_memo,examination_woman_vagina,examination_vagina_memo,examination_woman_cervix,examination_cervix_memo,examination_woman_corpus,examination_corpus_memo,examination_woman_accessories,examination_accessories_memo,examination_woman_doctor,examination_other,blood_hemoglobin,blood_leukocyte,blood_platelet,blood_other,urine_protein,glycosuria,urine_acetone_bodies,bld,urine_other,blood_glucose_mmol,blood_glucose_mg,cardiogram,cardiogram_memo,cardiogram_img,microalbuminuria,fob,glycosylated_hemoglobin,hb,sgft,ast,albumin,total_bilirubin,conjugated_bilirubin,scr,blood_urea,blood_k,blood_na,tc,tg,ldl,hdl,chest_x,x_memo,chestx_img,ultrasound_abdomen,ultrasound_memo,abdomenB_img,other_b,otherb_memo,otherb_img,cervical_smear,cervical_smear_memo,other,cerebrovascular_disease,cerebrovascular_disease_other,kidney_disease,kidney_disease_other,heart_disease,heart_disease_other,vascular_disease,vascular_disease_other,ocular_diseases,ocular_diseases_other,nervous_system_disease,nervous_disease_memo,other_disease,other_disease_memo,health_evaluation,abnormal1,abnormal2,abnormal3,abnormal4,health_guidance,danger_controlling,target_weight,advise_bacterin,danger_controlling_other,health_advice,create_user,create_name,create_org,create_org_name,create_time)
                 values('{data.Rows[i]["id"]}','{data.Rows[i]["name"]}','{data.Rows[i]["aichive_no"]}','{data.Rows[i]["id_number"]}','{data.Rows[i]["batch_no"]}','{data.Rows[i]["bar_code"]}','{data.Rows[i]["dutydoctor"]}','{data.Rows[i]["symptom"]}','{data.Rows[i]["symptom_other"]}','{data.Rows[i]["check_date"]}','{data.Rows[i]["base_temperature"]}','{data.Rows[i]["base_heartbeat"]}','{data.Rows[i]["base_respiratory"]}',{Ifnull(data.Rows[i]["base_blood_pressure_left_high"])},{Ifnull(data.Rows[i]["base_blood_pressure_left_low"])},{Ifnull(data.Rows[i]["base_blood_pressure_right_high"])},{Ifnull(data.Rows[i]["base_blood_pressure_right_low"])},'{data.Rows[i]["base_height"]}','{data.Rows[i]["base_weight"]}','{data.Rows[i]["base_waist"]}','{data.Rows[i]["base_bmi"]}','{data.Rows[i]["base_health_estimate"]}','{data.Rows[i]["base_selfcare_estimate"]}','{data.Rows[i]["base_cognition_estimate"]}','{data.Rows[i]["base_cognition_score"]}','{data.Rows[i]["base_feeling_estimate"]}','{data.Rows[i]["base_feeling_score"]}','{data.Rows[i]["base_doctor"]}','{data.Rows[i]["lifeway_exercise_frequency"]}','{data.Rows[i]["lifeway_exercise_time"]}','{data.Rows[i]["lifeway_exercise_year"]}','{data.Rows[i]["lifeway_exercise_type"]}','{data.Rows[i]["lifeway_diet"]}','{data.Rows[i]["lifeway_smoke_status"]}','{data.Rows[i]["lifeway_smoke_number"]}','{data.Rows[i]["lifeway_smoke_startage"]}','{data.Rows[i]["lifeway_smoke_endage"]}','{data.Rows[i]["lifeway_drink_status"]}','{data.Rows[i]["lifeway_drink_number"]}','{data.Rows[i]["lifeway_drink_stop"]}','{data.Rows[i]["lifeway_drink_stopage"]}','{data.Rows[i]["lifeway_drink_startage"]}','{data.Rows[i]["lifeway_drink_oneyear"]}','{data.Rows[i]["lifeway_drink_type"]}','{data.Rows[i]["lifeway_drink_other"]}','{data.Rows[i]["lifeway_occupational_disease"]}','{data.Rows[i]["lifeway_job"]}','{data.Rows[i]["lifeway_job_period"]}','{data.Rows[i]["lifeway_hazardous_dust"]}','{data.Rows[i]["lifeway_dust_preventive"]}','{data.Rows[i]["lifeway_hazardous_radiation"]}','{data.Rows[i]["lifeway_radiation_preventive"]}','{data.Rows[i]["lifeway_hazardous_physical"]}','{data.Rows[i]["lifeway_physical_preventive"]}','{data.Rows[i]["lifeway_hazardous_chemical"]}','{data.Rows[i]["lifeway_chemical_preventive"]}','{data.Rows[i]["lifeway_hazardous_other"]}','{data.Rows[i]["lifeway_other_preventive"]}','{data.Rows[i]["lifeway_doctor"]}','{data.Rows[i]["organ_lips"]}','{data.Rows[i]["organ_tooth"]}','{data.Rows[i]["organ_hypodontia"]}','{data.Rows[i]["organ_hypodontia_topleft"]}','{data.Rows[i]["organ_hypodontia_topright"]}','{data.Rows[i]["organ_hypodontia_bottomleft"]}','{data.Rows[i]["organ_hypodontia_bottomright"]}','{data.Rows[i]["organ_caries"]}','{data.Rows[i]["organ_caries_topleft"]}','{data.Rows[i]["organ_caries_topright"]}','{data.Rows[i]["organ_caries_bottomleft"]}','{data.Rows[i]["organ_caries_bottomright"]}','{data.Rows[i]["organ_denture"]}','{data.Rows[i]["organ_denture_topleft"]}','{data.Rows[i]["organ_denture_topright"]}','{data.Rows[i]["organ_denture_bottomleft"]}','{data.Rows[i]["organ_denture_bottomright"]}','{data.Rows[i]["organ_guttur"]}','{data.Rows[i]["organ_vision_left"]}','{data.Rows[i]["organ_vision_right"]}','{data.Rows[i]["organ_correctedvision_left"]}','{data.Rows[i]["organ_correctedvision_right"]}','{data.Rows[i]["organ_hearing"]}','{data.Rows[i]["organ_movement"]}','{data.Rows[i]["organ_doctor"]}','{data.Rows[i]["examination_eye"]}','{data.Rows[i]["examination_eye_other"]}','{data.Rows[i]["examination_skin"]}','{data.Rows[i]["examination_skin_other"]}','{data.Rows[i]["examination_sclera"]}','{data.Rows[i]["examination_sclera_other"]}','{data.Rows[i]["examination_lymph"]}','{data.Rows[i]["examination_lymph_other"]}','{data.Rows[i]["examination_barrel_chest"]}','{data.Rows[i]["examination_breath_sounds"]}','{data.Rows[i]["examination_breath_other"]}','{data.Rows[i]["examination_rale"]}','{data.Rows[i]["examination_rale_other"]}','{data.Rows[i]["examination_heart_rate"]}','{data.Rows[i]["examination_heart_rhythm"]}','{data.Rows[i]["examination_heart_noise"]}','{data.Rows[i]["examination_noise_other"]}','{data.Rows[i]["examination_abdomen_tenderness"]}','{data.Rows[i]["examination_tenderness_memo"]}','{data.Rows[i]["examination_abdomen_mass"]}','{data.Rows[i]["examination_mass_memo"]}','{data.Rows[i]["examination_abdomen_hepatomegaly"]}','{data.Rows[i]["examination_hepatomegaly_memo"]}','{data.Rows[i]["examination_abdomen_splenomegaly"]}','{data.Rows[i]["examination_splenomegaly_memo"]}','{data.Rows[i]["examination_abdomen_shiftingdullness"]}','{data.Rows[i]["examination_shiftingdullness_memo"]}','{data.Rows[i]["examination_lowerextremity_edema"]}','{data.Rows[i]["examination_dorsal_artery"]}','{data.Rows[i]["examination_anus"]}','{data.Rows[i]["examination_anus_other"]}','{data.Rows[i]["examination_breast"]}','{data.Rows[i]["examination_breast_other"]}','{data.Rows[i]["examination_doctor"]}','{data.Rows[i]["examination_woman_vulva"]}','{data.Rows[i]["examination_vulva_memo"]}','{data.Rows[i]["examination_woman_vagina"]}','{data.Rows[i]["examination_vagina_memo"]}','{data.Rows[i]["examination_woman_cervix"]}','{data.Rows[i]["examination_cervix_memo"]}','{data.Rows[i]["examination_woman_corpus"]}','{data.Rows[i]["examination_corpus_memo"]}','{data.Rows[i]["examination_woman_accessories"]}','{data.Rows[i]["examination_accessories_memo"]}','{data.Rows[i]["examination_woman_doctor"]}','{data.Rows[i]["examination_other"]}','{data.Rows[i]["blood_hemoglobin"]}','{data.Rows[i]["blood_leukocyte"]}','{data.Rows[i]["blood_platelet"]}','{data.Rows[i]["blood_other"]}','{data.Rows[i]["urine_protein"]}','{data.Rows[i]["glycosuria"]}','{data.Rows[i]["urine_acetone_bodies"]}','{data.Rows[i]["bld"]}','{data.Rows[i]["urine_other"]}','{data.Rows[i]["blood_glucose_mmol"]}','{data.Rows[i]["blood_glucose_mg"]}','{data.Rows[i]["cardiogram"]}','{data.Rows[i]["cardiogram_memo"]}','{data.Rows[i]["cardiogram_img"]}','{data.Rows[i]["microalbuminuria"]}','{data.Rows[i]["fob"]}','{data.Rows[i]["glycosylated_hemoglobin"]}','{data.Rows[i]["hb"]}','{data.Rows[i]["sgft"]}','{data.Rows[i]["ast"]}','{data.Rows[i]["albumin"]}','{data.Rows[i]["total_bilirubin"]}','{data.Rows[i]["conjugated_bilirubin"]}','{data.Rows[i]["scr"]}','{data.Rows[i]["blood_urea"]}','{data.Rows[i]["blood_k"]}','{data.Rows[i]["blood_na"]}','{data.Rows[i]["tc"]}','{data.Rows[i]["tg"]}','{data.Rows[i]["ldl"]}','{data.Rows[i]["hdl"]}','{data.Rows[i]["chest_x"]}','{data.Rows[i]["chestx_memo"]}','{data.Rows[i]["chestx_img"]}','{data.Rows[i]["ultrasound_abdomen"]}','{data.Rows[i]["ultrasound_memo"]}','{data.Rows[i]["abdomenB_img"]}','{data.Rows[i]["other_b"]}','{data.Rows[i]["otherb_memo"]}','{data.Rows[i]["otherb_img"]}','{data.Rows[i]["cervical_smear"]}','{data.Rows[i]["cervical_smear_memo"]}','{data.Rows[i]["other"]}','{data.Rows[i]["cerebrovascular_disease"]}','{data.Rows[i]["cerebrovascular_disease_other"]}','{data.Rows[i]["kidney_disease"]}','{data.Rows[i]["kidney_disease_other"]}','{data.Rows[i]["heart_disease"]}','{data.Rows[i]["heart_disease_other"]}','{data.Rows[i]["vascular_disease"]}','{data.Rows[i]["vascular_disease_other"]}','{data.Rows[i]["ocular_diseases"]}','{data.Rows[i]["ocular_diseases_other"]}','{data.Rows[i]["nervous_system_disease"]}','{data.Rows[i]["nervous_disease_memo"]}','{data.Rows[i]["other_disease"]}','{data.Rows[i]["other_disease_memo"]}','{data.Rows[i]["health_evaluation"]}','{data.Rows[i]["abnormal1"]}','{data.Rows[i]["abnormal2"]}','{data.Rows[i]["abnormal3"]}','{data.Rows[i]["abnormal4"]}','{data.Rows[i]["health_guidance"]}','{data.Rows[i]["danger_controlling"]}','{data.Rows[i]["target_weight"]}','{data.Rows[i]["advise_bacterin"]}','{data.Rows[i]["danger_controlling_other"]}','{data.Rows[i]["healthAdvice"]}','{data.Rows[i]["create_user"]}','{data.Rows[i]["create_name"]}','{data.Rows[i]["create_org"]}','{data.Rows[i]["create_org_name"]}',{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
                         recordid += $"'{data.Rows[i]["id"]}',";
@@ -3628,22 +3693,24 @@ values({Ifnull(data5.Rows[f]["resident_base_info_id"])},{Ifnull(data5.Rows[f]["a
                 #endregion
 
                 #region 老年人生活自理评估
-                DataSet estimate = DbHelperMySQL.Query($@"select * from elderly_selfcare_estimate where id_number in({string.Join(",", ide.Select(m => m.ID).ToList())}) and upload_status='0' or upload_status is null");
+                DataSet estimate = DbHelperMySQL.Query($@"select * from elderly_selfcare_estimate where id_number in({string.Join(",", ide.Select(m => m.ID).ToList())}) and (upload_status=0 or upload_status is null or upload_status=2)");
                 if (estimate != null && estimate.Tables.Count > 0 && estimate.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = estimate.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From elderly_selfcare_estimate where id='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql);
                         sqllist.Add($@"insert into elderly_selfcare_estimate (id,name,archive_no,id_number,test_date,answer_result,total_score,judgement_result,test_doctor,create_user,create_name,create_org,create_org_name,create_time
-                ) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["test_date"])},{Ifnull(data.Rows[i]["answer_result"])},{Ifnull(data.Rows[i]["total_score"])},{Ifnull(data.Rows[i]["judgement_result"])},{Ifnull(data.Rows[i]["test_doctor"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
+                            ) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["test_date"])},{Ifnull(data.Rows[i]["answer_result"])},{Ifnull(data.Rows[i]["total_score"])},{Ifnull(data.Rows[i]["judgement_result"])},{Ifnull(data.Rows[i]["test_doctor"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
                         estimateid += $"'{data.Rows[i]["id"]}',";
                     }
                 }
                 #endregion
 
                 #region 高血压
-                DataSet fuv = DbHelperMySQL.Query($@"select * from fuv_hypertension where upload_status='0' and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
+                DataSet fuv = DbHelperMySQL.Query($@"select * from fuv_hypertension where (upload_status=0 or upload_status=2) and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
                 if (fuv != null && fuv.Tables.Count > 0 && fuv.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = fuv.Tables[0];
@@ -3654,14 +3721,21 @@ values({Ifnull(data5.Rows[f]["resident_base_info_id"])},{Ifnull(data5.Rows[f]["a
                         if (follow != null && follow.Tables.Count > 0 && follow.Tables[0].Rows.Count > 0)
                         {
                             DataTable data1 = follow.Tables[0];
-                            for (int k = 0; k < data.Rows.Count; k++)
+                            if(data1.Rows.Count>0)
+                            {
+                                string sql = string.Format("Delete From follow_medicine_record where follow_id='{0}'", data.Rows[i]["id"].ToString());
+                                sqllist.Add(sql);
+                            } 
+                            for (int k = 0; k < data1.Rows.Count; k++)
                             {
                                 sqllist.Add($@"insert into follow_medicine_record (id,follow_id,drug_name,num,dosage,create_user,create_name,create_time) values({Ifnull(data1.Rows[k]["id"])},{Ifnull(data1.Rows[k]["follow_id"])},{Ifnull(data1.Rows[k]["drug_name"])},{Ifnull(data1.Rows[k]["num"])},{Ifnull(data1.Rows[k]["dosage"])},{Ifnull(data1.Rows[k]["create_user"])},{Ifnull(data1.Rows[k]["create_name"])},{Ifnull(Convert.ToDateTime(data1.Rows[k]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
                                 followid += $"'{data1.Rows[i]["id"]}',";
                             }
                         }
+                        string sql1 = string.Format("Delete From fuv_hypertension where id='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql1);
                         sqllist.Add($@"insert into fuv_hypertension (id,name,archive_no,id_number,visit_date,visit_type,symptom,other_symptom,sbp,dbp,weight,target_weight,bmi,target_bmi,heart_rate,other_sign,smoken,target_somken,wine,target_wine,sport_week,sport_once,target_sport_week,target_sport_once,salt_intake,target_salt_intake,mind_adjust,doctor_obey,assist_examine,drug_obey,untoward_effect,untoward_effect_drug,visit_class,referral_code,next_visit_date,visit_doctor,advice,create_user,create_name,create_time,create_org,create_org_name,transfer_organ,transfer_reason
-) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["visit_type"])},{Ifnull(data.Rows[i]["symptom"])},{Ifnull(data.Rows[i]["other_symptom"])},{Ifnull(data.Rows[i]["sbp"])},{Ifnull(data.Rows[i]["dbp"])},{Ifnull(data.Rows[i]["weight"])},{Ifnull(data.Rows[i]["target_weight"])},{Ifnull(data.Rows[i]["bmi"])},{Ifnull(data.Rows[i]["target_bmi"])},{Ifnull(data.Rows[i]["heart_rate"])},{Ifnull(data.Rows[i]["other_sign"])},{Ifnull(data.Rows[i]["smoken"])},{Ifnull(data.Rows[i]["target_somken"])},{Ifnull(data.Rows[i]["wine"])},{Ifnull(data.Rows[i]["target_wine"])},{Ifnull(data.Rows[i]["sport_week"])},{Ifnull(data.Rows[i]["sport_once"])},{Ifnull(data.Rows[i]["target_sport_week"])},{Ifnull(data.Rows[i]["target_sport_once"])},{Ifnull(data.Rows[i]["salt_intake"])},{Ifnull(data.Rows[i]["target_salt_intake"])},{Ifnull(data.Rows[i]["mind_adjust"])},{Ifnull(data.Rows[i]["doctor_obey"])},{Ifnull(data.Rows[i]["assist_examine"])},{Ifnull(data.Rows[i]["drug_obey"])},{Ifnull(data.Rows[i]["untoward_effect"])},{Ifnull(data.Rows[i]["untoward_effect_drug"])},{Ifnull(data.Rows[i]["visit_class"])},{Ifnull(data.Rows[i]["referral_code"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["advice"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(data.Rows[i]["transfer_organ"])},{Ifnull(data.Rows[i]["transfer_reason"])});");
+                            ) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["visit_type"])},{Ifnull(data.Rows[i]["symptom"])},{Ifnull(data.Rows[i]["other_symptom"])},{Ifnull(data.Rows[i]["sbp"])},{Ifnull(data.Rows[i]["dbp"])},{Ifnull(data.Rows[i]["weight"])},{Ifnull(data.Rows[i]["target_weight"])},{Ifnull(data.Rows[i]["bmi"])},{Ifnull(data.Rows[i]["target_bmi"])},{Ifnull(data.Rows[i]["heart_rate"])},{Ifnull(data.Rows[i]["other_sign"])},{Ifnull(data.Rows[i]["smoken"])},{Ifnull(data.Rows[i]["target_somken"])},{Ifnull(data.Rows[i]["wine"])},{Ifnull(data.Rows[i]["target_wine"])},{Ifnull(data.Rows[i]["sport_week"])},{Ifnull(data.Rows[i]["sport_once"])},{Ifnull(data.Rows[i]["target_sport_week"])},{Ifnull(data.Rows[i]["target_sport_once"])},{Ifnull(data.Rows[i]["salt_intake"])},{Ifnull(data.Rows[i]["target_salt_intake"])},{Ifnull(data.Rows[i]["mind_adjust"])},{Ifnull(data.Rows[i]["doctor_obey"])},{Ifnull(data.Rows[i]["assist_examine"])},{Ifnull(data.Rows[i]["drug_obey"])},{Ifnull(data.Rows[i]["untoward_effect"])},{Ifnull(data.Rows[i]["untoward_effect_drug"])},{Ifnull(data.Rows[i]["visit_class"])},{Ifnull(data.Rows[i]["referral_code"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["advice"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(data.Rows[i]["transfer_organ"])},{Ifnull(data.Rows[i]["transfer_reason"])});");
                         fuvid += $"'{data.Rows[i]["id"]}',";
                     }
                 }
@@ -3679,12 +3753,19 @@ values({Ifnull(data5.Rows[f]["resident_base_info_id"])},{Ifnull(data5.Rows[f]["a
                         if (follow != null && follow.Tables.Count > 0 && follow.Tables[0].Rows.Count > 0)
                         {
                             DataTable data1 = follow.Tables[0];
+                            if (data1.Rows.Count > 0)
+                            {
+                                string sql = string.Format("Delete From follow_medicine_record where follow_id='{0}'", data.Rows[i]["id"].ToString());
+                                sqllist.Add(sql);
+                            }
                             for (int k = 0; k < data.Rows.Count; k++)
                             {
                                 sqllist.Add($@"insert into follow_medicine_record (id,follow_id,drug_name,num,dosage,create_user,create_name,create_time) values({Ifnull(data1.Rows[k]["id"])},{Ifnull(data1.Rows[k]["follow_id"])},{Ifnull(data1.Rows[k]["drug_name"])},{Ifnull(data1.Rows[k]["num"])},{Ifnull(data1.Rows[k]["dosage"])},{Ifnull(data1.Rows[k]["create_user"])},{Ifnull(data1.Rows[k]["create_name"])},{Ifnull(Convert.ToDateTime(data1.Rows[k]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
                                 followid += $"'{data1.Rows[i]["id"]}',";
                             }
                         }
+                        string sql1 = string.Format("Delete From diabetes_follow_record where id='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql1);
                         sqllist.Add($@"insert into diabetes_follow_record (id,name,archive_no,id_number,visit_date,visit_type,symptom,symptom_other,blood_pressure_high,blood_pressure_low,weight_now,weight_next,bmi_now,bmi_next,dorsal_artery,other,smoke_now,smoke_next,drink_now,drink_next,sports_num_now,sports_time_now,sports_num_next,sports_time_next,staple_food_now,staple_food_next,psychological_recovery,medical_compliance,blood_glucose,glycosylated_hemoglobin,check_date,compliance,untoward_effect,reactive_hypoglycemia,follow_type,insulin_name,insulin_usage,transfer_treatment,transfer_treatment_reason,transfer_treatment_department,next_visit_date,visit_doctor,create_user,create_name,create_org,create_org_name,create_time
 ) values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["visit_type"])},{Ifnull(data.Rows[i]["symptom"])},{Ifnull(data.Rows[i]["symptom_other"])},{Ifnull(data.Rows[i]["blood_pressure_high"])},{Ifnull(data.Rows[i]["blood_pressure_low"])},{Ifnull(data.Rows[i]["weight_now"])},{Ifnull(data.Rows[i]["weight_next"])},{Ifnull(data.Rows[i]["bmi_now"])},{Ifnull(data.Rows[i]["bmi_next"])},{Ifnull(data.Rows[i]["dorsal_artery"])},{Ifnull(data.Rows[i]["other"])},{Ifnull(data.Rows[i]["smoke_now"])},{Ifnull(data.Rows[i]["smoke_next"])},{Ifnull(data.Rows[i]["drink_now"])},{Ifnull(data.Rows[i]["drink_next"])},{Ifnull(data.Rows[i]["sports_num_now"])},{Ifnull(data.Rows[i]["sports_time_now"])},{Ifnull(data.Rows[i]["sports_num_next"])},{Ifnull(data.Rows[i]["sports_time_next"])},{Ifnull(data.Rows[i]["staple_food_now"])},{Ifnull(data.Rows[i]["staple_food_next"])},{Ifnull(data.Rows[i]["psychological_recovery"])},{Ifnull(data.Rows[i]["medical_compliance"])},{Ifnull(data.Rows[i]["blood_glucose"])},{Ifnull(data.Rows[i]["glycosylated_hemoglobin"])},{Ifnull(data.Rows[i]["check_date"])},{Ifnull(data.Rows[i]["compliance"])},{Ifnull(data.Rows[i]["untoward_effect"])},{Ifnull(data.Rows[i]["reactive_hypoglycemia"])},{Ifnull(data.Rows[i]["follow_type"])},{Ifnull(data.Rows[i]["insulin_name"])},{Ifnull(data.Rows[i]["insulin_usage"])},{Ifnull(data.Rows[i]["transfer_treatment"])},{Ifnull(data.Rows[i]["transfer_treatment_reason"])},{Ifnull(data.Rows[i]["transfer_treatment_department"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
                         diabetesid += $"'{data.Rows[i]["id"]}',";
@@ -3693,13 +3774,16 @@ values({Ifnull(data5.Rows[f]["resident_base_info_id"])},{Ifnull(data5.Rows[f]["a
                 #endregion
 
                 #region 尿常规记录表
-                DataSet ncg = DbHelperMySQL.Query($@"select * from zkhw_tj_ncg where id_number in({string.Join(",", ide.Select(m => m.ID).ToList())}) and upload_status='0' or upload_status is null");
+                DataSet ncg = DbHelperMySQL.Query($@"select * from zkhw_tj_ncg where id_number in({string.Join(",", ide.Select(m => m.ID).ToList())}) and (upload_status=0 or upload_status=2 or upload_status is null)");
                 if (ncg != null && ncg.Tables.Count > 0 && ncg.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = ncg.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From zkhw_tj_ncg where ID='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql);
+
                         string sqlncg = $@"insert into zkhw_tj_ncg (ID,aichive_no,id_number,bar_code,WBC,LEU,NIT,URO,PRO,PH,BLD,SG,KET,BIL,GLU,Vc,MA,ACR,Ca,CR,type,createtime,synchronize_type,ZrysNCG) values({ Ifnull(data.Rows[i]["id"])},{ Ifnull(data.Rows[i]["aichive_no"])},{ Ifnull(data.Rows[i]["id_number"])},{ Ifnull(data.Rows[i]["bar_code"])},{ Ifnull(data.Rows[i]["WBC"])},{ Ifnull(data.Rows[i]["LEU"])},{ Ifnull(data.Rows[i]["NIT"])},{ Ifnull(data.Rows[i]["URO"])},{ Ifnull(data.Rows[i]["PRO"])},{ Ifnull(data.Rows[i]["PH"])},{ Ifnull(data.Rows[i]["BLD"])},{ Ifnull(data.Rows[i]["SG"])},{ Ifnull(data.Rows[i]["KET"])},{ Ifnull(data.Rows[i]["BIL"])},{ Ifnull(data.Rows[i]["GLU"])},{ Ifnull(data.Rows[i]["Vc"])},{ Ifnull(data.Rows[i]["MA"])},{ Ifnull(data.Rows[i]["ACR"])},{ Ifnull(data.Rows[i]["Ca"])},{ Ifnull(data.Rows[i]["CR"])},{ Ifnull(data.Rows[i]["type"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["createtime"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{ Ifnull(data.Rows[i]["synchronize_type"])},{ Ifnull(data.Rows[i]["ZrysNCG"])});";
                         sqllist.Add(sqlncg);
                         ncgid += $"'{data.Rows[i]["id"]}',";
@@ -3708,13 +3792,16 @@ values({Ifnull(data5.Rows[f]["resident_base_info_id"])},{Ifnull(data5.Rows[f]["a
                 #endregion
 
                 #region 身高体重
-                DataSet sgtz = DbHelperMySQL.Query($@"select * from zkhw_tj_sgtz where id_number in({string.Join(",", ide.Select(m => m.ID).ToList())}) and upload_status='0' or upload_status is null");
+                DataSet sgtz = DbHelperMySQL.Query($@"select * from zkhw_tj_sgtz where id_number in({string.Join(",", ide.Select(m => m.ID).ToList())}) and (upload_status=0 or upload_status=2 or upload_status is null)");
                 if (sgtz != null && sgtz.Tables.Count > 0 && sgtz.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = sgtz.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From zkhw_tj_sgtz where ID='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql);
+
                         sqllist.Add($@"insert into zkhw_tj_sgtz (ID,aichive_no,id_number,bar_code,BMI,Height,Weight,createtime) 
 values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["BMI"])},{Ifnull(data.Rows[i]["Height"])},{Ifnull(data.Rows[i]["Weight"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["createtime"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
                         sgtzid += $"'{data.Rows[i]["id"]}',";
@@ -3723,13 +3810,16 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                 #endregion
 
                 #region 生化记录表
-                DataSet sh = DbHelperMySQL.Query($@"select * from zkhw_tj_sh where id_number in({string.Join(",", ide.Select(m => m.ID).ToList())}) and upload_status='0' or upload_status is null");
+                DataSet sh = DbHelperMySQL.Query($@"select * from zkhw_tj_sh where id_number in({string.Join(",", ide.Select(m => m.ID).ToList())}) and (upload_status=0 or upload_status=2 or upload_status is null)");
                 if (sh != null && sh.Tables.Count > 0 && sh.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = sh.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From zkhw_tj_sh where ID='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql);
+
                         sqllist.Add($@"insert into zkhw_tj_sh (ID,aichive_no,id_number,bar_code,ALT,AST,TBIL,DBIL,CREA,UREA,GLU,TG,CHO,HDLC,LDLC,ALB,UA,HCY,AFP,CEA,Ka,Na,TP,ALP,GGT,CHE,TBA,APOA1,APOB,CK,CKMB,LDHL,HBDH,aAMY,createtime,synchronize_type,ZrysSH,low,high,timeCodeUnique) 
                         values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["ALT"])},{Ifnull(data.Rows[i]["AST"])},{Ifnull(data.Rows[i]["TBIL"])},{Ifnull(data.Rows[i]["DBIL"])},{Ifnull(data.Rows[i]["CREA"])},{Ifnull(data.Rows[i]["UREA"])},{Ifnull(data.Rows[i]["GLU"])},{Ifnull(data.Rows[i]["TG"])},{Ifnull(data.Rows[i]["CHO"])},{Ifnull(data.Rows[i]["HDLC"])},{Ifnull(data.Rows[i]["LDLC"])},{Ifnull(data.Rows[i]["ALB"])},{Ifnull(data.Rows[i]["UA"])},{Ifnull(data.Rows[i]["HCY"])},{Ifnull(data.Rows[i]["AFP"])},{Ifnull(data.Rows[i]["CEA"])},{Ifnull(data.Rows[i]["Ka"])},{Ifnull(data.Rows[i]["Na"])},{Ifnull(data.Rows[i]["TP"])},{Ifnull(data.Rows[i]["ALP"])},{Ifnull(data.Rows[i]["GGT"])},{Ifnull(data.Rows[i]["CHE"])},{Ifnull(data.Rows[i]["TBA"])},{Ifnull(data.Rows[i]["APOA1"])},{Ifnull(data.Rows[i]["APOB"])},{Ifnull(data.Rows[i]["CK"])},{Ifnull(data.Rows[i]["CKMB"])},{Ifnull(data.Rows[i]["LDHL"])},{Ifnull(data.Rows[i]["HBDH"])},{Ifnull(data.Rows[i]["aAMY"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["createtime"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["synchronize_type"])},{Ifnull(data.Rows[i]["ZrysSH"])},{Ifnull(data.Rows[i]["low"])},{Ifnull(data.Rows[i]["high"])},{Ifnull(data.Rows[i]["timeCodeUnique"])});");
                         shid += $"'{data.Rows[i]["id"]}',";
@@ -3738,13 +3828,16 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                 #endregion
 
                 #region 血常规记录表
-                DataSet xcg = DbHelperMySQL.Query($@"select * from zkhw_tj_xcg where id_number in({string.Join(",", ide.Select(m => m.ID).ToList())}) and upload_status='0' or upload_status is null");
+                DataSet xcg = DbHelperMySQL.Query($@"select * from zkhw_tj_xcg where id_number in({string.Join(",", ide.Select(m => m.ID).ToList())}) and (upload_status=0 or upload_status=2 or upload_status is null)");
                 if (xcg != null && xcg.Tables.Count > 0 && xcg.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = xcg.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From zkhw_tj_xcg where ID='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql);
+
                         sqllist.Add($@"insert into zkhw_tj_xcg (ID,aichive_no,id_number,bar_code,WBC,RBC,PCT,PLT,HGB,HCT,MCV,MCH,MCHC,RDWCV,RDWSD,MONO,MONOP,GRAN,GRANP,NEUT,NEUTP,EO,EOP,BASO,BASOP,LYM,LYMP,MPV,PDW,MXD,MXDP,PLCR,OTHERS,createtime,synchronize_type,ZrysXCG,timeCodeUnique) 
 values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["WBC"])},{Ifnull(data.Rows[i]["RBC"])},{Ifnull(data.Rows[i]["PCT"])},{Ifnull(data.Rows[i]["PLT"])},{Ifnull(data.Rows[i]["HGB"])},{Ifnull(data.Rows[i]["HCT"])},{Ifnull(data.Rows[i]["MCV"])},{Ifnull(data.Rows[i]["MCH"])},{Ifnull(data.Rows[i]["MCHC"])},{Ifnull(data.Rows[i]["RDWCV"])},{Ifnull(data.Rows[i]["RDWSD"])},{Ifnull(data.Rows[i]["MONO"])},{Ifnull(data.Rows[i]["MONOP"])},{Ifnull(data.Rows[i]["GRAN"])},{Ifnull(data.Rows[i]["GRANP"])},{Ifnull(data.Rows[i]["NEUT"])},{Ifnull(data.Rows[i]["NEUTP"])},{Ifnull(data.Rows[i]["EO"])},{Ifnull(data.Rows[i]["EOP"])},{Ifnull(data.Rows[i]["BASO"])},{Ifnull(data.Rows[i]["BASOP"])},{Ifnull(data.Rows[i]["LYM"])},{Ifnull(data.Rows[i]["LYMP"])},{Ifnull(data.Rows[i]["MPV"])},{Ifnull(data.Rows[i]["PDW"])},{Ifnull(data.Rows[i]["MXD"])},{Ifnull(data.Rows[i]["MXDP"])},{Ifnull(data.Rows[i]["PLCR"])},{Ifnull(data.Rows[i]["OTHERS"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["createtime"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["synchronize_type"])},{Ifnull(data.Rows[i]["ZrysXCG"])},{Ifnull(data.Rows[i]["timeCodeUnique"])});");
                         xcgid += $"'{data.Rows[i]["id"]}',";
@@ -3753,13 +3846,16 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                 #endregion
 
                 #region 心电图记录表
-                DataSet xdt = DbHelperMySQL.Query($@"select * from zkhw_tj_xdt where id_number in({string.Join(",", ide.Select(m => m.ID).ToList())}) and upload_status='0' or upload_status is null");
+                DataSet xdt = DbHelperMySQL.Query($@"select * from zkhw_tj_xdt where id_number in({string.Join(",", ide.Select(m => m.ID).ToList())}) and (upload_status=0 or upload_status=2 or upload_status is null)");
                 if (xdt != null && xdt.Tables.Count > 0 && xdt.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = xdt.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From zkhw_tj_xdt where ID='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql);
+
                         sqllist.Add($@"insert into zkhw_tj_xdt (ID,aichive_no,id_number,bar_code,XdtResult,XdtDesc,XdtDoctor,XdtName,Ventrate,PR,QRS,QT,QTc,P_R_T,DOB,Age,Gen,Dep,createtime,synchronize_type,ZrysXDT,imageUrl,hr,p,pqrs,t,rv5,sv1,baseline_drift,myoelectricity,frequency
 ) 
 values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["XdtResult"])},{Ifnull(data.Rows[i]["XdtDesc"])},{Ifnull(data.Rows[i]["XdtDoctor"])},{Ifnull(data.Rows[i]["XdtName"])},{Ifnull(data.Rows[i]["Ventrate"])},{Ifnull(data.Rows[i]["PR"])},{Ifnull(data.Rows[i]["QRS"])},{Ifnull(data.Rows[i]["QT"])},{Ifnull(data.Rows[i]["QTc"])},{Ifnull(data.Rows[i]["P_R_T"])},{Ifnull(data.Rows[i]["DOB"])},{Ifnull(data.Rows[i]["Age"])},{Ifnull(data.Rows[i]["Gen"])},{Ifnull(data.Rows[i]["Dep"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["createtime"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["synchronize_type"])},{Ifnull(data.Rows[i]["ZrysXDT"])},{Ifnull(data.Rows[i]["imageUrl"])},{Ifnull(data.Rows[i]["hr"])},{Ifnull(data.Rows[i]["p"])},{Ifnull(data.Rows[i]["pqrs"])},{Ifnull(data.Rows[i]["t"])},{Ifnull(data.Rows[i]["rv5"])},{Ifnull(data.Rows[i]["sv1"])},{Ifnull(data.Rows[i]["baseline_drift"])},{Ifnull(data.Rows[i]["myoelectricity"])},{Ifnull(data.Rows[i]["frequency"])});");
@@ -3769,13 +3865,16 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                 #endregion
 
                 #region 血压表
-                DataSet xy = DbHelperMySQL.Query($@"select * from zkhw_tj_xy where id_number in({string.Join(",", ide.Select(m => m.ID).ToList())}) and upload_status='0' or upload_status is null");
+                DataSet xy = DbHelperMySQL.Query($@"select * from zkhw_tj_xy where id_number in({string.Join(",", ide.Select(m => m.ID).ToList())}) and (upload_status=0 or upload_status=2 or upload_status is null)");
                 if (xy != null && xy.Tables.Count > 0 && xy.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = xy.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From zkhw_tj_xy where ID='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql);
+
                         sqllist.Add($@"insert into zkhw_tj_xy (ID,aichive_no,id_number,bar_code,DBP,SBP,Pulse,createtime) 
 values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["DBP"])},{Ifnull(data.Rows[i]["SBP"])},{Ifnull(data.Rows[i]["Pulse"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["createtime"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))});");
                         xyid += $"'{data.Rows[i]["id"]}',";
@@ -3784,13 +3883,16 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                 #endregion
 
                 #region B超表
-                DataSet bc = DbHelperMySQL.Query($@"select * from zkhw_tj_bc where id_number in({string.Join(",", ide.Select(m => m.ID).ToList())}) and upload_status='0' or upload_status is null");
+                DataSet bc = DbHelperMySQL.Query($@"select * from zkhw_tj_bc where id_number in({string.Join(",", ide.Select(m => m.ID).ToList())}) and (upload_status=0 or upload_status=2 or upload_status is null)");
                 if (bc != null && bc.Tables.Count > 0 && bc.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = bc.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From zkhw_tj_bc where ID='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql);
+
                         sqllist.Add($@"insert into zkhw_tj_bc (ID,aichive_no,id_number,bar_code,FubuBC,FubuResult,FubuDesc,QitaBC,QitaResult,QitaDesc,BuPic01,BuPic02,BuPic03,BuPic04,createtime,synchronize_type,ZrysBC,imageUrl_a,imageUrl_b,imageUrl_c,imageUrl_d) 
 values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["bar_code"])},{Ifnull(data.Rows[i]["FubuBC"])},{Ifnull(data.Rows[i]["FubuResult"])},{Ifnull(data.Rows[i]["FubuDesc"])},{Ifnull(data.Rows[i]["QitaBC"])},{Ifnull(data.Rows[i]["QitaResult"])},{Ifnull(data.Rows[i]["QitaDesc"])},{Ifnull(data.Rows[i]["BuPic01"])},{Ifnull(data.Rows[i]["BuPic02"])},{Ifnull(data.Rows[i]["BuPic03"])},{Ifnull(data.Rows[i]["BuPic04"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["createtime"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["synchronize_type"])},{Ifnull(data.Rows[i]["ZrysBC"])},{Ifnull(data.Rows[i]["imageUrl_a"])},{Ifnull(data.Rows[i]["imageUrl_b"])},{Ifnull(data.Rows[i]["imageUrl_c"])},{Ifnull(data.Rows[i]["imageUrl_d"])});");
                         bcid += $"'{data.Rows[i]["id"]}',";
@@ -3799,13 +3901,16 @@ values({Ifnull(data.Rows[i]["ID"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull
                 #endregion
 
                 #region 儿童健康服务
-                DataSet rtjkfw = DbHelperMySQL.Query($@"select * from children_health_record where upload_status='0' and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
+                DataSet rtjkfw = DbHelperMySQL.Query($@"select * from children_health_record where (upload_status=0 or upload_status=2) and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
                 if (rtjkfw != null && rtjkfw.Tables.Count > 0 && rtjkfw.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = rtjkfw.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From children_health_record where id='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql);
+
                         sqllist.Add($@"insert into children_health_record (id,name,archive_no,id_number,age,visit_date,weight,weight_evaluate,height,height_evaluate,weight_height,physical_assessment,head_circumference,complexion,complexion_other,skin,anterior_fontanelle_wide,anterior_fontanelle_high,anterior_fontanelle,neck_mass,eye,vision,ear,hearing,oral_cavity,teething_num,caries_num,breast,abdominal,umbilical_cord,extremity,gait,rickets_symptom,rickets_sign,anus,hemoglobin,other,outdoor_time,vitamind_name,vitamind_num,growth,sicken_stasus,pneumonia_num,diarrhea_num,trauma_num,sicken_other,transfer_treatment,transfer_treatment_reason,transfer_treatment_department,guidance,guidance_other,next_visit_date,visit_doctor,create_user,create_name,create_org,create_org_name,create_time,upload_status) 
 values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["archive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["age"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["weight"])},{Ifnull(data.Rows[i]["weight_evaluate"])},{Ifnull(data.Rows[i]["height"])},{Ifnull(data.Rows[i]["height_evaluate"])},{Ifnull(data.Rows[i]["weight_height"])},{Ifnull(data.Rows[i]["physical_assessment"])},{Ifnull(data.Rows[i]["head_circumference"])},{Ifnull(data.Rows[i]["complexion"])},{Ifnull(data.Rows[i]["complexion_other"])},{Ifnull(data.Rows[i]["skin"])},{Ifnull(data.Rows[i]["anterior_fontanelle_wide"])},{Ifnull(data.Rows[i]["anterior_fontanelle_high"])},{Ifnull(data.Rows[i]["anterior_fontanelle"])},{Ifnull(data.Rows[i]["neck_mass"])},{Ifnull(data.Rows[i]["eye"])},{Ifnull(data.Rows[i]["vision"])},{Ifnull(data.Rows[i]["ear"])},{Ifnull(data.Rows[i]["hearing"])},{Ifnull(data.Rows[i]["oral_cavity"])},{Ifnull(data.Rows[i]["teething_num"])},{Ifnull(data.Rows[i]["caries_num"])},{Ifnull(data.Rows[i]["breast"])},{Ifnull(data.Rows[i]["abdominal"])},{Ifnull(data.Rows[i]["umbilical_cord"])},{Ifnull(data.Rows[i]["extremity"])},{Ifnull(data.Rows[i]["gait"])},{Ifnull(data.Rows[i]["rickets_symptom"])},{Ifnull(data.Rows[i]["rickets_sign"])},{Ifnull(data.Rows[i]["anus"])},{Ifnull(data.Rows[i]["hemoglobin"])},{Ifnull(data.Rows[i]["other"])},{Ifnull(data.Rows[i]["outdoor_time"])},{Ifnull(data.Rows[i]["vitamind_name"])},{Ifnull(data.Rows[i]["vitamind_num"])},{Ifnull(data.Rows[i]["growth"])},{Ifnull(data.Rows[i]["sicken_stasus"])},{Ifnull(data.Rows[i]["pneumonia_num"])},{Ifnull(data.Rows[i]["diarrhea_num"])},{Ifnull(data.Rows[i]["trauma_num"])},{Ifnull(data.Rows[i]["sicken_other"])},{Ifnull(data.Rows[i]["transfer_treatment"])},{Ifnull(data.Rows[i]["transfer_treatment_reason"])},{Ifnull(data.Rows[i]["transfer_treatment_department"])},{Ifnull(data.Rows[i]["guidance"])},{Ifnull(data.Rows[i]["guidance_other"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["upload_status"])}
 );");
@@ -3815,13 +3920,16 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 #endregion
 
                 #region 新生儿家庭记录
-                DataSet xsrjt = DbHelperMySQL.Query($@"select * from neonatus_info where upload_status='0' and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
+                DataSet xsrjt = DbHelperMySQL.Query($@"select * from neonatus_info where (upload_status=0 or upload_status=2) and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
                 if (xsrjt != null && xsrjt.Tables.Count > 0 && xsrjt.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = xsrjt.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From neonatus_info where id='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql);
+
                         sqllist.Add($@"insert into neonatus_info (id,name,archive_no,id_number,sex,birthday,home_address,father_name,father_profession,father_phone,father_birthday,mother_name,mother_profession,mother_phone,mother_birthday,gestational_weeks,sicken_stasus,sicken_other,midwife_org,birth_situation,birth_other,asphyxia_neonatorum,asphyxia_time,deformity,deformity_other,hearing,disease,disease_other,birth_weight,weight,birth_height,feeding_patterns,milk_num,milk_intake,vomit,shit,defecation_num,temperature,heart_rate,breathing_rate,complexion,complexion_other,aurigo,aurigo_other,anterior_fontanelle_wide,anterior_fontanelle_high,anterior_fontanelle,anterior_fontanelle_other,eye,extremity_mobility,ear,neck_mass,nose,skin,skin_other,oral_cavity,anus,heart_lung,breast,abdominal_touch,spine,aedea,umbilical_cord,umbilical_cord_other,transfer_treatment,transfer_treatment_reason,transfer_treatment_department,guidance,guidance_other,visit_date,next_visit_date,next_visit_address,visit_doctor,province_code,province_name,city_code,city_name,county_code,county_name,towns_code,towns_name,village_code,village_name,create_user,create_name,create_org,create_org_name,create_time,upload_status) 
 values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["archive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["sex"])},{Ifnull(data.Rows[i]["birthday"])},{Ifnull(data.Rows[i]["home_address"])},{Ifnull(data.Rows[i]["father_name"])},{Ifnull(data.Rows[i]["father_profession"])},{Ifnull(data.Rows[i]["father_phone"])},{Ifnull(data.Rows[i]["father_birthday"])},{Ifnull(data.Rows[i]["mother_name"])},{Ifnull(data.Rows[i]["mother_profession"])},{Ifnull(data.Rows[i]["mother_phone"])},{Ifnull(data.Rows[i]["mother_birthday"])},{Ifnull(data.Rows[i]["gestational_weeks"])},{Ifnull(data.Rows[i]["sicken_stasus"])},{Ifnull(data.Rows[i]["sicken_other"])},{Ifnull(data.Rows[i]["midwife_org"])},{Ifnull(data.Rows[i]["birth_situation"])},{Ifnull(data.Rows[i]["birth_other"])},{Ifnull(data.Rows[i]["asphyxia_neonatorum"])},{Ifnull(data.Rows[i]["asphyxia_time"])},{Ifnull(data.Rows[i]["deformity"])},{Ifnull(data.Rows[i]["deformity_other"])},{Ifnull(data.Rows[i]["hearing"])},{Ifnull(data.Rows[i]["disease"])},{Ifnull(data.Rows[i]["disease_other"])},{Ifnull(data.Rows[i]["birth_weight"])},{Ifnull(data.Rows[i]["weight"])},{Ifnull(data.Rows[i]["birth_height"])},{Ifnull(data.Rows[i]["feeding_patterns"])},{Ifnull(data.Rows[i]["milk_num"])},{Ifnull(data.Rows[i]["milk_intake"])},{Ifnull(data.Rows[i]["vomit"])},{Ifnull(data.Rows[i]["shit"])},{Ifnull(data.Rows[i]["defecation_num"])},{Ifnull(data.Rows[i]["temperature"])},{Ifnull(data.Rows[i]["heart_rate"])},{Ifnull(data.Rows[i]["breathing_rate"])},{Ifnull(data.Rows[i]["complexion"])},{Ifnull(data.Rows[i]["complexion_other"])},{Ifnull(data.Rows[i]["aurigo"])},{Ifnull(data.Rows[i]["aurigo_other"])},{Ifnull(data.Rows[i]["anterior_fontanelle_wide"])},{Ifnull(data.Rows[i]["anterior_fontanelle_high"])},{Ifnull(data.Rows[i]["anterior_fontanelle"])},{Ifnull(data.Rows[i]["anterior_fontanelle_other"])},{Ifnull(data.Rows[i]["eye"])},{Ifnull(data.Rows[i]["extremity_mobility"])},{Ifnull(data.Rows[i]["ear"])},{Ifnull(data.Rows[i]["neck_mass"])},{Ifnull(data.Rows[i]["nose"])},{Ifnull(data.Rows[i]["skin"])},{Ifnull(data.Rows[i]["skin_other"])},{Ifnull(data.Rows[i]["oral_cavity"])},{Ifnull(data.Rows[i]["anus"])},{Ifnull(data.Rows[i]["heart_lung"])},{Ifnull(data.Rows[i]["breast"])},{Ifnull(data.Rows[i]["abdominal_touch"])},{Ifnull(data.Rows[i]["spine"])},{Ifnull(data.Rows[i]["aedea"])},{Ifnull(data.Rows[i]["umbilical_cord"])},{Ifnull(data.Rows[i]["umbilical_cord_other"])},{Ifnull(data.Rows[i]["transfer_treatment"])},{Ifnull(data.Rows[i]["transfer_treatment_reason"])},{Ifnull(data.Rows[i]["transfer_treatment_department"])},{Ifnull(data.Rows[i]["guidance"])},{Ifnull(data.Rows[i]["guidance_other"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["next_visit_address"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["province_code"])},{Ifnull(data.Rows[i]["province_name"])},{Ifnull(data.Rows[i]["city_code"])},{Ifnull(data.Rows[i]["city_name"])},{Ifnull(data.Rows[i]["county_code"])},{Ifnull(data.Rows[i]["county_name"])},{Ifnull(data.Rows[i]["towns_code"])},{Ifnull(data.Rows[i]["towns_name"])},{Ifnull(data.Rows[i]["village_code"])},{Ifnull(data.Rows[i]["village_name"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["upload_status"])}
 );");
@@ -3831,13 +3939,16 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 #endregion
 
                 #region 孕妇产后服务记录
-                DataSet yfch = DbHelperMySQL.Query($@"select * from gravida_after_record where upload_status='0' and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
+                DataSet yfch = DbHelperMySQL.Query($@"select * from gravida_after_record where (upload_status=0 or upload_status=2 ) and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
                 if (yfch != null && yfch.Tables.Count > 0 && yfch.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = yfch.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From gravida_after_record where id='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql);
+
                         sqllist.Add($@"insert into gravida_after_record (id,name,archive_no,id_number,visit_date,childbirth,discharge_date,temperature,general_health_status,general_psychology_status,blood_pressure_high,blood_pressure_low,breast,breast_error,lyma,lyma_error,womb,womb_error,wound,wound_error,other,`condition`,guidance,transfer_treatment,transfer_treatment_reason,transfer_treatment_department,visit_doctor,create_user,create_name,create_org,create_org_name,create_time,upload_status) 
 values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["childbirth"])},{Ifnull(data.Rows[i]["discharge_date"])},{Ifnull(data.Rows[i]["temperature"])},{Ifnull(data.Rows[i]["general_health_status"])},{Ifnull(data.Rows[i]["general_psychology_status"])},{Ifnull(data.Rows[i]["blood_pressure_high"])},{Ifnull(data.Rows[i]["blood_pressure_low"])},{Ifnull(data.Rows[i]["breast"])},{Ifnull(data.Rows[i]["breast_error"])},{Ifnull(data.Rows[i]["lyma"])},{Ifnull(data.Rows[i]["lyma_error"])},{Ifnull(data.Rows[i]["womb"])},{Ifnull(data.Rows[i]["womb_error"])},{Ifnull(data.Rows[i]["wound"])},{Ifnull(data.Rows[i]["wound_error"])},{Ifnull(data.Rows[i]["other"])},{Ifnull(data.Rows[i]["condition"])},{Ifnull(data.Rows[i]["guidance"])},{Ifnull(data.Rows[i]["transfer_treatment"])},{Ifnull(data.Rows[i]["transfer_treatment_reason"])},{Ifnull(data.Rows[i]["transfer_treatment_department"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["upload_status"])}
 );");
@@ -3847,13 +3958,16 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 #endregion
 
                 #region 孕妇产前服务记录
-                DataSet yfcq = DbHelperMySQL.Query($@"select * from gravida_follow_record where upload_status='0' and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
+                DataSet yfcq = DbHelperMySQL.Query($@"select * from gravida_follow_record where (upload_status=0 or upload_status=2 ) and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
                 if (yfcq != null && yfcq.Tables.Count > 0 && yfcq.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = yfcq.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From gravida_follow_record where id='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql);
+
                         sqllist.Add($@"insert into gravida_follow_record (id,name,archive_no,id_number,order_num,visit_date,gestational_weeks,symptom,weight,fundus_height,abdomen_circumference,fetus_position,fetal_heart_rate,blood_pressure_high,blood_pressure_low,hemoglobin,urine_protein,check_other,`condition`,error_info,guidance,transfer_treatment,transfer_treatment_reason,transfer_treatment_department,next_visit_date,visit_doctor,create_user,create_name,create_org,create_org_name,create_time,upload_status
 ) 
 values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["order_num"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["gestational_weeks"])},{Ifnull(data.Rows[i]["symptom"])},{Ifnull(data.Rows[i]["weight"])},{Ifnull(data.Rows[i]["fundus_height"])},{Ifnull(data.Rows[i]["abdomen_circumference"])},{Ifnull(data.Rows[i]["fetus_position"])},{Ifnull(data.Rows[i]["fetal_heart_rate"])},{Ifnull(data.Rows[i]["blood_pressure_high"])},{Ifnull(data.Rows[i]["blood_pressure_low"])},{Ifnull(data.Rows[i]["hemoglobin"])},{Ifnull(data.Rows[i]["urine_protein"])},{Ifnull(data.Rows[i]["check_other"])},{Ifnull(data.Rows[i]["condition"])},{Ifnull(data.Rows[i]["error_info"])},{Ifnull(data.Rows[i]["guidance"])},{Ifnull(data.Rows[i]["transfer_treatment"])},{Ifnull(data.Rows[i]["transfer_treatment_reason"])},{Ifnull(data.Rows[i]["transfer_treatment_department"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["upload_status"])}
@@ -3864,13 +3978,16 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 #endregion
 
                 #region 孕妇第一次检查
-                DataSet yfdyc = DbHelperMySQL.Query($@"select * from gravida_info where upload_status='0' and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
+                DataSet yfdyc = DbHelperMySQL.Query($@"select * from gravida_info where (upload_status=0 or upload_status=2 ) and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
                 if (yfdyc != null && yfdyc.Tables.Count > 0 && yfdyc.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = yfdyc.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From gravida_info where id='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql);
+
                         sqllist.Add($@"insert into gravida_info (id,name,archive_no,id_number,visit_date,gestational_weeks,gravida_age,husband_name,husband_age,husband_phone,pregnant_num,natural_labour_num,cesarean_num,last_menstruation_date,due_date,past_illness,past_illness_other,family_history,family_history_other,habits_customs,habits_customs_other,isoperation,operation_name,natural_abortion_num,abactio_num,fetaldeath_num,stillbirth_num,neonatal_death_num,birth_defect_num,height,weight,bmi,blood_pressure_high,blood_pressure_low,heart,heart_other,lungs,lungs_other,vulva,vulva_other,vagina,vagina_other,cervix,cervix_other,corpus,corpus_other,accessories,accessories_other,hemoglobin,leukocyte,platelet,blood_other,urine_protein,glycosuria,urine_acetone_bodies,bld,urine_other,blood_sugar,blood_group,blood_rh,sgft,ast,albumin,total_bilirubin,conjugated_bilirubin,scr,blood_urea,vaginal_fluid,vaginal_fluid_other,vaginal_cleaning,hb,hbsab,hbeag,hbeab,hbcab,syphilis,hiv,b_ultrasonic,other,general_assessment,assessment_error,health_guidance,health_guidance_other,transfer_treatment,transfer_treatment_reason,transfer_treatment_department,next_visit_date,visit_doctor,create_user,create_name,create_org,create_org_name,create_time,upload_status) 
 values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["gestational_weeks"])},{Ifnull(data.Rows[i]["gravida_age"])},{Ifnull(data.Rows[i]["husband_name"])},{Ifnull(data.Rows[i]["husband_age"])},{Ifnull(data.Rows[i]["husband_phone"])},{Ifnull(data.Rows[i]["pregnant_num"])},{Ifnull(data.Rows[i]["natural_labour_num"])},{Ifnull(data.Rows[i]["cesarean_num"])},{Ifnull(data.Rows[i]["last_menstruation_date"])},{Ifnull(data.Rows[i]["due_date"])},{Ifnull(data.Rows[i]["past_illness"])},{Ifnull(data.Rows[i]["past_illness_other"])},{Ifnull(data.Rows[i]["family_history"])},{Ifnull(data.Rows[i]["family_history_other"])},{Ifnull(data.Rows[i]["habits_customs"])},{Ifnull(data.Rows[i]["habits_customs_other"])},{Ifnull(data.Rows[i]["isoperation"])},{Ifnull(data.Rows[i]["operation_name"])},{Ifnull(data.Rows[i]["natural_abortion_num"])},{Ifnull(data.Rows[i]["abactio_num"])},{Ifnull(data.Rows[i]["fetaldeath_num"])},{Ifnull(data.Rows[i]["stillbirth_num"])},{Ifnull(data.Rows[i]["neonatal_death_num"])},{Ifnull(data.Rows[i]["birth_defect_num"])},{Ifnull(data.Rows[i]["height"])},{Ifnull(data.Rows[i]["weight"])},{Ifnull(data.Rows[i]["bmi"])},{Ifnull(data.Rows[i]["blood_pressure_high"])},{Ifnull(data.Rows[i]["blood_pressure_low"])},{Ifnull(data.Rows[i]["heart"])},{Ifnull(data.Rows[i]["heart_other"])},{Ifnull(data.Rows[i]["lungs"])},{Ifnull(data.Rows[i]["lungs_other"])},{Ifnull(data.Rows[i]["vulva"])},{Ifnull(data.Rows[i]["vulva_other"])},{Ifnull(data.Rows[i]["vagina"])},{Ifnull(data.Rows[i]["vagina_other"])},{Ifnull(data.Rows[i]["cervix"])},{Ifnull(data.Rows[i]["cervix_other"])},{Ifnull(data.Rows[i]["corpus"])},{Ifnull(data.Rows[i]["corpus_other"])},{Ifnull(data.Rows[i]["accessories"])},{Ifnull(data.Rows[i]["accessories_other"])},{Ifnull(data.Rows[i]["hemoglobin"])},{Ifnull(data.Rows[i]["leukocyte"])},{Ifnull(data.Rows[i]["platelet"])},{Ifnull(data.Rows[i]["blood_other"])},{Ifnull(data.Rows[i]["urine_protein"])},{Ifnull(data.Rows[i]["glycosuria"])},{Ifnull(data.Rows[i]["urine_acetone_bodies"])},{Ifnull(data.Rows[i]["bld"])},{Ifnull(data.Rows[i]["urine_other"])},{Ifnull(data.Rows[i]["blood_sugar"])},{Ifnull(data.Rows[i]["blood_group"])},{Ifnull(data.Rows[i]["blood_rh"])},{Ifnull(data.Rows[i]["sgft"])},{Ifnull(data.Rows[i]["ast"])},{Ifnull(data.Rows[i]["albumin"])},{Ifnull(data.Rows[i]["total_bilirubin"])},{Ifnull(data.Rows[i]["conjugated_bilirubin"])},{Ifnull(data.Rows[i]["scr"])},{Ifnull(data.Rows[i]["blood_urea"])},{Ifnull(data.Rows[i]["vaginal_fluid"])},{Ifnull(data.Rows[i]["vaginal_fluid_other"])},{Ifnull(data.Rows[i]["vaginal_cleaning"])},{Ifnull(data.Rows[i]["hb"])},{Ifnull(data.Rows[i]["hbsab"])},{Ifnull(data.Rows[i]["hbeag"])},{Ifnull(data.Rows[i]["hbeab"])},{Ifnull(data.Rows[i]["hbcab"])},{Ifnull(data.Rows[i]["syphilis"])},{Ifnull(data.Rows[i]["hiv"])},{Ifnull(data.Rows[i]["b_ultrasonic"])},{Ifnull(data.Rows[i]["other"])},{Ifnull(data.Rows[i]["general_assessment"])},{Ifnull(data.Rows[i]["assessment_error"])},{Ifnull(data.Rows[i]["health_guidance"])},{Ifnull(data.Rows[i]["health_guidance_other"])},{Ifnull(data.Rows[i]["transfer_treatment"])},{Ifnull(data.Rows[i]["transfer_treatment_reason"])},{Ifnull(data.Rows[i]["transfer_treatment_department"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["upload_status"])}
 );");
@@ -3879,13 +3996,16 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 }
                 #endregion
 
-                DataSet fjhdyc = DbHelperMySQL.Query($@"select * from tuberculosis_info where upload_status='0' and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
+                DataSet fjhdyc = DbHelperMySQL.Query($@"select * from tuberculosis_info where (upload_status=0 or upload_status=2 ) and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
                 if (fjhdyc != null && fjhdyc.Tables.Count > 0 && fjhdyc.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = fjhdyc.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From tuberculosis_info where id='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql);
+
                         sqllist.Add($@"insert into tuberculosis_info (id,name,archive_no,id_number,visit_date,visit_type,patient_type,sputum_bacterium_type,drug_fast_type,symptom,symptom_other,chemotherapy_plan,`usage`,drugs_type,supervisor_type,supervisor_other,single_room,ventilation,smoke_now,smoke_next,drink_now,drink_next,get_medicine_address,get_medicine_date,medicine_record,medicine_leave,treatment_course,erratically,untoward_effect,further_consultation,insist,habits_customs,intimate_contact,next_visit_date,estimate_doctor,create_user,create_name,create_org,create_org_name,create_time,upload_status) 
 values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["archive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["visit_type"])},{Ifnull(data.Rows[i]["patient_type"])},{Ifnull(data.Rows[i]["sputum_bacterium_type"])},{Ifnull(data.Rows[i]["drug_fast_type"])},{Ifnull(data.Rows[i]["symptom"])},{Ifnull(data.Rows[i]["symptom_other"])},{Ifnull(data.Rows[i]["chemotherapy_plan"])},{Ifnull(data.Rows[i]["usage"])},{Ifnull(data.Rows[i]["drugs_type"])},{Ifnull(data.Rows[i]["supervisor_type"])},{Ifnull(data.Rows[i]["supervisor_other"])},{Ifnull(data.Rows[i]["single_room"])},{Ifnull(data.Rows[i]["ventilation"])},{Ifnull(data.Rows[i]["smoke_now"])},{Ifnull(data.Rows[i]["smoke_next"])},{Ifnull(data.Rows[i]["drink_now"])},{Ifnull(data.Rows[i]["drink_next"])},{Ifnull(data.Rows[i]["get_medicine_address"])},{Ifnull(data.Rows[i]["get_medicine_date"])},{Ifnull(data.Rows[i]["medicine_record"])},{Ifnull(data.Rows[i]["medicine_leave"])},{Ifnull(data.Rows[i]["treatment_course"])},{Ifnull(data.Rows[i]["erratically"])},{Ifnull(data.Rows[i]["untoward_effect"])},{Ifnull(data.Rows[i]["further_consultation"])},{Ifnull(data.Rows[i]["insist"])},{Ifnull(data.Rows[i]["habits_customs"])},{Ifnull(data.Rows[i]["intimate_contact"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["estimate_doctor"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["upload_status"])}
 );");
@@ -3893,13 +4013,16 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                     }
                 }
 
-                DataSet nlrzyyjk = DbHelperMySQL.Query($@"select * from elderly_tcm_record where upload_status='0' and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
+                DataSet nlrzyyjk = DbHelperMySQL.Query($@"select * from elderly_tcm_record where (upload_status=0 or upload_status=2 ) and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
                 if (nlrzyyjk != null && nlrzyyjk.Tables.Count > 0 && nlrzyyjk.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = nlrzyyjk.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From elderly_tcm_record where id='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql);
+
                         sqllist.Add($@"insert into elderly_tcm_record (id,name,archive_no,id_number,test_date,answer_result,qixuzhi_score,qixuzhi_result,yangxuzhi_score,yangxuzhi_result,yinxuzhi_score,yinxuzhi_result,tanshizhi_score,tanshizhi_result,shirezhi_score,shirezhi_result,xueyuzhi_score,xueyuzhi_result,qiyuzhi_score,qiyuzhi_result,tebingzhi_sorce,tebingzhi_result,pinghezhi_sorce,pinghezhi_result,test_doctor,tcm_guidance,create_user,create_name,create_org,create_org_name,create_time,upload_status) 
 values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["test_date"])},{Ifnull(data.Rows[i]["answer_result"])},{Ifnull(data.Rows[i]["qixuzhi_score"])},{Ifnull(data.Rows[i]["qixuzhi_result"])},{Ifnull(data.Rows[i]["yangxuzhi_score"])},{Ifnull(data.Rows[i]["yangxuzhi_result"])},{Ifnull(data.Rows[i]["yinxuzhi_score"])},{Ifnull(data.Rows[i]["yinxuzhi_result"])},{Ifnull(data.Rows[i]["tanshizhi_score"])},{Ifnull(data.Rows[i]["tanshizhi_result"])},{Ifnull(data.Rows[i]["shirezhi_score"])},{Ifnull(data.Rows[i]["shirezhi_result"])},{Ifnull(data.Rows[i]["xueyuzhi_score"])},{Ifnull(data.Rows[i]["xueyuzhi_result"])},{Ifnull(data.Rows[i]["qiyuzhi_score"])},{Ifnull(data.Rows[i]["qiyuzhi_result"])},{Ifnull(data.Rows[i]["tebingzhi_sorce"])},{Ifnull(data.Rows[i]["tebingzhi_result"])},{Ifnull(data.Rows[i]["pinghezhi_sorce"])},{Ifnull(data.Rows[i]["pinghezhi_result"])},{Ifnull(data.Rows[i]["test_doctor"])},{Ifnull(data.Rows[i]["tcm_guidance"])},
 {Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["upload_status"])}
@@ -3908,13 +4031,16 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                     }
                 }
 
-                DataSet fjhsf = DbHelperMySQL.Query($@"select * from tuberculosis_follow_record where upload_status='0' and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
+                DataSet fjhsf = DbHelperMySQL.Query($@"select * from tuberculosis_follow_record where (upload_status=0 or upload_status=2 ) and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
                 if (fjhsf != null && fjhsf.Tables.Count > 0 && fjhsf.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = fjhsf.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From tuberculosis_follow_record where id='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql);
+
                         sqllist.Add($@"insert into tuberculosis_follow_record (id,name,archive_no,id_number,visit_date,month_order,supervisor_type,visit_type,symptom,symptom_other,smoke_now,smoke_next,drink_now,drink_next,chemotherapy_plan,`usage`,drugs_type,miss,untoward_effect,untoward_effect_info,complication,complication_info,transfer_treatment_department,transfer_treatment_reason,twoweek_visit_result,handling_suggestion,next_visit_date,visit_doctor,stop_date,stop_reason,must_visit_num,actual_visit_num,must_medicine_num,actual_medicine_num,medicine_rate,estimate_doctor,create_user,create_name,create_org,create_org_name,create_time,upload_status) 
 values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["month_order"])},{Ifnull(data.Rows[i]["supervisor_type"])},{Ifnull(data.Rows[i]["visit_type"])},{Ifnull(data.Rows[i]["symptom"])},{Ifnull(data.Rows[i]["symptom_other"])},{Ifnull(data.Rows[i]["smoke_now"])},{Ifnull(data.Rows[i]["smoke_next"])},{Ifnull(data.Rows[i]["drink_now"])},{Ifnull(data.Rows[i]["drink_next"])},{Ifnull(data.Rows[i]["chemotherapy_plan"])},{Ifnull(data.Rows[i]["usage"])},{Ifnull(data.Rows[i]["drugs_type"])},{Ifnull(data.Rows[i]["miss"])},{Ifnull(data.Rows[i]["untoward_effect"])},{Ifnull(data.Rows[i]["untoward_effect_info"])},{Ifnull(data.Rows[i]["complication"])},{Ifnull(data.Rows[i]["complication_info"])},{Ifnull(data.Rows[i]["transfer_treatment_department"])},{Ifnull(data.Rows[i]["transfer_treatment_reason"])},{Ifnull(data.Rows[i]["twoweek_visit_result"])},{Ifnull(data.Rows[i]["handling_suggestion"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["stop_date"])},{Ifnull(data.Rows[i]["stop_reason"])},{Ifnull(data.Rows[i]["must_visit_num"])},{Ifnull(data.Rows[i]["actual_visit_num"])},{Ifnull(data.Rows[i]["must_medicine_num"])},{Ifnull(data.Rows[i]["actual_medicine_num"])},{Ifnull(data.Rows[i]["medicine_rate"])},{Ifnull(data.Rows[i]["estimate_doctor"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["upload_status"])}
 );");
@@ -3922,13 +4048,16 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                     }
                 }
 
-                DataSet jsbgr = DbHelperMySQL.Query($@"select * from psychosis_info where upload_status='0' and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
+                DataSet jsbgr = DbHelperMySQL.Query($@"select * from psychosis_info where (upload_status=0 or upload_status=2 ) and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
                 if (jsbgr != null && jsbgr.Tables.Count > 0 && jsbgr.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = jsbgr.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From psychosis_info where id='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql);
+
                         sqllist.Add($@"insert into psychosis_info (id,name,archive_no,id_number,guardian_name,guardian_relation,guardian_address,guardian_phone,neighborhood_committee_linkman,neighborhood_committee_linktel,resident_type,employment_status,agree_manage,agree_name,agree_date,first_morbidity_date,symptom,isolation,outpatient,first_medicine_date,hospitalized_num,diagnosis,diagnosis_hospital,diagnosis_date,recently_treatment_effect,dangerous_act,slight_trouble_num,cause_trouble_num,cause_accident_num,harm_other_num,autolesion_num,attempted_suicide_num,economics,specialist_suggestion,record_date,record_doctor,create_user,create_name,create_org,create_org_name,create_time,upload_status) 
 values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["archive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["guardian_name"])},{Ifnull(data.Rows[i]["guardian_relation"])},{Ifnull(data.Rows[i]["guardian_address"])},{Ifnull(data.Rows[i]["guardian_phone"])},{Ifnull(data.Rows[i]["neighborhood_committee_linkman"])},{Ifnull(data.Rows[i]["neighborhood_committee_linktel"])},{Ifnull(data.Rows[i]["resident_type"])},{Ifnull(data.Rows[i]["employment_status"])},{Ifnull(data.Rows[i]["agree_manage"])},{Ifnull(data.Rows[i]["agree_name"])},{Ifnull(data.Rows[i]["agree_date"])},{Ifnull(data.Rows[i]["first_morbidity_date"])},{Ifnull(data.Rows[i]["symptom"])},{Ifnull(data.Rows[i]["isolation"])},{Ifnull(data.Rows[i]["outpatient"])},{Ifnull(data.Rows[i]["first_medicine_date"])},{Ifnull(data.Rows[i]["hospitalized_num"])},{Ifnull(data.Rows[i]["diagnosis"])},{Ifnull(data.Rows[i]["diagnosis_hospital"])},{Ifnull(data.Rows[i]["diagnosis_date"])},{Ifnull(data.Rows[i]["recently_treatment_effect"])},{Ifnull(data.Rows[i]["dangerous_act"])},{Ifnull(data.Rows[i]["slight_trouble_num"])},{Ifnull(data.Rows[i]["cause_trouble_num"])},{Ifnull(data.Rows[i]["cause_accident_num"])},{Ifnull(data.Rows[i]["harm_other_num"])},{Ifnull(data.Rows[i]["autolesion_num"])},{Ifnull(data.Rows[i]["attempted_suicide_num"])},{Ifnull(data.Rows[i]["economics"])},{Ifnull(data.Rows[i]["specialist_suggestion"])},{Ifnull(data.Rows[i]["record_date"])},{Ifnull(data.Rows[i]["record_doctor"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["upload_status"])}
 );");
@@ -3936,13 +4065,16 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                     }
                 }
 
-                DataSet jsbsf = DbHelperMySQL.Query($@"select * from psychosis_follow_record where upload_status='0' and Cardcode in({string.Join(",", ide.Select(m => m.ID).ToList())})");
+                DataSet jsbsf = DbHelperMySQL.Query($@"select * from psychosis_follow_record where (upload_status=0 or upload_status=2 ) and Cardcode in({string.Join(",", ide.Select(m => m.ID).ToList())})");
                 if (jsbsf != null && jsbsf.Tables.Count > 0 && jsbsf.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = jsbsf.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From psychosis_follow_record where id='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql);
+
                         sqllist.Add($@"insert into psychosis_follow_record (id,name,archive_no,id_number,visit_date,visit_type,miss_reason,miss_reason_other,die_date,die_reason,physical_disease,die_reason_other,fatalness,symptom,symptom_other,insight,sleep_status,dietary_status,self_help,housework,work,learning_ability,interpersonal,dangerous_act,slight_trouble_num,cause_trouble_num,cause_accident_num,harm_other_num,autolesion_num,attempted_suicide_num,isolation,hospitalized_status,out_hospital_date,laboratory_examination,compliance,untoward_effect,untoward_effect_info,treatment_effect,transfer_treatment,transfer_treatment_reason,transfer_treatment_department,rehabilitation_measure,rehabilitation_measure_other,next_visit_classify,next_visit_date,visit_doctor,create_user,create_name,create_org,create_org_name,create_time,upload_status) 
 values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["archive_no"])},{Ifnull(data.Rows[i]["Cardcode"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["visit_type"])},{Ifnull(data.Rows[i]["miss_reason"])},{Ifnull(data.Rows[i]["miss_reason_other"])},{Ifnull(data.Rows[i]["die_date"])},{Ifnull(data.Rows[i]["die_reason"])},{Ifnull(data.Rows[i]["physical_disease"])},{Ifnull(data.Rows[i]["die_reason_other"])},{Ifnull(data.Rows[i]["fatalness"])},{Ifnull(data.Rows[i]["symptom"])},{Ifnull(data.Rows[i]["symptom_other"])},{Ifnull(data.Rows[i]["insight"])},{Ifnull(data.Rows[i]["sleep_status"])},{Ifnull(data.Rows[i]["dietary_status"])},{Ifnull(data.Rows[i]["self_help"])},{Ifnull(data.Rows[i]["housework"])},{Ifnull(data.Rows[i]["work"])},{Ifnull(data.Rows[i]["learning_ability"])},{Ifnull(data.Rows[i]["interpersonal"])},{Ifnull(data.Rows[i]["dangerous_act"])},{Ifnull(data.Rows[i]["slight_trouble_num"])},{Ifnull(data.Rows[i]["cause_trouble_num"])},{Ifnull(data.Rows[i]["cause_accident_num"])},{Ifnull(data.Rows[i]["harm_other_num"])},{Ifnull(data.Rows[i]["autolesion_num"])},{Ifnull(data.Rows[i]["attempted_suicide_num"])},{Ifnull(data.Rows[i]["isolation"])},{Ifnull(data.Rows[i]["hospitalized_status"])},{Ifnull(data.Rows[i]["out_hospital_date"])},{Ifnull(data.Rows[i]["laboratory_examination"])},{Ifnull(data.Rows[i]["compliance"])},{Ifnull(data.Rows[i]["untoward_effect"])},{Ifnull(data.Rows[i]["untoward_effect_info"])},{Ifnull(data.Rows[i]["treatment_effect"])},{Ifnull(data.Rows[i]["transfer_treatment"])},{Ifnull(data.Rows[i]["transfer_treatment_reason"])},{Ifnull(data.Rows[i]["transfer_treatment_department"])},{Ifnull(data.Rows[i]["rehabilitation_measure"])},{Ifnull(data.Rows[i]["rehabilitation_measure_other"])},{Ifnull(data.Rows[i]["next_visit_classify"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["upload_status"])}
 );");
@@ -3950,13 +4082,16 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                     }
                 }
 
-                DataSet xsrt = DbHelperMySQL.Query($@"select * from children_tcm_record where upload_status='0' and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
+                DataSet xsrt = DbHelperMySQL.Query($@"select * from children_tcm_record where (upload_status=0 or upload_status=2 ) and id_number in({string.Join(",", ide.Select(m => m.ID).ToList())})");
                 if (xsrt != null && xsrt.Tables.Count > 0 && xsrt.Tables[0].Rows.Count > 0)
                 {
                     DataTable data = xsrt.Tables[0];
                     string id = string.Empty;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
+                        string sql = string.Format("Delete From children_tcm_record where id='{0}'", data.Rows[i]["id"].ToString());
+                        sqllist.Add(sql);
+
                         sqllist.Add($@"insert into children_tcm_record (id,name,archive_no,id_number,age,visit_date,tcm_info,tcm_other,next_visit_date,visit_doctor,create_user,create_name,create_org,create_org_name,create_time,upload_status) 
 values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["age"])},{Ifnull(data.Rows[i]["visit_date"])},{Ifnull(data.Rows[i]["tcm_info"])},{Ifnull(data.Rows[i]["tcm_other"])},{Ifnull(data.Rows[i]["next_visit_date"])},{Ifnull(data.Rows[i]["visit_doctor"])},{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["upload_status"])}
 );");
@@ -4075,7 +4210,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                         lb.eventInfo = "数据上传成功！";
                         lb.type = "2";
                         lls.addCheckLog(lb);
-                        button1_Click(null,null);
+                        button1_Click(null, null);
                         MessageBox.Show("数据上传成功！");
                     }
                     else
@@ -4132,7 +4267,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
         }
         #endregion
 
-        
+
 
         /// <summary>
         /// 查看报告
@@ -4145,7 +4280,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             if (dataGridView1.Columns[e.ColumnIndex].Name == "btnModify" && e.RowIndex >= 0)
             {
                 //得到最新的文件
-                
+
                 //说明点击的列是DataGridViewButtonColumn列
                 DataGridViewColumn column = dataGridView1.Columns[e.ColumnIndex];
                 string id = dataGridView1["身份证号", e.RowIndex].Value.ToString();
@@ -4154,7 +4289,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 List<FileTimeInfo> list = new List<FileTimeInfo>();
                 string dir = @str + $"/up/result";
                 list = Common.GetLatestFileTimeInfo(dir, nameidstr);
-                if(list.Count>0)
+                if (list.Count > 0)
                 {
                     OpenPdf(list[0].FileName);
                     //OpenPdf(@str + $"/up/result/{name + id}.pdf");
@@ -4163,7 +4298,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 {
                     MessageBox.Show("找不到文件！");
                 }
-                
+
             }
         }
 
@@ -4178,8 +4313,8 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             {
                 doctor_id = dtgrgd.Rows[0]["doctor_id"].ToString();
             }
-            if (idnum == "" && doctor_id == "") {MessageBox.Show("患者身份证号或医生编号不正确!"); return; }
-            string newurl = "http://1.85.36.75:8077/ehr/sdc/ehr/browse/noArchive_msg.jsp?duns="+frmLogin.organCode+"&verifyCode=123&archiveId="+ idnum + "&flag=brows&doctorNo="+ doctor_id + "&random=0.9859470667327924";
+            if (idnum == "" && doctor_id == "") { MessageBox.Show("患者身份证号或医生编号不正确!"); return; }
+            string newurl = "http://1.85.36.75:8077/ehr/sdc/ehr/browse/noArchive_msg.jsp?duns=" + frmLogin.organCode + "&verifyCode=123&archiveId=" + idnum + "&flag=brows&doctorNo=" + doctor_id + "&random=0.9859470667327924";
             Form2 f2 = new Form2();
             f2.url = newurl;
             f2.ShowDialog();
@@ -4201,7 +4336,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
         }
 
         private void button4_Click(object sender, EventArgs e)
-        { 
+        {
             //得到选上传图片的人员
             List<ComboBoxData> _lst = new List<ComboBoxData>();
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
@@ -4210,10 +4345,10 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
                 {
                     string id = dataGridView1["身份证号", i].Value.ToString();
-                    combo.ID = id; 
+                    combo.ID = id;
                     combo.BarCode = dataGridView1["条码号", i].Value.ToString();
 
-                    combo.Name= dataGridView1["card_pic", i].Value.ToString();
+                    combo.Name = dataGridView1["card_pic", i].Value.ToString();
                     _lst.Add(combo);
                 }
             }
@@ -4221,11 +4356,11 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             {
                 MessageBox.Show("请选择要上传的人员！");
                 return;
-            } 
+            }
             LoadingHelper.myCaption = "正在上传...";
             LoadingHelper.myLabel = "正在上传...";
             LoadingHelper.ShowLoadingScreen();
-            Thread.Sleep(50); 
+            Thread.Sleep(50);
             try
             {
                 //根据id_number和bar_code找到对应的b超图片
@@ -4250,7 +4385,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 //根据id_number和bar_code找到对应的心电图图片 
                 DownLoadXinDianTuPian(sWhere);
                 //发送拍照的图片
-                for(int i=0;i<_lst.Count;i++)
+                for (int i = 0; i < _lst.Count; i++)
                 {
                     PushPaiZhaoImg(_lst[i].Name);
                 }
@@ -4259,7 +4394,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                     ComboBoxData combo = new ComboBoxData();
                     if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
                     {
-                        dataGridView1["B超图片", i].Value="1";
+                        dataGridView1["B超图片", i].Value = "1";
                         dataGridView1["心电图片", i].Value = "1";
                     }
                 }
@@ -4269,9 +4404,9 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             catch
             {
                 LoadingHelper.CloseForm();
-            } 
+            }
         }
-       
+
         #region 上传图片
         private bool PushPaiZhaoImg(string t)
         {
@@ -4279,11 +4414,11 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             try
             {
                 string fileName = Application.StartupPath + "\\cardImg\\" + t;
-                if(File.Exists(fileName))
+                if (File.Exists(fileName))
                 {
                     byte[] a = File.ReadAllBytes(fileName);
                     flag = OSSClientHelper.PushImg(a, t, "cardtp2019");
-                } 
+                }
             }
             catch
             {
@@ -4297,37 +4432,37 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             string sql = string.Format("select id_number,bar_code,BuPic01,BuPic02,BuPic03,BuPic04 from zkhw_tj_bc {0} ", s);
             DataSet dataSet = DbHelperMySQL.Query(sql);
             DataTable dt = dataSet.Tables[0];
-            for(int i=0;i<dt.Rows.Count;i++)
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
                 string t1 = dt.Rows[i]["BuPic01"].ToString();
                 string t2 = dt.Rows[i]["BuPic02"].ToString();
                 string t3 = dt.Rows[i]["BuPic03"].ToString();
                 string t4 = dt.Rows[i]["BuPic04"].ToString();
                 //上传
-                bool flag1= true;
+                bool flag1 = true;
                 bool flag2 = true;
                 bool flag3 = true;
                 bool flag4 = true;
-                if (t1 !="")
+                if (t1 != "")
                 {
-                    flag1=PushBChaoImg(t1);
+                    flag1 = PushBChaoImg(t1);
                 }
-                
+
                 if (t2 != "")
                 {
-                    flag2=PushBChaoImg(t2);
+                    flag2 = PushBChaoImg(t2);
                 }
                 if (t3 != "")
                 {
-                    flag3=PushBChaoImg(t3);
+                    flag3 = PushBChaoImg(t3);
                 }
                 if (t4 != "")
                 {
-                    flag4=PushBChaoImg(t4);
+                    flag4 = PushBChaoImg(t4);
                 }
                 if (t1 == "" && t2 == "" && t3 == "" && t4 == "") continue;
 
-                if(flag1==true && flag2 == true && flag3 == true && flag4 == true)
+                if (flag1 == true && flag2 == true && flag3 == true && flag4 == true)
                 {
                     string id = dt.Rows[i]["id_number"].ToString();
                     string bcode = dt.Rows[i]["bar_code"].ToString();
@@ -4347,7 +4482,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 {
                     byte[] a = File.ReadAllBytes(fileName);
                     flag = OSSClientHelper.PushImg(a, t, "bctp2019");
-                } 
+                }
             }
             catch
             {
@@ -4363,19 +4498,19 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             DataTable dt = dataSet.Tables[0];
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                string t1 = dt.Rows[i]["imageUrl"].ToString(); 
+                string t1 = dt.Rows[i]["imageUrl"].ToString();
                 //上传
                 if (t1 != "")
                 {
-                    bool flag=PushXinDianImg(t1);
-                    if(flag ==true)
+                    bool flag = PushXinDianImg(t1);
+                    if (flag == true)
                     {
-                        string id= dt.Rows[i]["id_number"].ToString();
+                        string id = dt.Rows[i]["id_number"].ToString();
                         string bcode = dt.Rows[i]["bar_code"].ToString();
-                        sql =string.Format( "update zkhw_tj_bgdc set XinDianImage='1' Where id_number='{0}' and bar_code='{1}'",id,bcode);
+                        sql = string.Format("update zkhw_tj_bgdc set XinDianImage='1' Where id_number='{0}' and bar_code='{1}'", id, bcode);
                         DbHelperMySQL.ExecuteSql(sql);
                     }
-                } 
+                }
             }
         }
         private bool PushXinDianImg(string t)
@@ -4400,10 +4535,10 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if(e.ColumnIndex==9 || e.ColumnIndex==10 )
+            if (e.ColumnIndex == 9 || e.ColumnIndex == 10)
             {
                 string t = e.Value.ToString();
-                if(t=="1")
+                if (t == "1")
                 {
                     e.Value = "是";
                 }

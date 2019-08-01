@@ -152,7 +152,7 @@ namespace zkhwClient.dao
                 + "',lifeway_hazardous_radiation='" + per.lifeway_hazardous_radiation + "',lifeway_radiation_preventive='" + per.lifeway_radiation_preventive + "',lifeway_hazardous_physical='" 
                 + per.lifeway_hazardous_physical + "',lifeway_physical_preventive='" + per.lifeway_physical_preventive + "',lifeway_hazardous_chemical='" + per.lifeway_hazardous_chemical 
                 + "',lifeway_chemical_preventive='" + per.lifeway_chemical_preventive + "',lifeway_hazardous_other='" + per.lifeway_hazardous_other + "',lifeway_other_preventive='" + per.lifeway_other_preventive
-                + "',lifeway_doctor='" + per.lifeway_doctor + "' where id = '" + per.id + "'";
+                + "',lifeway_doctor='" + per.lifeway_doctor + "',upload_status =0 where id = '" + per.id + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
             {
@@ -187,7 +187,7 @@ namespace zkhwClient.dao
                 + "',examination_cervix_memo='" + per.examination_cervix_memo + "',examination_woman_corpus='" + per.examination_woman_corpus + "',examination_corpus_memo='" + per.examination_corpus_memo + "',examination_woman_accessories='" + per.examination_woman_accessories
                 + "',examination_accessories_memo='" + per.examination_accessories_memo + "',examination_other='" + per.examination_other + "',blood_hemoglobin ='" + per.blood_hemoglobin + "',blood_leukocyte='" + per.blood_leukocyte + "',blood_platelet='" + per.blood_platelet + "',blood_other='" + per.blood_other + "',urine_protein='" + 
                 per.urine_protein + "',glycosuria='" + per.glycosuria + "',urine_acetone_bodies='" + per.urine_acetone_bodies + "',bld='" + per.bld + "',urine_other='" + per.urine_other + "',blood_glucose_mmol='" + per.blood_glucose_mmol + "' ,blood_glucose_mg='" + per.blood_glucose_mg + "',cardiogram='" + per.cardiogram 
-                + "',cardiogram_memo='" + per.cardiogram_memo + "' where id = '" + per.id + "'"; 
+                + "',cardiogram_memo='" + per.cardiogram_memo + "',upload_status=0  where id = '" + per.id + "'"; 
                 ret = DbHelperMySQL.ExecuteSql(sql);
                 return ret == 0 ? false : true;
         }
@@ -207,7 +207,7 @@ namespace zkhwClient.dao
                 + "',cerebrovascular_disease_other='" + per.cerebrovascular_disease_other + "',kidney_disease='" + per.kidney_disease + "',kidney_disease_other='" + per.kidney_disease_other
                 + "',heart_disease='" + per.heart_disease + "',heart_disease_other ='" + per.heart_disease_other + "',vascular_disease='" + per.vascular_disease + "',vascular_disease_other='" + per.vascular_disease_other
                 + "',ocular_diseases='" + per.ocular_diseases + "',ocular_diseases_other='" + per.ocular_diseases_other + "',nervous_system_disease='" + per.nervous_system_disease
-                + "',nervous_disease_memo='" + per.nervous_disease_memo + "',other_disease='" + per.other_disease + "',other_disease_memo='" + per.other_disease_memo +"' where id = '" + per.id + "'";
+                + "',nervous_disease_memo='" + per.nervous_disease_memo + "',other_disease='" + per.other_disease + "',other_disease_memo='" + per.other_disease_memo + "',upload_status=0 where id = '" + per.id + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }
@@ -254,7 +254,7 @@ namespace zkhwClient.dao
                 + per.abnormal2 + "',abnormal3='" + per.abnormal3 + "',abnormal4='" + per.abnormal4 + "',health_guidance='"
                 + per.health_guidance + "',danger_controlling='" + per.danger_controlling + "',target_weight='"
                 + per.target_weight + "',advise_bacterin= '" + per.advise_bacterin + "',danger_controlling_other='"
-                + per.danger_controlling_other + "',healthAdvice='" + per.healthAdvice + "',create_user='" + frmLogin.userCode + "',create_name='" + frmLogin.name + "',create_org='" + frmLogin.organCode + "',create_org_name='" + frmLogin.organName + "',update_user='" + frmLogin.userCode + "',update_name='" + frmLogin.name + "',update_time='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where id = '" + per.id + "'";
+                + per.danger_controlling_other + "',healthAdvice='" + per.healthAdvice + "',create_user='" + frmLogin.userCode + "',create_name='" + frmLogin.name + "',create_org='" + frmLogin.organCode + "',create_org_name='" + frmLogin.organName + "',update_user='" + frmLogin.userCode + "',update_name='" + frmLogin.name + "',update_time='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "',upload_status=0 where id = '" + per.id + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             if (ret>0) {
                 if (goodsList.Rows.Count > 0) {

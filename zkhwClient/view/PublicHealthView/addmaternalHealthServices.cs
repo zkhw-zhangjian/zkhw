@@ -188,7 +188,7 @@ namespace zkhwClient.view.PublicHealthView
         private int Update()
         {
             gravida_info info = GetData();
-            string sql = @"update gravida_info set visit_date=@visit_date,
+            string sql = @"update gravida_info set upload_status=0, visit_date=@visit_date,
 gestational_weeks=@gestational_weeks,gravida_age=@gravida_age,husband_name=@husband_name,husband_age=@husband_age,husband_phone=@husband_phone,pregnant_num=@pregnant_num,
 natural_labour_num=@natural_labour_num,cesarean_num=@cesarean_num,last_menstruation_date=@last_menstruation_date,due_date=@due_date,past_illness=@past_illness,
 past_illness_other=@past_illness_other,family_history=@family_history,family_history_other=@family_history_other,habits_customs=@habits_customs,

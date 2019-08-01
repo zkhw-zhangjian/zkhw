@@ -122,7 +122,7 @@ namespace zkhwClient.view.PublicHealthView
             foreach (children_tcm_record info in infolist)
             {
                 DBSql sqls = new DBSql();
-                sqls.sql = @"update children_tcm_record set visit_date=@visit_date,tcm_info=@tcm_info,tcm_other=@tcm_other,next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_user,update_name=@update_name,update_time=@update_time where name=@name and aichive_no=@aichive_no and id_number=@id_number and age=@age;";
+                sqls.sql = @"update children_tcm_record set upload_status=0,visit_date=@visit_date,tcm_info=@tcm_info,tcm_other=@tcm_other,next_visit_date=@next_visit_date,visit_doctor=@visit_doctor,update_user=@update_user,update_name=@update_name,update_time=@update_time where name=@name and aichive_no=@aichive_no and id_number=@id_number and age=@age;";
                 sqls.parameters = new MySqlParameter[] {
                     new MySqlParameter("@id",info.id),
                     new MySqlParameter("@name", info.name),

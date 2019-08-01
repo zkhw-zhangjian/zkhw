@@ -299,6 +299,24 @@ namespace zkhwClient.view.PublicHealthView
         #endregion
 
         #region 上传 2019-6-12
+
+        private void GetResidentBaseInfo(string _idnumber,out string str1,out string str2)
+        {
+            str1 = "";
+            str2 = "";
+            string sql = string.Format("select * from resident_base_info where id_number='{0}'", _idnumber);
+            DataSet info = DbHelperMySQL.Query(sql);
+            DataTable data = info.Tables[0]; 
+            if(data.Rows.Count>0)
+            {
+                str1 = string.Format("Delete From resident_info_temp where id='{0}'", _idnumber);
+                str2 = $@"insert into resident_info_temp (id,archive_no,pb_archive,name,sex,birthday,id_number,card_pic,company,phone,link_name,link_phone,resident_type,register_address,residence_address,nation,blood_group,blood_rh,education,profession,marital_status,pay_type,pay_other,drug_allergy,allergy_other,exposure,disease_other,is_hypertension,is_diabetes,is_psychosis,is_tuberculosis,is_heredity,heredity_name,is_deformity,deformity_name,is_poor,kitchen,fuel,other_fuel,drink,other_drink,toilet,poultry,medical_code,photo_code,aichive_org,doctor_name,province_code,province_name,city_code,city_name,county_code,county_name,towns_code,towns_name,village_code,village_name,status,remark,create_user,create_name,create_time,create_org,create_org_name
+                                ) values({Ifnull(data.Rows[0]["id"])},{Ifnull(data.Rows[0]["archive_no"])},{Ifnull(data.Rows[0]["pb_archive"])},{Ifnull(data.Rows[0]["name"])},{Ifnull(data.Rows[0]["sex"])},{Ifnull(data.Rows[0]["birthday"])},{Ifnull(_idnumber)},{Ifnull(data.Rows[0]["card_pic"])},{Ifnull(data.Rows[0]["company"])},{Ifnull(data.Rows[0]["phone"])},{Ifnull(data.Rows[0]["link_name"])},{Ifnull(data.Rows[0]["link_phone"])},{Ifnull(data.Rows[0]["resident_type"])},{Ifnull(data.Rows[0]["address"])},{Ifnull(data.Rows[0]["residence_address"])},{Ifnull(data.Rows[0]["nation"])},{Ifnull(data.Rows[0]["blood_group"])},{Ifnull(data.Rows[0]["blood_rh"])},{Ifnull(data.Rows[0]["education"])},{Ifnull(data.Rows[0]["profession"])},
+                            {Ifnull(data.Rows[0]["marital_status"])},{Ifnull(data.Rows[0]["pay_type"])},{Ifnull(data.Rows[0]["pay_other"])},{Ifnull(data.Rows[0]["drug_allergy"])},{Ifnull(data.Rows[0]["allergy_other"])},{Ifnull(data.Rows[0]["exposure"])},{Ifnull(data.Rows[0]["disease_other"])},{Ifnull(data.Rows[0]["is_hypertension"])},{Ifnull(data.Rows[0]["is_diabetes"])},{Ifnull(data.Rows[0]["is_psychosis"])},{Ifnull(data.Rows[0]["is_tuberculosis"])},{Ifnull(data.Rows[0]["is_heredity"])},{Ifnull(data.Rows[0]["heredity_name"])},{Ifnull(data.Rows[0]["is_deformity"])},{Ifnull(data.Rows[0]["deformity_name"])},{Ifnull(data.Rows[0]["is_poor"])},{Ifnull(data.Rows[0]["kitchen"])},{Ifnull(data.Rows[0]["fuel"])},{Ifnull(data.Rows[0]["other_fuel"])},
+                            {Ifnull(data.Rows[0]["drink"])},{Ifnull(data.Rows[0]["other_drink"])},{Ifnull(data.Rows[0]["toilet"])},{Ifnull(data.Rows[0]["poultry"])},{Ifnull(data.Rows[0]["medical_code"])},{Ifnull(data.Rows[0]["photo_code"])},{Ifnull(data.Rows[0]["aichive_org"])},{Ifnull(data.Rows[0]["doctor_name"])},{Ifnull(data.Rows[0]["province_code"])},{Ifnull(data.Rows[0]["province_name"])},{Ifnull(data.Rows[0]["city_code"])},{Ifnull(data.Rows[0]["city_name"])},{Ifnull(data.Rows[0]["county_code"])},{Ifnull(data.Rows[0]["county_name"])},{Ifnull(data.Rows[0]["towns_code"])},{Ifnull(data.Rows[0]["towns_name"])},
+                            {Ifnull(data.Rows[0]["village_code"])},{Ifnull(data.Rows[0]["village_name"])},{Ifnull(data.Rows[0]["status"])},{Ifnull(data.Rows[0]["remark"])},{Ifnull(data.Rows[0]["create_user"])},{Ifnull(data.Rows[0]["create_name"])},{Ifnull(Convert.ToDateTime(data.Rows[0]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[0]["create_org"])},{Ifnull(data.Rows[0]["create_org_name"])});";
+            }
+        }
         private void btnUpload_Click(object sender, EventArgs e)
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
@@ -331,7 +349,15 @@ namespace zkhwClient.view.PublicHealthView
                 string _answerresult= data.Rows[0]["answer_result"].ToString();
                 if (_answerresult == "") { MessageBox.Show("还未参加体质服务不能上传！"); return; }
                 List<string> sqllist = new List<string>();
-
+                //这里上传对应的档案信息
+                string str1 = "";
+                string str2 = "";
+                GetResidentBaseInfo(_idnumber, out str1, out str2);
+                if(str1!="")
+                {
+                    sqllist.Add(str1);
+                    sqllist.Add(str2);
+                }
                 string _id = data.Rows[0]["id"].ToString();
                 sqllist.Add($@"delete from elderly_tcm_record where id={Ifnull(data.Rows[0]["id"])};");
                 sqllist.Add($@"insert into elderly_tcm_record (id,name,archive_no,id_number,test_date,answer_result,qixuzhi_score,qixuzhi_result,yangxuzhi_score,yangxuzhi_result,yinxuzhi_score,yinxuzhi_result,tanshizhi_score,tanshizhi_result,shirezhi_score,shirezhi_result,xueyuzhi_score,xueyuzhi_result,qiyuzhi_score,qiyuzhi_result,tebingzhi_sorce,tebingzhi_result,pinghezhi_sorce,pinghezhi_result,test_doctor,tcm_guidance,create_user,create_name,create_org,create_org_name,create_time,upload_status) 

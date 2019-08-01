@@ -194,20 +194,13 @@ namespace zkhwClient.view.setting
         }
 
         private void comboBox5_SelectionChangeCommitted(object sender, EventArgs e)
-        {       
+        {
+            if (this.comboBox5.SelectedValue == null) return;
             xcuncode = this.comboBox5.SelectedValue.ToString();
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            if (xcuncode == null || "".Equals(xcuncode)) {
-                MessageBox.Show("信息不完整!"); return;
-            } else if (this.comboBox5.Text=="请选择") {
-                DataTable dtxzs = areadao.cunInfo(xzcode);
-                this.comboBox5.Text = dtxzs.Rows[0]["name"].ToString();
-                xcuncode = dtxzs.Rows[0]["code"].ToString();
-            }
-            
-            if(this.comboBox5.Text=="" || this.comboBox5.Text == "请选择" )
+            if (this.comboBox5.Text == "" || this.comboBox5.Text == "请选择")
             {
                 MessageBox.Show("信息不完整!"); return;
             }
@@ -219,7 +212,13 @@ namespace zkhwClient.view.setting
             {
                 MessageBox.Show("出错!"); return;
             }
-
+            if (xcuncode == null || "".Equals(xcuncode)) {
+                MessageBox.Show("信息不完整!"); return;
+            } else if (this.comboBox5.Text=="请选择") {
+                DataTable dtxzs = areadao.cunInfo(xzcode);
+                this.comboBox5.Text = dtxzs.Rows[0]["name"].ToString();
+                xcuncode = dtxzs.Rows[0]["code"].ToString();
+            } 
             shengName = this.comboBox1.Text;
             shiName = this.comboBox2.Text;
             qxName = this.comboBox3.Text;

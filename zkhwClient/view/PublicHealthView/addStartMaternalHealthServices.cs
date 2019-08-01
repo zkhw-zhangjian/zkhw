@@ -138,7 +138,7 @@ namespace zkhwClient.view.PublicHealthView
             foreach (gravida_follow_record info in infolist)
             {
                 DBSql sqls = new DBSql();
-                sqls.sql = @"update gravida_follow_record set visit_date=@visit_date,gestational_weeks=@gestational_weeks,symptom=@symptom,
+                sqls.sql = @"update gravida_follow_record set upload_status=0,visit_date=@visit_date,gestational_weeks=@gestational_weeks,symptom=@symptom,
 weight=@weight,fundus_height=@fundus_height,abdomen_circumference=@abdomen_circumference,fetus_position=@fetus_position,
 fetal_heart_rate=@fetal_heart_rate,blood_pressure_high=@blood_pressure_high,blood_pressure_low=@blood_pressure_low,
 hemoglobin=@hemoglobin,urine_protein=@urine_protein,check_other=@check_other,`condition`=@condition,error_info=@error_info,

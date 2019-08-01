@@ -3,6 +3,7 @@
  */
 using AForge.Video.DirectShow;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
@@ -48,13 +49,22 @@ namespace zkhwClient.view.PublicHealthView
         grjdxxBean grjdxx = null;
         loginLogService logservice = new loginLogService();
         areaConfigDao area = new areaConfigDao();
+        DataTable dtno = null;
         public personRegist()
         {
             InitializeComponent();
         }
 
-        private void personRegist_Load(object sender, EventArgs e)
+        private void BindNation()
         {
+            dtno = Common.GetNationDataTable(0);
+            this.comboBox2.DataSource = dtno;//绑定数据源
+            this.comboBox2.DisplayMember = "name";//显示给用户的数据集表项
+            this.comboBox2.ValueMember = "id";//操作时获取的值
+        }
+
+        private void personRegist_Load(object sender, EventArgs e)
+        { 
             this.label1.Text = "居民健康档案登记";
             this.label1.ForeColor = Color.SkyBlue;
             label1.Font = new Font("微软雅黑", 20F, System.Drawing.FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
@@ -66,6 +76,8 @@ namespace zkhwClient.view.PublicHealthView
             label13.Font = new Font("微软雅黑", 20F, System.Drawing.FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
             label13.Left = (this.panel4.Width - this.label13.Width) / 2;
             label13.BringToFront();
+
+            BindNation();
 
             label14.Text = DateTime.Now.Year.ToString() + "年" + DateTime.Now.Month.ToString() + "月" + DateTime.Now.Day.ToString() + "日";
             registrationRecordCheck();//右侧统计信息
@@ -159,7 +171,7 @@ namespace zkhwClient.view.PublicHealthView
         }
         //读取身份证
         private void button3_Click(object sender, EventArgs e)
-        {
+        { 
             textBox5.Text = "";
             textBox6.Text = "";
             try
@@ -250,7 +262,13 @@ namespace zkhwClient.view.PublicHealthView
                 textBox4.Text = Encoding.GetEncoding("GB2312").GetString(signdate).Replace("\0", "").Trim();
                 textBox3.Text = Encoding.GetEncoding("GB2312").GetString(number).Replace("\0", "").Trim();
                 textBox1.Text = Encoding.GetEncoding("GB2312").GetString(name).Replace("\0", "").Trim();
-                textBox2.Text = Encoding.GetEncoding("GB2312").GetString(people).Replace("\0", "").Trim();
+                //textBox2.Text = Encoding.GetEncoding("GB2312").GetString(people).Replace("\0", "").Trim();
+                string tmp= Encoding.GetEncoding("GB2312").GetString(people).Replace("\0", "").Trim();
+                if (tmp.IndexOf("族") < 0)
+                {
+                    tmp= tmp+ "族";
+                }
+                comboBox2.Text = tmp;
                 //label11.Text = "安全模块号：" + System.Text.Encoding.GetEncoding("GB2312").GetString(samid).Replace("\0", "").Trim();
                 //textBox8.Text = Encoding.GetEncoding("GB2312").GetString(validtermOfStart).Replace("\0", "").Trim() + "-" + Encoding.GetEncoding("GB2312").GetString(validtermOfEnd).Replace("\0", "").Trim();
                 richTextBox1.Text=richTextBox1.Text.Replace("?","号");
@@ -315,7 +333,14 @@ namespace zkhwClient.view.PublicHealthView
                             textBox3.Text = dt.Rows[0][3].ToString();
                             pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
                             richTextBox1.Text = dt.Rows[0][5].ToString();
-                            textBox2.Text = dt.Rows[0][6].ToString();
+                            tmp = dt.Rows[0][6].ToString();
+                            if (tmp == "") tmp = "1";
+                            DataRow[] drw = dtno.Select("id='"+tmp+"'");
+                            if(drw !=null)
+                            {
+                                comboBox2.Text=drw[0]["Name"].ToString();
+                            }  
+
                             textBox5.Text = dt.Rows[0][7].ToString();
                         };
                     }
@@ -526,7 +551,15 @@ namespace zkhwClient.view.PublicHealthView
             string signdate = textBox4.Text;
             string number = textBox3.Text;
             string name = textBox1.Text;
-            string people = textBox2.Text;
+            string people = "1" ;
+            string tmp = comboBox2.Text;
+            if (tmp == "") tmp = "汉族";
+            DataRow[] drw = dtno.Select("name='" + tmp + "'");
+            if (drw != null)
+            {
+                people = drw[0]["id"].ToString();
+            }
+            
             if (number==null|| number == "" || "".Equals(number)) {
                 MessageBox.Show("身份证号不能为空,如未带身份证，请手动填写身份证号!");
                 return;
@@ -654,10 +687,12 @@ namespace zkhwClient.view.PublicHealthView
                     registrationRecordCheck();//右侧统计
                 }
                 else {
-                    grjdxx.archive_no = dt.Rows[0]["archive_no"].ToString();
-                    grjdxx.doctor_id= dt.Rows[0]["doctor_id"].ToString();
-                    grjddao.updateGrjdInfo(grjdxx.archive_no, grjdxx.photo_code);
-                    grjddao.updategejdInfo(grjdxx);
+                    grjdxx.archive_no = cardcode;
+                    grjddao.updategejdInfonew(grjdxx); 
+                    //grjdxx.archive_no = dt.Rows[0]["archive_no"].ToString();
+                    //grjdxx.doctor_id= dt.Rows[0]["doctor_id"].ToString();
+                    //grjddao.updateGrjdInfo(grjdxx.archive_no, grjdxx.photo_code);
+                    //grjddao.updategejdInfo(grjdxx);
                 }
                 grjddao.addPhysicalExaminationInfo(grjdxx, barcode);//添加健康体检表信息 
                 jkBean jk = new jkBean();
@@ -834,14 +869,21 @@ namespace zkhwClient.view.PublicHealthView
             string _sMonth = textBox3.Text.Substring(10, 2);
             string _sDay = textBox3.Text.Substring(12, 2);
             textBox8.Text = _sYear + "-" + _sMonth + "-" + _sDay;
-            int _xb = int.Parse(textBox3.Text.Substring(16, 1));
-            if(_xb%2==0)
+            try
             {
-                comboBox1.Text = "女";
+                int _xb = int.Parse(textBox3.Text.Substring(16, 1));
+                if (_xb % 2 == 0)
+                {
+                    comboBox1.Text = "女";
+                }
+                else
+                {
+                    comboBox1.Text = "男";
+                }
             }
-            else
+            catch 
             {
-                comboBox1.Text = "男";
+                comboBox1.Text = "未说明的性别";
             }
             this.richTextBox1.Text = basicInfoSettings.shengName+ basicInfoSettings.shiName+ basicInfoSettings.qxName;
             //string cardCode6 = textBox3.Text.Trim().Substring(0,6);

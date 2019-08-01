@@ -25,14 +25,14 @@ namespace zkhwClient.dao
             int rt = 0;
             string id = Result.GetNewId();
             string timeCodeUnique = sh.bar_code + "_" + sh.createTime;
-            String sql = "insert into zkhw_tj_sh (ID,aichive_no,id_number,bar_code,ALB,ALP,ALT,AST,CHO,Crea,DBIL,GGT,GLU,HDLC,LDLC,TBIL,TG,TP,UA,UREA,createtime,ZrysSH,timeCodeUnique) values('" + id + "','" + sh.aichive_no + "','" + sh.id_number + "','" + sh.bar_code + "','" + sh.ALB + "','" + sh.ALP + "','" + sh.ALT + "','" + sh.AST + "','" + sh.CHO + "','" + sh.Crea + "','" + sh.DBIL + "','" + sh.GGT + "','" + sh.GLU + "','" + sh.HDL_C + "','" + sh.LDL_C + "','" + sh.TBIL + "','" + sh.TG + "','" + sh.TP + "','" + sh.UA + "','" + sh.UREA + "','" + sh.createTime + "','" + sh.ZrysSH + "','" + timeCodeUnique + "')";
+            String sql = "insert into zkhw_tj_sh (ID,aichive_no,id_number,bar_code,ALB,ALP,ALT,AST,CHO,Crea,DBIL,GGT,GLU,HDLC,LDLC,TBIL,TG,TP,UA,UREA,createtime,ZrysSH,timeCodeUnique,upload_status) values('" + id + "','" + sh.aichive_no + "','" + sh.id_number + "','" + sh.bar_code + "','" + sh.ALB + "','" + sh.ALP + "','" + sh.ALT + "','" + sh.AST + "','" + sh.CHO + "','" + sh.Crea + "','" + sh.DBIL + "','" + sh.GGT + "','" + sh.GLU + "','" + sh.HDL_C + "','" + sh.LDL_C + "','" + sh.TBIL + "','" + sh.TG + "','" + sh.TP + "','" + sh.UA + "','" + sh.UREA + "','" + sh.createTime + "','" + sh.ZrysSH + "','" + timeCodeUnique + "',0)";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
         public bool updateShenghuaInfo(shenghuaBean sh)
         {
             int rt = 0;
-            String sql = "update zkhw_tj_sh set ALB='" + sh.ALB + "',ALP='" + sh.ALP + "',ALT='" + sh.ALT + "',AST='" + sh.AST + "',CHO='" + sh.CHO + "',Crea='" + sh.Crea + "',DBIL='" + sh.DBIL + "',GGT='" + sh.GGT + "',GLU='" + sh.GLU + "',HDLC='" + sh.HDL_C + "',LDLC='" + sh.LDL_C + "',TBIL='" + sh.TBIL + "',TG='" + sh.TG + "',TP='" + sh.TP + "',UA='" + sh.UA + "',UREA='" + sh.UREA + "' where aichive_no = '" + sh.aichive_no + "' and bar_code='" + sh.bar_code + "'";
+            String sql = "update zkhw_tj_sh set ALB='" + sh.ALB + "',ALP='" + sh.ALP + "',ALT='" + sh.ALT + "',AST='" + sh.AST + "',CHO='" + sh.CHO + "',Crea='" + sh.Crea + "',DBIL='" + sh.DBIL + "',GGT='" + sh.GGT + "',GLU='" + sh.GLU + "',HDLC='" + sh.HDL_C + "',LDLC='" + sh.LDL_C + "',TBIL='" + sh.TBIL + "',TG='" + sh.TG + "',TP='" + sh.TP + "',UA='" + sh.UA + "',UREA='" + sh.UREA + "',upload_status=0 where aichive_no = '" + sh.aichive_no + "' and bar_code='" + sh.bar_code + "'";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
@@ -49,7 +49,7 @@ namespace zkhwClient.dao
         public bool updateXuechangguiInfo(xuechangguiBean xcg)
         {
             int rt = 0;
-            String sql = "update zkhw_tj_xcg set HCT='" + xcg.HCT + "',HGB='" + xcg.HGB + "',LYM='" + xcg.LYM + "',LYMP='" + xcg.LYMP + "',MCH='" + xcg.MCH + "',MCHC='" + xcg.MCHC + "',MCV='" + xcg.MCV + "',MPV='" + xcg.MPV + "',MXD='" + xcg.MXD + "',MXDP='" + xcg.MXDP + "',NEUT='" + xcg.NEUT + "',NEUTP='" + xcg.NEUTP + "',PCT='" + xcg.PCT + "',PDW='" + xcg.PDW + "',PLT='" + xcg.PLT + "',RBC='" + xcg.RBC + "',RDWCV='" + xcg.RDW_CV + "',RDWSD='" + xcg.RDW_SD + "',WBC='" + xcg.WBC + "',MONO='" + xcg.MONO + "',MONOP='" + xcg.MONOP + "',GRAN='" + xcg.GRAN + "',GRANP='" + xcg.GRANP + "',PLCR='" + xcg.PLCR + "' where aichive_no = '" + xcg.aichive_no + "' and bar_code='" + xcg.bar_code + "'";
+            String sql = "update zkhw_tj_xcg set HCT='" + xcg.HCT + "',HGB='" + xcg.HGB + "',LYM='" + xcg.LYM + "',LYMP='" + xcg.LYMP + "',MCH='" + xcg.MCH + "',MCHC='" + xcg.MCHC + "',MCV='" + xcg.MCV + "',MPV='" + xcg.MPV + "',MXD='" + xcg.MXD + "',MXDP='" + xcg.MXDP + "',NEUT='" + xcg.NEUT + "',NEUTP='" + xcg.NEUTP + "',PCT='" + xcg.PCT + "',PDW='" + xcg.PDW + "',PLT='" + xcg.PLT + "',RBC='" + xcg.RBC + "',RDWCV='" + xcg.RDW_CV + "',RDWSD='" + xcg.RDW_SD + "',WBC='" + xcg.WBC + "',MONO='" + xcg.MONO + "',MONOP='" + xcg.MONOP + "',GRAN='" + xcg.GRAN + "',GRANP='" + xcg.GRANP + "',PLCR='" + xcg.PLCR + "',upload_status=0 where aichive_no = '" + xcg.aichive_no + "' and bar_code='" + xcg.bar_code + "'";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
@@ -65,7 +65,7 @@ namespace zkhwClient.dao
         public bool updateBichaoInfo(string aichive_no, string barcode, string FubuBC, string FubuResult, string FubuDesc, string QitaBC, string QitaResult, string QitaDesc)
         {
             int ret = 0;
-            String sql = "update zkhw_tj_bc set FubuBC='" + FubuBC + "',FubuResult='" + FubuResult + "',FubuDesc='" + FubuDesc + "',QitaBC='" + QitaBC + "',QitaResult='" + QitaResult + "',QitaDesc='" + QitaDesc + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            String sql = "update zkhw_tj_bc set FubuBC='" + FubuBC + "',FubuResult='" + FubuResult + "',FubuDesc='" + FubuDesc + "',QitaBC='" + QitaBC + "',QitaResult='" + QitaResult + "',QitaDesc='" + QitaDesc + "',upload_status=0 where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }
@@ -81,7 +81,7 @@ namespace zkhwClient.dao
         public bool updateXindiantuInfo(string aichive_no, string barcode, string XdtResult, string XdtDesc, string Ventrate, string PR, string QRS, string QT, string QTc, string P_R_T, string DOB, string Age, string Gen, string Dep)
         {
             int ret = 0;
-            String sql = "update zkhw_tj_xdt set XdtResult='" + XdtResult + "',XdtDesc='" + XdtDesc + "',Ventrate='" + Ventrate + "',PR='" + PR + "',QRS='" + QRS + "',QT='" + QT + "',QTc='" + QTc + "',P_R_T='" + P_R_T + "',DOB='" + DOB + "',Age='" + Age + "',Gen='" + Gen + "',Dep='" + Dep + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            String sql = "update zkhw_tj_xdt set XdtResult='" + XdtResult + "',XdtDesc='" + XdtDesc + "',Ventrate='" + Ventrate + "',PR='" + PR + "',QRS='" + QRS + "',QT='" + QT + "',QTc='" + QTc + "',P_R_T='" + P_R_T + "',DOB='" + DOB + "',Age='" + Age + "',Gen='" + Gen + "',Dep='" + Dep + "',upload_status=0 where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }
@@ -154,7 +154,7 @@ namespace zkhwClient.dao
         public bool updateNiaochangguiInfo(string aichive_no, string barcode, string WBC, string LEU, string NIT, string URO, string PRO, string PH, string BLD, string SG, string KET, string BIL, string GLU, string Vc, string MA, string ACR, string Ca, string CR)
         {
             int ret = 0;
-            String sql = "update zkhw_tj_ncg set WBC='" + WBC + "',LEU='" + LEU + "',NIT='" + NIT + "',URO='" + URO + "',PRO='" + PRO + "',PH='" + PH + "',BLD='" + BLD + "',SG='" + SG + "',KET='" + KET + "',BIL='" + BIL + "',GLU='" + GLU + "',Vc='" + Vc + "',MA='" + MA + "',ACR='" + ACR + "',Ca='" + Ca + "',CR='" + CR + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            String sql = "update zkhw_tj_ncg set WBC='" + WBC + "',LEU='" + LEU + "',NIT='" + NIT + "',URO='" + URO + "',PRO='" + PRO + "',PH='" + PH + "',BLD='" + BLD + "',SG='" + SG + "',KET='" + KET + "',BIL='" + BIL + "',GLU='" + GLU + "',Vc='" + Vc + "',MA='" + MA + "',ACR='" + ACR + "',Ca='" + Ca + "',CR='" + CR + "',upload_status=0 where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }
@@ -229,7 +229,7 @@ namespace zkhwClient.dao
         public bool updateSgtzInfo(string aichive_no, string barcode, string Height, string Weight, string BMI)
         {
             int ret = 0;
-            String sql = "update zkhw_tj_sgtz set Height='" + Height + "',Weight='" + Weight + "',BMI='" + BMI + "' where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
+            String sql = "update zkhw_tj_sgtz set Height='" + Height + "',Weight='" + Weight + "',BMI='" + BMI + "',upload_status=0 where aichive_no = '" + aichive_no + "' and bar_code='" + barcode + "'";
             ret = DbHelperMySQL.ExecuteSql(sql);
             if (ret == 0)
             {

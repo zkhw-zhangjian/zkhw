@@ -37,11 +37,11 @@ namespace zkhwClient.dao
             {
                 id = Result.GetNewId();
                 sql = @"insert into poor_follow_record (id,name,archive_no,id_number,visit_date,visit_type,sex,birthday,visit_doctor,work_info,advice,create_user,create_name,create_org,create_org_name,create_time,upload_status) values ";
-                sql += @" ('" + id + "','" + hp.name + "', '" + hp.archive_no + "', '" + hp.id_number + "', '" + hp.visit_date + "', '" + hp.visit_type + "', '" + hp.sex + "', '" + hp.birthday + "', '" + hp.visit_doctor + "', '" + hp.work_info + "', '" + hp.advice + "','" + frmLogin.userCode + "','" + frmLogin.name + "','" + frmLogin.organCode + "','" + frmLogin.organName + "', '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "', '0')";
+                sql += @" ('" + id + "','" + hp.name + "', '" + hp.archive_no + "', '" + hp.id_number + "', '" + hp.visit_date + "', '" + hp.visit_type + "', '" + hp.sex + "', '" + hp.birthday + "', '" + hp.visit_doctor + "', '" + hp.work_info + "', '" + hp.advice + "','" + frmLogin.userCode + "','" + frmLogin.name + "','" + frmLogin.organCode + "','" + frmLogin.organName + "', '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "', 0)";
             }
             else
             {
-                sql = @"update poor_follow_record set visit_date='" + hp.visit_date + "',visit_type='" + hp.visit_type + "',work_info='" + hp.work_info + "',advice='" + hp.advice + "',update_user= '" + frmLogin.userCode + "',update_name= '" + frmLogin.name + "',update_time='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where archive_no = '" + hp.archive_no + "' and id_number='"+ hp.id_number+ "'";
+                sql = @"update poor_follow_record set visit_date='" + hp.visit_date + "',visit_type='" + hp.visit_type + "',work_info='" + hp.work_info + "',advice='" + hp.advice + "',update_user= '" + frmLogin.userCode + "',update_name= '" + frmLogin.name + "',update_time='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "',upload_status=0 where archive_no = '" + hp.archive_no + "' and id_number='"+ hp.id_number+ "'";
             }
             ret = DbHelperMySQL.ExecuteSql(sql);
 

@@ -387,17 +387,17 @@ namespace zkhwClient
                         if (File.Exists(f)) 
                         {
                             //如果有子文件删除文件
-                            File.Delete(f);
+                            File.Delete(f); 
                         }
                         else
                         {
                             //循环递归删除子文件夹
-                            DeleteDir(f);
+                            DeleteDir(f); 
                         }
                     }
                     //删除空文件夹
-                    Directory.Delete(file);
-               }
+                    Directory.Delete(file); 
+                }
             }
             catch // 异常处理
             {
@@ -425,5 +425,6 @@ namespace zkhwClient
                 bcJudge = "未见明显异常#肝,胆,胰,脾未见异常";
             }
         }
-   }
+
+    }
 }
