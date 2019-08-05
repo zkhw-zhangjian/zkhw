@@ -81,6 +81,7 @@ namespace zkhwClient.dao
         {
             //初始化监听
             watcherb.BeginInit();
+            watcherb.InternalBufferSize = 5 * 1024 * 1024;
             //设置监听文件类型
             watcherb.Filter = FilterType;
             //设置是否监听子目录
@@ -97,6 +98,7 @@ namespace zkhwClient.dao
         }
         private static void watch_createdbchao(object sender, FileSystemEventArgs e)
         {
+            //list1.item.add(e.FullPath);
             //事件内容
             while (!IsFileReady(e.FullPath))
             {
