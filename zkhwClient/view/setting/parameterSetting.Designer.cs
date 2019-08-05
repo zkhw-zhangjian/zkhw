@@ -211,7 +211,8 @@
             "英诺华",
             "雷杜",
             "库贝尔",
-            "迈瑞"});
+            "迈瑞",
+            "迪瑞"});
             this.comboBox1.Location = new System.Drawing.Point(198, 296);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(218, 28);
