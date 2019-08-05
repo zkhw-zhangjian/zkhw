@@ -94,8 +94,8 @@ namespace zkhwClient.view.PublicHealthView
             this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
             this.dataGridView1.Columns[1].HeaderCell.Value = "档案编号";
             this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
-            this.dataGridView1.Columns[3].HeaderCell.Value = "填表日期";
-            this.dataGridView1.Columns[4].HeaderCell.Value = "签字医生";
+            this.dataGridView1.Columns[3].HeaderCell.Value = "问询日期";
+            this.dataGridView1.Columns[4].HeaderCell.Value = "问询医生";
             this.dataGridView1.Columns[5].Visible = false;
             this.dataGridView1.Columns[6].HeaderCell.Value = "是否上传";
             this.dataGridView1.Columns[7].Visible = false;
@@ -323,15 +323,16 @@ namespace zkhwClient.view.PublicHealthView
             int row = dataGridView1.CurrentRow.Index;
             string _archiveno = dataGridView1["archive_no", row].Value.ToString();
             string _idnumber = dataGridView1["id_number", row].Value.ToString();
-            string sql = "";
-            if (_archiveno != "")
-            {
-                sql = string.Format("select * from elderly_tcm_record Where aichive_no='{0}'", _archiveno);
-            }
-            else
-            {
-                sql = string.Format("select * from elderly_tcm_record Where id_number='{0}'", _idnumber);
-            }
+            string _idd = dataGridView1["id", row].Value.ToString();
+            string sql =  string.Format("select * from elderly_tcm_record Where id='{0}'", _idd);
+            //if (_archiveno != "")
+            //{
+            //    sql = string.Format("select * from elderly_tcm_record Where aichive_no='{0}'", _archiveno);
+            //}
+            //else
+            //{
+            //    sql = string.Format("select * from elderly_tcm_record Where id_number='{0}'", _idnumber);
+            //}
             DataSet estimate = DbHelperMySQL.Query(sql);
             if (estimate != null && estimate.Tables[0].Rows.Count > 0)
             {

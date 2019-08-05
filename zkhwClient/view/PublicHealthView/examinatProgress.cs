@@ -856,7 +856,8 @@ namespace zkhwClient.view.PublicHealthView
         private void btnDel_Click(object sender, EventArgs e)
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
-            string archive_no = this.dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+            string _idnumber = this.dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
+            string _barcode = this.dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
             DialogResult rr = MessageBox.Show("确认删除？", "确认删除提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
             int tt = (int)rr;
             if (tt == 1)
@@ -865,25 +866,25 @@ namespace zkhwClient.view.PublicHealthView
                 List<string> _lst = new List<string>();
                 //string sql = string.Format(" Delete From resident_base_info where archive_no='{0}'", archive_no);
                 //_lst.Add(sql);
-                string sql = string.Format(" Delete From zkhw_tj_jk where aichive_no='{0}'", archive_no);
+                string sql = string.Format(" Delete From zkhw_tj_jk where id_number='{0}' and bar_code='{1}'", _idnumber,_barcode);
                 _lst.Add(sql);
-                sql = string.Format(" Delete From zkhw_tj_bgdc where aichive_no='{0}'", archive_no);
+                sql = string.Format(" Delete From zkhw_tj_bgdc where id_number='{0}' and bar_code='{1}'", _idnumber, _barcode);
                 _lst.Add(sql);
-                sql = string.Format(" Delete From physical_examination_record where aichive_no='{0}'", archive_no);
+                sql = string.Format(" Delete From physical_examination_record where id_number='{0}' and bar_code='{1}'", _idnumber, _barcode);
                 _lst.Add(sql);
-                sql = string.Format(" Delete From zkhw_tj_bc where aichive_no='{0}'", archive_no);
+                sql = string.Format(" Delete From zkhw_tj_bc where id_number='{0}' and bar_code='{1}'", _idnumber, _barcode);
                 _lst.Add(sql);
-                sql = string.Format(" Delete From zkhw_tj_ncg where aichive_no='{0}'", archive_no);
+                sql = string.Format(" Delete From zkhw_tj_ncg where id_number='{0}' and bar_code='{1}'", _idnumber, _barcode);
                 _lst.Add(sql);
-                sql = string.Format(" Delete From zkhw_tj_sgtz where aichive_no='{0}'", archive_no);
+                sql = string.Format(" Delete From zkhw_tj_sgtz where id_number='{0}' and bar_code='{1}'", _idnumber, _barcode);
                 _lst.Add(sql);
-                sql = string.Format(" Delete From zkhw_tj_sh where aichive_no='{0}'", archive_no);
+                sql = string.Format(" Delete From zkhw_tj_sh where id_number='{0}' and bar_code='{1}'", _idnumber, _barcode);
                 _lst.Add(sql);
-                sql = string.Format(" Delete From zkhw_tj_xcg where aichive_no='{0}'", archive_no);
+                sql = string.Format(" Delete From zkhw_tj_xcg where id_number='{0}' and bar_code='{1}'", _idnumber, _barcode);
                 _lst.Add(sql);
-                sql = string.Format(" Delete From zkhw_tj_xdt where aichive_no='{0}'", archive_no);
+                sql = string.Format(" Delete From zkhw_tj_xdt where id_number='{0}' and bar_code='{1}'", _idnumber, _barcode);
                 _lst.Add(sql);
-                sql = string.Format(" Delete From zkhw_tj_xy where aichive_no='{0}'", archive_no);
+                sql = string.Format(" Delete From zkhw_tj_xy where id_number='{0}' and bar_code='{1}'", _idnumber, _barcode);
                 _lst.Add(sql);
                 #endregion
                 int ret = DbHelperMySQL.ExecuteSqlTran(_lst);

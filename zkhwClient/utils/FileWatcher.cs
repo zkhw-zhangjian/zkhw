@@ -354,7 +354,7 @@ namespace zkhwClient
                     string filepath = e.FullPath.Substring(0, innum);
                     DeleteDir(filepath);
                     //插入数据库
-                }
+                } 
                     #endregion
                 }
                 catch (Exception ex)
