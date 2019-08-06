@@ -80,12 +80,12 @@ namespace zkhwClient.view.PublicHealthView
             //}
             //else
             //{
-                sql = @"SELECT bb.name,bb.archive_no,bb.id_number,aa.test_date,aa.test_doctor,aa.id,(case aa.upload_status when '1' then '是' ELSE '否' END) cstatus,aa.exam_id ,bb.bar_code
+                sql = @"SELECT bb.name,bb.archive_no,bb.id_number,aa.test_date,aa.test_doctor,bb.bar_code,(case aa.upload_status when '1' then '是' ELSE '否' END) cstatus,aa.exam_id ,aa.id
                      FROM (select b.name, b.archive_no, b.id_number,z.bar_code from resident_base_info b inner join zkhw_tj_jk z on b.id_number=z.id_number 
-                    where 1=1 and z.createtime>='" + time1 + "' and b.age >= '65' ";
+                    where 1=1 and (DATE_FORMAT( z.createtime,'%Y-%m-%d')>='" + time1 + "' and DATE_FORMAT( z.createtime,'%Y-%m-%d')<='"+ time2+ "' ) and b.age >= '65' ";
                 if (cun != null && !"".Equals(cun)) { sql += " AND b.village_code='" + cun + "'"; }
                 if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
-                sql += ") bb LEFT JOIN(select id,aichive_no,test_date,test_doctor,upload_status,exam_id from elderly_tcm_record where test_date >= '" + time1 + "' and test_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
+                sql += ") bb LEFT JOIN(select e.id,e.aichive_no,e.test_date,e.test_doctor,e.upload_status,e.exam_id,p.bar_code from elderly_tcm_record e  inner join physical_examination_record p on e.exam_id = p.id where DATE_FORMAT( test_date,'%Y-%m-%d') >= '" + time1 + "' and DATE_FORMAT( test_date,'%Y-%m-%d') <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no and bb.bar_code=aa.bar_code ";
             //}
             DataSet dataSet = DbHelperMySQL.Query(sql);
             if (dataSet.Tables.Count < 1) { MessageBox.Show("未查询出数据，请重新查询!"); return; }
@@ -96,7 +96,8 @@ namespace zkhwClient.view.PublicHealthView
             this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
             this.dataGridView1.Columns[3].HeaderCell.Value = "问询日期";
             this.dataGridView1.Columns[4].HeaderCell.Value = "问询医生";
-            this.dataGridView1.Columns[5].Visible = false;
+            this.dataGridView1.Columns[5].HeaderCell.Value = "条码号";
+            //this.dataGridView1.Columns[5].Visible = false;
             this.dataGridView1.Columns[6].HeaderCell.Value = "是否上传";
             this.dataGridView1.Columns[7].Visible = false;
             this.dataGridView1.Columns[8].Visible = false;
@@ -133,7 +134,7 @@ namespace zkhwClient.view.PublicHealthView
             DataTable dtcode = null;
             if (examid=="")
             {
-                dtcode = tcmHealthService.checkTcmHealthServicesByno1(code, idnum);
+                dtcode = tcmHealthService.checkTcmHealthServicesByno1(code, idnum, barcode);
                 if (examid == "")
                 {
                     healthCheckupDao hd = new healthCheckupDao();  //获取exam_id
@@ -178,7 +179,7 @@ namespace zkhwClient.view.PublicHealthView
             DataTable dtcode = null;
             if (examid == "")
             {
-                dtcode = tcmHealthService.checkTcmHealthServicesByno1(code, idnum);
+                dtcode = tcmHealthService.checkTcmHealthServicesByno1(code, idnum, barcode);
             }
             else
             {

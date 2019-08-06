@@ -147,7 +147,8 @@ namespace zkhwClient.PublicHealth
             DataTable dt = null;
             if (examid=="")
             {
-                dt = olderHelthS.query(archiveno);
+                //dt = olderHelthS.query(archiveno);
+                dt = olderHelthS.query1(archiveno,barcode);
                 //查找对应的ID
                 healthCheckupDao hcd = new healthCheckupDao();
                 examid = hcd.GetExaminationRecord(archiveno, idnumber, barcode);

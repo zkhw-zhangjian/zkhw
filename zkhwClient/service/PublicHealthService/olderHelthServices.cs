@@ -25,6 +25,10 @@ namespace zkhwClient.service
         {
             return hPD.query(archive_no);
         }
+        public DataTable query1(string archive_no,string barcode)
+        {
+            return hPD.query1(archive_no, barcode);
+        }
         public DataTable queryForExamID(string examid)
         {
             return hPD.queryForExamID(examid);

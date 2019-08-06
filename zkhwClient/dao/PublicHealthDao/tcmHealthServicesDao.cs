@@ -32,10 +32,11 @@ namespace zkhwClient.dao
             return ds.Tables[0];
         }
 
-        public DataTable checkTcmHealthServicesByno1(string code, string idnum)
+        public DataTable checkTcmHealthServicesByno1(string code, string idnum,string barcode)
         {
             DataSet ds = new DataSet();
-            string sql = "select * from elderly_tcm_record where aichive_no = '" + code + "' and id_number = '" + idnum + "'";
+            string sql = @"select * from elderly_tcm_record e inner join physical_examination_record p on e.exam_id = p.id
+                where e.aichive_no = '" + code + "' and e.id_number = '" + idnum + "' and p.bar_code='"+ barcode + "'";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }

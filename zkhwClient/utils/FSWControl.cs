@@ -98,15 +98,17 @@ namespace zkhwClient.dao
         }
         private static void watch_createdbchao(object sender, FileSystemEventArgs e)
         {
-            //list1.item.add(e.FullPath);
-            //事件内容
-            while (!IsFileReady(e.FullPath))
-            {
-                if (!File.Exists(e.FullPath))
-                    return;
-                Thread.Sleep(100);
-            }
-            FileWatcher.OnChangedForBChao(sender, e);
+            ////事件内容
+            //while (!IsFileReady(e.FullPath))
+            //{
+            //    if (!File.Exists(e.FullPath))
+            //        return;
+            //    Thread.Sleep(100);
+            //}
+            //FileWatcher.OnChangedForBChao(sender, e);
+            Thread thread = new Thread(new ParameterizedThreadStart(FileWatcher.OnChangedForBChao1));
+            thread.IsBackground = true;
+            thread.Start(e.FullPath); 
         }
  
         static bool IsFileReady(string filename)
