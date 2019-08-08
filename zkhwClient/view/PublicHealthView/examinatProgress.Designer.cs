@@ -61,6 +61,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.btnDown = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -70,6 +71,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btnDown);
             this.groupBox1.Controls.Add(this.btnDel);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
@@ -97,7 +99,7 @@
             // 
             // btnDel
             // 
-            this.btnDel.Location = new System.Drawing.Point(714, 48);
+            this.btnDel.Location = new System.Drawing.Point(649, 48);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(75, 25);
             this.btnDel.TabIndex = 12;
@@ -238,7 +240,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(614, 48);
+            this.button1.Location = new System.Drawing.Point(549, 48);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 25);
             this.button1.TabIndex = 11;
@@ -438,6 +440,16 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "体检进度";
             // 
+            // btnDown
+            // 
+            this.btnDown.BackgroundImage = global::zkhwClient.Properties.Resources.拉取数据;
+            this.btnDown.Location = new System.Drawing.Point(748, 48);
+            this.btnDown.Name = "btnDown";
+            this.btnDown.Size = new System.Drawing.Size(75, 25);
+            this.btnDown.TabIndex = 16;
+            this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+            // 
             // examinatProgress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -494,5 +506,6 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button btnDel;
+        private System.Windows.Forms.Button btnDown;
     }
 }

@@ -567,6 +567,11 @@ namespace zkhwClient.view.PublicHealthView
                                 this.textBox33.Text += "其他系统疾病 ";
                             }
                         }
+
+                        if(textBox48.Text.Trim() !="" || textBox29.Text.Trim() != "" || textBox31.Text.Trim() != "" || textBox33.Text.Trim() != "")
+                        {
+                            radioButton40.Checked = true;
+                        }
                     }
 
                     foreach (Control ctr in this.panel2.Controls)

@@ -34,10 +34,10 @@ namespace zkhwClient.dao
             //{
                 sql = @"SELECT bb.name,bb.archive_no,bb.id_number,aa.total_score,aa.judgement_result,aa.test_date,aa.test_doctor,bb.sex ,bb.bar_code,aa.exam_id
                 FROM (select b.name, b.archive_no, b.id_number,b.sex,z.bar_code from resident_base_info b 
-                 inner join zkhw_tj_jk z on b.id_number=z.id_number where 1=1 and z.createtime>='" + time1 + "' and b.age >= '65'";
+                 inner join zkhw_tj_jk z on b.id_number=z.id_number where 1=1 and (DATE_FORMAT( z.createtime,'%Y-%m-%d')>='" + time1 + "' and DATE_FORMAT( z.createtime,'%Y-%m-%d')<='"+ time2+ "' )and b.age >= '65'";
                 if (code != null && !"".Equals(code)) { sql += " AND b.village_code='" + code + "'"; }
                 if (pCa != "") { sql += " AND (b.name like '%" + pCa + "%' or b.id_number like '%" + pCa + "%'  or b.archive_no like '%" + pCa + "%')"; }
-                sql += ") bb LEFT JOIN(select a.aichive_no, a.total_score, a.judgement_result, a.test_date, a.test_doctor,a.exam_id from elderly_selfcare_estimate a where a.test_date >= '" + time1 + "' and a.test_date <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no";
+                sql += ") bb LEFT JOIN(select a.aichive_no, a.total_score, a.judgement_result, a.test_date, a.test_doctor,a.exam_id,p.bar_code  from elderly_selfcare_estimate a inner join physical_examination_record p on a.exam_id = p.id where DATE_FORMAT( a.test_date,'%Y-%m-%d') >= '" + time1 + "' and DATE_FORMAT( a.test_date,'%Y-%m-%d') <= '" + time2 + "') aa on bb.archive_no = aa.aichive_no and bb.bar_code=aa.bar_code";
             //}
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
@@ -54,6 +54,14 @@ namespace zkhwClient.dao
         {
             DataSet ds = new DataSet();
             string sql = "select * from elderly_selfcare_estimate where aichive_no = '" + archive_no + "'";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+        public DataTable query1(string archive_no,string barcode)
+        {
+            DataSet ds = new DataSet();
+            string sql = @"select * from elderly_selfcare_estimate e inner join physical_examination_record p on e.exam_id = p.id
+                where e.aichive_no = '" + archive_no + "' and p.bar_code='"+ barcode + "'";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }

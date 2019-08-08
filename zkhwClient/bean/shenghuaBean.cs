@@ -48,5 +48,6 @@ namespace zkhwClient
         public string bar_code { get; set; }
 
         public string ZrysSH { get; set; }
+         
     }
 }
