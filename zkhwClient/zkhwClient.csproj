@@ -193,6 +193,7 @@
       <DependentUpon>PagerControl.cs</DependentUpon>
     </Compile>
     <Compile Include="dao\ConfigInfoManage.cs" />
+    <Compile Include="dao\downloadDataForYunDao.cs" />
     <Compile Include="dao\PublicHealthDao\healthCheckupDao.cs" />
     <Compile Include="dao\PublicHealthDao\olderHelthServiceDao.cs" />
     <Compile Include="dao\PublicHealthDao\diabetesPatientDao.cs" />
@@ -201,6 +202,8 @@
     <Compile Include="dao\PublicHealthDao\psychiatricPatientServicesDao.cs" />
     <Compile Include="dao\PublicHealthDao\psychiatricPatientServicesDaoS.cs" />
     <Compile Include="dao\PublicHealthDao\healthPoorServicesDao.cs" />
+    <Compile Include="dao\rangeJudgeForSHInfo.cs" />
+    <Compile Include="dao\rangeJudgeForXCGInfo.cs" />
     <Compile Include="dao\SystemSettingsDao\areaConfigDao.cs" />
     <Compile Include="dao\SystemSettingsDao\jkInfoDao.cs" />
     <Compile Include="dao\SystemSettingsDao\basicSettingDao.cs" />
@@ -1306,6 +1309,7 @@
     <Content Include="images\update.png" />
     <Content Include="images\xzwj.png" />
     <Content Include="images\身份证样图.png" />
+    <None Include="Resources\拉取数据.png" />
     <Content Include="up\pic\371327198003045712.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

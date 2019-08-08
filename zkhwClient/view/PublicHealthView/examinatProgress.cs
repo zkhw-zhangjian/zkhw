@@ -47,8 +47,7 @@ namespace zkhwClient.view.PublicHealthView
 
         private void examinatProgress_Load(object sender, EventArgs e) 
         { 
-            //让默认的日期时间减一天
-
+            //让默认的日期时间减一天 
             this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
             this.button1.BackgroundImage = System.Drawing.Image.FromFile(@str + "/images/check.png");
             this.btnDel.BackgroundImage = System.Drawing.Image.FromFile(@str + "/images/delete.png");
@@ -900,5 +899,158 @@ namespace zkhwClient.view.PublicHealthView
                 }
             }
         }
+
+        private void btnDown_Click(object sender, EventArgs e)
+        {
+            //根据下面grid中的barcode从云平台获取对应的生化、血球数据
+            string _barcode = "";
+            for(int i=0;i< dataGridView1.Rows.Count;i++)
+            {
+                string a = this.dataGridView1.Rows[i].Cells["bar_code"].Value.ToString();
+                string b = "'" + a + "'";
+                if(_barcode=="")
+                {
+                    _barcode = b;
+                }
+                else
+                {
+                    _barcode = _barcode + "," + b;
+                }
+            }
+            if(_barcode !="")
+            {
+                DownLoadData(_barcode);
+            } 
+        }
+
+        private void DownLoadData(string s)
+        {
+            LoadingHelper.myCaption = "正在拉取数据...";
+            LoadingHelper.myLabel = "准备拉取数据...";
+            LoadingHelper.ShowLoadingScreen();
+            Thread.Sleep(50);
+            if (LoadingHelper.loadingForm != null)
+            {
+                LoadingHelper.loadingForm.mystr = "准备拉取数据...";
+            }
+            try
+            {
+                string b = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+                string c = dateTimePicker2.Value.ToString("yyyy-MM-dd");
+                List<string> _idlst = new List<string>();
+                List<string> _sqlList = new List<string>();
+
+                #region 生化
+                DataTable dt = downloadDataForYunDao.GetShenHuaDataForYun(s, b, c);
+                if (dt != null)
+                {
+                    //整理生化数据
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        if (dt.Rows[i] != null)
+                        {
+                            string timecodeUnique = "";
+                            string shid = "";
+                            shenghuaBean obj = downloadDataForYunDao.GetShengHuaObj(basicInfoSettings.sh, dt.Rows[i], out timecodeUnique, out shid);
+                            if (obj != null)
+                            {
+                                //这里处理对应的表
+                                string sql = downloadDataForYunDao.GetSqlForShenHua(obj, timecodeUnique);
+                                _sqlList.Add(sql);
+                                //处理对应的表  zkhw_tj_bgdc、physical_examination_record
+                                _sqlList.Add(downloadDataForYunDao.GetUpdateBgdcShSql(dttv, obj));
+                                _sqlList.Add(downloadDataForYunDao.GetUpdatePEShInfoSql(obj));
+                            }
+                            _idlst.Add(downloadDataForYunDao.GetUpdateShToYun(shid));
+                        }
+                    }
+                    if(dt.Rows.Count>0)
+                    {
+                        LoadingHelper.loadingForm.mystr = "已拉取数据 20%";
+                    } 
+                } 
+                #endregion
+
+                #region 血常规
+                DataTable dt1 = downloadDataForYunDao.GetXueChangGuiDataForYun(s, b, c);
+                if (dt1 != null)
+                {
+                    //整理血常规数据
+                    for (int i = 0; i < dt1.Rows.Count; i++)
+                    {
+                        if (dt1.Rows[i] != null)
+                        {
+                            string xcgid = "";
+                            xuechangguiBean obj = downloadDataForYunDao.GetXCGObj(basicInfoSettings.xcg, dt.Rows[i], out xcgid);
+                            if (obj != null)
+                            {
+                                //这里处理对应的表
+                                string sql = downloadDataForYunDao.GetSqlForXCG(obj);
+                                _sqlList.Add(sql);
+                                //处理对应的表  zkhw_tj_bgdc、physical_examination_record
+                                _sqlList.Add(downloadDataForYunDao.GetUpdateBgdcXCGSql(dttv, obj));
+                                _sqlList.Add(downloadDataForYunDao.GetUpdatePEXCGInfoSql(obj));
+                            }
+                            _idlst.Add(downloadDataForYunDao.GetUpdateXCGToYun(xcgid));
+                        }
+                    }
+                    if(dt1.Rows.Count>0)
+                    {
+                        LoadingHelper.loadingForm.mystr = "已拉取数据40%";
+                    } 
+                }
+                #endregion
+
+                #region 这里插入数据
+                if (_sqlList.Count > 0)
+                {
+                    int ret = DbHelperMySQL.ExecuteSqlTran(_sqlList);
+                    if (ret > 0)
+                    {
+                        LoadingHelper.loadingForm.mystr = "已拉取数据 99%";
+                        if (_idlst.Count > 0)
+                        {
+                            DbHelperMySQL.ExecuteSqlTranYpt(_idlst);
+                            LoadingHelper.loadingForm.mystr = "已拉取数据 100%";
+                        }
+                        if (LoadingHelper.loadingForm != null)
+                        {
+                            LoadingHelper.CloseForm();
+                        }
+                        MessageBox.Show("成功！");
+                        queryExaminatProgress();
+                    }
+                    else
+                    { 
+                        if (LoadingHelper.loadingForm != null)
+                        {
+                            LoadingHelper.CloseForm();
+                        }
+                        MessageBox.Show("失败！");
+                    }
+                }
+                else
+                {
+                    LoadingHelper.loadingForm.mystr = "无拉取数据";
+                    if (_idlst.Count > 0)
+                    {
+                        DbHelperMySQL.ExecuteSqlTranYpt(_idlst);
+                    }
+                }
+                #endregion
+                if (LoadingHelper.loadingForm != null)
+                {
+                    LoadingHelper.CloseForm();
+                }
+            }
+            catch
+            {
+                if (LoadingHelper.loadingForm != null)
+                {
+                    LoadingHelper.CloseForm();
+                }
+            } 
+            
+        } 
     }
 }
