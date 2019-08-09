@@ -37,10 +37,10 @@ namespace zkhwClient.view.setting
             this.textBox4.Text = node.InnerText;
             node = xmlDoc.SelectSingleNode("config/barNum");
             this.textBox5.Text = node.InnerText;
-            
+            node = xmlDoc.SelectSingleNode("config/bcJudge");
+            this.richTextBox1.Text = node.InnerText;
             node = xmlDoc.SelectSingleNode("config/chebiaoshi");
             this.textBox9.Text = node.InnerText;
-
             node = xmlDoc.SelectSingleNode("config/shxqAgreement");
             this.comboBox1.Text = node.InnerText;
             if (this.comboBox1.Text == "库贝尔")
