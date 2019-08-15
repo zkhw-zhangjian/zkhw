@@ -193,11 +193,11 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "1、饮食要合理，应注意低盐、低糖、低脂、高蛋白的原则 ",
-            "2、运动要适量，睡眠要充足",
-            "3、精神要愉快、情绪要稳定 ",
-            "4、服饰穿戴要宽松",
-            "5、坚持服药，不得自行停药"});
+            "饮食要合理，应注意低盐、低糖、低脂、高蛋白的原则 ",
+            "运动要适量，睡眠要充足",
+            "精神要愉快、情绪要稳定 ",
+            "服饰穿戴要宽松",
+            "坚持服药，不得自行停药"});
             this.comboBox1.Location = new System.Drawing.Point(100, 721);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(408, 20);

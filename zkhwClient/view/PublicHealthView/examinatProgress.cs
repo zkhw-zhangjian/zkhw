@@ -39,14 +39,16 @@ namespace zkhwClient.view.PublicHealthView
         string xcuncode = null; 
         string jmxx = null; 
         string str = Application.StartupPath;//项目路径 
-        DataTable dttv = null; 
+        DataTable dttv = null;
+        bool isfirst = true;
         public examinatProgress() 
         { 
             InitializeComponent(); 
         }
 
         private void examinatProgress_Load(object sender, EventArgs e) 
-        { 
+        {
+            isfirst = true;
             //让默认的日期时间减一天 
             this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
             this.button1.BackgroundImage = System.Drawing.Image.FromFile(@str + "/images/check.png");
@@ -321,7 +323,11 @@ namespace zkhwClient.view.PublicHealthView
             else
             {
                 this.dataGridView1.DataSource = null;
-                MessageBox.Show("未查询出数据！");
+                if(isfirst==false)
+                {
+                    MessageBox.Show("未查询出数据！");
+                }
+                isfirst = false;
             }
         }
 
