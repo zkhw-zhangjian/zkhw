@@ -3945,6 +3945,10 @@ namespace zkhwClient
                     string[] sendArray = sendHL7.Split('|');
                     byte[] buffernew = buffer.Skip(0).Take(effective).ToArray();
                     string sHL7 = Encoding.Default.GetString(buffernew).Trim();
+                    using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
+                    {
+                        sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "\n库贝尔-- " + sHL7);
+                    }
                     if (sHL7.IndexOf("ICUBIO") > 0)
                     {//解析生化协议报文数据                   
                         shenghuaBean sh = new shenghuaBean();
@@ -6727,7 +6731,7 @@ namespace zkhwClient
             serverSocket.Bind(point);
             //设置同时连接个数
             serverSocket.Listen(10);
-
+            
             //利用线程后台执行监听,否则程序会假死
             Thread thread = new Thread(ListenDr);
             thread.IsBackground = true;
@@ -6817,23 +6821,23 @@ namespace zkhwClient
                     for (int i = 1; i < sHL7Lines.Length; i++)
                     {
                         string[] sHL7Array = sHL7Lines[i].Split('|');
-                        switch (sHL7Array[4])
+                        switch (sHL7Array[3])
                         {
-                            case "ALB": sh.ALB = sHL7Array[4]; break;
-                            case "ALP": sh.ALP = sHL7Array[4]; break;
-                            case "ALT": sh.ALT = sHL7Array[4]; break;
-                            case "AST": sh.AST = sHL7Array[4]; break;
-                            case "TC": sh.CHO = sHL7Array[4]; break;
-                            case "CRE": sh.Crea = sHL7Array[4]; break;
-                            case "DBIL": sh.DBIL = sHL7Array[4]; break;
-                            case "GLU": sh.GLU = sHL7Array[4]; break;
-                            case "HDL-C": sh.HDL_C = sHL7Array[4]; break;
-                            case "LDL-C": sh.LDL_C = sHL7Array[4]; break;
-                            case "TBIL": sh.TBIL = sHL7Array[4]; break;
-                            case "TG": sh.TG = sHL7Array[4]; break;
-                            case "TP": sh.TP = sHL7Array[4]; break;
-                            case "UA": sh.UA = sHL7Array[4]; break;
-                            case "UREA": sh.UREA = sHL7Array[4]; break;
+                            case "ALB^1": sh.ALB = sHL7Array[4]; break;
+                            case "ALP^1": sh.ALP = sHL7Array[4]; break;
+                            case "ALT^1": sh.ALT = sHL7Array[4]; break;
+                            case "AST^1": sh.AST = sHL7Array[4]; break;
+                            case "TC^1": sh.CHO = sHL7Array[4]; break;
+                            case "CRE^1": sh.Crea = sHL7Array[4]; break;
+                            case "DBIL^1": sh.DBIL = sHL7Array[4]; break;
+                            case "GLU^1": sh.GLU = sHL7Array[4]; break;
+                            case "HDL-C^1": sh.HDL_C = sHL7Array[4]; break;
+                            case "LDL-C^1": sh.LDL_C = sHL7Array[4]; break;
+                            case "TBIL^1": sh.TBIL = sHL7Array[4]; break;
+                            case "TG^1": sh.TG = sHL7Array[4]; break;
+                            case "TP^1": sh.TP = sHL7Array[4]; break;
+                            case "UA^1": sh.UA = sHL7Array[4]; break;
+                            case "UREA^1": sh.UREA = sHL7Array[4]; break;
                             default: break;
                         }
                     }
