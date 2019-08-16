@@ -233,10 +233,10 @@ namespace zkhwClient.view.setting
             }
             input_name = this.comboBox6.Text;
             zeren_doctor = this.comboBox7.Text;
-            if (shengName == "陕西")
-            {
+            //if (shengName == "陕西")
+            //{
                 zeren_doctorId = this.comboBox7.SelectedValue.ToString();
-            }
+            //}
             bc = this.comboBox8.Text;
             xcg = this.comboBox9.Text;
             sh = this.comboBox10.Text;

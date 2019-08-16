@@ -216,10 +216,14 @@ namespace zkhwClient
                 basicInfoInit baseinfo = new basicInfoInit();
                 if (baseinfo.ShowDialog() == DialogResult.OK) {
                     this.comboBox1.DataSource = null;
-                    DataTable dd = us.listUser();
+                    DataTable dd = us.listUserForLogin();
                     this.comboBox1.DataSource = dd;//绑定数据源
-                    this.comboBox1.DisplayMember = "username";//显示给用户的数据集表项
+                    this.comboBox1.DisplayMember = "displayname";//显示给用户的数据集表项
                     this.comboBox1.ValueMember = "username";//操作时获取的值
+                    //DataTable dd = us.listUser();
+                    //this.comboBox1.DataSource = dd;//绑定数据源
+                    //this.comboBox1.DisplayMember = "username";//显示给用户的数据集表项
+                    //this.comboBox1.ValueMember = "username";//操作时获取的值
                 }
             }
             else

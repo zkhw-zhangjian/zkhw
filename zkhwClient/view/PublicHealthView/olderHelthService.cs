@@ -25,6 +25,8 @@ namespace zkhwClient.PublicHealth
         string qxcode = null;
         string shicode = null;
         string shengcode = null;
+
+        bool isfrist = true;
         public olderHelthService()
         {
             InitializeComponent();
@@ -32,6 +34,7 @@ namespace zkhwClient.PublicHealth
 
         private void examinatProgress_Load(object sender, EventArgs e)
         {
+            isfrist = true;
             btnLoad.Visible = false;
             //让默认的日期时间减一天
             this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
@@ -67,8 +70,12 @@ namespace zkhwClient.PublicHealth
            // DataTable dt = olderHelthS.queryOlderHelthService1(pCa, time1, time2, xcuncode);
             if (dt.Rows.Count < 1)
             {
-                MessageBox.Show("未查询出数据!");
-                xcuncode = "";
+                if(isfrist==false)
+                {
+                    MessageBox.Show("未查询出数据!");
+                    xcuncode = "";
+                }
+                isfrist = false;
                 return;
             }
             this.dataGridView1.DataSource = dt;

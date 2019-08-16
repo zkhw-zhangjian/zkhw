@@ -22,6 +22,7 @@ namespace zkhwClient.view.PublicHealthView
         public string time1 = null;
         public string time2 = null;
         public string cun = "";
+        bool isfirst = true;
         healthPoorServicesDao hpd = new healthPoorServicesDao();
         public healthPoorServices()
         {
@@ -30,6 +31,7 @@ namespace zkhwClient.view.PublicHealthView
 
         private void healthPoorServices_Load(object sender, EventArgs e)
         {
+            isfirst = true;
             //让默认的日期时间减一天
             this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
             this.label4.Text = "健康扶贫服务记录表";
@@ -88,13 +90,22 @@ namespace zkhwClient.view.PublicHealthView
             cun = comboBox5.SelectedValue?.ToString();
             querytcmHealthServices();
         }
+        
         private void querytcmHealthServices()
         {
             this.dataGridView1.DataSource = null;
             time1 = this.dateTimePicker1.Text.ToString();//开始时间
             time2 = this.dateTimePicker2.Text.ToString();//结束时间
             DataTable dt=hpd.querytcmHealthServices(pCa, time1, time2,cun);
-            if (dt!=null&&dt.Rows.Count < 1) { MessageBox.Show("未查询出数据，请重新查询!"); return; }
+            if (dt!=null&&dt.Rows.Count < 1)
+            {
+                if(isfirst==false)
+                {
+                    MessageBox.Show("未查询出数据，请重新查询!");
+                }
+                isfirst = false;
+                return;
+            }
             this.dataGridView1.DataSource = dt;
             this.dataGridView1.Columns[0].Visible = false;
             this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";

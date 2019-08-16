@@ -560,8 +560,13 @@ namespace zkhwClient.view.PublicHealthView
                 people = drw[0]["id"].ToString();
             }
             
-            if (number==null|| number == "" || "".Equals(number)) {
+            if (number==null|| number == "" || "".Equals(number) ) {
                 MessageBox.Show("身份证号不能为空,如未带身份证，请手动填写身份证号!");
+                return;
+            }
+            if (number.Length != 18)
+            {
+                MessageBox.Show("身份证号有误,请输入正确的号码!");
                 return;
             }
             DisplayPersonTeShuInfo(number);
@@ -686,8 +691,8 @@ namespace zkhwClient.view.PublicHealthView
                     grjddao.addgrjdInfo(grjdxx);//添加个人信息档案
                     registrationRecordCheck();//右侧统计
                 }
-                else {
-                    grjdxx.archive_no = cardcode;
+                else { 
+                    grjdxx.archive_no = dt.Rows[0]["archive_no"].ToString();
                     grjddao.updategejdInfonew(grjdxx); 
                     //grjdxx.archive_no = dt.Rows[0]["archive_no"].ToString();
                     //grjdxx.doctor_id= dt.Rows[0]["doctor_id"].ToString();
@@ -870,16 +875,22 @@ namespace zkhwClient.view.PublicHealthView
         /// <param name="e"></param>
         private void textBox3_DoubleClick(object sender, EventArgs e)
         {
-            if (textBox3.Text == "") return;
-            if (textBox3.Text.Length < 18) return;
+            string number = textBox3.Text.Trim();
+            if (number == "") return;
+            if (number.Length < 18) return;
+            if (number.Length != 18)
+            {
+                MessageBox.Show("身份证号有误,请输入正确的号码!");
+                return;
+            }
             //开始验证
-            string _sYear = textBox3.Text.Substring(6, 4);
-            string _sMonth = textBox3.Text.Substring(10, 2);
-            string _sDay = textBox3.Text.Substring(12, 2);
+            string _sYear = number.Substring(6, 4);
+            string _sMonth = number.Substring(10, 2);
+            string _sDay = number.Substring(12, 2);
             textBox8.Text = _sYear + "-" + _sMonth + "-" + _sDay;
             try
             {
-                int _xb = int.Parse(textBox3.Text.Substring(16, 1));
+                int _xb = int.Parse(number.Substring(16, 1));
                 if (_xb % 2 == 0)
                 {
                     comboBox1.Text = "女";
