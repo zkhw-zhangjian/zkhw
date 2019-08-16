@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -15,7 +16,7 @@ namespace zkhwClient.dao
         {
             DataSet ds = new DataSet();
             string sql = "select k.aichive_no,k.id_number,k.bar_code from zkhw_tj_jk k where k.bar_code='" + barcode + "' order by k.createtime desc limit 1";
-            ds = DbHelperMySQL.Query(sql);          
+            ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
         //登记界面右侧 查询统计男女各多少人功能

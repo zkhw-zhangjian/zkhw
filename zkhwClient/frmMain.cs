@@ -184,8 +184,14 @@ namespace zkhwClient
                 node = xmlDoc.SelectSingleNode("config/com");
                 string comnum = node.InnerText;
                 socketTcpKbe();//库贝尔
-                initPort(comnum);
-                port.DataReceived += new SerialDataReceivedEventHandler(this.mySerialPort_DataReceived);
+                bool bl= initPort(comnum);
+                if (bl)
+                {
+                    port.DataReceived += new SerialDataReceivedEventHandler(this.mySerialPort_DataReceived);
+                }
+                else {
+                    MessageBox.Show("打开串口异常,请检查，并重启软件！");
+                }
             }
             if (shxqAgreement == "雷杜")
             {
@@ -3945,10 +3951,7 @@ namespace zkhwClient
                     string[] sendArray = sendHL7.Split('|');
                     byte[] buffernew = buffer.Skip(0).Take(effective).ToArray();
                     string sHL7 = Encoding.Default.GetString(buffernew).Trim();
-                    using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
-                    {
-                        sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "\n库贝尔-- " + sHL7);
-                    }
+
                     if (sHL7.IndexOf("ICUBIO") > 0)
                     {//解析生化协议报文数据                   
                         shenghuaBean sh = new shenghuaBean();
@@ -4456,6 +4459,7 @@ namespace zkhwClient
         private void mySerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             bool isCRC = false;
+            Thread.Sleep(12000);
             try
             {
                 SerialPort sp = (SerialPort)sender;
@@ -4466,8 +4470,8 @@ namespace zkhwClient
                     return;
                 }
                 sp.Read(byteRead, 0, byteRead.Length);
-                sp.DiscardInBuffer();
-                sp.DiscardOutBuffer();
+                //sp.DiscardInBuffer();
+                //sp.DiscardOutBuffer();
                 totalByteRead = totalByteRead.Concat(byteRead).ToArray();
                 text = ToHexString(totalByteRead);
                 if (totalByteRead.Length > 1000)
@@ -4484,92 +4488,105 @@ namespace zkhwClient
                         isCRC = true;
                     }
                 }
+                
                 if (isCRC)
                 {
+                    //using (StreamWriter sw = new StreamWriter(Application.StartupPath + "/log.txt", true))
+                    //{
+                    //    sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "接收报文2：" + text );
+                    //}
                     Thread multiAdd = new Thread(parsingTextData);
                     multiAdd.IsBackground = true;
                     multiAdd.Start(text);
-
-                    using (StreamWriter sw = new StreamWriter("D:/log.txt", true))
-                    {
-                        sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "报文：" + ToHexString(totalByteRead));
-                    }
                     totalByteRead = new Byte[0];
                 }
             }
             catch (Exception ee)
             {
-                using (StreamWriter sw = new StreamWriter("D:/log.txt", true))
+                using (StreamWriter sw = new StreamWriter(Application.StartupPath + "/log.txt", true))
                 {
-                    sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "异常报文：" + ToHexString(totalByteRead));
+                    sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "异常报文1：" + ToHexString(totalByteRead));
                 }
             }
         }
 
         public void parsingTextData(object parameter)
         {
-            string xmlStr = @parameter.ToString();
             xuechangguiBean xcg = new xuechangguiBean();
-            xcg.ZrysXCG = basicInfoSettings.xcg;
-            var doc = new XmlDocument();
-            doc.LoadXml(xmlStr);
-            var rowNoteList = doc.SelectNodes("/sample/smpinfo/p");
-            var fieldNodeID = rowNoteList[0].ChildNodes;
-            string barcode= fieldNodeID[1].InnerText;
-            var fieldNodeTime = rowNoteList[2].ChildNodes;
-            string timeNow = fieldNodeTime[1].InnerText;
-            timeNow = timeNow.Replace("T"," ")+":00";
-            DataTable dtjkinfo = jkdao.selectjkInfoBybarcode(xcg.bar_code);
-            if (dtjkinfo != null && dtjkinfo.Rows.Count > 0)
+            try
             {
-                xcg.aichive_no = dtjkinfo.Rows[0]["aichive_no"].ToString();
-                xcg.id_number = dtjkinfo.Rows[0]["id_number"].ToString();
-            }
-            else
-            {
-                return;
-            }
-            xcg.createTime = timeNow; //DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            var smpresultsList = doc.SelectNodes("/sample/smpresults/p");
-            foreach (XmlNode rowNode in smpresultsList)
-            {
-                var fieldNodeList = rowNode.ChildNodes;
-                string type = fieldNodeList[0].InnerText;
-                switch (type)
+                string xmlStr = @parameter.ToString();
+                xcg.ZrysXCG = basicInfoSettings.xcg;
+                var doc = new XmlDocument();
+                doc.LoadXml(xmlStr);
+                var rowNoteList = doc.SelectNodes("/sample/smpinfo/p");
+                var fieldNodeID = rowNoteList[0].ChildNodes;
+                string barcode = fieldNodeID[1].InnerText;
+                string []barcodes = barcode.Split('/');
+                xcg.bar_code = barcodes[0].Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", "").Trim();
+                var fieldNodeTime = rowNoteList[2].ChildNodes;
+                string timeNow = fieldNodeTime[1].InnerText;
+                timeNow = timeNow.Replace("T", " ") + ":00";
+                DataTable dtjkinfo = jkdao.selectjkInfoBybarcode(xcg.bar_code);
+                if (dtjkinfo.Rows.Count > 0)
                 {
-                    case "HCT": xcg.HCT = fieldNodeList[1].InnerText; break;
-                    case "HGB": xcg.HGB = fieldNodeList[1].InnerText; break;
-                    case "LYMHC": xcg.LYM = fieldNodeList[1].InnerText; break;
-                    case "LYMHR": xcg.LYMP = fieldNodeList[1].InnerText; break;
-                    case "MCH": xcg.MCH = fieldNodeList[1].InnerText; break;
-                    case "MCHC": xcg.MCHC = fieldNodeList[1].InnerText; break;
-                    case "MCV": xcg.MCV = fieldNodeList[1].InnerText; break;
-                    case "MPV": xcg.MPV = fieldNodeList[1].InnerText; break;
-                    case "MIDC": xcg.MXD = fieldNodeList[1].InnerText; break;
-                    case "MIDR": xcg.MXDP = fieldNodeList[1].InnerText; break;
-                    case "NEUTC": xcg.NEUT = fieldNodeList[1].InnerText; break;
-                    case "NEUTR": xcg.NEUTP = fieldNodeList[1].InnerText; break;
-                    case "PCT": xcg.PCT = fieldNodeList[1].InnerText; break;
-                    case "PDW": xcg.PDW = fieldNodeList[1].InnerText; break;
-                    case "PLT": xcg.PLT = fieldNodeList[1].InnerText; break;
-                    case "RBC": xcg.RBC = fieldNodeList[1].InnerText; break;
-                    case "RDW-CV": xcg.RDW_CV = fieldNodeList[1].InnerText; break;
-                    case "RDW-SD": xcg.RDW_SD = fieldNodeList[1].InnerText; break;
-                    case "WBC": xcg.WBC = fieldNodeList[1].InnerText; break;
-                    case "MONC": xcg.MONO = fieldNodeList[1].InnerText; break;
-                    case "MONP": xcg.MONOP = fieldNodeList[1].InnerText; break;
-                    case "GRAC": xcg.GRAN = fieldNodeList[1].InnerText; break;
-                    case "GRAP": xcg.GRANP = fieldNodeList[1].InnerText; break;
-                    case "P-LCR": xcg.PLCR = fieldNodeList[1].InnerText; break;
-                    default: break;
+                    xcg.aichive_no = dtjkinfo.Rows[0]["aichive_no"].ToString();
+                    xcg.id_number = dtjkinfo.Rows[0]["id_number"].ToString();
                 }
+                else
+                {
+                    return;
+                }
+                xcg.createTime = timeNow; //DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                var smpresultsList = doc.SelectNodes("/sample/smpresults/p");
+                foreach (XmlNode rowNode in smpresultsList)
+                {
+                    var fieldNodeList = rowNode.ChildNodes;
+                    string type = fieldNodeList[0].InnerText;
+                    switch (type)
+                    {
+                        case "HCT": xcg.HCT = fieldNodeList[1].InnerText; break;
+                        case "HGB": xcg.HGB = fieldNodeList[1].InnerText; break;
+                        case "LYMHC": xcg.LYM = fieldNodeList[1].InnerText; break;
+                        case "LYMHR": xcg.LYMP = fieldNodeList[1].InnerText; break;
+                        case "MCH": xcg.MCH = fieldNodeList[1].InnerText; break;
+                        case "MCHC": xcg.MCHC = fieldNodeList[1].InnerText; break;
+                        case "MCV": xcg.MCV = fieldNodeList[1].InnerText; break;
+                        case "MPV": xcg.MPV = fieldNodeList[1].InnerText; break;
+                        case "MIDC": xcg.MXD = fieldNodeList[1].InnerText; break;
+                        case "MIDR": xcg.MXDP = fieldNodeList[1].InnerText; break;
+                        case "NEUTC": xcg.NEUT = fieldNodeList[1].InnerText; break;
+                        case "NEUTR": xcg.NEUTP = fieldNodeList[1].InnerText; break;
+                        case "PCT": xcg.PCT = fieldNodeList[1].InnerText; break;
+                        case "PDW": xcg.PDW = fieldNodeList[1].InnerText; break;
+                        case "PLT": xcg.PLT = fieldNodeList[1].InnerText; break;
+                        case "RBC": xcg.RBC = fieldNodeList[1].InnerText; break;
+                        case "RDW-CV": xcg.RDW_CV = fieldNodeList[1].InnerText; break;
+                        case "RDW-SD": xcg.RDW_SD = fieldNodeList[1].InnerText; break;
+                        case "WBC": xcg.WBC = fieldNodeList[1].InnerText; break;
+                        case "MONC": xcg.MONO = fieldNodeList[1].InnerText; break;
+                        case "MONP": xcg.MONOP = fieldNodeList[1].InnerText; break;
+                        case "GRAC": xcg.GRAN = fieldNodeList[1].InnerText; break;
+                        case "GRAP": xcg.GRANP = fieldNodeList[1].InnerText; break;
+                        case "P-LCR": xcg.PLCR = fieldNodeList[1].InnerText; break;
+                        default: break;
+                    }
+                }
+            }
+            catch (Exception ee)
+            {
+                using (StreamWriter sw = new StreamWriter(Application.StartupPath + "/log.txt", true))
+                {
+                    sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "异常报文解析：" + ee.Message+"--"+ee.StackTrace);
+                }
+                return;
             }
                 bool istrue = tjdao.insertXuechangguiInfo(xcg);
                 if (istrue)
                 {
                     int flag = 1;
                     string wbc = xcg.WBC;
-                    if (wbc != null && wbc != "*")
+                    if (wbc != null && wbc != "")
                     {
                         double wbcdouble = double.Parse(wbc);
                         DataRow[] drwbc = dttv.Select("type='WBC'");
@@ -4587,7 +4604,7 @@ namespace zkhwClient
                         }
                     }
                     string rbc = xcg.RBC;
-                    if (rbc != null && rbc != "*")
+                    if (rbc != null && rbc != "")
                     {
                         double rbcdouble = double.Parse(rbc);
                         DataRow[] drrbc = dttv.Select("type='RBC'");
@@ -4605,7 +4622,7 @@ namespace zkhwClient
                         }
                     }
                     string pct = xcg.PCT;
-                    if (pct != null && pct != "*")
+                    if (pct != null && pct != "")
                     {
                         double pctdouble = double.Parse(pct);
                         DataRow[] drpct = dttv.Select("type='PCT'");
@@ -4623,7 +4640,7 @@ namespace zkhwClient
                         }
                     }
                     string plt = xcg.PLT;
-                    if (plt != null && plt != "*")
+                    if (plt != null && plt != "")
                     {
                         double pltdouble = double.Parse(plt);
                         DataRow[] drplt = dttv.Select("type='PLT'");
@@ -4641,7 +4658,7 @@ namespace zkhwClient
                         }
                     }
                     string hgb = xcg.HGB;
-                    if (hgb != null && hgb != "*")
+                    if (hgb != null && hgb != "")
                     {
                         double hgbdouble = double.Parse(hgb);
                         DataRow[] drhgb = dttv.Select("type='HGB'");
@@ -4659,7 +4676,7 @@ namespace zkhwClient
                         }
                     }
                     string hct = xcg.HCT;
-                    if (hct != null && hct != "*")
+                    if (hct != null && hct != "")
                     {
                         double hctdouble = double.Parse(hct);
                         DataRow[] drhct = dttv.Select("type='HCT'");
@@ -4677,7 +4694,7 @@ namespace zkhwClient
                         }
                     }
                     string mcv = xcg.MCV;
-                    if (mcv != null && mcv != "*")
+                    if (mcv != null && mcv != "")
                     {
                         double mcvdouble = double.Parse(mcv);
                         DataRow[] drmcv = dttv.Select("type='MCV'");
@@ -4695,7 +4712,7 @@ namespace zkhwClient
                         }
                     }
                     string mch = xcg.MCH;
-                    if (mch != null && mch != "*")
+                    if (mch != null && mch != "")
                     {
                         double mchdouble = double.Parse(mch);
                         DataRow[] drmch = dttv.Select("type='MCH'");
@@ -4713,7 +4730,7 @@ namespace zkhwClient
                         }
                     }
                     string mchc = xcg.MCHC;
-                    if (mchc != null && mchc != "*")
+                    if (mchc != null && mchc != "")
                     {
                         double mchcdouble = double.Parse(mchc);
                         DataRow[] drmchc = dttv.Select("type='MCHC'");
@@ -4731,7 +4748,7 @@ namespace zkhwClient
                         }
                     }
                     string rdwcv = xcg.RDW_CV;
-                    if (rdwcv != null && rdwcv != "*")
+                    if (rdwcv != null && rdwcv != "")
                     {
                         double rdwcvdouble = double.Parse(rdwcv);
                         DataRow[] drrdwcv = dttv.Select("type='RDWCV'");
@@ -4749,7 +4766,7 @@ namespace zkhwClient
                         }
                     }
                     string rdwsd = xcg.RDW_SD;
-                    if (rdwsd != null && rdwsd != "*")
+                    if (rdwsd != null && rdwsd != "")
                     {
                         double rdwsddouble = double.Parse(rdwsd);
                         DataRow[] drrdwsd = dttv.Select("type='RDWSD'");
@@ -4767,7 +4784,7 @@ namespace zkhwClient
                         }
                     }
                     string neut = xcg.NEUT;
-                    if (neut != null && neut != "*")
+                    if (neut != null && neut != "")
                     {
                         double neutdouble = double.Parse(neut);
                         DataRow[] drneut = dttv.Select("type='NEUT'");
@@ -4785,7 +4802,7 @@ namespace zkhwClient
                         }
                     }
                     string neutp = xcg.NEUTP;
-                    if (neutp != null && neutp != "*")
+                    if (neutp != null && neutp != "")
                     {
                         double neutpdouble = double.Parse(neutp);
                         DataRow[] drneutp = dttv.Select("type='NEUTP'");
@@ -4803,7 +4820,7 @@ namespace zkhwClient
                         }
                     }
                     string lym = xcg.LYM;
-                    if (lym != null && lym != "*")
+                    if (lym != null && lym != "")
                     {
                         double lymdouble = double.Parse(lym);
                         DataRow[] drlym = dttv.Select("type='LYM'");
@@ -4821,7 +4838,7 @@ namespace zkhwClient
                         }
                     }
                     string lymp = xcg.LYMP;
-                    if (lymp != null && lymp != "*")
+                    if (lymp != null && lymp != "")
                     {
                         double lympdouble = double.Parse(lymp);
                         DataRow[] drlymp = dttv.Select("type='LYMP'");
@@ -4839,7 +4856,7 @@ namespace zkhwClient
                         }
                     }
                     string mpv = xcg.MPV;
-                    if (mpv != null && mpv != "*")
+                    if (mpv != null && mpv != "")
                     {
                         double mpvdouble = double.Parse(mpv);
                         DataRow[] drmpv = dttv.Select("type='MPV'");
@@ -4857,7 +4874,7 @@ namespace zkhwClient
                         }
                     }
                     string pdw = xcg.PDW;
-                    if (pdw != null && pdw != "*")
+                    if (pdw != null && pdw != "")
                     {
                         double pdwdouble = double.Parse(pdw);
                         DataRow[] drpdw = dttv.Select("type='PDW'");
@@ -4875,7 +4892,7 @@ namespace zkhwClient
                         }
                     }
                     string mxd = xcg.MXD;
-                    if (mxd != null && mxd != "*")
+                    if (mxd != null && mxd != "")
                     {
                         double mxddouble = double.Parse(mxd);
                         DataRow[] drmxd = dttv.Select("type='MXD'");
@@ -4893,7 +4910,7 @@ namespace zkhwClient
                         }
                     }
                     string mxdp = xcg.MXDP;
-                    if (mxdp != null && mxdp != "*")
+                    if (mxdp != null && mxdp != "")
                     {
                         double mxdpdouble = double.Parse(mxdp);
                         DataRow[] drmxdp = dttv.Select("type='MXDP'");
@@ -4922,7 +4939,7 @@ namespace zkhwClient
                     }
                     int flag = 1;
                     string wbc = xcg.WBC;
-                    if (wbc != null && wbc != "*")
+                    if (wbc != null && wbc != "")
                     {
                         double wbcdouble = double.Parse(wbc);
                         DataRow[] drwbc = dttv.Select("type='WBC'");
@@ -4940,7 +4957,7 @@ namespace zkhwClient
                         }
                     }
                     string rbc = xcg.RBC;
-                    if (rbc != null && rbc != "*")
+                    if (rbc != null && rbc != "")
                     {
                         double rbcdouble = double.Parse(rbc);
                         DataRow[] drrbc = dttv.Select("type='RBC'");
@@ -4958,7 +4975,7 @@ namespace zkhwClient
                         }
                     }
                     string pct = xcg.PCT;
-                    if (pct != null && pct != "*")
+                    if (pct != null && pct != "")
                     {
                         double pctdouble = double.Parse(pct);
                         DataRow[] drpct = dttv.Select("type='PCT'");
@@ -4976,7 +4993,7 @@ namespace zkhwClient
                         }
                     }
                     string plt = xcg.PLT;
-                    if (plt != null && plt != "*")
+                    if (plt != null && plt != "")
                     {
                         double pltdouble = double.Parse(plt);
                         DataRow[] drplt = dttv.Select("type='PLT'");
@@ -4994,7 +5011,7 @@ namespace zkhwClient
                         }
                     }
                     string hgb = xcg.HGB;
-                    if (hgb != null && hgb != "*")
+                    if (hgb != null && hgb != "")
                     {
                         double hgbdouble = double.Parse(hgb);
                         DataRow[] drhgb = dttv.Select("type='HGB'");
@@ -5012,7 +5029,7 @@ namespace zkhwClient
                         }
                     }
                     string hct = xcg.HCT;
-                    if (hct != null && hct != "*")
+                    if (hct != null && hct != "")
                     {
                         double hctdouble = double.Parse(hct);
                         DataRow[] drhct = dttv.Select("type='HCT'");
@@ -5030,7 +5047,7 @@ namespace zkhwClient
                         }
                     }
                     string mcv = xcg.MCV;
-                    if (mcv != null && mcv != "*")
+                    if (mcv != null && mcv != "")
                     {
                         double mcvdouble = double.Parse(mcv);
                         DataRow[] drmcv = dttv.Select("type='MCV'");
@@ -5048,7 +5065,7 @@ namespace zkhwClient
                         }
                     }
                     string mch = xcg.MCH;
-                    if (mch != null && mch != "*")
+                    if (mch != null && mch != "")
                     {
                         double mchdouble = double.Parse(mch);
                         DataRow[] drmch = dttv.Select("type='MCH'");
@@ -5066,7 +5083,7 @@ namespace zkhwClient
                         }
                     }
                     string mchc = xcg.MCHC;
-                    if (mchc != null && mchc != "*")
+                    if (mchc != null && mchc != "")
                     {
                         double mchcdouble = double.Parse(mchc);
                         DataRow[] drmchc = dttv.Select("type='MCHC'");
@@ -5084,7 +5101,7 @@ namespace zkhwClient
                         }
                     }
                     string rdwcv = xcg.RDW_CV;
-                    if (rdwcv != null && rdwcv != "*")
+                    if (rdwcv != null && rdwcv != "")
                     {
                         double rdwcvdouble = double.Parse(rdwcv);
                         DataRow[] drrdwcv = dttv.Select("type='RDWCV'");
@@ -5102,7 +5119,7 @@ namespace zkhwClient
                         }
                     }
                     string rdwsd = xcg.RDW_SD;
-                    if (rdwsd != null && rdwsd != "*")
+                    if (rdwsd != null && rdwsd != "")
                     {
                         double rdwsddouble = double.Parse(rdwsd);
                         DataRow[] drrdwsd = dttv.Select("type='RDWSD'");
@@ -5120,7 +5137,7 @@ namespace zkhwClient
                         }
                     }
                     string neut = xcg.NEUT;
-                    if (neut != null && neut != "*")
+                    if (neut != null && neut != "")
                     {
                         double neutdouble = double.Parse(neut);
                         DataRow[] drneut = dttv.Select("type='NEUT'");
@@ -5138,7 +5155,7 @@ namespace zkhwClient
                         }
                     }
                     string neutp = xcg.NEUTP;
-                    if (neutp != null && neutp != "*")
+                    if (neutp != null && neutp != "")
                     {
                         double neutpdouble = double.Parse(neutp);
                         DataRow[] drneutp = dttv.Select("type='NEUTP'");
@@ -5156,7 +5173,7 @@ namespace zkhwClient
                         }
                     }
                     string lym = xcg.LYM;
-                    if (lym != null && lym != "*")
+                    if (lym != null && lym != "")
                     {
                         double lymdouble = double.Parse(lym);
                         DataRow[] drlym = dttv.Select("type='LYM'");
@@ -5174,7 +5191,7 @@ namespace zkhwClient
                         }
                     }
                     string lymp = xcg.LYMP;
-                    if (lymp != null && lymp != "*")
+                    if (lymp != null && lymp != "")
                     {
                         double lympdouble = double.Parse(lymp);
                         DataRow[] drlymp = dttv.Select("type='LYMP'");
@@ -5192,7 +5209,7 @@ namespace zkhwClient
                         }
                     }
                     string mpv = xcg.MPV;
-                    if (mpv != null && mpv != "*")
+                    if (mpv != null && mpv != "")
                     {
                         double mpvdouble = double.Parse(mpv);
                         DataRow[] drmpv = dttv.Select("type='MPV'");
@@ -5210,7 +5227,7 @@ namespace zkhwClient
                         }
                     }
                     string pdw = xcg.PDW;
-                    if (pdw != null && pdw != "*")
+                    if (pdw != null && pdw != "")
                     {
                         double pdwdouble = double.Parse(pdw);
                         DataRow[] drpdw = dttv.Select("type='PDW'");
@@ -5228,7 +5245,7 @@ namespace zkhwClient
                         }
                     }
                     string mxd = xcg.MXD;
-                    if (mxd != null && mxd != "*")
+                    if (mxd != null && mxd != "")
                     {
                         double mxddouble = double.Parse(mxd);
                         DataRow[] drmxd = dttv.Select("type='MXD'");
@@ -5246,7 +5263,7 @@ namespace zkhwClient
                         }
                     }
                     string mxdp = xcg.MXDP;
-                    if (mxdp != null && mxdp != "*")
+                    if (mxdp != null && mxdp != "")
                     {
                         double mxdpdouble = double.Parse(mxdp);
                         DataRow[] drmxdp = dttv.Select("type='MXDP'");
@@ -5285,13 +5302,13 @@ namespace zkhwClient
                 }
                 else
                 {
-                    MessageBox.Show("库贝尔血球串口连接失败,请联系运维人员!");
+                    MessageBox.Show("库贝尔血球串口打开失败,请联系运维人员!");
                     return false;
                 }
             }
             catch (Exception ee)
             {
-                MessageBox.Show("库贝尔血球串口连接失败,请联系运维人员!");
+                MessageBox.Show("库贝尔血球串口打开失败,请联系运维人员!");
                 return false;
             }
         }

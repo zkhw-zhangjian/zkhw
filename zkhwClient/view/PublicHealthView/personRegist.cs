@@ -799,49 +799,57 @@ namespace zkhwClient.view.PublicHealthView
 
         private void button5_Click(object sender, EventArgs e)
         {
-            label45.Text = "";
-            string idnumber = this.textBox3.Text;
-            if (idnumber != null && idnumber.Length == 18)
+            try
             {
-                DisplayPersonTeShuInfo(idnumber);
-
-                string nameCodenew = textBox1.Text + " " + Regex.Replace(textBox3.Text, "(\\d{6})\\d{10}(\\d{2})", "$1**********$2");
-                if (nameCodenew.IndexOf('*') < 0)
+                label45.Text = "";
+                string idnumber = this.textBox3.Text;
+                if (idnumber != null && idnumber.Length == 18)
                 {
-                    nameCodenew = textBox1.Text + " " + textBox3.Text.Substring(0, 6) + "**********" + textBox3.Text.Substring(16, 2);
-                }
-                string codenew = "";
-                int fnum = Int32.Parse(this.numericUpDown1.Value.ToString());
-                DataTable dttjjk = grjddao.selectTjjk(idnumber);
-                if (dttjjk != null && dttjjk.Rows.Count > 0)
-                {
-                    codenew = dttjjk.Rows[0]["bar_code"].ToString();
+                    DisplayPersonTeShuInfo(idnumber);
 
-                    //调用Bartender 
-                    btApp = new BarTender.Application();
-                    //获取打印模板,指定打印机 
-                    btFormat = btApp.Formats.Open(@str + "\\cs1.btw", false, "");
-                    // 同样标签的份数 
-                    btFormat.PrintSetup.IdenticalCopiesOfLabel = fnum;
-                    // 序列标签数 
-                    btFormat.PrintSetup.NumberSerializedLabels = 1;
-                    //设置参数 code
-                    btFormat.SetNamedSubStringValue("code", codenew);
-                    btFormat.SetNamedSubStringValue("nameCode", nameCodenew);
-                    //打印开始 第2个参数是 是否显示打印机属性的。可以设置打印机路径 
-                    btFormat.PrintOut(false, false);
-                    //关闭摸板文件，并且关闭文件流 
-                    btFormat.Close(BarTender.BtSaveOptions.btDoNotSaveChanges);
-                    //打印完毕 
-                    btApp.Quit(BarTender.BtSaveOptions.btDoNotSaveChanges);
+                    string nameCodenew = textBox1.Text + " " + Regex.Replace(textBox3.Text, "(\\d{6})\\d{10}(\\d{2})", "$1**********$2");
+                    if (nameCodenew.IndexOf('*') < 0)
+                    {
+                        nameCodenew = textBox1.Text + " " + textBox3.Text.Substring(0, 6) + "**********" + textBox3.Text.Substring(16, 2);
+                    }
+                    string codenew = "";
+                    int fnum = Int32.Parse(this.numericUpDown1.Value.ToString());
+                    DataTable dttjjk = grjddao.selectTjjk(idnumber);
+                    if (dttjjk != null && dttjjk.Rows.Count > 0)
+                    {
+                        codenew = dttjjk.Rows[0]["bar_code"].ToString();
+
+                        //调用Bartender 
+                        btApp = new BarTender.Application();
+                        //获取打印模板,指定打印机 
+                        btFormat = btApp.Formats.Open(@str + "\\cs1.btw", false, "");
+                        // 同样标签的份数 
+                        btFormat.PrintSetup.IdenticalCopiesOfLabel = fnum;
+                        // 序列标签数 
+                        btFormat.PrintSetup.NumberSerializedLabels = 1;
+                        //设置参数 code
+                        btFormat.SetNamedSubStringValue("code", codenew);
+                        btFormat.SetNamedSubStringValue("nameCode", nameCodenew);
+                        //打印开始 第2个参数是 是否显示打印机属性的。可以设置打印机路径 
+                        btFormat.PrintOut(false, false);
+                        //关闭摸板文件，并且关闭文件流 
+                        btFormat.Close(BarTender.BtSaveOptions.btDoNotSaveChanges);
+                        //打印完毕 
+                        btApp.Quit(BarTender.BtSaveOptions.btDoNotSaveChanges);
+                    }
+                    else
+                    {
+                        MessageBox.Show("此身份证号没有登记过，请检查!");
+                    }
                 }
-                else {
-                    MessageBox.Show("此身份证号没有登记过，请检查!");
+                else
+                {
+                    MessageBox.Show("身份证号不正确,请检查!");
                 }
             }
-            else
+            catch (Exception ee)
             {
-                MessageBox.Show("身份证号不正确,请检查!");
+                MessageBox.Show(ee.Message + "---" + ee.StackTrace);
             }
         }
         private void checkPerson()
