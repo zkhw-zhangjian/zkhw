@@ -114,7 +114,7 @@ namespace zkhwClient.dao
         public void updateGrjdInfo(string id,string photocode)
         {
             string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            String sql = @"update resident_base_info set create_time='" + time + "',photo_code='" + photocode + "' where archive = '" + id + "'";
+            String sql = @"update resident_base_info set create_time='" + time + "',photo_code='" + photocode + "' where archive_no = '" + id + "'";
            DbHelperMySQL.ExecuteSql(sql);
         }
         //
