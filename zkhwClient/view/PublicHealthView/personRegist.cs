@@ -841,6 +841,7 @@ namespace zkhwClient.view.PublicHealthView
                         btFormat.Close(BarTender.BtSaveOptions.btDoNotSaveChanges);
                         //打印完毕 
                         btApp.Quit(BarTender.BtSaveOptions.btDoNotSaveChanges);
+                         
                     }
                     else
                     {

@@ -225,10 +225,90 @@ namespace zkhwClient.view.PublicHealthView
             this.textBox43.Text += "10";
             ////////////////////////////////////////////////////////////////
 
-
+            InitData();
         }
 
+        private void InitData()
+        {
+            int a = (int)numericUpDown1.Value;
+            switch(a)
+            {
+                case 0:
+                    checkBox1.Checked = true;
+                    break;
+                case 3:
+                    checkBox3.Checked = true;
+                    break;
+                case 5:
+                    checkBox4.Checked = true;
+                    break;
+            }
 
+            a = (int)numericUpDown2.Value;
+            switch (a)
+            {
+                case 0:
+                    checkBox5.Checked = true;
+                    break;
+                case 1:
+                    checkBox6.Checked = true;
+                    break;
+                case 3:
+                    checkBox7.Checked = true;
+                    break;
+                case 7:
+                    checkBox8.Checked = true;
+                    break;
+            }
+
+            a = (int)numericUpDown3.Value;
+            switch (a)
+            {
+                case 0:
+                    checkBox9.Checked = true;
+                    break; 
+                case 3:
+                    checkBox11.Checked = true;
+                    break;
+                case 5:
+                    checkBox12.Checked = true;
+                    break;
+            }
+
+            a = (int)numericUpDown4.Value;
+            switch (a)
+            {
+                case 0:
+                    checkBox13.Checked = true;
+                    break;
+                case 1:
+                    checkBox14.Checked = true;
+                    break;
+                case 3:
+                    checkBox15.Checked = true;
+                    break;
+                case 10:
+                    checkBox16.Checked = true;
+                    break;
+            }
+
+            a = (int)numericUpDown5.Value;
+            switch (a)
+            {
+                case 0:
+                    checkBox17.Checked = true;
+                    break;
+                case 1:
+                    checkBox18.Checked = true;
+                    break;
+                case 3:
+                    checkBox19.Checked = true;
+                    break;
+                case 10:
+                    checkBox20.Checked = true;
+                    break;
+            }
+        }
 
 
         private void button5_Click(object sender, EventArgs e)

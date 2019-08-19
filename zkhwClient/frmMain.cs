@@ -3894,6 +3894,10 @@ namespace zkhwClient
             IPAddress ip = localhost.AddressList[0];
             Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint point = new IPEndPoint(ip, 9001);
+
+            //MessageBox.Show(ip.ToString());
+
+            //MessageBox.Show(point.Address.ToString()+"||"+point.Port.ToString());
             //socket绑定监听地址
             serverSocket.Bind(point);
             //设置同时连接个数

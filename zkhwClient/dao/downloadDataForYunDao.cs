@@ -167,44 +167,52 @@ namespace zkhwClient.dao
         {
             xcgid = dr["ID"].ToString();
             xuechangguiBean obj = new xuechangguiBean();
-            obj.ZrysXCG = ZrysSH;
-            obj.bar_code = dr["bar_code"].ToString();
-            DataTable dtjkinfo = jkdao.selectjkInfoBybarcode(obj.bar_code);
-            if (dtjkinfo != null && dtjkinfo.Rows.Count > 0)
+            try
             {
-                obj.aichive_no = dtjkinfo.Rows[0]["aichive_no"].ToString();
-                obj.id_number = dtjkinfo.Rows[0]["id_number"].ToString();
+                obj.ZrysXCG = ZrysSH;
+                obj.bar_code = dr["bar_code"].ToString();
+                DataTable dtjkinfo = jkdao.selectjkInfoBybarcode(obj.bar_code);
+                if (dtjkinfo != null && dtjkinfo.Rows.Count > 0)
+                {
+                    obj.aichive_no = dtjkinfo.Rows[0]["aichive_no"].ToString();
+                    obj.id_number = dtjkinfo.Rows[0]["id_number"].ToString();
+                }
+                else
+                {
+                    return null;
+                }
+                obj.HCT = dr["HCT"].ToString();
+                obj.HGB = dr["HGB"].ToString();
+                obj.LYM = dr["LYM"].ToString();
+                obj.LYMP = dr["LYMP"].ToString();
+                obj.MCH = dr["MCH"].ToString();
+                obj.MCHC = dr["MCHC"].ToString();
+                obj.MCV = dr["MCV"].ToString();
+                obj.MPV = dr["MPV"].ToString();
+                obj.MXD = dr["MXD"].ToString();
+                obj.MXDP = dr["MXDP"].ToString();
+                obj.NEUT = dr["NEUT"].ToString();
+                obj.NEUTP = dr["NEUTP"].ToString();
+                obj.PCT = dr["PCT"].ToString();
+                obj.PDW = dr["PDW"].ToString();
+                obj.PLT = dr["PLT"].ToString();
+                obj.RBC = dr["RBC"].ToString();
+                obj.RDW_CV = dr["RDWCV"].ToString();
+                obj.RDW_SD = dr["RDWSD"].ToString();
+                obj.WBC = dr["WBC"].ToString();
+                obj.MONO = dr["MONO"].ToString();
+                obj.MONOP = dr["MONOP"].ToString();
+                obj.GRAN = dr["GRAN"].ToString();
+                obj.GRANP = dr["GRANP"].ToString();
+                obj.PLCR = dr["PLCR"].ToString();
+                obj.createTime = dr["createtime"].ToString();
+                obj.timeCodeUnique = dr["timecodeUnique"].ToString();
             }
-            else
+            catch(Exception dd)
             {
-                return null; 
+
             }
-            obj.HCT = dr["HCT"].ToString();
-            obj.HGB = dr["HGB"].ToString();
-            obj.LYM = dr["LYM"].ToString();
-            obj.LYMP = dr["LYMP"].ToString();
-            obj.MCH = dr["MCH"].ToString();
-            obj.MCHC = dr["MCHC"].ToString();
-            obj.MCV = dr["MCV"].ToString();
-            obj.MPV = dr["MPV"].ToString();
-            obj.MXD = dr["MXD"].ToString();
-            obj.MXDP = dr["MXDP"].ToString();
-            obj.NEUT = dr["NEUT"].ToString();
-            obj.NEUTP = dr["NEUTP"].ToString();
-            obj.PCT = dr["PCT"].ToString();
-            obj.PDW = dr["PDW"].ToString();
-            obj.PLT = dr["PLT"].ToString();
-            obj.RBC = dr["RBC"].ToString();
-            obj.RDW_CV = dr["RDWCV"].ToString();
-            obj.RDW_SD = dr["RDWSD"].ToString();
-            obj.WBC = dr["WBC"].ToString();
-            obj.MONO = dr["MONO"].ToString();
-            obj.MONOP = dr["MONOP"].ToString();
-            obj.GRAN = dr["GRAN"].ToString();
-            obj.GRANP = dr["GRANP"].ToString();
-            obj.PLCR = dr["PLCR"].ToString();
-            obj.createTime = dr["createtime"].ToString();
-            obj.timeCodeUnique = dr["timecodeUnique"].ToString(); 
+            
             return obj;
         }
 

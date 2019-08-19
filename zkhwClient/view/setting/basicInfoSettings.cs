@@ -382,5 +382,13 @@ namespace zkhwClient.view.setting
             }
             this.textBox4.Text = names.Substring(1);
         }
+
+        private void basicInfoSettings_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(xcuncode==null || xcuncode=="")
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

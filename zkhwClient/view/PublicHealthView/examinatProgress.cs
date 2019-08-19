@@ -987,7 +987,7 @@ namespace zkhwClient.view.PublicHealthView
                         if (dt1.Rows[i] != null)
                         {
                             string xcgid = "";
-                            xuechangguiBean obj = downloadDataForYunDao.GetXCGObj(basicInfoSettings.xcg, dt.Rows[i], out xcgid);
+                            xuechangguiBean obj = downloadDataForYunDao.GetXCGObj(basicInfoSettings.xcg, dt1.Rows[i], out xcgid);
                             if (obj != null)
                             {
                                 //这里处理对应的表
