@@ -20,7 +20,6 @@ using System.Xml;
 using zkhwClient.bean;
 using zkhwClient.dao;
 using zkhwClient.service;
-using zkhwClient.utils;
 using zkhwClient.view.setting;
 
 namespace zkhwClient.view.PublicHealthView
@@ -728,25 +727,24 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     if (addjkbool)
                     {
-                        //调用Bartender 
-                        btApp = new BarTender.Application();
-                        //获取打印模板,指定打印机 
-                        btFormat = btApp.Formats.Open(@str + "\\cs1.btw", false, "");
-                        // 同样标签的份数 
-                        btFormat.PrintSetup.IdenticalCopiesOfLabel = pageCount;
-                        // 序列标签数 
-                        btFormat.PrintSetup.NumberSerializedLabels = 1;
-                        //设置参数 code
-                        btFormat.SetNamedSubStringValue("code", barcode);
-                        btFormat.SetNamedSubStringValue("nameCode", nameCode);
-                        //打印开始 第2个参数是 是否显示打印机属性的。可以设置打印机路径 
-                        btFormat.PrintOut(false, false);
-                        //关闭摸板文件，并且关闭文件流 
-                        btFormat.Close(BarTender.BtSaveOptions.btDoNotSaveChanges);
-                        //打印完毕 
-                        btApp.Quit(BarTender.BtSaveOptions.btDoNotSaveChanges);
+                    //调用Bartender 
+                    btApp = new BarTender.Application();
+                    //获取打印模板,指定打印机
+                    btFormat = btApp.Formats.Open(@str + "\\cs1.btw", false, "");
+                    // 同样标签的份数 
+                    btFormat.PrintSetup.IdenticalCopiesOfLabel = pageCount;
+                    // 序列标签数 
+                    btFormat.PrintSetup.NumberSerializedLabels = 1;
+                    //设置参数 code
+                    btFormat.SetNamedSubStringValue("code", barcode);
+                    btFormat.SetNamedSubStringValue("nameCode", nameCode);
+                    //打印开始 第2个参数是 是否显示打印机属性的。可以设置打印机路径 
+                    btFormat.PrintOut(false, false);
+                    //关闭摸板文件，并且关闭文件流 
+                    btFormat.Close(BarTender.BtSaveOptions.btDoNotSaveChanges);
+                    //打印完毕 
+                    btApp.Quit(BarTender.BtSaveOptions.btDoNotSaveChanges);
                     jkjcheckdao.updateShDevice(-1, -1, 1, -1, -1, -1, -1, -1, -1, -1);
-
                 }
             }
             catch (Exception e)
@@ -757,9 +755,9 @@ namespace zkhwClient.view.PublicHealthView
                 lb.eventInfo = "打印机设备连接不正确！";
                 lb.type = "3";
                 logservice.addCheckLog(lb);
+                MessageBox.Show(e.Message + "---" + e.StackTrace);
                 MessageBox.Show("打印机设备连接不正确,请重新连接或重启!");
                 jkjcheckdao.updateShDevice(-1, -1, 0, -1, -1, -1, -1, -1, -1, -1);
-                MessageBox.Show(e.Message+"---"+e.StackTrace);
             }
         }
         //右侧查询按钮
