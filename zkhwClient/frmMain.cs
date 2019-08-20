@@ -3889,24 +3889,27 @@ namespace zkhwClient
         }
         private void socketTcpKbe()
         {
-            string hostName = Dns.GetHostName();   //获取本机名
-            IPHostEntry localhost = Dns.GetHostByName(hostName);//方法已过期，可以获取IPv4的地址
-            IPAddress ip = localhost.AddressList[0];
-            Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPEndPoint point = new IPEndPoint(ip, 9001);
+            try
+            {
+                string hostName = Dns.GetHostName();   //获取本机名
+                IPHostEntry localhost = Dns.GetHostByName(hostName);//方法已过期，可以获取IPv4的地址
+                IPAddress ip = localhost.AddressList[0];
+                Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                IPEndPoint point = new IPEndPoint(ip, 9001);  
+                //socket绑定监听地址
+                serverSocket.Bind(point);
+                //设置同时连接个数
+                serverSocket.Listen(10);
 
-            //MessageBox.Show(ip.ToString());
-
-            //MessageBox.Show(point.Address.ToString()+"||"+point.Port.ToString());
-            //socket绑定监听地址
-            serverSocket.Bind(point);
-            //设置同时连接个数
-            serverSocket.Listen(10);
-
-            //利用线程后台执行监听,否则程序会假死
-            Thread thread = new Thread(ListenKbe);
-            thread.IsBackground = true;
-            thread.Start(serverSocket);
+                //利用线程后台执行监听,否则程序会假死
+                Thread thread = new Thread(ListenKbe);
+                thread.IsBackground = true;
+                thread.Start(serverSocket);
+            }
+            catch (Exception dd)
+            {
+                MessageBox.Show(dd.Message);
+            }
         }
         /// <summary>
         /// 监听连接

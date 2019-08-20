@@ -284,7 +284,7 @@ namespace zkhwClient.view.PublicHealthView
                 case 1:
                     checkBox14.Checked = true;
                     break;
-                case 3:
+                case 5:
                     checkBox15.Checked = true;
                     break;
                 case 10:
@@ -301,7 +301,7 @@ namespace zkhwClient.view.PublicHealthView
                 case 1:
                     checkBox18.Checked = true;
                     break;
-                case 3:
+                case 5:
                     checkBox19.Checked = true;
                     break;
                 case 10:
