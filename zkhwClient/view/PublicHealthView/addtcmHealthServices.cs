@@ -38,7 +38,7 @@ namespace zkhwClient.view.PublicHealthView
 
         public string bar_code = "";
         public string exam_id = "";
-        public addtcmHealthServices(int s, string name, string no, string id)
+        public addtcmHealthServices(int s, string name, string no, string id,string examid)
         {
             InitializeComponent();
             IS = s;
@@ -46,6 +46,7 @@ namespace zkhwClient.view.PublicHealthView
             aichive_no = no.Trim();
             id_number = id.Trim();
             姓名.Text = Names;
+            exam_id = examid;
             this.Text = (IS == 1 ? "新增" : "修改");
             if (GetUpdate())
             {
@@ -767,6 +768,10 @@ namespace zkhwClient.view.PublicHealthView
         private void GetData()
         {
             string sql = $@"select * from elderly_tcm_record where id_number='{id_number}' order by create_time desc LIMIT 1";
+            if(exam_id !="")
+            {
+                sql = $@"select * from elderly_tcm_record where exam_id='{exam_id}' order by create_time desc LIMIT 1";
+            }
             DataSet jb = DbHelperMySQL.Query(sql);
             if (jb != null && jb.Tables.Count > 0 && jb.Tables[0].Rows.Count > 0)
             {
@@ -976,7 +981,16 @@ namespace zkhwClient.view.PublicHealthView
         private void addtcmHealthServices_Load(object sender, EventArgs e)
         {
             healthCheckupDao hcd = new healthCheckupDao();
-            DataTable dt = hcd.queryhealthCheckupByid(id_number);
+            DataTable dt = null;
+            if (exam_id !="")
+            {
+                dt = hcd.queryhealthCheckupByExid(exam_id); 
+            }
+            else
+            {
+                dt = hcd.queryhealthCheckupByid(id_number,bar_code);
+            }
+            
             if (dt!=null&&dt.Rows.Count>0) {
                string baseWaist= dt.Rows[0]["base_waist"].ToString();
                string baseBmi = dt.Rows[0]["base_bmi"].ToString();

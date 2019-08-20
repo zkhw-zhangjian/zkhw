@@ -20,7 +20,7 @@ namespace zkhwClient.dao
         {
             string id = "";
             string sql = string.Format(@"select id from physical_examination_record 
-                      where aichive_no='{0}' and id_number='{1}' and bar_code='{2}' LIMIT 1  ", 
+                      where aichive_no='{0}' and id_number='{1}' and bar_code='{2}' ORDER BY check_date DESC LIMIT 1  ", 
                       _archiveno, _idnumber, _barcode);
             object o = DbHelperMySQL.GetSingle(sql);
             if(o!=null)
@@ -104,6 +104,21 @@ namespace zkhwClient.dao
         {
             DataSet ds = new DataSet();
             string sql = "select base_waist,base_bmi from physical_examination_record where id_number = '" + idnumber + "' order by create_time desc limit 1";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+        public DataTable queryhealthCheckupByid(string idnumber,string bar_code)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select base_waist,base_bmi from physical_examination_record where id_number = '" + idnumber + "' and bar_code='"+ bar_code + "' order by create_time desc limit 1";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+
+        public DataTable queryhealthCheckupByExid(string exid)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select base_waist,base_bmi from physical_examination_record where id = '" + exid + "'  limit 1";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }

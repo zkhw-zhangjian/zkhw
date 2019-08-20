@@ -202,7 +202,7 @@ namespace zkhwClient.view.setting
         {
             if (this.comboBox5.Text == "" || this.comboBox5.Text == "请选择")
             {
-                MessageBox.Show("信息不完整!"); return;
+                MessageBox.Show("【区域设置】信息不完整!"); return;
             }
             try
             {

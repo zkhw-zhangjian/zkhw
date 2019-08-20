@@ -154,7 +154,7 @@ namespace zkhwClient.view.PublicHealthView
                 MessageBox.Show(_strDisplay); 
                 return;
             }
-            addtcmHealthServices addtcm = new addtcmHealthServices(1, dataGridView1["name", row].Value.ToString(), dataGridView1["archive_no", row].Value.ToString(), dataGridView1["id_number", row].Value.ToString());
+            addtcmHealthServices addtcm = new addtcmHealthServices(1, dataGridView1["name", row].Value.ToString(), dataGridView1["archive_no", row].Value.ToString(), dataGridView1["id_number", row].Value.ToString(), examid);
             addtcm.bar_code = barcode;
             addtcm.exam_id = examid;
             addtcm.StartPosition = FormStartPosition.CenterScreen;
@@ -187,7 +187,7 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (dtcode.Rows.Count > 0)
             {
-                addtcmHealthServices addtcm = new addtcmHealthServices(0, dataGridView1["name", row].Value.ToString(), dataGridView1["archive_no", row].Value.ToString(), dataGridView1["id_number", row].Value.ToString());
+                addtcmHealthServices addtcm = new addtcmHealthServices(0, dataGridView1["name", row].Value.ToString(), dataGridView1["archive_no", row].Value.ToString(), dataGridView1["id_number", row].Value.ToString(), examid);
                 addtcm.bar_code = barcode;
                 addtcm.exam_id = examid;
                 addtcm.StartPosition = FormStartPosition.CenterScreen;

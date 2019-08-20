@@ -721,7 +721,7 @@ namespace zkhwClient.view.PublicHealthView
                             {
                                 ret = 1;
                             }
-                            addtcmHealthServices addtcm = new addtcmHealthServices(ret, per.name, per.aichive_no, per.id_number);
+                            addtcmHealthServices addtcm = new addtcmHealthServices(ret, per.name, per.aichive_no, per.id_number, per.id);
                             addtcm.bar_code = per.bar_code;
                             addtcm.exam_id = per.id;
                             addtcm.StartPosition = FormStartPosition.CenterScreen;
