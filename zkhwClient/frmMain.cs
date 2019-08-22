@@ -2551,7 +2551,7 @@ namespace zkhwClient
                     break;
                 } 
                 string sendHL7new = "";
-                string sendHL7 = "MSH|^~\\&|||Rayto||1||ACK^R01|1|P|2.3.1||||S||UNICODE|||MSA|AA|1|||||";
+                string sendHL7 = "MSH|^~\\&|||Rayto||1||ACK^R01|1|P|2.3.1||||S||UNICODE|||MSA|AA|1||||0|";
                 string []sendArray= sendHL7.Split('|');
                 byte[] buffernew = buffer.Skip(0).Take(effective).ToArray();
                 string sHL7 = Encoding.Default.GetString(buffernew).Trim();          
@@ -3045,8 +3045,7 @@ namespace zkhwClient
                     for (int j = 0; j < sendArray.Length; j++) {
                         sendHL7new += "|" + sendArray[j];
                     }
-                    byte[] sendBytes = Encoding.Unicode.GetBytes(sendHL7new.Substring(1));
-                    send.Send(sendBytes);
+                    send.Send(AckKbe(sendHL7new.Substring(1)));
                 } else
                 {//解析血球协议报文数据
                     try
@@ -3814,8 +3813,7 @@ namespace zkhwClient
                         {
                             sendHL7new += "|" + sendArray[j];
                         }
-                        byte[] sendBytes = Encoding.Unicode.GetBytes(sendHL7new.Substring(1));
-                        send.Send(sendBytes);
+                            send.Send(AckKbe(sendHL7new.Substring(1)));
                     }
                     catch (Exception ex){
                         using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
@@ -3973,9 +3971,7 @@ namespace zkhwClient
                         break;
                     }
                     string sendHL7new = "";
-                    //string sendHL7 = "MSH|^~\\&|||ICUBIO|335|20190708162020||ACK^R01|3|P|2.3.1||||0||ASCII|||MSA|AA|3|Message accepted|||0|";
                     string sendHL7 = "MSH|^~\\&|||ICUBIO|740|20190821110721||ACK^R01|1|P|2.3.1||||0||ASCII|||MSA|AA|1|Message accepted|||0|";
-
                     string[] sendArray = sendHL7.Split('|');
                     byte[] buffernew = buffer.Skip(0).Take(effective).ToArray();
                     string sHL7 = Encoding.Default.GetString(buffernew).Trim();
@@ -5419,11 +5415,9 @@ namespace zkhwClient
                 if (totalByteRead.Length<100) { continue; }            
                 string sHL7 = Encoding.Default.GetString(totalByteRead).Trim();
                 string sendHL7new = "";
-                string sendHL7 = "MSH|^~\\&|LIS||||20361231235956||ACK^R01|1|P|2.3.1||||||UNICODE"
-                                +"MSA|AA|1";
+                string sendHL7 = "MSH|^~\\&|LIS||||20361231235956||ACK^R01|1|P|2.3.1||||||UNICODEMSA|AA|1";
                 string[] sendArray = sendHL7.Split('|');
-                string sendHL7sh = "MSH|^~\\&|||||20120508094823||ACK^R01|1|P|2.3.1||||2||ASCII|||"
-                                  +"MSA|AA|1|Message accepted|||0|";
+                string sendHL7sh = "MSH|^~\\&|||||20120508094823||ACK^R01|1|P|2.3.1||||2||ASCII|||MSA|AA|1|Message accepted|||0|";
                 string[] sendArraysh = sendHL7sh.Split('|');
                 if (sHL7.IndexOf("ASCII") > 0)
                 {//解析生化协议报文数据
@@ -5917,11 +5911,7 @@ namespace zkhwClient
                     {
                         sendHL7sh += "|" + sendArraysh[j];
                     }
-                    byte[] sendBytes = Encoding.Unicode.GetBytes(sendHL7sh.Substring(1));
-                    byte[] sendBytes1 = { 0x0B };
-                    byte[] sendBytes2 = { 0x1C, 0x0D };
-                    sendBytes =sendBytes1.Concat(sendBytes).Concat(sendBytes2).ToArray();
-                    send.Send(sendBytes);
+                    send.Send(AckKbe(sendHL7sh));
                 }
                 else if(sHL7.IndexOf("UNICODE") >1)
                 {//解析血球协议报文数据
@@ -6749,11 +6739,7 @@ namespace zkhwClient
                         {
                             sendHL7new += "|" + sendArray[j];
                         }
-                        byte[] sendBytes = Encoding.Unicode.GetBytes(sendHL7new.Substring(1));
-                        byte[] sendBytes1 = { 0x0B };
-                        byte[] sendBytes2 = { 0x1C, 0x0D };
-                        sendBytes = sendBytes1.Concat(sendBytes).Concat(sendBytes2).ToArray();
-                        send.Send(sendBytes);
+                        send.Send(AckKbe(sendHL7new.Substring(1)));
                     }
                     catch (Exception ex)
                     {
@@ -6829,11 +6815,9 @@ namespace zkhwClient
                 if (totalByteRead.Length < 100) { continue; }
                 string sHL7 = Encoding.Default.GetString(totalByteRead).Trim();
                 string sendHL7new = "";
-                string sendHL7 = "MSH|^~\\&|BCC3900||||20361231235956||ACK^R01|1|P|2.3.1||||||UTF-8"
-                                + "MSA|AA|1";
+                string sendHL7 = "MSH|^~\\&|LIS||||20361231235956||ACK^R01|1|P|2.3.1||||||UTF8MSA|AA|1||||0";
                 string[] sendArray = sendHL7.Split('|');
-                string sendHL7sh = "MSH|^~\\&|Analyzer ID|CS6400|LIS ID||20120508094823||ACK^R01|1|P|2.3.1||||0||UNICODE|||"
-                                  + "MSA|AA|1||||0|";
+                string sendHL7sh = "MSH|^~\\&|Analyzer ID|CS6400|LIS ID||20120508094823||ACK^R01|1|P|2.3.1||||0||UNICODE|||MSA|AA|1||||0|";
                 string[] sendArraysh = sendHL7sh.Split('|');
                 if (sHL7.IndexOf("UTF-8") > 0)
                 {//解析生化协议报文数据
@@ -7327,11 +7311,7 @@ namespace zkhwClient
                     {
                         sendHL7sh += "|" + sendArraysh[j];
                     }
-                    byte[] sendBytes = Encoding.Unicode.GetBytes(sendHL7sh.Substring(1));
-                    byte[] sendBytes1 = { 0x0B };
-                    byte[] sendBytes2 = { 0x1C, 0x0D };
-                    sendBytes = sendBytes1.Concat(sendBytes).Concat(sendBytes2).ToArray();
-                    send.Send(sendBytes);
+                    send.Send(AckKbe(sendHL7sh.Substring(1)));
                 }
                 else if (sHL7.IndexOf("UNICODE") > 1)
                 {//解析血球协议报文数据
@@ -8160,11 +8140,7 @@ namespace zkhwClient
                         {
                             sendHL7new += "|" + sendArray[j];
                         }
-                        byte[] sendBytes = Encoding.Unicode.GetBytes(sendHL7new.Substring(1));
-                        byte[] sendBytes1 = { 0x0B };
-                        byte[] sendBytes2 = { 0x1C, 0x0D };
-                        sendBytes = sendBytes1.Concat(sendBytes).Concat(sendBytes2).ToArray();
-                        send.Send(sendBytes);
+                        send.Send(AckKbe(sendHL7new.Substring(1)));
                     }
                     catch (Exception ex)
                     {
