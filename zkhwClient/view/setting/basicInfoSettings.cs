@@ -47,19 +47,23 @@ namespace zkhwClient.view.setting
         XmlDocument xmlDoc = new XmlDocument();
         XmlNode node;
         string path = @"config.xml";
+
+        string issave = "0";
         public basicInfoSettings()
         {
             InitializeComponent();
         }
         private void basicInfoSettings_Load(object sender, EventArgs e)
         {
+            issave = "0";
             this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源
             this.comboBox1.DisplayMember = "name";//显示给用户的数据集表项
             this.comboBox1.ValueMember = "code";//操作时获取的值 
             showCombobox();
 
             DataTable dtbasic= bsdao.checkBasicsettingInfo();
-            if (dtbasic.Rows.Count > 0) {
+            if (dtbasic.Rows.Count > 0)
+            {
                 zeren_doctor = dtbasic.Rows[0]["zeren_doctor"].ToString();
                 zeren_doctorId = dtbasic.Rows[0]["update_user"].ToString();
                 organ_name = dtbasic.Rows[0]["organ_name"].ToString();
@@ -133,6 +137,8 @@ namespace zkhwClient.view.setting
 
                 this.textBox2.Text = other;
                 this.textBox3.Text = wx;
+
+                issave = "1";
             }
             //if (shengName == "陕西")
             //{
@@ -213,7 +219,7 @@ namespace zkhwClient.view.setting
                 MessageBox.Show("出错!"); return;
             }
             if (xcuncode == null || "".Equals(xcuncode)) {
-                MessageBox.Show("信息不完整!"); return;
+                MessageBox.Show("【区域设置】信息不完整!"); return;
             } else if (this.comboBox5.Text=="请选择") {
                 DataTable dtxzs = areadao.cunInfo(xzcode);
                 this.comboBox5.Text = dtxzs.Rows[0]["name"].ToString();
@@ -273,7 +279,8 @@ namespace zkhwClient.view.setting
                     else
                     {  
                         setFunDelegate(textBox1.Text.Trim(), comboBox6.Text, comboBox7.Text);
-                    } 
+                    }
+                    issave = "1";
                     MessageBox.Show("数据保存成功！");
                 }
             }
@@ -385,9 +392,16 @@ namespace zkhwClient.view.setting
 
         private void basicInfoSettings_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(xcuncode==null || xcuncode=="")
+            if (xcuncode == null || xcuncode == "")
             {
                 e.Cancel = true;
+            }
+            else
+            {
+                if(issave=="0")
+                {
+                    e.Cancel = true;
+                }
             }
         }
     }

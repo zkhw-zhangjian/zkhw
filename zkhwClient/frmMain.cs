@@ -3929,7 +3929,26 @@ namespace zkhwClient
                 thread.Start(send);
             }
         }
+        private byte[] AckKbe(string str)
+        {
+            string[] astr = Regex.Split(str, "MSA", RegexOptions.IgnoreCase);
 
+            string a = astr[0];
+            string b = "MSA" + astr[1];
+            int num = a.Length + b.Length + 5;
+            byte[] c = new byte[num];
+            byte[] a1 = Encoding.ASCII.GetBytes(a);
+            Array.Copy(a1, 0, c, 1, a1.Length);
+            byte[] b1 = Encoding.ASCII.GetBytes(b);
+            Array.Copy(b1, 0, c, a1.Length + 2, b1.Length);
+            //特殊处理的几个值
+            c[0] = 0x0B;
+            c[a1.Length + 1] = 0x0D;
+            c[num - 3] = 0x0D;
+            c[num - 2] = 0x1C;
+            c[num - 1] = 0x0D;
+            return c;
+        }
         /// <summary>
         /// 接收消息
         /// </summary>
@@ -3954,7 +3973,9 @@ namespace zkhwClient
                         break;
                     }
                     string sendHL7new = "";
-                    string sendHL7 = "MSH|^~\\&|||ICUBIO|335|20190708162020||ACK^R01|3|P|2.3.1||||0||ASCII|||MSA|AA|3|Message accepted|||0|";
+                    //string sendHL7 = "MSH|^~\\&|||ICUBIO|335|20190708162020||ACK^R01|3|P|2.3.1||||0||ASCII|||MSA|AA|3|Message accepted|||0|";
+                    string sendHL7 = "MSH|^~\\&|||ICUBIO|740|20190821110721||ACK^R01|1|P|2.3.1||||0||ASCII|||MSA|AA|1|Message accepted|||0|";
+
                     string[] sendArray = sendHL7.Split('|');
                     byte[] buffernew = buffer.Skip(0).Take(effective).ToArray();
                     string sHL7 = Encoding.Default.GetString(buffernew).Trim();
@@ -4451,7 +4472,8 @@ namespace zkhwClient
                         {
                             sendHL7new += "|" + sendArray[j];
                         }
-                        byte[] sendBytes = Encoding.Unicode.GetBytes(sendHL7new.Substring(1));
+                        //byte[] sendBytes = Encoding.Unicode.GetBytes(sendHL7new.Substring(1));
+                        byte[] sendBytes = AckKbe(sendHL7new.Substring(1));
                         send.Send(sendBytes);
                     }
                 }
