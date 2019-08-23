@@ -36,19 +36,23 @@ namespace zkhwClient.dao
             int _result = 1;
             if (strvalue != "" && strvalue != "*")
             {
-                double dblvalue = double.Parse(strvalue);
-                double warning_min = 0;
-                double warning_max = 0;
-                double threshold_min = 0;
-                double threshold_max = 0;
-                GetRangeValue(typeValue, out warning_min, out warning_max, out threshold_min, out threshold_max); 
-                if (dblvalue > warning_max || dblvalue < warning_min)
-                { 
-                    _result = 2;
-                } 
-                if (dblvalue > threshold_max || dblvalue < threshold_min)
-                { 
-                    _result = 3;
+                double dblvalue = 0;
+                bool a = double.TryParse(strvalue, out dblvalue);
+                if(a==true)
+                {
+                    double warning_min = 0;
+                    double warning_max = 0;
+                    double threshold_min = 0;
+                    double threshold_max = 0;
+                    GetRangeValue(typeValue, out warning_min, out warning_max, out threshold_min, out threshold_max);
+                    if (dblvalue > warning_max || dblvalue < warning_min)
+                    {
+                        _result = 2;
+                    }
+                    if (dblvalue > threshold_max || dblvalue < threshold_min)
+                    {
+                        _result = 3;
+                    }
                 } 
             }
             return _result;

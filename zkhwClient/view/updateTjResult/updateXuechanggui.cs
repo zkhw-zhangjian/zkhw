@@ -521,89 +521,132 @@ namespace zkhwClient.view.updateTjResult
                 string wbc = dtbichao.Rows[0]["WBC"].ToString();
                 if (wbc != "" && wbc != "*")
                 {
-                    double wbcdouble = double.Parse(wbc);
-                    GetJudgeResultForWBC(wbcdouble); 
+                    double wbcdouble = 0;
+                    bool a = double.TryParse(wbc, out wbcdouble);
+                    if(a==true)
+                    {
+                        GetJudgeResultForWBC(wbcdouble);
+                    } 
                 }
                 this.textBox5.Text = wbc;
 
                 string rbc = dtbichao.Rows[0]["RBC"].ToString();
                 if (rbc != "" && rbc != "*")
                 {
-                    double rbcdouble = double.Parse(rbc);
-                    GetJudgeResultForRBC(rbcdouble); 
+                    double rbcdouble = 0;
+                    bool a = double.TryParse(rbc, out rbcdouble);
+                    if(a==true)
+                    {
+                        GetJudgeResultForRBC(rbcdouble);
+                    } 
                 }               
                 this.textBox6.Text = rbc;
 
                 string pct = dtbichao.Rows[0]["PCT"].ToString();
                 if (pct != "" && pct != "*")
                 {
-                    double pctdouble = double.Parse(pct);
-                    GetJudgeResultForPCT(pctdouble); 
+                    double pctdouble = 0;
+                    bool a = double.TryParse(pct, out pctdouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForPCT(pctdouble);
+                    } 
                 }
                 this.textBox8.Text = pct;
 
                 string plt = dtbichao.Rows[0]["PLT"].ToString();
                 if (plt != "" && plt != "*")
                 {
-                    double pltdouble = double.Parse(plt);
-                    GetJudgeResultForPLT(pltdouble);
+                    double pltdouble = 0;
+                    bool a = double.TryParse(plt, out pltdouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForPLT(pltdouble);
+                    } 
                 }
                 this.textBox7.Text = plt;
 
                 string hgb = dtbichao.Rows[0]["HGB"].ToString();
                 if (hgb != "" && hgb != "*")
                 {
-                    double hgbdouble = double.Parse(hgb);
-                    GetJudgeResultForHGB(hgbdouble);
+                    double hgbdouble = 0;
+                    bool a = double.TryParse(hgb, out hgbdouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForHGB(hgbdouble);
+                    } 
                 }
                 this.textBox11.Text = hgb;
 
                 string hct = dtbichao.Rows[0]["HCT"].ToString();
                 if (hct != "" && hct != "*")
                 {
-                    double hctdouble = double.Parse(hct);
-                    GetJudgeResultForHCT(hctdouble);
-                    
+                    double hctdouble = 0;
+                    bool a = double.TryParse(hct, out hctdouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForHCT(hctdouble);
+                    } 
                 }
                 this.textBox10.Text = hct;
 
                 string mcv = dtbichao.Rows[0]["MCV"].ToString();
                 if (mcv != "" && mcv != "*")
                 {
-                    double mcvdouble = double.Parse(mcv);
-                    GetJudgeResultForMCV(mcvdouble);
+                    double mcvdouble =0;
+                    bool a = double.TryParse(mcv, out mcvdouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForMCV(mcvdouble);
+                    } 
                 }
                 this.textBox13.Text = mcv;
 
                 string mch = dtbichao.Rows[0]["MCH"].ToString();
                 if (mch != "" && mch != "*")
                 {
-                    double mchdouble = double.Parse(mch);
-                    GetJudgeResultForMCH(mchdouble); 
+                    double mchdouble = 0;
+                    bool a = double.TryParse(mch, out mchdouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForMCH(mchdouble);
+                    }  
                 }
                 this.textBox12.Text = mch;
 
                 string mchc = dtbichao.Rows[0]["MCHC"].ToString();
                 if (mchc != "" && mchc != "*")
                 {
-                    double mchcdouble = double.Parse(mchc);
-                    GetJudgeResultForMCHC(mchcdouble); 
+                    double mchcdouble = 0;
+                    bool a = double.TryParse(mchc, out mchcdouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForMCHC(mchcdouble);
+                    } 
                 }
                 this.textBox15.Text = mchc;
 
                 string rdwcv = dtbichao.Rows[0]["RDWCV"].ToString();
                 if (rdwcv != "" && rdwcv != "*")
                 {
-                    double rdwcvdouble = double.Parse(rdwcv);
-                    GetJudgeResultForRDWCV(rdwcvdouble); 
+                    double rdwcvdouble = 0; 
+                    bool a = double.TryParse(rdwcv, out rdwcvdouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForRDWCV(rdwcvdouble);
+                    }
                 }
                 this.textBox14.Text = rdwcv;
 
                 string rdwsd = dtbichao.Rows[0]["RDWSD"].ToString();
                 if (rdwsd != "" && rdwsd != "*")
                 {
-                    double rdwsddouble = double.Parse(rdwsd);
-                    GetJudgeResultForRDWSD(rdwsddouble); 
+                    double rdwsddouble = 0;
+                    bool a = double.TryParse(rdwsd, out rdwsddouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForRDWSD(rdwsddouble);
+                    } 
                 }
                 this.textBox17.Text = rdwsd;
 
@@ -636,48 +679,72 @@ namespace zkhwClient.view.updateTjResult
                 string lym = dtbichao.Rows[0]["LYM"].ToString();
                 if (lym != "" && lym != "*")
                 {
-                    double lymdouble = double.Parse(lym);
-                    GetJudgeResultForLYM(lymdouble);
+                    double lymdouble = 0;
+                    bool a = double.TryParse(lym, out lymdouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForLYM(lymdouble);
+                    } 
                 }
                 this.textBox28.Text = lym;
 
                 string lymp = dtbichao.Rows[0]["LYMP"].ToString();
                 if (lymp != "" && lymp != "*")
                 {
-                    double lympdouble = double.Parse(lymp);
-                    GetJudgeResultForLYMP(lympdouble);
+                    double lympdouble = 0;
+                    bool a = double.TryParse(lymp, out lympdouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForLYMP(lympdouble);
+                    } 
                 }
                 this.textBox31.Text = lymp;
 
                 string mpv = dtbichao.Rows[0]["MPV"].ToString();
                 if (mpv != "" && mpv != "*")
                 {
-                    double mpvdouble = double.Parse(mpv);
-                    GetJudgeResultForMPV(mpvdouble);
+                    double mpvdouble =0;
+                    bool a = double.TryParse(mpv, out mpvdouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForMPV(mpvdouble);
+                    } 
                 }
                 this.textBox30.Text = mpv;
 
                 string pdw = dtbichao.Rows[0]["PDW"].ToString();
                 if (pdw != "" && pdw != "*")
                 {
-                    double pdwdouble = double.Parse(pdw);
-                    GetJudgeResultForPDW(pdwdouble);
+                    double pdwdouble = 0;
+                    bool a = double.TryParse(pdw, out pdwdouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForPDW(pdwdouble);
+                    } 
                 }
                 this.textBox33.Text = pdw;
 
                 string mxd = dtbichao.Rows[0]["MXD"].ToString();
                 if (mxd != "" && mxd != "*")
                 {
-                    double mxddouble = double.Parse(mxd);
-                    GetJudgeResultForMXD(mxddouble);
+                    double mxddouble = 0;
+                    bool a = double.TryParse(mxd, out mxddouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForMXD(mxddouble);
+                    } 
                 }
                 this.textBox32.Text = mxd;
 
                 string mxdp = dtbichao.Rows[0]["MXDP"].ToString();
                 if (mxdp != "" && mxdp != "*")
                 {
-                    double mxdpdouble = double.Parse(mxdp);
-                    GetJudgeResultForMXDP(mxdpdouble);
+                    double mxdpdouble = 0;
+                    bool a = double.TryParse(mxdp, out mxdpdouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForMXDP(mxdpdouble);
+                    } 
                 }
                 this.textBox35.Text = mxdp;
                 this.textBox34.Text = dtbichao.Rows[0]["PLCR"].ToString();
@@ -767,116 +834,193 @@ namespace zkhwClient.view.updateTjResult
                 int r0 = 1;
                 if (WBC != "" && WBC != "*")
                 {
-                    double a = double.Parse(WBC);
-                    r0=GetJudgeResultForWBC(a);
+                    double a = 0;
+                    bool b = double.TryParse(WBC, out a);
+                    if(b==true)
+                    {
+                        r0 = GetJudgeResultForWBC(a);
+                    }
+                    
                 } 
                 int r1 = 1;
                 if (RBC != "" && RBC != "*")
                 {
-                    double a = double.Parse(RBC);
-                    r1 = GetJudgeResultForRBC(a);
+                    double a = 0;
+                    bool b = double.TryParse(RBC, out a);
+                    if (b == true)
+                    {
+                        r1 = GetJudgeResultForRBC(a);
+                    } 
                 } 
                 int r2 = 1;
                 if (PCT != "" && PCT != "*")
                 {
-                    double a = double.Parse(PCT);
-                    r2 = GetJudgeResultForPCT(a);
+                    double a = 0;
+                    bool b = double.TryParse(PCT, out a);
+                    if (b == true)
+                    {
+                        r2 = GetJudgeResultForPCT(a);
+                    } 
                 } 
                 int r3 = 1;
                 if (PLT != "" && PLT != "*")
                 {
-                    double a = double.Parse(PLT);
-                    r3 = GetJudgeResultForPLT(a);
+                    double a = 0;
+                    bool b = double.TryParse(PLT, out a);
+                    if (b == true)
+                    {
+                        r3 = GetJudgeResultForPLT(a);
+                    } 
                 } 
                 int r4 = 1;
                 if (HGB != "" && HGB != "*")
                 {
-                    double a = double.Parse(HGB);
-                    r4 = GetJudgeResultForHGB(a);
+                    double a = 0;
+                    bool b = double.TryParse(HGB, out a);
+                    if (b == true)
+                    {
+                        r4 = GetJudgeResultForHGB(a);
+                    } 
                 }
                 int r5 = 1;
                 if (HCT != "" && HCT != "*")
                 {
-                    double a = double.Parse(HCT);
-                    r5 = GetJudgeResultForHCT(a);
+                    double a = 0;
+                    bool b = double.TryParse(HCT, out a);
+                    if (b == true)
+                    {
+                        r5 = GetJudgeResultForHCT(a);
+                    } 
                 }
                 int r6 = 1;
                 if (MCV != "" && MCV != "*")
                 {
-                    double a = double.Parse(MCV);
-                    r6 = GetJudgeResultForMCV(a);
+                    double a = 0;
+                    bool b = double.TryParse(MCV, out a);
+                    if (b == true)
+                    {
+                        r6 = GetJudgeResultForMCV(a);
+                    } 
                 }
                 int r7 = 1;
                 if (MCH != "" && MCH != "*")
                 {
-                    double a = double.Parse(MCH);
-                    r7 = GetJudgeResultForMCH(a);
+                    double a = 0;
+                    bool b = double.TryParse(MCH, out a);
+                    if (b == true)
+                    {
+                        r7 = GetJudgeResultForMCH(a);
+                    } 
                 }
                 int r8 = 1;
                 if (MCHC != "" && MCHC != "*")
                 {
-                    double a = double.Parse(MCHC);
-                    r8 = GetJudgeResultForMCHC(a);
+                    double a = 0;
+                    bool b = double.TryParse(MCHC, out a);
+                    if (b == true)
+                    {
+                        r8 = GetJudgeResultForMCHC(a);
+                    } 
                 }
                 int r9 = 1;
                 if (RDWCV != "" && RDWCV != "*")
                 {
-                    double a = double.Parse(RDWCV);
-                    r9 = GetJudgeResultForRDWCV(a);
+                    double a = 0;
+                    bool b = double.TryParse(RDWCV, out a);
+                    if (b == true)
+                    {
+                        r9 = GetJudgeResultForRDWCV(a);
+                    } 
                 }
                 int r10 = 1;
                 if (RDWSD != "" && RDWSD != "*")
                 {
-                    double a = double.Parse(RDWSD);
-                    r10 = GetJudgeResultForRDWSD(a);
+                    double a = 0;
+                    bool b = double.TryParse(RDWSD, out a);
+                    if (b == true)
+                    {
+                        r10 = GetJudgeResultForRDWSD(a);
+                    } 
                 }
                 int r11 = 1;
                 if (NEUT != "" && NEUT != "*")
                 {
-                    double a = double.Parse(NEUT);
-                    r11 = GetJudgeResultForNEUT(a);
+                    double a = 0;
+                    bool b = double.TryParse(NEUT, out a);
+                    if (b == true)
+                    {
+                        r11 = GetJudgeResultForNEUT(a);
+                    } 
                 }
                 int r12 = 1;
                 if (NEUTP != "" && NEUTP != "*")
                 {
-                    double a = double.Parse(NEUTP);
-                    r12 = GetJudgeResultForNEUTP(a);
+                    double a =0;
+                    bool b = double.TryParse(NEUTP, out a);
+                    if (b == true)
+                    {
+                        r12 = GetJudgeResultForNEUTP(a);
+                    } 
                 }
                 int r13 = 1;
                 if (LYM != "" && LYM != "*")
                 {
-                    double a = double.Parse(LYM);
-                    r13 = GetJudgeResultForLYM(a);
+                    double a = 0;
+                    bool b = double.TryParse(LYM, out a);
+                    if (b == true)
+                    {
+                        r13 = GetJudgeResultForLYM(a);
+                    } 
                 }
                 int r14 = 1;
                 if (LYMP != "" && LYMP != "*")
                 {
-                    double a = double.Parse(LYMP);
-                    r14 = GetJudgeResultForLYMP(a);
+                    double a = 0;
+                    bool b = double.TryParse(LYMP, out a);
+                    if (b == true)
+                    {
+                        r14 = GetJudgeResultForLYMP(a);
+                    } 
                 }
                 int r15 = 1;
                 if (MPV != "" && MPV != "*")
                 {
-                    double a = double.Parse(MPV);
-                    r15 = GetJudgeResultForMPV(a);
+                    double a = 0;
+                    bool b = double.TryParse(MPV, out a);
+                    if (b == true)
+                    {
+                        r15 = GetJudgeResultForMPV(a);
+                    } 
                 }
                 int r16 = 1;
                 if (PDW != "" && PDW != "*")
                 {
-                    double a = double.Parse(PDW);
-                    r16 = GetJudgeResultForPDW(a);
+                    double a = 0;
+                    bool b = double.TryParse(PDW, out a);
+                    if (b == true)
+                    {
+                        r16 = GetJudgeResultForPDW(a);
+                    } 
                 }
                 int r17 = 1;
                 if (MXD != "" && MXD != "*")
                 {
-                    double a = double.Parse(MXD);
-                    r17 = GetJudgeResultForMXD(a);
+                    double a = 0;
+                    bool b = double.TryParse(MXD, out a);
+                    if (b == true)
+                    {
+                        r17 = GetJudgeResultForMXD(a);
+                    } 
                 }
                 int r18 = 1;
                 if (MXDP != "" && MXDP != "*")
                 {
-                    double a = double.Parse(MXDP);
-                    r18 = GetJudgeResultForMXDP(a);
+                    double a = 0;
+                    bool b = double.TryParse(MXDP, out a);
+                    if (b == true)
+                    {
+                        r18 = GetJudgeResultForMXDP(a);
+                    } 
                 }
                 int r = 1;
                 r = r0;

@@ -866,15 +866,26 @@ where 1=1";
                     {
                         List<Report> reports = new List<Report>();
                         foreach (var items in list)
-                        {
-
-
+                        { 
                             Report report = new Report();
                             DataRow data = dataSet.Tables["个人"].Select($"id_number={item.ID}")[0];
+                            string age = data["age"].ToString();
+                            if (age.Length > 0)
+                            {
+                                int ageint = Int32.Parse(age);
+                                if (ageint < 65)
+                                {
+                                    if (items == "中医体质" || items == "老年人生活自理能力评估")
+                                    {
+                                        continue;
+                                    }
+                                }
+                            }
                             report.Name = items;
                             report.Doc = PdfProcessing(items, data, item.BarCode);
                             reports.Add(report);
                         }
+                        if (reports.Count == 0) continue;
                         Report re = reports.Where(m => m.Name == "封面").FirstOrDefault();
                         Report res = reports.Where(m => m.Name == "个人信息").FirstOrDefault();
                         if (re != null && res != null)
@@ -943,6 +954,11 @@ where 1=1";
                         }
                     }
                     LoadingHelper.CloseForm();
+                    if(intNum == 0)
+                    {
+                        MessageBox.Show("没有导出的报告！");
+                        return false;
+                    }
                     return true;
                     #endregion
                 }
@@ -1035,6 +1051,20 @@ where 1=1";
                             if (q.Count > 0)
                             {
                                 barcode = q[0].BarCode;
+                            }
+                            string age = data["age"].ToString();
+                            if (age.Length > 0)
+                            {
+                                int ageint = Int32.Parse(age);
+                                if (ageint < 65)
+                                {
+                                    if (list[0] == "中医体质" || list[0] == "老年人生活自理能力评估")
+                                    {
+                                        LoadingHelper.CloseForm();
+                                        MessageBox.Show("年龄小于65岁未做中医体质和老年人生活自理能力评估！"); 
+                                        return false;
+                                    }
+                                }
                             }
                             doc = PdfProcessing(list[0], data, barcode);
                             string urls = @str + $"/up/result/{list[0] + "-" + data["name"].ToString() + data["id_number"].ToString()}.pdf";

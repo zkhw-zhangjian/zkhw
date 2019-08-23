@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace zkhwClient
 {
-    class xuechangguiBean
+    public class xuechangguiBean
     {
         public string aichive_no { get; set; }
         public string id_number { get; set; }

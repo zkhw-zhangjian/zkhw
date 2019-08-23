@@ -320,24 +320,36 @@ namespace zkhwClient.view.updateTjResult
                 string alt = dtbichao.Rows[0]["ALT"].ToString();
                 if (alt != "" && alt != "*")
                 {
-                    double altdouble = double.Parse(alt);
-                    GetJudgeResultForALT(altdouble); 
+                    double altdouble = 0;
+                    bool a = double.TryParse(alt, out altdouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForALT(altdouble);
+                    } 
                 }
                 this.textBox5.Text = alt;
 
                 string ast = dtbichao.Rows[0]["AST"].ToString();
                 if (ast != "" && ast != "*")
                 {
-                    double astdouble = double.Parse(ast);
-                    GetJudgeResultForAST(astdouble); 
+                    double astdouble = 0;
+                    bool a = double.TryParse(ast, out astdouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForAST(astdouble);
+                    } 
                 }
                 this.textBox6.Text = ast;
 
                 string tbil = dtbichao.Rows[0]["TBIL"].ToString();
                 if (tbil != "" && tbil != "*")
                 {
-                    double tbildouble = double.Parse(tbil);
-                    GetJudgeResultForTBIL(tbildouble); 
+                    double tbildouble = 0;
+                    bool a = double.TryParse(tbil, out tbildouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForTBIL(tbildouble);
+                    } 
                 }
                 this.textBox8.Text = tbil;
 
@@ -352,55 +364,83 @@ namespace zkhwClient.view.updateTjResult
                 string crea = dtbichao.Rows[0]["CREA"].ToString();
                 if (crea != "" && crea != "*")
                 {
-                    double creadouble = double.Parse(crea);
-                    GetJudgeResultForCREA(creadouble); 
+                    double creadouble = 0;
+                    bool a = double.TryParse(crea, out creadouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForCREA(creadouble);
+                    } 
                 }
                 this.textBox11.Text = crea;
                 string urea = dtbichao.Rows[0]["UREA"].ToString();
                 if (urea != "" && urea != "*")
                 {
-                    double ureadouble = double.Parse(urea);
-                    GetJudgeResultForUREA(ureadouble); 
+                    double ureadouble = 0;
+                    bool a = double.TryParse(urea, out ureadouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForUREA(ureadouble);
+                    } 
                 }
                 this.textBox10.Text = urea;
 
                 string glu = dtbichao.Rows[0]["GLU"].ToString();
                 if (glu != "" && glu != "*")
                 {
-                    double gludouble = double.Parse(glu);
-                    GetJudgeResultForGLU(gludouble);
+                    double gludouble = 0;
+                    bool a = double.TryParse(glu, out gludouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForGLU(gludouble);
+                    } 
                 }
                 this.textBox13.Text = glu;
 
                 string tg = dtbichao.Rows[0]["TG"].ToString();
                 if (tg != "" && tg != "*")
                 {
-                    double tgdouble = double.Parse(tg);
-                    GetJudgeResultForTG(tgdouble);
+                    double tgdouble = 0;
+                    bool a = double.TryParse(tg, out tgdouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForTG(tgdouble);
+                    } 
                 }
                 this.textBox12.Text = tg;
 
                 string cho = dtbichao.Rows[0]["CHO"].ToString();
                 if (cho != "" && cho != "*")
                 {
-                    double chodouble = double.Parse(cho);
-                    GetJudgeResultForCHO(chodouble);
+                    double chodouble = 0;
+                    bool a = double.TryParse(cho, out chodouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForCHO(chodouble);
+                    } 
                 }
                 this.textBox15.Text = cho;
 
                 string hdlc = dtbichao.Rows[0]["HDLC"].ToString();
                 if (hdlc != "" && hdlc != "*")
                 {
-                    double hdlcdouble = double.Parse(hdlc);
-                    GetJudgeResultForHDLC(hdlcdouble); 
+                    double hdlcdouble = 0;
+                    bool a = double.TryParse(hdlc, out hdlcdouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForHDLC(hdlcdouble);
+                    } 
                 }
                 this.textBox14.Text = hdlc;
 
                 string ldlc = dtbichao.Rows[0]["LDLC"].ToString();
                 if (ldlc != "" && ldlc != "*")
                 {
-                    double ldlcdouble = double.Parse(ldlc); 
-                    GetJudgeResultForLDLC(ldlcdouble); 
+                    double ldlcdouble = 0;
+                    bool a = double.TryParse(ldlc, out ldlcdouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForLDLC(ldlcdouble);
+                    } 
                 }
                 this.textBox17.Text = ldlc;
 
@@ -469,18 +509,33 @@ namespace zkhwClient.view.updateTjResult
                 int r0 = 1;
                 if (ALT != "" && ALT != "*")
                 {
-                    r0 = GetJudgeResultForALT(double.Parse(ALT));
+                    double b = 0;
+                    bool a = double.TryParse(ALT, out b);
+                    if(a==true)
+                    {
+                        r0 = GetJudgeResultForALT(b);
+                    } 
                 }
                 int r1 = 1;
                 if (AST != "" && AST != "*")
-                {
-                    r1 = GetJudgeResultForAST(double.Parse(AST));
+                { 
+                    double b = 0;
+                    bool a = double.TryParse(AST, out b);
+                    if (a == true)
+                    {
+                        r1 = GetJudgeResultForAST(b);
+                    }
                 }
 
                 int r2 = 1;
                 if (TBIL != "" && TBIL != "*")
-                {
-                    r2 = GetJudgeResultForTBIL(double.Parse(TBIL));
+                { 
+                    double b = 0;
+                    bool a = double.TryParse(TBIL, out b);
+                    if (a == true)
+                    {
+                        r2 = GetJudgeResultForTBIL(b);
+                    }
                 }
 
                 int r3 = 1;
@@ -491,40 +546,75 @@ namespace zkhwClient.view.updateTjResult
 
                 int r4 = 1;
                 if (CREA != "" && CREA != "*")
-                {
-                    r4 = GetJudgeResultForCREA(double.Parse(CREA));
+                { 
+                    double b = 0;
+                    bool a = double.TryParse(CREA, out b);
+                    if (a == true)
+                    {
+                        r4 = GetJudgeResultForCREA(b);
+                    }
                 }
 
                 int r5 = 1;
                 if (UREA != "" && UREA != "*")
-                {
-                    r5 = GetJudgeResultForUREA(double.Parse(UREA));
+                { 
+                    double b = 0;
+                    bool a = double.TryParse(UREA, out b);
+                    if (a == true)
+                    {
+                        r5 = GetJudgeResultForUREA(b);
+                    }
                 }
                 int r6 = 1;
                 if (GLU != "" && GLU != "*")
-                {
-                    r6 = GetJudgeResultForGLU(double.Parse(GLU));
+                { 
+                    double b = 0;
+                    bool a = double.TryParse(GLU, out b);
+                    if (a == true)
+                    {
+                        r6 = GetJudgeResultForGLU(b);
+                    }
                 }
 
                 int r7 = 1;
                 if (TG != "" && TG != "*")
-                {
-                    r7 = GetJudgeResultForTG(double.Parse(TG));
+                { 
+                    double b = 0;
+                    bool a = double.TryParse(TG, out b);
+                    if (a == true)
+                    {
+                        r7 = GetJudgeResultForTG(b);
+                    }
                 }
                 int r8 = 1;
                 if (CHO != "" && CHO != "*")
-                {
-                    r8 = GetJudgeResultForCHO(double.Parse(CHO));
+                { 
+                    double b = 0;
+                    bool a = double.TryParse(CHO, out b);
+                    if (a == true)
+                    {
+                        r8 = GetJudgeResultForCHO(b);
+                    }
                 }
                 int r9 = 1;
                 if (HDLC != "" && HDLC != "*")
-                {
-                    r9 = GetJudgeResultForHDLC(double.Parse(HDLC));
+                { 
+                    double b = 0;
+                    bool a = double.TryParse(HDLC, out b);
+                    if (a == true)
+                    {
+                        r9 = GetJudgeResultForHDLC(b);
+                    }
                 }
                 int r10 = 1;
                 if (LDLC != "" && LDLC != "*")
-                {
-                    r10 = GetJudgeResultForLDLC(double.Parse(LDLC));
+                { 
+                    double b = 0;
+                    bool a = double.TryParse(LDLC, out b);
+                    if (a == true)
+                    {
+                        r10 = GetJudgeResultForLDLC(b);
+                    }
                 }
 
                 r = r0;

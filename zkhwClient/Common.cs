@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using zkhwClient.dao;
 
 namespace zkhwClient
 {
@@ -356,6 +357,142 @@ namespace zkhwClient
             newRow["name"] = "基诺族";
             dtno.Rows.Add(newRow);
             return dtno;
-        } 
+        }
+
+        public static int JudgeValueForSh(DataTable dttv, shenghuaBean sh)
+        {
+            int flag = 1;
+            if (rangeJudgeForSHInfo.dttv != null)
+            {
+                rangeJudgeForSHInfo.dttv.Clear();
+            }
+            rangeJudgeForSHInfo.dttv = dttv.Copy();
+            flag = rangeJudgeForSHInfo.GetResultSh("ALT", sh.ALT);
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForSHInfo.GetResultSh("AST", sh.AST);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForSHInfo.GetResultSh("TBIL", sh.TBIL);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForSHInfo.GetResultSh("DBIL", sh.DBIL);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForSHInfo.GetResultSh("CREA", sh.Crea);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForSHInfo.GetResultSh("UREA", sh.UREA);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForSHInfo.GetResultSh("GLU", sh.GLU);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForSHInfo.GetResultSh("TG", sh.TG);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForSHInfo.GetResultSh("CHO", sh.CHO);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForSHInfo.GetResultSh("HDLC", sh.HDL_C);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForSHInfo.GetResultSh("LDLC", sh.LDL_C);
+            }
+            return flag;
+        }
+
+        public static int JudgeValueForXCG(DataTable dttv, xuechangguiBean xcg)
+        {
+            int flag = 1;
+            if (rangeJudgeForXCGInfo.dttv != null)
+            {
+                rangeJudgeForXCGInfo.dttv.Clear();
+            }
+            rangeJudgeForXCGInfo.dttv = dttv.Copy();
+            flag = rangeJudgeForXCGInfo.GetResultXCG("WBC", xcg.WBC);
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForXCGInfo.GetResultXCG("RBC", xcg.RBC);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForXCGInfo.GetResultXCG("PCT", xcg.PCT);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForXCGInfo.GetResultXCG("PLT", xcg.PLT);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForXCGInfo.GetResultXCG("HGB", xcg.HGB);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForXCGInfo.GetResultXCG("HCT", xcg.HCT);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForXCGInfo.GetResultXCG("MCV", xcg.MCV);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForXCGInfo.GetResultXCG("MCH", xcg.MCH);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForXCGInfo.GetResultXCG("MCHC", xcg.MCHC);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForXCGInfo.GetResultXCG("RDWCV", xcg.RDW_CV);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForXCGInfo.GetResultXCG("RDWSD", xcg.RDW_SD);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForXCGInfo.GetResultXCG("NEUT", xcg.NEUT);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForXCGInfo.GetResultXCG("NEUTP", xcg.NEUTP);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForXCGInfo.GetResultXCG("LYM", xcg.LYM);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForXCGInfo.GetResultXCG("LYMP", xcg.LYMP);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForXCGInfo.GetResultXCG("MPV", xcg.MPV);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForXCGInfo.GetResultXCG("PDW", xcg.PDW);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForXCGInfo.GetResultXCG("MXD", xcg.MXD);
+            }
+            if (flag <= 2)
+            {
+                flag = rangeJudgeForXCGInfo.GetResultXCG("MXDP", xcg.MXDP);
+            }
+            return flag;
+        }
     }
 }
