@@ -370,43 +370,83 @@ namespace zkhwClient
             flag = rangeJudgeForSHInfo.GetResultSh("ALT", sh.ALT);
             if (flag <= 2)
             {
-                flag = rangeJudgeForSHInfo.GetResultSh("AST", sh.AST);
+               int  a = rangeJudgeForSHInfo.GetResultSh("AST", sh.AST);
+                if(a>flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForSHInfo.GetResultSh("TBIL", sh.TBIL);
+                int a = rangeJudgeForSHInfo.GetResultSh("TBIL", sh.TBIL);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForSHInfo.GetResultSh("DBIL", sh.DBIL);
+                int a = rangeJudgeForSHInfo.GetResultSh("DBIL", sh.DBIL);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForSHInfo.GetResultSh("CREA", sh.Crea);
+                int a = rangeJudgeForSHInfo.GetResultSh("CREA", sh.Crea);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForSHInfo.GetResultSh("UREA", sh.UREA);
+                int a = rangeJudgeForSHInfo.GetResultSh("UREA", sh.UREA);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForSHInfo.GetResultSh("GLU", sh.GLU);
+                int a = rangeJudgeForSHInfo.GetResultSh("GLU", sh.GLU);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForSHInfo.GetResultSh("TG", sh.TG);
+                int a = rangeJudgeForSHInfo.GetResultSh("TG", sh.TG);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForSHInfo.GetResultSh("CHO", sh.CHO);
+                int a = rangeJudgeForSHInfo.GetResultSh("CHO", sh.CHO);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForSHInfo.GetResultSh("HDLC", sh.HDL_C);
+                int a = rangeJudgeForSHInfo.GetResultSh("HDLC", sh.HDL_C);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForSHInfo.GetResultSh("LDLC", sh.LDL_C);
+                int a = rangeJudgeForSHInfo.GetResultSh("LDLC", sh.LDL_C);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             return flag;
         }
@@ -422,75 +462,147 @@ namespace zkhwClient
             flag = rangeJudgeForXCGInfo.GetResultXCG("WBC", xcg.WBC);
             if (flag <= 2)
             {
-                flag = rangeJudgeForXCGInfo.GetResultXCG("RBC", xcg.RBC);
+                int a = rangeJudgeForXCGInfo.GetResultXCG("RBC", xcg.RBC);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForXCGInfo.GetResultXCG("PCT", xcg.PCT);
+                int a = rangeJudgeForXCGInfo.GetResultXCG("PCT", xcg.PCT);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForXCGInfo.GetResultXCG("PLT", xcg.PLT);
+                int a = rangeJudgeForXCGInfo.GetResultXCG("PLT", xcg.PLT);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForXCGInfo.GetResultXCG("HGB", xcg.HGB);
+                int a = rangeJudgeForXCGInfo.GetResultXCG("HGB", xcg.HGB);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForXCGInfo.GetResultXCG("HCT", xcg.HCT);
+                int a = rangeJudgeForXCGInfo.GetResultXCG("HCT", xcg.HCT);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForXCGInfo.GetResultXCG("MCV", xcg.MCV);
+                int a = rangeJudgeForXCGInfo.GetResultXCG("MCV", xcg.MCV);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForXCGInfo.GetResultXCG("MCH", xcg.MCH);
+                int a = rangeJudgeForXCGInfo.GetResultXCG("MCH", xcg.MCH);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForXCGInfo.GetResultXCG("MCHC", xcg.MCHC);
+                int a = rangeJudgeForXCGInfo.GetResultXCG("MCHC", xcg.MCHC);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForXCGInfo.GetResultXCG("RDWCV", xcg.RDW_CV);
+                int a = rangeJudgeForXCGInfo.GetResultXCG("RDWCV", xcg.RDW_CV);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForXCGInfo.GetResultXCG("RDWSD", xcg.RDW_SD);
+                int a = rangeJudgeForXCGInfo.GetResultXCG("RDWSD", xcg.RDW_SD);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForXCGInfo.GetResultXCG("NEUT", xcg.NEUT);
+                int a = rangeJudgeForXCGInfo.GetResultXCG("NEUT", xcg.NEUT);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForXCGInfo.GetResultXCG("NEUTP", xcg.NEUTP);
+                int a = rangeJudgeForXCGInfo.GetResultXCG("NEUTP", xcg.NEUTP);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForXCGInfo.GetResultXCG("LYM", xcg.LYM);
+                int a = rangeJudgeForXCGInfo.GetResultXCG("LYM", xcg.LYM);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForXCGInfo.GetResultXCG("LYMP", xcg.LYMP);
+                int a = rangeJudgeForXCGInfo.GetResultXCG("LYMP", xcg.LYMP);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForXCGInfo.GetResultXCG("MPV", xcg.MPV);
+                int a = rangeJudgeForXCGInfo.GetResultXCG("MPV", xcg.MPV);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForXCGInfo.GetResultXCG("PDW", xcg.PDW);
+                int a = rangeJudgeForXCGInfo.GetResultXCG("PDW", xcg.PDW);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForXCGInfo.GetResultXCG("MXD", xcg.MXD);
+                int a = rangeJudgeForXCGInfo.GetResultXCG("MXD", xcg.MXD);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             if (flag <= 2)
             {
-                flag = rangeJudgeForXCGInfo.GetResultXCG("MXDP", xcg.MXDP);
+                int a = rangeJudgeForXCGInfo.GetResultXCG("MXDP", xcg.MXDP);
+                if (a > flag)
+                {
+                    flag = a;
+                }
             }
             return flag;
         }
