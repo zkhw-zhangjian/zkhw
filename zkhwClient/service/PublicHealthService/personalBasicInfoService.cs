@@ -21,9 +21,9 @@ namespace zkhwClient.service
         {
             return hPD.deletePersonalBasicInfo(id);
         }
-        public bool aUpersonalBasicInfo(bean.resident_base_infoBean hm, string id, DataTable goodsList, DataTable goodsList0, DataTable goodsList1, DataTable goodsList2, DataTable goodsList3)
+        public bool aUpersonalBasicInfo(bean.resident_base_infoBean hm, string id, DataTable goodsList, DataTable goodsList0, DataTable goodsList1, DataTable goodsList2, DataTable goodsList3,int intbian)
         {
-            return hPD.aUpersonalBasicInfo(hm,id, goodsList, goodsList0, goodsList1, goodsList2, goodsList3);
+            return hPD.aUpersonalBasicInfo(hm,id, goodsList, goodsList0, goodsList1, goodsList2, goodsList3, intbian);
         }
         public DataTable queryPersonalBasicInfo0(string id)
         {

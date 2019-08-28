@@ -210,6 +210,8 @@ namespace zkhwClient.view.PublicHealthView
             if (dt != null && dt.Rows.Count > 0)
             {
                 hm.textBox1.Text = dt.Rows[0]["name"].ToString();
+                hm.oldname= dt.Rows[0]["name"].ToString();
+
                 hm.textBox2.Text = dt.Rows[0]["archive_no"].ToString();
                 if (dt.Rows[0]["sex"].ToString() == hm.radioButton1.Tag.ToString()) { hm.radioButton1.Checked = true; };
                 if (dt.Rows[0]["sex"].ToString() == hm.radioButton2.Tag.ToString()) { hm.radioButton2.Checked = true; };
@@ -218,7 +220,20 @@ namespace zkhwClient.view.PublicHealthView
                 if (dt.Rows[0]["birthday"].ToString() != "")
                     hm.dateTimePicker1.Value = DateTime.Parse(dt.Rows[0]["birthday"].ToString());
                 hm.textBox12.Text = dt.Rows[0]["id_number"].ToString();
+                hm.oldidnumber= dt.Rows[0]["id_number"].ToString();
+
                 hm.textBox14.Text = dt.Rows[0]["company"].ToString();
+                if(dt.Rows[0]["residence_address"].ToString()=="")
+                {
+                    hm.textBox46.Text = dt.Rows[0]["county_name"].ToString() + dt.Rows[0]["towns_name"].ToString() + dt.Rows[0]["village_name"].ToString();
+                }
+                else
+                {
+                    hm.textBox46.Text = dt.Rows[0]["residence_address"].ToString();
+                }
+                
+                hm.textBox44.Text = dt.Rows[0]["address"].ToString();
+
                 hm.textBox16.Text = dt.Rows[0]["phone"].ToString();
                 hm.textBox18.Text = dt.Rows[0]["link_name"].ToString();
                 hm.textBox20.Text = dt.Rows[0]["link_phone"].ToString();

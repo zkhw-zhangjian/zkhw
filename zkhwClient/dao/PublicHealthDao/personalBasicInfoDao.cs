@@ -38,7 +38,7 @@ namespace zkhwClient.dao
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
-        public bool aUpersonalBasicInfo(bean.resident_base_infoBean hm, string id, DataTable goodsList, DataTable goodsList0, DataTable goodsList1, DataTable goodsList2, DataTable goodsList3)
+        public bool aUpersonalBasicInfo(bean.resident_base_infoBean hm, string id, DataTable goodsList, DataTable goodsList0, DataTable goodsList1, DataTable goodsList2, DataTable goodsList3,int intbian)
         {
             int ret = 0;
             String sql = "";
@@ -49,6 +49,7 @@ namespace zkhwClient.dao
             String sql4 = "";
             if (id == "")
             {
+                #region 新插入
                 id = Result.GetNewId();
                 sql = @"insert into resident_base_info (id,archive_no,pb_archive,name,sex,birthday,id_number,address,nation,company,phone,link_name,link_phone,resident_type,residence_address,blood_group,blood_rh,education,profession,marital_status,pay_type,pay_other,drug_allergy,allergy_other,exposure,disease_other,is_hypertension,is_diabetes,is_psychosis,is_tuberculosis,is_heredity,heredity_name,is_deformity,deformity_name,is_poor,kitchen,fuel,other_fuel,drink,other_drink,toilet,poultry,medical_code,photo_code,aichive_org,doctor_name,upload_status,upload_time,create_user,create_name,create_time,create_org,create_org_name,is_signing,update_time) values ";
                 sql += @" ('" + id + "','" + hm.archive_no + "', '" + hm.pb_archive + "', '" + hm.name + "', '" + hm.sex + "', '" + hm.birthday + "', '" + hm.id_number + "', '" + hm.address + "', '" + hm.nation + "','" + hm.company + "', '" + hm.phone + "', '" + hm.link_name + "', '" + hm.link_phone + "', '" + hm.resident_type + "', '" + hm.address + "', '" + hm.blood_group + "', '" + hm.blood_rh + "', '" + hm.education + "', '" + hm.profession + "','" + hm.marital_status + "', '" + hm.pay_type + "', '" + hm.pay_other + "', '" + hm.drug_allergy + "', '" + hm.allergy_other + "', '" + hm.exposure + "', '" + hm.disease_other + "', '" + hm.is_hypertension + "', '" + hm.is_diabetes + "', '" + hm.is_psychosis + "','" + hm.is_tuberculosis + "', '" + hm.is_heredity + "', '" + hm.heredity_name + "', '" + hm.is_deformity + "', '" + hm.deformity_name + "', '" + hm.is_poor + "', '" + hm.kitchen + "', '" + hm.fuel + "', '" + hm.other_fuel + "', '" + hm.drink + "','" + hm.other_drink + "', '" + hm.toilet + "', '" + hm.poultry + "', '" + hm.medical_code + "', '" + hm.photo_code + "', '" + basicInfoSettings.organ_name + "', '" + hm.is_signing + "', '" + hm.synchro_time + "', '" + hm.create_user + "','" + hm.create_name + "', '" + hm.create_time + "', '" + hm.create_org + "', '" + hm.create_org_name + "',"+hm.is_signing+ "," + hm.update_time + ")";
@@ -132,10 +133,39 @@ namespace zkhwClient.dao
                         }
                     }
                 }
+                #endregion
+
+                ret = DbHelperMySQL.ExecuteSql(sql);
+                if (ret == 0) { return false; }
+                if (sql0 != "")
+                {
+                    DbHelperMySQL.ExecuteSql(sql0);
+                }
+                if (sql1 != "")
+                {
+                    DbHelperMySQL.ExecuteSql(sql1);
+                }
+                if (sql2 != "")
+                {
+                    DbHelperMySQL.ExecuteSql(sql2);
+                }
+                if (sql3 != "")
+                {
+                    DbHelperMySQL.ExecuteSql(sql3);
+                }
+                if (sql4 != "")
+                {
+                    DbHelperMySQL.ExecuteSql(sql4);
+                }
+
+                return ret == 0 ? false : true;
             }
             else
             {
-              sql = @"update resident_base_info set id_number='" + hm.id_number + "',nation='" + hm.nation + "',company='" + hm.company + "',phone= '" + hm.phone + "',link_name= '" + hm.link_name + "',link_phone= '" + hm.link_phone + "',resident_type= '" + hm.resident_type + "',residence_address='" + hm.residence_address + "',blood_group= '" + hm.blood_group + "',blood_rh='" + hm.blood_rh + "',education='" + hm.education + "',profession='" + hm.profession + "',marital_status='" + hm.marital_status + "',pay_type='" + hm.pay_type + "',pay_other= '" + hm.pay_other + "',drug_allergy='" + hm.drug_allergy + "',allergy_other='" + hm.allergy_other + "',exposure= '" + hm.exposure + "',disease_other='" + hm.disease_other + "',is_hypertension='" + hm.is_hypertension + "',is_diabetes= '" + hm.is_diabetes + "',is_psychosis='" + hm.is_psychosis + "',is_tuberculosis='" + hm.is_tuberculosis + "',is_heredity= '" + hm.is_heredity + "',heredity_name= '" + hm.heredity_name + "',is_deformity='" + hm.is_deformity + "',deformity_name='" + hm.deformity_name + "',is_poor= '" + hm.is_poor + "',kitchen='" + hm.kitchen + "',fuel='" + hm.fuel + "',other_fuel='" + hm.other_fuel + "',drink= '" + hm.drink + "',other_drink='" + hm.other_drink + "',toilet= '" + hm.toilet + "',poultry= '" + hm.poultry + "',medical_code='" + hm.medical_code + "',photo_code= '" + hm.photo_code + "',is_signing= '" + hm.is_signing + "',update_user='" + hm.update_user + "',update_name='" + hm.update_name + "',update_time='" + hm.update_time + "',upload_status=0 where id = '" + id + "'";
+                List<string> _lst = new List<string>();
+                #region 更新
+                sql = @"update resident_base_info set name='"+hm.name+"', address='"+hm.address+"', id_number='" + hm.id_number + "',nation='" + hm.nation + "',company='" + hm.company + "',phone= '" + hm.phone + "',link_name= '" + hm.link_name + "',link_phone= '" + hm.link_phone + "',resident_type= '" + hm.resident_type + "',residence_address='" + hm.residence_address + "',blood_group= '" + hm.blood_group + "',blood_rh='" + hm.blood_rh + "',education='" + hm.education + "',profession='" + hm.profession + "',marital_status='" + hm.marital_status + "',pay_type='" + hm.pay_type + "',pay_other= '" + hm.pay_other + "',drug_allergy='" + hm.drug_allergy + "',allergy_other='" + hm.allergy_other + "',exposure= '" + hm.exposure + "',disease_other='" + hm.disease_other + "',is_hypertension='" + hm.is_hypertension + "',is_diabetes= '" + hm.is_diabetes + "',is_psychosis='" + hm.is_psychosis + "',is_tuberculosis='" + hm.is_tuberculosis + "',is_heredity= '" + hm.is_heredity + "',heredity_name= '" + hm.heredity_name + "',is_deformity='" + hm.is_deformity + "',deformity_name='" + hm.deformity_name + "',is_poor= '" + hm.is_poor + "',kitchen='" + hm.kitchen + "',fuel='" + hm.fuel + "',other_fuel='" + hm.other_fuel + "',drink= '" + hm.drink + "',other_drink='" + hm.other_drink + "',toilet= '" + hm.toilet + "',poultry= '" + hm.poultry + "',medical_code='" + hm.medical_code + "',photo_code= '" + hm.photo_code + "',is_signing= '" + hm.is_signing + "',update_user='" + hm.update_user + "',update_name='" + hm.update_name + "',update_time='" + hm.update_time + "',upload_status=0 where id = '" + id + "'";
+                _lst.Add(sql);
 
                 sql0 = @"delete from resident_diseases  where resident_base_info_id = '" + id + "';";
                 sql1 = @"delete from operation_record  where resident_base_info_id = '" + id + "';";
@@ -238,31 +268,118 @@ namespace zkhwClient.dao
                         }
                     }
                 }
+                #endregion
+                #region 身份证、名字变化就要改变别的表
+                if(intbian>=2 )
+                {
+                    sql =string.Format("update zkhw_tj_bc set id_number='{0}' Where aichive_no='{1}'", hm.id_number,hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update zkhw_tj_ncg set id_number='{0}' Where aichive_no='{1}'", hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update zkhw_tj_sgtz set id_number='{0}' Where aichive_no='{1}'", hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update zkhw_tj_sh set id_number='{0}' Where aichive_no='{1}'", hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update zkhw_tj_xcg set id_number='{0}' Where aichive_no='{1}'", hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update zkhw_tj_xdt set id_number='{0}' Where aichive_no='{1}'", hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update zkhw_tj_xy set id_number='{0}' Where aichive_no='{1}'", hm.id_number, hm.archive_no);
+                    _lst.Add(sql);  
+                }
+
+                if(intbian>0)
+                {
+                    sql = string.Format("update physical_examination_record set name='{0}', id_number='{1}' Where aichive_no='{2}'",hm.name, hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update children_health_record set name='{0}', id_number='{1}' Where archive_no='{2}'", hm.name, hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update children_tcm_record set name='{0}', id_number='{1}' Where aichive_no='{2}'", hm.name, hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update diabetes_follow_record set name='{0}', id_number='{1}' Where aichive_no='{2}'", hm.name, hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update elderly_selfcare_estimate set name='{0}', id_number='{1}' Where aichive_no='{2}'", hm.name, hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update elderly_tcm_record set name='{0}', id_number='{1}' Where aichive_no='{2}'", hm.name, hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update fuv_hypertension set name='{0}', id_number='{1}' Where aichive_no='{2}'", hm.name, hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update gravida_after_record set name='{0}', id_number='{1}' Where aichive_no='{2}'", hm.name, hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update gravida_follow_record set name='{0}', id_number='{1}' Where aichive_no='{2}'", hm.name, hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update gravida_info set name='{0}', id_number='{1}' Where aichive_no='{2}'", hm.name, hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update neonatus_info set name='{0}', id_number='{1}' Where archive_no='{2}'", hm.name, hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update poor_follow_record set name='{0}', id_number='{1}' Where archive_no='{2}'", hm.name, hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update psychosis_info set name='{0}', id_number='{1}' Where archive_no='{2}'", hm.name, hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update sign_service_info set name='{0}', id_number='{1}' Where archive_no='{2}'", hm.name, hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update tuberculosis_follow_record set name='{0}', id_number='{1}' Where aichive_no='{2}'", hm.name, hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update tuberculosis_info set name='{0}', id_number='{1}' Where archive_no='{2}'", hm.name, hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update zkhw_tj_bgdc set name='{0}', id_number='{1}' Where aichive_no='{2}'", hm.name, hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                    sql = string.Format("update zkhw_tj_jk set name='{0}', id_number='{1}' Where aichive_no='{2}'", hm.name, hm.id_number, hm.archive_no);
+                    _lst.Add(sql);
+
+                }
+                #endregion
+                ret = DbHelperMySQL.ExecuteSqlTran(_lst);
+
+                if (ret == 0) { return false; }
+                if (sql0 != "")
+                {
+                    DbHelperMySQL.ExecuteSql(sql0);
+                }
+                if (sql1 != "")
+                {
+                    DbHelperMySQL.ExecuteSql(sql1);
+                }
+                if (sql2 != "")
+                {
+                    DbHelperMySQL.ExecuteSql(sql2);
+                }
+                if (sql3 != "")
+                {
+                    DbHelperMySQL.ExecuteSql(sql3);
+                }
+                if (sql4 != "")
+                {
+                    DbHelperMySQL.ExecuteSql(sql4);
+                }
+
+                return ret == 0 ? false : true;
+
             }
-            ret = DbHelperMySQL.ExecuteSql(sql);
-            if (ret==0) { return false; }
-            if (sql0 != "")
-            {
-                DbHelperMySQL.ExecuteSql(sql0);
-            }
-            if (sql1 != "")
-            {
-                DbHelperMySQL.ExecuteSql(sql1);
-            }
-            if (sql2 != "")
-            {
-                DbHelperMySQL.ExecuteSql(sql2);
-            }
-            if (sql3 != "")
-            {
-                DbHelperMySQL.ExecuteSql(sql3);
-            }
-            if (sql4 != "")
-            {
-                DbHelperMySQL.ExecuteSql(sql4);
-            }
-            
-            return ret == 0 ? false : true;
+
         }
         public DataTable queryPersonalBasicInfo0(string id)
         {

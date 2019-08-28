@@ -1141,7 +1141,16 @@ where 1=1";
                         builder.InsertImage(resizeImageFromFile(@str + @"\photoImg\" + photo_pic, 172, 184));
                     }
                     dic.Add("姓名", data["name"].ToString());
-                    dic.Add("现住址", data["county_name"].ToString() + data["towns_name"].ToString() + data["village_name"].ToString());
+                    //dic.Add("现住址", data["county_name"].ToString() + data["towns_name"].ToString() + data["village_name"].ToString());
+                    if (!string.IsNullOrWhiteSpace(data["residence_address"].ToString()))
+                    {
+                        dic.Add("现住址", data["residence_address"].ToString()); 
+                    }
+                    else
+                    {
+                        dic.Add("现住址", data["county_name"].ToString() + data["towns_name"].ToString() + data["village_name"].ToString());
+                    }
+                    
                     dic.Add("户籍地址", data["address"].ToString());
                     dic.Add("联系电话", data["phone"].ToString());
                     dic.Add("乡镇名称", data["towns_name"].ToString());
