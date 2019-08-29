@@ -53,9 +53,9 @@ namespace zkhwClient.view.PublicHealthView
             this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
             this.button1.BackgroundImage = System.Drawing.Image.FromFile(@str + "/images/check.png");
             this.btnDel.BackgroundImage = System.Drawing.Image.FromFile(@str + "/images/delete.png");
-            this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源
-            this.comboBox1.DisplayMember = "name";//显示给用户的数据集表项
-            this.comboBox1.ValueMember = "code";//操作时获取的值 
+
+            Common.SetComboBoxInfo(comboBox1, areadao.shengInfo());
+
             dttv = grjddao.checkThresholdValues();//获取阈值信息
             registrationRecordCheck();//体检人数统计
         } 
@@ -64,7 +64,7 @@ namespace zkhwClient.view.PublicHealthView
             time1 = this.dateTimePicker1.Text.ToString();//开始时间
             time2 = this.dateTimePicker2.Text.ToString();//结束时间
             jmxx = this.textBox1.Text;
-            if (this.comboBox5.Text == "" || this.comboBox5.Text == null)
+            if (this.comboBox5.Text == "" || this.comboBox5.Text == "--请选择--" || comboBox5.SelectedValue==null)
            {
                 xcuncode = null;
             }
@@ -338,41 +338,42 @@ namespace zkhwClient.view.PublicHealthView
         }
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            shengcode = this.comboBox1.SelectedValue.ToString();
-            this.comboBox2.DataSource = areadao.shiInfo(shengcode);//绑定数据源
-            this.comboBox2.DisplayMember = "name";//显示给用户的数据集表项
-            this.comboBox2.ValueMember = "code";//操作时获取的值 
+            this.comboBox2.DataSource = null;
             this.comboBox3.DataSource = null;
             this.comboBox4.DataSource = null;
             this.comboBox5.DataSource = null;
+            if (this.comboBox1.SelectedValue == null) return;
+            shengcode = this.comboBox1.SelectedValue.ToString();
+            Common.SetComboBoxInfo(comboBox2, areadao.shiInfo(shengcode));
         }
 
         private void comboBox2_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            shicode = this.comboBox2.SelectedValue.ToString();
-            this.comboBox3.DataSource = areadao.quxianInfo(shicode);//绑定数据源
-            this.comboBox3.DisplayMember = "name";//显示给用户的数据集表项
-            this.comboBox3.ValueMember = "code";//操作时获取的值 
+            this.comboBox3.DataSource = null;
             this.comboBox4.DataSource = null;
             this.comboBox5.DataSource = null;
+            if (this.comboBox2.SelectedValue == null) return;
+            shicode = this.comboBox2.SelectedValue.ToString();
+            Common.SetComboBoxInfo(comboBox3, areadao.quxianInfo(shicode)); 
         }
         private void comboBox3_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            qxcode = this.comboBox3.SelectedValue.ToString();
-            this.comboBox4.DataSource = areadao.zhenInfo(qxcode);//绑定数据源
-            this.comboBox4.DisplayMember = "name";//显示给用户的数据集表项
-            this.comboBox4.ValueMember = "code";//操作时获取的值 
+            this.comboBox4.DataSource = null;
             this.comboBox5.DataSource = null;
+            if (this.comboBox3.SelectedValue == null) return;
+            qxcode = this.comboBox3.SelectedValue.ToString();
+            Common.SetComboBoxInfo(comboBox4, areadao.zhenInfo(qxcode)); 
         }
         private void comboBox4_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            this.comboBox5.DataSource = null;
+            if (this.comboBox4.SelectedValue == null) return;
             xzcode = this.comboBox4.SelectedValue.ToString();
-            this.comboBox5.DataSource = areadao.cunInfo(xzcode);//绑定数据源
-            this.comboBox5.DisplayMember = "name";//显示给用户的数据集表项
-            this.comboBox5.ValueMember = "code";//操作时获取的值 
+            Common.SetComboBoxInfo(comboBox5, areadao.cunInfo(xzcode));
         }
         private void comboBox5_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            if (this.comboBox5.SelectedValue == null) return;
             xcuncode = this.comboBox5.SelectedValue.ToString();
         }
         //体检人数统计  原来参数使用到basicInfoSettings.xcuncode 变更到xcuncode

@@ -2556,10 +2556,10 @@ namespace zkhwClient
                 string []sendArray= sendHL7.Split('|');
                 byte[] buffernew = buffer.Skip(0).Take(effective).ToArray();
                 string sHL7 = Encoding.Default.GetString(buffernew).Trim();
-                //using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
-                //{
-                //    sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "\n" + sHL7);
-                //}
+                using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
+                {
+                    sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "\n" + sHL7);
+                }
                 if (sHL7.IndexOf("CHEMRAY420") > 0)
                 {//解析生化协议报文数据                   
                     shenghuaBean sh = new shenghuaBean();

@@ -606,5 +606,40 @@ namespace zkhwClient
             }
             return flag;
         }
+
+        public static void SetComboBoxInfo(ComboBox cb,DataTable dt,string  DisplayMember,string ValueMember)
+        {
+            DataRow dr = dt.NewRow();
+            dr[0] = null;
+            dr[1] = "--请选择--";
+            dt.Rows.InsertAt(dr, 0);
+
+            cb.DataSource = dt;
+            cb.DisplayMember = DisplayMember;//显示给用户的数据集表项
+            cb.ValueMember = ValueMember;//操作时获取的值 
+        }
+
+        public static void SetComboBoxInfo(ComboBox cb, DataTable dt)
+        {
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                List<ComboBoxData> ts = Result.ToDataList<ComboBoxData>(dt);
+                Result.Bind(cb, ts, "Name", "ID", "--请选择--");
+            } 
+        }
+
+        public static void SetComboBoxSelectIndex(ComboBox cb, string code)
+        {
+            if (code == null || code == "") return;
+            for (int i = 0; i < cb.Items.Count; i++)
+            {
+                ComboBoxData obj = (ComboBoxData)cb.Items[i];
+                if (obj.ID == code)
+                {
+                    cb.SelectedIndex = i;
+                    break;
+                }
+            }
+        }
     }
 }

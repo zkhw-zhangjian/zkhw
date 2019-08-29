@@ -194,6 +194,7 @@
     </Compile>
     <Compile Include="dao\ConfigInfoManage.cs" />
     <Compile Include="dao\downloadDataForYunDao.cs" />
+    <Compile Include="dao\SystemSettingsDao\ltdorganizationDao.cs" />
     <Compile Include="dao\PublicHealthDao\healthCheckupDao.cs" />
     <Compile Include="dao\PublicHealthDao\olderHelthServiceDao.cs" />
     <Compile Include="dao\PublicHealthDao\diabetesPatientDao.cs" />

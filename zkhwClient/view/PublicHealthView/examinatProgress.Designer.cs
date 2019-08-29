@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnDown = new System.Windows.Forms.Button();
             this.btnDel = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -61,7 +62,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.btnDown = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -96,6 +96,16 @@
             this.groupBox1.Size = new System.Drawing.Size(1099, 83);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // btnDown
+            // 
+            this.btnDown.BackgroundImage = global::zkhwClient.Properties.Resources.拉取数据;
+            this.btnDown.Location = new System.Drawing.Point(748, 48);
+            this.btnDown.Name = "btnDown";
+            this.btnDown.Size = new System.Drawing.Size(75, 25);
+            this.btnDown.TabIndex = 16;
+            this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
             // 
             // btnDel
             // 
@@ -186,6 +196,7 @@
             // 
             // comboBox5
             // 
+            this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox5.FormattingEnabled = true;
             this.comboBox5.Location = new System.Drawing.Point(943, 18);
             this.comboBox5.Name = "comboBox5";
@@ -195,6 +206,7 @@
             // 
             // comboBox4
             // 
+            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox4.FormattingEnabled = true;
             this.comboBox4.Location = new System.Drawing.Point(829, 18);
             this.comboBox4.Name = "comboBox4";
@@ -204,6 +216,7 @@
             // 
             // comboBox3
             // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Location = new System.Drawing.Point(714, 18);
             this.comboBox3.Name = "comboBox3";
@@ -213,6 +226,7 @@
             // 
             // comboBox2
             // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(614, 18);
             this.comboBox2.Name = "comboBox2";
@@ -222,6 +236,7 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(502, 18);
             this.comboBox1.Name = "comboBox1";
@@ -439,16 +454,6 @@
             this.label7.Size = new System.Drawing.Size(93, 20);
             this.label7.TabIndex = 0;
             this.label7.Text = "体检进度";
-            // 
-            // btnDown
-            // 
-            this.btnDown.BackgroundImage = global::zkhwClient.Properties.Resources.拉取数据;
-            this.btnDown.Location = new System.Drawing.Point(748, 48);
-            this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(75, 25);
-            this.btnDown.TabIndex = 16;
-            this.btnDown.UseVisualStyleBackColor = true;
-            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
             // 
             // examinatProgress
             // 
