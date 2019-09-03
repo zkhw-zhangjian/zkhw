@@ -211,7 +211,14 @@ namespace zkhwClient
                     {
                         cs = cs.Replace("|","").Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", "");
                         int num = cs.IndexOf("诊断结果");
-                        csresult=cs.Substring(num);
+                        if(num>=0)
+                        {
+                            csresult = cs.Substring(num);
+                        }
+                        else
+                        {
+                            csresult = cs;
+                        } 
                     }
                     string BuPic01 = string.Empty;
                     string BuPic02 = string.Empty;
@@ -448,7 +455,14 @@ namespace zkhwClient
                 {
                     cs = cs.Replace("|", "").Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", "");
                     int num = cs.IndexOf("诊断结果");
-                    csresult = cs.Substring(num);
+                    if(num>=0)
+                    {
+                        csresult = cs.Substring(num);
+                    }
+                    else
+                    {
+                        csresult = cs;
+                    }
                 }
                 string BuPic01 = string.Empty;
                 string BuPic02 = string.Empty;

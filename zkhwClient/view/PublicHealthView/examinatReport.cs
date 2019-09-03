@@ -1597,8 +1597,7 @@ where 1=1";
                                         hy.Add("胆固醇箭头", "↓");
                                     }
                                     hy.Add("胆固醇结果", cho);
-                                }
-
+                                } 
                             }
                             string crea = da.Rows[j]["CREA"].ToString();
                             if (crea != null && !"".Equals(crea))
@@ -1686,9 +1685,7 @@ where 1=1";
                                         hy.Add("高密度脂蛋白箭头", "↓");
                                     }
                                     hy.Add("高密度脂蛋白结果", hdlc);
-                                }
-
-
+                                } 
                             }
                             string ldlc = da.Rows[j]["LDLC"].ToString();
                             if (ldlc != null && !"".Equals(ldlc))
@@ -1970,15 +1967,18 @@ where 1=1";
                             {
                                 if (mxd != "*")
                                 {
-                                    double mxddouble = Convert.ToDouble(mxd);
-                                    if (mxddouble > 0.9)
+                                    double mxddouble = 0; 
+                                    if (isDouble(mxd, out mxddouble))
                                     {
-                                        hy.Add("中间细胞数目箭头", "↑");
-                                    }
-                                    else if (mxddouble < 0.1)
-                                    {
-                                        hy.Add("中间细胞数目箭头", "↓");
-                                    }
+                                        if (mxddouble > 0.9)
+                                        {
+                                            hy.Add("中间细胞数目箭头", "↑");
+                                        }
+                                        else if (mxddouble < 0.1)
+                                        {
+                                            hy.Add("中间细胞数目箭头", "↓");
+                                        }
+                                    }   
                                 }
                                 hy.Add("中间细胞数目结果", mxd);
                             }
@@ -1987,15 +1987,18 @@ where 1=1";
                             {
                                 if (mxdp != "*")
                                 {
-                                    double mxdpdouble = Convert.ToDouble(mxdp);
-                                    if (mxdpdouble > 12)
+                                    double mxdpdouble = 0;
+                                    if (isDouble(mxdp, out mxdpdouble))
                                     {
-                                        hy.Add("中间细胞百分比箭头", "↑");
-                                    }
-                                    else if (mxdpdouble < 3)
-                                    {
-                                        hy.Add("中间细胞百分比箭头", "↓");
-                                    }
+                                        if (mxdpdouble > 12)
+                                        {
+                                            hy.Add("中间细胞百分比箭头", "↑");
+                                        }
+                                        else if (mxdpdouble < 3)
+                                        {
+                                            hy.Add("中间细胞百分比箭头", "↓");
+                                        }
+                                    }   
                                 }
                                 hy.Add("中间细胞百分比结果", mxdp);
                             }
@@ -2004,15 +2007,18 @@ where 1=1";
                             {
                                 if (neut != "*")
                                 {
-                                    double neutdouble = Convert.ToDouble(neut);
-                                    if (neutdouble > 7)
+                                    double neutdouble =0;
+                                    if (isDouble(neut, out neutdouble))
                                     {
-                                        hy.Add("中性粒细胞数目箭头", "↑");
-                                    }
-                                    else if (neutdouble < 2)
-                                    {
-                                        hy.Add("中性粒细胞数目箭头", "↓");
-                                    }
+                                        if (neutdouble > 7)
+                                        {
+                                            hy.Add("中性粒细胞数目箭头", "↑");
+                                        }
+                                        else if (neutdouble < 2)
+                                        {
+                                            hy.Add("中性粒细胞数目箭头", "↓");
+                                        }
+                                    } 
                                 }
                                 hy.Add("中性粒细胞数目结果", neut);
                             }
@@ -2021,15 +2027,18 @@ where 1=1";
                             {
                                 if (neutp != "*")
                                 {
-                                    double neutpdouble = Convert.ToDouble(neutp);
-                                    if (neutpdouble > 70)
+                                    double neutpdouble = 0;
+                                    if (isDouble(neutp, out neutpdouble))
                                     {
-                                        hy.Add("中性粒细胞百分比箭头", "↑");
-                                    }
-                                    else if (neutpdouble < 50)
-                                    {
-                                        hy.Add("中性粒细胞百分比箭头", "↓");
-                                    }
+                                        if (neutpdouble > 70)
+                                        {
+                                            hy.Add("中性粒细胞百分比箭头", "↑");
+                                        }
+                                        else if (neutpdouble < 50)
+                                        {
+                                            hy.Add("中性粒细胞百分比箭头", "↓");
+                                        }
+                                    }    
                                 }
                                 hy.Add("中性粒细胞百分比结果", neutp);
                             }
@@ -2038,15 +2047,18 @@ where 1=1";
                             {
                                 if (pct != "*")
                                 {
-                                    double pctdouble = Convert.ToDouble(pct);
-                                    if (pctdouble > 0.4)
+                                    double pctdouble = 0;
+                                    if (isDouble(pct, out pctdouble))
                                     {
-                                        hy.Add("血小板压积箭头", "↑");
-                                    }
-                                    else if (pctdouble < 0.02)
-                                    {
-                                        hy.Add("血小板压积箭头", "↓");
-                                    }
+                                        if (pctdouble > 0.4)
+                                        {
+                                            hy.Add("血小板压积箭头", "↑");
+                                        }
+                                        else if (pctdouble < 0.02)
+                                        {
+                                            hy.Add("血小板压积箭头", "↓");
+                                        }
+                                    }   
                                 }
                                 hy.Add("血小板压积结果", pct);
                             }
@@ -2055,44 +2067,53 @@ where 1=1";
                             {
                                 if (pdw != "*")
                                 {
-                                    double pdwdouble = Convert.ToDouble(pdw);
-                                    if (pdwdouble > 17)
+                                    double pdwdouble = 0;
+                                    if (isDouble(pdw, out pdwdouble))
                                     {
-                                        hy.Add("血小板分布宽度箭头", "↑");
-                                    }
-                                    else if (pdwdouble < 7)
-                                    {
-                                        hy.Add("血小板分布宽度箭头", "↓");
-                                    }
+                                        if (pdwdouble > 17)
+                                        {
+                                            hy.Add("血小板分布宽度箭头", "↑");
+                                        }
+                                        else if (pdwdouble < 7)
+                                        {
+                                            hy.Add("血小板分布宽度箭头", "↓");
+                                        }
+                                    }   
                                 }
                                 hy.Add("血小板分布宽度结果", pdw);
                             }
                             string plt = da.Rows[j]["PLT"].ToString();
                             if (plt != null && !"".Equals(plt))
                             {
-                                double pltdouble = Convert.ToDouble(plt);
-                                if (pltdouble > 300)
+                                double pltdouble = 0;
+                                if (isDouble(plt, out pltdouble))
                                 {
-                                    hy.Add("血小板数目箭头", "↑");
-                                }
-                                else if (pltdouble < 100)
-                                {
-                                    hy.Add("血小板数目箭头", "↓");
-                                }
+                                    if (pltdouble > 300)
+                                    {
+                                        hy.Add("血小板数目箭头", "↑");
+                                    }
+                                    else if (pltdouble < 100)
+                                    {
+                                        hy.Add("血小板数目箭头", "↓");
+                                    }
+                                } 
                                 hy.Add("血小板数目结果", plt);
                             }
                             string rbc = da.Rows[j]["RBC"].ToString();
                             if (rbc != null && !"".Equals(rbc))
                             {
-                                double rbcdouble = Convert.ToDouble(rbc);
-                                if (rbcdouble > 5.5)
+                                double rbcdouble = 0;
+                                if (isDouble(rbc, out rbcdouble))
                                 {
-                                    hy.Add("红细胞数目箭头", "↑");
-                                }
-                                else if (rbcdouble < 3.5)
-                                {
-                                    hy.Add("红细胞数目箭头", "↓");
-                                }
+                                    if (rbcdouble > 5.5)
+                                    {
+                                        hy.Add("红细胞数目箭头", "↑");
+                                    }
+                                    else if (rbcdouble < 3.5)
+                                    {
+                                        hy.Add("红细胞数目箭头", "↓");
+                                    }
+                                } 
                                 hy.Add("红细胞数目结果", rbc);
                             }
                             string rdwcv = da.Rows[j]["RDWCV"].ToString();
@@ -2100,15 +2121,19 @@ where 1=1";
                             {
                                 if (rdwcv != "*")
                                 {
-                                    double rbcdouble = Convert.ToDouble(rdwcv);
-                                    if (rbcdouble > 18)
+                                    double rbcdouble = 0;
+                                    if (isDouble(rdwcv, out rbcdouble))
                                     {
-                                        hy.Add("红细胞分布宽度CV箭头", "↑");
+                                        if (rbcdouble > 18)
+                                        {
+                                            hy.Add("红细胞分布宽度CV箭头", "↑");
+                                        }
+                                        else if (rbcdouble < 11.5)
+                                        {
+                                            hy.Add("红细胞分布宽度CV箭头", "↓");
+                                        }
                                     }
-                                    else if (rbcdouble < 11.5)
-                                    {
-                                        hy.Add("红细胞分布宽度CV箭头", "↓");
-                                    }
+                                        
                                 }
                                 hy.Add("红细胞分布宽度CV结果", rdwcv);
                             }
@@ -2117,30 +2142,38 @@ where 1=1";
                             {
                                 if (rdwsd != "*")
                                 {
-                                    double rdwsddouble = Convert.ToDouble(rdwsd);
-                                    if (rdwsddouble > 56)
+                                    double rdwsddouble = 0;
+                                    if (isDouble(rdwsd, out rdwsddouble))
                                     {
-                                        hy.Add("红细胞分布宽度SD箭头", "↑");
+                                        if (rdwsddouble > 56)
+                                        {
+                                            hy.Add("红细胞分布宽度SD箭头", "↑");
+                                        }
+                                        else if (rdwsddouble < 35)
+                                        {
+                                            hy.Add("红细胞分布宽度SD箭头", "↓");
+                                        }
                                     }
-                                    else if (rdwsddouble < 35)
-                                    {
-                                        hy.Add("红细胞分布宽度SD箭头", "↓");
-                                    }
+                                        
                                 }
                                 hy.Add("红细胞分布宽度SD结果", rdwsd);
                             }
                             string wbc = da.Rows[j]["WBC"].ToString();
                             if (wbc != null && !"".Equals(wbc))
                             {
-                                double wbcdouble = Convert.ToDouble(wbc);
-                                if (wbcdouble > 10)
+                                double wbcdouble = 0;
+                                if (isDouble(wbc, out wbcdouble))
                                 {
-                                    hy.Add("白细胞数目箭头", "↑");
+                                    if (wbcdouble > 10)
+                                    {
+                                        hy.Add("白细胞数目箭头", "↑");
+                                    }
+                                    else if (wbcdouble < 4)
+                                    {
+                                        hy.Add("白细胞数目箭头", "↓");
+                                    }
                                 }
-                                else if (wbcdouble < 4)
-                                {
-                                    hy.Add("白细胞数目箭头", "↓");
-                                }
+                                    
                                 hy.Add("白细胞数目结果", wbc);
                             }
                         }
@@ -2156,26 +2189,34 @@ where 1=1";
                         hy.Add("胆红素结果", da.Rows[0]["BIL"].ToString());
                         hy.Add("蛋白质结果", da.Rows[0]["PRO"].ToString());
                         hy.Add("尿液葡萄糖结果", da.Rows[0]["GLU"].ToString());
-                        double sgdoublee = Convert.ToDouble(da.Rows[0]["SG"].ToString());
-                        if (sgdoublee > 1.025)
+                        double sgdoublee = 0;
+                        if (isDouble(da.Rows[0]["SG"].ToString(), out sgdoublee))
                         {
-                            hy.Add("尿比重箭头", "↑");
+                            if (sgdoublee > 1.025)
+                            {
+                                hy.Add("尿比重箭头", "↑");
+                            }
+                            else if (sgdoublee < 1.015)
+                            {
+                                hy.Add("尿比重箭头", "↓");
+                            }
                         }
-                        else if (sgdoublee < 1.015)
-                        {
-                            hy.Add("尿比重箭头", "↓");
-                        }
+                            
                         hy.Add("尿比重结果", da.Rows[0]["SG"].ToString());
                         hy.Add("隐血结果", da.Rows[0]["BLD"].ToString());
-                        double phdouble = Convert.ToDouble(da.Rows[0]["PH"].ToString());
-                        if (phdouble > 8)
+                        double phdouble = 0;
+                        if (isDouble(da.Rows[0]["PH"].ToString(), out phdouble))
                         {
-                            hy.Add("酸碱度箭头", "↑");
+                            if (phdouble > 8)
+                            {
+                                hy.Add("酸碱度箭头", "↑");
+                            }
+                            else if (phdouble < 4.6)
+                            {
+                                hy.Add("酸碱度箭头", "↓");
+                            }
                         }
-                        else if (phdouble < 4.6)
-                        {
-                            hy.Add("酸碱度箭头", "↓");
-                        }
+                            
                         hy.Add("酸碱度结果", da.Rows[0]["PH"].ToString());
                         hy.Add("维生素C结果", da.Rows[0]["Vc"].ToString());
                         hy.Add("检验1", da.Rows[0]["ZrysNCG"].ToString());
@@ -4574,7 +4615,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 9 || e.ColumnIndex == 10)
+            if (e.ColumnIndex == 9 || e.ColumnIndex == 10 || e.ColumnIndex == 11)
             {
                 string t = e.Value.ToString();
                 if (t == "1")

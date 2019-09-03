@@ -90,46 +90,46 @@ namespace zkhwClient.view.setting
                 logindao.deleteLtdOrganization(xzcode);
                 logindao.deleteUsersBycode(xzcode);
                 //logindao.deleteResidentsBycode(xzcode);
-                logindao.deleteThresholdValue();
+                //logindao.deleteThresholdValue();
 
                 #region  同步阈值信息 
-                DataTable dtThresholdValue = logindao.checkThresholdValue();
-                if (dtThresholdValue.Rows.Count > 0)
-                {
-                    List<thresholdValueBean> listTv = new List<thresholdValueBean>();
-                    for (int i = 0; i < dtThresholdValue.Rows.Count; i++)
-                    {
-                        thresholdValueBean tv = new thresholdValueBean();
-                        tv.id = dtThresholdValue.Rows[i]["id"].ToString();
-                        tv.class_type = dtThresholdValue.Rows[i]["class_type"].ToString();
-                        tv.type = dtThresholdValue.Rows[i]["type"].ToString();
-                        string warning_min = dtThresholdValue.Rows[i]["warning_min"].ToString();
-                        tv.warning_min = warning_min == null || "".Equals(warning_min) ? "0" : warning_min;
-                        string warning_max = dtThresholdValue.Rows[i]["warning_max"].ToString();
-                        tv.warning_max = warning_max == null || "".Equals(warning_max) ? "0" : warning_max;
-                        string threshold_min = dtThresholdValue.Rows[i]["threshold_min"].ToString();
-                        tv.threshold_min = threshold_min == null || "".Equals(threshold_min) ? "0" : threshold_min;
-                        string threshold_max = dtThresholdValue.Rows[i]["threshold_max"].ToString();
-                        tv.threshold_max = threshold_max == null || "".Equals(threshold_max) ? "0" : threshold_max;
-                        tv.create_user = dtThresholdValue.Rows[i]["create_user"].ToString();
-                        tv.create_name = dtThresholdValue.Rows[i]["create_name"].ToString();
-                        string create_time = dtThresholdValue.Rows[i]["create_time"].ToString();
-                        tv.create_time = create_time == null || "".Equals(create_time) ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") : Convert.ToDateTime(create_time).ToString("yyyy-MM-dd HH:mm:ss");
-                        tv.update_user = dtThresholdValue.Rows[i]["update_user"].ToString();
-                        tv.update_name = dtThresholdValue.Rows[i]["update_name"].ToString();
-                        string update_time = dtThresholdValue.Rows[i]["update_time"].ToString();
-                        tv.update_time = update_time == null || "".Equals(update_time) ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") : Convert.ToDateTime(update_time).ToString("yyyy-MM-dd HH:mm:ss");
-                        listTv.Add(tv);
-                    }
-                    if (listTv.Count > 0)
-                    {
-                        bool istrue = logindao.addThresholdValues(listTv);
-                        if (istrue)
-                        {
-                            this.progressBar1.Value = 5;
-                        }
-                    }
-                }
+                //DataTable dtThresholdValue = logindao.checkThresholdValue();
+                //if (dtThresholdValue.Rows.Count > 0)
+                //{
+                //    List<thresholdValueBean> listTv = new List<thresholdValueBean>();
+                //    for (int i = 0; i < dtThresholdValue.Rows.Count; i++)
+                //    {
+                //        thresholdValueBean tv = new thresholdValueBean();
+                //        tv.id = dtThresholdValue.Rows[i]["id"].ToString();
+                //        tv.class_type = dtThresholdValue.Rows[i]["class_type"].ToString();
+                //        tv.type = dtThresholdValue.Rows[i]["type"].ToString();
+                //        string warning_min = dtThresholdValue.Rows[i]["warning_min"].ToString();
+                //        tv.warning_min = warning_min == null || "".Equals(warning_min) ? "0" : warning_min;
+                //        string warning_max = dtThresholdValue.Rows[i]["warning_max"].ToString();
+                //        tv.warning_max = warning_max == null || "".Equals(warning_max) ? "0" : warning_max;
+                //        string threshold_min = dtThresholdValue.Rows[i]["threshold_min"].ToString();
+                //        tv.threshold_min = threshold_min == null || "".Equals(threshold_min) ? "0" : threshold_min;
+                //        string threshold_max = dtThresholdValue.Rows[i]["threshold_max"].ToString();
+                //        tv.threshold_max = threshold_max == null || "".Equals(threshold_max) ? "0" : threshold_max;
+                //        tv.create_user = dtThresholdValue.Rows[i]["create_user"].ToString();
+                //        tv.create_name = dtThresholdValue.Rows[i]["create_name"].ToString();
+                //        string create_time = dtThresholdValue.Rows[i]["create_time"].ToString();
+                //        tv.create_time = create_time == null || "".Equals(create_time) ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") : Convert.ToDateTime(create_time).ToString("yyyy-MM-dd HH:mm:ss");
+                //        tv.update_user = dtThresholdValue.Rows[i]["update_user"].ToString();
+                //        tv.update_name = dtThresholdValue.Rows[i]["update_name"].ToString();
+                //        string update_time = dtThresholdValue.Rows[i]["update_time"].ToString();
+                //        tv.update_time = update_time == null || "".Equals(update_time) ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") : Convert.ToDateTime(update_time).ToString("yyyy-MM-dd HH:mm:ss");
+                //        listTv.Add(tv);
+                //    }
+                //    if (listTv.Count > 0)
+                //    {
+                //        bool istrue = logindao.addThresholdValues(listTv);
+                //        if (istrue)
+                //        {
+                //            this.progressBar1.Value = 5;
+                //        }
+                //    }
+                //}
                 #endregion
 
                 #region 同步云平台机构信息

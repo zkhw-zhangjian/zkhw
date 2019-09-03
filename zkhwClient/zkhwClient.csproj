@@ -634,6 +634,12 @@
     <Compile Include="view\setting\frmEmpower.Designer.cs">
       <DependentUpon>frmEmpower.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\setting\frmThresholdSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\setting\frmThresholdSetting.Designer.cs">
+      <DependentUpon>frmThresholdSetting.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\setting\parameterSetting.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1048,6 +1054,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\setting\frmEmpower.resx">
       <DependentUpon>frmEmpower.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\setting\frmThresholdSetting.resx">
+      <DependentUpon>frmThresholdSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\setting\parameterSetting.resx">
       <DependentUpon>parameterSetting.cs</DependentUpon>

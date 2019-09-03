@@ -95,7 +95,7 @@ namespace zkhwClient.dao
         public DataTable queryhealthCheckupAndAge(string id)
         {
             DataSet ds = new DataSet();
-            string sql = "select p.*,r.age from physical_examination_record p INNER JOIN resident_base_info r on p.id_number=r.id_number  where p.id = '" + id + "'";
+            string sql = "select p.*,r.age,r.is_hypertension ,r.is_diabetes,r.is_psychosis,r.is_tuberculosis,r.is_poor,r.is_signing,r.id as resident_base_info_id from physical_examination_record p INNER JOIN resident_base_info r on p.id_number=r.id_number  where p.id = '" + id + "'";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -146,6 +146,30 @@ namespace zkhwClient.dao
             return ds.Tables[0];
         }
         //添加健康体检表  第一页
+        public string GetaddPhysicalExaminationRecordSql1(physical_examination_recordBean per)
+        { 
+            String sql = @"update physical_examination_record set symptom='" + per.symptom + "',symptom_other='" + per.symptom_other + "',base_temperature='"
+                + per.base_temperature + "',base_heartbeat='" + per.base_heartbeat + "',base_respiratory='" + per.base_respiratory + "',base_blood_pressure_left_high='"
+                + per.base_blood_pressure_left_high + "',base_blood_pressure_left_low='" + per.base_blood_pressure_left_low + "',base_blood_pressure_right_high='"
+                + per.base_blood_pressure_right_high + "',base_blood_pressure_right_low= '" + per.base_blood_pressure_right_low + "',base_height='"
+                + per.base_height + "',base_weight='" + per.base_weight + "',base_waist='" + per.base_waist + "',base_bmi= '" + per.base_bmi
+                + "',base_health_estimate= '" + per.base_health_estimate + "',base_selfcare_estimate= '" + per.base_selfcare_estimate + "',base_cognition_estimate='"
+                + per.base_cognition_estimate + "',base_cognition_score= '" + per.base_cognition_score + "',base_feeling_estimate='" + per.base_feeling_estimate
+                + "',base_feeling_score='" + per.base_feeling_score + "',base_doctor='" + per.base_doctor + "',lifeway_exercise_frequency='" + per.lifeway_exercise_frequency
+                + "',lifeway_exercise_time='" + per.lifeway_exercise_time + "',lifeway_exercise_year='" + per.lifeway_exercise_year + "',lifeway_exercise_type='" + per.lifeway_exercise_type
+                + "',lifeway_diet='" + per.lifeway_diet + "',lifeway_smoke_status='" + per.lifeway_smoke_status + "',lifeway_smoke_number='" + per.lifeway_smoke_number
+                + "',lifeway_smoke_startage='" + per.lifeway_smoke_startage + "',lifeway_smoke_endage='" + per.lifeway_smoke_endage + "',lifeway_drink_status='" + per.lifeway_drink_status
+                + "',lifeway_drink_number='" + per.lifeway_drink_number + "',lifeway_drink_stop='" + per.lifeway_drink_stop + "',lifeway_drink_stopage='" + per.lifeway_drink_stopage
+                + "',lifeway_drink_startage='" + per.lifeway_drink_startage + "',lifeway_drink_oneyear='" + per.lifeway_drink_oneyear + "',lifeway_drink_type='" + per.lifeway_drink_type
+                + "',lifeway_drink_other='" + per.lifeway_drink_other + "',lifeway_occupational_disease='" + per.lifeway_occupational_disease + "',lifeway_job='" + per.lifeway_job
+                + "',lifeway_job_period='" + per.lifeway_job_period + "',lifeway_hazardous_dust='" + per.lifeway_hazardous_dust + "',lifeway_dust_preventive='" + per.lifeway_dust_preventive
+                + "',lifeway_hazardous_radiation='" + per.lifeway_hazardous_radiation + "',lifeway_radiation_preventive='" + per.lifeway_radiation_preventive + "',lifeway_hazardous_physical='"
+                + per.lifeway_hazardous_physical + "',lifeway_physical_preventive='" + per.lifeway_physical_preventive + "',lifeway_hazardous_chemical='" + per.lifeway_hazardous_chemical
+                + "',lifeway_chemical_preventive='" + per.lifeway_chemical_preventive + "',lifeway_hazardous_other='" + per.lifeway_hazardous_other + "',lifeway_other_preventive='" + per.lifeway_other_preventive
+                + "',lifeway_doctor='" + per.lifeway_doctor + "',upload_status =0 where id = '" + per.id + "'";
+            return sql;
+        }
+
         public bool addPhysicalExaminationRecord1(physical_examination_recordBean per)
         {
             int ret = 0;

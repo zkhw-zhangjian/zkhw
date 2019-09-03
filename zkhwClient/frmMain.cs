@@ -713,6 +713,16 @@ namespace zkhwClient
                 frm._EditType = 0;
                 frm.ShowDialog();
             }
+            else if (tag == "生化血常规范围")
+            {
+                frmThresholdSetting frm = new frmThresholdSetting();
+                frm.TopLevel = false;
+                frm.Dock = DockStyle.Fill;
+                frm.FormBorderStyle = FormBorderStyle.None;
+                this.panel1.Controls.Clear();
+                this.panel1.Controls.Add(frm);
+                frm.Show();
+            }
             else if (tag == "体检设备说明书")
             {   //使用帮助模块 
                 OpenPdf(Application.StartupPath+ "\\pdf\\仪器配置说明.docx");
@@ -2597,7 +2607,8 @@ namespace zkhwClient
                             case "ALT": sh.ALT = sHL7Array[5]; break;
                             case "AST": sh.AST = sHL7Array[5]; break;
                             case "CHO": sh.CHO = sHL7Array[5]; break;
-                            case "CREA": sh.Crea = sHL7Array[5]; break;
+                            case "CRE": sh.Crea = sHL7Array[5]; break;
+                            //case "CREA": sh.Crea = sHL7Array[5]; break;
                             case "DBIL": sh.DBIL = sHL7Array[5]; break;
                             case "GGT": sh.GGT = sHL7Array[5]; break;
                             case "GLU": sh.GLU = sHL7Array[5]; break;

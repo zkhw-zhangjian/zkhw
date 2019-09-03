@@ -20,6 +20,9 @@ namespace zkhwClient.bean
         public string update_user { get; set; }
         public string update_name { get; set; }
         public string update_time { get; set; }
+        public string chinaName { get; set; }
+        public string CheckMethod { get; set; }
+        public string unit { get; set; }
 
     }
 }

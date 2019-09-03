@@ -58,6 +58,7 @@
             this.系统日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.中间库位置设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuRuanJianShouQuan = new System.Windows.Forms.ToolStripMenuItem();
+            this.生化血常规范围ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.数据分析ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.使用情况统计ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.使用帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -304,7 +305,8 @@
             this.设备管理ToolStripMenuItem,
             this.系统日志ToolStripMenuItem,
             this.中间库位置设置ToolStripMenuItem,
-            this.menuRuanJianShouQuan});
+            this.menuRuanJianShouQuan,
+            this.生化血常规范围ToolStripMenuItem});
             this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
             this.设置ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.设置ToolStripMenuItem.Text = "设置";
@@ -313,32 +315,39 @@
             // 基本信息设置ToolStripMenuItem
             // 
             this.基本信息设置ToolStripMenuItem.Name = "基本信息设置ToolStripMenuItem";
-            this.基本信息设置ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.基本信息设置ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.基本信息设置ToolStripMenuItem.Text = "基本信息设置";
             // 
             // 设备管理ToolStripMenuItem
             // 
             this.设备管理ToolStripMenuItem.Name = "设备管理ToolStripMenuItem";
-            this.设备管理ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.设备管理ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.设备管理ToolStripMenuItem.Text = "设备管理";
             // 
             // 系统日志ToolStripMenuItem
             // 
             this.系统日志ToolStripMenuItem.Name = "系统日志ToolStripMenuItem";
-            this.系统日志ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.系统日志ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.系统日志ToolStripMenuItem.Text = "系统日志";
             // 
             // 中间库位置设置ToolStripMenuItem
             // 
             this.中间库位置设置ToolStripMenuItem.Name = "中间库位置设置ToolStripMenuItem";
-            this.中间库位置设置ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.中间库位置设置ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.中间库位置设置ToolStripMenuItem.Text = "参数设置";
             // 
             // menuRuanJianShouQuan
             // 
             this.menuRuanJianShouQuan.Name = "menuRuanJianShouQuan";
-            this.menuRuanJianShouQuan.Size = new System.Drawing.Size(148, 22);
+            this.menuRuanJianShouQuan.Size = new System.Drawing.Size(160, 22);
             this.menuRuanJianShouQuan.Text = "软件授权";
+            // 
+            // 生化血常规范围ToolStripMenuItem
+            // 
+            this.生化血常规范围ToolStripMenuItem.Name = "生化血常规范围ToolStripMenuItem";
+            this.生化血常规范围ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.生化血常规范围ToolStripMenuItem.Tag = "0";
+            this.生化血常规范围ToolStripMenuItem.Text = "生化血常规范围";
             // 
             // 数据分析ToolStripMenuItem
             // 
@@ -813,6 +822,7 @@
         private System.Windows.Forms.ToolStripMenuItem 健康扶贫服务ToolStripMenuItem;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem menuRuanJianShouQuan;
+        private System.Windows.Forms.ToolStripMenuItem 生化血常规范围ToolStripMenuItem;
     }
 }
 

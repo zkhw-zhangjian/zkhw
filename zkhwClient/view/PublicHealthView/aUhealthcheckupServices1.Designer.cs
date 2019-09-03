@@ -31,6 +31,13 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.checkBox41 = new System.Windows.Forms.CheckBox();
+            this.checkBox40 = new System.Windows.Forms.CheckBox();
+            this.checkBox39 = new System.Windows.Forms.CheckBox();
+            this.checkBox38 = new System.Windows.Forms.CheckBox();
+            this.checkBox37 = new System.Windows.Forms.CheckBox();
+            this.textBox52 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox120 = new System.Windows.Forms.TextBox();
@@ -157,7 +164,6 @@
             this.textBox80 = new System.Windows.Forms.TextBox();
             this.textBox83 = new System.Windows.Forms.TextBox();
             this.textBox84 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox51 = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
@@ -254,6 +260,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.checkBox42 = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel14.SuspendLayout();
@@ -286,16 +293,16 @@
             this.textBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox1.Location = new System.Drawing.Point(141, 44);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(315, 30);
+            this.textBox1.Size = new System.Drawing.Size(173, 30);
             this.textBox1.TabIndex = 1;
             // 
             // textBox2
             // 
             this.textBox2.Enabled = false;
             this.textBox2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox2.Location = new System.Drawing.Point(657, 44);
+            this.textBox2.Location = new System.Drawing.Point(435, 44);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(642, 30);
+            this.textBox2.Size = new System.Drawing.Size(257, 30);
             this.textBox2.TabIndex = 3;
             // 
             // panel1
@@ -304,13 +311,19 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.textBox10);
+            this.panel1.Controls.Add(this.checkBox41);
+            this.panel1.Controls.Add(this.checkBox40);
+            this.panel1.Controls.Add(this.checkBox39);
+            this.panel1.Controls.Add(this.checkBox38);
+            this.panel1.Controls.Add(this.checkBox37);
+            this.panel1.Controls.Add(this.textBox52);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.textBox120);
             this.panel1.Controls.Add(this.textBox119);
             this.panel1.Controls.Add(this.textBox118);
             this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Controls.Add(this.textBox10);
             this.panel1.Controls.Add(this.textBox6);
             this.panel1.Controls.Add(this.textBox51);
             this.panel1.Controls.Add(this.textBox9);
@@ -325,10 +338,93 @@
             this.panel1.Controls.Add(this.dateTimePicker1);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Controls.Add(this.checkBox42);
             this.panel1.Location = new System.Drawing.Point(5, 4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1320, 699);
             this.panel1.TabIndex = 6;
+            // 
+            // textBox10
+            // 
+            this.textBox10.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox10.Location = new System.Drawing.Point(141, 104);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.ReadOnly = true;
+            this.textBox10.Size = new System.Drawing.Size(1160, 30);
+            this.textBox10.TabIndex = 80;
+            this.textBox10.Text = "检查项目";
+            this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // checkBox41
+            // 
+            this.checkBox41.AutoSize = true;
+            this.checkBox41.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox41.Location = new System.Drawing.Point(584, 77);
+            this.checkBox41.Name = "checkBox41";
+            this.checkBox41.Size = new System.Drawing.Size(91, 24);
+            this.checkBox41.TabIndex = 93;
+            this.checkBox41.Tag = "1";
+            this.checkBox41.Text = "贫困户";
+            this.checkBox41.UseVisualStyleBackColor = true;
+            // 
+            // checkBox40
+            // 
+            this.checkBox40.AutoSize = true;
+            this.checkBox40.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox40.Location = new System.Drawing.Point(474, 77);
+            this.checkBox40.Name = "checkBox40";
+            this.checkBox40.Size = new System.Drawing.Size(91, 24);
+            this.checkBox40.TabIndex = 92;
+            this.checkBox40.Tag = "9";
+            this.checkBox40.Text = "结核病";
+            this.checkBox40.UseVisualStyleBackColor = true;
+            // 
+            // checkBox39
+            // 
+            this.checkBox39.AutoSize = true;
+            this.checkBox39.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox39.Location = new System.Drawing.Point(364, 77);
+            this.checkBox39.Name = "checkBox39";
+            this.checkBox39.Size = new System.Drawing.Size(91, 24);
+            this.checkBox39.TabIndex = 91;
+            this.checkBox39.Tag = "8";
+            this.checkBox39.Text = "精神病";
+            this.checkBox39.UseVisualStyleBackColor = true;
+            // 
+            // checkBox38
+            // 
+            this.checkBox38.AutoSize = true;
+            this.checkBox38.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox38.Location = new System.Drawing.Point(254, 77);
+            this.checkBox38.Name = "checkBox38";
+            this.checkBox38.Size = new System.Drawing.Size(91, 24);
+            this.checkBox38.TabIndex = 90;
+            this.checkBox38.Tag = "3";
+            this.checkBox38.Text = "糖尿病";
+            this.checkBox38.UseVisualStyleBackColor = true;
+            // 
+            // checkBox37
+            // 
+            this.checkBox37.AutoSize = true;
+            this.checkBox37.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox37.Location = new System.Drawing.Point(144, 77);
+            this.checkBox37.Name = "checkBox37";
+            this.checkBox37.Size = new System.Drawing.Size(91, 24);
+            this.checkBox37.TabIndex = 89;
+            this.checkBox37.Tag = "2";
+            this.checkBox37.Text = "高血压";
+            this.checkBox37.UseVisualStyleBackColor = true;
+            // 
+            // textBox52
+            // 
+            this.textBox52.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox52.Location = new System.Drawing.Point(2, 74);
+            this.textBox52.Name = "textBox52";
+            this.textBox52.ReadOnly = true;
+            this.textBox52.Size = new System.Drawing.Size(130, 30);
+            this.textBox52.TabIndex = 88;
+            this.textBox52.Text = "标签";
+            this.textBox52.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // button2
             // 
@@ -1832,17 +1928,6 @@
             this.textBox84.Text = "坚持锻炼时间";
             this.textBox84.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // textBox10
-            // 
-            this.textBox10.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox10.Location = new System.Drawing.Point(141, 104);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.ReadOnly = true;
-            this.textBox10.Size = new System.Drawing.Size(1160, 30);
-            this.textBox10.TabIndex = 80;
-            this.textBox10.Text = "检查项目";
-            this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // textBox6
             // 
             this.textBox6.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -1858,18 +1943,18 @@
             // 
             this.textBox51.Enabled = false;
             this.textBox51.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox51.Location = new System.Drawing.Point(657, 74);
+            this.textBox51.Location = new System.Drawing.Point(1094, 44);
             this.textBox51.Name = "textBox51";
-            this.textBox51.Size = new System.Drawing.Size(642, 30);
+            this.textBox51.Size = new System.Drawing.Size(205, 30);
             this.textBox51.TabIndex = 78;
             // 
             // textBox9
             // 
             this.textBox9.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox9.Location = new System.Drawing.Point(457, 74);
+            this.textBox9.Location = new System.Drawing.Point(962, 44);
             this.textBox9.Name = "textBox9";
             this.textBox9.ReadOnly = true;
-            this.textBox9.Size = new System.Drawing.Size(194, 30);
+            this.textBox9.Size = new System.Drawing.Size(129, 30);
             this.textBox9.TabIndex = 63;
             this.textBox9.Text = "*责任医生";
             this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1877,10 +1962,10 @@
             // textBox8
             // 
             this.textBox8.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox8.Location = new System.Drawing.Point(2, 74);
+            this.textBox8.Location = new System.Drawing.Point(698, 44);
             this.textBox8.Name = "textBox8";
             this.textBox8.ReadOnly = true;
-            this.textBox8.Size = new System.Drawing.Size(130, 30);
+            this.textBox8.Size = new System.Drawing.Size(102, 30);
             this.textBox8.TabIndex = 62;
             this.textBox8.Text = "体检日期";
             this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1888,10 +1973,10 @@
             // textBox4
             // 
             this.textBox4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox4.Location = new System.Drawing.Point(457, 44);
+            this.textBox4.Location = new System.Drawing.Point(318, 44);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(194, 30);
+            this.textBox4.Size = new System.Drawing.Size(116, 30);
             this.textBox4.TabIndex = 61;
             this.textBox4.Text = "健康档案号";
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -2650,7 +2735,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 123);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1301, 108);
+            this.groupBox3.Size = new System.Drawing.Size(1273, 108);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
@@ -3031,10 +3116,22 @@
             this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
             this.dateTimePicker1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(141, 74);
+            this.dateTimePicker1.Location = new System.Drawing.Point(802, 44);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(316, 30);
+            this.dateTimePicker1.Size = new System.Drawing.Size(155, 30);
             this.dateTimePicker1.TabIndex = 6;
+            // 
+            // checkBox42
+            // 
+            this.checkBox42.AutoSize = true;
+            this.checkBox42.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox42.Location = new System.Drawing.Point(694, 77);
+            this.checkBox42.Name = "checkBox42";
+            this.checkBox42.Size = new System.Drawing.Size(70, 24);
+            this.checkBox42.TabIndex = 94;
+            this.checkBox42.Tag = "1";
+            this.checkBox42.Text = "签约";
+            this.checkBox42.UseVisualStyleBackColor = true;
             // 
             // aUhealthcheckupServices1
             // 
@@ -3326,5 +3423,12 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        public System.Windows.Forms.CheckBox checkBox37;
+        private System.Windows.Forms.TextBox textBox52;
+        public System.Windows.Forms.CheckBox checkBox41;
+        public System.Windows.Forms.CheckBox checkBox40;
+        public System.Windows.Forms.CheckBox checkBox39;
+        public System.Windows.Forms.CheckBox checkBox38;
+        public System.Windows.Forms.CheckBox checkBox42;
     }
 }
