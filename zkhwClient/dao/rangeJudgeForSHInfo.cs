@@ -21,14 +21,14 @@ namespace zkhwClient.dao
             warning_max = 0;
             threshold_min = 0;
             threshold_max = 0;
-            DataRow[] dralt = dttv.Select("type='"+ typevalue + "'");
-            if(dralt !=null)
+            DataRow[] dr = dttv.Select("type='"+ typevalue + "'");
+            if(dr !=null)
             {
-                warning_min = double.Parse(dralt[0]["warning_min"].ToString());
-                warning_max = double.Parse(dralt[0]["warning_max"].ToString());
+                warning_min = double.Parse(dr[0]["warning_min"].ToString());
+                warning_max = double.Parse(dr[0]["warning_max"].ToString());
 
-                threshold_min = double.Parse(dralt[0]["threshold_min"].ToString());
-                threshold_max = double.Parse(dralt[0]["threshold_max"].ToString());
+                threshold_min = double.Parse(dr[0]["threshold_min"].ToString());
+                threshold_max = double.Parse(dr[0]["threshold_max"].ToString());
             }
         }
         public static int GetResultSh(string typeValue,string strvalue)
@@ -58,6 +58,34 @@ namespace zkhwClient.dao
             return _result;
         }
          
-
+        public static string GetItemResultForValue(string typeValue, string strvalue)
+        {
+            string _result = "";
+            if (strvalue != "" && strvalue != "*")
+            {
+                double dblvalue = 0;
+                bool a = double.TryParse(strvalue, out dblvalue);
+                if (a == true)
+                { 
+                    DataRow[] dr = dttv.Select("type='" + typeValue + "'");
+                    if (dr != null)
+                    {
+                        double warning_min = double.Parse(dr[0]["warning_min"].ToString());
+                        double warning_max = double.Parse(dr[0]["warning_max"].ToString());
+                        string unit = dr[0]["unit"].ToString();
+                        string chinaName = dr[0]["chinaName"].ToString();
+                        if (dblvalue< warning_min)
+                        {
+                            _result = chinaName + "偏低：" + dblvalue.ToString() + " "+unit;
+                        }
+                        else if(dblvalue> warning_max)
+                        {
+                            _result = chinaName + "偏高：" + dblvalue.ToString() + " " + unit;
+                        }
+                    } 
+                }
+            }
+            return _result;
+        }
     }
 }

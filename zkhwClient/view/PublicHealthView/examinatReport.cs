@@ -1197,7 +1197,7 @@ where 1=1";
             }
             return tishi;
         }
-         
+          
         private Document PdfProcessing(string lx, DataRow data, string barcode)
         {
             DateTime date = DateTime.Now;
@@ -2836,54 +2836,44 @@ where 1=1";
                 case "结果":
                     doc = new Document(@str + $"/up/template/结果.doc");
                     builder = new DocumentBuilder(doc);
-                    var jg = new Dictionary<string, string>();
-
+                    var jg = new Dictionary<string, string>(); 
                     if (jkdata != null && jkdata.Rows.Count > 0)
                     {
+                        grjdDao grjddao1 = new grjdDao();
+                        DataTable dtSh1= grjddao1.checkThresholdValues("生化");
+                        DataTable dtXcg1 = grjddao1.checkThresholdValues("血常规");
+                        rangeJudgeForSHInfo.dttv = dtSh1;
+                        rangeJudgeForXCGInfo.dttv = dtXcg1;
                         for (int j = 0; j < jkdata.Rows.Count; j++)
                         {
+
                             string sm = string.Empty;
                             int flagxcg = 0;
                             //jktj.Add("血红蛋白", 
                             string blood_hemoglobin = jkdata.Rows[j]["blood_hemoglobin"].ToString();
-                            if (!string.IsNullOrWhiteSpace(blood_hemoglobin))
+                            string tmp=rangeJudgeForXCGInfo.GetItemResultForValue("HGB", blood_hemoglobin);
+                            if(tmp !="")
                             {
-                                if (Convert.ToDouble(blood_hemoglobin) < 110)
-                                {
-                                    sm += "血红蛋白值偏低：" + blood_hemoglobin + " g/L   ";
-                                    flagxcg = 1;
-                                }
-                                else if (Convert.ToDouble(blood_hemoglobin) > 160)
-                                {
-                                    sm += "血红蛋白偏高：" + blood_hemoglobin + " g/L   ";
-                                    flagxcg = 1;
-                                }
+                                sm += tmp;
+                                flagxcg = 1;
                             }
+                            
                             //jktj.Add("血小板", 
                             string blood_platelet = jkdata.Rows[j]["blood_platelet"].ToString();
-                            if (!string.IsNullOrWhiteSpace(blood_platelet))
+                            tmp = rangeJudgeForXCGInfo.GetItemResultForValue("PLT", blood_platelet);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(blood_platelet) < 100)
-                                {
-                                    sm += "血小板值偏低：" + blood_platelet + " mmol/L   ";
-                                    flagxcg = 1;
-                                }
-                                else if (Convert.ToDouble(blood_platelet) > 300)
-                                {
-                                    sm += "血小板偏高：" + blood_platelet + " mmol/L   ";
-                                    flagxcg = 1;
-                                }
-                            }
+                                sm += tmp;
+                                flagxcg = 1;
+                            } 
                             //jktj.Add("白细胞", 
                             string blood_leukocyte = jkdata.Rows[j]["blood_leukocyte"].ToString();
-                            if (!string.IsNullOrWhiteSpace(blood_leukocyte))
+                            tmp = rangeJudgeForXCGInfo.GetItemResultForValue("WBC", blood_leukocyte);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(blood_leukocyte) > 10)
-                                {
-                                    sm += "白细胞偏高：" + blood_leukocyte + " CELL/μL   ";
-                                    flagxcg = 1;
-                                }
-                            }
+                                sm += tmp;
+                                flagxcg = 1;
+                            } 
                             if (flagxcg == 1) sm += "\r\n";
                             int flagncg = 0;
                             //jktj.Add("尿蛋白", 
@@ -2931,165 +2921,115 @@ where 1=1";
                             //jktj.Add("空腹血糖1", 
                             int bgm = 0;
                             string blood_glucose_mmol = jkdata.Rows[j]["blood_glucose_mmol"].ToString();
-                            if (!string.IsNullOrWhiteSpace(blood_glucose_mmol))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("GLU", blood_glucose_mmol);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(blood_glucose_mmol) > 6.1)
-                                {
-                                    sm += @"血糖值偏高：" + blood_glucose_mmol + "mmol/L   ";
-                                    bgm = 1;
-                                    flagsh = 1;
-                                }
-                                else if (Convert.ToDouble(blood_glucose_mmol) < 3.9)
-                                {
-                                    sm += @"血糖值偏低：" + blood_glucose_mmol + "mmol/L   ";
-                                    bgm = 1;
-                                    flagsh = 1;
-                                }
+                                sm += tmp;
+                                bgm = 1;
+                                flagsh = 1;
                             }
+                             
                             //jktj.Add("血清谷丙转氨酶", 
                             string sgft = jkdata.Rows[j]["sgft"].ToString();
-                            if (!string.IsNullOrWhiteSpace(sgft))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("ALT", sgft);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(sgft) > 40)
-                                {
-                                    sm += @"血清谷丙转氨酶值偏高：" + sgft + "u/l   ";
-                                    flagsh = 1;
-                                }
-                            }
+                                sm += tmp; 
+                                flagsh = 1;
+                            } 
                             //jktj.Add("血清谷草转氨酶",
                             string ast = jkdata.Rows[j]["ast"].ToString();
-                            if (!string.IsNullOrWhiteSpace(ast))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("AST", ast);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(ast) > 40)
-                                {
-                                    sm += @"血清谷草转氨酶值偏高：" + ast + "u/l   ";
-                                    flagsh = 1;
-                                }
-                            }
+                                sm += tmp;
+                                flagsh = 1;
+                            } 
                             //jktj.Add("白蛋白",
                             string albumin = jkdata.Rows[j]["albumin"].ToString();
-                            if (!string.IsNullOrWhiteSpace(albumin))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("ALB", albumin);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(albumin) > 54)
-                                {
-                                    sm += @"白蛋白值偏高：" + albumin + "g/l   ";
-                                    flagsh = 1;
-                                }
-                                else if (Convert.ToDouble(albumin) < 34)
-                                {
-                                    sm += @"白蛋白值偏低：" + albumin + "g/l   ";
-                                    flagsh = 1;
-                                }
-                            }
+                                sm += tmp;
+                                flagsh = 1;
+                            } 
                             //jktj.Add("总胆红素", 
                             string total_bilirubin = jkdata.Rows[j]["total_bilirubin"].ToString();
-                            if (!string.IsNullOrWhiteSpace(total_bilirubin))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("TBIL", total_bilirubin);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(total_bilirubin) > 20)
-                                {
-                                    sm += @"总胆红素值偏高：" + total_bilirubin + "umol/l   ";
-                                    flagsh = 1;
-                                }
-                                else if (Convert.ToDouble(total_bilirubin) < 2)
-                                {
-                                    sm += @"总胆红素值偏低：" + total_bilirubin + "umol/l   ";
-                                    flagsh = 1;
-                                }
-                            }
+                                sm += tmp;
+                                flagsh = 1;
+                            } 
+                             
                             //jktj.Add("直接胆红素", 
                             string conjugated_bilirubin = jkdata.Rows[j]["conjugated_bilirubin"].ToString();
-                            if (!string.IsNullOrWhiteSpace(conjugated_bilirubin))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("DBIL", conjugated_bilirubin);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(conjugated_bilirubin) > 6.8)
-                                {
-                                    sm += @"直接胆红素值偏高：" + conjugated_bilirubin + "umol/l   ";
-                                    flagsh = 1;
-                                }
-                                else if (Convert.ToDouble(conjugated_bilirubin) < 1.7)
-                                {
-                                    sm += @"直接红素值偏低：" + conjugated_bilirubin + "umol/l   ";
-                                    flagsh = 1;
-                                }
-                            }
+                                sm += tmp;
+                                flagsh = 1;
+                            } 
 
                             //jktj.Add("血清肌酐", 
                             string scr = jkdata.Rows[j]["scr"].ToString();
-                            if (!string.IsNullOrWhiteSpace(scr))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("CREA", scr);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(scr) > 115)
-                                {
-                                    sm += @"肌酐值偏高：" + scr + "umol/l   ";
-                                    flagsh = 1;
-                                }
-                            }
+                                sm += tmp;
+                                flagsh = 1;
+                            } 
                             //jktj.Add("尿素", 
                             string blood_urea = jkdata.Rows[j]["blood_urea"].ToString();
-                            if (!string.IsNullOrWhiteSpace(blood_urea))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("UREA", blood_urea);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(blood_urea) > 8.2)
-                                {
-                                    sm += @"尿素值偏高：" + scr + "umol/l   ";
-                                    flagsh = 1;
-                                }
-                                else if (Convert.ToDouble(blood_urea) < 1.7)
-                                {
-                                    sm += @"尿素值偏低：" + blood_urea + "umol/l   ";
-                                    flagsh = 1;
-                                }
-                            }
+                                sm += tmp;
+                                flagsh = 1;
+                            } 
                             //jktj.Add("总胆固醇", 
                             string tc = jkdata.Rows[j]["tc"].ToString();
                             //jktj.Add("甘油三酯", 
                             string tg = jkdata.Rows[j]["tg"].ToString();
                             int flg = 0;
-                            if (!string.IsNullOrWhiteSpace(tc))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("CHO", tc);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(tc) > 5.2)
+                                if(tmp.IndexOf("偏高")>=0)
                                 {
                                     flg = 1;
-                                    sm += "胆固醇值偏高:" + tc + " " + "mmol/l";
+                                    sm += tmp;
                                     flagsh = 1;
-                                }
+                                } 
                             }
-                            if (!string.IsNullOrWhiteSpace(tg))
+
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("TG", tg);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(tg) > 1.7)
+                                if (tmp.IndexOf("偏高") >= 0)
                                 {
                                     flg = 1;
-                                    sm += "甘油三酯值偏高:" + tg + " " + "mmol/l";
+                                    sm += tmp;
                                     flagsh = 1;
                                 }
-                            }
+                            } 
                             //jktj.Add("低密度脂蛋白", 
                             string ldl = jkdata.Rows[j]["ldl"].ToString();
-                            if (!string.IsNullOrWhiteSpace(ldl))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("LDLC", ldl);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(ldl) > 3.9)
-                                {
-                                    sm += @"低密度脂蛋白值偏高：" + ldl + "mmol/l   ";
-                                    flagsh = 1;
-                                }
-                                else if (Convert.ToDouble(ldl) < 1.5)
-                                {
-                                    sm += @"低密度脂蛋白值偏低：" + ldl + "mmol/l   ";
-                                    flagsh = 1;
-                                }
+                                sm += tmp;
+                                flagsh = 1;
                             }
+                            
                             //jktj.Add("高密度脂蛋白", 
                             string hdl = jkdata.Rows[j]["hdl"].ToString();
-                            if (!string.IsNullOrWhiteSpace(hdl))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("HDLC", hdl);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(hdl) > 1.9)
-                                {
-                                    sm += @"高密度脂蛋白值偏高：" + hdl + "mmol/l   ";
-                                    flagsh = 1;
-                                }
-                                else if (Convert.ToDouble(hdl) < 0.9)
-                                {
-                                    sm += @"高密度脂蛋白值偏低：" + hdl + "mmol/l   ";
-                                    flagsh = 1;
-                                }
-                            }
+                                sm += tmp;
+                                flagsh = 1;
+                            } 
                             if (flagsh == 1) sm += "\r\n";
 
                             int gyyfiag = 0;

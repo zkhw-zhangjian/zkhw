@@ -59,5 +59,36 @@ namespace zkhwClient.dao
             }
             return _result;
         }
+
+
+        public static string GetItemResultForValue(string typeValue, string strvalue)
+        {
+            string _result = "";
+            if (strvalue != "" && strvalue != "*")
+            {
+                double dblvalue = 0;
+                bool a = double.TryParse(strvalue, out dblvalue);
+                if (a == true)
+                {
+                    DataRow[] dr = dttv.Select("type='" + typeValue + "'");
+                    if (dr != null)
+                    {
+                        double warning_min = double.Parse(dr[0]["warning_min"].ToString());
+                        double warning_max = double.Parse(dr[0]["warning_max"].ToString());
+                        string unit = dr[0]["unit"].ToString();
+                        string chinaName = dr[0]["chinaName"].ToString();
+                        if (dblvalue < warning_min)
+                        {
+                            _result = chinaName + "偏低：" + dblvalue.ToString() + " " + unit;
+                        }
+                        else if (dblvalue > warning_max)
+                        {
+                            _result = chinaName + "偏高：" + dblvalue.ToString() + " " + unit;
+                        }
+                    }
+                }
+            }
+            return _result;
+        }
     }
 }
