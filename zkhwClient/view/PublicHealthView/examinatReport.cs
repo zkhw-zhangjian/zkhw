@@ -1554,11 +1554,7 @@ where 1=1";
                     hy.Add("生日", data["birthday"].ToString());
                     hy.Add("生日1", data["birthday"].ToString());
                     hy.Add("身份证号", data["id_number"].ToString());
-                    hy.Add("身份证号1", data["id_number"].ToString());
-                    //hy.Add("检验", basicInfoSettings.sh);
-                    //hy.Add("检验1", basicInfoSettings.ncg);
-                    //hy.Add("地址", data["address"].ToString());
-                    //hy.Add("地址1", data["address"].ToString());
+                    hy.Add("身份证号1", data["id_number"].ToString()); 
 
                     #region 心电图
                     DataSet hyxdts = DbHelperMySQL.Query($"select * from zkhw_tj_xdt where id_number='{data["id_number"].ToString()}' and bar_code='{barcode}' order by createtime desc LIMIT 1");
@@ -2235,7 +2231,7 @@ where 1=1";
                             } 
                              
                             string wbc = da.Rows[j]["WBC"].ToString();
-                            tmp = GetTiShiForShHa(dtXcg, "WBC", rdwsd);
+                            tmp = GetTiShiForShHa(dtXcg, "WBC", wbc);
                             if (tmp != "")
                             {
                                 if (tmp != "-1")
@@ -2755,7 +2751,7 @@ where 1=1";
                     xdt.Add("性别", Sex(data["sex"].ToString()));
                     xdt.Add("生日", data["birthday"].ToString());
                     xdt.Add("身份证号", data["id_number"].ToString());
-                    DataSet xdts = DbHelperMySQL.Query($"select * from zkhw_tj_xdt where id_number='{data["id_number"].ToString()}' and id_number='{data["id_number"].ToString()}' order by createtime desc LIMIT 1");
+                    DataSet xdts = DbHelperMySQL.Query($"select * from zkhw_tj_xdt where id_number='{data["id_number"].ToString()}'  and bar_code='{barcode}' order by createtime desc LIMIT 1");
                     if (xdts != null && xdts.Tables.Count > 0 && xdts.Tables[0].Rows.Count > 0)
                     {
                         DataTable da = xdts.Tables[0];
@@ -2789,7 +2785,7 @@ where 1=1";
                     bc.Add("性别", Sex(data["sex"].ToString()));
                     bc.Add("生日", data["birthday"].ToString());
                     bc.Add("身份证号", data["id_number"].ToString());
-                    DataSet bcss = DbHelperMySQL.Query($"select * from zkhw_tj_bc where id_number='{data["id_number"].ToString()}' and id_number='{data["id_number"].ToString()}' order by createtime desc LIMIT 1");
+                    DataSet bcss = DbHelperMySQL.Query($"select * from zkhw_tj_bc where id_number='{data["id_number"].ToString()}' and  bar_code='{barcode}' order by createtime desc LIMIT 1");
                     if (bcss != null && bcss.Tables.Count > 0 && bcss.Tables[0].Rows.Count > 0)
                     {
                         DataTable da = bcss.Tables[0];
@@ -3147,33 +3143,48 @@ where 1=1";
                     break;
                 #endregion
 
-                #region 老年人生活自理能力评估
+                #region 老年人生活自理能力评估   //这样子查找有问题
                 case "老年人生活自理能力评估":
                     doc = new Document(@str + $"/up/template/老年人生活自理能力评估.doc");
                     builder = new DocumentBuilder(doc);
                     var zlpg = new Dictionary<string, string>();
-                    DataSet zlpgs = DbHelperMySQL.Query($"select * from elderly_selfcare_estimate where id_number='{data["id_number"].ToString()}' order by create_time desc LIMIT 1");
-                    if (zlpgs != null && zlpgs.Tables.Count > 0 && zlpgs.Tables[0].Rows.Count > 0)
+                    if (jkdata != null && jkdata.Rows.Count > 0)
                     {
-                        DataTable da = zlpgs.Tables[0];
-                        for (int j = 0; j < da.Rows.Count; j++)
+                        for (int h = 0; h < jkdata.Rows.Count; h++)
                         {
-                            string zz = da.Rows[j]["answer_result"].ToString();
-                            if (zz.IndexOf(',') >= 0)
+                            string _id = jkdata.Rows[h]["id"].ToString();
+                            DataSet zlpgs = null;
+                            if (_id=="")
                             {
-                                string[] y = zz.Split(',');
-                                for (int i = 0; i < y.Length; i++)
-                                {
-                                    zlpg.Add("评分" + (i + 1), y[i]);
-                                }
+                                zlpgs = DbHelperMySQL.Query($"select * from elderly_selfcare_estimate where id_number='{data["id_number"].ToString()}' order by create_time desc LIMIT 1");
                             }
                             else
                             {
-                                zlpg.Add("评分1", zz);
+                                zlpgs = DbHelperMySQL.Query($"select * from elderly_selfcare_estimate where exam_id='{_id}' order by create_time desc LIMIT 1");
                             }
-                            zlpg.Add("总分", da.Rows[j]["total_score"].ToString());
+                            if (zlpgs != null && zlpgs.Tables.Count > 0 && zlpgs.Tables[0].Rows.Count > 0)
+                            {
+                                DataTable da = zlpgs.Tables[0];
+                                for (int j = 0; j < da.Rows.Count; j++)
+                                {
+                                    string zz = da.Rows[j]["answer_result"].ToString();
+                                    if (zz.IndexOf(',') >= 0)
+                                    {
+                                        string[] y = zz.Split(',');
+                                        for (int i = 0; i < y.Length; i++)
+                                        {
+                                            zlpg.Add("评分" + (i + 1), y[i]);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        zlpg.Add("评分1", zz);
+                                    }
+                                    zlpg.Add("总分", da.Rows[j]["total_score"].ToString());
+                                }
+                            }
                         }
-                    }
+                    } 
                     //书签替换
                     foreach (var key in zlpg.Keys)
                     {
@@ -3198,206 +3209,222 @@ where 1=1";
                         }
                     }
                     zytz.Add("姓名", data["name"].ToString());
-                    DataSet zytzs = DbHelperMySQL.Query($"select * from elderly_tcm_record where id_number='{data["id_number"].ToString()}' order by create_time desc LIMIT 1");
-                    if (zytzs != null && zytzs.Tables.Count > 0 && zytzs.Tables[0].Rows.Count > 0)
+                    if (jkdata != null && jkdata.Rows.Count > 0)
                     {
-                        DataTable da = zytzs.Tables[0];
-                        for (int j = 0; j < da.Rows.Count; j++)
+                        for (int h = 0; h < jkdata.Rows.Count; h++)
                         {
-                            string[] zz = da.Rows[j]["answer_result"].ToString().Split('|');
-                            for (int i = 0; i < zz.Length; i++)
+                            string _id = jkdata.Rows[h]["id"].ToString();
+                            DataSet zytzs = null;
+                            if (_id=="")
                             {
-                                int aa = Int32.Parse(zz[i].Split(':')[0]) - 1;
-                                zytz.Add("a" + aa + zz[i].Split(':')[1], "√");
+                                zytzs = DbHelperMySQL.Query($"select * from elderly_tcm_record where id_number='{data["id_number"].ToString()}' order by create_time desc LIMIT 1");
                             }
-                            int qz = 0;
-                            qz = Convert.ToInt32(da.Rows[j]["qixuzhi_score"]);
-                            zytz.Add("气虚质得分", qz.ToString());
-                            if (da.Rows[j]["qixuzhi_result"].ToString() == "1")
+                            else
                             {
-                                zytz.Add("气虚质是", "√");
-                                string qx = da.Rows[j]["tcm_guidance"].ToString();
-                                if (qx.IndexOf(',') >= 0)
+                                zytzs = DbHelperMySQL.Query($"select * from elderly_tcm_record where exam_id='{_id}' order by create_time desc LIMIT 1");
+                            }
+                            if (zytzs != null && zytzs.Tables.Count > 0 && zytzs.Tables[0].Rows.Count > 0)
+                            {
+                                DataTable da = zytzs.Tables[0];
+                                for (int j = 0; j < da.Rows.Count; j++)
                                 {
-                                    string[] y = qx.Split(',');
-                                    for (int i = 0; i < y.Length; i++)
+                                    string[] zz = da.Rows[j]["answer_result"].ToString().Split('|');
+                                    for (int i = 0; i < zz.Length; i++)
                                     {
-                                        zytz.Add("气虚质" + y[i], "√");
+                                        int aa = Int32.Parse(zz[i].Split(':')[0]) - 1;
+                                        zytz.Add("a" + aa + zz[i].Split(':')[1], "√");
                                     }
-                                }
-                                else
-                                {
-                                    zytz.Add("气虚质" + qx, "√");
-                                }
-                            }
-
-                            qz = Convert.ToInt32(da.Rows[j]["yangxuzhi_score"]);
-                            zytz.Add("阳虚质得分", qz.ToString());
-                            if (da.Rows[j]["yangxuzhi_result"].ToString() == "1")
-                            {
-                                zytz.Add("阳虚质是", "√");
-                                string qx = da.Rows[j]["tcm_guidance"].ToString();
-                                if (qx.IndexOf(',') >= 0)
-                                {
-                                    string[] y = qx.Split(',');
-                                    for (int i = 0; i < y.Length; i++)
+                                    int qz = 0;
+                                    qz = Convert.ToInt32(da.Rows[j]["qixuzhi_score"]);
+                                    zytz.Add("气虚质得分", qz.ToString());
+                                    if (da.Rows[j]["qixuzhi_result"].ToString() == "1")
                                     {
-                                        zytz.Add("阳虚质" + y[i], "√");
+                                        zytz.Add("气虚质是", "√");
+                                        string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                        if (qx.IndexOf(',') >= 0)
+                                        {
+                                            string[] y = qx.Split(',');
+                                            for (int i = 0; i < y.Length; i++)
+                                            {
+                                                zytz.Add("气虚质" + y[i], "√");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            zytz.Add("气虚质" + qx, "√");
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    zytz.Add("阳虚质" + qx, "√");
-                                }
-                            }
 
-                            qz = Convert.ToInt32(da.Rows[j]["yinxuzhi_score"]);
-                            zytz.Add("阴虚质得分", qz.ToString());
-                            if (da.Rows[j]["yinxuzhi_result"].ToString() == "1")
-                            {
-                                zytz.Add("阴虚质是", "√");
-                                string qx = da.Rows[j]["tcm_guidance"].ToString();
-                                if (qx.IndexOf(',') >= 0)
-                                {
-                                    string[] y = qx.Split(',');
-                                    for (int i = 0; i < y.Length; i++)
+                                    qz = Convert.ToInt32(da.Rows[j]["yangxuzhi_score"]);
+                                    zytz.Add("阳虚质得分", qz.ToString());
+                                    if (da.Rows[j]["yangxuzhi_result"].ToString() == "1")
                                     {
-                                        zytz.Add("阴虚质" + y[i], "√");
+                                        zytz.Add("阳虚质是", "√");
+                                        string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                        if (qx.IndexOf(',') >= 0)
+                                        {
+                                            string[] y = qx.Split(',');
+                                            for (int i = 0; i < y.Length; i++)
+                                            {
+                                                zytz.Add("阳虚质" + y[i], "√");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            zytz.Add("阳虚质" + qx, "√");
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    zytz.Add("阴虚质" + qx, "√");
-                                }
-                            }
 
-                            qz = Convert.ToInt32(da.Rows[j]["tanshizhi_score"]);
-                            zytz.Add("痰湿质得分", qz.ToString());
-                            if (da.Rows[j]["tanshizhi_result"].ToString() == "1")
-                            {
-                                zytz.Add("痰湿质是", "√");
-                                string qx = da.Rows[j]["tcm_guidance"].ToString();
-                                if (qx.IndexOf(',') >= 0)
-                                {
-                                    string[] y = qx.Split(',');
-                                    for (int i = 0; i < y.Length; i++)
+                                    qz = Convert.ToInt32(da.Rows[j]["yinxuzhi_score"]);
+                                    zytz.Add("阴虚质得分", qz.ToString());
+                                    if (da.Rows[j]["yinxuzhi_result"].ToString() == "1")
                                     {
-                                        zytz.Add("痰湿质" + y[i], "√");
+                                        zytz.Add("阴虚质是", "√");
+                                        string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                        if (qx.IndexOf(',') >= 0)
+                                        {
+                                            string[] y = qx.Split(',');
+                                            for (int i = 0; i < y.Length; i++)
+                                            {
+                                                zytz.Add("阴虚质" + y[i], "√");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            zytz.Add("阴虚质" + qx, "√");
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    zytz.Add("痰湿质" + qx, "√");
-                                }
-                            }
 
-                            qz = Convert.ToInt32(da.Rows[j]["shirezhi_score"]);
-                            zytz.Add("湿热质得分", qz.ToString());
-                            if (da.Rows[j]["shirezhi_result"].ToString() == "1")
-                            {
-                                zytz.Add("湿热质是", "√");
-                                string qx = da.Rows[j]["tcm_guidance"].ToString();
-                                if (qx.IndexOf(',') >= 0)
-                                {
-                                    string[] y = qx.Split(',');
-                                    for (int i = 0; i < y.Length; i++)
+                                    qz = Convert.ToInt32(da.Rows[j]["tanshizhi_score"]);
+                                    zytz.Add("痰湿质得分", qz.ToString());
+                                    if (da.Rows[j]["tanshizhi_result"].ToString() == "1")
                                     {
-                                        zytz.Add("湿热质" + y[i], "√");
+                                        zytz.Add("痰湿质是", "√");
+                                        string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                        if (qx.IndexOf(',') >= 0)
+                                        {
+                                            string[] y = qx.Split(',');
+                                            for (int i = 0; i < y.Length; i++)
+                                            {
+                                                zytz.Add("痰湿质" + y[i], "√");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            zytz.Add("痰湿质" + qx, "√");
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    zytz.Add("湿热质" + qx, "√");
-                                }
-                            }
 
-                            qz = Convert.ToInt32(da.Rows[j]["xueyuzhi_score"]);
-                            zytz.Add("血瘀质得分", qz.ToString());
-                            if (da.Rows[j]["xueyuzhi_result"].ToString() == "1")
-                            {
-                                zytz.Add("血瘀质是", "√");
-                                string qx = da.Rows[j]["tcm_guidance"].ToString();
-                                if (qx.IndexOf(',') >= 0)
-                                {
-                                    string[] y = qx.Split(',');
-                                    for (int i = 0; i < y.Length; i++)
+                                    qz = Convert.ToInt32(da.Rows[j]["shirezhi_score"]);
+                                    zytz.Add("湿热质得分", qz.ToString());
+                                    if (da.Rows[j]["shirezhi_result"].ToString() == "1")
                                     {
-                                        zytz.Add("血瘀质" + y[i], "√");
+                                        zytz.Add("湿热质是", "√");
+                                        string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                        if (qx.IndexOf(',') >= 0)
+                                        {
+                                            string[] y = qx.Split(',');
+                                            for (int i = 0; i < y.Length; i++)
+                                            {
+                                                zytz.Add("湿热质" + y[i], "√");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            zytz.Add("湿热质" + qx, "√");
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    zytz.Add("血瘀质" + qx, "√");
-                                }
-                            }
 
-                            qz = Convert.ToInt32(da.Rows[j]["qiyuzhi_score"]);
-                            zytz.Add("气郁质得分", qz.ToString());
-                            if (da.Rows[j]["qiyuzhi_result"].ToString() == "1")
-                            {
-                                zytz.Add("气郁质是", "√");
-                                string qx = da.Rows[j]["tcm_guidance"].ToString();
-                                if (qx.IndexOf(',') >= 0)
-                                {
-                                    string[] y = qx.Split(',');
-                                    for (int i = 0; i < y.Length; i++)
+                                    qz = Convert.ToInt32(da.Rows[j]["xueyuzhi_score"]);
+                                    zytz.Add("血瘀质得分", qz.ToString());
+                                    if (da.Rows[j]["xueyuzhi_result"].ToString() == "1")
                                     {
-                                        zytz.Add("气郁质" + y[i], "√");
+                                        zytz.Add("血瘀质是", "√");
+                                        string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                        if (qx.IndexOf(',') >= 0)
+                                        {
+                                            string[] y = qx.Split(',');
+                                            for (int i = 0; i < y.Length; i++)
+                                            {
+                                                zytz.Add("血瘀质" + y[i], "√");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            zytz.Add("血瘀质" + qx, "√");
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    zytz.Add("气郁质" + qx, "√");
-                                }
-                            }
 
-                            qz = Convert.ToInt32(da.Rows[j]["tebingzhi_sorce"]);
-                            zytz.Add("特禀质得分", qz.ToString());
-                            if (da.Rows[j]["tebingzhi_result"].ToString() == "1")
-                            {
-                                zytz.Add("特禀质是", "√");
-                                string qx = da.Rows[j]["tcm_guidance"].ToString();
-                                if (qx.IndexOf(',') >= 0)
-                                {
-                                    string[] y = qx.Split(',');
-                                    for (int i = 0; i < y.Length; i++)
+                                    qz = Convert.ToInt32(da.Rows[j]["qiyuzhi_score"]);
+                                    zytz.Add("气郁质得分", qz.ToString());
+                                    if (da.Rows[j]["qiyuzhi_result"].ToString() == "1")
                                     {
-                                        zytz.Add("特禀质" + y[i], "√");
+                                        zytz.Add("气郁质是", "√");
+                                        string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                        if (qx.IndexOf(',') >= 0)
+                                        {
+                                            string[] y = qx.Split(',');
+                                            for (int i = 0; i < y.Length; i++)
+                                            {
+                                                zytz.Add("气郁质" + y[i], "√");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            zytz.Add("气郁质" + qx, "√");
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    zytz.Add("特禀质" + qx, "√");
-                                }
-                            }
 
-                            qz = Convert.ToInt32(da.Rows[j]["pinghezhi_sorce"]);
-                            zytz.Add("平和质得分", qz.ToString());
-                            if (da.Rows[j]["pinghezhi_result"].ToString() == "1")
-                            {
-                                zytz.Add("平和质是", "√");
-                                string qx = da.Rows[j]["tcm_guidance"].ToString();
-                                if (qx.IndexOf(',') >= 0)
-                                {
-                                    string[] y = qx.Split(',');
-                                    for (int i = 0; i < y.Length; i++)
+                                    qz = Convert.ToInt32(da.Rows[j]["tebingzhi_sorce"]);
+                                    zytz.Add("特禀质得分", qz.ToString());
+                                    if (da.Rows[j]["tebingzhi_result"].ToString() == "1")
                                     {
-                                        zytz.Add("平和质" + y[i], "√");
+                                        zytz.Add("特禀质是", "√");
+                                        string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                        if (qx.IndexOf(',') >= 0)
+                                        {
+                                            string[] y = qx.Split(',');
+                                            for (int i = 0; i < y.Length; i++)
+                                            {
+                                                zytz.Add("特禀质" + y[i], "√");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            zytz.Add("特禀质" + qx, "√");
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    zytz.Add("平和质" + qx, "√");
+
+                                    qz = Convert.ToInt32(da.Rows[j]["pinghezhi_sorce"]);
+                                    zytz.Add("平和质得分", qz.ToString());
+                                    if (da.Rows[j]["pinghezhi_result"].ToString() == "1")
+                                    {
+                                        zytz.Add("平和质是", "√");
+                                        string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                        if (qx.IndexOf(',') >= 0)
+                                        {
+                                            string[] y = qx.Split(',');
+                                            for (int i = 0; i < y.Length; i++)
+                                            {
+                                                zytz.Add("平和质" + y[i], "√");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            zytz.Add("平和质" + qx, "√");
+                                        }
+                                    }
+
+                                    string time = da.Rows[j]["test_date"].ToString();
+                                    zytz.Add("填表日期年", time?.Split('-')[0]);
+                                    zytz.Add("填表日期月", time?.Split('-')[1]);
+                                    zytz.Add("填表日期日", time?.Split('-')[2].Split(' ')[0]);
+                                    zytz.Add("医生签名", da.Rows[j]["test_doctor"].ToString());
                                 }
                             }
-
-                            string time = da.Rows[j]["test_date"].ToString();
-                            zytz.Add("填表日期年", time?.Split('-')[0]);
-                            zytz.Add("填表日期月", time?.Split('-')[1]);
-                            zytz.Add("填表日期日", time?.Split('-')[2].Split(' ')[0]);
-                            zytz.Add("医生签名", da.Rows[j]["test_doctor"].ToString());
                         }
                     }
+                    
                     //书签替换
                     foreach (var key in zytz.Keys)
                     {
@@ -4145,9 +4172,9 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                         string sql = string.Format("Delete From elderly_tcm_record where id='{0}'", data.Rows[i]["id"].ToString());
                         sqllist.Add(sql);
 
-                        sqllist.Add($@"insert into elderly_tcm_record (id,name,archive_no,id_number,test_date,answer_result,qixuzhi_score,qixuzhi_result,yangxuzhi_score,yangxuzhi_result,yinxuzhi_score,yinxuzhi_result,tanshizhi_score,tanshizhi_result,shirezhi_score,shirezhi_result,xueyuzhi_score,xueyuzhi_result,qiyuzhi_score,qiyuzhi_result,tebingzhi_sorce,tebingzhi_result,pinghezhi_sorce,pinghezhi_result,test_doctor,tcm_guidance,create_user,create_name,create_org,create_org_name,create_time,upload_status) 
+                        sqllist.Add($@"insert into elderly_tcm_record (id,name,archive_no,id_number,test_date,answer_result,qixuzhi_score,qixuzhi_result,yangxuzhi_score,yangxuzhi_result,yinxuzhi_score,yinxuzhi_result,tanshizhi_score,tanshizhi_result,shirezhi_score,shirezhi_result,xueyuzhi_score,xueyuzhi_result,qiyuzhi_score,qiyuzhi_result,tebingzhi_sorce,tebingzhi_result,pinghezhi_sorce,pinghezhi_result,test_doctor,tcm_guidance,create_user,create_name,create_org,create_org_name,create_time,upload_status,exam_id) 
 values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["test_date"])},{Ifnull(data.Rows[i]["answer_result"])},{Ifnull(data.Rows[i]["qixuzhi_score"])},{Ifnull(data.Rows[i]["qixuzhi_result"])},{Ifnull(data.Rows[i]["yangxuzhi_score"])},{Ifnull(data.Rows[i]["yangxuzhi_result"])},{Ifnull(data.Rows[i]["yinxuzhi_score"])},{Ifnull(data.Rows[i]["yinxuzhi_result"])},{Ifnull(data.Rows[i]["tanshizhi_score"])},{Ifnull(data.Rows[i]["tanshizhi_result"])},{Ifnull(data.Rows[i]["shirezhi_score"])},{Ifnull(data.Rows[i]["shirezhi_result"])},{Ifnull(data.Rows[i]["xueyuzhi_score"])},{Ifnull(data.Rows[i]["xueyuzhi_result"])},{Ifnull(data.Rows[i]["qiyuzhi_score"])},{Ifnull(data.Rows[i]["qiyuzhi_result"])},{Ifnull(data.Rows[i]["tebingzhi_sorce"])},{Ifnull(data.Rows[i]["tebingzhi_result"])},{Ifnull(data.Rows[i]["pinghezhi_sorce"])},{Ifnull(data.Rows[i]["pinghezhi_result"])},{Ifnull(data.Rows[i]["test_doctor"])},{Ifnull(data.Rows[i]["tcm_guidance"])},
-{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["upload_status"])}
+{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["upload_status"])},{Ifnull(data.Rows[i]["exam_id"])}
 );");
                         nlrzyyjkid += $"'{data.Rows[i]["id"]}',";
                     }
