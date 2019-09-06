@@ -138,7 +138,7 @@ namespace zkhwClient
         }
 
         private void frmLogin_Load_1(object sender, EventArgs e)
-        { 
+        {
             this.label3.Text = "中科弘卫一体化查体系统";//标题
             this.label3.ForeColor = Color.Blue;
             label3.Font = new Font("微软雅黑", 15F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));

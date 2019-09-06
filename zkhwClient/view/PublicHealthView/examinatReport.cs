@@ -866,15 +866,26 @@ where 1=1";
                     {
                         List<Report> reports = new List<Report>();
                         foreach (var items in list)
-                        {
-
-
+                        { 
                             Report report = new Report();
                             DataRow data = dataSet.Tables["个人"].Select($"id_number={item.ID}")[0];
+                            string age = data["age"].ToString();
+                            if (age.Length > 0)
+                            {
+                                int ageint = Int32.Parse(age);
+                                if (ageint < 65)
+                                {
+                                    if (items == "中医体质" || items == "老年人生活自理能力评估")
+                                    {
+                                        continue;
+                                    }
+                                }
+                            }
                             report.Name = items;
                             report.Doc = PdfProcessing(items, data, item.BarCode);
                             reports.Add(report);
                         }
+                        if (reports.Count == 0) continue;
                         Report re = reports.Where(m => m.Name == "封面").FirstOrDefault();
                         Report res = reports.Where(m => m.Name == "个人信息").FirstOrDefault();
                         if (re != null && res != null)
@@ -943,6 +954,11 @@ where 1=1";
                         }
                     }
                     LoadingHelper.CloseForm();
+                    if(intNum == 0)
+                    {
+                        MessageBox.Show("没有导出的报告！");
+                        return false;
+                    }
                     return true;
                     #endregion
                 }
@@ -1036,6 +1052,20 @@ where 1=1";
                             {
                                 barcode = q[0].BarCode;
                             }
+                            string age = data["age"].ToString();
+                            if (age.Length > 0)
+                            {
+                                int ageint = Int32.Parse(age);
+                                if (ageint < 65)
+                                {
+                                    if (list[0] == "中医体质" || list[0] == "老年人生活自理能力评估")
+                                    {
+                                        LoadingHelper.CloseForm();
+                                        MessageBox.Show("年龄小于65岁未做中医体质和老年人生活自理能力评估！"); 
+                                        return false;
+                                    }
+                                }
+                            }
                             doc = PdfProcessing(list[0], data, barcode);
                             string urls = @str + $"/up/result/{list[0] + "-" + data["name"].ToString() + data["id_number"].ToString()}.pdf";
                             DeteleFile(urls);
@@ -1073,6 +1103,101 @@ where 1=1";
             bool t = double.TryParse(a, out b);
             return t;
         }
+
+        private Dictionary<string, string> GetShHuaXCGDic(DataTable dtSh,string type)
+        {
+            var hy = new Dictionary<string, string>();
+            try
+            {
+                DataRow[] dr = dtSh.Select("type='" + type + "'");
+                if (dr != null)
+                { 
+                    if(type== "HDLC")
+                    {
+                        type = "HDL_C";
+                    }
+                    if (type == "LDLC")
+                    {
+                        type = "LDL_C";
+                    }
+                    if (type == "LYM")
+                    {
+                        type = "LYMN";
+                    }
+                    if (type == "MXD")
+                    {
+                        type = "MXDN";
+                    }
+                    if (type == "NEUT")
+                    {
+                        type = "NEUTN";
+                    }
+                    if (type == "RDWCV")
+                    {
+                        type = "RDW_CV";
+                    }
+                    if (type == "RDWSD")
+                    {
+                        type = "RDW_SD";
+                    }
+                    if (type == "GRAN")
+                    {
+                        type = "GRANN";
+                    }
+                    string chinaName = type + "中文名";
+                    hy.Add(chinaName, dr[0]["chinaName"].ToString());
+
+                    string CheckMethod = type + "检验方法";
+                    hy.Add(CheckMethod, dr[0]["CheckMethod"].ToString());
+
+                    string unit = type + "单位";
+                    hy.Add(unit, dr[0]["unit"].ToString());
+
+                    string fanwei = type + "参考范围";
+                    string tmp = dr[0]["warning_min"].ToString() + "-" + dr[0]["warning_max"].ToString();
+                    hy.Add(fanwei, tmp);
+                }
+            }
+            catch
+            { }
+            return hy;
+        }
+
+        private string GetTiShiForShHa(DataTable dtSh, string type,string strValus)
+        {
+            string tishi = "";
+            try
+            {
+                DataRow[] dr = dtSh.Select("type='" + type + "'");
+                if (dr != null)
+                {
+                    double warning_min = double.Parse(dr[0]["warning_min"].ToString());
+                    double warning_max = double.Parse(dr[0]["warning_max"].ToString());
+                    double valuedouble = 0;
+                    if (isDouble(strValus, out valuedouble))
+                    {
+                        if(valuedouble> warning_max)
+                        {
+                            tishi = "↑";
+                        }
+                        else if(valuedouble< warning_min)
+                        {
+                            tishi = "↓";
+                        }
+                        else
+                        {
+                            tishi = "-1";
+                        }
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+            return tishi;
+        }
+          
         private Document PdfProcessing(string lx, DataRow data, string barcode)
         {
             DateTime date = DateTime.Now;
@@ -1111,7 +1236,16 @@ where 1=1";
                         builder.InsertImage(resizeImageFromFile(@str + @"\photoImg\" + photo_pic, 172, 184));
                     }
                     dic.Add("姓名", data["name"].ToString());
-                    dic.Add("现住址", data["county_name"].ToString() + data["towns_name"].ToString() + data["village_name"].ToString());
+                    //dic.Add("现住址", data["county_name"].ToString() + data["towns_name"].ToString() + data["village_name"].ToString());
+                    if (!string.IsNullOrWhiteSpace(data["residence_address"].ToString()))
+                    {
+                        dic.Add("现住址", data["residence_address"].ToString()); 
+                    }
+                    else
+                    {
+                        dic.Add("现住址", data["county_name"].ToString() + data["towns_name"].ToString() + data["village_name"].ToString());
+                    }
+                    
                     dic.Add("户籍地址", data["address"].ToString());
                     dic.Add("联系电话", data["phone"].ToString());
                     dic.Add("乡镇名称", data["towns_name"].ToString());
@@ -1420,19 +1554,20 @@ where 1=1";
                     hy.Add("生日", data["birthday"].ToString());
                     hy.Add("生日1", data["birthday"].ToString());
                     hy.Add("身份证号", data["id_number"].ToString());
-                    hy.Add("身份证号1", data["id_number"].ToString());
-                    //hy.Add("检验", basicInfoSettings.sh);
-                    //hy.Add("检验1", basicInfoSettings.ncg);
-                    //hy.Add("地址", data["address"].ToString());
-                    //hy.Add("地址1", data["address"].ToString());
-                    DataSet hyxdts = DbHelperMySQL.Query($"select * from zkhw_tj_xdt where id_number='{data["id_number"].ToString()}' order by createtime desc LIMIT 1");
+                    hy.Add("身份证号1", data["id_number"].ToString()); 
+
+                    #region 心电图
+                    DataSet hyxdts = DbHelperMySQL.Query($"select * from zkhw_tj_xdt where id_number='{data["id_number"].ToString()}' and bar_code='{barcode}' order by createtime desc LIMIT 1");
                     if (hyxdts != null && hyxdts.Tables.Count > 0 && hyxdts.Tables[0].Rows.Count > 0)
                     {
                         DataTable da = hyxdts.Tables[0];
                         string XdtDesc = da.Rows[0]["XdtDesc"].ToString().Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", "").Replace("***", "").Replace("~", "");
                         hy.Add("心电图", XdtDesc);
                     }
-                    DataSet bcs = DbHelperMySQL.Query($"select * from zkhw_tj_bc where id_number='{data["id_number"].ToString()}' order by createtime desc LIMIT 1");
+                    #endregion
+
+                    #region B超
+                    DataSet bcs = DbHelperMySQL.Query($"select * from zkhw_tj_bc where id_number='{data["id_number"].ToString()}' and bar_code='{barcode}' order by createtime desc LIMIT 1");
                     if (bcs != null && bcs.Tables.Count > 0 && bcs.Tables[0].Rows.Count > 0)
                     {
                         DataTable da = bcs.Tables[0];
@@ -1466,647 +1601,687 @@ where 1=1";
                             hy.Add("报告日期1", DateTime.Now.ToString("yyyy-MM-dd"));
                         }
                     }
+                    #endregion
 
-                    DataSet sh = DbHelperMySQL.Query($"select * from zkhw_tj_sh where id_number='{data["id_number"].ToString()}' order by createtime desc LIMIT 1");
+                    #region 生化
+                   
+                    grjdDao grjddao = new grjdDao();
+                    DataTable dtSh = grjddao.checkThresholdValues("生化");
+                    #region 生化内容
+                    Dictionary<string, string>  tt=GetShHuaXCGDic(dtSh, "ALT");
+                    if(tt.Count>0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtSh, "AST");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtSh, "CHO");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtSh, "CREA");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtSh, "GLU");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtSh, "HDLC");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtSh, "LDLC");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtSh, "TBIL");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtSh, "TG");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtSh, "UREA");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    #endregion
+                    #region 生化处理值
+                    DataSet sh = DbHelperMySQL.Query($"select * from zkhw_tj_sh where id_number='{data["id_number"].ToString()}' and bar_code='{barcode}' order by createtime desc LIMIT 1");
                     if (sh != null && sh.Tables.Count > 0 && sh.Tables[0].Rows.Count > 0)
                     {
                         DataTable da = sh.Tables[0];
                         hy.Add("检验", da.Rows[0]["ZrysSH"].ToString());
                         for (int j = 0; j < da.Rows.Count; j++)
-                        {
-                            string alb = da.Rows[j]["ALB"].ToString();
-                            if (alb != null && !"".Equals(alb))
-                            {
-
-                                double albdouble = 0;
-                                if (isDouble(alb, out albdouble))
-                                {
-                                    if (albdouble > 54)
-                                    {
-                                        hy.Add("白蛋白箭头", "↑");
-                                    }
-                                    else if (albdouble < 34)
-                                    {
-                                        hy.Add("白蛋白箭头", "↓");
-                                    }
-                                    hy.Add("白蛋白结果", alb);
-                                }
-                            }
-                            string alp = da.Rows[j]["ALP"].ToString();
-                            if (alp != null && !"".Equals(alp))
-                            {
-                                double alpdouble = 0;
-                                if (isDouble(alp, out alpdouble))
-                                {
-                                    if (alpdouble > 150)
-                                    {
-                                        hy.Add("碱性磷酸酶箭头", "↑");
-                                    }
-                                    else if (alpdouble < 40)
-                                    {
-                                        hy.Add("碱性磷酸酶箭头", "↓");
-                                    }
-                                    hy.Add("碱性磷酸酶结果", alp);
-                                }
-                            }
+                        { 
                             string alt = da.Rows[j]["ALT"].ToString();
-                            if (alt != null && !"".Equals(alt) && alt != "N/A")
+                            string tmp = GetTiShiForShHa(dtSh, "ALT", alt);
+                            if(tmp !="")
                             {
-                                double altdouble = 0;
-                                if (isDouble(alt, out altdouble))
+                                if(tmp !="-1")
                                 {
-                                    if (altdouble > 40)
-                                    {
-                                        hy.Add("谷丙转氨酶箭头", "↑");
-                                    }
-                                    else if (altdouble <= 0)
-                                    {
-                                        hy.Add("谷丙转氨酶箭头", "↓");
-                                    }
-                                    hy.Add("谷丙转氨酶结果", alt);
-                                }
+                                    hy.Add("ALT提示", tmp);
+                                } 
+                                hy.Add("ALT结果", alt);
                             }
+                            
                             string ast = da.Rows[j]["AST"].ToString();
-                            if (ast != null && !"".Equals(ast))
+                            tmp = GetTiShiForShHa(dtSh, "AST", ast);
+                            if (tmp != "")
                             {
-                                double astdouble = 0;
-                                if (isDouble(ast, out astdouble))
+                                if (tmp != "-1")
                                 {
-                                    if (astdouble > 40)
-                                    {
-                                        hy.Add("谷草转氨酶箭头", "↑");
-                                    }
-                                    else if (astdouble <= 0)
-                                    {
-                                        hy.Add("谷草转氨酶箭头", "↓");
-                                    }
-                                    hy.Add("谷草转氨酶结果", ast);
-                                }
-                            }
+                                    hy.Add("AST提示", tmp);
+                                } 
+                                hy.Add("AST结果", ast);
+                            } 
+                             
                             string cho = da.Rows[j]["CHO"].ToString();
-                            if (cho != null && !"".Equals(cho))
+                            tmp = GetTiShiForShHa(dtSh, "CHO", cho);
+                            if (tmp != "")
                             {
-                                double chodouble = 0;
-                                if (isDouble(cho, out chodouble))
+                                if (tmp != "-1")
                                 {
-                                    if (chodouble > 5.2)
-                                    {
-                                        hy.Add("胆固醇箭头", "↑");
-                                    }
-                                    else if (chodouble <= 0)
-                                    {
-                                        hy.Add("胆固醇箭头", "↓");
-                                    }
-                                    hy.Add("胆固醇结果", cho);
-                                }
-
-                            }
+                                    hy.Add("CHO提示", tmp);
+                                } 
+                                hy.Add("CHO结果", cho);
+                            } 
                             string crea = da.Rows[j]["CREA"].ToString();
-                            if (crea != null && !"".Equals(crea))
+                            tmp = GetTiShiForShHa(dtSh, "CREA", crea);
+                            if (tmp != "")
                             {
-                                double creadouble = 0;
-                                if (isDouble(crea, out creadouble))
+                                if (tmp != "-1")
                                 {
-                                    if (creadouble > 115)
-                                    {
-                                        hy.Add("肌酐箭头", "↑");
-                                    }
-                                    else if (creadouble < 44)
-                                    {
-                                        hy.Add("肌酐箭头", "↓");
-                                    }
-                                    hy.Add("肌酐结果", crea);
-                                }
-                            }
-
-                            string dbil = da.Rows[j]["DBIL"].ToString();
-                            if (dbil != null && !"".Equals(dbil))
-                            {
-                                double dbildouble = 0;
-                                if (isDouble(dbil, out dbildouble))
-                                {
-                                    if (dbildouble > 6.8)
-                                    {
-                                        hy.Add("直接胆红素箭头", "↑");
-                                    }
-                                    else if (dbildouble < 1.7)
-                                    {
-                                        hy.Add("直接胆红素箭头", "↓");
-                                    }
-                                    hy.Add("直接胆红素结果", dbil);
-                                }
-                            }
-                            string ggt = da.Rows[j]["GGT"].ToString();
-                            if (ggt != null && !"".Equals(ggt))
-                            {
-                                double ggtdouble = 0;
-                                if (isDouble(ggt, out ggtdouble))
-                                {
-                                    if (ggtdouble > 50)
-                                    {
-                                        hy.Add("谷氨酰氨基箭头", "↑");
-                                    }
-                                    else if (ggtdouble < 7)
-                                    {
-                                        hy.Add("谷氨酰氨基箭头", "↓");
-                                    }
-                                    hy.Add("谷氨酰氨基结果", ggt);
-                                }
-                            }
+                                    hy.Add("CREA提示", tmp);
+                                } 
+                                hy.Add("CREA结果", crea);
+                            } 
                             string glu = da.Rows[j]["GLU"].ToString();
-                            if (glu != null && !"".Equals(glu))
+                            tmp = GetTiShiForShHa(dtSh, "GLU", glu);
+                            if (tmp != "")
                             {
-                                double gludouble = 0;
-                                if (isDouble(glu, out gludouble))
+                                if (tmp != "-1")
                                 {
-                                    if (gludouble > 6.1)
-                                    {
-                                        hy.Add("葡萄糖箭头", "↑");
-                                    }
-                                    else if (gludouble < 3.9)
-                                    {
-                                        hy.Add("葡萄糖箭头", "↓");
-                                    }
-                                    hy.Add("葡萄糖结果", glu);
-                                }
-
+                                    hy.Add("GLU提示", tmp);
+                                } 
+                                hy.Add("GLU结果", glu);
                             }
+                             
                             string hdlc = da.Rows[j]["HDLC"].ToString();
-                            if (hdlc != null && !"".Equals(hdlc))
+                            tmp = GetTiShiForShHa(dtSh, "HDLC", hdlc);
+                            if (tmp != "")
                             {
-                                double hdlcdouble = 0;
-
-                                if (isDouble(hdlc, out hdlcdouble))
+                                if (tmp != "-1")
                                 {
-                                    if (hdlcdouble > 1.9)
-                                    {
-                                        hy.Add("高密度脂蛋白箭头", "↑");
-                                    }
-                                    else if (hdlcdouble < 0.9)
-                                    {
-                                        hy.Add("高密度脂蛋白箭头", "↓");
-                                    }
-                                    hy.Add("高密度脂蛋白结果", hdlc);
-                                }
-
-
+                                    hy.Add("HDL_C提示", tmp);
+                                } 
+                                hy.Add("HDL_C结果", hdlc);
                             }
+                             
                             string ldlc = da.Rows[j]["LDLC"].ToString();
-                            if (ldlc != null && !"".Equals(ldlc))
+                            tmp = GetTiShiForShHa(dtSh, "LDLC", ldlc);
+                            if (tmp != "")
                             {
-                                double ldlcdouble = 0;
-
-                                if (isDouble(ldlc, out ldlcdouble))
+                                if (tmp != "-1")
                                 {
-                                    if (ldlcdouble > 3.9)
-                                    {
-                                        hy.Add("低密度脂蛋白箭头", "↑");
-                                    }
-                                    else if (ldlcdouble < 1.5)
-                                    {
-                                        hy.Add("低密度脂蛋白箭头", "↓");
-                                    }
-                                    hy.Add("低密度脂蛋白结果", ldlc);
-                                }
-
-
+                                    hy.Add("LDL_C提示", tmp);
+                                } 
+                                hy.Add("LDL_C结果", ldlc);
                             }
+                             
                             string tbil = da.Rows[j]["TBIL"].ToString();
-                            if (tbil != null && !"".Equals(tbil))
+                            tmp = GetTiShiForShHa(dtSh, "TBIL", tbil);
+                            if (tmp != "")
                             {
-                                double tbildouble = 0;
-
-                                if (isDouble(tbil, out tbildouble))
+                                if (tmp != "-1")
                                 {
-                                    if (tbildouble > 20)
-                                    {
-                                        hy.Add("总胆红素箭头", "↑");
-                                    }
-                                    else if (tbildouble < 2)
-                                    {
-                                        hy.Add("总胆红素箭头", "↓");
-                                    }
-                                    hy.Add("总胆红素结果", tbil);
-                                }
-                            }
-
+                                    hy.Add("TBIL提示", tmp);
+                                } 
+                                hy.Add("TBIL结果", tbil);
+                            } 
                             string tg = da.Rows[j]["TG"].ToString();
-                            if (tg != "")
+                            tmp = GetTiShiForShHa(dtSh, "TG", tg);
+                            if (tmp != "")
                             {
-                                double tgdouble = 0;
-                                if (isDouble(tg, out tgdouble))
+                                if (tmp != "-1")
                                 {
-                                    if (tgdouble > 1.7)
-                                    {
-                                        hy.Add("甘油三酯箭头", "↑");
-                                    }
-                                    else if (tgdouble <= 0)
-                                    {
-                                        hy.Add("甘油三酯箭头", "↓");
-                                    }
-                                    hy.Add("甘油三酯结果", tg);
-                                }
-                            }
-
+                                    hy.Add("TG提示", tmp);
+                                } 
+                                hy.Add("TG结果", tg);
+                            } 
                             string tp = da.Rows[j]["TP"].ToString();
-                            if (tp != null && !"".Equals(tp))
+                            tmp = GetTiShiForShHa(dtSh, "TP", tp);
+                            if (tmp != "")
                             {
-                                double tpdouble = 0;
-                                if (isDouble(tp, out tpdouble))
+                                if (tmp != "-1")
                                 {
-                                    if (tpdouble > 83)
-                                    {
-                                        hy.Add("总蛋白箭头", "↑");
-                                    }
-                                    else if (tpdouble < 60)
-                                    {
-                                        hy.Add("总蛋白箭头", "↓");
-                                    }
-                                    hy.Add("总蛋白结果", tp);
-                                }
-                            }
-                            string ua = da.Rows[j]["UA"].ToString();
-                            if (ua != null && !"".Equals(ua))
-                            {
-                                double uadouble = 0;
-                                if (isDouble(ua, out uadouble))
-                                {
-                                    if (uadouble > 428)
-                                    {
-                                        hy.Add("尿酸箭头", "↑");
-                                    }
-                                    else if (uadouble < 90)
-                                    {
-                                        hy.Add("尿酸箭头", "↓");
-                                    }
-                                    hy.Add("尿酸结果", ua);
-                                }
-                            }
+                                    hy.Add("TP提示", tmp);
+                                } 
+                                hy.Add("TP结果", tp);
+                            } 
                             string urea = da.Rows[j]["UREA"].ToString();
-                            if (urea != null && !"".Equals(urea))
+                            tmp = GetTiShiForShHa(dtSh, "UREA", urea);
+                            if (tmp != "")
                             {
-                                double ureadouble = 0;
-                                if (isDouble(urea, out ureadouble))
+                                if (tmp != "-1")
                                 {
-                                    if (ureadouble > 8.2)
-                                    {
-                                        hy.Add("尿素箭头", "↑");
-                                    }
-                                    else if (ureadouble < 1.7)
-                                    {
-                                        hy.Add("尿素箭头", "↓");
-                                    }
-                                    hy.Add("尿素结果", urea);
-                                }
+                                    hy.Add("UREA提示", tmp);
+                                } 
+                                hy.Add("UREA结果", urea);
+                            } 
+                        }
+                    }
+                    #endregion
+                    #endregion
 
-                            }
+                    #region 血常规
+                    #region 内容
+                    DataTable dtXcg = grjddao.checkThresholdValues("血常规");
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "HCT");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "HGB");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "LYM");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "LYMP");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "MCH");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "MCHC");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "MCV");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "MPV");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "MXD");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "MXDP");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "NEUT");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "NEUTP");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "PCT");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "PDW");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "PLT");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "RBC");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "RDWCV");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
                         }
                     }
 
-                    DataSet xcg = DbHelperMySQL.Query($"select * from zkhw_tj_xcg where id_number='{data["id_number"].ToString()}' order by createtime desc LIMIT 1");
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "RDWSD");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "WBC");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "GRAN");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "GRANP");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    tt.Clear();
+                    tt = GetShHuaXCGDic(dtXcg, "PLCR");
+                    if (tt.Count > 0)
+                    {
+                        foreach (var k in tt)
+                        {
+                            hy.Add(k.Key, k.Value);
+                        }
+                    }
+                    #endregion
+                    #region 值
+                    DataSet xcg = DbHelperMySQL.Query($"select * from zkhw_tj_xcg where id_number='{data["id_number"].ToString()}' and bar_code='{barcode}' order by createtime desc LIMIT 1");
                     if (xcg != null && xcg.Tables.Count > 0 && xcg.Tables[0].Rows.Count > 0)
                     {
                         DataTable da = xcg.Tables[0];
                         for (int j = 0; j < da.Rows.Count; j++)
                         {
                             string hct = da.Rows[j]["HCT"].ToString();
-                            if (hct != null && !"".Equals(hct))
+                            string tmp = GetTiShiForShHa(dtXcg, "HCT", hct);
+                            if (tmp != "")
                             {
-                                if (hct != "*")
+                                if (tmp != "-1")
                                 {
-                                    double hctdouble = 0;
-                                    if (isDouble(hct, out hctdouble))
-                                    {
-                                        if (hctdouble > 50)
-                                        {
-                                            hy.Add("红细胞压积箭头", "↑");
-                                        }
-                                        else if (hctdouble < 37)
-                                        {
-                                            hy.Add("红细胞压积箭头", "↓");
-                                        }
-                                    }
-                                }
-                                hy.Add("红细胞压积结果", hct);
-                            }
+                                    hy.Add("HCT提示", tmp);
+                                } 
+                                hy.Add("HCT结果", hct);
+                            } 
+                           
                             string hgb = da.Rows[j]["HGB"].ToString();
-                            if (hgb != null && !"".Equals(hgb))
+                            tmp = GetTiShiForShHa(dtXcg, "HGB", hgb);
+                            if (tmp != "")
                             {
-                                double hgbdouble = Convert.ToDouble(hgb);
-                                if (isDouble(hgb, out hgbdouble))
+                                if (tmp != "-1")
                                 {
-                                    if (hgbdouble > 160)
-                                    {
-                                        hy.Add("血红蛋白箭头", "↑");
-                                    }
-                                    else if (hgbdouble < 110)
-                                    {
-                                        hy.Add("血红蛋白箭头", "↓");
-                                    }
-                                    hy.Add("血红蛋白结果", hgb);
-                                }
-                            }
+                                    hy.Add("HGB提示", tmp);
+                                } 
+                                hy.Add("HGB结果", hgb);
+                            } 
+                             
                             string lym = da.Rows[j]["LYM"].ToString();
-                            if (lym != null && !"".Equals(lym))
+                            tmp = GetTiShiForShHa(dtXcg, "LYM", lym);
+                            if (tmp != "")
                             {
-                                if (lym != "*")
+                                if (tmp != "-1")
                                 {
-                                    double lymdouble = 0;
-                                    if (isDouble(lym, out lymdouble))
-                                    {
-                                        if (lymdouble > 4)
-                                        {
-                                            hy.Add("淋巴细胞数目箭头", "↑");
-                                        }
-                                        else if (lymdouble < 0.8)
-                                        {
-                                            hy.Add("淋巴细胞数目箭头", "↓");
-                                        }
-                                    }
-                                }
-                                hy.Add("淋巴细胞数目结果", lym);
+                                    hy.Add("LYMN提示", tmp);
+                                } 
+                                hy.Add("LYMN结果", lym);
                             }
+
+                             
                             string lymp = da.Rows[j]["LYMP"].ToString();
-                            if (lymp != null && !"".Equals(lymp))
+                            tmp = GetTiShiForShHa(dtXcg, "LYMP", lymp);
+                            if (tmp != "")
                             {
-                                if (lymp != "*")
+                                if (tmp != "-1")
                                 {
-                                    double lympdouble = 0;
-                                    if (isDouble(lymp, out lympdouble))
-                                    {
-                                        if (lympdouble > 40)
-                                        {
-                                            hy.Add("淋巴细胞百分比箭头", "↑");
-                                        }
-                                        else if (lympdouble < 20)
-                                        {
-                                            hy.Add("淋巴细胞百分比箭头", "↓");
-                                        }
-                                    }
-                                }
-                                hy.Add("淋巴细胞百分比结果", lymp);
-                            }
+                                    hy.Add("LYMP提示", tmp);
+                                } 
+                                hy.Add("LYMP结果", lymp);
+                            } 
+
                             string mch = da.Rows[j]["MCH"].ToString();
-                            if (mch != null && !"".Equals(mch))
+                            tmp = GetTiShiForShHa(dtXcg, "MCH", mch);
+                            if (tmp != "")
                             {
-                                if (mch != "*")
+                                if (tmp != "-1")
                                 {
-                                    double mchdouble = 0;
-                                    if (isDouble(mch, out mchdouble))
-                                    {
-                                        if (mchdouble > 40)
-                                        {
-                                            hy.Add("平均血红蛋白含量箭头", "↑");
-                                        }
-                                        else if (mchdouble < 27)
-                                        {
-                                            hy.Add("平均血红蛋白含量箭头", "↓");
-                                        }
-                                    }
-                                }
-                                hy.Add("平均血红蛋白含量结果", mch);
+                                    hy.Add("MCH提示", tmp);
+                                } 
+                                hy.Add("MCH结果", mch);
                             }
+                            
                             string mchc = da.Rows[j]["MCHC"].ToString();
-                            if (mchc != null && !"".Equals(mchc))
+                            tmp = GetTiShiForShHa(dtXcg, "MCHC", mchc);
+                            if (tmp != "")
                             {
-                                if (mchc != "*")
+                                if (tmp != "-1")
                                 {
-                                    double mchcdouble = 0;
-                                    if (isDouble(mchc, out mchcdouble))
-                                    {
-                                        if (mchcdouble > 360)
-                                        {
-                                            hy.Add("平均血红蛋白浓度箭头", "↑");
-                                        }
-                                        else if (mchcdouble < 320)
-                                        {
-                                            hy.Add("平均血红蛋白浓度箭头", "↓");
-                                        }
-                                    }
-                                }
-                                hy.Add("平均血红蛋白浓度结果", mchc);
+                                    hy.Add("MCHC提示", tmp);
+                                } 
+                                hy.Add("MCHC结果", mchc);
                             }
+                             
                             string mcv = da.Rows[j]["MCV"].ToString();
-                            if (mcv != null && !"".Equals(mcv))
+                            tmp = GetTiShiForShHa(dtXcg, "MCV", mcv);
+                            if (tmp != "")
                             {
-                                if (mcv != "*")
+                                if (tmp != "-1")
                                 {
-                                    double mcvdouble = 0;
-                                    if (isDouble(mcv, out mcvdouble))
-                                    {
-                                        if (mcvdouble > 95)
-                                        {
-                                            hy.Add("平均红细胞体积箭头", "↑");
-                                        }
-                                        else if (mcvdouble < 82)
-                                        {
-                                            hy.Add("平均红细胞体积箭头", "↓");
-                                        }
-                                    }
-                                }
-                                hy.Add("平均红细胞体积结果", mcv);
-                            }
+                                    hy.Add("MCV提示", tmp);
+                                } 
+                                hy.Add("MCV结果", mcv);
+                            } 
                             string mpv = da.Rows[j]["MPV"].ToString();
-                            if (mpv != null && !"".Equals(mpv))
+                            tmp = GetTiShiForShHa(dtXcg, "MPV", mpv);
+                            if (tmp != "")
                             {
-                                if (mpv != "*")
+                                if (tmp != "-1")
                                 {
-                                    double mpvdouble = 0;
-                                    if (isDouble(mpv, out mpvdouble))
-                                    {
-                                        if (mpvdouble > 11)
-                                        {
-                                            hy.Add("平均血小板体积箭头", "↑");
-                                        }
-                                        else if (mpvdouble < 7)
-                                        {
-                                            hy.Add("平均血小板体积箭头", "↓");
-                                        }
-                                    }
-                                }
-                                hy.Add("平均血小板体积结果", mpv);
+                                    hy.Add("MPV提示", tmp);
+                                } 
+                                hy.Add("MPV结果", mpv);
                             }
+                             
                             string mxd = da.Rows[j]["MXD"].ToString();
-                            if (mxd != null && !"".Equals(mxd))
+                            tmp = GetTiShiForShHa(dtXcg, "MXD", mxd);
+                            if (tmp != "")
                             {
-                                if (mxd != "*")
+                                if (tmp != "-1")
                                 {
-                                    double mxddouble = Convert.ToDouble(mxd);
-                                    if (mxddouble > 0.9)
-                                    {
-                                        hy.Add("中间细胞数目箭头", "↑");
-                                    }
-                                    else if (mxddouble < 0.1)
-                                    {
-                                        hy.Add("中间细胞数目箭头", "↓");
-                                    }
-                                }
-                                hy.Add("中间细胞数目结果", mxd);
-                            }
+                                    hy.Add("MXDN提示", tmp);
+                                } 
+                                hy.Add("MXDN结果", mxd);
+                            } 
                             string mxdp = da.Rows[j]["MXDP"].ToString();
-                            if (mxdp != null && !"".Equals(mxdp))
+                            tmp = GetTiShiForShHa(dtXcg, "MXDP", mxdp);
+                            if (tmp != "")
                             {
-                                if (mxdp != "*")
+                                if (tmp != "-1")
                                 {
-                                    double mxdpdouble = Convert.ToDouble(mxdp);
-                                    if (mxdpdouble > 12)
-                                    {
-                                        hy.Add("中间细胞百分比箭头", "↑");
-                                    }
-                                    else if (mxdpdouble < 3)
-                                    {
-                                        hy.Add("中间细胞百分比箭头", "↓");
-                                    }
-                                }
-                                hy.Add("中间细胞百分比结果", mxdp);
-                            }
+                                    hy.Add("MXDP提示", tmp);
+                                } 
+                                hy.Add("MXDP结果", mxdp);
+                            } 
                             string neut = da.Rows[j]["NEUT"].ToString();
-                            if (neut != null && !"".Equals(neut))
+                            tmp = GetTiShiForShHa(dtXcg, "NEUT", neut);
+                            if (tmp != "")
                             {
-                                if (neut != "*")
+                                if (tmp != "-1")
                                 {
-                                    double neutdouble = Convert.ToDouble(neut);
-                                    if (neutdouble > 7)
-                                    {
-                                        hy.Add("中性粒细胞数目箭头", "↑");
-                                    }
-                                    else if (neutdouble < 2)
-                                    {
-                                        hy.Add("中性粒细胞数目箭头", "↓");
-                                    }
-                                }
-                                hy.Add("中性粒细胞数目结果", neut);
-                            }
+                                    hy.Add("NEUTN提示", tmp);
+                                } 
+                                hy.Add("NEUTN结果", neut);
+                            } 
                             string neutp = da.Rows[j]["NEUTP"].ToString();
-                            if (neutp != null && !"".Equals(neutp))
+                            tmp = GetTiShiForShHa(dtXcg, "NEUTP", neutp);
+                            if (tmp != "")
                             {
-                                if (neutp != "*")
+                                if (tmp != "-1")
                                 {
-                                    double neutpdouble = Convert.ToDouble(neutp);
-                                    if (neutpdouble > 70)
-                                    {
-                                        hy.Add("中性粒细胞百分比箭头", "↑");
-                                    }
-                                    else if (neutpdouble < 50)
-                                    {
-                                        hy.Add("中性粒细胞百分比箭头", "↓");
-                                    }
-                                }
-                                hy.Add("中性粒细胞百分比结果", neutp);
+                                    hy.Add("NEUTP提示", tmp);
+                                } 
+                                hy.Add("NEUTP结果", neutp);
                             }
+                             
                             string pct = da.Rows[j]["PCT"].ToString();
-                            if (pct != null && !"".Equals(pct))
+                            tmp = GetTiShiForShHa(dtXcg, "PCT", pct);
+                            if (tmp != "")
                             {
-                                if (pct != "*")
+                                if (tmp != "-1")
                                 {
-                                    double pctdouble = Convert.ToDouble(pct);
-                                    if (pctdouble > 0.4)
-                                    {
-                                        hy.Add("血小板压积箭头", "↑");
-                                    }
-                                    else if (pctdouble < 0.02)
-                                    {
-                                        hy.Add("血小板压积箭头", "↓");
-                                    }
-                                }
-                                hy.Add("血小板压积结果", pct);
+                                    hy.Add("PCT提示", tmp);
+                                } 
+                                hy.Add("PCT结果", pct);
                             }
+                             
                             string pdw = da.Rows[j]["PDW"].ToString();
-                            if (pdw != null && !"".Equals(pdw))
+                            tmp = GetTiShiForShHa(dtXcg, "PDW", pdw);
+                            if (tmp != "")
                             {
-                                if (pdw != "*")
+                                if (tmp != "-1")
                                 {
-                                    double pdwdouble = Convert.ToDouble(pdw);
-                                    if (pdwdouble > 17)
-                                    {
-                                        hy.Add("血小板分布宽度箭头", "↑");
-                                    }
-                                    else if (pdwdouble < 7)
-                                    {
-                                        hy.Add("血小板分布宽度箭头", "↓");
-                                    }
-                                }
-                                hy.Add("血小板分布宽度结果", pdw);
+                                    hy.Add("PDW提示", tmp);
+                                } 
+                                hy.Add("PDW结果", pdw);
                             }
+                             
                             string plt = da.Rows[j]["PLT"].ToString();
-                            if (plt != null && !"".Equals(plt))
+                            tmp = GetTiShiForShHa(dtXcg, "PLT", plt);
+                            if (tmp != "")
                             {
-                                double pltdouble = Convert.ToDouble(plt);
-                                if (pltdouble > 300)
+                                if (tmp != "-1")
                                 {
-                                    hy.Add("血小板数目箭头", "↑");
-                                }
-                                else if (pltdouble < 100)
-                                {
-                                    hy.Add("血小板数目箭头", "↓");
-                                }
-                                hy.Add("血小板数目结果", plt);
+                                    hy.Add("PLT提示", tmp);
+                                } 
+                                hy.Add("PLT结果", plt);
                             }
+                             
                             string rbc = da.Rows[j]["RBC"].ToString();
-                            if (rbc != null && !"".Equals(rbc))
+                            tmp = GetTiShiForShHa(dtXcg, "RBC", rbc);
+                            if (tmp != "")
                             {
-                                double rbcdouble = Convert.ToDouble(rbc);
-                                if (rbcdouble > 5.5)
+                                if (tmp != "-1")
                                 {
-                                    hy.Add("红细胞数目箭头", "↑");
-                                }
-                                else if (rbcdouble < 3.5)
-                                {
-                                    hy.Add("红细胞数目箭头", "↓");
-                                }
-                                hy.Add("红细胞数目结果", rbc);
+                                    hy.Add("RBC提示", tmp); 
+                                } 
+                                hy.Add("RBC结果", rbc);
                             }
+                             
                             string rdwcv = da.Rows[j]["RDWCV"].ToString();
-                            if (rdwcv != null && !"".Equals(rdwcv))
+                            tmp = GetTiShiForShHa(dtXcg, "RDWCV", rdwcv);
+                            if (tmp != "")
                             {
-                                if (rdwcv != "*")
+                                if (tmp != "-1")
                                 {
-                                    double rbcdouble = Convert.ToDouble(rdwcv);
-                                    if (rbcdouble > 18)
-                                    {
-                                        hy.Add("红细胞分布宽度CV箭头", "↑");
-                                    }
-                                    else if (rbcdouble < 11.5)
-                                    {
-                                        hy.Add("红细胞分布宽度CV箭头", "↓");
-                                    }
-                                }
-                                hy.Add("红细胞分布宽度CV结果", rdwcv);
-                            }
+                                    hy.Add("RDW_CV提示", tmp);
+                                } 
+                                hy.Add("RDW_CV结果", rdwcv);
+                            } 
                             string rdwsd = da.Rows[j]["RDWSD"].ToString();
-                            if (rdwsd != null && !"".Equals(rdwsd))
+                            tmp = GetTiShiForShHa(dtXcg, "RDWSD", rdwsd);
+                            if (tmp != "")
                             {
-                                if (rdwsd != "*")
+                                if (tmp != "-1")
                                 {
-                                    double rdwsddouble = Convert.ToDouble(rdwsd);
-                                    if (rdwsddouble > 56)
-                                    {
-                                        hy.Add("红细胞分布宽度SD箭头", "↑");
-                                    }
-                                    else if (rdwsddouble < 35)
-                                    {
-                                        hy.Add("红细胞分布宽度SD箭头", "↓");
-                                    }
-                                }
-                                hy.Add("红细胞分布宽度SD结果", rdwsd);
-                            }
+                                    hy.Add("RDW_SD提示", tmp);
+                                } 
+                                hy.Add("RDW_SD结果", rdwsd);
+                            } 
+                             
                             string wbc = da.Rows[j]["WBC"].ToString();
-                            if (wbc != null && !"".Equals(wbc))
+                            tmp = GetTiShiForShHa(dtXcg, "WBC", wbc);
+                            if (tmp != "")
                             {
-                                double wbcdouble = Convert.ToDouble(wbc);
-                                if (wbcdouble > 10)
+                                if (tmp != "-1")
                                 {
-                                    hy.Add("白细胞数目箭头", "↑");
-                                }
-                                else if (wbcdouble < 4)
+                                    hy.Add("WBC提示", tmp);
+                                } 
+                                hy.Add("WBC结果", wbc);
+                            }
+
+                            string gran = da.Rows[j]["GRAN"].ToString();
+                            tmp = GetTiShiForShHa(dtXcg, "GRAN", gran);
+                            if (tmp != "")
+                            {
+                                if (tmp != "-1")
                                 {
-                                    hy.Add("白细胞数目箭头", "↓");
-                                }
-                                hy.Add("白细胞数目结果", wbc);
+                                    hy.Add("GRANN提示", tmp);
+                                } 
+                                hy.Add("GRANN结果", gran);
+                            }
+
+                            string granp = da.Rows[j]["GRANP"].ToString();
+                            tmp = GetTiShiForShHa(dtXcg, "GRANP", granp);
+                            if (tmp != "")
+                            {
+                                if (tmp != "-1")
+                                {
+                                    hy.Add("GRANP提示", tmp);
+                                } 
+                                hy.Add("GRANP结果", granp);
+                            }
+
+                            string plcr = da.Rows[j]["PLCR"].ToString();
+                            tmp = GetTiShiForShHa(dtXcg, "PLCR", plcr);
+                            if (tmp != "")
+                            {
+                                if (tmp != "-1")
+                                {
+                                    hy.Add("PLCR提示", tmp);
+                                } 
+                                hy.Add("PLCR结果", plcr);
                             }
                         }
                     }
-                    DataSet ncg = DbHelperMySQL.Query($"select * from zkhw_tj_ncg where id_number='{data["id_number"].ToString()}' and id_number='{data["id_number"].ToString()}' order by createtime desc LIMIT 1");
+                    #endregion
+                    #endregion
+
+                    #region 尿常规 
+                    DataTable dtNCG = grjddao.checkThresholdValues("尿常规");
+
+                    DataSet ncg = DbHelperMySQL.Query($"select * from zkhw_tj_ncg where id_number='{data["id_number"].ToString()}' and bar_code='{barcode}' order by createtime desc LIMIT 1");
                     if (ncg != null && ncg.Tables.Count > 0 && ncg.Tables[0].Rows.Count > 0)
                     {
                         DataTable da = ncg.Tables[0];
@@ -2117,33 +2292,36 @@ where 1=1";
                         hy.Add("胆红素结果", da.Rows[0]["BIL"].ToString());
                         hy.Add("蛋白质结果", da.Rows[0]["PRO"].ToString());
                         hy.Add("尿液葡萄糖结果", da.Rows[0]["GLU"].ToString());
-                        double sgdoublee = Convert.ToDouble(da.Rows[0]["SG"].ToString());
-                        if (sgdoublee > 1.025)
+                        string sg=da.Rows[0]["SG"].ToString();
+                        string tmp = GetTiShiForShHa(dtNCG, "SG", sg);
+                        if (tmp != "")
                         {
-                            hy.Add("尿比重箭头", "↑");
-                        }
-                        else if (sgdoublee < 1.015)
-                        {
-                            hy.Add("尿比重箭头", "↓");
-                        }
-                        hy.Add("尿比重结果", da.Rows[0]["SG"].ToString());
+                            if (tmp != "-1")
+                            {
+                                hy.Add("尿比重箭头", tmp);
+                            } 
+                            hy.Add("尿比重结果", sg);
+                        } 
+                             
                         hy.Add("隐血结果", da.Rows[0]["BLD"].ToString());
-                        double phdouble = Convert.ToDouble(da.Rows[0]["PH"].ToString());
-                        if (phdouble > 8)
+                        
+                        string ph = da.Rows[0]["PH"].ToString();
+                        tmp = GetTiShiForShHa(dtNCG, "PH", ph);
+                        if (tmp != "")
                         {
-                            hy.Add("酸碱度箭头", "↑");
+                            if (tmp != "-1")
+                            {
+                                hy.Add("酸碱度箭头", tmp);
+                            } 
+                            hy.Add("酸碱度结果", ph);
                         }
-                        else if (phdouble < 4.6)
-                        {
-                            hy.Add("酸碱度箭头", "↓");
-                        }
-                        hy.Add("酸碱度结果", da.Rows[0]["PH"].ToString());
+                         
                         hy.Add("维生素C结果", da.Rows[0]["Vc"].ToString());
                         hy.Add("检验1", da.Rows[0]["ZrysNCG"].ToString());
                         hy.Add("送检日期1", Convert.ToDateTime(da.Rows[0]["createtime"].ToString()).ToString("yyyy-MM-dd"));
-                    }
-
-                    //书签替换
+                    } 
+                    #endregion
+                    //书签替换 
                     foreach (var key in hy.Keys)
                     {
                         builder.MoveToBookmark(key);
@@ -2573,7 +2751,7 @@ where 1=1";
                     xdt.Add("性别", Sex(data["sex"].ToString()));
                     xdt.Add("生日", data["birthday"].ToString());
                     xdt.Add("身份证号", data["id_number"].ToString());
-                    DataSet xdts = DbHelperMySQL.Query($"select * from zkhw_tj_xdt where id_number='{data["id_number"].ToString()}' and id_number='{data["id_number"].ToString()}' order by createtime desc LIMIT 1");
+                    DataSet xdts = DbHelperMySQL.Query($"select * from zkhw_tj_xdt where id_number='{data["id_number"].ToString()}'  and bar_code='{barcode}' order by createtime desc LIMIT 1");
                     if (xdts != null && xdts.Tables.Count > 0 && xdts.Tables[0].Rows.Count > 0)
                     {
                         DataTable da = xdts.Tables[0];
@@ -2607,7 +2785,7 @@ where 1=1";
                     bc.Add("性别", Sex(data["sex"].ToString()));
                     bc.Add("生日", data["birthday"].ToString());
                     bc.Add("身份证号", data["id_number"].ToString());
-                    DataSet bcss = DbHelperMySQL.Query($"select * from zkhw_tj_bc where id_number='{data["id_number"].ToString()}' and id_number='{data["id_number"].ToString()}' order by createtime desc LIMIT 1");
+                    DataSet bcss = DbHelperMySQL.Query($"select * from zkhw_tj_bc where id_number='{data["id_number"].ToString()}' and  bar_code='{barcode}' order by createtime desc LIMIT 1");
                     if (bcss != null && bcss.Tables.Count > 0 && bcss.Tables[0].Rows.Count > 0)
                     {
                         DataTable da = bcss.Tables[0];
@@ -2654,54 +2832,44 @@ where 1=1";
                 case "结果":
                     doc = new Document(@str + $"/up/template/结果.doc");
                     builder = new DocumentBuilder(doc);
-                    var jg = new Dictionary<string, string>();
-
+                    var jg = new Dictionary<string, string>(); 
                     if (jkdata != null && jkdata.Rows.Count > 0)
                     {
+                        grjdDao grjddao1 = new grjdDao();
+                        DataTable dtSh1= grjddao1.checkThresholdValues("生化");
+                        DataTable dtXcg1 = grjddao1.checkThresholdValues("血常规");
+                        rangeJudgeForSHInfo.dttv = dtSh1;
+                        rangeJudgeForXCGInfo.dttv = dtXcg1;
                         for (int j = 0; j < jkdata.Rows.Count; j++)
                         {
+
                             string sm = string.Empty;
                             int flagxcg = 0;
                             //jktj.Add("血红蛋白", 
                             string blood_hemoglobin = jkdata.Rows[j]["blood_hemoglobin"].ToString();
-                            if (!string.IsNullOrWhiteSpace(blood_hemoglobin))
+                            string tmp=rangeJudgeForXCGInfo.GetItemResultForValue("HGB", blood_hemoglobin);
+                            if(tmp !="")
                             {
-                                if (Convert.ToDouble(blood_hemoglobin) < 110)
-                                {
-                                    sm += "血红蛋白值偏低：" + blood_hemoglobin + " g/L   ";
-                                    flagxcg = 1;
-                                }
-                                else if (Convert.ToDouble(blood_hemoglobin) > 160)
-                                {
-                                    sm += "血红蛋白偏高：" + blood_hemoglobin + " g/L   ";
-                                    flagxcg = 1;
-                                }
+                                sm += tmp;
+                                flagxcg = 1;
                             }
+                            
                             //jktj.Add("血小板", 
                             string blood_platelet = jkdata.Rows[j]["blood_platelet"].ToString();
-                            if (!string.IsNullOrWhiteSpace(blood_platelet))
+                            tmp = rangeJudgeForXCGInfo.GetItemResultForValue("PLT", blood_platelet);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(blood_platelet) < 100)
-                                {
-                                    sm += "血小板值偏低：" + blood_platelet + " mmol/L   ";
-                                    flagxcg = 1;
-                                }
-                                else if (Convert.ToDouble(blood_platelet) > 300)
-                                {
-                                    sm += "血小板偏高：" + blood_platelet + " mmol/L   ";
-                                    flagxcg = 1;
-                                }
-                            }
+                                sm += tmp;
+                                flagxcg = 1;
+                            } 
                             //jktj.Add("白细胞", 
                             string blood_leukocyte = jkdata.Rows[j]["blood_leukocyte"].ToString();
-                            if (!string.IsNullOrWhiteSpace(blood_leukocyte))
+                            tmp = rangeJudgeForXCGInfo.GetItemResultForValue("WBC", blood_leukocyte);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(blood_leukocyte) > 10)
-                                {
-                                    sm += "白细胞偏高：" + blood_leukocyte + " CELL/μL   ";
-                                    flagxcg = 1;
-                                }
-                            }
+                                sm += tmp;
+                                flagxcg = 1;
+                            } 
                             if (flagxcg == 1) sm += "\r\n";
                             int flagncg = 0;
                             //jktj.Add("尿蛋白", 
@@ -2749,165 +2917,115 @@ where 1=1";
                             //jktj.Add("空腹血糖1", 
                             int bgm = 0;
                             string blood_glucose_mmol = jkdata.Rows[j]["blood_glucose_mmol"].ToString();
-                            if (!string.IsNullOrWhiteSpace(blood_glucose_mmol))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("GLU", blood_glucose_mmol);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(blood_glucose_mmol) > 6.1)
-                                {
-                                    sm += @"血糖值偏高：" + blood_glucose_mmol + "mmol/L   ";
-                                    bgm = 1;
-                                    flagsh = 1;
-                                }
-                                else if (Convert.ToDouble(blood_glucose_mmol) < 3.9)
-                                {
-                                    sm += @"血糖值偏低：" + blood_glucose_mmol + "mmol/L   ";
-                                    bgm = 1;
-                                    flagsh = 1;
-                                }
+                                sm += tmp;
+                                bgm = 1;
+                                flagsh = 1;
                             }
+                             
                             //jktj.Add("血清谷丙转氨酶", 
                             string sgft = jkdata.Rows[j]["sgft"].ToString();
-                            if (!string.IsNullOrWhiteSpace(sgft))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("ALT", sgft);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(sgft) > 40)
-                                {
-                                    sm += @"血清谷丙转氨酶值偏高：" + sgft + "u/l   ";
-                                    flagsh = 1;
-                                }
-                            }
+                                sm += tmp; 
+                                flagsh = 1;
+                            } 
                             //jktj.Add("血清谷草转氨酶",
                             string ast = jkdata.Rows[j]["ast"].ToString();
-                            if (!string.IsNullOrWhiteSpace(ast))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("AST", ast);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(ast) > 40)
-                                {
-                                    sm += @"血清谷草转氨酶值偏高：" + ast + "u/l   ";
-                                    flagsh = 1;
-                                }
-                            }
+                                sm += tmp;
+                                flagsh = 1;
+                            } 
                             //jktj.Add("白蛋白",
                             string albumin = jkdata.Rows[j]["albumin"].ToString();
-                            if (!string.IsNullOrWhiteSpace(albumin))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("ALB", albumin);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(albumin) > 54)
-                                {
-                                    sm += @"白蛋白值偏高：" + albumin + "g/l   ";
-                                    flagsh = 1;
-                                }
-                                else if (Convert.ToDouble(albumin) < 34)
-                                {
-                                    sm += @"白蛋白值偏低：" + albumin + "g/l   ";
-                                    flagsh = 1;
-                                }
-                            }
+                                sm += tmp;
+                                flagsh = 1;
+                            } 
                             //jktj.Add("总胆红素", 
                             string total_bilirubin = jkdata.Rows[j]["total_bilirubin"].ToString();
-                            if (!string.IsNullOrWhiteSpace(total_bilirubin))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("TBIL", total_bilirubin);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(total_bilirubin) > 20)
-                                {
-                                    sm += @"总胆红素值偏高：" + total_bilirubin + "umol/l   ";
-                                    flagsh = 1;
-                                }
-                                else if (Convert.ToDouble(total_bilirubin) < 2)
-                                {
-                                    sm += @"总胆红素值偏低：" + total_bilirubin + "umol/l   ";
-                                    flagsh = 1;
-                                }
-                            }
+                                sm += tmp;
+                                flagsh = 1;
+                            } 
+                             
                             //jktj.Add("直接胆红素", 
                             string conjugated_bilirubin = jkdata.Rows[j]["conjugated_bilirubin"].ToString();
-                            if (!string.IsNullOrWhiteSpace(conjugated_bilirubin))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("DBIL", conjugated_bilirubin);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(conjugated_bilirubin) > 6.8)
-                                {
-                                    sm += @"直接胆红素值偏高：" + conjugated_bilirubin + "umol/l   ";
-                                    flagsh = 1;
-                                }
-                                else if (Convert.ToDouble(conjugated_bilirubin) < 1.7)
-                                {
-                                    sm += @"直接红素值偏低：" + conjugated_bilirubin + "umol/l   ";
-                                    flagsh = 1;
-                                }
-                            }
+                                sm += tmp;
+                                flagsh = 1;
+                            } 
 
                             //jktj.Add("血清肌酐", 
                             string scr = jkdata.Rows[j]["scr"].ToString();
-                            if (!string.IsNullOrWhiteSpace(scr))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("CREA", scr);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(scr) > 115)
-                                {
-                                    sm += @"肌酐值偏高：" + scr + "umol/l   ";
-                                    flagsh = 1;
-                                }
-                            }
+                                sm += tmp;
+                                flagsh = 1;
+                            } 
                             //jktj.Add("尿素", 
                             string blood_urea = jkdata.Rows[j]["blood_urea"].ToString();
-                            if (!string.IsNullOrWhiteSpace(blood_urea))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("UREA", blood_urea);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(blood_urea) > 8.2)
-                                {
-                                    sm += @"尿素值偏高：" + scr + "umol/l   ";
-                                    flagsh = 1;
-                                }
-                                else if (Convert.ToDouble(blood_urea) < 1.7)
-                                {
-                                    sm += @"尿素值偏低：" + blood_urea + "umol/l   ";
-                                    flagsh = 1;
-                                }
-                            }
+                                sm += tmp;
+                                flagsh = 1;
+                            } 
                             //jktj.Add("总胆固醇", 
                             string tc = jkdata.Rows[j]["tc"].ToString();
                             //jktj.Add("甘油三酯", 
                             string tg = jkdata.Rows[j]["tg"].ToString();
                             int flg = 0;
-                            if (!string.IsNullOrWhiteSpace(tc))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("CHO", tc);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(tc) > 5.2)
+                                if(tmp.IndexOf("偏高")>=0)
                                 {
                                     flg = 1;
-                                    sm += "胆固醇值偏高:" + tc + " " + "mmol/l";
+                                    sm += tmp;
                                     flagsh = 1;
-                                }
+                                } 
                             }
-                            if (!string.IsNullOrWhiteSpace(tg))
+
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("TG", tg);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(tg) > 1.7)
+                                if (tmp.IndexOf("偏高") >= 0)
                                 {
                                     flg = 1;
-                                    sm += "甘油三酯值偏高:" + tg + " " + "mmol/l";
+                                    sm += tmp;
                                     flagsh = 1;
                                 }
-                            }
+                            } 
                             //jktj.Add("低密度脂蛋白", 
                             string ldl = jkdata.Rows[j]["ldl"].ToString();
-                            if (!string.IsNullOrWhiteSpace(ldl))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("LDLC", ldl);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(ldl) > 3.9)
-                                {
-                                    sm += @"低密度脂蛋白值偏高：" + ldl + "mmol/l   ";
-                                    flagsh = 1;
-                                }
-                                else if (Convert.ToDouble(ldl) < 1.5)
-                                {
-                                    sm += @"低密度脂蛋白值偏低：" + ldl + "mmol/l   ";
-                                    flagsh = 1;
-                                }
+                                sm += tmp;
+                                flagsh = 1;
                             }
+                            
                             //jktj.Add("高密度脂蛋白", 
                             string hdl = jkdata.Rows[j]["hdl"].ToString();
-                            if (!string.IsNullOrWhiteSpace(hdl))
+                            tmp = rangeJudgeForSHInfo.GetItemResultForValue("HDLC", hdl);
+                            if (tmp != "")
                             {
-                                if (Convert.ToDouble(hdl) > 1.9)
-                                {
-                                    sm += @"高密度脂蛋白值偏高：" + hdl + "mmol/l   ";
-                                    flagsh = 1;
-                                }
-                                else if (Convert.ToDouble(hdl) < 0.9)
-                                {
-                                    sm += @"高密度脂蛋白值偏低：" + hdl + "mmol/l   ";
-                                    flagsh = 1;
-                                }
-                            }
+                                sm += tmp;
+                                flagsh = 1;
+                            } 
                             if (flagsh == 1) sm += "\r\n";
 
                             int gyyfiag = 0;
@@ -3025,33 +3143,48 @@ where 1=1";
                     break;
                 #endregion
 
-                #region 老年人生活自理能力评估
+                #region 老年人生活自理能力评估   //这样子查找有问题
                 case "老年人生活自理能力评估":
                     doc = new Document(@str + $"/up/template/老年人生活自理能力评估.doc");
                     builder = new DocumentBuilder(doc);
                     var zlpg = new Dictionary<string, string>();
-                    DataSet zlpgs = DbHelperMySQL.Query($"select * from elderly_selfcare_estimate where id_number='{data["id_number"].ToString()}' order by create_time desc LIMIT 1");
-                    if (zlpgs != null && zlpgs.Tables.Count > 0 && zlpgs.Tables[0].Rows.Count > 0)
+                    if (jkdata != null && jkdata.Rows.Count > 0)
                     {
-                        DataTable da = zlpgs.Tables[0];
-                        for (int j = 0; j < da.Rows.Count; j++)
+                        for (int h = 0; h < jkdata.Rows.Count; h++)
                         {
-                            string zz = da.Rows[j]["answer_result"].ToString();
-                            if (zz.IndexOf(',') >= 0)
+                            string _id = jkdata.Rows[h]["id"].ToString();
+                            DataSet zlpgs = null;
+                            if (_id=="")
                             {
-                                string[] y = zz.Split(',');
-                                for (int i = 0; i < y.Length; i++)
-                                {
-                                    zlpg.Add("评分" + (i + 1), y[i]);
-                                }
+                                zlpgs = DbHelperMySQL.Query($"select * from elderly_selfcare_estimate where id_number='{data["id_number"].ToString()}' order by create_time desc LIMIT 1");
                             }
                             else
                             {
-                                zlpg.Add("评分1", zz);
+                                zlpgs = DbHelperMySQL.Query($"select * from elderly_selfcare_estimate where exam_id='{_id}' order by create_time desc LIMIT 1");
                             }
-                            zlpg.Add("总分", da.Rows[j]["total_score"].ToString());
+                            if (zlpgs != null && zlpgs.Tables.Count > 0 && zlpgs.Tables[0].Rows.Count > 0)
+                            {
+                                DataTable da = zlpgs.Tables[0];
+                                for (int j = 0; j < da.Rows.Count; j++)
+                                {
+                                    string zz = da.Rows[j]["answer_result"].ToString();
+                                    if (zz.IndexOf(',') >= 0)
+                                    {
+                                        string[] y = zz.Split(',');
+                                        for (int i = 0; i < y.Length; i++)
+                                        {
+                                            zlpg.Add("评分" + (i + 1), y[i]);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        zlpg.Add("评分1", zz);
+                                    }
+                                    zlpg.Add("总分", da.Rows[j]["total_score"].ToString());
+                                }
+                            }
                         }
-                    }
+                    } 
                     //书签替换
                     foreach (var key in zlpg.Keys)
                     {
@@ -3076,206 +3209,222 @@ where 1=1";
                         }
                     }
                     zytz.Add("姓名", data["name"].ToString());
-                    DataSet zytzs = DbHelperMySQL.Query($"select * from elderly_tcm_record where id_number='{data["id_number"].ToString()}' order by create_time desc LIMIT 1");
-                    if (zytzs != null && zytzs.Tables.Count > 0 && zytzs.Tables[0].Rows.Count > 0)
+                    if (jkdata != null && jkdata.Rows.Count > 0)
                     {
-                        DataTable da = zytzs.Tables[0];
-                        for (int j = 0; j < da.Rows.Count; j++)
+                        for (int h = 0; h < jkdata.Rows.Count; h++)
                         {
-                            string[] zz = da.Rows[j]["answer_result"].ToString().Split('|');
-                            for (int i = 0; i < zz.Length; i++)
+                            string _id = jkdata.Rows[h]["id"].ToString();
+                            DataSet zytzs = null;
+                            if (_id=="")
                             {
-                                int aa = Int32.Parse(zz[i].Split(':')[0]) - 1;
-                                zytz.Add("a" + aa + zz[i].Split(':')[1], "√");
+                                zytzs = DbHelperMySQL.Query($"select * from elderly_tcm_record where id_number='{data["id_number"].ToString()}' order by create_time desc LIMIT 1");
                             }
-                            int qz = 0;
-                            qz = Convert.ToInt32(da.Rows[j]["qixuzhi_score"]);
-                            zytz.Add("气虚质得分", qz.ToString());
-                            if (da.Rows[j]["qixuzhi_result"].ToString() == "1")
+                            else
                             {
-                                zytz.Add("气虚质是", "√");
-                                string qx = da.Rows[j]["tcm_guidance"].ToString();
-                                if (qx.IndexOf(',') >= 0)
+                                zytzs = DbHelperMySQL.Query($"select * from elderly_tcm_record where exam_id='{_id}' order by create_time desc LIMIT 1");
+                            }
+                            if (zytzs != null && zytzs.Tables.Count > 0 && zytzs.Tables[0].Rows.Count > 0)
+                            {
+                                DataTable da = zytzs.Tables[0];
+                                for (int j = 0; j < da.Rows.Count; j++)
                                 {
-                                    string[] y = qx.Split(',');
-                                    for (int i = 0; i < y.Length; i++)
+                                    string[] zz = da.Rows[j]["answer_result"].ToString().Split('|');
+                                    for (int i = 0; i < zz.Length; i++)
                                     {
-                                        zytz.Add("气虚质" + y[i], "√");
+                                        int aa = Int32.Parse(zz[i].Split(':')[0]) - 1;
+                                        zytz.Add("a" + aa + zz[i].Split(':')[1], "√");
                                     }
-                                }
-                                else
-                                {
-                                    zytz.Add("气虚质" + qx, "√");
-                                }
-                            }
-
-                            qz = Convert.ToInt32(da.Rows[j]["yangxuzhi_score"]);
-                            zytz.Add("阳虚质得分", qz.ToString());
-                            if (da.Rows[j]["yangxuzhi_result"].ToString() == "1")
-                            {
-                                zytz.Add("阳虚质是", "√");
-                                string qx = da.Rows[j]["tcm_guidance"].ToString();
-                                if (qx.IndexOf(',') >= 0)
-                                {
-                                    string[] y = qx.Split(',');
-                                    for (int i = 0; i < y.Length; i++)
+                                    int qz = 0;
+                                    qz = Convert.ToInt32(da.Rows[j]["qixuzhi_score"]);
+                                    zytz.Add("气虚质得分", qz.ToString());
+                                    if (da.Rows[j]["qixuzhi_result"].ToString() == "1")
                                     {
-                                        zytz.Add("阳虚质" + y[i], "√");
+                                        zytz.Add("气虚质是", "√");
+                                        string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                        if (qx.IndexOf(',') >= 0)
+                                        {
+                                            string[] y = qx.Split(',');
+                                            for (int i = 0; i < y.Length; i++)
+                                            {
+                                                zytz.Add("气虚质" + y[i], "√");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            zytz.Add("气虚质" + qx, "√");
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    zytz.Add("阳虚质" + qx, "√");
-                                }
-                            }
 
-                            qz = Convert.ToInt32(da.Rows[j]["yinxuzhi_score"]);
-                            zytz.Add("阴虚质得分", qz.ToString());
-                            if (da.Rows[j]["yinxuzhi_result"].ToString() == "1")
-                            {
-                                zytz.Add("阴虚质是", "√");
-                                string qx = da.Rows[j]["tcm_guidance"].ToString();
-                                if (qx.IndexOf(',') >= 0)
-                                {
-                                    string[] y = qx.Split(',');
-                                    for (int i = 0; i < y.Length; i++)
+                                    qz = Convert.ToInt32(da.Rows[j]["yangxuzhi_score"]);
+                                    zytz.Add("阳虚质得分", qz.ToString());
+                                    if (da.Rows[j]["yangxuzhi_result"].ToString() == "1")
                                     {
-                                        zytz.Add("阴虚质" + y[i], "√");
+                                        zytz.Add("阳虚质是", "√");
+                                        string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                        if (qx.IndexOf(',') >= 0)
+                                        {
+                                            string[] y = qx.Split(',');
+                                            for (int i = 0; i < y.Length; i++)
+                                            {
+                                                zytz.Add("阳虚质" + y[i], "√");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            zytz.Add("阳虚质" + qx, "√");
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    zytz.Add("阴虚质" + qx, "√");
-                                }
-                            }
 
-                            qz = Convert.ToInt32(da.Rows[j]["tanshizhi_score"]);
-                            zytz.Add("痰湿质得分", qz.ToString());
-                            if (da.Rows[j]["tanshizhi_result"].ToString() == "1")
-                            {
-                                zytz.Add("痰湿质是", "√");
-                                string qx = da.Rows[j]["tcm_guidance"].ToString();
-                                if (qx.IndexOf(',') >= 0)
-                                {
-                                    string[] y = qx.Split(',');
-                                    for (int i = 0; i < y.Length; i++)
+                                    qz = Convert.ToInt32(da.Rows[j]["yinxuzhi_score"]);
+                                    zytz.Add("阴虚质得分", qz.ToString());
+                                    if (da.Rows[j]["yinxuzhi_result"].ToString() == "1")
                                     {
-                                        zytz.Add("痰湿质" + y[i], "√");
+                                        zytz.Add("阴虚质是", "√");
+                                        string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                        if (qx.IndexOf(',') >= 0)
+                                        {
+                                            string[] y = qx.Split(',');
+                                            for (int i = 0; i < y.Length; i++)
+                                            {
+                                                zytz.Add("阴虚质" + y[i], "√");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            zytz.Add("阴虚质" + qx, "√");
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    zytz.Add("痰湿质" + qx, "√");
-                                }
-                            }
 
-                            qz = Convert.ToInt32(da.Rows[j]["shirezhi_score"]);
-                            zytz.Add("湿热质得分", qz.ToString());
-                            if (da.Rows[j]["shirezhi_result"].ToString() == "1")
-                            {
-                                zytz.Add("湿热质是", "√");
-                                string qx = da.Rows[j]["tcm_guidance"].ToString();
-                                if (qx.IndexOf(',') >= 0)
-                                {
-                                    string[] y = qx.Split(',');
-                                    for (int i = 0; i < y.Length; i++)
+                                    qz = Convert.ToInt32(da.Rows[j]["tanshizhi_score"]);
+                                    zytz.Add("痰湿质得分", qz.ToString());
+                                    if (da.Rows[j]["tanshizhi_result"].ToString() == "1")
                                     {
-                                        zytz.Add("湿热质" + y[i], "√");
+                                        zytz.Add("痰湿质是", "√");
+                                        string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                        if (qx.IndexOf(',') >= 0)
+                                        {
+                                            string[] y = qx.Split(',');
+                                            for (int i = 0; i < y.Length; i++)
+                                            {
+                                                zytz.Add("痰湿质" + y[i], "√");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            zytz.Add("痰湿质" + qx, "√");
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    zytz.Add("湿热质" + qx, "√");
-                                }
-                            }
 
-                            qz = Convert.ToInt32(da.Rows[j]["xueyuzhi_score"]);
-                            zytz.Add("血瘀质得分", qz.ToString());
-                            if (da.Rows[j]["xueyuzhi_result"].ToString() == "1")
-                            {
-                                zytz.Add("血瘀质是", "√");
-                                string qx = da.Rows[j]["tcm_guidance"].ToString();
-                                if (qx.IndexOf(',') >= 0)
-                                {
-                                    string[] y = qx.Split(',');
-                                    for (int i = 0; i < y.Length; i++)
+                                    qz = Convert.ToInt32(da.Rows[j]["shirezhi_score"]);
+                                    zytz.Add("湿热质得分", qz.ToString());
+                                    if (da.Rows[j]["shirezhi_result"].ToString() == "1")
                                     {
-                                        zytz.Add("血瘀质" + y[i], "√");
+                                        zytz.Add("湿热质是", "√");
+                                        string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                        if (qx.IndexOf(',') >= 0)
+                                        {
+                                            string[] y = qx.Split(',');
+                                            for (int i = 0; i < y.Length; i++)
+                                            {
+                                                zytz.Add("湿热质" + y[i], "√");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            zytz.Add("湿热质" + qx, "√");
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    zytz.Add("血瘀质" + qx, "√");
-                                }
-                            }
 
-                            qz = Convert.ToInt32(da.Rows[j]["qiyuzhi_score"]);
-                            zytz.Add("气郁质得分", qz.ToString());
-                            if (da.Rows[j]["qiyuzhi_result"].ToString() == "1")
-                            {
-                                zytz.Add("气郁质是", "√");
-                                string qx = da.Rows[j]["tcm_guidance"].ToString();
-                                if (qx.IndexOf(',') >= 0)
-                                {
-                                    string[] y = qx.Split(',');
-                                    for (int i = 0; i < y.Length; i++)
+                                    qz = Convert.ToInt32(da.Rows[j]["xueyuzhi_score"]);
+                                    zytz.Add("血瘀质得分", qz.ToString());
+                                    if (da.Rows[j]["xueyuzhi_result"].ToString() == "1")
                                     {
-                                        zytz.Add("气郁质" + y[i], "√");
+                                        zytz.Add("血瘀质是", "√");
+                                        string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                        if (qx.IndexOf(',') >= 0)
+                                        {
+                                            string[] y = qx.Split(',');
+                                            for (int i = 0; i < y.Length; i++)
+                                            {
+                                                zytz.Add("血瘀质" + y[i], "√");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            zytz.Add("血瘀质" + qx, "√");
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    zytz.Add("气郁质" + qx, "√");
-                                }
-                            }
 
-                            qz = Convert.ToInt32(da.Rows[j]["tebingzhi_sorce"]);
-                            zytz.Add("特禀质得分", qz.ToString());
-                            if (da.Rows[j]["tebingzhi_result"].ToString() == "1")
-                            {
-                                zytz.Add("特禀质是", "√");
-                                string qx = da.Rows[j]["tcm_guidance"].ToString();
-                                if (qx.IndexOf(',') >= 0)
-                                {
-                                    string[] y = qx.Split(',');
-                                    for (int i = 0; i < y.Length; i++)
+                                    qz = Convert.ToInt32(da.Rows[j]["qiyuzhi_score"]);
+                                    zytz.Add("气郁质得分", qz.ToString());
+                                    if (da.Rows[j]["qiyuzhi_result"].ToString() == "1")
                                     {
-                                        zytz.Add("特禀质" + y[i], "√");
+                                        zytz.Add("气郁质是", "√");
+                                        string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                        if (qx.IndexOf(',') >= 0)
+                                        {
+                                            string[] y = qx.Split(',');
+                                            for (int i = 0; i < y.Length; i++)
+                                            {
+                                                zytz.Add("气郁质" + y[i], "√");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            zytz.Add("气郁质" + qx, "√");
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    zytz.Add("特禀质" + qx, "√");
-                                }
-                            }
 
-                            qz = Convert.ToInt32(da.Rows[j]["pinghezhi_sorce"]);
-                            zytz.Add("平和质得分", qz.ToString());
-                            if (da.Rows[j]["pinghezhi_result"].ToString() == "1")
-                            {
-                                zytz.Add("平和质是", "√");
-                                string qx = da.Rows[j]["tcm_guidance"].ToString();
-                                if (qx.IndexOf(',') >= 0)
-                                {
-                                    string[] y = qx.Split(',');
-                                    for (int i = 0; i < y.Length; i++)
+                                    qz = Convert.ToInt32(da.Rows[j]["tebingzhi_sorce"]);
+                                    zytz.Add("特禀质得分", qz.ToString());
+                                    if (da.Rows[j]["tebingzhi_result"].ToString() == "1")
                                     {
-                                        zytz.Add("平和质" + y[i], "√");
+                                        zytz.Add("特禀质是", "√");
+                                        string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                        if (qx.IndexOf(',') >= 0)
+                                        {
+                                            string[] y = qx.Split(',');
+                                            for (int i = 0; i < y.Length; i++)
+                                            {
+                                                zytz.Add("特禀质" + y[i], "√");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            zytz.Add("特禀质" + qx, "√");
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    zytz.Add("平和质" + qx, "√");
+
+                                    qz = Convert.ToInt32(da.Rows[j]["pinghezhi_sorce"]);
+                                    zytz.Add("平和质得分", qz.ToString());
+                                    if (da.Rows[j]["pinghezhi_result"].ToString() == "1")
+                                    {
+                                        zytz.Add("平和质是", "√");
+                                        string qx = da.Rows[j]["tcm_guidance"].ToString();
+                                        if (qx.IndexOf(',') >= 0)
+                                        {
+                                            string[] y = qx.Split(',');
+                                            for (int i = 0; i < y.Length; i++)
+                                            {
+                                                zytz.Add("平和质" + y[i], "√");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            zytz.Add("平和质" + qx, "√");
+                                        }
+                                    }
+
+                                    string time = da.Rows[j]["test_date"].ToString();
+                                    zytz.Add("填表日期年", time?.Split('-')[0]);
+                                    zytz.Add("填表日期月", time?.Split('-')[1]);
+                                    zytz.Add("填表日期日", time?.Split('-')[2].Split(' ')[0]);
+                                    zytz.Add("医生签名", da.Rows[j]["test_doctor"].ToString());
                                 }
                             }
-
-                            string time = da.Rows[j]["test_date"].ToString();
-                            zytz.Add("填表日期年", time?.Split('-')[0]);
-                            zytz.Add("填表日期月", time?.Split('-')[1]);
-                            zytz.Add("填表日期日", time?.Split('-')[2].Split(' ')[0]);
-                            zytz.Add("医生签名", da.Rows[j]["test_doctor"].ToString());
                         }
                     }
+                    
                     //书签替换
                     foreach (var key in zytz.Keys)
                     {
@@ -4023,9 +4172,9 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                         string sql = string.Format("Delete From elderly_tcm_record where id='{0}'", data.Rows[i]["id"].ToString());
                         sqllist.Add(sql);
 
-                        sqllist.Add($@"insert into elderly_tcm_record (id,name,archive_no,id_number,test_date,answer_result,qixuzhi_score,qixuzhi_result,yangxuzhi_score,yangxuzhi_result,yinxuzhi_score,yinxuzhi_result,tanshizhi_score,tanshizhi_result,shirezhi_score,shirezhi_result,xueyuzhi_score,xueyuzhi_result,qiyuzhi_score,qiyuzhi_result,tebingzhi_sorce,tebingzhi_result,pinghezhi_sorce,pinghezhi_result,test_doctor,tcm_guidance,create_user,create_name,create_org,create_org_name,create_time,upload_status) 
+                        sqllist.Add($@"insert into elderly_tcm_record (id,name,archive_no,id_number,test_date,answer_result,qixuzhi_score,qixuzhi_result,yangxuzhi_score,yangxuzhi_result,yinxuzhi_score,yinxuzhi_result,tanshizhi_score,tanshizhi_result,shirezhi_score,shirezhi_result,xueyuzhi_score,xueyuzhi_result,qiyuzhi_score,qiyuzhi_result,tebingzhi_sorce,tebingzhi_result,pinghezhi_sorce,pinghezhi_result,test_doctor,tcm_guidance,create_user,create_name,create_org,create_org_name,create_time,upload_status,exam_id) 
 values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.Rows[i]["aichive_no"])},{Ifnull(data.Rows[i]["id_number"])},{Ifnull(data.Rows[i]["test_date"])},{Ifnull(data.Rows[i]["answer_result"])},{Ifnull(data.Rows[i]["qixuzhi_score"])},{Ifnull(data.Rows[i]["qixuzhi_result"])},{Ifnull(data.Rows[i]["yangxuzhi_score"])},{Ifnull(data.Rows[i]["yangxuzhi_result"])},{Ifnull(data.Rows[i]["yinxuzhi_score"])},{Ifnull(data.Rows[i]["yinxuzhi_result"])},{Ifnull(data.Rows[i]["tanshizhi_score"])},{Ifnull(data.Rows[i]["tanshizhi_result"])},{Ifnull(data.Rows[i]["shirezhi_score"])},{Ifnull(data.Rows[i]["shirezhi_result"])},{Ifnull(data.Rows[i]["xueyuzhi_score"])},{Ifnull(data.Rows[i]["xueyuzhi_result"])},{Ifnull(data.Rows[i]["qiyuzhi_score"])},{Ifnull(data.Rows[i]["qiyuzhi_result"])},{Ifnull(data.Rows[i]["tebingzhi_sorce"])},{Ifnull(data.Rows[i]["tebingzhi_result"])},{Ifnull(data.Rows[i]["pinghezhi_sorce"])},{Ifnull(data.Rows[i]["pinghezhi_result"])},{Ifnull(data.Rows[i]["test_doctor"])},{Ifnull(data.Rows[i]["tcm_guidance"])},
-{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["upload_status"])}
+{Ifnull(data.Rows[i]["create_user"])},{Ifnull(data.Rows[i]["create_name"])},{Ifnull(data.Rows[i]["create_org"])},{Ifnull(data.Rows[i]["create_org_name"])},{Ifnull(Convert.ToDateTime(data.Rows[i]["create_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"))},{Ifnull(data.Rows[i]["upload_status"])},{Ifnull(data.Rows[i]["exam_id"])}
 );");
                         nlrzyyjkid += $"'{data.Rows[i]["id"]}',";
                     }
@@ -4535,7 +4684,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 9 || e.ColumnIndex == 10)
+            if (e.ColumnIndex == 9 || e.ColumnIndex == 10 || e.ColumnIndex == 11)
             {
                 string t = e.Value.ToString();
                 if (t == "1")

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using zkhwClient.dao;
 
 namespace zkhwClient
 {
@@ -356,6 +357,289 @@ namespace zkhwClient
             newRow["name"] = "基诺族";
             dtno.Rows.Add(newRow);
             return dtno;
-        } 
+        }
+
+        public static int JudgeValueForSh(DataTable dttv, shenghuaBean sh)
+        {
+            int flag = 1;
+            if (rangeJudgeForSHInfo.dttv != null)
+            {
+                rangeJudgeForSHInfo.dttv.Clear();
+            }
+            rangeJudgeForSHInfo.dttv = dttv.Copy();
+            flag = rangeJudgeForSHInfo.GetResultSh("ALT", sh.ALT);
+            if (flag <= 2)
+            {
+               int  a = rangeJudgeForSHInfo.GetResultSh("AST", sh.AST);
+                if(a>flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForSHInfo.GetResultSh("TBIL", sh.TBIL);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForSHInfo.GetResultSh("DBIL", sh.DBIL);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForSHInfo.GetResultSh("CREA", sh.Crea);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForSHInfo.GetResultSh("UREA", sh.UREA);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForSHInfo.GetResultSh("GLU", sh.GLU);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForSHInfo.GetResultSh("TG", sh.TG);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForSHInfo.GetResultSh("CHO", sh.CHO);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForSHInfo.GetResultSh("HDLC", sh.HDL_C);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForSHInfo.GetResultSh("LDLC", sh.LDL_C);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            return flag;
+        }
+
+        public static int JudgeValueForXCG(DataTable dttv, xuechangguiBean xcg)
+        {
+            int flag = 1;
+            if (rangeJudgeForXCGInfo.dttv != null)
+            {
+                rangeJudgeForXCGInfo.dttv.Clear();
+            }
+            rangeJudgeForXCGInfo.dttv = dttv.Copy();
+            flag = rangeJudgeForXCGInfo.GetResultXCG("WBC", xcg.WBC);
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForXCGInfo.GetResultXCG("RBC", xcg.RBC);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForXCGInfo.GetResultXCG("PCT", xcg.PCT);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForXCGInfo.GetResultXCG("PLT", xcg.PLT);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForXCGInfo.GetResultXCG("HGB", xcg.HGB);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForXCGInfo.GetResultXCG("HCT", xcg.HCT);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForXCGInfo.GetResultXCG("MCV", xcg.MCV);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForXCGInfo.GetResultXCG("MCH", xcg.MCH);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForXCGInfo.GetResultXCG("MCHC", xcg.MCHC);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForXCGInfo.GetResultXCG("RDWCV", xcg.RDW_CV);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForXCGInfo.GetResultXCG("RDWSD", xcg.RDW_SD);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForXCGInfo.GetResultXCG("NEUT", xcg.NEUT);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForXCGInfo.GetResultXCG("NEUTP", xcg.NEUTP);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForXCGInfo.GetResultXCG("LYM", xcg.LYM);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForXCGInfo.GetResultXCG("LYMP", xcg.LYMP);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForXCGInfo.GetResultXCG("MPV", xcg.MPV);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForXCGInfo.GetResultXCG("PDW", xcg.PDW);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForXCGInfo.GetResultXCG("MXD", xcg.MXD);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForXCGInfo.GetResultXCG("MXDP", xcg.MXDP);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            return flag;
+        }
+
+        public static void SetComboBoxInfo(ComboBox cb,DataTable dt,string  DisplayMember,string ValueMember)
+        {
+            DataRow dr = dt.NewRow();
+            dr[0] = null;
+            dr[1] = "--请选择--";
+            dt.Rows.InsertAt(dr, 0);
+
+            cb.DataSource = dt;
+            cb.DisplayMember = DisplayMember;//显示给用户的数据集表项
+            cb.ValueMember = ValueMember;//操作时获取的值 
+        }
+
+        public static void SetComboBoxInfo(ComboBox cb, DataTable dt)
+        {
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                List<ComboBoxData> ts = Result.ToDataList<ComboBoxData>(dt);
+                Result.Bind(cb, ts, "Name", "ID", "--请选择--");
+            } 
+        }
+
+        public static void SetComboBoxSelectIndex(ComboBox cb, string code)
+        {
+            if (code == null || code == "") return;
+            for (int i = 0; i < cb.Items.Count; i++)
+            {
+                ComboBoxData obj = (ComboBoxData)cb.Items[i];
+                if (obj.ID == code)
+                {
+                    cb.SelectedIndex = i;
+                    break;
+                }
+            }
+        }
     }
 }

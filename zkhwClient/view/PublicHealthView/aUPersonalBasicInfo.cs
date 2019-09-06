@@ -21,7 +21,8 @@ namespace zkhwClient.view.PublicHealthView
         DataTable goodsList1 = new DataTable();//既往史外伤清单表 traumatism_record
         DataTable goodsList2 = new DataTable();//既往史输血清单表 metachysis_record
         DataTable goodsList3 = new DataTable();//家族史表 family_record
-
+        public string oldname = "";
+        public string oldidnumber = "";
 
         public aUPersonalBasicInfo()
         {
@@ -426,8 +427,25 @@ namespace zkhwClient.view.PublicHealthView
             resident_base_infoBean.birthday = this.dateTimePicker1.Text;
             resident_base_infoBean.id_number = this.textBox12.Text.Replace(" ", "");
             if (resident_base_infoBean.id_number=="" || resident_base_infoBean.id_number.Length!=18) {
-                MessageBox.Show("身份证号码不正确!");return;
+                MessageBox.Show("身份证号码不正确!");
+                return;
             }
+            else
+            {
+                //判断下身份证号不能重复
+                DataTable dt = personalBasicInfoService.query(resident_base_infoBean.id_number);
+                if(dt.Rows.Count>0)
+                {
+                    if(dt.Rows[0]["archive_no"].ToString()!= resident_base_infoBean.archive_no)
+                    {
+                        MessageBox.Show("身份证号码已经使用!");
+                        return;
+                    }
+                }
+            }
+            resident_base_infoBean.address= this.textBox44.Text.Replace(" ", "");
+            resident_base_infoBean.residence_address = this.textBox46.Text.Replace(" ", "");
+
             resident_base_infoBean.company = this.textBox14.Text.Replace(" ", "");
             resident_base_infoBean.phone = this.textBox16.Text.Replace(" ", "");
             resident_base_infoBean.link_name = this.textBox18.Text.Replace(" ", "");
@@ -639,8 +657,21 @@ namespace zkhwClient.view.PublicHealthView
             {
                 resident_base_infoBean.is_signing = "1";
             }
-
-            bool isfalse = personalBasicInfoService.aUpersonalBasicInfo(resident_base_infoBean, id, goodsList, goodsList0, goodsList1, goodsList2, goodsList3);
+            int intbian = 0;
+            if(oldname != resident_base_infoBean.name)
+            {
+                intbian = 1;  //姓名改变
+            }
+            if (oldidnumber != resident_base_infoBean.id_number)
+            {
+                intbian = 2;   //身份证号改变
+            }
+            if (oldname != resident_base_infoBean.name && oldidnumber != resident_base_infoBean.id_number)
+            {
+                intbian = 3;   //两个都改变了
+            }
+            
+            bool isfalse = personalBasicInfoService.aUpersonalBasicInfo(resident_base_infoBean, id, goodsList, goodsList0, goodsList1, goodsList2, goodsList3, intbian);
             if (isfalse)
             {
                 this.DialogResult = DialogResult.OK;

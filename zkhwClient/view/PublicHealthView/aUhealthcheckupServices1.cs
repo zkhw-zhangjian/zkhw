@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -11,6 +12,9 @@ namespace zkhwClient.view.PublicHealthView
         private string _laonianrenshenghuozili = "n";
         private string _barCode = "";
         public string id = "";
+
+        private string _residentbaseinfoid = "";
+
         healthCheckupDao hcd = new healthCheckupDao();
         public aUhealthcheckupServices1()
         {
@@ -81,9 +85,92 @@ namespace zkhwClient.view.PublicHealthView
                     this.checkBox21.Checked = false;
 
                     _barCode= dt.Rows[0]["bar_code"].ToString();
+                    #region   老 高 糖 精 结 贫 签约
+                    if(dt.Rows[0]["is_hypertension"]!=null)
+                    {
+                        string tmp = dt.Rows[0]["is_hypertension"].ToString();
+                        if (tmp == "") tmp = "0";
+                        if(int.Parse(tmp)==1)
+                        {
+                            checkBox37.Checked = true;
+                        }
+                        else
+                        {
+                            checkBox37.Checked = false;
+                        }
+                    }
 
+                    if (dt.Rows[0]["is_diabetes"] != null)
+                    {
+                        string tmp = dt.Rows[0]["is_diabetes"].ToString();
+                        if (tmp == "") tmp = "0";
+                        if (int.Parse(tmp) == 1)
+                        {
+                            checkBox38.Checked = true;
+                        }
+                        else
+                        {
+                            checkBox38.Checked = false;
+                        }
+                    }
+
+                    if (dt.Rows[0]["is_psychosis"] != null)
+                    {
+                        string tmp = dt.Rows[0]["is_psychosis"].ToString();
+                        if (tmp == "") tmp = "0";
+                        if (int.Parse(tmp) == 1)
+                        {
+                            checkBox39.Checked = true;
+                        }
+                        else
+                        {
+                            checkBox39.Checked = false;
+                        }
+                    }
+                    if (dt.Rows[0]["is_tuberculosis"] != null)
+                    {
+                        string tmp = dt.Rows[0]["is_tuberculosis"].ToString();
+                        if (tmp == "") tmp = "0";
+                        if (int.Parse(tmp) == 1)
+                        {
+                            checkBox40.Checked = true;
+                        }
+                        else
+                        {
+                            checkBox40.Checked = false;
+                        }
+                    }
+                    if (dt.Rows[0]["is_poor"] != null)
+                    {
+                        string tmp = dt.Rows[0]["is_poor"].ToString();
+                        if (tmp == "") tmp = "0";
+                        if (int.Parse(tmp) == 1)
+                        {
+                            checkBox41.Checked = true;
+                        }
+                        else
+                        {
+                            checkBox41.Checked = false;
+                        }
+                    }
+                    if (dt.Rows[0]["is_signing"] != null)
+                    {
+                        string tmp = dt.Rows[0]["is_signing"].ToString();
+                        if (tmp == "") tmp = "0";
+                        if (int.Parse(tmp) == 1)
+                        {
+                            checkBox42.Checked = true;
+                        }
+                        else
+                        {
+                            checkBox42.Checked = false;
+                        }
+                    }
+                    #endregion
+
+                    _residentbaseinfoid= dt.Rows[0]["resident_base_info_id"].ToString();
                     //将ctr转换成CheckBox并赋值给ck
-                    string symptom=dt.Rows[0]["symptom"].ToString();
+                    string symptom =dt.Rows[0]["symptom"].ToString();
                     if (symptom != "" && symptom.IndexOf(',') > -1)
                     {
                         string[] sym = symptom.Split(',');
@@ -917,12 +1004,77 @@ namespace zkhwClient.view.PublicHealthView
             };
             return per;
         }
+        private bool SetResult(bean.physical_examination_recordBean per)
+        {
+            bool ret = false;
+            List<string> _lst = new List<string>();
+            string sql = hcd.GetaddPhysicalExaminationRecordSql1(per);
+            _lst.Add(sql);
+
+            sql = string.Format(@"delete from resident_diseases where resident_base_info_id='{0}' 
+                       and (disease_type='2' or disease_type='3' or disease_type='8' or disease_type='9')", _residentbaseinfoid);
+            _lst.Add(sql);
+
+            int _hypertension = 0;
+            if (checkBox37.Checked == true)
+            {
+                sql = string.Format(@"Insert Into resident_diseases(resident_base_info_id,disease_type,disease_name)
+                       values('{0}','2','高血压')", _residentbaseinfoid);
+                _lst.Add(sql);
+                _hypertension = 1;
+            }
+
+            
+            int _diabetes = 0;
+            if (checkBox38.Checked == true)
+            {
+                sql = string.Format(@"Insert Into resident_diseases(resident_base_info_id,disease_type,disease_name)
+                       values('{0}','3','糖尿病')", _residentbaseinfoid);
+                _lst.Add(sql);
+                _diabetes = 1;
+            }
+
+            int _psychosis = 0;
+            if (checkBox39.Checked == true)
+            {
+                sql = string.Format(@"Insert Into resident_diseases(resident_base_info_id,disease_type,disease_name)
+                       values('{0}','8','严重精神障碍')", _residentbaseinfoid);
+                _lst.Add(sql);
+                _psychosis = 1;
+            }
+
+            int _tuberculosis = 0;
+            if (checkBox40.Checked == true)
+            {
+                sql = string.Format(@"Insert Into resident_diseases(resident_base_info_id,disease_type,disease_name)
+                       values('{0}','9','结核病')", _residentbaseinfoid);
+                _lst.Add(sql);
+                _tuberculosis = 1;
+            }
+
+            string  _poor = "0";
+            if (checkBox41.Checked == true) _poor = "1";
+
+            int _signing = 0;
+            if (checkBox42.Checked == true) _signing = 1;
+
+            sql = string.Format(@"Update resident_base_info set is_hypertension={0},is_diabetes={1},is_psychosis={2},
+                 is_tuberculosis={3},is_poor='{4}',is_signing={5} where id_number='{6}' ", _hypertension, _diabetes, _psychosis, _tuberculosis, _poor,_signing, this.textBox119.Text);
+            _lst.Add(sql);
+
+            int r = DbHelperMySQL.ExecuteSqlTran(_lst);
+            if(r>0)
+            {
+                ret = true;
+            }
+            return ret;
+        }
         private void button4_Click(object sender, EventArgs e)
         {
             bean.physical_examination_recordBean per = GetControlValues();
             if (per == null) return;
             //以下页面未用 数据库字段格式要求
-            bool isfalse = hcd.addPhysicalExaminationRecord1(per);
+            bool isfalse = SetResult(per);// hcd.addPhysicalExaminationRecord1(per);
             if (isfalse)
             {
                 //this.DialogResult = DialogResult.OK;
@@ -1101,7 +1253,8 @@ namespace zkhwClient.view.PublicHealthView
             bean.physical_examination_recordBean per = GetControlValues();
             if (per == null) return;
             //以下页面未用 数据库字段格式要求
-            bool isfalse = hcd.addPhysicalExaminationRecord1(per);
+            //bool isfalse = hcd.addPhysicalExaminationRecord1(per);
+            bool isfalse = SetResult(per);
             if (isfalse)
             {
                 //this.DialogResult = DialogResult.OK;
@@ -1125,7 +1278,8 @@ namespace zkhwClient.view.PublicHealthView
             bean.physical_examination_recordBean per = GetControlValues();
             if (per == null) return;
             //以下页面未用 数据库字段格式要求
-            bool isfalse = hcd.addPhysicalExaminationRecord1(per);
+            //bool isfalse = hcd.addPhysicalExaminationRecord1(per);
+            bool isfalse = SetResult(per);
             if (isfalse)
             {
                 //this.DialogResult = DialogResult.OK;

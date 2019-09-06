@@ -384,8 +384,12 @@ namespace zkhwClient.view.updateTjResult
                 string ph = dtbichao.Rows[0]["PH"].ToString();
                 if (ph != "")
                 { 
-                    double phdouble = double.Parse(ph);
-                    _result = GetJudgeResultForPH(phdouble); 
+                    double phdouble = 0;
+                    bool a = double.TryParse(ph, out phdouble);
+                    if (a==true)
+                    {
+                        _result = GetJudgeResultForPH(phdouble);
+                    } 
                 }
                 this.textBox10.Text = ph;
 
@@ -396,8 +400,12 @@ namespace zkhwClient.view.updateTjResult
                 string sg=dtbichao.Rows[0]["SG"].ToString();
                 if (sg != "")
                 {
-                    double sgdouble = double.Parse(sg);
-                    GetJudgeResultForSG(sgdouble); 
+                    double sgdouble = 0;
+                    bool a = double.TryParse(sg, out sgdouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForSG(sgdouble);
+                    } 
                 }
                 this.textBox12.Text = sg;
 
@@ -420,8 +428,12 @@ namespace zkhwClient.view.updateTjResult
                 string strma=dtbichao.Rows[0]["MA"].ToString();
                 if (strma != "")
                 {
-                    double madouble = double.Parse(strma);
-                    GetJudgeResultForMA(madouble);
+                    double madouble = 0;
+                    bool a = double.TryParse(strma, out madouble);
+                    if (a == true)
+                    {
+                        GetJudgeResultForMA(madouble);
+                    } 
                 } 
                 this.textBox19.Text = dtbichao.Rows[0]["MA"].ToString();
 
@@ -461,15 +473,25 @@ namespace zkhwClient.view.updateTjResult
                 int r2 = GetJudgeResultForURO(URO);
                 int r3 = GetJudgeResultForPRO(PRO);
                 int r4 = 1;
-                if (PH !="")
+                if (PH != "")
                 {
-                    r4 = GetJudgeResultForPH(double.Parse(PH));
+                    double b = 0;
+                    bool a = double.TryParse(PH, out b);
+                    if (a == true)
+                    {
+                        r4 = GetJudgeResultForPH(b);
+                    } 
                 } 
                 int r5 = GetJudgeResultForBLD(BLD);
                 int r6 = 1;
                 if(SG !="")
-                {
-                    r6 = GetJudgeResultForSG(double.Parse(SG));
+                { 
+                    double b = 0;
+                    bool a = double.TryParse(SG, out b);
+                    if (a == true)
+                    {
+                        r6 = GetJudgeResultForSG(b);
+                    }
                 } 
                 int r7 = GetJudgeResultForKET(KET);
                 int r8 = GetJudgeResultForBIL(BIL);
@@ -477,8 +499,13 @@ namespace zkhwClient.view.updateTjResult
                 int r10 = GetJudgeResultForVC(Vc);
                 int r11 = 1;
                 if(MA !="")
-                {
-                    r11 = GetJudgeResultForMA(double.Parse(MA));
+                { 
+                    double b = 0;
+                    bool a = double.TryParse(MA, out b);
+                    if (a == true)
+                    {
+                        r11 = GetJudgeResultForMA(b);
+                    }
                 }
 
                 r = r0;

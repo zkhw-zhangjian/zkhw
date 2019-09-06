@@ -56,9 +56,7 @@ namespace zkhwClient.view.setting
         private void basicInfoSettings_Load(object sender, EventArgs e)
         {
             issave = "0";
-            this.comboBox1.DataSource = areadao.shengInfo();//绑定数据源
-            this.comboBox1.DisplayMember = "name";//显示给用户的数据集表项
-            this.comboBox1.ValueMember = "code";//操作时获取的值 
+            Common.SetComboBoxInfo(comboBox1, ltdorganizationDao.GetShengInfo());
             showCombobox();
 
             DataTable dtbasic= bsdao.checkBasicsettingInfo();
@@ -72,26 +70,25 @@ namespace zkhwClient.view.setting
                 xcuncode = dtbasic.Rows[0]["cun_code"].ToString();
                 shengcode = dtbasic.Rows[0]["sheng_code"].ToString();
 
-                this.comboBox2.DataSource = areadao.shiInfo(shengcode);//绑定数据源
-                this.comboBox2.DisplayMember = "name";//显示给用户的数据集表项
-                this.comboBox2.ValueMember = "code";//操作时获取的值
+                Common.SetComboBoxInfo(comboBox2, ltdorganizationDao.GetCityInfo(shengcode));                
 
                 shicode = dtbasic.Rows[0]["shi_code"].ToString();
 
-                this.comboBox3.DataSource = areadao.quxianInfo(shicode);//绑定数据源
-                this.comboBox3.DisplayMember = "name";//显示给用户的数据集表项
-                this.comboBox3.ValueMember = "code";//操作时获取的值 
+                Common.SetComboBoxInfo(comboBox3, ltdorganizationDao.GetCountyInfo(shicode));
 
                 qxcode = dtbasic.Rows[0]["qx_code"].ToString();
+                Common.SetComboBoxInfo(comboBox4, areadao.zhenInfo(qxcode));
 
-                this.comboBox4.DataSource = areadao.zhenInfo(qxcode);//绑定数据源
-                this.comboBox4.DisplayMember = "name";//显示给用户的数据集表项
-                this.comboBox4.ValueMember = "code";//操作时获取的值
+                //this.comboBox4.DataSource = areadao.zhenInfo(qxcode);//绑定数据源
+                //this.comboBox4.DisplayMember = "name";//显示给用户的数据集表项
+                //this.comboBox4.ValueMember = "code";//操作时获取的值
 
                 xzcode = dtbasic.Rows[0]["xz_code"].ToString();
-                this.comboBox5.DataSource = areadao.cunInfo(xzcode);//绑定数据源
-                this.comboBox5.DisplayMember = "name";//显示给用户的数据集表项
-                this.comboBox5.ValueMember = "code";//操作时获取的值
+                Common.SetComboBoxInfo(comboBox5, areadao.cunInfo(xzcode));
+
+                //this.comboBox5.DataSource = areadao.cunInfo(xzcode);//绑定数据源
+                //this.comboBox5.DisplayMember = "name";//显示给用户的数据集表项
+                //this.comboBox5.ValueMember = "code";//操作时获取的值
 
                 allareaname = dtbasic.Rows[0]["allFullName"].ToString();
                 bc = dtbasic.Rows[0]["bc"].ToString();
@@ -109,18 +106,20 @@ namespace zkhwClient.view.setting
                 {
                     xzName = bsdao.selectAreaBycode(xzcode).Rows[0][0].ToString();
                 }
-                if (xcuncode != null && !"".Equals(xcuncode)) {
-                   xcName = bsdao.selectAreaBycode(xcuncode).Rows[0][0].ToString();
+                if (xcuncode != null && !"".Equals(xcuncode))
+                {
+                    xcName = bsdao.selectAreaBycode(xcuncode).Rows[0][0].ToString();
                 }
                 shengName = bsdao.selectAreaBycode(shengcode).Rows[0][0].ToString();
                 shiName = bsdao.selectAreaBycode(shicode).Rows[0][0].ToString();
                 qxName = bsdao.selectAreaBycode(qxcode).Rows[0][0].ToString();
+                //因为名称有可能对应不上那么就用code对应
+                Common.SetComboBoxSelectIndex(comboBox1, shengcode);
+                Common.SetComboBoxSelectIndex(comboBox2, shicode);
+                Common.SetComboBoxSelectIndex(comboBox3, qxcode);
+                Common.SetComboBoxSelectIndex(comboBox4, xzcode);
+                Common.SetComboBoxSelectIndex(comboBox5, xcuncode); 
 
-                this.comboBox1.Text = shengName;
-                this.comboBox2.Text = shiName;
-                this.comboBox3.Text = qxName;
-                this.comboBox4.Text = xzName;
-                this.comboBox5.Text = xcName;
                 this.textBox1.Text = organ_name;
                 this.comboBox6.Text = input_name;
                 this.comboBox7.Text = zeren_doctor;
@@ -140,63 +139,44 @@ namespace zkhwClient.view.setting
 
                 issave = "1";
             }
-            //if (shengName == "陕西")
-            //{
-                this.comboBox7.DropDownStyle = ComboBoxStyle.DropDownList;
-            //}
+             this.comboBox7.DropDownStyle = ComboBoxStyle.DropDownList; 
         }
-
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            shengcode = this.comboBox1.SelectedValue.ToString();
-            this.comboBox2.DataSource = areadao.shiInfo(shengcode);//绑定数据源
-            this.comboBox2.DisplayMember = "name";//显示给用户的数据集表项
-            this.comboBox2.ValueMember = "code";//操作时获取的值 
+            this.comboBox2.DataSource = null;
             this.comboBox3.DataSource = null;
             this.comboBox4.DataSource = null;
             this.comboBox5.DataSource = null;
-            //if (this.comboBox1.Text == "陕西")
-            //{
+            if (this.comboBox1.SelectedValue == null) return;
+            shengcode = this.comboBox1.SelectedValue.ToString();
+            Common.SetComboBoxInfo(comboBox2, ltdorganizationDao.GetCityInfo(shengcode));
             this.comboBox7.DropDownStyle = ComboBoxStyle.DropDownList;
-            //}
-            //else
-            //{
-            //    this.comboBox7.DropDownStyle = ComboBoxStyle.DropDown;
-            //}
         }
-
         private void comboBox2_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            shicode = this.comboBox2.SelectedValue.ToString();
-            this.comboBox3.DataSource = areadao.quxianInfo(shicode);//绑定数据源
-            this.comboBox3.DisplayMember = "name";//显示给用户的数据集表项
-            this.comboBox3.ValueMember = "code";//操作时获取的值 
+            this.comboBox3.DataSource = null;
             this.comboBox4.DataSource = null;
             this.comboBox5.DataSource = null;
+            if (this.comboBox2.SelectedValue == null) return;
+            shicode = this.comboBox2.SelectedValue.ToString();
+            Common.SetComboBoxInfo(comboBox3, ltdorganizationDao.GetCountyInfo(shicode)); 
         }
 
         private void comboBox3_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            qxcode = this.comboBox3.SelectedValue.ToString();
-            this.comboBox4.DataSource = areadao.zhenInfo(qxcode);//绑定数据源
-            this.comboBox4.DisplayMember = "name";//显示给用户的数据集表项
-            this.comboBox4.ValueMember = "code";//操作时获取的值 
+            this.comboBox4.DataSource = null;
             this.comboBox5.DataSource = null;
+            if (this.comboBox3.SelectedValue == null) return;
+            qxcode = this.comboBox3.SelectedValue.ToString();
+            Common.SetComboBoxInfo(comboBox4, areadao.zhenInfo(qxcode)); 
         }
 
         private void comboBox4_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            this.comboBox5.DataSource = null;
+            if (this.comboBox4.SelectedValue == null) return;
             xzcode = this.comboBox4.SelectedValue.ToString();
-            DataTable dtxz= areadao.cunInfo(xzcode);
-            if (qxcode == "440983") {
-                DataRow dr = dtxz.NewRow();
-                dr["code"] = "0";
-                dr["name"] = "请选择";
-                dtxz.Rows.InsertAt(dr, 0);
-            }
-            this.comboBox5.DataSource = dtxz;//绑定数据源
-            this.comboBox5.DisplayMember = "name";//显示给用户的数据集表项
-            this.comboBox5.ValueMember = "code";//操作时获取的值 
+            Common.SetComboBoxInfo(comboBox5, areadao.cunInfo(xzcode)); 
         }
 
         private void comboBox5_SelectionChangeCommitted(object sender, EventArgs e)
@@ -206,7 +186,7 @@ namespace zkhwClient.view.setting
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            if (this.comboBox5.Text == "" || this.comboBox5.Text == "请选择")
+            if (this.comboBox5.Text == "" || this.comboBox5.Text == "--请选择--" || this.comboBox5.SelectedValue==null)
             {
                 MessageBox.Show("【区域设置】信息不完整!"); return;
             }
@@ -220,7 +200,7 @@ namespace zkhwClient.view.setting
             }
             if (xcuncode == null || "".Equals(xcuncode)) {
                 MessageBox.Show("【区域设置】信息不完整!"); return;
-            } else if (this.comboBox5.Text=="请选择") {
+            } else if (this.comboBox5.Text== "--请选择--") {
                 DataTable dtxzs = areadao.cunInfo(xzcode);
                 this.comboBox5.Text = dtxzs.Rows[0]["name"].ToString();
                 xcuncode = dtxzs.Rows[0]["code"].ToString();
@@ -393,17 +373,20 @@ namespace zkhwClient.view.setting
 
         private void basicInfoSettings_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (xcuncode == null || xcuncode == "")
-            {
-                e.Cancel = true;
-            }
-            else
-            {
-                if(issave=="0")
-                {
-                    e.Cancel = true;
-                }
-            }
+            //if (xcuncode == null || xcuncode == "")
+            //{
+            //    e.Cancel = true;
+            //}
+            //else
+            //{
+            //    if(issave=="0")
+            //    {
+            //        e.Cancel = true;
+            //    }
+            //}
         }
+ 
+
+       
     }
 }

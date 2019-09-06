@@ -113,9 +113,12 @@ namespace zkhwClient.view.updateTjResult
                 string height = dtbichao.Rows[0]["Height"].ToString();
                 if (height != "")
                 {
-                    double heightdouble = double.Parse(height);
-                    int ret = GetJudgeResultForHeight(heightdouble);
-                    
+                    double heightdouble = 0;
+                    bool a = double.TryParse(height, out heightdouble);
+                    if (a == true)
+                    {
+                        int ret = GetJudgeResultForHeight(heightdouble);
+                    } 
                 }
                 this.textBox5.Text = height;
                 #endregion
@@ -124,8 +127,12 @@ namespace zkhwClient.view.updateTjResult
                 string weight = dtbichao.Rows[0]["Weight"].ToString();
                 if (weight != "")
                 {
-                    double weightdouble = double.Parse(weight);
-                    int ret= GetJudgeResultForWeight(weightdouble); 
+                    double weightdouble = 0;
+                    bool a = double.TryParse(weight, out weightdouble);
+                    if (a == true)
+                    {
+                        int ret = GetJudgeResultForWeight(weightdouble);
+                    } 
                 }
                 this.textBox6.Text = weight;
                 #endregion
@@ -134,8 +141,12 @@ namespace zkhwClient.view.updateTjResult
                 string _bmi= dtbichao.Rows[0]["BMI"].ToString();
                 if(_bmi !="")
                 {
-                    double _dbBmi = double.Parse(_bmi);
-                    int ret=GetJudgeResultForBMI(_dbBmi); 
+                    double _dbBmi = 0;
+                    bool a = double.TryParse(_bmi, out _dbBmi);
+                    if (a == true)
+                    {
+                        int ret = GetJudgeResultForBMI(_dbBmi);
+                    } 
                 }
                 this.textBox7.Text = _bmi;
                 #endregion
@@ -159,18 +170,30 @@ namespace zkhwClient.view.updateTjResult
                 int r2 = 1;
                 if (Height != "")
                 {
-                    double a = double.Parse(Height);
-                    r0 = GetJudgeResultForHeight(a);
+                    double a = 0; 
+                    bool b = double.TryParse(Height, out a);
+                    if (b == true)
+                    {
+                        r0 = GetJudgeResultForHeight(a);
+                    } 
                 }
                 if (Weight != "")
                 {
-                    double a = double.Parse(Weight);
-                    r1 = GetJudgeResultForWeight(a);
+                    double a = 0; 
+                    bool b = double.TryParse(Weight, out a);
+                    if (b == true)
+                    {
+                        r1 = GetJudgeResultForWeight(a);
+                    } 
                 }
                 if (BMI != "")
                 {
-                    double a = double.Parse(BMI);
-                    r2 = GetJudgeResultForBMI(a);
+                    double a = 0;
+                    bool b = double.TryParse(BMI, out a);
+                    if (b == true)
+                    {
+                        r2 = GetJudgeResultForBMI(a);
+                    } 
                 }
                 int r = r0;
                 if (r < r1)

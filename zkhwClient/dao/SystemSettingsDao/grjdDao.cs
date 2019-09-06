@@ -111,6 +111,13 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
+        public DataTable checkThresholdValues(string str)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select type ,chinaName,CheckMethod,warning_min,warning_max,threshold_min,threshold_max,unit,id from threshold_value a where class_type='" + str + "' order by type asc";
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
         public void updateGrjdInfo(string id,string photocode)
         {
             string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");

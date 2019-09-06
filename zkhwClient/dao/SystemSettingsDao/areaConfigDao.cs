@@ -11,7 +11,7 @@ namespace zkhwClient.dao
         public DataTable shengInfo()
         {
             string code = "-1";
-            String sql = "select code,name from code_area_config where parent_code = '" + code + "'";
+            String sql = "select code as ID,name As Name from code_area_config where parent_code = '" + code + "'";
             DataSet ds = new DataSet();
             ds.Clear();
             ds = DbHelperMySQL.Query(sql);
@@ -20,7 +20,7 @@ namespace zkhwClient.dao
 
         public DataTable shiInfo(string shengcode)
         {
-            String sql = "select code,name from code_area_config where parent_code = '" + shengcode + "'";
+            String sql = "select code as ID,name As Name from code_area_config where parent_code = '" + shengcode + "'";
             DataSet ds = new DataSet();
             ds.Clear();
             ds = DbHelperMySQL.Query(sql);
@@ -30,7 +30,7 @@ namespace zkhwClient.dao
 
         public DataTable quxianInfo(string shicode)
         {
-            String sql = "select code,name from code_area_config where parent_code = '" + shicode + "'";
+            String sql = "select code as ID,name As Name from code_area_config where parent_code = '" + shicode + "'";
             DataSet ds = new DataSet();
             ds.Clear();
             ds = DbHelperMySQL.Query(sql);
@@ -39,7 +39,7 @@ namespace zkhwClient.dao
 
         public DataTable zhenInfo(string qxcode)
         {
-            String sql = "select code,name from code_area_config where parent_code = '" + qxcode + "'";
+            String sql = "select code as ID,name as Name from code_area_config where parent_code = '" + qxcode + "'";
             DataSet ds = new DataSet();
             ds.Clear();
             ds = DbHelperMySQL.Query(sql);
@@ -48,7 +48,7 @@ namespace zkhwClient.dao
 
         public DataTable cunInfo(string xzcode)
         {
-            String sql = "select code,name from code_area_config where parent_code = '" + xzcode + "'";
+            String sql = "select code as ID,name As Name from code_area_config where parent_code = '" + xzcode + "'";
             DataSet ds = new DataSet();
             ds.Clear();
             ds = DbHelperMySQL.Query(sql);
