@@ -218,6 +218,7 @@ namespace zkhwClient.view.setting
                 return;
             }
             input_name = this.comboBox6.Text;
+
             zeren_doctor = this.comboBox7.Text;
             //if (shengName == "陕西")
             //{
