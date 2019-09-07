@@ -23,6 +23,7 @@ namespace zkhwClient.bean
         public string chinaName { get; set; }
         public string CheckMethod { get; set; }
         public string unit { get; set; }
+        public string deviceModel { get; set; }
 
     }
 }

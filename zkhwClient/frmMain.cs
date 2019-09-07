@@ -60,6 +60,41 @@ namespace zkhwClient
             label7.Text = b;//建档人
             label9.Text = c;//责任医生
         }
+        private void CallMethod(string shxqAgreement,string comnum)
+        { 
+            string[] sxa = shxqAgreement.Split(',');
+            if (sxa[0].ToString().Trim() == "SH_YNH_001" || sxa[1].ToString().Trim() == "XCG_YNH_001")
+            {
+                this.timer2.Interval = Int32.Parse(Properties.Settings.Default.timeInterval);
+                this.timer2.Start();//定时获取生化和血球的数据-英诺华
+            }
+
+            if (sxa[0].ToString().Trim() == "SH_KBE_003" || sxa[1].ToString().Trim() == "XCG_KBE_003")
+            { 
+                socketTcpKbe();//库贝尔
+                bool bl = initPort(comnum);
+                if (bl)
+                {
+                    port.DataReceived += new SerialDataReceivedEventHandler(this.mySerialPort_DataReceived);
+                }
+                else
+                {
+                    MessageBox.Show("打开串口异常,请检查，并重启软件！");
+                }
+            }
+            if (sxa[0].ToString().Trim() == "SH_LD_002" || sxa[1].ToString().Trim() == "XCG_LD_002")
+            {
+                socketTcp();//雷杜
+            }
+            if (sxa[0].ToString().Trim() == "SH_MR_004" || sxa[1].ToString().Trim() == "XCG_MR_004")
+            {
+                socketTcpMr();//迈瑞
+            }
+            if (sxa[0].ToString().Trim() == "SH_DR_005" || sxa[1].ToString().Trim() == "XCG_DR_005")
+            {
+                socketTcpDr();//迪瑞
+            }
+        }
         private void frmMain_Load(object sender, EventArgs e)
         { 
             basicInfoSettings basicSet = new basicInfoSettings();
@@ -71,14 +106,12 @@ namespace zkhwClient
             XmlNode node;
             node = xmlDoc.SelectSingleNode("config/shxqAgreement");
             string shxqAgreement = node.InnerText;//生化血球厂家协议
-            
-            dttv = grjddao.checkThresholdValues();//获取阈值信息
+            Common._deviceModel = shxqAgreement;
+
+            dttv = grjddao.checkThresholdValues(Common._deviceModel, "");//获取阈值信息
             this.timer1.Start();//时间控件定时器
-            if (shxqAgreement == "英诺华")
-            {
-                this.timer2.Interval = Int32.Parse(Properties.Settings.Default.timeInterval);
-                this.timer2.Start();//定时获取生化和血球的数据-英诺华
-            }
+
+            
             this.timer3.Interval = Int32.Parse(Properties.Settings.Default.timer3Interval);
             this.timer3.Start();//1分钟定时刷新设备状态
 
@@ -179,32 +212,12 @@ namespace zkhwClient
                     };
                 }//屏蔽其它功能菜单下拉选
             }
-            if (shxqAgreement == "库贝尔")
-            {
-                node = xmlDoc.SelectSingleNode("config/com");
-                string comnum = node.InnerText;
-                socketTcpKbe();//库贝尔
-                bool bl= initPort(comnum);
-                if (bl)
-                {
-                    port.DataReceived += new SerialDataReceivedEventHandler(this.mySerialPort_DataReceived);
-                }
-                else {
-                    MessageBox.Show("打开串口异常,请检查，并重启软件！");
-                }
-            }
-            if (shxqAgreement == "雷杜")
-            {
-                socketTcp();//雷杜
-            }
-            if (shxqAgreement == "迈瑞")
-            {
-                socketTcpMr();//迈瑞
-            }
-            if (shxqAgreement == "迪瑞")
-            {
-                socketTcpDr();//迪瑞
-            }
+            #region 调用那个程序
+            node = xmlDoc.SelectSingleNode("config/com");
+            string comnum = node.InnerText;
+            CallMethod(shxqAgreement, comnum);
+            
+            #endregion
             //http
             proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
             proHttp.StartInfo.CreateNoWindow = true;
@@ -1028,6 +1041,8 @@ namespace zkhwClient
                         if (arr_dt2.Rows.Count > 0)
                         {
                             shenghuaBean sh = new shenghuaBean();
+                            string[] a = Common._deviceModel.Split(',');
+                            sh.deviceModel = a[0].ToString().Trim();
                             sh.ZrysSH = basicInfoSettings.sh;
                             sh.bar_code = arr_dt1.Rows[j]["patient_id"].ToString();
                             sh.createTime = Convert.ToDateTime(arr_dt1.Rows[j]["send_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss");
@@ -1499,6 +1514,8 @@ namespace zkhwClient
                         if (arr_dt2.Rows.Count > 0)
                         {
                             xuechangguiBean xcg = new xuechangguiBean();
+                            string[] a = Common._deviceModel.Split(',');
+                            xcg.deviceModel = a[1].ToString().Trim();
                             xcg.ZrysXCG = basicInfoSettings.xcg;
                             xcg.bar_code = arr_dt1.Rows[j]["patient_id"].ToString();
                             DataTable dtjkinfo = jkdao.selectjkInfoBybarcode(xcg.bar_code);
@@ -2573,6 +2590,8 @@ namespace zkhwClient
                 if (sHL7.IndexOf("CHEMRAY420") > 0)
                 {//解析生化协议报文数据                   
                     shenghuaBean sh = new shenghuaBean();
+                    string[] a = Common._deviceModel.Split(',');
+                    sh.deviceModel = a[0].ToString().Trim();
                     sh.ZrysSH = basicInfoSettings.sh;
                     string[] sHL7Pids = Regex.Split(sHL7, "PID", RegexOptions.IgnoreCase);
                     if (sHL7Pids.Length == 0) { return; };
@@ -2652,6 +2671,8 @@ namespace zkhwClient
                     try
                     {
                         xuechangguiBean xcg = new xuechangguiBean();
+                        string[] a = Common._deviceModel.Split(','); 
+                        xcg.deviceModel = a[1].ToString().Trim();
                         xcg.ZrysXCG = basicInfoSettings.xcg;
                         string[] sHL7Pids = Regex.Split(sHL7, "PID", RegexOptions.IgnoreCase);
                         if (sHL7Pids.Length == 0) { return; };
@@ -2896,6 +2917,8 @@ namespace zkhwClient
                     if (sHL7.IndexOf("ICUBIO") > 0)
                     {//解析生化协议报文数据                   
                         shenghuaBean sh = new shenghuaBean();
+                        string[] a = Common._deviceModel.Split(',');
+                        sh.deviceModel = a[0].ToString().Trim();
                         sh.ZrysSH = basicInfoSettings.sh;
                         string[] sHL7Pids = Regex.Split(sHL7, "PID", RegexOptions.IgnoreCase);
                         if (sHL7Pids.Length == 0) { return; };
@@ -3459,6 +3482,8 @@ namespace zkhwClient
             {
                 string xmlStr = @parameter.ToString();
                 xcg.ZrysXCG = basicInfoSettings.xcg;
+                string[] a = Common._deviceModel.Split(',');
+                xcg.deviceModel = a[1].ToString().Trim();
                 var doc = new XmlDocument();
                 doc.LoadXml(xmlStr);
                 var rowNoteList = doc.SelectNodes("/sample/smpinfo/p");
@@ -4343,6 +4368,8 @@ namespace zkhwClient
                         continue;
                     }
                     shenghuaBean sh = new shenghuaBean();
+                    string[] a = Common._deviceModel.Split(',');
+                    sh.deviceModel = a[0].ToString().Trim();
                     sh.ZrysSH = basicInfoSettings.sh;
                     string[] sHL7Pids = Regex.Split(sHL7, "PID", RegexOptions.IgnoreCase);
                     if (sHL7Pids.Length == 0) { return; };
@@ -4839,6 +4866,8 @@ namespace zkhwClient
                             continue;
                         }
                         xuechangguiBean xcg = new xuechangguiBean();
+                        string[] a = Common._deviceModel.Split(',');
+                        xcg.deviceModel = a[1].ToString().Trim();
                         xcg.ZrysXCG = basicInfoSettings.xcg;
                         string[] sHL7Pids = Regex.Split(sHL7, "PID", RegexOptions.IgnoreCase);
                         if (sHL7Pids.Length == 0) { return; };
@@ -5743,6 +5772,8 @@ namespace zkhwClient
                         continue;
                     }
                     shenghuaBean sh = new shenghuaBean();
+                    string[] a = Common._deviceModel.Split(',');
+                    sh.deviceModel = a[0].ToString().Trim();
                     sh.ZrysSH = basicInfoSettings.sh;
                     string[] sHL7Pids = Regex.Split(sHL7, "PID", RegexOptions.IgnoreCase);
                     if (sHL7Pids.Length == 0) { return; };
@@ -6239,6 +6270,8 @@ namespace zkhwClient
                             continue;
                         }
                         xuechangguiBean xcg = new xuechangguiBean();
+                        string[] a = Common._deviceModel.Split(',');
+                        xcg.deviceModel = a[1].ToString().Trim();
                         xcg.ZrysXCG = basicInfoSettings.xcg;
                         string[] sHL7Pids = Regex.Split(sHL7, "PID", RegexOptions.IgnoreCase);
                         if (sHL7Pids.Length == 0) { return; };

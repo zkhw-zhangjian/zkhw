@@ -67,5 +67,6 @@ namespace zkhwClient
         public string RDWCV { get; set; }
         public string RDWSD { get; set; } 
         public string timeCodeUnique { get; set; }
+        public string deviceModel { get; set; }
     }
 }

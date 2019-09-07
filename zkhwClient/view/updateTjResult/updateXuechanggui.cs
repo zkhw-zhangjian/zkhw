@@ -24,6 +24,8 @@ namespace zkhwClient.view.updateTjResult
         public string bar_code = ""; 
         tjcheckDao tjdao = new tjcheckDao();
         public DataTable dttv=null;
+
+        private string _currentdevno = "XCG_YNH_001"; 
         public updateXuechanggui()
         {
             InitializeComponent();
@@ -518,6 +520,19 @@ namespace zkhwClient.view.updateTjResult
             if (dtbichao != null && dtbichao.Rows.Count > 0)
             {
                 _isHaveData = true;
+                _currentdevno = "XCG_YNH_001";
+                if (dtbichao.Rows[0]["deviceModel"] != null)
+                {
+                    _currentdevno = dtbichao.Rows[0]["deviceModel"].ToString();
+                    if (_currentdevno == "")
+                    {
+                        _currentdevno = "XCG_YNH_001";
+                    }
+                }
+                grjdDao grjddao = new grjdDao();
+                dttv = grjddao.checkThresholdValues(_currentdevno, "血常规");
+
+
                 string wbc = dtbichao.Rows[0]["WBC"].ToString();
                 if (wbc != "" && wbc != "*")
                 {
@@ -787,13 +802,16 @@ namespace zkhwClient.view.updateTjResult
             string OTHERS = this.textBox36.Text;
             //1：判断有没有，有就更新 否则就插入 DataTable selectXuechangguiInfo
             bool istrue = false;
+           
             if (_isHaveData==true)
-            {
-                istrue = tjdao.updateXuechangguiInfo(aichive_no, bar_code, WBC, RBC, PCT, PLT, HGB, HCT, MCV, MCH, MCHC, RDWCV, RDWSD, MONO, MONOP, GRAN, GRANP, NEUT, NEUTP, EO, EOP, BASO, BASOP, LYM, LYMP, MPV, PDW, MXD, MXDP, PLCR, OTHERS);
+            { 
+                istrue = tjdao.updateXuechangguiInfo(aichive_no, bar_code, WBC, RBC, PCT, PLT, HGB, HCT, MCV, MCH, MCHC, RDWCV, RDWSD, MONO, MONOP, GRAN, GRANP, NEUT, NEUTP, EO, EOP, BASO, BASOP, LYM, LYMP, MPV, PDW, MXD, MXDP, PLCR, OTHERS, _currentdevno);
             }
             else
             {
+                string[] deviceno = Common._deviceModel.Split(',');
                 xuechangguiBean obj = new xuechangguiBean();
+                obj.deviceModel = deviceno[1].ToString().Trim();
                 obj.aichive_no = aichive_no;
                 obj.bar_code = bar_code;
                 obj.id_number = textBox4.Text;

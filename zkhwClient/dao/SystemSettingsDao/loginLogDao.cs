@@ -284,16 +284,16 @@ namespace zkhwClient.dao
         public bool addThresholdValues(List<thresholdValueBean> list)
         {
             int rt = 0;
-            String sql = "insert into threshold_value (id,class_type,type,warning_min,warning_max,threshold_min,threshold_max,create_user,create_name,create_time,update_user,update_name,update_time) values ";
+            String sql = "insert into threshold_value (id,class_type,type,warning_min,warning_max,threshold_min,threshold_max,create_user,create_name,create_time,update_user,update_name,update_time,chinaName,checkMethod,unit,deviceModel) values ";
             for (int j = 0; j < list.Count; j++)
             {
                 if (j > 0)
                 {
-                    sql += " , ('" + list[j].id + "','" + list[j].class_type + "','" + list[j].type + "', '" + list[j].warning_min + "', '" + list[j].warning_max + "', '" + list[j].threshold_min + "', '" + list[j].threshold_max + "', '" + list[j].create_user + "', '" + list[j].create_name + "', '" + list[j].create_time + "', '" + list[j].update_user + "', '" + list[j].update_name + "', '" + list[j].update_time + "')";
+                    sql += " , ('" + list[j].id + "','" + list[j].class_type + "','" + list[j].type + "', '" + list[j].warning_min + "', '" + list[j].warning_max + "', '" + list[j].threshold_min + "', '" + list[j].threshold_max + "', '" + list[j].create_user + "', '" + list[j].create_name + "', '" + list[j].create_time + "', '" + list[j].update_user + "', '" + list[j].update_name + "', '" + list[j].update_time + "', '" + list[j].chinaName + "', '" + list[j].CheckMethod + "', '" + list[j].unit + "', '" + list[j].deviceModel + "')";
                 }
                 else
                 {
-                    sql += "('" + list[j].id + "','" + list[j].class_type + "','" + list[j].type + "', '" + list[j].warning_min + "', '" + list[j].warning_max + "', '" + list[j].threshold_min + "', '" + list[j].threshold_max + "', '" + list[j].create_user + "', '" + list[j].create_name + "', '" + list[j].create_time + "', '" + list[j].update_user + "', '" + list[j].update_name + "', '" + list[j].update_time + "')";
+                    sql += "('" + list[j].id + "','" + list[j].class_type + "','" + list[j].type + "', '" + list[j].warning_min + "', '" + list[j].warning_max + "', '" + list[j].threshold_min + "', '" + list[j].threshold_max + "', '" + list[j].create_user + "', '" + list[j].create_name + "', '" + list[j].create_time + "', '" + list[j].update_user + "', '" + list[j].update_name + "', '" + list[j].update_time + "', '" + list[j].chinaName + "', '" + list[j].CheckMethod + "', '" + list[j].unit + "', '" + list[j].deviceModel + "')";
                 }
             }
             rt = DbHelperMySQL.ExecuteSql(sql);

@@ -41,5 +41,13 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
+
+        public DataTable GetZkhwDictionaries(string type)
+        {
+            DataSet ds = new DataSet();
+            String sql = string.Format("select DISTINCT DICTCODE,ITEMNAME from zkhw_dictionaries where DICTTYPE='{0}'",type);
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
     }
 }

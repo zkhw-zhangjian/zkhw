@@ -25,6 +25,7 @@ namespace zkhwClient
     }
     public class Common
     {
+        public static string _deviceModel = "";  //设备型号 包括生化、血球
         public static void txtBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             try

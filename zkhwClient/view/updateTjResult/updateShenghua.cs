@@ -23,6 +23,9 @@ namespace zkhwClient.view.updateTjResult
         public string bar_code = "";
         tjcheckDao tjdao = new tjcheckDao();
         public DataTable dttv = null;
+
+        private string _currentdevno = "SH_YNH_001";
+        private bool _haveData = false;
         public updateShenghua()
         {
             InitializeComponent();
@@ -306,7 +309,7 @@ namespace zkhwClient.view.updateTjResult
         }
 
         #endregion     
-
+        
         private void updateBichao_Load(object sender, EventArgs e)
         {
             this.textBox1.Text = name;
@@ -316,7 +319,21 @@ namespace zkhwClient.view.updateTjResult
             this.textBox2.Text = bar_code;
             DataTable dtbichao = tjdao.selectShenghuaInfo(aichive_no, bar_code);
             if (dtbichao != null && dtbichao.Rows.Count > 0)
-            { 
+            {
+                _haveData = true;
+                //这里处理下  dttv
+                _currentdevno = "SH_YNH_001";
+                if(dtbichao.Rows[0]["deviceModel"]!=null)
+                {
+                    _currentdevno = dtbichao.Rows[0]["deviceModel"].ToString();
+                    if (_currentdevno == "")
+                    {
+                        _currentdevno = "SH_YNH_001";
+                    }
+                } 
+                grjdDao grjddao = new grjdDao();
+                dttv = grjddao.checkThresholdValues(_currentdevno, "生化");
+
                 string alt = dtbichao.Rows[0]["ALT"].ToString();
                 if (alt != "" && alt != "*")
                 {
@@ -501,7 +518,14 @@ namespace zkhwClient.view.updateTjResult
             string HBDH = this.textBox35.Text;
             string aAMY = this.textBox34.Text;
             string shren = setting.basicInfoSettings.sh;
-            bool istrue= tjdao.updateShenghuaInfo(aichive_no, id_number,bar_code, ALT, AST, TBIL, DBIL, CREA, UREA, GLU, TG, CHO, HDLC, LDLC, ALB, UA, HCY, AFP, CEA, Ka, Na, TP, ALP, GGT, CHE, TBA, APOA1, APOB, CK, CKMB, LDHL, HBDH, aAMY, shren);
+             
+            if(_haveData==false)
+            {
+                string[] deviceno = Common._deviceModel.Split(',');
+                _currentdevno = deviceno[0].ToString().Trim();
+                if (_currentdevno == "") _currentdevno = "SH_YNH_001";
+            }
+            bool istrue= tjdao.updateShenghuaInfo(aichive_no, id_number,bar_code, ALT, AST, TBIL, DBIL, CREA, UREA, GLU, TG, CHO, HDLC, LDLC, ALB, UA, HCY, AFP, CEA, Ka, Na, TP, ALP, GGT, CHE, TBA, APOA1, APOB, CK, CKMB, LDHL, HBDH, aAMY, shren, _currentdevno);
             if (istrue)
             {
                 #region 判断
