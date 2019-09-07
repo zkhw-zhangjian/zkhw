@@ -27,7 +27,7 @@ namespace zkhwClient.view.setting
         }
         private void GetThreshValuesForSheHua()
         {
-            dtSh = grjddao.checkThresholdValues("生化");
+            dtSh = grjddao.checkThresholdValues(Common._deviceModel, "生化");
             dataGridView1.DataSource = dtSh;
 
             dataGridView1.Columns[0].DefaultCellStyle.SelectionBackColor = Control.DefaultBackColor;
@@ -71,7 +71,7 @@ namespace zkhwClient.view.setting
 
         private void GetThreshValuesForXeChangGui()
         { 
-            dtXCG = grjddao.checkThresholdValues("血常规");
+            dtXCG = grjddao.checkThresholdValues(Common._deviceModel, "血常规");
             dataGridView2.DataSource = dtXCG;
             dataGridView2.Columns[0].DefaultCellStyle.SelectionBackColor = Control.DefaultBackColor;
             dataGridView2.Columns[0].DefaultCellStyle.SelectionForeColor = Color.Black;

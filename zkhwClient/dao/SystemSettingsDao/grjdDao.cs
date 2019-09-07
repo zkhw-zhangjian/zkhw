@@ -111,6 +111,39 @@ namespace zkhwClient.dao
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dmodel">按照，好分割位生化和血常规</param>
+        /// <param name="classtype"></param>
+        /// <returns></returns>
+        public DataTable checkThresholdValues(string dmodel,string classtype)
+        {
+            string sql = "";
+            if (dmodel =="")
+            {
+                sql = "select class_type,type,warning_min,warning_max,threshold_min,threshold_max from threshold_value a where 1=1";
+            }
+            else
+            {
+                string[] a = dmodel.Split(',');
+                string tmp = " deviceModel='" + a[0].ToString().Trim() + "'";
+                if (a.Length >= 2)
+                {
+                    tmp = tmp + " or deviceModel='" + a[1].ToString().Trim() + "'";
+                } 
+                sql = "select class_type,type,warning_min,warning_max,threshold_min,threshold_max from threshold_value a where (" + tmp + ")";
+            }
+            if (classtype !="")
+            {
+                sql+= " And class_type='"+ classtype + "'";
+            }
+            DataSet ds = new DataSet();
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+
         public DataTable checkThresholdValues(string str)
         {
             DataSet ds = new DataSet();

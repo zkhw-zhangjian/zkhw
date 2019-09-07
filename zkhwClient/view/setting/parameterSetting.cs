@@ -24,8 +24,61 @@ namespace zkhwClient.view.setting
             InitializeComponent();
         }
 
+        private void GetDeviceModel()
+        {
+            basicSettingDao dDao = new basicSettingDao();
+            //生化
+            DataTable dtsh = dDao.GetZkhwDictionaries("ZWSH");
+            comboBox1.DataSource = dtsh; 
+            comboBox1.DisplayMember = "ITEMNAME"; 
+            comboBox1.ValueMember = "DICTCODE"; 
+            //血球
+            DataTable dtxq = dDao.GetZkhwDictionaries("ZWXCG");
+            comboBox3.DataSource = dtxq;
+            comboBox3.DisplayMember = "ITEMNAME";
+            comboBox3.ValueMember = "DICTCODE";
+        }
+
+        private void LabelVisibleSH(bool a)
+        {
+            label3.Visible = a;
+            label1.Visible = a;
+            textBox1.Visible = a; 
+        }
+        private void LabelVisibleXCG(bool a)
+        {
+            label5.Visible = a;
+            label2.Visible = a;
+            textBox2.Visible = a;
+        }
+        private void CommVisible(bool a)
+        {
+            label14.Visible = a;
+            comboBox2.Visible = a;
+        }
+        private void GetCommPort()
+        { 
+            string[] ArryPort = System.IO.Ports.SerialPort.GetPortNames();
+            this.comboBox2.Items.Clear();
+            if (ArryPort.Length > 0)
+            {
+                for (int i = 0; i < ArryPort.Length; i++)
+                {
+                    this.comboBox2.Items.Add(ArryPort[i]);
+                }
+            } 
+        }
+
         private void parameterSetting_Load(object sender, EventArgs e)
         {
+            LabelVisibleSH(false);
+            LabelVisibleXCG(false);
+
+            GetDeviceModel();      //得到对应的设备型号
+           
+            GetCommPort();
+            CommVisible(false);
+
             xmlDoc.Load(path);
             node = xmlDoc.SelectSingleNode("config/shenghuaPath");
             this.textBox1.Text = node.InnerText;
@@ -38,41 +91,46 @@ namespace zkhwClient.view.setting
             node = xmlDoc.SelectSingleNode("config/barNum");
             this.textBox5.Text = node.InnerText;
             node = xmlDoc.SelectSingleNode("config/bcJudge");
-            this.richTextBox1.Text = node.InnerText;
+            this.textBox10.Text = node.InnerText;
             node = xmlDoc.SelectSingleNode("config/chebiaoshi");
             this.textBox9.Text = node.InnerText;
-            node = xmlDoc.SelectSingleNode("config/shxqAgreement");
-            this.comboBox1.Text = node.InnerText;
-            if (this.comboBox1.Text == "库贝尔")
-            {
-                this.label14.Visible = true;
-                this.comboBox2.Visible = true;
-                string[] ArryPort = System.IO.Ports.SerialPort.GetPortNames();
-                this.comboBox2.Items.Clear();
-                if (ArryPort.Length > 0)
-                {
-                    for (int i = 0; i < ArryPort.Length; i++)
-                    {
-                        this.comboBox2.Items.Add(ArryPort[i]);
-                    }   
-                }
-                node = xmlDoc.SelectSingleNode("config/com");
-                this.comboBox2.Text = node.InnerText;
-            }
-            else if (this.comboBox1.Text == "英诺华")
-            {
-                this.label1.Visible = true;
-                this.label2.Visible = true;
-                this.label3.Visible = true;
-                this.label5.Visible = true;
-                this.textBox1.Visible = true;
-                this.textBox2.Visible = true;
-            }
-            GetBChaoPanDuan();
+            node = xmlDoc.SelectSingleNode("config/shxqAgreement");  //生化在前，血球在后 
+            string shxqAgreement = node.InnerText;
 
+            node = xmlDoc.SelectSingleNode("config/com");
+            comboBox2.Text = node.InnerText; 
+
+            GetBChaoPanDuan(); 
             this.textBox6.Text = @str + "/up/result/";
             this.textBox7.Text = @str + "/xdtImg/";
             this.textBox8.Text = @str + "/bcImg/";
+
+            string[] a = shxqAgreement.Split(',');
+            if(a.Length<=2)
+            { 
+                return;
+            }
+            for(int i=0;i< comboBox1.Items.Count;i++)
+            {
+                DataRowView dv = comboBox1.Items[i] as DataRowView;
+                string sh = dv.Row["DICTCODE"].ToString();
+                if(sh==a[0].ToString().Trim())
+                {
+                    comboBox1.SelectedIndex = i;
+                    break;
+                }
+            }
+
+            for (int i = 0; i < comboBox3.Items.Count; i++)
+            {
+                DataRowView dv = comboBox3.Items[i] as DataRowView;
+                string sh = dv.Row["DICTCODE"].ToString();
+                if (sh == a[0].ToString().Trim())
+                {
+                    comboBox3.SelectedIndex = i;
+                    break;
+                }
+            }
         }
 
         private void GetBChaoPanDuan()
@@ -82,7 +140,7 @@ namespace zkhwClient.view.setting
             _bChaoOBJ = cdal.GetObj(s);
             if(_bChaoOBJ !=null)
             {
-                richTextBox1.Text = _bChaoOBJ.Content;
+                textBox10.Text = _bChaoOBJ.Content;
             } 
         }
 
@@ -101,9 +159,21 @@ namespace zkhwClient.view.setting
             xmlDoc.Load(path);
             XmlNode node;
 
-            if (this.comboBox1.Text == "库贝尔")
+            
+            string codexcg = "";
+            try
             {
-                if (this.comboBox1.Text == "库贝尔" && this.comboBox2.Text != "")
+                DataRowView dv = comboBox3.Items[comboBox3.SelectedIndex] as DataRowView;
+                codexcg = dv.Row["DICTCODE"].ToString();
+            }
+            catch
+            {
+                MessageBox.Show("血球设备选择有误！");
+                return;
+            }
+            if(codexcg == "XCG_KBE_003")  //特殊处理
+            {
+                if (this.comboBox2.Text != "")
                 {
                     node = xmlDoc.SelectSingleNode("config/com");
                     node.InnerText = this.comboBox2.Text;
@@ -114,20 +184,38 @@ namespace zkhwClient.view.setting
                     MessageBox.Show("库贝尔血球串口号不能为空!"); return;
                 }
             }
-            
+            string codesh = "";
+            try
+            {
+                DataRowView dv = comboBox1.Items[comboBox1.SelectedIndex] as DataRowView;
+                codesh = dv.Row["DICTCODE"].ToString();
+            }
+            catch
+            {
+                MessageBox.Show("生化设备选择有误！");
+                return;
+            }
+
+            if (codesh == "SH_YNH_001")
+            {
+                node = xmlDoc.SelectSingleNode("config/shenghuaPath");
+                node.InnerText = this.textBox1.Text;
+                xmlDoc.Save(path); 
+            }
+
+            if (codexcg == "XCG_YNH_001")
+            {  
+                node = xmlDoc.SelectSingleNode("config/xuechangguiPath");
+                node.InnerText = this.textBox2.Text;
+                xmlDoc.Save(path);
+            }
+
             node = xmlDoc.SelectSingleNode("config/shxqAgreement");
-            node.InnerText = this.comboBox1.Text;
+            string tmp = codesh + "," + codexcg;
+            node.InnerText = tmp;
             xmlDoc.Save(path);
 
-            if (this.comboBox1.Text== "英诺华") {
-            node = xmlDoc.SelectSingleNode("config/shenghuaPath");
-            node.InnerText = this.textBox1.Text;
-            xmlDoc.Save(path);
-
-            node = xmlDoc.SelectSingleNode("config/xuechangguiPath");
-            node.InnerText = this.textBox2.Text;
-            xmlDoc.Save(path);
-             }
+            
             node = xmlDoc.SelectSingleNode("config/chejiahao");
             node.InnerText = this.textBox3.Text;
             xmlDoc.Save(path);
@@ -162,7 +250,7 @@ namespace zkhwClient.view.setting
                 type = 0;
             }
             _bChaoOBJ.Name =  _BChao ;
-            _bChaoOBJ.Content = richTextBox1.Text;
+            _bChaoOBJ.Content = textBox10.Text;
             ConfigInfoManage cdal = new ConfigInfoManage();
            if(type==0)
             {
@@ -217,49 +305,23 @@ namespace zkhwClient.view.setting
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string shxq = this.comboBox1.Text;
-            if (shxq == "库贝尔")
+            string code = "";
+            try
             {
-                this.label14.Visible = true;
-                this.comboBox2.Visible = true;
-                string[] ArryPort = System.IO.Ports.SerialPort.GetPortNames();
-                this.comboBox2.Items.Clear();
-                if (ArryPort.Length > 0)
-                {
-                    for (int i = 0; i < ArryPort.Length; i++)
-                    {
-                        this.comboBox2.Items.Add(ArryPort[i]);
-                    }
-                }
-                this.label1.Visible = false;
-                this.label2.Visible = false;
-                this.label3.Visible = false;
-                this.label5.Visible = false;
-                this.textBox1.Visible = false;
-                this.textBox2.Visible = false;
+                DataRowView dv = comboBox1.Items[comboBox1.SelectedIndex] as DataRowView;
+                code = dv.Row["DICTCODE"].ToString();
             }
-            else if (shxq == "英诺华")
+            catch
             {
-                this.label14.Visible = false;
-                this.comboBox2.Visible = false;
-                this.label1.Visible = true;
-                this.label2.Visible = true;
-                this.label3.Visible = true;
-                this.label5.Visible = true;
-                this.textBox1.Visible = true;
-                this.textBox2.Visible = true;
+                code = comboBox1.Text;
             }
-            else
+            LabelVisibleSH(false);
+            switch(code)
             {
-                this.label14.Visible = false;
-                this.comboBox2.Visible = false;
-                this.label1.Visible = false;
-                this.label2.Visible = false;
-                this.label3.Visible = false;
-                this.label5.Visible = false;
-                this.textBox1.Visible = false;
-                this.textBox2.Visible = false;
-            }
+                case "SH_YNH_001":
+                    LabelVisibleSH(true);
+                    break;
+            } 
         }
 
         private void textBox9_KeyPress(object sender, KeyPressEventArgs e)
@@ -275,6 +337,31 @@ namespace zkhwClient.view.setting
             if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string code = "";
+            try
+            {
+                DataRowView dv = comboBox3.Items[comboBox3.SelectedIndex] as DataRowView;
+                code = dv.Row["DICTCODE"].ToString();
+            }
+            catch
+            {
+                code = comboBox3.Text;
+            }
+            LabelVisibleXCG(false);
+            CommVisible(false);
+            switch (code)
+            {
+                case "XCG_YNH_001":
+                    LabelVisibleXCG(true);
+                    break;
+                case "XCG_KBE_003":
+                    CommVisible(true);
+                    break;
             }
         }
     }

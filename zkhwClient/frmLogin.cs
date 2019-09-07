@@ -124,6 +124,7 @@ namespace zkhwClient
                 /*****end******/
                 this.Hide();
                 frmMain main = new frmMain();
+                //frmMainn main = new frmMainn();
                 main.Show();
             }
             else

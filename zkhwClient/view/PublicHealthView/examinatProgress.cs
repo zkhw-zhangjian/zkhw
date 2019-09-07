@@ -56,7 +56,7 @@ namespace zkhwClient.view.PublicHealthView
 
             Common.SetComboBoxInfo(comboBox1, areadao.shengInfo());
 
-            dttv = grjddao.checkThresholdValues();//获取阈值信息
+            dttv = grjddao.checkThresholdValues(Common._deviceModel,"");//获取阈值信息
             registrationRecordCheck();//体检人数统计
         } 
         public void queryExaminatProgress() 
@@ -458,7 +458,7 @@ namespace zkhwClient.view.PublicHealthView
                 ush.aichive_no = str2;
                 ush.id_number = str3;
                 ush.bar_code = str4;
-                ush.dttv = dttv;
+                //ush.dttv = dttv;
                 ush.rowIndex = e.RowIndex;
                 ush.testFunDelegate = DealGridColour;
                 ush.Show();
@@ -471,7 +471,7 @@ namespace zkhwClient.view.PublicHealthView
                 uxcg.aichive_no = str2;
                 uxcg.id_number = str3;
                 uxcg.bar_code = str4;
-                uxcg.dttv = dttv;
+                //uxcg.dttv = dttv;
                 uxcg.rowIndex = e.RowIndex;
                 uxcg.testFunDelegate = DealGridColour;
                 uxcg.Show();
@@ -965,7 +965,9 @@ namespace zkhwClient.view.PublicHealthView
                                 string sql = downloadDataForYunDao.GetSqlForShenHua(obj, timecodeUnique);
                                 _sqlList.Add(sql);
                                 //处理对应的表  zkhw_tj_bgdc、physical_examination_record
-                                _sqlList.Add(downloadDataForYunDao.GetUpdateBgdcShSql(dttv, obj));
+
+                                DataTable dt0 = grjddao.checkThresholdValues(obj.deviceModel, "生化");
+                                _sqlList.Add(downloadDataForYunDao.GetUpdateBgdcShSql(dt0, obj));
                                 _sqlList.Add(downloadDataForYunDao.GetUpdatePEShInfoSql(obj));
                             }
                             _idlst.Add(downloadDataForYunDao.GetUpdateShToYun(shid));
@@ -995,7 +997,8 @@ namespace zkhwClient.view.PublicHealthView
                                 string sql = downloadDataForYunDao.GetSqlForXCG(obj);
                                 _sqlList.Add(sql);
                                 //处理对应的表  zkhw_tj_bgdc、physical_examination_record
-                                _sqlList.Add(downloadDataForYunDao.GetUpdateBgdcXCGSql(dttv, obj));
+                                DataTable dt0 = grjddao.checkThresholdValues(obj.deviceModel, "血常规");
+                                _sqlList.Add(downloadDataForYunDao.GetUpdateBgdcXCGSql(dt0, obj));
                                 _sqlList.Add(downloadDataForYunDao.GetUpdatePEXCGInfoSql(obj));
                             }
                             _idlst.Add(downloadDataForYunDao.GetUpdateXCGToYun(xcgid));

@@ -45,7 +45,14 @@ namespace zkhwClient.dao
             sh.GGT = dr["GGT"].ToString();
             sh.createTime = dr["createtime"].ToString();
             timecodeUnique = dr["timecodeUnique"].ToString();
-            
+            if(dr["deviceModel"].ToString()=="")
+            {
+                sh.deviceModel = "SH_YNH_001";
+            }
+            else
+            {
+                sh.deviceModel = dr["deviceModel"].ToString();
+            } 
             return sh;
         }
         public static DataTable GetShenHuaDataForYun(string a,string b,string c)
@@ -70,11 +77,11 @@ namespace zkhwClient.dao
             if(flag==false)
             {
                 string id = Result.GetNewId(); 
-                sql = "insert into zkhw_tj_sh (ID,aichive_no,id_number,bar_code,ALB,ALP,ALT,AST,CHO,Crea,DBIL,GGT,GLU,HDLC,LDLC,TBIL,TG,TP,UA,UREA,createtime,ZrysSH,timeCodeUnique,upload_status) values('" + id + "','" + sh.aichive_no + "','" + sh.id_number + "','" + sh.bar_code + "','" + sh.ALB + "','" + sh.ALP + "','" + sh.ALT + "','" + sh.AST + "','" + sh.CHO + "','" + sh.Crea + "','" + sh.DBIL + "','" + sh.GGT + "','" + sh.GLU + "','" + sh.HDL_C + "','" + sh.LDL_C + "','" + sh.TBIL + "','" + sh.TG + "','" + sh.TP + "','" + sh.UA + "','" + sh.UREA + "','" + sh.createTime + "','" + sh.ZrysSH + "','" + timecodeUnique + "',0)";
+                sql = "insert into zkhw_tj_sh (ID,aichive_no,id_number,bar_code,ALB,ALP,ALT,AST,CHO,Crea,DBIL,GGT,GLU,HDLC,LDLC,TBIL,TG,TP,UA,UREA,createtime,ZrysSH,timeCodeUnique,upload_status,deviceModel) values('" + id + "','" + sh.aichive_no + "','" + sh.id_number + "','" + sh.bar_code + "','" + sh.ALB + "','" + sh.ALP + "','" + sh.ALT + "','" + sh.AST + "','" + sh.CHO + "','" + sh.Crea + "','" + sh.DBIL + "','" + sh.GGT + "','" + sh.GLU + "','" + sh.HDL_C + "','" + sh.LDL_C + "','" + sh.TBIL + "','" + sh.TG + "','" + sh.TP + "','" + sh.UA + "','" + sh.UREA + "','" + sh.createTime + "','" + sh.ZrysSH + "','" + timecodeUnique + "',0,'"+sh.deviceModel+"')";
             }
             else
             {
-                sql = "update zkhw_tj_sh set ALB='" + sh.ALB + "',ALP='" + sh.ALP + "',ALT='" + sh.ALT + "',AST='" + sh.AST + "',CHO='" + sh.CHO + "',Crea='" + sh.Crea + "',DBIL='" + sh.DBIL + "',GGT='" + sh.GGT + "',GLU='" + sh.GLU + "',HDLC='" + sh.HDL_C + "',LDLC='" + sh.LDL_C + "',TBIL='" + sh.TBIL + "',TG='" + sh.TG + "',TP='" + sh.TP + "',UA='" + sh.UA + "',UREA='" + sh.UREA + "',upload_status=0 where timeCodeUnique = '" + timecodeUnique + "'" ;
+                sql = "update zkhw_tj_sh set ALB='" + sh.ALB + "',ALP='" + sh.ALP + "',ALT='" + sh.ALT + "',AST='" + sh.AST + "',CHO='" + sh.CHO + "',Crea='" + sh.Crea + "',DBIL='" + sh.DBIL + "',GGT='" + sh.GGT + "',GLU='" + sh.GLU + "',HDLC='" + sh.HDL_C + "',LDLC='" + sh.LDL_C + "',TBIL='" + sh.TBIL + "',TG='" + sh.TG + "',TP='" + sh.TP + "',UA='" + sh.UA + "',UREA='" + sh.UREA + "',upload_status=0,deviceModel='"+sh.deviceModel+"' where timeCodeUnique = '" + timecodeUnique + "'" ;
             }
             return sql;
         } 
@@ -161,6 +168,14 @@ namespace zkhwClient.dao
                 obj.PLCR = dr["PLCR"].ToString();
                 obj.createTime = dr["createtime"].ToString();
                 obj.timeCodeUnique = dr["timecodeUnique"].ToString();
+                if(dr["deviceModel"].ToString()=="")
+                {
+                    obj.deviceModel = "XCG_YNH_001";
+                }
+                else
+                {
+                    obj.deviceModel = dr["deviceModel"].ToString();
+                }
             }
             catch(Exception dd)
             {

@@ -232,6 +232,12 @@
     <Compile Include="frmMain1.Designer.cs">
       <DependentUpon>frmMain1.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmMainn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMainn.Designer.cs">
+      <DependentUpon>frmMainn.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoaderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -865,6 +871,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainn.resx">
+      <DependentUpon>frmMainn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoaderForm.resx">
       <DependentUpon>LoaderForm.cs</DependentUpon>
