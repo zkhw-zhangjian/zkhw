@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.comboBox7 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -73,6 +72,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.comboBox7 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -102,15 +102,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "基本信息";
-            // 
-            // comboBox7
-            // 
-            this.comboBox7.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Location = new System.Drawing.Point(784, 68);
-            this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(121, 28);
-            this.comboBox7.TabIndex = 11;
             // 
             // label4
             // 
@@ -307,6 +298,8 @@
             // 
             // comboBox14
             // 
+            this.comboBox14.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox14.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox14.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox14.FormattingEnabled = true;
             this.comboBox14.Location = new System.Drawing.Point(520, 74);
@@ -326,6 +319,8 @@
             // 
             // comboBox13
             // 
+            this.comboBox13.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox13.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox13.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox13.FormattingEnabled = true;
             this.comboBox13.Location = new System.Drawing.Point(316, 74);
@@ -345,6 +340,8 @@
             // 
             // comboBox12
             // 
+            this.comboBox12.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox12.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox12.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox12.FormattingEnabled = true;
             this.comboBox12.Location = new System.Drawing.Point(106, 74);
@@ -364,6 +361,8 @@
             // 
             // comboBox11
             // 
+            this.comboBox11.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox11.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox11.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox11.FormattingEnabled = true;
             this.comboBox11.Location = new System.Drawing.Point(784, 34);
@@ -383,6 +382,8 @@
             // 
             // comboBox10
             // 
+            this.comboBox10.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox10.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox10.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox10.FormattingEnabled = true;
             this.comboBox10.Location = new System.Drawing.Point(520, 34);
@@ -402,6 +403,8 @@
             // 
             // comboBox9
             // 
+            this.comboBox9.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox9.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox9.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox9.FormattingEnabled = true;
             this.comboBox9.Location = new System.Drawing.Point(316, 34);
@@ -421,6 +424,8 @@
             // 
             // comboBox8
             // 
+            this.comboBox8.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox8.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox8.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox8.FormattingEnabled = true;
             this.comboBox8.Location = new System.Drawing.Point(106, 34);
@@ -511,6 +516,8 @@
             // 
             // comboBox17
             // 
+            this.comboBox17.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox17.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox17.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox17.FormattingEnabled = true;
             this.comboBox17.Location = new System.Drawing.Point(330, 40);
@@ -530,6 +537,8 @@
             // 
             // comboBox16
             // 
+            this.comboBox16.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox16.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox16.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox16.FormattingEnabled = true;
             this.comboBox16.Location = new System.Drawing.Point(118, 40);
@@ -573,6 +582,17 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // comboBox7
+            // 
+            this.comboBox7.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox7.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox7.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox7.FormattingEnabled = true;
+            this.comboBox7.Location = new System.Drawing.Point(782, 68);
+            this.comboBox7.Name = "comboBox7";
+            this.comboBox7.Size = new System.Drawing.Size(121, 28);
+            this.comboBox7.TabIndex = 11;
+            // 
             // basicInfoSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -614,7 +634,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox7;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox6;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -649,5 +668,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ComboBox comboBox7;
     }
 }

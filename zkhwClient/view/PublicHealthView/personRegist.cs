@@ -3,10 +3,7 @@
  */
 using AForge.Video.DirectShow;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Data.OleDb;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -49,6 +46,18 @@ namespace zkhwClient.view.PublicHealthView
         loginLogService logservice = new loginLogService();
         areaConfigDao area = new areaConfigDao();
         DataTable dtno = null;
+        basicSettingDao bsdao = new basicSettingDao();
+        areaConfigDao areadao = new areaConfigDao();
+        public string xcuncode = null;
+        public string xzcode = null;
+        public string qxcode = null;
+        public string shicode = null;
+        public string shengcode = null;
+        public string shengName = null;
+        public string shiName = null;
+        public string qxName = null;
+        public string xzName = null;
+        public string xcName = null;
         public personRegist()
         {
             InitializeComponent();
@@ -77,6 +86,26 @@ namespace zkhwClient.view.PublicHealthView
             label13.BringToFront();
 
             BindNation();
+            Common.SetComboBoxInfo(comboBox7, ltdorganizationDao.GetShengInfo());//区域
+            DataTable dtbasic = bsdao.checkBasicsettingInfo();
+            if (dtbasic.Rows.Count > 0)
+            {
+                xcuncode = dtbasic.Rows[0]["cun_code"].ToString();
+                shengcode = dtbasic.Rows[0]["sheng_code"].ToString();
+                Common.SetComboBoxInfo(comboBox6, ltdorganizationDao.GetCityInfo(shengcode));
+                shicode = dtbasic.Rows[0]["shi_code"].ToString();
+                Common.SetComboBoxInfo(comboBox3, ltdorganizationDao.GetCountyInfo(shicode));
+                qxcode = dtbasic.Rows[0]["qx_code"].ToString();
+                Common.SetComboBoxInfo(comboBox4, areadao.zhenInfo(qxcode));
+                xzcode = dtbasic.Rows[0]["xz_code"].ToString();
+                Common.SetComboBoxInfo(comboBox5, areadao.cunInfo(xzcode));
+                //因为名称有可能对应不上那么就用code对应
+                Common.SetComboBoxSelectIndex(comboBox7, shengcode);
+                Common.SetComboBoxSelectIndex(comboBox6, shicode);
+                Common.SetComboBoxSelectIndex(comboBox3, qxcode);
+                Common.SetComboBoxSelectIndex(comboBox4, xzcode);
+                Common.SetComboBoxSelectIndex(comboBox5, xcuncode);
+            }
 
             label14.Text = DateTime.Now.Year.ToString() + "年" + DateTime.Now.Month.ToString() + "月" + DateTime.Now.Day.ToString() + "日";
             registrationRecordCheck();//右侧统计信息
@@ -361,7 +390,6 @@ namespace zkhwClient.view.PublicHealthView
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.ToString());
                 loginLogBean lb = new loginLogBean();
                 lb.name = frmLogin.name;
                 lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -578,6 +606,11 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (name != null && !"".Equals(name) && birthday != null && !"".Equals(birthday))
             {
+                shengName = bsdao.selectAreaBycode(shengcode).Rows[0][0].ToString();
+                shiName = bsdao.selectAreaBycode(shicode).Rows[0][0].ToString();
+                qxName = bsdao.selectAreaBycode(qxcode).Rows[0][0].ToString();
+                xzName = bsdao.selectAreaBycode(xzcode).Rows[0][0].ToString();
+                xcName = bsdao.selectAreaBycode(xcuncode).Rows[0][0].ToString();
                 grjdxx = new grjdxxBean();
                 grjdxx.name = name;
                 grjdxx.Sex = sex;
@@ -595,16 +628,16 @@ namespace zkhwClient.view.PublicHealthView
                 grjdxx.doctor_name = basicInfoSettings.zeren_doctor;
                 grjdxx.create_archives_name = basicInfoSettings.input_name;
                 grjdxx.residence_address = basicInfoSettings.allareaname;
-                grjdxx.province_name = basicInfoSettings.shengName;
-                grjdxx.province_code = basicInfoSettings.shengcode;
-                grjdxx.city_code = basicInfoSettings.shicode;
-                grjdxx.city_name = basicInfoSettings.shiName;
-                grjdxx.county_code = basicInfoSettings.qxcode;
-                grjdxx.county_name = basicInfoSettings.qxName;
-                grjdxx.towns_code = basicInfoSettings.xzcode;
-                grjdxx.towns_name = basicInfoSettings.xzName;
-                grjdxx.village_code = basicInfoSettings.xcuncode;
-                grjdxx.village_name = basicInfoSettings.xcName;
+                grjdxx.province_name = shengName;
+                grjdxx.province_code = shengcode;
+                grjdxx.city_code = shicode;
+                grjdxx.city_name = shiName;
+                grjdxx.county_code = qxcode;
+                grjdxx.county_name = qxName;
+                grjdxx.towns_code = xzcode;
+                grjdxx.towns_name = xzName;
+                grjdxx.village_code = xcuncode;
+                grjdxx.village_name = xcName;
                 grjdxx.create_name = frmLogin.user_Name;
             }
             else
@@ -758,6 +791,26 @@ namespace zkhwClient.view.PublicHealthView
                 MessageBox.Show(e.Message + "---" + e.StackTrace);
                 MessageBox.Show("打印机设备连接不正确,请重新连接或重启!");
                 jkjcheckdao.updateShDevice(-1, -1, 0, -1, -1, -1, -1, -1, -1, -1);
+            }
+            Common.SetComboBoxInfo(comboBox7, ltdorganizationDao.GetShengInfo());//默认区域
+            DataTable dtbasic = bsdao.checkBasicsettingInfo();
+            if (dtbasic.Rows.Count > 0)
+            {
+                xcuncode = dtbasic.Rows[0]["cun_code"].ToString();
+                shengcode = dtbasic.Rows[0]["sheng_code"].ToString();
+                Common.SetComboBoxInfo(comboBox6, ltdorganizationDao.GetCityInfo(shengcode));
+                shicode = dtbasic.Rows[0]["shi_code"].ToString();
+                Common.SetComboBoxInfo(comboBox3, ltdorganizationDao.GetCountyInfo(shicode));
+                qxcode = dtbasic.Rows[0]["qx_code"].ToString();
+                Common.SetComboBoxInfo(comboBox4, areadao.zhenInfo(qxcode));
+                xzcode = dtbasic.Rows[0]["xz_code"].ToString();
+                Common.SetComboBoxInfo(comboBox5, areadao.cunInfo(xzcode));
+                //因为名称有可能对应不上那么就用code对应
+                Common.SetComboBoxSelectIndex(comboBox7, shengcode);
+                Common.SetComboBoxSelectIndex(comboBox6, shicode);
+                Common.SetComboBoxSelectIndex(comboBox3, qxcode);
+                Common.SetComboBoxSelectIndex(comboBox4, xzcode);
+                Common.SetComboBoxSelectIndex(comboBox5, xcuncode);
             }
         }
         //右侧查询按钮
@@ -1000,6 +1053,50 @@ namespace zkhwClient.view.PublicHealthView
         {
             //if (numericUpDown1.Value == 0) numericUpDown1.Value = 4;
             //WritePrintBarCodeNumber();
+        }
+
+        private void comboBox7_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            this.comboBox6.DataSource = null;
+            this.comboBox3.DataSource = null;
+            this.comboBox4.DataSource = null;
+            this.comboBox5.DataSource = null;
+            if (this.comboBox7.SelectedValue == null) return;
+            shengcode = this.comboBox7.SelectedValue.ToString();
+            Common.SetComboBoxInfo(comboBox6, ltdorganizationDao.GetCityInfo(shengcode));
+        }
+
+        private void comboBox6_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            this.comboBox3.DataSource = null;
+            this.comboBox4.DataSource = null;
+            this.comboBox5.DataSource = null;
+            if (this.comboBox6.SelectedValue == null) return;
+            shicode = this.comboBox6.SelectedValue.ToString();
+            Common.SetComboBoxInfo(comboBox3, ltdorganizationDao.GetCountyInfo(shicode));
+        }
+
+        private void comboBox3_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            this.comboBox4.DataSource = null;
+            this.comboBox5.DataSource = null;
+            if (this.comboBox3.SelectedValue == null) return;
+            qxcode = this.comboBox3.SelectedValue.ToString();
+            Common.SetComboBoxInfo(comboBox4, areadao.zhenInfo(qxcode));
+        }
+
+        private void comboBox4_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            this.comboBox5.DataSource = null;
+            if (this.comboBox4.SelectedValue == null) return;
+            xzcode = this.comboBox4.SelectedValue.ToString();
+            Common.SetComboBoxInfo(comboBox5, areadao.cunInfo(xzcode));
+        }
+
+        private void comboBox5_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (this.comboBox5.SelectedValue == null) return;
+            xcuncode = this.comboBox5.SelectedValue.ToString();
         }
 
         private void WritePrintBarCodeNumber()

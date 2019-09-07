@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using zkhwClient.dao;
@@ -47,7 +43,7 @@ namespace zkhwClient.view.setting
         XmlDocument xmlDoc = new XmlDocument();
         XmlNode node;
         string path = @"config.xml";
-
+        DataTable dtuserlist = null;
         string issave = "0";
         public basicInfoSettings()
         {
@@ -139,7 +135,7 @@ namespace zkhwClient.view.setting
 
                 issave = "1";
             }
-             this.comboBox7.DropDownStyle = ComboBoxStyle.DropDownList; 
+             //this.comboBox7.DropDownStyle = ComboBoxStyle.DropDownList; 
         }
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
@@ -218,25 +214,90 @@ namespace zkhwClient.view.setting
                 return;
             }
             input_name = this.comboBox6.Text;
-
+            DataRow[] drs6 = dtuserlist.Select("uname = '"+ input_name + "' ");
+            if (drs6.Count() < 1)
+            {
+                MessageBox.Show("无此建档人名称，请重新选择!");
+                return;
+            }
             zeren_doctor = this.comboBox7.Text;
+            DataRow[] drs7 = dtuserlist.Select("uname = '" + zeren_doctor + "' ");
+            if (drs7.Count() < 1)
+            {
+                MessageBox.Show("无此责任医生，请重新选择!");
+                return;
+            }
             //if (shengName == "陕西")
             //{
-                zeren_doctorId = this.comboBox7.SelectedValue.ToString();
+            zeren_doctorId = this.comboBox7.SelectedValue.ToString();
             //}
             bc = this.comboBox8.Text;
+            DataRow[] drs8 = dtuserlist.Select("uname = '" + bc + "' ");
+            if (drs8.Count() < 1)
+            {
+                MessageBox.Show("无此B超人员名称，请重新选择!");
+                return;
+            }
             xcg = this.comboBox9.Text;
+            DataRow[] drs9 = dtuserlist.Select("uname = '" + xcg + "' ");
+            if (drs9.Count() < 1)
+            {
+                MessageBox.Show("无此血球人员名称，请重新选择!");
+                return;
+            }
             sh = this.comboBox10.Text;
+            DataRow[] drs10 = dtuserlist.Select("uname = '" + sh + "' ");
+            if (drs10.Count() < 1)
+            {
+                MessageBox.Show("无此生化人员名称，请重新选择!");
+                return;
+            }
             sgtz = this.comboBox11.Text;
+            DataRow[] drs11 = dtuserlist.Select("uname = '" + sgtz + "' ");
+            if (drs11.Count() < 1)
+            {
+                MessageBox.Show("无此生化人员名称，请重新选择!");
+                return;
+            }
             ncg = this.comboBox12.Text;
+            DataRow[] drs12 = dtuserlist.Select("uname = '" + ncg + "' ");
+            if (drs12.Count() < 1)
+            {
+                MessageBox.Show("无此尿机人员名称，请重新选择!");
+                return;
+            }
             xdt = this.comboBox13.Text;
+            DataRow[] drs13 = dtuserlist.Select("uname = '" + xdt + "' ");
+            if (drs13.Count() < 1)
+            {
+                MessageBox.Show("无此心电人员名称，请重新选择!");
+                return;
+            }
             xy = this.comboBox14.Text;
+            DataRow[] drs14 = dtuserlist.Select("uname = '" + xy + "' ");
+            if (drs14.Count() < 1)
+            {
+                MessageBox.Show("无此血压计人员名称，请重新选择!");
+                return;
+            }
             wx = textBox3.Text;
             string other = textBox2.Text;
             string captain = ""; //this.comboBox15.SelectedValue.ToString();
             string members = "";// textBox4.Text;
             string operation = this.comboBox16.Text;
+            DataRow[] drs16 = dtuserlist.Select("uname = '" + operation + "' ");
+            if (drs16.Count() < 1)
+            {
+                MessageBox.Show("无此操作人员名称，请重新选择!");
+                return;
+            }
             string car_name = this.comboBox17.Text;
+            DataRow[] drs17 = dtuserlist.Select("uname = '" + car_name + "' ");
+            if (drs17.Count() < 1)
+            {
+                MessageBox.Show("无此司机人员名称，请重新选择!");
+                return;
+            }
             string create_user = null;
             string create_name = null;
 
@@ -271,7 +332,7 @@ namespace zkhwClient.view.setting
         }
         
         private void showCombobox() {
-            DataTable dtuserlist= userdao.listUserbyOrganCode(frmLogin.organCode);
+            dtuserlist= userdao.listUserbyOrganCode(frmLogin.organCode);
             this.comboBox6.DataSource = dtuserlist.Copy();//绑定数据源
             this.comboBox6.DisplayMember = "uname";//显示给用户的数据集表项
             this.comboBox6.ValueMember = "uname";//操作时获取的值
@@ -385,8 +446,5 @@ namespace zkhwClient.view.setting
             //    }
             //}
         }
- 
-
-       
     }
 }

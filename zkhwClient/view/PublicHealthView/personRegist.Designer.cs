@@ -99,6 +99,12 @@
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
+            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.label46 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -151,6 +157,12 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.comboBox5);
+            this.groupBox1.Controls.Add(this.comboBox4);
+            this.groupBox1.Controls.Add(this.comboBox3);
+            this.groupBox1.Controls.Add(this.comboBox6);
+            this.groupBox1.Controls.Add(this.comboBox7);
+            this.groupBox1.Controls.Add(this.label46);
             this.groupBox1.Controls.Add(this.comboBox2);
             this.groupBox1.Controls.Add(this.label45);
             this.groupBox1.Controls.Add(this.label44);
@@ -322,7 +334,7 @@
             // label42
             // 
             this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(5, 510);
+            this.label42.Location = new System.Drawing.Point(5, 538);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(29, 12);
             this.label42.TabIndex = 29;
@@ -404,7 +416,7 @@
             // textBox6
             // 
             this.textBox6.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox6.Location = new System.Drawing.Point(538, 441);
+            this.textBox6.Location = new System.Drawing.Point(538, 488);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(256, 30);
             this.textBox6.TabIndex = 9;
@@ -413,7 +425,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label10.Location = new System.Drawing.Point(407, 447);
+            this.label10.Location = new System.Drawing.Point(407, 494);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(104, 20);
             this.label10.TabIndex = 16;
@@ -422,7 +434,7 @@
             // textBox5
             // 
             this.textBox5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox5.Location = new System.Drawing.Point(170, 441);
+            this.textBox5.Location = new System.Drawing.Point(170, 488);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(218, 30);
             this.textBox5.TabIndex = 8;
@@ -431,7 +443,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.Location = new System.Drawing.Point(8, 444);
+            this.label9.Location = new System.Drawing.Point(8, 491);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(146, 20);
             this.label9.TabIndex = 14;
@@ -926,6 +938,71 @@
             this.label13.TabIndex = 0;
             this.label13.Text = "label13";
             // 
+            // comboBox5
+            // 
+            this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Location = new System.Drawing.Point(675, 440);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(195, 28);
+            this.comboBox5.TabIndex = 48;
+            this.comboBox5.SelectionChangeCommitted += new System.EventHandler(this.comboBox5_SelectionChangeCommitted);
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Location = new System.Drawing.Point(525, 440);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(145, 28);
+            this.comboBox4.TabIndex = 47;
+            this.comboBox4.SelectionChangeCommitted += new System.EventHandler(this.comboBox4_SelectionChangeCommitted);
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(372, 440);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(145, 28);
+            this.comboBox3.TabIndex = 45;
+            this.comboBox3.SelectionChangeCommitted += new System.EventHandler(this.comboBox3_SelectionChangeCommitted);
+            // 
+            // comboBox6
+            // 
+            this.comboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox6.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox6.FormattingEnabled = true;
+            this.comboBox6.Location = new System.Drawing.Point(235, 440);
+            this.comboBox6.Name = "comboBox6";
+            this.comboBox6.Size = new System.Drawing.Size(129, 28);
+            this.comboBox6.TabIndex = 44;
+            this.comboBox6.SelectionChangeCommitted += new System.EventHandler(this.comboBox6_SelectionChangeCommitted);
+            // 
+            // comboBox7
+            // 
+            this.comboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox7.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox7.FormattingEnabled = true;
+            this.comboBox7.Location = new System.Drawing.Point(109, 440);
+            this.comboBox7.Name = "comboBox7";
+            this.comboBox7.Size = new System.Drawing.Size(118, 28);
+            this.comboBox7.TabIndex = 43;
+            this.comboBox7.SelectionChangeCommitted += new System.EventHandler(this.comboBox7_SelectionChangeCommitted);
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label46.Location = new System.Drawing.Point(7, 443);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(104, 20);
+            this.label46.TabIndex = 42;
+            this.label46.Text = "所属区域:";
+            // 
             // personRegist
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1027,5 +1104,11 @@
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.ComboBox comboBox7;
+        private System.Windows.Forms.Label label46;
     }
 }
