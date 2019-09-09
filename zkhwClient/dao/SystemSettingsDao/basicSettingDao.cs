@@ -20,7 +20,7 @@ namespace zkhwClient.dao
         public DataTable checkBasicsettingInfo()
         {
             DataSet ds = new DataSet();
-            String sql = "select sheng_code, shi_code, qx_code, xz_code, cun_code, organ_code, organ_name, input_name, zeren_doctor, bc, xcg, sh, sgtz, ncg, xdt, xy, wx, other, captain, members, operation, car_name,create_time,update_user,allFullName from basicInfo_setting where 1=1 order by create_time desc";
+            String sql = "select sheng_code, shi_code, qx_code, xz_code, cun_code, organ_code, organ_name, input_name, zeren_doctor, bc, xcg, sh, sgtz, ncg, xdt, xy, wx, other, captain, members, operation, car_name,create_time,update_user,allFullName from basicInfo_setting where 1=1 order by create_time desc limit 1";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
