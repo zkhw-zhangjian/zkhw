@@ -122,6 +122,7 @@ namespace zkhwClient.view.PublicHealthView
         private void button1_Click(object sender, EventArgs e)
         {
             resident_diseases hm = new resident_diseases();
+            hm._displaydt = "0";
             if (hm.ShowDialog() == DialogResult.OK)
             {
                 DataRow[] drr = goodsList.Select("disease_name = '" + hm.disease_name.ToString() + "'");
