@@ -65,7 +65,7 @@
             "其他"});
             this.comboBox1.Location = new System.Drawing.Point(127, 16);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(194, 28);
+            this.comboBox1.Size = new System.Drawing.Size(212, 28);
             this.comboBox1.TabIndex = 1;
             // 
             // label2
@@ -83,7 +83,7 @@
             this.button1.BackColor = System.Drawing.Color.SkyBlue;
             this.button1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(38, 129);
+            this.button1.Location = new System.Drawing.Point(145, 129);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(83, 34);
             this.button1.TabIndex = 6;
@@ -96,7 +96,7 @@
             this.button2.BackColor = System.Drawing.Color.Red;
             this.button2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(224, 129);
+            this.button2.Location = new System.Drawing.Point(258, 129);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(81, 34);
             this.button2.TabIndex = 7;
@@ -111,14 +111,14 @@
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Location = new System.Drawing.Point(127, 65);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(194, 30);
+            this.dateTimePicker1.Size = new System.Drawing.Size(212, 30);
             this.dateTimePicker1.TabIndex = 8;
             // 
             // resident_diseases
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(333, 175);
+            this.ClientSize = new System.Drawing.Size(351, 175);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);

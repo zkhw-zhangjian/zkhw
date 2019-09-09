@@ -186,6 +186,7 @@
     <Compile Include="bean\UserInfo.cs" />
     <Compile Include="bean\xuechangguiBean.cs" />
     <Compile Include="Common.cs" />
+    <Compile Include="control\OutlookBar.cs" />
     <Compile Include="control\PagerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1329,6 +1330,19 @@
     <Content Include="images\xzwj.png" />
     <Content Include="images\身份证样图.png" />
     <None Include="Resources\拉取数据.png" />
+    <Content Include="img\bbdc.png" />
+    <Content Include="img\gj.png" />
+    <Content Include="img\jkfp.png" />
+    <Content Include="img\jyqy.png" />
+    <Content Include="img\lnr.png" />
+    <Content Include="img\log.ico" />
+    <Content Include="img\rydj.png" />
+    <Content Include="img\sfxt.png" />
+    <Content Include="img\sybz.png" />
+    <Content Include="img\tc.png" />
+    <Content Include="img\tjjd.png" />
+    <Content Include="img\topleft.png" />
+    <Content Include="img\xtsz.png" />
     <Content Include="up\pic\371327198003045712.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

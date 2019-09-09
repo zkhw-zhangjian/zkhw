@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using zkhwClient.bean;
 using zkhwClient.dao;
 
 namespace zkhwClient.view.PublicHealthView
@@ -38,6 +40,36 @@ namespace zkhwClient.view.PublicHealthView
             {
                 this.radioButton7.Checked = true;
             }
+        }
+
+        private void GetManBingBaiQian()
+        {
+            service.personalBasicInfoService personalBasicInfoService = new service.personalBasicInfoService();
+            DataTable dt = personalBasicInfoService.queryResident_diseases(_residentbaseinfoid);
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                ispoor obj = new ispoor();
+                obj.Code = dt.Rows[i]["disease_type"].ToString();
+                obj.Data = dt.Rows[i]["disease_name"].ToString();
+                obj.Message= dt.Rows[i]["disease_date"].ToString();
+                _mbList.Add(obj);
+            }
+            //这里正好显示下对应的标签
+            for(int i=0;i< _mbList.Count;i++)
+            {
+                foreach (Control ctrl in panel19.Controls)
+                {
+                    CheckBox ck = ctrl as CheckBox;
+                    //判断该控件是不是CheckBox
+                    if (ck is CheckBox)
+                    {
+                        if (ck.Tag.ToString() == _mbList[i].Code)
+                        {
+                            ck.Checked = true;
+                        }
+                    }
+                }
+            } 
         }
         private void aUdiabetesPatientServices_Load(object sender, EventArgs e)
         {
@@ -169,6 +201,8 @@ namespace zkhwClient.view.PublicHealthView
                     #endregion
 
                     _residentbaseinfoid= dt.Rows[0]["resident_base_info_id"].ToString();
+                    //查找对应的标签
+                    GetManBingBaiQian();
                     //将ctr转换成CheckBox并赋值给ck
                     string symptom =dt.Rows[0]["symptom"].ToString();
                     if (symptom != "" && symptom.IndexOf(',') > -1)
@@ -1012,56 +1046,58 @@ namespace zkhwClient.view.PublicHealthView
             _lst.Add(sql);
 
             sql = string.Format(@"delete from resident_diseases where resident_base_info_id='{0}' 
-                       and (disease_type='2' or disease_type='3' or disease_type='8' or disease_type='9')", _residentbaseinfoid);
+and (disease_type='2' or disease_type='3' or disease_type='8' or disease_type='9' or disease_type='4' or disease_type>'13')", _residentbaseinfoid);
             _lst.Add(sql);
-
+            if (_mbList.Count>0)
+            { 
+                for (int i = 0; i < _mbList.Count; i++)
+                {
+                    ispoor obj = (ispoor)_mbList[i];
+                    //1:先删除
+                    sql = string.Format(@"delete from resident_diseases where resident_base_info_id='{0}' and disease_type='{1}'", _residentbaseinfoid,obj.Code);
+                    _lst.Add(sql);
+                    //2:添加
+                    sql = string.Format(@"Insert Into resident_diseases(resident_base_info_id,disease_type,disease_name,disease_date) values('{0}','{1}','{2}','{3}')", _residentbaseinfoid,obj.Code,obj.Data,obj.Message);
+                    _lst.Add(sql); 
+                } 
+            }
+            #region  特殊处理下
             int _hypertension = 0;
             if (checkBox37.Checked == true)
             {
-                sql = string.Format(@"Insert Into resident_diseases(resident_base_info_id,disease_type,disease_name)
-                       values('{0}','2','高血压')", _residentbaseinfoid);
-                _lst.Add(sql);
                 _hypertension = 1;
             }
 
-            
+
             int _diabetes = 0;
             if (checkBox38.Checked == true)
             {
-                sql = string.Format(@"Insert Into resident_diseases(resident_base_info_id,disease_type,disease_name)
-                       values('{0}','3','糖尿病')", _residentbaseinfoid);
-                _lst.Add(sql);
                 _diabetes = 1;
             }
 
             int _psychosis = 0;
             if (checkBox39.Checked == true)
             {
-                sql = string.Format(@"Insert Into resident_diseases(resident_base_info_id,disease_type,disease_name)
-                       values('{0}','8','严重精神障碍')", _residentbaseinfoid);
-                _lst.Add(sql);
                 _psychosis = 1;
             }
 
             int _tuberculosis = 0;
             if (checkBox40.Checked == true)
             {
-                sql = string.Format(@"Insert Into resident_diseases(resident_base_info_id,disease_type,disease_name)
-                       values('{0}','9','结核病')", _residentbaseinfoid);
-                _lst.Add(sql);
                 _tuberculosis = 1;
             }
 
-            string  _poor = "0";
+            string _poor = "0";
             if (checkBox41.Checked == true) _poor = "1";
 
             int _signing = 0;
             if (checkBox42.Checked == true) _signing = 1;
 
             sql = string.Format(@"Update resident_base_info set is_hypertension={0},is_diabetes={1},is_psychosis={2},
-                 is_tuberculosis={3},is_poor='{4}',is_signing={5} where id_number='{6}' ", _hypertension, _diabetes, _psychosis, _tuberculosis, _poor,_signing, this.textBox119.Text);
+                 is_tuberculosis={3},is_poor='{4}',is_signing={5} where id_number='{6}' ", _hypertension, _diabetes, _psychosis, _tuberculosis, _poor, _signing, this.textBox119.Text);
             _lst.Add(sql);
 
+            #endregion
             int r = DbHelperMySQL.ExecuteSqlTran(_lst);
             if(r>0)
             {
@@ -1661,6 +1697,58 @@ namespace zkhwClient.view.PublicHealthView
         private void textBox66_KeyPress(object sender, KeyPressEventArgs e)
         {
             Common.txtBox_KeyPress(sender, e);
+        }
+        List<ispoor> _mbList = new List<ispoor>();
+
+        private void checkBox37_Click(object sender, EventArgs e)
+        {
+            CheckBox ck = (CheckBox)sender;
+            bool quxiao = true;
+            if(ck.Checked==true)
+            {
+                resident_diseases frm = new resident_diseases();
+                frm._displaydt = "1";
+                string stag = ck.Tag.ToString();
+                if (frm.ShowDialog()==DialogResult.OK)
+                {
+                    quxiao = false;
+                    bool flag = false; 
+                    for(int i=0;i< _mbList.Count;i++)
+                    {
+                        if(_mbList[i].Code == stag)
+                        {
+                            flag = true;
+                            _mbList[i].Message = frm.disease_date;
+                            _mbList[i].Data = ck.Text;
+                            break;
+                        }
+                    }
+                    if(flag==false)
+                    {
+                        ispoor obj = new ispoor();
+                        obj.Code = stag;
+                        obj.Data = ck.Text;
+                        obj.Message= frm.disease_date;
+                        _mbList.Add(obj);
+                    } 
+                }
+                else
+                {
+                    ck.Checked = false;
+                }
+            } 
+            if(quxiao==true)
+            {
+                string stag = ck.Tag.ToString();
+                for(int i =0;i< _mbList.Count;i++)
+                {
+                    if(stag == _mbList[i].Code)
+                    {
+                        _mbList.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
         }
     }
 }

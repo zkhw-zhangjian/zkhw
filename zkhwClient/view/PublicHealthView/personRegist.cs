@@ -63,16 +63,19 @@ namespace zkhwClient.view.PublicHealthView
         }
 
         private void personRegist_Load(object sender, EventArgs e)
-        { 
+        {
+            dataGridView1.RowsDefaultCellStyle.BackColor = Color.Bisque;
+            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+
             this.label1.Text = "居民健康档案登记";
             this.label1.ForeColor = Color.SkyBlue;
-            label1.Font = new Font("微软雅黑", 20F, System.Drawing.FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
+            label1.Font = new Font("微软雅黑", 18F, System.Drawing.FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
             label1.Left = (this.panel1.Width - this.label1.Width) / 2;
             label1.BringToFront();
 
             this.label13.Text = "登记记录";
             this.label13.ForeColor = Color.SkyBlue;
-            label13.Font = new Font("微软雅黑", 20F, System.Drawing.FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
+            label13.Font = new Font("微软雅黑", 18F, System.Drawing.FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
             label13.Left = (this.panel4.Width - this.label13.Width) / 2;
             label13.BringToFront();
 
@@ -254,7 +257,7 @@ namespace zkhwClient.view.PublicHealthView
 
                 //byte[] samid = new byte[32];
                 //CVRSDK.CVR_GetSAMID(ref samid[0]);
-                richTextBox1.Text = Encoding.GetEncoding("GB2312").GetString(address).Replace("\0", "").Trim();
+                textBox2.Text = Encoding.GetEncoding("GB2312").GetString(address).Replace("\0", "").Trim();
                 //textBox9.Text = Encoding.GetEncoding("GB2312").GetString(sex).Replace("\0", "").Trim();
                 this.comboBox1.Text = Encoding.GetEncoding("GB2312").GetString(sex).Replace("\0", "").Trim();
                 textBox8.Text = Encoding.GetEncoding("GB2312").GetString(birthday).Replace("\0", "").Trim();
@@ -270,7 +273,7 @@ namespace zkhwClient.view.PublicHealthView
                 comboBox2.Text = tmp;
                 //label11.Text = "安全模块号：" + System.Text.Encoding.GetEncoding("GB2312").GetString(samid).Replace("\0", "").Trim();
                 //textBox8.Text = Encoding.GetEncoding("GB2312").GetString(validtermOfStart).Replace("\0", "").Trim() + "-" + Encoding.GetEncoding("GB2312").GetString(validtermOfEnd).Replace("\0", "").Trim();
-                richTextBox1.Text=richTextBox1.Text.Replace("?","号");
+                textBox2.Text= textBox2.Text.Replace("?","号");
                 //把身份证图片名称zp.bpm 修改为对应的名称
                 string pName = Application.StartupPath + "\\zp.bmp";
                 FileInfo inf = new FileInfo(pName);
@@ -331,7 +334,7 @@ namespace zkhwClient.view.PublicHealthView
                             textBox8.Text = dt.Rows[0][2].ToString();
                             textBox3.Text = dt.Rows[0][3].ToString();
                             pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
-                            richTextBox1.Text = dt.Rows[0][5].ToString();
+                            textBox2.Text = dt.Rows[0][5].ToString();
                             tmp = dt.Rows[0][6].ToString();
                             if (tmp == "") tmp = "1";
                             DataRow[] drw = dtno.Select("id='"+tmp+"'");
@@ -528,7 +531,7 @@ namespace zkhwClient.view.PublicHealthView
         private void button1_Click(object sender, EventArgs e)
         {
             label45.Text = "";
-            string address = richTextBox1.Text;
+            string address = textBox2.Text;
             string sexcomboBox = this.comboBox1.Text;
             string sex = "1";
             if ("男".Equals(sexcomboBox))
@@ -773,22 +776,22 @@ namespace zkhwClient.view.PublicHealthView
                     //dv.Sort = "measureCode,meterNo,devtime asc";
                     //DataTable dts = dv.ToTable(true);
                     this.dataGridView1.DataSource = dtRegistration;
-                    this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
-                    this.dataGridView1.Columns[1].HeaderCell.Value = "性别";
-                    this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
-                    this.dataGridView1.Columns[3].HeaderCell.Value = "电子档案号";
-                    this.dataGridView1.Columns[4].HeaderCell.Value = "条码号";
-                    this.dataGridView1.Columns[0].Width = 70;
-                    this.dataGridView1.Columns[1].Width = 55;
-                    this.dataGridView1.Columns[2].Width = 120;
-                    this.dataGridView1.Columns[3].Width = 150;
-                    this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
-                    this.dataGridView1.AllowUserToAddRows = false;
-                    int rows = this.dataGridView1.Rows.Count - 1 < 0 ? 0 : this.dataGridView1.Rows.Count - 1;
-                    for (int count = 0; count <= rows; count++)
-                    {
-                        this.dataGridView1.Rows[count].HeaderCell.Value = String.Format("{0}", count + 1);
-                    }
+                    //this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
+                    //this.dataGridView1.Columns[1].HeaderCell.Value = "性别";
+                    //this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
+                    //this.dataGridView1.Columns[3].HeaderCell.Value = "电子档案号";
+                    //this.dataGridView1.Columns[4].HeaderCell.Value = "条码号";
+                    //this.dataGridView1.Columns[0].Width = 70;
+                    //this.dataGridView1.Columns[1].Width = 55;
+                    //this.dataGridView1.Columns[2].Width = 120;
+                    //this.dataGridView1.Columns[3].Width = 150;
+                    //this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
+                    //this.dataGridView1.AllowUserToAddRows = false;
+                    //int rows = this.dataGridView1.Rows.Count - 1 < 0 ? 0 : this.dataGridView1.Rows.Count - 1;
+                    //for (int count = 0; count <= rows; count++)
+                    //{
+                    //    this.dataGridView1.Rows[count].HeaderCell.Value = String.Format("{0}", count + 1);
+                    //}
                 }
                 else {
                     MessageBox.Show("未查询出数据!");
@@ -903,7 +906,7 @@ namespace zkhwClient.view.PublicHealthView
             {
                 comboBox1.Text = "未说明的性别";
             }
-            this.richTextBox1.Text = basicInfoSettings.shengName+ basicInfoSettings.shiName+ basicInfoSettings.qxName;
+            this.textBox2.Text = basicInfoSettings.shengName+ basicInfoSettings.shiName+ basicInfoSettings.qxName;
             //string cardCode6 = textBox3.Text.Trim().Substring(0,6);
             //DataTable dtArea = area.GetAreaByCode(cardCode6);
 
@@ -1000,6 +1003,67 @@ namespace zkhwClient.view.PublicHealthView
         {
             //if (numericUpDown1.Value == 0) numericUpDown1.Value = 4;
             //WritePrintBarCodeNumber();
+        }
+
+        private void button2_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 18, false, Color.FromArgb(0, 122, 204), Color.FromArgb(8, 39, 57));
+            base.OnPaint(e);
+            Graphics g = e.Graphics;
+            g.DrawString("搜索", new Font("微软雅黑", 11, System.Drawing.FontStyle.Bold), new SolidBrush(Color.White), new PointF(15, 5));
+        }
+
+        
+
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            for (int i = 0; i < e.RowCount; i++)
+            {
+                dataGridView1.Rows[e.RowIndex + i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                dataGridView1.Rows[e.RowIndex + i].HeaderCell.Value = (e.RowIndex + i + 1).ToString();
+            }
+
+            for (int i = e.RowIndex + e.RowCount; i < this.dataGridView1.Rows.Count; i++)
+            {
+                dataGridView1.Rows[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                dataGridView1.Rows[i].HeaderCell.Value = (i + 1).ToString();
+            }
+        }
+
+        private void button3_Paint(object sender, PaintEventArgs e)
+        {
+            Button bt = (Button)sender;
+            string tag = bt.Tag.ToString();
+            string wenzi = "";
+            int ksx = 30;
+            switch (tag)
+            {
+                case "0":
+                    wenzi = "读卡";
+                    break;
+                case "1":
+                    wenzi = "拍照";
+                    break;
+                case "2":
+                    wenzi = "打印";
+                    break;
+                case "3":
+                    ksx = 15;
+                    wenzi = "补打条码";
+                    break;
+            }
+            if(tag=="2")
+            {
+                ControlCircular.Draw(e.ClipRectangle, e.Graphics, 18, false, Color.FromArgb(127, 190, 38), Color.FromArgb(127, 190, 38));
+            }
+            else
+            {
+                ControlCircular.Draw(e.ClipRectangle, e.Graphics, 18, false, Color.FromArgb(0, 122, 204), Color.FromArgb(8, 39, 57));
+            } 
+            base.OnPaint(e);
+            Graphics g = e.Graphics; 
+            g.DrawString(wenzi, new Font("微软雅黑", 15, System.Drawing.FontStyle.Bold), new SolidBrush(Color.White), new PointF(ksx, 5));
+
         }
 
         private void WritePrintBarCodeNumber()
