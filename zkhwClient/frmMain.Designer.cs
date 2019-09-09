@@ -145,8 +145,8 @@
             this.设置ToolStripMenuItem,
             this.数据分析ToolStripMenuItem,
             this.使用帮助ToolStripMenuItem,
-            this.挂机ToolStripMenuItem,
             this.系统退出ToolStripMenuItem,
+            this.挂机ToolStripMenuItem,
             this.系统ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -295,7 +295,7 @@
             // 家医签约登录ToolStripMenuItem
             // 
             this.家医签约登录ToolStripMenuItem.Name = "家医签约登录ToolStripMenuItem";
-            this.家医签约登录ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.家医签约登录ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.家医签约登录ToolStripMenuItem.Text = "家医签约登录";
             // 
             // 设置ToolStripMenuItem
@@ -362,7 +362,7 @@
             // 使用情况统计ToolStripMenuItem
             // 
             this.使用情况统计ToolStripMenuItem.Name = "使用情况统计ToolStripMenuItem";
-            this.使用情况统计ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.使用情况统计ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.使用情况统计ToolStripMenuItem.Text = "使用情况统计";
             // 
             // 使用帮助ToolStripMenuItem

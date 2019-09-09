@@ -63,6 +63,7 @@ namespace zkhwClient
         private void CallMethod(string shxqAgreement,string comnum)
         { 
             string[] sxa = shxqAgreement.Split(',');
+            if (sxa.Length<2) { return; }
             if (sxa[0].ToString().Trim() == "SH_YNH_001" || sxa[1].ToString().Trim() == "XCG_YNH_001")
             {
                 this.timer2.Interval = Int32.Parse(Properties.Settings.Default.timeInterval);
@@ -736,99 +737,98 @@ namespace zkhwClient
                 this.panel1.Controls.Add(frm);
                 frm.Show();
             }
-            else if (tag == "体检设备说明书")
-            {   //使用帮助模块 
-                OpenPdf(Application.StartupPath+ "\\pdf\\仪器配置说明.docx");
-            }
-            else if (tag == "软件系统说明书")
-            {   //使用帮助模块 
-                //softwareSystems pR = new softwareSystems();
-                //pR.TopLevel = false;
-                //pR.Dock = DockStyle.Fill;
-                //pR.FormBorderStyle = FormBorderStyle.None;
-                //this.panel1.Controls.Clear();
-                //this.panel1.Controls.Add(pR);
-                //pR.Show();
-                OpenPdf(Application.StartupPath + "\\pdf\\软件系统.pdf");
-            }
-            else if (tag == "B超")
-            {
-                OpenPdf(Application.StartupPath + "\\pdf\\B超.pdf");
-                //bUltrasound pR = new bUltrasound();
-                //pR.TopLevel = false;
-                //pR.Dock = DockStyle.Fill;
-                //pR.FormBorderStyle = FormBorderStyle.None;
-                //this.panel1.Controls.Clear();
-                //this.panel1.Controls.Add(pR);
-                //pR.Show();
-            }
-            else if (tag == "生化")
-            {
-                OpenPdf(Application.StartupPath + "\\pdf\\生化.pdf");
-                //biochemical pR = new biochemical();
-                //pR.TopLevel = false;
-                //pR.Dock = DockStyle.Fill;
-                //pR.FormBorderStyle = FormBorderStyle.None;
-                //this.panel1.Controls.Clear();
-                //this.panel1.Controls.Add(pR);
-                //pR.Show();
-            }
-            else if (tag == "尿常规")
-            {
-                OpenPdf(Application.StartupPath + "\\pdf\\尿常规.pdf");
-                //urinaryFluid pR = new urinaryFluid();
-                //pR.TopLevel = false;
-                //pR.Dock = DockStyle.Fill;
-                //pR.FormBorderStyle = FormBorderStyle.None;
-                //this.panel1.Controls.Clear();
-                //this.panel1.Controls.Add(pR);
-                //pR.Show();
-            }
-            else if (tag == "血常规")
-            {
-                OpenPdf(Application.StartupPath + "\\pdf\\血常规.pdf");
-                //bloodAnalysis pR = new bloodAnalysis();
-                //pR.TopLevel = false;
-                //pR.Dock = DockStyle.Fill;
-                //pR.FormBorderStyle = FormBorderStyle.None;
-                //this.panel1.Controls.Clear();
-                //this.panel1.Controls.Add(pR);
-                //pR.Show();
-            }
-            else if (tag == "身高体重")
-            {
-                OpenPdf(Application.StartupPath + "\\pdf\\身高体重.pdf");
-                //heightAndWeight pR = new heightAndWeight();
-                //pR.TopLevel = false;
-                //pR.Dock = DockStyle.Fill;
-                //pR.FormBorderStyle = FormBorderStyle.None;
-                //this.panel1.Controls.Clear();
-                //this.panel1.Controls.Add(pR);
-                //pR.Show();
-            }
-            else if (tag == "心电图")
-            {
-                OpenPdf(Application.StartupPath + "\\pdf\\心电图.pdf");
-                //electrocarDiogram pR = new electrocarDiogram();
-                //pR.TopLevel = false;
-                //pR.Dock = DockStyle.Fill;
-                //pR.FormBorderStyle = FormBorderStyle.None;
-                //this.panel1.Controls.Clear();
-                //this.panel1.Controls.Add(pR);
-                //pR.Show();
-            }
-            else if (tag == "血压")
-            {
-                OpenPdf(Application.StartupPath + "\\pdf\\血压.pdf");
-                //bloodPressure pR = new bloodPressure();
-                //pR.TopLevel = false;
-                //pR.Dock = DockStyle.Fill;
-                //pR.FormBorderStyle = FormBorderStyle.None;
-                //this.panel1.Controls.Clear();
-                //this.panel1.Controls.Add(pR);
-                //pR.Show();
-
-            }
+            //else if (tag == "体检设备说明书")
+            //{   //使用帮助模块 
+            //    OpenPdf(Application.StartupPath+ "\\pdf\\仪器配置说明.docx");
+            //}
+            //else if (tag == "软件系统说明书")
+            //{   //使用帮助模块 
+            //    //softwareSystems pR = new softwareSystems();
+            //    //pR.TopLevel = false;
+            //    //pR.Dock = DockStyle.Fill;
+            //    //pR.FormBorderStyle = FormBorderStyle.None;
+            //    //this.panel1.Controls.Clear();
+            //    //this.panel1.Controls.Add(pR);
+            //    //pR.Show();
+            //    OpenPdf(Application.StartupPath + "\\pdf\\软件系统.pdf");
+            //}
+            //else if (tag == "B超")
+            //{
+            //    OpenPdf(Application.StartupPath + "\\pdf\\B超.pdf");
+            //    //bUltrasound pR = new bUltrasound();
+            //    //pR.TopLevel = false;
+            //    //pR.Dock = DockStyle.Fill;
+            //    //pR.FormBorderStyle = FormBorderStyle.None;
+            //    //this.panel1.Controls.Clear();
+            //    //this.panel1.Controls.Add(pR);
+            //    //pR.Show();
+            //}
+            //else if (tag == "生化")
+            //{
+            //    OpenPdf(Application.StartupPath + "\\pdf\\生化.pdf");
+            //    //biochemical pR = new biochemical();
+            //    //pR.TopLevel = false;
+            //    //pR.Dock = DockStyle.Fill;
+            //    //pR.FormBorderStyle = FormBorderStyle.None;
+            //    //this.panel1.Controls.Clear();
+            //    //this.panel1.Controls.Add(pR);
+            //    //pR.Show();
+            //}
+            //else if (tag == "尿常规")
+            //{
+            //    OpenPdf(Application.StartupPath + "\\pdf\\尿常规.pdf");
+            //    //urinaryFluid pR = new urinaryFluid();
+            //    //pR.TopLevel = false;
+            //    //pR.Dock = DockStyle.Fill;
+            //    //pR.FormBorderStyle = FormBorderStyle.None;
+            //    //this.panel1.Controls.Clear();
+            //    //this.panel1.Controls.Add(pR);
+            //    //pR.Show();
+            //}
+            //else if (tag == "血常规")
+            //{
+            //    OpenPdf(Application.StartupPath + "\\pdf\\血常规.pdf");
+            //    //bloodAnalysis pR = new bloodAnalysis();
+            //    //pR.TopLevel = false;
+            //    //pR.Dock = DockStyle.Fill;
+            //    //pR.FormBorderStyle = FormBorderStyle.None;
+            //    //this.panel1.Controls.Clear();
+            //    //this.panel1.Controls.Add(pR);
+            //    //pR.Show();
+            //}
+            //else if (tag == "身高体重")
+            //{
+            //    OpenPdf(Application.StartupPath + "\\pdf\\身高体重.pdf");
+            //    //heightAndWeight pR = new heightAndWeight();
+            //    //pR.TopLevel = false;
+            //    //pR.Dock = DockStyle.Fill;
+            //    //pR.FormBorderStyle = FormBorderStyle.None;
+            //    //this.panel1.Controls.Clear();
+            //    //this.panel1.Controls.Add(pR);
+            //    //pR.Show();
+            //}
+            //else if (tag == "心电图")
+            //{
+            //    OpenPdf(Application.StartupPath + "\\pdf\\心电图.pdf");
+            //    //electrocarDiogram pR = new electrocarDiogram();
+            //    //pR.TopLevel = false;
+            //    //pR.Dock = DockStyle.Fill;
+            //    //pR.FormBorderStyle = FormBorderStyle.None;
+            //    //this.panel1.Controls.Clear();
+            //    //this.panel1.Controls.Add(pR);
+            //    //pR.Show();
+            //}
+            //else if (tag == "血压")
+            //{
+            //    OpenPdf(Application.StartupPath + "\\pdf\\血压.pdf");
+            //    //bloodPressure pR = new bloodPressure();
+            //    //pR.TopLevel = false;
+            //    //pR.Dock = DockStyle.Fill;
+            //    //pR.FormBorderStyle = FormBorderStyle.None;
+            //    //this.panel1.Controls.Clear();
+            //    //this.panel1.Controls.Add(pR);
+            //    //pR.Show();
+            //}
             else
             {
                 this.panel1.Controls.Clear();
@@ -937,52 +937,53 @@ namespace zkhwClient
 
         private void 使用帮助ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (ToolStripMenuItem item in this.menuStrip1.Items)
-            {
-                if (item.Text == "使用帮助")
-                {
-                    item.Checked = true;
-                    item.BackColor = Color.CadetBlue;
-                    this.flowLayoutPanel1.Controls.Clear();
-                    PictureBox[] picb = new PictureBox[item.DropDownItems.Count];
-                    for (int i = 0; i < item.DropDownItems.Count; i++)
-                    {
-                        picb[i] = new PictureBox();
-                        picb[i].SizeMode = PictureBoxSizeMode.StretchImage;
-                        picb[i].BorderStyle = BorderStyle.None;
-                        if (i == 0)//默认首项选中
-                        {
-                            picb[i].BackColor = Color.Blue;
-                            softwareSystems pR = new softwareSystems();
-                            pR.TopLevel = false;
-                            pR.Dock = DockStyle.Fill;
-                            pR.FormBorderStyle = FormBorderStyle.None;
-                            this.panel1.Controls.Clear();
-                            this.panel1.Controls.Add(pR);
-                            pR.Show();
-                        }
-                        picb[i].Size = new Size(216, 40);//大   小
-                        picb[i].Click += new EventHandler(picb_DouClick);
-                        picb[i].Tag = item.DropDownItems[i].Text;
+            softwareSystems softs = new softwareSystems();
+            softs.Show();
+            //foreach (ToolStripMenuItem item in this.menuStrip1.Items)
+            //{
+            //    if (item.Text == "使用帮助")
+            //    {
+            //        item.Checked = true;
+            //        item.BackColor = Color.CadetBlue;
+            //        this.flowLayoutPanel1.Controls.Clear();
+            //        PictureBox[] picb = new PictureBox[item.DropDownItems.Count];
+            //        for (int i = 0; i < item.DropDownItems.Count; i++)
+            //        {
+            //            picb[i] = new PictureBox();
+            //            picb[i].SizeMode = PictureBoxSizeMode.StretchImage;
+            //            picb[i].BorderStyle = BorderStyle.None;
+            //            if (i == 0)//默认首项选中
+            //            {
+            //                picb[i].BackColor = Color.Blue;
+            //                softwareSystems pR = new softwareSystems();
+            //                pR.TopLevel = false;
+            //                pR.Dock = DockStyle.Fill;
+            //                pR.FormBorderStyle = FormBorderStyle.None;
+            //                this.panel1.Controls.Clear();
+            //                this.panel1.Controls.Add(pR);
+            //                pR.Show();
+            //            }
+            //            picb[i].Size = new Size(216, 40);//大   小
+            //            picb[i].Click += new EventHandler(picb_DouClick);
+            //            picb[i].Tag = item.DropDownItems[i].Text;
 
-                        TextBox rt = new TextBox();
-                        rt.Width = 200;
-                        rt.Height = 40;
-                        rt.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
-                        rt.Enabled = false;
-                        rt.Text = item.DropDownItems[i].Text;
-                        rt.Parent = picb[i];//指定父级
-                        this.flowLayoutPanel1.Controls.Add(picb[i]);
-                        item.DropDownItems[i].Visible = false; //看不见
-                    };
-                }
-                else
-                {
-                    item.Checked = false;
-                    item.BackColor = Color.SkyBlue;
-                }
-
-            }
+            //            TextBox rt = new TextBox();
+            //            rt.Width = 200;
+            //            rt.Height = 40;
+            //            rt.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
+            //            rt.Enabled = false;
+            //            rt.Text = item.DropDownItems[i].Text;
+            //            rt.Parent = picb[i];//指定父级
+            //            this.flowLayoutPanel1.Controls.Add(picb[i]);
+            //            item.DropDownItems[i].Visible = false; //看不见
+            //        };
+            //    }
+            //    else
+            //    {
+            //        item.Checked = false;
+            //        item.BackColor = Color.SkyBlue;
+            //    }
+            //}
         }
         //定时器 刷新页面时间控件
         private void timer1_Tick(object sender, EventArgs e)
@@ -2500,26 +2501,7 @@ namespace zkhwClient
                 }                
             }
         }
-        private void OpenPdf(string url)
-        {
-            //定义一个ProcessStartInfo实例
-            ProcessStartInfo info = new ProcessStartInfo();
-            //设置启动进程的初始目录
-            info.WorkingDirectory = Application.StartupPath;
-            //设置启动进程的应用程序或文档名
-            info.FileName = url;
-            //设置启动进程的参数
-            info.Arguments = "";
-            //启动由包含进程启动信息的进程资源
-            try
-            {
-                Process.Start(info);
-            }
-            catch
-            {
-                return;
-            }
-        }
+        
         private void socketTcp() {
             string hostName = Dns.GetHostName();   //获取本机名
             IPHostEntry localhost = Dns.GetHostByName(hostName);//方法已过期，可以获取IPv4的地址
