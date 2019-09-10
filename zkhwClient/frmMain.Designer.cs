@@ -62,15 +62,6 @@
             this.数据分析ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.使用情况统计ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.使用帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.软件系统ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.体检设备说明书ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.b超ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.生化ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.尿液ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.血液分析ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.身高体重ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.心电图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.血压ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.挂机ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
@@ -295,7 +286,7 @@
             // 家医签约登录ToolStripMenuItem
             // 
             this.家医签约登录ToolStripMenuItem.Name = "家医签约登录ToolStripMenuItem";
-            this.家医签约登录ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.家医签约登录ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.家医签约登录ToolStripMenuItem.Text = "家医签约登录";
             // 
             // 设置ToolStripMenuItem
@@ -362,79 +353,15 @@
             // 使用情况统计ToolStripMenuItem
             // 
             this.使用情况统计ToolStripMenuItem.Name = "使用情况统计ToolStripMenuItem";
-            this.使用情况统计ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.使用情况统计ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.使用情况统计ToolStripMenuItem.Text = "使用情况统计";
             // 
             // 使用帮助ToolStripMenuItem
             // 
-            this.使用帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.软件系统ToolStripMenuItem,
-            this.体检设备说明书ToolStripMenuItem,
-            this.b超ToolStripMenuItem,
-            this.生化ToolStripMenuItem,
-            this.尿液ToolStripMenuItem,
-            this.血液分析ToolStripMenuItem,
-            this.身高体重ToolStripMenuItem,
-            this.心电图ToolStripMenuItem,
-            this.血压ToolStripMenuItem});
             this.使用帮助ToolStripMenuItem.Name = "使用帮助ToolStripMenuItem";
             this.使用帮助ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.使用帮助ToolStripMenuItem.Text = "使用帮助";
             this.使用帮助ToolStripMenuItem.Click += new System.EventHandler(this.使用帮助ToolStripMenuItem_Click);
-            // 
-            // 软件系统ToolStripMenuItem
-            // 
-            this.软件系统ToolStripMenuItem.Name = "软件系统ToolStripMenuItem";
-            this.软件系统ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.软件系统ToolStripMenuItem.Text = "软件系统说明书";
-            // 
-            // 体检设备说明书ToolStripMenuItem
-            // 
-            this.体检设备说明书ToolStripMenuItem.Name = "体检设备说明书ToolStripMenuItem";
-            this.体检设备说明书ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.体检设备说明书ToolStripMenuItem.Text = "体检设备说明书";
-            // 
-            // b超ToolStripMenuItem
-            // 
-            this.b超ToolStripMenuItem.Name = "b超ToolStripMenuItem";
-            this.b超ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.b超ToolStripMenuItem.Text = "B超";
-            // 
-            // 生化ToolStripMenuItem
-            // 
-            this.生化ToolStripMenuItem.Name = "生化ToolStripMenuItem";
-            this.生化ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.生化ToolStripMenuItem.Text = "生化";
-            // 
-            // 尿液ToolStripMenuItem
-            // 
-            this.尿液ToolStripMenuItem.Name = "尿液ToolStripMenuItem";
-            this.尿液ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.尿液ToolStripMenuItem.Text = "尿常规";
-            // 
-            // 血液分析ToolStripMenuItem
-            // 
-            this.血液分析ToolStripMenuItem.Name = "血液分析ToolStripMenuItem";
-            this.血液分析ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.血液分析ToolStripMenuItem.Text = "血常规";
-            // 
-            // 身高体重ToolStripMenuItem
-            // 
-            this.身高体重ToolStripMenuItem.Name = "身高体重ToolStripMenuItem";
-            this.身高体重ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.身高体重ToolStripMenuItem.Text = "身高体重";
-            // 
-            // 心电图ToolStripMenuItem
-            // 
-            this.心电图ToolStripMenuItem.Name = "心电图ToolStripMenuItem";
-            this.心电图ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.心电图ToolStripMenuItem.Text = "心电图";
-            // 
-            // 血压ToolStripMenuItem
-            // 
-            this.血压ToolStripMenuItem.Name = "血压ToolStripMenuItem";
-            this.血压ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.血压ToolStripMenuItem.Text = "血压";
             // 
             // 挂机ToolStripMenuItem
             // 
@@ -795,14 +722,6 @@
         private System.Windows.Forms.ToolStripMenuItem 基本信息设置ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 设备管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 系统日志ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 软件系统ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem b超ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 生化ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 尿液ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 血液分析ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 身高体重ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 心电图ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 血压ToolStripMenuItem;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
@@ -817,7 +736,6 @@
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Timer timer3;
-        private System.Windows.Forms.ToolStripMenuItem 体检设备说明书ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 家医签约登录ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 健康扶贫服务ToolStripMenuItem;
         private System.Windows.Forms.Label label3;

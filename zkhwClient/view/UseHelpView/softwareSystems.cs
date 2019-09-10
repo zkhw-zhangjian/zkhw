@@ -37,56 +37,56 @@ namespace zkhwClient.view.UseHelpView
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            OpenPdf(Application.StartupPath + "\\pdf\\软件系统操作手册.docx");
+            OpenPdf(Application.StartupPath + "\\pdf\\系统软件说明书.pdf");
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            OpenPdf(Application.StartupPath + "\\pdf\\B超.docx");
+            OpenPdf(Application.StartupPath + "\\pdf\\B超_安盛_C5.pdf");
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             if (sxa.Length == 2&& "SH_LD_002".Equals(sxa[0]))
             {
-                OpenPdf(Application.StartupPath + "\\pdf\\雷杜生化Chemray420.pdf");
+                OpenPdf(Application.StartupPath + "\\pdf\\生化_雷杜_Chemray420.pdf");
             }
             else
             {
-                OpenPdf(Application.StartupPath + "\\pdf\\生化血球配置.docx");
+                OpenPdf(Application.StartupPath + "\\pdf\\生化_英诺华_DS-301.pdf");
             }
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            OpenPdf(Application.StartupPath + "\\pdf\\尿分析仪.docx");
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             if (sxa.Length == 2 && "XCG_LD_002".Equals(sxa[1]))
             {
-                OpenPdf(Application.StartupPath + "\\pdf\\雷杜血球RT-7300.pdf");
+                OpenPdf(Application.StartupPath + "\\pdf\\血常规_雷杜_RT-7300.pdf");
             }
             else
             {
-                OpenPdf(Application.StartupPath + "\\pdf\\生化血球配置.docx");
+                OpenPdf(Application.StartupPath + "\\pdf\\血常规_英诺华_HB-7021.pdf");
             }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            OpenPdf(Application.StartupPath + "\\pdf\\尿常规_优利特_URIT-300.pdf");
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            OpenPdf(Application.StartupPath + "\\pdf\\身高体重仪.docx");
+            OpenPdf(Application.StartupPath + "\\pdf\\身高体重_悦骑_SG-1000.pdf");
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            OpenPdf(Application.StartupPath + "\\pdf\\心电图仪.docx");
+            OpenPdf(Application.StartupPath + "\\pdf\\心电图_中旗_iMac300.pdf");
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            OpenPdf(Application.StartupPath + "\\pdf\\血压检测仪.docx");
+            OpenPdf(Application.StartupPath + "\\pdf\\血压_悦骑_ABP-1000.pdf");
         }
 
         private void softwareSystems_Load(object sender, EventArgs e)
