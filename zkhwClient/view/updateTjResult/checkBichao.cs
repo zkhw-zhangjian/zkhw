@@ -22,7 +22,8 @@ namespace zkhwClient.view.updateTjResult
             this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1);
             this.button1.BackgroundImage = Image.FromFile(@str + "/images/check.png");
 
-            DataTable dtbichao = tjdao.checkBichaoInfo(basicInfoSettings.createtime,null, basicInfoSettings.xcuncode);
+            //DataTable dtbichao = tjdao.checkBichaoInfo(basicInfoSettings.createtime,null, basicInfoSettings.xcuncode);
+            DataTable dtbichao = tjdao.checkBichaoInfo(dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss"), null, basicInfoSettings.xcuncode);
             if (dtbichao != null && dtbichao.Rows.Count > 0)
             {
                 this.dataGridView1.DataSource = dtbichao;

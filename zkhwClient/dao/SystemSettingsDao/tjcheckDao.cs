@@ -316,11 +316,11 @@ namespace zkhwClient.dao
             }
             if (time1 != null && !"".Equals(time1))
             {
-                sql += " and createtime >='" + time1 + "'";
+                sql += " and date_format(createtime,'%Y-%m-%d') >='" + time1 + "'";
             }
             if (time2 != null && !"".Equals(time2))
             {
-                sql += " and createtime <='" + time2 + "'";
+                sql += " and date_format(createtime,'%Y-%m-%d') <='" + time2 + "'";
             }
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
@@ -336,11 +336,11 @@ namespace zkhwClient.dao
             }
             if (time1 != null && !"".Equals(time1))
             {
-                sql += " and createtime >='" + time1 + "'";
+                sql += " and date_format(createtime,'%Y-%m-%d')>='" + time1 + "'";
             }
             if (time2 != null && !"".Equals(time2))
             {
-                sql += " and createtime <='" + time2 + "'";
+                sql += " and date_format(createtime,'%Y-%m-%d') <='" + time2 + "'";
             }
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
@@ -356,11 +356,11 @@ namespace zkhwClient.dao
             }
             if (time1 != null && !"".Equals(time1))
             {
-                sql += " and createtime >='" + time1 + "'";
+                sql += " and date_format(createtime,'%Y-%m-%d')  >='" + time1 + "'";
             }
             if (time2 != null && !"".Equals(time2))
             {
-                sql += " and createtime <='" + time2 + "'";
+                sql += " and date_format(createtime,'%Y-%m-%d') <='" + time2 + "'";
             }
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
@@ -376,11 +376,11 @@ namespace zkhwClient.dao
             }
             if (time1 != null && !"".Equals(time1))
             {
-                sql += " and createtime >='" + time1 + "'";
+                sql += " and date_format(createtime,'%Y-%m-%d')  >='" + time1 + "'";
             }
             if (time2 != null && !"".Equals(time2))
             {
-                sql += " and createtime <='" + time2 + "'";
+                sql += " and date_format(createtime,'%Y-%m-%d') <='" + time2 + "'";
             }
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
@@ -396,11 +396,11 @@ namespace zkhwClient.dao
             }
             if (time1 != null && !"".Equals(time1))
             {
-                sql += " and createtime >='" + time1 + "'";
+                sql += " and date_format(createtime,'%Y-%m-%d') >='" + time1 + "'";
             }
             if (time2 != null && !"".Equals(time2))
             {
-                sql += " and createtime <='" + time2 + "'";
+                sql += " and date_format(createtime,'%Y-%m-%d') <='" + time2 + "'";
             }
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
@@ -416,11 +416,11 @@ namespace zkhwClient.dao
             }
             if (time1 != null && !"".Equals(time1))
             {
-                sql += " and createtime >='" + time1 + "'";
+                sql += " and date_format(createtime,'%Y-%m-%d')  >='" + time1 + "'";
             }
             if (time2 != null && !"".Equals(time2))
             {
-                sql += " and createtime <='" + time2 + "'";
+                sql += " and date_format(createtime,'%Y-%m-%d') <='" + time2 + "'";
             }
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
@@ -436,11 +436,11 @@ namespace zkhwClient.dao
             }
             if (time1 != null && !"".Equals(time1))
             {
-                sql += " and createtime >='" + time1 + "'";
+                sql += " and date_format(createtime,'%Y-%m-%d')>='" + time1 + "'";
             }
             if (time2 != null && !"".Equals(time2))
             {
-                sql += " and createtime <='" + time2 + "'";
+                sql += " and date_format(createtime,'%Y-%m-%d') <='" + time2 + "'";
             }
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
