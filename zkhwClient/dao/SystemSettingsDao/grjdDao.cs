@@ -207,5 +207,13 @@ namespace zkhwClient.dao
             if (ds.Tables.Count < 1) { return null; }
             return ds.Tables[0];
         }
+        public DataTable selectDiseases(string code)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select c.name,c.healthAdvice from resident_base_info a join resident_diseases b on a.id=b.resident_base_info_id join slow_diseases_healthAdvice c on b.disease_type= c.code where a.archive_no='" + code + "'";
+            ds = DbHelperMySQL.Query(sql);
+            if (ds.Tables.Count < 1) { return null; }
+            return ds.Tables[0];
+        }
     }
 }
