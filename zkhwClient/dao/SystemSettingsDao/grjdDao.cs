@@ -107,7 +107,7 @@ namespace zkhwClient.dao
         public DataTable checkThresholdValues()
         {
             DataSet ds = new DataSet();
-            string sql = "select class_type,type,warning_min,warning_max,threshold_min,threshold_max from threshold_value a where 1=1";
+            string sql = "select class_type,type,warning_min,warning_max,threshold_min,threshold_max,chinaName,CheckMethod,unit from threshold_value a where 1=1";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -123,7 +123,7 @@ namespace zkhwClient.dao
             string sql = "";
             if (dmodel =="")
             {
-                sql = "select class_type,type,warning_min,warning_max,threshold_min,threshold_max from threshold_value a where 1=1";
+                sql = "select class_type,type,warning_min,warning_max,threshold_min,threshold_max,chinaName,CheckMethod,unit from threshold_value a where 1=1";
             }
             else
             {
@@ -133,7 +133,7 @@ namespace zkhwClient.dao
                 {
                     tmp = tmp + " or deviceModel='" + a[1].ToString().Trim() + "'";
                 } 
-                sql = "select class_type,type,warning_min,warning_max,threshold_min,threshold_max from threshold_value a where (" + tmp + ")";
+                sql = "select class_type,type,warning_min,warning_max,threshold_min,threshold_max,chinaName,CheckMethod,unit from threshold_value a where (" + tmp + ")";
             }
             if (classtype !="")
             {
@@ -203,6 +203,14 @@ namespace zkhwClient.dao
         {
             DataSet ds = new DataSet();
             string sql = "select a.bar_code,a.createtime from zkhw_tj_jk a where a.createtime >='" + time1 + "' and a.createtime <='" + time2 + "' and a.id_number = '" + cardcode + "' order by createtime desc limit 1";
+            ds = DbHelperMySQL.Query(sql);
+            if (ds.Tables.Count < 1) { return null; }
+            return ds.Tables[0];
+        }
+        public DataTable selectDiseases(string code)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select c.name,c.healthAdvice from resident_base_info a join resident_diseases b on a.id=b.resident_base_info_id join slow_diseases_healthAdvice c on b.disease_type= c.code where a.archive_no='" + code + "'";
             ds = DbHelperMySQL.Query(sql);
             if (ds.Tables.Count < 1) { return null; }
             return ds.Tables[0];
