@@ -27,8 +27,11 @@ namespace zkhwClient
                 KillProc("ASNetWks");
                 KillProc("httpceshi");
                 Application.EnableVisualStyles();   //这两行实现   XP   可视风格   
-                Application.DoEvents();             //这两行实现   XP   可视风格
+                Application.DoEvents();             //这两行实现   XP   可视风格  
                 Application.Run(new frmLogin());
+                //Application.Run(new personRegistt());
+
+
                 //Application.Run(new zkhwClient.view.PublicHealthView.examinatReport());
                 //Application.Run(new zkhwClient.view.HomeDoctorSigningView.teamMembers());
                 //Application.Run(new frmLogin());//有数据库

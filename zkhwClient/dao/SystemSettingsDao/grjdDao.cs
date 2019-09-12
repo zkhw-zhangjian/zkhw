@@ -107,7 +107,7 @@ namespace zkhwClient.dao
         public DataTable checkThresholdValues()
         {
             DataSet ds = new DataSet();
-            string sql = "select class_type,type,warning_min,warning_max,threshold_min,threshold_max from threshold_value a where 1=1";
+            string sql = "select class_type,type,warning_min,warning_max,threshold_min,threshold_max,chinaName,CheckMethod,unit from threshold_value a where 1=1";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }
@@ -123,7 +123,7 @@ namespace zkhwClient.dao
             string sql = "";
             if (dmodel =="")
             {
-                sql = "select class_type,type,warning_min,warning_max,threshold_min,threshold_max from threshold_value a where 1=1";
+                sql = "select class_type,type,warning_min,warning_max,threshold_min,threshold_max,chinaName,CheckMethod,unit from threshold_value a where 1=1";
             }
             else
             {
@@ -133,7 +133,7 @@ namespace zkhwClient.dao
                 {
                     tmp = tmp + " or deviceModel='" + a[1].ToString().Trim() + "'";
                 } 
-                sql = "select class_type,type,warning_min,warning_max,threshold_min,threshold_max from threshold_value a where (" + tmp + ")";
+                sql = "select class_type,type,warning_min,warning_max,threshold_min,threshold_max,chinaName,CheckMethod,unit from threshold_value a where (" + tmp + ")";
             }
             if (classtype !="")
             {
