@@ -33,13 +33,7 @@ namespace zkhwClient.view.PublicHealthView
         private void personalBasicInfo_Load(object sender, EventArgs e)
         {
             //让默认的日期时间减一天
-            this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1);
-
-            this.label4.Text = "个人基本信息建档";
-            this.label4.ForeColor = Color.SkyBlue;
-            label4.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
-            label4.Left = (this.panel1.Width - this.label4.Width) / 2;
-            label4.BringToFront();
+            this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1); 
             //区域 
             Common.SetComboBoxInfo(comboBox1, areadao.shengInfo());
 
@@ -541,6 +535,26 @@ namespace zkhwClient.view.PublicHealthView
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             OpenWindow();
+        }
+
+        private void button5_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 5));
+
+        }
+
+        private void button2_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("修改", new System.Drawing.Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(25, 6));
+
         }
     }
 }

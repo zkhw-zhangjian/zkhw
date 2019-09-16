@@ -19,8 +19,7 @@ namespace zkhwClient.view.updateTjResult
         private void checkNiaocg_Load(object sender, EventArgs e)
         {
             //让默认的日期时间减一天
-            this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1);
-            this.button1.BackgroundImage = Image.FromFile(@str + "/images/check.png");
+            this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1); 
 
             DataTable dtbichao = tjdao.checkNcgInfo(dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss"), null, basicInfoSettings.xcuncode);
             //DataTable dtbichao = tjdao.checkNcgInfo(basicInfoSettings.createtime, null, basicInfoSettings.xcuncode);
@@ -49,7 +48,7 @@ namespace zkhwClient.view.updateTjResult
             }
             else {
                 this.dataGridView1.DataSource = null;
-                MessageBox.Show("未查询到数据!");
+                
             }
         }
 
@@ -111,6 +110,17 @@ namespace zkhwClient.view.updateTjResult
                 this.dataGridView1.DataSource = null;
                 MessageBox.Show("未查询到数据!");
             }
+        }
+
+        private void button2_Paint(object sender, PaintEventArgs e)
+        {
+            Color color = Color.FromArgb(77, 177, 81);
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, color, color);
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("查询", new Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 5));
+
         }
     }
 }

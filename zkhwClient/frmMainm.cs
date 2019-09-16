@@ -17,8 +17,12 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using zkhwClient.dao;
+using zkhwClient.PublicHealth;
 using zkhwClient.utils;
+using zkhwClient.view;
+using zkhwClient.view.PublicHealthView;
 using zkhwClient.view.setting;
+using zkhwClient.view.updateTjResult;
 using zkhwClient.view.UseHelpView;
 
 namespace zkhwClient
@@ -54,7 +58,7 @@ namespace zkhwClient
         private void startlabel()
         {
             label26.Text = "    老年人生活        \r\n    自理能力评估";
-
+            label30.Text = "    2型糖尿病\r\n    患者健康管理";
             pangw.Dock = DockStyle.Fill; 
             panel17.Controls.Clear();
             panel17.Controls.Add(pangw);
@@ -62,9 +66,9 @@ namespace zkhwClient
 
         public void SetJianDangInfo(string a, string b, string c)
         {
-            label14.Text = "        " + a; //建档单位
-            label18.Text = "        " + b;//建档人
-            label19.Text = "        " + c;//责任医生
+            label14.Text = "      " + a; //建档单位
+            label18.Text = "      " + b;//建档人
+            label19.Text = "      " + c;//责任医生
         }
         private void frmMainm_Load(object sender, EventArgs e)
         {
@@ -84,6 +88,8 @@ namespace zkhwClient
             dttv = grjddao.checkThresholdValues(Common._deviceModel, "");//获取阈值信息
             this.timer1.Start();//时间控件定时器
             //定时器
+            this.timer3.Interval = Int32.Parse(Properties.Settings.Default.timer3Interval);
+            this.timer3.Start();//1分钟定时刷新设备状态
 
             node = xmlDoc.SelectSingleNode("config/shlasttime");
             node.InnerText = DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00";
@@ -192,6 +198,42 @@ namespace zkhwClient
             frm.Show();
         }
         #region 底部处理 
+        private void label1_Click(object sender, EventArgs e)
+        {
+            Label lbl = (Label)sender;
+            string stag = lbl.Tag.ToString();
+            switch(stag)
+            {
+                case "0":
+                    checkBichao checkBc = new checkBichao();
+                    checkBc.Show();
+                    break;
+                case "1":
+                    checkShenghua checkSh = new checkShenghua();
+                    checkSh.Show();
+                    break;
+                case "2":
+                    checkNiaocg checkNcg = new checkNiaocg();
+                    checkNcg.Show();
+                    break;
+                case "3":
+                    checkXuecg checkXcg = new checkXuecg();
+                    checkXcg.Show();
+                    break;
+                case "4":
+                    checkSgtz checkSgTz = new checkSgtz();
+                    checkSgTz.Show();
+                    break;
+                case "5":
+                    checkXindt checkXdt = new checkXindt();
+                    checkXdt.Show();
+                    break;
+                case "6":
+                    checkXueya checkXy = new checkXueya();
+                    checkXy.Show();
+                    break; 
+            }
+        }
         private void label1_MouseEnter(object sender, EventArgs e)
         {
             Label lbl = (Label)sender;
@@ -249,6 +291,8 @@ namespace zkhwClient
                     pangw.Dock = DockStyle.Fill;
                     panel17.Controls.Clear();
                     panel17.Controls.Add(pangw);
+                    personRegistt frm = new personRegistt();
+                    OpenWinToMain(frm);
                 }
                 else if (lbl.Text == "设置")
                 {
@@ -258,6 +302,9 @@ namespace zkhwClient
                     pansetup.Dock = DockStyle.Fill;
                     panel17.Controls.Clear();
                     panel17.Controls.Add(pansetup);
+
+                    basicInfoSettings frm = new basicInfoSettings();
+                    OpenWinToMain(frm);
                 }
             }
         }
@@ -301,6 +348,41 @@ namespace zkhwClient
             string[] b = a.Split(',');
             lbl.Tag = "1," + b[1].ToString();
             lbl.BackColor = leftselectColor;
+            string c = b[1].ToString();
+            Form frm = null;
+            switch (c)
+            {
+                case "0":
+                    frm = new basicInfoSettings();
+                    break;
+                case "1":
+                    frm = new deviceManagement();
+                    break;
+                case "2":
+                    frm = new systemlog();
+                    break;
+                case "3":
+                    frm = new parameterSetting();
+                    break;
+                case "4":  
+                    break;
+                case "5":
+                    frm = new frmThresholdSetting();
+                    break; 
+            }
+            if(c=="4")
+            {
+                frmEmpower frm1 = new frmEmpower();
+                frm1._EditType = 0;
+                frm1.ShowDialog();
+            }
+            else
+            {
+                if (frm != null)
+                {
+                    OpenWinToMain(frm);
+                }
+            }  
         }
 
         private void label49_MouseEnter(object sender, EventArgs e)
@@ -401,6 +483,60 @@ namespace zkhwClient
             string[] b = a.Split(',');
             lbl.Tag = "1," + b[1].ToString();
             lbl.BackColor = leftselectColor;
+            string c = b[1].ToString();
+            Form frm = null;
+            switch(c)
+            {
+                case "0":
+                    frm = new personRegistt();
+                    break;
+                case "1":
+                    frm = new examinatProgress();
+                    break;
+                case "2":
+                    frm = new examinatReport();
+                    break;
+                case "3":
+                    frm = new personalBasicInfo();
+                    break;
+                case "4":
+                    frm = new healthCheckup();
+                    break;
+                case "5":
+                    frm = new olderHelthService();
+                    break;
+                case "6":
+                    frm = new tcmHealthServices();
+                    break;
+                case "7":
+                    frm = new healthPoorServices();
+                    break;
+                case "8":
+                    frm = new hypertensionPatientServices();
+                    break;
+                case "9":
+                    frm = new diabetesPatientServices();
+                    break;
+                case "10":
+                    frm = new psychiatricPatientServices();
+                    break;
+                case "11":
+                    frm = new tuberculosisPatientServices();
+                    break;
+                case "12":
+                    frm = new childHealthServices();
+                    break;
+                case "13":
+                    frm = new maternalHealthServices();
+                    break;
+                case "14":
+                    frm = new childrenCMHealthServices();
+                    break;
+            }
+            if(frm !=null)
+            {
+                OpenWinToMain(frm);
+            } 
         }
         #endregion
 
@@ -6342,6 +6478,156 @@ namespace zkhwClient
                 totalByteRead = new Byte[0];
             }
         }
+        private void GetAllLocalMachines()
+        {
+            Process p = new Process();
+            p.StartInfo.FileName = "cmd.exe";
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardInput = true;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.CreateNoWindow = true;
+            p.Start();
+            p.StandardInput.WriteLine("arp -a");
+            p.StandardInput.WriteLine("exit");
+            //ArrayList list = new ArrayList();
+            StreamReader reader = p.StandardOutput;
+            string IPHead = Dns.GetHostByName(Dns.GetHostName()).AddressList[0].ToString().Substring(0, 3);
+            for (string line = reader.ReadLine(); line != null; line = reader.ReadLine())
+            {
+                line = line.Trim();
+                if (line.StartsWith(IPHead) && line.Length > 40)
+                {
+                    string IP = line.Substring(0, 15).Trim();
+                    //身高82 血压80 心电81 尿机83 B超84
+                    if (IP == "192.168.1.80")
+                    {
+                        String sql = "update zkhw_state_device set xy_online='1',xy_state='1' where ID='1'";
+                        DbHelperMySQL.ExecuteSql(sql);
+                    }
+                    if (IP == "192.168.1.83")
+                    {
+                        String sql = "update zkhw_state_device set ncg_online='1',ncg_state='1' where ID='1'";
+                        DbHelperMySQL.ExecuteSql(sql);
+                    }
+                    if (IP == "192.168.1.82")
+                    {
+                        String sql = "update zkhw_state_device set sgtz_online='1',sgtz_state='1' where ID='1'";
+                        DbHelperMySQL.ExecuteSql(sql);
+                    }
+                    if (IP == "192.168.1.81")
+                    {
+                        String sql = "update zkhw_state_device set xdt_online='1',xdt_state='1' where ID='1'";
+                        DbHelperMySQL.ExecuteSql(sql);
+                    }
+                    if (IP == "192.168.1.84")
+                    {
+                        String sql = "update zkhw_state_device set bc_online='1',bc_state='1' where ID='1'";
+                        DbHelperMySQL.ExecuteSql(sql);
+                    }
+                }
+            }
+        }
 
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            GetAllLocalMachines();//cmd获取局域网内的所有设备IP和MAC信息
+            DataTable dtDeviceType = tjdao.checkDevice();
+            if (dtDeviceType == null || dtDeviceType.Rows.Count < 1)
+            {
+                return;
+            }
+            Color _color= Color.FromArgb(37, 55, 129);
+            string sfz_online = dtDeviceType.Rows[0]["sfz_online"].ToString();
+            if (sfz_online == "0" || "0".Equals(sfz_online))
+            {
+                label10.BackColor = Color.Red;
+            }
+            else
+            {
+                label10.BackColor = _color;
+            }
+            string sxt_online = dtDeviceType.Rows[0]["sxt_online"].ToString();
+            if (sxt_online == "0" || "0".Equals(sxt_online))
+            {
+                label9.BackColor = Color.Red;
+            }
+            else
+            {
+                label9.BackColor = _color;
+            }
+            string dyj_online = dtDeviceType.Rows[0]["dyj_online"].ToString();
+            if (dyj_online == "0" || "0".Equals(dyj_online))
+            {
+                label11.BackColor = Color.Red;
+            }
+            else
+            {
+                label11.BackColor = _color;
+            }
+            string xcg_online = dtDeviceType.Rows[0]["xcg_online"].ToString();
+            if (xcg_online == "0" || "0".Equals(xcg_online))
+            {
+                label5.BackColor = Color.Red;
+            }
+            else
+            {
+                label5.BackColor = _color;
+            }
+            string sh_online = dtDeviceType.Rows[0]["sh_online"].ToString();
+            if (sh_online == "0" || "0".Equals(sh_online))
+            {
+                label3.BackColor = Color.Red;
+            }
+            else
+            {
+                label3.BackColor = _color;
+            }
+            string ncg_online = dtDeviceType.Rows[0]["ncg_online"].ToString();
+            if (ncg_online == "0" || "0".Equals(ncg_online))
+            {
+                label4.BackColor = Color.Red;
+            }
+            else
+            {
+                label4.BackColor = _color;
+            }
+            string xdt_online = dtDeviceType.Rows[0]["xdt_online"].ToString();
+            if (xdt_online == "0" || "0".Equals(xdt_online))
+            {
+                label7.BackColor = Color.Red;
+            }
+            else
+            {
+                label7.BackColor = _color;
+            }
+            string sgtz_online = dtDeviceType.Rows[0]["sgtz_online"].ToString();
+            if (sgtz_online == "0" || "0".Equals(sgtz_online))
+            {
+                label6.BackColor = Color.Red;
+            }
+            else
+            {
+                label6.BackColor = _color;
+            }
+            string xy_online = dtDeviceType.Rows[0]["xy_online"].ToString();
+            if (xy_online == "0" || "0".Equals(xy_online))
+            {
+                label8.BackColor = Color.Red;
+            }
+            else
+            {
+                label8.BackColor = _color;
+            }
+            string bc_online = dtDeviceType.Rows[0]["bc_online"].ToString();
+            if (bc_online == "0" || "0".Equals(bc_online))
+            {
+                label1.BackColor = Color.Red;
+            }
+            else
+            {
+                label1.BackColor = _color;
+            }
+        }
     }
 }

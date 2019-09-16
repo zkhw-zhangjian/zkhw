@@ -221,5 +221,35 @@ namespace zkhwClient.view.updateTjResult
                 bcJudge = "未见明显异常#肝,胆,胰,脾未见异常";
             }
         }
+
+        private void button5_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("保存", new System.Drawing.Font("微软雅黑", 10, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 5));
+
+        }
+
+        private void btnPre_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("上一张", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 5));
+
+        }
+
+        private void btnNext_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("下一张", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 5));
+
+        }
     }
 }

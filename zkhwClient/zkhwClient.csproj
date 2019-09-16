@@ -239,12 +239,6 @@
     <Compile Include="frmMainm.Designer.cs">
       <DependentUpon>frmMainm.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMainn.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMainn.Designer.cs">
-      <DependentUpon>frmMainn.cs</DependentUpon>
-    </Compile>
     <Compile Include="LoaderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -888,9 +882,6 @@
     <EmbeddedResource Include="frmMainm.resx">
       <DependentUpon>frmMainm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMainn.resx">
-      <DependentUpon>frmMainn.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="LoaderForm.resx">
       <DependentUpon>LoaderForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1348,25 +1339,15 @@
     <Content Include="images\xzwj.png" />
     <Content Include="images\身份证样图.png" />
     <None Include="Resources\拉取数据.png" />
-    <Content Include="img\bbdc.png" />
     <None Include="img\djr.png" />
     <Content Include="img\cz.png" />
     <Content Include="img\d.png" />
-    <Content Include="img\gj.png" />
     <None Include="img\jddw.png" />
-    <Content Include="img\jkfp.png" />
-    <Content Include="img\jyqy.png" />
-    <Content Include="img\lnr.png" />
     <Content Include="img\log.ico" />
     <None Include="img\rightbottom.png" />
-    <Content Include="img\rydj.png" />
-    <Content Include="img\sfxt.png" />
-    <Content Include="img\sybz.png" />
-    <Content Include="img\tc.png" />
-    <Content Include="img\tjjd.png" />
     <Content Include="img\topleft.png" />
-    <Content Include="img\xtsz.png" />
     <None Include="img\ys.png" />
+    <Content Include="img\czz.png" />
     <Content Include="up\pic\371327198003045712.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

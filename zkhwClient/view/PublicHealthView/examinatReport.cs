@@ -100,9 +100,7 @@ namespace zkhwClient.view.PublicHealthView
             //this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1);
             this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
             this.dateTimePicker3.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
-            this.button1.BackgroundImage = Image.FromFile(@str + "/images/check.png");
-            this.统计查询.BackgroundImage = Image.FromFile(@str + "/images/check.png");
-
+  
             isfirst = true;
             QueryTongJi();
             BinData();
@@ -232,6 +230,7 @@ where 1=1";
                 buttonColumn.Name = "btnModify";
                 buttonColumn.HeaderText = "";
                 buttonColumn.DefaultCellStyle.NullValue = "查看报告";
+                
                 dataGridView1.Columns.Add(buttonColumn);
                 //}
                 //else {
@@ -280,29 +279,29 @@ where 1=1";
         {
             if (dt == null || dt.Rows.Count <= 0)
             {
-                lblShangChuan.Text = "已上传:0";
-                lblWeiShangChuan.Text = "未上传:0";
+                lblShangChuan.Text = "0";
+                lblWeiShangChuan.Text = "0";
             }
             else
             {
                 DataRow[] dr = dt.Select("是否上传数据 = '否'");
                 if (dr.Length > 0)
                 {
-                    lblWeiShangChuan.Text = "未上传:" + dr.Length.ToString();
+                    lblWeiShangChuan.Text =  dr.Length.ToString();
                 }
                 else
                 {
-                    lblWeiShangChuan.Text = "未上传:0";
+                    lblWeiShangChuan.Text = "0";
                 }
 
                 DataRow[] dr1 = dt.Select("是否上传数据 = '是'");
                 if (dr1.Length > 0)
                 {
-                    lblShangChuan.Text = "已上传:" + dr1.Length.ToString();
+                    lblShangChuan.Text =  dr1.Length.ToString();
                 }
                 else
                 {
-                    lblShangChuan.Text = "已上传:0";
+                    lblShangChuan.Text = "0";
                 }
             }
         }
@@ -772,7 +771,7 @@ where 1=1";
                 List<ComboBoxData> ide = new List<ComboBoxData>();
                 DataSet dataSet = new DataSet();
 
-                foreach (Control ctrl in groupBox4.Controls)
+                foreach (Control ctrl in panel22.Controls)
                 {
                     if (ctrl is CheckBox)
                     {
@@ -4703,6 +4702,53 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                     e.Value = "否";
                 }
             }
+        }
+
+        private void 统计查询_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 4));
+        }
+
+        private void button1_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 4));
+        }
+
+        private void button2_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("报告导出", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 4));
+
+        }
+
+        private void button3_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("数据上传", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 4));
+
+        }
+
+        private void button4_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(193, 193, 193), Color.FromArgb(193, 193, 193));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("B超心电图片上传", new System.Drawing.Font("微软雅黑", 8, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 4));
         }
     }
 

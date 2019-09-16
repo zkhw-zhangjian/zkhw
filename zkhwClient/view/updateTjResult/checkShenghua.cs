@@ -20,8 +20,7 @@ namespace zkhwClient.view.updateTjResult
         {
             //让默认的日期时间减一天
             this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1);
-            this.button1.BackgroundImage = Image.FromFile(@str + "/images/check.png");
-
+           
             //DataTable dtbichao = tjdao.checkShenghuaInfo(basicInfoSettings.createtime, null, basicInfoSettings.xcuncode);
             DataTable dtbichao = tjdao.checkShenghuaInfo(dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss"), null, basicInfoSettings.xcuncode);
             if (dtbichao != null && dtbichao.Rows.Count > 0)
@@ -50,7 +49,7 @@ namespace zkhwClient.view.updateTjResult
             else
             {
                 this.dataGridView1.DataSource = null;
-                MessageBox.Show("未查询到数据!");
+                //MessageBox.Show("未查询到数据!");
             }
         }
 
@@ -83,7 +82,8 @@ namespace zkhwClient.view.updateTjResult
                         }
                     }
                 }
-                if (dtbichao.Rows.Count<1) {
+                if (dtbichao.Rows.Count < 1)
+                {
                     this.dataGridView1.DataSource = null; MessageBox.Show("未查询出数据!"); return;
                 }
                 this.dataGridView1.DataSource = dtbichao;
@@ -107,10 +107,21 @@ namespace zkhwClient.view.updateTjResult
                     this.dataGridView1.Rows[x].HeaderCell.Value = String.Format("{0}", x + 1);
                 }
             }
-            else{
+            else
+            {
                 this.dataGridView1.DataSource = null;
                 MessageBox.Show("未查询到数据!");
             }
+        }
+
+        private void button2_Paint(object sender, PaintEventArgs e)
+        {
+            Color color = Color.FromArgb(77, 177, 81);
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, color, color);
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("查询", new Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 5));
         }
     }
 }

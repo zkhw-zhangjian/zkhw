@@ -63,9 +63,9 @@ namespace zkhwClient.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap cz {
+        internal static System.Drawing.Bitmap czz {
             get {
-                object obj = ResourceManager.GetObject("cz", resourceCulture);
+                object obj = ResourceManager.GetObject("czz", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
