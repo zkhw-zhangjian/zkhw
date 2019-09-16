@@ -1167,36 +1167,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="up\template\B超.doc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="up\template\个人信息.doc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="up\template\个人信息档案.doc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="up\template\中医体质.doc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="up\template\健康体检表.doc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="up\template\化验报告单.doc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="up\template\封面.doc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="up\template\心电图.doc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="up\template\结果.doc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="up\template\老年人生活自理能力评估.doc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="up\template\B超.doc" />
+    <None Include="up\template\个人信息.doc" />
+    <None Include="up\template\个人信息档案.doc" />
+    <None Include="up\template\中医体质.doc" />
+    <None Include="up\template\健康体检表.doc" />
+    <None Include="up\template\化验报告单.doc" />
+    <None Include="up\template\封面.doc" />
+    <None Include="up\template\心电图.doc" />
+    <None Include="up\template\结果.doc" />
+    <None Include="up\template\老年人生活自理能力评估.doc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -1343,13 +1323,9 @@
     <Content Include="img\tjjd.png" />
     <Content Include="img\topleft.png" />
     <Content Include="img\xtsz.png" />
-    <Content Include="up\pic\371327198003045712.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="up\template\B超.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="up\template\心电图.xml">
+    <Content Include="up\pic\371327198003045712.jpg" />
+    <Content Include="up\template\B超.xml" />
+    <Content Include="utils\up\template\心电图.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="zkhw.ico" />
@@ -1362,7 +1338,8 @@
     <Folder Include="service\DataAnalysisService\" />
     <Folder Include="service\HomeDoctorSigningService\" />
     <Folder Include="service\UseHelpService\" />
-    <Folder Include="up\result\" />
+    <Folder Include="utils\up\pic\" />
+    <Folder Include="utils\up\result\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

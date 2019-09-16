@@ -19,15 +19,13 @@ namespace zkhwClient.view.PublicHealthView
         public string sex = "";
         public int flag = 0;
         public string _examid = "";
-        public string _barCode = ""; 
+        public string _barCode = "";
         public aUolderHelthService()
         {
             InitializeComponent();
         }
         private void aUolderHelthService_Load(object sender, EventArgs e)
         {
-            this.label47.ForeColor = Color.SkyBlue;
-            label47.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
             label47.Left = (this.panel11.Width - this.label47.Width) / 2;
             label47.BringToFront();
 
@@ -68,7 +66,7 @@ namespace zkhwClient.view.PublicHealthView
             this.textBox19.Text += System.Environment.NewLine;
             this.textBox19.Text += System.Environment.NewLine;
             this.textBox19.Text += "5";
-///////////////////////////////////////////////
+            ///////////////////////////////////////////////
             this.textBox22.Text += System.Environment.NewLine;
             this.textBox22.Text += "独立完成";
             this.textBox22.Text += System.Environment.NewLine;
@@ -231,7 +229,7 @@ namespace zkhwClient.view.PublicHealthView
         private void InitData()
         {
             int a = (int)numericUpDown1.Value;
-            switch(a)
+            switch (a)
             {
                 case 0:
                     checkBox1.Checked = true;
@@ -266,7 +264,7 @@ namespace zkhwClient.view.PublicHealthView
             {
                 case 0:
                     checkBox9.Checked = true;
-                    break; 
+                    break;
                 case 3:
                     checkBox11.Checked = true;
                     break;
@@ -333,7 +331,7 @@ namespace zkhwClient.view.PublicHealthView
             elderly_selfcare_estimateBean.answer_result = elderly_selfcare_estimateBean.answer_result.Substring(1);
             elderly_selfcare_estimateBean.total_score = this.numericUpDown6.Value.ToString();
 
-            if (this.numericUpDown6.Value >=0 && this.numericUpDown6.Value <= 3) {
+            if (this.numericUpDown6.Value >= 0 && this.numericUpDown6.Value <= 3) {
                 elderly_selfcare_estimateBean.judgement_result = "可自理";
                 _stag = "1";
             }
@@ -349,23 +347,23 @@ namespace zkhwClient.view.PublicHealthView
                 elderly_selfcare_estimateBean.judgement_result = "不能自理";
                 _stag = "4";
             }
-            else { } 
+            else { }
             //////以下页面未用 数据库字段格式要求
             elderly_selfcare_estimateBean.upload_time = DateTime.Now.ToString("yyyy-MM-dd");
             elderly_selfcare_estimateBean.create_time = DateTime.Now.ToString("yyyy-MM-dd");
-            elderly_selfcare_estimateBean.update_time = DateTime.Now.ToString("yyyy-MM-dd"); 
-            elderly_selfcare_estimateBean.upload_status = "0"; 
+            elderly_selfcare_estimateBean.update_time = DateTime.Now.ToString("yyyy-MM-dd");
+            elderly_selfcare_estimateBean.upload_status = "0";
             elderly_selfcare_estimateBean.test_date = DateTime.Now.ToString("yyyy-MM-dd");
             elderly_selfcare_estimateBean.create_name = frmLogin.name;
-            elderly_selfcare_estimateBean.test_doctor= basicInfoSettings.zeren_doctor;
-            if(_examid=="")
+            elderly_selfcare_estimateBean.test_doctor = basicInfoSettings.zeren_doctor;
+            if (_examid == "")
             {
                 healthCheckupDao hcd = new healthCheckupDao();
                 _examid = hcd.GetExaminationRecord(elderly_selfcare_estimateBean.aichive_no, elderly_selfcare_estimateBean.id_number, _barCode);
             }
             elderly_selfcare_estimateBean.exam_id = _examid;
             string _id = "";
-            if(flag==1)
+            if (flag == 1)
             {
                 _id = _examid;
             }
@@ -376,9 +374,9 @@ namespace zkhwClient.view.PublicHealthView
                 //这里就要更新对应的 zkhw_tj_bgdc-->lnrzlnlpg、physical_examination_record-->base_selfcare_estimate
                 string id_number = textBox12.Text;
                 string aichive_no = textBox2.Text;
-                tjcheckDao tjdao = new tjcheckDao(); 
+                tjcheckDao tjdao = new tjcheckDao();
                 //用事务更新
-                tjdao.UpdateOldestimateTran("1", _barCode, id_number, _examid, _stag); 
+                tjdao.UpdateOldestimateTran("1", _barCode, id_number, _examid, _stag);
                 this.DialogResult = DialogResult.OK;
             }
         }
@@ -634,6 +632,24 @@ namespace zkhwClient.view.PublicHealthView
                 this.checkBox19.Checked = false;
                 this.numericUpDown5.Value = 10;
             }
+        }
+
+        private void button4_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("保存", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(17, 5));
+        }
+
+        private void button5_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(255, 0, 0), Color.FromArgb(255, 0, 0));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("关闭", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(17, 5));
         }
     }
 }
