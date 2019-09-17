@@ -59,12 +59,12 @@ namespace zkhwClient.dao
                     {
                         if (i == 0)
                         {
-                            sql0 += "insert into resident_diseases(resident_base_info_id,disease_name,disease_date,disease_type) values ('" + id + "','" + goodsList.Rows[i]["disease_name"] + "','" + goodsList.Rows[i]["disease_date"] + "','" + goodsList.Rows[i]["disease_type"] + "')";
+                            sql0 += "insert into resident_diseases(archive_no,id_number,name,resident_base_info_id,disease_name,disease_date,disease_type) values ('"+ hm.archive_no + "','"+ hm.id_number + "','"+hm.name+"','" + id + "','" + goodsList.Rows[i]["disease_name"] + "','" + goodsList.Rows[i]["disease_date"] + "','" + goodsList.Rows[i]["disease_type"] + "')";
 
                         }
                         else
                         {
-                            sql0 += ",('" + id + "','" + goodsList.Rows[i]["disease_name"] + "','" + goodsList.Rows[i]["disease_date"] + "','" + goodsList.Rows[i]["disease_type"] + "')";
+                            sql0 += ",('" + hm.archive_no + "','" + hm.id_number + "','" + hm.name + "','" + id + "','" + goodsList.Rows[i]["disease_name"] + "','" + goodsList.Rows[i]["disease_date"] + "','" + goodsList.Rows[i]["disease_type"] + "')";
 
                         }
                     }
@@ -178,12 +178,12 @@ namespace zkhwClient.dao
                     {
                         if (i == 0)
                         {
-                            sql0 += "insert into resident_diseases(resident_base_info_id,disease_name,disease_date,disease_type) values ('" + id + "','" + goodsList.Rows[i]["disease_name"] + "','" + goodsList.Rows[i]["disease_date"] + "','" + goodsList.Rows[i]["disease_type"] + "')";
+                            sql0 += "insert into resident_diseases(archive_no,id_number,name,resident_base_info_id,disease_name,disease_date,disease_type) values ('" + hm.archive_no + "','" + hm.id_number + "','" + hm.name + "','" + id + "','" + goodsList.Rows[i]["disease_name"] + "','" + goodsList.Rows[i]["disease_date"] + "','" + goodsList.Rows[i]["disease_type"] + "')";
 
                         }
                         else
                         {
-                            sql0 += ",('" + id + "','" + goodsList.Rows[i]["disease_name"] + "','" + goodsList.Rows[i]["disease_date"] + "','" + goodsList.Rows[i]["disease_type"] + "')";
+                            sql0 += ",('" + hm.archive_no + "','" + hm.id_number + "','" + hm.name + "','" + id + "','" + goodsList.Rows[i]["disease_name"] + "','" + goodsList.Rows[i]["disease_date"] + "','" + goodsList.Rows[i]["disease_type"] + "')";
 
                         }
                     }

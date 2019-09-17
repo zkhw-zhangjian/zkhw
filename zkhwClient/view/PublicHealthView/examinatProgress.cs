@@ -51,9 +51,7 @@ namespace zkhwClient.view.PublicHealthView
             isfirst = true;
             //让默认的日期时间减一天 
             this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
-            this.button1.BackgroundImage = System.Drawing.Image.FromFile(@str + "/images/check.png");
-            this.btnDel.BackgroundImage = System.Drawing.Image.FromFile(@str + "/images/delete.png");
-
+ 
             Common.SetComboBoxInfo(comboBox1, areadao.shengInfo());
 
             dttv = grjddao.checkThresholdValues(Common._deviceModel,"");//获取阈值信息
@@ -574,37 +572,7 @@ namespace zkhwClient.view.PublicHealthView
         //生成PDF xcuncode   
         private void label6_Click(object sender, EventArgs e)
         {
-            //DataTable dts = jkdao.querytjjdTopdf(basicInfoSettings.xcuncode, basicInfoSettings.createtime);  //2019-6-17改成下面的方式
-            if (xcuncode == "" || xcuncode == null) xcuncode = basicInfoSettings.xcuncode;
-            time1 = this.dateTimePicker1.Value.ToString("yyyy-MM-dd"); 
-            time2 = this.dateTimePicker2.Value.ToString("yyyy-MM-dd"); 
-            DataTable dts = jkdao.querytjjdTopdf(xcuncode, time1, time2);
-            if (dts != null && dts.Rows.Count > 0)
-            {
-                string localFilePath = String.Empty;
-                SaveFileDialog fileDialog = new SaveFileDialog();
-                fileDialog.InitialDirectory = "C://";
-                fileDialog.Filter = "All files (*.*)|*.*";
-                string xcunName = basicInfoSettings.xcName;
-                //设置文件名称：
-                if (this.comboBox5.Text.Trim() != "")
-                {
-                    xcunName = this.comboBox5.Text;
-                }
-                fileDialog.FileName = DateTime.Now.ToString("yyyyMMdd") + xcunName + "花名册.pdf";
-                fileDialog.FilterIndex = 2;
-                fileDialog.RestoreDirectory = true;
-                if (fileDialog.ShowDialog() == DialogResult.OK)
-                {   //获得文件路径
-                    localFilePath = fileDialog.FileName.ToString();
-                    CreateTable(dts.Copy(), localFilePath);
-                    //MessageBox.Show("PDF文件生成成功!");
-                }
-            }
-            else
-            {
-                MessageBox.Show("无历史数据，请先查询历史数据后再生成PDF文件!");
-            }
+            
         }
 
         private void CreateTable(DataTable dts, string path)
@@ -1061,6 +1029,96 @@ namespace zkhwClient.view.PublicHealthView
                 }
             } 
             
-        } 
+        }
+
+        private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 10, false, Color.FromArgb(255, 255, 255), Color.FromArgb(255, 255, 255));
+            base.OnPaint(e);
+        }
+
+        private void button1_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 5));
+        }
+
+        private void button2_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 5));
+
+        }
+
+        private void btnDel_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("删除", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 5));
+
+        }
+
+        private void btnDown_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("拉取数据", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 5));
+
+        }
+
+        private void button1_Paint_1(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(170, 171, 171), Color.FromArgb(170, 171, 171));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("导出数据", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 5));
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            //DataTable dts = jkdao.querytjjdTopdf(basicInfoSettings.xcuncode, basicInfoSettings.createtime);  //2019-6-17改成下面的方式
+            if (xcuncode == "" || xcuncode == null) xcuncode = basicInfoSettings.xcuncode;
+            time1 = this.dateTimePicker1.Value.ToString("yyyy-MM-dd");
+            time2 = this.dateTimePicker2.Value.ToString("yyyy-MM-dd");
+            DataTable dts = jkdao.querytjjdTopdf(xcuncode, time1, time2);
+            if (dts != null && dts.Rows.Count > 0)
+            {
+                string localFilePath = String.Empty;
+                SaveFileDialog fileDialog = new SaveFileDialog();
+                fileDialog.InitialDirectory = "C://";
+                fileDialog.Filter = "All files (*.*)|*.*";
+                string xcunName = basicInfoSettings.xcName;
+                //设置文件名称：
+                if (this.comboBox5.Text.Trim() != "")
+                {
+                    xcunName = this.comboBox5.Text;
+                }
+                fileDialog.FileName = DateTime.Now.ToString("yyyyMMdd") + xcunName + "花名册.pdf";
+                fileDialog.FilterIndex = 2;
+                fileDialog.RestoreDirectory = true;
+                if (fileDialog.ShowDialog() == DialogResult.OK)
+                {   //获得文件路径
+                    localFilePath = fileDialog.FileName.ToString();
+                    CreateTable(dts.Copy(), localFilePath);
+                    //MessageBox.Show("PDF文件生成成功!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("无历史数据，请先查询历史数据后再生成PDF文件!");
+            }
+        }
     }
 }

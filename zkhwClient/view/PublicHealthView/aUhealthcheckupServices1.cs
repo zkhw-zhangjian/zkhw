@@ -1057,7 +1057,7 @@ and (disease_type='2' or disease_type='3' or disease_type='8' or disease_type='9
                     sql = string.Format(@"delete from resident_diseases where resident_base_info_id='{0}' and disease_type='{1}'", _residentbaseinfoid,obj.Code);
                     _lst.Add(sql);
                     //2:添加
-                    sql = string.Format(@"Insert Into resident_diseases(resident_base_info_id,disease_type,disease_name,disease_date) values('{0}','{1}','{2}','{3}')", _residentbaseinfoid,obj.Code,obj.Data,obj.Message);
+                    sql = string.Format(@"Insert Into resident_diseases(archive_no,id_number,name,resident_base_info_id,disease_type,disease_name,disease_date) values('{0}','{1}','{2}','{3}','{4}','{5}','{6}')", per.aichive_no, textBox119.Text, per.name, _residentbaseinfoid,obj.Code,obj.Data,obj.Message);
                     _lst.Add(sql); 
                 } 
             }
