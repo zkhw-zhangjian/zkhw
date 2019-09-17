@@ -74,8 +74,7 @@ namespace zkhwClient.view.PublicHealthView
         private void aUdiabetesPatientServices_Load(object sender, EventArgs e)
         {
             this.label51.Text = "健康体检表第一页(共四页)";
-            this.label51.BackColor = Color.SkyBlue;
-            label51.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
+            label51.Font = new Font("微软雅黑", 18F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
             label51.Left = (this.panel1.Width - this.label51.Width) / 2;
             label51.BringToFront();
 
@@ -1750,5 +1749,51 @@ and (disease_type='2' or disease_type='3' or disease_type='8' or disease_type='9
                 }
             }
         }
+
+        private void button3_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("评估", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(18, 4));
+        }
+
+        private void button1_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("转到末页", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 6));
+        }
+
+        private void button2_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("转到第三页", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(7, 6));
+        }
+
+        private void button4_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("转到第二页", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(7, 6));
+        }
+
+        private void button5_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(255, 0, 0), Color.FromArgb(255, 0, 0));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("关闭", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 5));
+        }
+
     }
 }
