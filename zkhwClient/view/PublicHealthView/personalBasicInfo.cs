@@ -194,7 +194,7 @@ namespace zkhwClient.view.PublicHealthView
         private void OpenWindow()
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
-            aUPersonalBasicInfo hm = new aUPersonalBasicInfo();
+            aUPersonalBasicInfoo hm = new aUPersonalBasicInfoo();
             string id = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
             hm.id = id;
             hm.label47.Text = "修改个人基本信息表";
