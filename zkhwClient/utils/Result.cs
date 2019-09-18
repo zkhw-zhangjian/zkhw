@@ -347,12 +347,13 @@ namespace zkhwClient.dao
                 return false;
         }
     }
-
+     
     public class ComboBoxData
     {
         public string ID { get; set; }
         public string Name { get; set; }
 
         public string BarCode { get; set; }
+         
     }
 }

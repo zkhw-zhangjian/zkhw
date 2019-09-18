@@ -59,10 +59,19 @@ namespace zkhwClient
         public string xzName = null;
         public string xcName = null;
 
+        private float xMy;//定义当前窗体的宽度
+        private float yMy;//定义当前窗体的高度
+
         public personRegistt()
         {
             InitializeComponent();
+
+            xMy = this.Width;
+            yMy = this.Height;
+            Common.setTag(this);
         }
+      
+        
         private void BindNation()
         {
             dtno = Common.GetNationDataTable(0);
@@ -272,11 +281,26 @@ namespace zkhwClient
             //ControlCircular.Draw(e.ClipRectangle, e.Graphics, 18, false, Color.FromArgb(255, 255, 255), Color.FromArgb(255, 255, 255));
             //base.OnPaint(e);
         }
-
+        private Single GetBtnFontSize(Button con)
+        {
+            float newx = (this.Width) / xMy;
+            float newy = (this.Height) / yMy; 
+            string[] mytag = con.Tag.ToString().Split(new char[] { ';' });
+            //根据窗体缩放的比例确定控件的值
+            con.Width = Convert.ToInt32(System.Convert.ToSingle(mytag[0]) * newx);//宽度
+            con.Height = Convert.ToInt32(System.Convert.ToSingle(mytag[1]) * newy);//高度
+            con.Left = Convert.ToInt32(System.Convert.ToSingle(mytag[2]) * newx);//左边距
+            con.Top = Convert.ToInt32(System.Convert.ToSingle(mytag[3]) * newy);//顶边距
+            Single currentSize = (System.Convert.ToSingle(mytag[4]) * newy)+1;//字体大小
+            return currentSize;
+        }
         private void button1_Paint(object sender, PaintEventArgs e)
         {
             Button bt = (Button)sender;
-            string stag = bt.Tag.ToString();
+            Single _size = GetBtnFontSize(bt);
+          
+
+            string stag = bt.AccessibleName; 
             string wenzi = "";
             int starti = 20;
             Color color = Color.FromArgb(81, 95, 154);
@@ -301,7 +325,7 @@ namespace zkhwClient
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString(wenzi, new Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(starti, 5));
+            g.DrawString(wenzi, new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(starti, 5));
         }
 
         private void txtNum_KeyPress(object sender, KeyPressEventArgs e)
@@ -1040,6 +1064,15 @@ namespace zkhwClient
             //     string fullName = dtArea.Rows[0]["detail"].ToString().Replace(",", "");
             //     this.richTextBox1.Text = fullName;
             // }
+        }
+
+        private void personRegistt_Resize(object sender, EventArgs e)
+        {
+            float newx = (this.Width) / xMy;
+            float newy = (this.Height) / yMy;
+            Common.setControls(newx, newy, this);
+
+             
         }
 
         public void OnPrintSampleBarcode(string barcode, int pageCount, string nameCode)

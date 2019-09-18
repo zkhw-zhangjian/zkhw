@@ -39,11 +39,6 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -92,14 +87,9 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label89 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.label51 = new System.Windows.Forms.Label();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.label50 = new System.Windows.Forms.Label();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.label49 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.label48 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.comboBox7 = new System.Windows.Forms.ComboBox();
             this.label88 = new System.Windows.Forms.Label();
@@ -129,6 +119,11 @@
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -148,7 +143,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1194, 45);
+            this.panel1.Size = new System.Drawing.Size(1170, 45);
             this.panel1.TabIndex = 0;
             // 
             // label6
@@ -167,7 +162,7 @@
             // 
             this.panel6.Controls.Add(this.label1);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(845, 0);
+            this.panel6.Location = new System.Drawing.Point(821, 0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(349, 45);
             this.panel6.TabIndex = 0;
@@ -187,17 +182,17 @@
             // panel2
             // 
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 550);
+            this.panel2.Location = new System.Drawing.Point(0, 535);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1194, 34);
+            this.panel2.Size = new System.Drawing.Size(1170, 34);
             this.panel2.TabIndex = 1;
             // 
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(1160, 45);
+            this.panel3.Location = new System.Drawing.Point(1136, 45);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(34, 505);
+            this.panel3.Size = new System.Drawing.Size(34, 490);
             this.panel3.TabIndex = 2;
             // 
             // panel4
@@ -205,7 +200,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(0, 45);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(33, 505);
+            this.panel4.Size = new System.Drawing.Size(33, 490);
             this.panel4.TabIndex = 3;
             // 
             // panel5
@@ -214,9 +209,9 @@
             this.panel5.Controls.Add(this.dataGridView1);
             this.panel5.Controls.Add(this.panel7);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel5.Location = new System.Drawing.Point(849, 45);
+            this.panel5.Location = new System.Drawing.Point(825, 45);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(311, 505);
+            this.panel5.Size = new System.Drawing.Size(311, 490);
             this.panel5.TabIndex = 4;
             this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
             // 
@@ -225,10 +220,9 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 9F);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -256,45 +250,9 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(311, 277);
+            this.dataGridView1.Size = new System.Drawing.Size(311, 262);
             this.dataGridView1.TabIndex = 31;
             this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "name";
-            this.Column1.HeaderText = "姓名";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 80;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "sex";
-            this.Column2.HeaderText = "性别";
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 60;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "id_number";
-            this.Column3.HeaderText = "身份证号";
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 130;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "aichive_no";
-            this.Column4.HeaderText = "电子档案号";
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 130;
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "bar_code";
-            this.Column5.HeaderText = "条码号";
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 90;
             // 
             // panel7
             // 
@@ -682,9 +640,9 @@
             // panel8
             // 
             this.panel8.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel8.Location = new System.Drawing.Point(839, 45);
+            this.panel8.Location = new System.Drawing.Point(815, 45);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(10, 505);
+            this.panel8.Size = new System.Drawing.Size(10, 490);
             this.panel8.TabIndex = 5;
             // 
             // panel9
@@ -727,7 +685,7 @@
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(33, 45);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(806, 505);
+            this.panel9.Size = new System.Drawing.Size(782, 490);
             this.panel9.TabIndex = 0;
             // 
             // label54
@@ -749,7 +707,7 @@
             this.label53.Location = new System.Drawing.Point(440, 333);
             this.label53.Margin = new System.Windows.Forms.Padding(0);
             this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(23, 23);
+            this.label53.Size = new System.Drawing.Size(23, 24);
             this.label53.TabIndex = 67;
             this.label53.Text = "-";
             this.label53.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -762,7 +720,7 @@
             this.label52.Location = new System.Drawing.Point(500, 333);
             this.label52.Margin = new System.Windows.Forms.Padding(0);
             this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(23, 23);
+            this.label52.Size = new System.Drawing.Size(23, 24);
             this.label52.TabIndex = 66;
             this.label52.Text = "+";
             this.label52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -771,8 +729,9 @@
             // txtNum
             // 
             this.txtNum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.txtNum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtNum.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.txtNum.Location = new System.Drawing.Point(463, 333);
+            this.txtNum.Location = new System.Drawing.Point(463, 334);
             this.txtNum.Margin = new System.Windows.Forms.Padding(0);
             this.txtNum.Name = "txtNum";
             this.txtNum.Size = new System.Drawing.Size(37, 23);
@@ -855,30 +814,15 @@
             // panel10
             // 
             this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.panel10.Controls.Add(this.label51);
             this.panel10.Controls.Add(this.comboBox5);
-            this.panel10.Controls.Add(this.label50);
             this.panel10.Controls.Add(this.comboBox4);
-            this.panel10.Controls.Add(this.label49);
             this.panel10.Controls.Add(this.comboBox3);
-            this.panel10.Controls.Add(this.label48);
-            this.panel10.Controls.Add(this.label47);
             this.panel10.Controls.Add(this.comboBox6);
             this.panel10.Controls.Add(this.comboBox7);
             this.panel10.Location = new System.Drawing.Point(118, 368);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(647, 56);
             this.panel10.TabIndex = 57;
-            // 
-            // label51
-            // 
-            this.label51.AutoSize = true;
-            this.label51.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.label51.Location = new System.Drawing.Point(623, 23);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(20, 17);
-            this.label51.TabIndex = 53;
-            this.label51.Text = "村";
             // 
             // comboBox5
             // 
@@ -888,19 +832,9 @@
             this.comboBox5.FormattingEnabled = true;
             this.comboBox5.Location = new System.Drawing.Point(505, 17);
             this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(112, 25);
+            this.comboBox5.Size = new System.Drawing.Size(135, 25);
             this.comboBox5.TabIndex = 52;
             this.comboBox5.SelectionChangeCommitted += new System.EventHandler(this.comboBox5_SelectionChangeCommitted);
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.label50.Location = new System.Drawing.Point(464, 23);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(37, 17);
-            this.label50.TabIndex = 51;
-            this.label50.Text = "乡/镇";
             // 
             // comboBox4
             // 
@@ -910,19 +844,9 @@
             this.comboBox4.FormattingEnabled = true;
             this.comboBox4.Location = new System.Drawing.Point(357, 17);
             this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(101, 25);
+            this.comboBox4.Size = new System.Drawing.Size(142, 25);
             this.comboBox4.TabIndex = 50;
             this.comboBox4.SelectionChangeCommitted += new System.EventHandler(this.comboBox4_SelectionChangeCommitted);
-            // 
-            // label49
-            // 
-            this.label49.AutoSize = true;
-            this.label49.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.label49.Location = new System.Drawing.Point(334, 23);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(20, 17);
-            this.label49.TabIndex = 49;
-            this.label49.Text = "县";
             // 
             // comboBox3
             // 
@@ -932,29 +856,9 @@
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Location = new System.Drawing.Point(232, 17);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(96, 25);
+            this.comboBox3.Size = new System.Drawing.Size(119, 25);
             this.comboBox3.TabIndex = 48;
             this.comboBox3.SelectionChangeCommitted += new System.EventHandler(this.comboBox3_SelectionChangeCommitted);
-            // 
-            // label48
-            // 
-            this.label48.AutoSize = true;
-            this.label48.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.label48.Location = new System.Drawing.Point(209, 23);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(20, 17);
-            this.label48.TabIndex = 47;
-            this.label48.Text = "市";
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.label47.Location = new System.Drawing.Point(93, 23);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(20, 17);
-            this.label47.TabIndex = 46;
-            this.label47.Text = "省";
             // 
             // comboBox6
             // 
@@ -964,7 +868,7 @@
             this.comboBox6.FormattingEnabled = true;
             this.comboBox6.Location = new System.Drawing.Point(116, 17);
             this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(89, 25);
+            this.comboBox6.Size = new System.Drawing.Size(110, 25);
             this.comboBox6.TabIndex = 45;
             this.comboBox6.SelectionChangeCommitted += new System.EventHandler(this.comboBox6_SelectionChangeCommitted);
             // 
@@ -976,7 +880,7 @@
             this.comboBox7.FormattingEnabled = true;
             this.comboBox7.Location = new System.Drawing.Point(13, 17);
             this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(76, 25);
+            this.comboBox7.Size = new System.Drawing.Size(97, 25);
             this.comboBox7.TabIndex = 44;
             this.comboBox7.SelectionChangeCommitted += new System.EventHandler(this.comboBox7_SelectionChangeCommitted);
             // 
@@ -1013,6 +917,7 @@
             // 
             // button4
             // 
+            this.button4.AccessibleName = "3";
             this.button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -1022,7 +927,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 27);
             this.button4.TabIndex = 10;
-            this.button4.Tag = "3";
+            this.button4.Tag = "";
             this.button4.Text = "补打条码";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
@@ -1030,6 +935,7 @@
             // 
             // button3
             // 
+            this.button3.AccessibleName = "2";
             this.button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -1039,7 +945,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 27);
             this.button3.TabIndex = 11;
-            this.button3.Tag = "2";
+            this.button3.Tag = "";
             this.button3.Text = "打印";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -1047,6 +953,7 @@
             // 
             // button2
             // 
+            this.button2.AccessibleName = "1";
             this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -1056,7 +963,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 27);
             this.button2.TabIndex = 9;
-            this.button2.Tag = "1";
+            this.button2.Tag = "";
             this.button2.Text = "拍照";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -1064,6 +971,7 @@
             // 
             // button1
             // 
+            this.button1.AccessibleName = "0";
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -1073,7 +981,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 27);
             this.button1.TabIndex = 8;
-            this.button1.Tag = "0";
+            this.button1.Tag = "";
             this.button1.Text = "读卡";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -1279,12 +1187,48 @@
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.Width = 90;
             // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "name";
+            this.Column1.HeaderText = "姓名";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 80;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "sex";
+            this.Column2.HeaderText = "性别";
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 60;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "id_number";
+            this.Column3.HeaderText = "身份证号";
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 130;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "aichive_no";
+            this.Column4.HeaderText = "电子档案号";
+            this.Column4.Name = "Column4";
+            this.Column4.Width = 130;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "bar_code";
+            this.Column5.HeaderText = "条码号";
+            this.Column5.Name = "Column5";
+            this.Column5.Width = 90;
+            // 
             // personRegistt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(239)))), ((int)(((byte)(245)))));
-            this.ClientSize = new System.Drawing.Size(1194, 584);
+            this.ClientSize = new System.Drawing.Size(1170, 569);
             this.Controls.Add(this.panel9);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel5);
@@ -1295,6 +1239,7 @@
             this.Name = "personRegistt";
             this.Text = "人员登记";
             this.Load += new System.EventHandler(this.personRegistt_Load);
+            this.Resize += new System.EventHandler(this.personRegistt_Resize);
             this.panel1.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
@@ -1305,7 +1250,6 @@
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
@@ -1400,15 +1344,10 @@
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.ComboBox comboBox7;
-        private System.Windows.Forms.Label label48;
-        private System.Windows.Forms.Label label47;
         private System.Windows.Forms.ComboBox comboBox6;
-        private System.Windows.Forms.Label label49;
         private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.Label label50;
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.ComboBox comboBox5;
-        private System.Windows.Forms.Label label51;
         private System.Windows.Forms.TextBox txtNum;
         private System.Windows.Forms.Label label52;
         private System.Windows.Forms.Label label53;

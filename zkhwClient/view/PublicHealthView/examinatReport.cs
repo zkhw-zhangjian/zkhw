@@ -16,6 +16,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
+using zkhwClient.bean;
 using zkhwClient.dao;
 using zkhwClient.view.setting;
 
@@ -157,7 +158,7 @@ END)性别,
 base.id_number 身份证号,
 bgdc.BaoGaoShengChan 报告生成时间,
 (case bgdc.ShiFouTongBu when '1' then '是' ELSE '否' END) 是否上传数据,
-bgdc.BChaoImage B超图片,bgdc.XinDianImage 心电图片,bgdc.bar_code 条码号,base.card_pic
+bgdc.BChaoImage B超图片,bgdc.XinDianImage 心电图片,bgdc.bar_code 条码号,base.card_pic,base.photo_code
 from resident_base_info base
 left join 
 (select * from zkhw_tj_bgdc order by createtime desc) bgdc
@@ -249,7 +250,7 @@ where 1=1";
                 dataGridView1.Columns.Insert(0, checkColumn);    //添加的checkbox在第一列 
 
 
-                this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
+                //this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
                 this.dataGridView1.AllowUserToAddRows = false;
                 this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
                 this.dataGridView1.ReadOnly = true;
@@ -265,6 +266,7 @@ where 1=1";
                 //dataGridView1.Columns[10].Width = 70; 
                 dataGridView1.Columns[11].Visible = false;
                 dataGridView1.Columns[12].Visible = false;
+                dataGridView1.Columns[13].Visible = false;
                 //int rows = this.dataGridView1.Rows.Count - 1 <= 0 ? 0 : this.dataGridView1.Rows.Count - 1;
                 //if(rows>0)
                 //for (int x = 0; x <= rows; x++)
@@ -4493,17 +4495,18 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
         private void button4_Click(object sender, EventArgs e)
         {
             //得到选上传图片的人员
-            List<ComboBoxData> _lst = new List<ComboBoxData>();
+            List<grjdxxBean> _lst = new List<grjdxxBean>();
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
-                ComboBoxData combo = new ComboBoxData();
+                grjdxxBean combo = new grjdxxBean();
                 if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
                 {
                     string id = dataGridView1["身份证号", i].Value.ToString();
-                    combo.ID = id;
-                    combo.BarCode = dataGridView1["条码号", i].Value.ToString();
+                    combo.archive_no = id;
+                    combo.aichive_org = dataGridView1["条码号", i].Value.ToString();
 
-                    combo.Name = dataGridView1["card_pic", i].Value.ToString();
+                    combo.Cardcode = dataGridView1["card_pic", i].Value.ToString();
+                    combo.photo_code = dataGridView1["photo_code", i].Value.ToString();
                     _lst.Add(combo);
                 }
             }
@@ -4522,7 +4525,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 string sWhere = "";
                 for (int i = 0; i < _lst.Count; i++)
                 {
-                    string tmp = string.Format(" (id_number='{0}' and bar_code='{1}')", _lst[i].ID, _lst[i].BarCode);
+                    string tmp = string.Format(" (id_number='{0}' and bar_code='{1}')", _lst[i].archive_no, _lst[i].aichive_org);
                     if (sWhere == "")
                     {
                         sWhere = tmp;
@@ -4542,11 +4545,11 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 //发送拍照的图片
                 for (int i = 0; i < _lst.Count; i++)
                 {
-                    PushPaiZhaoImg(_lst[i].Name);
+                    PushCardImg(_lst[i].Cardcode);
+                    PushPhotoImg(_lst[i].photo_code);
                 }
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                {
-                    ComboBoxData combo = new ComboBoxData();
+                { 
                     if ((bool)dataGridView1.Rows[i].Cells[0].EditedFormattedValue == true)
                     {
                         dataGridView1["B超图片", i].Value = "1";
@@ -4563,7 +4566,26 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
         }
 
         #region 上传图片
-        private bool PushPaiZhaoImg(string t)
+        private bool PushPhotoImg(string t)
+        {
+            bool flag = false;
+            try
+            {
+                string fileName = Application.StartupPath + "\\photoImg\\" + t;
+                if (File.Exists(fileName))
+                {
+                    byte[] a = File.ReadAllBytes(fileName);
+                    flag = OSSClientHelper.PushImg(a, t, "phototp2019");
+                }
+            }
+            catch
+            {
+
+            }
+            return flag;
+        }
+
+        private bool PushCardImg(string t)
         {
             bool flag = false;
             try
@@ -4748,7 +4770,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("B超心电图片上传", new System.Drawing.Font("微软雅黑", 8, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 4));
+            g.DrawString("图片上传", new System.Drawing.Font("微软雅黑", 8, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 4));
         }
     }
 
