@@ -122,17 +122,19 @@ namespace zkhwClient.view.PublicHealthView
                 this.dataGridView1.Columns[13].HeaderCell.Value = "老年人生活自理能力评估";
                 this.dataGridView1.Columns[14].HeaderCell.Value = "老年人中医体质辨识";
                 this.dataGridView1.Columns[15].HeaderCell.Value = "年龄";
-                this.dataGridView1.Columns[0].Width = 120;
-                this.dataGridView1.Columns[1].Width = 150;
-                this.dataGridView1.Columns[2].Width = 190;
-                this.dataGridView1.Columns[3].Width = 190;
-                this.dataGridView1.Columns[4].Width = 150;
-                this.dataGridView1.Columns[5].Width = 125;
-                this.dataGridView1.Columns[6].Width = 125;
-                this.dataGridView1.Columns[7].Width = 125;
-                this.dataGridView1.Columns[8].Width = 125;
-                this.dataGridView1.Columns[9].Width = 125;
-                this.dataGridView1.Columns[10].Width = 125;
+                this.dataGridView1.Columns[0].Width = 82;
+                this.dataGridView1.Columns[1].Width = 60;
+                this.dataGridView1.Columns[2].Width = 130;
+                this.dataGridView1.Columns[3].Width = 130;
+                this.dataGridView1.Columns[4].Width = 70;
+                this.dataGridView1.Columns[5].Width = 70;
+                this.dataGridView1.Columns[6].Width = 70;
+                this.dataGridView1.Columns[7].Width = 70;
+                this.dataGridView1.Columns[8].Width = 70;
+                this.dataGridView1.Columns[9].Width = 70;
+                this.dataGridView1.Columns[10].Width = 70;
+                this.dataGridView1.Columns[11].Width = 80;
+                this.dataGridView1.Columns[12].Width = 90;
                 this.dataGridView1.Columns[15].Visible = false;
                 this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
                 this.dataGridView1.AllowUserToAddRows = false;
@@ -1058,7 +1060,7 @@ namespace zkhwClient.view.PublicHealthView
 
         private void btnDel_Paint(object sender, PaintEventArgs e)
         {
-            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(190, 190, 190), Color.FromArgb(190, 190, 190));
             base.OnPaint(e);
 
             Graphics g = e.Graphics;

@@ -59,6 +59,8 @@ namespace zkhwClient
         {
             label26.Text = "    老年人生活        \r\n    自理能力评估";
             label30.Text = "    2型糖尿病\r\n    患者健康管理";
+            label27.Text = "    老年人中医药        \r\n    健康管理";
+            label31.Text = "    严重精神障碍        \r\n    患者管理";
             pangw.Dock = DockStyle.Fill; 
             panel17.Controls.Clear();
             panel17.Controls.Add(pangw);
