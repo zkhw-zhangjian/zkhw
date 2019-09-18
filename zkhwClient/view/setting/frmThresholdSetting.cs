@@ -29,7 +29,7 @@ namespace zkhwClient.view.setting
         {
             dtSh = grjddao.checkThresholdValues(Common._deviceModel, "生化");
             dataGridView1.DataSource = dtSh;
-
+           
             dataGridView1.Columns[0].DefaultCellStyle.SelectionBackColor = Control.DefaultBackColor;
             dataGridView1.Columns[0].DefaultCellStyle.SelectionForeColor = Color.Black;
         }
