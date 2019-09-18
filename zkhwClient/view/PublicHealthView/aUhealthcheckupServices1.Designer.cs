@@ -318,7 +318,7 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.AutoScroll = true;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.textBox10);
             this.panel1.Controls.Add(this.textBox52);
             this.panel1.Controls.Add(this.button2);
@@ -350,11 +350,12 @@
             // textBox10
             // 
             this.textBox10.BackColor = System.Drawing.SystemColors.Window;
+            this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox10.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Bold);
             this.textBox10.Location = new System.Drawing.Point(138, 118);
             this.textBox10.Name = "textBox10";
             this.textBox10.ReadOnly = true;
-            this.textBox10.Size = new System.Drawing.Size(1160, 30);
+            this.textBox10.Size = new System.Drawing.Size(1160, 23);
             this.textBox10.TabIndex = 80;
             this.textBox10.Text = "检查项目";
             this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -700,7 +701,7 @@
             this.panel15.Controls.Add(this.radioButton40);
             this.panel15.Location = new System.Drawing.Point(1, 1);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(137, 30);
+            this.panel15.Size = new System.Drawing.Size(130, 30);
             this.panel15.TabIndex = 125;
             // 
             // radioButton41
@@ -808,13 +809,12 @@
             this.textBox112.BackColor = System.Drawing.SystemColors.Window;
             this.textBox112.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox112.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.textBox112.Location = new System.Drawing.Point(100, 158);
+            this.textBox112.Location = new System.Drawing.Point(136, 158);
             this.textBox112.Name = "textBox112";
             this.textBox112.ReadOnly = true;
-            this.textBox112.Size = new System.Drawing.Size(96, 22);
+            this.textBox112.Size = new System.Drawing.Size(60, 22);
             this.textBox112.TabIndex = 150;
             this.textBox112.Text = "其他";
-            this.textBox112.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox105
             // 
@@ -937,13 +937,12 @@
             this.textBox97.BackColor = System.Drawing.SystemColors.Window;
             this.textBox97.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox97.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.textBox97.Location = new System.Drawing.Point(138, 34);
+            this.textBox97.Location = new System.Drawing.Point(136, 34);
             this.textBox97.Name = "textBox97";
             this.textBox97.ReadOnly = true;
-            this.textBox97.Size = new System.Drawing.Size(58, 22);
+            this.textBox97.Size = new System.Drawing.Size(60, 22);
             this.textBox97.TabIndex = 132;
             this.textBox97.Text = "粉尘";
-            this.textBox97.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox96
             // 
@@ -1007,10 +1006,10 @@
             this.textBox91.BackColor = System.Drawing.SystemColors.Window;
             this.textBox91.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox91.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.textBox91.Location = new System.Drawing.Point(137, 4);
+            this.textBox91.Location = new System.Drawing.Point(133, 4);
             this.textBox91.Name = "textBox91";
             this.textBox91.ReadOnly = true;
-            this.textBox91.Size = new System.Drawing.Size(58, 22);
+            this.textBox91.Size = new System.Drawing.Size(62, 22);
             this.textBox91.TabIndex = 126;
             this.textBox91.Text = "(工种";
             // 
@@ -2009,7 +2008,7 @@
             // 
             // panel5
             // 
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel5.Controls.Add(this.label51);
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
@@ -2782,7 +2781,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 139);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1284, 108);
+            this.groupBox3.Size = new System.Drawing.Size(1298, 108);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
