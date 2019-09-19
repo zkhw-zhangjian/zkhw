@@ -1748,7 +1748,7 @@ namespace zkhwClient.view.PublicHealthView
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("返回到首页", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(7, 6));
+            g.DrawString("转到首页", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 6));
         }
 
         private void button4_Paint(object sender, PaintEventArgs e)
