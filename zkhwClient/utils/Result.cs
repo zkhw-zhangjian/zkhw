@@ -356,4 +356,13 @@ namespace zkhwClient.dao
         public string BarCode { get; set; }
          
     }
+
+    public class UpLoadImg
+    {
+        public string ID { get; set; }
+        public string Name { get; set; }
+        public string type { get; set; }   
+        public string BarCode { get; set; }
+
+    }
 }
