@@ -335,7 +335,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 35);
             this.button1.TabIndex = 61;
-            this.button1.Text = "返回到首页";
+            this.button1.Text = "转到首页";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             this.button1.Paint += new System.Windows.Forms.PaintEventHandler(this.button1_Paint);
