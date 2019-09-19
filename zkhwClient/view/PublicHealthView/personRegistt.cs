@@ -291,7 +291,7 @@ namespace zkhwClient
             con.Height = Convert.ToInt32(System.Convert.ToSingle(mytag[1]) * newy);//高度
             con.Left = Convert.ToInt32(System.Convert.ToSingle(mytag[2]) * newx);//左边距
             con.Top = Convert.ToInt32(System.Convert.ToSingle(mytag[3]) * newy);//顶边距
-            Single currentSize = (System.Convert.ToSingle(mytag[4]) * newy)+1;//字体大小
+            Single currentSize = (System.Convert.ToSingle(mytag[4]) * newy);//字体大小
             return currentSize;
         }
         private void button1_Paint(object sender, PaintEventArgs e)
@@ -1070,9 +1070,7 @@ namespace zkhwClient
         {
             float newx = (this.Width) / xMy;
             float newy = (this.Height) / yMy;
-            Common.setControls(newx, newy, this);
-
-             
+            Common.setControls(newx, newy, this); 
         }
 
         public void OnPrintSampleBarcode(string barcode, int pageCount, string nameCode)

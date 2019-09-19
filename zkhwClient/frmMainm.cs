@@ -358,7 +358,7 @@ namespace zkhwClient
                     frm = new basicInfoSettings();
                     break;
                 case "1":
-                    frm = new deviceManagement();
+                    frm = new deviceManagementt();
                     break;
                 case "2":
                     frm = new systemlog();

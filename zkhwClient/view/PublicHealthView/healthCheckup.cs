@@ -57,12 +57,12 @@ namespace zkhwClient.view.PublicHealthView
             this.dataGridView1.Columns[6].Visible = false;
             this.dataGridView1.Columns[7].HeaderCell.Value = "是否上传";
             
-            this.dataGridView1.Columns[0].Width = 60;
-            this.dataGridView1.Columns[1].Width = 130;
-            this.dataGridView1.Columns[2].Width = 130;
-            this.dataGridView1.Columns[3].Width = 70;
-            this.dataGridView1.Columns[4].Width = 82;
-            this.dataGridView1.Columns[5].Width = 60;
+            //this.dataGridView1.Columns[0].Width = 60;
+            //this.dataGridView1.Columns[1].Width = 130;
+            //this.dataGridView1.Columns[2].Width = 130;
+            //this.dataGridView1.Columns[3].Width = 70;
+            //this.dataGridView1.Columns[4].Width = 82;
+            //this.dataGridView1.Columns[5].Width = 60;
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
             this.dataGridView1.AllowUserToAddRows = false;

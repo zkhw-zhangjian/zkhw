@@ -144,6 +144,34 @@ namespace zkhwClient.dao
             return ds.Tables[0];
         }
 
+
+
+        public DataTable checkThresholdValues1(string dmodel, string classtype)
+        {
+            string sql = "";
+            if (dmodel == "")
+            {
+                sql = "select type as 项目名称,chinaName as 中文名称 ,CheckMethod as 检验方法 ,warning_min as 范围下限,warning_max as 范围上限,threshold_min as 危机下限,threshold_max as 范围上限,unit as 单位 from threshold_value a where 1=1";
+            }
+            else
+            {
+                string[] a = dmodel.Split(',');
+                string tmp = " deviceModel='" + a[0].ToString().Trim() + "'";
+                if (a.Length >= 2)
+                {
+                    tmp = tmp + " or deviceModel='" + a[1].ToString().Trim() + "'";
+                }
+                sql = "select type as 项目名称,chinaName as 中文名称 ,CheckMethod as 检验方法 ,warning_min as 范围下限,warning_max as 范围上限,threshold_min as 危机下限,threshold_max as 范围上限,unit as 单位 from threshold_value a where (" + tmp + ")";
+            }
+            if (classtype != "")
+            {
+                sql += " And class_type='" + classtype + "'";
+            }
+            DataSet ds = new DataSet();
+            ds = DbHelperMySQL.Query(sql);
+            return ds.Tables[0];
+        }
+
         public DataTable checkThresholdValues(string str)
         {
             DataSet ds = new DataSet();

@@ -113,9 +113,29 @@ namespace zkhwClient.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap tx {
+            get {
+                object obj = ResourceManager.GetObject("tx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap ys {
             get {
                 object obj = ResourceManager.GetObject("ys", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap zx {
+            get {
+                object obj = ResourceManager.GetObject("zx", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

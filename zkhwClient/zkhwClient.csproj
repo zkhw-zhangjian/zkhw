@@ -641,6 +641,12 @@
     <Compile Include="view\setting\deviceManagement.Designer.cs">
       <DependentUpon>deviceManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\setting\deviceManagementt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\setting\deviceManagementt.Designer.cs">
+      <DependentUpon>deviceManagementt.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\setting\frmEmpower.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1074,6 +1080,9 @@
     <EmbeddedResource Include="view\setting\deviceManagement.resx">
       <DependentUpon>deviceManagement.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\setting\deviceManagementt.resx">
+      <DependentUpon>deviceManagementt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\setting\frmEmpower.resx">
       <DependentUpon>frmEmpower.cs</DependentUpon>
     </EmbeddedResource>
@@ -1351,6 +1360,8 @@
     <Content Include="img\topleft.png" />
     <None Include="img\ys.png" />
     <Content Include="img\czz.png" />
+    <Content Include="img\tx.png" />
+    <Content Include="img\zx.png" />
     <Content Include="up\pic\371327198003045712.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
