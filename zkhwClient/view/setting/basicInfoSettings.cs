@@ -316,7 +316,7 @@ namespace zkhwClient.view.setting
 
                     if (setFunDelegate == null)
                     {
-                        frmMain frm =(frmMain)this.Parent.Parent;
+                        frmMainm frm =(frmMainm)this.Parent.Parent;
                         frm.SetJianDangInfo(textBox1.Text.Trim(), comboBox6.Text, comboBox7.Text);
                     }
                     else
