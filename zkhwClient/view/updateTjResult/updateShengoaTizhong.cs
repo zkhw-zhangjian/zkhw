@@ -97,9 +97,14 @@ namespace zkhwClient.view.updateTjResult
             }
             return _result;
         }
+         
         #endregion
         private void updateBichao_Load(object sender, EventArgs e)
         {
+
+            grjdDao grjddao = new grjdDao();
+            dttv = grjddao.checkThresholdValues("", "");
+
             isfrist = true;
             this.textBox1.Text = name;
             this.textBox3.Text = time;
@@ -108,7 +113,9 @@ namespace zkhwClient.view.updateTjResult
             this.textBox2.Text = bar_code;
             DataTable dtbichao = tjdao.selectSgtzInfo(aichive_no, bar_code);
             if (dtbichao != null && dtbichao.Rows.Count > 0)
-            {
+            { 
+                
+
                 #region 身高
                 string height = dtbichao.Rows[0]["Height"].ToString();
                 if (height != "")
@@ -285,7 +292,7 @@ namespace zkhwClient.view.updateTjResult
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("保存", new System.Drawing.Font("微软雅黑", 10, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 5));
+            g.DrawString("保存", new System.Drawing.Font("微软雅黑", 10, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(24, 5));
         }
     }
 }

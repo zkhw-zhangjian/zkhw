@@ -66,9 +66,9 @@ namespace zkhwClient
         {
             InitializeComponent();
 
-            xMy = this.Width;
-            yMy = this.Height;
-            Common.setTag(this);
+            //xMy = this.Width;
+            //yMy = this.Height;
+            //Common.setTag(this);
         }
       
         
@@ -78,6 +78,12 @@ namespace zkhwClient
             this.comboBox2.DataSource = dtno;//绑定数据源
             this.comboBox2.DisplayMember = "name";//显示给用户的数据集表项
             this.comboBox2.ValueMember = "id";//操作时获取的值
+        }
+        public void btnClose_Click()
+        {
+            videoSourcePlayer1.SignalToStop();
+            videoSourcePlayer1.WaitForStop();
+            this.Close();
         }
         private void personRegistt_Load(object sender, EventArgs e)
         {
@@ -144,6 +150,7 @@ namespace zkhwClient
                     lb.type = "3";
                     logservice.addCheckLog(lb);
                     jkjcheckdao.updateShDevice(0, -1, -1, -1, -1, -1, -1, -1, -1, -1);
+                    this.label42.Visible = true;
                 }
             }
             catch (Exception ex)
@@ -297,9 +304,9 @@ namespace zkhwClient
         private void button1_Paint(object sender, PaintEventArgs e)
         {
             Button bt = (Button)sender;
-            Single _size = GetBtnFontSize(bt);
-          
+            //Single _size = GetBtnFontSize(bt);
 
+            Single _size = 10;
             string stag = bt.AccessibleName; 
             string wenzi = "";
             int starti = 20;
@@ -490,7 +497,7 @@ namespace zkhwClient
                             }
                             textBox8.Text = dt.Rows[0][2].ToString();
                             textBox3.Text = dt.Rows[0][3].ToString();
-                            pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
+                            pictureBox4.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
                             textBox5.Text = dt.Rows[0][5].ToString();
                         };
                         this.label41.Text = "读卡成功！";
@@ -504,7 +511,7 @@ namespace zkhwClient
                         }
                         inf.MoveTo(Application.StartupPath + "\\cardImg\\" + textBox1.Text + textBox8.Text + ".jpg");
 
-                        pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + textBox1.Text + textBox8.Text + ".jpg";
+                        pictureBox4.ImageLocation = Application.StartupPath + "\\cardImg\\" + textBox1.Text + textBox8.Text + ".jpg";
 
                         DataTable dt = grjddao.judgeRepeatBync(textBox1.Text, textBox8.Text);
                         if (dt.Rows.Count > 0)
@@ -522,7 +529,7 @@ namespace zkhwClient
                             }
                             textBox8.Text = dt.Rows[0][2].ToString();
                             textBox3.Text = dt.Rows[0][3].ToString();
-                            pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
+                            pictureBox4.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
                             richTextBox1.Text = dt.Rows[0][5].ToString();
                             tmp = dt.Rows[0][6].ToString();
                             if (tmp == "") tmp = "1";
@@ -547,7 +554,7 @@ namespace zkhwClient
                     {
                         File.Delete(pName);
                     }
-                    pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\123.jpg";
+                    pictureBox4.ImageLocation = Application.StartupPath + "\\cardImg\\123.jpg";
                 }
                 jkjcheckdao.updateShDevice(1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
             }
@@ -1068,9 +1075,9 @@ namespace zkhwClient
 
         private void personRegistt_Resize(object sender, EventArgs e)
         {
-            float newx = (this.Width) / xMy;
-            float newy = (this.Height) / yMy;
-            Common.setControls(newx, newy, this); 
+            //float newx = (this.Width) / xMy;
+            //float newy = (this.Height) / yMy;
+            //Common.setControls(newx, newy, this);
         }
 
         public void OnPrintSampleBarcode(string barcode, int pageCount, string nameCode)

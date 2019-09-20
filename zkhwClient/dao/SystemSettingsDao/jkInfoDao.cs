@@ -39,7 +39,7 @@ namespace zkhwClient.dao
             DataSet ds = new DataSet();
             string sql = @"select healthchecktime,name,aichive_no,id_number,bar_code,BChao,XinDian,ShengHua,
                        XueChangGui,NiaoChangGui,XueYa,Shengaotizhong,jktjb,lnrzlnlpg,lnrzytzbs,age  
-                       from zkhw_tj_bgdc where createtime >= '" + time1 + "' and createtime <= '" + time2 + "'";
+                       from zkhw_tj_bgdc where date_format(createtime,'%Y-%m-%d') >= '" + time1 + "' and date_format(createtime,'%Y-%m-%d') <= '" + time2 + "'";
             if (xcuncode!=null&&!"".Equals(xcuncode)) {
                 sql += " and area_duns='" + xcuncode + "'";
             }
