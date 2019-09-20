@@ -102,28 +102,30 @@
             // button5
             // 
             this.button5.BackColor = System.Drawing.Color.Red;
-            this.button5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button5.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.button5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button5.Location = new System.Drawing.Point(319, 140);
+            this.button5.Location = new System.Drawing.Point(293, 140);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(67, 38);
+            this.button5.Size = new System.Drawing.Size(75, 31);
             this.button5.TabIndex = 115;
             this.button5.Text = "关闭";
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button5.Paint += new System.Windows.Forms.PaintEventHandler(this.button5_Paint);
             // 
             // button4
             // 
             this.button4.BackColor = System.Drawing.Color.LimeGreen;
-            this.button4.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button4.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.button4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button4.Location = new System.Drawing.Point(246, 140);
+            this.button4.Location = new System.Drawing.Point(200, 140);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(67, 38);
+            this.button4.Size = new System.Drawing.Size(75, 31);
             this.button4.TabIndex = 114;
             this.button4.Text = "保存";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.Paint += new System.Windows.Forms.PaintEventHandler(this.button4_Paint);
             // 
             // label4
             // 
@@ -217,6 +219,7 @@
             this.tabPage2.Controls.Add(this.textBox6);
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.textBox7);
+            this.tabPage2.Font = new System.Drawing.Font("宋体", 9F);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -228,28 +231,30 @@
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Red;
-            this.button2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(319, 141);
+            this.button2.Location = new System.Drawing.Point(298, 141);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(67, 38);
+            this.button2.Size = new System.Drawing.Size(75, 31);
             this.button2.TabIndex = 123;
             this.button2.Text = "关闭";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Paint += new System.Windows.Forms.PaintEventHandler(this.button2_Paint);
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.LimeGreen;
-            this.button1.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(244, 141);
+            this.button1.Location = new System.Drawing.Point(205, 141);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(67, 38);
+            this.button1.Size = new System.Drawing.Size(75, 31);
             this.button1.TabIndex = 122;
             this.button1.Text = "保存";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Paint += new System.Windows.Forms.PaintEventHandler(this.button1_Paint);
             // 
             // label5
             // 
@@ -354,28 +359,30 @@
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.Red;
-            this.button3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button3.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.button3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button3.Location = new System.Drawing.Point(319, 140);
+            this.button3.Location = new System.Drawing.Point(296, 140);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(67, 38);
+            this.button3.Size = new System.Drawing.Size(75, 31);
             this.button3.TabIndex = 125;
             this.button3.Text = "关闭";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Paint += new System.Windows.Forms.PaintEventHandler(this.button3_Paint);
             // 
             // button6
             // 
             this.button6.BackColor = System.Drawing.Color.LimeGreen;
-            this.button6.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button6.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.button6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button6.Location = new System.Drawing.Point(244, 140);
+            this.button6.Location = new System.Drawing.Point(203, 140);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(67, 38);
+            this.button6.Size = new System.Drawing.Size(75, 31);
             this.button6.TabIndex = 124;
             this.button6.Text = "保存";
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.button6.Paint += new System.Windows.Forms.PaintEventHandler(this.button6_Paint);
             // 
             // label9
             // 

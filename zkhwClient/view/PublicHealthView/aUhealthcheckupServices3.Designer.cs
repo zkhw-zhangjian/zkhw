@@ -842,7 +842,7 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(1, 43);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1303, 477);
+            this.groupBox1.Size = new System.Drawing.Size(1269, 477);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             // 
@@ -1462,7 +1462,7 @@
             this.textBox67.Location = new System.Drawing.Point(922, 167);
             this.textBox67.Name = "textBox67";
             this.textBox67.ReadOnly = true;
-            this.textBox67.Size = new System.Drawing.Size(93, 29);
+            this.textBox67.Size = new System.Drawing.Size(95, 29);
             this.textBox67.TabIndex = 201;
             this.textBox67.Text = "μmol/L";
             // 
@@ -1551,10 +1551,10 @@
             this.textBox11.BackColor = System.Drawing.SystemColors.Window;
             this.textBox11.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox11.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.textBox11.Location = new System.Drawing.Point(1015, 139);
+            this.textBox11.Location = new System.Drawing.Point(1023, 139);
             this.textBox11.Name = "textBox11";
             this.textBox11.ReadOnly = true;
-            this.textBox11.Size = new System.Drawing.Size(79, 22);
+            this.textBox11.Size = new System.Drawing.Size(71, 22);
             this.textBox11.TabIndex = 193;
             this.textBox11.Text = "白蛋白";
             this.textBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1566,7 +1566,7 @@
             this.textBox5.Location = new System.Drawing.Point(922, 137);
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(64, 29);
+            this.textBox5.Size = new System.Drawing.Size(95, 29);
             this.textBox5.TabIndex = 192;
             this.textBox5.Text = "U/L";
             // 
@@ -2282,7 +2282,7 @@
             // 
             this.textBox41.Enabled = false;
             this.textBox41.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.textBox41.Location = new System.Drawing.Point(185, 30);
+            this.textBox41.Location = new System.Drawing.Point(185, 31);
             this.textBox41.Name = "textBox41";
             this.textBox41.Size = new System.Drawing.Size(671, 29);
             this.textBox41.TabIndex = 227;

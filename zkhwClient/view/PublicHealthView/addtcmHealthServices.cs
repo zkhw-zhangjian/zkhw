@@ -84,7 +84,7 @@ namespace zkhwClient.view.PublicHealthView
             this.Close();
         }
 
-        private void 计算_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
             Thread.Sleep(1000);
             try
@@ -1042,6 +1042,32 @@ namespace zkhwClient.view.PublicHealthView
                     }
                 }
             }
+        }
+
+        private void 取消_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(255, 0, 0), Color.FromArgb(255, 0, 0));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("关闭", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 5));
+        }
+
+        private void 确定_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("保存", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 5));
+        }
+
+        private void button4_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            base.OnPaint(e);
+            Graphics g = e.Graphics;
+            g.DrawString("体质辨识(计算)", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(6, 5));
         }
     }
 }

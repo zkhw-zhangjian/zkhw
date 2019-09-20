@@ -1121,7 +1121,7 @@ namespace zkhwClient.view.PublicHealthView
 
         private void button6_Paint(object sender, PaintEventArgs e)
         {
-            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(255, 0, 0), Color.FromArgb(255, 0, 0));
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
@@ -1139,7 +1139,7 @@ namespace zkhwClient.view.PublicHealthView
 
         private void button1_Paint(object sender, PaintEventArgs e)
         {
-            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(255, 0, 0), Color.FromArgb(255, 0, 0));
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
