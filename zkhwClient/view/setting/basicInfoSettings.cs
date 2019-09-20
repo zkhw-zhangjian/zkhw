@@ -257,7 +257,7 @@ namespace zkhwClient.view.setting
             DataRow[] drs11 = dtuserlist.Select("uname = '" + sgtz + "' ");
             if (drs11.Count() < 1)
             {
-                MessageBox.Show("无此生化人员名称，请重新选择!");
+                MessageBox.Show("无此身高体重人员名称，请重新选择!");
                 return;
             }
             ncg = this.comboBox12.Text;
