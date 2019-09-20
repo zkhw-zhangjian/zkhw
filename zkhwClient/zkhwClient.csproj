@@ -221,6 +221,12 @@
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmLoginn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLoginn.Designer.cs">
+      <DependentUpon>frmLoginn.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -882,6 +888,9 @@
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmLoginn.resx">
+      <DependentUpon>frmLoginn.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -1352,16 +1361,21 @@
     <Content Include="images\身份证样图.png" />
     <None Include="Resources\拉取数据.png" />
     <None Include="img\djr.png" />
+    <None Include="img\bjk.png" />
     <Content Include="img\cz.png" />
     <Content Include="img\d.png" />
     <None Include="img\jddw.png" />
     <Content Include="img\log.ico" />
     <None Include="img\rightbottom.png" />
+    <Content Include="img\mm.png" />
     <Content Include="img\topleft.png" />
     <None Include="img\ys.png" />
     <Content Include="img\czz.png" />
     <Content Include="img\tx.png" />
+    <Content Include="img\user.png" />
     <Content Include="img\zx.png" />
+    <None Include="Resources\bjj.png" />
+    <None Include="Resources\bbj.jpg" />
     <Content Include="up\pic\371327198003045712.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
