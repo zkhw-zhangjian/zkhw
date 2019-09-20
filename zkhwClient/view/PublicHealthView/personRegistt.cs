@@ -812,6 +812,9 @@ namespace zkhwClient
                 sex = "0";
             }
             string birthday = textBox8.Text;
+            if (birthday.IndexOf("-")<0) {
+                MessageBox.Show("出生日期格式不正确,请重新输入!例:1990-01-01");return;
+            }
             string signdate = textBox4.Text;
             string number = textBox3.Text;
             string name = textBox1.Text;

@@ -210,8 +210,14 @@ namespace zkhwClient.view.PublicHealthView
                 if (dt.Rows[0]["sex"].ToString() == hm.radioButton2.Tag.ToString()) { hm.radioButton2.Checked = true; };
                 if (dt.Rows[0]["sex"].ToString() == hm.radioButton3.Tag.ToString()) { hm.radioButton3.Checked = true; };
                 if (dt.Rows[0]["sex"].ToString() == hm.radioButton25.Tag.ToString()) { hm.radioButton25.Checked = true; };
-                if (dt.Rows[0]["birthday"].ToString() != "")
+                hm.textBox12.Text = dt.Rows[0]["id_number"].ToString();
+                if (dt.Rows[0]["birthday"].ToString() != "" && dt.Rows[0]["birthday"].ToString().IndexOf("-") > 0)
+                {
                     hm.dateTimePicker1.Value = DateTime.Parse(dt.Rows[0]["birthday"].ToString());
+                }
+                else {
+                    hm.dateTimePicker1.Value = DateTime.Parse(hm.textBox12.Text.Substring(6,4)+ "-"+hm.textBox12.Text.Substring(10, 2) + "-" + hm.textBox12.Text.Substring(12, 2));
+                }
                 hm.textBox12.Text = dt.Rows[0]["id_number"].ToString();
                 hm.oldidnumber= dt.Rows[0]["id_number"].ToString();
 
@@ -426,7 +432,7 @@ namespace zkhwClient.view.PublicHealthView
                     hm.radioButton16.Checked = true;
                 }
             }
-            else { } 
+            else { MessageBox.Show("未查询到数据"+id); } 
 
             if (hm.ShowDialog() == DialogResult.OK)
             {
