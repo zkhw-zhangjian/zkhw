@@ -440,11 +440,10 @@
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.label3.Location = new System.Drawing.Point(597, 4);
+            this.label3.Location = new System.Drawing.Point(597, 8);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(393, 35);
+            this.label3.Size = new System.Drawing.Size(393, 40);
             this.label3.TabIndex = 6;
             this.label3.Text = "老年人中医药健康管理服务记录";
             // 

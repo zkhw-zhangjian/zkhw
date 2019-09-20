@@ -3,6 +3,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Windows.Forms;
 using System.Xml;
@@ -46,6 +47,7 @@ namespace zkhwClient.view.setting
         string path = @"config.xml";
         DataTable dtuserlist = null;
         string issave = "0";
+        bool isPaint = false;
         public basicInfoSettings()
         {
             InitializeComponent();
@@ -136,7 +138,16 @@ namespace zkhwClient.view.setting
 
                 issave = "1";
             }
-             //this.comboBox7.DropDownStyle = ComboBoxStyle.DropDownList; 
+            //this.comboBox7.DropDownStyle = ComboBoxStyle.DropDownList; 
+            if (IsInternetAvailable())
+            {
+                isPaint = true;
+                button2_Paint(null, new PaintEventArgs(CreateGraphics(), ClientRectangle));
+            }
+            else {
+                isPaint = false;
+                button2_Paint(null, new PaintEventArgs(CreateGraphics(), ClientRectangle));
+            }
         }
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
@@ -409,10 +420,14 @@ namespace zkhwClient.view.setting
         {
             try
             {
-                Dns.GetHostEntry("www.baidu.com"); //using System.Net;
-                return true;
+                Ping ping = new Ping();
+                PingReply pr = ping.Send("baidu.com");
+                if (pr.Status == IPStatus.Success)
+                    return true;
+                else
+                    return false;
             }
-            catch (SocketException ex)
+            catch
             {
                 return false;
             }
@@ -460,7 +475,11 @@ namespace zkhwClient.view.setting
 
         private void button2_Paint(object sender, PaintEventArgs e)
         {
-            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(170, 171, 171), Color.FromArgb(170, 171, 171));
+            if (isPaint) {
+                ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(170, 171, 171), Color.FromArgb(170, 171, 171));
+            } else {
+                ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(193, 193, 193), Color.FromArgb(193, 193, 193));
+            }
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
