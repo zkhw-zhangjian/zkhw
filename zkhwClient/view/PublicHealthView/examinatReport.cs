@@ -12,6 +12,9 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -27,6 +30,7 @@ namespace zkhwClient.view.PublicHealthView
         string str = Application.StartupPath;//项目路径
         service.loginLogService lls = new service.loginLogService();
         bool isfirst = false;
+        bool isPaint = false;
         #region 初始化数据
         public examinatReport()
         {
@@ -110,8 +114,54 @@ namespace zkhwClient.view.PublicHealthView
             int count = 0;
             queryExaminatProgress(GetData(pagerControl1.PageIndex, pagerControl1.PageSize, out count));
             pagerControl1.DrawControl(count);
+
+            if (!IsInternetAvailable())
+            {
+                isPaint = false;
+                button3_Paint(null, new PaintEventArgs(CreateGraphics(), ClientRectangle));
+                button4_Paint(null, new PaintEventArgs(CreateGraphics(), ClientRectangle));
+            }
+            else
+            {
+                isPaint = true;
+                button3_Paint(null, new PaintEventArgs(CreateGraphics(), ClientRectangle));
+                button4_Paint(null, new PaintEventArgs(CreateGraphics(), ClientRectangle));
+            }
+            this.timer1.Start();
         }
         #endregion
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (!IsInternetAvailable())
+            {
+                isPaint = false;
+                button3_Paint(null, new PaintEventArgs(CreateGraphics(), ClientRectangle));
+                button4_Paint(null, new PaintEventArgs(CreateGraphics(), ClientRectangle));
+            }
+            else
+            {
+                isPaint = true;
+                button3_Paint(null, new PaintEventArgs(CreateGraphics(), ClientRectangle));
+                button4_Paint(null, new PaintEventArgs(CreateGraphics(), ClientRectangle));
+            }
+        }
+        private bool IsInternetAvailable()
+        {
+            try
+            {
+                Ping ping = new Ping();
+                PingReply pr = ping.Send("baidu.com");
+                if (pr.Status == IPStatus.Success)
+                    return true;
+                else
+                    return false;
+                //Dns.GetHostEntry("www.baidu.com"); //using System.Net;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         #region 列表展示
         void pagerControl1_OnPageChanged(object sender, EventArgs e)
@@ -4930,9 +4980,14 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
 
         private void button3_Paint(object sender, PaintEventArgs e)
         {
-            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            if (isPaint)
+            {
+                ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81)); 
+            }
+            else {
+                ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(193, 193, 193), Color.FromArgb(193, 193, 193));
+            }
             base.OnPaint(e);
-
             Graphics g = e.Graphics;
             g.DrawString("数据上传", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 4));
 
@@ -4940,9 +4995,15 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
 
         private void button4_Paint(object sender, PaintEventArgs e)
         {
-            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(193, 193, 193), Color.FromArgb(193, 193, 193));
+            if (isPaint)
+            {
+                ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            }
+            else
+            {
+                ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(193, 193, 193), Color.FromArgb(193, 193, 193));
+            }
             base.OnPaint(e);
-
             Graphics g = e.Graphics;
             g.DrawString("图片上传", new System.Drawing.Font("微软雅黑", 8, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 4));
         }

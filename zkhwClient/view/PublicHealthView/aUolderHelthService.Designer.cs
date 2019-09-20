@@ -138,7 +138,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.checkBox20);
             this.panel1.Controls.Add(this.checkBox19);
             this.panel1.Controls.Add(this.checkBox18);
