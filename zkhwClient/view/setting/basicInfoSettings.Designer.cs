@@ -334,7 +334,7 @@
             this.groupBox3.Controls.Add(this.comboBox15);
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox3.Location = new System.Drawing.Point(106, 471);
+            this.groupBox3.Location = new System.Drawing.Point(71, 457);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(21, 26);
             this.groupBox3.TabIndex = 2;
