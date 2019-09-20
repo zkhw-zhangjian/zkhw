@@ -353,7 +353,9 @@ namespace zkhwClient.view.updateTjResult
         
         #endregion
         private void updateBichao_Load(object sender, EventArgs e)
-        { 
+        {
+            grjdDao grjddao = new grjdDao();
+            dttv = grjddao.checkThresholdValues("", "");
 
             this.textBox1.Text = name;
             this.textBox3.Text = time;
@@ -570,7 +572,7 @@ namespace zkhwClient.view.updateTjResult
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("保存", new System.Drawing.Font("微软雅黑", 10, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 5));
+            g.DrawString("保存", new System.Drawing.Font("微软雅黑", 10, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(24, 5));
         }
     }
 }

@@ -24,9 +24,15 @@ namespace zkhwClient.view.PublicHealthView
         public string oldname = "";
         public string oldidnumber = "";
 
+        private float xMy;//定义当前窗体的宽度
+        private float yMy;//定义当前窗体的高度
         public aUPersonalBasicInfoo()
         {
             InitializeComponent();
+
+            xMy = this.Width;
+            yMy = this.Height;
+            Common.setTag(this);
         }
         private void aUHypertensionPatientServices_Load(object sender, EventArgs e)
         {
@@ -832,6 +838,12 @@ namespace zkhwClient.view.PublicHealthView
             g.DrawString("-", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Bold), new SolidBrush(Color.White), new PointF(2, 1));
 
         }
-         
+
+        private void aUPersonalBasicInfoo_Resize(object sender, EventArgs e)
+        {
+            float newx = (this.Width) / xMy;
+            float newy = (this.Height) / yMy;
+            Common.setControls(newx, newy, this);
+        }
     }
 }

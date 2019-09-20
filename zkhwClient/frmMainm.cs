@@ -121,8 +121,8 @@ namespace zkhwClient
 
             #endregion
 
-            personRegistt frm = new personRegistt();
-            OpenWinToMain(frm);
+            pR = new personRegistt();
+            OpenWinToMain();
 
             //http
             proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
@@ -189,15 +189,15 @@ namespace zkhwClient
                 socketTcpDr();//迪瑞
             }
         }
-
-        private void OpenWinToMain(Form frm)
+       
+        private void OpenWinToMain()
         {
-            frm.TopLevel = false;
-            frm.Dock = DockStyle.Fill;
-            frm.FormBorderStyle = FormBorderStyle.None;
+            pR.TopLevel = false;
+            pR.Dock = DockStyle.Fill;
+            pR.FormBorderStyle = FormBorderStyle.None;
             panel1.Controls.Clear();
-            panel1.Controls.Add(frm);
-            frm.Show();
+            panel1.Controls.Add(pR);
+            pR.Show();
         }
         #region 底部处理 
         private void label1_Click(object sender, EventArgs e)
@@ -293,8 +293,8 @@ namespace zkhwClient
                     pangw.Dock = DockStyle.Fill;
                     panel17.Controls.Clear();
                     panel17.Controls.Add(pangw);
-                    personRegistt frm = new personRegistt();
-                    OpenWinToMain(frm);
+                    pR = new personRegistt();
+                    OpenWinToMain();
                 }
                 else if (lbl.Text == "设置")
                 {
@@ -306,7 +306,17 @@ namespace zkhwClient
                     panel17.Controls.Add(pansetup);
 
                     basicInfoSettings frm = new basicInfoSettings();
-                    OpenWinToMain(frm);
+                    if (pR != null)
+                    {
+                        pR.btnClose_Click();
+                        pR = null;
+                    }
+                    frm.TopLevel = false;
+                    frm.Dock = DockStyle.Fill;
+                    frm.FormBorderStyle = FormBorderStyle.None;
+                    panel1.Controls.Clear();
+                    panel1.Controls.Add(frm);
+                    frm.Show();
                 }
             }
         }
@@ -358,7 +368,7 @@ namespace zkhwClient
                     frm = new basicInfoSettings();
                     break;
                 case "1":
-                    frm = new deviceManagement();
+                    frm = new deviceManagementt();
                     break;
                 case "2":
                     frm = new systemlog();
@@ -366,13 +376,13 @@ namespace zkhwClient
                 case "3":
                     frm = new parameterSetting();
                     break;
-                case "4":  
+                case "4":
                     break;
                 case "5":
                     frm = new frmThresholdSetting();
-                    break; 
+                    break;
             }
-            if(c=="4")
+            if (c=="4")
             {
                 frmEmpower frm1 = new frmEmpower();
                 frm1._EditType = 0;
@@ -380,11 +390,18 @@ namespace zkhwClient
             }
             else
             {
-                if (frm != null)
+                if (pR != null)
                 {
-                    OpenWinToMain(frm);
+                    pR.btnClose_Click();
+                    pR = null;
                 }
-            }  
+                frm.TopLevel = false;
+                frm.Dock = DockStyle.Fill;
+                frm.FormBorderStyle = FormBorderStyle.None;
+                panel1.Controls.Clear();
+                panel1.Controls.Add(frm);
+                frm.Show();
+            }
         }
 
         private void label49_MouseEnter(object sender, EventArgs e)
@@ -477,6 +494,7 @@ namespace zkhwClient
             label34.Tag = "0,14";
             label34.BackColor = leftColor;
         }
+         
         private void label20_Click(object sender, EventArgs e)
         { 
             setlabeltaggongweiforleft(0);
@@ -485,59 +503,79 @@ namespace zkhwClient
             string[] b = a.Split(',');
             lbl.Tag = "1," + b[1].ToString();
             lbl.BackColor = leftselectColor;
-            string c = b[1].ToString();
-            Form frm = null;
-            switch(c)
+            string c = b[1].ToString(); 
+            if(c=="0")
             {
-                case "0":
-                    frm = new personRegistt();
-                    break;
-                case "1":
-                    frm = new examinatProgress();
-                    break;
-                case "2":
-                    frm = new examinatReport();
-                    break;
-                case "3":
-                    frm = new personalBasicInfo();
-                    break;
-                case "4":
-                    frm = new healthCheckup();
-                    break;
-                case "5":
-                    frm = new olderHelthService();
-                    break;
-                case "6":
-                    frm = new tcmHealthServices();
-                    break;
-                case "7":
-                    frm = new healthPoorServices();
-                    break;
-                case "8":
-                    frm = new hypertensionPatientServices();
-                    break;
-                case "9":
-                    frm = new diabetesPatientServices();
-                    break;
-                case "10":
-                    frm = new psychiatricPatientServices();
-                    break;
-                case "11":
-                    frm = new tuberculosisPatientServices();
-                    break;
-                case "12":
-                    frm = new childHealthServices();
-                    break;
-                case "13":
-                    frm = new maternalHealthServices();
-                    break;
-                case "14":
-                    frm = new childrenCMHealthServices();
-                    break;
+                if (pR != null)
+                {
+                    pR.btnClose_Click();
+                    pR = null;
+                }
+                pR = new personRegistt();
+                OpenWinToMain();
             }
-            if(frm !=null)
+            else
             {
-                OpenWinToMain(frm);
+                Form frm = null;
+                switch (c)
+                {
+                    case "1":
+                        frm = new examinatProgress();
+                        break;
+                    case "2":
+                        frm = new examinatReport();
+                        break;
+                    case "3":
+                        frm = new personalBasicInfo();
+                        break;
+                    case "4":
+                        frm = new healthCheckup();
+                        break;
+                    case "5":
+                        frm = new olderHelthService();
+                        break;
+                    case "6":
+                        frm = new tcmHealthServices();
+                        break;
+                    case "7":
+                        frm = new healthPoorServices();
+                        break;
+                    case "8":
+                        frm = new hypertensionPatientServices();
+                        break;
+                    case "9":
+                        frm = new diabetesPatientServices();
+                        break;
+                    case "10":
+                        frm = new psychiatricPatientServices();
+                        break;
+                    case "11":
+                        frm = new tuberculosisPatientServices();
+                        break;
+                    case "12":
+                        frm = new childHealthServices();
+                        break;
+                    case "13":
+                        frm = new maternalHealthServices();
+                        break;
+                    case "14":
+                        frm = new childrenCMHealthServices();
+                        break;
+                }
+                if(frm !=null)
+                {
+                    if (pR != null)
+                    {
+                        pR.btnClose_Click();
+                        pR = null;
+                    }
+                    frm.TopLevel = false;
+                    frm.Dock = DockStyle.Fill;
+                    frm.FormBorderStyle = FormBorderStyle.None;
+                    panel1.Controls.Clear();
+                    panel1.Controls.Add(frm);
+                    frm.Show();
+                }
             } 
         }
         #endregion
@@ -6629,6 +6667,47 @@ namespace zkhwClient
             else
             {
                 label1.BackColor = _color;
+            }
+        }
+
+        private void label17_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                if (!proHttp.HasExited)
+                {
+                    proHttp.Kill();
+                }
+                if (!proAsNet.HasExited)
+                {
+                    proAsNet.Kill();
+                }
+                ////if (!proFtp.HasExited)
+                ////{
+                ////    proFtp.Kill();
+                ////}
+                service.loginLogService llse = new service.loginLogService();
+                bean.loginLogBean lb = new bean.loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "退出系统！";
+                lb.type = "1";
+                if (lb.name != "admin" && lb.name != "" && lb.name != null)
+                {
+                    llse.addCheckLog(lb);
+                }
+                Process p = Process.GetCurrentProcess();
+                if (p != null)
+                {
+                    p.Kill();
+                }
+                try
+                {
+                    Environment.Exit(0);
+                }
+                catch
+                { }
             }
         }
     }

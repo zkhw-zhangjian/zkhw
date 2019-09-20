@@ -780,7 +780,7 @@
             this.button5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button5.Location = new System.Drawing.Point(312, 50);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(194, 92);
+            this.button5.Size = new System.Drawing.Size(91, 39);
             this.button5.TabIndex = 54;
             this.button5.Text = "全部刷新";
             this.button5.UseVisualStyleBackColor = false;

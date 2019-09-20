@@ -56,6 +56,8 @@ namespace zkhwClient.view.PublicHealthView
 
             dttv = grjddao.checkThresholdValues(Common._deviceModel,"");//获取阈值信息
             registrationRecordCheck();//体检人数统计
+
+            queryExaminatProgress();
         } 
         public void queryExaminatProgress() 
         { 
@@ -484,7 +486,7 @@ namespace zkhwClient.view.PublicHealthView
                 uncg.aichive_no = str2;
                 uncg.id_number = str3;
                 uncg.bar_code = str4;
-                uncg.dttv = dttv;
+                //uncg.dttv = dttv;
                 uncg.rowIndex = e.RowIndex;
                 uncg.testFunDelegate = DealGridColour;
                 uncg.Show();
@@ -497,7 +499,7 @@ namespace zkhwClient.view.PublicHealthView
                 uxy.aichive_no = str2;
                 uxy.id_number = str3;
                 uxy.bar_code = str4;
-                uxy.dttv = dttv;
+                //uxy.dttv = dttv;
                 uxy.rowIndex = e.RowIndex;
                 uxy.testFunDelegate = DealGridColour;
                 uxy.Show();
@@ -510,7 +512,7 @@ namespace zkhwClient.view.PublicHealthView
                 usgtz.aichive_no = str2;
                 usgtz.id_number = str3;
                 usgtz.bar_code = str4;
-                usgtz.dttv = dttv;
+                //usgtz.dttv = dttv;
                 usgtz.rowIndex = e.RowIndex;
                 usgtz.testFunDelegate = DealGridColour;
                 usgtz.Show();
@@ -1064,7 +1066,7 @@ namespace zkhwClient.view.PublicHealthView
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("删除", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 5));
+            g.DrawString("删除", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(23, 5));
 
         }
 
@@ -1084,7 +1086,7 @@ namespace zkhwClient.view.PublicHealthView
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("导出数据", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 5));
+            g.DrawString("导出花名册", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(7, 5));
 
         }
 

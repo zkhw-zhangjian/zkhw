@@ -18,12 +18,12 @@ namespace zkhwClient.view.setting
         }
 
         private void frmEmpower_Load(object sender, EventArgs e)
-        {
-            if(_EditType == 0)
+        { 
+            if (_EditType == 0)
             {
                 txtNote.Visible = false; 
 
-                panel1.Top = (groupBox1.Height - panel1.Height) / 2;
+                panel1.Top = txtNote.Top;
             }
             else
             {
@@ -77,6 +77,25 @@ namespace zkhwClient.view.setting
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void btnCancel_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(170, 171, 171), Color.FromArgb(170, 171, 171));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("暂不授权", new System.Drawing.Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 5));
+
+        }
+
+        private void btnOK_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("确定授权", new System.Drawing.Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 5));
         }
     }
 }
