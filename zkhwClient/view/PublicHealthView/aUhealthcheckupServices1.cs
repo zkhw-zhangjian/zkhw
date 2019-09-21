@@ -971,6 +971,10 @@ namespace zkhwClient.view.PublicHealthView
             if (per.lifeway_drink_type != null && per.lifeway_drink_type != "")
             {
                 per.lifeway_drink_type = per.lifeway_drink_type.Substring(1);
+                if (per.lifeway_drink_type.Split(',').Length==5) {
+                    MessageBox.Show("饮酒种类最多只能选择4项,请重新选择!");
+                    return null;
+                }
             }
             per.lifeway_drink_other = this.textBox117.Text.Replace(" ", "");
 

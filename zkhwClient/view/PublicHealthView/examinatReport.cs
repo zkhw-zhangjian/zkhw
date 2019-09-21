@@ -1358,16 +1358,26 @@ where 1=1";
                     dics.Add("姓名", data["name"].ToString());
                     dics.Add("性别", data["sex"].ToString());
                     string birthday = data["birthday"].ToString();
+                    string sfzCard = data["id_number"].ToString();
                     if (birthday != "")
                     {
                         string[] sr = birthday.Split('-');
+                        if (sr.Length==1) {
+                            sr = birthday.Split('/');
+                            if (sr.Length == 1) {
+                                sr = new string [3] ;
+                                sr[0] = sfzCard.Substring(6,4);
+                                sr[1] = sfzCard.Substring(10,2);
+                                sr[2] = sfzCard.Substring(12,2);
+                            }
+                        }
                         string r = sr[0] + sr[1] + sr[2];
                         for (int i = 0; i < r.Length; i++)
                         {
                             dics.Add("出生日期" + (i + 1), r[i].ToString());
                         }
                     }
-                    dics.Add("身份证号", data["id_number"].ToString());
+                    dics.Add("身份证号", sfzCard);
 
                     dics.Add("工作单位", data["company"].ToString());
                     dics.Add("本人电话", data["phone"].ToString());
