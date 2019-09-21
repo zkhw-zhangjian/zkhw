@@ -20,6 +20,23 @@ namespace zkhwClient.view.PublicHealthView
         {
             InitializeComponent();
         }
+
+        private void PanDuanXingBie(string id_number)
+        {
+            personalBasicInfoDao dbid = new personalBasicInfoDao();
+
+            DataTable dt = dbid.query(id_number);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                string sex = dt.Rows[0]["sex"].ToString();
+                if(sex=="1")
+                {
+                    panel6.Enabled = false;
+                    radioButton1.Checked = false;
+                    radioButton2.Checked = false;
+                }
+            }
+        }
         private void aUdiabetesPatientServices_Load(object sender, EventArgs e)
         {
             this.label51.Text = "健康体检表第三页(共四页)";
@@ -33,6 +50,7 @@ namespace zkhwClient.view.PublicHealthView
                 DataTable dt = hcd.queryhealthCheckup(id);
                 if (dt != null && dt.Rows.Count > 0)
                 {
+                    PanDuanXingBie(dt.Rows[0]["id_number"].ToString());
                     //this.textBox106.Text = dt.Rows[0]["aichive_no"].ToString();
                     //this.textBox105.Text = dt.Rows[0]["bar_code"].ToString();
                     //this.textBox108.Text = dt.Rows[0]["id"].ToString();

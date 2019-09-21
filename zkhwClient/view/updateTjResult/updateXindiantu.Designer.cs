@@ -63,8 +63,8 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -456,6 +456,15 @@
             this.panel3.Size = new System.Drawing.Size(791, 38);
             this.panel3.TabIndex = 82;
             // 
+            // textBox5
+            // 
+            this.textBox5.BackColor = System.Drawing.SystemColors.Window;
+            this.textBox5.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.textBox5.Location = new System.Drawing.Point(84, 8);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(684, 23);
+            this.textBox5.TabIndex = 39;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -466,16 +475,6 @@
             this.label2.Size = new System.Drawing.Size(56, 17);
             this.label2.TabIndex = 37;
             this.label2.Text = "诊断结果";
-            // 
-            // textBox5
-            // 
-            this.textBox5.BackColor = System.Drawing.SystemColors.Window;
-            this.textBox5.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.textBox5.Location = new System.Drawing.Point(84, 8);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(684, 23);
-            this.textBox5.TabIndex = 39;
             // 
             // panel4
             // 
@@ -494,7 +493,6 @@
             this.textBox6.Location = new System.Drawing.Point(84, 6);
             this.textBox6.Multiline = true;
             this.textBox6.Name = "textBox6";
-            this.textBox6.ReadOnly = true;
             this.textBox6.Size = new System.Drawing.Size(684, 76);
             this.textBox6.TabIndex = 39;
             // 

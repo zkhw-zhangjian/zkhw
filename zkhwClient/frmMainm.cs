@@ -293,6 +293,11 @@ namespace zkhwClient
                     pangw.Dock = DockStyle.Fill;
                     panel17.Controls.Clear();
                     panel17.Controls.Add(pangw);
+                    if (pR != null)
+                    {
+                        pR.btnClose_Click();
+                        pR = null;
+                    }
                     pR = new personRegistt();
                     OpenWinToMain();
                 }

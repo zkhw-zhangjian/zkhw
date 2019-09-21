@@ -309,7 +309,7 @@ namespace zkhwClient.dao
         public DataTable checkBichaoInfo(string time1, string time2, string xcuncode)
         {
             DataSet ds = new DataSet();
-            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when BChao='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
+            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when BChao='0' then '未完成' else '完成' end) as type from zkhw_tj_bgdc where 1=1";
             if (xcuncode != null && !"".Equals(xcuncode))
             {
                 sql += " and area_duns='" + xcuncode + "'";
@@ -329,7 +329,7 @@ namespace zkhwClient.dao
         public DataTable checkShenghuaInfo(string time1, string time2, string xcuncode)
         {
             DataSet ds = new DataSet();
-            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when ShengHua='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
+            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when ShengHua='0' then '未完成' else '完成' end) as type from zkhw_tj_bgdc where 1=1";
             if (xcuncode != null && !"".Equals(xcuncode))
             {
                 sql += " and area_duns='" + xcuncode + "'";
@@ -349,7 +349,7 @@ namespace zkhwClient.dao
         public DataTable checkNcgInfo(string time1, string time2, string xcuncode)
         {
             DataSet ds = new DataSet();
-            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when NiaoChangGui='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
+            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when NiaoChangGui='0' then '未完成' else '完成' end) as type from zkhw_tj_bgdc where 1=1";
             if (xcuncode != null && !"".Equals(xcuncode))
             {
                 sql += " and area_duns='" + xcuncode + "'";
@@ -369,7 +369,7 @@ namespace zkhwClient.dao
         public DataTable checkXcgInfo(string time1, string time2, string xcuncode)
         {
             DataSet ds = new DataSet();
-            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when XueChangGui='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
+            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when XueChangGui='0' then '未完成' else '完成' end) as type from zkhw_tj_bgdc where 1=1";
             if (xcuncode != null && !"".Equals(xcuncode))
             {
                 sql += " and area_duns='" + xcuncode + "'";
@@ -389,7 +389,7 @@ namespace zkhwClient.dao
         public DataTable checkSgtzInfo(string time1, string time2, string xcuncode)
         {
             DataSet ds = new DataSet();
-            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when Shengaotizhong='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
+            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when Shengaotizhong='0' then '未完成' else '完成' end) as type from zkhw_tj_bgdc where 1=1";
             if (xcuncode != null && !"".Equals(xcuncode))
             {
                 sql += " and area_duns='" + xcuncode + "'";
@@ -409,7 +409,7 @@ namespace zkhwClient.dao
         public DataTable checkXdtInfo(string time1, string time2, string xcuncode)
         {
             DataSet ds = new DataSet();
-            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when XinDian='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
+            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when XinDian='0' then '未完成' else '完成' end) as type from zkhw_tj_bgdc where 1=1";
             if (xcuncode != null && !"".Equals(xcuncode))
             {
                 sql += " and area_duns='" + xcuncode + "'";
@@ -429,7 +429,7 @@ namespace zkhwClient.dao
         public DataTable checkXueyaInfo(string time1, string time2, string xcuncode)
         {
             DataSet ds = new DataSet();
-            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when XueYa='1' then '完成' else '未完成' end) as type from zkhw_tj_bgdc where 1=1";
+            string sql = "select healthchecktime,name,aichive_no,id_number,bar_code,(case when XueYa='0' then '未完成' else '完成' end) as type from zkhw_tj_bgdc where 1=1";
             if (xcuncode != null && !"".Equals(xcuncode))
             {
                 sql += " and area_duns='" + xcuncode + "'";

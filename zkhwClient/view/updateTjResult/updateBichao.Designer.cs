@@ -371,7 +371,6 @@
             this.textBox5.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.textBox5.Location = new System.Drawing.Point(100, 7);
             this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
             this.textBox5.Size = new System.Drawing.Size(660, 23);
             this.textBox5.TabIndex = 38;
             // 
@@ -403,7 +402,6 @@
             this.textBox6.Location = new System.Drawing.Point(100, 7);
             this.textBox6.Multiline = true;
             this.textBox6.Name = "textBox6";
-            this.textBox6.ReadOnly = true;
             this.textBox6.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox6.Size = new System.Drawing.Size(660, 65);
             this.textBox6.TabIndex = 38;

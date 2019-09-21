@@ -497,7 +497,7 @@ namespace zkhwClient
                             }
                             textBox8.Text = dt.Rows[0][2].ToString();
                             textBox3.Text = dt.Rows[0][3].ToString();
-                            pictureBox4.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
+                            pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
                             textBox5.Text = dt.Rows[0][5].ToString();
                         };
                         this.label41.Text = "读卡成功！";
@@ -511,7 +511,7 @@ namespace zkhwClient
                         }
                         inf.MoveTo(Application.StartupPath + "\\cardImg\\" + textBox1.Text + textBox8.Text + ".jpg");
 
-                        pictureBox4.ImageLocation = Application.StartupPath + "\\cardImg\\" + textBox1.Text + textBox8.Text + ".jpg";
+                        pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + textBox1.Text + textBox8.Text + ".jpg";
 
                         DataTable dt = grjddao.judgeRepeatBync(textBox1.Text, textBox8.Text);
                         if (dt.Rows.Count > 0)
@@ -529,7 +529,7 @@ namespace zkhwClient
                             }
                             textBox8.Text = dt.Rows[0][2].ToString();
                             textBox3.Text = dt.Rows[0][3].ToString();
-                            pictureBox4.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
+                            pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
                             richTextBox1.Text = dt.Rows[0][5].ToString();
                             tmp = dt.Rows[0][6].ToString();
                             if (tmp == "") tmp = "1";
@@ -554,7 +554,7 @@ namespace zkhwClient
                     {
                         File.Delete(pName);
                     }
-                    pictureBox4.ImageLocation = Application.StartupPath + "\\cardImg\\123.jpg";
+                    pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\123.jpg";
                 }
                 jkjcheckdao.updateShDevice(1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
             }

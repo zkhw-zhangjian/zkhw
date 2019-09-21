@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle73 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle74 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle75 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle76 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle77 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle78 = new System.Windows.Forms.DataGridViewCellStyle();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel11 = new System.Windows.Forms.Panel();
@@ -52,24 +52,14 @@
             this.textBox36 = new System.Windows.Forms.TextBox();
             this.radioButton47 = new System.Windows.Forms.RadioButton();
             this.radioButton48 = new System.Windows.Forms.RadioButton();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
             this.panel9 = new System.Windows.Forms.Panel();
             this.dataGridView6 = new System.Windows.Forms.DataGridView();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
             this.panel18 = new System.Windows.Forms.Panel();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.panel17 = new System.Windows.Forms.Panel();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.panel16 = new System.Windows.Forms.Panel();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel15 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel25 = new System.Windows.Forms.Panel();
@@ -244,9 +234,18 @@
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
             this.panel37 = new System.Windows.Forms.Panel();
-            this.button13 = new System.Windows.Forms.Button();
             this.panel38 = new System.Windows.Forms.Panel();
             this.panel39 = new System.Windows.Forms.Panel();
+            this.button14 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             this.panel27.SuspendLayout();
             this.panel26.SuspendLayout();
             this.panel19.SuspendLayout();
@@ -375,7 +374,7 @@
             this.panel26.Controls.Add(this.radpinkun1);
             this.panel26.Controls.Add(this.radpinkun0);
             this.panel26.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.panel26.Location = new System.Drawing.Point(1147, 274);
+            this.panel26.Location = new System.Drawing.Point(1147, 277);
             this.panel26.Name = "panel26";
             this.panel26.Size = new System.Drawing.Size(116, 32);
             this.panel26.TabIndex = 14;
@@ -417,7 +416,7 @@
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.button4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button4.Location = new System.Drawing.Point(1071, 46);
+            this.button4.Location = new System.Drawing.Point(1079, 1187);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(88, 31);
             this.button4.TabIndex = 28;
@@ -436,7 +435,7 @@
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.button5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button5.Location = new System.Drawing.Point(1180, 46);
+            this.button5.Location = new System.Drawing.Point(1188, 1186);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(88, 31);
             this.button5.TabIndex = 29;
@@ -452,9 +451,9 @@
             this.panel19.Controls.Add(this.radioButton47);
             this.panel19.Controls.Add(this.radioButton48);
             this.panel19.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.panel19.Location = new System.Drawing.Point(726, 756);
+            this.panel19.Location = new System.Drawing.Point(726, 811);
             this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(558, 83);
+            this.panel19.Size = new System.Drawing.Size(558, 111);
             this.panel19.TabIndex = 135;
             // 
             // textBox36
@@ -492,256 +491,104 @@
             this.radioButton48.Text = "1无";
             this.radioButton48.UseVisualStyleBackColor = true;
             // 
-            // button12
-            // 
-            this.button12.BackColor = System.Drawing.Color.White;
-            this.button12.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button12.FlatAppearance.BorderSize = 0;
-            this.button12.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button12.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button12.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button12.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button12.Location = new System.Drawing.Point(652, 810);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(21, 23);
-            this.button12.TabIndex = 134;
-            this.button12.Text = "-";
-            this.button12.UseVisualStyleBackColor = false;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
-            this.button12.Paint += new System.Windows.Forms.PaintEventHandler(this.button2_Paint);
-            // 
-            // button11
-            // 
-            this.button11.BackColor = System.Drawing.Color.White;
-            this.button11.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button11.FlatAppearance.BorderSize = 0;
-            this.button11.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button11.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button11.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button11.Location = new System.Drawing.Point(652, 760);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(21, 23);
-            this.button11.TabIndex = 133;
-            this.button11.Text = "+";
-            this.button11.UseVisualStyleBackColor = false;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
-            this.button11.Paint += new System.Windows.Forms.PaintEventHandler(this.button1_Paint);
-            // 
             // panel9
             // 
             this.panel9.Controls.Add(this.dataGridView6);
-            this.panel9.Location = new System.Drawing.Point(129, 758);
+            this.panel9.Location = new System.Drawing.Point(129, 813);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(520, 80);
+            this.panel9.Size = new System.Drawing.Size(520, 109);
             this.panel9.TabIndex = 132;
             // 
             // dataGridView6
             // 
             this.dataGridView6.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.dataGridView6.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView6.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle73.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle73.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle73.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle73.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle73.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle73.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView6.DefaultCellStyle = dataGridViewCellStyle73;
             this.dataGridView6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView6.Location = new System.Drawing.Point(0, 0);
             this.dataGridView6.Name = "dataGridView6";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView6.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle74.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle74.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle74.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle74.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle74.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle74.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle74.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView6.RowHeadersDefaultCellStyle = dataGridViewCellStyle74;
             this.dataGridView6.RowTemplate.Height = 23;
             this.dataGridView6.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView6.Size = new System.Drawing.Size(520, 80);
+            this.dataGridView6.Size = new System.Drawing.Size(520, 109);
             this.dataGridView6.TabIndex = 0;
-            // 
-            // button10
-            // 
-            this.button10.BackColor = System.Drawing.Color.White;
-            this.button10.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button10.FlatAppearance.BorderSize = 0;
-            this.button10.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button10.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button10.Location = new System.Drawing.Point(1261, 723);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(23, 23);
-            this.button10.TabIndex = 131;
-            this.button10.Text = "-";
-            this.button10.UseVisualStyleBackColor = false;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
-            this.button10.Paint += new System.Windows.Forms.PaintEventHandler(this.button2_Paint);
-            // 
-            // button9
-            // 
-            this.button9.BackColor = System.Drawing.Color.White;
-            this.button9.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button9.FlatAppearance.BorderSize = 0;
-            this.button9.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button9.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button9.Location = new System.Drawing.Point(1261, 672);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(23, 23);
-            this.button9.TabIndex = 130;
-            this.button9.Text = "+";
-            this.button9.UseVisualStyleBackColor = false;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            this.button9.Paint += new System.Windows.Forms.PaintEventHandler(this.button1_Paint);
             // 
             // panel18
             // 
             this.panel18.Controls.Add(this.dataGridView4);
-            this.panel18.Location = new System.Drawing.Point(1021, 671);
+            this.panel18.Location = new System.Drawing.Point(1021, 693);
             this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(234, 75);
+            this.panel18.Size = new System.Drawing.Size(234, 103);
             this.panel18.TabIndex = 129;
             // 
             // dataGridView4
             // 
             this.dataGridView4.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView4.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle75.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle75.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle75.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle75.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle75.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle75.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle75.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView4.DefaultCellStyle = dataGridViewCellStyle75;
             this.dataGridView4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView4.Location = new System.Drawing.Point(0, 0);
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.RowTemplate.Height = 23;
             this.dataGridView4.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView4.Size = new System.Drawing.Size(234, 75);
+            this.dataGridView4.Size = new System.Drawing.Size(234, 103);
             this.dataGridView4.TabIndex = 0;
-            // 
-            // button8
-            // 
-            this.button8.BackColor = System.Drawing.Color.White;
-            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button8.FlatAppearance.BorderSize = 0;
-            this.button8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button8.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button8.Location = new System.Drawing.Point(952, 724);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(21, 23);
-            this.button8.TabIndex = 128;
-            this.button8.Text = "-";
-            this.button8.UseVisualStyleBackColor = false;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            this.button8.Paint += new System.Windows.Forms.PaintEventHandler(this.button2_Paint);
-            // 
-            // button7
-            // 
-            this.button7.BackColor = System.Drawing.Color.White;
-            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button7.FlatAppearance.BorderSize = 0;
-            this.button7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button7.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button7.Location = new System.Drawing.Point(952, 672);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(21, 23);
-            this.button7.TabIndex = 127;
-            this.button7.Text = "+";
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            this.button7.Paint += new System.Windows.Forms.PaintEventHandler(this.button1_Paint);
             // 
             // panel17
             // 
             this.panel17.Controls.Add(this.dataGridView3);
-            this.panel17.Location = new System.Drawing.Point(726, 672);
+            this.panel17.Location = new System.Drawing.Point(726, 696);
             this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(220, 75);
+            this.panel17.Size = new System.Drawing.Size(220, 102);
             this.panel17.TabIndex = 126;
             // 
             // dataGridView3
             // 
             this.dataGridView3.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle76.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle76.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle76.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle76.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle76.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle76.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle76.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle76;
             this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView3.Location = new System.Drawing.Point(0, 0);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowTemplate.Height = 23;
             this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView3.Size = new System.Drawing.Size(220, 75);
+            this.dataGridView3.Size = new System.Drawing.Size(220, 102);
             this.dataGridView3.TabIndex = 0;
-            // 
-            // button6
-            // 
-            this.button6.BackColor = System.Drawing.Color.White;
-            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button6.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button6.Location = new System.Drawing.Point(652, 723);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(21, 23);
-            this.button6.TabIndex = 125;
-            this.button6.Text = "-";
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            this.button6.Paint += new System.Windows.Forms.PaintEventHandler(this.button2_Paint);
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.White;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button3.Location = new System.Drawing.Point(652, 670);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(21, 23);
-            this.button3.TabIndex = 124;
-            this.button3.Text = "+";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            this.button3.Paint += new System.Windows.Forms.PaintEventHandler(this.button1_Paint);
             // 
             // panel16
             // 
             this.panel16.Controls.Add(this.dataGridView2);
-            this.panel16.Location = new System.Drawing.Point(434, 671);
+            this.panel16.Location = new System.Drawing.Point(434, 693);
             this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(215, 75);
+            this.panel16.Size = new System.Drawing.Size(215, 103);
             this.panel16.TabIndex = 123;
             // 
             // dataGridView2
@@ -753,81 +600,43 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 23;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(215, 75);
+            this.dataGridView2.Size = new System.Drawing.Size(215, 103);
             this.dataGridView2.TabIndex = 0;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button2.Location = new System.Drawing.Point(354, 722);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(24, 23);
-            this.button2.TabIndex = 122;
-            this.button2.Text = "-";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            this.button2.Paint += new System.Windows.Forms.PaintEventHandler(this.button2_Paint);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button1.Location = new System.Drawing.Point(354, 669);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(24, 23);
-            this.button1.TabIndex = 121;
-            this.button1.Text = "+";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            this.button1.Paint += new System.Windows.Forms.PaintEventHandler(this.button1_Paint);
             // 
             // panel15
             // 
             this.panel15.Controls.Add(this.dataGridView1);
-            this.panel15.Location = new System.Drawing.Point(130, 670);
+            this.panel15.Location = new System.Drawing.Point(130, 694);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(220, 75);
+            this.panel15.Size = new System.Drawing.Size(220, 104);
             this.panel15.TabIndex = 120;
             // 
             // dataGridView1
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle77.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle77.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle77.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle77.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle77.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle77.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle77.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle77;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle78.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle78.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle78.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle78.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle78.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle78.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle78.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle78;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(220, 75);
+            this.dataGridView1.Size = new System.Drawing.Size(220, 104);
             this.dataGridView1.TabIndex = 0;
             // 
             // panel25
@@ -836,7 +645,7 @@
             this.panel25.Controls.Add(this.radioButton14);
             this.panel25.Controls.Add(this.radioButton15);
             this.panel25.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.panel25.Location = new System.Drawing.Point(779, 313);
+            this.panel25.Location = new System.Drawing.Point(779, 326);
             this.panel25.Name = "panel25";
             this.panel25.Size = new System.Drawing.Size(330, 36);
             this.panel25.TabIndex = 16;
@@ -891,7 +700,7 @@
             this.panel24.Controls.Add(this.radioButton88);
             this.panel24.Controls.Add(this.radioButton87);
             this.panel24.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.panel24.Location = new System.Drawing.Point(162, 1043);
+            this.panel24.Location = new System.Drawing.Point(162, 1129);
             this.panel24.Name = "panel24";
             this.panel24.Size = new System.Drawing.Size(1042, 34);
             this.panel24.TabIndex = 27;
@@ -957,7 +766,7 @@
             this.panel23.Controls.Add(this.radioButton83);
             this.panel23.Controls.Add(this.radioButton82);
             this.panel23.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.panel23.Location = new System.Drawing.Point(162, 1005);
+            this.panel23.Location = new System.Drawing.Point(162, 1091);
             this.panel23.Name = "panel23";
             this.panel23.Size = new System.Drawing.Size(1042, 34);
             this.panel23.TabIndex = 26;
@@ -1037,7 +846,7 @@
             this.panel22.Controls.Add(this.radioButton77);
             this.panel22.Controls.Add(this.radioButton76);
             this.panel22.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.panel22.Location = new System.Drawing.Point(162, 967);
+            this.panel22.Location = new System.Drawing.Point(162, 1053);
             this.panel22.Name = "panel22";
             this.panel22.Size = new System.Drawing.Size(1042, 34);
             this.panel22.TabIndex = 25;
@@ -1129,7 +938,7 @@
             this.panel21.Controls.Add(this.radioButton71);
             this.panel21.Controls.Add(this.radioButton70);
             this.panel21.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.panel21.Location = new System.Drawing.Point(162, 929);
+            this.panel21.Location = new System.Drawing.Point(162, 1015);
             this.panel21.Name = "panel21";
             this.panel21.Size = new System.Drawing.Size(1042, 34);
             this.panel21.TabIndex = 24;
@@ -1218,7 +1027,7 @@
             this.richTextBox2.BackColor = System.Drawing.Color.White;
             this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.richTextBox2.Location = new System.Drawing.Point(9, 916);
+            this.richTextBox2.Location = new System.Drawing.Point(9, 1002);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
             this.richTextBox2.Size = new System.Drawing.Size(32, 148);
@@ -1238,7 +1047,7 @@
             this.panel20.Controls.Add(this.checkBox27);
             this.panel20.Controls.Add(this.checkBox26);
             this.panel20.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.panel20.Location = new System.Drawing.Point(129, 844);
+            this.panel20.Location = new System.Drawing.Point(129, 929);
             this.panel20.Name = "panel20";
             this.panel20.Size = new System.Drawing.Size(1156, 33);
             this.panel20.TabIndex = 108;
@@ -1372,7 +1181,8 @@
             this.panel14.Controls.Add(this.checkBox15);
             this.panel14.Controls.Add(this.checkBox14);
             this.panel14.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.panel14.Location = new System.Drawing.Point(130, 625);
+            this.panel14.ForeColor = System.Drawing.Color.White;
+            this.panel14.Location = new System.Drawing.Point(130, 645);
             this.panel14.Name = "panel14";
             this.panel14.Size = new System.Drawing.Size(1152, 34);
             this.panel14.TabIndex = 22;
@@ -1434,7 +1244,7 @@
             this.panel13.Controls.Add(this.checkBox10);
             this.panel13.Controls.Add(this.checkBox9);
             this.panel13.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.panel13.Location = new System.Drawing.Point(131, 588);
+            this.panel13.Location = new System.Drawing.Point(131, 608);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(1169, 34);
             this.panel13.TabIndex = 21;
@@ -1521,7 +1331,7 @@
             this.panel12.Controls.Add(this.checkBox2);
             this.panel12.Controls.Add(this.checkBox1);
             this.panel12.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.panel12.Location = new System.Drawing.Point(132, 512);
+            this.panel12.Location = new System.Drawing.Point(132, 532);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(1168, 65);
             this.panel12.TabIndex = 20;
@@ -1640,7 +1450,7 @@
             this.panel8.Controls.Add(this.radioButton43);
             this.panel8.Controls.Add(this.radioButton42);
             this.panel8.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.panel8.Location = new System.Drawing.Point(132, 469);
+            this.panel8.Location = new System.Drawing.Point(132, 485);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(980, 34);
             this.panel8.TabIndex = 19;
@@ -1723,7 +1533,7 @@
             this.panel7.Controls.Add(this.radioButton34);
             this.panel7.Controls.Add(this.radioButton33);
             this.panel7.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.panel7.Location = new System.Drawing.Point(132, 398);
+            this.panel7.Location = new System.Drawing.Point(132, 414);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(1168, 66);
             this.panel7.TabIndex = 18;
@@ -1855,7 +1665,7 @@
             this.panel6.Controls.Add(this.radioButton23);
             this.panel6.Controls.Add(this.radioButton22);
             this.panel6.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.panel6.Location = new System.Drawing.Point(132, 354);
+            this.panel6.Location = new System.Drawing.Point(132, 369);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(1168, 33);
             this.panel6.TabIndex = 17;
@@ -1997,7 +1807,7 @@
             this.panel5.Controls.Add(this.radioButton9);
             this.panel5.Controls.Add(this.radioButton8);
             this.panel5.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.panel5.Location = new System.Drawing.Point(132, 314);
+            this.panel5.Location = new System.Drawing.Point(132, 327);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(537, 36);
             this.panel5.TabIndex = 15;
@@ -2070,7 +1880,7 @@
             this.panel4.Controls.Add(this.radioButton7);
             this.panel4.Controls.Add(this.radioButton6);
             this.panel4.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.panel4.Location = new System.Drawing.Point(519, 272);
+            this.panel4.Location = new System.Drawing.Point(519, 280);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(483, 32);
             this.panel4.TabIndex = 13;
@@ -2122,7 +1932,7 @@
             this.panel2.Controls.Add(this.radioButton5);
             this.panel2.Controls.Add(this.radioButton4);
             this.panel2.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.panel2.Location = new System.Drawing.Point(135, 270);
+            this.panel2.Location = new System.Drawing.Point(135, 280);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(316, 32);
             this.panel2.TabIndex = 12;
@@ -2157,7 +1967,7 @@
             // textBox20
             // 
             this.textBox20.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.textBox20.Location = new System.Drawing.Point(771, 226);
+            this.textBox20.Location = new System.Drawing.Point(771, 236);
             this.textBox20.Name = "textBox20";
             this.textBox20.Size = new System.Drawing.Size(511, 29);
             this.textBox20.TabIndex = 11;
@@ -2165,7 +1975,7 @@
             // textBox18
             // 
             this.textBox18.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.textBox18.Location = new System.Drawing.Point(525, 226);
+            this.textBox18.Location = new System.Drawing.Point(525, 236);
             this.textBox18.Name = "textBox18";
             this.textBox18.Size = new System.Drawing.Size(131, 29);
             this.textBox18.TabIndex = 10;
@@ -2173,7 +1983,7 @@
             // textBox16
             // 
             this.textBox16.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.textBox16.Location = new System.Drawing.Point(135, 226);
+            this.textBox16.Location = new System.Drawing.Point(135, 236);
             this.textBox16.Name = "textBox16";
             this.textBox16.Size = new System.Drawing.Size(282, 29);
             this.textBox16.TabIndex = 9;
@@ -2212,7 +2022,7 @@
             this.panel10.Controls.Add(this.radioButton19);
             this.panel10.Controls.Add(this.radioButton20);
             this.panel10.Controls.Add(this.radioButton21);
-            this.panel10.Location = new System.Drawing.Point(162, 891);
+            this.panel10.Location = new System.Drawing.Point(162, 977);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(796, 34);
             this.panel10.TabIndex = 23;
@@ -2433,7 +2243,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.Location = new System.Drawing.Point(51, 230);
+            this.label9.Location = new System.Drawing.Point(51, 240);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(74, 22);
             this.label9.TabIndex = 154;
@@ -2443,7 +2253,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.label10.Location = new System.Drawing.Point(425, 230);
+            this.label10.Location = new System.Drawing.Point(425, 240);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(90, 22);
             this.label10.TabIndex = 155;
@@ -2453,7 +2263,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.label11.Location = new System.Drawing.Point(673, 230);
+            this.label11.Location = new System.Drawing.Point(673, 240);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(90, 22);
             this.label11.TabIndex = 156;
@@ -2462,7 +2272,7 @@
             // panel30
             // 
             this.panel30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.panel30.Location = new System.Drawing.Point(9, 258);
+            this.panel30.Location = new System.Drawing.Point(9, 268);
             this.panel30.Name = "panel30";
             this.panel30.Size = new System.Drawing.Size(1300, 1);
             this.panel30.TabIndex = 157;
@@ -2471,7 +2281,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label12.Location = new System.Drawing.Point(51, 275);
+            this.label12.Location = new System.Drawing.Point(51, 285);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(74, 22);
             this.label12.TabIndex = 158;
@@ -2481,7 +2291,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label13.Location = new System.Drawing.Point(473, 274);
+            this.label13.Location = new System.Drawing.Point(473, 282);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(42, 22);
             this.label13.TabIndex = 159;
@@ -2490,7 +2300,7 @@
             // panel31
             // 
             this.panel31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.panel31.Location = new System.Drawing.Point(9, 307);
+            this.panel31.Location = new System.Drawing.Point(9, 317);
             this.panel31.Name = "panel31";
             this.panel31.Size = new System.Drawing.Size(1300, 1);
             this.panel31.TabIndex = 160;
@@ -2507,7 +2317,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label14.Location = new System.Drawing.Point(83, 324);
+            this.label14.Location = new System.Drawing.Point(83, 334);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(42, 22);
             this.label14.TabIndex = 161;
@@ -2517,7 +2327,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label15.Location = new System.Drawing.Point(713, 322);
+            this.label15.Location = new System.Drawing.Point(713, 335);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(47, 22);
             this.label15.TabIndex = 162;
@@ -2527,7 +2337,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label16.Location = new System.Drawing.Point(51, 358);
+            this.label16.Location = new System.Drawing.Point(51, 373);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(74, 22);
             this.label16.TabIndex = 163;
@@ -2536,7 +2346,7 @@
             // panel32
             // 
             this.panel32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.panel32.Location = new System.Drawing.Point(9, 394);
+            this.panel32.Location = new System.Drawing.Point(9, 410);
             this.panel32.Name = "panel32";
             this.panel32.Size = new System.Drawing.Size(1300, 1);
             this.panel32.TabIndex = 164;
@@ -2545,7 +2355,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label17.Location = new System.Drawing.Point(83, 418);
+            this.label17.Location = new System.Drawing.Point(83, 434);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(42, 22);
             this.label17.TabIndex = 165;
@@ -2554,7 +2364,7 @@
             // panel33
             // 
             this.panel33.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.panel33.Location = new System.Drawing.Point(9, 465);
+            this.panel33.Location = new System.Drawing.Point(9, 481);
             this.panel33.Name = "panel33";
             this.panel33.Size = new System.Drawing.Size(1300, 1);
             this.panel33.TabIndex = 166;
@@ -2563,7 +2373,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label18.Location = new System.Drawing.Point(51, 471);
+            this.label18.Location = new System.Drawing.Point(51, 487);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(74, 22);
             this.label18.TabIndex = 167;
@@ -2573,7 +2383,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label19.Location = new System.Drawing.Point(51, 523);
+            this.label19.Location = new System.Drawing.Point(51, 543);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(74, 22);
             this.label19.TabIndex = 168;
@@ -2583,7 +2393,7 @@
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label20.Location = new System.Drawing.Point(51, 546);
+            this.label20.Location = new System.Drawing.Point(51, 566);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(74, 22);
             this.label20.TabIndex = 169;
@@ -2592,7 +2402,7 @@
             // panel34
             // 
             this.panel34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.panel34.Location = new System.Drawing.Point(9, 506);
+            this.panel34.Location = new System.Drawing.Point(9, 526);
             this.panel34.Name = "panel34";
             this.panel34.Size = new System.Drawing.Size(1300, 1);
             this.panel34.TabIndex = 170;
@@ -2600,7 +2410,7 @@
             // panel35
             // 
             this.panel35.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.panel35.Location = new System.Drawing.Point(9, 582);
+            this.panel35.Location = new System.Drawing.Point(9, 602);
             this.panel35.Name = "panel35";
             this.panel35.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.panel35.Size = new System.Drawing.Size(1300, 1);
@@ -2610,7 +2420,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label21.Location = new System.Drawing.Point(1067, 280);
+            this.label21.Location = new System.Drawing.Point(1067, 283);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(74, 22);
             this.label21.TabIndex = 172;
@@ -2630,7 +2440,7 @@
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label23.Location = new System.Drawing.Point(35, 593);
+            this.label23.Location = new System.Drawing.Point(35, 613);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(90, 22);
             this.label23.TabIndex = 174;
@@ -2640,7 +2450,7 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label24.Location = new System.Drawing.Point(56, 629);
+            this.label24.Location = new System.Drawing.Point(56, 649);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(68, 22);
             this.label24.TabIndex = 175;
@@ -2650,7 +2460,7 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label25.Location = new System.Drawing.Point(9, 675);
+            this.label25.Location = new System.Drawing.Point(9, 709);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(26, 22);
             this.label25.TabIndex = 176;
@@ -2660,7 +2470,7 @@
             // 
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label26.Location = new System.Drawing.Point(9, 698);
+            this.label26.Location = new System.Drawing.Point(9, 732);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(26, 22);
             this.label26.TabIndex = 177;
@@ -2670,7 +2480,7 @@
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label27.Location = new System.Drawing.Point(9, 720);
+            this.label27.Location = new System.Drawing.Point(9, 754);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(26, 22);
             this.label27.TabIndex = 178;
@@ -2680,7 +2490,7 @@
             // 
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label28.Location = new System.Drawing.Point(62, 698);
+            this.label28.Location = new System.Drawing.Point(62, 729);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(62, 22);
             this.label28.TabIndex = 179;
@@ -2690,7 +2500,7 @@
             // 
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label29.Location = new System.Drawing.Point(388, 694);
+            this.label29.Location = new System.Drawing.Point(388, 729);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(42, 22);
             this.label29.TabIndex = 180;
@@ -2700,7 +2510,7 @@
             // 
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label30.Location = new System.Drawing.Point(679, 695);
+            this.label30.Location = new System.Drawing.Point(679, 729);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(42, 22);
             this.label30.TabIndex = 181;
@@ -2710,7 +2520,7 @@
             // 
             this.label31.AutoSize = true;
             this.label31.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label31.Location = new System.Drawing.Point(973, 698);
+            this.label31.Location = new System.Drawing.Point(973, 729);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(42, 22);
             this.label31.TabIndex = 182;
@@ -2720,7 +2530,7 @@
             // 
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label32.Location = new System.Drawing.Point(56, 795);
+            this.label32.Location = new System.Drawing.Point(56, 831);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(68, 22);
             this.label32.TabIndex = 183;
@@ -2730,7 +2540,7 @@
             // 
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label33.Location = new System.Drawing.Point(685, 752);
+            this.label33.Location = new System.Drawing.Point(688, 822);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(26, 22);
             this.label33.TabIndex = 184;
@@ -2740,7 +2550,7 @@
             // 
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label34.Location = new System.Drawing.Point(685, 773);
+            this.label34.Location = new System.Drawing.Point(688, 841);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(26, 22);
             this.label34.TabIndex = 185;
@@ -2750,7 +2560,7 @@
             // 
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label35.Location = new System.Drawing.Point(685, 796);
+            this.label35.Location = new System.Drawing.Point(688, 864);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(26, 22);
             this.label35.TabIndex = 186;
@@ -2760,7 +2570,7 @@
             // 
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label36.Location = new System.Drawing.Point(685, 817);
+            this.label36.Location = new System.Drawing.Point(688, 885);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(26, 22);
             this.label36.TabIndex = 187;
@@ -2770,7 +2580,7 @@
             // 
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label37.Location = new System.Drawing.Point(50, 848);
+            this.label37.Location = new System.Drawing.Point(50, 933);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(74, 22);
             this.label37.TabIndex = 188;
@@ -2779,7 +2589,7 @@
             // panel36
             // 
             this.panel36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.panel36.Location = new System.Drawing.Point(9, 883);
+            this.panel36.Location = new System.Drawing.Point(9, 969);
             this.panel36.Name = "panel36";
             this.panel36.Size = new System.Drawing.Size(1300, 1);
             this.panel36.TabIndex = 189;
@@ -2788,7 +2598,7 @@
             // 
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label38.Location = new System.Drawing.Point(52, 896);
+            this.label38.Location = new System.Drawing.Point(52, 982);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(106, 22);
             this.label38.TabIndex = 190;
@@ -2798,7 +2608,7 @@
             // 
             this.label39.AutoSize = true;
             this.label39.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label39.Location = new System.Drawing.Point(52, 934);
+            this.label39.Location = new System.Drawing.Point(52, 1020);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(74, 22);
             this.label39.TabIndex = 191;
@@ -2808,7 +2618,7 @@
             // 
             this.label40.AutoSize = true;
             this.label40.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label40.Location = new System.Drawing.Point(52, 970);
+            this.label40.Location = new System.Drawing.Point(52, 1056);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(42, 22);
             this.label40.TabIndex = 192;
@@ -2818,7 +2628,7 @@
             // 
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label41.Location = new System.Drawing.Point(52, 1004);
+            this.label41.Location = new System.Drawing.Point(52, 1090);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(42, 22);
             this.label41.TabIndex = 193;
@@ -2828,7 +2638,7 @@
             // 
             this.label42.AutoSize = true;
             this.label42.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label42.Location = new System.Drawing.Point(52, 1042);
+            this.label42.Location = new System.Drawing.Point(52, 1128);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(58, 22);
             this.label42.TabIndex = 194;
@@ -2837,25 +2647,15 @@
             // panel37
             // 
             this.panel37.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.panel37.Location = new System.Drawing.Point(9, 1088);
+            this.panel37.Location = new System.Drawing.Point(9, 1174);
             this.panel37.Name = "panel37";
             this.panel37.Size = new System.Drawing.Size(1300, 1);
             this.panel37.TabIndex = 195;
             // 
-            // button13
-            // 
-            this.button13.Location = new System.Drawing.Point(1209, 1103);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(75, 23);
-            this.button13.TabIndex = 196;
-            this.button13.Text = "button13";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Visible = false;
-            // 
             // panel38
             // 
             this.panel38.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.panel38.Location = new System.Drawing.Point(9, 750);
+            this.panel38.Location = new System.Drawing.Point(9, 803);
             this.panel38.Name = "panel38";
             this.panel38.Size = new System.Drawing.Size(1300, 1);
             this.panel38.TabIndex = 197;
@@ -2863,10 +2663,150 @@
             // panel39
             // 
             this.panel39.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.panel39.Location = new System.Drawing.Point(9, 664);
+            this.panel39.Location = new System.Drawing.Point(9, 684);
             this.panel39.Name = "panel39";
             this.panel39.Size = new System.Drawing.Size(1300, 1);
             this.panel39.TabIndex = 198;
+            // 
+            // button14
+            // 
+            this.button14.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(95)))), ((int)(((byte)(154)))));
+            this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button14.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button14.ForeColor = System.Drawing.Color.Black;
+            this.button14.Location = new System.Drawing.Point(353, 696);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(24, 23);
+            this.button14.TabIndex = 8;
+            this.button14.Text = "+";
+            this.button14.UseVisualStyleBackColor = false;
+            this.button14.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button1
+            // 
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(95)))), ((int)(((byte)(154)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Location = new System.Drawing.Point(652, 696);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(24, 23);
+            this.button1.TabIndex = 199;
+            this.button1.Text = "+";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button3
+            // 
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(95)))), ((int)(((byte)(154)))));
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button3.ForeColor = System.Drawing.Color.Black;
+            this.button3.Location = new System.Drawing.Point(948, 696);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(24, 23);
+            this.button3.TabIndex = 200;
+            this.button3.Text = "+";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button7
+            // 
+            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(95)))), ((int)(((byte)(154)))));
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button7.ForeColor = System.Drawing.Color.Black;
+            this.button7.Location = new System.Drawing.Point(1258, 696);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(24, 23);
+            this.button7.TabIndex = 201;
+            this.button7.Text = "+";
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button9
+            // 
+            this.button9.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(95)))), ((int)(((byte)(154)))));
+            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button9.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button9.ForeColor = System.Drawing.Color.Black;
+            this.button9.Location = new System.Drawing.Point(652, 819);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(24, 23);
+            this.button9.TabIndex = 202;
+            this.button9.Text = "+";
+            this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button11
+            // 
+            this.button11.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(95)))), ((int)(((byte)(154)))));
+            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button11.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button11.ForeColor = System.Drawing.Color.Black;
+            this.button11.Location = new System.Drawing.Point(353, 773);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(24, 23);
+            this.button11.TabIndex = 203;
+            this.button11.Text = "-";
+            this.button11.UseVisualStyleBackColor = false;
+            this.button11.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button2
+            // 
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(95)))), ((int)(((byte)(154)))));
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.ForeColor = System.Drawing.Color.Black;
+            this.button2.Location = new System.Drawing.Point(652, 773);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(24, 23);
+            this.button2.TabIndex = 204;
+            this.button2.Text = "-";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button6
+            // 
+            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(95)))), ((int)(((byte)(154)))));
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button6.ForeColor = System.Drawing.Color.Black;
+            this.button6.Location = new System.Drawing.Point(652, 896);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(24, 23);
+            this.button6.TabIndex = 205;
+            this.button6.Text = "-";
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // button12
+            // 
+            this.button12.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(95)))), ((int)(((byte)(154)))));
+            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button12.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button12.ForeColor = System.Drawing.Color.Black;
+            this.button12.Location = new System.Drawing.Point(948, 773);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(24, 23);
+            this.button12.TabIndex = 206;
+            this.button12.Text = "-";
+            this.button12.UseVisualStyleBackColor = false;
+            this.button12.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button8
+            // 
+            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(95)))), ((int)(((byte)(154)))));
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button8.ForeColor = System.Drawing.Color.Black;
+            this.button8.Location = new System.Drawing.Point(1258, 773);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(24, 23);
+            this.button8.TabIndex = 207;
+            this.button8.Text = "-";
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button10_Click);
             // 
             // aUPersonalBasicInfoo
             // 
@@ -2875,10 +2815,21 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1329, 744);
+            this.ClientSize = new System.Drawing.Size(1329, 749);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button12);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button11);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button14);
             this.Controls.Add(this.panel39);
             this.Controls.Add(this.panel38);
-            this.Controls.Add(this.button13);
             this.Controls.Add(this.panel37);
             this.Controls.Add(this.label42);
             this.Controls.Add(this.label41);
@@ -2942,31 +2893,19 @@
             this.Controls.Add(this.panel10);
             this.Controls.Add(this.panel27);
             this.Controls.Add(this.panel26);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.panel19);
-            this.Controls.Add(this.button12);
             this.Controls.Add(this.textBox12);
-            this.Controls.Add(this.button11);
             this.Controls.Add(this.panel9);
             this.Controls.Add(this.textBox14);
-            this.Controls.Add(this.button10);
-            this.Controls.Add(this.button9);
             this.Controls.Add(this.textBox16);
             this.Controls.Add(this.panel18);
-            this.Controls.Add(this.button8);
             this.Controls.Add(this.textBox18);
-            this.Controls.Add(this.button7);
             this.Controls.Add(this.panel17);
             this.Controls.Add(this.textBox20);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel16);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.panel4);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel15);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel25);
@@ -3066,24 +3005,14 @@
         public System.Windows.Forms.TextBox textBox36;
         public System.Windows.Forms.RadioButton radioButton47;
         public System.Windows.Forms.RadioButton radioButton48;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.DataGridView dataGridView6;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Panel panel18;
         private System.Windows.Forms.DataGridView dataGridView4;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Panel panel17;
         private System.Windows.Forms.DataGridView dataGridView3;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Panel panel16;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.DataGridView dataGridView1;
         public System.Windows.Forms.Panel panel25;
@@ -3258,8 +3187,17 @@
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.Panel panel37;
-        private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Panel panel38;
         private System.Windows.Forms.Panel panel39;
+        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button8;
     }
 }

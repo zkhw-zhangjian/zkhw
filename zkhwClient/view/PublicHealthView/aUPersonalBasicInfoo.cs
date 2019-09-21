@@ -30,9 +30,9 @@ namespace zkhwClient.view.PublicHealthView
         {
             InitializeComponent();
 
-            xMy = this.Width;
-            yMy = this.Height;
-            Common.setTag(this);
+            //xMy = this.Width;
+            //yMy = this.Height;
+            //Common.setTag(this);
         }
         private void aUHypertensionPatientServices_Load(object sender, EventArgs e)
         {
@@ -821,29 +821,29 @@ namespace zkhwClient.view.PublicHealthView
 
         private void button1_Paint(object sender, PaintEventArgs e)
         {
-            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 5, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
-            base.OnPaint(e);
+            //ControlCircular.Draw(e.ClipRectangle, e.Graphics, 5, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
+            //base.OnPaint(e);
 
-            Graphics g = e.Graphics;
-            g.DrawString("+", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Bold), new SolidBrush(Color.White), new PointF(1, 1));
+            //Graphics g = e.Graphics;
+            //g.DrawString("+", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Bold), new SolidBrush(Color.White), new PointF(1, 1));
 
         }
 
         private void button2_Paint(object sender, PaintEventArgs e)
         {
-            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 5, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
-            base.OnPaint(e);
+            //ControlCircular.Draw(e.ClipRectangle, e.Graphics, 5, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
+            //base.OnPaint(e);
 
-            Graphics g = e.Graphics;
-            g.DrawString("-", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Bold), new SolidBrush(Color.White), new PointF(2, 1));
+            //Graphics g = e.Graphics;
+            //g.DrawString("-", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Bold), new SolidBrush(Color.White), new PointF(2, 1));
 
         }
 
         private void aUPersonalBasicInfoo_Resize(object sender, EventArgs e)
         {
-            float newx = (this.Width) / xMy;
-            float newy = (this.Height) / yMy;
-            Common.setControls(newx, newy, this);
+            //float newx = (this.Width) / xMy;
+            //float newy = (this.Height) / yMy;
+            //Common.setControls(newx, newy, this);
         }
     }
 }

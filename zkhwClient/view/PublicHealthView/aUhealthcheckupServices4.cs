@@ -729,6 +729,10 @@ namespace zkhwClient.view.PublicHealthView
                     }
                 }
             }
+            else
+            {
+                MessageBox.Show("出错！！！");
+            }
         }
         //将用药记录 goodsList 绑定到页面 dataGridView1展示出来
         private void goodsListBind()
