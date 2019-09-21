@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Windows.Forms;
@@ -75,6 +76,14 @@ namespace zkhwClient
         }
         private void frmLoginn_Load(object sender, EventArgs e)
         {
+            if (IsInternetAvailable())
+            {
+                this.button2.BackColor = Color.FromArgb(77, 177, 81);
+            }
+            else
+            {
+                this.button2.BackColor = Color.FromArgb(170, 171, 171);
+            }
             DataTable dd = us.listUserForLogin();
             this.comboBox1.DataSource = dd;//绑定数据源
             this.comboBox1.DisplayMember = "displayname";//显示给用户的数据集表项
@@ -189,18 +198,7 @@ namespace zkhwClient
         {
             LoginSys();
         }
-        private bool IsInternetAvailable()
-        {
-            try
-            {
-                Dns.GetHostEntry("www.baidu.com"); //using System.Net;
-                return true;
-            }
-            catch (SocketException ex)
-            {
-                return false;
-            }
-        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             if (IsInternetAvailable())
@@ -230,6 +228,24 @@ namespace zkhwClient
             float newx = (this.Width) / xMy;
             float newy = (this.Height) / yMy;
             Common.setControls(newx, newy, this);
+        }
+
+        //判断是否连接 外网
+        private bool IsInternetAvailable()
+        {
+            try
+            {
+                Ping ping = new Ping();
+                PingReply pr = ping.Send("baidu.com");
+                if (pr.Status == IPStatus.Success)
+                    return true;
+                else
+                    return false;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
