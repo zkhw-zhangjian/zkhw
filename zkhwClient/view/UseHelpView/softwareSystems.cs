@@ -52,7 +52,7 @@ namespace zkhwClient.view.UseHelpView
             {
                 OpenPdf(Application.StartupPath + "\\pdf\\生化_雷杜_Chemray420.pdf");
             }
-            else
+            else if (sxa.Length == 2 && "SH_YNH_001".Equals(sxa[1]))
             {
                 OpenPdf(Application.StartupPath + "\\pdf\\生化_英诺华_DS-301.pdf");
             }
@@ -64,7 +64,7 @@ namespace zkhwClient.view.UseHelpView
             {
                 OpenPdf(Application.StartupPath + "\\pdf\\血常规_雷杜_RT-7300.pdf");
             }
-            else
+            else if (sxa.Length == 2 && "XCG_YNH_001".Equals(sxa[1]))
             {
                 OpenPdf(Application.StartupPath + "\\pdf\\血常规_英诺华_HB-7021.pdf");
             }

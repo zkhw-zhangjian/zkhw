@@ -173,6 +173,7 @@ namespace zkhwClient.view.PublicHealthView
                             {
                                 ck.Checked = true;
                                 if ("23456".IndexOf(ck.Tag.ToString()) > -1) {
+                                    this.checkBox1.Checked = false;
                                     this.textBox37.BackColor = Color.Salmon;
                                 }
                             }
@@ -192,6 +193,7 @@ namespace zkhwClient.view.PublicHealthView
                                 ck.Checked = true;
                                 if ("23456".IndexOf(ck.Tag.ToString()) > -1)
                                 {
+                                    this.checkBox7.Checked = false;
                                     this.textBox39.BackColor = Color.Salmon;
                                 }
                             }
@@ -211,6 +213,7 @@ namespace zkhwClient.view.PublicHealthView
                                 ck.Checked = true;
                                 if ("234567".IndexOf(ck.Tag.ToString()) > -1)
                                 {
+                                    this.checkBox13.Checked = false;
                                     this.textBox40.BackColor = Color.Salmon;
                                 }
                             }
@@ -230,6 +233,7 @@ namespace zkhwClient.view.PublicHealthView
                                 ck.Checked = true;
                                 if ("234".IndexOf(ck.Tag.ToString()) > -1)
                                 {
+                                    this.checkBox20.Checked = false;
                                     this.textBox43.BackColor = Color.Salmon;
                                 }
                             }
@@ -249,6 +253,7 @@ namespace zkhwClient.view.PublicHealthView
                                 ck.Checked = true;
                                 if ("2345".IndexOf(ck.Tag.ToString()) > -1)
                                 {
+                                    this.checkBox24.Checked = false;
                                     this.textBox45.BackColor = Color.Salmon;
                                 }
                             }
