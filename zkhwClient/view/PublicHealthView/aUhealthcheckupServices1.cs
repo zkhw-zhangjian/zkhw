@@ -1799,5 +1799,31 @@ and (disease_type='2' or disease_type='3' or disease_type='8' or disease_type='9
             g.DrawString("关闭", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 5));
         }
 
+        private void radioButton20_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radioButton20.Checked==true)
+            {
+                textBox76.Enabled = true;
+            }
+            else
+            {
+                textBox76.Enabled = false;
+                textBox76.Text = "";
+            }
+        }
+         
+
+        private void checkBox30_CheckStateChanged(object sender, EventArgs e)
+        {
+            if(checkBox30.Checked==true)
+            {
+                textBox117.Enabled = true;
+            }
+            else
+            {
+                textBox117.Enabled = false;
+                textBox117.Text = "";
+            }
+        }
     }
 }

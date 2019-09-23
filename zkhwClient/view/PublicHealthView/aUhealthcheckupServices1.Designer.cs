@@ -1051,6 +1051,7 @@
             // 
             // textBox117
             // 
+            this.textBox117.Enabled = false;
             this.textBox117.Font = new System.Drawing.Font("宋体", 14F);
             this.textBox117.Location = new System.Drawing.Point(429, 0);
             this.textBox117.Name = "textBox117";
@@ -1068,6 +1069,7 @@
             this.checkBox30.Tag = "5";
             this.checkBox30.Text = "5其他";
             this.checkBox30.UseVisualStyleBackColor = true;
+            this.checkBox30.CheckStateChanged += new System.EventHandler(this.checkBox30_CheckStateChanged);
             // 
             // checkBox29
             // 
@@ -1247,6 +1249,7 @@
             // 
             // textBox76
             // 
+            this.textBox76.Enabled = false;
             this.textBox76.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.textBox76.Location = new System.Drawing.Point(318, 0);
             this.textBox76.Name = "textBox76";
@@ -1279,6 +1282,7 @@
             this.radioButton20.Tag = "2";
             this.radioButton20.Text = "2已戒酒,戒酒年龄:";
             this.radioButton20.UseVisualStyleBackColor = true;
+            this.radioButton20.CheckedChanged += new System.EventHandler(this.radioButton20_CheckedChanged);
             // 
             // textBox73
             // 
@@ -2781,7 +2785,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 139);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1298, 108);
+            this.groupBox3.Size = new System.Drawing.Size(1274, 108);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
