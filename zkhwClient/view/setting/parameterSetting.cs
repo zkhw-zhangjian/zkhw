@@ -106,7 +106,7 @@ namespace zkhwClient.view.setting
             this.textBox8.Text = @str + "/bcImg/";
 
             string[] a = shxqAgreement.Split(',');
-            if(a.Length<=2)
+            if(a.Length<2)
             { 
                 return;
             }
@@ -125,7 +125,7 @@ namespace zkhwClient.view.setting
             {
                 DataRowView dv = comboBox3.Items[i] as DataRowView;
                 string sh = dv.Row["DICTCODE"].ToString();
-                if (sh == a[0].ToString().Trim())
+                if (sh == a[1].ToString().Trim())
                 {
                     comboBox3.SelectedIndex = i;
                     break;

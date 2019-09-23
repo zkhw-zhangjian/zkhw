@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -124,6 +124,9 @@
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -220,14 +223,14 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView1.ColumnHeadersHeight = 30;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -235,14 +238,14 @@
             this.Column3,
             this.Column4,
             this.Column5});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
@@ -684,6 +687,9 @@
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.Color.White;
+            this.panel9.Controls.Add(this.label47);
+            this.panel9.Controls.Add(this.label46);
+            this.panel9.Controls.Add(this.label44);
             this.panel9.Controls.Add(this.label54);
             this.panel9.Controls.Add(this.label53);
             this.panel9.Controls.Add(this.label52);
@@ -729,7 +735,7 @@
             this.label54.AutoSize = true;
             this.label54.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.label54.Font = new System.Drawing.Font("宋体", 10.5F);
-            this.label54.Location = new System.Drawing.Point(527, 337);
+            this.label54.Location = new System.Drawing.Point(527, 348);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(21, 14);
             this.label54.TabIndex = 68;
@@ -740,7 +746,7 @@
             // 
             this.label53.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(177)))), ((int)(((byte)(81)))));
             this.label53.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label53.Location = new System.Drawing.Point(440, 333);
+            this.label53.Location = new System.Drawing.Point(440, 344);
             this.label53.Margin = new System.Windows.Forms.Padding(0);
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(23, 23);
@@ -753,7 +759,7 @@
             // 
             this.label52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(177)))), ((int)(((byte)(81)))));
             this.label52.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label52.Location = new System.Drawing.Point(500, 333);
+            this.label52.Location = new System.Drawing.Point(500, 344);
             this.label52.Margin = new System.Windows.Forms.Padding(0);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(23, 23);
@@ -767,7 +773,7 @@
             this.txtNum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.txtNum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtNum.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.txtNum.Location = new System.Drawing.Point(463, 333);
+            this.txtNum.Location = new System.Drawing.Point(463, 344);
             this.txtNum.Margin = new System.Windows.Forms.Padding(0);
             this.txtNum.Name = "txtNum";
             this.txtNum.Size = new System.Drawing.Size(37, 23);
@@ -781,7 +787,7 @@
             this.label45.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.label45.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.label45.ForeColor = System.Drawing.Color.Red;
-            this.label45.Location = new System.Drawing.Point(554, 480);
+            this.label45.Location = new System.Drawing.Point(554, 489);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(44, 17);
             this.label45.TabIndex = 64;
@@ -792,7 +798,7 @@
             // 
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.label41.Location = new System.Drawing.Point(295, 480);
+            this.label41.Location = new System.Drawing.Point(295, 489);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(0, 17);
             this.label41.TabIndex = 63;
@@ -801,7 +807,7 @@
             // 
             this.label42.AutoSize = true;
             this.label42.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.label42.Location = new System.Drawing.Point(37, 481);
+            this.label42.Location = new System.Drawing.Point(37, 490);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(32, 17);
             this.label42.TabIndex = 62;
@@ -812,7 +818,7 @@
             // 
             this.textBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.textBox6.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.textBox6.Location = new System.Drawing.Point(556, 443);
+            this.textBox6.Location = new System.Drawing.Point(556, 452);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(209, 23);
             this.textBox6.TabIndex = 13;
@@ -820,7 +826,7 @@
             // label43
             // 
             this.label43.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.label43.Location = new System.Drawing.Point(480, 443);
+            this.label43.Location = new System.Drawing.Point(480, 452);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(70, 23);
             this.label43.TabIndex = 60;
@@ -831,7 +837,7 @@
             // 
             this.textBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.textBox5.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.textBox5.Location = new System.Drawing.Point(117, 443);
+            this.textBox5.Location = new System.Drawing.Point(117, 452);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(357, 23);
             this.textBox5.TabIndex = 12;
@@ -840,7 +846,7 @@
             // 
             this.label89.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.label89.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.label89.Location = new System.Drawing.Point(27, 443);
+            this.label89.Location = new System.Drawing.Point(27, 452);
             this.label89.Name = "label89";
             this.label89.Size = new System.Drawing.Size(84, 23);
             this.label89.TabIndex = 58;
@@ -855,7 +861,7 @@
             this.panel10.Controls.Add(this.comboBox3);
             this.panel10.Controls.Add(this.comboBox6);
             this.panel10.Controls.Add(this.comboBox7);
-            this.panel10.Location = new System.Drawing.Point(118, 368);
+            this.panel10.Location = new System.Drawing.Point(118, 377);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(647, 56);
             this.panel10.TabIndex = 57;
@@ -924,7 +930,7 @@
             // 
             this.label88.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.label88.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.label88.Location = new System.Drawing.Point(27, 368);
+            this.label88.Location = new System.Drawing.Point(27, 377);
             this.label88.Name = "label88";
             this.label88.Size = new System.Drawing.Size(84, 56);
             this.label88.TabIndex = 56;
@@ -935,7 +941,7 @@
             // 
             this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.textBox4.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.textBox4.Location = new System.Drawing.Point(118, 333);
+            this.textBox4.Location = new System.Drawing.Point(118, 346);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(261, 23);
             this.textBox4.TabIndex = 6;
@@ -944,7 +950,7 @@
             // 
             this.label13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.label13.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.label13.Location = new System.Drawing.Point(27, 333);
+            this.label13.Location = new System.Drawing.Point(27, 346);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(84, 23);
             this.label13.TabIndex = 54;
@@ -960,7 +966,7 @@
             this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.button4.Location = new System.Drawing.Point(560, 330);
+            this.button4.Location = new System.Drawing.Point(560, 341);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 27);
             this.button4.TabIndex = 10;
@@ -979,7 +985,7 @@
             this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.button3.Location = new System.Drawing.Point(674, 330);
+            this.button3.Location = new System.Drawing.Point(674, 341);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 27);
             this.button3.TabIndex = 11;
@@ -998,7 +1004,7 @@
             this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.button2.Location = new System.Drawing.Point(674, 289);
+            this.button2.Location = new System.Drawing.Point(674, 305);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 27);
             this.button2.TabIndex = 9;
@@ -1017,7 +1023,7 @@
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.button1.Location = new System.Drawing.Point(560, 289);
+            this.button1.Location = new System.Drawing.Point(560, 305);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 27);
             this.button1.TabIndex = 8;
@@ -1031,7 +1037,7 @@
             // 
             this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.textBox3.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.textBox3.Location = new System.Drawing.Point(118, 293);
+            this.textBox3.Location = new System.Drawing.Point(118, 292);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(261, 23);
             this.textBox3.TabIndex = 5;
@@ -1041,7 +1047,7 @@
             // 
             this.label12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.label12.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.label12.Location = new System.Drawing.Point(27, 293);
+            this.label12.Location = new System.Drawing.Point(27, 292);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(84, 23);
             this.label12.TabIndex = 48;
@@ -1052,19 +1058,19 @@
             // 
             this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.richTextBox1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.richTextBox1.Location = new System.Drawing.Point(118, 172);
+            this.richTextBox1.Location = new System.Drawing.Point(118, 179);
             this.richTextBox1.Multiline = true;
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(180, 105);
+            this.richTextBox1.Size = new System.Drawing.Size(180, 98);
             this.richTextBox1.TabIndex = 4;
             // 
             // label11
             // 
             this.label11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.label11.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.label11.Location = new System.Drawing.Point(27, 172);
+            this.label11.Location = new System.Drawing.Point(27, 179);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(84, 105);
+            this.label11.Size = new System.Drawing.Size(84, 98);
             this.label11.TabIndex = 46;
             this.label11.Text = "住    址";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1079,7 +1085,7 @@
             "女",
             "未说明的性别",
             "未知的性别"});
-            this.comboBox2.Location = new System.Drawing.Point(118, 135);
+            this.comboBox2.Location = new System.Drawing.Point(118, 145);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(180, 25);
             this.comboBox2.TabIndex = 3;
@@ -1088,7 +1094,7 @@
             // 
             this.label10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.label10.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.label10.Location = new System.Drawing.Point(27, 135);
+            this.label10.Location = new System.Drawing.Point(27, 145);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(84, 23);
             this.label10.TabIndex = 44;
@@ -1099,7 +1105,7 @@
             // 
             this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.label9.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.label9.Location = new System.Drawing.Point(27, 91);
+            this.label9.Location = new System.Drawing.Point(27, 109);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(84, 23);
             this.label9.TabIndex = 43;
@@ -1116,7 +1122,7 @@
             "女",
             "未说明的性别",
             "未知的性别"});
-            this.comboBox1.Location = new System.Drawing.Point(118, 92);
+            this.comboBox1.Location = new System.Drawing.Point(118, 110);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(180, 25);
             this.comboBox1.TabIndex = 2;
@@ -1226,6 +1232,45 @@
             this.dataGridViewTextBoxColumn5.HeaderText = "条码号";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.Width = 90;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.label44.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.label44.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(177)))), ((int)(((byte)(81)))));
+            this.label44.Location = new System.Drawing.Point(120, 81);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(102, 17);
+            this.label44.TabIndex = 69;
+            this.label44.Text = "格式 1999-01-01";
+            this.label44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.label46.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.label46.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(177)))), ((int)(((byte)(81)))));
+            this.label46.Location = new System.Drawing.Point(120, 320);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(200, 17);
+            this.label46.TabIndex = 70;
+            this.label46.Text = "手动输入后双击文本框自动识别信息";
+            this.label46.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.label47.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.label47.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(177)))), ((int)(((byte)(81)))));
+            this.label47.Location = new System.Drawing.Point(482, 282);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(164, 17);
+            this.label47.TabIndex = 71;
+            this.label47.Text = "重新拍照请再次点击图片区域";
+            this.label47.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // personRegistt
             // 
@@ -1356,5 +1401,8 @@
         private System.Windows.Forms.Label label52;
         private System.Windows.Forms.Label label53;
         private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.Label label47;
     }
 }
