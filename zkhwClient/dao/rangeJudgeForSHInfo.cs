@@ -24,6 +24,21 @@ namespace zkhwClient.dao
             DataRow[] dr = dttv.Select("type='"+ typevalue + "'");
             if(dr !=null)
             {
+                if (dr.Length == 0)
+                {
+                    if (typevalue == "LDLC")
+                    {
+                        typevalue = "LDL";
+                        dr = dttv.Select("type='" + typevalue + "'");
+                    }
+
+                    if (typevalue == "HDLC")
+                    {
+                        typevalue = "HDL";
+                        dr = dttv.Select("type='" + typevalue + "'");
+                    }
+                }
+
                 warning_min = double.Parse(dr[0]["warning_min"].ToString());
                 warning_max = double.Parse(dr[0]["warning_max"].ToString());
 
@@ -70,6 +85,22 @@ namespace zkhwClient.dao
                     DataRow[] dr = dttv.Select("type='" + typeValue + "'");
                     if (dr != null)
                     {
+                        if(dr.Length==0)
+                        {
+                            if(typeValue== "LDLC")
+                            {
+                                typeValue = "LDL";
+                                dr = dttv.Select("type='" + typeValue + "'");
+                            }
+
+                            if (typeValue == "HDLC")
+                            {
+                                typeValue = "HDL";
+                                dr = dttv.Select("type='" + typeValue + "'");
+                            }
+
+                            if (dr.Length == 0) return "";
+                        }
                         double warning_min = double.Parse(dr[0]["warning_min"].ToString());
                         double warning_max = double.Parse(dr[0]["warning_max"].ToString());
                         string unit = dr[0]["unit"].ToString();
