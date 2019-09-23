@@ -23,6 +23,7 @@ namespace zkhwClient.view.updateTjResult
         public string bar_code = ""; 
         tjcheckDao tjdao = new tjcheckDao();
         public DataTable dttv = null;
+
         public updateXueya()
         {
             InitializeComponent();
@@ -103,9 +104,10 @@ namespace zkhwClient.view.updateTjResult
             this.textBox9.Text = aichive_no;
             this.textBox4.Text = id_number;
             this.textBox2.Text = bar_code;
+
             DataTable dtbichao = tjdao.selectXueyaInfo(aichive_no, bar_code);
             if (dtbichao != null && dtbichao.Rows.Count > 0)
-            { 
+            {
                 string sbp=dtbichao.Rows[0]["SBP"].ToString();
                 if (sbp != "")
                 {
@@ -139,6 +141,7 @@ namespace zkhwClient.view.updateTjResult
             string DBP =  this.textBox6.Text;
             string Pulse = this.textBox7.Text;
             bool istrue= tjdao.updateXueyaInfo(aichive_no, id_number, bar_code, DBP, SBP, Pulse);
+ 
             if (istrue)
             {
                 string xueya = "1";
@@ -179,7 +182,7 @@ namespace zkhwClient.view.updateTjResult
                 MessageBox.Show("数据保存成功!");
             }
             else {
-            MessageBox.Show("数据保存失败!");
+                MessageBox.Show("数据保存失败!");
             } 
         }
 

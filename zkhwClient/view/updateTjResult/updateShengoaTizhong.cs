@@ -111,11 +111,10 @@ namespace zkhwClient.view.updateTjResult
             this.textBox9.Text = aichive_no;
             this.textBox4.Text = id_number;
             this.textBox2.Text = bar_code;
+
             DataTable dtbichao = tjdao.selectSgtzInfo(aichive_no, bar_code);
             if (dtbichao != null && dtbichao.Rows.Count > 0)
-            { 
-                
-
+            {
                 #region 身高
                 string height = dtbichao.Rows[0]["Height"].ToString();
                 if (height != "")
@@ -167,8 +166,8 @@ namespace zkhwClient.view.updateTjResult
         {   
             string Height = this.textBox5.Text;
             string Weight =  this.textBox6.Text;
-            string BMI = this.textBox7.Text; 
-            bool istrue= tjdao.updateSgtzInfo(aichive_no, bar_code, Height, Weight, BMI);
+            string BMI = this.textBox7.Text;
+            bool istrue = tjdao.updateSgtzInfo(aichive_no, bar_code, Height, Weight, BMI);
             if (istrue)
             {
                 //2019-6-19更新 zkhw_tj_bgdc 要根据输入的数值进行判断

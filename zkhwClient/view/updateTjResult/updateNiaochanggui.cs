@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using zkhwClient.dao;
+using zkhwClient.view.setting;
 
 namespace zkhwClient.view.updateTjResult
 {
@@ -21,7 +22,8 @@ namespace zkhwClient.view.updateTjResult
         public string id_number = "";
         public string bar_code = ""; 
         tjcheckDao tjdao = new tjcheckDao();
-        public DataTable dttv = null; 
+        public DataTable dttv = null;
+        private bool _isHaveData = false;
         public updateNiaochanggui()
         {
             InitializeComponent();
@@ -362,9 +364,11 @@ namespace zkhwClient.view.updateTjResult
             this.textBox9.Text = aichive_no;
             this.textBox4.Text = id_number;
             this.textBox2.Text = bar_code;
+            _isHaveData = false;
             DataTable dtbichao = tjdao.selectNiaochangguiInfo(aichive_no, bar_code);
             if (dtbichao != null && dtbichao.Rows.Count > 0)
-            { 
+            {
+                _isHaveData = true;
                 string wbc= dtbichao.Rows[0]["WBC"].ToString();
                 int _result = GetJudgeResultForWBC(wbc); 
                 this.textBox5.Text = wbc;
@@ -465,7 +469,14 @@ namespace zkhwClient.view.updateTjResult
             string ACR = this.textBox18.Text;
             string Ca = this.textBox21.Text;
             string CR = this.textBox20.Text;
-            bool istrue= tjdao.updateNiaochangguiInfo(aichive_no, bar_code, WBC, LEU, NIT, URO, PRO, PH, BLD, SG, KET, BIL, GLU, Vc, MA, ACR, Ca, CR);
+            bool istrue = false;
+            if (_isHaveData)
+            {
+                istrue = tjdao.updateNiaochangguiInfo(aichive_no, bar_code, WBC, LEU, NIT, URO, PRO, PH, BLD, SG, KET, BIL, GLU, Vc, MA, ACR, Ca, CR);
+            }
+            else {
+                istrue = tjdao.insertNiaojiInfo(aichive_no, id_number, bar_code, WBC, KET, NIT, URO, BIL, GLU, PRO, SG, PH, BLD, Vc, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "11G",basicInfoSettings.ncg);
+            }
             if (istrue)
             {
                 int r = 1;
