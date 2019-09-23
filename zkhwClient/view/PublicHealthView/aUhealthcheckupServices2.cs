@@ -1768,5 +1768,31 @@ namespace zkhwClient.view.PublicHealthView
             Graphics g = e.Graphics;
             g.DrawString("转到末页", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 6));
         }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radioButton4.Checked==true)
+            {
+                textBox21.Enabled = true;
+            }
+            else
+            {
+                textBox21.Enabled = false;
+                textBox21.Text = "";
+            }
+        }
+
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton5.Checked == true)
+            {
+                textBox42.Enabled = true;
+            }
+            else
+            {
+                textBox42.Enabled = false;
+                textBox42.Text = "";
+            } 
+        }
     }
 }
