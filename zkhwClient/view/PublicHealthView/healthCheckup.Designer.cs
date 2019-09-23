@@ -418,9 +418,9 @@
             this.label7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label7.Location = new System.Drawing.Point(14, 9);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(56, 17);
+            this.label7.Size = new System.Drawing.Size(32, 17);
             this.label7.TabIndex = 0;
-            this.label7.Text = "申请时间";
+            this.label7.Text = "时间";
             // 
             // dateTimePicker1
             // 

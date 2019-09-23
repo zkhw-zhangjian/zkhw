@@ -46,31 +46,31 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.panel15 = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.panel14 = new System.Windows.Forms.Panel();
             this.panel13 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.panel13.SuspendLayout();
-            this.panel15.SuspendLayout();
+            this.panel12.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
-            this.panel12.SuspendLayout();
+            this.panel15.SuspendLayout();
+            this.panel13.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -290,108 +290,44 @@
             this.panel5.Size = new System.Drawing.Size(1060, 617);
             this.panel5.TabIndex = 12;
             // 
-            // panel10
+            // panel12
             // 
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel10.Location = new System.Drawing.Point(0, 0);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(1060, 19);
-            this.panel10.TabIndex = 8;
+            this.panel12.Controls.Add(this.dataGridView1);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel12.Location = new System.Drawing.Point(10, 102);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(1040, 470);
+            this.panel12.TabIndex = 16;
             // 
-            // panel11
+            // panel8
             // 
-            this.panel11.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel11.Location = new System.Drawing.Point(0, 19);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(10, 598);
-            this.panel11.TabIndex = 9;
+            this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.panel8.Controls.Add(this.panel9);
+            this.panel8.Controls.Add(this.button4);
+            this.panel8.Controls.Add(this.button1);
+            this.panel8.Controls.Add(this.button3);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel8.Location = new System.Drawing.Point(10, 572);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(1040, 45);
+            this.panel8.TabIndex = 15;
             // 
-            // panel6
+            // panel9
             // 
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(1050, 19);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(10, 598);
-            this.panel6.TabIndex = 10;
+            this.panel9.Controls.Add(this.button2);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel9.Location = new System.Drawing.Point(765, 0);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(275, 45);
+            this.panel9.TabIndex = 5;
             // 
-            // panel13
+            // panel7
             // 
-            this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.panel13.Controls.Add(this.comboBox5);
-            this.panel13.Controls.Add(this.label10);
-            this.panel13.Controls.Add(this.comboBox4);
-            this.panel13.Controls.Add(this.comboBox3);
-            this.panel13.Controls.Add(this.label7);
-            this.panel13.Controls.Add(this.comboBox2);
-            this.panel13.Controls.Add(this.dateTimePicker1);
-            this.panel13.Controls.Add(this.comboBox1);
-            this.panel13.Controls.Add(this.dateTimePicker2);
-            this.panel13.Controls.Add(this.label8);
-            this.panel13.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel13.Location = new System.Drawing.Point(10, 19);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(1040, 35);
-            this.panel13.TabIndex = 11;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label10.Location = new System.Drawing.Point(203, 10);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(17, 17);
-            this.label10.TabIndex = 60;
-            this.label10.Text = "─";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(14, 9);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(56, 17);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "申请时间";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
-            this.dateTimePicker1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(84, 7);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(114, 23);
-            this.dateTimePicker1.TabIndex = 0;
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.CalendarFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dateTimePicker2.CustomFormat = "yyyy-MM-dd";
-            this.dateTimePicker2.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(226, 7);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(114, 23);
-            this.dateTimePicker2.TabIndex = 1;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.label8.Location = new System.Drawing.Point(364, 9);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(56, 17);
-            this.label8.TabIndex = 5;
-            this.label8.Text = "所属区域";
-            // 
-            // panel14
-            // 
-            this.panel14.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel14.Location = new System.Drawing.Point(10, 54);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(1040, 5);
-            this.panel14.TabIndex = 12;
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(10, 97);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(1040, 5);
+            this.panel7.TabIndex = 14;
             // 
             // panel15
             // 
@@ -433,44 +369,108 @@
             this.label14.TabIndex = 1;
             this.label14.Text = "居民信息";
             // 
-            // panel7
+            // panel14
             // 
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(10, 97);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(1040, 5);
-            this.panel7.TabIndex = 14;
+            this.panel14.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel14.Location = new System.Drawing.Point(10, 54);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(1040, 5);
+            this.panel14.TabIndex = 12;
             // 
-            // panel8
+            // panel13
             // 
-            this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.panel8.Controls.Add(this.panel9);
-            this.panel8.Controls.Add(this.button4);
-            this.panel8.Controls.Add(this.button1);
-            this.panel8.Controls.Add(this.button3);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel8.Location = new System.Drawing.Point(10, 572);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(1040, 45);
-            this.panel8.TabIndex = 15;
+            this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.panel13.Controls.Add(this.comboBox5);
+            this.panel13.Controls.Add(this.label10);
+            this.panel13.Controls.Add(this.comboBox4);
+            this.panel13.Controls.Add(this.comboBox3);
+            this.panel13.Controls.Add(this.label7);
+            this.panel13.Controls.Add(this.comboBox2);
+            this.panel13.Controls.Add(this.dateTimePicker1);
+            this.panel13.Controls.Add(this.comboBox1);
+            this.panel13.Controls.Add(this.dateTimePicker2);
+            this.panel13.Controls.Add(this.label8);
+            this.panel13.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel13.Location = new System.Drawing.Point(10, 19);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(1040, 35);
+            this.panel13.TabIndex = 11;
             // 
-            // panel9
+            // label10
             // 
-            this.panel9.Controls.Add(this.button2);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel9.Location = new System.Drawing.Point(765, 0);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(275, 45);
-            this.panel9.TabIndex = 5;
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label10.Location = new System.Drawing.Point(203, 10);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(17, 17);
+            this.label10.TabIndex = 60;
+            this.label10.Text = "─";
             // 
-            // panel12
+            // label7
             // 
-            this.panel12.Controls.Add(this.dataGridView1);
-            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel12.Location = new System.Drawing.Point(10, 102);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(1040, 470);
-            this.panel12.TabIndex = 16;
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Location = new System.Drawing.Point(14, 9);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(32, 17);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "时间";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker1.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(84, 7);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(114, 23);
+            this.dateTimePicker1.TabIndex = 0;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.CalendarFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dateTimePicker2.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker2.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker2.Location = new System.Drawing.Point(226, 7);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(114, 23);
+            this.dateTimePicker2.TabIndex = 1;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.label8.Location = new System.Drawing.Point(364, 9);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(56, 17);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "所属区域";
+            // 
+            // panel6
+            // 
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel6.Location = new System.Drawing.Point(1050, 19);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(10, 598);
+            this.panel6.TabIndex = 10;
+            // 
+            // panel11
+            // 
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel11.Location = new System.Drawing.Point(0, 19);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(10, 598);
+            this.panel11.TabIndex = 9;
+            // 
+            // panel10
+            // 
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel10.Location = new System.Drawing.Point(0, 0);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(1060, 19);
+            this.panel10.TabIndex = 8;
             // 
             // personalBasicInfo
             // 
@@ -491,13 +491,13 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel5.ResumeLayout(false);
-            this.panel13.ResumeLayout(false);
-            this.panel13.PerformLayout();
-            this.panel15.ResumeLayout(false);
-            this.panel15.PerformLayout();
+            this.panel12.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
-            this.panel12.ResumeLayout(false);
+            this.panel15.ResumeLayout(false);
+            this.panel15.PerformLayout();
+            this.panel13.ResumeLayout(false);
+            this.panel13.PerformLayout();
             this.ResumeLayout(false);
 
         }
