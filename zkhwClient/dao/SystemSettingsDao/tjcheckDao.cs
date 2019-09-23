@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Windows.Forms;
+using zkhwClient.view.UseHelpView;
 
 namespace zkhwClient.dao
 {
@@ -158,6 +159,15 @@ namespace zkhwClient.dao
             ret = DbHelperMySQL.ExecuteSql(sql);
             return ret == 0 ? false : true;
         }
+        //新增尿常规信息
+        public bool insertNiaojiInfo(string aichive_no, string id_number, string oidcode, string WBC, string KET, string NIT, string URO, string BIL, string GLU, string PRO, string SG, string PH, string BLD, string Vc, string ctime, string type, string ZrysNCG)
+        {
+            int ret = 0;
+            string id = Result.GetNewId();
+            String sql = "insert into zkhw_tj_ncg(ID,aichive_no,id_number,bar_code,WBC,KET,NIT,URO,BIL,GLU,PRO,SG,PH,BLD,Vc,createtime,type,ZrysNCG) values('" + id + "','" + aichive_no + "','" + id_number + "','" + oidcode + "','" + WBC + "','" + KET + "','" + NIT + "','" + URO + "','" + BIL + "','" + GLU + "','" + PRO + "','" + SG + "','" + PH + "','" + BLD + "','" + Vc + "','" + ctime + "','" + type + "','" + ZrysNCG + "')";
+            ret = DbHelperMySQL.ExecuteSql(sql);
+            return ret == 0 ? false : true;
+        }
         //更新体检进度tj_bgdc--尿常规
         public bool updateTJbgdcNiaochanggui(string aichive_no, string barcode, int flag)
         {
@@ -194,6 +204,7 @@ namespace zkhwClient.dao
             }
             return ret == 0 ? false : true;
         }
+
         //根据血压检查结果修改健康体检表对应信息
         public bool updatePEXyInfo(string aichive_no, string barcode, string base_heartbeat, string right_high, string right_low, string left_high, string left_low, string base_respiratory)
         {
