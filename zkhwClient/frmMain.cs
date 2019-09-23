@@ -1252,6 +1252,10 @@ namespace zkhwClient
                                     {
                                         double hdlcdouble = double.Parse(hdlc);
                                         DataRow[] drhdlc = dttv.Select("type='HDLC'");
+                                        if (drhdlc.Length == 0)
+                                        {
+                                            drhdlc = dttv.Select("type='HDL'");
+                                        }
                                         double hdlcwmin = double.Parse(drhdlc[0]["warning_min"].ToString());
                                         double hdlcwmax = double.Parse(drhdlc[0]["warning_max"].ToString());
                                         if (hdlcdouble > hdlcwmax || hdlcdouble < hdlcwmin)
@@ -1271,7 +1275,11 @@ namespace zkhwClient
                                     {
                                         double ldlcdouble = double.Parse(ldlc);
                                         DataRow[] drldlc = dttv.Select("type='LDLC'");
-                                        double ldlcwmin = double.Parse(drldlc[0]["warning_min"].ToString());
+                                    if (drldlc.Length == 0)
+                                    {
+                                        drldlc = dttv.Select("type='LDL'");
+                                    }
+                                    double ldlcwmin = double.Parse(drldlc[0]["warning_min"].ToString());
                                         double ldlcwmax = double.Parse(drldlc[0]["warning_max"].ToString());
                                         if (ldlcdouble > ldlcwmax || ldlcdouble < ldlcwmin)
                                         {
@@ -1454,6 +1462,10 @@ namespace zkhwClient
                                     {
                                         double hdlcdouble = double.Parse(hdlc);
                                         DataRow[] drhdlc = dttv.Select("type='HDLC'");
+                                        if (drhdlc.Length == 0)
+                                        {
+                                            drhdlc = dttv.Select("type='HDL'");
+                                        }
                                         double hdlcwmin = double.Parse(drhdlc[0]["warning_min"].ToString());
                                         double hdlcwmax = double.Parse(drhdlc[0]["warning_max"].ToString());
                                         if (hdlcdouble > hdlcwmax || hdlcdouble < hdlcwmin)
@@ -1473,7 +1485,11 @@ namespace zkhwClient
                                     {
                                         double ldlcdouble = double.Parse(ldlc);
                                         DataRow[] drldlc = dttv.Select("type='LDLC'");
-                                        double ldlcwmin = double.Parse(drldlc[0]["warning_min"].ToString());
+                                    if (drldlc.Length == 0)
+                                    {
+                                        drldlc = dttv.Select("type='LDL'");
+                                    }
+                                    double ldlcwmin = double.Parse(drldlc[0]["warning_min"].ToString());
                                         double ldlcwmax = double.Parse(drldlc[0]["warning_max"].ToString());
                                         if (ldlcdouble > ldlcwmax || ldlcdouble < ldlcwmin)
                                         {
@@ -3132,6 +3148,10 @@ namespace zkhwClient
                             {
                                 double hdlcdouble = double.Parse(hdlc);
                                 DataRow[] drhdlc = dttv.Select("type='HDLC'");
+                                if (drhdlc.Length == 0)
+                                {
+                                    drhdlc = dttv.Select("type='HDL'");
+                                }
                                 double hdlcwmin = double.Parse(drhdlc[0]["warning_min"].ToString());
                                 double hdlcwmax = double.Parse(drhdlc[0]["warning_max"].ToString());
                                 if (hdlcdouble > hdlcwmax || hdlcdouble < hdlcwmin)
@@ -3151,6 +3171,10 @@ namespace zkhwClient
                             {
                                 double ldlcdouble = double.Parse(ldlc);
                                 DataRow[] drldlc = dttv.Select("type='LDLC'");
+                                if (drldlc.Length == 0)
+                                {
+                                    drldlc = dttv.Select("type='LDL'");
+                                }
                                 double ldlcwmin = double.Parse(drldlc[0]["warning_min"].ToString());
                                 double ldlcwmax = double.Parse(drldlc[0]["warning_max"].ToString());
                                 if (ldlcdouble > ldlcwmax || ldlcdouble < ldlcwmin)
@@ -3349,6 +3373,10 @@ namespace zkhwClient
                             {
                                 double hdlcdouble = double.Parse(hdlc);
                                 DataRow[] drhdlc = dttv.Select("type='HDLC'");
+                                if (drhdlc.Length == 0)
+                                {
+                                    drhdlc = dttv.Select("type='HDL'");
+                                }
                                 double hdlcwmin = double.Parse(drhdlc[0]["warning_min"].ToString());
                                 double hdlcwmax = double.Parse(drhdlc[0]["warning_max"].ToString());
                                 if (hdlcdouble > hdlcwmax || hdlcdouble < hdlcwmin)
@@ -3368,6 +3396,10 @@ namespace zkhwClient
                             {
                                 double ldlcdouble = double.Parse(ldlc);
                                 DataRow[] drldlc = dttv.Select("type='LDLC'");
+                                if (drldlc.Length == 0)
+                                {
+                                    drldlc = dttv.Select("type='LDL'");
+                                }
                                 double ldlcwmin = double.Parse(drldlc[0]["warning_min"].ToString());
                                 double ldlcwmax = double.Parse(drldlc[0]["warning_max"].ToString());
                                 if (ldlcdouble > ldlcwmax || ldlcdouble < ldlcwmin)
@@ -4579,6 +4611,10 @@ namespace zkhwClient
                         {
                             double hdlcdouble = double.Parse(hdlc);
                             DataRow[] drhdlc = dttv.Select("type='HDLC'");
+                            if (drhdlc.Length == 0)
+                            {
+                                drhdlc = dttv.Select("type='HDL'");
+                            }
                             double hdlcwmin = double.Parse(drhdlc[0]["warning_min"].ToString());
                             double hdlcwmax = double.Parse(drhdlc[0]["warning_max"].ToString());
                             if (hdlcdouble > hdlcwmax || hdlcdouble < hdlcwmin)
@@ -4598,6 +4634,10 @@ namespace zkhwClient
                         {
                             double ldlcdouble = double.Parse(ldlc);
                             DataRow[] drldlc = dttv.Select("type='LDLC'");
+                            if (drldlc.Length == 0)
+                            {
+                                drldlc = dttv.Select("type='LDL'");
+                            }
                             double ldlcwmin = double.Parse(drldlc[0]["warning_min"].ToString());
                             double ldlcwmax = double.Parse(drldlc[0]["warning_max"].ToString());
                             if (ldlcdouble > ldlcwmax || ldlcdouble < ldlcwmin)
@@ -4796,6 +4836,10 @@ namespace zkhwClient
                         {
                             double hdlcdouble = double.Parse(hdlc);
                             DataRow[] drhdlc = dttv.Select("type='HDLC'");
+                            if (drhdlc.Length == 0)
+                            {
+                                drhdlc = dttv.Select("type='HDL'");
+                            }
                             double hdlcwmin = double.Parse(drhdlc[0]["warning_min"].ToString());
                             double hdlcwmax = double.Parse(drhdlc[0]["warning_max"].ToString());
                             if (hdlcdouble > hdlcwmax || hdlcdouble < hdlcwmin)
@@ -4815,6 +4859,10 @@ namespace zkhwClient
                         {
                             double ldlcdouble = double.Parse(ldlc);
                             DataRow[] drldlc = dttv.Select("type='LDLC'");
+                            if (drldlc.Length == 0)
+                            {
+                                drldlc = dttv.Select("type='LDL'");
+                            }
                             double ldlcwmin = double.Parse(drldlc[0]["warning_min"].ToString());
                             double ldlcwmax = double.Parse(drldlc[0]["warning_max"].ToString());
                             if (ldlcdouble > ldlcwmax || ldlcdouble < ldlcwmin)
@@ -5983,6 +6031,10 @@ namespace zkhwClient
                         {
                             double hdlcdouble = double.Parse(hdlc);
                             DataRow[] drhdlc = dttv.Select("type='HDLC'");
+                            if (drhdlc.Length == 0)
+                            {
+                                drhdlc = dttv.Select("type='HDL'");
+                            }
                             double hdlcwmin = double.Parse(drhdlc[0]["warning_min"].ToString());
                             double hdlcwmax = double.Parse(drhdlc[0]["warning_max"].ToString());
                             if (hdlcdouble > hdlcwmax || hdlcdouble < hdlcwmin)
@@ -6002,6 +6054,10 @@ namespace zkhwClient
                         {
                             double ldlcdouble = double.Parse(ldlc);
                             DataRow[] drldlc = dttv.Select("type='LDLC'");
+                            if (drldlc.Length == 0)
+                            {
+                                drldlc = dttv.Select("type='LDL'");
+                            }
                             double ldlcwmin = double.Parse(drldlc[0]["warning_min"].ToString());
                             double ldlcwmax = double.Parse(drldlc[0]["warning_max"].ToString());
                             if (ldlcdouble > ldlcwmax || ldlcdouble < ldlcwmin)
@@ -6200,6 +6256,10 @@ namespace zkhwClient
                         {
                             double hdlcdouble = double.Parse(hdlc);
                             DataRow[] drhdlc = dttv.Select("type='HDLC'");
+                            if (drhdlc.Length == 0)
+                            {
+                                drhdlc = dttv.Select("type='HDL'");
+                            }
                             double hdlcwmin = double.Parse(drhdlc[0]["warning_min"].ToString());
                             double hdlcwmax = double.Parse(drhdlc[0]["warning_max"].ToString());
                             if (hdlcdouble > hdlcwmax || hdlcdouble < hdlcwmin)
@@ -6219,6 +6279,10 @@ namespace zkhwClient
                         {
                             double ldlcdouble = double.Parse(ldlc);
                             DataRow[] drldlc = dttv.Select("type='LDLC'");
+                            if (drldlc.Length == 0)
+                            {
+                                drldlc = dttv.Select("type='LDL'");
+                            }
                             double ldlcwmin = double.Parse(drldlc[0]["warning_min"].ToString());
                             double ldlcwmax = double.Parse(drldlc[0]["warning_max"].ToString());
                             if (ldlcdouble > ldlcwmax || ldlcdouble < ldlcwmin)
