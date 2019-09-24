@@ -452,7 +452,7 @@ namespace zkhwClient.view.PublicHealthView
 
         private void btnUpload_Paint(object sender, PaintEventArgs e)
         {
-            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(170, 171, 171), Color.FromArgb(170, 171, 171));
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
