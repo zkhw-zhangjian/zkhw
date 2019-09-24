@@ -236,7 +236,8 @@ namespace zkhwClient.view.setting
             node = xmlDoc.SelectSingleNode("config/chebiaoshi");
             node.InnerText = this.textBox9.Text;
             xmlDoc.Save(path);
-             
+
+            Common._deviceModel = codesh + "," + codexcg;
             //保存数据库
             SetBChaoPanDuanInfo();
             MessageBox.Show("保存成功！");

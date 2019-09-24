@@ -1162,13 +1162,31 @@ where 1=1";
             try
             {
                 DataRow[] dr = dtSh.Select("type='" + type + "'");
+                if(dr.Length==0)
+                {
+                    if (type == "HDLC")
+                    {
+                        type = "HDL";
+                        dr = dtSh.Select("type='" + type + "'");
+                    }
+                    if (type == "LDLC")
+                    {
+                        type = "LDL";
+                        dr = dtSh.Select("type='" + type + "'");
+                    }
+                    if(type== "NEUT")
+                    {
+                        dr = dtSh.Select("type='NEUTN'");
+                    }
+                }
+                
                 if (dr != null)
                 { 
-                    if(type== "HDLC")
+                    if(type== "HDLC" || type=="HDL")
                     {
                         type = "HDL_C";
                     }
-                    if (type == "LDLC")
+                    if (type == "LDLC" || type == "LDL")
                     {
                         type = "LDL_C";
                     }
@@ -1223,6 +1241,19 @@ where 1=1";
                 DataRow[] dr = dtSh.Select("type='" + type + "'");
                 if (dr != null)
                 {
+                    if (dr.Length == 0)
+                    {
+                        if (type == "HDLC")
+                        {
+                            type = "HDL";
+                            dr = dtSh.Select("type='" + type + "'");
+                        }
+                        if (type == "LDLC")
+                        {
+                            type = "LDL";
+                            dr = dtSh.Select("type='" + type + "'");
+                        }
+                    }
                     double warning_min = double.Parse(dr[0]["warning_min"].ToString());
                     double warning_max = double.Parse(dr[0]["warning_max"].ToString());
                     double valuedouble = 0;
@@ -1616,7 +1647,9 @@ where 1=1";
                     hy.Add("生日", data["birthday"].ToString());
                     hy.Add("生日1", data["birthday"].ToString());
                     hy.Add("身份证号", data["id_number"].ToString());
-                    hy.Add("身份证号1", data["id_number"].ToString()); 
+                    hy.Add("身份证号1", data["id_number"].ToString());
+
+                    hy.Add("地址1", data["address"].ToString());
 
                     #region 心电图
                     DataSet hyxdts = DbHelperMySQL.Query($"select * from zkhw_tj_xdt where id_number='{data["id_number"].ToString()}' and bar_code='{barcode}' order by createtime desc LIMIT 1");
@@ -1890,7 +1923,8 @@ where 1=1";
 
                     #region 血常规
                     #region 内容
-                    DataTable dtXcg = grjddao.checkThresholdValues(Common._deviceModel, "血常规");
+                    //DataTable dtXcg = grjddao.checkThresholdValues(Common._deviceModel, "血常规");
+                    DataTable dtXcg = grjddao.checkThresholdValues("", "血常规");
                     tt.Clear();
                     tt = GetShHuaXCGDic(dtXcg, "HCT");
                     if (tt.Count > 0)

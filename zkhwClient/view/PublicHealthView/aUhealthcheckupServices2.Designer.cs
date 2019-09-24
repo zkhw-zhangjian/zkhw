@@ -2036,6 +2036,7 @@
             // 
             // textBox42
             // 
+            this.textBox42.Enabled = false;
             this.textBox42.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.textBox42.Location = new System.Drawing.Point(393, 0);
             this.textBox42.Name = "textBox42";
@@ -2054,6 +2055,7 @@
             this.radioButton5.Tag = "4";
             this.radioButton5.Text = "4其他";
             this.radioButton5.UseVisualStyleBackColor = true;
+            this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
             // 
             // radioButton7
             // 
@@ -2120,6 +2122,7 @@
             // 
             // textBox21
             // 
+            this.textBox21.Enabled = false;
             this.textBox21.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.textBox21.Location = new System.Drawing.Point(183, 0);
             this.textBox21.Name = "textBox21";
@@ -2152,6 +2155,7 @@
             this.radioButton4.Tag = "2";
             this.radioButton4.Text = "2异常";
             this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
             // 
             // textBox41
             // 

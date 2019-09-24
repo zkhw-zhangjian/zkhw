@@ -476,7 +476,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.cerebrovascular_disease != null && per.cerebrovascular_disease != "")
             {
-                per.cerebrovascular_disease = per.cerebrovascular_disease.Substring(1);
+                string tmp1 = per.cerebrovascular_disease.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.cerebrovascular_disease = str; 
                 if (this.checkBox6.Checked)
                 {
                     per.cerebrovascular_disease_other = this.textBox36.Text;
@@ -498,7 +515,25 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.kidney_disease != null && per.kidney_disease != "")
             {
-                per.kidney_disease = per.kidney_disease.Substring(1);
+                string tmp1 = per.kidney_disease.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.kidney_disease = str;
+                 
                 if (this.checkBox12.Checked)
                 {
                     per.kidney_disease_other = this.textBox38.Text;
@@ -520,7 +555,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.heart_disease != null && per.heart_disease != "")
             {
-                per.heart_disease = per.heart_disease.Substring(1);
+                string tmp1 = per.heart_disease.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.heart_disease = str; 
                 if (this.checkBox19.Checked)
                 {
                     per.heart_disease_other = this.textBox41.Text;
@@ -542,7 +594,25 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.vascular_disease != null && per.vascular_disease != "")
             {
-                per.vascular_disease = per.vascular_disease.Substring(1);
+                string tmp1 = per.vascular_disease.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.vascular_disease = str;
+                 
                 if (this.checkBox23.Checked)
                 {
                     per.vascular_disease_other = this.textBox42.Text;
@@ -564,7 +634,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.ocular_diseases != null && per.ocular_diseases != "")
             {
-                per.ocular_diseases = per.ocular_diseases.Substring(1);
+                string tmp1 = per.ocular_diseases.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.ocular_diseases = str;
                 if (this.checkBox28.Checked)
                 {
                     per.ocular_diseases_other = this.textBox44.Text;
@@ -1082,7 +1169,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.cerebrovascular_disease != null && per.cerebrovascular_disease != "")
             {
-                per.cerebrovascular_disease = per.cerebrovascular_disease.Substring(1);
+                string tmp1 = per.cerebrovascular_disease.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.cerebrovascular_disease = str;
                 if (this.checkBox6.Checked)
                 {
                     per.cerebrovascular_disease_other = this.textBox36.Text;
@@ -1104,7 +1208,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.kidney_disease != null && per.kidney_disease != "")
             {
-                per.kidney_disease = per.kidney_disease.Substring(1);
+                string tmp1 = per.kidney_disease.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.kidney_disease = str;
                 if (this.checkBox12.Checked)
                 {
                     per.kidney_disease_other = this.textBox38.Text;
@@ -1126,7 +1247,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.heart_disease != null && per.heart_disease != "")
             {
-                per.heart_disease = per.heart_disease.Substring(1);
+                string tmp1 = per.heart_disease.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.heart_disease = str;
                 if (this.checkBox19.Checked)
                 {
                     per.heart_disease_other = this.textBox41.Text;
@@ -1148,7 +1286,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.vascular_disease != null && per.vascular_disease != "")
             {
-                per.vascular_disease = per.vascular_disease.Substring(1);
+                string tmp1 = per.vascular_disease.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.vascular_disease = str;
                 if (this.checkBox23.Checked)
                 {
                     per.vascular_disease_other = this.textBox42.Text;
@@ -1170,7 +1325,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.ocular_diseases != null && per.ocular_diseases != "")
             {
-                per.ocular_diseases = per.ocular_diseases.Substring(1);
+                string tmp1 = per.ocular_diseases.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.ocular_diseases = str;
                 if (this.checkBox28.Checked)
                 {
                     per.ocular_diseases_other = this.textBox44.Text;
@@ -1420,7 +1592,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.cerebrovascular_disease != null && per.cerebrovascular_disease != "")
             {
-                per.cerebrovascular_disease = per.cerebrovascular_disease.Substring(1);
+                string tmp1 = per.cerebrovascular_disease.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.cerebrovascular_disease = str;
                 if (this.checkBox6.Checked)
                 {
                     per.cerebrovascular_disease_other = this.textBox36.Text;
@@ -1442,7 +1631,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.kidney_disease != null && per.kidney_disease != "")
             {
-                per.kidney_disease = per.kidney_disease.Substring(1);
+                string tmp1 = per.kidney_disease.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.kidney_disease = str;
                 if (this.checkBox12.Checked)
                 {
                     per.kidney_disease_other = this.textBox38.Text;
@@ -1464,7 +1670,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.heart_disease != null && per.heart_disease != "")
             {
-                per.heart_disease = per.heart_disease.Substring(1);
+                string tmp1 = per.heart_disease.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.heart_disease = str;
                 if (this.checkBox19.Checked)
                 {
                     per.heart_disease_other = this.textBox41.Text;
@@ -1486,7 +1709,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.vascular_disease != null && per.vascular_disease != "")
             {
-                per.vascular_disease = per.vascular_disease.Substring(1);
+                string tmp1 = per.vascular_disease.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.vascular_disease = str;
                 if (this.checkBox23.Checked)
                 {
                     per.vascular_disease_other = this.textBox42.Text;
@@ -1508,7 +1748,25 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.ocular_diseases != null && per.ocular_diseases != "")
             {
-                per.ocular_diseases = per.ocular_diseases.Substring(1);
+                string tmp1 = per.ocular_diseases.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.ocular_diseases = str;
+                 
                 if (this.checkBox28.Checked)
                 {
                     per.ocular_diseases_other = this.textBox44.Text;
