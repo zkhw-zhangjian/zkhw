@@ -288,7 +288,7 @@ namespace zkhwClient.view.setting
 
         private void panel57_Click(object sender, EventArgs e)
         {
-
+            OpenPdf(Application.StartupPath + "\\pdf\\摄像头使用手册.pdf");
         }
     }
 }
