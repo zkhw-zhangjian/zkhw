@@ -1962,11 +1962,12 @@
             // textBox9
             // 
             this.textBox9.BackColor = System.Drawing.SystemColors.Window;
+            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox9.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Bold);
-            this.textBox9.Location = new System.Drawing.Point(962, 40);
+            this.textBox9.Location = new System.Drawing.Point(962, 43);
             this.textBox9.Name = "textBox9";
             this.textBox9.ReadOnly = true;
-            this.textBox9.Size = new System.Drawing.Size(129, 30);
+            this.textBox9.Size = new System.Drawing.Size(129, 23);
             this.textBox9.TabIndex = 63;
             this.textBox9.Text = "*责任医生";
             this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -2785,7 +2786,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 139);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1274, 108);
+            this.groupBox3.Size = new System.Drawing.Size(1262, 108);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
