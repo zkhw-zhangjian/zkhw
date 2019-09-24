@@ -489,7 +489,12 @@ namespace zkhwClient.view.updateTjResult
                 this.textBox35.Text = dtbichao.Rows[0]["HBDH"].ToString();
                 this.textBox34.Text = dtbichao.Rows[0]["aAMY"].ToString();
             }
-            else { 
+            else {
+                _currentdevno = "SH_YNH_001";
+                string[] a = Common._deviceModel.Split(',');
+                _currentdevno = a[0].ToString();
+                grjdDao grjddao = new grjdDao();
+                dttv = grjddao.checkThresholdValues(_currentdevno, "生化");
                 MessageBox.Show("未查询到数据!");
             }
         }

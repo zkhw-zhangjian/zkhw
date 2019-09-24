@@ -66,9 +66,9 @@ namespace zkhwClient
         {
             InitializeComponent();
 
-            //xMy = this.Width;
-            //yMy = this.Height;
-            //Common.setTag(this);
+            xMy = this.Width;
+            yMy = this.Height;
+            Common.setTag(this);
         }
       
         
@@ -310,9 +310,9 @@ namespace zkhwClient
         private void button1_Paint(object sender, PaintEventArgs e)
         {
             Button bt = (Button)sender;
-            //Single _size = GetBtnFontSize(bt);
+            Single _size = GetBtnFontSize(bt);
 
-            Single _size = 10;
+            //Single _size = 10;
             string stag = bt.AccessibleName; 
             string wenzi = "";
             int starti = 20;
@@ -337,8 +337,17 @@ namespace zkhwClient
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, color, color);
             base.OnPaint(e);
 
+
+            StringFormat stringFormat = new StringFormat();
+            stringFormat.Alignment = StringAlignment.Center; 
+            float x = e.ClipRectangle.Width / 2f;
+            float y = e.ClipRectangle.Height / 2f - (_size / 2f);
             Graphics g = e.Graphics;
-            g.DrawString(wenzi, new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(starti, 5));
+            g.DrawString(wenzi, new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular, GraphicsUnit.Pixel), new SolidBrush(Color.White), x, y, stringFormat);
+
+
+            //Graphics g = e.Graphics;
+            //g.DrawString(wenzi, new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(starti, 5));
         }
 
         private void txtNum_KeyPress(object sender, KeyPressEventArgs e)
@@ -1102,9 +1111,9 @@ namespace zkhwClient
 
         private void personRegistt_Resize(object sender, EventArgs e)
         {
-            //float newx = (this.Width) / xMy;
-            //float newy = (this.Height) / yMy;
-            //Common.setControls(newx, newy, this);
+            float newx = (this.Width) / xMy;
+            float newy = (this.Height) / yMy;
+            Common.setControls(newx, newy, this);
         }
 
         public void OnPrintSampleBarcode(string barcode, int pageCount, string nameCode)

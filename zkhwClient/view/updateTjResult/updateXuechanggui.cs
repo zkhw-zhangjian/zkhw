@@ -765,7 +765,13 @@ namespace zkhwClient.view.updateTjResult
                 this.textBox34.Text = dtbichao.Rows[0]["PLCR"].ToString();
                 this.textBox36.Text = dtbichao.Rows[0]["OTHERS"].ToString();
             }
-            else { 
+            else {
+                _currentdevno = "XCG_YNH_001";
+                string[] a = Common._deviceModel.Split(',');
+                _currentdevno = a[1].ToString();
+                grjdDao grjddao = new grjdDao();
+                dttv = grjddao.checkThresholdValues(_currentdevno, "血常规");
+
                 MessageBox.Show("未查询到数据!");
             }
         }
