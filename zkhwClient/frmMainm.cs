@@ -50,9 +50,16 @@ namespace zkhwClient
         public SerialPort port = new SerialPort();
         Byte[] totalByteRead = new Byte[0];
 
+        private float xMy;//定义当前窗体的宽度
+        private float yMy;//定义当前窗体的高度
+
         public frmMainm()
         {
             InitializeComponent();
+
+            //xMy = this.Width;
+            //yMy = this.Height;
+            //Common.setTag(this);
         }
 
         private void startlabel()
@@ -6778,6 +6785,13 @@ namespace zkhwClient
                 catch
                 { }
             }
+        }
+
+        private void frmMainm_Resize(object sender, EventArgs e)
+        {
+            //float newx = (this.Width) / xMy;
+            //float newy = (this.Height) / yMy;
+            //Common.setControls(newx, newy, this);
         }
     }
 }
