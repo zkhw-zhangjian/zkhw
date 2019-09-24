@@ -650,7 +650,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.health_guidance != null && per.health_guidance != "")
             {
-                per.health_guidance = per.health_guidance.Substring(1);
+                string tmp1 = per.health_guidance.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.health_guidance = str;
             }
 
             foreach (Control ctr in this.panel3.Controls)
@@ -668,7 +685,25 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.danger_controlling != null && per.danger_controlling != "")
             {
-                per.danger_controlling = per.danger_controlling.Substring(1);
+                string tmp1 = per.danger_controlling.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.danger_controlling = str;
+                 
             }
             if (checkBox8.Checked) {
                 per.target_weight= this.textBox37.Text;
@@ -700,7 +735,17 @@ namespace zkhwClient.view.PublicHealthView
                 MessageBox.Show("数据保存成功!");
                 if (per.id_number!=""&& per.id_number.Length==18) {
                   string yl = per.id_number.Substring(6, 4) + "-" + per.id_number.Substring(10, 2) + "-" + per.id_number.Substring(12, 2);
-                  int year1 = DateTime.Parse(yl).Year;
+                    int year1 = 0;
+                    try
+                    {
+                        year1 = DateTime.Parse(yl).Year;
+                    }
+                    catch
+                    {
+                        MessageBox.Show("此人身份证输入有误！");
+                        return;
+                    }
+                     
                   int year2 = DateTime.Now.Year;
                     if (year2-year1>=65) {
                         //MessageBox.Show("此患者已满65周岁,还需要填写老年人生活自理能力评估表，和老年人中医体质表!");
@@ -886,7 +931,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.health_guidance != null && per.health_guidance != "")
             {
-                per.health_guidance = per.health_guidance.Substring(1);
+                string tmp1 = per.health_guidance.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.health_guidance = str; 
             }
 
             foreach (Control ctr in this.panel3.Controls)
@@ -904,7 +966,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.danger_controlling != null && per.danger_controlling != "")
             {
-                per.danger_controlling = per.danger_controlling.Substring(1);
+                string tmp1 = per.danger_controlling.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.danger_controlling = str;
             }
             if (checkBox8.Checked)
             {
@@ -967,7 +1046,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.health_guidance != null && per.health_guidance != "")
             {
-                per.health_guidance = per.health_guidance.Substring(1);
+                string tmp1 = per.health_guidance.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.health_guidance = str;
             }
 
             foreach (Control ctr in this.panel3.Controls)
@@ -985,7 +1081,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.danger_controlling != null && per.danger_controlling != "")
             {
-                per.danger_controlling = per.danger_controlling.Substring(1);
+                string tmp1 = per.danger_controlling.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.danger_controlling = str;
             }
             if (checkBox8.Checked)
             {
@@ -1048,7 +1161,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.health_guidance != null && per.health_guidance != "")
             {
-                per.health_guidance = per.health_guidance.Substring(1);
+                string tmp1 = per.health_guidance.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.health_guidance = str;
             }
 
             foreach (Control ctr in this.panel3.Controls)
@@ -1066,7 +1196,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.danger_controlling != null && per.danger_controlling != "")
             {
-                per.danger_controlling = per.danger_controlling.Substring(1);
+                string tmp1 = per.danger_controlling.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.danger_controlling = str;
             }
             if (checkBox8.Checked)
             {

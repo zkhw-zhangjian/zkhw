@@ -485,6 +485,7 @@ namespace zkhwClient.view.PublicHealthView
             per.check_date = this.dateTimePicker1.Value.ToString();
             per.doctor_name = this.textBox51.Text.Replace(" ", "");
             per.id = this.textBox120.Text;
+            
             foreach (Control ctr in this.groupBox3.Controls)
             {
                 //判断该控件是不是CheckBox
@@ -500,7 +501,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.symptom != null && per.symptom != "")
             {
-                per.symptom = per.symptom.Substring(1);
+                string tmp1 = per.symptom.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length>1)
+                {
+                    for(int i=0;i<b.Length;i++)
+                    {
+                        a[i] =int.Parse( b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                } 
+                per.symptom = str;
             }
             else
             {
@@ -813,7 +831,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.lifeway_diet != null && per.lifeway_diet != "")
             {
-                per.lifeway_diet = per.lifeway_diet.Substring(1);
+                string tmp1 = per.lifeway_diet.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                } 
+                per.lifeway_diet = str;
             }
             else
             {
@@ -975,6 +1010,24 @@ namespace zkhwClient.view.PublicHealthView
                     MessageBox.Show("饮酒种类最多只能选择4项,请重新选择!");
                     return null;
                 }
+                string tmp1 = per.lifeway_drink_type;
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.lifeway_drink_type = str;
             }
             per.lifeway_drink_other = this.textBox117.Text.Replace(" ", "");
 

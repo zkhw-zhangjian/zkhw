@@ -216,7 +216,13 @@ namespace zkhwClient
                 label16.Text = dt16num.Rows[0][0].ToString();//计划体检人数
             }
             string time = Common.GetCreateTime(basicInfoSettings.createtime);
-            DataTable dt19num = grjddao.jkAllNum(basicInfoSettings.xcuncode, time);
+            DataTable dt49num = grjddao.jkAllNum(basicInfoSettings.xcuncode, time);
+            if (dt49num != null && dt49num.Rows.Count > 0)
+            {
+                label49.Text = dt49num.Rows[0][0].ToString();//登记人数
+            }
+
+            DataTable dt19num = grjddao.jkAllNum(basicInfoSettings.xcuncode, DateTime.Now.ToString("yyyy-MM-dd"));
             if (dt19num != null && dt19num.Rows.Count > 0)
             {
                 label19.Text = dt19num.Rows[0][0].ToString();//登记人数
@@ -815,6 +821,14 @@ namespace zkhwClient
             if (birthday.IndexOf("-")<0) {
                 MessageBox.Show("出生日期格式不正确,请重新输入!例:1990-01-01");return;
             }
+            try
+            {
+               DateTime b=  DateTime.Parse(birthday);
+            }
+            catch
+            {
+                MessageBox.Show("出生日期格式不正确,请重新输入!例:1990-01-01"); return;
+            }
             string signdate = textBox4.Text;
             string number = textBox3.Text;
             string name = textBox1.Text;
@@ -934,6 +948,16 @@ namespace zkhwClient
                 string idnumber = this.textBox3.Text;
                 if (idnumber != null && idnumber.Length == 18)
                 {
+                    string ab= idnumber.Substring(6, 4) + "-" + idnumber.Substring(10, 2) + "-" + idnumber.Substring(12, 2);
+                    try
+                    {
+                        DateTime c = DateTime.Parse(ab);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("身份证输入有误！");
+                        return;
+                    }
                     DisplayPersonTeShuInfo(idnumber);
 
                     string nameCodenew = textBox1.Text + " " + Regex.Replace(textBox3.Text, "(\\d{6})\\d{10}(\\d{2})", "$1**********$2");

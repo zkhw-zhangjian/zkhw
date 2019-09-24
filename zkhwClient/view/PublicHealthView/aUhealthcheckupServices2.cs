@@ -476,7 +476,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.organ_tooth != null && per.organ_tooth != "")
             {
-                per.organ_tooth = per.organ_tooth.Substring(1);
+                string tmp1 = per.organ_tooth.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.organ_tooth = str;
             }
             
             if (this.radioButton87.Checked == true) { per.organ_guttur = this.radioButton87.Tag.ToString(); };
@@ -658,7 +675,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.examination_breast != null && per.examination_breast != "")
             {
-                per.examination_breast = per.examination_breast.Substring(1);
+                string tmp1 = per.examination_breast.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.examination_breast = str;
                 if (this.checkBox9.Checked)
                 {
                     per.examination_breast_other = this.textBox30.Text;
@@ -1119,7 +1153,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.organ_tooth != null && per.organ_tooth != "")
             {
-                per.organ_tooth = per.organ_tooth.Substring(1);
+                string tmp1 = per.organ_tooth.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.organ_tooth = str;
             }
 
             if (this.radioButton87.Checked == true) { per.organ_guttur = this.radioButton87.Tag.ToString(); };
@@ -1292,7 +1343,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.examination_breast != null && per.examination_breast != "")
             {
-                per.examination_breast = per.examination_breast.Substring(1);
+                string tmp1 = per.examination_breast.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.examination_breast = str;
                 if (this.checkBox9.Checked)
                 {
                     per.examination_breast_other = this.textBox30.Text;
@@ -1424,6 +1492,7 @@ namespace zkhwClient.view.PublicHealthView
 
                 }
             }
+            
             if (this.checkBox2.Checked)
             {
                 per.organ_hypodontia_topleft = hypodontia1;
@@ -1450,7 +1519,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.organ_tooth != null && per.organ_tooth != "")
             {
-                per.organ_tooth = per.organ_tooth.Substring(1);
+                string tmp1 = per.organ_tooth.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.organ_tooth = str; 
             }
 
             if (this.radioButton87.Checked == true) { per.organ_guttur = this.radioButton87.Tag.ToString(); };
@@ -1623,7 +1709,25 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (per.examination_breast != null && per.examination_breast != "")
             {
-                per.examination_breast = per.examination_breast.Substring(1);
+                string tmp1 = per.examination_breast.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                per.examination_breast = str;
+                 
                 if (this.checkBox9.Checked)
                 {
                     per.examination_breast_other = this.textBox30.Text;
