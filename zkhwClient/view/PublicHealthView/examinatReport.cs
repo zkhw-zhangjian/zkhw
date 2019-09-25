@@ -1554,7 +1554,7 @@ where 1=1";
                                 }
                                 else
                                 {
-                                    dics.Add("家族史父亲", fqs);
+                                    dics.Add("家族史父亲1", fqs);
                                 }
                             }
                         }

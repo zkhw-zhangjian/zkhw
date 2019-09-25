@@ -81,7 +81,7 @@ namespace zkhwClient
         }
         private void frmMainm_Load(object sender, EventArgs e)
         {
-            startlabel();
+              startlabel();
             //初始化界面
             basicInfoSettings basicSet = new basicInfoSettings();
             basicSet.setFunDelegate = SetJianDangInfo;
