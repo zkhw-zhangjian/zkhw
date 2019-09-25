@@ -28,7 +28,7 @@ namespace zkhwClient
                 KillProc("httpceshi");
                 Application.EnableVisualStyles();   //这两行实现   XP   可视风格   
                 Application.DoEvents();             //这两行实现   XP   可视风格  
-                Application.Run(new frmLoginn());
+                Application.Run(new frmLogin());
                 //Application.Run(new personRegistt());
 
 

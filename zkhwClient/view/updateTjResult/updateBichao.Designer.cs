@@ -69,7 +69,7 @@
             // 
             this.textBox2.BackColor = System.Drawing.SystemColors.Window;
             this.textBox2.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.textBox2.Location = new System.Drawing.Point(551, 9);
+            this.textBox2.Location = new System.Drawing.Point(562, 9);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(138, 23);
@@ -80,7 +80,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.label4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label4.Location = new System.Drawing.Point(495, 12);
+            this.label4.Location = new System.Drawing.Point(503, 12);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 17);
             this.label4.TabIndex = 40;
@@ -101,7 +101,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label2.Location = new System.Drawing.Point(58, 12);
+            this.label2.Location = new System.Drawing.Point(52, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 17);
             this.label2.TabIndex = 37;
@@ -111,7 +111,7 @@
             // 
             this.textBox3.BackColor = System.Drawing.SystemColors.Window;
             this.textBox3.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.textBox3.Location = new System.Drawing.Point(324, 9);
+            this.textBox3.Location = new System.Drawing.Point(328, 9);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(166, 23);
@@ -122,7 +122,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label1.Location = new System.Drawing.Point(258, 12);
+            this.label1.Location = new System.Drawing.Point(260, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(60, 17);
             this.label1.TabIndex = 43;
@@ -307,7 +307,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.label13.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label13.Location = new System.Drawing.Point(46, 9);
+            this.label13.Location = new System.Drawing.Point(40, 9);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(44, 17);
             this.label13.TabIndex = 37;
@@ -338,7 +338,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.label15.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label15.Location = new System.Drawing.Point(369, 9);
+            this.label15.Location = new System.Drawing.Point(366, 9);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(56, 17);
             this.label15.TabIndex = 40;
@@ -359,7 +359,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.label3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label3.Location = new System.Drawing.Point(37, 10);
+            this.label3.Location = new System.Drawing.Point(31, 10);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 17);
             this.label3.TabIndex = 37;
@@ -389,7 +389,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.label5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label5.Location = new System.Drawing.Point(37, 10);
+            this.label5.Location = new System.Drawing.Point(31, 10);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(56, 17);
             this.label5.TabIndex = 37;
