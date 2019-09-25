@@ -2786,7 +2786,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 139);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1262, 108);
+            this.groupBox3.Size = new System.Drawing.Size(1250, 108);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
@@ -3129,7 +3129,7 @@
             // 
             this.checkBox21.AutoSize = true;
             this.checkBox21.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.checkBox21.Location = new System.Drawing.Point(138, 18);
+            this.checkBox21.Location = new System.Drawing.Point(139, 18);
             this.checkBox21.Name = "checkBox21";
             this.checkBox21.Size = new System.Drawing.Size(86, 25);
             this.checkBox21.TabIndex = 19;

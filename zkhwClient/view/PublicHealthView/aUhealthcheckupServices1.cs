@@ -315,7 +315,7 @@ namespace zkhwClient.view.PublicHealthView
                     if (base_bmi != null && !"".Equals(base_bmi))
                     {
                         double bmidouble = Convert.ToDouble(base_bmi);
-                        if (bmidouble > 24)
+                        if (bmidouble <18 || bmidouble > 24)
                         {
                             this.textBox68.BackColor = Color.Salmon;
                         }
