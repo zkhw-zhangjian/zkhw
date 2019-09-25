@@ -53,7 +53,7 @@ namespace zkhwClient.view.PublicHealthView
 
         private void aUhealthPoorServices_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void button5_Click(object sender, EventArgs e)
