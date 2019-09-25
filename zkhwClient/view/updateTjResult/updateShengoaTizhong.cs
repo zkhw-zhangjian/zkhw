@@ -80,7 +80,7 @@ namespace zkhwClient.view.updateTjResult
         }
         private int GetJudgeResultForBMI(double _bmi)
         {
-            int _result = 1; 
+            int _result = 1;
             if (_bmi >= 24 && _bmi <= 28)
             {
                 _result = 2;
@@ -90,7 +90,12 @@ namespace zkhwClient.view.updateTjResult
             {
                 _result = 3;
                 this.textBox7.ForeColor = Color.Red;
-            }  
+            }
+            else if (_bmi < 18)
+            {
+                _result = 3;
+                this.textBox7.ForeColor = Color.Red;
+            }
             if(_result==1)
             {
                 this.textBox7.ForeColor = Color.Black;

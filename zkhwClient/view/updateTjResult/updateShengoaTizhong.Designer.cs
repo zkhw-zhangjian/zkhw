@@ -48,6 +48,9 @@
             this.label38 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button5 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -58,11 +61,11 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.label6.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label6.Location = new System.Drawing.Point(464, 20);
+            this.label6.Location = new System.Drawing.Point(460, 20);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(48, 17);
+            this.label6.Size = new System.Drawing.Size(56, 17);
             this.label6.TabIndex = 45;
-            this.label6.Text = "体面积 ";
+            this.label6.Text = "体质BMI";
             // 
             // label7
             // 
@@ -81,7 +84,7 @@
             this.textBox5.ForeColor = System.Drawing.SystemColors.ControlText;
             this.textBox5.Location = new System.Drawing.Point(65, 17);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(151, 23);
+            this.textBox5.Size = new System.Drawing.Size(110, 23);
             this.textBox5.TabIndex = 0;
             this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
@@ -103,7 +106,7 @@
             this.textBox6.ForeColor = System.Drawing.SystemColors.ControlText;
             this.textBox6.Location = new System.Drawing.Point(281, 17);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(152, 23);
+            this.textBox6.Size = new System.Drawing.Size(110, 23);
             this.textBox6.TabIndex = 1;
             this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             this.textBox6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
@@ -112,9 +115,9 @@
             // 
             this.textBox7.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.textBox7.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.textBox7.Location = new System.Drawing.Point(517, 17);
+            this.textBox7.Location = new System.Drawing.Point(522, 17);
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(137, 23);
+            this.textBox7.Size = new System.Drawing.Size(86, 23);
             this.textBox7.TabIndex = 8;
             this.textBox7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
             // 
@@ -252,6 +255,9 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.label2);
+            this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.label8);
             this.panel3.Controls.Add(this.textBox5);
             this.panel3.Controls.Add(this.label7);
@@ -281,6 +287,39 @@
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             this.button5.Paint += new System.Windows.Forms.PaintEventHandler(this.button5_Paint);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label1.Location = new System.Drawing.Point(180, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(25, 17);
+            this.label1.TabIndex = 52;
+            this.label1.Text = "cm";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label2.Location = new System.Drawing.Point(397, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(23, 17);
+            this.label2.TabIndex = 53;
+            this.label2.Text = "kg";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.label3.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label3.Location = new System.Drawing.Point(614, 20);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 17);
+            this.label3.TabIndex = 54;
+            this.label3.Text = "kg/㎡";
             // 
             // updateShengoaTizhong
             // 
@@ -329,5 +368,8 @@
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
