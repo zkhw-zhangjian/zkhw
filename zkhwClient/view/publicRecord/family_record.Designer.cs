@@ -87,7 +87,7 @@
             this.button1.BackColor = System.Drawing.Color.SkyBlue;
             this.button1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(111, 213);
+            this.button1.Location = new System.Drawing.Point(278, 214);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(83, 34);
             this.button1.TabIndex = 6;
@@ -100,7 +100,7 @@
             this.button2.BackColor = System.Drawing.Color.Red;
             this.button2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(311, 213);
+            this.button2.Location = new System.Drawing.Point(440, 213);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(81, 34);
             this.button2.TabIndex = 7;
@@ -111,27 +111,29 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.checkBox11);
-            this.panel1.Controls.Add(this.checkBox10);
-            this.panel1.Controls.Add(this.checkBox9);
-            this.panel1.Controls.Add(this.checkBox8);
-            this.panel1.Controls.Add(this.checkBox7);
-            this.panel1.Controls.Add(this.checkBox6);
-            this.panel1.Controls.Add(this.checkBox5);
-            this.panel1.Controls.Add(this.checkBox4);
-            this.panel1.Controls.Add(this.checkBox3);
-            this.panel1.Controls.Add(this.checkBox2);
+              
             this.panel1.Controls.Add(this.checkBox1);
+            this.panel1.Controls.Add(this.checkBox2);
+            this.panel1.Controls.Add(this.checkBox3);
+            this.panel1.Controls.Add(this.checkBox4);
+            this.panel1.Controls.Add(this.checkBox5);
+            this.panel1.Controls.Add(this.checkBox6);
+            this.panel1.Controls.Add(this.checkBox7);
+            this.panel1.Controls.Add(this.checkBox8);
+            this.panel1.Controls.Add(this.checkBox9);
+            this.panel1.Controls.Add(this.checkBox10);
+            this.panel1.Controls.Add(this.checkBox11);
+
             this.panel1.Location = new System.Drawing.Point(111, 60);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(373, 125);
+            this.panel1.Size = new System.Drawing.Size(443, 134);
             this.panel1.TabIndex = 9;
             // 
             // checkBox11
             // 
             this.checkBox11.AutoSize = true;
             this.checkBox11.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox11.Location = new System.Drawing.Point(275, 99);
+            this.checkBox11.Location = new System.Drawing.Point(312, 99);
             this.checkBox11.Name = "checkBox11";
             this.checkBox11.Size = new System.Drawing.Size(92, 24);
             this.checkBox11.TabIndex = 10;
@@ -143,7 +145,7 @@
             // 
             this.checkBox10.AutoSize = true;
             this.checkBox10.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox10.Location = new System.Drawing.Point(115, 98);
+            this.checkBox10.Location = new System.Drawing.Point(128, 98);
             this.checkBox10.Name = "checkBox10";
             this.checkBox10.Size = new System.Drawing.Size(134, 24);
             this.checkBox10.TabIndex = 9;
@@ -167,7 +169,7 @@
             // 
             this.checkBox8.AutoSize = true;
             this.checkBox8.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox8.Location = new System.Drawing.Point(275, 69);
+            this.checkBox8.Location = new System.Drawing.Point(311, 69);
             this.checkBox8.Name = "checkBox8";
             this.checkBox8.Size = new System.Drawing.Size(102, 24);
             this.checkBox8.TabIndex = 7;
@@ -179,7 +181,7 @@
             // 
             this.checkBox7.AutoSize = true;
             this.checkBox7.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox7.Location = new System.Drawing.Point(115, 69);
+            this.checkBox7.Location = new System.Drawing.Point(128, 69);
             this.checkBox7.Name = "checkBox7";
             this.checkBox7.Size = new System.Drawing.Size(165, 24);
             this.checkBox7.TabIndex = 6;
@@ -203,7 +205,7 @@
             // 
             this.checkBox5.AutoSize = true;
             this.checkBox5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox5.Location = new System.Drawing.Point(222, 39);
+            this.checkBox5.Location = new System.Drawing.Point(311, 39);
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.Size = new System.Drawing.Size(123, 24);
             this.checkBox5.TabIndex = 4;
@@ -227,7 +229,7 @@
             // 
             this.checkBox3.AutoSize = true;
             this.checkBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox3.Location = new System.Drawing.Point(243, 7);
+            this.checkBox3.Location = new System.Drawing.Point(311, 7);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(102, 24);
             this.checkBox3.TabIndex = 2;
@@ -239,7 +241,7 @@
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox2.Location = new System.Drawing.Point(136, 7);
+            this.checkBox2.Location = new System.Drawing.Point(152, 7);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(102, 24);
             this.checkBox2.TabIndex = 1;
@@ -263,7 +265,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(493, 256);
+            this.ClientSize = new System.Drawing.Size(566, 260);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);

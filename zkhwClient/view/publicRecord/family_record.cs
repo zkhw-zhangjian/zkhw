@@ -40,6 +40,7 @@ namespace zkhwClient.view
             {
                 relation = "4";
             }
+            #region 原来的
             foreach (Control ctr in this.panel1.Controls)
             {
                 //判断该控件是不是CheckBox
@@ -59,6 +60,8 @@ namespace zkhwClient.view
                 disease_name = disease_name.Substring(1);
                 disease_type = disease_type.Substring(1);
             }
+            #endregion
+
             this.DialogResult = DialogResult.OK;
 
         }

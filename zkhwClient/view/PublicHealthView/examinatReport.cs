@@ -1552,6 +1552,10 @@ where 1=1";
                                         dics.Add("家族史父亲" + (i + 1), y[i]);
                                     }
                                 }
+                                else
+                                {
+                                    dics.Add("家族史父亲", fqs);
+                                }
                             }
                         }
                         DataRow[] mq = da.Select("relation='2'");
@@ -1567,6 +1571,10 @@ where 1=1";
                                     {
                                         dics.Add("家族史母亲" + (i + 1), y[i]);
                                     }
+                                }
+                                else
+                                {
+                                    dics.Add("家族史母亲1", fqs);
                                 }
                             }
                         }
@@ -1585,6 +1593,10 @@ where 1=1";
                                         dics.Add("家族史兄弟" + (i + 1), y[i]);
                                     }
                                 }
+                                else
+                                {
+                                    dics.Add("家族史兄弟1", fqs);
+                                }
                             }
                         }
                         DataRow[] zn = da.Select("relation='4'");
@@ -1600,6 +1612,10 @@ where 1=1";
                                     {
                                         dics.Add("家族史子女" + (i + 1), y[i]);
                                     }
+                                }
+                                else
+                                {
+                                    dics.Add("家族史子女1",fqs);
                                 }
                             }
                         }

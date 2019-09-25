@@ -515,7 +515,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (resident_base_infoBean.pay_type != null && resident_base_infoBean.pay_type != "")
             {
-                resident_base_infoBean.pay_type = resident_base_infoBean.pay_type.Substring(1);
+                string tmp1 = resident_base_infoBean.pay_type.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                resident_base_infoBean.pay_type = str; 
             }
             if (this.checkBox8.Checked) {
                 resident_base_infoBean.pay_other = this.textBox38.Text;
@@ -535,7 +552,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (resident_base_infoBean.drug_allergy != null && resident_base_infoBean.drug_allergy != "")
             {
-                resident_base_infoBean.drug_allergy = resident_base_infoBean.drug_allergy.Substring(1);
+                string tmp1 = resident_base_infoBean.drug_allergy.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                resident_base_infoBean.drug_allergy = str; 
             }
             if (this.checkBox13.Checked)
             {
@@ -556,7 +590,24 @@ namespace zkhwClient.view.PublicHealthView
             }
             if (resident_base_infoBean.exposure != null && resident_base_infoBean.exposure != "")
             {
-                resident_base_infoBean.exposure = resident_base_infoBean.exposure.Substring(1);
+                string tmp1 = resident_base_infoBean.exposure.Substring(1);
+                string[] b = tmp1.Split(',');
+                int[] a = new int[b.Length];
+                string str = "";
+                if (b.Length > 1)
+                {
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        a[i] = int.Parse(b[i].ToString());
+                    }
+                    Array.Sort(a);
+                    str = string.Join(",", a);
+                }
+                else
+                {
+                    str = b[0];
+                }
+                resident_base_infoBean.exposure = str;
             }
             if (this.radioButton48.Checked == true) { resident_base_infoBean.is_heredity = this.radioButton48.Tag.ToString(); };
             if (this.radioButton47.Checked == true) { resident_base_infoBean.is_heredity = this.radioButton47.Tag.ToString();
@@ -577,9 +628,27 @@ namespace zkhwClient.view.PublicHealthView
                     }
                 }
                 if (resident_base_infoBean.is_deformity != null && resident_base_infoBean.is_deformity != "")
-                {
-                    resident_base_infoBean.is_deformity = resident_base_infoBean.is_deformity.Substring(1);
-                    if(this.checkBox33.Checked)resident_base_infoBean.deformity_name = this.textBox37.Text;
+                { 
+                    string tmp1 = resident_base_infoBean.is_deformity.Substring(1);
+                    string[] b = tmp1.Split(',');
+                    int[] a = new int[b.Length];
+                    string str = "";
+                    if (b.Length > 1)
+                    {
+                        for (int i = 0; i < b.Length; i++)
+                        {
+                            a[i] = int.Parse(b[i].ToString());
+                        }
+                        Array.Sort(a);
+                        str = string.Join(",", a);
+                    }
+                    else
+                    {
+                        str = b[0];
+                    }
+                    resident_base_infoBean.is_deformity = str;
+
+                if (this.checkBox33.Checked)resident_base_infoBean.deformity_name = this.textBox37.Text;
                 }
             
 

@@ -1575,7 +1575,6 @@
             this.radioButton39.Name = "radioButton39";
             this.radioButton39.Size = new System.Drawing.Size(69, 25);
             this.radioButton39.TabIndex = 15;
-            this.radioButton39.TabStop = true;
             this.radioButton39.Tag = "6";
             this.radioButton39.Text = "6军人";
             this.radioButton39.UseVisualStyleBackColor = true;
@@ -1612,7 +1611,6 @@
             this.radioButton36.Name = "radioButton36";
             this.radioButton36.Size = new System.Drawing.Size(165, 25);
             this.radioButton36.TabIndex = 12;
-            this.radioButton36.TabStop = true;
             this.radioButton36.Tag = "3";
             this.radioButton36.Text = "3商业、服务业人员";
             this.radioButton36.UseVisualStyleBackColor = true;
@@ -1625,7 +1623,6 @@
             this.radioButton35.Name = "radioButton35";
             this.radioButton35.Size = new System.Drawing.Size(181, 25);
             this.radioButton35.TabIndex = 11;
-            this.radioButton35.TabStop = true;
             this.radioButton35.Tag = "2";
             this.radioButton35.Text = "2办事人员和有关人员";
             this.radioButton35.UseVisualStyleBackColor = true;
@@ -1638,7 +1635,6 @@
             this.radioButton34.Name = "radioButton34";
             this.radioButton34.Size = new System.Drawing.Size(133, 25);
             this.radioButton34.TabIndex = 10;
-            this.radioButton34.TabStop = true;
             this.radioButton34.Tag = "1";
             this.radioButton34.Text = "1专业技术人员";
             this.radioButton34.UseVisualStyleBackColor = true;
@@ -1646,13 +1642,11 @@
             // radioButton33
             // 
             this.radioButton33.AutoSize = true;
-            this.radioButton33.Checked = true;
             this.radioButton33.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.radioButton33.Location = new System.Drawing.Point(8, 5);
             this.radioButton33.Name = "radioButton33";
             this.radioButton33.Size = new System.Drawing.Size(357, 25);
             this.radioButton33.TabIndex = 9;
-            this.radioButton33.TabStop = true;
             this.radioButton33.Tag = "0";
             this.radioButton33.Text = "0国家机关、党群组织、企业、事业单位负责人";
             this.radioButton33.UseVisualStyleBackColor = true;
@@ -1707,7 +1701,6 @@
             this.radioButton30.Name = "radioButton30";
             this.radioButton30.Size = new System.Drawing.Size(69, 25);
             this.radioButton30.TabIndex = 17;
-            this.radioButton30.TabStop = true;
             this.radioButton30.Tag = "8";
             this.radioButton30.Text = "8小学";
             this.radioButton30.UseVisualStyleBackColor = true;
@@ -1720,7 +1713,6 @@
             this.radioButton29.Name = "radioButton29";
             this.radioButton29.Size = new System.Drawing.Size(69, 25);
             this.radioButton29.TabIndex = 16;
-            this.radioButton29.TabStop = true;
             this.radioButton29.Tag = "7";
             this.radioButton29.Text = "7初中";
             this.radioButton29.UseVisualStyleBackColor = true;
@@ -1733,7 +1725,6 @@
             this.radioButton28.Name = "radioButton28";
             this.radioButton28.Size = new System.Drawing.Size(69, 25);
             this.radioButton28.TabIndex = 15;
-            this.radioButton28.TabStop = true;
             this.radioButton28.Tag = "6";
             this.radioButton28.Text = "6高中";
             this.radioButton28.UseVisualStyleBackColor = true;
@@ -1746,7 +1737,6 @@
             this.radioButton27.Name = "radioButton27";
             this.radioButton27.Size = new System.Drawing.Size(101, 25);
             this.radioButton27.TabIndex = 14;
-            this.radioButton27.TabStop = true;
             this.radioButton27.Tag = "5";
             this.radioButton27.Text = "5技工学校";
             this.radioButton27.UseVisualStyleBackColor = true;
@@ -1759,7 +1749,6 @@
             this.radioButton26.Name = "radioButton26";
             this.radioButton26.Size = new System.Drawing.Size(133, 25);
             this.radioButton26.TabIndex = 13;
-            this.radioButton26.TabStop = true;
             this.radioButton26.Tag = "4";
             this.radioButton26.Text = "4中等专业学校";
             this.radioButton26.UseVisualStyleBackColor = true;
@@ -1772,7 +1761,6 @@
             this.radioButton24.Name = "radioButton24";
             this.radioButton24.Size = new System.Drawing.Size(181, 25);
             this.radioButton24.TabIndex = 12;
-            this.radioButton24.TabStop = true;
             this.radioButton24.Tag = "3";
             this.radioButton24.Text = "3大学专科和专科学校";
             this.radioButton24.UseVisualStyleBackColor = true;
@@ -1785,7 +1773,6 @@
             this.radioButton23.Name = "radioButton23";
             this.radioButton23.Size = new System.Drawing.Size(101, 25);
             this.radioButton23.TabIndex = 11;
-            this.radioButton23.TabStop = true;
             this.radioButton23.Tag = "2";
             this.radioButton23.Text = "2大学本科";
             this.radioButton23.UseVisualStyleBackColor = true;
@@ -1793,13 +1780,11 @@
             // radioButton22
             // 
             this.radioButton22.AutoSize = true;
-            this.radioButton22.Checked = true;
             this.radioButton22.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.radioButton22.Location = new System.Drawing.Point(8, 4);
             this.radioButton22.Name = "radioButton22";
             this.radioButton22.Size = new System.Drawing.Size(85, 25);
             this.radioButton22.TabIndex = 10;
-            this.radioButton22.TabStop = true;
             this.radioButton22.Tag = "1";
             this.radioButton22.Text = "1研究生";
             this.radioButton22.UseVisualStyleBackColor = true;
