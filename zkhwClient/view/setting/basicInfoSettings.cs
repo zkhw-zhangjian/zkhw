@@ -336,6 +336,7 @@ namespace zkhwClient.view.setting
                     }
                     issave = "1";
                     MessageBox.Show("数据保存成功！");
+                    this.Close();
                 }
             }
             else{

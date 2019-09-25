@@ -55,9 +55,9 @@ namespace zkhwClient.view.PublicHealthView
             Common.SetComboBoxInfo(comboBox1, areadao.shengInfo());
 
             dttv = grjddao.checkThresholdValues(Common._deviceModel,"");//获取阈值信息
-            registrationRecordCheck();//体检人数统计
 
             queryExaminatProgress();
+            registrationRecordCheck();//体检人数统计
         } 
         public void queryExaminatProgress() 
         { 
@@ -146,18 +146,18 @@ namespace zkhwClient.view.PublicHealthView
                     this.dataGridView1.Rows[x].HeaderCell.Value = String.Format("{0}", x + 1);
                     if (this.dataGridView1.Rows[x].Cells[5].Value.ToString() == "1")
                     {
+                        this.dataGridView1.Rows[x].Cells[5].Style.ForeColor = Color.Green;
                         this.dataGridView1.Rows[x].Cells[5].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[5].Style.ForeColor = Color.Green;
                     }
                     else if (this.dataGridView1.Rows[x].Cells[5].Value.ToString() == "2")
                     {
-                        this.dataGridView1.Rows[x].Cells[5].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[5].Style.ForeColor = Color.Blue;
+                        this.dataGridView1.Rows[x].Cells[5].Style.ForeColor = Color.Blue;
+                        this.dataGridView1.Rows[x].Cells[5].Value = "已完成";                        
                     }
                     else if (this.dataGridView1.Rows[x].Cells[5].Value.ToString() == "3")
                     {
+                        this.dataGridView1.Rows[x].Cells[5].Style.ForeColor = Color.Red;
                         this.dataGridView1.Rows[x].Cells[5].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[5].Style.ForeColor = Color.Red;
                     }
                     else
                     {
@@ -165,18 +165,18 @@ namespace zkhwClient.view.PublicHealthView
                     }
                     if (this.dataGridView1.Rows[x].Cells[6].Value.ToString() == "1")
                     {
+                        this.dataGridView1.Rows[x].Cells[6].Style.ForeColor = Color.Green;
                         this.dataGridView1.Rows[x].Cells[6].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[6].Style.ForeColor = Color.Green;
                     }
                     else if (this.dataGridView1.Rows[x].Cells[6].Value.ToString() == "2")
                     {
-                       this.dataGridView1.Rows[x].Cells[6].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[6].Style.ForeColor = Color.Blue;
+                        this.dataGridView1.Rows[x].Cells[6].Style.ForeColor = Color.Blue;
+                        this.dataGridView1.Rows[x].Cells[6].Value = "已完成";                       
                     }
                     else if (this.dataGridView1.Rows[x].Cells[6].Value.ToString() == "3")
                     {
-                        this.dataGridView1.Rows[x].Cells[6].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[6].Style.ForeColor = Color.Red;
+                        this.dataGridView1.Rows[x].Cells[6].Style.ForeColor = Color.Red;
+                        this.dataGridView1.Rows[x].Cells[6].Value = "已完成";                      
                     }
                     else
                     {
@@ -184,18 +184,18 @@ namespace zkhwClient.view.PublicHealthView
                     }
                     if (this.dataGridView1.Rows[x].Cells[7].Value.ToString() == "1")
                     {
-                        this.dataGridView1.Rows[x].Cells[7].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[7].Style.ForeColor = Color.Green;
+                        this.dataGridView1.Rows[x].Cells[7].Style.ForeColor = Color.Green;
+                        this.dataGridView1.Rows[x].Cells[7].Value = "已完成";                      
                     }
                     else if (this.dataGridView1.Rows[x].Cells[7].Value.ToString() == "2")
                     {
-                        this.dataGridView1.Rows[x].Cells[7].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[7].Style.ForeColor = Color.Blue;
+                        this.dataGridView1.Rows[x].Cells[7].Style.ForeColor = Color.Blue;
+                        this.dataGridView1.Rows[x].Cells[7].Value = "已完成";                       
                     }
                     else if (this.dataGridView1.Rows[x].Cells[7].Value.ToString() == "3")
                     {
-                        this.dataGridView1.Rows[x].Cells[7].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[7].Style.ForeColor = Color.Red;
+                        this.dataGridView1.Rows[x].Cells[7].Style.ForeColor = Color.Red;
+                        this.dataGridView1.Rows[x].Cells[7].Value = "已完成";                      
                     }
                     else
                     {
@@ -203,18 +203,18 @@ namespace zkhwClient.view.PublicHealthView
                     }
                     if (this.dataGridView1.Rows[x].Cells[8].Value.ToString() == "1")
                     {
-                        this.dataGridView1.Rows[x].Cells[8].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[8].Style.ForeColor = Color.Green;
+                        this.dataGridView1.Rows[x].Cells[8].Style.ForeColor = Color.Green;
+                        this.dataGridView1.Rows[x].Cells[8].Value = "已完成";                        
                     }
                     else if (this.dataGridView1.Rows[x].Cells[8].Value.ToString() == "2")
                     {
-                        this.dataGridView1.Rows[x].Cells[8].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[8].Style.ForeColor = Color.Blue;
+                        this.dataGridView1.Rows[x].Cells[8].Style.ForeColor = Color.Blue;
+                        this.dataGridView1.Rows[x].Cells[8].Value = "已完成";                       
                     }
                     else if (this.dataGridView1.Rows[x].Cells[8].Value.ToString() == "3")
                     {
-                        this.dataGridView1.Rows[x].Cells[8].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[8].Style.ForeColor = Color.Red;
+                        this.dataGridView1.Rows[x].Cells[8].Style.ForeColor = Color.Red;
+                        this.dataGridView1.Rows[x].Cells[8].Value = "已完成";                        
                     }
                     else
                     {
@@ -222,18 +222,18 @@ namespace zkhwClient.view.PublicHealthView
                     }
                     if (this.dataGridView1.Rows[x].Cells[9].Value.ToString() == "1")
                     {
-                        this.dataGridView1.Rows[x].Cells[9].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[9].Style.ForeColor = Color.Green;
+                        this.dataGridView1.Rows[x].Cells[9].Style.ForeColor = Color.Green;
+                        this.dataGridView1.Rows[x].Cells[9].Value = "已完成";                        
                     }
                     else if (this.dataGridView1.Rows[x].Cells[9].Value.ToString() == "2")
                     {
+                        this.dataGridView1.Rows[x].Cells[9].Style.ForeColor = Color.Blue;
                         this.dataGridView1.Rows[x].Cells[9].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[9].Style.ForeColor = Color.Blue;
                     }
                     else if (this.dataGridView1.Rows[x].Cells[9].Value.ToString() == "3")
                     {
+                        this.dataGridView1.Rows[x].Cells[9].Style.ForeColor = Color.Red;
                         this.dataGridView1.Rows[x].Cells[9].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[9].Style.ForeColor = Color.Red;
                     }
                     else
                     {
@@ -241,18 +241,18 @@ namespace zkhwClient.view.PublicHealthView
                     }
                     if (this.dataGridView1.Rows[x].Cells[10].Value.ToString() == "1")
                     {
+                        this.dataGridView1.Rows[x].Cells[10].Style.ForeColor = Color.Green;
                         this.dataGridView1.Rows[x].Cells[10].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[10].Style.ForeColor = Color.Green;
                     }
                     else if (this.dataGridView1.Rows[x].Cells[10].Value.ToString() == "2")
                     {
+                        this.dataGridView1.Rows[x].Cells[10].Style.ForeColor = Color.Blue;
                         this.dataGridView1.Rows[x].Cells[10].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[10].Style.ForeColor = Color.Blue;
                     }
                     else if (this.dataGridView1.Rows[x].Cells[10].Value.ToString() == "3")
                     {
+                        this.dataGridView1.Rows[x].Cells[10].Style.ForeColor = Color.Red;
                         this.dataGridView1.Rows[x].Cells[10].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[10].Style.ForeColor = Color.Red;
                     }
                     else
                     {
@@ -260,18 +260,18 @@ namespace zkhwClient.view.PublicHealthView
                     }
                     if (this.dataGridView1.Rows[x].Cells[11].Value.ToString() == "1")
                     {
+                        this.dataGridView1.Rows[x].Cells[11].Style.ForeColor = Color.Green;
                         this.dataGridView1.Rows[x].Cells[11].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[11].Style.ForeColor = Color.Green;
                     }
                     else if (this.dataGridView1.Rows[x].Cells[11].Value.ToString() == "2")
                     {
+                        this.dataGridView1.Rows[x].Cells[11].Style.ForeColor = Color.Blue;
                         this.dataGridView1.Rows[x].Cells[11].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[11].Style.ForeColor = Color.Blue;
                     }
                     else if (this.dataGridView1.Rows[x].Cells[11].Value.ToString() == "3")
                     {
+                        this.dataGridView1.Rows[x].Cells[11].Style.ForeColor = Color.Red;
                         this.dataGridView1.Rows[x].Cells[11].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[11].Style.ForeColor = Color.Red;
                     }
                     else
                     {
@@ -279,45 +279,45 @@ namespace zkhwClient.view.PublicHealthView
                     }
                     if (this.dataGridView1.Rows[x].Cells[12].Value.ToString() == "1")
                     {
-                        dataGridView1.Rows[x].Cells[12].Value = "已完成";
-                        dataGridView1.Rows[x].Cells[12].Style.ForeColor = Color.Green;
+                        this.dataGridView1.Rows[x].Cells[12].Style.ForeColor = Color.Green;
+                        this.dataGridView1.Rows[x].Cells[12].Value = "已完成";
                     }
                     else
                     {
+                        this.dataGridView1.Rows[x].Cells[12].Style.ForeColor = Color.Red;
                         this.dataGridView1.Rows[x].Cells[12].Value = "--";
-                        dataGridView1.Rows[x].Cells[12].Style.ForeColor = Color.Red;
                     }
                     double age = 0;
                     string tmp = this.dataGridView1.Rows[x].Cells[15].Value.ToString();
                     double.TryParse(tmp, out age); 
                     if (age < 65)
-                    { 
-                        dataGridView1.Rows[x].Cells[13].Value = "年龄不符";
-                        dataGridView1.Rows[x].Cells[13].Style.ForeColor = Color.Green;
-                        dataGridView1.Rows[x].Cells[14].Value = "年龄不符";
-                        dataGridView1.Rows[x].Cells[14].Style.ForeColor = Color.Green;
+                    {
+                        this.dataGridView1.Rows[x].Cells[13].Style.ForeColor = Color.Green;
+                        this.dataGridView1.Rows[x].Cells[13].Value = "年龄不符";
+                        this.dataGridView1.Rows[x].Cells[14].Style.ForeColor = Color.Green;
+                        this.dataGridView1.Rows[x].Cells[14].Value = "年龄不符";
                     }
                     else
                     {
                         if (this.dataGridView1.Rows[x].Cells[13].Value.ToString() == "1") 
                         {
-                            dataGridView1.Rows[x].Cells[13].Value = "已完成";
-                            dataGridView1.Rows[x].Cells[13].Style.ForeColor = Color.Green; 
+                            this.dataGridView1.Rows[x].Cells[13].Style.ForeColor = Color.Green; 
+                            this.dataGridView1.Rows[x].Cells[13].Value = "已完成";
                         }
                         else
-                        { 
+                        {
+                            this.dataGridView1.Rows[x].Cells[13].Style.ForeColor = Color.Red;
                             this.dataGridView1.Rows[x].Cells[13].Value = "--";
-                            dataGridView1.Rows[x].Cells[13].Style.ForeColor = Color.Red;
                         }
                         if (this.dataGridView1.Rows[x].Cells[14].Value.ToString() == "1") 
-                        { 
-                            dataGridView1.Rows[x].Cells[14].Value = "已完成"; 
-                            dataGridView1.Rows[x].Cells[14].Style.ForeColor = Color.Green; 
+                        {
+                            this.dataGridView1.Rows[x].Cells[14].Style.ForeColor = Color.Green;
+                            this.dataGridView1.Rows[x].Cells[14].Value = "已完成"; 
                         } 
                         else 
-                        { 
+                        {
+                            this.dataGridView1.Rows[x].Cells[14].Style.ForeColor = Color.Red;
                             this.dataGridView1.Rows[x].Cells[14].Value = "--";
-                            dataGridView1.Rows[x].Cells[14].Style.ForeColor = Color.Red;
                         } 
                     } 
                 } 

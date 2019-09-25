@@ -3241,6 +3241,7 @@ where 1=1";
                             }
                             if (dtdis!=null&& dtdis.Rows.Count>0) {
                                 for (int i=0;i< dtdis.Rows.Count;i++) {
+                                    if (gyyfiag == 1&&"高血压".Equals(dtdis.Rows[i][0].ToString())) { continue; }
                                     sm += dtdis.Rows[i][0].ToString()+ "健康指导：\r\n";
                                     sm += dtdis.Rows[i][1].ToString()+ "\r\n";
                                 }
