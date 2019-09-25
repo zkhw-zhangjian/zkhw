@@ -845,5 +845,18 @@ namespace zkhwClient.view.PublicHealthView
             //float newy = (this.Height) / yMy;
             //Common.setControls(newx, newy, this);
         }
+
+        private void radioButton47_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton47.Checked == true)
+            {
+                textBox36.Enabled = true;
+            }
+            else
+            {
+                textBox36.Text = "";
+                textBox36.Enabled = false;
+            }
+        }
     }
 }
