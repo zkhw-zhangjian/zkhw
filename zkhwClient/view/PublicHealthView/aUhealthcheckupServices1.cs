@@ -415,9 +415,10 @@ namespace zkhwClient.view.PublicHealthView
 
                     if (this.radioButton40.Tag.ToString() == dt.Rows[0]["lifeway_occupational_disease"].ToString()) { this.radioButton40.Checked = true; };
                     if (this.radioButton41.Tag.ToString() == dt.Rows[0]["lifeway_occupational_disease"].ToString())
-                    {
+                    {          
                         this.textBox89.BackColor = Color.Salmon;
                         this.radioButton41.Checked = true;
+                        radioButton41_Click(null, null);
                         this.textBox92.Text = dt.Rows[0]["lifeway_job"].ToString();
                         this.textBox95.Text = dt.Rows[0]["lifeway_job_period"].ToString();
                         this.textBox98.Text = dt.Rows[0]["lifeway_hazardous_dust"].ToString();
@@ -1876,6 +1877,53 @@ and (disease_type='2' or disease_type='3' or disease_type='8' or disease_type='9
             {
                 textBox117.Enabled = false;
                 textBox117.Text = "";
+            }
+        }
+
+        private void radioButton40_Click(object sender, EventArgs e)
+        {
+            if (radioButton40.Checked) {
+                textBox92.Enabled = false;
+                textBox95.Enabled = false;
+                textBox98.Enabled = false;
+                textBox103.Enabled = false;
+                textBox115.Enabled = false;
+                textBox107.Enabled = false;
+                textBox111.Enabled = false;
+                radioButton42.Enabled = false;
+                radioButton43.Enabled = false;
+                radioButton44.Enabled = false;
+                radioButton45.Enabled = false;
+                radioButton46.Enabled = false;
+                radioButton47.Enabled = false;
+                radioButton48.Enabled = false;
+                radioButton49.Enabled = false;
+                radioButton50.Enabled = false;
+                radioButton51.Enabled = false;
+            }
+        }
+
+        private void radioButton41_Click(object sender, EventArgs e)
+        {
+            if (radioButton41.Checked)
+            {
+                textBox92.Enabled = true;
+                textBox95.Enabled = true;
+                textBox98.Enabled = true;
+                textBox103.Enabled = true;
+                textBox115.Enabled = true;
+                textBox107.Enabled = true;
+                textBox111.Enabled = true;
+                radioButton42.Enabled = true;
+                radioButton43.Enabled = true;
+                radioButton44.Enabled = true;
+                radioButton45.Enabled = true;
+                radioButton46.Enabled = true;
+                radioButton47.Enabled = true;
+                radioButton48.Enabled = true;
+                radioButton49.Enabled = true;
+                radioButton50.Enabled = true;
+                radioButton51.Enabled = true;
             }
         }
     }
