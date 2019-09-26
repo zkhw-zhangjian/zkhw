@@ -1450,6 +1450,8 @@ where 1=1";
                     {
                         dics.Add("医疗费用1", yyf);
                     }
+                    string payother = data["pay_other"].ToString();
+                    dics.Add("支付方式其他", payother);
                     string ywgm = data["drug_allergy"].ToString();
                     if (ywgm.IndexOf(',') >= 0)
                     {
