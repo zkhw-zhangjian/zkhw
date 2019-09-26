@@ -286,8 +286,9 @@
             // 家医签约登录ToolStripMenuItem
             // 
             this.家医签约登录ToolStripMenuItem.Name = "家医签约登录ToolStripMenuItem";
-            this.家医签约登录ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.家医签约登录ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.家医签约登录ToolStripMenuItem.Text = "家医签约登录";
+            this.家医签约登录ToolStripMenuItem.Click += new System.EventHandler(this.家医签约登录ToolStripMenuItem_Click);
             // 
             // 设置ToolStripMenuItem
             // 

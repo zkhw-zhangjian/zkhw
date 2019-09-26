@@ -25,11 +25,16 @@ namespace zkhwClient.PublicHealth
         string qxcode = null;
         string shicode = null;
         string shengcode = null;
-
+        //private float xMy;//定义当前窗体的宽度
+        //private float yMy;//定义当前窗体的高度
         bool isfrist = true;
         public olderHelthService()
         {
             InitializeComponent();
+
+            //xMy = this.Width;
+            //yMy = this.Height;
+            //Common.setTag(this);
         }
 
         private void examinatProgress_Load(object sender, EventArgs e)
@@ -80,6 +85,8 @@ namespace zkhwClient.PublicHealth
                 return;
             }
             this.dataGridView1.DataSource = dt;
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular);
+
             this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
             this.dataGridView1.Columns[1].HeaderCell.Value = "档案编号";
             this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
@@ -395,14 +402,16 @@ namespace zkhwClient.PublicHealth
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 10, false, Color.FromArgb(255, 255, 255), Color.FromArgb(255, 255, 255));
             base.OnPaint(e);
         }
-
+         
         private void button1_Paint(object sender, PaintEventArgs e)
         {
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
             base.OnPaint(e);
 
+            
+
             Graphics g = e.Graphics;
-            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 4));
+            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 6));
 
         }
 
@@ -411,17 +420,26 @@ namespace zkhwClient.PublicHealth
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
             base.OnPaint(e);
 
+             
+
             Graphics g = e.Graphics;
-            g.DrawString("添加", new System.Drawing.Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(25, 7));
+            g.DrawString("添加", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 7));
         }
 
         private void button3_Paint(object sender, PaintEventArgs e)
         {
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
-            base.OnPaint(e);
+            base.OnPaint(e); 
 
             Graphics g = e.Graphics;
-            g.DrawString("修改", new System.Drawing.Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(25, 7));
+            g.DrawString("修改", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 7));
+        }
+
+        private void olderHelthService_Paint(object sender, PaintEventArgs e)
+        {
+            //float newx = (this.Width) / xMy;
+            //float newy = (this.Height) / yMy;
+            //Common.setControls(newx, newy, this);
         }
     }
 }

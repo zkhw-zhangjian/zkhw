@@ -230,8 +230,14 @@
     <Compile Include="frmMainm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMainm.Designer.cs">
+    <Compile Include="frmMainm.designer.cs">
       <DependentUpon>frmMainm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMainmm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMainmm.Designer.cs">
+      <DependentUpon>frmMainmm.cs</DependentUpon>
     </Compile>
     <Compile Include="LoaderForm.cs">
       <SubType>Form</SubType>
@@ -887,6 +893,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainm.resx">
       <DependentUpon>frmMainm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainmm.resx">
+      <DependentUpon>frmMainmm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoaderForm.resx">
       <DependentUpon>LoaderForm.cs</DependentUpon>

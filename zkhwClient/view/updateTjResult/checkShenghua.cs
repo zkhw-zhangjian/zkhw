@@ -18,6 +18,9 @@ namespace zkhwClient.view.updateTjResult
         
         private void checkShenghua_Load(object sender, EventArgs e)
         {
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular);
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+
             //让默认的日期时间减一天
             this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1);
            
@@ -32,12 +35,7 @@ namespace zkhwClient.view.updateTjResult
                 this.dataGridView1.Columns[3].HeaderCell.Value = "身份证号";
                 this.dataGridView1.Columns[4].HeaderCell.Value = "条码号";
                 this.dataGridView1.Columns[5].HeaderCell.Value = "是否检验";
-                this.dataGridView1.Columns[0].Width = 120;
-                this.dataGridView1.Columns[1].Width = 120;
-                this.dataGridView1.Columns[2].Width = 160;
-                this.dataGridView1.Columns[3].Width = 160;
-                this.dataGridView1.Columns[4].Width = 110;
-                this.dataGridView1.Columns[5].Width = 100;
+               
                 this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
                 this.dataGridView1.AllowUserToAddRows = false;
                 int rows = this.dataGridView1.Rows.Count - 1 <= 0 ? 0 : this.dataGridView1.Rows.Count - 1;
@@ -93,12 +91,7 @@ namespace zkhwClient.view.updateTjResult
                 this.dataGridView1.Columns[3].HeaderCell.Value = "身份证号";
                 this.dataGridView1.Columns[4].HeaderCell.Value = "条码号";
                 this.dataGridView1.Columns[5].HeaderCell.Value = "是否检验";
-                this.dataGridView1.Columns[0].Width = 120;
-                this.dataGridView1.Columns[1].Width = 120;
-                this.dataGridView1.Columns[2].Width = 160;
-                this.dataGridView1.Columns[3].Width = 160;
-                this.dataGridView1.Columns[4].Width = 110;
-                this.dataGridView1.Columns[5].Width = 100;
+                 
                 this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
                 this.dataGridView1.AllowUserToAddRows = false;
                 int rows = this.dataGridView1.Rows.Count - 1 <= 0 ? 0 : this.dataGridView1.Rows.Count - 1;
@@ -121,7 +114,7 @@ namespace zkhwClient.view.updateTjResult
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("查询", new Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 5));
+            g.DrawString("查询", new Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 5));
         }
     }
 }

@@ -311,24 +311,27 @@ namespace zkhwClient.view.updateTjResult
         {
             int _result = 1;
             DataRow[] drneut = dttv.Select("type='NEUT'");
-            double neutwmin = double.Parse(drneut[0]["warning_min"].ToString());
-            double neutwmax = double.Parse(drneut[0]["warning_max"].ToString());
-            if (neutdouble > neutwmax || neutdouble < neutwmin)
+            if(drneut.Length>0)
             {
-                this.textBox20.ForeColor = Color.Blue;
-                _result = 2;
-            }
-            double neuttmin = double.Parse(drneut[0]["threshold_min"].ToString());
-            double neuttmax = double.Parse(drneut[0]["threshold_max"].ToString());
-            if (neutdouble > neuttmax || neutdouble < neuttmin)
-            {
-                this.textBox20.ForeColor = Color.Red;
-                _result = 3;
-            }
-            if (_result == 1)
-            {
-                this.textBox20.ForeColor = Color.Black;
-            }
+                double neutwmin = double.Parse(drneut[0]["warning_min"].ToString());
+                double neutwmax = double.Parse(drneut[0]["warning_max"].ToString());
+                if (neutdouble > neutwmax || neutdouble < neutwmin)
+                {
+                    this.textBox20.ForeColor = Color.Blue;
+                    _result = 2;
+                }
+                double neuttmin = double.Parse(drneut[0]["threshold_min"].ToString());
+                double neuttmax = double.Parse(drneut[0]["threshold_max"].ToString());
+                if (neutdouble > neuttmax || neutdouble < neuttmin)
+                {
+                    this.textBox20.ForeColor = Color.Red;
+                    _result = 3;
+                }
+                if (_result == 1)
+                {
+                    this.textBox20.ForeColor = Color.Black;
+                }
+            } 
             return _result;
         }
 
@@ -1137,7 +1140,7 @@ namespace zkhwClient.view.updateTjResult
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("保存", new System.Drawing.Font("微软雅黑", 10, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(24, 5));
+            g.DrawString("保存", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 5));
 
         }
     }

@@ -228,7 +228,7 @@ namespace zkhwClient.view.updateTjResult
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("保存", new System.Drawing.Font("微软雅黑", 10, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 5));
+            g.DrawString("保存", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(25, 5));
 
         }
 
@@ -238,7 +238,7 @@ namespace zkhwClient.view.updateTjResult
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("上一张", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 5));
+            g.DrawString("上一张", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 5));
 
         }
 
@@ -248,7 +248,7 @@ namespace zkhwClient.view.updateTjResult
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("下一张", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 5));
+            g.DrawString("下一张", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 5));
 
         }
     }

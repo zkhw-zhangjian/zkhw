@@ -25,9 +25,17 @@ namespace zkhwClient.view.PublicHealthView
         public string qxcode = null;
         public string xzcode = null;
         public string xcuncode = null;
+        private float xMy;//定义当前窗体的宽度
+        private float yMy;//定义当前窗体的高度
+
+
         public personalBasicInfo()
         {
             InitializeComponent();
+
+            //xMy = this.Width;
+            //yMy = this.Height;
+            //Common.setTag(this);
         }
 
         private void personalBasicInfo_Load(object sender, EventArgs e)
@@ -141,6 +149,7 @@ namespace zkhwClient.view.PublicHealthView
                     dtfinished.Rows.Add(dr);
                 }
                 this.dataGridView1.DataSource = dtfinished;
+                dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular);
                 this.dataGridView1.Columns[0].Visible = false;
                 this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";
                 this.dataGridView1.Columns[2].HeaderCell.Value = "档案编号";
@@ -549,18 +558,27 @@ namespace zkhwClient.view.PublicHealthView
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 5));
+            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 6));
 
         }
-
+        
         private void button2_Paint(object sender, PaintEventArgs e)
         {
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
             base.OnPaint(e);
+            StringFormat stringFormat = new StringFormat();
+            stringFormat.Alignment = StringAlignment.Center;
 
             Graphics g = e.Graphics;
-            g.DrawString("修改", new System.Drawing.Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(25, 6));
+            g.DrawString("修改", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 7));
 
+        }
+
+        private void personalBasicInfo_Resize(object sender, EventArgs e)
+        {
+            //float newx = (this.Width) / xMy;
+            //float newy = (this.Height) / yMy;
+            //Common.setControls(newx, newy, this);
         }
     }
 }

@@ -1,34 +1,36 @@
 ﻿using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
-using zkhwClient.view.PublicHealthView;
-using zkhwClient.PublicHealth;
-using zkhwClient.view.HomeDoctorSigningView;
-using zkhwClient.view.UseHelpView;
-using zkhwClient.view.setting;
-using System.Diagnostics;
-using zkhwClient.dao;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
-using System.Xml;
-using System.Threading;
 using System.Data.OleDb;
+using System.Diagnostics;
+using System.Drawing;
 using System.IO;
-using zkhwClient.view.updateTjResult;
-using System.Net;
+using System.IO.Ports;
 using System.Linq;
-using System.Text;
+using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Windows.Forms;
+using System.Xml;
+using zkhwClient.dao;
+using zkhwClient.PublicHealth;
 using zkhwClient.utils;
 using zkhwClient.view;
-using System.IO.Ports;
+using zkhwClient.view.HomeDoctorSigningView;
+using zkhwClient.view.PublicHealthView;
+using zkhwClient.view.setting;
+using zkhwClient.view.updateTjResult;
+using zkhwClient.view.UseHelpView;
 
 namespace zkhwClient
 {
-    public partial class frmMain : Form
+    public partial class frmMainmm : Form
     {
-        personRegist pR = null;
+        personRegistt pR = null;
         Process proHttp = new Process();
         //Process proFtp = new Process();
         Process proAsNet = new Process();
@@ -41,7 +43,7 @@ namespace zkhwClient
         XmlDocument xmlDoc = new XmlDocument();
         XmlNode node;
         string path = @"config.xml";
-        string shenghuapath= "";
+        string shenghuapath = "";
         string xuechangguipath = "";
         string shlasttime = "";
         string xcglasttime = "";
@@ -49,21 +51,123 @@ namespace zkhwClient
         public SerialPort port = new SerialPort();
         Byte[] totalByteRead = new Byte[0];
 
-        public frmMain()
+        private float xMy;//定义当前窗体的宽度
+        private float yMy;//定义当前窗体的高度
+
+        public frmMainmm()
         {
             InitializeComponent();
-        } 
 
-        public void SetJianDangInfo(string a,string b,string c)
-        {
-            label3.Text = a; //建档单位
-            label7.Text = b;//建档人
-            label9.Text = c;//责任医生
+            //xMy = this.Width;
+            //yMy = this.Height;
+            //Common.setTag(this);
         }
-        private void CallMethod(string shxqAgreement,string comnum)
-        { 
+
+        private void startlabel()
+        {
+            label26.Text = "    老年人生活        \r\n    自理能力评估";
+            label30.Text = "    2型糖尿病\r\n    患者健康管理";
+            label27.Text = "    老年人中医药        \r\n    健康管理";
+            label31.Text = "    严重精神障碍        \r\n    患者管理";
+            //label29.Text = "    高血压患者        \r\n    健康管理";
+            //label32.Text = "    肺结核患者        \r\n    健康管理";
+            //label34.Text = "    儿童中医药        \r\n    健康管理";
+            pangw.Dock = DockStyle.Fill; 
+            panel17.Controls.Clear();
+            panel17.Controls.Add(pangw);
+        }
+
+        public void SetJianDangInfo(string a, string b, string c)
+        {
+            label14.Text = "      " + a; //建档单位
+            label18.Text = "      " + b;//建档人
+            label19.Text = "      " + c;//责任医生
+        }
+        private void frmMainm_Load(object sender, EventArgs e)
+        {
+           startlabel();
+            //初始化界面
+            basicInfoSettings basicSet = new basicInfoSettings();
+            basicSet.setFunDelegate = SetJianDangInfo;
+            basicSet.Show();
+
+            //读取配置文件
+            xmlDoc.Load(path);
+            XmlNode node;
+            node = xmlDoc.SelectSingleNode("config/shxqAgreement");
+            string shxqAgreement = node.InnerText;//生化血球厂家协议
+            Common._deviceModel = shxqAgreement;
+
+            dttv = grjddao.checkThresholdValues(Common._deviceModel, "");//获取阈值信息
+            this.timer1.Start();//时间控件定时器
+            //定时器
+            this.timer3.Interval = Int32.Parse(Properties.Settings.Default.timer3Interval);
+            this.timer3.Start();//1分钟定时刷新设备状态
+
+            node = xmlDoc.SelectSingleNode("config/shlasttime");
+            node.InnerText = DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00";
+            xmlDoc.Save(path);
+            xmlDoc.Load(path);
+            node = xmlDoc.SelectSingleNode("config/xcglasttime");
+            node.InnerText = DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00";
+            xmlDoc.Save(path);
+
+            DataTable dts = bsdao.checkBasicsettingInfo();
+            if (dts.Rows.Count > 0)
+            {
+                string a = dts.Rows[0]["organ_name"].ToString();
+                string b = dts.Rows[0]["input_name"].ToString();
+                string c = dts.Rows[0]["zeren_doctor"].ToString();
+                SetJianDangInfo(a, b, c);
+            }
+            else
+            {
+                SetJianDangInfo("", "", "");
+            }
+
+            #region 调用那个程序
+            node = xmlDoc.SelectSingleNode("config/com");
+            string comnum = node.InnerText;
+            CallMethod(shxqAgreement, comnum);
+
+            #endregion
+
+            pR = new personRegistt();
+            OpenWinToMain();
+
+            //http
+            proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
+            proHttp.StartInfo.CreateNoWindow = true;
+            proHttp.StartInfo.UseShellExecute = false;
+            proHttp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            proHttp.StartInfo.ErrorDialog = false;
+            proHttp.StartInfo.UseShellExecute = false;
+            proHttp.Start();
+            //AsNetWork  B超
+            proAsNet.StartInfo.FileName = Application.StartupPath + "\\AsNetWork\\ASNetWks.exe";
+            proAsNet.StartInfo.WorkingDirectory = Application.StartupPath + "\\AsNetWork";
+            proAsNet.StartInfo.CreateNoWindow = true;
+            proAsNet.StartInfo.ErrorDialog = false;
+            proAsNet.StartInfo.UseShellExecute = true;
+            proAsNet.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            proAsNet.Start();
+            Thread.Sleep(300);
+            IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
+
+            ////ftp                 
+            ////proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.05\\ftpservice.exe";
+            ////proFtp.StartInfo.CreateNoWindow = true;
+            ////proFtp.StartInfo.UseShellExecute = false;
+            ////proFtp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            ////proFtp.StartInfo.ErrorDialog = false;
+            ////proFtp.Start();
+            ////Thread.Sleep(1000);
+            ////IntPtrFindWindow.intptrwindows(proFtp.MainWindowHandle);
+        }
+        private void CallMethod(string shxqAgreement, string comnum)
+        {
             string[] sxa = shxqAgreement.Split(',');
-            if (sxa.Length<2) { return; }
+            if (sxa.Length < 2) { return; }
             if (sxa[0].ToString().Trim() == "SH_YNH_001" || sxa[1].ToString().Trim() == "XCG_YNH_001")
             {
                 this.timer2.Interval = Int32.Parse(Properties.Settings.Default.timeInterval);
@@ -71,7 +175,7 @@ namespace zkhwClient
             }
 
             if (sxa[0].ToString().Trim() == "SH_KBE_003" || sxa[1].ToString().Trim() == "XCG_KBE_003")
-            { 
+            {
                 socketTcpKbe();//库贝尔
                 bool bl = initPort(comnum);
                 if (bl)
@@ -96,904 +200,425 @@ namespace zkhwClient
                 socketTcpDr();//迪瑞
             }
         }
-        private void frmMain_Load(object sender, EventArgs e)
-        { 
-            basicInfoSettings basicSet = new basicInfoSettings();
-            basicSet.setFunDelegate = SetJianDangInfo;
-            basicSet.Show();
-            //basicSet.Hide();
+       
+        private void OpenWinToMain()
+        {
+            pR.TopLevel = false;
+            pR.Dock = DockStyle.Fill;
+            pR.FormBorderStyle = FormBorderStyle.None;
+            panel1.Controls.Clear();
+            panel1.Controls.Add(pR);
+            pR.Show();
+        }
+        #region 底部处理 
+        private void label1_Click(object sender, EventArgs e)
+        {
+            Label lbl = (Label)sender;
+            string stag = lbl.Tag.ToString();
+            switch(stag)
+            {
+                case "0":
+                    checkBichao checkBc = new checkBichao();
+                    checkBc.Show();
+                    break;
+                case "1":
+                    checkShenghua checkSh = new checkShenghua();
+                    checkSh.Show();
+                    break;
+                case "2":
+                    checkNiaocg checkNcg = new checkNiaocg();
+                    checkNcg.Show();
+                    break;
+                case "3":
+                    checkXuecg checkXcg = new checkXuecg();
+                    checkXcg.Show();
+                    break;
+                case "4":
+                    checkSgtz checkSgTz = new checkSgtz();
+                    checkSgTz.Show();
+                    break;
+                case "5":
+                    checkXindt checkXdt = new checkXindt();
+                    checkXdt.Show();
+                    break;
+                case "6":
+                    checkXueya checkXy = new checkXueya();
+                    checkXy.Show();
+                    break; 
+            }
+        }
+        private void label1_MouseEnter(object sender, EventArgs e)
+        {
+            Label lbl = (Label)sender;
+            lbl.BackColor = Color.FromArgb(11, 26, 83);
+        }
 
-            xmlDoc.Load(path);
-            XmlNode node;
-            node = xmlDoc.SelectSingleNode("config/shxqAgreement");
-            string shxqAgreement = node.InnerText;//生化血球厂家协议
-            Common._deviceModel = shxqAgreement;
+        private void label1_MouseLeave(object sender, EventArgs e)
+        {
+            Label lbl = (Label)sender;
+            lbl.BackColor = Color.FromArgb(37, 55, 129);
+        }
+        #endregion
 
-            dttv = grjddao.checkThresholdValues(Common._deviceModel, "");//获取阈值信息
-            this.timer1.Start();//时间控件定时器
+        #region 顶部色块处理
+        private void label2_MouseEnter(object sender, EventArgs e)
+        {
+            Label lbl = (Label)sender;
+            lbl.BackColor = Color.FromArgb(118, 118, 118);
+        }
 
-            
-            this.timer3.Interval = Int32.Parse(Properties.Settings.Default.timer3Interval);
-            this.timer3.Start();//1分钟定时刷新设备状态
+        private void label2_MouseLeave(object sender, EventArgs e)
+        {
+            Label lbl = (Label)sender;
+            string stag = lbl.Tag.ToString();
+            if (stag == "0")
+            {
+                lbl.BackColor = Color.FromArgb(67, 67, 67);
+            }
+        }
+        private void setlabeltagfortop()
+        {
+            label2.Tag = 0;
+            label13.Tag = 0;
+            label12.Tag = 0;
+            label15.Tag = 0;
+            label16.Tag = 0;
+            label17.Tag = 0;
 
-            this.label1.Text = "一体化查体车  中科弘卫";
-            this.label1.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
-           
-            node = xmlDoc.SelectSingleNode("config/shlasttime");
-            node.InnerText = DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00";
-            xmlDoc.Save(path);
-            xmlDoc.Load(path);
-            node = xmlDoc.SelectSingleNode("config/xcglasttime");
-            node.InnerText = DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00";
-            xmlDoc.Save(path);
-            //获取首页右上角信息
-            DataTable dts= bsdao.checkBasicsettingInfo();
-            if (dts.Rows.Count>0) {
-                label3.Text= dts.Rows[0]["organ_name"].ToString();
-                label7.Text = dts.Rows[0]["input_name"].ToString();
-                label9.Text = dts.Rows[0]["zeren_doctor"].ToString();
-            } 
+            label2.BackColor = Color.FromArgb(67, 67, 67);
+            label12.BackColor = Color.FromArgb(67, 67, 67);
+        }
+        private void label2_Click(object sender, EventArgs e)
+        {
+            setlabeltagfortop();
+            Label lbl = (Label)sender;
+            lbl.BackColor = Color.FromArgb(118, 118, 118);
+            if (lbl.Text == "公共卫生" || lbl.Text == "设置")
+            {
+                lbl.Tag = 1;
+                if (lbl.Text == "公共卫生")
+                {
+                    pansetup.Visible = false;
+                    pangw.Visible = true;
+                    setlabeltaggongweiforleft(1);
+                    pangw.Dock = DockStyle.Fill;
+                    panel17.Controls.Clear();
+                    panel17.Controls.Add(pangw);
+                    if (pR != null)
+                    {
+                        pR.btnClose_Click();
+                        pR = null;
+                    }
+                    pR = new personRegistt();
+                    OpenWinToMain();
+                }
+                else if (lbl.Text == "设置")
+                {
+                    pansetup.Visible = true;
+                    pangw.Visible = false;
+                    setlabeltagshezhiforleft(1);
+                    pansetup.Dock = DockStyle.Fill;
+                    panel17.Controls.Clear();
+                    panel17.Controls.Add(pansetup);
+
+                    basicInfoSettings frm = new basicInfoSettings();
+                    if (pR != null)
+                    {
+                        pR.btnClose_Click();
+                        pR = null;
+                    }
+                    frm.TopLevel = false;
+                    frm.Dock = DockStyle.Fill;
+                    frm.FormBorderStyle = FormBorderStyle.None;
+                    panel1.Controls.Clear();
+                    panel1.Controls.Add(frm);
+                    frm.Show();
+                }
+            }
+        }
+        #endregion
+
+        #region 左侧设置
+        private Color leftselectColor= Color.FromArgb(49, 151, 052);
+        private Color leftColor= Color.FromArgb(77, 177, 81);
+        private void setlabeltagshezhiforleft(int itype)
+        {
+            if(itype==0)
+            {
+                label49.Tag = "0,0";
+                label49.BackColor = leftColor;
+            }
             else
             {
-                label3.Text = "";
-                label7.Text = "";
-                label9.Text = "";
-            }
-            //默认主页面显示
-            foreach (ToolStripMenuItem item in this.menuStrip1.Items)
+                label49.Tag = "1,0";
+                label49.BackColor = leftselectColor;
+            } 
+            label48.Tag = "0,1";
+            label48.BackColor = leftColor;
+
+            label47.Tag = "0,2";
+            label47.BackColor = leftColor;
+
+            label46.Tag = "0,3";
+            label46.BackColor = leftColor;
+
+            label45.Tag = "0,4";
+            label45.BackColor = leftColor;
+
+            label43.Tag = "0,5";
+            label43.BackColor = leftColor;
+        }
+        private void label49_Click(object sender, EventArgs e)
+        {  
+            setlabeltagshezhiforleft(0);
+            Label lbl = (Label)sender;
+            string a = lbl.Tag.ToString();
+            string[] b = a.Split(',');
+            lbl.Tag = "1," + b[1].ToString();
+            lbl.BackColor = leftselectColor;
+            string c = b[1].ToString();
+            Form frm = null;
+            switch (c)
             {
-                if (item.Text == "公共卫生")
-                {
-                    item.Checked = true;
-                    item.BackColor = Color.CadetBlue;
-                    this.flowLayoutPanel1.Controls.Clear();
-                    //PictureBox[] picb = new PictureBox[item.DropDownItems.Count];
-                    int numcount = 0;
-                    for (int i = 0; i < item.DropDownItems.Count; i++)
-                    {
-                        string stag = item.DropDownItems[i].Tag.ToString();
-                        if (stag == "") stag = "0";
-                        if (int.Parse(stag) == 1)
-                        {
-                            numcount = numcount + 1;
-                        }
-                    }
-                    PictureBox[] picb = new PictureBox[numcount];
-                    int _index = 0;
-                    for (int i = 0; i < item.DropDownItems.Count; i++)
-                    {
-                        string stag = item.DropDownItems[i].Tag.ToString();
-                        if (stag == "") stag = "0";
-                        if (int.Parse(stag) == 0) continue;
-
-                        picb[_index] = new PictureBox();
-                        picb[_index].SizeMode = PictureBoxSizeMode.StretchImage;
-                        picb[_index].BorderStyle = BorderStyle.None;
-                        if (_index == 0)//默认首项选中
-                        {
-                            picb[_index].BackColor = Color.Blue;
-                            pR = new personRegist();
-                            pR.TopLevel = false;
-                            pR.Dock = DockStyle.Fill;
-                            pR.FormBorderStyle = FormBorderStyle.None;
-                            this.panel1.Controls.Clear();
-                            this.panel1.Controls.Add(pR);
-                            pR.Show();
-                        }
-                        picb[_index].Size = new Size(216, 40);//大   小
-                        picb[_index].Click += new EventHandler(picb_DouClick);
-                        picb[_index].Tag = item.DropDownItems[i].Text;
-
-                        TextBox rt = new TextBox();
-                        rt.Width = 200;
-                        rt.Height = 35;
-                        rt.Font = new Font("微软雅黑", 13F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(134)));
-                        rt.Enabled = false;
-                        rt.Text = item.DropDownItems[i].Text;
-                        rt.Parent = picb[_index];//指定父级
-                        this.flowLayoutPanel1.Controls.Add(picb[_index]);
-                        item.DropDownItems[i].Visible = false; //看不见
-
-                        _index = _index + 1;
-                    };
-                }
-                else if (item.Text == "挂机" || item.Text == "系统退出" || item.Text == "系统设置")
-                {
-                    item.Checked = false;
-                    item.BackColor = Color.SkyBlue;
-
-                }//保留系统功能菜单下拉选
-                else
-                {
-                    item.Checked = false;
-                    item.BackColor = Color.SkyBlue;
-                    for (int i = 0; i < item.DropDownItems.Count; i++)
-                    {
-                        item.DropDownItems[i].Visible = false; //看不见
-                    };
-                }//屏蔽其它功能菜单下拉选
+                case "0":
+                    frm = new basicInfoSettings();
+                    break;
+                case "1":
+                    frm = new deviceManagementt();
+                    break;
+                case "2":
+                    frm = new systemlog();
+                    break;
+                case "3":
+                    frm = new parameterSetting();
+                    break;
+                case "4":
+                    break;
+                case "5":
+                    frm = new frmThresholdSetting();
+                    break;
             }
-            #region 调用那个程序
-            node = xmlDoc.SelectSingleNode("config/com");
-            string comnum = node.InnerText;
-            CallMethod(shxqAgreement, comnum);
-            
-            #endregion
-            //http
-            proHttp.StartInfo.FileName = Application.StartupPath + "\\http\\httpCeshi.exe";
-            proHttp.StartInfo.CreateNoWindow = true;
-            proHttp.StartInfo.UseShellExecute = false;
-            proHttp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            proHttp.StartInfo.ErrorDialog = false;
-            proHttp.StartInfo.UseShellExecute = false;
-            proHttp.Start();
-            //AsNetWork  B超
-            proAsNet.StartInfo.FileName = Application.StartupPath + "\\AsNetWork\\ASNetWks.exe";
-            proAsNet.StartInfo.WorkingDirectory = Application.StartupPath + "\\AsNetWork";
-            proAsNet.StartInfo.CreateNoWindow = true;
-            proAsNet.StartInfo.ErrorDialog = false;
-            proAsNet.StartInfo.UseShellExecute = true;
-            proAsNet.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; 
-            proAsNet.Start();
-            Thread.Sleep(300);
-            IntPtrFindWindow.showwindow(proAsNet.MainWindowHandle);
-            ////ftp                 
-            ////proFtp.StartInfo.FileName = @"C:\\Program Files\\iMAC FTP-JN120.05\\ftpservice.exe";
-            ////proFtp.StartInfo.CreateNoWindow = true;
-            ////proFtp.StartInfo.UseShellExecute = false;
-            ////proFtp.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            ////proFtp.StartInfo.ErrorDialog = false;
-            ////proFtp.Start();
-            ////Thread.Sleep(1000);
-            ////IntPtrFindWindow.intptrwindows(proFtp.MainWindowHandle);
-        }
-
-        private void 用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            userManage um = new userManage();
-            um.ShowDialog();
-        }
-
-        private void 密码修改ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            passWordUpdate pwu = new passWordUpdate();
-            pwu.ShowDialog();
-        }
-
-        private void 系统退出ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
+            if (c=="4")
             {
-                if (!proHttp.HasExited)
-                {
-                    proHttp.Kill();
-                }
-                if (!proAsNet.HasExited)
-                {
-                    proAsNet.Kill();
-                }
-                ////if (!proFtp.HasExited)
-                ////{
-                ////    proFtp.Kill();
-                ////}
-                service.loginLogService llse = new service.loginLogService();
-                bean.loginLogBean lb = new bean.loginLogBean();
-                lb.name = frmLogin.name;
-                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                lb.eventInfo = "退出系统！";
-                lb.type = "1";
-                if (lb.name != "admin" && lb.name != "" && lb.name != null)
-                {
-                    llse.addCheckLog(lb);
-                }
-                Process p = Process.GetCurrentProcess();
-                if (p != null)
-                {
-                    p.Kill();
-                }
-                try
-                {
-                    Environment.Exit(0);
-                }
-                catch
-                { } 
+                frmEmpower frm1 = new frmEmpower();
+                frm1._EditType = 0;
+                frm1.ShowDialog();
             }
-            
-        }
-        //挂机
-        [DllImport("user32")]
-        public static extern bool LockWorkStation();//这个是调用windows的系统锁定 
-        private void 挂机ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LockWorkStation();
-        }
-
-        private void 公共卫生ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (ToolStripMenuItem item in this.menuStrip1.Items)
+            else
             {
-                if (item.Text == "公共卫生")
-                { 
-                    item.Checked = true;
-                    item.BackColor = Color.CadetBlue;
-                    this.flowLayoutPanel1.Controls.Clear();
-                    //PictureBox[] picb = new PictureBox[item.DropDownItems.Count];
-
-                    int numcount = 0;
-                    for (int i = 0; i < item.DropDownItems.Count; i++)
-                    {
-                        string stag = item.DropDownItems[i].Tag.ToString();
-                        if (stag == "") stag = "0";
-                        if (int.Parse(stag) == 1)
-                        {
-                            numcount = numcount + 1;
-                        }
-                    }
-                    PictureBox[] picb = new PictureBox[numcount];
-                    int _index = 0;
-                    for (int i = 0; i < item.DropDownItems.Count; i++)
-                    {
-                        string stag = item.DropDownItems[i].Tag.ToString();
-                        if (stag == "") stag = "0";
-                        if (int.Parse(stag) == 0) continue;
-
-                        picb[_index] = new PictureBox();
-                        picb[_index].SizeMode = PictureBoxSizeMode.StretchImage;
-                        picb[_index].BorderStyle = BorderStyle.None;
-                        if (_index == 0)//默认首项选中
-                        {
-                            if (pR!=null) {
-                                pR.btnClose_Click();
-                                pR = null;
-                            }
-                            picb[_index].BackColor = Color.Blue;
-                            pR = new personRegist();
-                            pR.TopLevel = false;
-                            pR.Dock = DockStyle.Fill;
-                            pR.FormBorderStyle = FormBorderStyle.None;
-                            this.panel1.Controls.Clear();
-                            this.panel1.Controls.Add(pR);
-                            pR.Show();
-                        }
-                        picb[_index].Size = new Size(216, 40);//大   小
-                        picb[_index].Click += new EventHandler(picb_DouClick);
-                        picb[_index].Tag = item.DropDownItems[i].Text;
-
-                        TextBox rt = new TextBox();
-                        rt.Width = 200;
-                        rt.Height = 40;
-                        rt.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
-                        rt.Enabled = false;
-                        rt.Text = item.DropDownItems[i].Text;
-                        rt.Parent = picb[_index];//指定父级
-                        this.flowLayoutPanel1.Controls.Add(picb[i]);
-                        item.DropDownItems[i].Visible = false; //看不见
-
-                        _index = _index + 1;
-                    };
-                }
-                else
-                {
-                    item.Checked = false;
-                    item.BackColor = Color.SkyBlue;
-                }
-
-            }
-        }
-        private void 家医ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (ToolStripMenuItem item in this.menuStrip1.Items)
-            {
-                if (item.Text == "家医签约")
-                {
-                    item.Checked = true;
-                    item.BackColor = Color.CadetBlue;
-                    this.flowLayoutPanel1.Controls.Clear();
-                    PictureBox[] picb = new PictureBox[item.DropDownItems.Count];
-                    for (int i = 0; i < item.DropDownItems.Count; i++)
-                    {
-                        picb[i] = new PictureBox();
-                        picb[i].SizeMode = PictureBoxSizeMode.StretchImage;
-                        picb[i].BorderStyle = BorderStyle.None;
-                        if (i == 0)//默认首项选中
-                        {
-                            picb[i].BackColor = Color.Blue;
-                            HomeDoctorLogin pR = new HomeDoctorLogin();
-                            pR.TopLevel = false;
-                            pR.Dock = DockStyle.Fill;
-                            pR.FormBorderStyle = FormBorderStyle.None;
-                            this.panel1.Controls.Clear();
-                            this.panel1.Controls.Add(pR);
-                            pR.Show();
-                        }
-                        picb[i].Size = new Size(216, 40);//大   小
-                        picb[i].Click += new EventHandler(picb_DouClick);
-                        picb[i].Tag = item.DropDownItems[i].Text;
-
-                        TextBox rt = new TextBox();
-                        rt.Width = 200;
-                        rt.Height = 40;
-                        rt.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
-                        rt.Enabled = false;
-                        rt.Text = item.DropDownItems[i].Text;
-                        rt.Parent = picb[i];//指定父级
-                        this.flowLayoutPanel1.Controls.Add(picb[i]);
-                        item.DropDownItems[i].Visible = false; //看不见
-                    };
-                }
-                else
-                {
-                    item.Checked = false;
-                    item.BackColor = Color.SkyBlue;
-                }
-
-            }
-        }
-        private void picb_DouClick(object sender, EventArgs e)
-        {
-            PictureBox pic = (PictureBox)sender;
-            pic.BackColor = Color.Blue;
-            string tag = pic.Tag.ToString();
-            //if (!"人员登记".Equals(tag) && pR != null)
-            //{
-            //    pR.btnClose_Click();
-            //    pR = null;
-            //}
-            //选中打标
-            for (int i = 0; i < this.flowLayoutPanel1.Controls.Count; i++)
-            {
-                if (this.flowLayoutPanel1.Controls[i].Tag.ToString() == tag)
-                {
-                    this.flowLayoutPanel1.Controls[i].BackColor = Color.Blue;
-                }
-                else
-                {
-                    this.flowLayoutPanel1.Controls[i].BackColor = this.flowLayoutPanel1.BackColor;
-                }
-            }
-
-            if (tag == "人员登记")
-            {    //公共卫生模块
                 if (pR != null)
                 {
                     pR.btnClose_Click();
                     pR = null;
                 }
-                pR = new personRegist();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if (tag == "体检进度")
-            {
-                examinatProgress pR = new examinatProgress();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-                pR.queryExaminatProgress();
-            }
-            else if (tag == "体检报告")
-            {
-                examinatReport pR = new examinatReport();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if (tag == "个人基本信息建档")
-            {
-                personalBasicInfo pR = new personalBasicInfo();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if (tag == "健康体检表")
-            {
-                healthCheckup pR = new healthCheckup();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if (tag == "老年人生活自理能力评估")
-            {
-                olderHelthService pR = new olderHelthService();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if (tag == "高血压患者服务")
-            {
-                hypertensionPatientServices pR = new hypertensionPatientServices();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if (tag == "健康扶贫服务")
-            {
-                healthPoorServices pR = new healthPoorServices();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if (tag == "个人档案管理")
-            {
-                fileManagement pR = new fileManagement();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }      
-            else if (tag == "2型糖尿病患者服务")
-            {
-                diabetesPatientServices pR = new diabetesPatientServices();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if (tag == "严重精神病障碍患者服务")
-            {
-                psychiatricPatientServices pR = new psychiatricPatientServices();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if (tag == "肺结核患者服务")
-            {
-                tuberculosisPatientServices pR = new tuberculosisPatientServices();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if (tag == "老年人中医体质辨识")
-            {
-                tcmHealthServices pR = new tcmHealthServices();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if (tag == "孕产妇健康服务")
-            {
-                maternalHealthServices pR = new maternalHealthServices();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if (tag == "0—6岁儿童健康服务")
-            {
-                childHealthServices pR = new childHealthServices();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if (tag == "儿童中医健康服务")
-            {
-                childrenCMHealthServices pR = new childrenCMHealthServices();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            //else if (tag == "健康教育服务")
-            //{
-            //    healthEducationServices pR = new healthEducationServices();
-            //    pR.TopLevel = false;
-            //    pR.Dock = DockStyle.Fill;
-            //    pR.FormBorderStyle = FormBorderStyle.None;
-            //    this.panel1.Controls.Clear();
-            //    this.panel1.Controls.Add(pR);
-            //    pR.Show();
-            //}
-            //else if (tag == "现场签约")
-            //{         //家医签约模块       
-            //    onSiteSigning pR = new onSiteSigning();
-            //    pR.TopLevel = false;
-            //    pR.Dock = DockStyle.Fill;
-            //    pR.FormBorderStyle = FormBorderStyle.None;
-            //    this.panel1.Controls.Clear();
-            //    this.panel1.Controls.Add(pR);
-            //    pR.Show();
-            //}
-            //else if (tag == "团队成员")
-            //{
-            //    teamMembers pR = new teamMembers();
-            //    pR.TopLevel = false;
-            //    pR.Dock = DockStyle.Fill;
-            //    pR.FormBorderStyle = FormBorderStyle.None;
-            //    this.panel1.Controls.Clear();
-            //    this.panel1.Controls.Add(pR);
-            //    pR.Show();
-            //}
-            //else if (tag == "签约统计")
-            //{
-            //    signingStatistics pR = new signingStatistics();
-            //    pR.TopLevel = false;
-            //    pR.Dock = DockStyle.Fill;
-            //    pR.FormBorderStyle = FormBorderStyle.None;
-            //    this.panel1.Controls.Clear();
-            //    this.panel1.Controls.Add(pR);
-            //    pR.Show();
-            //}
-            else if (tag == "家医签约登录")
-            {
-                HomeDoctorLogin pR = new HomeDoctorLogin();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if (tag == "使用情况统计")
-            {     //数据分析模块模块  
-                usageStatistics pR = new usageStatistics(); 
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-
-            }
-            else if (tag == "基本信息设置")
-            {     //设置模块 
-                basicInfoSettings pR = new basicInfoSettings(); 
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if (tag == "设备管理")
-            {
-                deviceManagement pR = new deviceManagement();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if (tag == "系统日志")
-            {
-                systemlog pR = new systemlog();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if (tag == "参数设置")
-            {
-                parameterSetting pR = new parameterSetting();
-                pR.TopLevel = false;
-                pR.Dock = DockStyle.Fill;
-                pR.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(pR);
-                pR.Show();
-            }
-            else if(tag== "软件授权")
-            {
-                //弹出窗体
-                frmEmpower frm = new frmEmpower();
-                frm._EditType = 0;
-                frm.ShowDialog();
-            }
-            else if (tag == "生化血常规范围")
-            {
-                frmThresholdSetting frm = new frmThresholdSetting();
                 frm.TopLevel = false;
                 frm.Dock = DockStyle.Fill;
                 frm.FormBorderStyle = FormBorderStyle.None;
-                this.panel1.Controls.Clear();
-                this.panel1.Controls.Add(frm);
+                panel1.Controls.Clear();
+                panel1.Controls.Add(frm);
                 frm.Show();
             }
-            //else if (tag == "体检设备说明书")
-            //{   //使用帮助模块 
-            //    OpenPdf(Application.StartupPath+ "\\pdf\\仪器配置说明.docx");
-            //}
-            //else if (tag == "软件系统说明书")
-            //{   //使用帮助模块 
-            //    //softwareSystems pR = new softwareSystems();
-            //    //pR.TopLevel = false;
-            //    //pR.Dock = DockStyle.Fill;
-            //    //pR.FormBorderStyle = FormBorderStyle.None;
-            //    //this.panel1.Controls.Clear();
-            //    //this.panel1.Controls.Add(pR);
-            //    //pR.Show();
-            //    OpenPdf(Application.StartupPath + "\\pdf\\软件系统.pdf");
-            //}
-            //else if (tag == "B超")
-            //{
-            //    OpenPdf(Application.StartupPath + "\\pdf\\B超.pdf");
-            //    //bUltrasound pR = new bUltrasound();
-            //    //pR.TopLevel = false;
-            //    //pR.Dock = DockStyle.Fill;
-            //    //pR.FormBorderStyle = FormBorderStyle.None;
-            //    //this.panel1.Controls.Clear();
-            //    //this.panel1.Controls.Add(pR);
-            //    //pR.Show();
-            //}
-            //else if (tag == "生化")
-            //{
-            //    OpenPdf(Application.StartupPath + "\\pdf\\生化.pdf");
-            //    //biochemical pR = new biochemical();
-            //    //pR.TopLevel = false;
-            //    //pR.Dock = DockStyle.Fill;
-            //    //pR.FormBorderStyle = FormBorderStyle.None;
-            //    //this.panel1.Controls.Clear();
-            //    //this.panel1.Controls.Add(pR);
-            //    //pR.Show();
-            //}
-            //else if (tag == "尿常规")
-            //{
-            //    OpenPdf(Application.StartupPath + "\\pdf\\尿常规.pdf");
-            //    //urinaryFluid pR = new urinaryFluid();
-            //    //pR.TopLevel = false;
-            //    //pR.Dock = DockStyle.Fill;
-            //    //pR.FormBorderStyle = FormBorderStyle.None;
-            //    //this.panel1.Controls.Clear();
-            //    //this.panel1.Controls.Add(pR);
-            //    //pR.Show();
-            //}
-            //else if (tag == "血常规")
-            //{
-            //    OpenPdf(Application.StartupPath + "\\pdf\\血常规.pdf");
-            //    //bloodAnalysis pR = new bloodAnalysis();
-            //    //pR.TopLevel = false;
-            //    //pR.Dock = DockStyle.Fill;
-            //    //pR.FormBorderStyle = FormBorderStyle.None;
-            //    //this.panel1.Controls.Clear();
-            //    //this.panel1.Controls.Add(pR);
-            //    //pR.Show();
-            //}
-            //else if (tag == "身高体重")
-            //{
-            //    OpenPdf(Application.StartupPath + "\\pdf\\身高体重.pdf");
-            //    //heightAndWeight pR = new heightAndWeight();
-            //    //pR.TopLevel = false;
-            //    //pR.Dock = DockStyle.Fill;
-            //    //pR.FormBorderStyle = FormBorderStyle.None;
-            //    //this.panel1.Controls.Clear();
-            //    //this.panel1.Controls.Add(pR);
-            //    //pR.Show();
-            //}
-            //else if (tag == "心电图")
-            //{
-            //    OpenPdf(Application.StartupPath + "\\pdf\\心电图.pdf");
-            //    //electrocarDiogram pR = new electrocarDiogram();
-            //    //pR.TopLevel = false;
-            //    //pR.Dock = DockStyle.Fill;
-            //    //pR.FormBorderStyle = FormBorderStyle.None;
-            //    //this.panel1.Controls.Clear();
-            //    //this.panel1.Controls.Add(pR);
-            //    //pR.Show();
-            //}
-            //else if (tag == "血压")
-            //{
-            //    OpenPdf(Application.StartupPath + "\\pdf\\血压.pdf");
-            //    //bloodPressure pR = new bloodPressure();
-            //    //pR.TopLevel = false;
-            //    //pR.Dock = DockStyle.Fill;
-            //    //pR.FormBorderStyle = FormBorderStyle.None;
-            //    //this.panel1.Controls.Clear();
-            //    //this.panel1.Controls.Add(pR);
-            //    //pR.Show();
-            //}
+        }
+
+        private void label49_MouseEnter(object sender, EventArgs e)
+        {
+            Label lbl = (Label)sender;
+            lbl.BackColor = leftselectColor;
+        }
+
+        private void label49_MouseLeave(object sender, EventArgs e)
+        {
+            Label lbl = (Label)sender;
+            string a = lbl.Tag.ToString();
+            string[] b = a.Split(',');
+            if (b[0].ToString() == "0")
+            {
+                lbl.BackColor = leftColor;
+            }
+        }
+        #endregion
+
+        #region 左侧公卫
+        private void label20_MouseEnter(object sender, EventArgs e)
+        {
+            Label lbl = (Label)sender;
+            lbl.BackColor = leftselectColor;
+        }
+
+        private void label20_MouseLeave(object sender, EventArgs e)
+        {
+            Label lbl = (Label)sender;
+            string a = lbl.Tag.ToString();
+            string[] b = a.Split(',');
+            if (b[0].ToString() == "0")
+            {
+                lbl.BackColor = leftColor;
+            }
+        }
+        private void setlabeltaggongweiforleft(int itype)
+        {
+            if(itype==0)
+            {
+                label20.Tag = "0,0";
+                label20.BackColor = leftColor;
+            }
             else
             {
-                this.panel1.Controls.Clear();
+                label20.Tag = "1,0";
+                label20.BackColor = leftselectColor;
             }
-        }
 
-        private void 数据分析ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (ToolStripMenuItem item in this.menuStrip1.Items)
+            label21.Tag = "0,1";
+            label21.BackColor = leftColor;
+
+            label23.Tag = "0,2";
+            label23.BackColor = leftColor;
+
+            label24.Tag = "0,3";
+            label24.BackColor = leftColor;
+
+            label25.Tag = "0,4";
+            label25.BackColor = leftColor;
+
+            label26.Tag = "0,5";
+            label26.BackColor = leftColor;
+
+            label27.Tag = "0,6";
+            label27.BackColor = leftColor;
+
+            label28.Tag = "0,7";
+            label28.BackColor = leftColor;
+
+            label29.Tag = "0,8";
+            label29.BackColor = leftColor;
+
+            label30.Tag = "0,9";
+            label30.BackColor = leftColor;
+
+            label31.Tag = "0,10";
+            label31.BackColor = leftColor;
+
+            label32.Tag = "0,11";
+            label32.BackColor = leftColor;
+
+            label33.Tag = "0,12";
+            label33.BackColor = leftColor;
+
+            label22.Tag = "0,13";
+            label22.BackColor = leftColor;
+
+            label34.Tag = "0,14";
+            label34.BackColor = leftColor;
+        }
+         
+        private void label20_Click(object sender, EventArgs e)
+        { 
+            setlabeltaggongweiforleft(0);
+            Label lbl = (Label)sender;
+            string a = lbl.Tag.ToString();
+            string[] b = a.Split(',');
+            lbl.Tag = "1," + b[1].ToString();
+            lbl.BackColor = leftselectColor;
+            string c = b[1].ToString(); 
+            if(c=="0")
             {
-                if (item.Text == "数据分析")
+                if (pR != null)
                 {
-                    item.Checked = true;
-                    item.BackColor = Color.CadetBlue;
-                    this.flowLayoutPanel1.Controls.Clear();
-                    PictureBox[] picb = new PictureBox[item.DropDownItems.Count];
-                    for (int i = 0; i < item.DropDownItems.Count; i++)
+                    pR.btnClose_Click();
+                    pR = null;
+                }
+                pR = new personRegistt();
+                OpenWinToMain();
+            }
+            else
+            {
+                Form frm = null;
+                switch (c)
+                {
+                    case "1":
+                        frm = new examinatProgress();
+                        break;
+                    case "2":
+                        frm = new examinatReport();
+                        break;
+                    case "3":
+                        frm = new personalBasicInfo();
+                        break;
+                    case "4":
+                        frm = new healthCheckup();
+                        break;
+                    case "5":
+                        frm = new olderHelthService();
+                        break;
+                    case "6":
+                        frm = new tcmHealthServices();
+                        break;
+                    case "7":
+                        frm = new healthPoorServices();
+                        break;
+                    case "8":
+                        frm = new hypertensionPatientServices();
+                        break;
+                    case "9":
+                        frm = new diabetesPatientServices();
+                        break;
+                    case "10":
+                        frm = new psychiatricPatientServices();
+                        break;
+                    case "11":
+                        frm = new tuberculosisPatientServices();
+                        break;
+                    case "12":
+                        frm = new childHealthServices();
+                        break;
+                    case "13":
+                        frm = new maternalHealthServices();
+                        break;
+                    case "14":
+                        frm = new childrenCMHealthServices();
+                        break;
+                }
+                if(frm !=null)
+                {
+                    if (pR != null)
                     {
-                        picb[i] = new PictureBox();
-                        picb[i].SizeMode = PictureBoxSizeMode.StretchImage;
-                        picb[i].BorderStyle = BorderStyle.None;
-                        if (i == 0)//默认首项选中
-                        {
-                            picb[i].BackColor = Color.Blue;
-                            usageStatistics pR = new usageStatistics();
-                            pR.TopLevel = false;
-                            pR.Dock = DockStyle.Fill;
-                            pR.FormBorderStyle = FormBorderStyle.None;
-                            this.panel1.Controls.Clear();
-                            this.panel1.Controls.Add(pR);
-                            pR.Show();
-                        }
-                        picb[i].Size = new Size(216, 40);//大   小
-                        picb[i].Click += new EventHandler(picb_DouClick);
-                        picb[i].Tag = item.DropDownItems[i].Text;
-
-                        TextBox rt = new TextBox();
-                        rt.Width = 200;
-                        rt.Height = 40;
-                        rt.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
-                        rt.Enabled = false;
-                        rt.Text = item.DropDownItems[i].Text;
-                        rt.Parent = picb[i];//指定父级
-                        this.flowLayoutPanel1.Controls.Add(picb[i]);
-                        item.DropDownItems[i].Visible = false; //看不见
-                    };
+                        pR.btnClose_Click();
+                        pR = null;
+                    }
+                    frm.TopLevel = false;
+                    frm.Dock = DockStyle.Fill;
+                    frm.FormBorderStyle = FormBorderStyle.None;
+                    panel1.Controls.Clear();
+                    panel1.Controls.Add(frm);
+                    frm.Show();
                 }
-                else
-                {
-                    item.Checked = false;
-                    item.BackColor = Color.SkyBlue;
-                }
-
-            }
+            } 
         }
+        #endregion
 
-        private void 设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        #region  挂机
+        [DllImport("user32")]
+        public static extern bool LockWorkStation();//这个是调用windows的系统锁定 
+
+        private void label16_Click(object sender, EventArgs e)
         {
-            foreach (ToolStripMenuItem item in this.menuStrip1.Items)
-            {
-                if (item.Text == "设置")
-                {
-                    item.Checked = true;
-                    item.BackColor = Color.CadetBlue;
-                    this.flowLayoutPanel1.Controls.Clear();
-                    PictureBox[] picb = new PictureBox[item.DropDownItems.Count];
-                    for (int i = 0; i < item.DropDownItems.Count; i++)
-                    { 
-                        picb[i] = new PictureBox();
-                        picb[i].SizeMode = PictureBoxSizeMode.StretchImage;
-                        picb[i].BorderStyle = BorderStyle.None;
-                        if (i == 0)//默认首项选中
-                        {
-                            picb[i].BackColor = Color.Blue;
-                            basicInfoSettings pR = new basicInfoSettings();
-                            pR.TopLevel = false;
-                            pR.Dock = DockStyle.Fill;
-                            pR.FormBorderStyle = FormBorderStyle.None;
-                            this.panel1.Controls.Clear();
-                            this.panel1.Controls.Add(pR);
-                            pR.Show();
-                        }
-                        picb[i].Size = new Size(216, 40);//大   小
-                        picb[i].Click += new EventHandler(picb_DouClick);
-                        picb[i].Tag = item.DropDownItems[i].Text;
-
-                        TextBox rt = new TextBox();
-                        rt.Width = 200;
-                        rt.Height = 40;
-                        rt.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
-                        rt.Enabled = false;
-                        rt.Text = item.DropDownItems[i].Text;
-                        rt.Parent = picb[i];//指定父级
-                        this.flowLayoutPanel1.Controls.Add(picb[i]);
-                        item.DropDownItems[i].Visible = false; //看不见
-                    };
-                }
-                else
-                {
-                    item.Checked = false;
-                    item.BackColor = Color.SkyBlue;
-                }
-
-            }
+            LockWorkStation();
         }
+        #endregion
 
-        private void 使用帮助ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void label15_Click(object sender, EventArgs e)
         {
             softwareSystems softs = new softwareSystems();
             softs.Show();
-            //foreach (ToolStripMenuItem item in this.menuStrip1.Items)
-            //{
-            //    if (item.Text == "使用帮助")
-            //    {
-            //        item.Checked = true;
-            //        item.BackColor = Color.CadetBlue;
-            //        this.flowLayoutPanel1.Controls.Clear();
-            //        PictureBox[] picb = new PictureBox[item.DropDownItems.Count];
-            //        for (int i = 0; i < item.DropDownItems.Count; i++)
-            //        {
-            //            picb[i] = new PictureBox();
-            //            picb[i].SizeMode = PictureBoxSizeMode.StretchImage;
-            //            picb[i].BorderStyle = BorderStyle.None;
-            //            if (i == 0)//默认首项选中
-            //            {
-            //                picb[i].BackColor = Color.Blue;
-            //                softwareSystems pR = new softwareSystems();
-            //                pR.TopLevel = false;
-            //                pR.Dock = DockStyle.Fill;
-            //                pR.FormBorderStyle = FormBorderStyle.None;
-            //                this.panel1.Controls.Clear();
-            //                this.panel1.Controls.Add(pR);
-            //                pR.Show();
-            //            }
-            //            picb[i].Size = new Size(216, 40);//大   小
-            //            picb[i].Click += new EventHandler(picb_DouClick);
-            //            picb[i].Tag = item.DropDownItems[i].Text;
-
-            //            TextBox rt = new TextBox();
-            //            rt.Width = 200;
-            //            rt.Height = 40;
-            //            rt.Font = new Font("微软雅黑", 13F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
-            //            rt.Enabled = false;
-            //            rt.Text = item.DropDownItems[i].Text;
-            //            rt.Parent = picb[i];//指定父级
-            //            this.flowLayoutPanel1.Controls.Add(picb[i]);
-            //            item.DropDownItems[i].Visible = false; //看不见
-            //        };
-            //    }
-            //    else
-            //    {
-            //        item.Checked = false;
-            //        item.BackColor = Color.SkyBlue;
-            //    }
-            //}
         }
-        //定时器 刷新页面时间控件
+
         private void timer1_Tick(object sender, EventArgs e)
         {
-            this.label5.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            lbldt.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
-        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        private void frmMainm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            
             try
             {
                 Environment.Exit(0);
@@ -1001,7 +626,7 @@ namespace zkhwClient
             catch
             { }
         }
-        //定时任务获取生化和血球的数据
+        #region 英洛华
         private void timer2_Tick(object sender, EventArgs e)
         {
             xmlDoc.Load(path);
@@ -1031,13 +656,13 @@ namespace zkhwClient
                 if (bl == false) { MessageBox.Show("生化中间库地址不正确，请检查是否设置地址！"); return; }
 
                 string sql1 = "select sample_id,patient_id,send_time from LisOutput where send_time > cdate('" + shlasttime + "') order by send_time asc";
-                if (getShenghua(sql1)==null || getShenghua(sql1).Tables.Count<1) { return; }
+                if (getShenghua(sql1) == null || getShenghua(sql1).Tables.Count < 1) { return; }
                 DataTable arr_dt1 = getShenghua(sql1).Tables[0];
                 if (arr_dt1.Rows.Count > 0)
                 {
                     for (int j = 0; j < arr_dt1.Rows.Count; j++)
                     {
-                        string sql2 = "select lop.patient_id,lop.send_time,lopr.* from LisOutput lop, LisOutputResult lopr where lop.sample_id=lopr.sample_id and lop.sample_id='"+ arr_dt1.Rows[j]["sample_id"].ToString() + "'";
+                        string sql2 = "select lop.patient_id,lop.send_time,lopr.* from LisOutput lop, LisOutputResult lopr where lop.sample_id=lopr.sample_id and lop.sample_id='" + arr_dt1.Rows[j]["sample_id"].ToString() + "'";
                         DataTable arr_dt2 = getShenghua(sql2).Tables[0];
                         if (arr_dt2.Rows.Count > 0)
                         {
@@ -1091,7 +716,7 @@ namespace zkhwClient
                             if (sh.CHO == "N/A") { sh.CHO = "0"; };
                             if (sh.HDL_C == "N/A") { sh.HDL_C = "0"; };
                             if (sh.LDL_C == "N/A") { sh.LDL_C = "0"; };
-                            bool istrue= tjdao.insertShenghuaInfo(sh);
+                            bool istrue = tjdao.insertShenghuaInfo(sh);
                             if (istrue)
                             {
                                 int flag = 1;
@@ -1113,186 +738,186 @@ namespace zkhwClient
                                         flag = 3;
                                     }
                                 }
-                               
-                                    string ast = sh.AST;
-                                    if (ast != null && ast != "*")
+
+                                string ast = sh.AST;
+                                if (ast != null && ast != "*")
+                                {
+                                    double astdouble = double.Parse(ast);
+                                    DataRow[] drast = dttv.Select("type='AST'");
+                                    double astwmin = double.Parse(drast[0]["warning_min"].ToString());
+                                    double astwmax = double.Parse(drast[0]["warning_max"].ToString());
+                                    if (astdouble > astwmax || astdouble < astwmin)
                                     {
-                                        double astdouble = double.Parse(ast);
-                                        DataRow[] drast = dttv.Select("type='AST'");
-                                        double astwmin = double.Parse(drast[0]["warning_min"].ToString());
-                                        double astwmax = double.Parse(drast[0]["warning_max"].ToString());
-                                        if (astdouble > astwmax || astdouble < astwmin)
-                                        {
-                                            flag = 2;
-                                        }
-                                        double asttmin = double.Parse(drast[0]["threshold_min"].ToString());
-                                        double asttmax = double.Parse(drast[0]["threshold_max"].ToString());
-                                        if (astdouble > asttmax || astdouble < asttmin)
-                                        {
-                                            flag = 3;
-                                        }
+                                        flag = 2;
                                     }
-                                
-                                    string tbil = sh.TBIL;
-                                    if (tbil != null && tbil != "*")
+                                    double asttmin = double.Parse(drast[0]["threshold_min"].ToString());
+                                    double asttmax = double.Parse(drast[0]["threshold_max"].ToString());
+                                    if (astdouble > asttmax || astdouble < asttmin)
                                     {
-                                        double tbildouble = double.Parse(tbil);
-                                        DataRow[] drtbil = dttv.Select("type='TBIL'");
-                                        double tbilwmin = double.Parse(drtbil[0]["warning_min"].ToString());
-                                        double tbilwmax = double.Parse(drtbil[0]["warning_max"].ToString());
-                                        if (tbildouble > tbilwmax || tbildouble < tbilwmin)
-                                        {
-                                            flag = 2;
-                                        }
-                                        double tbiltmin = double.Parse(drtbil[0]["threshold_min"].ToString());
-                                        double tbiltmax = double.Parse(drtbil[0]["threshold_max"].ToString());
-                                        if (tbildouble > tbiltmax || tbildouble < tbiltmin)
-                                        {
-                                            flag = 3;
-                                        }
-                                    }  
-                               
-                                    string crea = sh.Crea;
-                                    if (crea != null && crea != "*")
-                                    {
-                                        double creadouble = double.Parse(crea);
-                                        DataRow[] drcrea = dttv.Select("type='CREA'");
-                                        double creawmin = double.Parse(drcrea[0]["warning_min"].ToString());
-                                        double creawmax = double.Parse(drcrea[0]["warning_max"].ToString());
-                                        if (creadouble > creawmax || creadouble < creawmin)
-                                        {
-                                            flag = 2;
-                                        }
-                                        double creatmin = double.Parse(drcrea[0]["threshold_min"].ToString());
-                                        double creatmax = double.Parse(drcrea[0]["threshold_max"].ToString());
-                                        if (creadouble > creatmax || creadouble < creatmin)
-                                        {
-                                            flag = 3;
-                                        }
+                                        flag = 3;
                                     }
-                                
-                                    string urea = sh.UREA;
-                                    if (urea != null && urea != "*")
+                                }
+
+                                string tbil = sh.TBIL;
+                                if (tbil != null && tbil != "*")
+                                {
+                                    double tbildouble = double.Parse(tbil);
+                                    DataRow[] drtbil = dttv.Select("type='TBIL'");
+                                    double tbilwmin = double.Parse(drtbil[0]["warning_min"].ToString());
+                                    double tbilwmax = double.Parse(drtbil[0]["warning_max"].ToString());
+                                    if (tbildouble > tbilwmax || tbildouble < tbilwmin)
                                     {
-                                        double ureadouble = double.Parse(urea);
-                                        DataRow[] drurea = dttv.Select("type='UREA'");
-                                        double ureawmin = double.Parse(drurea[0]["warning_min"].ToString());
-                                        double ureawmax = double.Parse(drurea[0]["warning_max"].ToString());
-                                        if (ureadouble > ureawmax || ureadouble < ureawmin)
-                                        {
-                                            flag = 2;
-                                        }
-                                        double ureatmin = double.Parse(drurea[0]["threshold_min"].ToString());
-                                        double ureatmax = double.Parse(drurea[0]["threshold_max"].ToString());
-                                        if (ureadouble > ureatmax || ureadouble < ureatmin)
-                                        {
-                                            flag = 3;
-                                        }
+                                        flag = 2;
                                     }
-                               
-                                    string glu = sh.GLU;
-                                    if (glu != null && glu != "*")
+                                    double tbiltmin = double.Parse(drtbil[0]["threshold_min"].ToString());
+                                    double tbiltmax = double.Parse(drtbil[0]["threshold_max"].ToString());
+                                    if (tbildouble > tbiltmax || tbildouble < tbiltmin)
                                     {
-                                        double gludouble = double.Parse(glu);
-                                        DataRow[] drglu = dttv.Select("type='GLU'");
-                                        double gluwmin = double.Parse(drglu[0]["warning_min"].ToString());
-                                        double gluwmax = double.Parse(drglu[0]["warning_max"].ToString());
-                                        if (gludouble > gluwmax || gludouble < gluwmin)
-                                        {
-                                            flag = 2;
-                                        }
-                                        double glutmin = double.Parse(drglu[0]["threshold_min"].ToString());
-                                        double glutmax = double.Parse(drglu[0]["threshold_max"].ToString());
-                                        if (gludouble > glutmax || gludouble < glutmin)
-                                        {
-                                            flag = 3;
-                                        }
+                                        flag = 3;
                                     }
-                              
-                                    string tg = sh.TG;
-                                    if (tg != null && tg != "*")
+                                }
+
+                                string crea = sh.Crea;
+                                if (crea != null && crea != "*")
+                                {
+                                    double creadouble = double.Parse(crea);
+                                    DataRow[] drcrea = dttv.Select("type='CREA'");
+                                    double creawmin = double.Parse(drcrea[0]["warning_min"].ToString());
+                                    double creawmax = double.Parse(drcrea[0]["warning_max"].ToString());
+                                    if (creadouble > creawmax || creadouble < creawmin)
                                     {
-                                        double tgdouble = double.Parse(tg);
-                                        DataRow[] drtg = dttv.Select("type='TG'");
-                                        double tgwmin = double.Parse(drtg[0]["warning_min"].ToString());
-                                        double tgwmax = double.Parse(drtg[0]["warning_max"].ToString());
-                                        if (tgdouble > tgwmax || tgdouble < tgwmin)
-                                        {
-                                            flag = 2;
-                                        }
-                                        double tgtmin = double.Parse(drtg[0]["threshold_min"].ToString());
-                                        double tgtmax = double.Parse(drtg[0]["threshold_max"].ToString());
-                                        if (tgdouble > tgtmax || tgdouble < tgtmin)
-                                        {
-                                            flag = 3;
-                                        }
+                                        flag = 2;
                                     }
-                               
-                                    string cho = sh.CHO;
-                                    if (cho != null && cho != "*")
+                                    double creatmin = double.Parse(drcrea[0]["threshold_min"].ToString());
+                                    double creatmax = double.Parse(drcrea[0]["threshold_max"].ToString());
+                                    if (creadouble > creatmax || creadouble < creatmin)
                                     {
-                                        double chodouble = double.Parse(cho);
-                                        DataRow[] drcho = dttv.Select("type='CHO'");
-                                        double chowmin = double.Parse(drcho[0]["warning_min"].ToString());
-                                        double chowmax = double.Parse(drcho[0]["warning_max"].ToString());
-                                        if (chodouble > chowmax || chodouble < chowmin)
-                                        {
-                                            flag = 2;
-                                        }
-                                        double chotmin = double.Parse(drcho[0]["threshold_min"].ToString());
-                                        double chotmax = double.Parse(drcho[0]["threshold_max"].ToString());
-                                        if (chodouble > chotmax || chodouble < chotmin)
-                                        {
-                                            flag = 3;
-                                        }
+                                        flag = 3;
                                     }
-                               
-                                    string hdlc = sh.HDL_C;
-                                    if (hdlc != null && hdlc != "*")
+                                }
+
+                                string urea = sh.UREA;
+                                if (urea != null && urea != "*")
+                                {
+                                    double ureadouble = double.Parse(urea);
+                                    DataRow[] drurea = dttv.Select("type='UREA'");
+                                    double ureawmin = double.Parse(drurea[0]["warning_min"].ToString());
+                                    double ureawmax = double.Parse(drurea[0]["warning_max"].ToString());
+                                    if (ureadouble > ureawmax || ureadouble < ureawmin)
                                     {
-                                        double hdlcdouble = double.Parse(hdlc);
-                                        DataRow[] drhdlc = dttv.Select("type='HDLC'");
-                                        if (drhdlc.Length == 0)
-                                        {
-                                            drhdlc = dttv.Select("type='HDL'");
-                                        }
-                                        double hdlcwmin = double.Parse(drhdlc[0]["warning_min"].ToString());
-                                        double hdlcwmax = double.Parse(drhdlc[0]["warning_max"].ToString());
-                                        if (hdlcdouble > hdlcwmax || hdlcdouble < hdlcwmin)
-                                        {
-                                            flag = 2;
-                                        }
-                                        double hdlctmin = double.Parse(drhdlc[0]["threshold_min"].ToString());
-                                        double hdlctmax = double.Parse(drhdlc[0]["threshold_max"].ToString());
-                                        if (hdlcdouble > hdlctmax || hdlcdouble < hdlctmin)
-                                        {
-                                            flag = 3;
-                                        }
+                                        flag = 2;
                                     }
-                              
-                                    string ldlc = sh.LDL_C;
-                                    if (ldlc != null && ldlc != "*")
+                                    double ureatmin = double.Parse(drurea[0]["threshold_min"].ToString());
+                                    double ureatmax = double.Parse(drurea[0]["threshold_max"].ToString());
+                                    if (ureadouble > ureatmax || ureadouble < ureatmin)
                                     {
-                                        double ldlcdouble = double.Parse(ldlc);
-                                        DataRow[] drldlc = dttv.Select("type='LDLC'");
+                                        flag = 3;
+                                    }
+                                }
+
+                                string glu = sh.GLU;
+                                if (glu != null && glu != "*")
+                                {
+                                    double gludouble = double.Parse(glu);
+                                    DataRow[] drglu = dttv.Select("type='GLU'");
+                                    double gluwmin = double.Parse(drglu[0]["warning_min"].ToString());
+                                    double gluwmax = double.Parse(drglu[0]["warning_max"].ToString());
+                                    if (gludouble > gluwmax || gludouble < gluwmin)
+                                    {
+                                        flag = 2;
+                                    }
+                                    double glutmin = double.Parse(drglu[0]["threshold_min"].ToString());
+                                    double glutmax = double.Parse(drglu[0]["threshold_max"].ToString());
+                                    if (gludouble > glutmax || gludouble < glutmin)
+                                    {
+                                        flag = 3;
+                                    }
+                                }
+
+                                string tg = sh.TG;
+                                if (tg != null && tg != "*")
+                                {
+                                    double tgdouble = double.Parse(tg);
+                                    DataRow[] drtg = dttv.Select("type='TG'");
+                                    double tgwmin = double.Parse(drtg[0]["warning_min"].ToString());
+                                    double tgwmax = double.Parse(drtg[0]["warning_max"].ToString());
+                                    if (tgdouble > tgwmax || tgdouble < tgwmin)
+                                    {
+                                        flag = 2;
+                                    }
+                                    double tgtmin = double.Parse(drtg[0]["threshold_min"].ToString());
+                                    double tgtmax = double.Parse(drtg[0]["threshold_max"].ToString());
+                                    if (tgdouble > tgtmax || tgdouble < tgtmin)
+                                    {
+                                        flag = 3;
+                                    }
+                                }
+
+                                string cho = sh.CHO;
+                                if (cho != null && cho != "*")
+                                {
+                                    double chodouble = double.Parse(cho);
+                                    DataRow[] drcho = dttv.Select("type='CHO'");
+                                    double chowmin = double.Parse(drcho[0]["warning_min"].ToString());
+                                    double chowmax = double.Parse(drcho[0]["warning_max"].ToString());
+                                    if (chodouble > chowmax || chodouble < chowmin)
+                                    {
+                                        flag = 2;
+                                    }
+                                    double chotmin = double.Parse(drcho[0]["threshold_min"].ToString());
+                                    double chotmax = double.Parse(drcho[0]["threshold_max"].ToString());
+                                    if (chodouble > chotmax || chodouble < chotmin)
+                                    {
+                                        flag = 3;
+                                    }
+                                }
+
+                                string hdlc = sh.HDL_C;
+                                if (hdlc != null && hdlc != "*")
+                                {
+                                    double hdlcdouble = double.Parse(hdlc);
+                                    DataRow[] drhdlc = dttv.Select("type='HDLC'");
+                                    if (drhdlc.Length == 0)
+                                    {
+                                        drhdlc = dttv.Select("type='HDL'");
+                                    }
+                                    double hdlcwmin = double.Parse(drhdlc[0]["warning_min"].ToString());
+                                    double hdlcwmax = double.Parse(drhdlc[0]["warning_max"].ToString());
+                                    if (hdlcdouble > hdlcwmax || hdlcdouble < hdlcwmin)
+                                    {
+                                        flag = 2;
+                                    }
+                                    double hdlctmin = double.Parse(drhdlc[0]["threshold_min"].ToString());
+                                    double hdlctmax = double.Parse(drhdlc[0]["threshold_max"].ToString());
+                                    if (hdlcdouble > hdlctmax || hdlcdouble < hdlctmin)
+                                    {
+                                        flag = 3;
+                                    }
+                                }
+
+                                string ldlc = sh.LDL_C;
+                                if (ldlc != null && ldlc != "*")
+                                {
+                                    double ldlcdouble = double.Parse(ldlc);
+                                    DataRow[] drldlc = dttv.Select("type='LDLC'");
                                     if (drldlc.Length == 0)
                                     {
                                         drldlc = dttv.Select("type='LDL'");
                                     }
                                     double ldlcwmin = double.Parse(drldlc[0]["warning_min"].ToString());
-                                        double ldlcwmax = double.Parse(drldlc[0]["warning_max"].ToString());
-                                        if (ldlcdouble > ldlcwmax || ldlcdouble < ldlcwmin)
-                                        {
-                                            flag = 2;
-                                        }
-                                        double ldlctmin = double.Parse(drldlc[0]["threshold_min"].ToString());
-                                        double ldlctmax = double.Parse(drldlc[0]["threshold_max"].ToString());
-                                        if (ldlcdouble > ldlctmax || ldlcdouble < ldlctmin)
-                                        {
-                                            flag = 3;
-                                        }
+                                    double ldlcwmax = double.Parse(drldlc[0]["warning_max"].ToString());
+                                    if (ldlcdouble > ldlcwmax || ldlcdouble < ldlcwmin)
+                                    {
+                                        flag = 2;
                                     }
-                                
+                                    double ldlctmin = double.Parse(drldlc[0]["threshold_min"].ToString());
+                                    double ldlctmax = double.Parse(drldlc[0]["threshold_max"].ToString());
+                                    if (ldlcdouble > ldlctmax || ldlcdouble < ldlctmin)
+                                    {
+                                        flag = 3;
+                                    }
+                                }
+
                                 tjdao.updateTJbgdcShenghua(sh.aichive_no, sh.bar_code, flag);
                                 tjdao.updatePEShInfo(sh.aichive_no, sh.bar_code, sh.CHO, sh.TG, sh.LDL_C, sh.HDL_C, sh.GLU, sh.ALT, sh.AST, sh.ALB, sh.TBIL, sh.DBIL, sh.Crea, sh.UREA);
                                 //xmlDoc.Load(path);
@@ -1301,8 +926,9 @@ namespace zkhwClient
                                 //node.InnerText = sh.createTime;
                                 //xmlDoc.Save(path);
                             }
-                            else {
-                                bool istree= tjdao.updateShenghuaInfo(sh);
+                            else
+                            {
+                                bool istree = tjdao.updateShenghuaInfo(sh);
                                 if (!istree) return;
                                 int flag = 1;
                                 string alt = sh.ALT;
@@ -1323,190 +949,190 @@ namespace zkhwClient
                                         flag = 3;
                                     }
                                 }
-                               
-                                    string ast = sh.AST;
-                                    if (ast != null && ast != "*")
+
+                                string ast = sh.AST;
+                                if (ast != null && ast != "*")
+                                {
+                                    double astdouble = double.Parse(ast);
+                                    DataRow[] drast = dttv.Select("type='AST'");
+                                    double astwmin = double.Parse(drast[0]["warning_min"].ToString());
+                                    double astwmax = double.Parse(drast[0]["warning_max"].ToString());
+                                    if (astdouble > astwmax || astdouble < astwmin)
                                     {
-                                        double astdouble = double.Parse(ast);
-                                        DataRow[] drast = dttv.Select("type='AST'");
-                                        double astwmin = double.Parse(drast[0]["warning_min"].ToString());
-                                        double astwmax = double.Parse(drast[0]["warning_max"].ToString());
-                                        if (astdouble > astwmax || astdouble < astwmin)
-                                        {
-                                            flag = 2;
-                                        }
-                                        double asttmin = double.Parse(drast[0]["threshold_min"].ToString());
-                                        double asttmax = double.Parse(drast[0]["threshold_max"].ToString());
-                                        if (astdouble > asttmax || astdouble < asttmin)
-                                        {
-                                            flag = 3;
-                                        }
+                                        flag = 2;
                                     }
-                               
-                                    string tbil = sh.TBIL;
-                                    if (tbil != null && tbil != "*")
+                                    double asttmin = double.Parse(drast[0]["threshold_min"].ToString());
+                                    double asttmax = double.Parse(drast[0]["threshold_max"].ToString());
+                                    if (astdouble > asttmax || astdouble < asttmin)
                                     {
-                                        double tbildouble = double.Parse(tbil);
-                                        DataRow[] drtbil = dttv.Select("type='TBIL'");
-                                        double tbilwmin = double.Parse(drtbil[0]["warning_min"].ToString());
-                                        double tbilwmax = double.Parse(drtbil[0]["warning_max"].ToString());
-                                        if (tbildouble > tbilwmax || tbildouble < tbilwmin)
-                                        {
-                                            flag = 2;
-                                        }
-                                        double tbiltmin = double.Parse(drtbil[0]["threshold_min"].ToString());
-                                        double tbiltmax = double.Parse(drtbil[0]["threshold_max"].ToString());
-                                        if (tbildouble > tbiltmax || tbildouble < tbiltmin)
-                                        {
-                                            flag = 3;
-                                        }
+                                        flag = 3;
                                     }
-                               
-                                    string crea = sh.Crea;
-                                    if (crea != null && crea != "*")
+                                }
+
+                                string tbil = sh.TBIL;
+                                if (tbil != null && tbil != "*")
+                                {
+                                    double tbildouble = double.Parse(tbil);
+                                    DataRow[] drtbil = dttv.Select("type='TBIL'");
+                                    double tbilwmin = double.Parse(drtbil[0]["warning_min"].ToString());
+                                    double tbilwmax = double.Parse(drtbil[0]["warning_max"].ToString());
+                                    if (tbildouble > tbilwmax || tbildouble < tbilwmin)
                                     {
-                                        double creadouble = double.Parse(crea);
-                                        DataRow[] drcrea = dttv.Select("type='CREA'");
-                                        double creawmin = double.Parse(drcrea[0]["warning_min"].ToString());
-                                        double creawmax = double.Parse(drcrea[0]["warning_max"].ToString());
-                                        if (creadouble > creawmax || creadouble < creawmin)
-                                        {
-                                            flag = 2;
-                                        }
-                                        double creatmin = double.Parse(drcrea[0]["threshold_min"].ToString());
-                                        double creatmax = double.Parse(drcrea[0]["threshold_max"].ToString());
-                                        if (creadouble > creatmax || creadouble < creatmin)
-                                        {
-                                            flag = 3;
-                                        }
+                                        flag = 2;
                                     }
-                              
-                                    string urea = sh.UREA;
-                                    if (urea != null && urea != "*")
+                                    double tbiltmin = double.Parse(drtbil[0]["threshold_min"].ToString());
+                                    double tbiltmax = double.Parse(drtbil[0]["threshold_max"].ToString());
+                                    if (tbildouble > tbiltmax || tbildouble < tbiltmin)
                                     {
-                                        double ureadouble = double.Parse(urea);
-                                        DataRow[] drurea = dttv.Select("type='UREA'");
-                                        double ureawmin = double.Parse(drurea[0]["warning_min"].ToString());
-                                        double ureawmax = double.Parse(drurea[0]["warning_max"].ToString());
-                                        if (ureadouble > ureawmax || ureadouble < ureawmin)
-                                        {
-                                            flag = 2;
-                                        }
-                                        double ureatmin = double.Parse(drurea[0]["threshold_min"].ToString());
-                                        double ureatmax = double.Parse(drurea[0]["threshold_max"].ToString());
-                                        if (ureadouble > ureatmax || ureadouble < ureatmin)
-                                        {
-                                            flag = 3;
-                                        }
+                                        flag = 3;
                                     }
-                               
-                                    string glu = sh.GLU;
-                                    if (glu != null && glu != "*")
+                                }
+
+                                string crea = sh.Crea;
+                                if (crea != null && crea != "*")
+                                {
+                                    double creadouble = double.Parse(crea);
+                                    DataRow[] drcrea = dttv.Select("type='CREA'");
+                                    double creawmin = double.Parse(drcrea[0]["warning_min"].ToString());
+                                    double creawmax = double.Parse(drcrea[0]["warning_max"].ToString());
+                                    if (creadouble > creawmax || creadouble < creawmin)
                                     {
-                                        double gludouble = double.Parse(glu);
-                                        DataRow[] drglu = dttv.Select("type='GLU'");
-                                        double gluwmin = double.Parse(drglu[0]["warning_min"].ToString());
-                                        double gluwmax = double.Parse(drglu[0]["warning_max"].ToString());
-                                        if (gludouble > gluwmax || gludouble < gluwmin)
-                                        {
-                                            flag = 2;
-                                        }
-                                        double glutmin = double.Parse(drglu[0]["threshold_min"].ToString());
-                                        double glutmax = double.Parse(drglu[0]["threshold_max"].ToString());
-                                        if (gludouble > glutmax || gludouble < glutmin)
-                                        {
-                                            flag = 3;
-                                        }
+                                        flag = 2;
                                     }
-                                
-                                    string tg = sh.TG;
-                                    if (tg != null && tg != "*")
+                                    double creatmin = double.Parse(drcrea[0]["threshold_min"].ToString());
+                                    double creatmax = double.Parse(drcrea[0]["threshold_max"].ToString());
+                                    if (creadouble > creatmax || creadouble < creatmin)
                                     {
-                                        double tgdouble = double.Parse(tg);
-                                        DataRow[] drtg = dttv.Select("type='TG'");
-                                        double tgwmin = double.Parse(drtg[0]["warning_min"].ToString());
-                                        double tgwmax = double.Parse(drtg[0]["warning_max"].ToString());
-                                        if (tgdouble > tgwmax || tgdouble < tgwmin)
-                                        {
-                                            flag = 2;
-                                        }
-                                        double tgtmin = double.Parse(drtg[0]["threshold_min"].ToString());
-                                        double tgtmax = double.Parse(drtg[0]["threshold_max"].ToString());
-                                        if (tgdouble > tgtmax || tgdouble < tgtmin)
-                                        {
-                                            flag = 3;
-                                        }
+                                        flag = 3;
                                     }
-                               
-                                    string cho = sh.CHO;
-                                    if (cho != null && cho != "*")
+                                }
+
+                                string urea = sh.UREA;
+                                if (urea != null && urea != "*")
+                                {
+                                    double ureadouble = double.Parse(urea);
+                                    DataRow[] drurea = dttv.Select("type='UREA'");
+                                    double ureawmin = double.Parse(drurea[0]["warning_min"].ToString());
+                                    double ureawmax = double.Parse(drurea[0]["warning_max"].ToString());
+                                    if (ureadouble > ureawmax || ureadouble < ureawmin)
                                     {
-                                        double chodouble = double.Parse(cho);
-                                        DataRow[] drcho = dttv.Select("type='CHO'");
-                                        double chowmin = double.Parse(drcho[0]["warning_min"].ToString());
-                                        double chowmax = double.Parse(drcho[0]["warning_max"].ToString());
-                                        if (chodouble > chowmax || chodouble < chowmin)
-                                        {
-                                            flag = 2;
-                                        }
-                                        double chotmin = double.Parse(drcho[0]["threshold_min"].ToString());
-                                        double chotmax = double.Parse(drcho[0]["threshold_max"].ToString());
-                                        if (chodouble > chotmax || chodouble < chotmin)
-                                        {
-                                            flag = 3;
-                                        }
+                                        flag = 2;
                                     }
-                               
-                                    string hdlc = sh.HDL_C;
-                                    if (hdlc != null && hdlc != "*")
+                                    double ureatmin = double.Parse(drurea[0]["threshold_min"].ToString());
+                                    double ureatmax = double.Parse(drurea[0]["threshold_max"].ToString());
+                                    if (ureadouble > ureatmax || ureadouble < ureatmin)
                                     {
-                                        double hdlcdouble = double.Parse(hdlc);
-                                        DataRow[] drhdlc = dttv.Select("type='HDLC'");
-                                        if (drhdlc.Length == 0)
-                                        {
-                                            drhdlc = dttv.Select("type='HDL'");
-                                        }
-                                        double hdlcwmin = double.Parse(drhdlc[0]["warning_min"].ToString());
-                                        double hdlcwmax = double.Parse(drhdlc[0]["warning_max"].ToString());
-                                        if (hdlcdouble > hdlcwmax || hdlcdouble < hdlcwmin)
-                                        {
-                                            flag = 2;
-                                        }
-                                        double hdlctmin = double.Parse(drhdlc[0]["threshold_min"].ToString());
-                                        double hdlctmax = double.Parse(drhdlc[0]["threshold_max"].ToString());
-                                        if (hdlcdouble > hdlctmax || hdlcdouble < hdlctmin)
-                                        {
-                                            flag = 3;
-                                        }
+                                        flag = 3;
                                     }
-                               
-                                    string ldlc = sh.LDL_C;
-                                    if (ldlc != null && ldlc != "*")
+                                }
+
+                                string glu = sh.GLU;
+                                if (glu != null && glu != "*")
+                                {
+                                    double gludouble = double.Parse(glu);
+                                    DataRow[] drglu = dttv.Select("type='GLU'");
+                                    double gluwmin = double.Parse(drglu[0]["warning_min"].ToString());
+                                    double gluwmax = double.Parse(drglu[0]["warning_max"].ToString());
+                                    if (gludouble > gluwmax || gludouble < gluwmin)
                                     {
-                                        double ldlcdouble = double.Parse(ldlc);
-                                        DataRow[] drldlc = dttv.Select("type='LDLC'");
+                                        flag = 2;
+                                    }
+                                    double glutmin = double.Parse(drglu[0]["threshold_min"].ToString());
+                                    double glutmax = double.Parse(drglu[0]["threshold_max"].ToString());
+                                    if (gludouble > glutmax || gludouble < glutmin)
+                                    {
+                                        flag = 3;
+                                    }
+                                }
+
+                                string tg = sh.TG;
+                                if (tg != null && tg != "*")
+                                {
+                                    double tgdouble = double.Parse(tg);
+                                    DataRow[] drtg = dttv.Select("type='TG'");
+                                    double tgwmin = double.Parse(drtg[0]["warning_min"].ToString());
+                                    double tgwmax = double.Parse(drtg[0]["warning_max"].ToString());
+                                    if (tgdouble > tgwmax || tgdouble < tgwmin)
+                                    {
+                                        flag = 2;
+                                    }
+                                    double tgtmin = double.Parse(drtg[0]["threshold_min"].ToString());
+                                    double tgtmax = double.Parse(drtg[0]["threshold_max"].ToString());
+                                    if (tgdouble > tgtmax || tgdouble < tgtmin)
+                                    {
+                                        flag = 3;
+                                    }
+                                }
+
+                                string cho = sh.CHO;
+                                if (cho != null && cho != "*")
+                                {
+                                    double chodouble = double.Parse(cho);
+                                    DataRow[] drcho = dttv.Select("type='CHO'");
+                                    double chowmin = double.Parse(drcho[0]["warning_min"].ToString());
+                                    double chowmax = double.Parse(drcho[0]["warning_max"].ToString());
+                                    if (chodouble > chowmax || chodouble < chowmin)
+                                    {
+                                        flag = 2;
+                                    }
+                                    double chotmin = double.Parse(drcho[0]["threshold_min"].ToString());
+                                    double chotmax = double.Parse(drcho[0]["threshold_max"].ToString());
+                                    if (chodouble > chotmax || chodouble < chotmin)
+                                    {
+                                        flag = 3;
+                                    }
+                                }
+
+                                string hdlc = sh.HDL_C;
+                                if (hdlc != null && hdlc != "*")
+                                {
+                                    double hdlcdouble = double.Parse(hdlc);
+                                    DataRow[] drhdlc = dttv.Select("type='HDLC'");
+                                    if (drhdlc.Length == 0)
+                                    {
+                                        drhdlc = dttv.Select("type='HDL'");
+                                    }
+                                    double hdlcwmin = double.Parse(drhdlc[0]["warning_min"].ToString());
+                                    double hdlcwmax = double.Parse(drhdlc[0]["warning_max"].ToString());
+                                    if (hdlcdouble > hdlcwmax || hdlcdouble < hdlcwmin)
+                                    {
+                                        flag = 2;
+                                    }
+                                    double hdlctmin = double.Parse(drhdlc[0]["threshold_min"].ToString());
+                                    double hdlctmax = double.Parse(drhdlc[0]["threshold_max"].ToString());
+                                    if (hdlcdouble > hdlctmax || hdlcdouble < hdlctmin)
+                                    {
+                                        flag = 3;
+                                    }
+                                }
+
+                                string ldlc = sh.LDL_C;
+                                if (ldlc != null && ldlc != "*")
+                                {
+                                    double ldlcdouble = double.Parse(ldlc);
+                                    DataRow[] drldlc = dttv.Select("type='LDLC'");
                                     if (drldlc.Length == 0)
                                     {
                                         drldlc = dttv.Select("type='LDL'");
                                     }
                                     double ldlcwmin = double.Parse(drldlc[0]["warning_min"].ToString());
-                                        double ldlcwmax = double.Parse(drldlc[0]["warning_max"].ToString());
-                                        if (ldlcdouble > ldlcwmax || ldlcdouble < ldlcwmin)
-                                        {
-                                            flag = 2;
-                                        }
-                                        double ldlctmin = double.Parse(drldlc[0]["threshold_min"].ToString());
-                                        double ldlctmax = double.Parse(drldlc[0]["threshold_max"].ToString());
-                                        if (ldlcdouble > ldlctmax || ldlcdouble < ldlctmin)
-                                        {
-                                            flag = 3;
-                                        }
+                                    double ldlcwmax = double.Parse(drldlc[0]["warning_max"].ToString());
+                                    if (ldlcdouble > ldlcwmax || ldlcdouble < ldlcwmin)
+                                    {
+                                        flag = 2;
                                     }
-                                
+                                    double ldlctmin = double.Parse(drldlc[0]["threshold_min"].ToString());
+                                    double ldlctmax = double.Parse(drldlc[0]["threshold_max"].ToString());
+                                    if (ldlcdouble > ldlctmax || ldlcdouble < ldlctmin)
+                                    {
+                                        flag = 3;
+                                    }
+                                }
+
                                 tjdao.updateTJbgdcShenghua(sh.aichive_no, sh.bar_code, flag);
                                 tjdao.updatePEShInfo(sh.aichive_no, sh.bar_code, sh.CHO, sh.TG, sh.LDL_C, sh.HDL_C, sh.GLU, sh.ALT, sh.AST, sh.ALB, sh.TBIL, sh.DBIL, sh.Crea, sh.UREA);
                             }
-                        }                  
+                        }
                     }
                 }
             }
@@ -2305,7 +1931,8 @@ namespace zkhwClient
                 oda.Fill(myds_data);
                 return myds_data;
             }
-            catch {
+            catch
+            {
                 return null;
             }
         }
@@ -2316,213 +1943,25 @@ namespace zkhwClient
         {
             try
             {
-            string strcon = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source =" + xuechangguipath + "";
-            myds_data = new DataSet();
-            oda = new OleDbDataAdapter(strSQL, strcon);
-            oda.Fill(myds_data);
-            return myds_data;
+                string strcon = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source =" + xuechangguipath + "";
+                myds_data = new DataSet();
+                oda = new OleDbDataAdapter(strSQL, strcon);
+                oda.Fill(myds_data);
+                return myds_data;
             }
             catch
             {
                 return null;
             }
         }
-        //首页点击B超按钮
-        private void button1_Click(object sender, EventArgs e)
-        {
-            checkBichao checkBc = new checkBichao();
-            checkBc.Show();
-        }
-        //首页点击生化按钮
-        private void button2_Click(object sender, EventArgs e)
-        {
-            checkShenghua checkSh = new checkShenghua();
-            checkSh.Show();
-        }
-        //首页点击尿常规按钮
-        private void button3_Click(object sender, EventArgs e)
-        {
-            checkNiaocg checkNcg = new checkNiaocg();
-            checkNcg.Show();
-        }
-        //首页点击血常规按钮
-        private void button4_Click(object sender, EventArgs e)
-        {
-            checkXuecg checkXcg = new checkXuecg();
-            checkXcg.Show();
-        }
-        //首页点击身高体重按钮
-        private void button5_Click(object sender, EventArgs e)
-        {
-            checkSgtz checkSgTz = new checkSgtz();
-            checkSgTz.Show();
-        }
-        //首页点击心电图按钮
-        private void button6_Click(object sender, EventArgs e)
-        {
-            checkXindt checkXdt = new checkXindt();
-            checkXdt.Show();
-        }
-        //首页点击血压按钮
-        private void button7_Click(object sender, EventArgs e)
-        {
-            checkXueya checkXy = new checkXueya();
-            checkXy.Show();
-        }
+        #endregion
 
-        //首页底部设备状态更新
-        private void timer3_Tick(object sender, EventArgs e)
+        private void socketTcp()
         {
-            GetAllLocalMachines();//cmd获取局域网内的所有设备IP和MAC信息
-            DataTable dtDeviceType = tjdao.checkDevice();
-            if (dtDeviceType==null|| dtDeviceType.Rows.Count<1) {
-                return;
-            }
-          string sfz_online = dtDeviceType.Rows[0]["sfz_online"].ToString();
-            if (sfz_online == "0" || "0".Equals(sfz_online))
-            {
-                this.button9.BackColor = Color.Red;
-            }
-            else {
-                this.button9.BackColor = Color.MediumAquamarine;
-            }
-            string sxt_online = dtDeviceType.Rows[0]["sxt_online"].ToString();
-            if (sxt_online == "0" || "0".Equals(sxt_online))
-            {
-                this.button8.BackColor = Color.Red;
-            }
-            else
-            {
-                this.button8.BackColor = Color.MediumAquamarine;
-            }
-            string dyj_online = dtDeviceType.Rows[0]["dyj_online"].ToString();
-            if (dyj_online == "0" || "0".Equals(dyj_online))
-            {
-                this.button10.BackColor = Color.Red;
-            }
-            else
-            {
-                this.button10.BackColor = Color.MediumAquamarine;
-            }
-            string xcg_online = dtDeviceType.Rows[0]["xcg_online"].ToString();
-            if (xcg_online == "0" || "0".Equals(xcg_online))
-            {
-                this.button4.BackColor = Color.Red;
-            }
-            else
-            {
-                this.button4.BackColor = Color.MediumAquamarine;
-            }
-            string sh_online = dtDeviceType.Rows[0]["sh_online"].ToString();
-            if (sh_online == "0" || "0".Equals(sh_online))
-            {
-                this.button2.BackColor = Color.Red;
-            }
-            else
-            {
-                this.button2.BackColor = Color.MediumAquamarine;
-            }
-            string ncg_online = dtDeviceType.Rows[0]["ncg_online"].ToString();
-            if (ncg_online == "0" || "0".Equals(ncg_online))
-            {
-                this.button3.BackColor = Color.Red;
-            }
-            else
-            {
-                this.button3.BackColor = Color.MediumAquamarine;
-            }
-            string xdt_online = dtDeviceType.Rows[0]["xdt_online"].ToString();
-            if (xdt_online == "0" || "0".Equals(xdt_online))
-            {
-                this.button6.BackColor = Color.Red;
-            }
-            else
-            {
-                this.button6.BackColor = Color.MediumAquamarine;
-            }
-            string sgtz_online = dtDeviceType.Rows[0]["sgtz_online"].ToString();
-            if (sgtz_online == "0" || "0".Equals(sgtz_online))
-            {
-                this.button5.BackColor = Color.Red;
-            }
-            else
-            {
-                this.button5.BackColor = Color.MediumAquamarine;
-            }
-            string xy_online = dtDeviceType.Rows[0]["xy_online"].ToString();
-            if (xy_online == "0" || "0".Equals(xy_online))
-            {
-                this.button7.BackColor = Color.Red;
-            }
-            else
-            {
-                this.button7.BackColor = Color.MediumAquamarine;
-            }
-            string bc_online = dtDeviceType.Rows[0]["bc_online"].ToString();
-            if (bc_online == "0" || "0".Equals(bc_online))
-            {
-                this.button1.BackColor = Color.Red;
-            }
-            else
-            {
-                this.button1.BackColor = Color.MediumAquamarine;
-            }
-        }
-        private void GetAllLocalMachines()
-        {
-            Process p = new Process();
-            p.StartInfo.FileName = "cmd.exe";
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.RedirectStandardInput = true;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.RedirectStandardError = true;
-            p.StartInfo.CreateNoWindow = true;
-            p.Start();
-            p.StandardInput.WriteLine("arp -a");
-            p.StandardInput.WriteLine("exit");
-            //ArrayList list = new ArrayList();
-            StreamReader reader = p.StandardOutput;
-            string IPHead = Dns.GetHostByName(Dns.GetHostName()).AddressList[0].ToString().Substring(0, 3);
-            for (string line = reader.ReadLine(); line != null; line = reader.ReadLine())
-            {
-                line = line.Trim();
-                if (line.StartsWith(IPHead) && line.Length > 40)
-                {
-                    string IP = line.Substring(0, 15).Trim();
-                    //身高82 血压80 心电81 尿机83 B超84
-                    if (IP=="192.168.1.80") {
-                        String sql = "update zkhw_state_device set xy_online='1',xy_state='1' where ID='1'";
-                        DbHelperMySQL.ExecuteSql(sql);
-                    }
-                    if (IP == "192.168.1.83")
-                    {
-                        String sql = "update zkhw_state_device set ncg_online='1',ncg_state='1' where ID='1'";
-                        DbHelperMySQL.ExecuteSql(sql);
-                    }
-                    if (IP == "192.168.1.82")
-                    {
-                        String sql = "update zkhw_state_device set sgtz_online='1',sgtz_state='1' where ID='1'";
-                        DbHelperMySQL.ExecuteSql(sql);
-                    }
-                    if (IP == "192.168.1.81")
-                    {
-                        String sql = "update zkhw_state_device set xdt_online='1',xdt_state='1' where ID='1'";
-                        DbHelperMySQL.ExecuteSql(sql);
-                    }
-                    if (IP == "192.168.1.84")
-                    {
-                        String sql = "update zkhw_state_device set bc_online='1',bc_state='1' where ID='1'";
-                        DbHelperMySQL.ExecuteSql(sql);
-                    }
-                }                
-            }
-        }
-        
-        private void socketTcp() {
             string hostName = Dns.GetHostName();   //获取本机名
             IPHostEntry localhost = Dns.GetHostByName(hostName);//方法已过期，可以获取IPv4的地址
             IPAddress ip = localhost.AddressList[0];
-            Socket serverSocket = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
+            Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint point = new IPEndPoint(ip, 9001);
             //socket绑定监听地址
             serverSocket.Bind(point);
@@ -2552,7 +1991,7 @@ namespace zkhwClient
                 thread.Start(send);
             }
         }
-        
+
 
         /// <summary>
         /// 接收消息
@@ -2575,10 +2014,10 @@ namespace zkhwClient
                 if (effective == 0)
                 {
                     break;
-                } 
+                }
                 string sendHL7new = "";
                 string sendHL7 = "MSH|^~\\&|||Rayto||1||ACK^R01|1|P|2.3.1||||S||UNICODE|||MSA|AA|1||||0|";
-                string []sendArray= sendHL7.Split('|');
+                string[] sendArray = sendHL7.Split('|');
                 byte[] buffernew = buffer.Skip(0).Take(effective).ToArray();
                 string sHL7 = Encoding.Default.GetString(buffernew).Trim();
                 using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
@@ -2599,16 +2038,16 @@ namespace zkhwClient
                     sendArray[17] = "ASCII";
                     sendArray[22] = MSHArray[9];
                     string[] sHL7PArray = sHL7Pids[1].Split('|');
-                    sh.bar_code = sHL7PArray[34];  
+                    sh.bar_code = sHL7PArray[34];
                     DataTable dtjkinfo = jkdao.selectjkInfoBybarcode(sh.bar_code);
                     if (dtjkinfo != null && dtjkinfo.Rows.Count > 0)
-                    { 
+                    {
                         sh.aichive_no = dtjkinfo.Rows[0]["aichive_no"].ToString();
                         sh.id_number = dtjkinfo.Rows[0]["id_number"].ToString();
                     }
                     else
                     {
-                         
+
                         return;
                     }
                     //把HL7分成段
@@ -2644,9 +2083,9 @@ namespace zkhwClient
                     if (istrue)
                     {
                         #region 生化
-                        int flag =Common.JudgeValueForSh(dttv,sh);
+                        int flag = Common.JudgeValueForSh(dttv, sh);
                         tjdao.updateTJbgdcShenghua(sh.aichive_no, sh.bar_code, flag);
-                        tjdao.updatePEShInfo(sh.aichive_no, sh.bar_code, sh.CHO, sh.TG, sh.LDL_C, sh.HDL_C,sh.GLU, sh.ALT, sh.AST, sh.ALB, sh.TBIL, sh.DBIL, sh.Crea, sh.UREA);
+                        tjdao.updatePEShInfo(sh.aichive_no, sh.bar_code, sh.CHO, sh.TG, sh.LDL_C, sh.HDL_C, sh.GLU, sh.ALT, sh.AST, sh.ALB, sh.TBIL, sh.DBIL, sh.Crea, sh.UREA);
                         #endregion
                     }
                     else
@@ -2654,22 +2093,24 @@ namespace zkhwClient
                         bool istree = tjdao.updateShenghuaInfo(sh);
                         if (!istree) return;
                         #region 生化
-                        int flag = Common.JudgeValueForSh(dttv,sh);
+                        int flag = Common.JudgeValueForSh(dttv, sh);
                         tjdao.updateTJbgdcShenghua(sh.aichive_no, sh.bar_code, flag);
                         tjdao.updatePEShInfo(sh.aichive_no, sh.bar_code, sh.CHO, sh.TG, sh.LDL_C, sh.HDL_C, sh.GLU, sh.ALT, sh.AST, sh.ALB, sh.TBIL, sh.DBIL, sh.Crea, sh.UREA);
                         #endregion
                     }
                     //返回生化的确认数据报文
-                    for (int j = 0; j < sendArray.Length; j++) {
+                    for (int j = 0; j < sendArray.Length; j++)
+                    {
                         sendHL7new += "|" + sendArray[j];
                     }
                     send.Send(AckKbe(sendHL7new.Substring(1)));
-                } else
+                }
+                else
                 {//解析血球协议报文数据
                     try
                     {
                         xuechangguiBean xcg = new xuechangguiBean();
-                        string[] a = Common._deviceModel.Split(','); 
+                        string[] a = Common._deviceModel.Split(',');
                         xcg.deviceModel = a[1].ToString().Trim();
                         xcg.ZrysXCG = basicInfoSettings.xcg;
                         string[] sHL7Pids = Regex.Split(sHL7, "PID", RegexOptions.IgnoreCase);
@@ -2679,7 +2120,7 @@ namespace zkhwClient
                         sendArray[9] = MSHArray[9];
                         sendArray[22] = MSHArray[9];
                         string[] sHL7PArray = sHL7Pids[1].Split('|');
-                        xcg.bar_code = sHL7PArray[2]; 
+                        xcg.bar_code = sHL7PArray[2];
                         DataTable dtjkinfo = jkdao.selectjkInfoBybarcode(xcg.bar_code);
                         if (dtjkinfo != null && dtjkinfo.Rows.Count > 0)
                         {
@@ -2729,7 +2170,7 @@ namespace zkhwClient
                         bool istrue = tjdao.insertXuechangguiInfo(xcg);
                         if (istrue)
                         {
-                            int flag = Common.JudgeValueForXCG(dttv,xcg); 
+                            int flag = Common.JudgeValueForXCG(dttv, xcg);
                             tjdao.updateTJbgdcXuechanggui(xcg.aichive_no, xcg.bar_code, flag);
                             tjdao.updatePEXcgInfo(xcg.aichive_no, xcg.bar_code, xcg.HGB, xcg.WBC, xcg.PLT);
                         }
@@ -2740,7 +2181,7 @@ namespace zkhwClient
                             {
                                 return;
                             }
-                            int flag = Common.JudgeValueForXCG(dttv,xcg); 
+                            int flag = Common.JudgeValueForXCG(dttv, xcg);
                             tjdao.updateTJbgdcXuechanggui(xcg.aichive_no, xcg.bar_code, flag);
                             tjdao.updatePEXcgInfo(xcg.aichive_no, xcg.bar_code, xcg.HGB, xcg.WBC, xcg.PLT);
                         }
@@ -2749,19 +2190,20 @@ namespace zkhwClient
                         {
                             sendHL7new += "|" + sendArray[j];
                         }
-                            send.Send(AckKbe(sendHL7new.Substring(1)));
+                        send.Send(AckKbe(sendHL7new.Substring(1)));
                     }
-                    catch (Exception ex){
+                    catch (Exception ex)
+                    {
                         using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
                         {
-                            sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "\n" +ex.Message+"\n"+ex.StackTrace);
+                            sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "\n" + ex.Message + "\n" + ex.StackTrace);
                         }
                     }
-               }
-           }
+                }
+            }
         }
 
-        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        private void frmMainm_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
@@ -2810,9 +2252,9 @@ namespace zkhwClient
 
                     Environment.Exit(0);
                 }
-                catch(Exception tt)
+                catch (Exception tt)
                 {
-                    MessageBox.Show("Err:"+tt.Message);
+                    MessageBox.Show("Err:" + tt.Message);
                     Environment.Exit(0);
                 }
             }
@@ -2829,7 +2271,7 @@ namespace zkhwClient
                 IPHostEntry localhost = Dns.GetHostByName(hostName);//方法已过期，可以获取IPv4的地址
                 IPAddress ip = localhost.AddressList[0];
                 Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                IPEndPoint point = new IPEndPoint(ip, 9001);  
+                IPEndPoint point = new IPEndPoint(ip, 9001);
                 //socket绑定监听地址
                 serverSocket.Bind(point);
                 //设置同时连接个数
@@ -2889,7 +2331,8 @@ namespace zkhwClient
         /// <param name="o"></param>
         private void ReciveKbe(object o)
         {
-            try {
+            try
+            {
                 var send = o as Socket;
                 while (true)
                 {
@@ -2942,12 +2385,13 @@ namespace zkhwClient
                         for (int i = 1; i < sHL7Lines.Length; i++)
                         {
                             string[] sHL7Array = sHL7Lines[i].Split('|');
-                            if (sHL7Array[5]==""||"".Equals(sHL7Array[5])) {
+                            if (sHL7Array[5] == "" || "".Equals(sHL7Array[5]))
+                            {
                                 continue;
                             }
                             switch (sHL7Array[4])
                             {
-                                case "ALB": sh.ALB = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.')+3); break;
+                                case "ALB": sh.ALB = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.') + 3); break;
                                 case "ALP": sh.ALP = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.') + 3); break;
                                 case "ALT": sh.ALT = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.')); break;
                                 case "AST": sh.AST = sHL7Array[5].Substring(0, sHL7Array[5].IndexOf('.')); break;
@@ -2966,7 +2410,7 @@ namespace zkhwClient
                                 default: break;
                             }
                         }
-                        sh.createTime = DateTime.ParseExact(sHL7PArray[38],"yyyyMMddHHmmss",System.Globalization.CultureInfo.CurrentCulture).ToString("yyyy-MM-dd HH:mm:ss");
+                        sh.createTime = DateTime.ParseExact(sHL7PArray[38], "yyyyMMddHHmmss", System.Globalization.CultureInfo.CurrentCulture).ToString("yyyy-MM-dd HH:mm:ss");
                         bool istrue = tjdao.insertShenghuaInfo(sh);
                         if (istrue)
                         {
@@ -3428,7 +2872,8 @@ namespace zkhwClient
                     }
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 using (System.IO.StreamWriter sw = new System.IO.StreamWriter(Application.StartupPath + "/log.txt", true))
                 {
                     sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "\n" + ex.Message + "\n" + ex.StackTrace);
@@ -3455,19 +2900,21 @@ namespace zkhwClient
                 text = ToHexString(totalByteRead);
                 if (totalByteRead.Length > 1000)
                 {
-                    string beginText = text.Substring(0,16);
-                    string endText = text.Substring(text.Length-18, 18);
-                    if (beginText == "3C73616D706C653E" && endText == "3C2F73616D706C653E") {
+                    string beginText = text.Substring(0, 16);
+                    string endText = text.Substring(text.Length - 18, 18);
+                    if (beginText == "3C73616D706C653E" && endText == "3C2F73616D706C653E")
+                    {
                         text = Encoding.ASCII.GetString(totalByteRead);
                         isCRC = true;
                     }
                     string endText1 = text.Substring(text.Length - 22, 22);
-                    if (beginText == "3C73616D706C653E" && endText1 == "3C2F73616D706C653E0D0A") {
+                    if (beginText == "3C73616D706C653E" && endText1 == "3C2F73616D706C653E0D0A")
+                    {
                         text = Encoding.ASCII.GetString(totalByteRead);
                         isCRC = true;
                     }
                 }
-                
+
                 if (isCRC)
                 {
                     //using (StreamWriter sw = new StreamWriter(Application.StartupPath + "/log.txt", true))
@@ -3503,7 +2950,7 @@ namespace zkhwClient
                 var rowNoteList = doc.SelectNodes("/sample/smpinfo/p");
                 var fieldNodeID = rowNoteList[0].ChildNodes;
                 string barcode = fieldNodeID[1].InnerText;
-                string []barcodes = barcode.Split('/');
+                string[] barcodes = barcode.Split('/');
                 xcg.bar_code = barcodes[0].Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", "").Trim();
                 var fieldNodeTime = rowNoteList[2].ChildNodes;
                 string timeNow = fieldNodeTime[1].InnerText;
@@ -3558,713 +3005,714 @@ namespace zkhwClient
             {
                 using (StreamWriter sw = new StreamWriter(Application.StartupPath + "/log.txt", true))
                 {
-                    sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "异常报文解析：" + ee.Message+"--"+ee.StackTrace);
+                    sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "异常报文解析：" + ee.Message + "--" + ee.StackTrace);
                 }
                 return;
             }
-                bool istrue = tjdao.insertXuechangguiInfo(xcg);
-                if (istrue)
+            bool istrue = tjdao.insertXuechangguiInfo(xcg);
+            if (istrue)
+            {
+                int flag = 1;
+                string wbc = xcg.WBC;
+                if (wbc != null && wbc != "")
                 {
-                    int flag = 1;
-                    string wbc = xcg.WBC;
-                    if (wbc != null && wbc != "")
+                    double wbcdouble = double.Parse(wbc);
+                    DataRow[] drwbc = dttv.Select("type='WBC'");
+                    double wbcwmin = double.Parse(drwbc[0]["warning_min"].ToString());
+                    double wbcwmax = double.Parse(drwbc[0]["warning_max"].ToString());
+                    if (wbcdouble > wbcwmax || wbcdouble < wbcwmin)
                     {
-                        double wbcdouble = double.Parse(wbc);
-                        DataRow[] drwbc = dttv.Select("type='WBC'");
-                        double wbcwmin = double.Parse(drwbc[0]["warning_min"].ToString());
-                        double wbcwmax = double.Parse(drwbc[0]["warning_max"].ToString());
-                        if (wbcdouble > wbcwmax || wbcdouble < wbcwmin)
-                        {
-                            flag = 2;
-                        }
-                        double wbctmin = double.Parse(drwbc[0]["threshold_min"].ToString());
-                        double wbctmax = double.Parse(drwbc[0]["threshold_max"].ToString());
-                        if (wbcdouble > wbctmax || wbcdouble < wbctmin)
-                        {
-                            flag = 3;
-                        }
+                        flag = 2;
                     }
-                    string rbc = xcg.RBC;
-                    if (rbc != null && rbc != "")
+                    double wbctmin = double.Parse(drwbc[0]["threshold_min"].ToString());
+                    double wbctmax = double.Parse(drwbc[0]["threshold_max"].ToString());
+                    if (wbcdouble > wbctmax || wbcdouble < wbctmin)
                     {
-                        double rbcdouble = double.Parse(rbc);
-                        DataRow[] drrbc = dttv.Select("type='RBC'");
-                        double rbcwmin = double.Parse(drrbc[0]["warning_min"].ToString());
-                        double rbcwmax = double.Parse(drrbc[0]["warning_max"].ToString());
-                        if (rbcdouble > rbcwmax || rbcdouble < rbcwmin)
-                        {
-                            flag = 2;
-                        }
-                        double rbctmin = double.Parse(drrbc[0]["threshold_min"].ToString());
-                        double rbctmax = double.Parse(drrbc[0]["threshold_max"].ToString());
-                        if (rbcdouble > rbctmax || rbcdouble < rbctmin)
-                        {
-                            flag = 3;
-                        }
+                        flag = 3;
                     }
-                    string pct = xcg.PCT;
-                    if (pct != null && pct != "")
-                    {
-                        double pctdouble = double.Parse(pct);
-                        DataRow[] drpct = dttv.Select("type='PCT'");
-                        double pctwmin = double.Parse(drpct[0]["warning_min"].ToString());
-                        double pctwmax = double.Parse(drpct[0]["warning_max"].ToString());
-                        if (pctdouble > pctwmax || pctdouble < pctwmin)
-                        {
-                            flag = 2;
-                        }
-                        double pcttmin = double.Parse(drpct[0]["threshold_min"].ToString());
-                        double pcttmax = double.Parse(drpct[0]["threshold_max"].ToString());
-                        if (pctdouble > pcttmax || pctdouble < pcttmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string plt = xcg.PLT;
-                    if (plt != null && plt != "")
-                    {
-                        double pltdouble = double.Parse(plt);
-                        DataRow[] drplt = dttv.Select("type='PLT'");
-                        double pltwmin = double.Parse(drplt[0]["warning_min"].ToString());
-                        double pltwmax = double.Parse(drplt[0]["warning_max"].ToString());
-                        if (pltdouble > pltwmax || pltdouble < pltwmin)
-                        {
-                            flag = 2;
-                        }
-                        double plttmin = double.Parse(drplt[0]["threshold_min"].ToString());
-                        double plttmax = double.Parse(drplt[0]["threshold_max"].ToString());
-                        if (pltdouble > plttmax || pltdouble < plttmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string hgb = xcg.HGB;
-                    if (hgb != null && hgb != "")
-                    {
-                        double hgbdouble = double.Parse(hgb);
-                        DataRow[] drhgb = dttv.Select("type='HGB'");
-                        double hgbwmin = double.Parse(drhgb[0]["warning_min"].ToString());
-                        double hgbwmax = double.Parse(drhgb[0]["warning_max"].ToString());
-                        if (hgbdouble > hgbwmax || hgbdouble < hgbwmin)
-                        {
-                            flag = 2;
-                        }
-                        double hgbtmin = double.Parse(drhgb[0]["threshold_min"].ToString());
-                        double hgbtmax = double.Parse(drhgb[0]["threshold_max"].ToString());
-                        if (hgbdouble > hgbtmax || hgbdouble < hgbtmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string hct = xcg.HCT;
-                    if (hct != null && hct != "")
-                    {
-                        double hctdouble = double.Parse(hct);
-                        DataRow[] drhct = dttv.Select("type='HCT'");
-                        double hctwmin = double.Parse(drhct[0]["warning_min"].ToString());
-                        double hctwmax = double.Parse(drhct[0]["warning_max"].ToString());
-                        if (hctdouble > hctwmax || hctdouble < hctwmin)
-                        {
-                            flag = 2;
-                        }
-                        double hcttmin = double.Parse(drhct[0]["threshold_min"].ToString());
-                        double hcttmax = double.Parse(drhct[0]["threshold_max"].ToString());
-                        if (hctdouble > hcttmax || hctdouble < hcttmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string mcv = xcg.MCV;
-                    if (mcv != null && mcv != "")
-                    {
-                        double mcvdouble = double.Parse(mcv);
-                        DataRow[] drmcv = dttv.Select("type='MCV'");
-                        double mcvwmin = double.Parse(drmcv[0]["warning_min"].ToString());
-                        double mcvwmax = double.Parse(drmcv[0]["warning_max"].ToString());
-                        if (mcvdouble > mcvwmax || mcvdouble < mcvwmin)
-                        {
-                            flag = 2;
-                        }
-                        double mcvtmin = double.Parse(drmcv[0]["threshold_min"].ToString());
-                        double mcvtmax = double.Parse(drmcv[0]["threshold_max"].ToString());
-                        if (mcvdouble > mcvtmax || mcvdouble < mcvtmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string mch = xcg.MCH;
-                    if (mch != null && mch != "")
-                    {
-                        double mchdouble = double.Parse(mch);
-                        DataRow[] drmch = dttv.Select("type='MCH'");
-                        double mchwmin = double.Parse(drmch[0]["warning_min"].ToString());
-                        double mchwmax = double.Parse(drmch[0]["warning_max"].ToString());
-                        if (mchdouble > mchwmax || mchdouble < mchwmin)
-                        {
-                            flag = 2;
-                        }
-                        double mchtmin = double.Parse(drmch[0]["threshold_min"].ToString());
-                        double mchtmax = double.Parse(drmch[0]["threshold_max"].ToString());
-                        if (mchdouble > mchtmax || mchdouble < mchtmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string mchc = xcg.MCHC;
-                    if (mchc != null && mchc != "")
-                    {
-                        double mchcdouble = double.Parse(mchc);
-                        DataRow[] drmchc = dttv.Select("type='MCHC'");
-                        double mchcwmin = double.Parse(drmchc[0]["warning_min"].ToString());
-                        double mchcwmax = double.Parse(drmchc[0]["warning_max"].ToString());
-                        if (mchcdouble > mchcwmax || mchcdouble < mchcwmin)
-                        {
-                            flag = 2;
-                        }
-                        double mchctmin = double.Parse(drmchc[0]["threshold_min"].ToString());
-                        double mchctmax = double.Parse(drmchc[0]["threshold_max"].ToString());
-                        if (mchcdouble > mchctmax || mchcdouble < mchctmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string rdwcv = xcg.RDW_CV;
-                    if (rdwcv != null && rdwcv != "")
-                    {
-                        double rdwcvdouble = double.Parse(rdwcv);
-                        DataRow[] drrdwcv = dttv.Select("type='RDWCV'");
-                        double rdwcvwmin = double.Parse(drrdwcv[0]["warning_min"].ToString());
-                        double rdwcvwmax = double.Parse(drrdwcv[0]["warning_max"].ToString());
-                        if (rdwcvdouble > rdwcvwmax || rdwcvdouble < rdwcvwmin)
-                        {
-                            flag = 2;
-                        }
-                        double rdwcvtmin = double.Parse(drrdwcv[0]["threshold_min"].ToString());
-                        double rdwcvtmax = double.Parse(drrdwcv[0]["threshold_max"].ToString());
-                        if (rdwcvdouble > rdwcvtmax || rdwcvdouble < rdwcvtmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string rdwsd = xcg.RDW_SD;
-                    if (rdwsd != null && rdwsd != "")
-                    {
-                        double rdwsddouble = double.Parse(rdwsd);
-                        DataRow[] drrdwsd = dttv.Select("type='RDWSD'");
-                        double rdwsdwmin = double.Parse(drrdwsd[0]["warning_min"].ToString());
-                        double rdwsdwmax = double.Parse(drrdwsd[0]["warning_max"].ToString());
-                        if (rdwsddouble > rdwsdwmax || rdwsddouble < rdwsdwmin)
-                        {
-                            flag = 2;
-                        }
-                        double rdwsdtmin = double.Parse(drrdwsd[0]["threshold_min"].ToString());
-                        double rdwsdtmax = double.Parse(drrdwsd[0]["threshold_max"].ToString());
-                        if (rdwsddouble > rdwsdtmax || rdwsddouble < rdwsdtmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string neut = xcg.NEUT;
-                    if (neut != null && neut != "")
-                    {
-                        double neutdouble = double.Parse(neut);
-                        DataRow[] drneut = dttv.Select("type='NEUT'");
-                        double neutwmin = double.Parse(drneut[0]["warning_min"].ToString());
-                        double neutwmax = double.Parse(drneut[0]["warning_max"].ToString());
-                        if (neutdouble > neutwmax || neutdouble < neutwmin)
-                        {
-                            flag = 2;
-                        }
-                        double neuttmin = double.Parse(drneut[0]["threshold_min"].ToString());
-                        double neuttmax = double.Parse(drneut[0]["threshold_max"].ToString());
-                        if (neutdouble > neuttmax || neutdouble < neuttmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string neutp = xcg.NEUTP;
-                    if (neutp != null && neutp != "")
-                    {
-                        double neutpdouble = double.Parse(neutp);
-                        DataRow[] drneutp = dttv.Select("type='NEUTP'");
-                        double neutpwmin = double.Parse(drneutp[0]["warning_min"].ToString());
-                        double neutpwmax = double.Parse(drneutp[0]["warning_max"].ToString());
-                        if (neutpdouble > neutpwmax || neutpdouble < neutpwmin)
-                        {
-                            flag = 2;
-                        }
-                        double neutptmin = double.Parse(drneutp[0]["threshold_min"].ToString());
-                        double neutptmax = double.Parse(drneutp[0]["threshold_max"].ToString());
-                        if (neutpdouble > neutptmax || neutpdouble < neutptmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string lym = xcg.LYM;
-                    if (lym != null && lym != "")
-                    {
-                        double lymdouble = double.Parse(lym);
-                        DataRow[] drlym = dttv.Select("type='LYM'");
-                        double lymwmin = double.Parse(drlym[0]["warning_min"].ToString());
-                        double lymwmax = double.Parse(drlym[0]["warning_max"].ToString());
-                        if (lymdouble > lymwmax || lymdouble < lymwmin)
-                        {
-                            flag = 2;
-                        }
-                        double lymtmin = double.Parse(drlym[0]["threshold_min"].ToString());
-                        double lymtmax = double.Parse(drlym[0]["threshold_max"].ToString());
-                        if (lymdouble > lymtmax || lymdouble < lymtmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string lymp = xcg.LYMP;
-                    if (lymp != null && lymp != "")
-                    {
-                        double lympdouble = double.Parse(lymp);
-                        DataRow[] drlymp = dttv.Select("type='LYMP'");
-                        double lympwmin = double.Parse(drlymp[0]["warning_min"].ToString());
-                        double lympwmax = double.Parse(drlymp[0]["warning_max"].ToString());
-                        if (lympdouble > lympwmax || lympdouble < lympwmin)
-                        {
-                            flag = 2;
-                        }
-                        double lymptmin = double.Parse(drlymp[0]["threshold_min"].ToString());
-                        double lymptmax = double.Parse(drlymp[0]["threshold_max"].ToString());
-                        if (lympdouble > lymptmax || lympdouble < lymptmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string mpv = xcg.MPV;
-                    if (mpv != null && mpv != "")
-                    {
-                        double mpvdouble = double.Parse(mpv);
-                        DataRow[] drmpv = dttv.Select("type='MPV'");
-                        double mpvwmin = double.Parse(drmpv[0]["warning_min"].ToString());
-                        double mpvwmax = double.Parse(drmpv[0]["warning_max"].ToString());
-                        if (mpvdouble > mpvwmax || mpvdouble < mpvwmin)
-                        {
-                            flag = 2;
-                        }
-                        double mpvtmin = double.Parse(drmpv[0]["threshold_min"].ToString());
-                        double mpvtmax = double.Parse(drmpv[0]["threshold_max"].ToString());
-                        if (mpvdouble > mpvtmax || mpvdouble < mpvtmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string pdw = xcg.PDW;
-                    if (pdw != null && pdw != "")
-                    {
-                        double pdwdouble = double.Parse(pdw);
-                        DataRow[] drpdw = dttv.Select("type='PDW'");
-                        double pdwwmin = double.Parse(drpdw[0]["warning_min"].ToString());
-                        double pdwwmax = double.Parse(drpdw[0]["warning_max"].ToString());
-                        if (pdwdouble > pdwwmax || pdwdouble < pdwwmin)
-                        {
-                            flag = 2;
-                        }
-                        double pdwtmin = double.Parse(drpdw[0]["threshold_min"].ToString());
-                        double pdwtmax = double.Parse(drpdw[0]["threshold_max"].ToString());
-                        if (pdwdouble > pdwtmax || pdwdouble < pdwtmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string mxd = xcg.MXD;
-                    if (mxd != null && mxd != "")
-                    {
-                        double mxddouble = double.Parse(mxd);
-                        DataRow[] drmxd = dttv.Select("type='MXD'");
-                        double mxdwmin = double.Parse(drmxd[0]["warning_min"].ToString());
-                        double mxdwmax = double.Parse(drmxd[0]["warning_max"].ToString());
-                        if (mxddouble > mxdwmax || mxddouble < mxdwmin)
-                        {
-                            flag = 2;
-                        }
-                        double mxdtmin = double.Parse(drmxd[0]["threshold_min"].ToString());
-                        double mxdtmax = double.Parse(drmxd[0]["threshold_max"].ToString());
-                        if (mxddouble > mxdtmax || mxddouble < mxdtmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string mxdp = xcg.MXDP;
-                    if (mxdp != null && mxdp != "")
-                    {
-                        double mxdpdouble = double.Parse(mxdp);
-                        DataRow[] drmxdp = dttv.Select("type='MXDP'");
-                        double mxdpwmin = double.Parse(drmxdp[0]["warning_min"].ToString());
-                        double mxdpwmax = double.Parse(drmxdp[0]["warning_max"].ToString());
-                        if (mxdpdouble > mxdpwmax || mxdpdouble < mxdpwmin)
-                        {
-                            flag = 2;
-                        }
-                        double mxdptmin = double.Parse(drmxdp[0]["threshold_min"].ToString());
-                        double mxdptmax = double.Parse(drmxdp[0]["threshold_max"].ToString());
-                        if (mxdpdouble > mxdptmax || mxdpdouble < mxdptmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    tjdao.updateTJbgdcXuechanggui(xcg.aichive_no, xcg.bar_code, flag);
-                    tjdao.updatePEXcgInfo(xcg.aichive_no, xcg.bar_code, xcg.HGB, xcg.WBC, xcg.PLT);
                 }
-                else
+                string rbc = xcg.RBC;
+                if (rbc != null && rbc != "")
                 {
-                    bool istrue1 = tjdao.updateXuechangguiInfo(xcg);
-                    if (!istrue1)
+                    double rbcdouble = double.Parse(rbc);
+                    DataRow[] drrbc = dttv.Select("type='RBC'");
+                    double rbcwmin = double.Parse(drrbc[0]["warning_min"].ToString());
+                    double rbcwmax = double.Parse(drrbc[0]["warning_max"].ToString());
+                    if (rbcdouble > rbcwmax || rbcdouble < rbcwmin)
                     {
-                        return;
+                        flag = 2;
                     }
-                    int flag = 1;
-                    string wbc = xcg.WBC;
-                    if (wbc != null && wbc != "")
+                    double rbctmin = double.Parse(drrbc[0]["threshold_min"].ToString());
+                    double rbctmax = double.Parse(drrbc[0]["threshold_max"].ToString());
+                    if (rbcdouble > rbctmax || rbcdouble < rbctmin)
                     {
-                        double wbcdouble = double.Parse(wbc);
-                        DataRow[] drwbc = dttv.Select("type='WBC'");
-                        double wbcwmin = double.Parse(drwbc[0]["warning_min"].ToString());
-                        double wbcwmax = double.Parse(drwbc[0]["warning_max"].ToString());
-                        if (wbcdouble > wbcwmax || wbcdouble < wbcwmin)
-                        {
-                            flag = 2;
-                        }
-                        double wbctmin = double.Parse(drwbc[0]["threshold_min"].ToString());
-                        double wbctmax = double.Parse(drwbc[0]["threshold_max"].ToString());
-                        if (wbcdouble > wbctmax || wbcdouble < wbctmin)
-                        {
-                            flag = 3;
-                        }
+                        flag = 3;
                     }
-                    string rbc = xcg.RBC;
-                    if (rbc != null && rbc != "")
-                    {
-                        double rbcdouble = double.Parse(rbc);
-                        DataRow[] drrbc = dttv.Select("type='RBC'");
-                        double rbcwmin = double.Parse(drrbc[0]["warning_min"].ToString());
-                        double rbcwmax = double.Parse(drrbc[0]["warning_max"].ToString());
-                        if (rbcdouble > rbcwmax || rbcdouble < rbcwmin)
-                        {
-                            flag = 2;
-                        }
-                        double rbctmin = double.Parse(drrbc[0]["threshold_min"].ToString());
-                        double rbctmax = double.Parse(drrbc[0]["threshold_max"].ToString());
-                        if (rbcdouble > rbctmax || rbcdouble < rbctmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string pct = xcg.PCT;
-                    if (pct != null && pct != "")
-                    {
-                        double pctdouble = double.Parse(pct);
-                        DataRow[] drpct = dttv.Select("type='PCT'");
-                        double pctwmin = double.Parse(drpct[0]["warning_min"].ToString());
-                        double pctwmax = double.Parse(drpct[0]["warning_max"].ToString());
-                        if (pctdouble > pctwmax || pctdouble < pctwmin)
-                        {
-                            flag = 2;
-                        }
-                        double pcttmin = double.Parse(drpct[0]["threshold_min"].ToString());
-                        double pcttmax = double.Parse(drpct[0]["threshold_max"].ToString());
-                        if (pctdouble > pcttmax || pctdouble < pcttmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string plt = xcg.PLT;
-                    if (plt != null && plt != "")
-                    {
-                        double pltdouble = double.Parse(plt);
-                        DataRow[] drplt = dttv.Select("type='PLT'");
-                        double pltwmin = double.Parse(drplt[0]["warning_min"].ToString());
-                        double pltwmax = double.Parse(drplt[0]["warning_max"].ToString());
-                        if (pltdouble > pltwmax || pltdouble < pltwmin)
-                        {
-                            flag = 2;
-                        }
-                        double plttmin = double.Parse(drplt[0]["threshold_min"].ToString());
-                        double plttmax = double.Parse(drplt[0]["threshold_max"].ToString());
-                        if (pltdouble > plttmax || pltdouble < plttmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string hgb = xcg.HGB;
-                    if (hgb != null && hgb != "")
-                    {
-                        double hgbdouble = double.Parse(hgb);
-                        DataRow[] drhgb = dttv.Select("type='HGB'");
-                        double hgbwmin = double.Parse(drhgb[0]["warning_min"].ToString());
-                        double hgbwmax = double.Parse(drhgb[0]["warning_max"].ToString());
-                        if (hgbdouble > hgbwmax || hgbdouble < hgbwmin)
-                        {
-                            flag = 2;
-                        }
-                        double hgbtmin = double.Parse(drhgb[0]["threshold_min"].ToString());
-                        double hgbtmax = double.Parse(drhgb[0]["threshold_max"].ToString());
-                        if (hgbdouble > hgbtmax || hgbdouble < hgbtmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string hct = xcg.HCT;
-                    if (hct != null && hct != "")
-                    {
-                        double hctdouble = double.Parse(hct);
-                        DataRow[] drhct = dttv.Select("type='HCT'");
-                        double hctwmin = double.Parse(drhct[0]["warning_min"].ToString());
-                        double hctwmax = double.Parse(drhct[0]["warning_max"].ToString());
-                        if (hctdouble > hctwmax || hctdouble < hctwmin)
-                        {
-                            flag = 2;
-                        }
-                        double hcttmin = double.Parse(drhct[0]["threshold_min"].ToString());
-                        double hcttmax = double.Parse(drhct[0]["threshold_max"].ToString());
-                        if (hctdouble > hcttmax || hctdouble < hcttmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string mcv = xcg.MCV;
-                    if (mcv != null && mcv != "")
-                    {
-                        double mcvdouble = double.Parse(mcv);
-                        DataRow[] drmcv = dttv.Select("type='MCV'");
-                        double mcvwmin = double.Parse(drmcv[0]["warning_min"].ToString());
-                        double mcvwmax = double.Parse(drmcv[0]["warning_max"].ToString());
-                        if (mcvdouble > mcvwmax || mcvdouble < mcvwmin)
-                        {
-                            flag = 2;
-                        }
-                        double mcvtmin = double.Parse(drmcv[0]["threshold_min"].ToString());
-                        double mcvtmax = double.Parse(drmcv[0]["threshold_max"].ToString());
-                        if (mcvdouble > mcvtmax || mcvdouble < mcvtmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string mch = xcg.MCH;
-                    if (mch != null && mch != "")
-                    {
-                        double mchdouble = double.Parse(mch);
-                        DataRow[] drmch = dttv.Select("type='MCH'");
-                        double mchwmin = double.Parse(drmch[0]["warning_min"].ToString());
-                        double mchwmax = double.Parse(drmch[0]["warning_max"].ToString());
-                        if (mchdouble > mchwmax || mchdouble < mchwmin)
-                        {
-                            flag = 2;
-                        }
-                        double mchtmin = double.Parse(drmch[0]["threshold_min"].ToString());
-                        double mchtmax = double.Parse(drmch[0]["threshold_max"].ToString());
-                        if (mchdouble > mchtmax || mchdouble < mchtmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string mchc = xcg.MCHC;
-                    if (mchc != null && mchc != "")
-                    {
-                        double mchcdouble = double.Parse(mchc);
-                        DataRow[] drmchc = dttv.Select("type='MCHC'");
-                        double mchcwmin = double.Parse(drmchc[0]["warning_min"].ToString());
-                        double mchcwmax = double.Parse(drmchc[0]["warning_max"].ToString());
-                        if (mchcdouble > mchcwmax || mchcdouble < mchcwmin)
-                        {
-                            flag = 2;
-                        }
-                        double mchctmin = double.Parse(drmchc[0]["threshold_min"].ToString());
-                        double mchctmax = double.Parse(drmchc[0]["threshold_max"].ToString());
-                        if (mchcdouble > mchctmax || mchcdouble < mchctmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string rdwcv = xcg.RDW_CV;
-                    if (rdwcv != null && rdwcv != "")
-                    {
-                        double rdwcvdouble = double.Parse(rdwcv);
-                        DataRow[] drrdwcv = dttv.Select("type='RDWCV'");
-                        double rdwcvwmin = double.Parse(drrdwcv[0]["warning_min"].ToString());
-                        double rdwcvwmax = double.Parse(drrdwcv[0]["warning_max"].ToString());
-                        if (rdwcvdouble > rdwcvwmax || rdwcvdouble < rdwcvwmin)
-                        {
-                            flag = 2;
-                        }
-                        double rdwcvtmin = double.Parse(drrdwcv[0]["threshold_min"].ToString());
-                        double rdwcvtmax = double.Parse(drrdwcv[0]["threshold_max"].ToString());
-                        if (rdwcvdouble > rdwcvtmax || rdwcvdouble < rdwcvtmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string rdwsd = xcg.RDW_SD;
-                    if (rdwsd != null && rdwsd != "")
-                    {
-                        double rdwsddouble = double.Parse(rdwsd);
-                        DataRow[] drrdwsd = dttv.Select("type='RDWSD'");
-                        double rdwsdwmin = double.Parse(drrdwsd[0]["warning_min"].ToString());
-                        double rdwsdwmax = double.Parse(drrdwsd[0]["warning_max"].ToString());
-                        if (rdwsddouble > rdwsdwmax || rdwsddouble < rdwsdwmin)
-                        {
-                            flag = 2;
-                        }
-                        double rdwsdtmin = double.Parse(drrdwsd[0]["threshold_min"].ToString());
-                        double rdwsdtmax = double.Parse(drrdwsd[0]["threshold_max"].ToString());
-                        if (rdwsddouble > rdwsdtmax || rdwsddouble < rdwsdtmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string neut = xcg.NEUT;
-                    if (neut != null && neut != "")
-                    {
-                        double neutdouble = double.Parse(neut);
-                        DataRow[] drneut = dttv.Select("type='NEUT'");
-                        double neutwmin = double.Parse(drneut[0]["warning_min"].ToString());
-                        double neutwmax = double.Parse(drneut[0]["warning_max"].ToString());
-                        if (neutdouble > neutwmax || neutdouble < neutwmin)
-                        {
-                            flag = 2;
-                        }
-                        double neuttmin = double.Parse(drneut[0]["threshold_min"].ToString());
-                        double neuttmax = double.Parse(drneut[0]["threshold_max"].ToString());
-                        if (neutdouble > neuttmax || neutdouble < neuttmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string neutp = xcg.NEUTP;
-                    if (neutp != null && neutp != "")
-                    {
-                        double neutpdouble = double.Parse(neutp);
-                        DataRow[] drneutp = dttv.Select("type='NEUTP'");
-                        double neutpwmin = double.Parse(drneutp[0]["warning_min"].ToString());
-                        double neutpwmax = double.Parse(drneutp[0]["warning_max"].ToString());
-                        if (neutpdouble > neutpwmax || neutpdouble < neutpwmin)
-                        {
-                            flag = 2;
-                        }
-                        double neutptmin = double.Parse(drneutp[0]["threshold_min"].ToString());
-                        double neutptmax = double.Parse(drneutp[0]["threshold_max"].ToString());
-                        if (neutpdouble > neutptmax || neutpdouble < neutptmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string lym = xcg.LYM;
-                    if (lym != null && lym != "")
-                    {
-                        double lymdouble = double.Parse(lym);
-                        DataRow[] drlym = dttv.Select("type='LYM'");
-                        double lymwmin = double.Parse(drlym[0]["warning_min"].ToString());
-                        double lymwmax = double.Parse(drlym[0]["warning_max"].ToString());
-                        if (lymdouble > lymwmax || lymdouble < lymwmin)
-                        {
-                            flag = 2;
-                        }
-                        double lymtmin = double.Parse(drlym[0]["threshold_min"].ToString());
-                        double lymtmax = double.Parse(drlym[0]["threshold_max"].ToString());
-                        if (lymdouble > lymtmax || lymdouble < lymtmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string lymp = xcg.LYMP;
-                    if (lymp != null && lymp != "")
-                    {
-                        double lympdouble = double.Parse(lymp);
-                        DataRow[] drlymp = dttv.Select("type='LYMP'");
-                        double lympwmin = double.Parse(drlymp[0]["warning_min"].ToString());
-                        double lympwmax = double.Parse(drlymp[0]["warning_max"].ToString());
-                        if (lympdouble > lympwmax || lympdouble < lympwmin)
-                        {
-                            flag = 2;
-                        }
-                        double lymptmin = double.Parse(drlymp[0]["threshold_min"].ToString());
-                        double lymptmax = double.Parse(drlymp[0]["threshold_max"].ToString());
-                        if (lympdouble > lymptmax || lympdouble < lymptmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string mpv = xcg.MPV;
-                    if (mpv != null && mpv != "")
-                    {
-                        double mpvdouble = double.Parse(mpv);
-                        DataRow[] drmpv = dttv.Select("type='MPV'");
-                        double mpvwmin = double.Parse(drmpv[0]["warning_min"].ToString());
-                        double mpvwmax = double.Parse(drmpv[0]["warning_max"].ToString());
-                        if (mpvdouble > mpvwmax || mpvdouble < mpvwmin)
-                        {
-                            flag = 2;
-                        }
-                        double mpvtmin = double.Parse(drmpv[0]["threshold_min"].ToString());
-                        double mpvtmax = double.Parse(drmpv[0]["threshold_max"].ToString());
-                        if (mpvdouble > mpvtmax || mpvdouble < mpvtmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string pdw = xcg.PDW;
-                    if (pdw != null && pdw != "")
-                    {
-                        double pdwdouble = double.Parse(pdw);
-                        DataRow[] drpdw = dttv.Select("type='PDW'");
-                        double pdwwmin = double.Parse(drpdw[0]["warning_min"].ToString());
-                        double pdwwmax = double.Parse(drpdw[0]["warning_max"].ToString());
-                        if (pdwdouble > pdwwmax || pdwdouble < pdwwmin)
-                        {
-                            flag = 2;
-                        }
-                        double pdwtmin = double.Parse(drpdw[0]["threshold_min"].ToString());
-                        double pdwtmax = double.Parse(drpdw[0]["threshold_max"].ToString());
-                        if (pdwdouble > pdwtmax || pdwdouble < pdwtmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string mxd = xcg.MXD;
-                    if (mxd != null && mxd != "")
-                    {
-                        double mxddouble = double.Parse(mxd);
-                        DataRow[] drmxd = dttv.Select("type='MXD'");
-                        double mxdwmin = double.Parse(drmxd[0]["warning_min"].ToString());
-                        double mxdwmax = double.Parse(drmxd[0]["warning_max"].ToString());
-                        if (mxddouble > mxdwmax || mxddouble < mxdwmin)
-                        {
-                            flag = 2;
-                        }
-                        double mxdtmin = double.Parse(drmxd[0]["threshold_min"].ToString());
-                        double mxdtmax = double.Parse(drmxd[0]["threshold_max"].ToString());
-                        if (mxddouble > mxdtmax || mxddouble < mxdtmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    string mxdp = xcg.MXDP;
-                    if (mxdp != null && mxdp != "")
-                    {
-                        double mxdpdouble = double.Parse(mxdp);
-                        DataRow[] drmxdp = dttv.Select("type='MXDP'");
-                        double mxdpwmin = double.Parse(drmxdp[0]["warning_min"].ToString());
-                        double mxdpwmax = double.Parse(drmxdp[0]["warning_max"].ToString());
-                        if (mxdpdouble > mxdpwmax || mxdpdouble < mxdpwmin)
-                        {
-                            flag = 2;
-                        }
-                        double mxdptmin = double.Parse(drmxdp[0]["threshold_min"].ToString());
-                        double mxdptmax = double.Parse(drmxdp[0]["threshold_max"].ToString());
-                        if (mxdpdouble > mxdptmax || mxdpdouble < mxdptmin)
-                        {
-                            flag = 3;
-                        }
-                    }
-                    tjdao.updateTJbgdcXuechanggui(xcg.aichive_no, xcg.bar_code, flag);
-                    tjdao.updatePEXcgInfo(xcg.aichive_no, xcg.bar_code, xcg.HGB, xcg.WBC, xcg.PLT);
                 }
-         }
+                string pct = xcg.PCT;
+                if (pct != null && pct != "")
+                {
+                    double pctdouble = double.Parse(pct);
+                    DataRow[] drpct = dttv.Select("type='PCT'");
+                    double pctwmin = double.Parse(drpct[0]["warning_min"].ToString());
+                    double pctwmax = double.Parse(drpct[0]["warning_max"].ToString());
+                    if (pctdouble > pctwmax || pctdouble < pctwmin)
+                    {
+                        flag = 2;
+                    }
+                    double pcttmin = double.Parse(drpct[0]["threshold_min"].ToString());
+                    double pcttmax = double.Parse(drpct[0]["threshold_max"].ToString());
+                    if (pctdouble > pcttmax || pctdouble < pcttmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string plt = xcg.PLT;
+                if (plt != null && plt != "")
+                {
+                    double pltdouble = double.Parse(plt);
+                    DataRow[] drplt = dttv.Select("type='PLT'");
+                    double pltwmin = double.Parse(drplt[0]["warning_min"].ToString());
+                    double pltwmax = double.Parse(drplt[0]["warning_max"].ToString());
+                    if (pltdouble > pltwmax || pltdouble < pltwmin)
+                    {
+                        flag = 2;
+                    }
+                    double plttmin = double.Parse(drplt[0]["threshold_min"].ToString());
+                    double plttmax = double.Parse(drplt[0]["threshold_max"].ToString());
+                    if (pltdouble > plttmax || pltdouble < plttmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string hgb = xcg.HGB;
+                if (hgb != null && hgb != "")
+                {
+                    double hgbdouble = double.Parse(hgb);
+                    DataRow[] drhgb = dttv.Select("type='HGB'");
+                    double hgbwmin = double.Parse(drhgb[0]["warning_min"].ToString());
+                    double hgbwmax = double.Parse(drhgb[0]["warning_max"].ToString());
+                    if (hgbdouble > hgbwmax || hgbdouble < hgbwmin)
+                    {
+                        flag = 2;
+                    }
+                    double hgbtmin = double.Parse(drhgb[0]["threshold_min"].ToString());
+                    double hgbtmax = double.Parse(drhgb[0]["threshold_max"].ToString());
+                    if (hgbdouble > hgbtmax || hgbdouble < hgbtmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string hct = xcg.HCT;
+                if (hct != null && hct != "")
+                {
+                    double hctdouble = double.Parse(hct);
+                    DataRow[] drhct = dttv.Select("type='HCT'");
+                    double hctwmin = double.Parse(drhct[0]["warning_min"].ToString());
+                    double hctwmax = double.Parse(drhct[0]["warning_max"].ToString());
+                    if (hctdouble > hctwmax || hctdouble < hctwmin)
+                    {
+                        flag = 2;
+                    }
+                    double hcttmin = double.Parse(drhct[0]["threshold_min"].ToString());
+                    double hcttmax = double.Parse(drhct[0]["threshold_max"].ToString());
+                    if (hctdouble > hcttmax || hctdouble < hcttmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string mcv = xcg.MCV;
+                if (mcv != null && mcv != "")
+                {
+                    double mcvdouble = double.Parse(mcv);
+                    DataRow[] drmcv = dttv.Select("type='MCV'");
+                    double mcvwmin = double.Parse(drmcv[0]["warning_min"].ToString());
+                    double mcvwmax = double.Parse(drmcv[0]["warning_max"].ToString());
+                    if (mcvdouble > mcvwmax || mcvdouble < mcvwmin)
+                    {
+                        flag = 2;
+                    }
+                    double mcvtmin = double.Parse(drmcv[0]["threshold_min"].ToString());
+                    double mcvtmax = double.Parse(drmcv[0]["threshold_max"].ToString());
+                    if (mcvdouble > mcvtmax || mcvdouble < mcvtmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string mch = xcg.MCH;
+                if (mch != null && mch != "")
+                {
+                    double mchdouble = double.Parse(mch);
+                    DataRow[] drmch = dttv.Select("type='MCH'");
+                    double mchwmin = double.Parse(drmch[0]["warning_min"].ToString());
+                    double mchwmax = double.Parse(drmch[0]["warning_max"].ToString());
+                    if (mchdouble > mchwmax || mchdouble < mchwmin)
+                    {
+                        flag = 2;
+                    }
+                    double mchtmin = double.Parse(drmch[0]["threshold_min"].ToString());
+                    double mchtmax = double.Parse(drmch[0]["threshold_max"].ToString());
+                    if (mchdouble > mchtmax || mchdouble < mchtmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string mchc = xcg.MCHC;
+                if (mchc != null && mchc != "")
+                {
+                    double mchcdouble = double.Parse(mchc);
+                    DataRow[] drmchc = dttv.Select("type='MCHC'");
+                    double mchcwmin = double.Parse(drmchc[0]["warning_min"].ToString());
+                    double mchcwmax = double.Parse(drmchc[0]["warning_max"].ToString());
+                    if (mchcdouble > mchcwmax || mchcdouble < mchcwmin)
+                    {
+                        flag = 2;
+                    }
+                    double mchctmin = double.Parse(drmchc[0]["threshold_min"].ToString());
+                    double mchctmax = double.Parse(drmchc[0]["threshold_max"].ToString());
+                    if (mchcdouble > mchctmax || mchcdouble < mchctmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string rdwcv = xcg.RDW_CV;
+                if (rdwcv != null && rdwcv != "")
+                {
+                    double rdwcvdouble = double.Parse(rdwcv);
+                    DataRow[] drrdwcv = dttv.Select("type='RDWCV'");
+                    double rdwcvwmin = double.Parse(drrdwcv[0]["warning_min"].ToString());
+                    double rdwcvwmax = double.Parse(drrdwcv[0]["warning_max"].ToString());
+                    if (rdwcvdouble > rdwcvwmax || rdwcvdouble < rdwcvwmin)
+                    {
+                        flag = 2;
+                    }
+                    double rdwcvtmin = double.Parse(drrdwcv[0]["threshold_min"].ToString());
+                    double rdwcvtmax = double.Parse(drrdwcv[0]["threshold_max"].ToString());
+                    if (rdwcvdouble > rdwcvtmax || rdwcvdouble < rdwcvtmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string rdwsd = xcg.RDW_SD;
+                if (rdwsd != null && rdwsd != "")
+                {
+                    double rdwsddouble = double.Parse(rdwsd);
+                    DataRow[] drrdwsd = dttv.Select("type='RDWSD'");
+                    double rdwsdwmin = double.Parse(drrdwsd[0]["warning_min"].ToString());
+                    double rdwsdwmax = double.Parse(drrdwsd[0]["warning_max"].ToString());
+                    if (rdwsddouble > rdwsdwmax || rdwsddouble < rdwsdwmin)
+                    {
+                        flag = 2;
+                    }
+                    double rdwsdtmin = double.Parse(drrdwsd[0]["threshold_min"].ToString());
+                    double rdwsdtmax = double.Parse(drrdwsd[0]["threshold_max"].ToString());
+                    if (rdwsddouble > rdwsdtmax || rdwsddouble < rdwsdtmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string neut = xcg.NEUT;
+                if (neut != null && neut != "")
+                {
+                    double neutdouble = double.Parse(neut);
+                    DataRow[] drneut = dttv.Select("type='NEUT'");
+                    double neutwmin = double.Parse(drneut[0]["warning_min"].ToString());
+                    double neutwmax = double.Parse(drneut[0]["warning_max"].ToString());
+                    if (neutdouble > neutwmax || neutdouble < neutwmin)
+                    {
+                        flag = 2;
+                    }
+                    double neuttmin = double.Parse(drneut[0]["threshold_min"].ToString());
+                    double neuttmax = double.Parse(drneut[0]["threshold_max"].ToString());
+                    if (neutdouble > neuttmax || neutdouble < neuttmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string neutp = xcg.NEUTP;
+                if (neutp != null && neutp != "")
+                {
+                    double neutpdouble = double.Parse(neutp);
+                    DataRow[] drneutp = dttv.Select("type='NEUTP'");
+                    double neutpwmin = double.Parse(drneutp[0]["warning_min"].ToString());
+                    double neutpwmax = double.Parse(drneutp[0]["warning_max"].ToString());
+                    if (neutpdouble > neutpwmax || neutpdouble < neutpwmin)
+                    {
+                        flag = 2;
+                    }
+                    double neutptmin = double.Parse(drneutp[0]["threshold_min"].ToString());
+                    double neutptmax = double.Parse(drneutp[0]["threshold_max"].ToString());
+                    if (neutpdouble > neutptmax || neutpdouble < neutptmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string lym = xcg.LYM;
+                if (lym != null && lym != "")
+                {
+                    double lymdouble = double.Parse(lym);
+                    DataRow[] drlym = dttv.Select("type='LYM'");
+                    double lymwmin = double.Parse(drlym[0]["warning_min"].ToString());
+                    double lymwmax = double.Parse(drlym[0]["warning_max"].ToString());
+                    if (lymdouble > lymwmax || lymdouble < lymwmin)
+                    {
+                        flag = 2;
+                    }
+                    double lymtmin = double.Parse(drlym[0]["threshold_min"].ToString());
+                    double lymtmax = double.Parse(drlym[0]["threshold_max"].ToString());
+                    if (lymdouble > lymtmax || lymdouble < lymtmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string lymp = xcg.LYMP;
+                if (lymp != null && lymp != "")
+                {
+                    double lympdouble = double.Parse(lymp);
+                    DataRow[] drlymp = dttv.Select("type='LYMP'");
+                    double lympwmin = double.Parse(drlymp[0]["warning_min"].ToString());
+                    double lympwmax = double.Parse(drlymp[0]["warning_max"].ToString());
+                    if (lympdouble > lympwmax || lympdouble < lympwmin)
+                    {
+                        flag = 2;
+                    }
+                    double lymptmin = double.Parse(drlymp[0]["threshold_min"].ToString());
+                    double lymptmax = double.Parse(drlymp[0]["threshold_max"].ToString());
+                    if (lympdouble > lymptmax || lympdouble < lymptmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string mpv = xcg.MPV;
+                if (mpv != null && mpv != "")
+                {
+                    double mpvdouble = double.Parse(mpv);
+                    DataRow[] drmpv = dttv.Select("type='MPV'");
+                    double mpvwmin = double.Parse(drmpv[0]["warning_min"].ToString());
+                    double mpvwmax = double.Parse(drmpv[0]["warning_max"].ToString());
+                    if (mpvdouble > mpvwmax || mpvdouble < mpvwmin)
+                    {
+                        flag = 2;
+                    }
+                    double mpvtmin = double.Parse(drmpv[0]["threshold_min"].ToString());
+                    double mpvtmax = double.Parse(drmpv[0]["threshold_max"].ToString());
+                    if (mpvdouble > mpvtmax || mpvdouble < mpvtmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string pdw = xcg.PDW;
+                if (pdw != null && pdw != "")
+                {
+                    double pdwdouble = double.Parse(pdw);
+                    DataRow[] drpdw = dttv.Select("type='PDW'");
+                    double pdwwmin = double.Parse(drpdw[0]["warning_min"].ToString());
+                    double pdwwmax = double.Parse(drpdw[0]["warning_max"].ToString());
+                    if (pdwdouble > pdwwmax || pdwdouble < pdwwmin)
+                    {
+                        flag = 2;
+                    }
+                    double pdwtmin = double.Parse(drpdw[0]["threshold_min"].ToString());
+                    double pdwtmax = double.Parse(drpdw[0]["threshold_max"].ToString());
+                    if (pdwdouble > pdwtmax || pdwdouble < pdwtmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string mxd = xcg.MXD;
+                if (mxd != null && mxd != "")
+                {
+                    double mxddouble = double.Parse(mxd);
+                    DataRow[] drmxd = dttv.Select("type='MXD'");
+                    double mxdwmin = double.Parse(drmxd[0]["warning_min"].ToString());
+                    double mxdwmax = double.Parse(drmxd[0]["warning_max"].ToString());
+                    if (mxddouble > mxdwmax || mxddouble < mxdwmin)
+                    {
+                        flag = 2;
+                    }
+                    double mxdtmin = double.Parse(drmxd[0]["threshold_min"].ToString());
+                    double mxdtmax = double.Parse(drmxd[0]["threshold_max"].ToString());
+                    if (mxddouble > mxdtmax || mxddouble < mxdtmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string mxdp = xcg.MXDP;
+                if (mxdp != null && mxdp != "")
+                {
+                    double mxdpdouble = double.Parse(mxdp);
+                    DataRow[] drmxdp = dttv.Select("type='MXDP'");
+                    double mxdpwmin = double.Parse(drmxdp[0]["warning_min"].ToString());
+                    double mxdpwmax = double.Parse(drmxdp[0]["warning_max"].ToString());
+                    if (mxdpdouble > mxdpwmax || mxdpdouble < mxdpwmin)
+                    {
+                        flag = 2;
+                    }
+                    double mxdptmin = double.Parse(drmxdp[0]["threshold_min"].ToString());
+                    double mxdptmax = double.Parse(drmxdp[0]["threshold_max"].ToString());
+                    if (mxdpdouble > mxdptmax || mxdpdouble < mxdptmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                tjdao.updateTJbgdcXuechanggui(xcg.aichive_no, xcg.bar_code, flag);
+                tjdao.updatePEXcgInfo(xcg.aichive_no, xcg.bar_code, xcg.HGB, xcg.WBC, xcg.PLT);
+            }
+            else
+            {
+                bool istrue1 = tjdao.updateXuechangguiInfo(xcg);
+                if (!istrue1)
+                {
+                    return;
+                }
+                int flag = 1;
+                string wbc = xcg.WBC;
+                if (wbc != null && wbc != "")
+                {
+                    double wbcdouble = double.Parse(wbc);
+                    DataRow[] drwbc = dttv.Select("type='WBC'");
+                    double wbcwmin = double.Parse(drwbc[0]["warning_min"].ToString());
+                    double wbcwmax = double.Parse(drwbc[0]["warning_max"].ToString());
+                    if (wbcdouble > wbcwmax || wbcdouble < wbcwmin)
+                    {
+                        flag = 2;
+                    }
+                    double wbctmin = double.Parse(drwbc[0]["threshold_min"].ToString());
+                    double wbctmax = double.Parse(drwbc[0]["threshold_max"].ToString());
+                    if (wbcdouble > wbctmax || wbcdouble < wbctmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string rbc = xcg.RBC;
+                if (rbc != null && rbc != "")
+                {
+                    double rbcdouble = double.Parse(rbc);
+                    DataRow[] drrbc = dttv.Select("type='RBC'");
+                    double rbcwmin = double.Parse(drrbc[0]["warning_min"].ToString());
+                    double rbcwmax = double.Parse(drrbc[0]["warning_max"].ToString());
+                    if (rbcdouble > rbcwmax || rbcdouble < rbcwmin)
+                    {
+                        flag = 2;
+                    }
+                    double rbctmin = double.Parse(drrbc[0]["threshold_min"].ToString());
+                    double rbctmax = double.Parse(drrbc[0]["threshold_max"].ToString());
+                    if (rbcdouble > rbctmax || rbcdouble < rbctmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string pct = xcg.PCT;
+                if (pct != null && pct != "")
+                {
+                    double pctdouble = double.Parse(pct);
+                    DataRow[] drpct = dttv.Select("type='PCT'");
+                    double pctwmin = double.Parse(drpct[0]["warning_min"].ToString());
+                    double pctwmax = double.Parse(drpct[0]["warning_max"].ToString());
+                    if (pctdouble > pctwmax || pctdouble < pctwmin)
+                    {
+                        flag = 2;
+                    }
+                    double pcttmin = double.Parse(drpct[0]["threshold_min"].ToString());
+                    double pcttmax = double.Parse(drpct[0]["threshold_max"].ToString());
+                    if (pctdouble > pcttmax || pctdouble < pcttmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string plt = xcg.PLT;
+                if (plt != null && plt != "")
+                {
+                    double pltdouble = double.Parse(plt);
+                    DataRow[] drplt = dttv.Select("type='PLT'");
+                    double pltwmin = double.Parse(drplt[0]["warning_min"].ToString());
+                    double pltwmax = double.Parse(drplt[0]["warning_max"].ToString());
+                    if (pltdouble > pltwmax || pltdouble < pltwmin)
+                    {
+                        flag = 2;
+                    }
+                    double plttmin = double.Parse(drplt[0]["threshold_min"].ToString());
+                    double plttmax = double.Parse(drplt[0]["threshold_max"].ToString());
+                    if (pltdouble > plttmax || pltdouble < plttmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string hgb = xcg.HGB;
+                if (hgb != null && hgb != "")
+                {
+                    double hgbdouble = double.Parse(hgb);
+                    DataRow[] drhgb = dttv.Select("type='HGB'");
+                    double hgbwmin = double.Parse(drhgb[0]["warning_min"].ToString());
+                    double hgbwmax = double.Parse(drhgb[0]["warning_max"].ToString());
+                    if (hgbdouble > hgbwmax || hgbdouble < hgbwmin)
+                    {
+                        flag = 2;
+                    }
+                    double hgbtmin = double.Parse(drhgb[0]["threshold_min"].ToString());
+                    double hgbtmax = double.Parse(drhgb[0]["threshold_max"].ToString());
+                    if (hgbdouble > hgbtmax || hgbdouble < hgbtmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string hct = xcg.HCT;
+                if (hct != null && hct != "")
+                {
+                    double hctdouble = double.Parse(hct);
+                    DataRow[] drhct = dttv.Select("type='HCT'");
+                    double hctwmin = double.Parse(drhct[0]["warning_min"].ToString());
+                    double hctwmax = double.Parse(drhct[0]["warning_max"].ToString());
+                    if (hctdouble > hctwmax || hctdouble < hctwmin)
+                    {
+                        flag = 2;
+                    }
+                    double hcttmin = double.Parse(drhct[0]["threshold_min"].ToString());
+                    double hcttmax = double.Parse(drhct[0]["threshold_max"].ToString());
+                    if (hctdouble > hcttmax || hctdouble < hcttmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string mcv = xcg.MCV;
+                if (mcv != null && mcv != "")
+                {
+                    double mcvdouble = double.Parse(mcv);
+                    DataRow[] drmcv = dttv.Select("type='MCV'");
+                    double mcvwmin = double.Parse(drmcv[0]["warning_min"].ToString());
+                    double mcvwmax = double.Parse(drmcv[0]["warning_max"].ToString());
+                    if (mcvdouble > mcvwmax || mcvdouble < mcvwmin)
+                    {
+                        flag = 2;
+                    }
+                    double mcvtmin = double.Parse(drmcv[0]["threshold_min"].ToString());
+                    double mcvtmax = double.Parse(drmcv[0]["threshold_max"].ToString());
+                    if (mcvdouble > mcvtmax || mcvdouble < mcvtmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string mch = xcg.MCH;
+                if (mch != null && mch != "")
+                {
+                    double mchdouble = double.Parse(mch);
+                    DataRow[] drmch = dttv.Select("type='MCH'");
+                    double mchwmin = double.Parse(drmch[0]["warning_min"].ToString());
+                    double mchwmax = double.Parse(drmch[0]["warning_max"].ToString());
+                    if (mchdouble > mchwmax || mchdouble < mchwmin)
+                    {
+                        flag = 2;
+                    }
+                    double mchtmin = double.Parse(drmch[0]["threshold_min"].ToString());
+                    double mchtmax = double.Parse(drmch[0]["threshold_max"].ToString());
+                    if (mchdouble > mchtmax || mchdouble < mchtmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string mchc = xcg.MCHC;
+                if (mchc != null && mchc != "")
+                {
+                    double mchcdouble = double.Parse(mchc);
+                    DataRow[] drmchc = dttv.Select("type='MCHC'");
+                    double mchcwmin = double.Parse(drmchc[0]["warning_min"].ToString());
+                    double mchcwmax = double.Parse(drmchc[0]["warning_max"].ToString());
+                    if (mchcdouble > mchcwmax || mchcdouble < mchcwmin)
+                    {
+                        flag = 2;
+                    }
+                    double mchctmin = double.Parse(drmchc[0]["threshold_min"].ToString());
+                    double mchctmax = double.Parse(drmchc[0]["threshold_max"].ToString());
+                    if (mchcdouble > mchctmax || mchcdouble < mchctmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string rdwcv = xcg.RDW_CV;
+                if (rdwcv != null && rdwcv != "")
+                {
+                    double rdwcvdouble = double.Parse(rdwcv);
+                    DataRow[] drrdwcv = dttv.Select("type='RDWCV'");
+                    double rdwcvwmin = double.Parse(drrdwcv[0]["warning_min"].ToString());
+                    double rdwcvwmax = double.Parse(drrdwcv[0]["warning_max"].ToString());
+                    if (rdwcvdouble > rdwcvwmax || rdwcvdouble < rdwcvwmin)
+                    {
+                        flag = 2;
+                    }
+                    double rdwcvtmin = double.Parse(drrdwcv[0]["threshold_min"].ToString());
+                    double rdwcvtmax = double.Parse(drrdwcv[0]["threshold_max"].ToString());
+                    if (rdwcvdouble > rdwcvtmax || rdwcvdouble < rdwcvtmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string rdwsd = xcg.RDW_SD;
+                if (rdwsd != null && rdwsd != "")
+                {
+                    double rdwsddouble = double.Parse(rdwsd);
+                    DataRow[] drrdwsd = dttv.Select("type='RDWSD'");
+                    double rdwsdwmin = double.Parse(drrdwsd[0]["warning_min"].ToString());
+                    double rdwsdwmax = double.Parse(drrdwsd[0]["warning_max"].ToString());
+                    if (rdwsddouble > rdwsdwmax || rdwsddouble < rdwsdwmin)
+                    {
+                        flag = 2;
+                    }
+                    double rdwsdtmin = double.Parse(drrdwsd[0]["threshold_min"].ToString());
+                    double rdwsdtmax = double.Parse(drrdwsd[0]["threshold_max"].ToString());
+                    if (rdwsddouble > rdwsdtmax || rdwsddouble < rdwsdtmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string neut = xcg.NEUT;
+                if (neut != null && neut != "")
+                {
+                    double neutdouble = double.Parse(neut);
+                    DataRow[] drneut = dttv.Select("type='NEUT'");
+                    double neutwmin = double.Parse(drneut[0]["warning_min"].ToString());
+                    double neutwmax = double.Parse(drneut[0]["warning_max"].ToString());
+                    if (neutdouble > neutwmax || neutdouble < neutwmin)
+                    {
+                        flag = 2;
+                    }
+                    double neuttmin = double.Parse(drneut[0]["threshold_min"].ToString());
+                    double neuttmax = double.Parse(drneut[0]["threshold_max"].ToString());
+                    if (neutdouble > neuttmax || neutdouble < neuttmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string neutp = xcg.NEUTP;
+                if (neutp != null && neutp != "")
+                {
+                    double neutpdouble = double.Parse(neutp);
+                    DataRow[] drneutp = dttv.Select("type='NEUTP'");
+                    double neutpwmin = double.Parse(drneutp[0]["warning_min"].ToString());
+                    double neutpwmax = double.Parse(drneutp[0]["warning_max"].ToString());
+                    if (neutpdouble > neutpwmax || neutpdouble < neutpwmin)
+                    {
+                        flag = 2;
+                    }
+                    double neutptmin = double.Parse(drneutp[0]["threshold_min"].ToString());
+                    double neutptmax = double.Parse(drneutp[0]["threshold_max"].ToString());
+                    if (neutpdouble > neutptmax || neutpdouble < neutptmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string lym = xcg.LYM;
+                if (lym != null && lym != "")
+                {
+                    double lymdouble = double.Parse(lym);
+                    DataRow[] drlym = dttv.Select("type='LYM'");
+                    double lymwmin = double.Parse(drlym[0]["warning_min"].ToString());
+                    double lymwmax = double.Parse(drlym[0]["warning_max"].ToString());
+                    if (lymdouble > lymwmax || lymdouble < lymwmin)
+                    {
+                        flag = 2;
+                    }
+                    double lymtmin = double.Parse(drlym[0]["threshold_min"].ToString());
+                    double lymtmax = double.Parse(drlym[0]["threshold_max"].ToString());
+                    if (lymdouble > lymtmax || lymdouble < lymtmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string lymp = xcg.LYMP;
+                if (lymp != null && lymp != "")
+                {
+                    double lympdouble = double.Parse(lymp);
+                    DataRow[] drlymp = dttv.Select("type='LYMP'");
+                    double lympwmin = double.Parse(drlymp[0]["warning_min"].ToString());
+                    double lympwmax = double.Parse(drlymp[0]["warning_max"].ToString());
+                    if (lympdouble > lympwmax || lympdouble < lympwmin)
+                    {
+                        flag = 2;
+                    }
+                    double lymptmin = double.Parse(drlymp[0]["threshold_min"].ToString());
+                    double lymptmax = double.Parse(drlymp[0]["threshold_max"].ToString());
+                    if (lympdouble > lymptmax || lympdouble < lymptmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string mpv = xcg.MPV;
+                if (mpv != null && mpv != "")
+                {
+                    double mpvdouble = double.Parse(mpv);
+                    DataRow[] drmpv = dttv.Select("type='MPV'");
+                    double mpvwmin = double.Parse(drmpv[0]["warning_min"].ToString());
+                    double mpvwmax = double.Parse(drmpv[0]["warning_max"].ToString());
+                    if (mpvdouble > mpvwmax || mpvdouble < mpvwmin)
+                    {
+                        flag = 2;
+                    }
+                    double mpvtmin = double.Parse(drmpv[0]["threshold_min"].ToString());
+                    double mpvtmax = double.Parse(drmpv[0]["threshold_max"].ToString());
+                    if (mpvdouble > mpvtmax || mpvdouble < mpvtmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string pdw = xcg.PDW;
+                if (pdw != null && pdw != "")
+                {
+                    double pdwdouble = double.Parse(pdw);
+                    DataRow[] drpdw = dttv.Select("type='PDW'");
+                    double pdwwmin = double.Parse(drpdw[0]["warning_min"].ToString());
+                    double pdwwmax = double.Parse(drpdw[0]["warning_max"].ToString());
+                    if (pdwdouble > pdwwmax || pdwdouble < pdwwmin)
+                    {
+                        flag = 2;
+                    }
+                    double pdwtmin = double.Parse(drpdw[0]["threshold_min"].ToString());
+                    double pdwtmax = double.Parse(drpdw[0]["threshold_max"].ToString());
+                    if (pdwdouble > pdwtmax || pdwdouble < pdwtmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string mxd = xcg.MXD;
+                if (mxd != null && mxd != "")
+                {
+                    double mxddouble = double.Parse(mxd);
+                    DataRow[] drmxd = dttv.Select("type='MXD'");
+                    double mxdwmin = double.Parse(drmxd[0]["warning_min"].ToString());
+                    double mxdwmax = double.Parse(drmxd[0]["warning_max"].ToString());
+                    if (mxddouble > mxdwmax || mxddouble < mxdwmin)
+                    {
+                        flag = 2;
+                    }
+                    double mxdtmin = double.Parse(drmxd[0]["threshold_min"].ToString());
+                    double mxdtmax = double.Parse(drmxd[0]["threshold_max"].ToString());
+                    if (mxddouble > mxdtmax || mxddouble < mxdtmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                string mxdp = xcg.MXDP;
+                if (mxdp != null && mxdp != "")
+                {
+                    double mxdpdouble = double.Parse(mxdp);
+                    DataRow[] drmxdp = dttv.Select("type='MXDP'");
+                    double mxdpwmin = double.Parse(drmxdp[0]["warning_min"].ToString());
+                    double mxdpwmax = double.Parse(drmxdp[0]["warning_max"].ToString());
+                    if (mxdpdouble > mxdpwmax || mxdpdouble < mxdpwmin)
+                    {
+                        flag = 2;
+                    }
+                    double mxdptmin = double.Parse(drmxdp[0]["threshold_min"].ToString());
+                    double mxdptmax = double.Parse(drmxdp[0]["threshold_max"].ToString());
+                    if (mxdpdouble > mxdptmax || mxdpdouble < mxdptmin)
+                    {
+                        flag = 3;
+                    }
+                }
+                tjdao.updateTJbgdcXuechanggui(xcg.aichive_no, xcg.bar_code, flag);
+                tjdao.updatePEXcgInfo(xcg.aichive_no, xcg.bar_code, xcg.HGB, xcg.WBC, xcg.PLT);
+            }
+        }
+
 
         private bool initPort(string com)
         {
@@ -4368,7 +3816,7 @@ namespace zkhwClient
                 }
                 byte[] buffernew = buffer.Skip(0).Take(effective).ToArray();
                 totalByteRead = totalByteRead.Concat(buffernew).ToArray();
-                if (totalByteRead.Length<100) { continue; }            
+                if (totalByteRead.Length < 100) { continue; }
                 string sHL7 = Encoding.Default.GetString(totalByteRead).Trim();
                 string sendHL7new = "";
                 string sendHL7 = "MSH|^~\\&|LIS||||20361231235956||ACK^R01|1|P|2.3.1||||||UNICODEMSA|AA|1";
@@ -4377,7 +3825,7 @@ namespace zkhwClient
                 string[] sendArraysh = sendHL7sh.Split('|');
                 if (sHL7.IndexOf("ASCII") > 0)
                 {//解析生化协议报文数据
-                    if (sHL7.Substring(0, 3) != "MSH" || sHL7.Substring(sHL7.Length-1, 1)!="|")
+                    if (sHL7.Substring(0, 3) != "MSH" || sHL7.Substring(sHL7.Length - 1, 1) != "|")
                     {
                         continue;
                     }
@@ -4887,7 +4335,7 @@ namespace zkhwClient
                     }
                     send.Send(AckKbe(sendHL7sh));
                 }
-                else if(sHL7.IndexOf("UNICODE") >1)
+                else if (sHL7.IndexOf("UNICODE") > 1)
                 {//解析血球协议报文数据
                     try
                     {
@@ -5004,7 +4452,8 @@ namespace zkhwClient
                             {
                                 xcg.MXDP = sHL7Array[5]; continue;
                             }
-                            else {
+                            else
+                            {
                                 continue;
                             }
                         }
@@ -5739,7 +5188,7 @@ namespace zkhwClient
             serverSocket.Bind(point);
             //设置同时连接个数
             serverSocket.Listen(10);
-            
+
             //利用线程后台执行监听,否则程序会假死
             Thread thread = new Thread(ListenDr);
             thread.IsBackground = true;
@@ -7149,10 +6598,210 @@ namespace zkhwClient
                 totalByteRead = new Byte[0];
             }
         }
-
-        private void 家医签约登录ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GetAllLocalMachines()
         {
+            Process p = new Process();
+            p.StartInfo.FileName = "cmd.exe";
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardInput = true;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.CreateNoWindow = true;
+            p.Start();
+            p.StandardInput.WriteLine("arp -a");
+            p.StandardInput.WriteLine("exit");
+            //ArrayList list = new ArrayList();
+            StreamReader reader = p.StandardOutput;
+            string IPHead = Dns.GetHostByName(Dns.GetHostName()).AddressList[0].ToString().Substring(0, 3);
+            for (string line = reader.ReadLine(); line != null; line = reader.ReadLine())
+            {
+                line = line.Trim();
+                if (line.StartsWith(IPHead) && line.Length > 40)
+                {
+                    string IP = line.Substring(0, 15).Trim();
+                    //身高82 血压80 心电81 尿机83 B超84
+                    if (IP == "192.168.1.80")
+                    {
+                        String sql = "update zkhw_state_device set xy_online='1',xy_state='1' where ID='1'";
+                        DbHelperMySQL.ExecuteSql(sql);
+                    }
+                    if (IP == "192.168.1.83")
+                    {
+                        String sql = "update zkhw_state_device set ncg_online='1',ncg_state='1' where ID='1'";
+                        DbHelperMySQL.ExecuteSql(sql);
+                    }
+                    if (IP == "192.168.1.82")
+                    {
+                        String sql = "update zkhw_state_device set sgtz_online='1',sgtz_state='1' where ID='1'";
+                        DbHelperMySQL.ExecuteSql(sql);
+                    }
+                    if (IP == "192.168.1.81")
+                    {
+                        String sql = "update zkhw_state_device set xdt_online='1',xdt_state='1' where ID='1'";
+                        DbHelperMySQL.ExecuteSql(sql);
+                    }
+                    if (IP == "192.168.1.84")
+                    {
+                        String sql = "update zkhw_state_device set bc_online='1',bc_state='1' where ID='1'";
+                        DbHelperMySQL.ExecuteSql(sql);
+                    }
+                }
+            }
+        }
 
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            GetAllLocalMachines();//cmd获取局域网内的所有设备IP和MAC信息
+            DataTable dtDeviceType = tjdao.checkDevice();
+            if (dtDeviceType == null || dtDeviceType.Rows.Count < 1)
+            {
+                return;
+            }
+            Color _color= Color.FromArgb(37, 55, 129);
+            string sfz_online = dtDeviceType.Rows[0]["sfz_online"].ToString();
+            if (sfz_online == "0" || "0".Equals(sfz_online))
+            {
+                label10.BackColor = Color.Red;
+            }
+            else
+            {
+                label10.BackColor = _color;
+            }
+            string sxt_online = dtDeviceType.Rows[0]["sxt_online"].ToString();
+            if (sxt_online == "0" || "0".Equals(sxt_online))
+            {
+                label9.BackColor = Color.Red;
+            }
+            else
+            {
+                label9.BackColor = _color;
+            }
+            string dyj_online = dtDeviceType.Rows[0]["dyj_online"].ToString();
+            if (dyj_online == "0" || "0".Equals(dyj_online))
+            {
+                label11.BackColor = Color.Red;
+            }
+            else
+            {
+                label11.BackColor = _color;
+            }
+            string xcg_online = dtDeviceType.Rows[0]["xcg_online"].ToString();
+            if (xcg_online == "0" || "0".Equals(xcg_online))
+            {
+                label5.BackColor = Color.Red;
+            }
+            else
+            {
+                label5.BackColor = _color;
+            }
+            string sh_online = dtDeviceType.Rows[0]["sh_online"].ToString();
+            if (sh_online == "0" || "0".Equals(sh_online))
+            {
+                label3.BackColor = Color.Red;
+            }
+            else
+            {
+                label3.BackColor = _color;
+            }
+            string ncg_online = dtDeviceType.Rows[0]["ncg_online"].ToString();
+            if (ncg_online == "0" || "0".Equals(ncg_online))
+            {
+                label4.BackColor = Color.Red;
+            }
+            else
+            {
+                label4.BackColor = _color;
+            }
+            string xdt_online = dtDeviceType.Rows[0]["xdt_online"].ToString();
+            if (xdt_online == "0" || "0".Equals(xdt_online))
+            {
+                label7.BackColor = Color.Red;
+            }
+            else
+            {
+                label7.BackColor = _color;
+            }
+            string sgtz_online = dtDeviceType.Rows[0]["sgtz_online"].ToString();
+            if (sgtz_online == "0" || "0".Equals(sgtz_online))
+            {
+                label6.BackColor = Color.Red;
+            }
+            else
+            {
+                label6.BackColor = _color;
+            }
+            string xy_online = dtDeviceType.Rows[0]["xy_online"].ToString();
+            if (xy_online == "0" || "0".Equals(xy_online))
+            {
+                label8.BackColor = Color.Red;
+            }
+            else
+            {
+                label8.BackColor = _color;
+            }
+            string bc_online = dtDeviceType.Rows[0]["bc_online"].ToString();
+            if (bc_online == "0" || "0".Equals(bc_online))
+            {
+                label1.BackColor = Color.Red;
+            }
+            else
+            {
+                label1.BackColor = _color;
+            }
+        }
+
+        private void label17_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                if (!proHttp.HasExited)
+                {
+                    proHttp.Kill();
+                }
+                if (!proAsNet.HasExited)
+                {
+                    proAsNet.Kill();
+                }
+                ////if (!proFtp.HasExited)
+                ////{
+                ////    proFtp.Kill();
+                ////}
+                service.loginLogService llse = new service.loginLogService();
+                bean.loginLogBean lb = new bean.loginLogBean();
+                lb.name = frmLogin.name;
+                lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                lb.eventInfo = "退出系统！";
+                lb.type = "1";
+                if (lb.name != "admin" && lb.name != "" && lb.name != null)
+                {
+                    llse.addCheckLog(lb);
+                }
+                Process p = Process.GetCurrentProcess();
+                if (p != null)
+                {
+                    p.Kill();
+                }
+                try
+                {
+                    Environment.Exit(0);
+                }
+                catch
+                { }
+            }
+        }
+
+        private void frmMainm_Resize(object sender, EventArgs e)
+        {
+            //float newx = (this.Width) / xMy;
+            //float newy = (this.Height) / yMy;
+            //Common.setControls(newx, newy, this);
+        }
+
+        private void label13_Click(object sender, EventArgs e)
+        {
+            HomeDoctorLogin softs = new HomeDoctorLogin();
+            softs.Show();
         }
     }
 }

@@ -2968,7 +2968,6 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "个人基本信息建档";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.aUHypertensionPatientServices_Load);
             this.Resize += new System.EventHandler(this.aUPersonalBasicInfoo_Resize);
             this.panel27.ResumeLayout(false);

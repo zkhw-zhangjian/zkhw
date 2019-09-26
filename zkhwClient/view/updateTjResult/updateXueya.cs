@@ -226,7 +226,7 @@ namespace zkhwClient.view.updateTjResult
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("保存", new System.Drawing.Font("微软雅黑", 10, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(24, 5));
+            g.DrawString("保存", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 5));
         }
     }
 }
