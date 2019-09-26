@@ -275,7 +275,7 @@ namespace zkhwClient.view.PublicHealthView
                     if (this.radioButton22.Tag.ToString() == dt.Rows[0]["examination_dorsal_artery"].ToString()) { this.radioButton22.Checked = true; this.textBox26.BackColor = Color.Salmon; };
 
                     if (this.radioButton28.Tag.ToString() == dt.Rows[0]["examination_anus"].ToString()) { this.radioButton28.Checked = true; };
-                    if (this.radioButton28.Tag.ToString() == dt.Rows[0]["examination_anus"].ToString()) { this.radioButton29.Checked = true; this.textBox27.BackColor = Color.Salmon; };
+                    if (this.radioButton29.Tag.ToString() == dt.Rows[0]["examination_anus"].ToString()) { this.radioButton29.Checked = true; this.textBox27.BackColor = Color.Salmon; };
                     if (this.radioButton27.Tag.ToString() == dt.Rows[0]["examination_anus"].ToString()) { this.radioButton27.Checked = true; this.textBox27.BackColor = Color.Salmon; };
                     if (this.radioButton26.Tag.ToString() == dt.Rows[0]["examination_anus"].ToString()) { this.radioButton26.Checked = true; this.textBox27.BackColor = Color.Salmon; };
                     if (this.radioButton30.Tag.ToString() == dt.Rows[0]["examination_anus"].ToString())

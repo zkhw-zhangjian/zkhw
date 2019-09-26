@@ -696,6 +696,7 @@
             this.Name = "examinatProgress";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Tag = "";
             this.Text = "数据审核--Tab键控制光标";
             this.Load += new System.EventHandler(this.examinatProgress_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
