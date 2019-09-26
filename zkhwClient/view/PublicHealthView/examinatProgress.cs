@@ -7,14 +7,11 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Linq;  
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using zkhwClient.dao;
@@ -22,8 +19,7 @@ using zkhwClient.view.setting;
 using zkhwClient.view.updateTjResult;
 
 namespace zkhwClient.view.PublicHealthView
-{
-   
+{   
     public partial class examinatProgress : Form 
     { 
         public string time1 = null; 
@@ -43,7 +39,7 @@ namespace zkhwClient.view.PublicHealthView
         bool isfirst = true;
         public examinatProgress() 
         { 
-            InitializeComponent(); 
+            InitializeComponent();
         }
 
         private void examinatProgress_Load(object sender, EventArgs e) 
@@ -51,11 +47,8 @@ namespace zkhwClient.view.PublicHealthView
             isfirst = true;
             //让默认的日期时间减一天 
             this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
- 
             Common.SetComboBoxInfo(comboBox1, areadao.shengInfo());
-
             dttv = grjddao.checkThresholdValues(Common._deviceModel,"");//获取阈值信息
-
             queryExaminatProgress();
             registrationRecordCheck();//体检人数统计
         } 
@@ -72,9 +65,9 @@ namespace zkhwClient.view.PublicHealthView
             if (time1 != null && !"".Equals(time1) && time2 != null && !"".Equals(time2))
             { 
                 dt = jkdao.querytjjd(time1, time2, xcuncode, jmxx);
-            } 
+            }
             else { this.dataGridView1.DataSource = null; MessageBox.Show("时间段不能为空!"); return; };
-             if (dt != null && dt.Rows.Count > 0)
+            if (dt != null && dt.Rows.Count > 0)
             {
                 if (this.radioButton1.Checked)
                 {
