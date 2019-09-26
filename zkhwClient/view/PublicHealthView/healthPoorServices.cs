@@ -103,6 +103,7 @@ namespace zkhwClient.view.PublicHealthView
                 return;
             }
             this.dataGridView1.DataSource = dt;
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular);
             this.dataGridView1.Columns[0].Visible = false;
             this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";
             this.dataGridView1.Columns[2].HeaderCell.Value = "档案编号";
@@ -239,7 +240,7 @@ namespace zkhwClient.view.PublicHealthView
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("添加", new System.Drawing.Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(25, 6));
+            g.DrawString("添加", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 7));
 
         }
 
@@ -249,7 +250,7 @@ namespace zkhwClient.view.PublicHealthView
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("修改", new System.Drawing.Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(25, 6));
+            g.DrawString("修改", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 7));
 
         }
 
@@ -259,7 +260,7 @@ namespace zkhwClient.view.PublicHealthView
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("删除", new System.Drawing.Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(25, 6));
+            g.DrawString("删除", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 7));
 
         }
 
@@ -269,7 +270,7 @@ namespace zkhwClient.view.PublicHealthView
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 5));
+            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 6));
 
         }
     }

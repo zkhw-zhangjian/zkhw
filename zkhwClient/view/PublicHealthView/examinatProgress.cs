@@ -101,6 +101,7 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 if (dt.Rows.Count < 1) { this.dataGridView1.DataSource = null; MessageBox.Show("未查询出数据!"); return; }
                 this.dataGridView1.DataSource = dt;
+                dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular);
                 this.dataGridView1.Columns[0].HeaderCell.Value = "体检时间";
                 this.dataGridView1.Columns[1].HeaderCell.Value = "姓名";
                 this.dataGridView1.Columns[2].HeaderCell.Value = "档案编号";
@@ -117,19 +118,19 @@ namespace zkhwClient.view.PublicHealthView
                 this.dataGridView1.Columns[13].HeaderCell.Value = "老年人生活自理能力评估";
                 this.dataGridView1.Columns[14].HeaderCell.Value = "老年人中医体质辨识";
                 this.dataGridView1.Columns[15].HeaderCell.Value = "年龄";
-                this.dataGridView1.Columns[0].Width = 82;
-                this.dataGridView1.Columns[1].Width = 60;
-                this.dataGridView1.Columns[2].Width = 130;
-                this.dataGridView1.Columns[3].Width = 130;
-                this.dataGridView1.Columns[4].Width = 70;
-                this.dataGridView1.Columns[5].Width = 70;
-                this.dataGridView1.Columns[6].Width = 70;
-                this.dataGridView1.Columns[7].Width = 70;
-                this.dataGridView1.Columns[8].Width = 70;
-                this.dataGridView1.Columns[9].Width = 70;
-                this.dataGridView1.Columns[10].Width = 70;
-                this.dataGridView1.Columns[11].Width = 80;
-                this.dataGridView1.Columns[12].Width = 90;
+                //this.dataGridView1.Columns[0].Width = 82;
+                //this.dataGridView1.Columns[1].Width = 60;
+                //this.dataGridView1.Columns[2].Width = 130;
+                //this.dataGridView1.Columns[3].Width = 130;
+                //this.dataGridView1.Columns[4].Width = 70;
+                //this.dataGridView1.Columns[5].Width = 70;
+                //this.dataGridView1.Columns[6].Width = 70;
+                //this.dataGridView1.Columns[7].Width = 70;
+                //this.dataGridView1.Columns[8].Width = 70;
+                //this.dataGridView1.Columns[9].Width = 70;
+                //this.dataGridView1.Columns[10].Width = 70;
+                //this.dataGridView1.Columns[11].Width = 80;
+                //this.dataGridView1.Columns[12].Width = 90;
                 this.dataGridView1.Columns[15].Visible = false;
                 this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
                 this.dataGridView1.AllowUserToAddRows = false;
@@ -1047,9 +1048,17 @@ namespace zkhwClient.view.PublicHealthView
         {
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
             base.OnPaint(e);
+            //Single _size = 12;
+            //StringFormat stringFormat = new StringFormat();
+            //stringFormat.Alignment = StringAlignment.Center;
+            //float x = e.ClipRectangle.Width / 2f;
+            //float y = e.ClipRectangle.Height / 2f - (_size / 2f);
+            //Graphics g = e.Graphics;
+            //g.DrawString("查询", new System.Drawing.Font("微软雅黑", _size, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), x, y, stringFormat);
+
 
             Graphics g = e.Graphics;
-            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 5));
+            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 5));
 
         }
 
@@ -1059,7 +1068,7 @@ namespace zkhwClient.view.PublicHealthView
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("删除", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(23, 5));
+            g.DrawString("删除", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(23, 5));
 
         }
 
@@ -1069,7 +1078,7 @@ namespace zkhwClient.view.PublicHealthView
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("拉取数据", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 5));
+            g.DrawString("拉取数据", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 5));
 
         }
 
@@ -1079,7 +1088,7 @@ namespace zkhwClient.view.PublicHealthView
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("导出花名册", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(7, 5));
+            g.DrawString("导出花名册", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(7, 5));
 
         }
 

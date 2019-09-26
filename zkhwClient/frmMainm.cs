@@ -20,6 +20,7 @@ using zkhwClient.dao;
 using zkhwClient.PublicHealth;
 using zkhwClient.utils;
 using zkhwClient.view;
+using zkhwClient.view.HomeDoctorSigningView;
 using zkhwClient.view.PublicHealthView;
 using zkhwClient.view.setting;
 using zkhwClient.view.updateTjResult;
@@ -6792,6 +6793,12 @@ namespace zkhwClient
             //float newx = (this.Width) / xMy;
             //float newy = (this.Height) / yMy;
             //Common.setControls(newx, newy, this);
+        }
+
+        private void label13_Click(object sender, EventArgs e)
+        {
+            HomeDoctorLogin softs = new HomeDoctorLogin();
+            softs.Show();
         }
     }
 }

@@ -276,6 +276,7 @@ where 1=1";
             if (data != null)
             {
                 this.dataGridView1.DataSource = data;
+                dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular);
                 //if (buttonColumn == null)
                 //{
                 buttonColumn = new DataGridViewButtonColumn();
@@ -5023,7 +5024,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 4));
+            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(25, 4));
         }
 
         private void button1_Paint(object sender, PaintEventArgs e)
@@ -5032,7 +5033,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 4));
+            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(25, 4));
         }
 
         private void button2_Paint(object sender, PaintEventArgs e)
@@ -5041,7 +5042,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("报告导出", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 4));
+            g.DrawString("报告导出", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 4));
 
         }
 
@@ -5056,7 +5057,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             }
             base.OnPaint(e);
             Graphics g = e.Graphics;
-            g.DrawString("数据上传", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 4));
+            g.DrawString("数据上传", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 4));
 
         }
 
@@ -5072,7 +5073,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             }
             base.OnPaint(e);
             Graphics g = e.Graphics;
-            g.DrawString("图片上传", new System.Drawing.Font("微软雅黑", 8, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 4));
+            g.DrawString("图片上传", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 4));
         }
     }
 

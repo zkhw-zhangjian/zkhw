@@ -17,7 +17,11 @@ namespace zkhwClient.view.updateTjResult
         }
         
         private void checkXueyaInfo_Load(object sender, EventArgs e)
-        {
+        { 
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular);
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+
+
             //让默认的日期时间减一天
             this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1); 
 

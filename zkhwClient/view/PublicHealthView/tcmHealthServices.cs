@@ -87,7 +87,9 @@ namespace zkhwClient.view.PublicHealthView
             if (dataSet.Tables.Count < 1) { MessageBox.Show("未查询出数据，请重新查询!"); return; }
             DataTable dt = dataSet.Tables[0];
             this.dataGridView1.DataSource = dt;
-            this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
+
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular);
+            this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";  
             this.dataGridView1.Columns[1].HeaderCell.Value = "档案编号";
             this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
             this.dataGridView1.Columns[3].HeaderCell.Value = "问询日期";
@@ -427,7 +429,7 @@ namespace zkhwClient.view.PublicHealthView
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(22, 5));
+            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 6));
         }
 
         private void button1_Paint(object sender, PaintEventArgs e)
@@ -436,7 +438,7 @@ namespace zkhwClient.view.PublicHealthView
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("添加", new System.Drawing.Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(25, 7));
+            g.DrawString("添加", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 8));
 
         }
 
@@ -446,7 +448,7 @@ namespace zkhwClient.view.PublicHealthView
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("修改", new System.Drawing.Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(25, 7));
+            g.DrawString("修改", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 8));
 
         }
 
@@ -456,7 +458,7 @@ namespace zkhwClient.view.PublicHealthView
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("数据上传", new System.Drawing.Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(22, 7));
+            g.DrawString("数据上传", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 8));
 
         }
     }

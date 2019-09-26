@@ -48,9 +48,17 @@ namespace zkhwClient.view.setting
         DataTable dtuserlist = null;
         string issave = "0";
         bool isPaint = false;
+
+        private float xMy;//定义当前窗体的宽度
+        private float yMy;//定义当前窗体的高度
+
         public basicInfoSettings()
         {
             InitializeComponent();
+
+            //xMy = this.Width;
+            //yMy = this.Height;
+            //Common.setTag(this);
         }
         private void basicInfoSettings_Load(object sender, EventArgs e)
         {
@@ -327,7 +335,7 @@ namespace zkhwClient.view.setting
 
                     if (setFunDelegate == null)
                     {
-                        frmMainm frm =(frmMainm)this.Parent.Parent;
+                        frmMainmm frm =(frmMainmm)this.Parent.Parent;
                         frm.SetJianDangInfo(textBox1.Text.Trim(), comboBox6.Text, comboBox7.Text);
                     }
                     else
@@ -336,7 +344,7 @@ namespace zkhwClient.view.setting
                     }
                     issave = "1";
                     MessageBox.Show("数据保存成功！");
-                    this.Close();
+                     
                 }
             }
             else{
@@ -463,15 +471,34 @@ namespace zkhwClient.view.setting
             //    }
             //}
         }
-
+        private Single GetBtnFontSize(Button con)
+        {
+            float newx = (this.Width) / xMy;
+            float newy = (this.Height) / yMy;
+            string[] mytag = con.Tag.ToString().Split(new char[] { ';' });
+            //根据窗体缩放的比例确定控件的值
+            con.Width = Convert.ToInt32(System.Convert.ToSingle(mytag[0]) * newx);//宽度
+            con.Height = Convert.ToInt32(System.Convert.ToSingle(mytag[1]) * newy);//高度
+            con.Left = Convert.ToInt32(System.Convert.ToSingle(mytag[2]) * newx);//左边距
+            con.Top = Convert.ToInt32(System.Convert.ToSingle(mytag[3]) * newy);//顶边距
+            Single currentSize = (System.Convert.ToSingle(mytag[4]) * newy);//字体大小
+            return currentSize;
+        }
         private void button1_Paint(object sender, PaintEventArgs e)
         {
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
             base.OnPaint(e);
+            //Single _size = GetBtnFontSize(button1);
+            //StringFormat stringFormat = new StringFormat();
+            //stringFormat.Alignment = StringAlignment.Center;
+            //float x = e.ClipRectangle.Width / 2f;
+            //float y = e.ClipRectangle.Height / 2f - (_size / 2f);
+            //Graphics g = e.Graphics;
+            //g.DrawString("保存", new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular, GraphicsUnit.Pixel), new SolidBrush(Color.White), x, y, stringFormat);
 
             Graphics g = e.Graphics;
-            g.DrawString("保存", new System.Drawing.Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(22, 5));
-             
+            g.DrawString("保存", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(22, 5));
+
         }
 
         private void button2_Paint(object sender, PaintEventArgs e)
@@ -483,8 +510,25 @@ namespace zkhwClient.view.setting
             }
             base.OnPaint(e);
 
+            //Single _size = GetBtnFontSize(button2);
+            //StringFormat stringFormat = new StringFormat();
+            //stringFormat.Alignment = StringAlignment.Center;
+            //float x = e.ClipRectangle.Width / 2f;
+            //float y = e.ClipRectangle.Height / 2f - (_size / 2f);
+            //Graphics g = e.Graphics;
+            //g.DrawString("初始化", new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular, GraphicsUnit.Pixel), new SolidBrush(Color.White), x, y, stringFormat);
+
+
             Graphics g = e.Graphics;
-            g.DrawString("初始化", new System.Drawing.Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(18, 5));
+            g.DrawString("初始化", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(18, 5));
+
+        }
+
+        private void basicInfoSettings_Resize(object sender, EventArgs e)
+        {
+            //float newx = (this.Width) / xMy;
+            //float newy = (this.Height) / yMy;
+            //Common.setControls(newx, newy, this);
 
         }
     }
