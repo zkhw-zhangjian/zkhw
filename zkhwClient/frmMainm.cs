@@ -30,6 +30,7 @@ namespace zkhwClient
 {
     public partial class frmMainm : Form
     {
+   
         personRegistt pR = null;
         Process proHttp = new Process();
         //Process proFtp = new Process();
