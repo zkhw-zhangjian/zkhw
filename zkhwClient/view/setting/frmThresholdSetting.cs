@@ -22,7 +22,11 @@ namespace zkhwClient.view.setting
         }
 
         private void frmThresholdSetting_Load(object sender, EventArgs e)
-        {
+        { 
+
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular);
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+
             GetThreshValuesForSheHua();
         }
         private void GetThreshValuesForSheHua()

@@ -85,7 +85,7 @@ namespace zkhwClient.view.setting
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("暂不授权", new System.Drawing.Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 5));
+            g.DrawString("暂不授权", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 5));
 
         }
 
@@ -95,7 +95,7 @@ namespace zkhwClient.view.setting
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("确定授权", new System.Drawing.Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 5));
+            g.DrawString("确定授权", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 5));
         }
     }
 }

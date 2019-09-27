@@ -337,14 +337,15 @@ namespace zkhwClient.view.setting
                     {
                         frmMainmm frm =(frmMainmm)this.Parent.Parent;
                         frm.SetJianDangInfo(textBox1.Text.Trim(), comboBox6.Text, comboBox7.Text);
+                        MessageBox.Show("数据保存成功！");
                     }
                     else
-                    {  
+                    {   
                         setFunDelegate(textBox1.Text.Trim(), comboBox6.Text, comboBox7.Text);
+                        MessageBox.Show("数据保存成功！");
+                        this.Close();
                     }
-                    issave = "1";
-                    MessageBox.Show("数据保存成功！");
-                     
+                    issave = "1";  
                 }
             }
             else{

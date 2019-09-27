@@ -41,30 +41,30 @@
             this.label19 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel14 = new System.Windows.Forms.Panel();
             this.panel13 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.panel13.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel13.SuspendLayout();
             this.SuspendLayout();
             // 
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton3.Location = new System.Drawing.Point(540, 13);
+            this.radioButton3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.radioButton3.Location = new System.Drawing.Point(665, 20);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(74, 21);
+            this.radioButton3.Size = new System.Drawing.Size(92, 25);
             this.radioButton3.TabIndex = 14;
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "错误日志";
@@ -73,10 +73,10 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton2.Location = new System.Drawing.Point(448, 13);
+            this.radioButton2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.radioButton2.Location = new System.Drawing.Point(554, 20);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(74, 21);
+            this.radioButton2.Size = new System.Drawing.Size(92, 25);
             this.radioButton2.TabIndex = 13;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "操作日志";
@@ -86,10 +86,10 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton1.Location = new System.Drawing.Point(357, 12);
+            this.radioButton1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.radioButton1.Location = new System.Drawing.Point(444, 20);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(74, 21);
+            this.radioButton1.Size = new System.Drawing.Size(92, 25);
             this.radioButton1.TabIndex = 12;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "系统日志";
@@ -103,11 +103,11 @@
             this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button5.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.button5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button5.Location = new System.Drawing.Point(640, 7);
+            this.button5.Location = new System.Drawing.Point(782, 11);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 30);
+            this.button5.Size = new System.Drawing.Size(84, 38);
             this.button5.TabIndex = 6;
             this.button5.Text = "查询";
             this.button5.UseVisualStyleBackColor = false;
@@ -137,8 +137,9 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(943, 485);
+            this.dataGridView1.Size = new System.Drawing.Size(943, 469);
             this.dataGridView1.TabIndex = 9;
             // 
             // panel4
@@ -168,7 +169,7 @@
             // 
             // label19
             // 
-            this.label19.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.label19.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.label19.Image = global::zkhwClient.Properties.Resources.d;
             this.label19.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.label19.Location = new System.Drawing.Point(28, 12);
@@ -201,29 +202,22 @@
             this.panel5.Size = new System.Drawing.Size(977, 560);
             this.panel5.TabIndex = 15;
             // 
-            // panel10
+            // panel6
             // 
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel10.Location = new System.Drawing.Point(0, 0);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(977, 26);
-            this.panel10.TabIndex = 10;
+            this.panel6.Controls.Add(this.dataGridView1);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(17, 91);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(943, 469);
+            this.panel6.TabIndex = 15;
             // 
-            // panel11
+            // panel14
             // 
-            this.panel11.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel11.Location = new System.Drawing.Point(0, 26);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(17, 534);
-            this.panel11.TabIndex = 11;
-            // 
-            // panel12
-            // 
-            this.panel12.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel12.Location = new System.Drawing.Point(960, 26);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(17, 534);
-            this.panel12.TabIndex = 12;
+            this.panel14.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel14.Location = new System.Drawing.Point(17, 86);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(943, 5);
+            this.panel14.TabIndex = 14;
             // 
             // panel13
             // 
@@ -239,26 +233,26 @@
             this.panel13.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel13.Location = new System.Drawing.Point(17, 26);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(943, 44);
+            this.panel13.Size = new System.Drawing.Size(943, 60);
             this.panel13.TabIndex = 13;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label10.Location = new System.Drawing.Point(192, 14);
+            this.label10.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label10.Location = new System.Drawing.Point(227, 21);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(17, 17);
+            this.label10.Size = new System.Drawing.Size(21, 21);
             this.label10.TabIndex = 60;
             this.label10.Text = "─";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(22, 14);
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label1.Location = new System.Drawing.Point(17, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 17);
+            this.label1.Size = new System.Drawing.Size(42, 21);
             this.label1.TabIndex = 0;
             this.label1.Text = "时间";
             // 
@@ -266,40 +260,47 @@
             // 
             this.dateTimePicker1.CalendarFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
-            this.dateTimePicker1.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.dateTimePicker1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(73, 11);
+            this.dateTimePicker1.Location = new System.Drawing.Point(73, 17);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(114, 23);
+            this.dateTimePicker1.Size = new System.Drawing.Size(145, 29);
             this.dateTimePicker1.TabIndex = 0;
             // 
             // dateTimePicker2
             // 
             this.dateTimePicker2.CalendarFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dateTimePicker2.CustomFormat = "yyyy-MM-dd";
-            this.dateTimePicker2.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.dateTimePicker2.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(215, 11);
+            this.dateTimePicker2.Location = new System.Drawing.Point(256, 17);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(114, 23);
+            this.dateTimePicker2.Size = new System.Drawing.Size(145, 29);
             this.dateTimePicker2.TabIndex = 1;
             // 
-            // panel14
+            // panel12
             // 
-            this.panel14.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel14.Location = new System.Drawing.Point(17, 70);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(943, 5);
-            this.panel14.TabIndex = 14;
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel12.Location = new System.Drawing.Point(960, 26);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(17, 534);
+            this.panel12.TabIndex = 12;
             // 
-            // panel6
+            // panel11
             // 
-            this.panel6.Controls.Add(this.dataGridView1);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(17, 75);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(943, 485);
-            this.panel6.TabIndex = 15;
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel11.Location = new System.Drawing.Point(0, 26);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(17, 534);
+            this.panel11.TabIndex = 11;
+            // 
+            // panel10
+            // 
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel10.Location = new System.Drawing.Point(0, 0);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(977, 26);
+            this.panel10.TabIndex = 10;
             // 
             // systemlog
             // 
@@ -319,9 +320,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
             this.panel13.PerformLayout();
-            this.panel6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

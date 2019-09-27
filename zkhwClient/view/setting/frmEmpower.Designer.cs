@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.txtLast = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
@@ -36,7 +37,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtNote = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,16 +50,24 @@
             this.panel1.Controls.Add(this.txtShouQuanMa);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(29, 117);
+            this.panel1.Location = new System.Drawing.Point(42, 121);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(524, 142);
+            this.panel1.Size = new System.Drawing.Size(524, 155);
             this.panel1.TabIndex = 1;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Location = new System.Drawing.Point(2, 89);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(524, 3);
+            this.panel2.TabIndex = 7;
             // 
             // txtLast
             // 
             this.txtLast.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.txtLast.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtLast.Location = new System.Drawing.Point(74, 9);
+            this.txtLast.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.txtLast.Location = new System.Drawing.Point(90, 9);
             this.txtLast.Multiline = true;
             this.txtLast.Name = "txtLast";
             this.txtLast.ReadOnly = true;
@@ -74,7 +82,7 @@
             this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.Location = new System.Drawing.Point(408, 103);
+            this.btnCancel.Location = new System.Drawing.Point(408, 108);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(101, 33);
             this.btnCancel.TabIndex = 2;
@@ -91,7 +99,7 @@
             this.btnOK.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnOK.Location = new System.Drawing.Point(285, 103);
+            this.btnOK.Location = new System.Drawing.Point(285, 108);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(101, 33);
             this.btnOK.TabIndex = 1;
@@ -103,29 +111,29 @@
             // txtShouQuanMa
             // 
             this.txtShouQuanMa.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.txtShouQuanMa.Location = new System.Drawing.Point(74, 49);
+            this.txtShouQuanMa.Location = new System.Drawing.Point(90, 49);
             this.txtShouQuanMa.Multiline = true;
             this.txtShouQuanMa.Name = "txtShouQuanMa";
-            this.txtShouQuanMa.Size = new System.Drawing.Size(435, 29);
+            this.txtShouQuanMa.Size = new System.Drawing.Size(408, 29);
             this.txtShouQuanMa.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.label1.Location = new System.Drawing.Point(7, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 17);
+            this.label1.Size = new System.Drawing.Size(74, 21);
             this.label1.TabIndex = 2;
             this.label1.Text = "到期日期";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.label2.Location = new System.Drawing.Point(12, 52);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 17);
+            this.label2.Size = new System.Drawing.Size(58, 21);
             this.label2.TabIndex = 4;
             this.label2.Text = "授权码";
             // 
@@ -134,7 +142,7 @@
             this.txtNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.txtNote.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtNote.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.txtNote.Location = new System.Drawing.Point(29, 25);
+            this.txtNote.Location = new System.Drawing.Point(42, 29);
             this.txtNote.Multiline = true;
             this.txtNote.Name = "txtNote";
             this.txtNote.ReadOnly = true;
@@ -142,20 +150,12 @@
             this.txtNote.TabIndex = 6;
             this.txtNote.Text = "    软件授权到期，无法继续使用，请联系中科弘卫获取最新授权码，输入到下方授权码框进行授权，中科弘卫24小时服务电话：4008150101";
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Location = new System.Drawing.Point(2, 89);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(524, 3);
-            this.panel2.TabIndex = 7;
-            // 
             // frmEmpower
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(600, 277);
+            this.ClientSize = new System.Drawing.Size(616, 310);
             this.ControlBox = false;
             this.Controls.Add(this.txtNote);
             this.Controls.Add(this.panel1);

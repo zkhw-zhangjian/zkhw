@@ -30,7 +30,7 @@ namespace zkhwClient.view.setting
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("刷新", new System.Drawing.Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 5));
+            g.DrawString("刷新", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(25, 8));
 
         }
 
@@ -39,7 +39,7 @@ namespace zkhwClient.view.setting
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(170, 171, 171), Color.FromArgb(170, 171, 171));
             base.OnPaint(e);
             Graphics g = e.Graphics;
-            g.DrawString("使用说明书", new Font("微软雅黑", 9, FontStyle.Regular), new SolidBrush(Color.White), new PointF(6, 4));
+            g.DrawString("使用说明书", new Font("微软雅黑", 12, FontStyle.Regular), new SolidBrush(Color.White), new PointF(6, 4));
         }
 
         private void deviceManagementt_Load(object sender, EventArgs e)

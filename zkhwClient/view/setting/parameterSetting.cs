@@ -372,7 +372,7 @@ namespace zkhwClient.view.setting
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("打开目录", new System.Drawing.Font("微软雅黑", 9, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(18, 5));
+            g.DrawString("打开目录", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 5));
         }
 
         private void button1_Paint(object sender, PaintEventArgs e)
@@ -381,7 +381,7 @@ namespace zkhwClient.view.setting
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("保存", new System.Drawing.Font("微软雅黑", 10, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(25, 5));
+            g.DrawString("保存", new System.Drawing.Font("微软雅黑", 13, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 6));
 
         }
     }

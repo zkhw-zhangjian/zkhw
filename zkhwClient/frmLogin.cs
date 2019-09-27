@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -184,14 +185,42 @@ namespace zkhwClient
                 /*****end******/
                 this.Hide();
                 //frmMain main = new frmMain(); 
-                frmMainmm main = new frmMainmm();
-                main.Show();
+                int m_nWindwMetricsY = GetWindwMetricsY();
+                if(m_nWindwMetricsY==768)
+                {
+                    frmMainm main = new frmMainm();
+                    main.Show();
+                }
+                else
+                {
+                    frmMainmm main = new frmMainmm();
+                    main.Show();
+                } 
             }
             else
             {
                 MessageBox.Show("用户名或密码错误！");
+            } 
+        }
+        [DllImport("user32")]
+        public static extern int GetSystemMetrics(int nIndex);
+        private int GetWindwMetricsY()
+        {
+            int SM_CXSCREEN = 0;
+            int SM_CYSCREEN = 1;
+            int m_nWindwMetricsX = 1366;
+            int m_nWindwMetricsY = 768;
+            try
+            {
+                m_nWindwMetricsX = GetSystemMetrics(SM_CXSCREEN); 
+                m_nWindwMetricsY = GetSystemMetrics(SM_CYSCREEN);
             }
-
+            catch
+            {
+                m_nWindwMetricsY = 768;
+            }
+            
+            return m_nWindwMetricsY;
         }
 
         private void button1_Click(object sender, EventArgs e)
