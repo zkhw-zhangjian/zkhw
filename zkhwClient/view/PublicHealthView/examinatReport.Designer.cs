@@ -227,18 +227,18 @@
             // 
             this.comboBox5.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(1124, 40);
+            this.comboBox5.Location = new System.Drawing.Point(998, 40);
             this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(140, 29);
+            this.comboBox5.Size = new System.Drawing.Size(141, 29);
             this.comboBox5.TabIndex = 10;
             // 
             // comboBox4
             // 
             this.comboBox4.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(976, 40);
+            this.comboBox4.Location = new System.Drawing.Point(851, 40);
             this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(140, 29);
+            this.comboBox4.Size = new System.Drawing.Size(141, 29);
             this.comboBox4.TabIndex = 9;
             this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
             // 
@@ -246,9 +246,9 @@
             // 
             this.comboBox3.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(827, 40);
+            this.comboBox3.Location = new System.Drawing.Point(726, 40);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(140, 29);
+            this.comboBox3.Size = new System.Drawing.Size(120, 29);
             this.comboBox3.TabIndex = 8;
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
@@ -256,9 +256,9 @@
             // 
             this.comboBox2.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(681, 40);
+            this.comboBox2.Location = new System.Drawing.Point(615, 40);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(140, 29);
+            this.comboBox2.Size = new System.Drawing.Size(105, 29);
             this.comboBox2.TabIndex = 7;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
@@ -266,9 +266,9 @@
             // 
             this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(535, 40);
+            this.comboBox1.Location = new System.Drawing.Point(509, 40);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(140, 29);
+            this.comboBox1.Size = new System.Drawing.Size(100, 29);
             this.comboBox1.TabIndex = 6;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -294,9 +294,9 @@
             this.dateTimePicker2.CustomFormat = "yyyy-MM-dd";
             this.dateTimePicker2.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(284, 40);
+            this.dateTimePicker2.Location = new System.Drawing.Point(276, 40);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(134, 29);
+            this.dateTimePicker2.Size = new System.Drawing.Size(136, 29);
             this.dateTimePicker2.TabIndex = 3;
             // 
             // dateTimePicker1
@@ -307,7 +307,7 @@
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Location = new System.Drawing.Point(102, 40);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(127, 29);
+            this.dateTimePicker1.Size = new System.Drawing.Size(136, 29);
             this.dateTimePicker1.TabIndex = 1;
             // 
             // 血压75
@@ -1006,7 +1006,7 @@
             this.dateTimePicker4.CustomFormat = "yyyy-MM-dd";
             this.dateTimePicker4.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.dateTimePicker4.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker4.Location = new System.Drawing.Point(292, 55);
+            this.dateTimePicker4.Location = new System.Drawing.Point(275, 55);
             this.dateTimePicker4.Name = "dateTimePicker4";
             this.dateTimePicker4.Size = new System.Drawing.Size(136, 29);
             this.dateTimePicker4.TabIndex = 11;
@@ -1016,7 +1016,7 @@
             this.label16.AutoSize = true;
             this.label16.Cursor = System.Windows.Forms.Cursors.Cross;
             this.label16.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label16.Location = new System.Drawing.Point(260, 59);
+            this.label16.Location = new System.Drawing.Point(243, 59);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(21, 21);
             this.label16.TabIndex = 10;
@@ -1028,9 +1028,9 @@
             this.dateTimePicker3.CustomFormat = "yyyy-MM-dd";
             this.dateTimePicker3.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker3.Location = new System.Drawing.Point(104, 55);
+            this.dateTimePicker3.Location = new System.Drawing.Point(100, 55);
             this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(148, 29);
+            this.dateTimePicker3.Size = new System.Drawing.Size(136, 29);
             this.dateTimePicker3.TabIndex = 9;
             // 
             // label15
@@ -1394,15 +1394,15 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 5);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(32, 794);
+            this.panel3.Size = new System.Drawing.Size(23, 794);
             this.panel3.TabIndex = 8;
             // 
             // panel4
             // 
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(1321, 5);
+            this.panel4.Location = new System.Drawing.Point(1330, 5);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(32, 794);
+            this.panel4.Size = new System.Drawing.Size(23, 794);
             this.panel4.TabIndex = 9;
             // 
             // panel5
@@ -1415,18 +1415,18 @@
             this.panel5.Controls.Add(this.panel10);
             this.panel5.Controls.Add(this.panel9);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(32, 5);
+            this.panel5.Location = new System.Drawing.Point(23, 5);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1289, 794);
+            this.panel5.Size = new System.Drawing.Size(1307, 794);
             this.panel5.TabIndex = 10;
             // 
             // panel21
             // 
             this.panel21.Controls.Add(this.dataGridView1);
             this.panel21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel21.Location = new System.Drawing.Point(10, 448);
+            this.panel21.Location = new System.Drawing.Point(10, 446);
             this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(1269, 346);
+            this.panel21.Size = new System.Drawing.Size(1287, 348);
             this.panel21.TabIndex = 12;
             // 
             // dataGridView1
@@ -1466,7 +1466,7 @@
             this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1269, 346);
+            this.dataGridView1.Size = new System.Drawing.Size(1287, 348);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
@@ -1480,9 +1480,9 @@
             this.panel14.Controls.Add(this.panel16);
             this.panel14.Controls.Add(this.panel15);
             this.panel14.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel14.Location = new System.Drawing.Point(10, 307);
+            this.panel14.Location = new System.Drawing.Point(10, 305);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(1269, 141);
+            this.panel14.Size = new System.Drawing.Size(1287, 141);
             this.panel14.TabIndex = 11;
             // 
             // panel16
@@ -1496,7 +1496,7 @@
             this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel16.Location = new System.Drawing.Point(0, 30);
             this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(1269, 111);
+            this.panel16.Size = new System.Drawing.Size(1287, 111);
             this.panel16.TabIndex = 2;
             // 
             // panel20
@@ -1509,7 +1509,7 @@
             this.panel20.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel20.Location = new System.Drawing.Point(155, 0);
             this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(1114, 111);
+            this.panel20.Size = new System.Drawing.Size(1132, 111);
             this.panel20.TabIndex = 14;
             // 
             // panel23
@@ -1591,7 +1591,7 @@
             this.panel15.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel15.Location = new System.Drawing.Point(0, 0);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(1269, 30);
+            this.panel15.Size = new System.Drawing.Size(1287, 30);
             this.panel15.TabIndex = 1;
             // 
             // label39
@@ -1630,7 +1630,7 @@
             this.panel12.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel12.Location = new System.Drawing.Point(10, 172);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(1269, 135);
+            this.panel12.Size = new System.Drawing.Size(1287, 133);
             this.panel12.TabIndex = 10;
             // 
             // label3
@@ -1660,7 +1660,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label2.Location = new System.Drawing.Point(437, 43);
+            this.label2.Location = new System.Drawing.Point(425, 43);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 21);
             this.label2.TabIndex = 12;
@@ -1670,7 +1670,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label19.Location = new System.Drawing.Point(247, 44);
+            this.label19.Location = new System.Drawing.Point(244, 44);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(21, 21);
             this.label19.TabIndex = 11;
@@ -1694,7 +1694,7 @@
             this.panel13.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel13.Location = new System.Drawing.Point(0, 0);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(1269, 30);
+            this.panel13.Size = new System.Drawing.Size(1287, 30);
             this.panel13.TabIndex = 1;
             // 
             // label9
@@ -1714,7 +1714,7 @@
             this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel11.Location = new System.Drawing.Point(10, 0);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(1269, 172);
+            this.panel11.Size = new System.Drawing.Size(1287, 172);
             this.panel11.TabIndex = 9;
             // 
             // panel6
@@ -1724,7 +1724,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1269, 172);
+            this.panel6.Size = new System.Drawing.Size(1287, 172);
             this.panel6.TabIndex = 6;
             // 
             // panel8
@@ -1803,7 +1803,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Location = new System.Drawing.Point(0, 30);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(1269, 142);
+            this.panel8.Size = new System.Drawing.Size(1287, 142);
             this.panel8.TabIndex = 1;
             // 
             // panel7
@@ -1812,13 +1812,13 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(1269, 30);
+            this.panel7.Size = new System.Drawing.Size(1287, 30);
             this.panel7.TabIndex = 0;
             // 
             // panel10
             // 
             this.panel10.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel10.Location = new System.Drawing.Point(1279, 0);
+            this.panel10.Location = new System.Drawing.Point(1297, 0);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(10, 794);
             this.panel10.TabIndex = 8;
@@ -1856,7 +1856,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(239)))), ((int)(((byte)(245)))));
-            this.ClientSize = new System.Drawing.Size(1370, 750);
+            this.ClientSize = new System.Drawing.Size(1370, 749);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);

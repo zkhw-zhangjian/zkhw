@@ -170,7 +170,7 @@
             this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox5.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(609, 27);
+            this.comboBox5.Location = new System.Drawing.Point(609, 15);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(185, 29);
             this.comboBox5.TabIndex = 5;
@@ -181,7 +181,7 @@
             this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox4.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(463, 27);
+            this.comboBox4.Location = new System.Drawing.Point(463, 15);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(141, 29);
             this.comboBox4.TabIndex = 4;
@@ -192,7 +192,7 @@
             this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox3.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(327, 27);
+            this.comboBox3.Location = new System.Drawing.Point(327, 15);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(131, 29);
             this.comboBox3.TabIndex = 3;
@@ -203,7 +203,7 @@
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(213, 27);
+            this.comboBox2.Location = new System.Drawing.Point(213, 15);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(109, 29);
             this.comboBox2.TabIndex = 2;
@@ -214,7 +214,7 @@
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(106, 27);
+            this.comboBox1.Location = new System.Drawing.Point(106, 15);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(103, 29);
             this.comboBox1.TabIndex = 1;
@@ -542,7 +542,7 @@
             this.panel40.Controls.Add(this.panel46);
             this.panel40.Controls.Add(this.label7);
             this.panel40.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel40.Location = new System.Drawing.Point(27, 452);
+            this.panel40.Location = new System.Drawing.Point(27, 405);
             this.panel40.Name = "panel40";
             this.panel40.Size = new System.Drawing.Size(1134, 47);
             this.panel40.TabIndex = 22;
@@ -585,16 +585,16 @@
             // 
             this.panel37.Controls.Add(this.label8);
             this.panel37.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel37.Location = new System.Drawing.Point(27, 407);
+            this.panel37.Location = new System.Drawing.Point(27, 366);
             this.panel37.Name = "panel37";
-            this.panel37.Size = new System.Drawing.Size(1134, 45);
+            this.panel37.Size = new System.Drawing.Size(1134, 39);
             this.panel37.TabIndex = 21;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.label8.Location = new System.Drawing.Point(19, 11);
+            this.label8.Location = new System.Drawing.Point(19, 8);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(74, 22);
             this.label8.TabIndex = 1;
@@ -613,7 +613,7 @@
             this.panel36.Controls.Add(this.panel42);
             this.panel36.Controls.Add(this.label31);
             this.panel36.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel36.Location = new System.Drawing.Point(27, 359);
+            this.panel36.Location = new System.Drawing.Point(27, 318);
             this.panel36.Name = "panel36";
             this.panel36.Size = new System.Drawing.Size(1134, 48);
             this.panel36.TabIndex = 20;
@@ -673,7 +673,7 @@
             // panel29
             // 
             this.panel29.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel29.Location = new System.Drawing.Point(27, 354);
+            this.panel29.Location = new System.Drawing.Point(27, 313);
             this.panel29.Name = "panel29";
             this.panel29.Size = new System.Drawing.Size(1134, 5);
             this.panel29.TabIndex = 19;
@@ -694,9 +694,9 @@
             this.panel28.Controls.Add(this.panel35);
             this.panel28.Controls.Add(this.label29);
             this.panel28.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel28.Location = new System.Drawing.Point(27, 299);
+            this.panel28.Location = new System.Drawing.Point(27, 271);
             this.panel28.Name = "panel28";
-            this.panel28.Size = new System.Drawing.Size(1134, 55);
+            this.panel28.Size = new System.Drawing.Size(1134, 42);
             this.panel28.TabIndex = 18;
             // 
             // panel30
@@ -780,7 +780,7 @@
             // panel27
             // 
             this.panel27.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel27.Location = new System.Drawing.Point(27, 294);
+            this.panel27.Location = new System.Drawing.Point(27, 266);
             this.panel27.Name = "panel27";
             this.panel27.Size = new System.Drawing.Size(1134, 5);
             this.panel27.TabIndex = 17;
@@ -804,7 +804,7 @@
             this.panel19.Controls.Add(this.comboBox9);
             this.panel19.Controls.Add(this.comboBox10);
             this.panel19.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel19.Location = new System.Drawing.Point(27, 247);
+            this.panel19.Location = new System.Drawing.Point(27, 219);
             this.panel19.Name = "panel19";
             this.panel19.Size = new System.Drawing.Size(1134, 47);
             this.panel19.TabIndex = 16;
@@ -909,16 +909,16 @@
             // 
             this.panel18.Controls.Add(this.label1);
             this.panel18.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel18.Location = new System.Drawing.Point(27, 202);
+            this.panel18.Location = new System.Drawing.Point(27, 180);
             this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(1134, 45);
+            this.panel18.Size = new System.Drawing.Size(1134, 39);
             this.panel18.TabIndex = 15;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(19, 10);
+            this.label1.Location = new System.Drawing.Point(19, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(74, 22);
             this.label1.TabIndex = 0;
@@ -939,7 +939,7 @@
             this.panel12.Controls.Add(this.label22);
             this.panel12.Controls.Add(this.textBox1);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel12.Location = new System.Drawing.Point(27, 155);
+            this.panel12.Location = new System.Drawing.Point(27, 133);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(1134, 47);
             this.panel12.TabIndex = 14;
@@ -1017,7 +1017,7 @@
             // panel11
             // 
             this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel11.Location = new System.Drawing.Point(27, 150);
+            this.panel11.Location = new System.Drawing.Point(27, 128);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(1134, 5);
             this.panel11.TabIndex = 13;
@@ -1034,14 +1034,14 @@
             this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel10.Location = new System.Drawing.Point(27, 70);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(1134, 80);
+            this.panel10.Size = new System.Drawing.Size(1134, 58);
             this.panel10.TabIndex = 12;
             // 
             // label21
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label21.Location = new System.Drawing.Point(19, 31);
+            this.label21.Location = new System.Drawing.Point(19, 19);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(74, 21);
             this.label21.TabIndex = 1;

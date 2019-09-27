@@ -184,23 +184,23 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(18, 820);
+            this.panel2.Size = new System.Drawing.Size(18, 816);
             this.panel2.TabIndex = 15;
             // 
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(1389, 0);
+            this.panel3.Location = new System.Drawing.Point(1466, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(20, 820);
+            this.panel3.Size = new System.Drawing.Size(20, 816);
             this.panel3.TabIndex = 16;
             // 
             // panel4
             // 
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(18, 800);
+            this.panel4.Location = new System.Drawing.Point(18, 796);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1371, 20);
+            this.panel4.Size = new System.Drawing.Size(1448, 20);
             this.panel4.TabIndex = 17;
             // 
             // panel1
@@ -209,7 +209,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(18, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1371, 50);
+            this.panel1.Size = new System.Drawing.Size(1448, 50);
             this.panel1.TabIndex = 18;
             // 
             // label100
@@ -226,6 +226,7 @@
             // 
             // panel5
             // 
+            this.panel5.AutoScroll = true;
             this.panel5.BackColor = System.Drawing.Color.White;
             this.panel5.Controls.Add(this.panel42);
             this.panel5.Controls.Add(this.panel58);
@@ -238,7 +239,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(18, 50);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1371, 750);
+            this.panel5.Size = new System.Drawing.Size(1448, 746);
             this.panel5.TabIndex = 19;
             // 
             // panel42
@@ -250,7 +251,7 @@
             this.panel42.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel42.Location = new System.Drawing.Point(22, 470);
             this.panel42.Name = "panel42";
-            this.panel42.Size = new System.Drawing.Size(1332, 213);
+            this.panel42.Size = new System.Drawing.Size(1409, 213);
             this.panel42.TabIndex = 7;
             // 
             // panel43
@@ -496,7 +497,7 @@
             this.panel58.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel58.Location = new System.Drawing.Point(22, 460);
             this.panel58.Name = "panel58";
-            this.panel58.Size = new System.Drawing.Size(1332, 10);
+            this.panel58.Size = new System.Drawing.Size(1409, 10);
             this.panel58.TabIndex = 6;
             // 
             // panel26
@@ -511,7 +512,7 @@
             this.panel26.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel26.Location = new System.Drawing.Point(22, 247);
             this.panel26.Name = "panel26";
-            this.panel26.Size = new System.Drawing.Size(1332, 213);
+            this.panel26.Size = new System.Drawing.Size(1409, 213);
             this.panel26.TabIndex = 5;
             // 
             // panel27
@@ -943,7 +944,7 @@
             this.panel21.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel21.Location = new System.Drawing.Point(22, 237);
             this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(1332, 10);
+            this.panel21.Size = new System.Drawing.Size(1409, 10);
             this.panel21.TabIndex = 4;
             // 
             // panel9
@@ -958,7 +959,7 @@
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(22, 24);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(1332, 213);
+            this.panel9.Size = new System.Drawing.Size(1409, 213);
             this.panel9.TabIndex = 3;
             // 
             // panel22
@@ -1390,15 +1391,15 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(22, 0);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(1332, 24);
+            this.panel8.Size = new System.Drawing.Size(1409, 24);
             this.panel8.TabIndex = 2;
             // 
             // panel7
             // 
             this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel7.Location = new System.Drawing.Point(1354, 0);
+            this.panel7.Location = new System.Drawing.Point(1431, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(17, 750);
+            this.panel7.Size = new System.Drawing.Size(17, 746);
             this.panel7.TabIndex = 1;
             // 
             // panel6
@@ -1406,7 +1407,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(22, 750);
+            this.panel6.Size = new System.Drawing.Size(22, 746);
             this.panel6.TabIndex = 0;
             // 
             // deviceManagementt
@@ -1414,7 +1415,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(239)))), ((int)(((byte)(245)))));
-            this.ClientSize = new System.Drawing.Size(1409, 820);
+            this.ClientSize = new System.Drawing.Size(1486, 816);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel4);

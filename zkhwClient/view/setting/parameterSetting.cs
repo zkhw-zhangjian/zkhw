@@ -68,9 +68,19 @@ namespace zkhwClient.view.setting
                 }
             } 
         }
+        private void SetControlWodth()
+        {
+            if (Common.m_nWindwMetricsY <= 900)
+            {
+                panel6.Width = 10;
+                panel2.Width = 23;
+            }
+        }
 
         private void parameterSetting_Load(object sender, EventArgs e)
         {
+            SetControlWodth();
+
             LabelVisibleSH(false);
             LabelVisibleXCG(false);
 

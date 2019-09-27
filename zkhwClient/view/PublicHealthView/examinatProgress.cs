@@ -41,9 +41,21 @@ namespace zkhwClient.view.PublicHealthView
         { 
             InitializeComponent();
         }
+        private void SetControlWodth()
+        {
+            if (Common.m_nWindwMetricsY <= 900)
+            { 
+                comboBox4.Width = 120;
+                comboBox4.Left = comboBox3.Left + comboBox3.Width + 5;
+                comboBox5.Width = 120;
+                comboBox5.Left = comboBox4.Left + comboBox4.Width + 5;
+            }
+        }
 
         private void examinatProgress_Load(object sender, EventArgs e) 
         {
+            SetControlWodth();
+
             isfirst = true;
             //让默认的日期时间减一天 
             this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
