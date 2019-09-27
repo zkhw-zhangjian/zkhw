@@ -65,6 +65,8 @@ namespace zkhwClient
             }
         }
         #endregion
+
+        public static int m_nWindwMetricsY = 900;    //分辨率
         public static string _deviceModel = "";  //设备型号 包括生化、血球
         public static void txtBox_KeyPress(object sender, KeyPressEventArgs e)
         {

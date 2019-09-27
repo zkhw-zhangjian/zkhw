@@ -186,7 +186,8 @@ namespace zkhwClient
                 this.Hide();
                 //frmMain main = new frmMain(); 
                 int m_nWindwMetricsY = GetWindwMetricsY();
-                if(m_nWindwMetricsY==768)
+                Common.m_nWindwMetricsY = m_nWindwMetricsY;
+                if (m_nWindwMetricsY==768)
                 {
                     frmMainm main = new frmMainm();
                     main.Show();

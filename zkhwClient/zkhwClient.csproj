@@ -260,6 +260,12 @@
     <Compile Include="view\PublicHealthView\personRegistt.Designer.cs">
       <DependentUpon>personRegistt.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\PublicHealthView\personRegisttt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PublicHealthView\personRegisttt.Designer.cs">
+      <DependentUpon>personRegisttt.cs</DependentUpon>
+    </Compile>
     <Compile Include="service\PublicHealthService\olderHelthServices.cs" />
     <Compile Include="service\PublicHealthService\diabetesPatientService.cs" />
     <Compile Include="service\PublicHealthService\hypertensionPatientService.cs" />
@@ -905,6 +911,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\PublicHealthView\personRegistt.resx">
       <DependentUpon>personRegistt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PublicHealthView\personRegisttt.resx">
+      <DependentUpon>personRegisttt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\HomeDoctorSigningView\FormJY.resx">
       <DependentUpon>FormJY.cs</DependentUpon>

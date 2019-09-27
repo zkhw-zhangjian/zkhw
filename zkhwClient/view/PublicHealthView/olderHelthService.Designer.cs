@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
@@ -127,7 +127,7 @@
             // 
             this.comboBox5.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(1177, 16);
+            this.comboBox5.Location = new System.Drawing.Point(1027, 16);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(152, 29);
             this.comboBox5.TabIndex = 10;
@@ -137,7 +137,7 @@
             // 
             this.comboBox4.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(1019, 16);
+            this.comboBox4.Location = new System.Drawing.Point(869, 16);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(152, 29);
             this.comboBox4.TabIndex = 9;
@@ -147,9 +147,9 @@
             // 
             this.comboBox3.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(861, 16);
+            this.comboBox3.Location = new System.Drawing.Point(743, 16);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(152, 29);
+            this.comboBox3.Size = new System.Drawing.Size(120, 29);
             this.comboBox3.TabIndex = 8;
             this.comboBox3.SelectionChangeCommitted += new System.EventHandler(this.comboBox3_SelectionChangeCommitted);
             // 
@@ -157,9 +157,9 @@
             // 
             this.comboBox2.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(706, 16);
+            this.comboBox2.Location = new System.Drawing.Point(632, 16);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(152, 29);
+            this.comboBox2.Size = new System.Drawing.Size(105, 29);
             this.comboBox2.TabIndex = 7;
             this.comboBox2.SelectionChangeCommitted += new System.EventHandler(this.comboBox2_SelectionChangeCommitted);
             // 
@@ -167,9 +167,9 @@
             // 
             this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(548, 16);
+            this.comboBox1.Location = new System.Drawing.Point(526, 16);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(152, 29);
+            this.comboBox1.Size = new System.Drawing.Size(100, 29);
             this.comboBox1.TabIndex = 6;
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
             // 
@@ -195,23 +195,23 @@
             // dataGridView1
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(10, 132);
             this.dataGridView1.Name = "dataGridView1";
@@ -219,7 +219,7 @@
             this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1461, 467);
+            this.dataGridView1.Size = new System.Drawing.Size(1304, 467);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
             // 
@@ -269,7 +269,7 @@
             this.button4.BackColor = System.Drawing.Color.SkyBlue;
             this.button4.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button4.Location = new System.Drawing.Point(638, 24);
+            this.button4.Location = new System.Drawing.Point(560, 24);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(96, 32);
             this.button4.TabIndex = 6;
@@ -284,7 +284,7 @@
             this.button5.BackColor = System.Drawing.Color.Red;
             this.button5.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button5.Location = new System.Drawing.Point(529, 24);
+            this.button5.Location = new System.Drawing.Point(451, 24);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(93, 32);
             this.button5.TabIndex = 7;
@@ -321,7 +321,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1548, 56);
+            this.panel1.Size = new System.Drawing.Size(1370, 56);
             this.panel1.TabIndex = 9;
             // 
             // panel11
@@ -593,23 +593,23 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 56);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(33, 680);
+            this.panel2.Size = new System.Drawing.Size(23, 680);
             this.panel2.TabIndex = 10;
             // 
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(1514, 56);
+            this.panel3.Location = new System.Drawing.Point(1347, 56);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(34, 680);
+            this.panel3.Size = new System.Drawing.Size(23, 680);
             this.panel3.TabIndex = 11;
             // 
             // panel4
             // 
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(33, 717);
+            this.panel4.Location = new System.Drawing.Point(23, 717);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1481, 19);
+            this.panel4.Size = new System.Drawing.Size(1324, 19);
             this.panel4.TabIndex = 12;
             // 
             // panel12
@@ -625,9 +625,9 @@
             this.panel12.Controls.Add(this.panel14);
             this.panel12.Controls.Add(this.panel13);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel12.Location = new System.Drawing.Point(33, 56);
+            this.panel12.Location = new System.Drawing.Point(23, 56);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(1481, 661);
+            this.panel12.Size = new System.Drawing.Size(1324, 661);
             this.panel12.TabIndex = 13;
             // 
             // panel21
@@ -635,7 +635,7 @@
             this.panel21.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel21.Location = new System.Drawing.Point(10, 127);
             this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(1461, 5);
+            this.panel21.Size = new System.Drawing.Size(1304, 5);
             this.panel21.TabIndex = 15;
             // 
             // panel20
@@ -648,7 +648,7 @@
             this.panel20.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel20.Location = new System.Drawing.Point(10, 73);
             this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(1461, 54);
+            this.panel20.Size = new System.Drawing.Size(1304, 54);
             this.panel20.TabIndex = 14;
             // 
             // label20
@@ -666,7 +666,7 @@
             this.panel19.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel19.Location = new System.Drawing.Point(10, 68);
             this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(1461, 5);
+            this.panel19.Size = new System.Drawing.Size(1304, 5);
             this.panel19.TabIndex = 13;
             // 
             // panel18
@@ -685,14 +685,14 @@
             this.panel18.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel18.Location = new System.Drawing.Point(10, 13);
             this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(1461, 55);
+            this.panel18.Size = new System.Drawing.Size(1304, 55);
             this.panel18.TabIndex = 12;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label7.Location = new System.Drawing.Point(249, 20);
+            this.label7.Location = new System.Drawing.Point(241, 20);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(21, 21);
             this.label7.TabIndex = 60;
@@ -716,7 +716,7 @@
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Location = new System.Drawing.Point(99, 16);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(144, 29);
+            this.dateTimePicker1.Size = new System.Drawing.Size(134, 29);
             this.dateTimePicker1.TabIndex = 0;
             // 
             // dateTimePicker2
@@ -725,16 +725,16 @@
             this.dateTimePicker2.CustomFormat = "yyyy-MM-dd";
             this.dateTimePicker2.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(279, 16);
+            this.dateTimePicker2.Location = new System.Drawing.Point(271, 16);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(145, 29);
+            this.dateTimePicker2.Size = new System.Drawing.Size(134, 29);
             this.dateTimePicker2.TabIndex = 1;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label19.Location = new System.Drawing.Point(459, 20);
+            this.label19.Location = new System.Drawing.Point(440, 20);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(74, 21);
             this.label19.TabIndex = 5;
@@ -749,7 +749,7 @@
             this.panel16.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel16.Location = new System.Drawing.Point(10, 599);
             this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(1461, 62);
+            this.panel16.Size = new System.Drawing.Size(1304, 62);
             this.panel16.TabIndex = 11;
             // 
             // panel17
@@ -757,7 +757,7 @@
             this.panel17.Controls.Add(this.button2);
             this.panel17.Controls.Add(this.button3);
             this.panel17.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel17.Location = new System.Drawing.Point(1067, 0);
+            this.panel17.Location = new System.Drawing.Point(910, 0);
             this.panel17.Name = "panel17";
             this.panel17.Size = new System.Drawing.Size(394, 62);
             this.panel17.TabIndex = 5;
@@ -765,7 +765,7 @@
             // panel15
             // 
             this.panel15.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel15.Location = new System.Drawing.Point(1471, 13);
+            this.panel15.Location = new System.Drawing.Point(1314, 13);
             this.panel15.Name = "panel15";
             this.panel15.Size = new System.Drawing.Size(10, 648);
             this.panel15.TabIndex = 10;
@@ -783,7 +783,7 @@
             this.panel13.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel13.Location = new System.Drawing.Point(0, 0);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(1481, 13);
+            this.panel13.Size = new System.Drawing.Size(1324, 13);
             this.panel13.TabIndex = 8;
             // 
             // olderHelthService
@@ -791,7 +791,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(239)))), ((int)(((byte)(245)))));
-            this.ClientSize = new System.Drawing.Size(1548, 736);
+            this.ClientSize = new System.Drawing.Size(1370, 736);
             this.Controls.Add(this.panel12);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);

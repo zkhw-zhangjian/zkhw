@@ -37,8 +37,20 @@ namespace zkhwClient.PublicHealth
             //Common.setTag(this);
         }
 
+        private void SetControlWodth()
+        {
+            if (Common.m_nWindwMetricsY <= 900)
+            { 
+                comboBox4.Width = 120;
+                comboBox4.Left = comboBox3.Left + comboBox3.Width + 5;
+                comboBox5.Width = 120;
+                comboBox5.Left = comboBox4.Left + comboBox4.Width + 5;
+            }
+        }
+
         private void examinatProgress_Load(object sender, EventArgs e)
         {
+            SetControlWodth();
             isfrist = true;
             btnLoad.Visible = false;
             //让默认的日期时间减一天

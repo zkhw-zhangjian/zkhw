@@ -21,7 +21,7 @@ using zkhwClient.view.setting;
 
 namespace zkhwClient
 {
-    public partial class personRegistt : Form
+    public partial class personRegisttt : Form
     {
         static JavaScriptSerializer serializer = new JavaScriptSerializer();
         string str = Application.StartupPath;//项目路径
@@ -62,7 +62,7 @@ namespace zkhwClient
         private float xMy;//定义当前窗体的宽度
         private float yMy;//定义当前窗体的高度
 
-        public personRegistt()
+        public personRegisttt()
         {
             InitializeComponent();
 
@@ -87,6 +87,8 @@ namespace zkhwClient
         }
         private void personRegistt_Load(object sender, EventArgs e)
         {
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular);
+
             label45.Text = "";
             BindNation();
             Common.SetComboBoxInfo(comboBox7, ltdorganizationDao.GetShengInfo());//区域
@@ -310,9 +312,9 @@ namespace zkhwClient
         private void button1_Paint(object sender, PaintEventArgs e)
         {
             Button bt = (Button)sender;
-            Single _size = GetBtnFontSize(bt);
+            //Single _size = GetBtnFontSize(bt);
 
-            //Single _size = 10;
+            Single _size = 12;
             string stag = bt.AccessibleName; 
             string wenzi = "";
             int starti = 20;
@@ -336,18 +338,18 @@ namespace zkhwClient
             }
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, color, color);
             base.OnPaint(e);
-
-
-            StringFormat stringFormat = new StringFormat();
-            stringFormat.Alignment = StringAlignment.Center; 
-            float x = e.ClipRectangle.Width / 2f;
-            float y = e.ClipRectangle.Height / 2f - (_size / 2f);
             Graphics g = e.Graphics;
-            g.DrawString(wenzi, new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular, GraphicsUnit.Pixel), new SolidBrush(Color.White), x, y, stringFormat);
+            g.DrawString(wenzi, new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(starti, 5));
 
-
+            //StringFormat stringFormat = new StringFormat();
+            //stringFormat.Alignment = StringAlignment.Center; 
+            //float x = e.ClipRectangle.Width / 2f;
+            //float y = e.ClipRectangle.Height / 2f - (_size / 2f);
             //Graphics g = e.Graphics;
-            //g.DrawString(wenzi, new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(starti, 5));
+            //g.DrawString(wenzi, new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular, GraphicsUnit.Pixel), new SolidBrush(Color.White), x, y, stringFormat);
+
+
+
         }
 
         private void txtNum_KeyPress(object sender, KeyPressEventArgs e)
@@ -1018,39 +1020,7 @@ namespace zkhwClient
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            string name = this.textBox7.Text;
-            if (name != null && !"".Equals(name))
-            {
-                DataTable dtRegistration = grjddao.registrationRecordInfo(name);
-                if (dtRegistration.Rows.Count > 0)
-                { 
-                    this.dataGridView1.DataSource = dtRegistration;
-                    //this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
-                    //this.dataGridView1.Columns[1].HeaderCell.Value = "性别";
-                    //this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
-                    //this.dataGridView1.Columns[3].HeaderCell.Value = "电子档案号";
-                    //this.dataGridView1.Columns[4].HeaderCell.Value = "条码号";
-                    //this.dataGridView1.Columns[0].Width = 70;
-                    //this.dataGridView1.Columns[1].Width = 55;
-                    //this.dataGridView1.Columns[2].Width = 120;
-                    //this.dataGridView1.Columns[3].Width = 150;
-                    //this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
-                    //this.dataGridView1.AllowUserToAddRows = false;
-                    //int rows = this.dataGridView1.Rows.Count - 1 < 0 ? 0 : this.dataGridView1.Rows.Count - 1;
-                    //for (int count = 0; count <= rows; count++)
-                    //{
-                    //    this.dataGridView1.Rows[count].HeaderCell.Value = String.Format("{0}", count + 1);
-                    //}
-                }
-                else
-                {
-                    MessageBox.Show("未查询出数据!");
-                }
-            }
-            else
-            {
-                MessageBox.Show("搜索框不能为空!");
-            }
+            
         }
 
         private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -1113,7 +1083,81 @@ namespace zkhwClient
         {
             float newx = (this.Width) / xMy;
             float newy = (this.Height) / yMy;
-            Common.setControls(newx, newy, this);
+            setControls(newx, newy, this);
+        }
+
+        public static void setControls(float newx, float newy, Control cons)
+        {
+            //遍历窗体中的控件，重新设置控件的值
+            foreach (Control con in cons.Controls)
+            {
+                //获取控件的Tag属性值，并分割后存储字符串数组
+                if (con.Tag != null)
+                {
+                    string[] mytag = con.Tag.ToString().Split(new char[] { ';' });
+                    //根据窗体缩放的比例确定控件的值
+                    con.Width = Convert.ToInt32(System.Convert.ToSingle(mytag[0]) * newx);//宽度
+                    con.Height = Convert.ToInt32(System.Convert.ToSingle(mytag[1]) * newy);//高度
+                    con.Left = Convert.ToInt32(System.Convert.ToSingle(mytag[2]) * newx);//左边距
+                    con.Top = Convert.ToInt32(System.Convert.ToSingle(mytag[3]) * newy);//顶边距
+                    //Single currentSize = System.Convert.ToSingle(mytag[4]) * newy;//字体大小
+                    //if (currentSize == 0) currentSize = 9;
+                    //con.Font = new System.Drawing.Font(con.Font.Name, currentSize, con.Font.Style, con.Font.Unit);
+                    if (con.Controls.Count > 0)
+                    {
+                        setControls(newx, newy, con);
+                    }
+                }
+            }
+        }
+
+
+        private void button5_Paint(object sender, PaintEventArgs e)
+        {
+            Color color = Color.FromArgb(77, 177, 81);
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, color, color);
+            base.OnPaint(e);
+            Graphics g = e.Graphics;
+            g.DrawString("查询", new Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 5));
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string name = this.textBox7.Text;
+            if (name != null && !"".Equals(name))
+            {
+                DataTable dtRegistration = grjddao.registrationRecordInfo(name);
+                if (dtRegistration.Rows.Count > 0)
+                {
+                    this.dataGridView1.DataSource = dtRegistration;
+                    dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular);
+                    //this.dataGridView1.Columns[0].HeaderCell.Value = "姓名";
+                    //this.dataGridView1.Columns[1].HeaderCell.Value = "性别";
+                    //this.dataGridView1.Columns[2].HeaderCell.Value = "身份证号";
+                    //this.dataGridView1.Columns[3].HeaderCell.Value = "电子档案号";
+                    //this.dataGridView1.Columns[4].HeaderCell.Value = "条码号";
+                    //this.dataGridView1.Columns[0].Width = 70;
+                    //this.dataGridView1.Columns[1].Width = 55;
+                    //this.dataGridView1.Columns[2].Width = 120;
+                    //this.dataGridView1.Columns[3].Width = 150;
+                    //this.dataGridView1.RowsDefaultCellStyle.ForeColor = Color.Black;
+                    //this.dataGridView1.AllowUserToAddRows = false;
+                    //int rows = this.dataGridView1.Rows.Count - 1 < 0 ? 0 : this.dataGridView1.Rows.Count - 1;
+                    //for (int count = 0; count <= rows; count++)
+                    //{
+                    //    this.dataGridView1.Rows[count].HeaderCell.Value = String.Format("{0}", count + 1);
+                    //}
+                }
+                else
+                {
+                    MessageBox.Show("未查询出数据!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("搜索框不能为空!");
+            }
         }
 
         public void OnPrintSampleBarcode(string barcode, int pageCount, string nameCode)

@@ -38,8 +38,18 @@ namespace zkhwClient.view.PublicHealthView
             //Common.setTag(this);
         }
 
+        private void SetControlWodth()
+        {
+            if(Common.m_nWindwMetricsY<=900)
+            {
+                comboBox4.Width = 120;
+                comboBox5.Width = 120;
+                comboBox5.Left = comboBox4.Left + comboBox4.Width + 5;
+            } 
+        }
         private void personalBasicInfo_Load(object sender, EventArgs e)
         {
+            SetControlWodth();
             //让默认的日期时间减一天
             this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1); 
             //区域 
