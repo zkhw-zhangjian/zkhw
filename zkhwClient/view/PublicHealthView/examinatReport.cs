@@ -5042,7 +5042,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString("报告导出", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 4));
+            g.DrawString("报告导出", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 4));
 
         }
 
@@ -5057,7 +5057,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             }
             base.OnPaint(e);
             Graphics g = e.Graphics;
-            g.DrawString("数据上传", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 4));
+            g.DrawString("数据上传", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 4));
 
         }
 
@@ -5073,7 +5073,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
             }
             base.OnPaint(e);
             Graphics g = e.Graphics;
-            g.DrawString("图片上传", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 4));
+            g.DrawString("图片上传", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 4));
         }
     }
 
