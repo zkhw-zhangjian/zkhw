@@ -1154,7 +1154,7 @@ namespace zkhwClient
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, color, color);
             base.OnPaint(e);
             Graphics g = e.Graphics;
-            g.DrawString("查询", new Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 3));
+            g.DrawString("查询", new Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(12, 3));
 
 
             //Single _size = GetBtnFontSize(button5);

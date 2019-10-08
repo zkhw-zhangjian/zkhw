@@ -36,6 +36,7 @@ namespace zkhwClient.view.updateTjResult
         {
             int _result = 1;
             DataRow[] drwbc = dttv.Select("type='WBC'");
+            if (drwbc.Length == 0) return _result;
             double wbcwmin = double.Parse(drwbc[0]["warning_min"].ToString());
             double wbcwmax = double.Parse(drwbc[0]["warning_max"].ToString());
             if (wbcdouble > wbcwmax || wbcdouble < wbcwmin)
@@ -61,6 +62,7 @@ namespace zkhwClient.view.updateTjResult
         {
             int _result = 1;
             DataRow[] drrbc = dttv.Select("type='RBC'");
+            if (drrbc.Length == 0) return _result;
             double rbcwmin = double.Parse(drrbc[0]["warning_min"].ToString());
             double rbcwmax = double.Parse(drrbc[0]["warning_max"].ToString());
             if (rbcdouble > rbcwmax || rbcdouble < rbcwmin)
@@ -86,6 +88,7 @@ namespace zkhwClient.view.updateTjResult
         {
             int _result = 1;
             DataRow[] drpct = dttv.Select("type='PCT'");
+            if (drpct.Length == 0) return _result;
             double pctwmin = double.Parse(drpct[0]["warning_min"].ToString());
             double pctwmax = double.Parse(drpct[0]["warning_max"].ToString());
             if (pctdouble > pctwmax || pctdouble < pctwmin)
@@ -111,6 +114,7 @@ namespace zkhwClient.view.updateTjResult
         {
             int _result = 1;
             DataRow[] drplt = dttv.Select("type='PLT'");
+            if (drplt.Length == 0) return _result;
             double pltwmin = double.Parse(drplt[0]["warning_min"].ToString());
             double pltwmax = double.Parse(drplt[0]["warning_max"].ToString());
             if (pltdouble > pltwmax || pltdouble < pltwmin)
@@ -136,6 +140,7 @@ namespace zkhwClient.view.updateTjResult
         {
             int _result = 1;
             DataRow[] drhgb = dttv.Select("type='HGB'");
+            if (drhgb.Length == 0) return _result;
             double hgbwmin = double.Parse(drhgb[0]["warning_min"].ToString());
             double hgbwmax = double.Parse(drhgb[0]["warning_max"].ToString());
             if (hgbdouble > hgbwmax || hgbdouble < hgbwmin)
@@ -160,6 +165,7 @@ namespace zkhwClient.view.updateTjResult
         {
             int _result = 1;
             DataRow[] drhct = dttv.Select("type='HCT'");
+            if (drhct.Length == 0) return _result;
             double hctwmin = double.Parse(drhct[0]["warning_min"].ToString());
             double hctwmax = double.Parse(drhct[0]["warning_max"].ToString());
             if (hctdouble > hctwmax || hctdouble < hctwmin)
@@ -185,6 +191,7 @@ namespace zkhwClient.view.updateTjResult
         {
             int _result = 1;
             DataRow[] drmcv = dttv.Select("type='MCV'");
+            if (drmcv.Length == 0) return _result;
             double mcvwmin = double.Parse(drmcv[0]["warning_min"].ToString());
             double mcvwmax = double.Parse(drmcv[0]["warning_max"].ToString());
             if (mcvdouble > mcvwmax || mcvdouble < mcvwmin)
@@ -210,6 +217,7 @@ namespace zkhwClient.view.updateTjResult
         {
             int _result = 1;
             DataRow[] drmch = dttv.Select("type='MCH'");
+            if (drmch.Length == 0) return _result;
             double mchwmin = double.Parse(drmch[0]["warning_min"].ToString());
             double mchwmax = double.Parse(drmch[0]["warning_max"].ToString());
             if (mchdouble > mchwmax || mchdouble < mchwmin)
@@ -235,7 +243,8 @@ namespace zkhwClient.view.updateTjResult
         private int GetJudgeResultForMCHC(double mchcdouble)
         {
             int _result = 1;
-            DataRow[] drmchc = dttv.Select("type='MCHC'");
+            DataRow[] drmchc = dttv.Select("type='MCHC'"); 
+            if (drmchc.Length == 0) return _result;
             double mchcwmin = double.Parse(drmchc[0]["warning_min"].ToString());
             double mchcwmax = double.Parse(drmchc[0]["warning_max"].ToString());
             if (mchcdouble > mchcwmax || mchcdouble < mchcwmin)
@@ -261,6 +270,7 @@ namespace zkhwClient.view.updateTjResult
         {
             int _result = 1;
             DataRow[] drrdwcv = dttv.Select("type='RDWCV'");
+            if (drrdwcv.Length == 0) return _result;
             double rdwcvwmin = double.Parse(drrdwcv[0]["warning_min"].ToString());
             double rdwcvwmax = double.Parse(drrdwcv[0]["warning_max"].ToString());
             if (rdwcvdouble > rdwcvwmax || rdwcvdouble < rdwcvwmin)
@@ -286,6 +296,7 @@ namespace zkhwClient.view.updateTjResult
         {
             int _result = 1;
             DataRow[] drrdwsd = dttv.Select("type='RDWSD'");
+            if (drrdwsd.Length == 0) return _result;
             double rdwsdwmin = double.Parse(drrdwsd[0]["warning_min"].ToString());
             double rdwsdwmax = double.Parse(drrdwsd[0]["warning_max"].ToString());
             if (rdwsddouble > rdwsdwmax || rdwsddouble < rdwsdwmin)
@@ -339,6 +350,7 @@ namespace zkhwClient.view.updateTjResult
         {
             int _result = 1;
             DataRow[] drneutp = dttv.Select("type='NEUTP'");
+            if (drneutp.Length == 0) return _result;
             double neutpwmin = double.Parse(drneutp[0]["warning_min"].ToString());
             double neutpwmax = double.Parse(drneutp[0]["warning_max"].ToString());
             if (neutpdouble > neutpwmax || neutpdouble < neutpwmin)
@@ -364,6 +376,7 @@ namespace zkhwClient.view.updateTjResult
         {
             int _result = 1; 
             DataRow[] drlym = dttv.Select("type='LYM'");
+            if (drlym.Length == 0) return _result;
             double lymwmin = double.Parse(drlym[0]["warning_min"].ToString());
             double lymwmax = double.Parse(drlym[0]["warning_max"].ToString());
             if (lymdouble > lymwmax || lymdouble < lymwmin)
@@ -389,6 +402,7 @@ namespace zkhwClient.view.updateTjResult
         {
             int _result = 1; 
             DataRow[] drlymp = dttv.Select("type='LYMP'");
+            if (drlymp.Length == 0) return _result;
             double lympwmin = double.Parse(drlymp[0]["warning_min"].ToString());
             double lympwmax = double.Parse(drlymp[0]["warning_max"].ToString());
             if (lympdouble > lympwmax || lympdouble < lympwmin)
@@ -414,6 +428,7 @@ namespace zkhwClient.view.updateTjResult
         {
             int _result = 1; 
             DataRow[] drmpv = dttv.Select("type='MPV'");
+            if (drmpv.Length == 0) return _result;
             double mpvwmin = double.Parse(drmpv[0]["warning_min"].ToString());
             double mpvwmax = double.Parse(drmpv[0]["warning_max"].ToString());
             if (mpvdouble > mpvwmax || mpvdouble < mpvwmin)
@@ -439,6 +454,7 @@ namespace zkhwClient.view.updateTjResult
         {
             int _result = 1; 
             DataRow[] drpdw = dttv.Select("type='PDW'");
+            if (drpdw.Length == 0) return _result;
             double pdwwmin = double.Parse(drpdw[0]["warning_min"].ToString());
             double pdwwmax = double.Parse(drpdw[0]["warning_max"].ToString());
             if (pdwdouble > pdwwmax || pdwdouble < pdwwmin)
@@ -464,6 +480,7 @@ namespace zkhwClient.view.updateTjResult
         {
             int _result = 1; 
             DataRow[] drmxd = dttv.Select("type='MXD'");
+            if (drmxd.Length == 0) return _result;
             double mxdwmin = double.Parse(drmxd[0]["warning_min"].ToString());
             double mxdwmax = double.Parse(drmxd[0]["warning_max"].ToString());
             if (mxddouble > mxdwmax || mxddouble < mxdwmin)
@@ -489,6 +506,7 @@ namespace zkhwClient.view.updateTjResult
         {
             int _result = 1; 
             DataRow[] drmxdp = dttv.Select("type='MXDP'");
+            if (drmxdp.Length == 0) return _result;
             double mxdpwmin = double.Parse(drmxdp[0]["warning_min"].ToString());
             double mxdpwmax = double.Parse(drmxdp[0]["warning_max"].ToString());
             if (mxdpdouble > mxdpwmax || mxdpdouble < mxdpwmin)
@@ -814,7 +832,7 @@ namespace zkhwClient.view.updateTjResult
            
             if (_isHaveData==true)
             { 
-                istrue = tjdao.updateXuechangguiInfo(aichive_no, bar_code, WBC, RBC, PCT, PLT, HGB, HCT, MCV, MCH, MCHC, RDWCV, RDWSD, MONO, MONOP, GRAN, GRANP, NEUT, NEUTP, EO, EOP, BASO, BASOP, LYM, LYMP, MPV, PDW, MXD, MXDP, PLCR, OTHERS, _currentdevno);
+                istrue = tjdao.updateXuechangguiInfo(aichive_no, bar_code, WBC, RBC, PCT, PLT, HGB, HCT, MCV, MCH, MCHC, RDWCV, RDWSD, MONO, MONOP, GRAN, GRANP, NEUT, NEUTP, EO, EOP, BASO, BASOP, LYM, LYMP, MPV, PDW, MXD, MXDP, PLCR, OTHERS, _currentdevno, setting.basicInfoSettings.xcg);
             }
             else
             {
@@ -849,7 +867,7 @@ namespace zkhwClient.view.updateTjResult
                 obj.GRANP = GRANP;
                 obj.PLCR = PLCR;
                 obj.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                obj.ZrysXCG = "";
+                obj.ZrysXCG = setting.basicInfoSettings.xcg;
                 //obj.timeCodeUnique = obj.bar_code + "_" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 istrue = tjdao.insertXuechangguiInfo(obj);
             }

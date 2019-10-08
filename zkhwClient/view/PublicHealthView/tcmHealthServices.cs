@@ -64,14 +64,20 @@ namespace zkhwClient.view.PublicHealthView
                 this.label2.Text = "";
             }
             else { this.label2.Text = "---姓名/身份证号/档案号---"; }
-            if (comboBox5.SelectedValue !=null)
-            {
-                cun = comboBox5.SelectedValue.ToString();
-            } 
+             
+            
             querytcmHealthServices(); 
         }
         private void querytcmHealthServices()
         {
+            if (this.comboBox5.Text == "" || this.comboBox5.Text == "--请选择--" || comboBox5.SelectedValue == null)
+            {
+                cun = "";
+            }
+            else
+            {
+                cun = this.comboBox5.SelectedValue.ToString();
+            }
             this.dataGridView1.DataSource = null;
             time1 = this.dateTimePicker1.Text.ToString();//开始时间
             time2 = this.dateTimePicker2.Text.ToString();//结束时间

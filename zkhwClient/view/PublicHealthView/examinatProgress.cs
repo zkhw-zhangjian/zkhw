@@ -61,8 +61,8 @@ namespace zkhwClient.view.PublicHealthView
             this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
             Common.SetComboBoxInfo(comboBox1, areadao.shengInfo());
             dttv = grjddao.checkThresholdValues(Common._deviceModel,"");//获取阈值信息
-            queryExaminatProgress();
-            registrationRecordCheck();//体检人数统计
+            //queryExaminatProgress();
+            //registrationRecordCheck();//体检人数统计
         } 
         public void queryExaminatProgress() 
         { 
@@ -1137,6 +1137,12 @@ namespace zkhwClient.view.PublicHealthView
             {
                 MessageBox.Show("无历史数据，请先查询历史数据后再生成PDF文件!");
             }
+        }
+
+        private void examinatProgress_Shown(object sender, EventArgs e)
+        {
+            queryExaminatProgress();
+            registrationRecordCheck();//体检人数统计
         }
     }
 }

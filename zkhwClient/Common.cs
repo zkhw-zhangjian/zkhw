@@ -690,6 +690,7 @@ namespace zkhwClient
     { 
         public static void Draw(System.Drawing.Rectangle rectangle, Graphics g, int _radius, bool cusp, Color begin_color, Color end_color)
         {
+            if (rectangle.Width == 0 || rectangle.Height == 0) return;
             int span = 2;
             //抗锯齿
             g.SmoothingMode = SmoothingMode.AntiAlias;

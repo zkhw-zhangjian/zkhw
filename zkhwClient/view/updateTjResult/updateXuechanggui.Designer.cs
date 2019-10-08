@@ -259,7 +259,7 @@
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.label19.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label19.Location = new System.Drawing.Point(501, 305);
+            this.label19.Location = new System.Drawing.Point(501, 295);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(75, 21);
             this.label19.TabIndex = 116;
@@ -269,7 +269,7 @@
             // 
             this.textBox16.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.textBox16.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.textBox16.Location = new System.Drawing.Point(344, 372);
+            this.textBox16.Location = new System.Drawing.Point(596, 252);
             this.textBox16.Name = "textBox16";
             this.textBox16.Size = new System.Drawing.Size(130, 29);
             this.textBox16.TabIndex = 28;
@@ -279,7 +279,7 @@
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.label16.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label16.Location = new System.Drawing.Point(247, 376);
+            this.label16.Location = new System.Drawing.Point(499, 256);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(65, 21);
             this.label16.TabIndex = 114;
@@ -669,21 +669,23 @@
             // 
             this.textBox36.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.textBox36.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.textBox36.Location = new System.Drawing.Point(596, 252);
+            this.textBox36.Location = new System.Drawing.Point(596, 376);
             this.textBox36.Name = "textBox36";
             this.textBox36.Size = new System.Drawing.Size(130, 29);
             this.textBox36.TabIndex = 20;
+            this.textBox36.Visible = false;
             // 
             // label36
             // 
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.label36.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label36.Location = new System.Drawing.Point(496, 250);
+            this.label36.Location = new System.Drawing.Point(496, 374);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(72, 21);
             this.label36.TabIndex = 152;
             this.label36.Text = "OTHERS";
+            this.label36.Visible = false;
             // 
             // button5
             // 
@@ -907,7 +909,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(836, 700);
+            this.ClientSize = new System.Drawing.Size(836, 646);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);

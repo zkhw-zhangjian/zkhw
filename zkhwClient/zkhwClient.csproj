@@ -186,7 +186,6 @@
     <Compile Include="bean\UserInfo.cs" />
     <Compile Include="bean\xuechangguiBean.cs" />
     <Compile Include="Common.cs" />
-    <Compile Include="control\OutlookBar.cs" />
     <Compile Include="control\PagerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -66,10 +66,15 @@ namespace zkhwClient.view.PublicHealthView
                 this.label5.Text = "";
             }
             else { this.label5.Text = "---姓名/身份证号/档案号---"; }
-            if(this.comboBox5.SelectedValue!=null)
+            
+            if (this.comboBox5.Text == "" || this.comboBox5.Text == "--请选择--" || comboBox5.SelectedValue == null)
+            {
+                xcuncode = "";
+            }
+            else
             {
                 xcuncode = this.comboBox5.SelectedValue.ToString();
-            } 
+            }
             querypBasicInfo();
         }
         private DataTable CreateDataTable()

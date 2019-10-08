@@ -703,6 +703,7 @@
             this.Tag = "";
             this.Text = "数据审核--Tab键控制光标";
             this.Load += new System.EventHandler(this.examinatProgress_Load);
+            this.Shown += new System.EventHandler(this.examinatProgress_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

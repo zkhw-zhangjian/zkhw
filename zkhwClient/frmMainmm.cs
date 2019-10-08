@@ -536,7 +536,7 @@ namespace zkhwClient
                 switch (c)
                 {
                     case "1":
-                        frm = new examinatProgress();
+                        frm = new examinatProgress(); 
                         break;
                     case "2":
                         frm = new examinatReport();
