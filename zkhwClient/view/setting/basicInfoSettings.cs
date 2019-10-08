@@ -62,6 +62,7 @@ namespace zkhwClient.view.setting
         }
         private void basicInfoSettings_Load(object sender, EventArgs e)
         {
+            
             issave = "0";
             Common.SetComboBoxInfo(comboBox1, ltdorganizationDao.GetShengInfo());
             showCombobox();

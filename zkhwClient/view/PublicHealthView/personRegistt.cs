@@ -312,10 +312,10 @@ namespace zkhwClient
         private void button1_Paint(object sender, PaintEventArgs e)
         {
             Button bt = (Button)sender;
-            Single _size = GetBtnFontSize(bt);
+            //Single _size = GetBtnFontSize(bt);
 
-            //Single _size = 11;
-            string stag = bt.AccessibleName; 
+            Single _size = 10;
+            string stag = bt.AccessibleName;
             string wenzi = "";
             int starti = 20;
             Color color = Color.FromArgb(81, 95, 154);
@@ -340,7 +340,7 @@ namespace zkhwClient
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            g.DrawString(wenzi, new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(starti, 5));
+            g.DrawString(wenzi, new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(starti, 4));
 
 
             //StringFormat stringFormat = new StringFormat();
@@ -349,7 +349,7 @@ namespace zkhwClient
             //float y = e.ClipRectangle.Height / 2f - (_size / 2f);
             //Graphics g = e.Graphics;
             //g.DrawString(wenzi, new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular, GraphicsUnit.Pixel), new SolidBrush(Color.White), x, y, stringFormat);
-             
+
         }
 
         private void txtNum_KeyPress(object sender, KeyPressEventArgs e)
@@ -1154,7 +1154,7 @@ namespace zkhwClient
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, color, color);
             base.OnPaint(e);
             Graphics g = e.Graphics;
-            g.DrawString("查询", new Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(12, 3));
+            g.DrawString("查询", new Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(9, 2));
 
 
             //Single _size = GetBtnFontSize(button5);

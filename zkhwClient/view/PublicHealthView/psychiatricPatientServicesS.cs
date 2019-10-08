@@ -29,11 +29,7 @@ namespace zkhwClient.view.PublicHealthView
             //让默认的日期时间减一天
             this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1);
 
-            this.label4.Text = "严重精神障碍患者随访记录";
-            this.label4.ForeColor = Color.SkyBlue;
-            label4.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
-            label4.Left = (this.panel1.Width - this.label4.Width) / 2;
-            label4.BringToFront();
+            
 
             //区域
             Common.SetComboBoxInfo(comboBox1, areadao.shengInfo());

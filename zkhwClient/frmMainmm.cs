@@ -30,7 +30,7 @@ namespace zkhwClient
 {
     public partial class frmMainmm : Form
     {
-        personRegistt pR = null;
+        personRegisttt pR = null;
         Process proHttp = new Process();
         //Process proFtp = new Process();
         Process proAsNet = new Process();
@@ -132,7 +132,7 @@ namespace zkhwClient
 
             #endregion
 
-            pR = new personRegistt();
+            pR = new personRegisttt();
             OpenWinToMain();
 
             //http
@@ -309,7 +309,7 @@ namespace zkhwClient
                         pR.btnClose_Click();
                         pR = null;
                     }
-                    pR = new personRegistt();
+                    pR = new personRegisttt();
                     OpenWinToMain();
                 }
                 else if (lbl.Text == "设置")
@@ -527,7 +527,7 @@ namespace zkhwClient
                     pR.btnClose_Click();
                     pR = null;
                 }
-                pR = new personRegistt();
+                pR = new personRegisttt();
                 OpenWinToMain();
             }
             else
