@@ -27,7 +27,8 @@ namespace zkhwClient.view.publicRecord
 
         private void button1_Click(object sender, EventArgs e)
         {
-            drug_name = this.textBox3.Text;
+            //drug_name = this.textBox3.Text;
+            drug_name = comboBox2.Text;
             drug_usage = this.textBox1.Text;
             drug_use = this.textBox2.Text;
             drug_time = this.textBox4.Text;

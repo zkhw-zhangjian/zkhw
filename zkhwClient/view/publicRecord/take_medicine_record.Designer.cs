@@ -40,6 +40,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -101,10 +102,11 @@
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold);
-            this.textBox3.Location = new System.Drawing.Point(108, 10);
+            this.textBox3.Location = new System.Drawing.Point(22, 179);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(231, 30);
             this.textBox3.TabIndex = 9;
+            this.textBox3.Visible = false;
             // 
             // label5
             // 
@@ -164,11 +166,53 @@
             this.textBox4.Size = new System.Drawing.Size(231, 30);
             this.textBox4.TabIndex = 15;
             // 
+            // comboBox2
+            // 
+            this.comboBox2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            " ",
+            "阿司匹林肠溶片",
+            "硝苯地平片",
+            "卡托普利片",
+            "复方利血平",
+            "复方降压片",
+            "复方丹参片",
+            "尼莫地平片",
+            "依那普利缓释片",
+            "替米沙坦片",
+            "厄贝沙坦片",
+            "缬沙坦分散片",
+            "苯磺酸氨氯地平片",
+            "非洛地平缓释片",
+            "富马酸比索洛尔片",
+            "二甲双胍片",
+            "阿卡波糖片",
+            "格列美脲片",
+            "格列本脲片",
+            "吡格列酮片",
+            "伏格列波糖片",
+            "瑞格列奈片",
+            "胰岛素",
+            "酒石酸美托洛尔片",
+            "单硝酸异山梨酯片",
+            "辛伐他汀片",
+            "阿托伐他汀钙片",
+            "脑心通片",
+            "甲钴胺分散片",
+            "依帕司他片",
+            "维生素B1片"});
+            this.comboBox2.Location = new System.Drawing.Point(108, 10);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(231, 28);
+            this.comboBox2.TabIndex = 16;
+            // 
             // take_medicine_record
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(351, 248);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -203,5 +247,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }

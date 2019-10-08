@@ -27,16 +27,26 @@ namespace zkhwClient.view.PublicHealthView
         {
             InitializeComponent();
         }
+        private void SetControlWodth()
+        {
+            if (Common.m_nWindwMetricsY <= 900)
+            {
+                comboBox3.Width = 120;
+                comboBox3.Left = comboBox2.Left + comboBox2.Width + 5;
+                comboBox4.Width = 120;
+                comboBox4.Left = comboBox3.Left + comboBox3.Width + 5;
+                comboBox5.Width = 120;
+                comboBox5.Left = comboBox4.Left + comboBox4.Width + 5;
+            }
+        }
         private void hypertensionPatientServices_Load(object sender, EventArgs e)
         {
+            SetControlWodth();
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular);
             //让默认的日期时间减一天
             this.dateTimePicker1.Value = this.dateTimePicker2.Value.AddDays(-1);
 
-            this.label4.Text = "高血压随访记录历史表";
-            this.label4.ForeColor = Color.SkyBlue;
-            label4.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
-            label4.Left = (this.panel1.Width - this.label4.Width) / 2;
-            label4.BringToFront();
+           
 
             //区域
             Common.SetComboBoxInfo(comboBox1, areadao.shengInfo());
@@ -282,6 +292,46 @@ namespace zkhwClient.view.PublicHealthView
         {
             if (this.comboBox5.SelectedValue == null) return;
             xcuncode = this.comboBox5.SelectedValue.ToString(); 
+        }
+
+        private void button1_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("添加", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 7));
+
+        }
+
+        private void button2_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("修改", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 7));
+
+        }
+
+        private void button3_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("删除", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 7));
+
+        }
+
+        private void button5_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 6));
+
         }
     }
 }
