@@ -1886,6 +1886,7 @@ where 1=1";
                         for (int i = 0; i < grbh.Length; i++)
                         {
                             dics.Add("编号" + (i + 1), grbh[i].ToString());
+                            if (i == 7) break;
                         }
                     }
                     dics.Add("姓名", data["name"].ToString());
