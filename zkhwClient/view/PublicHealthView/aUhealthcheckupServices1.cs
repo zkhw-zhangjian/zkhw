@@ -15,7 +15,7 @@ namespace zkhwClient.view.PublicHealthView
         private string _barCode = "";
         public string id = "";
 
-        private string _residentbaseinfoid = "";
+        private string _residentbaseinfoid = ""; 
 
         healthCheckupDao hcd = new healthCheckupDao();
         public aUhealthcheckupServices1()
@@ -71,6 +71,22 @@ namespace zkhwClient.view.PublicHealthView
                 }
             } 
         }
+
+        private int PanDuanSex()
+        {
+            if (this.textBox119.Text.Length != 18) return -1;
+            int ret = 0; //女
+            int _xb = int.Parse(this.textBox119.Text.Substring(16, 1));
+            if (_xb % 2 == 0)
+            {
+                ret = 0; //女
+            }
+            else
+            {
+                ret = 1; //男
+            }
+            return ret;
+        }
         private void aUdiabetesPatientServices_Load(object sender, EventArgs e)
         {
             this.label51.Text = "健康体检表第一页(共四页)";
@@ -109,6 +125,7 @@ namespace zkhwClient.view.PublicHealthView
                     this.textBox1.Text = dt.Rows[0]["name"].ToString(); 
                     this.textBox2.Text = dt.Rows[0]["aichive_no"].ToString();
                     this.textBox118.Text = dt.Rows[0]["bar_code"].ToString();
+                    
                     this.textBox119.Text = dt.Rows[0]["id_number"].ToString();
                     this.dateTimePicker1.Value = DateTime.Parse(dt.Rows[0]["check_date"].ToString());
                     this.textBox51.Text = dt.Rows[0]["doctor_name"].ToString();
@@ -116,7 +133,7 @@ namespace zkhwClient.view.PublicHealthView
                     this.checkBox21.Checked = false;
 
                     _barCode= dt.Rows[0]["bar_code"].ToString();
-                    #region   老 高 糖 精 结 贫 签约
+                    #region   老 高 糖 精 结 贫 签约 孕
                     if(dt.Rows[0]["is_hypertension"]!=null)
                     {
                         string tmp = dt.Rows[0]["is_hypertension"].ToString();
@@ -197,9 +214,35 @@ namespace zkhwClient.view.PublicHealthView
                             checkBox42.Checked = false;
                         }
                     }
+                    int _sx = PanDuanSex();
+                    if(_sx ==0)
+                    {
+                        checkBox49.Enabled = true;
+                        checkBox49.Visible = true;
+                        //孕妇
+                        if (dt.Rows[0]["is_gravida"] != null)
+                        {
+                            string tmp = dt.Rows[0]["is_gravida"].ToString();
+                            if (tmp == "") tmp = "0";
+                            if (int.Parse(tmp) == 1)
+                            {
+                                checkBox49.Checked = true;
+                            }
+                            else
+                            {
+                                checkBox49.Checked = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        checkBox49.Enabled = false;
+                        checkBox49.Visible = false;
+                    }
+
                     #endregion
 
-                    _residentbaseinfoid= dt.Rows[0]["resident_base_info_id"].ToString();
+                    _residentbaseinfoid = dt.Rows[0]["resident_base_info_id"].ToString();
                     //查找对应的标签
                     GetManBingBaiQian();
                     //将ctr转换成CheckBox并赋值给ck
@@ -1150,8 +1193,14 @@ and (disease_type='2' or disease_type='3' or disease_type='8' or disease_type='9
             int _signing = 0;
             if (checkBox42.Checked == true) _signing = 1;
 
+            int _sigravida = 0;
+            if(checkBox49.Visible==true)
+            {
+                if (checkBox49.Checked == true) _sigravida = 1;
+            } 
+
             sql = string.Format(@"Update resident_base_info set is_hypertension={0},is_diabetes={1},is_psychosis={2},
-                 is_tuberculosis={3},is_poor='{4}',is_signing={5} where id_number='{6}' ", _hypertension, _diabetes, _psychosis, _tuberculosis, _poor, _signing, this.textBox119.Text);
+                 is_tuberculosis={3},is_poor='{4}',is_signing={5},is_gravida={6} where id_number='{7}' ", _hypertension, _diabetes, _psychosis, _tuberculosis, _poor, _signing, _sigravida, this.textBox119.Text);
             _lst.Add(sql);
 
             #endregion

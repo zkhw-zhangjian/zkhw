@@ -39,9 +39,16 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.panel15 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.panel14 = new System.Windows.Forms.Panel();
             this.panel13 = new System.Windows.Forms.Panel();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -53,24 +60,17 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.panel13.SuspendLayout();
-            this.panel15.SuspendLayout();
+            this.panel12.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
-            this.panel12.SuspendLayout();
+            this.panel15.SuspendLayout();
+            this.panel13.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -80,6 +80,7 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1201, 426);
@@ -224,29 +225,113 @@
             this.panel5.Size = new System.Drawing.Size(1221, 622);
             this.panel5.TabIndex = 14;
             // 
-            // panel10
+            // panel12
             // 
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel10.Location = new System.Drawing.Point(0, 0);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(1221, 13);
-            this.panel10.TabIndex = 18;
+            this.panel12.Controls.Add(this.dataGridView1);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel12.Location = new System.Drawing.Point(10, 135);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(1201, 426);
+            this.panel12.TabIndex = 27;
             // 
-            // panel11
+            // panel7
             // 
-            this.panel11.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel11.Location = new System.Drawing.Point(0, 13);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(10, 609);
-            this.panel11.TabIndex = 20;
+            this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.panel7.Controls.Add(this.panel8);
+            this.panel7.Controls.Add(this.button4);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel7.Location = new System.Drawing.Point(10, 561);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(1201, 61);
+            this.panel7.TabIndex = 26;
             // 
-            // panel6
+            // panel8
             // 
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(1211, 13);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(10, 609);
-            this.panel6.TabIndex = 21;
+            this.panel8.Controls.Add(this.button1);
+            this.panel8.Controls.Add(this.button2);
+            this.panel8.Controls.Add(this.button3);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel8.Location = new System.Drawing.Point(726, 0);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(475, 61);
+            this.panel8.TabIndex = 21;
+            // 
+            // panel9
+            // 
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel9.Location = new System.Drawing.Point(10, 130);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(1201, 5);
+            this.panel9.TabIndex = 25;
+            // 
+            // panel15
+            // 
+            this.panel15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.panel15.Controls.Add(this.label2);
+            this.panel15.Controls.Add(this.button5);
+            this.panel15.Controls.Add(this.label14);
+            this.panel15.Controls.Add(this.textBox1);
+            this.panel15.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel15.Location = new System.Drawing.Point(10, 83);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(1201, 47);
+            this.panel15.TabIndex = 24;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Enabled = false;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.label2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label2.Location = new System.Drawing.Point(135, 13);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(183, 20);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "---姓名/身份证号/档案号---";
+            // 
+            // button5
+            // 
+            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button5.Location = new System.Drawing.Point(377, 5);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(81, 37);
+            this.button5.TabIndex = 12;
+            this.button5.Text = "查询";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button5.Paint += new System.Windows.Forms.PaintEventHandler(this.button5_Paint);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label14.Location = new System.Drawing.Point(14, 10);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(74, 21);
+            this.label14.TabIndex = 1;
+            this.label14.Text = "居民信息";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.textBox1.Location = new System.Drawing.Point(104, 8);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(256, 29);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // panel14
+            // 
+            this.panel14.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel14.Location = new System.Drawing.Point(10, 78);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(1201, 5);
+            this.panel14.TabIndex = 23;
             // 
             // panel13
             // 
@@ -370,113 +455,29 @@
             this.label8.TabIndex = 5;
             this.label8.Text = "所属区域";
             // 
-            // panel14
+            // panel6
             // 
-            this.panel14.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel14.Location = new System.Drawing.Point(10, 78);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(1201, 5);
-            this.panel14.TabIndex = 23;
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel6.Location = new System.Drawing.Point(1211, 13);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(10, 609);
+            this.panel6.TabIndex = 21;
             // 
-            // panel15
+            // panel11
             // 
-            this.panel15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.panel15.Controls.Add(this.label2);
-            this.panel15.Controls.Add(this.button5);
-            this.panel15.Controls.Add(this.label14);
-            this.panel15.Controls.Add(this.textBox1);
-            this.panel15.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel15.Location = new System.Drawing.Point(10, 83);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(1201, 47);
-            this.panel15.TabIndex = 24;
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel11.Location = new System.Drawing.Point(0, 13);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(10, 609);
+            this.panel11.TabIndex = 20;
             // 
-            // label2
+            // panel10
             // 
-            this.label2.AutoSize = true;
-            this.label2.Enabled = false;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.label2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label2.Location = new System.Drawing.Point(135, 13);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(183, 20);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "---姓名/身份证号/档案号---";
-            // 
-            // button5
-            // 
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button5.Location = new System.Drawing.Point(377, 5);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(81, 37);
-            this.button5.TabIndex = 12;
-            this.button5.Text = "查询";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            this.button5.Paint += new System.Windows.Forms.PaintEventHandler(this.button5_Paint);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label14.Location = new System.Drawing.Point(14, 10);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(74, 21);
-            this.label14.TabIndex = 1;
-            this.label14.Text = "居民信息";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.textBox1.Location = new System.Drawing.Point(104, 8);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(256, 29);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // panel9
-            // 
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel9.Location = new System.Drawing.Point(10, 130);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(1201, 5);
-            this.panel9.TabIndex = 25;
-            // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.panel7.Controls.Add(this.panel8);
-            this.panel7.Controls.Add(this.button4);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel7.Location = new System.Drawing.Point(10, 561);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(1201, 61);
-            this.panel7.TabIndex = 26;
-            // 
-            // panel8
-            // 
-            this.panel8.Controls.Add(this.button1);
-            this.panel8.Controls.Add(this.button2);
-            this.panel8.Controls.Add(this.button3);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel8.Location = new System.Drawing.Point(726, 0);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(475, 61);
-            this.panel8.TabIndex = 21;
-            // 
-            // panel12
-            // 
-            this.panel12.Controls.Add(this.dataGridView1);
-            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel12.Location = new System.Drawing.Point(10, 135);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(1201, 426);
-            this.panel12.TabIndex = 27;
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel10.Location = new System.Drawing.Point(0, 0);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(1221, 13);
+            this.panel10.TabIndex = 18;
             // 
             // psychiatricPatientServicesG
             // 
@@ -497,13 +498,13 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel5.ResumeLayout(false);
-            this.panel13.ResumeLayout(false);
-            this.panel13.PerformLayout();
-            this.panel15.ResumeLayout(false);
-            this.panel15.PerformLayout();
+            this.panel12.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
-            this.panel12.ResumeLayout(false);
+            this.panel15.ResumeLayout(false);
+            this.panel15.PerformLayout();
+            this.panel13.ResumeLayout(false);
+            this.panel13.PerformLayout();
             this.ResumeLayout(false);
 
         }

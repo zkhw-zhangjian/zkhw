@@ -721,5 +721,22 @@ namespace zkhwClient
             gp.CloseAllFigures();
             return gp;
         }
+
+        public static void DrawFont(PaintEventArgs e, string wenzi, System.Drawing.Font font, Brush bush)
+        {
+            if(font==null)
+            {
+                font = new System.Drawing.Font("微软雅黑", 12F);
+            }
+            if (bush == null)
+            {
+                bush = Brushes.White;
+            }
+            Graphics g = e.Graphics;  
+            SizeF size = g.MeasureString(wenzi, font);
+            int posX = (e.ClipRectangle.Width - Convert.ToInt16(size.Width)) / 2;
+            int posY = (e.ClipRectangle.Height - Convert.ToInt16(size.Height)) / 2;
+            g.DrawString(wenzi, font, bush, new PointF(posX, posY));
+        }
     }
 }

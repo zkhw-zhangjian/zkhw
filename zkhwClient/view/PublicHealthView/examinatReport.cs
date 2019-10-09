@@ -1992,6 +1992,22 @@ where 1=1";
                             string time = da.Rows[j]["disease_date"].ToString();
                             dics.Add("疾病时间" + (j + 1) + "年", time?.Split('-')[0]);
                             dics.Add("疾病时间" + (j + 1) + "月", time?.Split('-')[1]);
+                            string note = da.Rows[j]["note"].ToString();
+                            if (da.Rows[j]["disease_type"].ToString()=="6")
+                            {
+                                if (note != "")
+                                {
+                                    dics.Add("恶性肿瘤说明" , note);
+                                }
+                            }
+                            if (da.Rows[j]["disease_type"].ToString() == "12")
+                            {
+                                if (note != "")
+                                {
+                                    dics.Add("职业病说明" , note);
+                                }
+                            }
+
                         }
                     }
                     DataSet datas = DbHelperMySQL.Query($"SELECT * from operation_record where resident_base_info_id='{data["id"].ToString()}'");
@@ -4307,6 +4323,7 @@ where 1=1";
                             string _idnumber = data.Rows[i]["id_number"].ToString();
                             string _archiveno = data.Rows[i]["archive_no"].ToString();
                             string _nation = data.Rows[i]["nation"].ToString();
+                            string _name= data.Rows[i]["name"].ToString();
                             if ("1".Equals(_nation)) {
                                 _nation = "01";
                             }
@@ -4379,11 +4396,11 @@ where 1=1";
                                 for (int d = 0; d < data4.Rows.Count; d++)
                                 {
                                     string _id = Result.GetNewId();
-                                    sqllist.Add($@"insert into resident_diseases (id,archive_no,id_number,disease_type,disease_name,disease_date) 
-                                    values({Ifnull(_id)},{Ifnull(_archiveno)},{Ifnull(_idnumber)},{Ifnull(data4.Rows[d]["disease_type"])},{Ifnull(data4.Rows[d]["disease_name"])},{Ifnull(data4.Rows[d]["disease_date"])});");
+                                    sqllist.Add($@"insert into resident_diseases (id,name,archive_no,id_number,disease_type,disease_name,disease_date,note) 
+                                    values({Ifnull(_id)},{Ifnull(_name)},{Ifnull(_archiveno)},{Ifnull(_idnumber)},{Ifnull(data4.Rows[d]["disease_type"])},{Ifnull(data4.Rows[d]["disease_name"])},{Ifnull(data4.Rows[d]["disease_date"])},{Ifnull(data4.Rows[d]["note"])});");
                                 }
                             }
-                            //2019-9-29 更改 做法，如果为多条家庭疾病史那么要分开插入
+                            //2019-9-29 更改 做法，如果为多条家庭疾病史那么要分开插入 _name
                             DataSet jtbs = DbHelperMySQL.Query($@"select * from family_record where resident_base_info_id='{_residentbaseinfoid}'");
                             if (jtbs != null && jtbs.Tables.Count > 0 && jtbs.Tables[0].Rows.Count > 0)
                             {

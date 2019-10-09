@@ -351,10 +351,36 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.create_time>='{C
         {
             this.label2.Text = "";
         }
-
+        private void SetControlWodth()
+        {
+            if (Common.m_nWindwMetricsY <= 900)
+            {
+                comboBox3.Width = 120;
+                comboBox3.Left = comboBox2.Left + comboBox2.Width + 5;
+                comboBox4.Width = 120;
+                comboBox4.Left = comboBox3.Left + comboBox3.Width + 5;
+                comboBox5.Width = 120;
+                comboBox5.Left = comboBox4.Left + comboBox4.Width + 5;
+            }
+        }
         private void tuberculosisPatientServices_Load(object sender, EventArgs e)
         {
+            SetControlWodth();
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular);
+        }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            this.label2.Visible = this.textBox1.Text.Length < 1;
+        }
+
+        private void button5_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            base.OnPaint(e);
+            Font font = new Font("微软雅黑", 12F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "查询", font, bush);
         }
     }
 

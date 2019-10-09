@@ -268,6 +268,7 @@
             this.checkBox39 = new System.Windows.Forms.CheckBox();
             this.checkBox43 = new System.Windows.Forms.CheckBox();
             this.checkBox40 = new System.Windows.Forms.CheckBox();
+            this.checkBox49 = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel14.SuspendLayout();
@@ -2803,7 +2804,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 139);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1226, 108);
+            this.groupBox3.Size = new System.Drawing.Size(1214, 108);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
@@ -3195,9 +3196,10 @@
             // 
             // panel19
             // 
+            this.panel19.Controls.Add(this.checkBox49);
+            this.panel19.Controls.Add(this.checkBox47);
             this.panel19.Controls.Add(this.checkBox41);
             this.panel19.Controls.Add(this.checkBox42);
-            this.panel19.Controls.Add(this.checkBox47);
             this.panel19.Controls.Add(this.checkBox48);
             this.panel19.Controls.Add(this.checkBox46);
             this.panel19.Controls.Add(this.checkBox37);
@@ -3240,7 +3242,7 @@
             // 
             this.checkBox47.AutoSize = true;
             this.checkBox47.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.checkBox47.Location = new System.Drawing.Point(991, 6);
+            this.checkBox47.Location = new System.Drawing.Point(965, 6);
             this.checkBox47.Name = "checkBox47";
             this.checkBox47.Size = new System.Drawing.Size(125, 25);
             this.checkBox47.TabIndex = 99;
@@ -3365,6 +3367,18 @@
             this.checkBox40.Text = "结核病";
             this.checkBox40.UseVisualStyleBackColor = true;
             this.checkBox40.Click += new System.EventHandler(this.checkBox37_Click);
+            // 
+            // checkBox49
+            // 
+            this.checkBox49.AutoSize = true;
+            this.checkBox49.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.checkBox49.Location = new System.Drawing.Point(142, 30);
+            this.checkBox49.Name = "checkBox49";
+            this.checkBox49.Size = new System.Drawing.Size(61, 25);
+            this.checkBox49.TabIndex = 101;
+            this.checkBox49.Tag = "1";
+            this.checkBox49.Text = "孕妇";
+            this.checkBox49.UseVisualStyleBackColor = true;
             // 
             // aUhealthcheckupServices1
             // 
@@ -3673,5 +3687,6 @@
         public System.Windows.Forms.CheckBox checkBox45;
         public System.Windows.Forms.CheckBox checkBox48;
         private System.Windows.Forms.Panel panel19;
+        public System.Windows.Forms.CheckBox checkBox49;
     }
 }

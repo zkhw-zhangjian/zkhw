@@ -16,7 +16,7 @@ namespace zkhwClient.dao
             //string sql = "select id,name,archive_no,id_number,create_name,create_time,doctor_name from resident_base_info where create_time >= '" + time1 + "' and create_time <= '" + time2 + "'";
             string sql = @"select id,name,archive_no,id_number,create_name,create_time,
                        doctor_name,age,is_hypertension,is_diabetes ,is_psychosis ,
-                       is_tuberculosis,is_poor  from resident_base_info where create_time >= '" + time1 + "' and create_time <= '" + time2 + "'";
+                       is_tuberculosis,is_poor,is_gravida  from resident_base_info where create_time >= '" + time1 + "' and create_time <= '" + time2 + "'";
             if (code != "") { sql += " AND village_code='" + code + "'"; }
             if (pCa != "") { sql += " and (name like '%" + pCa + "%'  or id_number like '%" + pCa + "%'  or archive_no like '%" + pCa + "%')"; }
             ds = DbHelperMySQL.Query(sql);
@@ -51,20 +51,20 @@ namespace zkhwClient.dao
             {
                 #region 新插入
                 id = Result.GetNewId();
-                sql = @"insert into resident_base_info (id,archive_no,pb_archive,name,sex,birthday,id_number,address,nation,company,phone,link_name,link_phone,resident_type,residence_address,blood_group,blood_rh,education,profession,marital_status,pay_type,pay_other,drug_allergy,allergy_other,exposure,disease_other,is_hypertension,is_diabetes,is_psychosis,is_tuberculosis,is_heredity,heredity_name,is_deformity,deformity_name,is_poor,kitchen,fuel,other_fuel,drink,other_drink,toilet,poultry,medical_code,photo_code,aichive_org,doctor_name,upload_status,upload_time,create_user,create_name,create_time,create_org,create_org_name,is_signing,update_time) values ";
-                sql += @" ('" + id + "','" + hm.archive_no + "', '" + hm.pb_archive + "', '" + hm.name + "', '" + hm.sex + "', '" + hm.birthday + "', '" + hm.id_number + "', '" + hm.address + "', '" + hm.nation + "','" + hm.company + "', '" + hm.phone + "', '" + hm.link_name + "', '" + hm.link_phone + "', '" + hm.resident_type + "', '" + hm.address + "', '" + hm.blood_group + "', '" + hm.blood_rh + "', '" + hm.education + "', '" + hm.profession + "','" + hm.marital_status + "', '" + hm.pay_type + "', '" + hm.pay_other + "', '" + hm.drug_allergy + "', '" + hm.allergy_other + "', '" + hm.exposure + "', '" + hm.disease_other + "', '" + hm.is_hypertension + "', '" + hm.is_diabetes + "', '" + hm.is_psychosis + "','" + hm.is_tuberculosis + "', '" + hm.is_heredity + "', '" + hm.heredity_name + "', '" + hm.is_deformity + "', '" + hm.deformity_name + "', '" + hm.is_poor + "', '" + hm.kitchen + "', '" + hm.fuel + "', '" + hm.other_fuel + "', '" + hm.drink + "','" + hm.other_drink + "', '" + hm.toilet + "', '" + hm.poultry + "', '" + hm.medical_code + "', '" + hm.photo_code + "', '" + basicInfoSettings.organ_name + "', '" + hm.is_signing + "', '" + hm.synchro_time + "', '" + hm.create_user + "','" + hm.create_name + "', '" + hm.create_time + "', '" + hm.create_org + "', '" + hm.create_org_name + "',"+hm.is_signing+ "," + hm.update_time + ")";
+                sql = @"insert into resident_base_info (id,archive_no,pb_archive,name,sex,birthday,id_number,address,nation,company,phone,link_name,link_phone,resident_type,residence_address,blood_group,blood_rh,education,profession,marital_status,pay_type,pay_other,drug_allergy,allergy_other,exposure,disease_other,is_hypertension,is_diabetes,is_psychosis,is_tuberculosis,is_heredity,heredity_name,is_deformity,deformity_name,is_poor,kitchen,fuel,other_fuel,drink,other_drink,toilet,poultry,medical_code,photo_code,aichive_org,doctor_name,upload_status,upload_time,create_user,create_name,create_time,create_org,create_org_name,is_signing,update_time,is_gravida) values ";
+                sql += @" ('" + id + "','" + hm.archive_no + "', '" + hm.pb_archive + "', '" + hm.name + "', '" + hm.sex + "', '" + hm.birthday + "', '" + hm.id_number + "', '" + hm.address + "', '" + hm.nation + "','" + hm.company + "', '" + hm.phone + "', '" + hm.link_name + "', '" + hm.link_phone + "', '" + hm.resident_type + "', '" + hm.address + "', '" + hm.blood_group + "', '" + hm.blood_rh + "', '" + hm.education + "', '" + hm.profession + "','" + hm.marital_status + "', '" + hm.pay_type + "', '" + hm.pay_other + "', '" + hm.drug_allergy + "', '" + hm.allergy_other + "', '" + hm.exposure + "', '" + hm.disease_other + "', '" + hm.is_hypertension + "', '" + hm.is_diabetes + "', '" + hm.is_psychosis + "','" + hm.is_tuberculosis + "', '" + hm.is_heredity + "', '" + hm.heredity_name + "', '" + hm.is_deformity + "', '" + hm.deformity_name + "', '" + hm.is_poor + "', '" + hm.kitchen + "', '" + hm.fuel + "', '" + hm.other_fuel + "', '" + hm.drink + "','" + hm.other_drink + "', '" + hm.toilet + "', '" + hm.poultry + "', '" + hm.medical_code + "', '" + hm.photo_code + "', '" + basicInfoSettings.organ_name + "', '" + hm.is_signing + "', '" + hm.synchro_time + "', '" + hm.create_user + "','" + hm.create_name + "', '" + hm.create_time + "', '" + hm.create_org + "', '" + hm.create_org_name + "',"+hm.is_signing+ "," + hm.update_time +","+hm.is_gravida+ ")";
                 if (goodsList.Rows.Count > 0)
                 {
                     for (int i = 0; i < goodsList.Rows.Count; i++)
                     {
                         if (i == 0)
                         {
-                            sql0 += "insert into resident_diseases(archive_no,id_number,name,resident_base_info_id,disease_name,disease_date,disease_type) values ('"+ hm.archive_no + "','"+ hm.id_number + "','"+hm.name+"','" + id + "','" + goodsList.Rows[i]["disease_name"] + "','" + goodsList.Rows[i]["disease_date"] + "','" + goodsList.Rows[i]["disease_type"] + "')";
+                            sql0 += "insert into resident_diseases(archive_no,id_number,name,resident_base_info_id,disease_name,disease_date,disease_type,note) values ('"+ hm.archive_no + "','"+ hm.id_number + "','"+hm.name+"','" + id + "','" + goodsList.Rows[i]["disease_name"] + "','" + goodsList.Rows[i]["disease_date"] + "','" + goodsList.Rows[i]["disease_type"] + "','" + goodsList.Rows[i]["disease_note"] + "')";
 
                         }
                         else
                         {
-                            sql0 += ",('" + hm.archive_no + "','" + hm.id_number + "','" + hm.name + "','" + id + "','" + goodsList.Rows[i]["disease_name"] + "','" + goodsList.Rows[i]["disease_date"] + "','" + goodsList.Rows[i]["disease_type"] + "')";
+                            sql0 += ",('" + hm.archive_no + "','" + hm.id_number + "','" + hm.name + "','" + id + "','" + goodsList.Rows[i]["disease_name"] + "','" + goodsList.Rows[i]["disease_date"] + "','" + goodsList.Rows[i]["disease_type"] + "','" + goodsList.Rows[i]["disease_note"] + "')";
 
                         }
                     }
@@ -164,7 +164,7 @@ namespace zkhwClient.dao
             {
                 List<string> _lst = new List<string>();
                 #region 更新
-                sql = @"update resident_base_info set name='"+hm.name+"', address='"+hm.address+"', id_number='" + hm.id_number + "',nation='" + hm.nation + "',company='" + hm.company + "',phone= '" + hm.phone + "',link_name= '" + hm.link_name + "',link_phone= '" + hm.link_phone + "',resident_type= '" + hm.resident_type + "',residence_address='" + hm.residence_address + "',blood_group= '" + hm.blood_group + "',blood_rh='" + hm.blood_rh + "',education='" + hm.education + "',profession='" + hm.profession + "',marital_status='" + hm.marital_status + "',pay_type='" + hm.pay_type + "',pay_other= '" + hm.pay_other + "',drug_allergy='" + hm.drug_allergy + "',allergy_other='" + hm.allergy_other + "',exposure= '" + hm.exposure + "',disease_other='" + hm.disease_other + "',is_hypertension='" + hm.is_hypertension + "',is_diabetes= '" + hm.is_diabetes + "',is_psychosis='" + hm.is_psychosis + "',is_tuberculosis='" + hm.is_tuberculosis + "',is_heredity= '" + hm.is_heredity + "',heredity_name= '" + hm.heredity_name + "',is_deformity='" + hm.is_deformity + "',deformity_name='" + hm.deformity_name + "',is_poor= '" + hm.is_poor + "',kitchen='" + hm.kitchen + "',fuel='" + hm.fuel + "',other_fuel='" + hm.other_fuel + "',drink= '" + hm.drink + "',other_drink='" + hm.other_drink + "',toilet= '" + hm.toilet + "',poultry= '" + hm.poultry + "',medical_code='" + hm.medical_code + "',is_signing= '" + hm.is_signing + "',update_user='" + hm.update_user + "',update_name='" + hm.update_name + "',update_time='" + hm.update_time + "',upload_status=0 where id = '" + id + "'";
+                sql = @"update resident_base_info set name='"+hm.name+"', address='"+hm.address+"', id_number='" + hm.id_number + "',nation='" + hm.nation + "',company='" + hm.company + "',phone= '" + hm.phone + "',link_name= '" + hm.link_name + "',link_phone= '" + hm.link_phone + "',resident_type= '" + hm.resident_type + "',residence_address='" + hm.residence_address + "',blood_group= '" + hm.blood_group + "',blood_rh='" + hm.blood_rh + "',education='" + hm.education + "',profession='" + hm.profession + "',marital_status='" + hm.marital_status + "',pay_type='" + hm.pay_type + "',pay_other= '" + hm.pay_other + "',drug_allergy='" + hm.drug_allergy + "',allergy_other='" + hm.allergy_other + "',exposure= '" + hm.exposure + "',disease_other='" + hm.disease_other + "',is_hypertension='" + hm.is_hypertension + "',is_diabetes= '" + hm.is_diabetes + "',is_psychosis='" + hm.is_psychosis + "',is_tuberculosis='" + hm.is_tuberculosis + "',is_heredity= '" + hm.is_heredity + "',heredity_name= '" + hm.heredity_name + "',is_deformity='" + hm.is_deformity + "',deformity_name='" + hm.deformity_name + "',is_poor= '" + hm.is_poor + "',kitchen='" + hm.kitchen + "',fuel='" + hm.fuel + "',other_fuel='" + hm.other_fuel + "',drink= '" + hm.drink + "',other_drink='" + hm.other_drink + "',toilet= '" + hm.toilet + "',poultry= '" + hm.poultry + "',medical_code='" + hm.medical_code + "',is_signing= '" + hm.is_signing + "',update_user='" + hm.update_user + "',update_name='" + hm.update_name + "',update_time='" + hm.update_time + "',upload_status=0,is_gravida="+hm.is_gravida+" where id = '" + id + "'";
                 _lst.Add(sql);
 
                 sql0 = @"delete from resident_diseases  where resident_base_info_id = '" + id + "';";
@@ -178,12 +178,12 @@ namespace zkhwClient.dao
                     {
                         if (i == 0)
                         {
-                            sql0 += "insert into resident_diseases(archive_no,id_number,name,resident_base_info_id,disease_name,disease_date,disease_type) values ('" + hm.archive_no + "','" + hm.id_number + "','" + hm.name + "','" + id + "','" + goodsList.Rows[i]["disease_name"] + "','" + goodsList.Rows[i]["disease_date"] + "','" + goodsList.Rows[i]["disease_type"] + "')";
+                            sql0 += "insert into resident_diseases(archive_no,id_number,name,resident_base_info_id,disease_name,disease_date,disease_type,note) values ('" + hm.archive_no + "','" + hm.id_number + "','" + hm.name + "','" + id + "','" + goodsList.Rows[i]["disease_name"] + "','" + goodsList.Rows[i]["disease_date"] + "','" + goodsList.Rows[i]["disease_type"] +"','"+ goodsList.Rows[i]["disease_note"] + "')";
 
                         }
                         else
                         {
-                            sql0 += ",('" + hm.archive_no + "','" + hm.id_number + "','" + hm.name + "','" + id + "','" + goodsList.Rows[i]["disease_name"] + "','" + goodsList.Rows[i]["disease_date"] + "','" + goodsList.Rows[i]["disease_type"] + "')";
+                            sql0 += ",('" + hm.archive_no + "','" + hm.id_number + "','" + hm.name + "','" + id + "','" + goodsList.Rows[i]["disease_name"] + "','" + goodsList.Rows[i]["disease_date"] + "','" + goodsList.Rows[i]["disease_type"] + "','" + goodsList.Rows[i]["disease_note"] + "')";
 
                         }
                     }
@@ -391,7 +391,7 @@ namespace zkhwClient.dao
         public DataTable queryResident_diseases(string resident_base_info_id)
         {
             DataSet ds = new DataSet();
-            string sql = "select id,resident_base_info_id,disease_name,disease_date,disease_type from resident_diseases where resident_base_info_id = '" + resident_base_info_id + "'";
+            string sql = "select id,resident_base_info_id,disease_name,disease_date,disease_type,note as disease_note from resident_diseases where resident_base_info_id = '" + resident_base_info_id + "'";
             ds = DbHelperMySQL.Query(sql);
             return ds.Tables[0];
         }

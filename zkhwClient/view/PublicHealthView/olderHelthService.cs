@@ -420,11 +420,9 @@ namespace zkhwClient.PublicHealth
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
             base.OnPaint(e);
 
-            
-
-            Graphics g = e.Graphics;
-            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 6));
-
+            Font font = new Font("微软雅黑", 12F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "查询", font, bush); 
         }
 
         private void button2_Paint(object sender, PaintEventArgs e)
@@ -432,19 +430,18 @@ namespace zkhwClient.PublicHealth
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
             base.OnPaint(e);
 
-             
-
-            Graphics g = e.Graphics;
-            g.DrawString("添加", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 7));
+            Font font = new Font("微软雅黑", 14F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "添加", font, bush); 
         }
 
         private void button3_Paint(object sender, PaintEventArgs e)
         {
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
-            base.OnPaint(e); 
-
-            Graphics g = e.Graphics;
-            g.DrawString("修改", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 7));
+            base.OnPaint(e);
+            Font font = new Font("微软雅黑", 14F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "修改", font, bush); 
         }
 
         private void olderHelthService_Paint(object sender, PaintEventArgs e)

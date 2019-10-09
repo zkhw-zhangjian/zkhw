@@ -121,6 +121,22 @@ namespace zkhwClient.view.PublicHealthView
                     {
                         _teshubiaoqian = "老";
                     }
+                    else
+                    {
+                        if (int.Parse(_tmp) <= 6)
+                        {
+                            _teshubiaoqian = "儿童";
+                        }
+                    }
+                   
+
+                    _tmp = dt.Rows[i]["is_gravida"].ToString();
+                    if (_tmp == "") _tmp = "0";
+                    if (int.Parse(_tmp) != 0)
+                    {
+                        _teshubiaoqian = _teshubiaoqian + " 孕";
+                    }
+
                     _tmp = dt.Rows[i]["is_hypertension"].ToString();
                     if (_tmp == "") _tmp = "0";
                     if(int.Parse(_tmp) !=0)
@@ -455,6 +471,18 @@ namespace zkhwClient.view.PublicHealthView
                 {
                     hm.radioButton16.Checked = true;
                 }
+
+                string _isgravida = dt.Rows[0]["is_gravida"].ToString();
+                if (_isgravida == "") _isgravida = "0";
+                if (int.Parse(_isgravida) == 0)
+                {
+                    hm.radioButton50.Checked = true;
+                }
+                else
+                {
+                    hm.radioButton49.Checked = true;
+                }
+
             }
             else { MessageBox.Show("未查询到数据"+id); } 
 
@@ -580,13 +608,11 @@ namespace zkhwClient.view.PublicHealthView
         private void button2_Paint(object sender, PaintEventArgs e)
         {
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
-            base.OnPaint(e);
-            StringFormat stringFormat = new StringFormat();
-            stringFormat.Alignment = StringAlignment.Center;
-
-            Graphics g = e.Graphics;
-            g.DrawString("修改", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 7));
-
+            base.OnPaint(e);   
+            string wenzi = "修改"; 
+            Font font = new Font("微软雅黑", 14F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, wenzi, font, bush);  
         }
 
         private void personalBasicInfo_Resize(object sender, EventArgs e)

@@ -59,6 +59,7 @@ namespace zkhwClient.view.PublicHealthView
                 drtmp["disease_name"] = dt.Rows[i]["disease_name"].ToString();
                 drtmp["disease_date"] = dt.Rows[i]["disease_date"].ToString();
                 drtmp["disease_type"] = dt.Rows[i]["disease_type"].ToString();
+                drtmp["disease_note"] = dt.Rows[i]["disease_note"].ToString();
                 goodsList.Rows.Add(drtmp);
             }
             goodsListBind();
@@ -122,6 +123,22 @@ namespace zkhwClient.view.PublicHealthView
                 goodsList3.Rows.Add(drtmp);
             }
             goodsList3Bind();
+
+            DisplayYunFuInfo();
+        }
+
+        private void DisplayYunFuInfo()
+        {
+            if(radioButton2.Checked==true)
+            {
+                label48.Visible = true;
+                panel41.Visible = true;
+            }
+            else
+            {
+                label48.Visible = false;
+                panel41.Visible = false;
+            }
         }
 
         //既往史疾病清单表 resident_diseases////////////////////////////////////////////////////////////////////////////////////////
@@ -143,6 +160,7 @@ namespace zkhwClient.view.PublicHealthView
                 drtmp["disease_name"] = hm.disease_name.ToString();
                 drtmp["disease_date"] = hm.disease_date.ToString(); 
                 drtmp["disease_type"] = hm.disease_type.ToString();
+                drtmp["disease_note"] = hm.disease_note;
                 goodsList.Rows.Add(drtmp);
             }
             goodsListBind();
@@ -156,6 +174,7 @@ namespace zkhwClient.view.PublicHealthView
             this.dataGridView1.Columns[2].HeaderCell.Value = "疾病名称";
             this.dataGridView1.Columns[3].HeaderCell.Value = "确认日期";
             this.dataGridView1.Columns[4].Visible = false;//disease_type
+            this.dataGridView1.Columns[5].Visible = false;//disease_note
 
 
             this.dataGridView1.AllowUserToAddRows = false;
@@ -746,7 +765,20 @@ namespace zkhwClient.view.PublicHealthView
             {
                 intbian = 3;   //两个都改变了
             }
-            
+            if (radioButton2.Checked == true)
+            {
+                if(radioButton50.Checked==true)
+                {
+                    resident_base_infoBean.is_gravida = 0;
+                }
+                else
+                {
+                    if (radioButton49.Checked == true)
+                    {
+                        resident_base_infoBean.is_gravida = 1;
+                    }
+                }
+            }
             bool isfalse = personalBasicInfoService.aUpersonalBasicInfo(resident_base_infoBean, id, goodsList, goodsList0, goodsList1, goodsList2, goodsList3, intbian);
             if (isfalse)
             {
@@ -926,6 +958,11 @@ namespace zkhwClient.view.PublicHealthView
                 textBox36.Text = "";
                 textBox36.Enabled = false;
             }
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            DisplayYunFuInfo();
         }
     }
 }

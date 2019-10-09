@@ -17,9 +17,22 @@ namespace zkhwClient.view.PublicHealthView
         {
             InitializeComponent();
         }
-
+        private void SetControlWodth()
+        {
+            if (Common.m_nWindwMetricsY <= 900)
+            {
+                comboBox3.Width = 120;
+                comboBox3.Left = comboBox2.Left + comboBox2.Width + 5;
+                comboBox4.Width = 120;
+                comboBox4.Left = comboBox3.Left + comboBox3.Width + 5;
+                comboBox5.Width = 120;
+                comboBox5.Left = comboBox4.Left + comboBox4.Width + 5;
+            }
+        }
         private void childHealthServices_Load(object sender, EventArgs e)
         {
+            SetControlWodth();
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular);
             this.dateTimePicker1.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
             Bin();
         }
@@ -302,5 +315,14 @@ where base.village_code='{basicInfoSettings.xcuncode}' and base.age<='6'";
             comboBoxBin(comboBox4, comboBox5);
         }
         #endregion
+
+        private void button5_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            base.OnPaint(e);
+            Font font = new Font("微软雅黑", 12F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "查询", font, bush);
+        }
     }
 }

@@ -17,9 +17,24 @@ namespace zkhwClient.view.PublicHealthView
         {
             InitializeComponent();
         }
+        private void SetControlWodth()
+        {
+            if (Common.m_nWindwMetricsY <= 900)
+            {
+                comboBox3.Width = 120;
+                comboBox3.Left = comboBox2.Left + comboBox2.Width + 5;
+                comboBox4.Width = 120;
+                comboBox4.Left = comboBox3.Left + comboBox3.Width + 5;
+                comboBox5.Width = 120;
+                comboBox5.Left = comboBox4.Left + comboBox4.Width + 5;
+            }
+        }
 
         private void childrenCMHealthServices_Load(object sender, EventArgs e)
         {
+            SetControlWodth();
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular);
+
             Bin();
         }
 
@@ -230,8 +245,48 @@ where and base.village_code='{basicInfoSettings.xcuncode}' and base.age<='6'";
         {
             comboBoxBin(comboBox4, comboBox5);
         }
+
         #endregion
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            this.label2.Visible = this.textBox1.Text.Length < 1;
+        }
 
+        private void button5_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
+            base.OnPaint(e);
+            Font font = new Font("微软雅黑", 12F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "查询", font, bush);
+        }
+
+        private void button3_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
+            base.OnPaint(e);
+            Font font = new Font("微软雅黑", 14F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "删除", font, bush);
+        }
+
+        private void button2_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
+            base.OnPaint(e);
+            Font font = new Font("微软雅黑", 14F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "修改", font, bush);
+        }
+
+        private void button1_Paint(object sender, PaintEventArgs e)
+        {
+            ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
+            base.OnPaint(e);
+            Font font = new Font("微软雅黑", 14F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "添加", font, bush);
+        }
     }
 }

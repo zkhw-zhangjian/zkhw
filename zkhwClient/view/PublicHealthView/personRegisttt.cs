@@ -338,8 +338,12 @@ namespace zkhwClient
             }
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, color, color);
             base.OnPaint(e);
-            Graphics g = e.Graphics;
-            g.DrawString(wenzi, new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(starti, 5));
+            Font font = new Font("微软雅黑", 12F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, wenzi, font, bush);
+
+            //Graphics g = e.Graphics;
+            //g.DrawString(wenzi, new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(starti, 5));
 
             //StringFormat stringFormat = new StringFormat();
             //stringFormat.Alignment = StringAlignment.Center; 
@@ -783,7 +787,17 @@ namespace zkhwClient
             if (tmp == "") tmp = "0";
             int is_tuberculosis = int.Parse(tmp);
 
+            tmp = dt.Rows[0]["is_gravida"].ToString();
+            if (tmp == "") tmp = "0";
+            int is_gravida = int.Parse(tmp);
+
             string _teshubiaoqian = "";
+
+            if (is_gravida != 0)
+            {
+                _teshubiaoqian = _teshubiaoqian + " 孕";
+            }
+
             if (is_hypertension != 0)
             {
                 _teshubiaoqian = _teshubiaoqian + " 高";
@@ -1117,8 +1131,12 @@ namespace zkhwClient
             Color color = Color.FromArgb(77, 177, 81);
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, color, color);
             base.OnPaint(e);
-            Graphics g = e.Graphics;
-            g.DrawString("查询", new Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(30, 5));
+            Font font = new Font("微软雅黑", 12F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "查询", font, bush);
+
+            //Graphics g = e.Graphics;
+            //g.DrawString("查询", new Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 5));
 
         }
 

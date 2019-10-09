@@ -10,6 +10,7 @@ namespace zkhwClient.view
         public string disease_date = "";
         public string disease_type = "1";
         public string _displaydt = "0";
+        public string disease_note = "";
         public resident_diseases()
         {
             InitializeComponent();
@@ -55,6 +56,7 @@ namespace zkhwClient.view
                 else if (this.comboBox1.Text == "恶性肿瘤")
                 {
                     disease_type = "6";
+
                 }
                 else if (this.comboBox1.Text == "脑卒中")
                 {
@@ -88,12 +90,27 @@ namespace zkhwClient.view
                 {
 
                 }
-
+                if(textBox1.Text !="")
+                {
+                    disease_note = textBox1.Text.Trim();
+                }
             }
 
             disease_date = this.dateTimePicker1.Text;
             this.DialogResult = DialogResult.OK;
 
+        }
+
+        private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if(comboBox1.Text=="恶性肿瘤" || comboBox1.Text == "职业病")
+            {
+                textBox1.Enabled = true;
+            }
+            else
+            {
+                textBox1.Enabled = false;
+            }
         }
     }
 }

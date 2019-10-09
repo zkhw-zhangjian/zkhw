@@ -144,6 +144,8 @@ namespace zkhwClient.bean
         public string update_name { get; set; }
         //修改时间
         public string update_time { get; set; }
+        //是否是孕妇
+        public int is_gravida { get; set; }
     }
 }
 //id,archive_no,pb_archive,name,sex,birthday,id_number,address,nation,IssuingAgencies,CardPic,company,phone,link_name,link_phone,resident_type,register_address,residence_address,blood_group,blood_rh,education,profession,marital_status,pay_type,pay_other,drug_allergy,allergy_other,exposure,disease_other,is_hypertension,is_diabetes,is_psychosis,is_tuberculosis,is_heredity,heredity_name,is_deformity,deformity_name,is_poor,kitchen,fuel,other_fuel,drink,other_drink,toilet,poultry,medical_code,photo_code,aichive_org,doctor_name,is_signing,is_synchro,synchro_result,synchro_time,create_user,create_name,create_time,create_org,create_org_name,update_user,update_name,update_time
