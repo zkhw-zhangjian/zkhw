@@ -646,11 +646,11 @@
     <Compile Include="view\setting\basicInfoSettings.Designer.cs">
       <DependentUpon>basicInfoSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\setting\deviceManagement.cs">
+    <Compile Include="view\setting\deviceManagementtt.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\setting\deviceManagement.Designer.cs">
-      <DependentUpon>deviceManagement.cs</DependentUpon>
+    <Compile Include="view\setting\deviceManagementtt.Designer.cs">
+      <DependentUpon>deviceManagementtt.cs</DependentUpon>
     </Compile>
     <Compile Include="view\setting\deviceManagementt.cs">
       <SubType>Form</SubType>
@@ -1094,8 +1094,8 @@
     <EmbeddedResource Include="view\setting\basicInfoSettings.resx">
       <DependentUpon>basicInfoSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\setting\deviceManagement.resx">
-      <DependentUpon>deviceManagement.cs</DependentUpon>
+    <EmbeddedResource Include="view\setting\deviceManagementtt.resx">
+      <DependentUpon>deviceManagementtt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\setting\deviceManagementt.resx">
       <DependentUpon>deviceManagementt.cs</DependentUpon>

@@ -490,17 +490,10 @@ namespace zkhwClient.view.setting
         {
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
             base.OnPaint(e);
-            //Single _size = GetBtnFontSize(button1);
-            //StringFormat stringFormat = new StringFormat();
-            //stringFormat.Alignment = StringAlignment.Center;
-            //float x = e.ClipRectangle.Width / 2f;
-            //float y = e.ClipRectangle.Height / 2f - (_size / 2f);
-            //Graphics g = e.Graphics;
-            //g.DrawString("保存", new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular, GraphicsUnit.Pixel), new SolidBrush(Color.White), x, y, stringFormat);
-
-            Graphics g = e.Graphics;
-            g.DrawString("保存", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(22, 5));
-
+            
+            Font font = new Font("微软雅黑", 13F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "保存", font, bush); 
         }
 
         private void button2_Paint(object sender, PaintEventArgs e)
@@ -512,18 +505,9 @@ namespace zkhwClient.view.setting
             }
             base.OnPaint(e);
 
-            //Single _size = GetBtnFontSize(button2);
-            //StringFormat stringFormat = new StringFormat();
-            //stringFormat.Alignment = StringAlignment.Center;
-            //float x = e.ClipRectangle.Width / 2f;
-            //float y = e.ClipRectangle.Height / 2f - (_size / 2f);
-            //Graphics g = e.Graphics;
-            //g.DrawString("初始化", new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular, GraphicsUnit.Pixel), new SolidBrush(Color.White), x, y, stringFormat);
-
-
-            Graphics g = e.Graphics;
-            g.DrawString("初始化", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(18, 5));
-
+            Font font = new Font("微软雅黑", 13F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "初始化", font, bush); 
         }
 
         private void basicInfoSettings_Resize(object sender, EventArgs e)

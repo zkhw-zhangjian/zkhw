@@ -692,7 +692,7 @@ namespace zkhwClient
             }
             else if (tag == "设备管理")
             {
-                deviceManagement pR = new deviceManagement();
+                deviceManagementt pR = new deviceManagementt();
                 pR.TopLevel = false;
                 pR.Dock = DockStyle.Fill;
                 pR.FormBorderStyle = FormBorderStyle.None;

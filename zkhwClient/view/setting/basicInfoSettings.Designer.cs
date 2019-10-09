@@ -62,6 +62,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label19 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.panel47 = new System.Windows.Forms.Panel();
+            this.panel48 = new System.Windows.Forms.Panel();
             this.panel44 = new System.Windows.Forms.Panel();
             this.panel40 = new System.Windows.Forms.Panel();
             this.panel43 = new System.Windows.Forms.Panel();
@@ -123,7 +125,7 @@
             this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.panel44.SuspendLayout();
+            this.panel47.SuspendLayout();
             this.panel40.SuspendLayout();
             this.panel37.SuspendLayout();
             this.panel36.SuspendLayout();
@@ -422,9 +424,9 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.button2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button2.Location = new System.Drawing.Point(731, 11);
+            this.button2.Location = new System.Drawing.Point(733, 16);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(84, 33);
+            this.button2.Size = new System.Drawing.Size(103, 43);
             this.button2.TabIndex = 7;
             this.button2.Text = "初始化";
             this.button2.UseVisualStyleBackColor = false;
@@ -441,9 +443,9 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button1.Location = new System.Drawing.Point(830, 11);
+            this.button1.Location = new System.Drawing.Point(851, 16);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(84, 33);
+            this.button1.Size = new System.Drawing.Size(103, 43);
             this.button1.TabIndex = 6;
             this.button1.Text = "保存";
             this.button1.UseVisualStyleBackColor = false;
@@ -498,6 +500,8 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.White;
+            this.panel5.Controls.Add(this.panel47);
+            this.panel5.Controls.Add(this.panel48);
             this.panel5.Controls.Add(this.panel44);
             this.panel5.Controls.Add(this.panel40);
             this.panel5.Controls.Add(this.panel37);
@@ -521,10 +525,27 @@
             this.panel5.Size = new System.Drawing.Size(1141, 599);
             this.panel5.TabIndex = 13;
             // 
+            // panel47
+            // 
+            this.panel47.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.panel47.Controls.Add(this.button1);
+            this.panel47.Controls.Add(this.button2);
+            this.panel47.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel47.Location = new System.Drawing.Point(40, 457);
+            this.panel47.Name = "panel47";
+            this.panel47.Size = new System.Drawing.Size(1066, 74);
+            this.panel47.TabIndex = 24;
+            // 
+            // panel48
+            // 
+            this.panel48.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel48.Location = new System.Drawing.Point(40, 452);
+            this.panel48.Name = "panel48";
+            this.panel48.Size = new System.Drawing.Size(1066, 5);
+            this.panel48.TabIndex = 25;
+            // 
             // panel44
             // 
-            this.panel44.Controls.Add(this.button1);
-            this.panel44.Controls.Add(this.button2);
             this.panel44.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel44.Location = new System.Drawing.Point(40, 537);
             this.panel44.Name = "panel44";
@@ -1113,7 +1134,7 @@
             this.groupBox3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
-            this.panel44.ResumeLayout(false);
+            this.panel47.ResumeLayout(false);
             this.panel40.ResumeLayout(false);
             this.panel40.PerformLayout();
             this.panel37.ResumeLayout(false);
@@ -1229,5 +1250,7 @@
         private System.Windows.Forms.Panel panel37;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel44;
+        private System.Windows.Forms.Panel panel47;
+        private System.Windows.Forms.Panel panel48;
     }
 }
