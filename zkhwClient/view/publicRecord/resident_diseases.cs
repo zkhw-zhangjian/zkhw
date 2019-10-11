@@ -27,8 +27,10 @@ namespace zkhwClient.view
 
             if(_displaydt=="1")
             {
-                label1.Visible = false;
-                comboBox1.Visible = false;
+                panel1.Visible = false;
+                panel2.Top = label4.Top;
+                //label1.Visible = false;
+                //comboBox1.Visible = false;
             }
         }
 

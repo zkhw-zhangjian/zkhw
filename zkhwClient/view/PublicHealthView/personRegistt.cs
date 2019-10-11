@@ -341,19 +341,7 @@ namespace zkhwClient
 
             Font font = new Font("微软雅黑", 10F);
             Brush bush = Brushes.White;
-            ControlCircular.DrawFont(e, wenzi, font, bush);
-
-            //Graphics g = e.Graphics;
-            //g.DrawString(wenzi, new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(starti, 4));
-
-
-            //StringFormat stringFormat = new StringFormat();
-            //stringFormat.Alignment = StringAlignment.Center; 
-            //float x = e.ClipRectangle.Width / 2f;
-            //float y = e.ClipRectangle.Height / 2f - (_size / 2f);
-            //Graphics g = e.Graphics;
-            //g.DrawString(wenzi, new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular, GraphicsUnit.Pixel), new SolidBrush(Color.White), x, y, stringFormat);
-
+            ControlCircular.DrawFont(e, wenzi, font, bush); 
         }
 
         private void txtNum_KeyPress(object sender, KeyPressEventArgs e)

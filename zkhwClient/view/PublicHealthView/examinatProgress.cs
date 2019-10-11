@@ -1059,49 +1059,37 @@ namespace zkhwClient.view.PublicHealthView
         private void button2_Paint(object sender, PaintEventArgs e)
         {
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
-            base.OnPaint(e);
-            //Single _size = 12;
-            //StringFormat stringFormat = new StringFormat();
-            //stringFormat.Alignment = StringAlignment.Center;
-            //float x = e.ClipRectangle.Width / 2f;
-            //float y = e.ClipRectangle.Height / 2f - (_size / 2f);
-            //Graphics g = e.Graphics;
-            //g.DrawString("查询", new System.Drawing.Font("微软雅黑", _size, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), x, y, stringFormat);
-
-
-            Graphics g = e.Graphics;
-            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 6));
-
+            base.OnPaint(e); 
+            System.Drawing.Font font = new System.Drawing.Font("微软雅黑", 12F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "查询", font, bush); 
         }
 
         private void btnDel_Paint(object sender, PaintEventArgs e)
         {
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(190, 190, 190), Color.FromArgb(190, 190, 190));
             base.OnPaint(e);
-
-            Graphics g = e.Graphics;
-            g.DrawString("删除", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(23, 6));
-
+            System.Drawing.Font font = new System.Drawing.Font("微软雅黑", 12F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "删除", font, bush); 
         }
 
         private void btnDown_Paint(object sender, PaintEventArgs e)
         {
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
             base.OnPaint(e);
-
-            Graphics g = e.Graphics;
-            g.DrawString("拉取数据", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(13, 6));
-
+            System.Drawing.Font font = new System.Drawing.Font("微软雅黑", 12F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "拉取数据", font, bush); 
         }
 
         private void button1_Paint_1(object sender, PaintEventArgs e)
         {
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
             base.OnPaint(e);
-
-            Graphics g = e.Graphics;
-            g.DrawString("导出花名册", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(7, 6));
-
+            System.Drawing.Font font = new System.Drawing.Font("微软雅黑", 12F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "导出花名册", font, bush); 
         }
 
         private void button1_Click_1(object sender, EventArgs e)

@@ -5260,7 +5260,8 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 #endregion
 
                 #region 开始上传
-                LoadingHelper.loadingForm.mystr = "准备完成上传中..."; 
+                LoadingHelper.loadingForm.mystr = "准备完成上传中...";
+                string failstr = "";
                 int failint = 0;
                 int succint = 0;
                 for (int i=0;i< _sendList.Count;i++)
@@ -5299,6 +5300,15 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                     }
                     else
                     {
+                        if(failstr=="")
+                        {
+                            failstr =  _sendList[i].Name;
+                        }
+                        else
+                        {
+                            failstr = failstr + "、" + _sendList[i].Name;
+                        }
+                        
                         failint += 1;
                     }
                 }
@@ -5314,7 +5324,7 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 }
                 if(failint>0)
                 {
-                    LoadingHelper.loadingForm.mystr = string.Format("上传成功：{0} 失败：{1}", succint, failint);
+                    LoadingHelper.loadingForm.mystr = string.Format("上传成功：{0} 失败：{1}个，分别为：{2}", succint, failint, failstr);
                     Thread.Sleep(2000);
                 }
                 else
@@ -5558,19 +5568,18 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
         {
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(77, 177, 81), Color.FromArgb(77, 177, 81));
             base.OnPaint(e);
-
-            Graphics g = e.Graphics;
-            g.DrawString("查询", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(25, 4));
+            System.Drawing.Font font = new System.Drawing.Font("微软雅黑", 12F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "查询", font, bush); 
         }
 
         private void button2_Paint(object sender, PaintEventArgs e)
         {
             ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(81, 95, 154), Color.FromArgb(81, 95, 154));
             base.OnPaint(e);
-
-            Graphics g = e.Graphics;
-            g.DrawString("报告导出", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 4));
-
+            System.Drawing.Font font = new System.Drawing.Font("微软雅黑", 12F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "报告导出", font, bush); 
         }
 
         private void button3_Paint(object sender, PaintEventArgs e)
@@ -5583,9 +5592,10 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(193, 193, 193), Color.FromArgb(193, 193, 193));
             }
             base.OnPaint(e);
-            Graphics g = e.Graphics;
-            g.DrawString("数据上传", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 4));
 
+            System.Drawing.Font font = new System.Drawing.Font("微软雅黑", 12F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "数据上传", font, bush); 
         }
 
         private void button4_Paint(object sender, PaintEventArgs e)
@@ -5599,8 +5609,10 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 ControlCircular.Draw(e.ClipRectangle, e.Graphics, 6, false, Color.FromArgb(193, 193, 193), Color.FromArgb(193, 193, 193));
             }
             base.OnPaint(e);
-            Graphics g = e.Graphics;
-            g.DrawString("图片上传", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(15, 4));
+
+            System.Drawing.Font font = new System.Drawing.Font("微软雅黑", 12F);
+            Brush bush = Brushes.White;
+            ControlCircular.DrawFont(e, "图片上传", font, bush); 
         }
     }
 

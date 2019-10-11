@@ -122,6 +122,13 @@ namespace zkhwClient.view.PublicHealthView
                 return;
             }
             aUHypertensionPatientServices hm = new aUHypertensionPatientServices();
+            if (Common.m_nWindwMetricsY > 900)
+            {
+                hm.Height = 993;
+                hm.Width = 1367;
+                hm.panel1.Height = 938;
+                hm.panel1.Width = 1339;
+            }
             hm.label47.Text = "添加高血压随访记录历史表";
             hm.Text = "添加高血压随访记录历史表";
             hm.textBox1.Text = name;
@@ -140,6 +147,13 @@ namespace zkhwClient.view.PublicHealthView
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             aUHypertensionPatientServices hm = new aUHypertensionPatientServices();
+            if (Common.m_nWindwMetricsY > 900)
+            {
+                hm.Height = 993;
+                hm.Width = 1367;
+                hm.panel1.Height = 938;
+                hm.panel1.Width = 1339;
+            }
             string id = this.dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
             hm.id = id;
             hm.label47.Text = "修改高血压随访记录历史表";

@@ -109,6 +109,13 @@ namespace zkhwClient.view.PublicHealthView
                 return;
             }
             aUdiabetesPatientServices hm = new aUdiabetesPatientServices();
+            if (Common.m_nWindwMetricsY > 900)
+            {
+                hm.Height = 1051;
+                hm.Width = 1378;
+                hm.panel1.Height = 980;
+                hm.panel1.Width = 1337;
+            }
             hm.label51.Text = "添加糖尿病患者服务";
             hm.Text = "添加糖尿病患者服务";
             hm.textBox1.Text = name;
@@ -126,6 +133,13 @@ namespace zkhwClient.view.PublicHealthView
         {
             if (this.dataGridView1.SelectedRows.Count < 1) { MessageBox.Show("未选中任何行！"); return; }
             aUdiabetesPatientServices dp = new aUdiabetesPatientServices();
+            if (Common.m_nWindwMetricsY > 900)
+            {
+                dp.Height = 1051;
+                dp.Width = 1378;
+                dp.panel1.Height = 980;
+                dp.panel1.Width = 1337;
+            }
             string id = this.dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
             dp.id = id;
             dp.label51.Text = "修改糖尿病患者服务";

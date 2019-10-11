@@ -318,7 +318,6 @@
             this.实际访视次数1 = new System.Windows.Forms.TextBox();
             this.应访视患者次数1 = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
             this.停止治疗及原因1 = new System.Windows.Forms.GroupBox();
             this.停止治疗原因1 = new System.Windows.Forms.GroupBox();
             this.checkBox14 = new System.Windows.Forms.CheckBox();
@@ -397,6 +396,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.随访时间1 = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
+            this.label113 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.to4.SuspendLayout();
             this.全程管理情况4.SuspendLayout();
@@ -459,9 +459,9 @@
             this.groupBox1.Controls.Add(this.to3);
             this.groupBox1.Controls.Add(this.to2);
             this.groupBox1.Controls.Add(this.to1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(4, 1);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1180, 1395);
+            this.groupBox1.Size = new System.Drawing.Size(1180, 1816);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -491,7 +491,7 @@
             this.to4.Controls.Add(this.label112);
             this.to4.Location = new System.Drawing.Point(883, 16);
             this.to4.Name = "to4";
-            this.to4.Size = new System.Drawing.Size(284, 1359);
+            this.to4.Size = new System.Drawing.Size(287, 1780);
             this.to4.TabIndex = 27;
             this.to4.TabStop = false;
             // 
@@ -509,9 +509,10 @@
             this.全程管理情况4.Controls.Add(this.应访视患者次数4);
             this.全程管理情况4.Controls.Add(this.label90);
             this.全程管理情况4.Controls.Add(this.label91);
-            this.全程管理情况4.Location = new System.Drawing.Point(14, 1239);
+            this.全程管理情况4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.全程管理情况4.Location = new System.Drawing.Point(14, 1588);
             this.全程管理情况4.Name = "全程管理情况4";
-            this.全程管理情况4.Size = new System.Drawing.Size(261, 100);
+            this.全程管理情况4.Size = new System.Drawing.Size(261, 163);
             this.全程管理情况4.TabIndex = 24;
             this.全程管理情况4.TabStop = false;
             this.全程管理情况4.Text = "全程管理情况";
@@ -519,81 +520,81 @@
             // label85
             // 
             this.label85.AutoSize = true;
-            this.label85.Location = new System.Drawing.Point(155, 69);
+            this.label85.Location = new System.Drawing.Point(156, 128);
             this.label85.Name = "label85";
-            this.label85.Size = new System.Drawing.Size(17, 12);
+            this.label85.Size = new System.Drawing.Size(29, 21);
             this.label85.TabIndex = 34;
             this.label85.Text = "% ";
             // 
             // 服药率4
             // 
-            this.服药率4.Location = new System.Drawing.Point(111, 66);
+            this.服药率4.Location = new System.Drawing.Point(106, 125);
             this.服药率4.Name = "服药率4";
-            this.服药率4.Size = new System.Drawing.Size(40, 21);
+            this.服药率4.Size = new System.Drawing.Size(40, 29);
             this.服药率4.TabIndex = 33;
             // 
             // label86
             // 
             this.label86.AutoSize = true;
-            this.label86.Location = new System.Drawing.Point(46, 69);
+            this.label86.Location = new System.Drawing.Point(8, 128);
             this.label86.Name = "label86";
-            this.label86.Size = new System.Drawing.Size(65, 12);
+            this.label86.Size = new System.Drawing.Size(90, 21);
             this.label86.TabIndex = 32;
             this.label86.Text = "次，服药率";
             // 
             // 实际服药次数4
             // 
-            this.实际服药次数4.Location = new System.Drawing.Point(4, 64);
+            this.实际服药次数4.Location = new System.Drawing.Point(169, 85);
             this.实际服药次数4.Name = "实际服药次数4";
-            this.实际服药次数4.Size = new System.Drawing.Size(40, 21);
+            this.实际服药次数4.Size = new System.Drawing.Size(40, 29);
             this.实际服药次数4.TabIndex = 31;
             // 
             // 应服药次数4
             // 
-            this.应服药次数4.Location = new System.Drawing.Point(129, 45);
+            this.应服药次数4.Location = new System.Drawing.Point(8, 87);
             this.应服药次数4.Name = "应服药次数4";
-            this.应服药次数4.Size = new System.Drawing.Size(40, 21);
+            this.应服药次数4.Size = new System.Drawing.Size(40, 29);
             this.应服药次数4.TabIndex = 30;
             // 
             // label87
             // 
             this.label87.AutoSize = true;
-            this.label87.Location = new System.Drawing.Point(2, 49);
+            this.label87.Location = new System.Drawing.Point(89, 57);
             this.label87.Name = "label87";
-            this.label87.Size = new System.Drawing.Size(125, 12);
+            this.label87.Size = new System.Drawing.Size(170, 21);
             this.label87.TabIndex = 29;
             this.label87.Text = "患者在疗程中，应服药";
             // 
             // label88
             // 
             this.label88.AutoSize = true;
-            this.label88.Location = new System.Drawing.Point(172, 48);
+            this.label88.Location = new System.Drawing.Point(56, 88);
             this.label88.Name = "label88";
-            this.label88.Size = new System.Drawing.Size(77, 12);
+            this.label88.Size = new System.Drawing.Size(106, 21);
             this.label88.TabIndex = 28;
             this.label88.Text = "次，实际服药";
             // 
             // label89
             // 
             this.label89.AutoSize = true;
-            this.label89.Location = new System.Drawing.Point(237, 24);
+            this.label89.Location = new System.Drawing.Point(56, 58);
             this.label89.Name = "label89";
-            this.label89.Size = new System.Drawing.Size(29, 12);
+            this.label89.Size = new System.Drawing.Size(42, 21);
             this.label89.TabIndex = 27;
             this.label89.Text = "次；";
             // 
             // 实际访视次数4
             // 
-            this.实际访视次数4.Location = new System.Drawing.Point(191, 19);
+            this.实际访视次数4.Location = new System.Drawing.Point(7, 53);
             this.实际访视次数4.Name = "实际访视次数4";
-            this.实际访视次数4.Size = new System.Drawing.Size(40, 21);
+            this.实际访视次数4.Size = new System.Drawing.Size(40, 29);
             this.实际访视次数4.TabIndex = 26;
             // 
             // 应访视患者次数4
             // 
-            this.应访视患者次数4.Location = new System.Drawing.Point(69, 19);
+            this.应访视患者次数4.Location = new System.Drawing.Point(97, 19);
             this.应访视患者次数4.Name = "应访视患者次数4";
-            this.应访视患者次数4.Size = new System.Drawing.Size(40, 21);
+            this.应访视患者次数4.Size = new System.Drawing.Size(40, 29);
             this.应访视患者次数4.TabIndex = 25;
             // 
             // label90
@@ -601,16 +602,16 @@
             this.label90.AutoSize = true;
             this.label90.Location = new System.Drawing.Point(2, 22);
             this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(65, 12);
+            this.label90.Size = new System.Drawing.Size(90, 21);
             this.label90.TabIndex = 1;
             this.label90.Text = "应访视患者";
             // 
             // label91
             // 
             this.label91.AutoSize = true;
-            this.label91.Location = new System.Drawing.Point(112, 22);
+            this.label91.Location = new System.Drawing.Point(144, 22);
             this.label91.Name = "label91";
-            this.label91.Size = new System.Drawing.Size(77, 12);
+            this.label91.Size = new System.Drawing.Size(106, 21);
             this.label91.TabIndex = 0;
             this.label91.Text = "次，实际访视";
             // 
@@ -619,9 +620,10 @@
             this.停止治疗及原因4.Controls.Add(this.停止治疗原因4);
             this.停止治疗及原因4.Controls.Add(this.出现停止治疗时间4);
             this.停止治疗及原因4.Controls.Add(this.label92);
-            this.停止治疗及原因4.Location = new System.Drawing.Point(14, 1094);
+            this.停止治疗及原因4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.停止治疗及原因4.Location = new System.Drawing.Point(14, 1390);
             this.停止治疗及原因4.Name = "停止治疗及原因4";
-            this.停止治疗及原因4.Size = new System.Drawing.Size(261, 139);
+            this.停止治疗及原因4.Size = new System.Drawing.Size(261, 195);
             this.停止治疗及原因4.TabIndex = 23;
             this.停止治疗及原因4.TabStop = false;
             this.停止治疗及原因4.Text = "停止治疗及原因";
@@ -632,9 +634,9 @@
             this.停止治疗原因4.Controls.Add(this.checkBox44);
             this.停止治疗原因4.Controls.Add(this.checkBox45);
             this.停止治疗原因4.Controls.Add(this.checkBox46);
-            this.停止治疗原因4.Location = new System.Drawing.Point(8, 63);
+            this.停止治疗原因4.Location = new System.Drawing.Point(8, 98);
             this.停止治疗原因4.Name = "停止治疗原因4";
-            this.停止治疗原因4.Size = new System.Drawing.Size(244, 63);
+            this.停止治疗原因4.Size = new System.Drawing.Size(244, 89);
             this.停止治疗原因4.TabIndex = 20;
             this.停止治疗原因4.TabStop = false;
             this.停止治疗原因4.Text = "2 停止治疗原因：";
@@ -642,9 +644,9 @@
             // checkBox43
             // 
             this.checkBox43.AutoSize = true;
-            this.checkBox43.Location = new System.Drawing.Point(85, 41);
+            this.checkBox43.Location = new System.Drawing.Point(85, 53);
             this.checkBox43.Name = "checkBox43";
-            this.checkBox43.Size = new System.Drawing.Size(108, 16);
+            this.checkBox43.Size = new System.Drawing.Size(141, 25);
             this.checkBox43.TabIndex = 3;
             this.checkBox43.Tag = "4";
             this.checkBox43.Text = "转入耐多药治疗";
@@ -653,9 +655,9 @@
             // checkBox44
             // 
             this.checkBox44.AutoSize = true;
-            this.checkBox44.Location = new System.Drawing.Point(10, 41);
+            this.checkBox44.Location = new System.Drawing.Point(10, 53);
             this.checkBox44.Name = "checkBox44";
-            this.checkBox44.Size = new System.Drawing.Size(48, 16);
+            this.checkBox44.Size = new System.Drawing.Size(61, 25);
             this.checkBox44.TabIndex = 2;
             this.checkBox44.Tag = "3";
             this.checkBox44.Text = "丢失";
@@ -664,9 +666,9 @@
             // checkBox45
             // 
             this.checkBox45.AutoSize = true;
-            this.checkBox45.Location = new System.Drawing.Point(85, 21);
+            this.checkBox45.Location = new System.Drawing.Point(152, 22);
             this.checkBox45.Name = "checkBox45";
-            this.checkBox45.Size = new System.Drawing.Size(48, 16);
+            this.checkBox45.Size = new System.Drawing.Size(61, 25);
             this.checkBox45.TabIndex = 1;
             this.checkBox45.Tag = "2";
             this.checkBox45.Text = "死亡";
@@ -675,9 +677,9 @@
             // checkBox46
             // 
             this.checkBox46.AutoSize = true;
-            this.checkBox46.Location = new System.Drawing.Point(10, 21);
+            this.checkBox46.Location = new System.Drawing.Point(10, 24);
             this.checkBox46.Name = "checkBox46";
-            this.checkBox46.Size = new System.Drawing.Size(72, 16);
+            this.checkBox46.Size = new System.Drawing.Size(93, 25);
             this.checkBox46.TabIndex = 0;
             this.checkBox46.Tag = "1";
             this.checkBox46.Text = "完成疗程";
@@ -685,65 +687,71 @@
             // 
             // 出现停止治疗时间4
             // 
-            this.出现停止治疗时间4.Location = new System.Drawing.Point(7, 36);
+            this.出现停止治疗时间4.Location = new System.Drawing.Point(7, 59);
             this.出现停止治疗时间4.Name = "出现停止治疗时间4";
-            this.出现停止治疗时间4.Size = new System.Drawing.Size(245, 21);
+            this.出现停止治疗时间4.Size = new System.Drawing.Size(197, 29);
             this.出现停止治疗时间4.TabIndex = 19;
             // 
             // label92
             // 
             this.label92.AutoSize = true;
-            this.label92.Location = new System.Drawing.Point(6, 21);
+            this.label92.Location = new System.Drawing.Point(6, 30);
             this.label92.Name = "label92";
-            this.label92.Size = new System.Drawing.Size(113, 12);
+            this.label92.Size = new System.Drawing.Size(152, 21);
             this.label92.TabIndex = 18;
             this.label92.Text = "1 出现停止治疗时间";
             // 
             // 随访医生签名4
             // 
-            this.随访医生签名4.Location = new System.Drawing.Point(73, 1066);
+            this.随访医生签名4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.随访医生签名4.Location = new System.Drawing.Point(73, 1349);
             this.随访医生签名4.Name = "随访医生签名4";
-            this.随访医生签名4.Size = new System.Drawing.Size(202, 21);
+            this.随访医生签名4.Size = new System.Drawing.Size(202, 29);
             this.随访医生签名4.TabIndex = 22;
             // 
             // label93
             // 
             this.label93.AutoSize = true;
-            this.label93.Location = new System.Drawing.Point(20, 1063);
+            this.label93.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.label93.Location = new System.Drawing.Point(13, 1342);
             this.label93.Name = "label93";
-            this.label93.Size = new System.Drawing.Size(41, 24);
+            this.label93.Size = new System.Drawing.Size(58, 44);
             this.label93.TabIndex = 21;
             this.label93.Text = "随访医\r\n生签名";
             // 
             // 下次随访时间4
             // 
-            this.下次随访时间4.Location = new System.Drawing.Point(73, 1036);
+            this.下次随访时间4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.下次随访时间4.Location = new System.Drawing.Point(73, 1299);
             this.下次随访时间4.Name = "下次随访时间4";
-            this.下次随访时间4.Size = new System.Drawing.Size(202, 21);
+            this.下次随访时间4.Size = new System.Drawing.Size(202, 29);
             this.下次随访时间4.TabIndex = 20;
             // 
             // label94
             // 
             this.label94.AutoSize = true;
-            this.label94.Location = new System.Drawing.Point(20, 1033);
+            this.label94.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.label94.Location = new System.Drawing.Point(13, 1288);
             this.label94.Name = "label94";
-            this.label94.Size = new System.Drawing.Size(41, 24);
+            this.label94.Size = new System.Drawing.Size(58, 44);
             this.label94.TabIndex = 19;
             this.label94.Text = "下次随\r\n访时间";
             // 
             // 处理意见4
             // 
-            this.处理意见4.Location = new System.Drawing.Point(73, 1006);
+            this.处理意见4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.处理意见4.Location = new System.Drawing.Point(16, 1241);
             this.处理意见4.Name = "处理意见4";
-            this.处理意见4.Size = new System.Drawing.Size(202, 21);
+            this.处理意见4.Size = new System.Drawing.Size(259, 29);
             this.处理意见4.TabIndex = 18;
             // 
             // label95
             // 
             this.label95.AutoSize = true;
-            this.label95.Location = new System.Drawing.Point(13, 1009);
+            this.label95.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.label95.Location = new System.Drawing.Point(13, 1210);
             this.label95.Name = "label95";
-            this.label95.Size = new System.Drawing.Size(53, 12);
+            this.label95.Size = new System.Drawing.Size(74, 22);
             this.label95.TabIndex = 17;
             this.label95.Text = "处理意见";
             // 
@@ -755,59 +763,60 @@
             this.转诊4.Controls.Add(this.label97);
             this.转诊4.Controls.Add(this.转诊科别4);
             this.转诊4.Controls.Add(this.label98);
-            this.转诊4.Location = new System.Drawing.Point(14, 867);
+            this.转诊4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.转诊4.Location = new System.Drawing.Point(7, 1030);
             this.转诊4.Name = "转诊4";
-            this.转诊4.Size = new System.Drawing.Size(261, 128);
+            this.转诊4.Size = new System.Drawing.Size(268, 163);
             this.转诊4.TabIndex = 16;
             this.转诊4.TabStop = false;
             this.转诊4.Text = "转诊";
             // 
             // 转诊结果4
             // 
-            this.转诊结果4.Location = new System.Drawing.Point(68, 74);
+            this.转诊结果4.Location = new System.Drawing.Point(83, 95);
             this.转诊结果4.Name = "转诊结果4";
-            this.转诊结果4.Size = new System.Drawing.Size(184, 46);
+            this.转诊结果4.Size = new System.Drawing.Size(179, 58);
             this.转诊结果4.TabIndex = 12;
             this.转诊结果4.Text = "";
             // 
             // label96
             // 
             this.label96.AutoSize = true;
-            this.label96.Location = new System.Drawing.Point(8, 74);
+            this.label96.Location = new System.Drawing.Point(8, 90);
             this.label96.Name = "label96";
-            this.label96.Size = new System.Drawing.Size(53, 36);
+            this.label96.Size = new System.Drawing.Size(74, 63);
             this.label96.TabIndex = 6;
             this.label96.Text = "2 周内随\r\n访，随访\r\n结果";
             // 
             // 转诊原因4
             // 
-            this.转诊原因4.Location = new System.Drawing.Point(68, 44);
+            this.转诊原因4.Location = new System.Drawing.Point(83, 58);
             this.转诊原因4.Name = "转诊原因4";
-            this.转诊原因4.Size = new System.Drawing.Size(180, 21);
+            this.转诊原因4.Size = new System.Drawing.Size(180, 29);
             this.转诊原因4.TabIndex = 5;
             // 
             // label97
             // 
             this.label97.AutoSize = true;
-            this.label97.Location = new System.Drawing.Point(8, 47);
+            this.label97.Location = new System.Drawing.Point(8, 61);
             this.label97.Name = "label97";
-            this.label97.Size = new System.Drawing.Size(35, 12);
+            this.label97.Size = new System.Drawing.Size(47, 21);
             this.label97.TabIndex = 4;
             this.label97.Text = "原 因";
             // 
             // 转诊科别4
             // 
-            this.转诊科别4.Location = new System.Drawing.Point(68, 17);
+            this.转诊科别4.Location = new System.Drawing.Point(83, 24);
             this.转诊科别4.Name = "转诊科别4";
-            this.转诊科别4.Size = new System.Drawing.Size(180, 21);
+            this.转诊科别4.Size = new System.Drawing.Size(180, 29);
             this.转诊科别4.TabIndex = 3;
             // 
             // label98
             // 
             this.label98.AutoSize = true;
-            this.label98.Location = new System.Drawing.Point(8, 20);
+            this.label98.Location = new System.Drawing.Point(8, 27);
             this.label98.Name = "label98";
-            this.label98.Size = new System.Drawing.Size(35, 12);
+            this.label98.Size = new System.Drawing.Size(47, 21);
             this.label98.TabIndex = 2;
             this.label98.Text = "科 别";
             // 
@@ -816,26 +825,27 @@
             this.药物不良反应4.Controls.Add(this.药物不良反应有4);
             this.药物不良反应4.Controls.Add(this.radioButton46);
             this.药物不良反应4.Controls.Add(this.radioButton47);
-            this.药物不良反应4.Location = new System.Drawing.Point(16, 787);
+            this.药物不良反应4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.药物不良反应4.Location = new System.Drawing.Point(16, 925);
             this.药物不良反应4.Name = "药物不良反应4";
-            this.药物不良反应4.Size = new System.Drawing.Size(259, 76);
+            this.药物不良反应4.Size = new System.Drawing.Size(265, 97);
             this.药物不良反应4.TabIndex = 15;
             this.药物不良反应4.TabStop = false;
             this.药物不良反应4.Text = "药物不良反应";
             // 
             // 药物不良反应有4
             // 
-            this.药物不良反应有4.Location = new System.Drawing.Point(54, 46);
+            this.药物不良反应有4.Location = new System.Drawing.Point(73, 58);
             this.药物不良反应有4.Name = "药物不良反应有4";
-            this.药物不良反应有4.Size = new System.Drawing.Size(196, 21);
+            this.药物不良反应有4.Size = new System.Drawing.Size(181, 29);
             this.药物不良反应有4.TabIndex = 8;
             // 
             // radioButton46
             // 
             this.radioButton46.AutoSize = true;
-            this.radioButton46.Location = new System.Drawing.Point(15, 46);
+            this.radioButton46.Location = new System.Drawing.Point(15, 58);
             this.radioButton46.Name = "radioButton46";
-            this.radioButton46.Size = new System.Drawing.Size(41, 16);
+            this.radioButton46.Size = new System.Drawing.Size(53, 25);
             this.radioButton46.TabIndex = 3;
             this.radioButton46.TabStop = true;
             this.radioButton46.Tag = "2";
@@ -845,9 +855,9 @@
             // radioButton47
             // 
             this.radioButton47.AutoSize = true;
-            this.radioButton47.Location = new System.Drawing.Point(16, 24);
+            this.radioButton47.Location = new System.Drawing.Point(16, 28);
             this.radioButton47.Name = "radioButton47";
-            this.radioButton47.Size = new System.Drawing.Size(41, 16);
+            this.radioButton47.Size = new System.Drawing.Size(53, 25);
             this.radioButton47.TabIndex = 2;
             this.radioButton47.TabStop = true;
             this.radioButton47.Tag = "1";
@@ -863,9 +873,10 @@
             this.用药4.Controls.Add(this.用法4);
             this.用药4.Controls.Add(this.化疗方案4);
             this.用药4.Controls.Add(this.label101);
-            this.用药4.Location = new System.Drawing.Point(15, 596);
+            this.用药4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.用药4.Location = new System.Drawing.Point(15, 635);
             this.用药4.Name = "用药4";
-            this.用药4.Size = new System.Drawing.Size(260, 185);
+            this.用药4.Size = new System.Drawing.Size(265, 280);
             this.用药4.TabIndex = 14;
             this.用药4.TabStop = false;
             this.用药4.Text = "用药";
@@ -873,25 +884,25 @@
             // label99
             // 
             this.label99.AutoSize = true;
-            this.label99.Location = new System.Drawing.Point(219, 158);
+            this.label99.Location = new System.Drawing.Point(219, 247);
             this.label99.Name = "label99";
-            this.label99.Size = new System.Drawing.Size(17, 12);
+            this.label99.Size = new System.Drawing.Size(26, 21);
             this.label99.TabIndex = 8;
             this.label99.Text = "次";
             // 
             // 漏服药次数4
             // 
-            this.漏服药次数4.Location = new System.Drawing.Point(74, 155);
+            this.漏服药次数4.Location = new System.Drawing.Point(107, 244);
             this.漏服药次数4.Name = "漏服药次数4";
-            this.漏服药次数4.Size = new System.Drawing.Size(139, 21);
+            this.漏服药次数4.Size = new System.Drawing.Size(91, 29);
             this.漏服药次数4.TabIndex = 7;
             // 
             // label100
             // 
             this.label100.AutoSize = true;
-            this.label100.Location = new System.Drawing.Point(11, 158);
+            this.label100.Location = new System.Drawing.Point(11, 247);
             this.label100.Name = "label100";
-            this.label100.Size = new System.Drawing.Size(65, 12);
+            this.label100.Size = new System.Drawing.Size(90, 21);
             this.label100.TabIndex = 6;
             this.label100.Text = "漏服药次数";
             // 
@@ -901,9 +912,9 @@
             this.药品剂型4.Controls.Add(this.radioButton49);
             this.药品剂型4.Controls.Add(this.radioButton50);
             this.药品剂型4.Controls.Add(this.radioButton51);
-            this.药品剂型4.Location = new System.Drawing.Point(13, 90);
+            this.药品剂型4.Location = new System.Drawing.Point(6, 117);
             this.药品剂型4.Name = "药品剂型4";
-            this.药品剂型4.Size = new System.Drawing.Size(238, 59);
+            this.药品剂型4.Size = new System.Drawing.Size(252, 119);
             this.药品剂型4.TabIndex = 5;
             this.药品剂型4.TabStop = false;
             this.药品剂型4.Text = "药品剂型";
@@ -911,9 +922,9 @@
             // radioButton48
             // 
             this.radioButton48.AutoSize = true;
-            this.radioButton48.Location = new System.Drawing.Point(163, 37);
+            this.radioButton48.Location = new System.Drawing.Point(153, 86);
             this.radioButton48.Name = "radioButton48";
-            this.radioButton48.Size = new System.Drawing.Size(71, 16);
+            this.radioButton48.Size = new System.Drawing.Size(90, 25);
             this.radioButton48.TabIndex = 5;
             this.radioButton48.TabStop = true;
             this.radioButton48.Tag = "4";
@@ -923,9 +934,9 @@
             // radioButton49
             // 
             this.radioButton49.AutoSize = true;
-            this.radioButton49.Location = new System.Drawing.Point(6, 37);
+            this.radioButton49.Location = new System.Drawing.Point(6, 86);
             this.radioButton49.Name = "radioButton49";
-            this.radioButton49.Size = new System.Drawing.Size(95, 16);
+            this.radioButton49.Size = new System.Drawing.Size(122, 25);
             this.radioButton49.TabIndex = 4;
             this.radioButton49.TabStop = true;
             this.radioButton49.Tag = "3";
@@ -935,9 +946,9 @@
             // radioButton50
             // 
             this.radioButton50.AutoSize = true;
-            this.radioButton50.Location = new System.Drawing.Point(163, 17);
+            this.radioButton50.Location = new System.Drawing.Point(6, 58);
             this.radioButton50.Name = "radioButton50";
-            this.radioButton50.Size = new System.Drawing.Size(71, 16);
+            this.radioButton50.Size = new System.Drawing.Size(90, 25);
             this.radioButton50.TabIndex = 3;
             this.radioButton50.TabStop = true;
             this.radioButton50.Tag = "2";
@@ -947,9 +958,9 @@
             // radioButton51
             // 
             this.radioButton51.AutoSize = true;
-            this.radioButton51.Location = new System.Drawing.Point(6, 17);
+            this.radioButton51.Location = new System.Drawing.Point(6, 27);
             this.radioButton51.Name = "radioButton51";
-            this.radioButton51.Size = new System.Drawing.Size(131, 16);
+            this.radioButton51.Size = new System.Drawing.Size(170, 25);
             this.radioButton51.TabIndex = 2;
             this.radioButton51.TabStop = true;
             this.radioButton51.Tag = "1";
@@ -960,9 +971,9 @@
             // 
             this.用法4.Controls.Add(this.radioButton52);
             this.用法4.Controls.Add(this.radioButton53);
-            this.用法4.Location = new System.Drawing.Point(13, 45);
+            this.用法4.Location = new System.Drawing.Point(13, 56);
             this.用法4.Name = "用法4";
-            this.用法4.Size = new System.Drawing.Size(238, 39);
+            this.用法4.Size = new System.Drawing.Size(246, 58);
             this.用法4.TabIndex = 3;
             this.用法4.TabStop = false;
             this.用法4.Text = "用法";
@@ -970,9 +981,9 @@
             // radioButton52
             // 
             this.radioButton52.AutoSize = true;
-            this.radioButton52.Location = new System.Drawing.Point(134, 17);
+            this.radioButton52.Location = new System.Drawing.Point(134, 26);
             this.radioButton52.Name = "radioButton52";
-            this.radioButton52.Size = new System.Drawing.Size(59, 16);
+            this.radioButton52.Size = new System.Drawing.Size(74, 25);
             this.radioButton52.TabIndex = 1;
             this.radioButton52.TabStop = true;
             this.radioButton52.Tag = "2";
@@ -982,9 +993,9 @@
             // radioButton53
             // 
             this.radioButton53.AutoSize = true;
-            this.radioButton53.Location = new System.Drawing.Point(9, 17);
+            this.radioButton53.Location = new System.Drawing.Point(9, 26);
             this.radioButton53.Name = "radioButton53";
-            this.radioButton53.Size = new System.Drawing.Size(65, 16);
+            this.radioButton53.Size = new System.Drawing.Size(79, 25);
             this.radioButton53.TabIndex = 0;
             this.radioButton53.TabStop = true;
             this.radioButton53.Tag = "1";
@@ -993,17 +1004,17 @@
             // 
             // 化疗方案4
             // 
-            this.化疗方案4.Location = new System.Drawing.Point(71, 18);
+            this.化疗方案4.Location = new System.Drawing.Point(90, 23);
             this.化疗方案4.Name = "化疗方案4";
-            this.化疗方案4.Size = new System.Drawing.Size(180, 21);
+            this.化疗方案4.Size = new System.Drawing.Size(167, 29);
             this.化疗方案4.TabIndex = 1;
             // 
             // label101
             // 
             this.label101.AutoSize = true;
-            this.label101.Location = new System.Drawing.Point(11, 21);
+            this.label101.Location = new System.Drawing.Point(7, 27);
             this.label101.Name = "label101";
-            this.label101.Size = new System.Drawing.Size(53, 12);
+            this.label101.Size = new System.Drawing.Size(74, 21);
             this.label101.TabIndex = 0;
             this.label101.Text = "化疗方案";
             // 
@@ -1019,9 +1030,10 @@
             this.生活方式指导4.Controls.Add(this.label106);
             this.生活方式指导4.Controls.Add(this.吸烟d1);
             this.生活方式指导4.Controls.Add(this.label107);
-            this.生活方式指导4.Location = new System.Drawing.Point(14, 510);
+            this.生活方式指导4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.生活方式指导4.Location = new System.Drawing.Point(7, 528);
             this.生活方式指导4.Name = "生活方式指导4";
-            this.生活方式指导4.Size = new System.Drawing.Size(261, 80);
+            this.生活方式指导4.Size = new System.Drawing.Size(274, 98);
             this.生活方式指导4.TabIndex = 13;
             this.生活方式指导4.TabStop = false;
             this.生活方式指导4.Text = "生活方式指导";
@@ -1029,82 +1041,82 @@
             // label102
             // 
             this.label102.AutoSize = true;
-            this.label102.Location = new System.Drawing.Point(220, 50);
+            this.label102.Location = new System.Drawing.Point(220, 65);
             this.label102.Name = "label102";
-            this.label102.Size = new System.Drawing.Size(35, 12);
+            this.label102.Size = new System.Drawing.Size(49, 21);
             this.label102.TabIndex = 9;
             this.label102.Text = "两/天";
             // 
             // 饮酒d2
             // 
-            this.饮酒d2.Location = new System.Drawing.Point(145, 47);
+            this.饮酒d2.Location = new System.Drawing.Point(155, 64);
             this.饮酒d2.Name = "饮酒d2";
-            this.饮酒d2.Size = new System.Drawing.Size(69, 21);
+            this.饮酒d2.Size = new System.Drawing.Size(59, 29);
             this.饮酒d2.TabIndex = 8;
             // 
             // label103
             // 
             this.label103.AutoSize = true;
-            this.label103.Location = new System.Drawing.Point(132, 52);
+            this.label103.Location = new System.Drawing.Point(129, 67);
             this.label103.Name = "label103";
-            this.label103.Size = new System.Drawing.Size(11, 12);
+            this.label103.Size = new System.Drawing.Size(17, 21);
             this.label103.TabIndex = 7;
             this.label103.Text = "/";
             // 
             // 饮酒d1
             // 
-            this.饮酒d1.Location = new System.Drawing.Point(56, 47);
+            this.饮酒d1.Location = new System.Drawing.Point(62, 64);
             this.饮酒d1.Name = "饮酒d1";
-            this.饮酒d1.Size = new System.Drawing.Size(72, 21);
+            this.饮酒d1.Size = new System.Drawing.Size(59, 29);
             this.饮酒d1.TabIndex = 6;
             // 
             // label104
             // 
             this.label104.AutoSize = true;
-            this.label104.Location = new System.Drawing.Point(12, 50);
+            this.label104.Location = new System.Drawing.Point(9, 65);
             this.label104.Name = "label104";
-            this.label104.Size = new System.Drawing.Size(35, 12);
+            this.label104.Size = new System.Drawing.Size(47, 21);
             this.label104.TabIndex = 5;
             this.label104.Text = "饮 酒";
             // 
             // label105
             // 
             this.label105.AutoSize = true;
-            this.label105.Location = new System.Drawing.Point(220, 23);
+            this.label105.Location = new System.Drawing.Point(220, 32);
             this.label105.Name = "label105";
-            this.label105.Size = new System.Drawing.Size(35, 12);
+            this.label105.Size = new System.Drawing.Size(49, 21);
             this.label105.TabIndex = 4;
             this.label105.Text = "支/天";
             // 
             // 吸烟d2
             // 
-            this.吸烟d2.Location = new System.Drawing.Point(145, 20);
+            this.吸烟d2.Location = new System.Drawing.Point(155, 27);
             this.吸烟d2.Name = "吸烟d2";
-            this.吸烟d2.Size = new System.Drawing.Size(69, 21);
+            this.吸烟d2.Size = new System.Drawing.Size(59, 29);
             this.吸烟d2.TabIndex = 3;
             // 
             // label106
             // 
             this.label106.AutoSize = true;
-            this.label106.Location = new System.Drawing.Point(132, 25);
+            this.label106.Location = new System.Drawing.Point(129, 32);
             this.label106.Name = "label106";
-            this.label106.Size = new System.Drawing.Size(11, 12);
+            this.label106.Size = new System.Drawing.Size(17, 21);
             this.label106.TabIndex = 2;
             this.label106.Text = "/";
             // 
             // 吸烟d1
             // 
-            this.吸烟d1.Location = new System.Drawing.Point(56, 20);
+            this.吸烟d1.Location = new System.Drawing.Point(62, 27);
             this.吸烟d1.Name = "吸烟d1";
-            this.吸烟d1.Size = new System.Drawing.Size(72, 21);
+            this.吸烟d1.Size = new System.Drawing.Size(59, 29);
             this.吸烟d1.TabIndex = 1;
             // 
             // label107
             // 
             this.label107.AutoSize = true;
-            this.label107.Location = new System.Drawing.Point(12, 23);
+            this.label107.Location = new System.Drawing.Point(9, 28);
             this.label107.Name = "label107";
-            this.label107.Size = new System.Drawing.Size(35, 12);
+            this.label107.Size = new System.Drawing.Size(47, 21);
             this.label107.TabIndex = 0;
             this.label107.Text = "吸 烟";
             // 
@@ -1122,19 +1134,19 @@
             this.症状及体征4.Controls.Add(this.checkBox54);
             this.症状及体征4.Controls.Add(this.checkBox55);
             this.症状及体征4.Controls.Add(this.checkBox56);
-            this.症状及体征4.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.症状及体征4.Location = new System.Drawing.Point(14, 206);
+            this.症状及体征4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.症状及体征4.Location = new System.Drawing.Point(14, 240);
             this.症状及体征4.Name = "症状及体征4";
-            this.症状及体征4.Size = new System.Drawing.Size(261, 298);
+            this.症状及体征4.Size = new System.Drawing.Size(261, 284);
             this.症状及体征4.TabIndex = 11;
             this.症状及体征4.TabStop = false;
             this.症状及体征4.Text = "症状及体征：";
             // 
             // richTextBox5
             // 
-            this.richTextBox5.Location = new System.Drawing.Point(17, 187);
+            this.richTextBox5.Location = new System.Drawing.Point(17, 200);
             this.richTextBox5.Name = "richTextBox5";
-            this.richTextBox5.Size = new System.Drawing.Size(238, 96);
+            this.richTextBox5.Size = new System.Drawing.Size(238, 77);
             this.richTextBox5.TabIndex = 11;
             this.richTextBox5.Text = "";
             // 
@@ -1143,7 +1155,7 @@
             this.label108.AutoSize = true;
             this.label108.Location = new System.Drawing.Point(8, 170);
             this.label108.Name = "label108";
-            this.label108.Size = new System.Drawing.Size(49, 14);
+            this.label108.Size = new System.Drawing.Size(58, 21);
             this.label108.TabIndex = 10;
             this.label108.Text = "其他：";
             // 
@@ -1152,7 +1164,7 @@
             this.checkBox47.AutoSize = true;
             this.checkBox47.Location = new System.Drawing.Point(18, 146);
             this.checkBox47.Name = "checkBox47";
-            this.checkBox47.Size = new System.Drawing.Size(138, 18);
+            this.checkBox47.Size = new System.Drawing.Size(155, 25);
             this.checkBox47.TabIndex = 9;
             this.checkBox47.Tag = "9";
             this.checkBox47.Text = "9 耳鸣、听力下降";
@@ -1163,7 +1175,7 @@
             this.checkBox48.AutoSize = true;
             this.checkBox48.Location = new System.Drawing.Point(18, 122);
             this.checkBox48.Name = "checkBox48";
-            this.checkBox48.Size = new System.Drawing.Size(138, 18);
+            this.checkBox48.Size = new System.Drawing.Size(155, 25);
             this.checkBox48.TabIndex = 8;
             this.checkBox48.Tag = "8";
             this.checkBox48.Text = "8 皮肤瘙痒、皮疹";
@@ -1174,7 +1186,7 @@
             this.checkBox49.AutoSize = true;
             this.checkBox49.Location = new System.Drawing.Point(145, 98);
             this.checkBox49.Name = "checkBox49";
-            this.checkBox49.Size = new System.Drawing.Size(96, 18);
+            this.checkBox49.Size = new System.Drawing.Size(107, 25);
             this.checkBox49.TabIndex = 7;
             this.checkBox49.Tag = "7";
             this.checkBox49.Text = "7 视物模糊";
@@ -1185,7 +1197,7 @@
             this.checkBox50.AutoSize = true;
             this.checkBox50.Location = new System.Drawing.Point(18, 98);
             this.checkBox50.Name = "checkBox50";
-            this.checkBox50.Size = new System.Drawing.Size(96, 18);
+            this.checkBox50.Size = new System.Drawing.Size(107, 25);
             this.checkBox50.TabIndex = 6;
             this.checkBox50.Tag = "6";
             this.checkBox50.Text = "6 头痛失眠";
@@ -1196,7 +1208,7 @@
             this.checkBox51.AutoSize = true;
             this.checkBox51.Location = new System.Drawing.Point(145, 74);
             this.checkBox51.Name = "checkBox51";
-            this.checkBox51.Size = new System.Drawing.Size(96, 18);
+            this.checkBox51.Size = new System.Drawing.Size(107, 25);
             this.checkBox51.TabIndex = 5;
             this.checkBox51.Tag = "5";
             this.checkBox51.Text = "5 恶心纳差";
@@ -1207,7 +1219,7 @@
             this.checkBox52.AutoSize = true;
             this.checkBox52.Location = new System.Drawing.Point(18, 74);
             this.checkBox52.Name = "checkBox52";
-            this.checkBox52.Size = new System.Drawing.Size(96, 18);
+            this.checkBox52.Size = new System.Drawing.Size(107, 25);
             this.checkBox52.TabIndex = 4;
             this.checkBox52.Tag = "4";
             this.checkBox52.Text = "4 胸痛消瘦";
@@ -1218,7 +1230,7 @@
             this.checkBox53.AutoSize = true;
             this.checkBox53.Location = new System.Drawing.Point(145, 50);
             this.checkBox53.Name = "checkBox53";
-            this.checkBox53.Size = new System.Drawing.Size(110, 18);
+            this.checkBox53.Size = new System.Drawing.Size(123, 25);
             this.checkBox53.TabIndex = 3;
             this.checkBox53.Tag = "3";
             this.checkBox53.Text = "3 咯血或血痰";
@@ -1229,7 +1241,7 @@
             this.checkBox54.AutoSize = true;
             this.checkBox54.Location = new System.Drawing.Point(17, 50);
             this.checkBox54.Name = "checkBox54";
-            this.checkBox54.Size = new System.Drawing.Size(96, 18);
+            this.checkBox54.Size = new System.Drawing.Size(107, 25);
             this.checkBox54.TabIndex = 2;
             this.checkBox54.Tag = "2";
             this.checkBox54.Text = "2 低热盗汗";
@@ -1240,7 +1252,7 @@
             this.checkBox55.AutoSize = true;
             this.checkBox55.Location = new System.Drawing.Point(145, 26);
             this.checkBox55.Name = "checkBox55";
-            this.checkBox55.Size = new System.Drawing.Size(96, 18);
+            this.checkBox55.Size = new System.Drawing.Size(107, 25);
             this.checkBox55.TabIndex = 1;
             this.checkBox55.Tag = "1";
             this.checkBox55.Text = "1 咳嗽咳痰";
@@ -1251,7 +1263,7 @@
             this.checkBox56.AutoSize = true;
             this.checkBox56.Location = new System.Drawing.Point(17, 26);
             this.checkBox56.Name = "checkBox56";
-            this.checkBox56.Size = new System.Drawing.Size(96, 18);
+            this.checkBox56.Size = new System.Drawing.Size(107, 25);
             this.checkBox56.TabIndex = 0;
             this.checkBox56.Tag = "0";
             this.checkBox56.Text = "0 没有症状";
@@ -1262,9 +1274,10 @@
             this.随访方式4.Controls.Add(this.radioButton54);
             this.随访方式4.Controls.Add(this.radioButton55);
             this.随访方式4.Controls.Add(this.radioButton56);
-            this.随访方式4.Location = new System.Drawing.Point(15, 157);
+            this.随访方式4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.随访方式4.Location = new System.Drawing.Point(15, 183);
             this.随访方式4.Name = "随访方式4";
-            this.随访方式4.Size = new System.Drawing.Size(260, 43);
+            this.随访方式4.Size = new System.Drawing.Size(260, 54);
             this.随访方式4.TabIndex = 10;
             this.随访方式4.TabStop = false;
             this.随访方式4.Text = "随访方式";
@@ -1272,9 +1285,9 @@
             // radioButton54
             // 
             this.radioButton54.AutoSize = true;
-            this.radioButton54.Location = new System.Drawing.Point(171, 15);
+            this.radioButton54.Location = new System.Drawing.Point(171, 23);
             this.radioButton54.Name = "radioButton54";
-            this.radioButton54.Size = new System.Drawing.Size(59, 16);
+            this.radioButton54.Size = new System.Drawing.Size(74, 25);
             this.radioButton54.TabIndex = 8;
             this.radioButton54.TabStop = true;
             this.radioButton54.Tag = "3";
@@ -1284,9 +1297,9 @@
             // radioButton55
             // 
             this.radioButton55.AutoSize = true;
-            this.radioButton55.Location = new System.Drawing.Point(92, 15);
+            this.radioButton55.Location = new System.Drawing.Point(92, 23);
             this.radioButton55.Name = "radioButton55";
-            this.radioButton55.Size = new System.Drawing.Size(53, 16);
+            this.radioButton55.Size = new System.Drawing.Size(69, 25);
             this.radioButton55.TabIndex = 7;
             this.radioButton55.TabStop = true;
             this.radioButton55.Tag = "2";
@@ -1296,9 +1309,9 @@
             // radioButton56
             // 
             this.radioButton56.AutoSize = true;
-            this.radioButton56.Location = new System.Drawing.Point(14, 15);
+            this.radioButton56.Location = new System.Drawing.Point(14, 23);
             this.radioButton56.Name = "radioButton56";
-            this.radioButton56.Size = new System.Drawing.Size(53, 16);
+            this.radioButton56.Size = new System.Drawing.Size(69, 25);
             this.radioButton56.TabIndex = 6;
             this.radioButton56.TabStop = true;
             this.radioButton56.Tag = "1";
@@ -1311,9 +1324,10 @@
             this.督导人员4.Controls.Add(this.radioButton58);
             this.督导人员4.Controls.Add(this.radioButton59);
             this.督导人员4.Controls.Add(this.radioButton60);
-            this.督导人员4.Location = new System.Drawing.Point(15, 90);
+            this.督导人员4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.督导人员4.Location = new System.Drawing.Point(15, 91);
             this.督导人员4.Name = "督导人员4";
-            this.督导人员4.Size = new System.Drawing.Size(260, 58);
+            this.督导人员4.Size = new System.Drawing.Size(260, 87);
             this.督导人员4.TabIndex = 8;
             this.督导人员4.TabStop = false;
             this.督导人员4.Text = "督导人员";
@@ -1321,9 +1335,9 @@
             // radioButton57
             // 
             this.radioButton57.AutoSize = true;
-            this.radioButton57.Location = new System.Drawing.Point(171, 35);
+            this.radioButton57.Location = new System.Drawing.Point(171, 54);
             this.radioButton57.Name = "radioButton57";
-            this.radioButton57.Size = new System.Drawing.Size(59, 16);
+            this.radioButton57.Size = new System.Drawing.Size(74, 25);
             this.radioButton57.TabIndex = 9;
             this.radioButton57.TabStop = true;
             this.radioButton57.Tag = "4";
@@ -1333,9 +1347,9 @@
             // radioButton58
             // 
             this.radioButton58.AutoSize = true;
-            this.radioButton58.Location = new System.Drawing.Point(14, 35);
+            this.radioButton58.Location = new System.Drawing.Point(14, 54);
             this.radioButton58.Name = "radioButton58";
-            this.radioButton58.Size = new System.Drawing.Size(71, 16);
+            this.radioButton58.Size = new System.Drawing.Size(90, 25);
             this.radioButton58.TabIndex = 8;
             this.radioButton58.TabStop = true;
             this.radioButton58.Tag = "3";
@@ -1345,9 +1359,9 @@
             // radioButton59
             // 
             this.radioButton59.AutoSize = true;
-            this.radioButton59.Location = new System.Drawing.Point(171, 15);
+            this.radioButton59.Location = new System.Drawing.Point(171, 27);
             this.radioButton59.Name = "radioButton59";
-            this.radioButton59.Size = new System.Drawing.Size(59, 16);
+            this.radioButton59.Size = new System.Drawing.Size(74, 25);
             this.radioButton59.TabIndex = 7;
             this.radioButton59.TabStop = true;
             this.radioButton59.Tag = "2";
@@ -1357,9 +1371,9 @@
             // radioButton60
             // 
             this.radioButton60.AutoSize = true;
-            this.radioButton60.Location = new System.Drawing.Point(14, 15);
+            this.radioButton60.Location = new System.Drawing.Point(14, 27);
             this.radioButton60.Name = "radioButton60";
-            this.radioButton60.Size = new System.Drawing.Size(53, 16);
+            this.radioButton60.Size = new System.Drawing.Size(69, 25);
             this.radioButton60.TabIndex = 6;
             this.radioButton60.TabStop = true;
             this.radioButton60.Tag = "1";
@@ -1369,54 +1383,56 @@
             // label109
             // 
             this.label109.AutoSize = true;
-            this.label109.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label109.Location = new System.Drawing.Point(192, 58);
+            this.label109.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label109.Location = new System.Drawing.Point(200, 56);
             this.label109.Name = "label109";
-            this.label109.Size = new System.Drawing.Size(24, 16);
+            this.label109.Size = new System.Drawing.Size(26, 21);
             this.label109.TabIndex = 7;
             this.label109.Text = "月";
             // 
             // label110
             // 
             this.label110.AutoSize = true;
-            this.label110.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label110.Location = new System.Drawing.Point(104, 57);
+            this.label110.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label110.Location = new System.Drawing.Point(104, 56);
             this.label110.Name = "label110";
-            this.label110.Size = new System.Drawing.Size(24, 16);
+            this.label110.Size = new System.Drawing.Size(26, 21);
             this.label110.TabIndex = 6;
             this.label110.Text = "第";
             // 
             // 治疗月序4
             // 
-            this.治疗月序4.Location = new System.Drawing.Point(134, 58);
+            this.治疗月序4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.治疗月序4.Location = new System.Drawing.Point(139, 53);
             this.治疗月序4.Name = "治疗月序4";
-            this.治疗月序4.Size = new System.Drawing.Size(52, 21);
+            this.治疗月序4.Size = new System.Drawing.Size(52, 29);
             this.治疗月序4.TabIndex = 5;
             // 
             // label111
             // 
             this.label111.AutoSize = true;
-            this.label111.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label111.Location = new System.Drawing.Point(12, 58);
+            this.label111.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label111.Location = new System.Drawing.Point(17, 58);
             this.label111.Name = "label111";
-            this.label111.Size = new System.Drawing.Size(72, 16);
+            this.label111.Size = new System.Drawing.Size(74, 21);
             this.label111.TabIndex = 4;
             this.label111.Text = "治疗月序";
             // 
             // 随访时间4
             // 
-            this.随访时间4.Location = new System.Drawing.Point(107, 20);
+            this.随访时间4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.随访时间4.Location = new System.Drawing.Point(107, 17);
             this.随访时间4.Name = "随访时间4";
-            this.随访时间4.Size = new System.Drawing.Size(168, 21);
+            this.随访时间4.Size = new System.Drawing.Size(168, 29);
             this.随访时间4.TabIndex = 3;
             // 
             // label112
             // 
             this.label112.AutoSize = true;
-            this.label112.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label112.Location = new System.Drawing.Point(12, 22);
+            this.label112.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.label112.Location = new System.Drawing.Point(12, 21);
             this.label112.Name = "label112";
-            this.label112.Size = new System.Drawing.Size(88, 16);
+            this.label112.Size = new System.Drawing.Size(90, 22);
             this.label112.TabIndex = 2;
             this.label112.Text = "随访时间：";
             // 
@@ -1446,7 +1462,7 @@
             this.to3.Controls.Add(this.label84);
             this.to3.Location = new System.Drawing.Point(593, 16);
             this.to3.Name = "to3";
-            this.to3.Size = new System.Drawing.Size(284, 1359);
+            this.to3.Size = new System.Drawing.Size(290, 1780);
             this.to3.TabIndex = 26;
             this.to3.TabStop = false;
             // 
@@ -1464,9 +1480,10 @@
             this.全程管理情况3.Controls.Add(this.应访视患者次数3);
             this.全程管理情况3.Controls.Add(this.label62);
             this.全程管理情况3.Controls.Add(this.label63);
-            this.全程管理情况3.Location = new System.Drawing.Point(14, 1239);
+            this.全程管理情况3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.全程管理情况3.Location = new System.Drawing.Point(8, 1588);
             this.全程管理情况3.Name = "全程管理情况3";
-            this.全程管理情况3.Size = new System.Drawing.Size(261, 100);
+            this.全程管理情况3.Size = new System.Drawing.Size(267, 163);
             this.全程管理情况3.TabIndex = 24;
             this.全程管理情况3.TabStop = false;
             this.全程管理情况3.Text = "全程管理情况";
@@ -1474,81 +1491,81 @@
             // label57
             // 
             this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(155, 69);
+            this.label57.Location = new System.Drawing.Point(153, 123);
             this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(17, 12);
+            this.label57.Size = new System.Drawing.Size(29, 21);
             this.label57.TabIndex = 34;
             this.label57.Text = "% ";
             // 
             // 服药率3
             // 
-            this.服药率3.Location = new System.Drawing.Point(111, 66);
+            this.服药率3.Location = new System.Drawing.Point(109, 120);
             this.服药率3.Name = "服药率3";
-            this.服药率3.Size = new System.Drawing.Size(40, 21);
+            this.服药率3.Size = new System.Drawing.Size(40, 29);
             this.服药率3.TabIndex = 33;
             // 
             // label58
             // 
             this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(46, 69);
+            this.label58.Location = new System.Drawing.Point(9, 128);
             this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(65, 12);
+            this.label58.Size = new System.Drawing.Size(90, 21);
             this.label58.TabIndex = 32;
             this.label58.Text = "次，服药率";
             // 
             // 实际服药次数3
             // 
-            this.实际服药次数3.Location = new System.Drawing.Point(4, 64);
+            this.实际服药次数3.Location = new System.Drawing.Point(167, 85);
             this.实际服药次数3.Name = "实际服药次数3";
-            this.实际服药次数3.Size = new System.Drawing.Size(40, 21);
+            this.实际服药次数3.Size = new System.Drawing.Size(40, 29);
             this.实际服药次数3.TabIndex = 31;
             // 
             // 应服药次数3
             // 
-            this.应服药次数3.Location = new System.Drawing.Point(129, 45);
+            this.应服药次数3.Location = new System.Drawing.Point(6, 85);
             this.应服药次数3.Name = "应服药次数3";
-            this.应服药次数3.Size = new System.Drawing.Size(40, 21);
+            this.应服药次数3.Size = new System.Drawing.Size(40, 29);
             this.应服药次数3.TabIndex = 30;
             // 
             // label59
             // 
             this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(2, 49);
+            this.label59.Location = new System.Drawing.Point(90, 58);
             this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(125, 12);
+            this.label59.Size = new System.Drawing.Size(170, 21);
             this.label59.TabIndex = 29;
             this.label59.Text = "患者在疗程中，应服药";
             // 
             // label60
             // 
             this.label60.AutoSize = true;
-            this.label60.Location = new System.Drawing.Point(172, 48);
+            this.label60.Location = new System.Drawing.Point(51, 91);
             this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(77, 12);
+            this.label60.Size = new System.Drawing.Size(106, 21);
             this.label60.TabIndex = 28;
             this.label60.Text = "次，实际服药";
             // 
             // label61
             // 
             this.label61.AutoSize = true;
-            this.label61.Location = new System.Drawing.Point(237, 24);
+            this.label61.Location = new System.Drawing.Point(52, 57);
             this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(29, 12);
+            this.label61.Size = new System.Drawing.Size(42, 21);
             this.label61.TabIndex = 27;
             this.label61.Text = "次；";
             // 
             // 实际访视次数3
             // 
-            this.实际访视次数3.Location = new System.Drawing.Point(191, 19);
+            this.实际访视次数3.Location = new System.Drawing.Point(7, 53);
             this.实际访视次数3.Name = "实际访视次数3";
-            this.实际访视次数3.Size = new System.Drawing.Size(40, 21);
+            this.实际访视次数3.Size = new System.Drawing.Size(40, 29);
             this.实际访视次数3.TabIndex = 26;
             // 
             // 应访视患者次数3
             // 
-            this.应访视患者次数3.Location = new System.Drawing.Point(69, 19);
+            this.应访视患者次数3.Location = new System.Drawing.Point(102, 19);
             this.应访视患者次数3.Name = "应访视患者次数3";
-            this.应访视患者次数3.Size = new System.Drawing.Size(40, 21);
+            this.应访视患者次数3.Size = new System.Drawing.Size(40, 29);
             this.应访视患者次数3.TabIndex = 25;
             // 
             // label62
@@ -1556,16 +1573,16 @@
             this.label62.AutoSize = true;
             this.label62.Location = new System.Drawing.Point(2, 22);
             this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(65, 12);
+            this.label62.Size = new System.Drawing.Size(90, 21);
             this.label62.TabIndex = 1;
             this.label62.Text = "应访视患者";
             // 
             // label63
             // 
             this.label63.AutoSize = true;
-            this.label63.Location = new System.Drawing.Point(112, 22);
+            this.label63.Location = new System.Drawing.Point(148, 22);
             this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(77, 12);
+            this.label63.Size = new System.Drawing.Size(106, 21);
             this.label63.TabIndex = 0;
             this.label63.Text = "次，实际访视";
             // 
@@ -1574,9 +1591,10 @@
             this.停止治疗及原因3.Controls.Add(this.停止治疗原因3);
             this.停止治疗及原因3.Controls.Add(this.出现停止治疗时间3);
             this.停止治疗及原因3.Controls.Add(this.label64);
-            this.停止治疗及原因3.Location = new System.Drawing.Point(14, 1094);
+            this.停止治疗及原因3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.停止治疗及原因3.Location = new System.Drawing.Point(14, 1390);
             this.停止治疗及原因3.Name = "停止治疗及原因3";
-            this.停止治疗及原因3.Size = new System.Drawing.Size(261, 139);
+            this.停止治疗及原因3.Size = new System.Drawing.Size(261, 195);
             this.停止治疗及原因3.TabIndex = 23;
             this.停止治疗及原因3.TabStop = false;
             this.停止治疗及原因3.Text = "停止治疗及原因";
@@ -1587,9 +1605,9 @@
             this.停止治疗原因3.Controls.Add(this.checkBox30);
             this.停止治疗原因3.Controls.Add(this.checkBox31);
             this.停止治疗原因3.Controls.Add(this.checkBox32);
-            this.停止治疗原因3.Location = new System.Drawing.Point(8, 63);
+            this.停止治疗原因3.Location = new System.Drawing.Point(8, 98);
             this.停止治疗原因3.Name = "停止治疗原因3";
-            this.停止治疗原因3.Size = new System.Drawing.Size(244, 63);
+            this.停止治疗原因3.Size = new System.Drawing.Size(244, 89);
             this.停止治疗原因3.TabIndex = 20;
             this.停止治疗原因3.TabStop = false;
             this.停止治疗原因3.Text = "2 停止治疗原因：";
@@ -1597,9 +1615,9 @@
             // checkBox29
             // 
             this.checkBox29.AutoSize = true;
-            this.checkBox29.Location = new System.Drawing.Point(85, 41);
+            this.checkBox29.Location = new System.Drawing.Point(85, 53);
             this.checkBox29.Name = "checkBox29";
-            this.checkBox29.Size = new System.Drawing.Size(108, 16);
+            this.checkBox29.Size = new System.Drawing.Size(141, 25);
             this.checkBox29.TabIndex = 3;
             this.checkBox29.Tag = "4";
             this.checkBox29.Text = "转入耐多药治疗";
@@ -1608,9 +1626,9 @@
             // checkBox30
             // 
             this.checkBox30.AutoSize = true;
-            this.checkBox30.Location = new System.Drawing.Point(10, 41);
+            this.checkBox30.Location = new System.Drawing.Point(10, 53);
             this.checkBox30.Name = "checkBox30";
-            this.checkBox30.Size = new System.Drawing.Size(48, 16);
+            this.checkBox30.Size = new System.Drawing.Size(61, 25);
             this.checkBox30.TabIndex = 2;
             this.checkBox30.Tag = "3";
             this.checkBox30.Text = "丢失";
@@ -1619,9 +1637,9 @@
             // checkBox31
             // 
             this.checkBox31.AutoSize = true;
-            this.checkBox31.Location = new System.Drawing.Point(85, 21);
+            this.checkBox31.Location = new System.Drawing.Point(126, 24);
             this.checkBox31.Name = "checkBox31";
-            this.checkBox31.Size = new System.Drawing.Size(48, 16);
+            this.checkBox31.Size = new System.Drawing.Size(61, 25);
             this.checkBox31.TabIndex = 1;
             this.checkBox31.Tag = "2";
             this.checkBox31.Text = "死亡";
@@ -1630,9 +1648,9 @@
             // checkBox32
             // 
             this.checkBox32.AutoSize = true;
-            this.checkBox32.Location = new System.Drawing.Point(10, 21);
+            this.checkBox32.Location = new System.Drawing.Point(10, 24);
             this.checkBox32.Name = "checkBox32";
-            this.checkBox32.Size = new System.Drawing.Size(72, 16);
+            this.checkBox32.Size = new System.Drawing.Size(93, 25);
             this.checkBox32.TabIndex = 0;
             this.checkBox32.Tag = "1";
             this.checkBox32.Text = "完成疗程";
@@ -1640,65 +1658,71 @@
             // 
             // 出现停止治疗时间3
             // 
-            this.出现停止治疗时间3.Location = new System.Drawing.Point(7, 36);
+            this.出现停止治疗时间3.Location = new System.Drawing.Point(7, 59);
             this.出现停止治疗时间3.Name = "出现停止治疗时间3";
-            this.出现停止治疗时间3.Size = new System.Drawing.Size(245, 21);
+            this.出现停止治疗时间3.Size = new System.Drawing.Size(197, 29);
             this.出现停止治疗时间3.TabIndex = 19;
             // 
             // label64
             // 
             this.label64.AutoSize = true;
-            this.label64.Location = new System.Drawing.Point(6, 21);
+            this.label64.Location = new System.Drawing.Point(6, 30);
             this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(113, 12);
+            this.label64.Size = new System.Drawing.Size(152, 21);
             this.label64.TabIndex = 18;
             this.label64.Text = "1 出现停止治疗时间";
             // 
             // 随访医生签名3
             // 
-            this.随访医生签名3.Location = new System.Drawing.Point(73, 1066);
+            this.随访医生签名3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.随访医生签名3.Location = new System.Drawing.Point(73, 1349);
             this.随访医生签名3.Name = "随访医生签名3";
-            this.随访医生签名3.Size = new System.Drawing.Size(202, 21);
+            this.随访医生签名3.Size = new System.Drawing.Size(202, 29);
             this.随访医生签名3.TabIndex = 22;
             // 
             // label65
             // 
             this.label65.AutoSize = true;
-            this.label65.Location = new System.Drawing.Point(20, 1063);
+            this.label65.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.label65.Location = new System.Drawing.Point(11, 1342);
             this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(41, 24);
+            this.label65.Size = new System.Drawing.Size(58, 44);
             this.label65.TabIndex = 21;
             this.label65.Text = "随访医\r\n生签名";
             // 
             // 下次随访时间3
             // 
-            this.下次随访时间3.Location = new System.Drawing.Point(73, 1036);
+            this.下次随访时间3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.下次随访时间3.Location = new System.Drawing.Point(73, 1299);
             this.下次随访时间3.Name = "下次随访时间3";
-            this.下次随访时间3.Size = new System.Drawing.Size(202, 21);
+            this.下次随访时间3.Size = new System.Drawing.Size(202, 29);
             this.下次随访时间3.TabIndex = 20;
             // 
             // label66
             // 
             this.label66.AutoSize = true;
-            this.label66.Location = new System.Drawing.Point(20, 1033);
+            this.label66.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.label66.Location = new System.Drawing.Point(11, 1288);
             this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(41, 24);
+            this.label66.Size = new System.Drawing.Size(58, 44);
             this.label66.TabIndex = 19;
             this.label66.Text = "下次随\r\n访时间";
             // 
             // 处理意见3
             // 
-            this.处理意见3.Location = new System.Drawing.Point(73, 1006);
+            this.处理意见3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.处理意见3.Location = new System.Drawing.Point(15, 1241);
             this.处理意见3.Name = "处理意见3";
-            this.处理意见3.Size = new System.Drawing.Size(202, 21);
+            this.处理意见3.Size = new System.Drawing.Size(260, 29);
             this.处理意见3.TabIndex = 18;
             // 
             // label67
             // 
             this.label67.AutoSize = true;
-            this.label67.Location = new System.Drawing.Point(13, 1009);
+            this.label67.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.label67.Location = new System.Drawing.Point(13, 1210);
             this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(53, 12);
+            this.label67.Size = new System.Drawing.Size(74, 22);
             this.label67.TabIndex = 17;
             this.label67.Text = "处理意见";
             // 
@@ -1710,59 +1734,60 @@
             this.转诊3.Controls.Add(this.label69);
             this.转诊3.Controls.Add(this.转诊科别3);
             this.转诊3.Controls.Add(this.label70);
-            this.转诊3.Location = new System.Drawing.Point(14, 867);
+            this.转诊3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.转诊3.Location = new System.Drawing.Point(7, 1030);
             this.转诊3.Name = "转诊3";
-            this.转诊3.Size = new System.Drawing.Size(261, 128);
+            this.转诊3.Size = new System.Drawing.Size(277, 163);
             this.转诊3.TabIndex = 16;
             this.转诊3.TabStop = false;
             this.转诊3.Text = "转诊";
             // 
             // 转诊结果3
             // 
-            this.转诊结果3.Location = new System.Drawing.Point(68, 74);
+            this.转诊结果3.Location = new System.Drawing.Point(83, 95);
             this.转诊结果3.Name = "转诊结果3";
-            this.转诊结果3.Size = new System.Drawing.Size(184, 46);
+            this.转诊结果3.Size = new System.Drawing.Size(179, 58);
             this.转诊结果3.TabIndex = 12;
             this.转诊结果3.Text = "";
             // 
             // label68
             // 
             this.label68.AutoSize = true;
-            this.label68.Location = new System.Drawing.Point(8, 74);
+            this.label68.Location = new System.Drawing.Point(8, 90);
             this.label68.Name = "label68";
-            this.label68.Size = new System.Drawing.Size(53, 36);
+            this.label68.Size = new System.Drawing.Size(74, 63);
             this.label68.TabIndex = 6;
             this.label68.Text = "2 周内随\r\n访，随访\r\n结果";
             // 
             // 转诊原因3
             // 
-            this.转诊原因3.Location = new System.Drawing.Point(68, 44);
+            this.转诊原因3.Location = new System.Drawing.Point(83, 58);
             this.转诊原因3.Name = "转诊原因3";
-            this.转诊原因3.Size = new System.Drawing.Size(180, 21);
+            this.转诊原因3.Size = new System.Drawing.Size(180, 29);
             this.转诊原因3.TabIndex = 5;
             // 
             // label69
             // 
             this.label69.AutoSize = true;
-            this.label69.Location = new System.Drawing.Point(8, 47);
+            this.label69.Location = new System.Drawing.Point(8, 61);
             this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(35, 12);
+            this.label69.Size = new System.Drawing.Size(47, 21);
             this.label69.TabIndex = 4;
             this.label69.Text = "原 因";
             // 
             // 转诊科别3
             // 
-            this.转诊科别3.Location = new System.Drawing.Point(68, 17);
+            this.转诊科别3.Location = new System.Drawing.Point(83, 24);
             this.转诊科别3.Name = "转诊科别3";
-            this.转诊科别3.Size = new System.Drawing.Size(180, 21);
+            this.转诊科别3.Size = new System.Drawing.Size(180, 29);
             this.转诊科别3.TabIndex = 3;
             // 
             // label70
             // 
             this.label70.AutoSize = true;
-            this.label70.Location = new System.Drawing.Point(8, 20);
+            this.label70.Location = new System.Drawing.Point(8, 27);
             this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(35, 12);
+            this.label70.Size = new System.Drawing.Size(47, 21);
             this.label70.TabIndex = 2;
             this.label70.Text = "科 别";
             // 
@@ -1771,26 +1796,27 @@
             this.药物不良反应3.Controls.Add(this.药物不良反应有3);
             this.药物不良反应3.Controls.Add(this.radioButton31);
             this.药物不良反应3.Controls.Add(this.radioButton32);
-            this.药物不良反应3.Location = new System.Drawing.Point(16, 787);
+            this.药物不良反应3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.药物不良反应3.Location = new System.Drawing.Point(16, 925);
             this.药物不良反应3.Name = "药物不良反应3";
-            this.药物不良反应3.Size = new System.Drawing.Size(259, 76);
+            this.药物不良反应3.Size = new System.Drawing.Size(265, 97);
             this.药物不良反应3.TabIndex = 15;
             this.药物不良反应3.TabStop = false;
             this.药物不良反应3.Text = "药物不良反应";
             // 
             // 药物不良反应有3
             // 
-            this.药物不良反应有3.Location = new System.Drawing.Point(54, 46);
+            this.药物不良反应有3.Location = new System.Drawing.Point(72, 58);
             this.药物不良反应有3.Name = "药物不良反应有3";
-            this.药物不良反应有3.Size = new System.Drawing.Size(196, 21);
+            this.药物不良反应有3.Size = new System.Drawing.Size(184, 29);
             this.药物不良反应有3.TabIndex = 8;
             // 
             // radioButton31
             // 
             this.radioButton31.AutoSize = true;
-            this.radioButton31.Location = new System.Drawing.Point(15, 46);
+            this.radioButton31.Location = new System.Drawing.Point(15, 58);
             this.radioButton31.Name = "radioButton31";
-            this.radioButton31.Size = new System.Drawing.Size(41, 16);
+            this.radioButton31.Size = new System.Drawing.Size(53, 25);
             this.radioButton31.TabIndex = 3;
             this.radioButton31.TabStop = true;
             this.radioButton31.Tag = "2";
@@ -1800,9 +1826,9 @@
             // radioButton32
             // 
             this.radioButton32.AutoSize = true;
-            this.radioButton32.Location = new System.Drawing.Point(16, 24);
+            this.radioButton32.Location = new System.Drawing.Point(16, 28);
             this.radioButton32.Name = "radioButton32";
-            this.radioButton32.Size = new System.Drawing.Size(41, 16);
+            this.radioButton32.Size = new System.Drawing.Size(53, 25);
             this.radioButton32.TabIndex = 2;
             this.radioButton32.TabStop = true;
             this.radioButton32.Tag = "1";
@@ -1818,9 +1844,10 @@
             this.用药3.Controls.Add(this.用法3);
             this.用药3.Controls.Add(this.化疗方案3);
             this.用药3.Controls.Add(this.label73);
-            this.用药3.Location = new System.Drawing.Point(15, 596);
+            this.用药3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.用药3.Location = new System.Drawing.Point(15, 635);
             this.用药3.Name = "用药3";
-            this.用药3.Size = new System.Drawing.Size(260, 185);
+            this.用药3.Size = new System.Drawing.Size(265, 280);
             this.用药3.TabIndex = 14;
             this.用药3.TabStop = false;
             this.用药3.Text = "用药";
@@ -1828,25 +1855,25 @@
             // label71
             // 
             this.label71.AutoSize = true;
-            this.label71.Location = new System.Drawing.Point(219, 158);
+            this.label71.Location = new System.Drawing.Point(219, 247);
             this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(17, 12);
+            this.label71.Size = new System.Drawing.Size(26, 21);
             this.label71.TabIndex = 8;
             this.label71.Text = "次";
             // 
             // 漏服药次数3
             // 
-            this.漏服药次数3.Location = new System.Drawing.Point(74, 155);
+            this.漏服药次数3.Location = new System.Drawing.Point(107, 244);
             this.漏服药次数3.Name = "漏服药次数3";
-            this.漏服药次数3.Size = new System.Drawing.Size(139, 21);
+            this.漏服药次数3.Size = new System.Drawing.Size(91, 29);
             this.漏服药次数3.TabIndex = 7;
             // 
             // label72
             // 
             this.label72.AutoSize = true;
-            this.label72.Location = new System.Drawing.Point(11, 158);
+            this.label72.Location = new System.Drawing.Point(11, 247);
             this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(65, 12);
+            this.label72.Size = new System.Drawing.Size(90, 21);
             this.label72.TabIndex = 6;
             this.label72.Text = "漏服药次数";
             // 
@@ -1856,9 +1883,9 @@
             this.药品剂型3.Controls.Add(this.radioButton34);
             this.药品剂型3.Controls.Add(this.radioButton35);
             this.药品剂型3.Controls.Add(this.radioButton36);
-            this.药品剂型3.Location = new System.Drawing.Point(13, 90);
+            this.药品剂型3.Location = new System.Drawing.Point(6, 117);
             this.药品剂型3.Name = "药品剂型3";
-            this.药品剂型3.Size = new System.Drawing.Size(238, 59);
+            this.药品剂型3.Size = new System.Drawing.Size(252, 119);
             this.药品剂型3.TabIndex = 5;
             this.药品剂型3.TabStop = false;
             this.药品剂型3.Text = "药品剂型";
@@ -1866,9 +1893,9 @@
             // radioButton33
             // 
             this.radioButton33.AutoSize = true;
-            this.radioButton33.Location = new System.Drawing.Point(163, 37);
+            this.radioButton33.Location = new System.Drawing.Point(151, 86);
             this.radioButton33.Name = "radioButton33";
-            this.radioButton33.Size = new System.Drawing.Size(71, 16);
+            this.radioButton33.Size = new System.Drawing.Size(90, 25);
             this.radioButton33.TabIndex = 5;
             this.radioButton33.TabStop = true;
             this.radioButton33.Tag = "4";
@@ -1878,9 +1905,9 @@
             // radioButton34
             // 
             this.radioButton34.AutoSize = true;
-            this.radioButton34.Location = new System.Drawing.Point(6, 37);
+            this.radioButton34.Location = new System.Drawing.Point(9, 86);
             this.radioButton34.Name = "radioButton34";
-            this.radioButton34.Size = new System.Drawing.Size(95, 16);
+            this.radioButton34.Size = new System.Drawing.Size(122, 25);
             this.radioButton34.TabIndex = 4;
             this.radioButton34.TabStop = true;
             this.radioButton34.Tag = "3";
@@ -1890,9 +1917,9 @@
             // radioButton35
             // 
             this.radioButton35.AutoSize = true;
-            this.radioButton35.Location = new System.Drawing.Point(163, 17);
+            this.radioButton35.Location = new System.Drawing.Point(9, 58);
             this.radioButton35.Name = "radioButton35";
-            this.radioButton35.Size = new System.Drawing.Size(71, 16);
+            this.radioButton35.Size = new System.Drawing.Size(90, 25);
             this.radioButton35.TabIndex = 3;
             this.radioButton35.TabStop = true;
             this.radioButton35.Tag = "2";
@@ -1902,9 +1929,9 @@
             // radioButton36
             // 
             this.radioButton36.AutoSize = true;
-            this.radioButton36.Location = new System.Drawing.Point(6, 17);
+            this.radioButton36.Location = new System.Drawing.Point(9, 27);
             this.radioButton36.Name = "radioButton36";
-            this.radioButton36.Size = new System.Drawing.Size(131, 16);
+            this.radioButton36.Size = new System.Drawing.Size(170, 25);
             this.radioButton36.TabIndex = 2;
             this.radioButton36.TabStop = true;
             this.radioButton36.Tag = "1";
@@ -1915,9 +1942,9 @@
             // 
             this.用法3.Controls.Add(this.radioButton37);
             this.用法3.Controls.Add(this.radioButton38);
-            this.用法3.Location = new System.Drawing.Point(13, 45);
+            this.用法3.Location = new System.Drawing.Point(13, 56);
             this.用法3.Name = "用法3";
-            this.用法3.Size = new System.Drawing.Size(238, 39);
+            this.用法3.Size = new System.Drawing.Size(246, 58);
             this.用法3.TabIndex = 3;
             this.用法3.TabStop = false;
             this.用法3.Text = "用法";
@@ -1925,9 +1952,9 @@
             // radioButton37
             // 
             this.radioButton37.AutoSize = true;
-            this.radioButton37.Location = new System.Drawing.Point(134, 17);
+            this.radioButton37.Location = new System.Drawing.Point(134, 26);
             this.radioButton37.Name = "radioButton37";
-            this.radioButton37.Size = new System.Drawing.Size(59, 16);
+            this.radioButton37.Size = new System.Drawing.Size(74, 25);
             this.radioButton37.TabIndex = 1;
             this.radioButton37.TabStop = true;
             this.radioButton37.Tag = "2";
@@ -1937,9 +1964,9 @@
             // radioButton38
             // 
             this.radioButton38.AutoSize = true;
-            this.radioButton38.Location = new System.Drawing.Point(9, 17);
+            this.radioButton38.Location = new System.Drawing.Point(9, 26);
             this.radioButton38.Name = "radioButton38";
-            this.radioButton38.Size = new System.Drawing.Size(65, 16);
+            this.radioButton38.Size = new System.Drawing.Size(79, 25);
             this.radioButton38.TabIndex = 0;
             this.radioButton38.TabStop = true;
             this.radioButton38.Tag = "1";
@@ -1948,17 +1975,17 @@
             // 
             // 化疗方案3
             // 
-            this.化疗方案3.Location = new System.Drawing.Point(71, 18);
+            this.化疗方案3.Location = new System.Drawing.Point(90, 23);
             this.化疗方案3.Name = "化疗方案3";
-            this.化疗方案3.Size = new System.Drawing.Size(180, 21);
+            this.化疗方案3.Size = new System.Drawing.Size(167, 29);
             this.化疗方案3.TabIndex = 1;
             // 
             // label73
             // 
             this.label73.AutoSize = true;
-            this.label73.Location = new System.Drawing.Point(11, 21);
+            this.label73.Location = new System.Drawing.Point(9, 27);
             this.label73.Name = "label73";
-            this.label73.Size = new System.Drawing.Size(53, 12);
+            this.label73.Size = new System.Drawing.Size(74, 21);
             this.label73.TabIndex = 0;
             this.label73.Text = "化疗方案";
             // 
@@ -1974,9 +2001,10 @@
             this.生活方式指导3.Controls.Add(this.label78);
             this.生活方式指导3.Controls.Add(this.吸烟c1);
             this.生活方式指导3.Controls.Add(this.label79);
-            this.生活方式指导3.Location = new System.Drawing.Point(14, 510);
+            this.生活方式指导3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.生活方式指导3.Location = new System.Drawing.Point(7, 528);
             this.生活方式指导3.Name = "生活方式指导3";
-            this.生活方式指导3.Size = new System.Drawing.Size(261, 80);
+            this.生活方式指导3.Size = new System.Drawing.Size(273, 98);
             this.生活方式指导3.TabIndex = 13;
             this.生活方式指导3.TabStop = false;
             this.生活方式指导3.Text = "生活方式指导";
@@ -1984,82 +2012,82 @@
             // label74
             // 
             this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(220, 50);
+            this.label74.Location = new System.Drawing.Point(212, 69);
             this.label74.Name = "label74";
-            this.label74.Size = new System.Drawing.Size(35, 12);
+            this.label74.Size = new System.Drawing.Size(49, 21);
             this.label74.TabIndex = 9;
             this.label74.Text = "两/天";
             // 
             // 饮酒c2
             // 
-            this.饮酒c2.Location = new System.Drawing.Point(145, 47);
+            this.饮酒c2.Location = new System.Drawing.Point(147, 64);
             this.饮酒c2.Name = "饮酒c2";
-            this.饮酒c2.Size = new System.Drawing.Size(69, 21);
+            this.饮酒c2.Size = new System.Drawing.Size(59, 29);
             this.饮酒c2.TabIndex = 8;
             // 
             // label75
             // 
             this.label75.AutoSize = true;
-            this.label75.Location = new System.Drawing.Point(132, 52);
+            this.label75.Location = new System.Drawing.Point(124, 70);
             this.label75.Name = "label75";
-            this.label75.Size = new System.Drawing.Size(11, 12);
+            this.label75.Size = new System.Drawing.Size(17, 21);
             this.label75.TabIndex = 7;
             this.label75.Text = "/";
             // 
             // 饮酒c1
             // 
-            this.饮酒c1.Location = new System.Drawing.Point(56, 47);
+            this.饮酒c1.Location = new System.Drawing.Point(59, 64);
             this.饮酒c1.Name = "饮酒c1";
-            this.饮酒c1.Size = new System.Drawing.Size(72, 21);
+            this.饮酒c1.Size = new System.Drawing.Size(59, 29);
             this.饮酒c1.TabIndex = 6;
             // 
             // label76
             // 
             this.label76.AutoSize = true;
-            this.label76.Location = new System.Drawing.Point(12, 50);
+            this.label76.Location = new System.Drawing.Point(4, 68);
             this.label76.Name = "label76";
-            this.label76.Size = new System.Drawing.Size(35, 12);
+            this.label76.Size = new System.Drawing.Size(47, 21);
             this.label76.TabIndex = 5;
             this.label76.Text = "饮 酒";
             // 
             // label77
             // 
             this.label77.AutoSize = true;
-            this.label77.Location = new System.Drawing.Point(220, 23);
+            this.label77.Location = new System.Drawing.Point(212, 33);
             this.label77.Name = "label77";
-            this.label77.Size = new System.Drawing.Size(35, 12);
+            this.label77.Size = new System.Drawing.Size(49, 21);
             this.label77.TabIndex = 4;
             this.label77.Text = "支/天";
             // 
             // 吸烟c2
             // 
-            this.吸烟c2.Location = new System.Drawing.Point(145, 20);
+            this.吸烟c2.Location = new System.Drawing.Point(147, 27);
             this.吸烟c2.Name = "吸烟c2";
-            this.吸烟c2.Size = new System.Drawing.Size(69, 21);
+            this.吸烟c2.Size = new System.Drawing.Size(59, 29);
             this.吸烟c2.TabIndex = 3;
             // 
             // label78
             // 
             this.label78.AutoSize = true;
-            this.label78.Location = new System.Drawing.Point(132, 25);
+            this.label78.Location = new System.Drawing.Point(124, 33);
             this.label78.Name = "label78";
-            this.label78.Size = new System.Drawing.Size(11, 12);
+            this.label78.Size = new System.Drawing.Size(17, 21);
             this.label78.TabIndex = 2;
             this.label78.Text = "/";
             // 
             // 吸烟c1
             // 
-            this.吸烟c1.Location = new System.Drawing.Point(56, 20);
+            this.吸烟c1.Location = new System.Drawing.Point(59, 27);
             this.吸烟c1.Name = "吸烟c1";
-            this.吸烟c1.Size = new System.Drawing.Size(72, 21);
+            this.吸烟c1.Size = new System.Drawing.Size(59, 29);
             this.吸烟c1.TabIndex = 1;
             // 
             // label79
             // 
             this.label79.AutoSize = true;
-            this.label79.Location = new System.Drawing.Point(12, 23);
+            this.label79.Location = new System.Drawing.Point(4, 28);
             this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(35, 12);
+            this.label79.Size = new System.Drawing.Size(47, 21);
             this.label79.TabIndex = 0;
             this.label79.Text = "吸 烟";
             // 
@@ -2077,19 +2105,19 @@
             this.症状及体征3.Controls.Add(this.checkBox40);
             this.症状及体征3.Controls.Add(this.checkBox41);
             this.症状及体征3.Controls.Add(this.checkBox42);
-            this.症状及体征3.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.症状及体征3.Location = new System.Drawing.Point(14, 206);
+            this.症状及体征3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.症状及体征3.Location = new System.Drawing.Point(14, 240);
             this.症状及体征3.Name = "症状及体征3";
-            this.症状及体征3.Size = new System.Drawing.Size(261, 298);
+            this.症状及体征3.Size = new System.Drawing.Size(261, 284);
             this.症状及体征3.TabIndex = 11;
             this.症状及体征3.TabStop = false;
             this.症状及体征3.Text = "症状及体征：";
             // 
             // richTextBox4
             // 
-            this.richTextBox4.Location = new System.Drawing.Point(17, 187);
+            this.richTextBox4.Location = new System.Drawing.Point(17, 200);
             this.richTextBox4.Name = "richTextBox4";
-            this.richTextBox4.Size = new System.Drawing.Size(238, 96);
+            this.richTextBox4.Size = new System.Drawing.Size(238, 77);
             this.richTextBox4.TabIndex = 11;
             this.richTextBox4.Text = "";
             // 
@@ -2098,7 +2126,7 @@
             this.label80.AutoSize = true;
             this.label80.Location = new System.Drawing.Point(8, 170);
             this.label80.Name = "label80";
-            this.label80.Size = new System.Drawing.Size(49, 14);
+            this.label80.Size = new System.Drawing.Size(58, 21);
             this.label80.TabIndex = 10;
             this.label80.Text = "其他：";
             // 
@@ -2107,7 +2135,7 @@
             this.checkBox33.AutoSize = true;
             this.checkBox33.Location = new System.Drawing.Point(18, 146);
             this.checkBox33.Name = "checkBox33";
-            this.checkBox33.Size = new System.Drawing.Size(138, 18);
+            this.checkBox33.Size = new System.Drawing.Size(155, 25);
             this.checkBox33.TabIndex = 9;
             this.checkBox33.Tag = "9";
             this.checkBox33.Text = "9 耳鸣、听力下降";
@@ -2118,7 +2146,7 @@
             this.checkBox34.AutoSize = true;
             this.checkBox34.Location = new System.Drawing.Point(18, 122);
             this.checkBox34.Name = "checkBox34";
-            this.checkBox34.Size = new System.Drawing.Size(138, 18);
+            this.checkBox34.Size = new System.Drawing.Size(155, 25);
             this.checkBox34.TabIndex = 8;
             this.checkBox34.Tag = "8";
             this.checkBox34.Text = "8 皮肤瘙痒、皮疹";
@@ -2129,7 +2157,7 @@
             this.checkBox35.AutoSize = true;
             this.checkBox35.Location = new System.Drawing.Point(145, 98);
             this.checkBox35.Name = "checkBox35";
-            this.checkBox35.Size = new System.Drawing.Size(96, 18);
+            this.checkBox35.Size = new System.Drawing.Size(107, 25);
             this.checkBox35.TabIndex = 7;
             this.checkBox35.Tag = "7";
             this.checkBox35.Text = "7 视物模糊";
@@ -2140,7 +2168,7 @@
             this.checkBox36.AutoSize = true;
             this.checkBox36.Location = new System.Drawing.Point(18, 98);
             this.checkBox36.Name = "checkBox36";
-            this.checkBox36.Size = new System.Drawing.Size(96, 18);
+            this.checkBox36.Size = new System.Drawing.Size(107, 25);
             this.checkBox36.TabIndex = 6;
             this.checkBox36.Tag = "6";
             this.checkBox36.Text = "6 头痛失眠";
@@ -2151,7 +2179,7 @@
             this.checkBox37.AutoSize = true;
             this.checkBox37.Location = new System.Drawing.Point(145, 74);
             this.checkBox37.Name = "checkBox37";
-            this.checkBox37.Size = new System.Drawing.Size(96, 18);
+            this.checkBox37.Size = new System.Drawing.Size(107, 25);
             this.checkBox37.TabIndex = 5;
             this.checkBox37.Tag = "5";
             this.checkBox37.Text = "5 恶心纳差";
@@ -2162,7 +2190,7 @@
             this.checkBox38.AutoSize = true;
             this.checkBox38.Location = new System.Drawing.Point(18, 74);
             this.checkBox38.Name = "checkBox38";
-            this.checkBox38.Size = new System.Drawing.Size(96, 18);
+            this.checkBox38.Size = new System.Drawing.Size(107, 25);
             this.checkBox38.TabIndex = 4;
             this.checkBox38.Tag = "4";
             this.checkBox38.Text = "4 胸痛消瘦";
@@ -2173,7 +2201,7 @@
             this.checkBox39.AutoSize = true;
             this.checkBox39.Location = new System.Drawing.Point(145, 50);
             this.checkBox39.Name = "checkBox39";
-            this.checkBox39.Size = new System.Drawing.Size(110, 18);
+            this.checkBox39.Size = new System.Drawing.Size(123, 25);
             this.checkBox39.TabIndex = 3;
             this.checkBox39.Tag = "3";
             this.checkBox39.Text = "3 咯血或血痰";
@@ -2184,7 +2212,7 @@
             this.checkBox40.AutoSize = true;
             this.checkBox40.Location = new System.Drawing.Point(17, 50);
             this.checkBox40.Name = "checkBox40";
-            this.checkBox40.Size = new System.Drawing.Size(96, 18);
+            this.checkBox40.Size = new System.Drawing.Size(107, 25);
             this.checkBox40.TabIndex = 2;
             this.checkBox40.Tag = "2";
             this.checkBox40.Text = "2 低热盗汗";
@@ -2195,7 +2223,7 @@
             this.checkBox41.AutoSize = true;
             this.checkBox41.Location = new System.Drawing.Point(145, 26);
             this.checkBox41.Name = "checkBox41";
-            this.checkBox41.Size = new System.Drawing.Size(96, 18);
+            this.checkBox41.Size = new System.Drawing.Size(107, 25);
             this.checkBox41.TabIndex = 1;
             this.checkBox41.Tag = "1";
             this.checkBox41.Text = "1 咳嗽咳痰";
@@ -2206,7 +2234,7 @@
             this.checkBox42.AutoSize = true;
             this.checkBox42.Location = new System.Drawing.Point(17, 26);
             this.checkBox42.Name = "checkBox42";
-            this.checkBox42.Size = new System.Drawing.Size(96, 18);
+            this.checkBox42.Size = new System.Drawing.Size(107, 25);
             this.checkBox42.TabIndex = 0;
             this.checkBox42.Tag = "0";
             this.checkBox42.Text = "0 没有症状";
@@ -2217,9 +2245,10 @@
             this.随访方式3.Controls.Add(this.radioButton39);
             this.随访方式3.Controls.Add(this.radioButton40);
             this.随访方式3.Controls.Add(this.radioButton41);
-            this.随访方式3.Location = new System.Drawing.Point(15, 157);
+            this.随访方式3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.随访方式3.Location = new System.Drawing.Point(15, 183);
             this.随访方式3.Name = "随访方式3";
-            this.随访方式3.Size = new System.Drawing.Size(260, 43);
+            this.随访方式3.Size = new System.Drawing.Size(260, 54);
             this.随访方式3.TabIndex = 10;
             this.随访方式3.TabStop = false;
             this.随访方式3.Text = "随访方式";
@@ -2227,9 +2256,9 @@
             // radioButton39
             // 
             this.radioButton39.AutoSize = true;
-            this.radioButton39.Location = new System.Drawing.Point(171, 15);
+            this.radioButton39.Location = new System.Drawing.Point(171, 23);
             this.radioButton39.Name = "radioButton39";
-            this.radioButton39.Size = new System.Drawing.Size(59, 16);
+            this.radioButton39.Size = new System.Drawing.Size(74, 25);
             this.radioButton39.TabIndex = 8;
             this.radioButton39.TabStop = true;
             this.radioButton39.Tag = "3";
@@ -2239,9 +2268,9 @@
             // radioButton40
             // 
             this.radioButton40.AutoSize = true;
-            this.radioButton40.Location = new System.Drawing.Point(92, 15);
+            this.radioButton40.Location = new System.Drawing.Point(92, 23);
             this.radioButton40.Name = "radioButton40";
-            this.radioButton40.Size = new System.Drawing.Size(53, 16);
+            this.radioButton40.Size = new System.Drawing.Size(69, 25);
             this.radioButton40.TabIndex = 7;
             this.radioButton40.TabStop = true;
             this.radioButton40.Tag = "2";
@@ -2251,9 +2280,9 @@
             // radioButton41
             // 
             this.radioButton41.AutoSize = true;
-            this.radioButton41.Location = new System.Drawing.Point(14, 15);
+            this.radioButton41.Location = new System.Drawing.Point(14, 23);
             this.radioButton41.Name = "radioButton41";
-            this.radioButton41.Size = new System.Drawing.Size(53, 16);
+            this.radioButton41.Size = new System.Drawing.Size(69, 25);
             this.radioButton41.TabIndex = 6;
             this.radioButton41.TabStop = true;
             this.radioButton41.Tag = "1";
@@ -2266,9 +2295,10 @@
             this.督导人员3.Controls.Add(this.radioButton43);
             this.督导人员3.Controls.Add(this.radioButton44);
             this.督导人员3.Controls.Add(this.radioButton45);
-            this.督导人员3.Location = new System.Drawing.Point(15, 90);
+            this.督导人员3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.督导人员3.Location = new System.Drawing.Point(15, 91);
             this.督导人员3.Name = "督导人员3";
-            this.督导人员3.Size = new System.Drawing.Size(260, 58);
+            this.督导人员3.Size = new System.Drawing.Size(260, 87);
             this.督导人员3.TabIndex = 8;
             this.督导人员3.TabStop = false;
             this.督导人员3.Text = "督导人员";
@@ -2276,9 +2306,9 @@
             // radioButton42
             // 
             this.radioButton42.AutoSize = true;
-            this.radioButton42.Location = new System.Drawing.Point(171, 35);
+            this.radioButton42.Location = new System.Drawing.Point(171, 54);
             this.radioButton42.Name = "radioButton42";
-            this.radioButton42.Size = new System.Drawing.Size(59, 16);
+            this.radioButton42.Size = new System.Drawing.Size(74, 25);
             this.radioButton42.TabIndex = 9;
             this.radioButton42.TabStop = true;
             this.radioButton42.Tag = "4";
@@ -2288,9 +2318,9 @@
             // radioButton43
             // 
             this.radioButton43.AutoSize = true;
-            this.radioButton43.Location = new System.Drawing.Point(14, 35);
+            this.radioButton43.Location = new System.Drawing.Point(14, 54);
             this.radioButton43.Name = "radioButton43";
-            this.radioButton43.Size = new System.Drawing.Size(71, 16);
+            this.radioButton43.Size = new System.Drawing.Size(90, 25);
             this.radioButton43.TabIndex = 8;
             this.radioButton43.TabStop = true;
             this.radioButton43.Tag = "3";
@@ -2300,9 +2330,9 @@
             // radioButton44
             // 
             this.radioButton44.AutoSize = true;
-            this.radioButton44.Location = new System.Drawing.Point(171, 15);
+            this.radioButton44.Location = new System.Drawing.Point(171, 27);
             this.radioButton44.Name = "radioButton44";
-            this.radioButton44.Size = new System.Drawing.Size(59, 16);
+            this.radioButton44.Size = new System.Drawing.Size(74, 25);
             this.radioButton44.TabIndex = 7;
             this.radioButton44.TabStop = true;
             this.radioButton44.Tag = "2";
@@ -2312,9 +2342,9 @@
             // radioButton45
             // 
             this.radioButton45.AutoSize = true;
-            this.radioButton45.Location = new System.Drawing.Point(14, 15);
+            this.radioButton45.Location = new System.Drawing.Point(14, 27);
             this.radioButton45.Name = "radioButton45";
-            this.radioButton45.Size = new System.Drawing.Size(53, 16);
+            this.radioButton45.Size = new System.Drawing.Size(69, 25);
             this.radioButton45.TabIndex = 6;
             this.radioButton45.TabStop = true;
             this.radioButton45.Tag = "1";
@@ -2324,54 +2354,56 @@
             // label81
             // 
             this.label81.AutoSize = true;
-            this.label81.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label81.Location = new System.Drawing.Point(192, 58);
+            this.label81.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label81.Location = new System.Drawing.Point(195, 57);
             this.label81.Name = "label81";
-            this.label81.Size = new System.Drawing.Size(24, 16);
+            this.label81.Size = new System.Drawing.Size(26, 21);
             this.label81.TabIndex = 7;
             this.label81.Text = "月";
             // 
             // label82
             // 
             this.label82.AutoSize = true;
-            this.label82.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label82.Location = new System.Drawing.Point(104, 57);
+            this.label82.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label82.Location = new System.Drawing.Point(104, 56);
             this.label82.Name = "label82";
-            this.label82.Size = new System.Drawing.Size(24, 16);
+            this.label82.Size = new System.Drawing.Size(26, 21);
             this.label82.TabIndex = 6;
             this.label82.Text = "第";
             // 
             // 治疗月序3
             // 
-            this.治疗月序3.Location = new System.Drawing.Point(134, 58);
+            this.治疗月序3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.治疗月序3.Location = new System.Drawing.Point(137, 53);
             this.治疗月序3.Name = "治疗月序3";
-            this.治疗月序3.Size = new System.Drawing.Size(52, 21);
+            this.治疗月序3.Size = new System.Drawing.Size(52, 29);
             this.治疗月序3.TabIndex = 5;
             // 
             // label83
             // 
             this.label83.AutoSize = true;
-            this.label83.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label83.Location = new System.Drawing.Point(12, 58);
+            this.label83.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label83.Location = new System.Drawing.Point(14, 57);
             this.label83.Name = "label83";
-            this.label83.Size = new System.Drawing.Size(72, 16);
+            this.label83.Size = new System.Drawing.Size(74, 21);
             this.label83.TabIndex = 4;
             this.label83.Text = "治疗月序";
             // 
             // 随访时间3
             // 
-            this.随访时间3.Location = new System.Drawing.Point(107, 20);
+            this.随访时间3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.随访时间3.Location = new System.Drawing.Point(107, 17);
             this.随访时间3.Name = "随访时间3";
-            this.随访时间3.Size = new System.Drawing.Size(168, 21);
+            this.随访时间3.Size = new System.Drawing.Size(168, 29);
             this.随访时间3.TabIndex = 3;
             // 
             // label84
             // 
             this.label84.AutoSize = true;
-            this.label84.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label84.Location = new System.Drawing.Point(12, 22);
+            this.label84.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.label84.Location = new System.Drawing.Point(12, 21);
             this.label84.Name = "label84";
-            this.label84.Size = new System.Drawing.Size(88, 16);
+            this.label84.Size = new System.Drawing.Size(90, 22);
             this.label84.TabIndex = 2;
             this.label84.Text = "随访时间：";
             // 
@@ -2401,7 +2433,7 @@
             this.to2.Controls.Add(this.label56);
             this.to2.Location = new System.Drawing.Point(301, 16);
             this.to2.Name = "to2";
-            this.to2.Size = new System.Drawing.Size(286, 1359);
+            this.to2.Size = new System.Drawing.Size(287, 1780);
             this.to2.TabIndex = 25;
             this.to2.TabStop = false;
             // 
@@ -2419,9 +2451,10 @@
             this.全程管理情况2.Controls.Add(this.应访视患者次数2);
             this.全程管理情况2.Controls.Add(this.label34);
             this.全程管理情况2.Controls.Add(this.label35);
-            this.全程管理情况2.Location = new System.Drawing.Point(14, 1239);
+            this.全程管理情况2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.全程管理情况2.Location = new System.Drawing.Point(4, 1588);
             this.全程管理情况2.Name = "全程管理情况2";
-            this.全程管理情况2.Size = new System.Drawing.Size(261, 100);
+            this.全程管理情况2.Size = new System.Drawing.Size(271, 163);
             this.全程管理情况2.TabIndex = 24;
             this.全程管理情况2.TabStop = false;
             this.全程管理情况2.Text = "全程管理情况";
@@ -2429,81 +2462,81 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(155, 69);
+            this.label29.Location = new System.Drawing.Point(157, 128);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(17, 12);
+            this.label29.Size = new System.Drawing.Size(29, 21);
             this.label29.TabIndex = 34;
             this.label29.Text = "% ";
             // 
             // 服药率2
             // 
-            this.服药率2.Location = new System.Drawing.Point(111, 66);
+            this.服药率2.Location = new System.Drawing.Point(113, 125);
             this.服药率2.Name = "服药率2";
-            this.服药率2.Size = new System.Drawing.Size(40, 21);
+            this.服药率2.Size = new System.Drawing.Size(40, 29);
             this.服药率2.TabIndex = 33;
             // 
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(46, 69);
+            this.label30.Location = new System.Drawing.Point(13, 130);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(65, 12);
+            this.label30.Size = new System.Drawing.Size(90, 21);
             this.label30.TabIndex = 32;
             this.label30.Text = "次，服药率";
             // 
             // 实际服药次数2
             // 
-            this.实际服药次数2.Location = new System.Drawing.Point(4, 64);
+            this.实际服药次数2.Location = new System.Drawing.Point(170, 88);
             this.实际服药次数2.Name = "实际服药次数2";
-            this.实际服药次数2.Size = new System.Drawing.Size(40, 21);
+            this.实际服药次数2.Size = new System.Drawing.Size(40, 29);
             this.实际服药次数2.TabIndex = 31;
             // 
             // 应服药次数2
             // 
-            this.应服药次数2.Location = new System.Drawing.Point(129, 45);
+            this.应服药次数2.Location = new System.Drawing.Point(10, 88);
             this.应服药次数2.Name = "应服药次数2";
-            this.应服药次数2.Size = new System.Drawing.Size(40, 21);
+            this.应服药次数2.Size = new System.Drawing.Size(40, 29);
             this.应服药次数2.TabIndex = 30;
             // 
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(2, 49);
+            this.label31.Location = new System.Drawing.Point(105, 58);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(125, 12);
+            this.label31.Size = new System.Drawing.Size(170, 21);
             this.label31.TabIndex = 29;
             this.label31.Text = "患者在疗程中，应服药";
             // 
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(172, 48);
+            this.label32.Location = new System.Drawing.Point(58, 91);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(77, 12);
+            this.label32.Size = new System.Drawing.Size(106, 21);
             this.label32.TabIndex = 28;
             this.label32.Text = "次，实际服药";
             // 
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(237, 24);
+            this.label33.Location = new System.Drawing.Point(58, 58);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(29, 12);
+            this.label33.Size = new System.Drawing.Size(42, 21);
             this.label33.TabIndex = 27;
             this.label33.Text = "次；";
             // 
             // 实际访视次数2
             // 
-            this.实际访视次数2.Location = new System.Drawing.Point(191, 19);
+            this.实际访视次数2.Location = new System.Drawing.Point(10, 53);
             this.实际访视次数2.Name = "实际访视次数2";
-            this.实际访视次数2.Size = new System.Drawing.Size(40, 21);
+            this.实际访视次数2.Size = new System.Drawing.Size(40, 29);
             this.实际访视次数2.TabIndex = 26;
             // 
             // 应访视患者次数2
             // 
-            this.应访视患者次数2.Location = new System.Drawing.Point(69, 19);
+            this.应访视患者次数2.Location = new System.Drawing.Point(96, 19);
             this.应访视患者次数2.Name = "应访视患者次数2";
-            this.应访视患者次数2.Size = new System.Drawing.Size(40, 21);
+            this.应访视患者次数2.Size = new System.Drawing.Size(40, 29);
             this.应访视患者次数2.TabIndex = 25;
             // 
             // label34
@@ -2511,16 +2544,16 @@
             this.label34.AutoSize = true;
             this.label34.Location = new System.Drawing.Point(2, 22);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(65, 12);
+            this.label34.Size = new System.Drawing.Size(90, 21);
             this.label34.TabIndex = 1;
             this.label34.Text = "应访视患者";
             // 
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(112, 22);
+            this.label35.Location = new System.Drawing.Point(150, 22);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(77, 12);
+            this.label35.Size = new System.Drawing.Size(106, 21);
             this.label35.TabIndex = 0;
             this.label35.Text = "次，实际访视";
             // 
@@ -2529,9 +2562,10 @@
             this.停止治疗及原因2.Controls.Add(this.停止治疗原因2);
             this.停止治疗及原因2.Controls.Add(this.出现停止治疗时间2);
             this.停止治疗及原因2.Controls.Add(this.label36);
-            this.停止治疗及原因2.Location = new System.Drawing.Point(14, 1094);
+            this.停止治疗及原因2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.停止治疗及原因2.Location = new System.Drawing.Point(10, 1390);
             this.停止治疗及原因2.Name = "停止治疗及原因2";
-            this.停止治疗及原因2.Size = new System.Drawing.Size(261, 139);
+            this.停止治疗及原因2.Size = new System.Drawing.Size(261, 195);
             this.停止治疗及原因2.TabIndex = 23;
             this.停止治疗及原因2.TabStop = false;
             this.停止治疗及原因2.Text = "停止治疗及原因";
@@ -2542,9 +2576,9 @@
             this.停止治疗原因2.Controls.Add(this.checkBox16);
             this.停止治疗原因2.Controls.Add(this.checkBox17);
             this.停止治疗原因2.Controls.Add(this.checkBox18);
-            this.停止治疗原因2.Location = new System.Drawing.Point(8, 63);
+            this.停止治疗原因2.Location = new System.Drawing.Point(8, 98);
             this.停止治疗原因2.Name = "停止治疗原因2";
-            this.停止治疗原因2.Size = new System.Drawing.Size(244, 63);
+            this.停止治疗原因2.Size = new System.Drawing.Size(244, 89);
             this.停止治疗原因2.TabIndex = 20;
             this.停止治疗原因2.TabStop = false;
             this.停止治疗原因2.Text = "2 停止治疗原因：";
@@ -2552,9 +2586,9 @@
             // checkBox15
             // 
             this.checkBox15.AutoSize = true;
-            this.checkBox15.Location = new System.Drawing.Point(85, 41);
+            this.checkBox15.Location = new System.Drawing.Point(85, 53);
             this.checkBox15.Name = "checkBox15";
-            this.checkBox15.Size = new System.Drawing.Size(108, 16);
+            this.checkBox15.Size = new System.Drawing.Size(141, 25);
             this.checkBox15.TabIndex = 3;
             this.checkBox15.Tag = "4";
             this.checkBox15.Text = "转入耐多药治疗";
@@ -2563,9 +2597,9 @@
             // checkBox16
             // 
             this.checkBox16.AutoSize = true;
-            this.checkBox16.Location = new System.Drawing.Point(10, 41);
+            this.checkBox16.Location = new System.Drawing.Point(10, 53);
             this.checkBox16.Name = "checkBox16";
-            this.checkBox16.Size = new System.Drawing.Size(48, 16);
+            this.checkBox16.Size = new System.Drawing.Size(61, 25);
             this.checkBox16.TabIndex = 2;
             this.checkBox16.Tag = "3";
             this.checkBox16.Text = "丢失";
@@ -2574,9 +2608,9 @@
             // checkBox17
             // 
             this.checkBox17.AutoSize = true;
-            this.checkBox17.Location = new System.Drawing.Point(85, 21);
+            this.checkBox17.Location = new System.Drawing.Point(135, 24);
             this.checkBox17.Name = "checkBox17";
-            this.checkBox17.Size = new System.Drawing.Size(48, 16);
+            this.checkBox17.Size = new System.Drawing.Size(61, 25);
             this.checkBox17.TabIndex = 1;
             this.checkBox17.Tag = "2";
             this.checkBox17.Text = "死亡";
@@ -2585,9 +2619,9 @@
             // checkBox18
             // 
             this.checkBox18.AutoSize = true;
-            this.checkBox18.Location = new System.Drawing.Point(10, 21);
+            this.checkBox18.Location = new System.Drawing.Point(10, 24);
             this.checkBox18.Name = "checkBox18";
-            this.checkBox18.Size = new System.Drawing.Size(72, 16);
+            this.checkBox18.Size = new System.Drawing.Size(93, 25);
             this.checkBox18.TabIndex = 0;
             this.checkBox18.Tag = "1";
             this.checkBox18.Text = "完成疗程";
@@ -2595,65 +2629,71 @@
             // 
             // 出现停止治疗时间2
             // 
-            this.出现停止治疗时间2.Location = new System.Drawing.Point(7, 36);
+            this.出现停止治疗时间2.Location = new System.Drawing.Point(7, 59);
             this.出现停止治疗时间2.Name = "出现停止治疗时间2";
-            this.出现停止治疗时间2.Size = new System.Drawing.Size(245, 21);
+            this.出现停止治疗时间2.Size = new System.Drawing.Size(197, 29);
             this.出现停止治疗时间2.TabIndex = 19;
             // 
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(6, 21);
+            this.label36.Location = new System.Drawing.Point(6, 30);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(113, 12);
+            this.label36.Size = new System.Drawing.Size(152, 21);
             this.label36.TabIndex = 18;
             this.label36.Text = "1 出现停止治疗时间";
             // 
             // 随访医生签名2
             // 
-            this.随访医生签名2.Location = new System.Drawing.Point(73, 1066);
+            this.随访医生签名2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.随访医生签名2.Location = new System.Drawing.Point(78, 1349);
             this.随访医生签名2.Name = "随访医生签名2";
-            this.随访医生签名2.Size = new System.Drawing.Size(202, 21);
+            this.随访医生签名2.Size = new System.Drawing.Size(202, 29);
             this.随访医生签名2.TabIndex = 22;
             // 
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(20, 1063);
+            this.label37.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.label37.Location = new System.Drawing.Point(13, 1342);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(41, 24);
+            this.label37.Size = new System.Drawing.Size(58, 44);
             this.label37.TabIndex = 21;
             this.label37.Text = "随访医\r\n生签名";
             // 
             // 下次随访时间2
             // 
-            this.下次随访时间2.Location = new System.Drawing.Point(73, 1036);
+            this.下次随访时间2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.下次随访时间2.Location = new System.Drawing.Point(77, 1299);
             this.下次随访时间2.Name = "下次随访时间2";
-            this.下次随访时间2.Size = new System.Drawing.Size(202, 21);
+            this.下次随访时间2.Size = new System.Drawing.Size(202, 29);
             this.下次随访时间2.TabIndex = 20;
             // 
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(20, 1033);
+            this.label38.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.label38.Location = new System.Drawing.Point(14, 1288);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(41, 24);
+            this.label38.Size = new System.Drawing.Size(58, 44);
             this.label38.TabIndex = 19;
             this.label38.Text = "下次随\r\n访时间";
             // 
             // 处理意见2
             // 
-            this.处理意见2.Location = new System.Drawing.Point(73, 1006);
+            this.处理意见2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.处理意见2.Location = new System.Drawing.Point(16, 1241);
             this.处理意见2.Name = "处理意见2";
-            this.处理意见2.Size = new System.Drawing.Size(202, 21);
+            this.处理意见2.Size = new System.Drawing.Size(263, 29);
             this.处理意见2.TabIndex = 18;
             // 
             // label39
             // 
             this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(13, 1009);
+            this.label39.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.label39.Location = new System.Drawing.Point(12, 1210);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(53, 12);
+            this.label39.Size = new System.Drawing.Size(74, 22);
             this.label39.TabIndex = 17;
             this.label39.Text = "处理意见";
             // 
@@ -2665,59 +2705,60 @@
             this.转诊2.Controls.Add(this.label41);
             this.转诊2.Controls.Add(this.转诊科别2);
             this.转诊2.Controls.Add(this.label42);
-            this.转诊2.Location = new System.Drawing.Point(14, 867);
+            this.转诊2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.转诊2.Location = new System.Drawing.Point(8, 1030);
             this.转诊2.Name = "转诊2";
-            this.转诊2.Size = new System.Drawing.Size(261, 128);
+            this.转诊2.Size = new System.Drawing.Size(271, 163);
             this.转诊2.TabIndex = 16;
             this.转诊2.TabStop = false;
             this.转诊2.Text = "转诊";
             // 
             // 转诊结果2
             // 
-            this.转诊结果2.Location = new System.Drawing.Point(68, 74);
+            this.转诊结果2.Location = new System.Drawing.Point(82, 95);
             this.转诊结果2.Name = "转诊结果2";
-            this.转诊结果2.Size = new System.Drawing.Size(184, 46);
+            this.转诊结果2.Size = new System.Drawing.Size(179, 58);
             this.转诊结果2.TabIndex = 12;
             this.转诊结果2.Text = "";
             // 
             // label40
             // 
             this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(8, 74);
+            this.label40.Location = new System.Drawing.Point(8, 90);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(53, 36);
+            this.label40.Size = new System.Drawing.Size(74, 63);
             this.label40.TabIndex = 6;
             this.label40.Text = "2 周内随\r\n访，随访\r\n结果";
             // 
             // 转诊原因2
             // 
-            this.转诊原因2.Location = new System.Drawing.Point(68, 44);
+            this.转诊原因2.Location = new System.Drawing.Point(82, 58);
             this.转诊原因2.Name = "转诊原因2";
-            this.转诊原因2.Size = new System.Drawing.Size(180, 21);
+            this.转诊原因2.Size = new System.Drawing.Size(180, 29);
             this.转诊原因2.TabIndex = 5;
             // 
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(8, 47);
+            this.label41.Location = new System.Drawing.Point(8, 61);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(35, 12);
+            this.label41.Size = new System.Drawing.Size(47, 21);
             this.label41.TabIndex = 4;
             this.label41.Text = "原 因";
             // 
             // 转诊科别2
             // 
-            this.转诊科别2.Location = new System.Drawing.Point(68, 17);
+            this.转诊科别2.Location = new System.Drawing.Point(82, 24);
             this.转诊科别2.Name = "转诊科别2";
-            this.转诊科别2.Size = new System.Drawing.Size(180, 21);
+            this.转诊科别2.Size = new System.Drawing.Size(180, 29);
             this.转诊科别2.TabIndex = 3;
             // 
             // label42
             // 
             this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(8, 20);
+            this.label42.Location = new System.Drawing.Point(8, 27);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(35, 12);
+            this.label42.Size = new System.Drawing.Size(47, 21);
             this.label42.TabIndex = 2;
             this.label42.Text = "科 别";
             // 
@@ -2726,26 +2767,27 @@
             this.药物不良反应2.Controls.Add(this.药物不良反应有2);
             this.药物不良反应2.Controls.Add(this.radioButton10);
             this.药物不良反应2.Controls.Add(this.radioButton17);
-            this.药物不良反应2.Location = new System.Drawing.Point(16, 787);
+            this.药物不良反应2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.药物不良反应2.Location = new System.Drawing.Point(16, 925);
             this.药物不良反应2.Name = "药物不良反应2";
-            this.药物不良反应2.Size = new System.Drawing.Size(259, 76);
+            this.药物不良反应2.Size = new System.Drawing.Size(265, 97);
             this.药物不良反应2.TabIndex = 15;
             this.药物不良反应2.TabStop = false;
             this.药物不良反应2.Text = "药物不良反应";
             // 
             // 药物不良反应有2
             // 
-            this.药物不良反应有2.Location = new System.Drawing.Point(54, 46);
+            this.药物不良反应有2.Location = new System.Drawing.Point(73, 58);
             this.药物不良反应有2.Name = "药物不良反应有2";
-            this.药物不良反应有2.Size = new System.Drawing.Size(196, 21);
+            this.药物不良反应有2.Size = new System.Drawing.Size(180, 29);
             this.药物不良反应有2.TabIndex = 8;
             // 
             // radioButton10
             // 
             this.radioButton10.AutoSize = true;
-            this.radioButton10.Location = new System.Drawing.Point(15, 46);
+            this.radioButton10.Location = new System.Drawing.Point(15, 58);
             this.radioButton10.Name = "radioButton10";
-            this.radioButton10.Size = new System.Drawing.Size(41, 16);
+            this.radioButton10.Size = new System.Drawing.Size(53, 25);
             this.radioButton10.TabIndex = 3;
             this.radioButton10.TabStop = true;
             this.radioButton10.Tag = "2";
@@ -2755,9 +2797,9 @@
             // radioButton17
             // 
             this.radioButton17.AutoSize = true;
-            this.radioButton17.Location = new System.Drawing.Point(16, 24);
+            this.radioButton17.Location = new System.Drawing.Point(16, 28);
             this.radioButton17.Name = "radioButton17";
-            this.radioButton17.Size = new System.Drawing.Size(41, 16);
+            this.radioButton17.Size = new System.Drawing.Size(53, 25);
             this.radioButton17.TabIndex = 2;
             this.radioButton17.TabStop = true;
             this.radioButton17.Tag = "1";
@@ -2773,9 +2815,10 @@
             this.用药2.Controls.Add(this.用法2);
             this.用药2.Controls.Add(this.化疗方案2);
             this.用药2.Controls.Add(this.label45);
-            this.用药2.Location = new System.Drawing.Point(15, 596);
+            this.用药2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.用药2.Location = new System.Drawing.Point(15, 635);
             this.用药2.Name = "用药2";
-            this.用药2.Size = new System.Drawing.Size(260, 185);
+            this.用药2.Size = new System.Drawing.Size(265, 280);
             this.用药2.TabIndex = 14;
             this.用药2.TabStop = false;
             this.用药2.Text = "用药";
@@ -2783,25 +2826,25 @@
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(219, 158);
+            this.label43.Location = new System.Drawing.Point(219, 247);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(17, 12);
+            this.label43.Size = new System.Drawing.Size(26, 21);
             this.label43.TabIndex = 8;
             this.label43.Text = "次";
             // 
             // 漏服药次数2
             // 
-            this.漏服药次数2.Location = new System.Drawing.Point(74, 155);
+            this.漏服药次数2.Location = new System.Drawing.Point(108, 245);
             this.漏服药次数2.Name = "漏服药次数2";
-            this.漏服药次数2.Size = new System.Drawing.Size(139, 21);
+            this.漏服药次数2.Size = new System.Drawing.Size(91, 29);
             this.漏服药次数2.TabIndex = 7;
             // 
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(11, 158);
+            this.label44.Location = new System.Drawing.Point(11, 247);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(65, 12);
+            this.label44.Size = new System.Drawing.Size(90, 21);
             this.label44.TabIndex = 6;
             this.label44.Text = "漏服药次数";
             // 
@@ -2811,9 +2854,9 @@
             this.药品剂型2.Controls.Add(this.radioButton19);
             this.药品剂型2.Controls.Add(this.radioButton20);
             this.药品剂型2.Controls.Add(this.radioButton21);
-            this.药品剂型2.Location = new System.Drawing.Point(13, 90);
+            this.药品剂型2.Location = new System.Drawing.Point(6, 117);
             this.药品剂型2.Name = "药品剂型2";
-            this.药品剂型2.Size = new System.Drawing.Size(238, 59);
+            this.药品剂型2.Size = new System.Drawing.Size(252, 119);
             this.药品剂型2.TabIndex = 5;
             this.药品剂型2.TabStop = false;
             this.药品剂型2.Text = "药品剂型";
@@ -2821,9 +2864,9 @@
             // radioButton18
             // 
             this.radioButton18.AutoSize = true;
-            this.radioButton18.Location = new System.Drawing.Point(163, 37);
+            this.radioButton18.Location = new System.Drawing.Point(151, 86);
             this.radioButton18.Name = "radioButton18";
-            this.radioButton18.Size = new System.Drawing.Size(71, 16);
+            this.radioButton18.Size = new System.Drawing.Size(90, 25);
             this.radioButton18.TabIndex = 5;
             this.radioButton18.TabStop = true;
             this.radioButton18.Tag = "4";
@@ -2833,9 +2876,9 @@
             // radioButton19
             // 
             this.radioButton19.AutoSize = true;
-            this.radioButton19.Location = new System.Drawing.Point(6, 37);
+            this.radioButton19.Location = new System.Drawing.Point(9, 86);
             this.radioButton19.Name = "radioButton19";
-            this.radioButton19.Size = new System.Drawing.Size(95, 16);
+            this.radioButton19.Size = new System.Drawing.Size(122, 25);
             this.radioButton19.TabIndex = 4;
             this.radioButton19.TabStop = true;
             this.radioButton19.Tag = "3";
@@ -2845,9 +2888,9 @@
             // radioButton20
             // 
             this.radioButton20.AutoSize = true;
-            this.radioButton20.Location = new System.Drawing.Point(163, 17);
+            this.radioButton20.Location = new System.Drawing.Point(9, 58);
             this.radioButton20.Name = "radioButton20";
-            this.radioButton20.Size = new System.Drawing.Size(71, 16);
+            this.radioButton20.Size = new System.Drawing.Size(90, 25);
             this.radioButton20.TabIndex = 3;
             this.radioButton20.TabStop = true;
             this.radioButton20.Tag = "2";
@@ -2857,9 +2900,9 @@
             // radioButton21
             // 
             this.radioButton21.AutoSize = true;
-            this.radioButton21.Location = new System.Drawing.Point(6, 17);
+            this.radioButton21.Location = new System.Drawing.Point(9, 27);
             this.radioButton21.Name = "radioButton21";
-            this.radioButton21.Size = new System.Drawing.Size(131, 16);
+            this.radioButton21.Size = new System.Drawing.Size(170, 25);
             this.radioButton21.TabIndex = 2;
             this.radioButton21.TabStop = true;
             this.radioButton21.Tag = "1";
@@ -2870,9 +2913,9 @@
             // 
             this.用法2.Controls.Add(this.radioButton22);
             this.用法2.Controls.Add(this.radioButton23);
-            this.用法2.Location = new System.Drawing.Point(13, 45);
+            this.用法2.Location = new System.Drawing.Point(13, 56);
             this.用法2.Name = "用法2";
-            this.用法2.Size = new System.Drawing.Size(238, 39);
+            this.用法2.Size = new System.Drawing.Size(245, 58);
             this.用法2.TabIndex = 3;
             this.用法2.TabStop = false;
             this.用法2.Text = "用法";
@@ -2880,9 +2923,9 @@
             // radioButton22
             // 
             this.radioButton22.AutoSize = true;
-            this.radioButton22.Location = new System.Drawing.Point(134, 17);
+            this.radioButton22.Location = new System.Drawing.Point(134, 26);
             this.radioButton22.Name = "radioButton22";
-            this.radioButton22.Size = new System.Drawing.Size(59, 16);
+            this.radioButton22.Size = new System.Drawing.Size(74, 25);
             this.radioButton22.TabIndex = 1;
             this.radioButton22.TabStop = true;
             this.radioButton22.Tag = "2";
@@ -2892,9 +2935,9 @@
             // radioButton23
             // 
             this.radioButton23.AutoSize = true;
-            this.radioButton23.Location = new System.Drawing.Point(9, 17);
+            this.radioButton23.Location = new System.Drawing.Point(9, 26);
             this.radioButton23.Name = "radioButton23";
-            this.radioButton23.Size = new System.Drawing.Size(65, 16);
+            this.radioButton23.Size = new System.Drawing.Size(79, 25);
             this.radioButton23.TabIndex = 0;
             this.radioButton23.TabStop = true;
             this.radioButton23.Tag = "1";
@@ -2903,17 +2946,17 @@
             // 
             // 化疗方案2
             // 
-            this.化疗方案2.Location = new System.Drawing.Point(71, 18);
+            this.化疗方案2.Location = new System.Drawing.Point(92, 23);
             this.化疗方案2.Name = "化疗方案2";
-            this.化疗方案2.Size = new System.Drawing.Size(180, 21);
+            this.化疗方案2.Size = new System.Drawing.Size(167, 29);
             this.化疗方案2.TabIndex = 1;
             // 
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(11, 21);
+            this.label45.Location = new System.Drawing.Point(11, 27);
             this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(53, 12);
+            this.label45.Size = new System.Drawing.Size(74, 21);
             this.label45.TabIndex = 0;
             this.label45.Text = "化疗方案";
             // 
@@ -2929,9 +2972,10 @@
             this.生活方式指导2.Controls.Add(this.label50);
             this.生活方式指导2.Controls.Add(this.吸烟b1);
             this.生活方式指导2.Controls.Add(this.label51);
-            this.生活方式指导2.Location = new System.Drawing.Point(14, 510);
+            this.生活方式指导2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.生活方式指导2.Location = new System.Drawing.Point(9, 528);
             this.生活方式指导2.Name = "生活方式指导2";
-            this.生活方式指导2.Size = new System.Drawing.Size(261, 80);
+            this.生活方式指导2.Size = new System.Drawing.Size(270, 98);
             this.生活方式指导2.TabIndex = 13;
             this.生活方式指导2.TabStop = false;
             this.生活方式指导2.Text = "生活方式指导";
@@ -2939,82 +2983,82 @@
             // label46
             // 
             this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(220, 50);
+            this.label46.Location = new System.Drawing.Point(215, 64);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(35, 12);
+            this.label46.Size = new System.Drawing.Size(49, 21);
             this.label46.TabIndex = 9;
             this.label46.Text = "两/天";
             // 
             // 饮酒b2
             // 
-            this.饮酒b2.Location = new System.Drawing.Point(145, 47);
+            this.饮酒b2.Location = new System.Drawing.Point(150, 64);
             this.饮酒b2.Name = "饮酒b2";
-            this.饮酒b2.Size = new System.Drawing.Size(69, 21);
+            this.饮酒b2.Size = new System.Drawing.Size(59, 29);
             this.饮酒b2.TabIndex = 8;
             // 
             // label47
             // 
             this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(132, 52);
+            this.label47.Location = new System.Drawing.Point(125, 66);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(11, 12);
+            this.label47.Size = new System.Drawing.Size(17, 21);
             this.label47.TabIndex = 7;
             this.label47.Text = "/";
             // 
             // 饮酒b1
             // 
-            this.饮酒b1.Location = new System.Drawing.Point(56, 47);
+            this.饮酒b1.Location = new System.Drawing.Point(62, 64);
             this.饮酒b1.Name = "饮酒b1";
-            this.饮酒b1.Size = new System.Drawing.Size(72, 21);
+            this.饮酒b1.Size = new System.Drawing.Size(59, 29);
             this.饮酒b1.TabIndex = 6;
             // 
             // label48
             // 
             this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(12, 50);
+            this.label48.Location = new System.Drawing.Point(7, 64);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(35, 12);
+            this.label48.Size = new System.Drawing.Size(47, 21);
             this.label48.TabIndex = 5;
             this.label48.Text = "饮 酒";
             // 
             // label49
             // 
             this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(220, 23);
+            this.label49.Location = new System.Drawing.Point(215, 34);
             this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(35, 12);
+            this.label49.Size = new System.Drawing.Size(49, 21);
             this.label49.TabIndex = 4;
             this.label49.Text = "支/天";
             // 
             // 吸烟b2
             // 
-            this.吸烟b2.Location = new System.Drawing.Point(145, 20);
+            this.吸烟b2.Location = new System.Drawing.Point(150, 27);
             this.吸烟b2.Name = "吸烟b2";
-            this.吸烟b2.Size = new System.Drawing.Size(69, 21);
+            this.吸烟b2.Size = new System.Drawing.Size(59, 29);
             this.吸烟b2.TabIndex = 3;
             // 
             // label50
             // 
             this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(132, 25);
+            this.label50.Location = new System.Drawing.Point(127, 33);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(11, 12);
+            this.label50.Size = new System.Drawing.Size(17, 21);
             this.label50.TabIndex = 2;
             this.label50.Text = "/";
             // 
             // 吸烟b1
             // 
-            this.吸烟b1.Location = new System.Drawing.Point(56, 20);
+            this.吸烟b1.Location = new System.Drawing.Point(62, 27);
             this.吸烟b1.Name = "吸烟b1";
-            this.吸烟b1.Size = new System.Drawing.Size(72, 21);
+            this.吸烟b1.Size = new System.Drawing.Size(59, 29);
             this.吸烟b1.TabIndex = 1;
             // 
             // label51
             // 
             this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(12, 23);
+            this.label51.Location = new System.Drawing.Point(12, 28);
             this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(35, 12);
+            this.label51.Size = new System.Drawing.Size(47, 21);
             this.label51.TabIndex = 0;
             this.label51.Text = "吸 烟";
             // 
@@ -3032,19 +3076,19 @@
             this.症状及体征2.Controls.Add(this.checkBox26);
             this.症状及体征2.Controls.Add(this.checkBox27);
             this.症状及体征2.Controls.Add(this.checkBox28);
-            this.症状及体征2.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.症状及体征2.Location = new System.Drawing.Point(14, 206);
+            this.症状及体征2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.症状及体征2.Location = new System.Drawing.Point(14, 240);
             this.症状及体征2.Name = "症状及体征2";
-            this.症状及体征2.Size = new System.Drawing.Size(261, 298);
+            this.症状及体征2.Size = new System.Drawing.Size(261, 284);
             this.症状及体征2.TabIndex = 11;
             this.症状及体征2.TabStop = false;
             this.症状及体征2.Text = "症状及体征：";
             // 
             // richTextBox3
             // 
-            this.richTextBox3.Location = new System.Drawing.Point(17, 187);
+            this.richTextBox3.Location = new System.Drawing.Point(17, 200);
             this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(238, 96);
+            this.richTextBox3.Size = new System.Drawing.Size(238, 77);
             this.richTextBox3.TabIndex = 11;
             this.richTextBox3.Text = "";
             // 
@@ -3053,7 +3097,7 @@
             this.label52.AutoSize = true;
             this.label52.Location = new System.Drawing.Point(8, 170);
             this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(49, 14);
+            this.label52.Size = new System.Drawing.Size(58, 21);
             this.label52.TabIndex = 10;
             this.label52.Text = "其他：";
             // 
@@ -3062,7 +3106,7 @@
             this.checkBox19.AutoSize = true;
             this.checkBox19.Location = new System.Drawing.Point(18, 146);
             this.checkBox19.Name = "checkBox19";
-            this.checkBox19.Size = new System.Drawing.Size(138, 18);
+            this.checkBox19.Size = new System.Drawing.Size(155, 25);
             this.checkBox19.TabIndex = 9;
             this.checkBox19.Tag = "9";
             this.checkBox19.Text = "9 耳鸣、听力下降";
@@ -3073,7 +3117,7 @@
             this.checkBox20.AutoSize = true;
             this.checkBox20.Location = new System.Drawing.Point(18, 122);
             this.checkBox20.Name = "checkBox20";
-            this.checkBox20.Size = new System.Drawing.Size(138, 18);
+            this.checkBox20.Size = new System.Drawing.Size(155, 25);
             this.checkBox20.TabIndex = 8;
             this.checkBox20.Tag = "8";
             this.checkBox20.Text = "8 皮肤瘙痒、皮疹";
@@ -3084,7 +3128,7 @@
             this.checkBox21.AutoSize = true;
             this.checkBox21.Location = new System.Drawing.Point(145, 98);
             this.checkBox21.Name = "checkBox21";
-            this.checkBox21.Size = new System.Drawing.Size(96, 18);
+            this.checkBox21.Size = new System.Drawing.Size(107, 25);
             this.checkBox21.TabIndex = 7;
             this.checkBox21.Tag = "7";
             this.checkBox21.Text = "7 视物模糊";
@@ -3095,7 +3139,7 @@
             this.checkBox22.AutoSize = true;
             this.checkBox22.Location = new System.Drawing.Point(18, 98);
             this.checkBox22.Name = "checkBox22";
-            this.checkBox22.Size = new System.Drawing.Size(96, 18);
+            this.checkBox22.Size = new System.Drawing.Size(107, 25);
             this.checkBox22.TabIndex = 6;
             this.checkBox22.Tag = "6";
             this.checkBox22.Text = "6 头痛失眠";
@@ -3106,7 +3150,7 @@
             this.checkBox23.AutoSize = true;
             this.checkBox23.Location = new System.Drawing.Point(145, 74);
             this.checkBox23.Name = "checkBox23";
-            this.checkBox23.Size = new System.Drawing.Size(96, 18);
+            this.checkBox23.Size = new System.Drawing.Size(107, 25);
             this.checkBox23.TabIndex = 5;
             this.checkBox23.Tag = "5";
             this.checkBox23.Text = "5 恶心纳差";
@@ -3117,7 +3161,7 @@
             this.checkBox24.AutoSize = true;
             this.checkBox24.Location = new System.Drawing.Point(18, 74);
             this.checkBox24.Name = "checkBox24";
-            this.checkBox24.Size = new System.Drawing.Size(96, 18);
+            this.checkBox24.Size = new System.Drawing.Size(107, 25);
             this.checkBox24.TabIndex = 4;
             this.checkBox24.Tag = "4";
             this.checkBox24.Text = "4 胸痛消瘦";
@@ -3128,7 +3172,7 @@
             this.checkBox25.AutoSize = true;
             this.checkBox25.Location = new System.Drawing.Point(145, 50);
             this.checkBox25.Name = "checkBox25";
-            this.checkBox25.Size = new System.Drawing.Size(110, 18);
+            this.checkBox25.Size = new System.Drawing.Size(123, 25);
             this.checkBox25.TabIndex = 3;
             this.checkBox25.Tag = "3";
             this.checkBox25.Text = "3 咯血或血痰";
@@ -3139,7 +3183,7 @@
             this.checkBox26.AutoSize = true;
             this.checkBox26.Location = new System.Drawing.Point(17, 50);
             this.checkBox26.Name = "checkBox26";
-            this.checkBox26.Size = new System.Drawing.Size(96, 18);
+            this.checkBox26.Size = new System.Drawing.Size(107, 25);
             this.checkBox26.TabIndex = 2;
             this.checkBox26.Tag = "2";
             this.checkBox26.Text = "2 低热盗汗";
@@ -3150,7 +3194,7 @@
             this.checkBox27.AutoSize = true;
             this.checkBox27.Location = new System.Drawing.Point(145, 26);
             this.checkBox27.Name = "checkBox27";
-            this.checkBox27.Size = new System.Drawing.Size(96, 18);
+            this.checkBox27.Size = new System.Drawing.Size(107, 25);
             this.checkBox27.TabIndex = 1;
             this.checkBox27.Tag = "1";
             this.checkBox27.Text = "1 咳嗽咳痰";
@@ -3161,7 +3205,7 @@
             this.checkBox28.AutoSize = true;
             this.checkBox28.Location = new System.Drawing.Point(17, 26);
             this.checkBox28.Name = "checkBox28";
-            this.checkBox28.Size = new System.Drawing.Size(96, 18);
+            this.checkBox28.Size = new System.Drawing.Size(107, 25);
             this.checkBox28.TabIndex = 0;
             this.checkBox28.Tag = "0";
             this.checkBox28.Text = "0 没有症状";
@@ -3172,9 +3216,10 @@
             this.随访方式2.Controls.Add(this.radioButton24);
             this.随访方式2.Controls.Add(this.radioButton25);
             this.随访方式2.Controls.Add(this.radioButton26);
-            this.随访方式2.Location = new System.Drawing.Point(15, 157);
+            this.随访方式2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.随访方式2.Location = new System.Drawing.Point(15, 183);
             this.随访方式2.Name = "随访方式2";
-            this.随访方式2.Size = new System.Drawing.Size(260, 43);
+            this.随访方式2.Size = new System.Drawing.Size(260, 54);
             this.随访方式2.TabIndex = 10;
             this.随访方式2.TabStop = false;
             this.随访方式2.Text = "随访方式";
@@ -3182,9 +3227,9 @@
             // radioButton24
             // 
             this.radioButton24.AutoSize = true;
-            this.radioButton24.Location = new System.Drawing.Point(171, 15);
+            this.radioButton24.Location = new System.Drawing.Point(171, 23);
             this.radioButton24.Name = "radioButton24";
-            this.radioButton24.Size = new System.Drawing.Size(59, 16);
+            this.radioButton24.Size = new System.Drawing.Size(74, 25);
             this.radioButton24.TabIndex = 8;
             this.radioButton24.TabStop = true;
             this.radioButton24.Tag = "3";
@@ -3194,9 +3239,9 @@
             // radioButton25
             // 
             this.radioButton25.AutoSize = true;
-            this.radioButton25.Location = new System.Drawing.Point(92, 15);
+            this.radioButton25.Location = new System.Drawing.Point(92, 23);
             this.radioButton25.Name = "radioButton25";
-            this.radioButton25.Size = new System.Drawing.Size(53, 16);
+            this.radioButton25.Size = new System.Drawing.Size(69, 25);
             this.radioButton25.TabIndex = 7;
             this.radioButton25.TabStop = true;
             this.radioButton25.Tag = "2";
@@ -3206,9 +3251,9 @@
             // radioButton26
             // 
             this.radioButton26.AutoSize = true;
-            this.radioButton26.Location = new System.Drawing.Point(14, 15);
+            this.radioButton26.Location = new System.Drawing.Point(14, 23);
             this.radioButton26.Name = "radioButton26";
-            this.radioButton26.Size = new System.Drawing.Size(53, 16);
+            this.radioButton26.Size = new System.Drawing.Size(69, 25);
             this.radioButton26.TabIndex = 6;
             this.radioButton26.TabStop = true;
             this.radioButton26.Tag = "1";
@@ -3221,9 +3266,10 @@
             this.督导人员2.Controls.Add(this.radioButton28);
             this.督导人员2.Controls.Add(this.radioButton29);
             this.督导人员2.Controls.Add(this.radioButton30);
-            this.督导人员2.Location = new System.Drawing.Point(15, 90);
+            this.督导人员2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.督导人员2.Location = new System.Drawing.Point(15, 91);
             this.督导人员2.Name = "督导人员2";
-            this.督导人员2.Size = new System.Drawing.Size(260, 58);
+            this.督导人员2.Size = new System.Drawing.Size(260, 87);
             this.督导人员2.TabIndex = 8;
             this.督导人员2.TabStop = false;
             this.督导人员2.Text = "督导人员";
@@ -3231,9 +3277,9 @@
             // radioButton27
             // 
             this.radioButton27.AutoSize = true;
-            this.radioButton27.Location = new System.Drawing.Point(171, 35);
+            this.radioButton27.Location = new System.Drawing.Point(171, 54);
             this.radioButton27.Name = "radioButton27";
-            this.radioButton27.Size = new System.Drawing.Size(59, 16);
+            this.radioButton27.Size = new System.Drawing.Size(74, 25);
             this.radioButton27.TabIndex = 9;
             this.radioButton27.TabStop = true;
             this.radioButton27.Tag = "4";
@@ -3243,9 +3289,9 @@
             // radioButton28
             // 
             this.radioButton28.AutoSize = true;
-            this.radioButton28.Location = new System.Drawing.Point(14, 35);
+            this.radioButton28.Location = new System.Drawing.Point(14, 54);
             this.radioButton28.Name = "radioButton28";
-            this.radioButton28.Size = new System.Drawing.Size(71, 16);
+            this.radioButton28.Size = new System.Drawing.Size(90, 25);
             this.radioButton28.TabIndex = 8;
             this.radioButton28.TabStop = true;
             this.radioButton28.Tag = "3";
@@ -3255,9 +3301,9 @@
             // radioButton29
             // 
             this.radioButton29.AutoSize = true;
-            this.radioButton29.Location = new System.Drawing.Point(171, 15);
+            this.radioButton29.Location = new System.Drawing.Point(171, 27);
             this.radioButton29.Name = "radioButton29";
-            this.radioButton29.Size = new System.Drawing.Size(59, 16);
+            this.radioButton29.Size = new System.Drawing.Size(74, 25);
             this.radioButton29.TabIndex = 7;
             this.radioButton29.TabStop = true;
             this.radioButton29.Tag = "2";
@@ -3267,9 +3313,9 @@
             // radioButton30
             // 
             this.radioButton30.AutoSize = true;
-            this.radioButton30.Location = new System.Drawing.Point(14, 15);
+            this.radioButton30.Location = new System.Drawing.Point(14, 27);
             this.radioButton30.Name = "radioButton30";
-            this.radioButton30.Size = new System.Drawing.Size(53, 16);
+            this.radioButton30.Size = new System.Drawing.Size(69, 25);
             this.radioButton30.TabIndex = 6;
             this.radioButton30.TabStop = true;
             this.radioButton30.Tag = "1";
@@ -3279,54 +3325,56 @@
             // label53
             // 
             this.label53.AutoSize = true;
-            this.label53.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label53.Location = new System.Drawing.Point(192, 58);
+            this.label53.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label53.Location = new System.Drawing.Point(198, 55);
             this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(24, 16);
+            this.label53.Size = new System.Drawing.Size(26, 21);
             this.label53.TabIndex = 7;
             this.label53.Text = "月";
             // 
             // label54
             // 
             this.label54.AutoSize = true;
-            this.label54.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label54.Location = new System.Drawing.Point(104, 57);
+            this.label54.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label54.Location = new System.Drawing.Point(104, 54);
             this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(24, 16);
+            this.label54.Size = new System.Drawing.Size(26, 21);
             this.label54.TabIndex = 6;
             this.label54.Text = "第";
             // 
             // 治疗月序2
             // 
-            this.治疗月序2.Location = new System.Drawing.Point(134, 58);
+            this.治疗月序2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.治疗月序2.Location = new System.Drawing.Point(137, 52);
             this.治疗月序2.Name = "治疗月序2";
-            this.治疗月序2.Size = new System.Drawing.Size(52, 21);
+            this.治疗月序2.Size = new System.Drawing.Size(52, 29);
             this.治疗月序2.TabIndex = 5;
             // 
             // label55
             // 
             this.label55.AutoSize = true;
-            this.label55.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label55.Location = new System.Drawing.Point(12, 58);
+            this.label55.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label55.Location = new System.Drawing.Point(11, 58);
             this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(72, 16);
+            this.label55.Size = new System.Drawing.Size(74, 21);
             this.label55.TabIndex = 4;
             this.label55.Text = "治疗月序";
             // 
             // 随访时间2
             // 
-            this.随访时间2.Location = new System.Drawing.Point(107, 20);
+            this.随访时间2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.随访时间2.Location = new System.Drawing.Point(107, 17);
             this.随访时间2.Name = "随访时间2";
-            this.随访时间2.Size = new System.Drawing.Size(168, 21);
+            this.随访时间2.Size = new System.Drawing.Size(168, 29);
             this.随访时间2.TabIndex = 3;
             // 
             // label56
             // 
             this.label56.AutoSize = true;
-            this.label56.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label56.Location = new System.Drawing.Point(12, 22);
+            this.label56.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.label56.Location = new System.Drawing.Point(12, 21);
             this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(88, 16);
+            this.label56.Size = new System.Drawing.Size(90, 22);
             this.label56.TabIndex = 2;
             this.label56.Text = "随访时间：";
             // 
@@ -3356,12 +3404,13 @@
             this.to1.Controls.Add(this.label1);
             this.to1.Location = new System.Drawing.Point(9, 16);
             this.to1.Name = "to1";
-            this.to1.Size = new System.Drawing.Size(286, 1359);
+            this.to1.Size = new System.Drawing.Size(286, 1780);
             this.to1.TabIndex = 1;
             this.to1.TabStop = false;
             // 
             // 全程管理情况1
             // 
+            this.全程管理情况1.Controls.Add(this.label113);
             this.全程管理情况1.Controls.Add(this.label28);
             this.全程管理情况1.Controls.Add(this.服药率1);
             this.全程管理情况1.Controls.Add(this.label25);
@@ -3373,10 +3422,10 @@
             this.全程管理情况1.Controls.Add(this.实际访视次数1);
             this.全程管理情况1.Controls.Add(this.应访视患者次数1);
             this.全程管理情况1.Controls.Add(this.label23);
-            this.全程管理情况1.Controls.Add(this.label22);
-            this.全程管理情况1.Location = new System.Drawing.Point(14, 1239);
+            this.全程管理情况1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.全程管理情况1.Location = new System.Drawing.Point(8, 1588);
             this.全程管理情况1.Name = "全程管理情况1";
-            this.全程管理情况1.Size = new System.Drawing.Size(261, 100);
+            this.全程管理情况1.Size = new System.Drawing.Size(261, 172);
             this.全程管理情况1.TabIndex = 24;
             this.全程管理情况1.TabStop = false;
             this.全程管理情况1.Text = "全程管理情况";
@@ -3384,81 +3433,81 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(155, 69);
+            this.label28.Location = new System.Drawing.Point(155, 123);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(17, 12);
+            this.label28.Size = new System.Drawing.Size(29, 21);
             this.label28.TabIndex = 34;
             this.label28.Text = "% ";
             // 
             // 服药率1
             // 
-            this.服药率1.Location = new System.Drawing.Point(111, 66);
+            this.服药率1.Location = new System.Drawing.Point(111, 122);
             this.服药率1.Name = "服药率1";
-            this.服药率1.Size = new System.Drawing.Size(40, 21);
+            this.服药率1.Size = new System.Drawing.Size(40, 29);
             this.服药率1.TabIndex = 33;
             // 
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(46, 69);
+            this.label25.Location = new System.Drawing.Point(6, 128);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(65, 12);
+            this.label25.Size = new System.Drawing.Size(90, 21);
             this.label25.TabIndex = 32;
             this.label25.Text = "次，服药率";
             // 
             // 实际服药次数1
             // 
-            this.实际服药次数1.Location = new System.Drawing.Point(4, 64);
+            this.实际服药次数1.Location = new System.Drawing.Point(159, 85);
             this.实际服药次数1.Name = "实际服药次数1";
-            this.实际服药次数1.Size = new System.Drawing.Size(40, 21);
+            this.实际服药次数1.Size = new System.Drawing.Size(40, 29);
             this.实际服药次数1.TabIndex = 31;
             // 
             // 应服药次数1
             // 
-            this.应服药次数1.Location = new System.Drawing.Point(129, 45);
+            this.应服药次数1.Location = new System.Drawing.Point(6, 85);
             this.应服药次数1.Name = "应服药次数1";
-            this.应服药次数1.Size = new System.Drawing.Size(40, 21);
+            this.应服药次数1.Size = new System.Drawing.Size(40, 29);
             this.应服药次数1.TabIndex = 30;
             // 
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(2, 49);
+            this.label26.Location = new System.Drawing.Point(85, 53);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(125, 12);
+            this.label26.Size = new System.Drawing.Size(170, 21);
             this.label26.TabIndex = 29;
             this.label26.Text = "患者在疗程中，应服药";
             // 
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(172, 48);
+            this.label27.Location = new System.Drawing.Point(53, 88);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(77, 12);
+            this.label27.Size = new System.Drawing.Size(106, 21);
             this.label27.TabIndex = 28;
             this.label27.Text = "次，实际服药";
             // 
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(237, 24);
+            this.label24.Location = new System.Drawing.Point(53, 53);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(29, 12);
+            this.label24.Size = new System.Drawing.Size(42, 21);
             this.label24.TabIndex = 27;
             this.label24.Text = "次；";
             // 
             // 实际访视次数1
             // 
-            this.实际访视次数1.Location = new System.Drawing.Point(191, 19);
+            this.实际访视次数1.Location = new System.Drawing.Point(7, 50);
             this.实际访视次数1.Name = "实际访视次数1";
-            this.实际访视次数1.Size = new System.Drawing.Size(40, 21);
+            this.实际访视次数1.Size = new System.Drawing.Size(40, 29);
             this.实际访视次数1.TabIndex = 26;
             // 
             // 应访视患者次数1
             // 
-            this.应访视患者次数1.Location = new System.Drawing.Point(69, 19);
+            this.应访视患者次数1.Location = new System.Drawing.Point(97, 19);
             this.应访视患者次数1.Name = "应访视患者次数1";
-            this.应访视患者次数1.Size = new System.Drawing.Size(40, 21);
+            this.应访视患者次数1.Size = new System.Drawing.Size(40, 29);
             this.应访视患者次数1.TabIndex = 25;
             // 
             // label23
@@ -3466,27 +3515,19 @@
             this.label23.AutoSize = true;
             this.label23.Location = new System.Drawing.Point(2, 22);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(65, 12);
+            this.label23.Size = new System.Drawing.Size(90, 21);
             this.label23.TabIndex = 1;
             this.label23.Text = "应访视患者";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(112, 22);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(77, 12);
-            this.label22.TabIndex = 0;
-            this.label22.Text = "次，实际访视";
             // 
             // 停止治疗及原因1
             // 
             this.停止治疗及原因1.Controls.Add(this.停止治疗原因1);
             this.停止治疗及原因1.Controls.Add(this.出现停止治疗时间1);
             this.停止治疗及原因1.Controls.Add(this.label21);
-            this.停止治疗及原因1.Location = new System.Drawing.Point(14, 1094);
+            this.停止治疗及原因1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.停止治疗及原因1.Location = new System.Drawing.Point(8, 1390);
             this.停止治疗及原因1.Name = "停止治疗及原因1";
-            this.停止治疗及原因1.Size = new System.Drawing.Size(261, 139);
+            this.停止治疗及原因1.Size = new System.Drawing.Size(261, 195);
             this.停止治疗及原因1.TabIndex = 23;
             this.停止治疗及原因1.TabStop = false;
             this.停止治疗及原因1.Text = "停止治疗及原因";
@@ -3497,9 +3538,9 @@
             this.停止治疗原因1.Controls.Add(this.checkBox13);
             this.停止治疗原因1.Controls.Add(this.checkBox12);
             this.停止治疗原因1.Controls.Add(this.checkBox11);
-            this.停止治疗原因1.Location = new System.Drawing.Point(8, 63);
+            this.停止治疗原因1.Location = new System.Drawing.Point(8, 98);
             this.停止治疗原因1.Name = "停止治疗原因1";
-            this.停止治疗原因1.Size = new System.Drawing.Size(244, 63);
+            this.停止治疗原因1.Size = new System.Drawing.Size(244, 89);
             this.停止治疗原因1.TabIndex = 20;
             this.停止治疗原因1.TabStop = false;
             this.停止治疗原因1.Text = "2 停止治疗原因：";
@@ -3507,9 +3548,9 @@
             // checkBox14
             // 
             this.checkBox14.AutoSize = true;
-            this.checkBox14.Location = new System.Drawing.Point(85, 41);
+            this.checkBox14.Location = new System.Drawing.Point(85, 56);
             this.checkBox14.Name = "checkBox14";
-            this.checkBox14.Size = new System.Drawing.Size(108, 16);
+            this.checkBox14.Size = new System.Drawing.Size(141, 25);
             this.checkBox14.TabIndex = 3;
             this.checkBox14.Tag = "4";
             this.checkBox14.Text = "转入耐多药治疗";
@@ -3518,9 +3559,9 @@
             // checkBox13
             // 
             this.checkBox13.AutoSize = true;
-            this.checkBox13.Location = new System.Drawing.Point(10, 41);
+            this.checkBox13.Location = new System.Drawing.Point(10, 57);
             this.checkBox13.Name = "checkBox13";
-            this.checkBox13.Size = new System.Drawing.Size(48, 16);
+            this.checkBox13.Size = new System.Drawing.Size(61, 25);
             this.checkBox13.TabIndex = 2;
             this.checkBox13.Tag = "3";
             this.checkBox13.Text = "丢失";
@@ -3529,9 +3570,9 @@
             // checkBox12
             // 
             this.checkBox12.AutoSize = true;
-            this.checkBox12.Location = new System.Drawing.Point(85, 21);
+            this.checkBox12.Location = new System.Drawing.Point(125, 28);
             this.checkBox12.Name = "checkBox12";
-            this.checkBox12.Size = new System.Drawing.Size(48, 16);
+            this.checkBox12.Size = new System.Drawing.Size(61, 25);
             this.checkBox12.TabIndex = 1;
             this.checkBox12.Tag = "2";
             this.checkBox12.Text = "死亡";
@@ -3540,9 +3581,9 @@
             // checkBox11
             // 
             this.checkBox11.AutoSize = true;
-            this.checkBox11.Location = new System.Drawing.Point(10, 21);
+            this.checkBox11.Location = new System.Drawing.Point(10, 28);
             this.checkBox11.Name = "checkBox11";
-            this.checkBox11.Size = new System.Drawing.Size(72, 16);
+            this.checkBox11.Size = new System.Drawing.Size(93, 25);
             this.checkBox11.TabIndex = 0;
             this.checkBox11.Tag = "1";
             this.checkBox11.Text = "完成疗程";
@@ -3550,65 +3591,71 @@
             // 
             // 出现停止治疗时间1
             // 
-            this.出现停止治疗时间1.Location = new System.Drawing.Point(7, 36);
+            this.出现停止治疗时间1.Location = new System.Drawing.Point(12, 59);
             this.出现停止治疗时间1.Name = "出现停止治疗时间1";
-            this.出现停止治疗时间1.Size = new System.Drawing.Size(245, 21);
+            this.出现停止治疗时间1.Size = new System.Drawing.Size(198, 29);
             this.出现停止治疗时间1.TabIndex = 19;
             // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(6, 21);
+            this.label21.Location = new System.Drawing.Point(11, 30);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(113, 12);
+            this.label21.Size = new System.Drawing.Size(152, 21);
             this.label21.TabIndex = 18;
             this.label21.Text = "1 出现停止治疗时间";
             // 
             // 随访医生签名1
             // 
-            this.随访医生签名1.Location = new System.Drawing.Point(73, 1066);
+            this.随访医生签名1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.随访医生签名1.Location = new System.Drawing.Point(77, 1344);
             this.随访医生签名1.Name = "随访医生签名1";
-            this.随访医生签名1.Size = new System.Drawing.Size(202, 21);
+            this.随访医生签名1.Size = new System.Drawing.Size(195, 29);
             this.随访医生签名1.TabIndex = 22;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(20, 1063);
+            this.label20.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.label20.Location = new System.Drawing.Point(14, 1337);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(41, 24);
+            this.label20.Size = new System.Drawing.Size(58, 44);
             this.label20.TabIndex = 21;
             this.label20.Text = "随访医\r\n生签名";
             // 
             // 下次随访时间1
             // 
-            this.下次随访时间1.Location = new System.Drawing.Point(73, 1036);
+            this.下次随访时间1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.下次随访时间1.Location = new System.Drawing.Point(77, 1291);
             this.下次随访时间1.Name = "下次随访时间1";
-            this.下次随访时间1.Size = new System.Drawing.Size(202, 21);
+            this.下次随访时间1.Size = new System.Drawing.Size(198, 29);
             this.下次随访时间1.TabIndex = 20;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(20, 1033);
+            this.label19.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.label19.Location = new System.Drawing.Point(17, 1282);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(41, 24);
+            this.label19.Size = new System.Drawing.Size(58, 44);
             this.label19.TabIndex = 19;
             this.label19.Text = "下次随\r\n访时间";
             // 
             // 处理意见1
             // 
-            this.处理意见1.Location = new System.Drawing.Point(73, 1006);
+            this.处理意见1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.处理意见1.Location = new System.Drawing.Point(12, 1238);
             this.处理意见1.Name = "处理意见1";
-            this.处理意见1.Size = new System.Drawing.Size(202, 21);
+            this.处理意见1.Size = new System.Drawing.Size(263, 29);
             this.处理意见1.TabIndex = 18;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(13, 1009);
+            this.label18.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.label18.Location = new System.Drawing.Point(13, 1210);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(53, 12);
+            this.label18.Size = new System.Drawing.Size(74, 22);
             this.label18.TabIndex = 17;
             this.label18.Text = "处理意见";
             // 
@@ -3620,59 +3667,60 @@
             this.转诊1.Controls.Add(this.label16);
             this.转诊1.Controls.Add(this.转诊科别1);
             this.转诊1.Controls.Add(this.label15);
-            this.转诊1.Location = new System.Drawing.Point(14, 867);
+            this.转诊1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.转诊1.Location = new System.Drawing.Point(8, 1030);
             this.转诊1.Name = "转诊1";
-            this.转诊1.Size = new System.Drawing.Size(261, 128);
+            this.转诊1.Size = new System.Drawing.Size(267, 163);
             this.转诊1.TabIndex = 16;
             this.转诊1.TabStop = false;
             this.转诊1.Text = "转诊";
             // 
             // 转诊结果1
             // 
-            this.转诊结果1.Location = new System.Drawing.Point(68, 74);
+            this.转诊结果1.Location = new System.Drawing.Point(81, 94);
             this.转诊结果1.Name = "转诊结果1";
-            this.转诊结果1.Size = new System.Drawing.Size(184, 46);
+            this.转诊结果1.Size = new System.Drawing.Size(179, 58);
             this.转诊结果1.TabIndex = 12;
             this.转诊结果1.Text = "";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(8, 74);
+            this.label17.Location = new System.Drawing.Point(8, 90);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(53, 36);
+            this.label17.Size = new System.Drawing.Size(74, 63);
             this.label17.TabIndex = 6;
             this.label17.Text = "2 周内随\r\n访，随访\r\n结果";
             // 
             // 转诊原因1
             // 
-            this.转诊原因1.Location = new System.Drawing.Point(68, 44);
+            this.转诊原因1.Location = new System.Drawing.Point(80, 58);
             this.转诊原因1.Name = "转诊原因1";
-            this.转诊原因1.Size = new System.Drawing.Size(180, 21);
+            this.转诊原因1.Size = new System.Drawing.Size(180, 29);
             this.转诊原因1.TabIndex = 5;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(8, 47);
+            this.label16.Location = new System.Drawing.Point(8, 61);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(35, 12);
+            this.label16.Size = new System.Drawing.Size(47, 21);
             this.label16.TabIndex = 4;
             this.label16.Text = "原 因";
             // 
             // 转诊科别1
             // 
-            this.转诊科别1.Location = new System.Drawing.Point(68, 17);
+            this.转诊科别1.Location = new System.Drawing.Point(80, 24);
             this.转诊科别1.Name = "转诊科别1";
-            this.转诊科别1.Size = new System.Drawing.Size(180, 21);
+            this.转诊科别1.Size = new System.Drawing.Size(180, 29);
             this.转诊科别1.TabIndex = 3;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(8, 20);
+            this.label15.Location = new System.Drawing.Point(8, 27);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(35, 12);
+            this.label15.Size = new System.Drawing.Size(47, 21);
             this.label15.TabIndex = 2;
             this.label15.Text = "科 别";
             // 
@@ -3681,26 +3729,27 @@
             this.药物不良反应1.Controls.Add(this.药物不良反应有1);
             this.药物不良反应1.Controls.Add(this.radioButton8);
             this.药物不良反应1.Controls.Add(this.radioButton9);
-            this.药物不良反应1.Location = new System.Drawing.Point(16, 787);
+            this.药物不良反应1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.药物不良反应1.Location = new System.Drawing.Point(10, 925);
             this.药物不良反应1.Name = "药物不良反应1";
-            this.药物不良反应1.Size = new System.Drawing.Size(259, 76);
+            this.药物不良反应1.Size = new System.Drawing.Size(265, 97);
             this.药物不良反应1.TabIndex = 15;
             this.药物不良反应1.TabStop = false;
             this.药物不良反应1.Text = "药物不良反应";
             // 
             // 药物不良反应有1
             // 
-            this.药物不良反应有1.Location = new System.Drawing.Point(54, 46);
+            this.药物不良反应有1.Location = new System.Drawing.Point(74, 58);
             this.药物不良反应有1.Name = "药物不良反应有1";
-            this.药物不良反应有1.Size = new System.Drawing.Size(196, 21);
+            this.药物不良反应有1.Size = new System.Drawing.Size(184, 29);
             this.药物不良反应有1.TabIndex = 8;
             // 
             // radioButton8
             // 
             this.radioButton8.AutoSize = true;
-            this.radioButton8.Location = new System.Drawing.Point(15, 46);
+            this.radioButton8.Location = new System.Drawing.Point(15, 58);
             this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(41, 16);
+            this.radioButton8.Size = new System.Drawing.Size(53, 25);
             this.radioButton8.TabIndex = 3;
             this.radioButton8.TabStop = true;
             this.radioButton8.Tag = "2";
@@ -3710,9 +3759,9 @@
             // radioButton9
             // 
             this.radioButton9.AutoSize = true;
-            this.radioButton9.Location = new System.Drawing.Point(16, 24);
+            this.radioButton9.Location = new System.Drawing.Point(16, 28);
             this.radioButton9.Name = "radioButton9";
-            this.radioButton9.Size = new System.Drawing.Size(41, 16);
+            this.radioButton9.Size = new System.Drawing.Size(53, 25);
             this.radioButton9.TabIndex = 2;
             this.radioButton9.TabStop = true;
             this.radioButton9.Tag = "1";
@@ -3728,9 +3777,10 @@
             this.用药1.Controls.Add(this.用法1);
             this.用药1.Controls.Add(this.化疗方案1);
             this.用药1.Controls.Add(this.label12);
-            this.用药1.Location = new System.Drawing.Point(15, 596);
+            this.用药1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.用药1.Location = new System.Drawing.Point(10, 635);
             this.用药1.Name = "用药1";
-            this.用药1.Size = new System.Drawing.Size(260, 185);
+            this.用药1.Size = new System.Drawing.Size(265, 280);
             this.用药1.TabIndex = 14;
             this.用药1.TabStop = false;
             this.用药1.Text = "用药";
@@ -3738,25 +3788,25 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(219, 158);
+            this.label14.Location = new System.Drawing.Point(218, 247);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(17, 12);
+            this.label14.Size = new System.Drawing.Size(26, 21);
             this.label14.TabIndex = 8;
             this.label14.Text = "次";
             // 
             // 漏服药次数1
             // 
-            this.漏服药次数1.Location = new System.Drawing.Point(74, 155);
+            this.漏服药次数1.Location = new System.Drawing.Point(112, 244);
             this.漏服药次数1.Name = "漏服药次数1";
-            this.漏服药次数1.Size = new System.Drawing.Size(139, 21);
+            this.漏服药次数1.Size = new System.Drawing.Size(91, 29);
             this.漏服药次数1.TabIndex = 7;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(11, 158);
+            this.label13.Location = new System.Drawing.Point(10, 247);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(65, 12);
+            this.label13.Size = new System.Drawing.Size(90, 21);
             this.label13.TabIndex = 6;
             this.label13.Text = "漏服药次数";
             // 
@@ -3766,9 +3816,9 @@
             this.药品剂型1.Controls.Add(this.radioButton5);
             this.药品剂型1.Controls.Add(this.radioButton6);
             this.药品剂型1.Controls.Add(this.radioButton7);
-            this.药品剂型1.Location = new System.Drawing.Point(13, 90);
+            this.药品剂型1.Location = new System.Drawing.Point(6, 117);
             this.药品剂型1.Name = "药品剂型1";
-            this.药品剂型1.Size = new System.Drawing.Size(238, 59);
+            this.药品剂型1.Size = new System.Drawing.Size(252, 119);
             this.药品剂型1.TabIndex = 5;
             this.药品剂型1.TabStop = false;
             this.药品剂型1.Text = "药品剂型";
@@ -3776,9 +3826,9 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(163, 37);
+            this.radioButton1.Location = new System.Drawing.Point(151, 86);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(71, 16);
+            this.radioButton1.Size = new System.Drawing.Size(90, 25);
             this.radioButton1.TabIndex = 5;
             this.radioButton1.TabStop = true;
             this.radioButton1.Tag = "4";
@@ -3788,9 +3838,9 @@
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(6, 37);
+            this.radioButton5.Location = new System.Drawing.Point(12, 84);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(95, 16);
+            this.radioButton5.Size = new System.Drawing.Size(122, 25);
             this.radioButton5.TabIndex = 4;
             this.radioButton5.TabStop = true;
             this.radioButton5.Tag = "3";
@@ -3800,9 +3850,9 @@
             // radioButton6
             // 
             this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(163, 17);
+            this.radioButton6.Location = new System.Drawing.Point(12, 58);
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(71, 16);
+            this.radioButton6.Size = new System.Drawing.Size(90, 25);
             this.radioButton6.TabIndex = 3;
             this.radioButton6.TabStop = true;
             this.radioButton6.Tag = "2";
@@ -3812,9 +3862,10 @@
             // radioButton7
             // 
             this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(6, 17);
+            this.radioButton7.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.radioButton7.Location = new System.Drawing.Point(12, 27);
             this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(131, 16);
+            this.radioButton7.Size = new System.Drawing.Size(170, 25);
             this.radioButton7.TabIndex = 2;
             this.radioButton7.TabStop = true;
             this.radioButton7.Tag = "1";
@@ -3825,9 +3876,9 @@
             // 
             this.用法1.Controls.Add(this.radioButton12);
             this.用法1.Controls.Add(this.radioButton11);
-            this.用法1.Location = new System.Drawing.Point(13, 45);
+            this.用法1.Location = new System.Drawing.Point(13, 56);
             this.用法1.Name = "用法1";
-            this.用法1.Size = new System.Drawing.Size(238, 39);
+            this.用法1.Size = new System.Drawing.Size(245, 58);
             this.用法1.TabIndex = 3;
             this.用法1.TabStop = false;
             this.用法1.Text = "用法";
@@ -3835,9 +3886,9 @@
             // radioButton12
             // 
             this.radioButton12.AutoSize = true;
-            this.radioButton12.Location = new System.Drawing.Point(134, 17);
+            this.radioButton12.Location = new System.Drawing.Point(137, 26);
             this.radioButton12.Name = "radioButton12";
-            this.radioButton12.Size = new System.Drawing.Size(59, 16);
+            this.radioButton12.Size = new System.Drawing.Size(74, 25);
             this.radioButton12.TabIndex = 1;
             this.radioButton12.TabStop = true;
             this.radioButton12.Tag = "2";
@@ -3847,9 +3898,9 @@
             // radioButton11
             // 
             this.radioButton11.AutoSize = true;
-            this.radioButton11.Location = new System.Drawing.Point(9, 17);
+            this.radioButton11.Location = new System.Drawing.Point(12, 26);
             this.radioButton11.Name = "radioButton11";
-            this.radioButton11.Size = new System.Drawing.Size(65, 16);
+            this.radioButton11.Size = new System.Drawing.Size(79, 25);
             this.radioButton11.TabIndex = 0;
             this.radioButton11.TabStop = true;
             this.radioButton11.Tag = "1";
@@ -3858,17 +3909,18 @@
             // 
             // 化疗方案1
             // 
-            this.化疗方案1.Location = new System.Drawing.Point(71, 18);
+            this.化疗方案1.Location = new System.Drawing.Point(87, 23);
             this.化疗方案1.Name = "化疗方案1";
-            this.化疗方案1.Size = new System.Drawing.Size(180, 21);
+            this.化疗方案1.Size = new System.Drawing.Size(167, 29);
             this.化疗方案1.TabIndex = 1;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(11, 21);
+            this.label12.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label12.Location = new System.Drawing.Point(4, 27);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(53, 12);
+            this.label12.Size = new System.Drawing.Size(74, 21);
             this.label12.TabIndex = 0;
             this.label12.Text = "化疗方案";
             // 
@@ -3884,9 +3936,10 @@
             this.生活方式指导1.Controls.Add(this.label10);
             this.生活方式指导1.Controls.Add(this.吸烟a1);
             this.生活方式指导1.Controls.Add(this.label11);
-            this.生活方式指导1.Location = new System.Drawing.Point(14, 510);
+            this.生活方式指导1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.生活方式指导1.Location = new System.Drawing.Point(14, 528);
             this.生活方式指导1.Name = "生活方式指导1";
-            this.生活方式指导1.Size = new System.Drawing.Size(261, 80);
+            this.生活方式指导1.Size = new System.Drawing.Size(261, 98);
             this.生活方式指导1.TabIndex = 13;
             this.生活方式指导1.TabStop = false;
             this.生活方式指导1.Text = "生活方式指导";
@@ -3894,82 +3947,82 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(220, 50);
+            this.label5.Location = new System.Drawing.Point(210, 71);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 12);
+            this.label5.Size = new System.Drawing.Size(49, 21);
             this.label5.TabIndex = 9;
             this.label5.Text = "两/天";
             // 
             // 饮酒a2
             // 
-            this.饮酒a2.Location = new System.Drawing.Point(145, 47);
+            this.饮酒a2.Location = new System.Drawing.Point(145, 64);
             this.饮酒a2.Name = "饮酒a2";
-            this.饮酒a2.Size = new System.Drawing.Size(69, 21);
+            this.饮酒a2.Size = new System.Drawing.Size(59, 29);
             this.饮酒a2.TabIndex = 8;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(132, 52);
+            this.label8.Location = new System.Drawing.Point(120, 69);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(11, 12);
+            this.label8.Size = new System.Drawing.Size(17, 21);
             this.label8.TabIndex = 7;
             this.label8.Text = "/";
             // 
             // 饮酒a1
             // 
-            this.饮酒a1.Location = new System.Drawing.Point(56, 47);
+            this.饮酒a1.Location = new System.Drawing.Point(56, 64);
             this.饮酒a1.Name = "饮酒a1";
-            this.饮酒a1.Size = new System.Drawing.Size(72, 21);
+            this.饮酒a1.Size = new System.Drawing.Size(59, 29);
             this.饮酒a1.TabIndex = 6;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 50);
+            this.label9.Location = new System.Drawing.Point(6, 65);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(35, 12);
+            this.label9.Size = new System.Drawing.Size(47, 21);
             this.label9.TabIndex = 5;
             this.label9.Text = "饮 酒";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(220, 23);
+            this.label7.Location = new System.Drawing.Point(210, 34);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 12);
+            this.label7.Size = new System.Drawing.Size(49, 21);
             this.label7.TabIndex = 4;
             this.label7.Text = "支/天";
             // 
             // 吸烟a2
             // 
-            this.吸烟a2.Location = new System.Drawing.Point(145, 20);
+            this.吸烟a2.Location = new System.Drawing.Point(145, 27);
             this.吸烟a2.Name = "吸烟a2";
-            this.吸烟a2.Size = new System.Drawing.Size(69, 21);
+            this.吸烟a2.Size = new System.Drawing.Size(59, 29);
             this.吸烟a2.TabIndex = 3;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(132, 25);
+            this.label10.Location = new System.Drawing.Point(120, 32);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(11, 12);
+            this.label10.Size = new System.Drawing.Size(17, 21);
             this.label10.TabIndex = 2;
             this.label10.Text = "/";
             // 
             // 吸烟a1
             // 
-            this.吸烟a1.Location = new System.Drawing.Point(56, 20);
+            this.吸烟a1.Location = new System.Drawing.Point(56, 27);
             this.吸烟a1.Name = "吸烟a1";
-            this.吸烟a1.Size = new System.Drawing.Size(72, 21);
+            this.吸烟a1.Size = new System.Drawing.Size(59, 29);
             this.吸烟a1.TabIndex = 1;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(12, 23);
+            this.label11.Location = new System.Drawing.Point(6, 28);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(35, 12);
+            this.label11.Size = new System.Drawing.Size(47, 21);
             this.label11.TabIndex = 0;
             this.label11.Text = "吸 烟";
             // 
@@ -3987,19 +4040,19 @@
             this.症状及体征1.Controls.Add(this.checkBox3);
             this.症状及体征1.Controls.Add(this.checkBox2);
             this.症状及体征1.Controls.Add(this.checkBox1);
-            this.症状及体征1.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.症状及体征1.Location = new System.Drawing.Point(14, 206);
+            this.症状及体征1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.症状及体征1.Location = new System.Drawing.Point(14, 240);
             this.症状及体征1.Name = "症状及体征1";
-            this.症状及体征1.Size = new System.Drawing.Size(261, 298);
+            this.症状及体征1.Size = new System.Drawing.Size(261, 284);
             this.症状及体征1.TabIndex = 11;
             this.症状及体征1.TabStop = false;
             this.症状及体征1.Text = "症状及体征：";
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(17, 187);
+            this.richTextBox1.Location = new System.Drawing.Point(17, 200);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(238, 96);
+            this.richTextBox1.Size = new System.Drawing.Size(238, 77);
             this.richTextBox1.TabIndex = 11;
             this.richTextBox1.Text = "";
             // 
@@ -4008,16 +4061,16 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(8, 170);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(49, 14);
+            this.label6.Size = new System.Drawing.Size(58, 21);
             this.label6.TabIndex = 10;
             this.label6.Text = "其他：";
             // 
             // checkBox10
             // 
             this.checkBox10.AutoSize = true;
-            this.checkBox10.Location = new System.Drawing.Point(18, 146);
+            this.checkBox10.Location = new System.Drawing.Point(10, 146);
             this.checkBox10.Name = "checkBox10";
-            this.checkBox10.Size = new System.Drawing.Size(138, 18);
+            this.checkBox10.Size = new System.Drawing.Size(155, 25);
             this.checkBox10.TabIndex = 9;
             this.checkBox10.Tag = "9";
             this.checkBox10.Text = "9 耳鸣、听力下降";
@@ -4026,9 +4079,9 @@
             // checkBox9
             // 
             this.checkBox9.AutoSize = true;
-            this.checkBox9.Location = new System.Drawing.Point(18, 122);
+            this.checkBox9.Location = new System.Drawing.Point(10, 122);
             this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(138, 18);
+            this.checkBox9.Size = new System.Drawing.Size(155, 25);
             this.checkBox9.TabIndex = 8;
             this.checkBox9.Tag = "8";
             this.checkBox9.Text = "8 皮肤瘙痒、皮疹";
@@ -4037,9 +4090,9 @@
             // checkBox8
             // 
             this.checkBox8.AutoSize = true;
-            this.checkBox8.Location = new System.Drawing.Point(145, 98);
+            this.checkBox8.Location = new System.Drawing.Point(137, 98);
             this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(96, 18);
+            this.checkBox8.Size = new System.Drawing.Size(107, 25);
             this.checkBox8.TabIndex = 7;
             this.checkBox8.Tag = "7";
             this.checkBox8.Text = "7 视物模糊";
@@ -4048,9 +4101,9 @@
             // checkBox7
             // 
             this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(18, 98);
+            this.checkBox7.Location = new System.Drawing.Point(10, 98);
             this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(96, 18);
+            this.checkBox7.Size = new System.Drawing.Size(107, 25);
             this.checkBox7.TabIndex = 6;
             this.checkBox7.Tag = "6";
             this.checkBox7.Text = "6 头痛失眠";
@@ -4059,9 +4112,9 @@
             // checkBox6
             // 
             this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(145, 74);
+            this.checkBox6.Location = new System.Drawing.Point(137, 74);
             this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(96, 18);
+            this.checkBox6.Size = new System.Drawing.Size(107, 25);
             this.checkBox6.TabIndex = 5;
             this.checkBox6.Tag = "5";
             this.checkBox6.Text = "5 恶心纳差";
@@ -4070,9 +4123,9 @@
             // checkBox5
             // 
             this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(18, 74);
+            this.checkBox5.Location = new System.Drawing.Point(10, 74);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(96, 18);
+            this.checkBox5.Size = new System.Drawing.Size(107, 25);
             this.checkBox5.TabIndex = 4;
             this.checkBox5.Tag = "4";
             this.checkBox5.Text = "4 胸痛消瘦";
@@ -4081,9 +4134,9 @@
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(145, 50);
+            this.checkBox4.Location = new System.Drawing.Point(137, 50);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(110, 18);
+            this.checkBox4.Size = new System.Drawing.Size(123, 25);
             this.checkBox4.TabIndex = 3;
             this.checkBox4.Tag = "3";
             this.checkBox4.Text = "3 咯血或血痰";
@@ -4092,9 +4145,9 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(17, 50);
+            this.checkBox3.Location = new System.Drawing.Point(9, 50);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(96, 18);
+            this.checkBox3.Size = new System.Drawing.Size(107, 25);
             this.checkBox3.TabIndex = 2;
             this.checkBox3.Tag = "2";
             this.checkBox3.Text = "2 低热盗汗";
@@ -4103,9 +4156,9 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(145, 26);
+            this.checkBox2.Location = new System.Drawing.Point(137, 26);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(96, 18);
+            this.checkBox2.Size = new System.Drawing.Size(107, 25);
             this.checkBox2.TabIndex = 1;
             this.checkBox2.Tag = "1";
             this.checkBox2.Text = "1 咳嗽咳痰";
@@ -4114,9 +4167,9 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(17, 26);
+            this.checkBox1.Location = new System.Drawing.Point(9, 26);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(96, 18);
+            this.checkBox1.Size = new System.Drawing.Size(107, 25);
             this.checkBox1.TabIndex = 0;
             this.checkBox1.Tag = "0";
             this.checkBox1.Text = "0 没有症状";
@@ -4127,9 +4180,10 @@
             this.随访方式1.Controls.Add(this.radioButton2);
             this.随访方式1.Controls.Add(this.radioButton3);
             this.随访方式1.Controls.Add(this.radioButton4);
-            this.随访方式1.Location = new System.Drawing.Point(15, 157);
+            this.随访方式1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.随访方式1.Location = new System.Drawing.Point(15, 183);
             this.随访方式1.Name = "随访方式1";
-            this.随访方式1.Size = new System.Drawing.Size(260, 43);
+            this.随访方式1.Size = new System.Drawing.Size(260, 54);
             this.随访方式1.TabIndex = 10;
             this.随访方式1.TabStop = false;
             this.随访方式1.Text = "随访方式";
@@ -4137,9 +4191,9 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(171, 15);
+            this.radioButton2.Location = new System.Drawing.Point(171, 23);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(59, 16);
+            this.radioButton2.Size = new System.Drawing.Size(74, 25);
             this.radioButton2.TabIndex = 8;
             this.radioButton2.TabStop = true;
             this.radioButton2.Tag = "3";
@@ -4149,9 +4203,9 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(92, 15);
+            this.radioButton3.Location = new System.Drawing.Point(92, 23);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(53, 16);
+            this.radioButton3.Size = new System.Drawing.Size(69, 25);
             this.radioButton3.TabIndex = 7;
             this.radioButton3.TabStop = true;
             this.radioButton3.Tag = "2";
@@ -4161,9 +4215,9 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(14, 15);
+            this.radioButton4.Location = new System.Drawing.Point(14, 23);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(53, 16);
+            this.radioButton4.Size = new System.Drawing.Size(69, 25);
             this.radioButton4.TabIndex = 6;
             this.radioButton4.TabStop = true;
             this.radioButton4.Tag = "1";
@@ -4176,9 +4230,10 @@
             this.督导人员1.Controls.Add(this.radioButton15);
             this.督导人员1.Controls.Add(this.radioButton13);
             this.督导人员1.Controls.Add(this.radioButton14);
-            this.督导人员1.Location = new System.Drawing.Point(15, 90);
+            this.督导人员1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.督导人员1.Location = new System.Drawing.Point(15, 91);
             this.督导人员1.Name = "督导人员1";
-            this.督导人员1.Size = new System.Drawing.Size(260, 58);
+            this.督导人员1.Size = new System.Drawing.Size(260, 87);
             this.督导人员1.TabIndex = 8;
             this.督导人员1.TabStop = false;
             this.督导人员1.Text = "督导人员";
@@ -4186,9 +4241,9 @@
             // radioButton16
             // 
             this.radioButton16.AutoSize = true;
-            this.radioButton16.Location = new System.Drawing.Point(171, 35);
+            this.radioButton16.Location = new System.Drawing.Point(171, 54);
             this.radioButton16.Name = "radioButton16";
-            this.radioButton16.Size = new System.Drawing.Size(59, 16);
+            this.radioButton16.Size = new System.Drawing.Size(74, 25);
             this.radioButton16.TabIndex = 9;
             this.radioButton16.TabStop = true;
             this.radioButton16.Tag = "4";
@@ -4198,9 +4253,9 @@
             // radioButton15
             // 
             this.radioButton15.AutoSize = true;
-            this.radioButton15.Location = new System.Drawing.Point(14, 35);
+            this.radioButton15.Location = new System.Drawing.Point(14, 54);
             this.radioButton15.Name = "radioButton15";
-            this.radioButton15.Size = new System.Drawing.Size(71, 16);
+            this.radioButton15.Size = new System.Drawing.Size(90, 25);
             this.radioButton15.TabIndex = 8;
             this.radioButton15.TabStop = true;
             this.radioButton15.Tag = "3";
@@ -4210,9 +4265,9 @@
             // radioButton13
             // 
             this.radioButton13.AutoSize = true;
-            this.radioButton13.Location = new System.Drawing.Point(171, 15);
+            this.radioButton13.Location = new System.Drawing.Point(171, 27);
             this.radioButton13.Name = "radioButton13";
-            this.radioButton13.Size = new System.Drawing.Size(59, 16);
+            this.radioButton13.Size = new System.Drawing.Size(74, 25);
             this.radioButton13.TabIndex = 7;
             this.radioButton13.TabStop = true;
             this.radioButton13.Tag = "2";
@@ -4222,9 +4277,9 @@
             // radioButton14
             // 
             this.radioButton14.AutoSize = true;
-            this.radioButton14.Location = new System.Drawing.Point(14, 15);
+            this.radioButton14.Location = new System.Drawing.Point(14, 27);
             this.radioButton14.Name = "radioButton14";
-            this.radioButton14.Size = new System.Drawing.Size(53, 16);
+            this.radioButton14.Size = new System.Drawing.Size(69, 25);
             this.radioButton14.TabIndex = 6;
             this.radioButton14.TabStop = true;
             this.radioButton14.Tag = "1";
@@ -4234,65 +4289,81 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(192, 58);
+            this.label4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label4.Location = new System.Drawing.Point(197, 54);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(24, 16);
+            this.label4.Size = new System.Drawing.Size(26, 21);
             this.label4.TabIndex = 7;
             this.label4.Text = "月";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(104, 57);
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label3.Location = new System.Drawing.Point(104, 54);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(24, 16);
+            this.label3.Size = new System.Drawing.Size(26, 21);
             this.label3.TabIndex = 6;
             this.label3.Text = "第";
             // 
             // 治疗月序1
             // 
-            this.治疗月序1.Location = new System.Drawing.Point(134, 58);
+            this.治疗月序1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.治疗月序1.Location = new System.Drawing.Point(137, 52);
             this.治疗月序1.Name = "治疗月序1";
-            this.治疗月序1.Size = new System.Drawing.Size(52, 21);
+            this.治疗月序1.Size = new System.Drawing.Size(52, 29);
             this.治疗月序1.TabIndex = 5;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(12, 58);
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label2.Location = new System.Drawing.Point(12, 57);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 16);
+            this.label2.Size = new System.Drawing.Size(74, 21);
             this.label2.TabIndex = 4;
             this.label2.Text = "治疗月序";
             // 
             // 随访时间1
             // 
-            this.随访时间1.Location = new System.Drawing.Point(107, 20);
+            this.随访时间1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.随访时间1.Location = new System.Drawing.Point(107, 17);
             this.随访时间1.Name = "随访时间1";
-            this.随访时间1.Size = new System.Drawing.Size(168, 21);
+            this.随访时间1.Size = new System.Drawing.Size(168, 29);
             this.随访时间1.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(12, 22);
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(12, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 16);
+            this.label1.Size = new System.Drawing.Size(90, 22);
             this.label1.TabIndex = 2;
             this.label1.Text = "随访时间：";
+            // 
+            // label113
+            // 
+            this.label113.AutoSize = true;
+            this.label113.Location = new System.Drawing.Point(144, 22);
+            this.label113.Name = "label113";
+            this.label113.Size = new System.Drawing.Size(106, 21);
+            this.label113.TabIndex = 35;
+            this.label113.Text = "次，实际访视";
             // 
             // detaTotuberculosisPatientServices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1226, 567);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1226, 1005);
             this.Controls.Add(this.groupBox1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "detaTotuberculosisPatientServices";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "非首次随访详情";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -4421,7 +4492,6 @@
         private System.Windows.Forms.TextBox 实际访视次数1;
         private System.Windows.Forms.TextBox 应访视患者次数1;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label22;
         private System.Windows.Forms.GroupBox 停止治疗及原因1;
         private System.Windows.Forms.GroupBox 停止治疗原因1;
         private System.Windows.Forms.CheckBox checkBox14;
@@ -4776,5 +4846,6 @@
         private System.Windows.Forms.Label label111;
         private System.Windows.Forms.DateTimePicker 随访时间4;
         private System.Windows.Forms.Label label112;
+        private System.Windows.Forms.Label label113;
     }
 }

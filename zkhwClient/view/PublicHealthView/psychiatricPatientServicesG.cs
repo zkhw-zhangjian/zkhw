@@ -111,6 +111,13 @@ namespace zkhwClient.view.PublicHealthView
                 if (aichive_no != null && !"".Equals(aichive_no))
                 {
                     aUpsychiatricPatientServices hm = new aUpsychiatricPatientServices();
+                    if (Common.m_nWindwMetricsY > 900)
+                    {
+                        hm.Height = 853;
+                        hm.Width = 1343;
+                        hm.panel1.Height = 794;
+                        hm.panel1.Width = 1305;
+                    }
                     hm.id = id;//祖
                     hm.textBox37.Text = name;
                     hm.textBox39.Text = aichive_no;
@@ -140,6 +147,13 @@ namespace zkhwClient.view.PublicHealthView
                 if (aichive_no != null && !"".Equals(aichive_no))
                 {
                     aUpsychiatricPatientServices hm = new aUpsychiatricPatientServices();
+                    if (Common.m_nWindwMetricsY > 900)
+                    {
+                        hm.Height = 853;
+                        hm.Width = 1343;
+                        hm.panel1.Height = 794;
+                        hm.panel1.Width = 1305;
+                    }
                     hm.id = id;//祖
                     hm.textBox37.Text = name;
                     hm.textBox39.Text = aichive_no;

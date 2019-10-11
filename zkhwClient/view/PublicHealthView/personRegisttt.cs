@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Script.Serialization;
@@ -340,19 +341,7 @@ namespace zkhwClient
             base.OnPaint(e);
             Font font = new Font("微软雅黑", 12F);
             Brush bush = Brushes.White;
-            ControlCircular.DrawFont(e, wenzi, font, bush);
-
-            //Graphics g = e.Graphics;
-            //g.DrawString(wenzi, new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(starti, 5));
-
-            //StringFormat stringFormat = new StringFormat();
-            //stringFormat.Alignment = StringAlignment.Center; 
-            //float x = e.ClipRectangle.Width / 2f;
-            //float y = e.ClipRectangle.Height / 2f - (_size / 2f);
-            //Graphics g = e.Graphics;
-            //g.DrawString(wenzi, new Font("微软雅黑", _size, System.Drawing.FontStyle.Regular, GraphicsUnit.Pixel), new SolidBrush(Color.White), x, y, stringFormat);
-
-
+            ControlCircular.DrawFont(e, wenzi, font, bush); 
 
         }
 
@@ -1092,12 +1081,17 @@ namespace zkhwClient
             //     this.richTextBox1.Text = fullName;
             // }
         }
-
+        [DllImport("user32")]
+        private static extern int SendMessage(IntPtr hwnd, int wMsg, int wParam, IntPtr lParam);
+        private const int WM_SETREDRAW = 0xB;
         private void personRegistt_Resize(object sender, EventArgs e)
         {
+            SendMessage(this.Handle, WM_SETREDRAW, 0, IntPtr.Zero);
             float newx = (this.Width) / xMy;
             float newy = (this.Height) / yMy;
             setControls(newx, newy, this);
+            SendMessage(this.Handle, WM_SETREDRAW, 1, IntPtr.Zero);
+            this.Invalidate(true);
         }
 
         public static void setControls(float newx, float newy, Control cons)

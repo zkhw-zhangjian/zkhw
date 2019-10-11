@@ -20,8 +20,7 @@ namespace zkhwClient.view.PublicHealthView
         }
         private void aUHypertensionPatientServices_Load(object sender, EventArgs e)
         {
-            this.label47.ForeColor = Color.SkyBlue;
-            label47.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
+           
             label47.Left = (this.panel1.Width - this.label47.Width) / 2;
             label47.BringToFront();
 

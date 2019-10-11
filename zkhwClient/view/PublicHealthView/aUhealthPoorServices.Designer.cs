@@ -60,15 +60,17 @@
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.label8.Location = new System.Drawing.Point(27, 222);
+            this.label8.Location = new System.Drawing.Point(54, 222);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(74, 22);
             this.label8.TabIndex = 156;
@@ -77,7 +79,7 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.panel5.Location = new System.Drawing.Point(14, 184);
+            this.panel5.Location = new System.Drawing.Point(42, 184);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(950, 1);
             this.panel5.TabIndex = 155;
@@ -86,7 +88,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.label7.Location = new System.Drawing.Point(449, 145);
+            this.label7.Location = new System.Drawing.Point(477, 145);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(74, 22);
             this.label7.TabIndex = 154;
@@ -96,7 +98,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.label6.Location = new System.Drawing.Point(27, 145);
+            this.label6.Location = new System.Drawing.Point(54, 145);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(74, 22);
             this.label6.TabIndex = 153;
@@ -105,7 +107,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.panel4.Location = new System.Drawing.Point(14, 129);
+            this.panel4.Location = new System.Drawing.Point(42, 129);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(950, 1);
             this.panel4.TabIndex = 152;
@@ -114,7 +116,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(706, 98);
+            this.label4.Location = new System.Drawing.Point(734, 98);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 22);
             this.label4.TabIndex = 151;
@@ -124,7 +126,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(449, 98);
+            this.label3.Location = new System.Drawing.Point(477, 98);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(72, 22);
             this.label3.TabIndex = 150;
@@ -134,7 +136,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.label5.Location = new System.Drawing.Point(27, 98);
+            this.label5.Location = new System.Drawing.Point(54, 98);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 22);
             this.label5.TabIndex = 149;
@@ -144,7 +146,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(449, 60);
+            this.label2.Location = new System.Drawing.Point(477, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 22);
             this.label2.TabIndex = 145;
@@ -154,7 +156,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(29, 60);
+            this.label1.Location = new System.Drawing.Point(54, 60);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 22);
             this.label1.TabIndex = 144;
@@ -163,7 +165,7 @@
             // panel11
             // 
             this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.panel11.Location = new System.Drawing.Point(12, 47);
+            this.panel11.Location = new System.Drawing.Point(40, 47);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(950, 1);
             this.panel11.TabIndex = 143;
@@ -172,7 +174,7 @@
             // 
             this.label47.AutoSize = true;
             this.label47.Font = new System.Drawing.Font("微软雅黑", 18F);
-            this.label47.Location = new System.Drawing.Point(427, 7);
+            this.label47.Location = new System.Drawing.Point(455, 7);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(158, 31);
             this.label47.TabIndex = 0;
@@ -183,7 +185,7 @@
             this.dateTimePicker2.CustomFormat = "yyyy-MM-dd";
             this.dateTimePicker2.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(537, 141);
+            this.dateTimePicker2.Location = new System.Drawing.Point(565, 141);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(192, 29);
             this.dateTimePicker2.TabIndex = 70;
@@ -193,7 +195,7 @@
             this.panel2.Controls.Add(this.radioButton5);
             this.panel2.Controls.Add(this.radioButton3);
             this.panel2.Controls.Add(this.radioButton4);
-            this.panel2.Location = new System.Drawing.Point(110, 138);
+            this.panel2.Location = new System.Drawing.Point(142, 138);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(314, 38);
             this.panel2.TabIndex = 68;
@@ -240,7 +242,7 @@
             // 
             this.textBox12.Enabled = false;
             this.textBox12.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.textBox12.Location = new System.Drawing.Point(114, 95);
+            this.textBox12.Location = new System.Drawing.Point(142, 95);
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(316, 29);
             this.textBox12.TabIndex = 67;
@@ -251,7 +253,7 @@
             this.dateTimePicker1.Enabled = false;
             this.dateTimePicker1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(793, 93);
+            this.dateTimePicker1.Location = new System.Drawing.Point(821, 93);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(134, 29);
             this.dateTimePicker1.TabIndex = 6;
@@ -261,7 +263,7 @@
             this.panel3.Controls.Add(this.radioButton1);
             this.panel3.Controls.Add(this.radioButton2);
             this.panel3.Enabled = false;
-            this.panel3.Location = new System.Drawing.Point(537, 92);
+            this.panel3.Location = new System.Drawing.Point(565, 92);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(157, 33);
             this.panel3.TabIndex = 37;
@@ -301,7 +303,7 @@
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(828, 724);
+            this.button5.Location = new System.Drawing.Point(732, 735);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(88, 31);
             this.button5.TabIndex = 42;
@@ -318,7 +320,7 @@
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(710, 724);
+            this.button4.Location = new System.Drawing.Point(614, 735);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(88, 31);
             this.button4.TabIndex = 41;
@@ -330,7 +332,7 @@
             // 
             this.textBox1.Enabled = false;
             this.textBox1.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.textBox1.Location = new System.Drawing.Point(114, 56);
+            this.textBox1.Location = new System.Drawing.Point(142, 56);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(316, 29);
             this.textBox1.TabIndex = 1;
@@ -339,7 +341,7 @@
             // 
             this.textBox2.Enabled = false;
             this.textBox2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.textBox2.Location = new System.Drawing.Point(537, 54);
+            this.textBox2.Location = new System.Drawing.Point(565, 54);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(392, 29);
             this.textBox2.TabIndex = 3;
@@ -348,7 +350,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.label9.Location = new System.Drawing.Point(8, 494);
+            this.label9.Location = new System.Drawing.Point(54, 494);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(74, 22);
             this.label9.TabIndex = 158;
@@ -357,7 +359,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.panel1.Location = new System.Drawing.Point(14, 447);
+            this.panel1.Location = new System.Drawing.Point(28, 447);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(950, 1);
             this.panel1.TabIndex = 159;
@@ -365,7 +367,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.richTextBox1.Location = new System.Drawing.Point(116, 196);
+            this.richTextBox1.Location = new System.Drawing.Point(142, 196);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(813, 242);
             this.richTextBox1.TabIndex = 160;
@@ -374,7 +376,7 @@
             // richTextBox2
             // 
             this.richTextBox2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.richTextBox2.Location = new System.Drawing.Point(116, 460);
+            this.richTextBox2.Location = new System.Drawing.Point(142, 460);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(813, 241);
             this.richTextBox2.TabIndex = 161;
@@ -383,7 +385,7 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.panel6.Location = new System.Drawing.Point(10, 711);
+            this.panel6.Location = new System.Drawing.Point(25, 722);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(950, 1);
             this.panel6.TabIndex = 162;
@@ -396,40 +398,49 @@
             this.panel7.Size = new System.Drawing.Size(950, 1);
             this.panel7.TabIndex = 163;
             // 
+            // panel8
+            // 
+            this.panel8.AutoScroll = true;
+            this.panel8.Controls.Add(this.richTextBox1);
+            this.panel8.Controls.Add(this.label1);
+            this.panel8.Controls.Add(this.panel6);
+            this.panel8.Controls.Add(this.button5);
+            this.panel8.Controls.Add(this.panel11);
+            this.panel8.Controls.Add(this.button4);
+            this.panel8.Controls.Add(this.richTextBox2);
+            this.panel8.Controls.Add(this.panel1);
+            this.panel8.Controls.Add(this.label2);
+            this.panel8.Controls.Add(this.label9);
+            this.panel8.Controls.Add(this.dateTimePicker2);
+            this.panel8.Controls.Add(this.label5);
+            this.panel8.Controls.Add(this.panel2);
+            this.panel8.Controls.Add(this.label47);
+            this.panel8.Controls.Add(this.label3);
+            this.panel8.Controls.Add(this.label8);
+            this.panel8.Controls.Add(this.textBox12);
+            this.panel8.Controls.Add(this.label4);
+            this.panel8.Controls.Add(this.dateTimePicker1);
+            this.panel8.Controls.Add(this.panel5);
+            this.panel8.Controls.Add(this.panel4);
+            this.panel8.Controls.Add(this.textBox1);
+            this.panel8.Controls.Add(this.panel3);
+            this.panel8.Controls.Add(this.label7);
+            this.panel8.Controls.Add(this.label6);
+            this.panel8.Controls.Add(this.textBox2);
+            this.panel8.Location = new System.Drawing.Point(-1, 1);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(1014, 792);
+            this.panel8.TabIndex = 164;
+            // 
             // aUhealthPoorServices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(988, 749);
+            this.ClientSize = new System.Drawing.Size(1033, 749);
+            this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel7);
-            this.Controls.Add(this.panel6);
-            this.Controls.Add(this.richTextBox2);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label47);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.panel5);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel4);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox12);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.panel11);
-            this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "aUhealthPoorServices";
@@ -441,8 +452,9 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -479,5 +491,6 @@
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel panel8;
     }
 }

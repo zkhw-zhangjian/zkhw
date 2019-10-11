@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Xml;
 using zkhwClient.dao;
@@ -509,12 +510,17 @@ namespace zkhwClient.view.setting
             Brush bush = Brushes.White;
             ControlCircular.DrawFont(e, "初始化", font, bush); 
         }
-
+        //[DllImport("user32")]
+        //private static extern int SendMessage(IntPtr hwnd, int wMsg, int wParam, IntPtr lParam);
+        //private const int WM_SETREDRAW = 0xB;
         private void basicInfoSettings_Resize(object sender, EventArgs e)
-        {
+        { 
+            //SendMessage(this.Handle, WM_SETREDRAW, 0, IntPtr.Zero);
             //float newx = (this.Width) / xMy;
             //float newy = (this.Height) / yMy;
             //Common.setControls(newx, newy, this);
+            //SendMessage(this.Handle, WM_SETREDRAW, 1, IntPtr.Zero);
+            //this.Invalidate(true); 
 
         }
     }

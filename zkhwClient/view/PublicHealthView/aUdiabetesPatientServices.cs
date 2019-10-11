@@ -23,8 +23,8 @@ namespace zkhwClient.view.PublicHealthView
         private void aUdiabetesPatientServices_Load(object sender, EventArgs e)
         {
             this.label51.Text = "2型糖尿病患者健康管理服务";
-            this.label51.ForeColor = Color.SkyBlue;
-            label51.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
+            //this.label51.ForeColor = Color.SkyBlue;
+            //label51.Font = new Font("微软雅黑", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(134)));
             label51.Left = (this.panel1.Width - this.label51.Width) / 2;
             label51.BringToFront();
 
