@@ -135,12 +135,12 @@ namespace zkhwClient.dao
             for(int j=0;j< list.Count;j++)
             {
                 string sql = "";
-                //先判断有没有数据，有就做更新处理,没有就插入
-                if(HaveData(list[j].id))
-                {
-                    sql = string.Format("delete from resident_base_info where id='{0}'", list[j].id);
-                    _sqlList.Add(sql);
-                } 
+                ////先判断有没有数据，有就做更新处理,没有就插入
+                //if(HaveData(list[j].id))
+                //{
+                sql = string.Format("delete from resident_base_info where id='{0}'", list[j].id);
+                _sqlList.Add(sql);
+                //} 
                 #region insert
                 sql = @"insert into resident_base_info (id,archive_no,pb_archive,name,sex,
                     birthday,age,id_number,card_pic,company,phone,link_name,link_phone,
@@ -272,11 +272,26 @@ namespace zkhwClient.dao
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
+
+        public bool deleteslowdiseases()
+        {
+            int rt = 0;
+            String sql = "delete from slow_diseases_healthAdvice";
+            rt = DbHelperMySQL.ExecuteSql(sql);
+            return rt == 0 ? false : true;
+        }
         //获取阈值信息
         public DataTable checkThresholdValue()
         {
             DataSet ds = new DataSet();
             string sql = "select * from threshold_value where 1=1";
+            ds = DbHelperMySQL.QueryYpt(sql);
+            return ds.Tables[0];
+        }
+        public DataTable GetSlowDiseasesInfo()
+        {
+            DataSet ds = new DataSet();
+            string sql = "select * from slow_diseases_healthAdvice ";
             ds = DbHelperMySQL.QueryYpt(sql);
             return ds.Tables[0];
         }
@@ -294,6 +309,31 @@ namespace zkhwClient.dao
                 else
                 {
                     sql += "('" + list[j].id + "','" + list[j].class_type + "','" + list[j].type + "', '" + list[j].warning_min + "', '" + list[j].warning_max + "', '" + list[j].threshold_min + "', '" + list[j].threshold_max + "', '" + list[j].create_user + "', '" + list[j].create_name + "', '" + list[j].create_time + "', '" + list[j].update_user + "', '" + list[j].update_name + "', '" + list[j].update_time + "', '" + list[j].chinaName + "', '" + list[j].CheckMethod + "', '" + list[j].unit + "', '" + list[j].deviceModel + "')";
+                }
+            }
+            rt = DbHelperMySQL.ExecuteSql(sql);
+            return rt == 0 ? false : true;
+        }
+
+
+        /// <summary>
+        /// 添加对应的慢病表
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public bool addSlowdiseases(List<slowdiseases> list)
+        {
+            int rt = 0;
+            String sql = "insert into slow_diseases_healthAdvice ( id,code,name,healthAdvice,man_healthAdvice,woman_healthAdvice,note,create_user,create_name,create_time,update_user,update_name,update_time) values ";
+            for (int j = 0; j < list.Count; j++)
+            {
+                if (j > 0)
+                {
+                    sql += " , ('" + list[j].id + "','" + list[j].code + "','" + list[j].name + "', '" + list[j].healthAdvice + "', '" + list[j].man_healthAdvice + "', '" + list[j].woman_healthAdvice + "', '" + list[j].note + "', '" + list[j].create_user + "', '" + list[j].create_name + "', '" + list[j].create_time + "', '" + list[j].update_user + "', '" + list[j].update_name + "', '" + list[j].update_time  + "')";
+                }
+                else
+                {
+                    sql += "('" + list[j].id + "','" + list[j].code + "','" + list[j].name + "', '" + list[j].healthAdvice + "', '" + list[j].man_healthAdvice + "', '" + list[j].woman_healthAdvice + "', '" + list[j].note + "', '" + list[j].create_user + "', '" + list[j].create_name + "', '" + list[j].create_time + "', '" + list[j].update_user + "', '" + list[j].update_name + "', '" + list[j].update_time + "')";
                 }
             }
             rt = DbHelperMySQL.ExecuteSql(sql);

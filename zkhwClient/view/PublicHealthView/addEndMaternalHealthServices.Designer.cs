@@ -176,10 +176,10 @@
             this.groupBox1.Controls.Add(this.to3);
             this.groupBox1.Controls.Add(this.to2);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBox1.Location = new System.Drawing.Point(9, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Location = new System.Drawing.Point(9, -5);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(1008, 1035);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -192,7 +192,7 @@
             this.取消.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.取消.ForeColor = System.Drawing.Color.White;
             this.取消.Location = new System.Drawing.Point(722, 956);
-            this.取消.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.取消.Margin = new System.Windows.Forms.Padding(2);
             this.取消.Name = "取消";
             this.取消.Size = new System.Drawing.Size(105, 37);
             this.取消.TabIndex = 20;
@@ -208,7 +208,7 @@
             this.确定.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.确定.ForeColor = System.Drawing.Color.White;
             this.确定.Location = new System.Drawing.Point(599, 956);
-            this.确定.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.确定.Margin = new System.Windows.Forms.Padding(2);
             this.确定.Name = "确定";
             this.确定.Size = new System.Drawing.Size(105, 37);
             this.确定.TabIndex = 19;
@@ -262,9 +262,9 @@
             this.伤口42.Controls.Add(this.radioButton11);
             this.伤口42.Controls.Add(this.radioButton12);
             this.伤口42.Location = new System.Drawing.Point(9, 417);
-            this.伤口42.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.伤口42.Margin = new System.Windows.Forms.Padding(2);
             this.伤口42.Name = "伤口42";
-            this.伤口42.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.伤口42.Padding = new System.Windows.Forms.Padding(2);
             this.伤口42.Size = new System.Drawing.Size(463, 60);
             this.伤口42.TabIndex = 60;
             this.伤口42.TabStop = false;
@@ -281,7 +281,7 @@
             // 
             this.radioButton11.AutoSize = true;
             this.radioButton11.Location = new System.Drawing.Point(142, 23);
-            this.radioButton11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton11.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton11.Name = "radioButton11";
             this.radioButton11.Size = new System.Drawing.Size(74, 25);
             this.radioButton11.TabIndex = 1;
@@ -294,7 +294,7 @@
             this.radioButton12.AutoSize = true;
             this.radioButton12.Checked = true;
             this.radioButton12.Location = new System.Drawing.Point(13, 23);
-            this.radioButton12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton12.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton12.Name = "radioButton12";
             this.radioButton12.Size = new System.Drawing.Size(106, 25);
             this.radioButton12.TabIndex = 0;
@@ -309,9 +309,9 @@
             this.子宫42.Controls.Add(this.radioButton13);
             this.子宫42.Controls.Add(this.radioButton14);
             this.子宫42.Location = new System.Drawing.Point(10, 357);
-            this.子宫42.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.子宫42.Margin = new System.Windows.Forms.Padding(2);
             this.子宫42.Name = "子宫42";
-            this.子宫42.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.子宫42.Padding = new System.Windows.Forms.Padding(2);
             this.子宫42.Size = new System.Drawing.Size(463, 60);
             this.子宫42.TabIndex = 59;
             this.子宫42.TabStop = false;
@@ -328,7 +328,7 @@
             // 
             this.radioButton13.AutoSize = true;
             this.radioButton13.Location = new System.Drawing.Point(142, 23);
-            this.radioButton13.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton13.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton13.Name = "radioButton13";
             this.radioButton13.Size = new System.Drawing.Size(74, 25);
             this.radioButton13.TabIndex = 1;
@@ -341,7 +341,7 @@
             this.radioButton14.AutoSize = true;
             this.radioButton14.Checked = true;
             this.radioButton14.Location = new System.Drawing.Point(13, 23);
-            this.radioButton14.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton14.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton14.Name = "radioButton14";
             this.radioButton14.Size = new System.Drawing.Size(106, 25);
             this.radioButton14.TabIndex = 0;
@@ -356,9 +356,9 @@
             this.恶露42.Controls.Add(this.radioButton15);
             this.恶露42.Controls.Add(this.radioButton16);
             this.恶露42.Location = new System.Drawing.Point(10, 294);
-            this.恶露42.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.恶露42.Margin = new System.Windows.Forms.Padding(2);
             this.恶露42.Name = "恶露42";
-            this.恶露42.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.恶露42.Padding = new System.Windows.Forms.Padding(2);
             this.恶露42.Size = new System.Drawing.Size(463, 60);
             this.恶露42.TabIndex = 59;
             this.恶露42.TabStop = false;
@@ -375,7 +375,7 @@
             // 
             this.radioButton15.AutoSize = true;
             this.radioButton15.Location = new System.Drawing.Point(142, 23);
-            this.radioButton15.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton15.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton15.Name = "radioButton15";
             this.radioButton15.Size = new System.Drawing.Size(74, 25);
             this.radioButton15.TabIndex = 1;
@@ -388,7 +388,7 @@
             this.radioButton16.AutoSize = true;
             this.radioButton16.Checked = true;
             this.radioButton16.Location = new System.Drawing.Point(13, 23);
-            this.radioButton16.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton16.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton16.Name = "radioButton16";
             this.radioButton16.Size = new System.Drawing.Size(106, 25);
             this.radioButton16.TabIndex = 0;
@@ -403,9 +403,9 @@
             this.乳房42.Controls.Add(this.radioButton17);
             this.乳房42.Controls.Add(this.radioButton18);
             this.乳房42.Location = new System.Drawing.Point(10, 233);
-            this.乳房42.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.乳房42.Margin = new System.Windows.Forms.Padding(2);
             this.乳房42.Name = "乳房42";
-            this.乳房42.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.乳房42.Padding = new System.Windows.Forms.Padding(2);
             this.乳房42.Size = new System.Drawing.Size(463, 60);
             this.乳房42.TabIndex = 58;
             this.乳房42.TabStop = false;
@@ -422,7 +422,7 @@
             // 
             this.radioButton17.AutoSize = true;
             this.radioButton17.Location = new System.Drawing.Point(142, 25);
-            this.radioButton17.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton17.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton17.Name = "radioButton17";
             this.radioButton17.Size = new System.Drawing.Size(74, 25);
             this.radioButton17.TabIndex = 1;
@@ -435,7 +435,7 @@
             this.radioButton18.AutoSize = true;
             this.radioButton18.Checked = true;
             this.radioButton18.Location = new System.Drawing.Point(13, 25);
-            this.radioButton18.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton18.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton18.Name = "radioButton18";
             this.radioButton18.Size = new System.Drawing.Size(106, 25);
             this.radioButton18.TabIndex = 0;
@@ -569,9 +569,9 @@
             this.分类42.Controls.Add(this.radioButton21);
             this.分类42.Controls.Add(this.radioButton22);
             this.分类42.Location = new System.Drawing.Point(10, 519);
-            this.分类42.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.分类42.Margin = new System.Windows.Forms.Padding(2);
             this.分类42.Name = "分类42";
-            this.分类42.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.分类42.Padding = new System.Windows.Forms.Padding(2);
             this.分类42.Size = new System.Drawing.Size(463, 60);
             this.分类42.TabIndex = 44;
             this.分类42.TabStop = false;
@@ -588,7 +588,7 @@
             // 
             this.radioButton21.AutoSize = true;
             this.radioButton21.Location = new System.Drawing.Point(142, 25);
-            this.radioButton21.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton21.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton21.Name = "radioButton21";
             this.radioButton21.Size = new System.Drawing.Size(74, 25);
             this.radioButton21.TabIndex = 1;
@@ -601,7 +601,7 @@
             this.radioButton22.AutoSize = true;
             this.radioButton22.Checked = true;
             this.radioButton22.Location = new System.Drawing.Point(15, 25);
-            this.radioButton22.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton22.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton22.Name = "radioButton22";
             this.radioButton22.Size = new System.Drawing.Size(106, 25);
             this.radioButton22.TabIndex = 0;
@@ -889,9 +889,9 @@
             this.伤口7.Controls.Add(this.radioButton9);
             this.伤口7.Controls.Add(this.radioButton10);
             this.伤口7.Location = new System.Drawing.Point(9, 417);
-            this.伤口7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.伤口7.Margin = new System.Windows.Forms.Padding(2);
             this.伤口7.Name = "伤口7";
-            this.伤口7.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.伤口7.Padding = new System.Windows.Forms.Padding(2);
             this.伤口7.Size = new System.Drawing.Size(463, 60);
             this.伤口7.TabIndex = 60;
             this.伤口7.TabStop = false;
@@ -908,7 +908,7 @@
             // 
             this.radioButton9.AutoSize = true;
             this.radioButton9.Location = new System.Drawing.Point(134, 23);
-            this.radioButton9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton9.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton9.Name = "radioButton9";
             this.radioButton9.Size = new System.Drawing.Size(74, 25);
             this.radioButton9.TabIndex = 1;
@@ -921,7 +921,7 @@
             this.radioButton10.AutoSize = true;
             this.radioButton10.Checked = true;
             this.radioButton10.Location = new System.Drawing.Point(13, 23);
-            this.radioButton10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton10.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton10.Name = "radioButton10";
             this.radioButton10.Size = new System.Drawing.Size(106, 25);
             this.radioButton10.TabIndex = 0;
@@ -936,9 +936,9 @@
             this.子宫7.Controls.Add(this.radioButton7);
             this.子宫7.Controls.Add(this.radioButton8);
             this.子宫7.Location = new System.Drawing.Point(10, 357);
-            this.子宫7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.子宫7.Margin = new System.Windows.Forms.Padding(2);
             this.子宫7.Name = "子宫7";
-            this.子宫7.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.子宫7.Padding = new System.Windows.Forms.Padding(2);
             this.子宫7.Size = new System.Drawing.Size(463, 60);
             this.子宫7.TabIndex = 59;
             this.子宫7.TabStop = false;
@@ -955,7 +955,7 @@
             // 
             this.radioButton7.AutoSize = true;
             this.radioButton7.Location = new System.Drawing.Point(134, 23);
-            this.radioButton7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton7.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton7.Name = "radioButton7";
             this.radioButton7.Size = new System.Drawing.Size(74, 25);
             this.radioButton7.TabIndex = 1;
@@ -968,7 +968,7 @@
             this.radioButton8.AutoSize = true;
             this.radioButton8.Checked = true;
             this.radioButton8.Location = new System.Drawing.Point(13, 23);
-            this.radioButton8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton8.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton8.Name = "radioButton8";
             this.radioButton8.Size = new System.Drawing.Size(106, 25);
             this.radioButton8.TabIndex = 0;
@@ -983,9 +983,9 @@
             this.恶露7.Controls.Add(this.radioButton5);
             this.恶露7.Controls.Add(this.radioButton6);
             this.恶露7.Location = new System.Drawing.Point(10, 294);
-            this.恶露7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.恶露7.Margin = new System.Windows.Forms.Padding(2);
             this.恶露7.Name = "恶露7";
-            this.恶露7.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.恶露7.Padding = new System.Windows.Forms.Padding(2);
             this.恶露7.Size = new System.Drawing.Size(463, 60);
             this.恶露7.TabIndex = 59;
             this.恶露7.TabStop = false;
@@ -1002,7 +1002,7 @@
             // 
             this.radioButton5.AutoSize = true;
             this.radioButton5.Location = new System.Drawing.Point(134, 23);
-            this.radioButton5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton5.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(74, 25);
             this.radioButton5.TabIndex = 1;
@@ -1015,7 +1015,7 @@
             this.radioButton6.AutoSize = true;
             this.radioButton6.Checked = true;
             this.radioButton6.Location = new System.Drawing.Point(13, 24);
-            this.radioButton6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton6.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(106, 25);
             this.radioButton6.TabIndex = 0;
@@ -1030,9 +1030,9 @@
             this.乳房7.Controls.Add(this.radioButton3);
             this.乳房7.Controls.Add(this.radioButton4);
             this.乳房7.Location = new System.Drawing.Point(10, 233);
-            this.乳房7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.乳房7.Margin = new System.Windows.Forms.Padding(2);
             this.乳房7.Name = "乳房7";
-            this.乳房7.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.乳房7.Padding = new System.Windows.Forms.Padding(2);
             this.乳房7.Size = new System.Drawing.Size(463, 60);
             this.乳房7.TabIndex = 58;
             this.乳房7.TabStop = false;
@@ -1049,7 +1049,7 @@
             // 
             this.radioButton3.AutoSize = true;
             this.radioButton3.Location = new System.Drawing.Point(134, 25);
-            this.radioButton3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton3.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(74, 25);
             this.radioButton3.TabIndex = 1;
@@ -1062,7 +1062,7 @@
             this.radioButton4.AutoSize = true;
             this.radioButton4.Checked = true;
             this.radioButton4.Location = new System.Drawing.Point(13, 24);
-            this.radioButton4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton4.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(106, 25);
             this.radioButton4.TabIndex = 0;
@@ -1196,9 +1196,9 @@
             this.分类7.Controls.Add(this.radioButton2);
             this.分类7.Controls.Add(this.radioButton1);
             this.分类7.Location = new System.Drawing.Point(10, 519);
-            this.分类7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.分类7.Margin = new System.Windows.Forms.Padding(2);
             this.分类7.Name = "分类7";
-            this.分类7.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.分类7.Padding = new System.Windows.Forms.Padding(2);
             this.分类7.Size = new System.Drawing.Size(463, 60);
             this.分类7.TabIndex = 44;
             this.分类7.TabStop = false;
@@ -1215,7 +1215,7 @@
             // 
             this.radioButton2.AutoSize = true;
             this.radioButton2.Location = new System.Drawing.Point(134, 22);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(74, 25);
             this.radioButton2.TabIndex = 1;
@@ -1228,7 +1228,7 @@
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
             this.radioButton1.Location = new System.Drawing.Point(13, 21);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton1.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(106, 25);
             this.radioButton1.TabIndex = 0;
@@ -1476,9 +1476,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1041, 842);
+            this.ClientSize = new System.Drawing.Size(1041, 749);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "addEndMaternalHealthServices";

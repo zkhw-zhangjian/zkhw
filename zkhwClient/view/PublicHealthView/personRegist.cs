@@ -725,7 +725,7 @@ namespace zkhwClient.view.PublicHealthView
                 }
                 else { 
                     grjdxx.archive_no = dt.Rows[0]["archive_no"].ToString();
-                    grjddao.updategejdInfonew(grjdxx); 
+                    grjddao.updategejdInfonew(grjdxx,0); 
                     //grjdxx.archive_no = dt.Rows[0]["archive_no"].ToString();
                     //grjdxx.doctor_id= dt.Rows[0]["doctor_id"].ToString();
                     //grjddao.updateGrjdInfo(grjdxx.archive_no, grjdxx.photo_code);

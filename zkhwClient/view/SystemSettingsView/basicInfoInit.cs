@@ -92,6 +92,7 @@ namespace zkhwClient.view.setting
                 logindao.deleteUsersBycode(xzcode);
                 //logindao.deleteResidentsBycode(xzcode);
                 logindao.deleteThresholdValue();
+                logindao.deleteslowdiseases();
 
                 #region  同步阈值信息 
                 DataTable dtThresholdValue = logindao.checkThresholdValue();
@@ -249,6 +250,44 @@ namespace zkhwClient.view.setting
                 //    }
                 //            logindao.addTeanInfos(listed);
                 //            this.progressBar1.Value = 40;
+                //}
+                #endregion
+
+                #region 同步慢病信息
+                //DataTable dtSlowdiseases = logindao.GetSlowDiseasesInfo();
+                //if (dtSlowdiseases.Rows.Count > 0)
+                //{
+                //    logindao.deleteslowdiseases();
+
+                //    List<slowdiseases> listTv = new List<slowdiseases>();
+                //    for (int i = 0; i < dtSlowdiseases.Rows.Count; i++)
+                //    {
+                //        slowdiseases tv = new slowdiseases();
+                //        tv.id = dtSlowdiseases.Rows[i]["id"].ToString();
+                //        tv.code = dtSlowdiseases.Rows[i]["code"].ToString();
+                //        tv.name = dtSlowdiseases.Rows[i]["name"].ToString();
+                //        tv.healthAdvice = dtSlowdiseases.Rows[i]["healthAdvice"].ToString();
+                //        tv.man_healthAdvice = dtSlowdiseases.Rows[i]["man_healthAdvice"].ToString();
+                //        tv.woman_healthAdvice = dtSlowdiseases.Rows[i]["woman_healthAdvice"].ToString();
+                //        tv.note = dtSlowdiseases.Rows[i]["note"].ToString();
+                //        tv.create_user = dtSlowdiseases.Rows[i]["create_user"].ToString();
+                //        tv.create_name = dtSlowdiseases.Rows[i]["create_name"].ToString(); 
+                //        string update_time = dtSlowdiseases.Rows[i]["create_time"].ToString();
+                //        tv.create_time = update_time == null || "".Equals(update_time) ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") : Convert.ToDateTime(update_time).ToString("yyyy-MM-dd HH:mm:ss");
+                //        tv.update_user = dtSlowdiseases.Rows[i]["update_user"].ToString();
+                //        tv.update_name = dtSlowdiseases.Rows[i]["update_name"].ToString();
+                //        update_time = dtSlowdiseases.Rows[i]["update_time"].ToString();
+                //        tv.update_time = update_time == null || "".Equals(update_time) ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") : Convert.ToDateTime(update_time).ToString("yyyy-MM-dd HH:mm:ss");
+                //        listTv.Add(tv);
+                //    }
+                //    if (listTv.Count > 0)
+                //    {
+                //        bool istrue = logindao.addSlowdiseases(listTv);
+                //        if (istrue)
+                //        {
+                //            this.progressBar1.Value = 40;
+                //        }
+                //    }
                 //}
                 #endregion
 

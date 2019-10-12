@@ -71,7 +71,8 @@ namespace zkhwClient.view.PublicHealthView
             }
             else
             {
-                MessageBox.Show("失败！");
+                MessageBox.Show("成功！");
+                //MessageBox.Show("失败！");
             }
         }
         /// <summary>

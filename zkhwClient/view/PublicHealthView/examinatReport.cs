@@ -5171,7 +5171,11 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 dataGridView1.Rows[i].HeaderCell.Value = (i + 1).ToString();
             }
         }
-
+        /// <summary>
+        /// 反应上传慢
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button4_Click(object sender, EventArgs e)
         {
             //得到选上传图片的人员

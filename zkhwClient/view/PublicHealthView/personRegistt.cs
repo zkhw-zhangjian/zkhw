@@ -1216,11 +1216,15 @@ namespace zkhwClient
                 else
                 {
                     grjdxx.archive_no = dt.Rows[0]["archive_no"].ToString();
-                    grjddao.updategejdInfonew(grjdxx);
-                    //grjdxx.archive_no = dt.Rows[0]["archive_no"].ToString();
-                    //grjdxx.doctor_id= dt.Rows[0]["doctor_id"].ToString();
-                    //grjddao.updateGrjdInfo(grjdxx.archive_no, grjdxx.photo_code);
-                    //grjddao.updategejdInfo(grjdxx);
+                    if(dt.Rows[0]["doctor_id"].ToString()=="" || dt.Rows[0]["doctor_id"]==null)
+                    {
+                        grjdxx.doctor_id = basicInfoSettings.zeren_doctorId;
+                        grjddao.updategejdInfonew(grjdxx,1);
+                    }
+                    else
+                    {
+                        grjddao.updategejdInfonew(grjdxx,0);
+                    } 
                 }
                 grjddao.addPhysicalExaminationInfo(grjdxx, barcode);//添加健康体检表信息 
                 jkBean jk = new jkBean();

@@ -192,13 +192,24 @@ namespace zkhwClient.dao
            DbHelperMySQL.ExecuteSql(sql);
         }
 
-        public void updategejdInfonew(bean.grjdxxBean grjd)
+        public void updategejdInfonew(bean.grjdxxBean grjd,int itype)
         {
-            string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"); 
-            string sql = @"update resident_base_info set name='"+ grjd.name + "',sex='"+ grjd.Sex + "',nation='"+ grjd.Nation + 
-                "',birthday='"+ grjd.Birthday + "',create_time='" + time +
-                "',phone= '" + grjd.phone + "',address='" + grjd.Zhuzhi + "',photo_code='" + grjd.photo_code + 
+            string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            string sql = "";
+            if (itype==1)
+            {
+                sql = @"update resident_base_info set name='" + grjd.name + "',sex='" + grjd.Sex + "',nation='" + grjd.Nation +
+                "',birthday='" + grjd.Birthday + "',create_time='" + time +
+                "',phone= '" + grjd.phone + "',address='" + grjd.Zhuzhi + "',doctor_id='"+ grjd.doctor_id + "',doctor_name='"+ grjd.doctor_name + "',photo_code='" + grjd.photo_code +
                 "' where id_number = '" + grjd.Cardcode + "'";
+            }
+            else
+            {
+                sql = @"update resident_base_info set name='" + grjd.name + "',sex='" + grjd.Sex + "',nation='" + grjd.Nation +
+                "',birthday='" + grjd.Birthday + "',create_time='" + time +
+                "',phone= '" + grjd.phone + "',address='" + grjd.Zhuzhi + "',photo_code='" + grjd.photo_code +
+                "' where id_number = '" + grjd.Cardcode + "'";
+            }
             DbHelperMySQL.ExecuteSql(sql);
         }
 

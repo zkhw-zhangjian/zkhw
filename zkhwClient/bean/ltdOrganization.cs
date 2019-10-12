@@ -34,4 +34,21 @@ namespace zkhwClient.bean
         public string lng { get; set; }
         public string lat { get; set; }
     }
+
+    public class slowdiseases
+    {
+        public string id { get; set; }
+        public string code { get; set; }
+        public string name { get; set; }
+        public string healthAdvice { get; set; }
+        public string man_healthAdvice { get; set; }
+        public string woman_healthAdvice { get; set; }
+        public string note { get; set; }
+        public string create_user { get; set; }
+        public string create_name { get; set; }
+        public string create_time { get; set; }
+        public string update_user { get; set; }
+        public string update_name { get; set; }
+        public string update_time { get; set; }
+    }
 }
