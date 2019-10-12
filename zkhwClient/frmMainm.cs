@@ -83,12 +83,12 @@ namespace zkhwClient
         }
         private void frmMainm_Load(object sender, EventArgs e)
         {
-              startlabel();
+            startlabel();
             //初始化界面
             basicInfoSettings basicSet = new basicInfoSettings();
             basicSet.setFunDelegate = SetJianDangInfo;
-            basicSet.Show();
-
+            basicSet.Show(); 
+            
             //读取配置文件
             xmlDoc.Load(path);
             XmlNode node;
@@ -97,7 +97,7 @@ namespace zkhwClient
             Common._deviceModel = shxqAgreement;
 
             dttv = grjddao.checkThresholdValues(Common._deviceModel, "");//获取阈值信息
-            this.timer1.Start();//时间控件定时器
+            this.timer1.Start();//时间控件定时器 
             //定时器
             this.timer3.Interval = Int32.Parse(Properties.Settings.Default.timer3Interval);
             this.timer3.Start();//1分钟定时刷新设备状态
@@ -122,7 +122,7 @@ namespace zkhwClient
             {
                 SetJianDangInfo("", "", "");
             }
-
+            
             #region 调用那个程序
             node = xmlDoc.SelectSingleNode("config/com");
             string comnum = node.InnerText;
@@ -130,6 +130,7 @@ namespace zkhwClient
 
             #endregion
 
+            
             pR = new personRegistt();
             OpenWinToMain();
 
@@ -2206,13 +2207,20 @@ namespace zkhwClient
             DialogResult result = MessageBox.Show("是否确认退出？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                if (!proHttp.HasExited)
+                try
                 {
-                    proHttp.Kill();
+                    if (!proHttp.HasExited)
+                    {
+                        proHttp.Kill();
+                    }
+                    if (!proAsNet.HasExited)
+                    {
+                        proAsNet.Kill();
+                    }
                 }
-                if (!proAsNet.HasExited)
+                catch
                 {
-                    proAsNet.Kill();
+
                 }
                 ////if (!proFtp.HasExited)
                 ////{

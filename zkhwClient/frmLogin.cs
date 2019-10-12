@@ -183,11 +183,10 @@ namespace zkhwClient
                     File.WriteAllText(spath, string.Empty);
                 }
                 /*****end******/
-                this.Hide();
-                //frmMain main = new frmMain(); 
+                this.Hide(); 
                 int m_nWindwMetricsY = GetWindwMetricsY();
                 Common.m_nWindwMetricsY = m_nWindwMetricsY;
-                if (m_nWindwMetricsY==768)
+                if (m_nWindwMetricsY<=900)
                 {
                     frmMainm main = new frmMainm();
                     main.Show();
