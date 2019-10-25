@@ -51,5 +51,11 @@ namespace zkhwClient
 
         public string deviceModel { get; set; } 
 
+        public string HBA1C { get; set; }
+        public string CK { get; set; }
+        public string CKMB { get; set; }
+        public string LDHL { get; set; }
+        public string HBDH { get; set; }
+        public string HCY { get; set; }
     }
 }

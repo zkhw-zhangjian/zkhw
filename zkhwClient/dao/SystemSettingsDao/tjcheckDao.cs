@@ -27,14 +27,21 @@ namespace zkhwClient.dao
             int rt = 0;
             string id = Result.GetNewId();
             string timeCodeUnique = sh.bar_code + "_" + sh.createTime;
-            String sql = "insert into zkhw_tj_sh (ID,aichive_no,id_number,bar_code,ALB,ALP,ALT,AST,CHO,Crea,DBIL,GGT,GLU,HDLC,LDLC,TBIL,TG,TP,UA,UREA,createtime,ZrysSH,timeCodeUnique,upload_status,deviceModel) values('" + id + "','" + sh.aichive_no + "','" + sh.id_number + "','" + sh.bar_code + "','" + sh.ALB + "','" + sh.ALP + "','" + sh.ALT + "','" + sh.AST + "','" + sh.CHO + "','" + sh.Crea + "','" + sh.DBIL + "','" + sh.GGT + "','" + sh.GLU + "','" + sh.HDL_C + "','" + sh.LDL_C + "','" + sh.TBIL + "','" + sh.TG + "','" + sh.TP + "','" + sh.UA + "','" + sh.UREA + "','" + sh.createTime + "','" + sh.ZrysSH + "','" + timeCodeUnique + "',0,'"+sh.deviceModel+"')";
+            String sql = "insert into zkhw_tj_sh (ID,aichive_no,id_number,bar_code,ALB,ALP,ALT,AST,CHO,Crea,DBIL,GGT,GLU,HDLC,LDLC,TBIL,TG,TP,UA,UREA,createtime,ZrysSH,timeCodeUnique,upload_status,deviceModel,CK,CKMB,LDHL,HBDH,HCY, HBA1C) values('" + id + "','" + 
+                sh.aichive_no + "','" + sh.id_number + "','" + sh.bar_code + "','" + sh.ALB + "','" + sh.ALP + "','" + sh.ALT + "','" + sh.AST + "','" + sh.CHO + "','" + sh.Crea + "','" + sh.DBIL + "','" + sh.GGT + "','" + sh.GLU + "','" + sh.HDL_C + "','" + sh.LDL_C + "','" + 
+                sh.TBIL + "','" + sh.TG + "','" + sh.TP + "','" + sh.UA + "','" + sh.UREA + "','" + sh.createTime + "','" + sh.ZrysSH + "','" + timeCodeUnique + "',0,'"+sh.deviceModel+"','"+sh.CK+"','"+sh.CKMB+"','"+sh.LDHL + "','"+sh.HBDH + "','"+sh.HCY+"','"+sh.HBA1C+"')";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }
         public bool updateShenghuaInfo(shenghuaBean sh)
         {
             int rt = 0;
-            String sql = "update zkhw_tj_sh set ALB='" + sh.ALB + "',ALP='" + sh.ALP + "',ALT='" + sh.ALT + "',AST='" + sh.AST + "',CHO='" + sh.CHO + "',Crea='" + sh.Crea + "',DBIL='" + sh.DBIL + "',GGT='" + sh.GGT + "',GLU='" + sh.GLU + "',HDLC='" + sh.HDL_C + "',LDLC='" + sh.LDL_C + "',TBIL='" + sh.TBIL + "',TG='" + sh.TG + "',TP='" + sh.TP + "',UA='" + sh.UA + "',UREA='" + sh.UREA + "',upload_status=0,deviceModel='"+sh.deviceModel+"' where aichive_no = '" + sh.aichive_no + "' and bar_code='" + sh.bar_code + "'";
+            String sql = "update zkhw_tj_sh set ALB='" + sh.ALB + "',ALP='" + sh.ALP + "',ALT='" + sh.ALT + "',AST='" + sh.AST + 
+                "',CHO='" + sh.CHO + "',Crea='" + sh.Crea + "',DBIL='" + sh.DBIL + "',GGT='" + sh.GGT + "',GLU='" + sh.GLU + 
+                "',HDLC='" + sh.HDL_C + "',LDLC='" + sh.LDL_C + "',TBIL='" + sh.TBIL + "',TG='" + sh.TG + "',TP='" + sh.TP + 
+                "',UA='" + sh.UA + "',UREA='" + sh.UREA + "',upload_status=0,deviceModel='"+sh.deviceModel+
+                "',CK='"+sh.CK+ "',CKMB='" + sh.CKMB + "',LDHL='" + sh.LDHL + "',HBDH='" + sh.HBDH + "',HCY='" + sh.HCY + "', HBA1C='" + sh.HBA1C + 
+                "' where aichive_no = '" + sh.aichive_no + "' and bar_code='" + sh.bar_code + "'";
             rt = DbHelperMySQL.ExecuteSql(sql);
             return rt == 0 ? false : true;
         }

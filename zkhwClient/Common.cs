@@ -421,6 +421,22 @@ namespace zkhwClient
             }
             if (flag <= 2)
             {
+                int a = rangeJudgeForSHInfo.GetResultSh("GGT", sh.GGT);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForSHInfo.GetResultSh("ALP", sh.ALP);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
                 int a = rangeJudgeForSHInfo.GetResultSh("TBIL", sh.TBIL);
                 if (a > flag)
                 {
@@ -437,7 +453,15 @@ namespace zkhwClient
             }
             if (flag <= 2)
             {
-                int a = rangeJudgeForSHInfo.GetResultSh("CREA", sh.Crea);
+                int a = rangeJudgeForSHInfo.GetResultSh("TP", sh.TP);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForSHInfo.GetResultSh("ALB", sh.ALB);
                 if (a > flag)
                 {
                     flag = a;
@@ -451,9 +475,10 @@ namespace zkhwClient
                     flag = a;
                 }
             }
+
             if (flag <= 2)
             {
-                int a = rangeJudgeForSHInfo.GetResultSh("GLU", sh.GLU);
+                int a = rangeJudgeForSHInfo.GetResultSh("CREA", sh.Crea);
                 if (a > flag)
                 {
                     flag = a;
@@ -461,7 +486,7 @@ namespace zkhwClient
             }
             if (flag <= 2)
             {
-                int a = rangeJudgeForSHInfo.GetResultSh("TG", sh.TG);
+                int a = rangeJudgeForSHInfo.GetResultSh("UA", sh.UA);
                 if (a > flag)
                 {
                     flag = a;
@@ -470,6 +495,14 @@ namespace zkhwClient
             if (flag <= 2)
             {
                 int a = rangeJudgeForSHInfo.GetResultSh("CHO", sh.CHO);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForSHInfo.GetResultSh("TG", sh.TG);
                 if (a > flag)
                 {
                     flag = a;
@@ -491,6 +524,62 @@ namespace zkhwClient
                     flag = a;
                 }
             }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForSHInfo.GetResultSh("CK", sh.CK);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForSHInfo.GetResultSh("CKMB", sh.CKMB);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForSHInfo.GetResultSh("LDHL", sh.LDHL);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForSHInfo.GetResultSh("HBDH", sh.HBDH);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForSHInfo.GetResultSh("HCY", sh.HCY);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForSHInfo.GetResultSh("GLU", sh.GLU);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForSHInfo.GetResultSh("HBA1C", sh.HBA1C);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            } 
             return flag;
         }
 
@@ -647,6 +736,49 @@ namespace zkhwClient
                     flag = a;
                 }
             }
+            if (flag <= 2)
+            {
+                int a = rangeJudgeForXCGInfo.GetResultXCG("P-LCR", xcg.PLCR);
+                if (a > flag)
+                {
+                    flag = a;
+                }
+            }
+            if(Common._deviceModel.Contains("XCG_KBE_003"))
+            {
+                if (flag <= 2)
+                {
+                    int a = rangeJudgeForXCGInfo.GetResultXCG("MONC", xcg.MONO);
+                    if (a > flag)
+                    {
+                        flag = a;
+                    }
+                }
+                if (flag <= 2)
+                {
+                    int a = rangeJudgeForXCGInfo.GetResultXCG("MONP", xcg.MONOP);
+                    if (a > flag)
+                    {
+                        flag = a;
+                    }
+                }
+                if (flag <= 2)
+                {
+                    int a = rangeJudgeForXCGInfo.GetResultXCG("GRAC", xcg.GRAN);
+                    if (a > flag)
+                    {
+                        flag = a;
+                    }
+                }
+                if (flag <= 2)
+                {
+                    int a = rangeJudgeForXCGInfo.GetResultXCG("GRAP", xcg.GRANP);
+                    if (a > flag)
+                    {
+                        flag = a;
+                    }
+                }
+            } 
             return flag;
         }
 

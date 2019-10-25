@@ -16,20 +16,29 @@ namespace zkhwClient.dao
         public static DataTable dttv = null;  //阈值表
 
 
-        public static void GetRangeValue(string typevalue, out double warning_min, out double warning_max, out double threshold_min, out double threshold_max)
+        public static void GetRangeValue(string typevalue, out double warning_min, out double warning_max, out double threshold_min, out double threshold_max, out bool flag)
         {
+            flag = false;
             warning_min = 0;
             warning_max = 0;
             threshold_min = 0;
             threshold_max = 0;
-            DataRow[] dralt = dttv.Select("type='" + typevalue + "'");
-            if (dralt != null)
+            try
             {
-                warning_min = double.Parse(dralt[0]["warning_min"].ToString());
-                warning_max = double.Parse(dralt[0]["warning_max"].ToString());
+                DataRow[] dralt = dttv.Select("type='" + typevalue + "'");
+                if (dralt != null)
+                {
+                    warning_min = double.Parse(dralt[0]["warning_min"].ToString());
+                    warning_max = double.Parse(dralt[0]["warning_max"].ToString());
 
-                threshold_min = double.Parse(dralt[0]["threshold_min"].ToString());
-                threshold_max = double.Parse(dralt[0]["threshold_max"].ToString());
+                    threshold_min = double.Parse(dralt[0]["threshold_min"].ToString());
+                    threshold_max = double.Parse(dralt[0]["threshold_max"].ToString());
+                    flag = true;
+                }
+            }
+            catch
+            {
+
             }
         }
        
@@ -47,14 +56,22 @@ namespace zkhwClient.dao
                     double warning_max = 0;
                     double threshold_min = 0;
                     double threshold_max = 0;
-                    GetRangeValue(typeValue, out warning_min, out warning_max, out threshold_min, out threshold_max);
-                    if (dblvalue > warning_max || dblvalue < warning_min)
+                    bool flag = false;
+                    GetRangeValue(typeValue, out warning_min, out warning_max, out threshold_min, out threshold_max, out flag);
+                    if (flag == true)
                     {
-                        _result = 2;
+                        if (dblvalue > warning_max || dblvalue < warning_min)
+                        {
+                            _result = 2;
+                        }
+                        if (dblvalue > threshold_max || dblvalue < threshold_min)
+                        {
+                            _result = 3;
+                        }
                     }
-                    if (dblvalue > threshold_max || dblvalue < threshold_min)
+                    else
                     {
-                        _result = 3;
+                        _result = 1;
                     }
                 } 
             }
