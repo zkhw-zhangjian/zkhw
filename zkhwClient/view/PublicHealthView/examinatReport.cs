@@ -5531,7 +5531,14 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                 string fileName = Application.StartupPath + "\\xdtImg\\" + t;
                 if (File.Exists(fileName))
                 {
-                    byte[] a = File.ReadAllBytes(fileName);
+                    //byte[] a = File.ReadAllBytes(fileName);
+                    //这里处理下压缩
+                    byte[] a;
+                    bool f = Common.GetPicThumbnail(fileName, "", 0, 0, 1, out a);
+                    if(f==false)
+                    {
+                        a = File.ReadAllBytes(fileName);
+                    }
                     flag = OSSClientHelper.PushImg(a, t, "xdtp2019");
                 }
             }

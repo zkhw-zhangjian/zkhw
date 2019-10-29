@@ -708,9 +708,9 @@ namespace zkhwClient
                                     case "LDH": sh.LDHL = arr_dt2.Rows[i]["result"].ToString(); break;
                                     case "a_HBDH": sh.HBDH = arr_dt2.Rows[i]["result"].ToString(); break;
                                     //未确定设备发送的关键字
-                                    //case "CK-MB": sh.CKMB = arr_dt2.Rows[i]["result"].ToString(); break;
-                                    //case "HCY": sh.HCY = arr_dt2.Rows[i]["result"].ToString(); break;
-                                    //case "HbA1c": sh.HBA1C = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "CK-MB": sh.CKMB = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "HCY": sh.HCY = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "HbA1c": sh.HBA1C = arr_dt2.Rows[i]["result"].ToString(); break;
 
                                     default: break;
                                 }
@@ -886,6 +886,7 @@ namespace zkhwClient
             IPAddress ip = localhost.AddressList[0];
             Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint point = new IPEndPoint(ip, 9001);
+            //IPEndPoint point = new IPEndPoint(IPAddress.Any, 50);
             //socket绑定监听地址
             serverSocket.Bind(point);
             //设置同时连接个数
@@ -926,7 +927,7 @@ namespace zkhwClient
             while (true)
             {
                 //获取发送过来的消息容器
-                byte[] buffer = new byte[1024 * 2];
+                byte[] buffer = new byte[1024 * 5];
                 var effective = 0;
                 try
                 {
@@ -988,9 +989,10 @@ namespace zkhwClient
                             case "AST": sh.AST = sHL7Array[5]; break;
                             case "CHO": sh.CHO = sHL7Array[5]; break;
                             case "CRE": sh.Crea = sHL7Array[5]; break;
-                            //case "CREA": sh.Crea = sHL7Array[5]; break;
+                            case "CREA": sh.Crea = sHL7Array[5]; break;
                             case "DBIL": sh.DBIL = sHL7Array[5]; break;
                             case "GGT": sh.GGT = sHL7Array[5]; break;
+                            case "GLU-HK": sh.GLU = sHL7Array[5]; break;
                             case "GLU": sh.GLU = sHL7Array[5]; break;
                             case "HDL": sh.HDL_C = sHL7Array[5]; break;
                             case "LDL": sh.LDL_C = sHL7Array[5]; break;
@@ -1001,11 +1003,11 @@ namespace zkhwClient
                             case "UREA": sh.UREA = sHL7Array[5]; break;
 
                             case "CK": sh.CK = sHL7Array[5]; break;
-                            case "CKMB": sh.CKMB = sHL7Array[5]; break;
-                            case "LDHL": sh.LDHL = sHL7Array[5]; break;
-                            case "HBDH": sh.HBDH = sHL7Array[5]; break;
+                            case "CK-MB": sh.CKMB = sHL7Array[5]; break;
+                            case "LDH": sh.LDHL = sHL7Array[5]; break; 
                             case "HCY": sh.HCY = sHL7Array[5]; break;
-                            case "HBA1C": sh.HBA1C = sHL7Array[5]; break;
+                            case "HbA1c": sh.HBA1C = sHL7Array[5]; break;
+                            case "α-HBD": sh.HBDH = sHL7Array[5]; break;
                             default: break;
                         }
                     }
@@ -1271,7 +1273,7 @@ namespace zkhwClient
                 while (true)
                 {
                     //获取发送过来的消息容器
-                    byte[] buffer = new byte[1024 * 2];
+                    byte[] buffer = new byte[1024 * 5];
                     var effective = 0;
                     try
                     {

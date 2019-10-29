@@ -706,10 +706,10 @@ namespace zkhwClient
                                     case "CK": sh.CK = arr_dt2.Rows[i]["result"].ToString(); break;
                                     case "LDH": sh.LDHL = arr_dt2.Rows[i]["result"].ToString(); break;
                                     case "a_HBDH": sh.HBDH = arr_dt2.Rows[i]["result"].ToString(); break;
-                                     //未确定设备发送的关键字
-                                    //case "CK-MB": sh.CKMB = arr_dt2.Rows[i]["result"].ToString(); break;
-                                    //case "HCY": sh.HCY = arr_dt2.Rows[i]["result"].ToString(); break;
-                                    //case "HbA1c": sh.HBA1C = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    //未确定设备发送的关键字
+                                    case "CK-MB": sh.CKMB = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "HCY": sh.HCY = arr_dt2.Rows[i]["result"].ToString(); break;
+                                    case "HbA1c": sh.HBA1C = arr_dt2.Rows[i]["result"].ToString(); break;
                                     default: break;
                                 }
                             }
