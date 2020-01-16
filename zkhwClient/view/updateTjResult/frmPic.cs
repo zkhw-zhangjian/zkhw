@@ -11,7 +11,7 @@ namespace zkhwClient.view.updateTjResult
 {
     public partial class frmPic : Form
     {
-
+        //放大查看图片
         public String picPath = "";
 
         Bitmap bufferpic;//加快GDI读取用缓存图片

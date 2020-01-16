@@ -257,6 +257,7 @@ namespace zkhwClient.view.updateTjResult
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
+            //双击
             if (bcPath != "")
             {
                 frmPic frm = new frmPic();

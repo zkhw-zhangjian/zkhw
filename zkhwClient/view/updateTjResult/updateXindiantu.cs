@@ -130,6 +130,7 @@ namespace zkhwClient.view.updateTjResult
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
+            //心电
             if (xdtPath != "")
             {
                 frmPic frm = new frmPic();
