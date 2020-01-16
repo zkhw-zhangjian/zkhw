@@ -1,4 +1,4 @@
-﻿/*基础*/
+﻿/*这里是基础类*/
 using iTextSharp.text;
 using System;
 using System.Collections.Generic;
