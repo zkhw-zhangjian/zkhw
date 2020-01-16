@@ -22,6 +22,8 @@ namespace zkhwClient.view.updateTjResult
         tjcheckDao tjdao = new tjcheckDao();
         public string pathbc = @"config.xml";
         public string bcJudge = "";
+
+        public string bcPath = "";
         public updateBichao()
         {
             InitializeComponent();
@@ -117,6 +119,7 @@ namespace zkhwClient.view.updateTjResult
                     string path = "bcImg//"+t;
                     if (System.IO.File.Exists(path))
                     {
+                        bcPath = path;
                         pictureBox1.Image = Image.FromFile(path, false);
                     }
                 } 
@@ -250,6 +253,17 @@ namespace zkhwClient.view.updateTjResult
             Graphics g = e.Graphics;
             g.DrawString("下一张", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 5));
 
+        }
+
+        private void pictureBox1_DoubleClick(object sender, EventArgs e)
+        {
+            if (bcPath != "")
+            {
+                frmPic frm = new frmPic();
+                Image img = Image.FromFile(Application.StartupPath + "\\" + bcPath);
+                frm.InPutBuffer(img);
+                frm.ShowDialog();
+            }
         }
     }
 }

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
+using System.Linq; 
 using System.Text;
 using System.Windows.Forms;
 using zkhwClient.dao;
@@ -22,6 +23,8 @@ namespace zkhwClient.view.updateTjResult
         public string bar_code = "";
         bool flag = false;
         tjcheckDao tjdao = new tjcheckDao();
+
+        public string xdtPath = "";
         public updateXindiantu()
         {
             InitializeComponent();
@@ -53,7 +56,8 @@ namespace zkhwClient.view.updateTjResult
                 string path= "xdtImg//"+ dtbichao.Rows[0]["imageUrl"].ToString();
                 if (System.IO.File.Exists(path))
                 {
-                    pictureBox1.Image = Image.FromFile(path, false);
+                    xdtPath = path;
+                    pictureBox1.Image = Image.FromFile(path, false); 
                 }
                 string XdtDesc= dtbichao.Rows[0]["XdtDesc"].ToString();
                 if (XdtDesc.IndexOf("正常") > -1)
@@ -70,6 +74,9 @@ namespace zkhwClient.view.updateTjResult
                 MessageBox.Show("未查询到数据!");
             }
         }
+        
+        
+        
         private void button5_Click(object sender, EventArgs e)
         { 
             string XdtResult= this.textBox5.Text;
@@ -120,5 +127,16 @@ namespace zkhwClient.view.updateTjResult
             g.DrawString("保存", new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(25, 5));
 
         }
+
+        private void pictureBox1_DoubleClick(object sender, EventArgs e)
+        {
+            if (xdtPath != "")
+            {
+                frmPic frm = new frmPic();
+                Image img = Image.FromFile(Application.StartupPath  + "\\"+xdtPath);
+                frm.InPutBuffer(img);
+                frm.ShowDialog();
+            }
+        } 
     }
 }

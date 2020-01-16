@@ -509,6 +509,12 @@ namespace zkhwClient
                             textBox3.Text = dt.Rows[0][3].ToString();
                             pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
                             textBox5.Text = dt.Rows[0][5].ToString();
+                            if (dt.Rows[0][7] == null) { }
+                            else
+                            {
+                                txtphone.Text = dt.Rows[0][7].ToString();
+                            }
+                            
                         };
                         this.label41.Text = "读卡成功！";
                         checkPerson();//判断居民一周内是否做过体检
@@ -550,6 +556,12 @@ namespace zkhwClient
                             }
 
                             textBox5.Text = dt.Rows[0][7].ToString();
+                            if (dt.Rows[0][9] == null) { }
+                            else
+                            {
+                                txtphone.Text = dt.Rows[0][9].ToString();
+                            }
+                            txtphone.Text = dt.Rows[0][9].ToString();
                         };
                     }
                     if (File.Exists(pName))
@@ -908,6 +920,7 @@ namespace zkhwClient
                 grjdxx.village_code = xcuncode;
                 grjdxx.village_name = xcName;
                 grjdxx.create_name = frmLogin.user_Name;
+                grjdxx.phone = txtphone.Text;
             }
             else
             {

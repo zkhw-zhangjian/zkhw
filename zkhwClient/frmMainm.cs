@@ -55,6 +55,9 @@ namespace zkhwClient
         private float xMy;//定义当前窗体的宽度
         private float yMy;//定义当前窗体的高度
 
+        private string zwaddress = "";
+        private string zwaddresstest = "0";
+
         public frmMainm()
         {
             InitializeComponent();
@@ -87,11 +90,21 @@ namespace zkhwClient
             //初始化界面
             basicInfoSettings basicSet = new basicInfoSettings();
             basicSet.setFunDelegate = SetJianDangInfo;
-            basicSet.Show(); 
-            
+            basicSet.Show();
+            //basicSet.Hide();
             //读取配置文件
             xmlDoc.Load(path);
             XmlNode node;
+
+            node = xmlDoc.SelectSingleNode("config/zwaddress");
+            zwaddress = node.InnerText;  //家已签约地址
+
+            node = xmlDoc.SelectSingleNode("config/zwaddresstest");
+            zwaddresstest = node.InnerText;  //家已签约地址
+
+            node = xmlDoc.SelectSingleNode("config/bxgwry");
+            Common._bxgwry = node.InnerText;  //是否必须用公卫人员
+
             node = xmlDoc.SelectSingleNode("config/shxqAgreement");
             string shxqAgreement = node.InnerText;//生化血球厂家协议
             Common._deviceModel = shxqAgreement;
@@ -395,6 +408,9 @@ namespace zkhwClient
                     break;
                 case "5":
                     frm = new frmThresholdSetting();
+                    break;
+                case "6":
+                    frm = new frmHealthcheckupEdit();
                     break;
             }
             if (c=="4")
@@ -985,7 +1001,7 @@ namespace zkhwClient
                             case "AST": sh.AST = sHL7Array[5]; break;
                             case "CHO": sh.CHO = sHL7Array[5]; break;
                             case "CRE": sh.Crea = sHL7Array[5]; break;
-                            //case "CREA": sh.Crea = sHL7Array[5]; break;
+                            case "CREA": sh.Crea = sHL7Array[5]; break;
                             case "DBIL": sh.DBIL = sHL7Array[5]; break;
                             case "GGT": sh.GGT = sHL7Array[5]; break;
                             case "GLU": sh.GLU = sHL7Array[5]; break;
@@ -998,11 +1014,11 @@ namespace zkhwClient
                             case "UREA": sh.UREA = sHL7Array[5]; break;
 
                             case "CK": sh.CK = sHL7Array[5]; break;
-                            case "CKMB": sh.CKMB = sHL7Array[5]; break;
-                            case "LDHL": sh.LDHL = sHL7Array[5]; break;
-                            case "HBDH": sh.HBDH = sHL7Array[5]; break;
+                            case "CK-MB": sh.CKMB = sHL7Array[5]; break;
+                            case "LDH": sh.LDHL = sHL7Array[5]; break;
                             case "HCY": sh.HCY = sHL7Array[5]; break;
-                            case "HBA1C": sh.HBA1C = sHL7Array[5]; break;
+                            case "HbA1c": sh.HBA1C = sHL7Array[5]; break;
+                            case "α-HBD": sh.HBDH = sHL7Array[5]; break;
                             default: break;
                         }
                     }
@@ -2856,6 +2872,8 @@ namespace zkhwClient
         private void label13_Click(object sender, EventArgs e)
         {
             HomeDoctorLogin softs = new HomeDoctorLogin();
+            softs.zwAddress = zwaddress;
+            softs.zwaddresstest = zwaddresstest;
             softs.Show();
         }
     }

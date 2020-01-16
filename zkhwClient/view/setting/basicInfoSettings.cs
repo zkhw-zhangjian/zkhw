@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*
+ * 2019-12-25改处理方式：
+  建档人、责任医生 这两个必须是公卫上的人员（只能拉取），其余人员可以选择也可以添加
+ */
+using System;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -63,7 +67,6 @@ namespace zkhwClient.view.setting
         }
         private void basicInfoSettings_Load(object sender, EventArgs e)
         {
-            
             issave = "0";
             Common.SetComboBoxInfo(comboBox1, ltdorganizationDao.GetShengInfo());
             showCombobox();
@@ -254,72 +257,181 @@ namespace zkhwClient.view.setting
             zeren_doctorId = this.comboBox7.SelectedValue.ToString();
             //}
             bc = this.comboBox8.Text;
-            DataRow[] drs8 = dtuserlist.Select("uname = '" + bc + "' ");
-            if (drs8.Count() < 1)
+            if (Common._bxgwry == "0")
             {
-                MessageBox.Show("无此B超人员名称，请重新选择!");
-                return;
+                if (this.comboBox8.Text == "")
+                {
+                    MessageBox.Show("B超人员不能为空!");
+                    return;
+                }
             }
+            else
+            {
+                DataRow[] drs8 = dtuserlist.Select("uname = '" + bc + "' ");
+                if (drs8.Count() < 1)
+                {
+                    MessageBox.Show("无此B超人员名称，请重新选择!");
+                    return;
+                }
+            }
+
+
             xcg = this.comboBox9.Text;
-            DataRow[] drs9 = dtuserlist.Select("uname = '" + xcg + "' ");
-            if (drs9.Count() < 1)
+            if (Common._bxgwry == "0")
             {
-                MessageBox.Show("无此血球人员名称，请重新选择!");
-                return;
+                if (this.comboBox9.Text == "")
+                {
+                    MessageBox.Show("血球人员不能为空!");
+                    return;
+                }
             }
+            else
+            {
+                DataRow[] drs9 = dtuserlist.Select("uname = '" + xcg + "' ");
+                if (drs9.Count() < 1)
+                {
+                    MessageBox.Show("无此血球人员名称，请重新选择!");
+                    return;
+                }
+            }
+
+
             sh = this.comboBox10.Text;
-            DataRow[] drs10 = dtuserlist.Select("uname = '" + sh + "' ");
-            if (drs10.Count() < 1)
+            if (Common._bxgwry == "0")
             {
-                MessageBox.Show("无此生化人员名称，请重新选择!");
-                return;
+                if (this.comboBox10.Text == "")
+                {
+                    MessageBox.Show("生化人员不能为空!");
+                    return;
+                }
             }
+            else
+            {
+                DataRow[] drs10 = dtuserlist.Select("uname = '" + sh + "' ");
+                if (drs10.Count() < 1)
+                {
+                    MessageBox.Show("无此生化人员名称，请重新选择!");
+                    return;
+                }
+            } 
             sgtz = this.comboBox11.Text;
-            DataRow[] drs11 = dtuserlist.Select("uname = '" + sgtz + "' ");
-            if (drs11.Count() < 1)
+            if (Common._bxgwry == "0")
             {
-                MessageBox.Show("无此身高体重人员名称，请重新选择!");
-                return;
+                if (this.comboBox11.Text == "")
+                {
+                    MessageBox.Show("身高体重不能为空!");
+                    return;
+                }
             }
+            else
+            {
+                DataRow[] drs11 = dtuserlist.Select("uname = '" + sgtz + "' ");
+                if (drs11.Count() < 1)
+                {
+                    MessageBox.Show("无此身高体重人员名称，请重新选择!");
+                    return;
+                }
+            }
+                
             ncg = this.comboBox12.Text;
-            DataRow[] drs12 = dtuserlist.Select("uname = '" + ncg + "' ");
-            if (drs12.Count() < 1)
+            if (Common._bxgwry == "0")
             {
-                MessageBox.Show("无此尿机人员名称，请重新选择!");
-                return;
+                if (this.comboBox12.Text == "")
+                {
+                    MessageBox.Show("尿机人员不能为空!");
+                    return;
+                }
             }
+            else
+            {
+                DataRow[] drs12 = dtuserlist.Select("uname = '" + ncg + "' ");
+                if (drs12.Count() < 1)
+                {
+                    MessageBox.Show("无此尿机人员名称，请重新选择!");
+                    return;
+                }
+            }
+
+                
             xdt = this.comboBox13.Text;
-            DataRow[] drs13 = dtuserlist.Select("uname = '" + xdt + "' ");
-            if (drs13.Count() < 1)
+            if (Common._bxgwry == "0")
             {
-                MessageBox.Show("无此心电人员名称，请重新选择!");
-                return;
+                if (this.comboBox13.Text == "")
+                {
+                    MessageBox.Show("心电人员不能为空!");
+                    return;
+                }
             }
+            else
+            {
+                DataRow[] drs13 = dtuserlist.Select("uname = '" + xdt + "' ");
+                if (drs13.Count() < 1)
+                {
+                    MessageBox.Show("无此心电人员名称，请重新选择!");
+                    return;
+                }
+            } 
             xy = this.comboBox14.Text;
-            DataRow[] drs14 = dtuserlist.Select("uname = '" + xy + "' ");
-            if (drs14.Count() < 1)
+            if (Common._bxgwry == "0")
             {
-                MessageBox.Show("无此血压计人员名称，请重新选择!");
-                return;
+                if (this.comboBox14.Text == "")
+                {
+                    MessageBox.Show("血压计人员不能为空!");
+                    return;
+                }
             }
+            else
+            {
+                DataRow[] drs14 = dtuserlist.Select("uname = '" + xy + "' ");
+                if (drs14.Count() < 1)
+                {
+                    MessageBox.Show("无此血压计人员名称，请重新选择!");
+                    return;
+                }
+            } 
             wx = textBox3.Text;
             string other = textBox2.Text;
             string captain = ""; //this.comboBox15.SelectedValue.ToString();
             string members = "";// textBox4.Text;
             string operation = this.comboBox16.Text;
-            DataRow[] drs16 = dtuserlist.Select("uname = '" + operation + "' ");
-            if (drs16.Count() < 1)
+            if (Common._bxgwry == "0")
             {
-                MessageBox.Show("无此操作人员名称，请重新选择!");
-                return;
+                if (this.comboBox16.Text == "")
+                {
+                    MessageBox.Show("操作人员不能为空!");
+                    return;
+                }
             }
+            else
+            {
+                DataRow[] drs16 = dtuserlist.Select("uname = '" + operation + "' ");
+                if (drs16.Count() < 1)
+                {
+                    MessageBox.Show("无此操作人员名称，请重新选择!");
+                    return;
+                }
+            }
+
+            
             string car_name = this.comboBox17.Text;
-            DataRow[] drs17 = dtuserlist.Select("uname = '" + car_name + "' ");
-            if (drs17.Count() < 1)
+            if (Common._bxgwry == "0")
             {
-                MessageBox.Show("无此司机人员名称，请重新选择!");
-                return;
+                if (this.comboBox17.Text == "")
+                {
+                    MessageBox.Show("司机人员不能为空!");
+                    return;
+                }
             }
+            else
+            {
+                DataRow[] drs17 = dtuserlist.Select("uname = '" + car_name + "' ");
+                if (drs17.Count() < 1)
+                {
+                    MessageBox.Show("无此司机人员名称，请重新选择!");
+                    return;
+                }
+            } 
+            
             string create_user = null;
             string create_name = null;
 

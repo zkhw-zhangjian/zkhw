@@ -159,7 +159,6 @@
             this.textBox80 = new System.Windows.Forms.TextBox();
             this.textBox83 = new System.Windows.Forms.TextBox();
             this.textBox84 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox51 = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
@@ -233,6 +232,7 @@
             this.checkBox25 = new System.Windows.Forms.CheckBox();
             this.checkBox24 = new System.Windows.Forms.CheckBox();
             this.checkBox23 = new System.Windows.Forms.CheckBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
             this.checkBox22 = new System.Windows.Forms.CheckBox();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
@@ -256,9 +256,10 @@
             this.button4 = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.panel19 = new System.Windows.Forms.Panel();
+            this.checkBox49 = new System.Windows.Forms.CheckBox();
+            this.checkBox47 = new System.Windows.Forms.CheckBox();
             this.checkBox41 = new System.Windows.Forms.CheckBox();
             this.checkBox42 = new System.Windows.Forms.CheckBox();
-            this.checkBox47 = new System.Windows.Forms.CheckBox();
             this.checkBox48 = new System.Windows.Forms.CheckBox();
             this.checkBox46 = new System.Windows.Forms.CheckBox();
             this.checkBox37 = new System.Windows.Forms.CheckBox();
@@ -268,7 +269,6 @@
             this.checkBox39 = new System.Windows.Forms.CheckBox();
             this.checkBox43 = new System.Windows.Forms.CheckBox();
             this.checkBox40 = new System.Windows.Forms.CheckBox();
-            this.checkBox49 = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel14.SuspendLayout();
@@ -320,6 +320,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.textBox6);
             this.panel1.Controls.Add(this.textBox10);
             this.panel1.Controls.Add(this.textBox52);
             this.panel1.Controls.Add(this.button2);
@@ -328,7 +329,6 @@
             this.panel1.Controls.Add(this.textBox119);
             this.panel1.Controls.Add(this.textBox118);
             this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Controls.Add(this.textBox6);
             this.panel1.Controls.Add(this.textBox51);
             this.panel1.Controls.Add(this.textBox9);
             this.panel1.Controls.Add(this.textBox8);
@@ -1955,19 +1955,6 @@
             this.textBox84.Text = "坚持锻炼时间";
             this.textBox84.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // textBox6
-            // 
-            this.textBox6.BackColor = System.Drawing.SystemColors.Window;
-            this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox6.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Bold);
-            this.textBox6.Location = new System.Drawing.Point(2, 120);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(130, 23);
-            this.textBox6.TabIndex = 79;
-            this.textBox6.Text = "内容";
-            this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // textBox51
             // 
             this.textBox51.Enabled = false;
@@ -2804,7 +2791,7 @@
             this.groupBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 139);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1214, 108);
+            this.groupBox3.Size = new System.Drawing.Size(1190, 108);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             // 
@@ -2908,6 +2895,19 @@
             this.checkBox23.Text = "20腹泻";
             this.checkBox23.UseVisualStyleBackColor = true;
             this.checkBox23.CheckedChanged += new System.EventHandler(this.checkBox23_CheckedChanged);
+            // 
+            // textBox6
+            // 
+            this.textBox6.BackColor = System.Drawing.SystemColors.Window;
+            this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox6.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Bold);
+            this.textBox6.Location = new System.Drawing.Point(-2, 117);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.ReadOnly = true;
+            this.textBox6.Size = new System.Drawing.Size(130, 23);
+            this.textBox6.TabIndex = 79;
+            this.textBox6.Text = "内容";
+            this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // checkBox22
             // 
@@ -3214,6 +3214,31 @@
             this.panel19.Size = new System.Drawing.Size(1165, 61);
             this.panel19.TabIndex = 101;
             // 
+            // checkBox49
+            // 
+            this.checkBox49.AutoSize = true;
+            this.checkBox49.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.checkBox49.Location = new System.Drawing.Point(142, 30);
+            this.checkBox49.Name = "checkBox49";
+            this.checkBox49.Size = new System.Drawing.Size(61, 25);
+            this.checkBox49.TabIndex = 101;
+            this.checkBox49.Tag = "1";
+            this.checkBox49.Text = "孕妇";
+            this.checkBox49.UseVisualStyleBackColor = true;
+            // 
+            // checkBox47
+            // 
+            this.checkBox47.AutoSize = true;
+            this.checkBox47.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.checkBox47.Location = new System.Drawing.Point(965, 6);
+            this.checkBox47.Name = "checkBox47";
+            this.checkBox47.Size = new System.Drawing.Size(125, 25);
+            this.checkBox47.TabIndex = 99;
+            this.checkBox47.Tag = "26";
+            this.checkBox47.Text = "慢性支气管炎";
+            this.checkBox47.UseVisualStyleBackColor = true;
+            this.checkBox47.Click += new System.EventHandler(this.checkBox37_Click);
+            // 
             // checkBox41
             // 
             this.checkBox41.AutoSize = true;
@@ -3237,19 +3262,6 @@
             this.checkBox42.Tag = "1";
             this.checkBox42.Text = "签约";
             this.checkBox42.UseVisualStyleBackColor = true;
-            // 
-            // checkBox47
-            // 
-            this.checkBox47.AutoSize = true;
-            this.checkBox47.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.checkBox47.Location = new System.Drawing.Point(965, 6);
-            this.checkBox47.Name = "checkBox47";
-            this.checkBox47.Size = new System.Drawing.Size(125, 25);
-            this.checkBox47.TabIndex = 99;
-            this.checkBox47.Tag = "26";
-            this.checkBox47.Text = "慢性支气管炎";
-            this.checkBox47.UseVisualStyleBackColor = true;
-            this.checkBox47.Click += new System.EventHandler(this.checkBox37_Click);
             // 
             // checkBox48
             // 
@@ -3367,18 +3379,6 @@
             this.checkBox40.Text = "结核病";
             this.checkBox40.UseVisualStyleBackColor = true;
             this.checkBox40.Click += new System.EventHandler(this.checkBox37_Click);
-            // 
-            // checkBox49
-            // 
-            this.checkBox49.AutoSize = true;
-            this.checkBox49.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.checkBox49.Location = new System.Drawing.Point(142, 30);
-            this.checkBox49.Name = "checkBox49";
-            this.checkBox49.Size = new System.Drawing.Size(61, 25);
-            this.checkBox49.TabIndex = 101;
-            this.checkBox49.Tag = "1";
-            this.checkBox49.Text = "孕妇";
-            this.checkBox49.UseVisualStyleBackColor = true;
             // 
             // aUhealthcheckupServices1
             // 

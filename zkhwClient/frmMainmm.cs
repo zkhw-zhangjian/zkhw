@@ -54,6 +54,8 @@ namespace zkhwClient
         private float xMy;//定义当前窗体的宽度
         private float yMy;//定义当前窗体的高度
 
+        private string zwaddress = "";
+        private string zwaddresstest = "0";
         public frmMainmm()
         {
             InitializeComponent();
@@ -94,6 +96,17 @@ namespace zkhwClient
             //读取配置文件
             xmlDoc.Load(path);
             XmlNode node;
+
+            node = xmlDoc.SelectSingleNode("config/zwaddress");
+            zwaddress = node.InnerText;  //家已签约地址
+
+            node = xmlDoc.SelectSingleNode("config/zwaddresstest");
+            zwaddresstest = node.InnerText;  //家已签约地址
+
+
+            node = xmlDoc.SelectSingleNode("config/bxgwry");
+            Common._bxgwry = node.InnerText;  //是否必须用公卫人员
+
             node = xmlDoc.SelectSingleNode("config/shxqAgreement");
             string shxqAgreement = node.InnerText;//生化血球厂家协议
             Common._deviceModel = shxqAgreement;
@@ -2427,6 +2440,8 @@ namespace zkhwClient
         private void label13_Click(object sender, EventArgs e)
         {
             HomeDoctorLogin softs = new HomeDoctorLogin();
+            softs.zwAddress = zwaddress;
+            softs.zwaddresstest = zwaddresstest;
             softs.Show();
         }
     }

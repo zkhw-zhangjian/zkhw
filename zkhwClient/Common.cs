@@ -69,6 +69,9 @@ namespace zkhwClient
 
         public static int m_nWindwMetricsY = 900;    //分辨率
         public static string _deviceModel = "";  //设备型号 包括生化、血球
+
+        public static String _bxgwry = "0"; //除了 建档人、责任医生其余人员必须是公卫人员吗？0可以不是 1必须是
+
         public static void txtBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             try

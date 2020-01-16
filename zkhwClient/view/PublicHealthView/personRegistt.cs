@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Script.Serialization;
@@ -508,6 +509,12 @@ namespace zkhwClient
                             textBox3.Text = dt.Rows[0][3].ToString();
                             pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
                             textBox5.Text = dt.Rows[0][5].ToString();
+                            if (dt.Rows[0][7] == null) { }
+                            else
+                            {
+                                txtphone.Text = dt.Rows[0][7].ToString();
+                            }
+                            
                         };
                         this.label41.Text = "读卡成功！";
                         checkPerson();//判断居民一周内是否做过体检
@@ -549,6 +556,13 @@ namespace zkhwClient
                             }
 
                             textBox5.Text = dt.Rows[0][7].ToString();
+                            if (dt.Rows[0][9] == null)
+                            { }
+                            else
+                            {
+                                txtphone.Text = dt.Rows[0][9].ToString();
+                            }
+                            
                         };
                     }
                     if (File.Exists(pName))
@@ -920,6 +934,7 @@ namespace zkhwClient
                 grjdxx.village_code = xcuncode;
                 grjdxx.village_name = xcName;
                 grjdxx.create_name = frmLogin.user_Name;
+                grjdxx.phone = txtphone.Text;
             }
             else
             {
@@ -1117,13 +1132,18 @@ namespace zkhwClient
                 }
             }
         }
-
+        [DllImport("user32")]
+        private static extern int SendMessage(IntPtr hwnd, int wMsg, int wParam, IntPtr lParam);
+        private const int WM_SETREDRAW = 0xB;
 
         private void personRegistt_Resize(object sender, EventArgs e)
         {
+            SendMessage(this.Handle, WM_SETREDRAW, 0, IntPtr.Zero);
             float newx = (this.Width) / xMy;
             float newy = (this.Height) / yMy;
             Common.setControls(newx, newy, this);
+            SendMessage(this.Handle, WM_SETREDRAW, 1, IntPtr.Zero);
+            this.Invalidate(true);
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -1186,6 +1206,35 @@ namespace zkhwClient
 
             //Graphics g = e.Graphics;
             //g.DrawString("查询", new Font("微软雅黑", 11, System.Drawing.FontStyle.Regular), new SolidBrush(Color.White), new PointF(20, 3));
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            DataTable dt = grjddao.judgeRepeat(textBox3.Text);
+            if (dt.Rows.Count > 0)
+            {
+                textBox1.Text = dt.Rows[0][0].ToString();
+                //textBox9.Text = dt.Rows[0][1].ToString();
+                string sexflag = dt.Rows[0][1].ToString();
+                if (sexflag == "1")
+                {
+                    this.comboBox1.Text = "男";
+                }
+                else if (sexflag == "2")
+                {
+                    this.comboBox1.Text = "女";
+                }
+                textBox8.Text = dt.Rows[0][2].ToString();
+                textBox3.Text = dt.Rows[0][3].ToString();
+                pictureBox1.ImageLocation = Application.StartupPath + "\\cardImg\\" + dt.Rows[0][4].ToString();
+                textBox5.Text = dt.Rows[0][5].ToString();
+                if (dt.Rows[0][7] == null) { }
+                else
+                {
+                    txtphone.Text = dt.Rows[0][7].ToString();
+                }
+                
+            };
         }
 
         public void OnPrintSampleBarcode(string barcode, int pageCount, string nameCode)

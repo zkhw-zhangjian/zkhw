@@ -1014,5 +1014,21 @@ namespace zkhwClient.view.PublicHealthView
             Brush bush = Brushes.White;
             ControlCircular.DrawFont(e, wenzi, font, bush); 
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView1.SelectedRows.Count > 0)
+            {
+                string name = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+                string aichive_no = this.dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+                string id_number = this.dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+                string bar_code = this.dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
+                frmHealthcheckupEdit frm = new frmHealthcheckupEdit();
+                frm.id_number = id_number;
+                frm.name = name;
+                frm.barcode = bar_code;
+                frm.ShowDialog();
+            }
+        }
     }
 }

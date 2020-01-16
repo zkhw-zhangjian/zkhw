@@ -92,7 +92,7 @@ namespace zkhwClient.view.setting
                 logindao.deleteUsersBycode(xzcode);
                 //logindao.deleteResidentsBycode(xzcode);
                 logindao.deleteThresholdValue();
-                logindao.deleteslowdiseases();
+                //logindao.deleteslowdiseases();
 
                 #region  同步阈值信息 
                 DataTable dtThresholdValue = logindao.checkThresholdValue();

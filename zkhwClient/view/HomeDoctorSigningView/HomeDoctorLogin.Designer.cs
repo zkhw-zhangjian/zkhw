@@ -35,16 +35,18 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 44);
+            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.textBox1.Location = new System.Drawing.Point(12, 56);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(319, 21);
+            this.textBox1.Size = new System.Drawing.Size(319, 29);
             this.textBox1.TabIndex = 0;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(256, 89);
+            this.button1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button1.Location = new System.Drawing.Point(256, 113);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(75, 32);
             this.button1.TabIndex = 1;
             this.button1.Text = "登录";
             this.button1.UseVisualStyleBackColor = true;
@@ -53,9 +55,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.label1.Location = new System.Drawing.Point(12, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 12);
+            this.label1.Size = new System.Drawing.Size(142, 21);
             this.label1.TabIndex = 2;
             this.label1.Text = "登录用户身份证号:";
             // 
@@ -70,6 +73,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "HomeDoctorLogin";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "家医签约";
             this.Load += new System.EventHandler(this.HomeDoctorLogin_Load);
             this.ResumeLayout(false);

@@ -4245,6 +4245,8 @@ where 1=1";
                     {
                         string id = dataGridView1["身份证号", i].Value.ToString();
                         combo.ID =  id  ;
+                        string bcode = dataGridView1["条码号", i].Value.ToString();
+                        combo.BarCode = bcode;
                         ide.Add(combo);
                     }
                 }
@@ -5011,12 +5013,12 @@ values({Ifnull(data.Rows[i]["id"])},{Ifnull(data.Rows[i]["name"])},{Ifnull(data.
                         {
                             sqllistz.Add($"update children_tcm_record set upload_status='1' where id in({xsrtid.TrimEnd(',')});");
                         }
-                        sqllistz.Add($"update zkhw_tj_bgdc set ShiFouTongBu='1' where id_number in ({string.Join(",", ide.Select(m => m.ID).ToList())});");
+                        //sqllistz.Add($"update zkhw_tj_bgdc set ShiFouTongBu='1' where id_number in ({string.Join(",", ide.Select(m => m.ID).ToList())});");
+                        sqllistz.Add($"update zkhw_tj_bgdc set ShiFouTongBu='1' where id_number='"+ _selectidnumber + "' and bar_code='"+ide[h].BarCode+"';");
                         int reu1 = DbHelperMySQL.ExecuteSqlTran(sqllistz);
                         if (reu1 > 0)
                         {
-                           
-                            //LoadingHelper.CloseForm();
+                            //LoadingHelper.CloseForm(); _selectidnumber
                             //bean.loginLogBean lb = new bean.loginLogBean();
                             //lb.name = frmLogin.name;
                             //lb.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
